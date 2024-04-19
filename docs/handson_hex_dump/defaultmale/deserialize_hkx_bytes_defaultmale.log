@@ -1,0 +1,247 @@
+2024-04-19T16:01:21.421205Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:362: class_header: 
+          section tag: __classnames__
+section tag separator: 0xFF
+
+Offsets:
+  absolute data start: 0xD0
+         local fixups: 0x90
+        global fixups: 0x90
+       virtual fixups: 0x90
+              exports: 0x90
+              imports; 0x90
+                  end: 0x90
+        abs +   local: 0x160
+        abs +  global: 0x160
+        abs + virtual: 0x160
+        abs + exports: 0x160
+        abs + imports: 0x160
+        abs +     end: 0x160
+
+2024-04-19T16:01:21.421515Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:363:  type_header: 
+          section tag: __types__
+section tag separator: 0xFF
+
+Offsets:
+  absolute data start: 0x160
+         local fixups: 0x0
+        global fixups: 0x0
+       virtual fixups: 0x0
+              exports: 0x0
+              imports; 0x0
+                  end: 0x0
+        abs +   local: 0x160
+        abs +  global: 0x160
+        abs + virtual: 0x160
+        abs + exports: 0x160
+        abs + imports: 0x160
+        abs +     end: 0x160
+
+2024-04-19T16:01:21.421564Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:364:  data_header: 
+          section tag: __data__
+section tag separator: 0xFF
+
+Offsets:
+  absolute data start: 0x160
+         local fixups: 0x170
+        global fixups: 0x1C0
+       virtual fixups: 0x1E0
+              exports: 0x210
+              imports; 0x210
+                  end: 0x210
+        abs +   local: 0x2D0
+        abs +  global: 0x320
+        abs + virtual: 0x340
+        abs + exports: 0x370
+        abs + imports: 0x370
+        abs +     end: 0x370
+
+2024-04-19T16:01:21.423182Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:374: data_section.local_map: {
+    0: LocalFixup {
+        src: 0,
+        dst: 16,
+    },
+    16: LocalFixup {
+        src: 16,
+        dst: 40,
+    },
+    24: LocalFixup {
+        src: 24,
+        dst: 64,
+    },
+    176: LocalFixup {
+        src: 176,
+        dst: 256,
+    },
+    256: LocalFixup {
+        src: 256,
+        dst: 264,
+    },
+    208: LocalFixup {
+        src: 208,
+        dst: 304,
+    },
+    216: LocalFixup {
+        src: 216,
+        dst: 320,
+    },
+    224: LocalFixup {
+        src: 224,
+        dst: 336,
+    },
+    232: LocalFixup {
+        src: 232,
+        dst: 352,
+    },
+}
+2024-04-19T16:01:21.423238Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:375: data_section.global_map: {
+    32: GlobalFixup {
+        src: 32,
+        dst_section_index: 2,
+        dst: 80,
+    },
+    112: GlobalFixup {
+        src: 112,
+        dst_section_index: 2,
+        dst: 128,
+    },
+}
+2024-04-19T16:01:21.423255Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:376: data_section.virtual_map: {
+    0: VirtualFixup {
+        src: 0,
+        section_index: 0,
+        name_offset: 75,
+    },
+    80: VirtualFixup {
+        src: 80,
+        section_index: 0,
+        name_offset: 101,
+    },
+    128: VirtualFixup {
+        src: 128,
+        section_index: 0,
+        name_offset: 121,
+    },
+}
+2024-04-19T16:01:21.423267Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:377:  class_names: ClassNames(
+    {
+        5: ClassPair {
+            signature: 1968725750,
+            class_name: "hkClass",
+        },
+        18: ClassPair {
+            signature: 1551803586,
+            class_name: "hkClassMember",
+        },
+        37: ClassPair {
+            signature: 2318797263,
+            class_name: "hkClassEnum",
+        },
+        54: ClassPair {
+            signature: 3463416428,
+            class_name: "hkClassEnumItem",
+        },
+        75: ClassPair {
+            signature: 661831966,
+            class_name: "hkRootLevelContainer",
+        },
+        101: ClassPair {
+            signature: 329489319,
+            class_name: "hkbProjectData",
+        },
+        121: ClassPair {
+            signature: 124442122,
+            class_name: "hkbProjectStringData",
+        },
+    },
+)
+2024-04-19T16:01:21.423310Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:307: string ptr:current_start = 16
+2024-04-19T16:01:21.423319Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:308: string ptr:local_dst = 40
+2024-04-19T16:01:21.423329Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:307: string ptr:current_start = 24
+2024-04-19T16:01:21.423332Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:308: string ptr:local_dst = 64
+2024-04-19T16:01:21.423388Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:400: deserialized class = HkRootLevelContainer(
+    HkRootLevelContainer {
+        named_variants: HkArrayClass {
+            numelements: 1,
+            classes: [
+                HkArrayClassParam {
+                    hkparam: HkRootLevelContainerNamedVariant {
+                        name: "hkbProjectData",
+                        class_name: "hkbProjectData",
+                        variant: "#0051",
+                    },
+                },
+            ],
+        },
+    },
+)
+2024-04-19T16:01:21.423455Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:400: deserialized class = HkbProjectData(
+    HkbProjectData {
+        mem_size_and_flags: 0,
+        reference_count: 0,
+        world_up_ws: Vector4 {
+            x: OrderedFloat(
+                0.0,
+            ),
+            y: OrderedFloat(
+                0.0,
+            ),
+            z: OrderedFloat(
+                1.0,
+            ),
+            w: OrderedFloat(
+                0.0,
+            ),
+        },
+        string_data: "#0052",
+        default_event_mode: EventModeIgnoreFromGenerator,
+    },
+)
+2024-04-19T16:01:21.423502Z DEBUG crates\hkx_serde\src\classes\generated\hkb_project_string_data.rs:203: animation_filenames position = 144
+2024-04-19T16:01:21.423515Z DEBUG crates\hkx_serde\src\classes\generated\hkb_project_string_data.rs:205: behavior_filenames position = 160
+2024-04-19T16:01:21.423520Z DEBUG crates\hkx_serde\src\classes\generated\hkb_project_string_data.rs:207: character_filenames position = 176
+2024-04-19T16:01:21.423524Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:307: string ptr:current_start = 256
+2024-04-19T16:01:21.423534Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:308: string ptr:local_dst = 264
+2024-04-19T16:01:21.423545Z DEBUG crates\hkx_serde\src\classes\generated\hkb_project_string_data.rs:209: event_names position = 192
+2024-04-19T16:01:21.423553Z DEBUG crates\hkx_serde\src\classes\generated\hkb_project_string_data.rs:211: animation_path position = 208
+2024-04-19T16:01:21.423558Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:307: string ptr:current_start = 208
+2024-04-19T16:01:21.423561Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:308: string ptr:local_dst = 304
+2024-04-19T16:01:21.423564Z DEBUG crates\hkx_serde\src\classes\generated\hkb_project_string_data.rs:213: behavior_path position = 216
+2024-04-19T16:01:21.423568Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:307: string ptr:current_start = 216
+2024-04-19T16:01:21.423572Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:308: string ptr:local_dst = 320
+2024-04-19T16:01:21.423575Z DEBUG crates\hkx_serde\src\classes\generated\hkb_project_string_data.rs:215: character_path  position = 224
+2024-04-19T16:01:21.423578Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:307: string ptr:current_start = 224
+2024-04-19T16:01:21.423581Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:308: string ptr:local_dst = 336
+2024-04-19T16:01:21.423588Z DEBUG crates\hkx_serde\src\classes\generated\hkb_project_string_data.rs:217: full_path_to_source position = 232
+2024-04-19T16:01:21.423593Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:307: string ptr:current_start = 232
+2024-04-19T16:01:21.423596Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:308: string ptr:local_dst = 352
+2024-04-19T16:01:21.423599Z DEBUG crates\hkx_serde\src\classes\generated\hkb_project_string_data.rs:219: root_path position = 240
+2024-04-19T16:01:21.423603Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:302: Not found local_map.dst. string ptr:current_start = 240
+2024-04-19T16:01:21.423608Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:400: deserialized class = HkbProjectStringData(
+    HkbProjectStringData {
+        mem_size_and_flags: 0,
+        reference_count: 0,
+        animation_filenames: HkArrayStringPtr {
+            numelements: 0,
+            hkcstrings: [],
+        },
+        behavior_filenames: HkArrayStringPtr {
+            numelements: 0,
+            hkcstrings: [],
+        },
+        character_filenames: HkArrayStringPtr {
+            numelements: 1,
+            hkcstrings: [
+                "Characters\\DefaultMale.hkx",
+            ],
+        },
+        event_names: HkArrayStringPtr {
+            numelements: 0,
+            hkcstrings: [],
+        },
+        animation_path: "",
+        behavior_path: "",
+        character_path: "",
+        full_path_to_source: "",
+        root_path: "",
+    },
+)
