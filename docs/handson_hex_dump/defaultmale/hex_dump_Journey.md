@@ -97,9 +97,10 @@ file_version: 8
                       <--------->                          section_count: i32
                                  <---------->              contents_section_index: i32
                                              <---------->  contents_contents_section_offset: i32
-                        ptr_size: 0
+                        ptr_size: 8 -> 8bytes -> This hkx file is 64bit.
                           endian: 0 -> little endian
                   padding_option: 0
+                      base_class: 1
                    section_count: 3
           contents_section_index: 2
 contents_contents_section_offset: 0
@@ -294,7 +295,7 @@ The byte location of the fixups is after the `__data__` section, so it can be de
 ### local fixups
 
 Used to read binary data that has an actual state at the pointer end, such as `hkStringPtr`, `hkArray`, etc.
-How about class ptr? This is an index which is attached to a real name in DRAM or XML, so it does not exist in the binary data. Therefore, there is no local_fixup for class ptr.
+How about class's ptr? This is an index which is attached to a real name in DRAM or XML, so it does not exist in the binary data. Therefore, there is no local_fixup for class's ptr.
 
 ```log
 000002d0: 00 00 00 00 10 00 00 00 10 00 00 00 28 00 00 00  ............(...
