@@ -98,7 +98,7 @@ file_version: 8
                                  <---------->              contents_section_index: i32
                                              <---------->  contents_contents_section_offset: i32
                         ptr_size: 8 -> 8bytes -> This hkx file is 64bit.
-                          endian: 0 -> little endian
+                          endian: 1 -> little endian
                   padding_option: 0
                       base_class: 1
                    section_count: 3
