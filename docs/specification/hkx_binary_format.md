@@ -98,7 +98,7 @@ Basically, we can assume that it does not exist.
 
 Fields of havok class
 
-<!-- TODO: havok types descriptions. (Bytes & XML representation) -->
+TODO: havok types descriptions. (Bytes & XML representation)
 
 ## Fixups
 
@@ -106,7 +106,7 @@ A. In binary data, a fixup refers to making adjustments or corrections to the bi
 
 Here, it is a key/value pair where 'the current location where the binary data is being read' is the key and 'the location where the binary data exists' is the value.
 
-- `local fixup`(8bytes):
+- `local fixup`(4 \* 2 = 8bytes):
   This information indicates where the data of the field in the Class will be placed.
 
   ```rust
@@ -122,7 +122,7 @@ Here, it is a key/value pair where 'the current location where the binary data i
   }
   ```
 
-- `global fixup`(16bytes):
+- `global fixup`(4 \* 3 = 12bytes):
   Location information needed when referencing class pointer, etc.
 
   ```rust
@@ -149,7 +149,7 @@ Here, it is a key/value pair where 'the current location where the binary data i
   }
   ```
 
-- `virtual fixup`(16bytes):
+- `virtual fixup`(4 \* 3 = 12bytes):
   Location information for the name of the C++ class that must call the constructor.
 
   ```rust
