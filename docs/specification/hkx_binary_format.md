@@ -1,6 +1,8 @@
 # Hkx binary data format
 
-- Note that offset is 0 based index.
+- Note
+  - That offset is 0 based index.
+  - Endianness should always be taken into account for data larger than 1bytes.
 
 ## Hkx one file binary format
 
@@ -66,11 +68,18 @@
 ### classnames
 
 - The following classes are always present in a single file.
+
   - `hkClass`
   - `hkClassMember`
   - `hkClassEnum`
   - `hkClassEnumItem`
-  - `hkRootLevelContainer`
+
+The `hkRootLevelContainer` is present in most hkx files, but not always as far as the C# implementation is concerned.
+
+- Note
+  If you think that "signature" is a unique number of a class, you will make an error.
+  The same signature is used in C++ class inheritance in some cases, and it is dangerous to judge a class by its signature.
+  It is better to use the class name to identify the class, since the class name itself is never covered by the signature.
 
 | Field                     | Description                                                 | Size (bytes)    | Offset (bytes)  |
 | ------------------------- | ----------------------------------------------------------- | --------------- | --------------- |

@@ -471,7 +471,7 @@ VirtualFixup {
 - The C++ pseudo code of `hkRootLevelContainer` is shown below.
 
 ```cpp
-/// # C++ Class Info
+/// # C++ Class (32bit) Info
 /// -      size: 12
 /// -    vtable: false
 /// - signature: `0x2772c11e`
@@ -489,7 +489,7 @@ struct hkRootLevelContainer {
 - `hkRootLevelContainerNamedVariant`
 
 ```cpp
-// # C++ Class Info
+// # C++ Class (32bit) Info
 // -      size: 12
 // -    vtable: false
 // - signature: `0xb103a2cd`
@@ -516,13 +516,13 @@ struct hkRootLevelContainerNamedVariant {
 }
 ```
 
-- `hkArray<T>`: read_ptr_size & move current seek position(+ptr size)
+- `hkArray<T>`: read_ptr_size & move current seek position(+=ptr size)
 - `hkStringPtr`:
   if ptr is null?
   null -> move current seek position(+ptr size)
 
   not null ->read `char*` of local_fixup.dst position
-  -> move current seek position(+ptr size)
+  -> move current seek position(+=ptr size)
   -> align 16 for local_fixup.dst position
 
 Basically, rather than reading them all together, it may be necessary to implement a position move by repeatedly using `read_f32` and so on.
