@@ -78,6 +78,8 @@ This page attempts to explain the binary specification of hkx while performing b
 
 ## hkx header
 
+First read the 17th endian byte, which is the endian byte. Then you can read u32, etc. as little endian or as big endian.
+
 ```log
 00000000: 57 e0 e0 57 10 c0 c0 10 00 00 00 00 08 00 00 00  W..W............
           <--------->                                      magic0: u32
@@ -809,11 +811,9 @@ int main() {
 - `hkArray<T>`: read_ptr_size & move current seek position(+=ptr size)
 - `hkStringPtr`:
   if ptr is null?
-  null -> move current seek position(+ptr size)
 
-  not null ->read `char*` of local_fixup.dst position
-  -> move current seek position(+=ptr size)
-  -> align 16 for local_fixup.dst position
+  true -> move current seek position(+ptr size)
+  false ->read `char*` of local_fixup.dst position -> move current seek position(+ptr size) -> align 16 for local_fixup.dst position
 
 Basically, rather than reading them all together, it may be necessary to implement a position move by repeatedly using `read_f32` and so on.
 In other words, the final read length must be the same, but the length of the seek to be read at once is **implementation dependent**.
@@ -833,7 +833,7 @@ In other words, the final read length must be the same, but the length of the se
 00000160: 00 00 00 00 00 00 00 00 01 00 00 00 01 00 00 80  ................
           <--------------------->                          consume pointer size: always 0
                                   <--------->              array size: u32 -> 1
-                                              <--------->  capacity & flags -> 1 | 0x80 (merge bits)
+                                              <--------->  capacity & flags -> 1 | 0x80
           <=============================================>  move seek 16bytes for namedVariants(`hkArray<struct hkRootLevelContainerNamedVariant>`)
 
 00000170: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
@@ -896,7 +896,7 @@ The next virtual_fixup is 128. Therefore, 0x160 + 0x80(128) = 0x1e0
                                   <--------------------->  `hkReferencedObject`
                                   <--->                    memSizeAndFlags: u16
                                         <--->              referenceCount: u16
-                                              <--------->  0 fill until align ptr size(If 64bit -> 8)
+                                              <--------->  0 fill until align ptr size(char _pad0[0(32bit) or 4(64bit)])
 
           <=====================>                          seek `hkBaseObject`
                                   <======================> seek `hkReferencedObject`
@@ -905,7 +905,7 @@ The next virtual_fixup is 128. Therefore, 0x160 + 0x80(128) = 0x1e0
           <--------------------------------------------->  animationFilenames: hkArray<hkStringPtr>
           <--------------------->                          consume pointer size
                                   <--------->              array size: u32 -> 0
-                                              <--------->  capacity & flags -> 0 | 0x80 (merge bits)
+                                              <--------->  capacity & flags -> 0 | 0x80
           <=============================================>  seek animationFilenames
 
 00000200: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80  ................
@@ -931,10 +931,10 @@ The next virtual_fixup is 128. Therefore, 0x160 + 0x80(128) = 0x1e0
 
 00000250: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
           <=====================>                          seek ptr size rootPath: hkStringPtr
-                                  <=====================>  seek for ptr size alignment
+                                  <=====================>  TODO: Unknown
 
 00000260: 00 00 00 00 00 00 00 00 43 68 61 72 61 63 74 65  ........Characte
-          <--------------------->
+          <=====================>                          TODO: Unknown
                                   <----------------------  hkStringPtr 1th of characterFilenames
 
 00000270: 72 73 5c 44 65 66 61 75 6c 74 4d 61 6c 65 2e 68  rs\DefaultMale.h
@@ -954,6 +954,10 @@ The next virtual_fixup is 128. Therefore, 0x160 + 0x80(128) = 0x1e0
           <--------------------------------------------->  0 fill until align 16 for characterPath: hkStringPtr
 000002c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
           <--------------------------------------------->  0 fill until align 16 for fullPathToSource: hkStringPtr
+
+NOTE:
+Since `rootPath` has a null string, the binary data size for the pointer is allocated and the contents area does not exist.
+If it existed, the binary data would come at this position.
 ```
 
 - With the above binary analysis, we were able to determine which data_section.local_fixups information was relevant.
