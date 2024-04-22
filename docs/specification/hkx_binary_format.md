@@ -10,11 +10,11 @@
 | -------------------------------------------------------- | --------------- | --------------- |
 | hkx file header                                          | 64              | 0               |
 | padding for `section_offset` in header(Here we assume 0) | 0               | 64              |
-| section header of `__class_name__`                       | 48              | 64              |
+| section header of `__classnames__`                       | 48              | 64              |
 | section header of `__type__`                             | 48              | 112             |
 | section header of `__data__`                             | 48              | 160             |
-| section of `__class_name__`                              | variable length | 208             |
-| section of `__type__`                                    | variable length | variable length |
+| section of `__classnames__`                              | variable length | 208             |
+| section of `__type__`(Here we assume 0)                  | 0               | variable length |
 | section of `__data__`                                    | variable length | variable length |
 | fixups of `__classnames__`                               | variable length | variable length |
 | fixups of `__types__`                                    | variable length | variable length |
@@ -41,6 +41,11 @@
 | flags                              | Various flags.                                                  | 4            | 56             |
 | max_predicate                      | Maximum predicate. None is -1 (== `0xFF 0xFF`)                  | 2            | 60             |
 | section_offset                     | Section offset. None is -1 (== `0xFF 0xFF`)                     | 2            | 62             |
+
+- padding_option:
+  Alignment or not until ptr size?
+  0 -> Do nothing
+  1 -> void*, hkArray, struct T*(class ptr), hkStringPtr, CString(char\*), means there is a blank space of ptr size at the beginning when reading/writing.
 
 ## Section header(48bytes)
 
