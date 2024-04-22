@@ -78,7 +78,7 @@ This page attempts to explain the binary specification of hkx while performing b
 
 ## hkx header
 
-First read the 17th endian byte, which is the endian byte. Then you can read u32, etc. as little endian or as big endian.
+First read the 17th endian byte, which is the endian byte. Then we can read u32, etc. as little endian or as big endian.
 
 ```log
 00000000: 57 e0 e0 57 10 c0 c0 10 00 00 00 00 08 00 00 00  W..W............
@@ -823,7 +823,7 @@ In other words, the final read length must be the same, but the length of the se
 
 ### Notes
 
-- Reading and writing binary data in the havok class requires that you always know which position you are currently reading or writing a fixup.
+- Reading and writing binary data in the havok class requires that we always know which position we are currently reading or writing a fixup.
 - `hkStringPtr` and so on are read/written to the coordinates vacated by local_fixup after reading the seek position of all fields of the class and meta information such as `hkArray`.
 
 ### Read binary
