@@ -176,9 +176,9 @@ Here, it is a key/value pair where 'the current location where the binary data i
       ///  Index Section ID
       ///
       /// # Examples
-      /// - 1: `__class_names__`
-      /// - 2: `__type__`
-      /// - 3: `__data__`
+      /// - 0: `__class_names__`
+      /// - 1: `__type__`
+      /// - 2: `__data__`
       pub section_index: u32,
       /// Havok Class name start position in `__class_name__` section.
       pub name_offset: u32,
