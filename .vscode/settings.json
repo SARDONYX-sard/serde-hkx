@@ -1,3 +1,6 @@
 {
+  "files.associations": {
+    "*.s": "asm-intel-x86-generic"
+  },
   "japanese-proofreading.textlint.かっこ類と隣接する文字の間のスペースの有無": false
 }
