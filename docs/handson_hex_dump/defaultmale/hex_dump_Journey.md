@@ -25,6 +25,7 @@ This page attempts to explain the binary specification of hkx while performing b
 000000b0: 00 00 00 ff 60 01 00 00 70 01 00 00 c0 01 00 00  ....`...p.......
 000000c0: e0 01 00 00 10 02 00 00 10 02 00 00 10 02 00 00  ................
 
+// Sections
 // `__classnames__` section
 000000d0: f6 5e 58 75 09 68 6b 43 6c 61 73 73 00 c2 a4 7e  .^Xu.hkClass...~
 000000e0: 5c 09 68 6b 43 6c 61 73 73 4d 65 6d 62 65 72 00  \.hkClassMember.
@@ -131,7 +132,6 @@ contents_contents_version_string: "hk_2010.2.0-r1\0" + separator 0xFF
 ### `__classnames__` section header
 
 ```txt
-
 00000040: 5f 5f 63 6c 61 73 73 6e 61 6d 65 73 5f 5f 00 00  __classnames__..
           <----------------------------------------------  contents_contents_version_string: [u8;19]
 
@@ -302,8 +302,18 @@ Therefore, there is binary data of fixups from 0x2d0.
 
 ### local fixups
 
-Used to read binary data that has an actual state at the pointer end, such as `hkStringPtr`, `hkArray`, etc.
-How about class's ptr? This is an index which is attached to a real name in DRAM or XML, so it does not exist in the binary data. Therefore, there is no local_fixup for class's ptr.
+Map with current seek position as src and actual content location as dst.
+This is used by `hkStringPtr`, `hkArray`, etc. to access data via pointers.
+
+- How about ptr of class?
+  This is dynamically added as an index during binary deserialization.
+
+  Some mod editing software starts with the number 50, but the Havok SDK name
+  index rule is currently unknown. Since it does not exist in the binary data,
+  this is usually not a problem, but since the motion patch tool uses the name
+  index (e.g. `#0050`) to perform diff patch, it is necessary to figure it out.
+
+  TODO: Figure out Havok SDK's name index rule.
 
 ```log
 000002d0: 00 00 00 00 10 00 00 00 10 00 00 00 28 00 00 00  ............(...
@@ -386,11 +396,13 @@ dst_section_index: 2
 
 Location information for the name of the C++ class that must call the constructor.
 
-Why is the name `virtual' the actual class?
+- Why is the name `virtual' the actual class?
 
-The SDK description says that virtual functions without the `hkBaseObject` field are inherited by all Havok Classes so that the vtable does not come after the data. The SDK explains that the virtual function without the`hkBaseObject` field is inherited by all Havok Classes so that vtable does not come after data.
+  The SDK description says that virtual functions without the `hkBaseObject` field are inherited by all Havok Classes so that the vtable does not come after the data. The SDK explains that the virtual function without the`hkBaseObject` field is inherited by all Havok Classes so that vtable does not come after data.
 
-And All Havok managed objects inherit from `hkReferencedObject`(which inherits from `hkBaseObject`), stores memory size and reference count.
+  And All Havok managed objects inherit from `hkReferencedObject`(which inherits from `hkBaseObject`), stores memory size and reference count.
+
+- section_index: 0 means that virtualFixup's name_offset(dst) indicates a `__classnames__` section.
 
 ```log
 00000340: 00 00 00 00 00 00 00 00 4b 00 00 00 50 00 00 00  ........K...P...
@@ -486,334 +498,311 @@ VirtualFixup {
 
 - The following code is almost identical to the actual definitions of the Havok types and Havok classes required for this project.
 
-View Assembly and C++ code in Compiler Explorer
+  View Assembly and C++ code in Compiler Explorer
 
-- [64bit version](https://godbolt.org/z/afea48o3E)
-- [32bit version](https://godbolt.org/z/38G8sh6Tf)
+  - [64bit version](https://godbolt.org/z/dz9cj5GEs)
+  - [32bit version](https://godbolt.org/z/xqYs7hYs5)
 
-<details><summary>Or view the C++ code here.</summary><div>
+  <details><summary>Or view the C++ code here.</summary><div>
 
-```cpp
-// INFO: To see the 32-bit version, add `-m32` to the compiler flags.
-#include <iostream>
+  ```cpp
+  // INFO: To see the 32-bit version, add `-m32` to the compiler flags.
+  #include <iostream>
 
-// havok_2010_2_0\Source\Common\Base\Container\String\hkStringPtr.h
-class hkStringPtr {
-   private:
-    const char *m_stringAndFlag;
-};
+  // havok_2010_2_0\Source\Common\Base\Container\String\hkStringPtr.h
+  class hkStringPtr {
+     private:
+      const char *m_stringAndFlag;
+  };
 
-// havok_2010_2_0\Source\Common\Base\Types\hkBaseTypes.h
-typedef unsigned short hkUint16;
-typedef float hkReal;
-template <typename ENUM, typename N>
-class hkEnum {
-   private:
-    N storage;
-};
+  // havok_2010_2_0\Source\Common\Base\Types\hkBaseTypes.h
+  typedef unsigned short hkUint16;
+  typedef float hkReal;
+  template <typename ENUM, typename N>
+  class hkEnum {
+     private:
+      N storage;
+  };
 
-// havok_2010_2_0\Source\Common\Base\Container\Array\hkArray.h
-// hkArray is 32bit: 12, 64bit: 16bytes
-// (ptr size(32bit: 4, 64bit: 8) + array  size(4: u32) + cap&flags(4: u32))
-template <typename T>
-class hkArray {
-   private:
-    T *m_data;
-    /** This is where it differs from a normal std::vector. len is not size_t.
-     */
-    int m_size;
-    /** highest 2 bits indicate any special considerations about the allocation
-     * for the array. */
-    int m_capacityAndFlags;
-};
+  // havok_2010_2_0\Source\Common\Base\Container\Array\hkArray.h
+  // - size: 32bit: 12, 64bit: 16bytes
+  //   ptr size(32bit: 4, 64bit: 8) + array  size(4: u32) + cap&flags(4: u32)
+  //
+  // Similar to Rust's `std::Vec` configuration. The difference is that size and
+  // capacity are not size_t. The difference is that size and capacity are not size_t,
+  // so even hkx binary data for AMD64 is 32bits.
+  template <typename T>
+  class hkArray {
+     private:
+      T *m_data;
+      int m_size;
+      /** The upper two bits are flags indicating the allocation status. */
+      int m_capacityAndFlags;
+  };
 
-// havok_2010_2_0\Source\Common\Base\Container\String\hkStringPtr.h
-struct hkVector4 {
-    hkReal x __attribute__((aligned(16)));
-    float y, z, w;
-};
+  // havok_2010_2_0\Source\Common\Base\Container\String\hkStringPtr.h
+  struct hkVector4 {
+      hkReal x __attribute__((aligned(16)));
+      float y, z, w;
+  };
 
-// havok_2010_2_0\compat\hkbTransitionEffect_0.h
-enum EventMode {
-    EVENT_MODE_DEFAULT = 0,
-    EVENT_MODE_PROCESS_ALL = 1,
-    EVENT_MODE_IGNORE_FROM_GENERATOR = 2,
-    EVENT_MODE_IGNORE_TO_GENERATOR = 3
-};
+  // havok_2010_2_0\compat\hkbTransitionEffect_0.h
+  enum EventMode {
+      EVENT_MODE_DEFAULT = 0,
+      EVENT_MODE_PROCESS_ALL = 1,
+      EVENT_MODE_IGNORE_FROM_GENERATOR = 2,
+      EVENT_MODE_IGNORE_TO_GENERATOR = 3
+  };
 
-/// Havok Classes
+  /// Havok Classes
 
-/// -      size: 16(if 32bit -> 12)
-/// -    vtable: false
-/// - signature: `0x2772c11e`
-/// -   version: 0
-struct hkRootLevelContainer {
-    // - offset: 0
-    // -  flags: `FLAGS_NONE`
-    hkArray<struct hkRootLevelContainerNamedVariant> namedVariants;
-};
-#if defined __i386__
-static_assert(sizeof(hkRootLevelContainer) == 12,
-              "hkRootLevelContainer size mismatch");
-#elif defined __x86_64__
-static_assert(sizeof(hkRootLevelContainer) == 16,
-              "hkRootLevelContainer size mismatch");
-#endif
+  /// -      size: 16(if 32bit -> 12)
+  /// -    vtable: false
+  /// - signature: `0x2772c11e`
+  /// -   version: 0
+  struct hkRootLevelContainer {
+      // - offset: 0
+      // -  flags: `FLAGS_NONE`
+      hkArray<struct hkRootLevelContainerNamedVariant> namedVariants;
+  };
+  #if defined __i386__
+  static_assert(sizeof(hkRootLevelContainer) == 12,
+                "hkRootLevelContainer size mismatch");
+  #elif defined __x86_64__
+  static_assert(sizeof(hkRootLevelContainer) == 16,
+                "hkRootLevelContainer size mismatch");
+  #endif
 
-// -      size: 32bit: 12, 64bit: 24
-// -    vtable: false
-// - signature: `0xb103a2cd`
-// -   version: 0
-struct hkRootLevelContainerNamedVariant {
-    // - offset: 0
-    // -  flags: `FLAGS_NONE`
-    hkStringPtr name;
-    // - offset: 32bit: 4, 64bit: 8
-    // -  flags: `FLAGS_NONE`
-    hkStringPtr className;
-    // - offset: 32bit: 8, 64bit: 16
-    // -  flags: `FLAGS_NONE`
-    struct hkReferencedObject *variant;
-};
-#if defined __i386__
-static_assert(sizeof(hkRootLevelContainerNamedVariant) == 12,
-              "hkRootLevelContainerNamedVariant size mismatch");
-#elif defined __x86_64__
-static_assert(sizeof(hkRootLevelContainerNamedVariant) == 24,
-              "hkRootLevelContainerNamedVariant size mismatch");
-#endif
+  // -      size: 32bit: 12, 64bit: 24
+  // -    vtable: false
+  // - signature: `0xb103a2cd`
+  // -   version: 0
+  struct hkRootLevelContainerNamedVariant {
+      // - offset: 0
+      // -  flags: `FLAGS_NONE`
+      hkStringPtr name;
+      // - offset: 32bit: 4, 64bit: 8
+      // -  flags: `FLAGS_NONE`
+      hkStringPtr className;
+      // - offset: 32bit: 8, 64bit: 16
+      // -  flags: `FLAGS_NONE`
+      struct hkReferencedObject *variant;
+  };
+  #if defined __i386__
+  static_assert(sizeof(hkRootLevelContainerNamedVariant) == 12,
+                "hkRootLevelContainerNamedVariant size mismatch");
+  #elif defined __x86_64__
+  static_assert(sizeof(hkRootLevelContainerNamedVariant) == 24,
+                "hkRootLevelContainerNamedVariant size mismatch");
+  #endif
 
-/// The class size is pointer size.
-/// The SDK description says that the `hkBaseObject`, a virtual function without
-/// a field, is the source of inheritance for all Havok Classes so that the
-/// vtable does not come after the data.
-///
-/// - size: 32bit: 4, 64bit: 8
-class hkBaseObject {
-   public:
-    virtual ~hkBaseObject() {}
-};
-#if defined __i386__
-static_assert(sizeof(hkBaseObject) == 4, "hkBaseObject size mismatch");
-#elif defined __x86_64__
-static_assert(sizeof(hkBaseObject) == 8, "hkBaseObject size mismatch");
-#endif
+  /// The class size is pointer size.
+  /// The SDK description says that the `hkBaseObject`, a virtual function without
+  /// a field, is the source of inheritance for all Havok Classes so that the
+  /// vtable does not come after the data.
+  ///
+  /// - size: 32bit: 4, 64bit: 8
+  class hkBaseObject {
+     public:
+      virtual ~hkBaseObject() {}
+  };
+  #if defined __i386__
+  static_assert(sizeof(hkBaseObject) == 4, "hkBaseObject size mismatch");
+  #elif defined __x86_64__
+  static_assert(sizeof(hkBaseObject) == 8, "hkBaseObject size mismatch");
+  #endif
 
-/// Stores memory size and reference count.
-/// # C++ Class Info
-/// -      size: 32bit: 8, 64bit: 12
-/// -    vtable: true
-/// -    parent: `hkBaseObject`/`0xe0708a00`
-/// - signature: `0x3b1c1113`
-/// -   version: 0
-class hkReferencedObject : hkBaseObject {
-    /// # C++ Parent class(`hkReferencedObject` => parent: `hkBaseObject`) info
-    /// - offset: 32bit: 0, 64bit: 0
-    /// size_t parent vtable ptr;
+  /// Stores memory size and reference count.
+  /// # C++ Class Info
+  /// -      size: 32bit: 8, 64bit: 12
+  /// -    vtable: true
+  /// -    parent: `hkBaseObject`/`0xe0708a00`
+  /// - signature: `0x3b1c1113`
+  /// -   version: 0
+  class hkReferencedObject : hkBaseObject {
+      /// # C++ Parent class(`hkReferencedObject` => parent: `hkBaseObject`) info
+      /// - offset: 32bit: 0, 64bit: 0
+      /// size_t parent vtable ptr;
 
-    /// - offset: 32bit: 4, 64bit:  8
-    /// -  flags: `FLAGS_NONE|SERIALIZE_IGNORED`
-    hkUint16 memSizeAndFlags;
-    /// - offset: 32bit: 6, 64bit: 10
-    /// -  flags: `FLAGS_NONE|SERIALIZE_IGNORED`
-    hkUint16 referenceCount;
+      /// - offset: 32bit: 4, 64bit:  8
+      /// -  flags: `FLAGS_NONE|SERIALIZE_IGNORED`
+      hkUint16 memSizeAndFlags;
+      /// - offset: 32bit: 6, 64bit: 10
+      /// -  flags: `FLAGS_NONE|SERIALIZE_IGNORED`
+      hkUint16 referenceCount;
 
-    /// Since the vtable size of hkBaseObject is the largest, the struct
-    /// alignment will be to the vtable of hkBaseObject, so (32bit: 4bytes,
-    /// 64bit: 8bytes) is needed.
-#if defined __i386__
-    // 32bit: 2 + 2 = 4
-    char _pad0[0];
-#elif defined __x86_64__
-    // 64bit: 2 + 2 + 4 = 8
-    char _pad0[4];
-#endif
-};
-#if defined __i386__
-static_assert(sizeof(hkReferencedObject) == 8,
-              "hkReferencedObject size mismatch");
-#elif defined __x86_64__
-static_assert(sizeof(hkReferencedObject) == 16,
-              "hkReferencedObject size mismatch");
-#endif
+      /// Since the vtable size of hkBaseObject is the largest, the struct
+      /// alignment will be to the vtable of hkBaseObject, so (32bit: 4bytes,
+      /// 64bit: 8bytes) is needed.
+  #if defined __i386__
+      // 32bit: 2 + 2 = 4
+      char _pad0[0];
+  #elif defined __x86_64__
+      // 64bit: 2 + 2 + 4 = 8
+      char _pad0[4];
+  #endif
+  };
+  #if defined __i386__
+  static_assert(sizeof(hkReferencedObject) == 8,
+                "hkReferencedObject size mismatch");
+  #elif defined __x86_64__
+  static_assert(sizeof(hkReferencedObject) == 16,
+                "hkReferencedObject size mismatch");
+  #endif
 
-/// # C++ Class Info
-/// -      size: 32bit: 48
-/// -    vtable: true
-/// -    parent: `hkReferencedObject`/`0x3b1c1113`
-/// - signature: `0x13a39ba7`
-/// -   version: 2
-struct hkbProjectData : hkReferencedObject {
-    /// C++ Parent class(`hkBaseObject` => parent: `None`) has no fields but
-    /// size is ptr size(32bit: 4, 64bit: 8)
+  /// # C++ Class Info
+  /// -      size: 32bit: 48
+  /// -    vtable: true
+  /// -    parent: `hkReferencedObject`/`0x3b1c1113`
+  /// - signature: `0x13a39ba7`
+  /// -   version: 2
+  struct hkbProjectData : hkReferencedObject {
+      /// C++ Parent class(`hkBaseObject` => parent: `None`) has no fields but
+      /// size is ptr size(32bit: 4, 64bit: 8)
 
-    /// # C++ Parent class(`hkReferencedObject` => parent: `hkBaseObject`) field
-    /// Info
-    /// -   name:`"memSizeAndFlags"`
-    /// -   type: `hkUint16`
-    /// - offset: 32bit:  4, 64bit: 8
-    /// -  flags: `FLAGS_NONE|SERIALIZE_IGNORED`
-    ///
-    /// -   name:`"referenceCount"`
-    /// -   type: `hkInt16`
-    /// - offset: 32bit:  6, 64bit: 10
-    /// -  flags: `FLAGS_NONE|SERIALIZE_IGNORED`
-    ///
-    /// Alignment at the end with the maximum size of the field.
-    /// In this case, hkBaseObject's vtable size is the largest, so it will be
-    /// a multiple of ptr size. Therefore,
-    /// char _pad0[0] <- 32bit
-    /// char _pad0[4] <- 64bit
+      /// # C++ Parent class(`hkReferencedObject` => parent: `hkBaseObject`) field
+      /// Info
+      /// -   name:`"memSizeAndFlags"`
+      /// -   type: `hkUint16`
+      /// - offset: 32bit:  4, 64bit: 8
+      /// -  flags: `FLAGS_NONE|SERIALIZE_IGNORED`
+      ///
+      /// -   name:`"referenceCount"`
+      /// -   type: `hkInt16`
+      /// - offset: 32bit:  6, 64bit: 10
+      /// -  flags: `FLAGS_NONE|SERIALIZE_IGNORED`
+      ///
+      /// Alignment at the end with the maximum size of the field.
+      /// In this case, hkBaseObject's vtable size is the largest, so it will be
+      /// a multiple of ptr size. Therefore,
+      /// char _pad0[0] <- 32bit
+      /// char _pad0[4] <- 64bit
 
-    /// The offset here is 16 bytes because Vector4 performs a 16-bytes
-    /// alignment to account for SIMD operations using f32 * 4 = 128
-    /// XMM registers.
-    ///
-    /// - offset: 32bit: 16, 64bit: 16
-    /// -  flags: `FLAGS_NONE`
-    hkVector4 worldUpWS;
-    /// - offset: 32bit: 32, 64bit: 32
-    /// -  flags: `FLAGS_NONE`
-    /// -   size: 32bit:  4, 64bit:  8
-    struct hkbProjectStringData *stringData;
-    /// - offset: 36
-    /// - offset: 32bit: 36, 64bit: 40
-    /// -  flags: `FLAGS_NONE`
-    /// -   size: 32bit:  1, 64bit:  1
-    hkEnum<EventMode, char> defaultEventMode;
+      /// The offset here is 16 bytes because Vector4 performs a 16-bytes
+      /// alignment to account for SIMD operations using f32 * 4 = 128
+      /// XMM registers.
+      ///
+      /// - offset: 32bit: 16, 64bit: 16
+      /// -  flags: `FLAGS_NONE`
+      hkVector4 worldUpWS;
+      /// - offset: 32bit: 32, 64bit: 32
+      /// -  flags: `FLAGS_NONE`
+      /// -   size: 32bit:  4, 64bit:  8
+      struct hkbProjectStringData *stringData;
+      /// - offset: 36
+      /// - offset: 32bit: 36, 64bit: 40
+      /// -  flags: `FLAGS_NONE`
+      /// -   size: 32bit:  1, 64bit:  1
+      hkEnum<EventMode, char> defaultEventMode;
 
-    /// struct alignment
-    /// Alignment at the end with the maximum size of the field.
-    // In this case, Vector4 size 16 is the largest, so it will be a multiple
-    // of 16. Therefore, 32bit/64bit: 48
-#if defined __i386__
-    char _pad0[11];
-#elif defined __x86_64__
-    char _pad0[7];
-#endif
-};
-#if defined __i386__
-static_assert(sizeof(hkbProjectData) == 48, "hkbProjectData size mismatch");
-#elif defined __x86_64__
-static_assert(sizeof(hkbProjectData) == 48, "hkbProjectData size mismatch");
-#endif
+      /// struct alignment
+      /// Alignment at the end with the maximum size of the field.
+      // In this case, Vector4 size 16 is the largest, so it will be a multiple
+      // of 16. Therefore, 32bit/64bit: 48
+  #if defined __i386__
+      char _pad0[11];
+  #elif defined __x86_64__
+      char _pad0[7];
+  #endif
+  };
+  #if defined __i386__
+  static_assert(sizeof(hkbProjectData) == 48, "hkbProjectData size mismatch");
+  #elif defined __x86_64__
+  static_assert(sizeof(hkbProjectData) == 48, "hkbProjectData size mismatch");
+  #endif
 
-/// `hkbProjectStringData`
-///
-/// - In C++, it represents the name of one field in the class.
-/// - In XML, the value of the `name` attribute of the `hkparam` tag.
-///
-/// # C++ Class Info
-/// -      size: 76
-/// -    vtable: true
-/// -    parent: `hkReferencedObject`/`0x3b1c1113`
-/// - signature: `0x76ad60a`
-/// -   version: 1
-struct hkbProjectStringData : hkReferencedObject {
-    /// C++ Parent class(`hkBaseObject` => parent: `None`) has no fields but
-    /// size is ptr size(32bit: 4, 64bit: 8)
+  /// `hkbProjectStringData`
+  ///
+  /// - In C++, it represents the name of one field in the class.
+  /// - In XML, the value of the `name` attribute of the `hkparam` tag.
+  ///
+  /// # C++ Class Info
+  /// -      size: 76
+  /// -    vtable: true
+  /// -    parent: `hkReferencedObject`/`0x3b1c1113`
+  /// - signature: `0x76ad60a`
+  /// -   version: 1
+  struct hkbProjectStringData : hkReferencedObject {
+      /// C++ Parent class(`hkBaseObject` => parent: `None`) has no fields but
+      /// size is ptr size(32bit: 4, 64bit: 8)
 
-    /// # C++ Parent class(`hkReferencedObject` => parent: `hkBaseObject`)
-    /// -   size: 32bit: 8, 64bit: 16
-    ///
-    /// Field Info
-    /// -   name:`"memSizeAndFlags"`
-    /// -   type: `hkUint16`
-    /// - offset: 32bit:  4, 64bit: 8
-    /// -  flags: `FLAGS_NONE|SERIALIZE_IGNORED`
-    ///
-    /// -   name:`"referenceCount"`
-    /// -   type: `hkInt16`
-    /// - offset: 32bit:  6, 64bit: 10
-    /// -  flags: `FLAGS_NONE|SERIALIZE_IGNORED`
-    ///
-    /// Alignment at the end with the maximum size of the field.
-    /// In this case, hkBaseObject's vtable size is the largest, so it will be
-    /// a multiple of ptr size. Therefore,
-    /// char _pad0[0] <- 32bit
-    /// char _pad0[4] <- 64bit
+      /// # C++ Parent class(`hkReferencedObject` => parent: `hkBaseObject`)
+      /// -   size: 32bit: 8, 64bit: 16
+      ///
+      /// Field Info
+      /// -   name:`"memSizeAndFlags"`
+      /// -   type: `hkUint16`
+      /// - offset: 32bit:  4, 64bit: 8
+      /// -  flags: `FLAGS_NONE|SERIALIZE_IGNORED`
+      ///
+      /// -   name:`"referenceCount"`
+      /// -   type: `hkInt16`
+      /// - offset: 32bit:  6, 64bit: 10
+      /// -  flags: `FLAGS_NONE|SERIALIZE_IGNORED`
+      ///
+      /// Alignment at the end with the maximum size of the field.
+      /// In this case, hkBaseObject's vtable size is the largest, so it will be
+      /// a multiple of ptr size. Therefore,
+      /// char _pad0[0] <- 32bit
+      /// char _pad0[4] <- 64bit
 
-    /// - offset: 32bit:  8, 64bit: 16
-    /// -  flags: `FLAGS_NONE`
-    hkArray<hkStringPtr> animation_filenames;
+      /// - offset: 32bit:  8, 64bit: 16
+      /// -  flags: `FLAGS_NONE`
+      hkArray<hkStringPtr> animation_filenames;
 
-    /// - offset: 32bit: 20, 64bit: 32
-    /// -  flags: `FLAGS_NONE`
-    hkArray<hkStringPtr> behavior_filenames;
-    /// - offset: 32bit: 32, 64bit: 48
-    /// -  flags: `FLAGS_NONE`
-    hkArray<hkStringPtr> character_filenames;
-    /// - offset: 32bit: 44, 64bit: 64
-    /// -  flags: `FLAGS_NONE`
-    hkArray<hkStringPtr> event_names;
+      /// - offset: 32bit: 20, 64bit: 32
+      /// -  flags: `FLAGS_NONE`
+      hkArray<hkStringPtr> behavior_filenames;
+      /// - offset: 32bit: 32, 64bit: 48
+      /// -  flags: `FLAGS_NONE`
+      hkArray<hkStringPtr> character_filenames;
+      /// - offset: 32bit: 44, 64bit: 64
+      /// -  flags: `FLAGS_NONE`
+      hkArray<hkStringPtr> event_names;
 
-    /// - offset: 32bit: 56, 64bit: 80
-    /// -  flags: `FLAGS_NONE`
-    hkStringPtr animation_path;
-    /// - offset: 32bit: 60, 64bit: 88
-    /// -  flags: `FLAGS_NONE`
-    hkStringPtr behavior_path;
-    /// - offset: 32bit: 64, 64bit: 96
-    /// -  flags: `FLAGS_NONE`
-    hkStringPtr character_path;
-    /// - offset: 32bit: 68, 64bit: 104
-    /// -  flags: `FLAGS_NONE`
-    hkStringPtr full_path_to_source;
-    /// - offset: 32bit: 72, 64bit: 112
-    /// -  flags: `FLAGS_NONE|SERIALIZE_IGNORED`
-    hkStringPtr root_path;
-};
-#if defined __i386__
-static_assert(sizeof(hkbProjectStringData) == 76,
-              "hkbProjectStringData size mismatch");
-#elif defined __x86_64__
-static_assert(sizeof(hkbProjectStringData) == 120,
-              "hkbProjectStringData size mismatch");
-#endif
+      /// - offset: 32bit: 56, 64bit: 80
+      /// -  flags: `FLAGS_NONE`
+      hkStringPtr animation_path;
+      /// - offset: 32bit: 60, 64bit: 88
+      /// -  flags: `FLAGS_NONE`
+      hkStringPtr behavior_path;
+      /// - offset: 32bit: 64, 64bit: 96
+      /// -  flags: `FLAGS_NONE`
+      hkStringPtr character_path;
+      /// - offset: 32bit: 68, 64bit: 104
+      /// -  flags: `FLAGS_NONE`
+      hkStringPtr full_path_to_source;
+      /// - offset: 32bit: 72, 64bit: 112
+      /// -  flags: `FLAGS_NONE|SERIALIZE_IGNORED`
+      hkStringPtr root_path;
+  };
+  #if defined __i386__
+  static_assert(sizeof(hkbProjectStringData) == 76,
+                "hkbProjectStringData size mismatch");
+  #elif defined __x86_64__
+  static_assert(sizeof(hkbProjectStringData) == 120,
+                "hkbProjectStringData size mismatch");
+  #endif
 
-int main() {
-    auto root = hkRootLevelContainer();
-    auto root_arg = hkRootLevelContainerNamedVariant();
-    auto class0 = hkbProjectData();
-    auto class1 = hkbProjectStringData();
+  int main() {
+      auto root = hkRootLevelContainer();
+      auto root_arg = hkRootLevelContainerNamedVariant();
+      auto class0 = hkbProjectData();
+      auto class1 = hkbProjectStringData();
 
-    // The following are warned that there is no guarantee of offsetof because
-    // they are not standard layout type, but the results are correct at the
-    // binary data level.
-    std::cout << "Offset of animation_filenames: "
-              << offsetof(hkbProjectStringData, animation_filenames)
-              << std::endl;
-    std::cout << "Offset of behavior_filenames: "
-              << offsetof(hkbProjectStringData, behavior_filenames)
-              << std::endl;
-    std::cout << "Offset of character_filenames: "
-              << offsetof(hkbProjectStringData, character_filenames)
-              << std::endl;
-    std::cout << "Offset of event_names: "
-              << offsetof(hkbProjectStringData, event_names) << std::endl;
-    std::cout << "Offset of animation_path: "
-              << offsetof(hkbProjectStringData, animation_path) << std::endl;
-    std::cout << "Offset of behavior_path: "
-              << offsetof(hkbProjectStringData, behavior_path) << std::endl;
-    std::cout << "Offset of character_path: "
-              << offsetof(hkbProjectStringData, character_path) << std::endl;
-    std::cout << "Offset of full_path_to_source: "
-              << offsetof(hkbProjectStringData, full_path_to_source)
-              << std::endl;
-    std::cout << "Offset of root_path: "
-              << offsetof(hkbProjectStringData, root_path) << std::endl;
-    return 0;
-}
-```
+      return 0;
+  }
+  ```
 
-</div></details>
+  </div></details>
 
 - `hkArray<T>`: read_ptr_size & move current seek position(+=ptr size)
 - `hkStringPtr`:
+
   if ptr is null?
 
-  true -> move current seek position(+ptr size)
-  false ->read `char*` of local_fixup.dst position -> move current seek position(+ptr size) -> align 16 for local_fixup.dst position
+  - true -> move current seek position(+ptr size)
+  - false ->read `char*` of local_fixup.dst position -> move current seek position(+ptr size) -> align 16 for local_fixup.dst position
 
 Basically, rather than reading them all together, it may be necessary to implement a position move by repeatedly using `read_f32` and so on.
 In other words, the final read length must be the same, but the length of the seek to be read at once is **implementation dependent**.
