@@ -496,7 +496,7 @@ VirtualFixup {
 }
 ```
 
-- The following code is almost identical to the actual definitions of the Havok types and Havok classes required for this project.
+- The following code is almost identical to the actual definitions of the Havok types and Havok classes required for this project.(The reason this is necessary is that **the binary read/write size depends on the C++ implementation**.)
 
   View Assembly and C++ code in Compiler Explorer
 
