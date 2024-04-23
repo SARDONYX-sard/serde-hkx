@@ -1,5 +1,6 @@
 {
   "words": [
+    "alloc",
     "compat",
     "cout",
     "defaultmale",
@@ -8,8 +9,10 @@
     "Havok",
     "hkparam",
     "iostream",
+    "malloc",
     "offsetof",
     "repr",
+    "rodata",
     "SIMD",
     "Skyrim",
     "struct",
