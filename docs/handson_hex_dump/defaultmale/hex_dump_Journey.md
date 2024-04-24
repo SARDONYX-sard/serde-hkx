@@ -5,7 +5,7 @@ The following is a hex dump by xxd.exe broken down by category.
 This page attempts to explain the binary specification of hkx while performing binary analysis based on SkyrimSE's `defaultmale.hkx`.
 
 ```txt
-// Hkx header
+// HKX header
 00000000: 57 e0 e0 57 10 c0 c0 10 00 00 00 00 08 00 00 00  W..W............
 00000010: 08 01 00 01 03 00 00 00 02 00 00 00 00 00 00 00  ................
 00000020: 00 00 00 00 4b 00 00 00 68 6b 5f 32 30 31 30 2e  ....K...hk_2010.
@@ -77,7 +77,7 @@ This page attempts to explain the binary specification of hkx while performing b
 00000360: 79 00 00 00 ff ff ff ff ff ff ff ff ff ff ff ff  y...............
 ```
 
-## hkx header
+## HKX header
 
 First read the 17th endian byte, which is the endian byte. Then we can read u32, etc. as little endian or as big endian.
 
@@ -300,7 +300,7 @@ This time the fixup abs in the `__data__` section is 0x160 and the local_fixups_
 
 Therefore, there is binary data of fixups from 0x2d0.
 
-### local fixups
+### Local fixups
 
 Map with current seek position as src and actual content location as dst.
 This is used by `hkStringPtr`, `hkArray`, etc. to access data via pointers.
@@ -398,7 +398,7 @@ Location information for the name of the C++ class that must call the constructo
 
 - Why is the name `virtual' the actual class?
 
-  The SDK description says that virtual functions without the `hkBaseObject` field are inherited by all Havok Classes so that the vtable does not come after the data. The SDK explains that the virtual function without the`hkBaseObject` field is inherited by all Havok Classes so that vtable does not come after data.
+  The SDK description says that `hkBaseObject`, a 'class without fields', is inherited by all Havok classes so that the vtable comes first before the data.
 
   And All Havok managed objects inherit from `hkReferencedObject`(which inherits from `hkBaseObject`), stores memory size and reference count.
 
@@ -503,8 +503,6 @@ VirtualFixup {
 
   - [64bit version](https://godbolt.org/z/dz9cj5GEs)
   - [32bit version](https://godbolt.org/z/xqYs7hYs5)
-
-  <details><summary>Or view the C++ code here.</summary><div>
 
   ```cpp
   // INFO: To see the 32-bit version, add `-m32` to the compiler flags.
@@ -796,8 +794,6 @@ VirtualFixup {
   }
   ```
 
-  </div></details>
-
 - `hkArray<T>`: read_ptr_size & move current seek position(+=ptr size)
 - `hkStringPtr`:
 
@@ -826,17 +822,31 @@ In other words, the final read length must be the same, but the length of the se
                                   <--------->              array size: u32 -> 1
                                               <--------->  capacity & flags -> 1 | 0x80
           <=============================================>  move seek 16bytes for namedVariants(`hkArray<struct hkRootLevelContainerNamedVariant>`)
+First, the 0th byte from abs is read.
+Then it reads forward for ptr because of `hkArray<T>` and looks for `dst` corresponding to `src: 0` in local_fixups.
+Then the actual content exists in that `dst`(abs(0x160 == 352) + dst(16) = 368 = 0x170).
 
 00000170: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
-          <--------------------->                          consume ptr size(name)
-                                  <--------------------->  consume ptr size(class_name)
-          <=====================>                          move seek 8bytes for name(`hkStringPtr`)
-                                  <=====================>  move seek 8bytes for class_name(`hkStringPtr`)
+          <--------------------->                          consume ptr size(name: `hkStringPtr`)
+                                  <--------------------->  consume ptr size(class_name: `hkStringPtr`)
+          <=====================>                          move seek 8bytes for name(current position: 16 -> dst: 40)
+                                  <=====================>  move seek 8bytes for class_name(current position: 24 -> dst: 64)
+Q. The 0x170th binary data is name and has no content?
+A. Yes, there is no `hkStringPtr` here yet. After reading `hkArray<T>` meta information (16bytes), use that position to read `hkStringPtr`.
+1. Read `hkStringPtr` first, advance position by ptr.
+2. Take out dst from local_fixup with current seek position as src.
+3. Jump to the content location and get it as a string until `\0` comes.
+(On write)4. Write in 0 until it becomes a multiple of 16
+
+Therefore,
+current seek position: 16 -> dst: 40
+abs(0x160 == 352) + dst(40) = 392 = 0x188
 
 00000180: 00 00 00 00 00 00 00 00 68 6b 62 50 72 6f 6a 65  ........hkbProje
-          <--------------------->                          consume ptr size(variant)
-                                  <----------------------  name of String ptr
-          <=====================>                          move seek 8bytes for variant(`struct hkReferencedObject*`)
+          <--------------------->                          consume ptr size(variant: `struct hkReferencedObject*`)
+                                  <----------------------  content of name(`hkStringPtr`)
+          <=====================>                          move seek 8bytes for variant(current position: )
+                                  <- This is 0x188 position
 
 00000190: 63 74 44 61 74 61 00 00 00 00 00 00 00 00 00 00  ctData..........
           ------------------->                             name
@@ -856,7 +866,7 @@ It is 0x160 + 0x50(80) = 0x1b0
                                   <--->                    mem_size_and_flags: u16
                                         <--->              referenceCount: u16
                                               <--------->  0 fill until align ptr size
-          <=====================>                          seek `hkBaseObject`
+          <=====================>                          seek `hkBaseObject`(Pointer size to vtable)
                                   <======================> seek `hkReferencedObject`
 
 000001c0: 00 00 00 00 00 00 00 00 00 00 80 3f 00 00 00 00  ...........?....
@@ -897,20 +907,20 @@ The next virtual_fixup is 128. Therefore, 0x160 + 0x80(128) = 0x1e0
           <--------------------->                          consume pointer size
                                   <--------->              array size: u32 -> 0
                                               <--------->  capacity & flags -> 0 | 0x80
-          <=============================================>  seek animationFilenames
+          <=============================================>  seek animationFilenames(current position: 208 -> dst: 304)
 
 00000200: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80  ................
           <--------------------------------------------->  behaviorFilenames: hkArray<hkStringPtr>
-          <=============================================>  seek behaviorFilenames
+          <=============================================>  seek behaviorFilenames(current position: 216 -> dst: 336)
 
 
 00000210: 00 00 00 00 00 00 00 00 01 00 00 00 01 00 00 80  ................
           <--------------------------------------------->  characterFilenames: hkArray<hkStringPtr>
-          <=============================================>  seek characterFilenames
+          <=============================================>  seek characterFilenames(current position: 232 -> dst: 352)
 
 00000220: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80  ................
           <--------------------------------------------->  eventNames: hkArray<hkStringPtr>
-          <=============================================>  seek eventNames
+          <=============================================>  seek eventNames(current position: 232 -> dst: 352)
 
 00000230: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
           <=====================>                          seek ptr size for animationPath: hkStringPtr
@@ -966,16 +976,16 @@ LocalFixup {
 },
 LocalFixup {
     src: 24,
-    dst: 64, // class_name: hkStringPtr
+    dst: 64, // className: hkStringPtr
 },
 // `hkbProjectStringData`
 LocalFixup {
     src: 176,
-    dst: 256, // character_filenames: hkArray<hkStringPtr>(length: 1)
+    dst: 256, // characterFilenames: hkArray<hkStringPtr>(length: 1)
 },
 LocalFixup {
     src: 256,
-    dst: 264, // 1th hkStringPtr in character_filenames: hkStringPtr
+    dst: 264, // 1th hkStringPtr in character_filenames: hkArray<hkStringPtr>
 },
 LocalFixup {
     src: 208,
@@ -993,5 +1003,5 @@ LocalFixup {
     src: 232,
     dst: 352, // fullPathToSource: hkStringPtr
 },
-// src: 240, root_path: hkStringPtr is None
+// src: 240, rootPath: hkStringPtr is None
 ```
