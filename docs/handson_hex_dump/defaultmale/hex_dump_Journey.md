@@ -833,10 +833,10 @@ Then the actual content exists in that `dst`(abs(0x160 == 352) + dst(16) = 368 =
                                   <=====================>  move seek 8bytes for class_name(current position: 24 -> dst: 64)
 Q. The 0x170th binary data is name and has no content?
 A. Yes, there is no `hkStringPtr` here yet. After reading `hkArray<T>` meta information (16bytes), use that position to read `hkStringPtr`.
-1. Read `hkStringPtr` first, advance position by ptr.
-2. Take out dst from local_fixup with current seek position as src.
-3. Jump to the content location and get it as a string until `\0` comes.
-(On write)4. Write in 0 until it becomes a multiple of 16
+1. Take out dst from local_fixup with current seek position as src.
+2. Jump to the content location and get it as a string until `\0` comes.
+2.5(On write) Write in 0 until it becomes a multiple of 16
+3. Read `hkStringPtr` first, advance position by ptr.
 
 Therefore,
 current seek position: 16 -> dst: 40
