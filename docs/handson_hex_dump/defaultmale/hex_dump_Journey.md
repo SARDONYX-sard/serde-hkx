@@ -879,15 +879,32 @@ It is 0x160 + 0x50(80) = 0x1b0
                       <=========>                          seek f32
                                   <=========>              seek f32
                                               <=========>  seek f32
+- Why is `00 00 80 3f` 0.1?
+  First of all, it's little-endian, so 0x3f800000.
 
+  0x3f800000 = 0b00111111_10000000_00000000_00000000
+
+  The bits breakdown of the IEEE754 single-precision floating-point numbers is as follows.
+  -     Sign bit(Bit 31): 0 -> unsigned
+  - Exponent(Bits 30-23): 0b01111111 -> 127
+  -  Mantissa(Bits 22-0): 00000000000000000000000
+
+  M = Mantissa, E = Exponent
+
+  1.M * 2^(E - 127) = 1.0 * 2^(127 - 127) = 1.0 * 1 = 1.0
+
+  The first one is 1 to save bits. (since we can just move the decimal point by exponent).
 
 000001d0: 00 00 00 00 00 00 00 00 02 00 00 00 00 00 00 00  ................
           <--------------------->                          string_data: struct hkbProjectStringData*
                                   <->                      enum EventMode: u8
-                                     <------------------>  0 fill until align 16
+                                     <------------------>  0 fill until align 16(For class alignment)
           <=====================>
                                   <=>
                                      <==================>
+Note that C++ class alignment constraints directly affect binary reads. The end of a class must be aligned with the maximum size of that field.
+In this case, Vector4 is the largest, so the size of the class must be a multiple of the size of Vector4.
+Therefore, a 16-bytes alignment is required.
 
 - `hkbProjectStringData` => `hkReferencedObject`(parent) => `hkBaseObject`(parent of parent)
 The next virtual_fixup is 128. Therefore, 0x160 + 0x80(128) = 0x1e0
