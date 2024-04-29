@@ -44,8 +44,8 @@
 
 - padding_option:
   Alignment or not until ptr size?
-  0 -> Do nothing
-  1 -> void*, hkArray, struct T*(class ptr), hkStringPtr, CString(char\*), means there is a blank space of ptr size at the beginning when reading/writing.
+  - 0 -> Do nothing
+  - 1 -> `void*`, `hkArray`, `struct T*(class ptr)`, `hkStringPtr`, `CString(char\*)`, means there is a blank space of ptr size at the beginning when reading/writing.
 
 ## Section header(48bytes)
 
