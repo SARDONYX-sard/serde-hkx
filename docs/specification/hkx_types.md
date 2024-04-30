@@ -39,19 +39,154 @@
 
 ## Container types details
 
+### `hkReal`
+
+```cpp
+typedef float hkReal;
+```
+
+- XML
+
+Display even if the value is 0 to the 6th decimal place.
+
+```xml
+<hkparam name="maxFrictionTorque">0.000000</hkparam>
+```
+
 ### `hkVector4`
+
+If we use SIMD registers, we will use `__m128` and so on.
+
+- Assumed C++
+
+```cpp
+/**
+ * - byte size: 48(x86)/ 48(x86_64)
+ * - ownership: Owned
+ */
+class __attribute__((aligned(16))) hkVector4 {
+    /**
+     * -    offset:  0
+     * - byte size:  4(x86)/ 4(x86_64)
+     */
+    hkReal x;
+    /**
+     * -    offset:  8(x86)/ 8(x86_64)
+     * - byte size:  4(x86)/ 4(x86_64)
+     */
+    hkReal y;
+    /**
+     * -    offset: 12(x86)/12(x86_64)
+     * - byte size:  4(x86)/ 4(x86_64)
+     */
+    hkReal z;
+    /**
+     * -    offset: 16(x86)/16(x86_64)
+     * - byte size:  4(x86)/ 4(x86_64)
+     */
+    hkReal w;
+};
+```
+
+- XML
+
+```xml
+<hkparam name="">
+  <!-- x         y        z         w -->
+  (-0.000000 0.000000 -0.000000 1.000000)
+</hkparam>
+```
 
 ### `hkQuaternion`
 
+- C++
+
+```cpp
+/**
+ * - byte size: 16(x86)/ 16(x86_64)
+ * - ownership: Owned
+ */
+class hkQuaternion {
+    /**
+     * Vector part
+     * -    offset:  0
+     * - byte size: 12(x86)/12(x86_64)
+     */
+    hkVector3 v;
+    /**
+     * Scaler part
+     * - byte size: 16(x86)/16(x86_64)
+     */
+    hkReal s;
+};
+```
+
+- XML
+
+The w component, which is unused on XML, is not displayed.
+
+```xml
+<hkparam>
+  <!--       Vector3 x      --><!-- scale -->
+  (-0.000000 0.000000 -0.000000 1.000000)
+</hkparam>
+```
+
 ### `hkMatrix3`
+
+- Assumed C++
+
+```cpp
+/**
+ * - byte size: 48(x86)/ 48(x86_64)
+ * - ownership: Owned
+ */
+class hkMatrix3 {
+    /**
+     * -    offset:  0
+     * - byte size: 16(x86)/16(x86_64)
+     */
+    hkVector4 x;
+    /**
+     * - byte size: 16(x86)/16(x86_64)
+     */
+    hkVector4 y;
+    /**
+     * -    offset: 32(x86)/32(x86_64)
+     * - byte size: 16(x86)/16(x86_64)
+     */
+    hkVector4 z;
+};
+```
+
+- Binary read/write
+
+f32(4bytes) must be read/written for 4 \* 3 = 12 times = 48 bytes size.
+
+- XML
+
+The w component, which is unused on XML, is not displayed.
+
+```xml
+<hkparam>
+  <!--       Vector4 x     -->
+  (0.000000 0.000000 0.000000)
+  <!--       Vector4 y       -->
+  (-0.000000 0.000000 -0.000000)
+  <!--       Vector4 z     -->
+  (1.000000 1.000000 1.000000)
+</hkparam>
+```
 
 ### `hkRotation`
 
+Same as `hkMatrix3`
+
 ### `hkQsTransform`
 
-```cpp
-// This is  closer code.
+- C++
 
+```cpp
 /**
  * - byte size: 48(x86)/ 48(x86_64)
  * - ownership: Owned
@@ -77,22 +212,103 @@ class hkQsTransform {
 };
 ```
 
-In XML, it would be as follows.(Note that the `w` in `transition` and `scale` are not used, so those two have only three elements.)
+- XML
 
 ```xml
-<!--                            < - vector4 transition - - >< - - - - quaternion rotation - - - - > < - vector4 scale - - - - >    -->
-<hkparam name="aFromBTransform">(0.000000 0.000000 0.000000)(-0.000000 0.000000 -0.000000 1.000000)(1.000000 1.000000 1.000000)</hkparam>
+<hkparam name="aFromBTransform">
+  <!--  Vector4 transition -->
+  (0.000000 0.000000 0.000000)
+  <!--       Quaternion rotation      -->
+  (-0.000000 0.000000 -0.000000 1.000000)
+  <!--  Vector4 scale      -->
+  (1.000000 1.000000 1.000000)
+</hkparam>
 ```
 
 ### `hkMatrix4`
 
-In XML, it would be as follows.
+- C++
+
+```cpp
+/**
+ * - byte size: 64(x86)/ 64(x86_64)
+ * - ownership: Owned
+ */
+class hkMatrix4 {
+    /**
+     * -    offset:  0
+     * - byte size: 16(x86)/16(x86_64)
+     */
+    hkVector4 x;
+    /**
+     * - byte size: 16(x86)/16(x86_64)
+     */
+    hkVector4 y;
+    /**
+     * -    offset: 32(x86)/32(x86_64)
+     * - byte size: 16(x86)/16(x86_64)
+     */
+    hkVector4 z;
+    /**
+     * -    offset: 48(x86)/48(x86_64)
+     * - byte size: 16(x86)/16(x86_64)
+     */
+    hkVector4 w;
+};
+```
+
+- XML
 
 ```xml
-<tag>(0.000000 0.000000 0.000000 0.000000)(-0.000000 0.000000 -0.000000 1.000000)(1.000000 1.000000 1.000000 0.000000)(1.000000 1.000000 1.000000 0.000000)</tag>
+<hkparam>
+  <!--           Vector4 x          -->
+  (0.000000 0.000000 0.000000 0.000000)
+  <!--           Vector4 y          -->
+  (-0.000000 0.000000 -0.000000 1.000000)
+  <!--           Vector4 z          -->
+  (1.000000 1.000000 1.000000 0.000000)
+  <!--           Vector4 w          -->
+  (1.000000 1.000000 1.000000 0.000000)
+</hkparam>
 ```
 
 ### `hkTransform`
+
+- Assumed C++
+
+```cpp
+/**
+ * - byte size: 64(x86)/ 64(x86_64)
+ * - ownership: Owned
+ */
+class hkTransform {
+    /**
+     * `Vector4::w`(4th) isn't used(`w` is always 0.0).
+     * -    offset:  0
+     * - byte size: 48(x86)/48(x86_64)
+     */
+    hkRotation rotation;
+    /**
+     * `Vector4::w`(4th) isn't used(`w` is always 0.0).
+     * -    offset: 48(x86)/48(x86_64)
+     * - byte size: 16(x86)/16(x86_64)
+     */
+    hkVector4 transition;
+};
+```
+
+- XML
+
+```xml
+<hkparam name="aFromBTransform">
+    <!--   Matrix3 rotation  -->
+    (0.000000 0.000000 0.000000)
+    (0.000000 0.000000 0.000000)
+    (0.000000 0.000000 0.000000)
+    <!--   Vector4 transition  -->
+    (-0.000000 0.000000 -0.000000)
+</hkparam>
+```
 
 ### `hkArray`
 
@@ -126,18 +342,71 @@ class hkArray {
 };
 ```
 
-- XML Example
+- XML
 
-```xml
-<hkparam name="variableNames" numelements="6">
-  <hkcstring>blendDefault</hkcstring>
-  <hkcstring>blendFast</hkcstring>
-  <hkcstring>blendSlow</hkcstring>
-  <hkcstring>Direction</hkcstring>
-  <hkcstring>IsBlocking</hkcstring>
-  <hkcstring>Speed</hkcstring>
-</hkparam>
-```
+  There seem to be five XML patterns for arrays among those we have identified.
+
+  - `hkArray<hkReal>`
+
+  ```xml
+  <hkparam name="boneWeights" numelements="99">
+    1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000
+    0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000
+    0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000
+    0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000
+    0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000
+    0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000
+    0.000000 0.000000 0.000000
+  </hkparam>
+  ```
+
+  - `hkArray<hkClass*>`
+    It can be regarded as the same as `hkArray<hkReal>` in the sense that it is space free.
+
+  ```xml
+  <hkparam name="variantVariableValues" numelements="2">
+    #0063 #0064
+  </hkparam>
+  ```
+
+  - `hkArray<hkStringPtr>`(e.g. `namedVariants`(`hkRootLevelContainerNamedVariant`) field of `hkRootLevelContainer` class)
+
+  ```xml
+  <hkparam name="namedVariants" numelements="6">
+     <hkobject>
+       <hkparam name="name">Merged Animation Container</hkparam>
+       <hkparam name="className">hkaAnimationContainer</hkparam>
+       <hkparam name="variant">#0051</hkparam>
+     </hkobject>
+     <hkobject>
+       <hkparam name="name">Resource Data</hkparam>
+       <hkparam name="className">hkMemoryResourceContainer</hkparam>
+       <hkparam name="variant">#0054</hkparam>
+    </hkobject>
+  </hkparam>
+  ```
+
+  - `hkArray<hkStringPtr>`
+
+    ```xml
+    <hkparam name="variableNames" numelements="6">
+      <hkcstring>blendDefault</hkcstring>
+      <hkcstring>blendFast</hkcstring>
+      <hkcstring>blendSlow</hkcstring>
+      <hkcstring>Direction</hkcstring>
+      <hkcstring>IsBlocking</hkcstring>
+      <hkcstring>Speed</hkcstring>
+    </hkparam>
+    ```
+
+  - `hkArray<Vector4>`(e.g. `hkpRigidBody` class's field), `hkArray<Matrix4`, etc.
+
+    ```xml
+    <hkparam name="deactivationRefPosition" numelements="2">
+      (0.000000 0.000000 0.000000 0.000000)
+      (0.000000 0.000000 0.000000 0.000000)
+    </hkparam>
+    ```
 
 ### `InplaceArray`
 
@@ -146,6 +415,10 @@ class hkArray {
 - enum type that stores only the size of `SizeType` in memory.
 
 ```cpp
+/**
+ * - byte size: sizeof(SizeType)(x86)/ sizeof(SizeType)(x86_64)
+ * - ownership: Owned
+ */
 template <typename Enum, typename SizeType>
 class hkEnum {
     SizeType storage;
@@ -176,8 +449,6 @@ class hkEnum {
 - Represents a 16-bit floating-point number
 
 ```cpp
-// This is  closer code.
-
 /**
  * - byte size: variable length
  * - byte size: 2(x86)/ 2(x86_64)
@@ -194,11 +465,10 @@ class hkHalf {
 - There is a flag `StringFlags::OWNED_FLAG = 0x1` defined in the class, so `Owned` is also possible.
 - It is unclear which segment (stack, heap, or other) is being pointed to because of the raw pointer.
 
-```cpp
-// This is  closer code.
+- C++
 
+```cpp
 /**
- * - byte size: variable length
  * - byte size: 4(x86)/ 8(x86_64)
  * - ownership: Borrowed | Owned
  */
@@ -209,6 +479,8 @@ class hkStringPtr {
 
 - XML Example
 
+An arbitrary string is entered.
+
 ```xml
 <hkparam name="name">Ragdoll_Wisp L Hand01</hkparam>
 ```
@@ -216,6 +488,10 @@ class hkStringPtr {
 ### `hkRelArray<T>`
 
 ```cpp
+/**
+ * - byte size: 4(x86)/ 4(x86_64)
+ * - ownership:
+ */
 template <typename T>
 class hkRelArray<T> {
   unsigned short m_size;
