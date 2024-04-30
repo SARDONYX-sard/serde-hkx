@@ -4,7 +4,7 @@ The following is a hex dump by xxd.exe broken down by category.
 
 This page attempts to explain the binary specification of hkx while performing binary analysis based on SkyrimSE's `defaultmale.hkx`.
 
-```txt
+```log
 // HKX header
 00000000: 57 e0 e0 57 10 c0 c0 10 00 00 00 00 08 00 00 00  W..W............
 00000010: 08 01 00 01 03 00 00 00 02 00 00 00 00 00 00 00  ................
@@ -62,16 +62,16 @@ This page attempts to explain the binary specification of hkx while performing b
 000002c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
 
 // Fixups
-// local_fixups
+// Local fixups
 000002d0: 00 00 00 00 10 00 00 00 10 00 00 00 28 00 00 00  ............(...
 000002e0: 18 00 00 00 40 00 00 00 b0 00 00 00 00 01 00 00  ....@...........
 000002f0: 00 01 00 00 08 01 00 00 d0 00 00 00 30 01 00 00  ............0...
 00000300: d8 00 00 00 40 01 00 00 e0 00 00 00 50 01 00 00  ....@.......P...
 00000310: e8 00 00 00 60 01 00 00 ff ff ff ff ff ff ff ff  ....`...........
-// global_fixups
+// Global fixups
 00000320: 20 00 00 00 02 00 00 00 50 00 00 00 70 00 00 00   .......P...p...
 00000330: 02 00 00 00 80 00 00 00 ff ff ff ff ff ff ff ff  ................
-// virtual_fixups
+// Virtual fixups
 00000340: 00 00 00 00 00 00 00 00 4b 00 00 00 50 00 00 00  ........K...P...
 00000350: 00 00 00 00 65 00 00 00 80 00 00 00 00 00 00 00  ....e...........
 00000360: 79 00 00 00 ff ff ff ff ff ff ff ff ff ff ff ff  y...............
@@ -879,21 +879,21 @@ It is 0x160 + 0x50(80) = 0x1b0
                       <=========>                          seek f32
                                   <=========>              seek f32
                                               <=========>  seek f32
-- Why is `00 00 80 3f` 0.1?
-  First of all, it's little-endian, so 0x3f800000.
+Why is `00 00 80 3f` 1.0?
+First of all, it's little-endian, so 0x3f800000.
 
-  0x3f800000 = 0b00111111_10000000_00000000_00000000
+0x3f800000 = 0b00111111_10000000_00000000_00000000
 
-  The bits breakdown of the IEEE754 single-precision floating-point numbers is as follows.
-  -     Sign bit(Bit 31): 0 -> unsigned
-  - Exponent(Bits 30-23): 0b01111111 -> 127
-  -  Mantissa(Bits 22-0): 00000000000000000000000
+The bits breakdown of the IEEE754 single-precision floating-point numbers is as follows.
+-     Sign bit(Bit 31): 0 -> unsigned
+- Exponent(Bits 30-23): 0b01111111 -> 127
+-  Mantissa(Bits 22-0): 00000000000000000000000
 
-  M = Mantissa, E = Exponent
+M = Mantissa, E = Exponent
 
-  1.M * 2^(E - 127) = 1.0 * 2^(127 - 127) = 1.0 * 1 = 1.0
+1.M * 2^(E - 127) = 1.0 * 2^(127 - 127) = 1.0 * 1 = 1.0
 
-  The first one is 1 to save bits. (since we can just move the decimal point by exponent).
+The first one is 1 to save bits. (since we can just move the decimal point by exponent).
 
 000001d0: 00 00 00 00 00 00 00 00 02 00 00 00 00 00 00 00  ................
           <--------------------->                          string_data: struct hkbProjectStringData*
