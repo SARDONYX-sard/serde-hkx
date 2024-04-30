@@ -96,7 +96,7 @@ The `hkRootLevelContainer` is present in most hkx files, but not always as far a
 | ...                       | ...                                                         | ...             | ...             |
 | 16bytes alignments        | Fill bytes with `0xFF` until the number is a multiple of 16 | variable length | variable length |
 
-- signature/class_name pair
+- Signature & ClassName pair
 
 | Field      | Description                                              | Size (bytes)    | Offset (bytes) |
 | ---------- | -------------------------------------------------------- | --------------- | -------------- |
@@ -111,8 +111,6 @@ Basically, we can assume that it does not exist.
 ### data
 
 Fields of havok class
-
-TODO: havok types descriptions. (Bytes & XML representation)
 
 ## Fixups
 
