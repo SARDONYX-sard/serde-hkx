@@ -32,7 +32,7 @@
 | `InplaceArray`     | `InplaceArray`                    |    sizeof(Array) |      sizeof(Array) |
 | `Enum`             | `hkEnum<Enum, SizeType>`          | sizeof(SizeType) |   sizeof(SizeType) |
 | `Struct`           | `Class T`                         |   sizeof(Struct) |     sizeof(Struct) |
-| `SimpleArray`      | `hkSimpleArray`                   |                4 |                  8 |
+| `SimpleArray`      | `hkSimpleArray`                   |                8 |                 12 |
 | `HomogeneousArray` |                                   |                  |                    |
 | `Variant`          | `hkVariant`                       |                8 |                 16 |
 | `CString`          | `char*`                           |                4 |                  8 |
