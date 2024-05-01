@@ -1,44 +1,47 @@
-# HKX types(unverified)
+# HKX types
 
-- Bytes Size: When reading/writing a binary file, read/write is done only for the size, so it should be clear.
+- Offset and Size: Used to adjust the size and read/write position of the binary data to be read/write.
 
-| TypeKind          | C++ Type                              |  Bytes size(x86) | Bytes size(x86_64) |
-| ----------------- | ------------------------------------- | ---------------: | -----------------: |
-| `Void`            |                                       |                  |                    |
-| `Bool`            | `hkBool` (`bool`)                     |                1 |                  1 |
-| `Char`            | `hkChar` (`signed char`)              |                1 |                  1 |
-| `Int8`            | `hkInt8` (`signed char`)              |                1 |                  1 |
-| `Uint8`           | `hkUint8` (`unsigned char`)           |                1 |                  1 |
-| `Int16`           | `hkInt16` (`signed short`)            |                2 |                  2 |
-| `Uint16`          | `hkUint16` (`unsigned short`)         |                2 |                  2 |
-| `Int32`           | `hkInt32` (`signed int`)              |                4 |                  4 |
-| `Uint32`          | `hkUint32` (`unsigned int`)           |                4 |                  4 |
-| `Int64`           | `hkInt64` (`signed long long`)        |                8 |                  8 |
-| `Uint64`          | `hkUint64` (`unsigned long long`)     |                8 |                  8 |
-| `Real`            | `hkReal` (`float`)                    |                4 |                  4 |
-| `Vector4`         | `hkVector4`                           |               16 |                 16 |
-| `Quaternion`      | `hkQuaternion`                        |               16 |                 16 |
-| `Matrix3`         | `hkMatrix3`                           |               48 |                 48 |
-| `Rotation`        | `hkRotation`                          |               48 |                 48 |
-| `QsTransform`     | `hkQsTransform`                       |               48 |                 48 |
-| `Matrix4`         | `hkMatrix4`                           |               64 |                 64 |
-| `Transform`       | `hkTransform`                         |               64 |                 64 |
-| `Zero`            |                                       |                  |                    |
-| `Pointer`         |                                       |                4 |                  8 |
-| `FunctionPointer` |                                       |                4 |                  8 |
-| `Array`           | `hkArray`                             |               12 |                 16 |
-| `InplaceArray`    | `InplaceArray`                        |    sizeof(Array) |      sizeof(Array) |
-| `Enum`            | `hkEnum<Enum, SizeType>`              | sizeof(SizeType) |   sizeof(SizeType) |
-| `Struct`          | `Class T`                             |   sizeof(Struct) |     sizeof(Struct) |
-| `SimpleArray`     | `T[N]` (e.g. `hkBool[3]`)             |                  |                    |
-| `Variant`         | `hkVariant` (`void*` & `hkClass*`)    |                4 |                  8 |
-| `CString`         | `char*`                               |                4 |                  8 |
-| `Ulong`           | `hkUlong`(`unsigned long`)            |                4 |                  8 |
-| `Flags`           | `hkFlags<Enum, SizeType>` (`hkInt16`) |                2 |                  2 |
-| `Half`            | `hkHalf` (`hkInt16`)                  |                2 |                  2 |
-| `StringPtr`       | `hkStringPtr`                         |                4 |                  8 |
-| `RelArray`        | `hkRelArray<T>`                       |                4 |                  4 |
-| `Max`             |                                       |                  |                    |
+- Never used(on this version): `Void`, `Zero`, `FunctionPointer`, `InplaceArray`, `HomogeneousArray`, `RelArray`, `Max`
+
+| TypeKind           | C++ Type                          |  Bytes size(x86) | Bytes size(x86_64) |
+| ------------------ | --------------------------------- | ---------------: | -----------------: |
+| `Void`             | `void`                            |                  |                    |
+| `Bool`             | `hkBool` (`bool`)                 |                1 |                  1 |
+| `Char`             | `hkChar` (`signed char`)          |                1 |                  1 |
+| `Int8`             | `hkInt8` (`signed char`)          |                1 |                  1 |
+| `Uint8`            | `hkUint8` (`unsigned char`)       |                1 |                  1 |
+| `Int16`            | `hkInt16` (`signed short`)        |                2 |                  2 |
+| `Uint16`           | `hkUint16` (`unsigned short`)     |                2 |                  2 |
+| `Int32`            | `hkInt32` (`signed int`)          |                4 |                  4 |
+| `Uint32`           | `hkUint32` (`unsigned int`)       |                4 |                  4 |
+| `Int64`            | `hkInt64` (`signed long long`)    |                8 |                  8 |
+| `Uint64`           | `hkUint64` (`unsigned long long`) |                8 |                  8 |
+| `Real`             | `hkReal` (`float`)                |                4 |                  4 |
+| `Vector4`          | `hkVector4`                       |               16 |                 16 |
+| `Quaternion`       | `hkQuaternion`                    |               16 |                 16 |
+| `Matrix3`          | `hkMatrix3`                       |               48 |                 48 |
+| `Rotation`         | `hkRotation`                      |               48 |                 48 |
+| `QsTransform`      | `hkQsTransform`                   |               48 |                 48 |
+| `Matrix4`          | `hkMatrix4`                       |               64 |                 64 |
+| `Transform`        | `hkTransform`                     |               64 |                 64 |
+| `Zero`             |                                   |                  |                    |
+| `Pointer`          | `T*`                              |                4 |                  8 |
+| `FunctionPointer`  |                                   |                4 |                  8 |
+| `Array`            | `hkArray`                         |               12 |                 16 |
+| `InplaceArray`     | `InplaceArray`                    |    sizeof(Array) |      sizeof(Array) |
+| `Enum`             | `hkEnum<Enum, SizeType>`          | sizeof(SizeType) |   sizeof(SizeType) |
+| `Struct`           | `Class T`                         |   sizeof(Struct) |     sizeof(Struct) |
+| `SimpleArray`      | `hkSimpleArray`                   |                4 |                  8 |
+| `HomogeneousArray` |                                   |                  |                    |
+| `Variant`          | `hkVariant`                       |                8 |                 16 |
+| `CString`          | `char*`                           |                4 |                  8 |
+| `Ulong`            | `hkUlong`(`unsigned long`)        |                4 |                  8 |
+| `Flags`            | `hkFlags<FlagEnum, SizeType>`     | sizeof(SizeType) |   sizeof(SizeType) |
+| `Half`             | `hkHalf` (`hkInt16`)              |                2 |                  2 |
+| `StringPtr`        | `hkStringPtr`                     |                4 |                  8 |
+| `RelArray`         | `hkRelArray<T>`                   |                4 |                  4 |
+| `Max`              |                                   |                  |                    |
 
 ## Types details
 
@@ -46,7 +49,20 @@ These are a summary of the assumed C++ code, the binary read/write method derive
 
 These may change when SIMD operations are enabled.(Especially, `hkVector4`)
 
+### `void`
+
+No type information.
+
+This is often used to fill in generics elements with types for which generics are not used.
+
+- `hkArray<hkBool>` -> vtype: TYPE_ARRAY, vsubtype: TYPE_BOOL
+- `hkBool` -> vtype: TYPE_BOOL, vsubtype: TYPE_VOID
+
 ### `hkReal`
+
+- f32 floating point number
+
+- C++
 
 ```cpp
 typedef float hkReal;
@@ -141,7 +157,11 @@ The w component, which is unused on XML, is not displayed.
 
 ### `hkMatrix3`
 
-- Assumed C++
+- f32(4bytes) must be read/written for 4 \* 3 = 12 times = 48 bytes size.
+
+- The reason for daring to use Vector4 seems to be for alignment.
+
+- C++
 
 ```cpp
 /**
@@ -166,10 +186,6 @@ class hkMatrix3 {
 };
 ```
 
-- Binary read/write
-
-f32(4bytes) must be read/written for 4 \* 3 = 12 times = 48 bytes size.
-
 - XML
 
 The w component, which is unused on XML, is not displayed.
@@ -187,7 +203,18 @@ The w component, which is unused on XML, is not displayed.
 
 ### `hkRotation`
 
-Same as `hkMatrix3`
+Same as `hkMatrix3`.
+
+- There is a 16-byte alignment in the class, but Vector4 is used in the hkMatrix3 field, which is considered the same since it does 16-byte alignment internally.
+
+```cpp
+/**
+ * - byte size: 48(x86)/ 48(x86_64)
+ * - ownership: Owned
+ */
+class hkRotation: public hkMatrix3 {
+};
+```
 
 ### `hkQsTransform`
 
@@ -319,7 +346,32 @@ class hkTransform {
 
 ### `Zero`
 
+It is said to be set to 0 during serialization, but it is a deprecated item and never used.
+
 ### `Pointer`
+
+- XML example
+
+Pointers are indicated by using the index of name.
+
+```xml
+<hkobject name="#0858" class="hkbVariableBindingSet" signature="0x338ad4ff">
+  <hkparam name="bindings" numelements="2">
+    <hkobject>
+      <hkparam name="memberPath">startStateId</hkparam>
+      <hkparam name="variableIndex">6</hkparam>
+      <hkparam name="bitIndex">-1</hkparam>
+      <hkparam name="bindingType">BINDING_TYPE_VARIABLE</hkparam>
+    </hkobject>
+    <!-- ... ... -->
+  </hkparam>
+  <hkparam name="indexOfBindingToEnable">-1</hkparam>
+</hkobject>
+
+<hkobject name="#0859" class="hkbStateMachine" signature="0x816c1dcb">
+  <hkparam name="variableBindingSet">#0858</hkparam>
+</hkobject>
+```
 
 ### `FunctionPointer`
 
@@ -453,7 +505,68 @@ class hkEnum {
 
 ### `SimpleArray`
 
+Inline defined pointer and size type.
+
+- Types used in the five classes
+
+  - `hkbCharacter`(`poseLocal`)
+  - `hkClass`(`declaredEnums: class hkClassEnum*`, `declaredMembers: class hkClassMember*`)
+  - `hkClassEnum`(`items`)
+  - `hkClassMember`(enum item)
+  - `khkCustomAttributes`(`attributes: struct Attribute*`)
+
+- This can be viewed as a structure consisting of a pointer to a certain class and immediately following it, an `int` representing the number of elements in an array.
+
+  We used the term "viewed as" because this class doesn't actually exist; its fields are directly written into each class.
+
+- The size is always defined as `int`, not `size_t`, which is the same as `hkArray`. In `hkArray`, the size is 16 bytes even in 64-bit environment because of this.
+
+- Assumed C++
+
+```cpp
+/**
+ * - byte size: 8(x86)/ 12(x86_64)
+ * - ownership: Owned
+ */
+struct hkSimpleArray {
+  /**
+   * -    offset: 0(x86)/ 0(x86_64)
+   * - byte size: 4(x86)/ 8(x86_64)
+   */
+   const SomeClass* m_someFieldName;
+  /**
+   * -    offset: 4(x86)/ 8(x86_64)
+   * - byte size: 4(x86)/ 4(x86_64)
+   */
+   int m_numSomeFieldName;
+};
+```
+
 ### `hkVariant`
+
+- It seems to have class and object pointers, but details are unknown.
+- The enum definition exists in `hkClassMember` and is only used in one place, `hkCustomAttributesAttribute`.
+
+- C++
+
+```cpp
+/**
+ * - byte size: 8(x86)/ 16(x86_64)
+ * - ownership: Owned
+ */
+struct hkVariant {
+  /**
+   * -    offset: 0(x86)/ 0(x86_64)
+   * - byte size: 4(x86)/ 8(x86_64)
+   */
+	void* m_object;
+  /**
+   * -    offset: 4(x86)/ 8(x86_64)
+   * - byte size: 4(x86)/ 8(x86_64)
+   */
+	hkClass* m_class;
+};
+```
 
 ### CString(`char*`)
 
@@ -462,7 +575,28 @@ class hkEnum {
 
 ### `hkUlong`(`unsigned long`)
 
-### `hkFlags<Enum, SizeType>`(`hkInt16`)
+- C++
+
+```cpp
+typedef unsigned long hkUlong;
+```
+
+### `hkFlags<Enum, SizeType>`
+
+- Signed (or unsigned) size flags of 8, 16, or 32
+
+- enum flag type that stores only the size of `SizeType` in memory.
+
+```cpp
+/**
+ * - byte size: sizeof(SizeType)(x86)/ sizeof(SizeType)(x86_64)
+ * - ownership: Owned
+ */
+template <typename FlagEnum, typename SizeType>
+class hkFlags {
+    SizeType storage;
+};
+```
 
 ### `hkHalf`
 
@@ -470,7 +604,6 @@ class hkEnum {
 
 ```cpp
 /**
- * - byte size: variable length
  * - byte size: 2(x86)/ 2(x86_64)
  * - ownership: Owned
  */
