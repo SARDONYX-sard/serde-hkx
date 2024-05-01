@@ -586,7 +586,7 @@ struct hkSimpleArray {
 ### `hkVariant`
 
 - It seems to have class and object pointers, but details are unknown.
-- The enum definition exists in `hkClassMember` and is only used in one place, `hkCustomAttributesAttribute`.
+- Only used for `value` of `hkCustomAttributesAttribute`.
 
 - C++
 
