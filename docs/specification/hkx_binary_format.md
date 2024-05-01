@@ -70,7 +70,7 @@
 
 ## Section
 
-### classnames
+### Classnames section
 
 - The following classes are always present in a single file.
 
@@ -104,11 +104,11 @@ The `hkRootLevelContainer` is present in most hkx files, but not always as far a
 | separator  | Always `0x09`                                            | 1               | 4              |
 | class name | A null-terminated string.(e.g. `hkRootLevelContainer\0`) | variable length | 5              |
 
-### types
+### Types section
 
 Basically, we can assume that it does not exist.
 
-### data
+### Data section
 
 Fields of havok class
 
