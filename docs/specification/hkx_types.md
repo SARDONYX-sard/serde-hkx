@@ -29,9 +29,9 @@
 | `Pointer`          | `T*`                              |                4 |                  8 |
 | `FunctionPointer`  |                                   |                4 |                  8 |
 | `Array`            | `hkArray`                         |               12 |                 16 |
-| `InplaceArray`     | `InplaceArray`                    |    sizeof(Array) |      sizeof(Array) |
+| `InplaceArray`     | `InplaceArray`                    |                  |                    |
 | `Enum`             | `hkEnum<Enum, SizeType>`          | sizeof(SizeType) |   sizeof(SizeType) |
-| `Struct`           | `Class T`                         |   sizeof(Struct) |     sizeof(Struct) |
+| `Struct`           | `class` or `struct`               |   sizeof(Struct) |     sizeof(Struct) |
 | `SimpleArray`      | `hkSimpleArray`                   |                8 |                 12 |
 | `HomogeneousArray` |                                   |                  |                    |
 | `Variant`          | `hkVariant`                       |                8 |                 16 |
@@ -42,6 +42,11 @@
 | `StringPtr`        | `hkStringPtr`                     |                4 |                  8 |
 | `RelArray`         | `hkRelArray<T>`                   |                4 |                  4 |
 | `Max`              |                                   |                  |                    |
+
+- Which Array pattern is hkBool[3] etc.?
+
+  It does not seem to be classified as TYPE_ARRAY or any other array.
+  `vtype: TYPE_BOOL, array size: 3`, only the array size changes. There is an editing software that calls this C style Array.
 
 ## Types details
 
@@ -409,7 +414,7 @@ class hkArray {
 
 - XML
 
-  There seem to be five XML patterns for arrays among those we have identified.
+  There seem to be 5 XML patterns for arrays among those we have identified.
 
   - `hkArray<hkReal>`
 
@@ -426,7 +431,7 @@ class hkArray {
   ```
 
   - `hkArray<hkClass*>`
-    It can be regarded as the same as `hkArray<hkReal>` in the sense that it is space free.
+    (It can be regarded as the same as `hkArray<hkReal>` in the sense that it is space free.)
 
   ```xml
   <hkparam name="variantVariableValues" numelements="2">
@@ -435,7 +440,8 @@ class hkArray {
   </hkparam>
   ```
 
-  - `hkArray<hkClass>`(e.g. `hkArray<hkRootLevelContainerNamedVariant> namedVariants` field of `hkRootLevelContainer` class)
+  - `hkArray<hkClass>`
+    (e.g. `hkArray<hkRootLevelContainerNamedVariant> namedVariants` field of `hkRootLevelContainer` class)
 
   ```xml
   <hkparam name="namedVariants" numelements="6">
@@ -446,7 +452,7 @@ class hkArray {
        <hkparam name="variant">#0051</hkparam>
      </hkobject>
 
-     <!--         kRootLevelContainerNamedVariant            -->
+     <!--           kRootLevelContainerNamedVariant              -->
      <hkobject>
        <hkparam name="name">Resource Data</hkparam>
        <hkparam name="className">hkMemoryResourceContainer</hkparam>
@@ -459,13 +465,12 @@ class hkArray {
 
     ```xml
     <hkparam name="variableNames" numelements="6">
-      <!--       hkStringPtr          -->
-      <hkcstring>blendDefault</hkcstring>
-      <hkcstring>blendFast</hkcstring>
-      <hkcstring>blendSlow</hkcstring>
-      <hkcstring>Direction</hkcstring>
-      <hkcstring>IsBlocking</hkcstring>
-      <hkcstring>Speed</hkcstring>
+      <hkcstring>blendDefault</hkcstring> <!-- hkStringPtr -->
+      <hkcstring>blendFast</hkcstring>    <!-- hkStringPtr -->
+      <hkcstring>blendSlow</hkcstring>    <!-- hkStringPtr -->
+      <hkcstring>Direction</hkcstring>    <!-- hkStringPtr -->
+      <hkcstring>IsBlocking</hkcstring>   <!-- hkStringPtr -->
+      <hkcstring>Speed</hkcstring>        <!-- hkStringPtr -->
     </hkparam>
     ```
 
@@ -473,10 +478,8 @@ class hkArray {
 
     ```xml
     <hkparam name="deactivationRefPosition" numelements="2">
-      <!--           Vector4            -->
-      (0.000000 0.000000 0.000000 0.000000)
-      <!--           Vector4            -->
-      (0.000000 0.000000 0.000000 0.000000)
+      (0.000000 0.000000 0.000000 0.000000) <!-- Vector4 -->
+      (0.000000 0.000000 0.000000 0.000000) <!-- Vector4 -->
     </hkparam>
     ```
 
@@ -496,6 +499,10 @@ class hkEnum {
     SizeType storage;
 };
 ```
+
+- XML
+
+  The tag in the enum becomes UPPER_SNAKE_CASE.
 
 ```xml
 <hkparam name="type">TYPE_ANG_FRICTION</hkparam>
@@ -598,6 +605,19 @@ class hkFlags {
 };
 ```
 
+- XML
+
+```xml
+<!-- pattern 1: If there are no flags at all (0bits), 0 is entered. -->
+<hkparam>0</hkparam>
+
+<!-- pattern 2: UPPER_SNAKE_CASE as in enum, but this one can also express OR bitwise operations with `|`.  -->
+<hkparam>ALIGN8|ALIGN16|SERIALIZE_IGNORED</hkparam>
+
+<!-- pattern 3: Can include arbitrary bits in addition to other bit flags. (Not sure if this makes sense) -->
+<hkparam>ALIGN8|ALIGN16|SERIALIZE_IGNORE|64</hkparam>
+```
+
 ### `hkHalf`
 
 - Represents a 16-bit floating-point number
@@ -632,7 +652,7 @@ class hkStringPtr {
 
 - XML Example
 
-An arbitrary string is entered.
+  An arbitrary string is entered.
 
 ```xml
 <hkparam name="name">Ragdoll_Wisp L Hand01</hkparam>
