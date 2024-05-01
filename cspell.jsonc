@@ -7,15 +7,23 @@
     "elif",
     "endl",
     "Havok",
+    "hkcstring",
+    "hkobject",
     "hkparam",
+    "Inplace",
     "iostream",
     "malloc",
+    "numelements",
     "offsetof",
     "repr",
     "rodata",
     "SIMD",
     "Skyrim",
     "struct",
-    "vtable"
+    "Uchar",
+    "Ulong",
+    "vsubtype",
+    "vtable",
+    "vtype"
   ]
 }
