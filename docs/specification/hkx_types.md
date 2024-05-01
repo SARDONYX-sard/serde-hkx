@@ -2,7 +2,7 @@
 
 - Offset and Size: Used to adjust the size and read/write position of the binary data to be read/write.
 
-- Never used(on this version): `Void`, `Zero`, `FunctionPointer`, `InplaceArray`, `HomogeneousArray`, `RelArray`, `Max`
+- Never used(on this version): `Zero`, `FunctionPointer`, `InplaceArray`, `HomogeneousArray`, `RelArray`, `Max`
 
 | TypeKind           | C++ Type                          |  Bytes size(x86) | Bytes size(x86_64) |
 | ------------------ | --------------------------------- | ---------------: | -----------------: |
