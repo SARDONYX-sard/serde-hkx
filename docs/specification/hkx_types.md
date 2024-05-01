@@ -1,7 +1,6 @@
 # HKX types
 
-- Offset and Size: Used to adjust the size and read/write position of the binary data to be read/write.
-
+- Offset and Size: This is used to adjust the size of binary data to be read or written, as well as the current read/write position.
 - Never used(on this version): `Zero`, `FunctionPointer`, `InplaceArray`, `HomogeneousArray`, `RelArray`, `Max`
 
 | TypeKind           | C++ Type                          |  Bytes size(x86) | Bytes size(x86_64) |
