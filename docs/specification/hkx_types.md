@@ -27,7 +27,7 @@
 | `Zero`             |                                   |                  |                    |
 | `Pointer`          | `T*`                              |                4 |                  8 |
 | `FunctionPointer`  |                                   |                4 |                  8 |
-| `Array`            | `hkArray`                         |               12 |                 16 |
+| `Array`            | `hkArray<T>`                      |               12 |                 16 |
 | `InplaceArray`     | `InplaceArray`                    |                  |                    |
 | `Enum`             | `hkEnum<Enum, SizeType>`          | sizeof(SizeType) |   sizeof(SizeType) |
 | `Struct`           | `class` or `struct`               |   sizeof(Struct) |     sizeof(Struct) |
@@ -53,7 +53,7 @@ These are a summary of the assumed C++ code, the binary read/write method derive
 
 These may change when SIMD operations are enabled.(Especially, `hkVector4`)
 
-### `void`
+### `Void`(`void`)
 
 No type information.
 
@@ -64,7 +64,7 @@ This is often used to fill in generics elements with types for which generics ar
 
 ---
 
-### `hkReal`
+### `Real`(`hkReal`)
 
 - f32 floating point number
 
@@ -84,7 +84,7 @@ Display even if the value is 0 to the 6th decimal place.
 
 ---
 
-### `hkVector4`
+### `Vector4`(`hkVector4`)
 
 If we use SIMD registers, we will use `__m128` and so on.
 
@@ -130,7 +130,7 @@ class __attribute__((aligned(16))) hkVector4 {
 
 ---
 
-### `hkQuaternion`
+### `Quaternion`(`hkQuaternion`)
 
 - C++
 
@@ -167,7 +167,7 @@ The w component, which is unused on XML, is not displayed.
 
 ---
 
-### `hkMatrix3`
+### `Matrix3`(`hkMatrix3`)
 
 - f32(4bytes) must be read/written for 4 \* 3 = 12 times = 48 bytes size.
 
@@ -215,7 +215,7 @@ The w component, which is unused on XML, is not displayed.
 
 ---
 
-### `hkRotation`
+### `Rotation`(`hkRotation`)
 
 Same as `hkMatrix3`.
 
@@ -232,7 +232,7 @@ class hkRotation: public hkMatrix3 {
 
 ---
 
-### `hkQsTransform`
+### `QsTransform`(`hkQsTransform`)
 
 - C++
 
@@ -277,7 +277,7 @@ class hkQsTransform {
 
 ---
 
-### `hkMatrix4`
+### `Matrix4`(`hkMatrix4`)
 
 - C++
 
@@ -326,7 +326,7 @@ class hkMatrix4 {
 
 ---
 
-### `hkTransform`
+### `Transform`(`hkTransform`)
 
 - C++
 
@@ -372,7 +372,7 @@ It is said to be set to 0 during serialization, but it is a deprecated item and 
 
 ---
 
-### `Pointer`
+### `Pointer`(`T*`)
 
 - XML example
 
@@ -403,7 +403,7 @@ Pointers are indicated by using the index of name.
 
 ---
 
-### `hkArray`
+### Array(`hkArray<T>`)
 
 - Since `T *m_data` is a raw pointer, it is not clear whether it is assigned to the stack or heap segment.
 
@@ -512,7 +512,7 @@ class hkArray {
 
 ---
 
-### `hkEnum<Enum, SizeType>`
+### Enum(`hkEnum<Enum, SizeType>`)
 
 - enum type that stores only the size of `SizeType` in memory.
 
@@ -537,11 +537,11 @@ class hkEnum {
 
 ---
 
-### `Struct`
+### `Struct`(`class` or `struct`)
 
 ---
 
-### `SimpleArray`
+### `SimpleArray`(inline fields)
 
 Inline defined pointer and size type.
 
@@ -582,7 +582,7 @@ struct hkSimpleArray {
 
 ---
 
-### `hkVariant`
+### `Variant`(`hkVariant`)
 
 - It seems to have class and object pointers, but details are unknown.
 - Only used for `value` of `hkCustomAttributesAttribute`.
@@ -617,7 +617,7 @@ struct hkVariant {
 
 ---
 
-### `hkUlong`(`unsigned long`)
+### `Ulong`(`hkUlong`)
 
 - C++
 
@@ -627,7 +627,7 @@ typedef unsigned long hkUlong;
 
 ---
 
-### `hkFlags<Enum, SizeType>`
+### `Flags`(`hkFlags<Enum, SizeType>`)
 
 - Signed (or unsigned) size flags of 8, 16, or 32
 
@@ -659,7 +659,7 @@ class hkFlags {
 
 ---
 
-### `hkHalf`
+### `Half`(`hkHalf`)
 
 - Represents a 16-bit floating-point number
 
@@ -675,7 +675,7 @@ class hkHalf {
 
 ---
 
-### `hkStringPtr`
+### `StringPtr`(`hkStringPtr`)
 
 - Null-terminated string type.
 - There is a flag `StringFlags::OWNED_FLAG = 0x1` defined in the class, so `Owned` is also possible.
@@ -703,7 +703,9 @@ class hkStringPtr {
 
 ---
 
-### `hkRelArray<T>`
+### `RelArray`(`hkRelArray<T>`)
+
+It seems to be an immutable sequence.
 
 ```cpp
 /**
@@ -716,3 +718,7 @@ class hkRelArray<T> {
   unsigned short m_offset;
 };
 ```
+
+---
+
+### Max
