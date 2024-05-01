@@ -43,9 +43,9 @@
 | `RelArray`         | `hkRelArray<T>`                   |                4 |                  4 |
 | `Max`              |                                   |                  |                    |
 
-- Which Array pattern is hkBool[3] etc.?
+- Which Array pattern is `hkBool[3]` etc.?
 
-  It does not seem to be classified as TYPE_ARRAY or any other array.
+  It does not seem to be classified as `TYPE_ARRAY` or any other array.
   `vtype: TYPE_BOOL, array size: 3`, only the array size changes. There is an editing software that calls this C style Array.
 
 ## Types details
@@ -62,6 +62,8 @@ This is often used to fill in generics elements with types for which generics ar
 
 - `hkArray<hkBool>` -> vtype: TYPE_ARRAY, vsubtype: TYPE_BOOL
 - `hkBool` -> vtype: TYPE_BOOL, vsubtype: TYPE_VOID
+
+---
 
 ### `hkReal`
 
@@ -80,6 +82,8 @@ Display even if the value is 0 to the 6th decimal place.
 ```xml
 <hkparam name="maxFrictionTorque">0.000000</hkparam>
 ```
+
+---
 
 ### `hkVector4`
 
@@ -125,6 +129,8 @@ class __attribute__((aligned(16))) hkVector4 {
 </hkparam>
 ```
 
+---
+
 ### `hkQuaternion`
 
 - C++
@@ -159,6 +165,8 @@ The w component, which is unused on XML, is not displayed.
   (-0.000000 0.000000 -0.000000 1.000000)
 </hkparam>
 ```
+
+---
 
 ### `hkMatrix3`
 
@@ -206,6 +214,8 @@ The w component, which is unused on XML, is not displayed.
 </hkparam>
 ```
 
+---
+
 ### `hkRotation`
 
 Same as `hkMatrix3`.
@@ -220,6 +230,8 @@ Same as `hkMatrix3`.
 class hkRotation: public hkMatrix3 {
 };
 ```
+
+---
 
 ### `hkQsTransform`
 
@@ -263,6 +275,8 @@ class hkQsTransform {
   (1.000000 1.000000 1.000000)
 </hkparam>
 ```
+
+---
 
 ### `hkMatrix4`
 
@@ -311,6 +325,8 @@ class hkMatrix4 {
 </hkparam>
 ```
 
+---
+
 ### `hkTransform`
 
 - C++
@@ -349,9 +365,13 @@ class hkTransform {
 </hkparam>
 ```
 
+---
+
 ### `Zero`
 
 It is said to be set to 0 during serialization, but it is a deprecated item and never used.
+
+---
 
 ### `Pointer`
 
@@ -378,7 +398,11 @@ Pointers are indicated by using the index of name.
 </hkobject>
 ```
 
+---
+
 ### `FunctionPointer`
+
+---
 
 ### `hkArray`
 
@@ -483,7 +507,11 @@ class hkArray {
     </hkparam>
     ```
 
+---
+
 ### `InplaceArray`
+
+---
 
 ### `hkEnum<Enum, SizeType>`
 
@@ -508,7 +536,11 @@ class hkEnum {
 <hkparam name="type">TYPE_ANG_FRICTION</hkparam>
 ```
 
+---
+
 ### `Struct`
+
+---
 
 ### `SimpleArray`
 
@@ -549,6 +581,8 @@ struct hkSimpleArray {
 };
 ```
 
+---
+
 ### `hkVariant`
 
 - It seems to have class and object pointers, but details are unknown.
@@ -575,10 +609,14 @@ struct hkVariant {
 };
 ```
 
+---
+
 ### CString(`char*`)
 
 - Null-terminated string type.
 - It is unclear which segment (stack, heap, or other) is being pointed to because of the raw pointer.
+
+---
 
 ### `hkUlong`(`unsigned long`)
 
@@ -587,6 +625,8 @@ struct hkVariant {
 ```cpp
 typedef unsigned long hkUlong;
 ```
+
+---
 
 ### `hkFlags<Enum, SizeType>`
 
@@ -618,6 +658,8 @@ class hkFlags {
 <hkparam>ALIGN8|ALIGN16|SERIALIZE_IGNORE|64</hkparam>
 ```
 
+---
+
 ### `hkHalf`
 
 - Represents a 16-bit floating-point number
@@ -631,6 +673,8 @@ class hkHalf {
     unsigned short m_data;
 };
 ```
+
+---
 
 ### `hkStringPtr`
 
@@ -657,6 +701,8 @@ class hkStringPtr {
 ```xml
 <hkparam name="name">Ragdoll_Wisp L Hand01</hkparam>
 ```
+
+---
 
 ### `hkRelArray<T>`
 
