@@ -1,7 +1,7 @@
 # HKX types
 
 - Offset and Size: This is used to adjust the size of binary data to be read or written, as well as the current read/write position.
-- Never used(on this version): `Zero`, `FunctionPointer`, `InplaceArray`, `HomogeneousArray`, `RelArray`, `Max`
+- Never used(In the Havok classes): `Zero`, `FunctionPointer`, `InplaceArray`, `HomogeneousArray`, `RelArray`, `Max`
 
 | TypeKind           | C++ Type                          |  Bytes size(x86) | Bytes size(x86_64) |
 | ------------------ | --------------------------------- | ---------------: | -----------------: |
