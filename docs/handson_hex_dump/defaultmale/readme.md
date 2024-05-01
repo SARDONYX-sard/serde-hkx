@@ -508,22 +508,21 @@ VirtualFixup {
   // INFO: To see the 32-bit version, add `-m32` to the compiler flags.
   #include <iostream>
 
-  // havok_2010_2_0/Source/Common/Base/Container/String/hkStringPtr.h
   class hkStringPtr {
      private:
       const char *m_stringAndFlag;
   };
 
-  // havok_2010_2_0/Source/Common/Base/Types/hkBaseTypes.h
   typedef unsigned short hkUint16;
+
   typedef float hkReal;
+
   template <typename ENUM, typename N>
   class hkEnum {
      private:
       N storage;
   };
 
-  // havok_2010_2_0/Source/Common/Base/Container/Array/hkArray.h
   // - size: 32bit: 12, 64bit: 16bytes
   //   ptr size(32bit: 4, 64bit: 8) + array  size(4: u32) + cap&flags(4: u32)
   //
@@ -546,7 +545,6 @@ VirtualFixup {
       float y, z, w;
   };
 
-  // havok_2010_2_0/compat/hkbTransitionEffect_0.h
   enum EventMode {
       EVENT_MODE_DEFAULT = 0,
       EVENT_MODE_PROCESS_ALL = 1,
