@@ -931,7 +931,7 @@ The next virtual_fixup is 128. Therefore, 0x160 + 0x80(128) = 0x1e0
 
 00000210: 00 00 00 00 00 00 00 00 01 00 00 00 01 00 00 80  ................
           <--------------------------------------------->  characterFilenames: hkArray<hkStringPtr>
-          <=============================================>  seek characterFilenames(current position: 232 -> dst: 352)
+          <=============================================>  seek characterFilenames(current position: 224 -> dst: 336)
 
 00000220: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80  ................
           <--------------------------------------------->  eventNames: hkArray<hkStringPtr>

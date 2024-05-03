@@ -14,7 +14,7 @@
 | section header of `__type__`                             | 48              | 112             |
 | section header of `__data__`                             | 48              | 160             |
 | section of `__classnames__`                              | variable length | 208             |
-| section of `__type__`(Here we assume 0)                  | 0               | variable length |
+| section of `__types__`(Here we assume 0)                 | 0               | variable length |
 | section of `__data__`                                    | variable length | variable length |
 | fixups of `__classnames__`                               | variable length | variable length |
 | fixups of `__types__`                                    | variable length | variable length |
