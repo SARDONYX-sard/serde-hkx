@@ -11,7 +11,7 @@
 | hkx file header                                          | 64              | 0               |
 | padding for `section_offset` in header(Here we assume 0) | 0               | 64              |
 | section header of `__classnames__`                       | 48              | 64              |
-| section header of `__type__`                             | 48              | 112             |
+| section header of `__types__`                            | 48              | 112             |
 | section header of `__data__`                             | 48              | 160             |
 | section of `__classnames__`                              | variable length | 208             |
 | section of `__types__`(Here we assume 0)                 | 0               | variable length |
