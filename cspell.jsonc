@@ -1,6 +1,7 @@
 {
   "words": [
     "alloc",
+    "arrsize",
     "compat",
     "cout",
     "defaultmale",
@@ -24,6 +25,7 @@
     "Ulong",
     "vsubtype",
     "vtable",
-    "vtype"
+    "vtype",
+    "xmmintrin"
   ]
 }

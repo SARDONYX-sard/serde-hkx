@@ -1,0 +1,3424 @@
+2024-04-20T18:10:33.387851Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:362: class_header:
+          section tag: __classnames__
+section tag separator: 0xFF
+
+Offsets:
+  absolute data start: 0xD0
+         local fixups: 0x1E0
+        global fixups: 0x1E0
+       virtual fixups: 0x1E0
+              exports: 0x1E0
+              imports; 0x1E0
+                  end: 0x1E0
+        abs +   local: 0x2B0
+        abs +  global: 0x2B0
+        abs + virtual: 0x2B0
+        abs + exports: 0x2B0
+        abs + imports: 0x2B0
+        abs +     end: 0x2B0
+
+2024-04-20T18:10:33.388133Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:363:  type_header:
+          section tag: __types__
+section tag separator: 0xFF
+
+Offsets:
+  absolute data start: 0x2B0
+         local fixups: 0x0
+        global fixups: 0x0
+       virtual fixups: 0x0
+              exports: 0x0
+              imports; 0x0
+                  end: 0x0
+        abs +   local: 0x2B0
+        abs +  global: 0x2B0
+        abs + virtual: 0x2B0
+        abs + exports: 0x2B0
+        abs + imports: 0x2B0
+        abs +     end: 0x2B0
+
+2024-04-20T18:10:33.388154Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:364:  data_header:
+          section tag: __data__
+section tag separator: 0xFF
+
+Offsets:
+  absolute data start: 0x2B0
+         local fixups: 0x9200
+        global fixups: 0x9AE0
+       virtual fixups: 0xA6D0
+              exports: 0xAE50
+              imports; 0xAE50
+                  end: 0xAE50
+        abs +   local: 0x94B0
+        abs +  global: 0x9D90
+        abs + virtual: 0xA980
+        abs + exports: 0xB100
+        abs + imports: 0xB100
+        abs +     end: 0xB100
+
+2024-04-20T18:10:33.390469Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:374: data_section.local_map: {
+    0: LocalFixup {
+        src: 0,
+        dst: 16,
+    },
+    16: LocalFixup {
+        src: 16,
+        dst: 160,
+    },
+    24: LocalFixup {
+        src: 24,
+        dst: 192,
+    },
+    40: LocalFixup {
+        src: 40,
+        dst: 224,
+    },
+    48: LocalFixup {
+        src: 48,
+        dst: 240,
+    },
+    64: LocalFixup {
+        src: 64,
+        dst: 272,
+    },
+    72: LocalFixup {
+        src: 72,
+        dst: 288,
+    },
+    88: LocalFixup {
+        src: 88,
+        dst: 304,
+    },
+    96: LocalFixup {
+        src: 96,
+        dst: 320,
+    },
+    112: LocalFixup {
+        src: 112,
+        dst: 352,
+    },
+    120: LocalFixup {
+        src: 120,
+        dst: 368,
+    },
+    136: LocalFixup {
+        src: 136,
+        dst: 400,
+    },
+    144: LocalFixup {
+        src: 144,
+        dst: 416,
+    },
+    464: LocalFixup {
+        src: 464,
+        dst: 544,
+    },
+    576: LocalFixup {
+        src: 576,
+        dst: 688,
+    },
+    584: LocalFixup {
+        src: 584,
+        dst: 704,
+    },
+    600: LocalFixup {
+        src: 600,
+        dst: 816,
+    },
+    816: LocalFixup {
+        src: 816,
+        dst: 1648,
+    },
+    832: LocalFixup {
+        src: 832,
+        dst: 1664,
+    },
+    848: LocalFixup {
+        src: 848,
+        dst: 1680,
+    },
+    864: LocalFixup {
+        src: 864,
+        dst: 1696,
+    },
+    880: LocalFixup {
+        src: 880,
+        dst: 1712,
+    },
+    896: LocalFixup {
+        src: 896,
+        dst: 1728,
+    },
+    912: LocalFixup {
+        src: 912,
+        dst: 1760,
+    },
+    928: LocalFixup {
+        src: 928,
+        dst: 1776,
+    },
+    944: LocalFixup {
+        src: 944,
+        dst: 1792,
+    },
+    960: LocalFixup {
+        src: 960,
+        dst: 1824,
+    },
+    976: LocalFixup {
+        src: 976,
+        dst: 1840,
+    },
+    992: LocalFixup {
+        src: 992,
+        dst: 1856,
+    },
+    1008: LocalFixup {
+        src: 1008,
+        dst: 1888,
+    },
+    1024: LocalFixup {
+        src: 1024,
+        dst: 1920,
+    },
+    1040: LocalFixup {
+        src: 1040,
+        dst: 1952,
+    },
+    1056: LocalFixup {
+        src: 1056,
+        dst: 1984,
+    },
+    1072: LocalFixup {
+        src: 1072,
+        dst: 2016,
+    },
+    1088: LocalFixup {
+        src: 1088,
+        dst: 2048,
+    },
+    1104: LocalFixup {
+        src: 1104,
+        dst: 2080,
+    },
+    1120: LocalFixup {
+        src: 1120,
+        dst: 2112,
+    },
+    1136: LocalFixup {
+        src: 1136,
+        dst: 2144,
+    },
+    1152: LocalFixup {
+        src: 1152,
+        dst: 2176,
+    },
+    1168: LocalFixup {
+        src: 1168,
+        dst: 2192,
+    },
+    1184: LocalFixup {
+        src: 1184,
+        dst: 2208,
+    },
+    1200: LocalFixup {
+        src: 1200,
+        dst: 2224,
+    },
+    1216: LocalFixup {
+        src: 1216,
+        dst: 2240,
+    },
+    1232: LocalFixup {
+        src: 1232,
+        dst: 2272,
+    },
+    1248: LocalFixup {
+        src: 1248,
+        dst: 2304,
+    },
+    1264: LocalFixup {
+        src: 1264,
+        dst: 2336,
+    },
+    1280: LocalFixup {
+        src: 1280,
+        dst: 2368,
+    },
+    1296: LocalFixup {
+        src: 1296,
+        dst: 2400,
+    },
+    1312: LocalFixup {
+        src: 1312,
+        dst: 2432,
+    },
+    1328: LocalFixup {
+        src: 1328,
+        dst: 2464,
+    },
+    1344: LocalFixup {
+        src: 1344,
+        dst: 2496,
+    },
+    1360: LocalFixup {
+        src: 1360,
+        dst: 2528,
+    },
+    1376: LocalFixup {
+        src: 1376,
+        dst: 2560,
+    },
+    1392: LocalFixup {
+        src: 1392,
+        dst: 2592,
+    },
+    1408: LocalFixup {
+        src: 1408,
+        dst: 2624,
+    },
+    1424: LocalFixup {
+        src: 1424,
+        dst: 2656,
+    },
+    1440: LocalFixup {
+        src: 1440,
+        dst: 2688,
+    },
+    1456: LocalFixup {
+        src: 1456,
+        dst: 2704,
+    },
+    1472: LocalFixup {
+        src: 1472,
+        dst: 2720,
+    },
+    1488: LocalFixup {
+        src: 1488,
+        dst: 2736,
+    },
+    1504: LocalFixup {
+        src: 1504,
+        dst: 2752,
+    },
+    1520: LocalFixup {
+        src: 1520,
+        dst: 2768,
+    },
+    1536: LocalFixup {
+        src: 1536,
+        dst: 2784,
+    },
+    1552: LocalFixup {
+        src: 1552,
+        dst: 2800,
+    },
+    1568: LocalFixup {
+        src: 1568,
+        dst: 2816,
+    },
+    1584: LocalFixup {
+        src: 1584,
+        dst: 2832,
+    },
+    1600: LocalFixup {
+        src: 1600,
+        dst: 2848,
+    },
+    1616: LocalFixup {
+        src: 1616,
+        dst: 2880,
+    },
+    1632: LocalFixup {
+        src: 1632,
+        dst: 2912,
+    },
+    616: LocalFixup {
+        src: 616,
+        dst: 2944,
+    },
+    5456: LocalFixup {
+        src: 5456,
+        dst: 5568,
+    },
+    5464: LocalFixup {
+        src: 5464,
+        dst: 5600,
+    },
+    5480: LocalFixup {
+        src: 5480,
+        dst: 5632,
+    },
+    5632: LocalFixup {
+        src: 5632,
+        dst: 5792,
+    },
+    5648: LocalFixup {
+        src: 5648,
+        dst: 5824,
+    },
+    5664: LocalFixup {
+        src: 5664,
+        dst: 5856,
+    },
+    5680: LocalFixup {
+        src: 5680,
+        dst: 5888,
+    },
+    5696: LocalFixup {
+        src: 5696,
+        dst: 5920,
+    },
+    5712: LocalFixup {
+        src: 5712,
+        dst: 5952,
+    },
+    5728: LocalFixup {
+        src: 5728,
+        dst: 5984,
+    },
+    5744: LocalFixup {
+        src: 5744,
+        dst: 6016,
+    },
+    5760: LocalFixup {
+        src: 5760,
+        dst: 6048,
+    },
+    5776: LocalFixup {
+        src: 5776,
+        dst: 6080,
+    },
+    5496: LocalFixup {
+        src: 5496,
+        dst: 6112,
+    },
+    6608: LocalFixup {
+        src: 6608,
+        dst: 6656,
+    },
+    6640: LocalFixup {
+        src: 6640,
+        dst: 6672,
+    },
+    6720: LocalFixup {
+        src: 6720,
+        dst: 6768,
+    },
+    6736: LocalFixup {
+        src: 6736,
+        dst: 6800,
+    },
+    6840: LocalFixup {
+        src: 6840,
+        dst: 6864,
+    },
+    7056: LocalFixup {
+        src: 7056,
+        dst: 7600,
+    },
+    7736: LocalFixup {
+        src: 7736,
+        dst: 7760,
+    },
+    7808: LocalFixup {
+        src: 7808,
+        dst: 7904,
+    },
+    7904: LocalFixup {
+        src: 7904,
+        dst: 7912,
+    },
+    7824: LocalFixup {
+        src: 7824,
+        dst: 7936,
+    },
+    8016: LocalFixup {
+        src: 8016,
+        dst: 8064,
+    },
+    8048: LocalFixup {
+        src: 8048,
+        dst: 8080,
+    },
+    8112: LocalFixup {
+        src: 8112,
+        dst: 8160,
+    },
+    8144: LocalFixup {
+        src: 8144,
+        dst: 8176,
+    },
+    8224: LocalFixup {
+        src: 8224,
+        dst: 8272,
+    },
+    8256: LocalFixup {
+        src: 8256,
+        dst: 8304,
+    },
+    8336: LocalFixup {
+        src: 8336,
+        dst: 8384,
+    },
+    8368: LocalFixup {
+        src: 8368,
+        dst: 8416,
+    },
+    8448: LocalFixup {
+        src: 8448,
+        dst: 8496,
+    },
+    8544: LocalFixup {
+        src: 8544,
+        dst: 8592,
+    },
+    8576: LocalFixup {
+        src: 8576,
+        dst: 8624,
+    },
+    8656: LocalFixup {
+        src: 8656,
+        dst: 8704,
+    },
+    8688: LocalFixup {
+        src: 8688,
+        dst: 8736,
+    },
+    8768: LocalFixup {
+        src: 8768,
+        dst: 8816,
+    },
+    8864: LocalFixup {
+        src: 8864,
+        dst: 8912,
+    },
+    8896: LocalFixup {
+        src: 8896,
+        dst: 8928,
+    },
+    8960: LocalFixup {
+        src: 8960,
+        dst: 9008,
+    },
+    8992: LocalFixup {
+        src: 8992,
+        dst: 9024,
+    },
+    9056: LocalFixup {
+        src: 9056,
+        dst: 9104,
+    },
+    9088: LocalFixup {
+        src: 9088,
+        dst: 9120,
+    },
+    9184: LocalFixup {
+        src: 9184,
+        dst: 9232,
+    },
+    9216: LocalFixup {
+        src: 9216,
+        dst: 9264,
+    },
+    9296: LocalFixup {
+        src: 9296,
+        dst: 9344,
+    },
+    9328: LocalFixup {
+        src: 9328,
+        dst: 9360,
+    },
+    9392: LocalFixup {
+        src: 9392,
+        dst: 9440,
+    },
+    9424: LocalFixup {
+        src: 9424,
+        dst: 9456,
+    },
+    9504: LocalFixup {
+        src: 9504,
+        dst: 9552,
+    },
+    9600: LocalFixup {
+        src: 9600,
+        dst: 9648,
+    },
+    9632: LocalFixup {
+        src: 9632,
+        dst: 9664,
+    },
+    9712: LocalFixup {
+        src: 9712,
+        dst: 9760,
+    },
+    9744: LocalFixup {
+        src: 9744,
+        dst: 9792,
+    },
+    9824: LocalFixup {
+        src: 9824,
+        dst: 9872,
+    },
+    9920: LocalFixup {
+        src: 9920,
+        dst: 9968,
+    },
+    9952: LocalFixup {
+        src: 9952,
+        dst: 10000,
+    },
+    10032: LocalFixup {
+        src: 10032,
+        dst: 10080,
+    },
+    10128: LocalFixup {
+        src: 10128,
+        dst: 10176,
+    },
+    10224: LocalFixup {
+        src: 10224,
+        dst: 10272,
+    },
+    10256: LocalFixup {
+        src: 10256,
+        dst: 10288,
+    },
+    10320: LocalFixup {
+        src: 10320,
+        dst: 10368,
+    },
+    10400: LocalFixup {
+        src: 10400,
+        dst: 10448,
+    },
+    10496: LocalFixup {
+        src: 10496,
+        dst: 10544,
+    },
+    10592: LocalFixup {
+        src: 10592,
+        dst: 10640,
+    },
+    10624: LocalFixup {
+        src: 10624,
+        dst: 10656,
+    },
+    10688: LocalFixup {
+        src: 10688,
+        dst: 10736,
+    },
+    10768: LocalFixup {
+        src: 10768,
+        dst: 10816,
+    },
+    10800: LocalFixup {
+        src: 10800,
+        dst: 10848,
+    },
+    10880: LocalFixup {
+        src: 10880,
+        dst: 10928,
+    },
+    10976: LocalFixup {
+        src: 10976,
+        dst: 11024,
+    },
+    11008: LocalFixup {
+        src: 11008,
+        dst: 11056,
+    },
+    11088: LocalFixup {
+        src: 11088,
+        dst: 11136,
+    },
+    11120: LocalFixup {
+        src: 11120,
+        dst: 11152,
+    },
+    11184: LocalFixup {
+        src: 11184,
+        dst: 11232,
+    },
+    11216: LocalFixup {
+        src: 11216,
+        dst: 11248,
+    },
+    11296: LocalFixup {
+        src: 11296,
+        dst: 11344,
+    },
+    11392: LocalFixup {
+        src: 11392,
+        dst: 11440,
+    },
+    11424: LocalFixup {
+        src: 11424,
+        dst: 11456,
+    },
+    11504: LocalFixup {
+        src: 11504,
+        dst: 11552,
+    },
+    11536: LocalFixup {
+        src: 11536,
+        dst: 11584,
+    },
+    11616: LocalFixup {
+        src: 11616,
+        dst: 11664,
+    },
+    11712: LocalFixup {
+        src: 11712,
+        dst: 11760,
+    },
+    11744: LocalFixup {
+        src: 11744,
+        dst: 11792,
+    },
+    11824: LocalFixup {
+        src: 11824,
+        dst: 11872,
+    },
+    11920: LocalFixup {
+        src: 11920,
+        dst: 11968,
+    },
+    12016: LocalFixup {
+        src: 12016,
+        dst: 12064,
+    },
+    12048: LocalFixup {
+        src: 12048,
+        dst: 12080,
+    },
+    12112: LocalFixup {
+        src: 12112,
+        dst: 12160,
+    },
+    12192: LocalFixup {
+        src: 12192,
+        dst: 12240,
+    },
+    12288: LocalFixup {
+        src: 12288,
+        dst: 12336,
+    },
+    12384: LocalFixup {
+        src: 12384,
+        dst: 12432,
+    },
+    12416: LocalFixup {
+        src: 12416,
+        dst: 12464,
+    },
+    12496: LocalFixup {
+        src: 12496,
+        dst: 12544,
+    },
+    12528: LocalFixup {
+        src: 12528,
+        dst: 12576,
+    },
+    12608: LocalFixup {
+        src: 12608,
+        dst: 12656,
+    },
+    12704: LocalFixup {
+        src: 12704,
+        dst: 12752,
+    },
+    12800: LocalFixup {
+        src: 12800,
+        dst: 12848,
+    },
+    12816: LocalFixup {
+        src: 12816,
+        dst: 12880,
+    },
+    12832: LocalFixup {
+        src: 12832,
+        dst: 12896,
+    },
+    12936: LocalFixup {
+        src: 12936,
+        dst: 12960,
+    },
+    13152: LocalFixup {
+        src: 13152,
+        dst: 13696,
+    },
+    13832: LocalFixup {
+        src: 13832,
+        dst: 13856,
+    },
+    13904: LocalFixup {
+        src: 13904,
+        dst: 14000,
+    },
+    14000: LocalFixup {
+        src: 14000,
+        dst: 14008,
+    },
+    13920: LocalFixup {
+        src: 13920,
+        dst: 14032,
+    },
+    14112: LocalFixup {
+        src: 14112,
+        dst: 14160,
+    },
+    14128: LocalFixup {
+        src: 14128,
+        dst: 14192,
+    },
+    14144: LocalFixup {
+        src: 14144,
+        dst: 14208,
+    },
+    14248: LocalFixup {
+        src: 14248,
+        dst: 14272,
+    },
+    14464: LocalFixup {
+        src: 14464,
+        dst: 15008,
+    },
+    15144: LocalFixup {
+        src: 15144,
+        dst: 15168,
+    },
+    15216: LocalFixup {
+        src: 15216,
+        dst: 15312,
+    },
+    15312: LocalFixup {
+        src: 15312,
+        dst: 15320,
+    },
+    15232: LocalFixup {
+        src: 15232,
+        dst: 15344,
+    },
+    15424: LocalFixup {
+        src: 15424,
+        dst: 15472,
+    },
+    15440: LocalFixup {
+        src: 15440,
+        dst: 15504,
+    },
+    15456: LocalFixup {
+        src: 15456,
+        dst: 15520,
+    },
+    15576: LocalFixup {
+        src: 15576,
+        dst: 15600,
+    },
+    15792: LocalFixup {
+        src: 15792,
+        dst: 16336,
+    },
+    16472: LocalFixup {
+        src: 16472,
+        dst: 16496,
+    },
+    16544: LocalFixup {
+        src: 16544,
+        dst: 16640,
+    },
+    16640: LocalFixup {
+        src: 16640,
+        dst: 16648,
+    },
+    16560: LocalFixup {
+        src: 16560,
+        dst: 16672,
+    },
+    16752: LocalFixup {
+        src: 16752,
+        dst: 16800,
+    },
+    16768: LocalFixup {
+        src: 16768,
+        dst: 16832,
+    },
+    16872: LocalFixup {
+        src: 16872,
+        dst: 16896,
+    },
+    17088: LocalFixup {
+        src: 17088,
+        dst: 17632,
+    },
+    17768: LocalFixup {
+        src: 17768,
+        dst: 17792,
+    },
+    17840: LocalFixup {
+        src: 17840,
+        dst: 17936,
+    },
+    17936: LocalFixup {
+        src: 17936,
+        dst: 17944,
+    },
+    17856: LocalFixup {
+        src: 17856,
+        dst: 17968,
+    },
+    18048: LocalFixup {
+        src: 18048,
+        dst: 18096,
+    },
+    18064: LocalFixup {
+        src: 18064,
+        dst: 18128,
+    },
+    18080: LocalFixup {
+        src: 18080,
+        dst: 18144,
+    },
+    18184: LocalFixup {
+        src: 18184,
+        dst: 18208,
+    },
+    18400: LocalFixup {
+        src: 18400,
+        dst: 18944,
+    },
+    19080: LocalFixup {
+        src: 19080,
+        dst: 19104,
+    },
+    19152: LocalFixup {
+        src: 19152,
+        dst: 19248,
+    },
+    19248: LocalFixup {
+        src: 19248,
+        dst: 19256,
+    },
+    19168: LocalFixup {
+        src: 19168,
+        dst: 19296,
+    },
+    19376: LocalFixup {
+        src: 19376,
+        dst: 19424,
+    },
+    19392: LocalFixup {
+        src: 19392,
+        dst: 19456,
+    },
+    19408: LocalFixup {
+        src: 19408,
+        dst: 19472,
+    },
+    19512: LocalFixup {
+        src: 19512,
+        dst: 19536,
+    },
+    19728: LocalFixup {
+        src: 19728,
+        dst: 20272,
+    },
+    20408: LocalFixup {
+        src: 20408,
+        dst: 20432,
+    },
+    20480: LocalFixup {
+        src: 20480,
+        dst: 20576,
+    },
+    20576: LocalFixup {
+        src: 20576,
+        dst: 20584,
+    },
+    20496: LocalFixup {
+        src: 20496,
+        dst: 20624,
+    },
+    20704: LocalFixup {
+        src: 20704,
+        dst: 20752,
+    },
+    20720: LocalFixup {
+        src: 20720,
+        dst: 20784,
+    },
+    20824: LocalFixup {
+        src: 20824,
+        dst: 20848,
+    },
+    21040: LocalFixup {
+        src: 21040,
+        dst: 21584,
+    },
+    21720: LocalFixup {
+        src: 21720,
+        dst: 21744,
+    },
+    21792: LocalFixup {
+        src: 21792,
+        dst: 21888,
+    },
+    21888: LocalFixup {
+        src: 21888,
+        dst: 21896,
+    },
+    21808: LocalFixup {
+        src: 21808,
+        dst: 21920,
+    },
+    22000: LocalFixup {
+        src: 22000,
+        dst: 22048,
+    },
+    22016: LocalFixup {
+        src: 22016,
+        dst: 22080,
+    },
+    22032: LocalFixup {
+        src: 22032,
+        dst: 22096,
+    },
+    22136: LocalFixup {
+        src: 22136,
+        dst: 22160,
+    },
+    22352: LocalFixup {
+        src: 22352,
+        dst: 22896,
+    },
+    23032: LocalFixup {
+        src: 23032,
+        dst: 23056,
+    },
+    23104: LocalFixup {
+        src: 23104,
+        dst: 23200,
+    },
+    23200: LocalFixup {
+        src: 23200,
+        dst: 23208,
+    },
+    23120: LocalFixup {
+        src: 23120,
+        dst: 23248,
+    },
+    23328: LocalFixup {
+        src: 23328,
+        dst: 23376,
+    },
+    23344: LocalFixup {
+        src: 23344,
+        dst: 23408,
+    },
+    23360: LocalFixup {
+        src: 23360,
+        dst: 23424,
+    },
+    23464: LocalFixup {
+        src: 23464,
+        dst: 23488,
+    },
+    23680: LocalFixup {
+        src: 23680,
+        dst: 24224,
+    },
+    24360: LocalFixup {
+        src: 24360,
+        dst: 24384,
+    },
+    24432: LocalFixup {
+        src: 24432,
+        dst: 24528,
+    },
+    24528: LocalFixup {
+        src: 24528,
+        dst: 24536,
+    },
+    24448: LocalFixup {
+        src: 24448,
+        dst: 24576,
+    },
+    24656: LocalFixup {
+        src: 24656,
+        dst: 24704,
+    },
+    24672: LocalFixup {
+        src: 24672,
+        dst: 24736,
+    },
+    24776: LocalFixup {
+        src: 24776,
+        dst: 24800,
+    },
+    24992: LocalFixup {
+        src: 24992,
+        dst: 25536,
+    },
+    25672: LocalFixup {
+        src: 25672,
+        dst: 25696,
+    },
+    25744: LocalFixup {
+        src: 25744,
+        dst: 25840,
+    },
+    25840: LocalFixup {
+        src: 25840,
+        dst: 25848,
+    },
+    25760: LocalFixup {
+        src: 25760,
+        dst: 25872,
+    },
+    25960: LocalFixup {
+        src: 25960,
+        dst: 25984,
+    },
+    26016: LocalFixup {
+        src: 26016,
+        dst: 26112,
+    },
+    26032: LocalFixup {
+        src: 26032,
+        dst: 26208,
+    },
+    26080: LocalFixup {
+        src: 26080,
+        dst: 26288,
+    },
+    26400: LocalFixup {
+        src: 26400,
+        dst: 26432,
+    },
+    26928: LocalFixup {
+        src: 26928,
+        dst: 26960,
+    },
+    27456: LocalFixup {
+        src: 27456,
+        dst: 27488,
+    },
+    27984: LocalFixup {
+        src: 27984,
+        dst: 28016,
+    },
+    28512: LocalFixup {
+        src: 28512,
+        dst: 28544,
+    },
+    28928: LocalFixup {
+        src: 28928,
+        dst: 28960,
+    },
+    29456: LocalFixup {
+        src: 29456,
+        dst: 29488,
+    },
+    29984: LocalFixup {
+        src: 29984,
+        dst: 30016,
+    },
+    30400: LocalFixup {
+        src: 30400,
+        dst: 30432,
+    },
+    30864: LocalFixup {
+        src: 30864,
+        dst: 30928,
+    },
+    30880: LocalFixup {
+        src: 30880,
+        dst: 31008,
+    },
+    30896: LocalFixup {
+        src: 30896,
+        dst: 31088,
+    },
+    31216: LocalFixup {
+        src: 31216,
+        dst: 31248,
+    },
+    31792: LocalFixup {
+        src: 31792,
+        dst: 31824,
+    },
+    32320: LocalFixup {
+        src: 32320,
+        dst: 32352,
+    },
+    32848: LocalFixup {
+        src: 32848,
+        dst: 32880,
+    },
+    33376: LocalFixup {
+        src: 33376,
+        dst: 33408,
+    },
+    33904: LocalFixup {
+        src: 33904,
+        dst: 33936,
+    },
+    34320: LocalFixup {
+        src: 34320,
+        dst: 34352,
+    },
+    34736: LocalFixup {
+        src: 34736,
+        dst: 34768,
+    },
+    35264: LocalFixup {
+        src: 35264,
+        dst: 35296,
+    },
+    35744: LocalFixup {
+        src: 35744,
+        dst: 35856,
+    },
+    36528: LocalFixup {
+        src: 36528,
+        dst: 36640,
+    },
+    36560: LocalFixup {
+        src: 36560,
+        dst: 37280,
+    },
+}
+2024-04-20T18:10:33.390907Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:375: data_section.global_map: {
+    32: GlobalFixup {
+        src: 32,
+        dst_section_index: 2,
+        dst: 448,
+    },
+    56: GlobalFixup {
+        src: 56,
+        dst_section_index: 2,
+        dst: 6592,
+    },
+    80: GlobalFixup {
+        src: 80,
+        dst_section_index: 2,
+        dst: 25936,
+    },
+    104: GlobalFixup {
+        src: 104,
+        dst_section_index: 2,
+        dst: 30848,
+    },
+    128: GlobalFixup {
+        src: 128,
+        dst_section_index: 2,
+        dst: 35712,
+    },
+    152: GlobalFixup {
+        src: 152,
+        dst_section_index: 2,
+        dst: 36496,
+    },
+    544: GlobalFixup {
+        src: 544,
+        dst_section_index: 2,
+        dst: 560,
+    },
+    552: GlobalFixup {
+        src: 552,
+        dst_section_index: 2,
+        dst: 5440,
+    },
+    6672: GlobalFixup {
+        src: 6672,
+        dst_section_index: 2,
+        dst: 6704,
+    },
+    6680: GlobalFixup {
+        src: 6680,
+        dst_section_index: 2,
+        dst: 8000,
+    },
+    6688: GlobalFixup {
+        src: 6688,
+        dst_section_index: 2,
+        dst: 12688,
+    },
+    6696: GlobalFixup {
+        src: 6696,
+        dst_section_index: 2,
+        dst: 12784,
+    },
+    6800: GlobalFixup {
+        src: 6800,
+        dst_section_index: 2,
+        dst: 6816,
+    },
+    6808: GlobalFixup {
+        src: 6808,
+        dst_section_index: 2,
+        dst: 7712,
+    },
+    6832: GlobalFixup {
+        src: 6832,
+        dst_section_index: 2,
+        dst: 6880,
+    },
+    6912: GlobalFixup {
+        src: 6912,
+        dst_section_index: 2,
+        dst: 7632,
+    },
+    7728: GlobalFixup {
+        src: 7728,
+        dst_section_index: 2,
+        dst: 7776,
+    },
+    7792: GlobalFixup {
+        src: 7792,
+        dst_section_index: 2,
+        dst: 7632,
+    },
+    8080: GlobalFixup {
+        src: 8080,
+        dst_section_index: 2,
+        dst: 8096,
+    },
+    8176: GlobalFixup {
+        src: 8176,
+        dst_section_index: 2,
+        dst: 8208,
+    },
+    8184: GlobalFixup {
+        src: 8184,
+        dst_section_index: 2,
+        dst: 8528,
+    },
+    8192: GlobalFixup {
+        src: 8192,
+        dst_section_index: 2,
+        dst: 8848,
+    },
+    8304: GlobalFixup {
+        src: 8304,
+        dst_section_index: 2,
+        dst: 8320,
+    },
+    8416: GlobalFixup {
+        src: 8416,
+        dst_section_index: 2,
+        dst: 8432,
+    },
+    8624: GlobalFixup {
+        src: 8624,
+        dst_section_index: 2,
+        dst: 8640,
+    },
+    8736: GlobalFixup {
+        src: 8736,
+        dst_section_index: 2,
+        dst: 8752,
+    },
+    8928: GlobalFixup {
+        src: 8928,
+        dst_section_index: 2,
+        dst: 8944,
+    },
+    9024: GlobalFixup {
+        src: 9024,
+        dst_section_index: 2,
+        dst: 9040,
+    },
+    9120: GlobalFixup {
+        src: 9120,
+        dst_section_index: 2,
+        dst: 9168,
+    },
+    9128: GlobalFixup {
+        src: 9128,
+        dst_section_index: 2,
+        dst: 10576,
+    },
+    9136: GlobalFixup {
+        src: 9136,
+        dst_section_index: 2,
+        dst: 10752,
+    },
+    9144: GlobalFixup {
+        src: 9144,
+        dst_section_index: 2,
+        dst: 10960,
+    },
+    9152: GlobalFixup {
+        src: 9152,
+        dst_section_index: 2,
+        dst: 12368,
+    },
+    9264: GlobalFixup {
+        src: 9264,
+        dst_section_index: 2,
+        dst: 9280,
+    },
+    9360: GlobalFixup {
+        src: 9360,
+        dst_section_index: 2,
+        dst: 9376,
+    },
+    9368: GlobalFixup {
+        src: 9368,
+        dst_section_index: 2,
+        dst: 10480,
+    },
+    9456: GlobalFixup {
+        src: 9456,
+        dst_section_index: 2,
+        dst: 9488,
+    },
+    9464: GlobalFixup {
+        src: 9464,
+        dst_section_index: 2,
+        dst: 9584,
+    },
+    9472: GlobalFixup {
+        src: 9472,
+        dst_section_index: 2,
+        dst: 10384,
+    },
+    9664: GlobalFixup {
+        src: 9664,
+        dst_section_index: 2,
+        dst: 9696,
+    },
+    9672: GlobalFixup {
+        src: 9672,
+        dst_section_index: 2,
+        dst: 9904,
+    },
+    9680: GlobalFixup {
+        src: 9680,
+        dst_section_index: 2,
+        dst: 10112,
+    },
+    9688: GlobalFixup {
+        src: 9688,
+        dst_section_index: 2,
+        dst: 10208,
+    },
+    9792: GlobalFixup {
+        src: 9792,
+        dst_section_index: 2,
+        dst: 9808,
+    },
+    10000: GlobalFixup {
+        src: 10000,
+        dst_section_index: 2,
+        dst: 10016,
+    },
+    10288: GlobalFixup {
+        src: 10288,
+        dst_section_index: 2,
+        dst: 10304,
+    },
+    10656: GlobalFixup {
+        src: 10656,
+        dst_section_index: 2,
+        dst: 10672,
+    },
+    10848: GlobalFixup {
+        src: 10848,
+        dst_section_index: 2,
+        dst: 10864,
+    },
+    11056: GlobalFixup {
+        src: 11056,
+        dst_section_index: 2,
+        dst: 11072,
+    },
+    11152: GlobalFixup {
+        src: 11152,
+        dst_section_index: 2,
+        dst: 11168,
+    },
+    11160: GlobalFixup {
+        src: 11160,
+        dst_section_index: 2,
+        dst: 12272,
+    },
+    11248: GlobalFixup {
+        src: 11248,
+        dst_section_index: 2,
+        dst: 11280,
+    },
+    11256: GlobalFixup {
+        src: 11256,
+        dst_section_index: 2,
+        dst: 11376,
+    },
+    11264: GlobalFixup {
+        src: 11264,
+        dst_section_index: 2,
+        dst: 12176,
+    },
+    11456: GlobalFixup {
+        src: 11456,
+        dst_section_index: 2,
+        dst: 11488,
+    },
+    11464: GlobalFixup {
+        src: 11464,
+        dst_section_index: 2,
+        dst: 11696,
+    },
+    11472: GlobalFixup {
+        src: 11472,
+        dst_section_index: 2,
+        dst: 11904,
+    },
+    11480: GlobalFixup {
+        src: 11480,
+        dst_section_index: 2,
+        dst: 12000,
+    },
+    11584: GlobalFixup {
+        src: 11584,
+        dst_section_index: 2,
+        dst: 11600,
+    },
+    11792: GlobalFixup {
+        src: 11792,
+        dst_section_index: 2,
+        dst: 11808,
+    },
+    12080: GlobalFixup {
+        src: 12080,
+        dst_section_index: 2,
+        dst: 12096,
+    },
+    12464: GlobalFixup {
+        src: 12464,
+        dst_section_index: 2,
+        dst: 12480,
+    },
+    12576: GlobalFixup {
+        src: 12576,
+        dst_section_index: 2,
+        dst: 12592,
+    },
+    12880: GlobalFixup {
+        src: 12880,
+        dst_section_index: 2,
+        dst: 12912,
+    },
+    12888: GlobalFixup {
+        src: 12888,
+        dst_section_index: 2,
+        dst: 13808,
+    },
+    12896: GlobalFixup {
+        src: 12896,
+        dst_section_index: 2,
+        dst: 14096,
+    },
+    12928: GlobalFixup {
+        src: 12928,
+        dst_section_index: 2,
+        dst: 12976,
+    },
+    13008: GlobalFixup {
+        src: 13008,
+        dst_section_index: 2,
+        dst: 13728,
+    },
+    13824: GlobalFixup {
+        src: 13824,
+        dst_section_index: 2,
+        dst: 13872,
+    },
+    13888: GlobalFixup {
+        src: 13888,
+        dst_section_index: 2,
+        dst: 13728,
+    },
+    14192: GlobalFixup {
+        src: 14192,
+        dst_section_index: 2,
+        dst: 14224,
+    },
+    14200: GlobalFixup {
+        src: 14200,
+        dst_section_index: 2,
+        dst: 15120,
+    },
+    14208: GlobalFixup {
+        src: 14208,
+        dst_section_index: 2,
+        dst: 15408,
+    },
+    14240: GlobalFixup {
+        src: 14240,
+        dst_section_index: 2,
+        dst: 14288,
+    },
+    14320: GlobalFixup {
+        src: 14320,
+        dst_section_index: 2,
+        dst: 15040,
+    },
+    15136: GlobalFixup {
+        src: 15136,
+        dst_section_index: 2,
+        dst: 15184,
+    },
+    15200: GlobalFixup {
+        src: 15200,
+        dst_section_index: 2,
+        dst: 15040,
+    },
+    15504: GlobalFixup {
+        src: 15504,
+        dst_section_index: 2,
+        dst: 15552,
+    },
+    15512: GlobalFixup {
+        src: 15512,
+        dst_section_index: 2,
+        dst: 16448,
+    },
+    15520: GlobalFixup {
+        src: 15520,
+        dst_section_index: 2,
+        dst: 16736,
+    },
+    15528: GlobalFixup {
+        src: 15528,
+        dst_section_index: 2,
+        dst: 18032,
+    },
+    15536: GlobalFixup {
+        src: 15536,
+        dst_section_index: 2,
+        dst: 21984,
+    },
+    15568: GlobalFixup {
+        src: 15568,
+        dst_section_index: 2,
+        dst: 15616,
+    },
+    15648: GlobalFixup {
+        src: 15648,
+        dst_section_index: 2,
+        dst: 16368,
+    },
+    16464: GlobalFixup {
+        src: 16464,
+        dst_section_index: 2,
+        dst: 16512,
+    },
+    16528: GlobalFixup {
+        src: 16528,
+        dst_section_index: 2,
+        dst: 16368,
+    },
+    16832: GlobalFixup {
+        src: 16832,
+        dst_section_index: 2,
+        dst: 16848,
+    },
+    16840: GlobalFixup {
+        src: 16840,
+        dst_section_index: 2,
+        dst: 17744,
+    },
+    16864: GlobalFixup {
+        src: 16864,
+        dst_section_index: 2,
+        dst: 16912,
+    },
+    16944: GlobalFixup {
+        src: 16944,
+        dst_section_index: 2,
+        dst: 17664,
+    },
+    17760: GlobalFixup {
+        src: 17760,
+        dst_section_index: 2,
+        dst: 17808,
+    },
+    17824: GlobalFixup {
+        src: 17824,
+        dst_section_index: 2,
+        dst: 17664,
+    },
+    18128: GlobalFixup {
+        src: 18128,
+        dst_section_index: 2,
+        dst: 18160,
+    },
+    18136: GlobalFixup {
+        src: 18136,
+        dst_section_index: 2,
+        dst: 19056,
+    },
+    18144: GlobalFixup {
+        src: 18144,
+        dst_section_index: 2,
+        dst: 19360,
+    },
+    18176: GlobalFixup {
+        src: 18176,
+        dst_section_index: 2,
+        dst: 18224,
+    },
+    18256: GlobalFixup {
+        src: 18256,
+        dst_section_index: 2,
+        dst: 18976,
+    },
+    19072: GlobalFixup {
+        src: 19072,
+        dst_section_index: 2,
+        dst: 19120,
+    },
+    19136: GlobalFixup {
+        src: 19136,
+        dst_section_index: 2,
+        dst: 18976,
+    },
+    19456: GlobalFixup {
+        src: 19456,
+        dst_section_index: 2,
+        dst: 19488,
+    },
+    19464: GlobalFixup {
+        src: 19464,
+        dst_section_index: 2,
+        dst: 20384,
+    },
+    19472: GlobalFixup {
+        src: 19472,
+        dst_section_index: 2,
+        dst: 20688,
+    },
+    19504: GlobalFixup {
+        src: 19504,
+        dst_section_index: 2,
+        dst: 19552,
+    },
+    19584: GlobalFixup {
+        src: 19584,
+        dst_section_index: 2,
+        dst: 20304,
+    },
+    20400: GlobalFixup {
+        src: 20400,
+        dst_section_index: 2,
+        dst: 20448,
+    },
+    20464: GlobalFixup {
+        src: 20464,
+        dst_section_index: 2,
+        dst: 20304,
+    },
+    20784: GlobalFixup {
+        src: 20784,
+        dst_section_index: 2,
+        dst: 20800,
+    },
+    20792: GlobalFixup {
+        src: 20792,
+        dst_section_index: 2,
+        dst: 21696,
+    },
+    20816: GlobalFixup {
+        src: 20816,
+        dst_section_index: 2,
+        dst: 20864,
+    },
+    20896: GlobalFixup {
+        src: 20896,
+        dst_section_index: 2,
+        dst: 21616,
+    },
+    21712: GlobalFixup {
+        src: 21712,
+        dst_section_index: 2,
+        dst: 21760,
+    },
+    21776: GlobalFixup {
+        src: 21776,
+        dst_section_index: 2,
+        dst: 21616,
+    },
+    22080: GlobalFixup {
+        src: 22080,
+        dst_section_index: 2,
+        dst: 22112,
+    },
+    22088: GlobalFixup {
+        src: 22088,
+        dst_section_index: 2,
+        dst: 23008,
+    },
+    22096: GlobalFixup {
+        src: 22096,
+        dst_section_index: 2,
+        dst: 23312,
+    },
+    22128: GlobalFixup {
+        src: 22128,
+        dst_section_index: 2,
+        dst: 22176,
+    },
+    22208: GlobalFixup {
+        src: 22208,
+        dst_section_index: 2,
+        dst: 22928,
+    },
+    23024: GlobalFixup {
+        src: 23024,
+        dst_section_index: 2,
+        dst: 23072,
+    },
+    23088: GlobalFixup {
+        src: 23088,
+        dst_section_index: 2,
+        dst: 22928,
+    },
+    23408: GlobalFixup {
+        src: 23408,
+        dst_section_index: 2,
+        dst: 23440,
+    },
+    23416: GlobalFixup {
+        src: 23416,
+        dst_section_index: 2,
+        dst: 24336,
+    },
+    23424: GlobalFixup {
+        src: 23424,
+        dst_section_index: 2,
+        dst: 24640,
+    },
+    23456: GlobalFixup {
+        src: 23456,
+        dst_section_index: 2,
+        dst: 23504,
+    },
+    23536: GlobalFixup {
+        src: 23536,
+        dst_section_index: 2,
+        dst: 24256,
+    },
+    24352: GlobalFixup {
+        src: 24352,
+        dst_section_index: 2,
+        dst: 24400,
+    },
+    24416: GlobalFixup {
+        src: 24416,
+        dst_section_index: 2,
+        dst: 24256,
+    },
+    24736: GlobalFixup {
+        src: 24736,
+        dst_section_index: 2,
+        dst: 24752,
+    },
+    24744: GlobalFixup {
+        src: 24744,
+        dst_section_index: 2,
+        dst: 25648,
+    },
+    24768: GlobalFixup {
+        src: 24768,
+        dst_section_index: 2,
+        dst: 24816,
+    },
+    24848: GlobalFixup {
+        src: 24848,
+        dst_section_index: 2,
+        dst: 25568,
+    },
+    25664: GlobalFixup {
+        src: 25664,
+        dst_section_index: 2,
+        dst: 25712,
+    },
+    25728: GlobalFixup {
+        src: 25728,
+        dst_section_index: 2,
+        dst: 25568,
+    },
+    25984: GlobalFixup {
+        src: 25984,
+        dst_section_index: 2,
+        dst: 26000,
+    },
+    26112: GlobalFixup {
+        src: 26112,
+        dst_section_index: 2,
+        dst: 6880,
+    },
+    26120: GlobalFixup {
+        src: 26120,
+        dst_section_index: 2,
+        dst: 12976,
+    },
+    26128: GlobalFixup {
+        src: 26128,
+        dst_section_index: 2,
+        dst: 14288,
+    },
+    26136: GlobalFixup {
+        src: 26136,
+        dst_section_index: 2,
+        dst: 15616,
+    },
+    26144: GlobalFixup {
+        src: 26144,
+        dst_section_index: 2,
+        dst: 16912,
+    },
+    26152: GlobalFixup {
+        src: 26152,
+        dst_section_index: 2,
+        dst: 18224,
+    },
+    26160: GlobalFixup {
+        src: 26160,
+        dst_section_index: 2,
+        dst: 19552,
+    },
+    26168: GlobalFixup {
+        src: 26168,
+        dst_section_index: 2,
+        dst: 20864,
+    },
+    26176: GlobalFixup {
+        src: 26176,
+        dst_section_index: 2,
+        dst: 22176,
+    },
+    26184: GlobalFixup {
+        src: 26184,
+        dst_section_index: 2,
+        dst: 23504,
+    },
+    26192: GlobalFixup {
+        src: 26192,
+        dst_section_index: 2,
+        dst: 24816,
+    },
+    26208: GlobalFixup {
+        src: 26208,
+        dst_section_index: 2,
+        dst: 26320,
+    },
+    26216: GlobalFixup {
+        src: 26216,
+        dst_section_index: 2,
+        dst: 26848,
+    },
+    26224: GlobalFixup {
+        src: 26224,
+        dst_section_index: 2,
+        dst: 27376,
+    },
+    26232: GlobalFixup {
+        src: 26232,
+        dst_section_index: 2,
+        dst: 27904,
+    },
+    26240: GlobalFixup {
+        src: 26240,
+        dst_section_index: 2,
+        dst: 28432,
+    },
+    26248: GlobalFixup {
+        src: 26248,
+        dst_section_index: 2,
+        dst: 28848,
+    },
+    26256: GlobalFixup {
+        src: 26256,
+        dst_section_index: 2,
+        dst: 29376,
+    },
+    26264: GlobalFixup {
+        src: 26264,
+        dst_section_index: 2,
+        dst: 29904,
+    },
+    26272: GlobalFixup {
+        src: 26272,
+        dst_section_index: 2,
+        dst: 30320,
+    },
+    26344: GlobalFixup {
+        src: 26344,
+        dst_section_index: 2,
+        dst: 26464,
+    },
+    26360: GlobalFixup {
+        src: 26360,
+        dst_section_index: 2,
+        dst: 14288,
+    },
+    26368: GlobalFixup {
+        src: 26368,
+        dst_section_index: 2,
+        dst: 12976,
+    },
+    26872: GlobalFixup {
+        src: 26872,
+        dst_section_index: 2,
+        dst: 26992,
+    },
+    26888: GlobalFixup {
+        src: 26888,
+        dst_section_index: 2,
+        dst: 15616,
+    },
+    26896: GlobalFixup {
+        src: 26896,
+        dst_section_index: 2,
+        dst: 14288,
+    },
+    27400: GlobalFixup {
+        src: 27400,
+        dst_section_index: 2,
+        dst: 27520,
+    },
+    27416: GlobalFixup {
+        src: 27416,
+        dst_section_index: 2,
+        dst: 16912,
+    },
+    27424: GlobalFixup {
+        src: 27424,
+        dst_section_index: 2,
+        dst: 15616,
+    },
+    27928: GlobalFixup {
+        src: 27928,
+        dst_section_index: 2,
+        dst: 28048,
+    },
+    27944: GlobalFixup {
+        src: 27944,
+        dst_section_index: 2,
+        dst: 18224,
+    },
+    27952: GlobalFixup {
+        src: 27952,
+        dst_section_index: 2,
+        dst: 15616,
+    },
+    28456: GlobalFixup {
+        src: 28456,
+        dst_section_index: 2,
+        dst: 28576,
+    },
+    28472: GlobalFixup {
+        src: 28472,
+        dst_section_index: 2,
+        dst: 19552,
+    },
+    28480: GlobalFixup {
+        src: 28480,
+        dst_section_index: 2,
+        dst: 18224,
+    },
+    28872: GlobalFixup {
+        src: 28872,
+        dst_section_index: 2,
+        dst: 28992,
+    },
+    28888: GlobalFixup {
+        src: 28888,
+        dst_section_index: 2,
+        dst: 20864,
+    },
+    28896: GlobalFixup {
+        src: 28896,
+        dst_section_index: 2,
+        dst: 19552,
+    },
+    29400: GlobalFixup {
+        src: 29400,
+        dst_section_index: 2,
+        dst: 29520,
+    },
+    29416: GlobalFixup {
+        src: 29416,
+        dst_section_index: 2,
+        dst: 22176,
+    },
+    29424: GlobalFixup {
+        src: 29424,
+        dst_section_index: 2,
+        dst: 15616,
+    },
+    29928: GlobalFixup {
+        src: 29928,
+        dst_section_index: 2,
+        dst: 30048,
+    },
+    29944: GlobalFixup {
+        src: 29944,
+        dst_section_index: 2,
+        dst: 23504,
+    },
+    29952: GlobalFixup {
+        src: 29952,
+        dst_section_index: 2,
+        dst: 22176,
+    },
+    30344: GlobalFixup {
+        src: 30344,
+        dst_section_index: 2,
+        dst: 30464,
+    },
+    30360: GlobalFixup {
+        src: 30360,
+        dst_section_index: 2,
+        dst: 24816,
+    },
+    30368: GlobalFixup {
+        src: 30368,
+        dst_section_index: 2,
+        dst: 23504,
+    },
+    30928: GlobalFixup {
+        src: 30928,
+        dst_section_index: 2,
+        dst: 12976,
+    },
+    30936: GlobalFixup {
+        src: 30936,
+        dst_section_index: 2,
+        dst: 14288,
+    },
+    30944: GlobalFixup {
+        src: 30944,
+        dst_section_index: 2,
+        dst: 15616,
+    },
+    30952: GlobalFixup {
+        src: 30952,
+        dst_section_index: 2,
+        dst: 16912,
+    },
+    30960: GlobalFixup {
+        src: 30960,
+        dst_section_index: 2,
+        dst: 18224,
+    },
+    30968: GlobalFixup {
+        src: 30968,
+        dst_section_index: 2,
+        dst: 22176,
+    },
+    30976: GlobalFixup {
+        src: 30976,
+        dst_section_index: 2,
+        dst: 19552,
+    },
+    30984: GlobalFixup {
+        src: 30984,
+        dst_section_index: 2,
+        dst: 23504,
+    },
+    30992: GlobalFixup {
+        src: 30992,
+        dst_section_index: 2,
+        dst: 20864,
+    },
+    31000: GlobalFixup {
+        src: 31000,
+        dst_section_index: 2,
+        dst: 24816,
+    },
+    31008: GlobalFixup {
+        src: 31008,
+        dst_section_index: 2,
+        dst: 31136,
+    },
+    31016: GlobalFixup {
+        src: 31016,
+        dst_section_index: 2,
+        dst: 31712,
+    },
+    31024: GlobalFixup {
+        src: 31024,
+        dst_section_index: 2,
+        dst: 32240,
+    },
+    31032: GlobalFixup {
+        src: 31032,
+        dst_section_index: 2,
+        dst: 32768,
+    },
+    31040: GlobalFixup {
+        src: 31040,
+        dst_section_index: 2,
+        dst: 33296,
+    },
+    31048: GlobalFixup {
+        src: 31048,
+        dst_section_index: 2,
+        dst: 33824,
+    },
+    31056: GlobalFixup {
+        src: 31056,
+        dst_section_index: 2,
+        dst: 34240,
+    },
+    31064: GlobalFixup {
+        src: 31064,
+        dst_section_index: 2,
+        dst: 34656,
+    },
+    31072: GlobalFixup {
+        src: 31072,
+        dst_section_index: 2,
+        dst: 35184,
+    },
+    30912: GlobalFixup {
+        src: 30912,
+        dst_section_index: 2,
+        dst: 5440,
+    },
+    31160: GlobalFixup {
+        src: 31160,
+        dst_section_index: 2,
+        dst: 31280,
+    },
+    31176: GlobalFixup {
+        src: 31176,
+        dst_section_index: 2,
+        dst: 14288,
+    },
+    31184: GlobalFixup {
+        src: 31184,
+        dst_section_index: 2,
+        dst: 12976,
+    },
+    31536: GlobalFixup {
+        src: 31536,
+        dst_section_index: 2,
+        dst: 31664,
+    },
+    31544: GlobalFixup {
+        src: 31544,
+        dst_section_index: 2,
+        dst: 31664,
+    },
+    31552: GlobalFixup {
+        src: 31552,
+        dst_section_index: 2,
+        dst: 31664,
+    },
+    31736: GlobalFixup {
+        src: 31736,
+        dst_section_index: 2,
+        dst: 31856,
+    },
+    31752: GlobalFixup {
+        src: 31752,
+        dst_section_index: 2,
+        dst: 15616,
+    },
+    31760: GlobalFixup {
+        src: 31760,
+        dst_section_index: 2,
+        dst: 14288,
+    },
+    32112: GlobalFixup {
+        src: 32112,
+        dst_section_index: 2,
+        dst: 31664,
+    },
+    32120: GlobalFixup {
+        src: 32120,
+        dst_section_index: 2,
+        dst: 31664,
+    },
+    32128: GlobalFixup {
+        src: 32128,
+        dst_section_index: 2,
+        dst: 31664,
+    },
+    32264: GlobalFixup {
+        src: 32264,
+        dst_section_index: 2,
+        dst: 32384,
+    },
+    32280: GlobalFixup {
+        src: 32280,
+        dst_section_index: 2,
+        dst: 16912,
+    },
+    32288: GlobalFixup {
+        src: 32288,
+        dst_section_index: 2,
+        dst: 15616,
+    },
+    32640: GlobalFixup {
+        src: 32640,
+        dst_section_index: 2,
+        dst: 31664,
+    },
+    32648: GlobalFixup {
+        src: 32648,
+        dst_section_index: 2,
+        dst: 31664,
+    },
+    32656: GlobalFixup {
+        src: 32656,
+        dst_section_index: 2,
+        dst: 31664,
+    },
+    32792: GlobalFixup {
+        src: 32792,
+        dst_section_index: 2,
+        dst: 32912,
+    },
+    32808: GlobalFixup {
+        src: 32808,
+        dst_section_index: 2,
+        dst: 18224,
+    },
+    32816: GlobalFixup {
+        src: 32816,
+        dst_section_index: 2,
+        dst: 15616,
+    },
+    33168: GlobalFixup {
+        src: 33168,
+        dst_section_index: 2,
+        dst: 31664,
+    },
+    33176: GlobalFixup {
+        src: 33176,
+        dst_section_index: 2,
+        dst: 31664,
+    },
+    33184: GlobalFixup {
+        src: 33184,
+        dst_section_index: 2,
+        dst: 31664,
+    },
+    33320: GlobalFixup {
+        src: 33320,
+        dst_section_index: 2,
+        dst: 33440,
+    },
+    33336: GlobalFixup {
+        src: 33336,
+        dst_section_index: 2,
+        dst: 22176,
+    },
+    33344: GlobalFixup {
+        src: 33344,
+        dst_section_index: 2,
+        dst: 15616,
+    },
+    33696: GlobalFixup {
+        src: 33696,
+        dst_section_index: 2,
+        dst: 31664,
+    },
+    33704: GlobalFixup {
+        src: 33704,
+        dst_section_index: 2,
+        dst: 31664,
+    },
+    33712: GlobalFixup {
+        src: 33712,
+        dst_section_index: 2,
+        dst: 31664,
+    },
+    33848: GlobalFixup {
+        src: 33848,
+        dst_section_index: 2,
+        dst: 33968,
+    },
+    33864: GlobalFixup {
+        src: 33864,
+        dst_section_index: 2,
+        dst: 19552,
+    },
+    33872: GlobalFixup {
+        src: 33872,
+        dst_section_index: 2,
+        dst: 18224,
+    },
+    34176: GlobalFixup {
+        src: 34176,
+        dst_section_index: 2,
+        dst: 31664,
+    },
+    34264: GlobalFixup {
+        src: 34264,
+        dst_section_index: 2,
+        dst: 34384,
+    },
+    34280: GlobalFixup {
+        src: 34280,
+        dst_section_index: 2,
+        dst: 23504,
+    },
+    34288: GlobalFixup {
+        src: 34288,
+        dst_section_index: 2,
+        dst: 22176,
+    },
+    34592: GlobalFixup {
+        src: 34592,
+        dst_section_index: 2,
+        dst: 31664,
+    },
+    34680: GlobalFixup {
+        src: 34680,
+        dst_section_index: 2,
+        dst: 34800,
+    },
+    34696: GlobalFixup {
+        src: 34696,
+        dst_section_index: 2,
+        dst: 20864,
+    },
+    34704: GlobalFixup {
+        src: 34704,
+        dst_section_index: 2,
+        dst: 19552,
+    },
+    35056: GlobalFixup {
+        src: 35056,
+        dst_section_index: 2,
+        dst: 31664,
+    },
+    35064: GlobalFixup {
+        src: 35064,
+        dst_section_index: 2,
+        dst: 31664,
+    },
+    35072: GlobalFixup {
+        src: 35072,
+        dst_section_index: 2,
+        dst: 31664,
+    },
+    35208: GlobalFixup {
+        src: 35208,
+        dst_section_index: 2,
+        dst: 35328,
+    },
+    35224: GlobalFixup {
+        src: 35224,
+        dst_section_index: 2,
+        dst: 24816,
+    },
+    35232: GlobalFixup {
+        src: 35232,
+        dst_section_index: 2,
+        dst: 23504,
+    },
+    35584: GlobalFixup {
+        src: 35584,
+        dst_section_index: 2,
+        dst: 31664,
+    },
+    35592: GlobalFixup {
+        src: 35592,
+        dst_section_index: 2,
+        dst: 31664,
+    },
+    35600: GlobalFixup {
+        src: 35600,
+        dst_section_index: 2,
+        dst: 31664,
+    },
+    35728: GlobalFixup {
+        src: 35728,
+        dst_section_index: 2,
+        dst: 560,
+    },
+    35736: GlobalFixup {
+        src: 35736,
+        dst_section_index: 2,
+        dst: 5440,
+    },
+    36512: GlobalFixup {
+        src: 36512,
+        dst_section_index: 2,
+        dst: 5440,
+    },
+    36520: GlobalFixup {
+        src: 36520,
+        dst_section_index: 2,
+        dst: 560,
+    },
+}
+2024-04-20T18:10:33.391323Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:376: data_section.virtual_map: {
+    0: VirtualFixup {
+        src: 0,
+        section_index: 0,
+        name_offset: 75,
+    },
+    448: VirtualFixup {
+        src: 448,
+        section_index: 0,
+        name_offset: 101,
+    },
+    560: VirtualFixup {
+        src: 560,
+        section_index: 0,
+        name_offset: 128,
+    },
+    5440: VirtualFixup {
+        src: 5440,
+        section_index: 0,
+        name_offset: 128,
+    },
+    6592: VirtualFixup {
+        src: 6592,
+        section_index: 0,
+        name_offset: 145,
+    },
+    6704: VirtualFixup {
+        src: 6704,
+        section_index: 0,
+        name_offset: 145,
+    },
+    6816: VirtualFixup {
+        src: 6816,
+        section_index: 0,
+        name_offset: 176,
+    },
+    6880: VirtualFixup {
+        src: 6880,
+        section_index: 0,
+        name_offset: 204,
+    },
+    7632: VirtualFixup {
+        src: 7632,
+        section_index: 0,
+        name_offset: 222,
+    },
+    7712: VirtualFixup {
+        src: 7712,
+        section_index: 0,
+        name_offset: 176,
+    },
+    7776: VirtualFixup {
+        src: 7776,
+        section_index: 0,
+        name_offset: 243,
+    },
+    8000: VirtualFixup {
+        src: 8000,
+        section_index: 0,
+        name_offset: 145,
+    },
+    8096: VirtualFixup {
+        src: 8096,
+        section_index: 0,
+        name_offset: 145,
+    },
+    8208: VirtualFixup {
+        src: 8208,
+        section_index: 0,
+        name_offset: 145,
+    },
+    8320: VirtualFixup {
+        src: 8320,
+        section_index: 0,
+        name_offset: 145,
+    },
+    8432: VirtualFixup {
+        src: 8432,
+        section_index: 0,
+        name_offset: 145,
+    },
+    8528: VirtualFixup {
+        src: 8528,
+        section_index: 0,
+        name_offset: 145,
+    },
+    8640: VirtualFixup {
+        src: 8640,
+        section_index: 0,
+        name_offset: 145,
+    },
+    8752: VirtualFixup {
+        src: 8752,
+        section_index: 0,
+        name_offset: 145,
+    },
+    8848: VirtualFixup {
+        src: 8848,
+        section_index: 0,
+        name_offset: 145,
+    },
+    8944: VirtualFixup {
+        src: 8944,
+        section_index: 0,
+        name_offset: 145,
+    },
+    9040: VirtualFixup {
+        src: 9040,
+        section_index: 0,
+        name_offset: 145,
+    },
+    9168: VirtualFixup {
+        src: 9168,
+        section_index: 0,
+        name_offset: 145,
+    },
+    9280: VirtualFixup {
+        src: 9280,
+        section_index: 0,
+        name_offset: 145,
+    },
+    9376: VirtualFixup {
+        src: 9376,
+        section_index: 0,
+        name_offset: 145,
+    },
+    9488: VirtualFixup {
+        src: 9488,
+        section_index: 0,
+        name_offset: 145,
+    },
+    9584: VirtualFixup {
+        src: 9584,
+        section_index: 0,
+        name_offset: 145,
+    },
+    9696: VirtualFixup {
+        src: 9696,
+        section_index: 0,
+        name_offset: 145,
+    },
+    9808: VirtualFixup {
+        src: 9808,
+        section_index: 0,
+        name_offset: 145,
+    },
+    9904: VirtualFixup {
+        src: 9904,
+        section_index: 0,
+        name_offset: 145,
+    },
+    10016: VirtualFixup {
+        src: 10016,
+        section_index: 0,
+        name_offset: 145,
+    },
+    10112: VirtualFixup {
+        src: 10112,
+        section_index: 0,
+        name_offset: 145,
+    },
+    10208: VirtualFixup {
+        src: 10208,
+        section_index: 0,
+        name_offset: 145,
+    },
+    10304: VirtualFixup {
+        src: 10304,
+        section_index: 0,
+        name_offset: 145,
+    },
+    10384: VirtualFixup {
+        src: 10384,
+        section_index: 0,
+        name_offset: 145,
+    },
+    10480: VirtualFixup {
+        src: 10480,
+        section_index: 0,
+        name_offset: 145,
+    },
+    10576: VirtualFixup {
+        src: 10576,
+        section_index: 0,
+        name_offset: 145,
+    },
+    10672: VirtualFixup {
+        src: 10672,
+        section_index: 0,
+        name_offset: 145,
+    },
+    10752: VirtualFixup {
+        src: 10752,
+        section_index: 0,
+        name_offset: 145,
+    },
+    10864: VirtualFixup {
+        src: 10864,
+        section_index: 0,
+        name_offset: 145,
+    },
+    10960: VirtualFixup {
+        src: 10960,
+        section_index: 0,
+        name_offset: 145,
+    },
+    11072: VirtualFixup {
+        src: 11072,
+        section_index: 0,
+        name_offset: 145,
+    },
+    11168: VirtualFixup {
+        src: 11168,
+        section_index: 0,
+        name_offset: 145,
+    },
+    11280: VirtualFixup {
+        src: 11280,
+        section_index: 0,
+        name_offset: 145,
+    },
+    11376: VirtualFixup {
+        src: 11376,
+        section_index: 0,
+        name_offset: 145,
+    },
+    11488: VirtualFixup {
+        src: 11488,
+        section_index: 0,
+        name_offset: 145,
+    },
+    11600: VirtualFixup {
+        src: 11600,
+        section_index: 0,
+        name_offset: 145,
+    },
+    11696: VirtualFixup {
+        src: 11696,
+        section_index: 0,
+        name_offset: 145,
+    },
+    11808: VirtualFixup {
+        src: 11808,
+        section_index: 0,
+        name_offset: 145,
+    },
+    11904: VirtualFixup {
+        src: 11904,
+        section_index: 0,
+        name_offset: 145,
+    },
+    12000: VirtualFixup {
+        src: 12000,
+        section_index: 0,
+        name_offset: 145,
+    },
+    12096: VirtualFixup {
+        src: 12096,
+        section_index: 0,
+        name_offset: 145,
+    },
+    12176: VirtualFixup {
+        src: 12176,
+        section_index: 0,
+        name_offset: 145,
+    },
+    12272: VirtualFixup {
+        src: 12272,
+        section_index: 0,
+        name_offset: 145,
+    },
+    12368: VirtualFixup {
+        src: 12368,
+        section_index: 0,
+        name_offset: 145,
+    },
+    12480: VirtualFixup {
+        src: 12480,
+        section_index: 0,
+        name_offset: 145,
+    },
+    12592: VirtualFixup {
+        src: 12592,
+        section_index: 0,
+        name_offset: 145,
+    },
+    12688: VirtualFixup {
+        src: 12688,
+        section_index: 0,
+        name_offset: 145,
+    },
+    12784: VirtualFixup {
+        src: 12784,
+        section_index: 0,
+        name_offset: 145,
+    },
+    12912: VirtualFixup {
+        src: 12912,
+        section_index: 0,
+        name_offset: 176,
+    },
+    12976: VirtualFixup {
+        src: 12976,
+        section_index: 0,
+        name_offset: 204,
+    },
+    13728: VirtualFixup {
+        src: 13728,
+        section_index: 0,
+        name_offset: 222,
+    },
+    13808: VirtualFixup {
+        src: 13808,
+        section_index: 0,
+        name_offset: 176,
+    },
+    13872: VirtualFixup {
+        src: 13872,
+        section_index: 0,
+        name_offset: 243,
+    },
+    14096: VirtualFixup {
+        src: 14096,
+        section_index: 0,
+        name_offset: 145,
+    },
+    14224: VirtualFixup {
+        src: 14224,
+        section_index: 0,
+        name_offset: 176,
+    },
+    14288: VirtualFixup {
+        src: 14288,
+        section_index: 0,
+        name_offset: 204,
+    },
+    15040: VirtualFixup {
+        src: 15040,
+        section_index: 0,
+        name_offset: 222,
+    },
+    15120: VirtualFixup {
+        src: 15120,
+        section_index: 0,
+        name_offset: 176,
+    },
+    15184: VirtualFixup {
+        src: 15184,
+        section_index: 0,
+        name_offset: 243,
+    },
+    15408: VirtualFixup {
+        src: 15408,
+        section_index: 0,
+        name_offset: 145,
+    },
+    15552: VirtualFixup {
+        src: 15552,
+        section_index: 0,
+        name_offset: 176,
+    },
+    15616: VirtualFixup {
+        src: 15616,
+        section_index: 0,
+        name_offset: 204,
+    },
+    16368: VirtualFixup {
+        src: 16368,
+        section_index: 0,
+        name_offset: 222,
+    },
+    16448: VirtualFixup {
+        src: 16448,
+        section_index: 0,
+        name_offset: 176,
+    },
+    16512: VirtualFixup {
+        src: 16512,
+        section_index: 0,
+        name_offset: 243,
+    },
+    16736: VirtualFixup {
+        src: 16736,
+        section_index: 0,
+        name_offset: 145,
+    },
+    16848: VirtualFixup {
+        src: 16848,
+        section_index: 0,
+        name_offset: 176,
+    },
+    16912: VirtualFixup {
+        src: 16912,
+        section_index: 0,
+        name_offset: 204,
+    },
+    17664: VirtualFixup {
+        src: 17664,
+        section_index: 0,
+        name_offset: 222,
+    },
+    17744: VirtualFixup {
+        src: 17744,
+        section_index: 0,
+        name_offset: 176,
+    },
+    17808: VirtualFixup {
+        src: 17808,
+        section_index: 0,
+        name_offset: 243,
+    },
+    18032: VirtualFixup {
+        src: 18032,
+        section_index: 0,
+        name_offset: 145,
+    },
+    18160: VirtualFixup {
+        src: 18160,
+        section_index: 0,
+        name_offset: 176,
+    },
+    18224: VirtualFixup {
+        src: 18224,
+        section_index: 0,
+        name_offset: 204,
+    },
+    18976: VirtualFixup {
+        src: 18976,
+        section_index: 0,
+        name_offset: 222,
+    },
+    19056: VirtualFixup {
+        src: 19056,
+        section_index: 0,
+        name_offset: 176,
+    },
+    19120: VirtualFixup {
+        src: 19120,
+        section_index: 0,
+        name_offset: 243,
+    },
+    19360: VirtualFixup {
+        src: 19360,
+        section_index: 0,
+        name_offset: 145,
+    },
+    19488: VirtualFixup {
+        src: 19488,
+        section_index: 0,
+        name_offset: 176,
+    },
+    19552: VirtualFixup {
+        src: 19552,
+        section_index: 0,
+        name_offset: 204,
+    },
+    20304: VirtualFixup {
+        src: 20304,
+        section_index: 0,
+        name_offset: 222,
+    },
+    20384: VirtualFixup {
+        src: 20384,
+        section_index: 0,
+        name_offset: 176,
+    },
+    20448: VirtualFixup {
+        src: 20448,
+        section_index: 0,
+        name_offset: 243,
+    },
+    20688: VirtualFixup {
+        src: 20688,
+        section_index: 0,
+        name_offset: 145,
+    },
+    20800: VirtualFixup {
+        src: 20800,
+        section_index: 0,
+        name_offset: 176,
+    },
+    20864: VirtualFixup {
+        src: 20864,
+        section_index: 0,
+        name_offset: 204,
+    },
+    21616: VirtualFixup {
+        src: 21616,
+        section_index: 0,
+        name_offset: 222,
+    },
+    21696: VirtualFixup {
+        src: 21696,
+        section_index: 0,
+        name_offset: 176,
+    },
+    21760: VirtualFixup {
+        src: 21760,
+        section_index: 0,
+        name_offset: 243,
+    },
+    21984: VirtualFixup {
+        src: 21984,
+        section_index: 0,
+        name_offset: 145,
+    },
+    22112: VirtualFixup {
+        src: 22112,
+        section_index: 0,
+        name_offset: 176,
+    },
+    22176: VirtualFixup {
+        src: 22176,
+        section_index: 0,
+        name_offset: 204,
+    },
+    22928: VirtualFixup {
+        src: 22928,
+        section_index: 0,
+        name_offset: 222,
+    },
+    23008: VirtualFixup {
+        src: 23008,
+        section_index: 0,
+        name_offset: 176,
+    },
+    23072: VirtualFixup {
+        src: 23072,
+        section_index: 0,
+        name_offset: 243,
+    },
+    23312: VirtualFixup {
+        src: 23312,
+        section_index: 0,
+        name_offset: 145,
+    },
+    23440: VirtualFixup {
+        src: 23440,
+        section_index: 0,
+        name_offset: 176,
+    },
+    23504: VirtualFixup {
+        src: 23504,
+        section_index: 0,
+        name_offset: 204,
+    },
+    24256: VirtualFixup {
+        src: 24256,
+        section_index: 0,
+        name_offset: 222,
+    },
+    24336: VirtualFixup {
+        src: 24336,
+        section_index: 0,
+        name_offset: 176,
+    },
+    24400: VirtualFixup {
+        src: 24400,
+        section_index: 0,
+        name_offset: 243,
+    },
+    24640: VirtualFixup {
+        src: 24640,
+        section_index: 0,
+        name_offset: 145,
+    },
+    24752: VirtualFixup {
+        src: 24752,
+        section_index: 0,
+        name_offset: 176,
+    },
+    24816: VirtualFixup {
+        src: 24816,
+        section_index: 0,
+        name_offset: 204,
+    },
+    25568: VirtualFixup {
+        src: 25568,
+        section_index: 0,
+        name_offset: 222,
+    },
+    25648: VirtualFixup {
+        src: 25648,
+        section_index: 0,
+        name_offset: 176,
+    },
+    25712: VirtualFixup {
+        src: 25712,
+        section_index: 0,
+        name_offset: 243,
+    },
+    25936: VirtualFixup {
+        src: 25936,
+        section_index: 0,
+        name_offset: 261,
+    },
+    26000: VirtualFixup {
+        src: 26000,
+        section_index: 0,
+        name_offset: 281,
+    },
+    26320: VirtualFixup {
+        src: 26320,
+        section_index: 0,
+        name_offset: 303,
+    },
+    26464: VirtualFixup {
+        src: 26464,
+        section_index: 0,
+        name_offset: 330,
+    },
+    26848: VirtualFixup {
+        src: 26848,
+        section_index: 0,
+        name_offset: 303,
+    },
+    26992: VirtualFixup {
+        src: 26992,
+        section_index: 0,
+        name_offset: 330,
+    },
+    27376: VirtualFixup {
+        src: 27376,
+        section_index: 0,
+        name_offset: 303,
+    },
+    27520: VirtualFixup {
+        src: 27520,
+        section_index: 0,
+        name_offset: 330,
+    },
+    27904: VirtualFixup {
+        src: 27904,
+        section_index: 0,
+        name_offset: 303,
+    },
+    28048: VirtualFixup {
+        src: 28048,
+        section_index: 0,
+        name_offset: 330,
+    },
+    28432: VirtualFixup {
+        src: 28432,
+        section_index: 0,
+        name_offset: 303,
+    },
+    28576: VirtualFixup {
+        src: 28576,
+        section_index: 0,
+        name_offset: 360,
+    },
+    28848: VirtualFixup {
+        src: 28848,
+        section_index: 0,
+        name_offset: 303,
+    },
+    28992: VirtualFixup {
+        src: 28992,
+        section_index: 0,
+        name_offset: 330,
+    },
+    29376: VirtualFixup {
+        src: 29376,
+        section_index: 0,
+        name_offset: 303,
+    },
+    29520: VirtualFixup {
+        src: 29520,
+        section_index: 0,
+        name_offset: 330,
+    },
+    29904: VirtualFixup {
+        src: 29904,
+        section_index: 0,
+        name_offset: 303,
+    },
+    30048: VirtualFixup {
+        src: 30048,
+        section_index: 0,
+        name_offset: 360,
+    },
+    30320: VirtualFixup {
+        src: 30320,
+        section_index: 0,
+        name_offset: 303,
+    },
+    30464: VirtualFixup {
+        src: 30464,
+        section_index: 0,
+        name_offset: 330,
+    },
+    30848: VirtualFixup {
+        src: 30848,
+        section_index: 0,
+        name_offset: 395,
+    },
+    31136: VirtualFixup {
+        src: 31136,
+        section_index: 0,
+        name_offset: 303,
+    },
+    31280: VirtualFixup {
+        src: 31280,
+        section_index: 0,
+        name_offset: 330,
+    },
+    31664: VirtualFixup {
+        src: 31664,
+        section_index: 0,
+        name_offset: 419,
+    },
+    31712: VirtualFixup {
+        src: 31712,
+        section_index: 0,
+        name_offset: 303,
+    },
+    31856: VirtualFixup {
+        src: 31856,
+        section_index: 0,
+        name_offset: 330,
+    },
+    32240: VirtualFixup {
+        src: 32240,
+        section_index: 0,
+        name_offset: 303,
+    },
+    32384: VirtualFixup {
+        src: 32384,
+        section_index: 0,
+        name_offset: 330,
+    },
+    32768: VirtualFixup {
+        src: 32768,
+        section_index: 0,
+        name_offset: 303,
+    },
+    32912: VirtualFixup {
+        src: 32912,
+        section_index: 0,
+        name_offset: 330,
+    },
+    33296: VirtualFixup {
+        src: 33296,
+        section_index: 0,
+        name_offset: 303,
+    },
+    33440: VirtualFixup {
+        src: 33440,
+        section_index: 0,
+        name_offset: 330,
+    },
+    33824: VirtualFixup {
+        src: 33824,
+        section_index: 0,
+        name_offset: 303,
+    },
+    33968: VirtualFixup {
+        src: 33968,
+        section_index: 0,
+        name_offset: 360,
+    },
+    34240: VirtualFixup {
+        src: 34240,
+        section_index: 0,
+        name_offset: 303,
+    },
+    34384: VirtualFixup {
+        src: 34384,
+        section_index: 0,
+        name_offset: 360,
+    },
+    34656: VirtualFixup {
+        src: 34656,
+        section_index: 0,
+        name_offset: 303,
+    },
+    34800: VirtualFixup {
+        src: 34800,
+        section_index: 0,
+        name_offset: 330,
+    },
+    35184: VirtualFixup {
+        src: 35184,
+        section_index: 0,
+        name_offset: 303,
+    },
+    35328: VirtualFixup {
+        src: 35328,
+        section_index: 0,
+        name_offset: 330,
+    },
+    35712: VirtualFixup {
+        src: 35712,
+        section_index: 0,
+        name_offset: 451,
+    },
+    36496: VirtualFixup {
+        src: 36496,
+        section_index: 0,
+        name_offset: 451,
+    },
+}
+2024-04-20T18:10:33.391542Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:377:  class_names: ClassNames(
+    {
+        5: ClassPair {
+            signature: 1968725750,
+            class_name: "hkClass",
+        },
+        18: ClassPair {
+            signature: 1551803586,
+            class_name: "hkClassMember",
+        },
+        37: ClassPair {
+            signature: 2318797263,
+            class_name: "hkClassEnum",
+        },
+        54: ClassPair {
+            signature: 3463416428,
+            class_name: "hkClassEnumItem",
+        },
+        75: ClassPair {
+            signature: 661831966,
+            class_name: "hkRootLevelContainer",
+        },
+        101: ClassPair {
+            signature: 2378302259,
+            class_name: "hkaAnimationContainer",
+        },
+        128: ClassPair {
+            signature: 913211936,
+            class_name: "hkaSkeleton",
+        },
+        145: ClassPair {
+            signature: 1197668650,
+            class_name: "hkMemoryResourceContainer",
+        },
+        176: ClassPair {
+            signature: 3220881542,
+            class_name: "hkMemoryResourceHandle",
+        },
+        204: ClassPair {
+            signature: 1979242501,
+            class_name: "hkpRigidBody",
+        },
+        222: ClassPair {
+            signature: 3708493779,
+            class_name: "hkpCapsuleShape",
+        },
+        243: ClassPair {
+            signature: 3934199048,
+            class_name: "hkpShapeInfo",
+        },
+        261: ClassPair {
+            signature: 3265552868,
+            class_name: "hkpPhysicsData",
+        },
+        281: ClassPair {
+            signature: 4285680663,
+            class_name: "hkpPhysicsSystem",
+        },
+        303: ClassPair {
+            signature: 55491167,
+            class_name: "hkpConstraintInstance",
+        },
+        330: ClassPair {
+            signature: 2411060521,
+            class_name: "hkpRagdollConstraintData",
+        },
+        360: ClassPair {
+            signature: 2081799019,
+            class_name: "hkpLimitedHingeConstraintData",
+        },
+        395: ClassPair {
+            signature: 357124328,
+            class_name: "hkaRagdollInstance",
+        },
+        419: ClassPair {
+            signature: 1955574531,
+            class_name: "hkpPositionConstraintMotor",
+        },
+        451: ClassPair {
+            signature: 316621477,
+            class_name: "hkaSkeletonMapper",
+        },
+    },
+)
+2024-04-20T18:10:33.391655Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:307: string ptr:current_start = 16
+2024-04-20T18:10:33.391675Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:308: string ptr:local_dst = 160
+2024-04-20T18:10:33.391701Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:307: string ptr:current_start = 24
+2024-04-20T18:10:33.391705Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:308: string ptr:local_dst = 192
+2024-04-20T18:10:33.391725Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:307: string ptr:current_start = 40
+2024-04-20T18:10:33.391728Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:308: string ptr:local_dst = 224
+2024-04-20T18:10:33.391732Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:307: string ptr:current_start = 48
+2024-04-20T18:10:33.391735Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:308: string ptr:local_dst = 240
+2024-04-20T18:10:33.391740Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:307: string ptr:current_start = 64
+2024-04-20T18:10:33.391743Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:308: string ptr:local_dst = 272
+2024-04-20T18:10:33.391746Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:307: string ptr:current_start = 72
+2024-04-20T18:10:33.391749Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:308: string ptr:local_dst = 288
+2024-04-20T18:10:33.391754Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:307: string ptr:current_start = 88
+2024-04-20T18:10:33.391757Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:308: string ptr:local_dst = 304
+2024-04-20T18:10:33.391760Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:307: string ptr:current_start = 96
+2024-04-20T18:10:33.391763Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:308: string ptr:local_dst = 320
+2024-04-20T18:10:33.391768Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:307: string ptr:current_start = 112
+2024-04-20T18:10:33.391771Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:308: string ptr:local_dst = 352
+2024-04-20T18:10:33.391774Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:307: string ptr:current_start = 120
+2024-04-20T18:10:33.391777Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:308: string ptr:local_dst = 368
+2024-04-20T18:10:33.391783Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:307: string ptr:current_start = 136
+2024-04-20T18:10:33.391786Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:308: string ptr:local_dst = 400
+2024-04-20T18:10:33.391790Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:307: string ptr:current_start = 144
+2024-04-20T18:10:33.391792Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:308: string ptr:local_dst = 416
+2024-04-20T18:10:33.391833Z DEBUG crates\hkx_serde\src\bytes\deserializer.rs:400: deserialized class = HkRootLevelContainer(
+    HkRootLevelContainer {
+        named_variants: HkArrayClass {
+            numelements: 6,
+            classes: [
+                HkArrayClassParam {
+                    hkparam: HkRootLevelContainerNamedVariant {
+                        name: "Merged Animation Container",
+                        class_name: "hkaAnimationContainer",
+                        variant: "#0051",
+                    },
+                },
+                HkArrayClassParam {
+                    hkparam: HkRootLevelContainerNamedVariant {
+                        name: "Resource Data",
+                        class_name: "hkMemoryResourceContainer",
+                        variant: "#0054",
+                    },
+                },
+                HkArrayClassParam {
+                    hkparam: HkRootLevelContainerNamedVariant {
+                        name: "Physics Data",
+                        class_name: "hkpPhysicsData",
+                        variant: "#0168",
+                    },
+                },
+                HkArrayClassParam {
+                    hkparam: HkRootLevelContainerNamedVariant {
+                        name: "RagdollInstance",
+                        class_name: "hkaRagdollInstance",
+                        variant: "#0188",
+                    },
+                },
+                HkArrayClassParam {
+                    hkparam: HkRootLevelContainerNamedVariant {
+                        name: "SkeletonMapper",
+                        class_name: "hkaSkeletonMapper",
+                        variant: "#0208",
+                    },
+                },
+                HkArrayClassParam {
+                    hkparam: HkRootLevelContainerNamedVariant {
+                        name: "SkeletonMapper",
+                        class_name: "hkaSkeletonMapper",
+                        variant: "#0209",
+                    },
+                },
+            ],
+        },
+    },
+)
