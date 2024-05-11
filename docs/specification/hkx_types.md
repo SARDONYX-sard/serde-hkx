@@ -395,7 +395,7 @@ class hkTransform {
 
 ---
 
-### `Zero`
+### ~~`Zero`~~
 
 It is said to be set to 0 during serialization, but it is a deprecated item and never used.
 
@@ -428,7 +428,7 @@ Pointers are indicated by using the index of name.
 
 ---
 
-### `FunctionPointer`
+### ~~`FunctionPointer`~~
 
 ---
 
@@ -537,7 +537,7 @@ class hkArray {
 
 ---
 
-### `InplaceArray`
+### ~~`InplaceArray`~~
 
 ---
 
@@ -567,6 +567,8 @@ class hkEnum {
 ---
 
 ### `Struct`(`class` or `struct`)
+
+- [Structure Member Alignment, Padding and Data Packing](https://www.geeksforgeeks.org/structure-member-alignment-padding-and-data-packing/)
 
 ---
 
@@ -682,10 +684,10 @@ class hkFlags {
 <hkparam>0</hkparam>
 
 <!-- pattern 2: UPPER_SNAKE_CASE as in enum, but this one can also express OR bitwise operations with `|`.  -->
-<hkparam>ALIGN8|ALIGN16|SERIALIZE_IGNORED</hkparam>
+<hkparam>ALIGN_8|ALIGN_16|SERIALIZE_IGNORED</hkparam>
 
 <!-- pattern 3: Can include arbitrary bits in addition to other bit flags. (Not sure if this makes sense) -->
-<hkparam>ALIGN8|ALIGN16|SERIALIZE_IGNORE|64</hkparam>
+<hkparam>ALIGN_8|ALIGN_16|SERIALIZE_IGNORE|64</hkparam>
 ```
 
 ---
@@ -752,4 +754,4 @@ class hkRelArray<T> {
 
 ---
 
-### Max
+### ~~`Max`~~
