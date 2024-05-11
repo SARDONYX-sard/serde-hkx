@@ -19,8 +19,17 @@ C++ Class members
 - `vsubtype`: The type inside the generics of Array, the size that holds the enum data will be entered.
 
 - `arrsize`: Used only when the size of arrays is predetermined, such as `hkBool[3]`. Otherwise, 0.
-  Note: this is not used when `vtype` is `TYPE_ARRAY`.
-  For example, `hkBool[3]` => vtype: `TYPE_BOOL`, `arrsize`: 3.
+
+  Note: **This is not used when `vtype` is `TYPE_ARRAY`.**
+
+  - For example `hkBool[3]`
+
+    ```json
+    {
+      "vtype": "TYPE_BOOL",
+      "arrsize": 3
+    }
+    ```
 
 - `flags`: flags for information such as owned type, alignment, skip serialization, etc.
 
