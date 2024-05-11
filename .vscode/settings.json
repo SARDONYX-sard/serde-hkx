@@ -2,5 +2,11 @@
   "files.associations": {
     "*.s": "asm-intel-x86-generic"
   },
-  "japanese-proofreading.textlint.かっこ類と隣接する文字の間のスペースの有無": false
+  "japanese-proofreading.textlint.かっこ類と隣接する文字の間のスペースの有無": false,
+  "json.schemas": [
+    {
+      "fileMatch": ["assets/classes/*.json"],
+      "url": "./assets/havok_class_schema.json"
+    }
+  ]
 }

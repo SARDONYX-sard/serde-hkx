@@ -1,0 +1,218 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Havok Class Information Schema",
+  "description": "Schema for describing Havok Class Information in Json format.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the C++ class."
+    },
+    "parent": {
+      "type": "string",
+      "description": "Parent classes of the C++ class."
+    },
+    "version": {
+      "type": "integer",
+      "description": "Version of the class."
+    },
+    "signature": {
+      "type": "string",
+      "description": "Signature of the class."
+    },
+    "size_x86": {
+      "type": "integer",
+      "description": "Size of the class in 32-bit environment."
+    },
+    "size_x86_64": {
+      "type": "integer",
+      "description": "Size of the class in 64-bit environment."
+    },
+    "vtable": {
+      "type": "boolean",
+      "description": "Flag indicating if the class has a vtable."
+    },
+    "enums": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the enum."
+          },
+          "flags": {
+            "type": "string",
+            "description": "Flags associated with the enum."
+          },
+          "enum_item": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Name of the enum item."
+                },
+                "value": {
+                  "type": "integer",
+                  "description": "Value of the enum item."
+                }
+              },
+              "required": ["name", "value"]
+            }
+          }
+        },
+        "required": ["name", "flags", "enum_item"]
+      },
+      "description": "Enums associated with the class."
+    },
+    "members": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the C++ member."
+          },
+          "class_ref": {
+            "type": "string",
+            "description": "Name of the referenced class if `vtype` or `vsubtype` is `TYPE_POINTER` or `TYPE_STRUCT`."
+          },
+          "offset_x86": {
+            "type": "integer",
+            "description": "Offset of the member in 32-bit environment."
+          },
+          "offset_x86_64": {
+            "type": "integer",
+            "description": "Offset of the member in 64-bit environment."
+          },
+          "ctype": {
+            "type": "string",
+            "description": "C data type of the member."
+          },
+          "vtype": {
+            "type": "string",
+            "enum": [
+              "TYPE_VOID",
+              "TYPE_BOOL",
+              "TYPE_CHAR",
+              "TYPE_INT8",
+              "TYPE_UINT8",
+              "TYPE_INT16",
+              "TYPE_UINT16",
+              "TYPE_INT32",
+              "TYPE_UINT32",
+              "TYPE_INT64",
+              "TYPE_UINT64",
+              "TYPE_REAL",
+              "TYPE_VECTOR4",
+              "TYPE_QUATERNION",
+              "TYPE_MATRIX3",
+              "TYPE_ROTATION",
+              "TYPE_QSTRANSFORM",
+              "TYPE_MATRIX4",
+              "TYPE_TRANSFORM",
+              "TYPE_ZERO",
+              "TYPE_POINTER",
+              "TYPE_FUNCTIONPOINTER",
+              "TYPE_ARRAY",
+              "TYPE_INPLACEARRAY",
+              "TYPE_ENUM",
+              "TYPE_STRUCT",
+              "TYPE_SIMPLEARRAY",
+              "TYPE_HOMOGENEOUSARRAY",
+              "TYPE_VARIANT",
+              "TYPE_CSTRING",
+              "TYPE_ULONG",
+              "TYPE_FLAGS",
+              "TYPE_HALF",
+              "TYPE_STRINGPTR",
+              "TYPE_RELARRAY"
+            ],
+            "description": "Type of the member as per hkx_types.md specification."
+          },
+          "vsubtype": {
+            "type": "string",
+            "enum": [
+              "TYPE_VOID",
+              "TYPE_BOOL",
+              "TYPE_CHAR",
+              "TYPE_INT8",
+              "TYPE_UINT8",
+              "TYPE_INT16",
+              "TYPE_UINT16",
+              "TYPE_INT32",
+              "TYPE_UINT32",
+              "TYPE_INT64",
+              "TYPE_UINT64",
+              "TYPE_REAL",
+              "TYPE_VECTOR4",
+              "TYPE_QUATERNION",
+              "TYPE_MATRIX3",
+              "TYPE_ROTATION",
+              "TYPE_QSTRANSFORM",
+              "TYPE_MATRIX4",
+              "TYPE_TRANSFORM",
+              "TYPE_ZERO",
+              "TYPE_POINTER",
+              "TYPE_FUNCTIONPOINTER",
+              "TYPE_ARRAY",
+              "TYPE_INPLACEARRAY",
+              "TYPE_ENUM",
+              "TYPE_STRUCT",
+              "TYPE_SIMPLEARRAY",
+              "TYPE_HOMOGENEOUSARRAY",
+              "TYPE_VARIANT",
+              "TYPE_CSTRING",
+              "TYPE_ULONG",
+              "TYPE_FLAGS",
+              "TYPE_HALF",
+              "TYPE_STRINGPTR",
+              "TYPE_RELARRAY"
+            ],
+            "description": "Subtype of the member."
+          },
+          "arrsize": {
+            "type": "integer",
+            "description": "Size of the array if applicable. Note: This is not used when vtype is `TYPE_ARRAY`. It is used when vtype: `TYPE_BOOL`, such as `hkBool[3]`."
+          },
+          "flags": {
+            "type": "string",
+            "description": "Flags associated with the member. e.g.(FLAGS_NONE|SERIALIZE_IGNORED)"
+          },
+          "default": {
+            "type": "integer",
+            "description": "Default value of the member."
+          },
+          "enum_ref": {
+            "type": "string",
+            "description": "Reference to an enum if the member type is enum."
+          }
+        },
+        "required": [
+          "name",
+          "offset_x86",
+          "offset_x86_64",
+          "ctype",
+          "vtype",
+          "vsubtype",
+          "arrsize",
+          "flags",
+          "default"
+        ]
+      },
+      "description": "Members of the class."
+    }
+  },
+  "required": [
+    "name",
+    "version",
+    "signature",
+    "size_x86",
+    "size_x86_64",
+    "vtable",
+    "members"
+  ]
+}
