@@ -42,7 +42,7 @@ C++ Class members
 
 - Reflection data in `hk_2010.2.0-r1`, but some data hidden by multiple inheritance of parent classes etc. do not exist.
 
-```json
+```jsonc
 {
   "name": "hkpCollisionFilter",
   "parent": ["hkReferencedObject", "hkpCollidableCollidableFilter", "hkpShapeCollectionFilter", "hkpRayShapeCollectionFilter", "hkpRayCollidableFilter"]
