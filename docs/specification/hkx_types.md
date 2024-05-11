@@ -675,7 +675,9 @@ class hkFlags {
 - XML
 
 ```xml
-<!-- pattern 1: If there are no flags at all (0bits), 0 is entered. -->
+<!-- pattern 1: There is also a pattern in which the number 0 is directly entered in the enum flags. -->
+<!--            (What this means is not clear. Even if 0 is assigned to the enum flags, this value appears directly in the XML. -->
+<!--            e.g. hkbCharacterData["characterPropertyInfos"] => hkbVariableInfo["role"] => hkbRoleAttribute["flags"] -->
 <hkparam>0</hkparam>
 
 <!-- pattern 2: UPPER_SNAKE_CASE as in enum, but this one can also express OR bitwise operations with `|`.  -->
