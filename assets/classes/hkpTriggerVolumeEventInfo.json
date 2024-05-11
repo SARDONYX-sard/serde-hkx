@@ -1,0 +1,45 @@
+{
+  "name": "hkpTriggerVolumeEventInfo",
+  "version": 0,
+  "signature": "0xeb60f431",
+  "size_x86": 16,
+  "size_x86_64": 24,
+  "vtable": false,
+  "members": [
+    {
+      "name": "sortValue",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkUint64",
+      "vtype": "TYPE_UINT64",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "body",
+      "offset_x86": 8,
+      "offset_x86_64": 8,
+      "class_ref": "hkpRigidBody",
+      "ctype": "struct hkpRigidBody*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "operation",
+      "offset_x86": 12,
+      "offset_x86_64": 16,
+      "enum_ref": "Operation",
+      "ctype": "enum Operation",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT32",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "name": "hkbNodeInternalStateInfo",
+  "version": 0,
+  "signature": "0x7db9971d",
+  "size_x86": 100,
+  "size_x86_64": 120,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "syncInfo",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "class_ref": "hkbGeneratorSyncInfo",
+      "ctype": "struct hkbGeneratorSyncInfo",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "name",
+      "offset_x86": 88,
+      "offset_x86_64": 96,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "internalState",
+      "offset_x86": 92,
+      "offset_x86_64": 104,
+      "class_ref": "hkReferencedObject",
+      "ctype": "struct hkReferencedObject*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "nodeId",
+      "offset_x86": 96,
+      "offset_x86_64": 112,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "hasActivateBeenCalled",
+      "offset_x86": 98,
+      "offset_x86_64": 114,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

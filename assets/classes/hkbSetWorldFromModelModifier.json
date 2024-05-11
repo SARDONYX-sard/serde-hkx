@@ -1,0 +1,55 @@
+{
+  "name": "hkbSetWorldFromModelModifier",
+  "version": 0,
+  "signature": "0xafcfa211",
+  "size_x86": 96,
+  "size_x86_64": 128,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "members": [
+    {
+      "name": "translation",
+      "offset_x86": 48,
+      "offset_x86_64": 80,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "rotation",
+      "offset_x86": 64,
+      "offset_x86_64": 96,
+      "ctype": "hkQuaternion",
+      "vtype": "TYPE_QUATERNION",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "setTranslation",
+      "offset_x86": 80,
+      "offset_x86_64": 112,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "setRotation",
+      "offset_x86": 81,
+      "offset_x86_64": 113,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

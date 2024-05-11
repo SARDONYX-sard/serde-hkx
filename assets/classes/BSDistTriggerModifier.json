@@ -1,0 +1,56 @@
+{
+  "name": "BSDistTriggerModifier",
+  "version": 1,
+  "signature": "0xb34d2bbd",
+  "size_x86": 80,
+  "size_x86_64": 128,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "members": [
+    {
+      "name": "targetPosition",
+      "offset_x86": 48,
+      "offset_x86_64": 80,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "distance",
+      "offset_x86": 64,
+      "offset_x86_64": 96,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "distanceTrigger",
+      "offset_x86": 68,
+      "offset_x86_64": 100,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "triggerEvent",
+      "offset_x86": 72,
+      "offset_x86_64": 104,
+      "class_ref": "hkbEventProperty",
+      "ctype": "struct hkbEventProperty",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "name": "hkbCharacterControllerModifierInternalState",
+  "version": 0,
+  "signature": "0xf8dfec0d",
+  "size_x86": 48,
+  "size_x86_64": 48,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "gravity",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "timestep",
+      "offset_x86": 32,
+      "offset_x86_64": 32,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "isInitialVelocityAdded",
+      "offset_x86": 36,
+      "offset_x86_64": 36,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "isTouchingGround",
+      "offset_x86": 37,
+      "offset_x86_64": 37,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

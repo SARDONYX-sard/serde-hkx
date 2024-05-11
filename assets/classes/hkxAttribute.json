@@ -1,0 +1,65 @@
+{
+  "name": "hkxAttribute",
+  "version": 0,
+  "signature": "0x7375cae3",
+  "size_x86": 8,
+  "size_x86_64": 16,
+  "vtable": false,
+  "enums": [
+    {
+      "name": "Hint",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "HINT_NONE",
+          "value": 0
+        },
+        {
+          "name": "HINT_IGNORE",
+          "value": 1
+        },
+        {
+          "name": "HINT_TRANSFORM",
+          "value": 2
+        },
+        {
+          "name": "HINT_SCALE",
+          "value": 4
+        },
+        {
+          "name": "HINT_TRANSFORM_AND_SCALE",
+          "value": 6
+        },
+        {
+          "name": "HINT_FLIP",
+          "value": 8
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "name",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "value",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "class_ref": "hkReferencedObject",
+      "ctype": "struct hkReferencedObject*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

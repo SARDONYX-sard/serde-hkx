@@ -1,0 +1,110 @@
+{
+  "name": "hkbGetUpModifier",
+  "version": 2,
+  "signature": "0x61cb7ac0",
+  "size_x86": 96,
+  "size_x86_64": 128,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "members": [
+    {
+      "name": "groundNormal",
+      "offset_x86": 48,
+      "offset_x86_64": 80,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "duration",
+      "offset_x86": 64,
+      "offset_x86_64": 96,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "alignWithGroundDuration",
+      "offset_x86": 68,
+      "offset_x86_64": 100,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "rootBoneIndex",
+      "offset_x86": 72,
+      "offset_x86_64": 104,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "otherBoneIndex",
+      "offset_x86": 74,
+      "offset_x86_64": 106,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "anotherBoneIndex",
+      "offset_x86": 76,
+      "offset_x86_64": 108,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "timeSinceBegin",
+      "offset_x86": 80,
+      "offset_x86_64": 112,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "timeStep",
+      "offset_x86": 84,
+      "offset_x86_64": 116,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "initNextModify",
+      "offset_x86": 88,
+      "offset_x86_64": 120,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

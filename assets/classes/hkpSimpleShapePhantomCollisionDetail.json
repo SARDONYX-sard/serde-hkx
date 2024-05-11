@@ -1,0 +1,22 @@
+{
+  "name": "hkpSimpleShapePhantomCollisionDetail",
+  "version": 0,
+  "signature": "0x98bfa6ce",
+  "size_x86": 4,
+  "size_x86_64": 8,
+  "vtable": false,
+  "members": [
+    {
+      "name": "collidable",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "class_ref": "hkpCollidable",
+      "ctype": "struct hkpCollidable*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

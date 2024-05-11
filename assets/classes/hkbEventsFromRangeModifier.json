@@ -1,0 +1,56 @@
+{
+  "name": "hkbEventsFromRangeModifier",
+  "version": 0,
+  "signature": "0xbc561b6e",
+  "size_x86": 68,
+  "size_x86_64": 112,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "members": [
+    {
+      "name": "inputValue",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "lowerBound",
+      "offset_x86": 48,
+      "offset_x86_64": 84,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "eventRanges",
+      "offset_x86": 52,
+      "offset_x86_64": 88,
+      "class_ref": "hkbEventRangeDataArray",
+      "ctype": "struct hkbEventRangeDataArray*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "wasActiveInPreviousFrame",
+      "offset_x86": 56,
+      "offset_x86_64": 96,
+      "ctype": "hkArray<void>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

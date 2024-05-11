@@ -1,0 +1,23 @@
+{
+  "name": "hkpStiffSpringConstraintData",
+  "version": 0,
+  "signature": "0xb98f66f4",
+  "size_x86": 80,
+  "size_x86_64": 96,
+  "parent": "hkpConstraintData",
+  "vtable": true,
+  "members": [
+    {
+      "name": "atoms",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "class_ref": "hkpStiffSpringConstraintDataAtoms",
+      "ctype": "struct hkpStiffSpringConstraintDataAtoms",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|ALIGN_16",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "name": "hkbTwistModifier",
+  "version": 1,
+  "signature": "0xb6b76b32",
+  "size_x86": 112,
+  "size_x86_64": 144,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "SetAngleMethod",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "LINEAR",
+          "value": 0
+        },
+        {
+          "name": "RAMPED",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "RotationAxisCoordinates",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "ROTATION_AXIS_IN_MODEL_COORDINATES",
+          "value": 0
+        },
+        {
+          "name": "ROTATION_AXIS_IN_LOCAL_COORDINATES",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "axisOfRotation",
+      "offset_x86": 48,
+      "offset_x86_64": 80,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "twistAngle",
+      "offset_x86": 64,
+      "offset_x86_64": 96,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "startBoneIndex",
+      "offset_x86": 68,
+      "offset_x86_64": 100,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "endBoneIndex",
+      "offset_x86": 70,
+      "offset_x86_64": 102,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "setAngleMethod",
+      "offset_x86": 72,
+      "offset_x86_64": 104,
+      "enum_ref": "SetAngleMethod",
+      "ctype": "enum SetAngleMethod",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "rotationAxisCoordinates",
+      "offset_x86": 73,
+      "offset_x86_64": 105,
+      "enum_ref": "RotationAxisCoordinates",
+      "ctype": "enum RotationAxisCoordinates",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "isAdditive",
+      "offset_x86": 74,
+      "offset_x86_64": 106,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "boneChainIndices",
+      "offset_x86": 76,
+      "offset_x86_64": 112,
+      "ctype": "hkArray<void>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "parentBoneIndices",
+      "offset_x86": 88,
+      "offset_x86_64": 128,
+      "ctype": "hkArray<void>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

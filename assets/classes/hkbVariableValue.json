@@ -1,0 +1,21 @@
+{
+  "name": "hkbVariableValue",
+  "version": 0,
+  "signature": "0xb99bd6a",
+  "size_x86": 4,
+  "size_x86_64": 4,
+  "vtable": false,
+  "members": [
+    {
+      "name": "value",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

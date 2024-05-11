@@ -1,0 +1,69 @@
+{
+  "name": "hkClassEnum",
+  "version": 0,
+  "signature": "0x8a3609cf",
+  "size_x86": 20,
+  "size_x86_64": 40,
+  "vtable": false,
+  "enums": [
+    {
+      "name": "FlagValues",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "FLAGS_NONE",
+          "value": 0
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "name",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "char*",
+      "vtype": "TYPE_CSTRING",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "items",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "class_ref": "hkClassEnumItem",
+      "ctype": "hkSimpleArray<struct hkClassEnumItem>",
+      "vtype": "TYPE_SIMPLEARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "attributes",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "class_ref": "hkCustomAttributes",
+      "ctype": "struct hkCustomAttributes*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "flags",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "enum_ref": "FlagValues",
+      "ctype": "flags FlagValues",
+      "vtype": "TYPE_FLAGS",
+      "vsubtype": "TYPE_UINT32",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

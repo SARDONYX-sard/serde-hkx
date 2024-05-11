@@ -1,0 +1,44 @@
+{
+  "name": "hkpStorageExtendedMeshShapeMaterial",
+  "version": 1,
+  "signature": "0x2ca3e906",
+  "size_x86": 12,
+  "size_x86_64": 16,
+  "parent": "hkpMeshMaterial",
+  "vtable": false,
+  "members": [
+    {
+      "name": "restitution",
+      "offset_x86": 4,
+      "offset_x86_64": 4,
+      "ctype": "hkHalf",
+      "vtype": "TYPE_HALF",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "friction",
+      "offset_x86": 6,
+      "offset_x86_64": 6,
+      "ctype": "hkHalf",
+      "vtype": "TYPE_HALF",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "userData",
+      "offset_x86": 8,
+      "offset_x86_64": 8,
+      "ctype": "hkUlong",
+      "vtype": "TYPE_ULONG",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

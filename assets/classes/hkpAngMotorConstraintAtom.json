@@ -1,0 +1,89 @@
+{
+  "name": "hkpAngMotorConstraintAtom",
+  "version": 0,
+  "signature": "0x81f087ff",
+  "size_x86": 20,
+  "size_x86_64": 24,
+  "parent": "hkpConstraintAtom",
+  "vtable": false,
+  "members": [
+    {
+      "name": "isEnabled",
+      "offset_x86": 2,
+      "offset_x86_64": 2,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "motorAxis",
+      "offset_x86": 3,
+      "offset_x86_64": 3,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "initializedOffset",
+      "offset_x86": 4,
+      "offset_x86_64": 4,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "previousTargetAngleOffset",
+      "offset_x86": 6,
+      "offset_x86_64": 6,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "correspondingAngLimitSolverResultOffset",
+      "offset_x86": 8,
+      "offset_x86_64": 8,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "targetAngle",
+      "offset_x86": 12,
+      "offset_x86_64": 12,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "motor",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "class_ref": "hkpConstraintMotor",
+      "ctype": "struct hkpConstraintMotor*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

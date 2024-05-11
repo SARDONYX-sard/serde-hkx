@@ -1,0 +1,22 @@
+{
+  "name": "hkpDefaultWorldMemoryWatchDog",
+  "version": 1,
+  "signature": "0x77d6b19f",
+  "size_x86": 12,
+  "size_x86_64": 24,
+  "parent": "hkWorldMemoryAvailableWatchDog",
+  "vtable": true,
+  "members": [
+    {
+      "name": "freeHeapMemoryRequested",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

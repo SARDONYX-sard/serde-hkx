@@ -1,0 +1,22 @@
+{
+  "name": "hkpRejectChassisListener",
+  "version": 1,
+  "signature": "0xc4fa16c9",
+  "size_x86": 16,
+  "size_x86_64": 24,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "chassis",
+      "offset_x86": 12,
+      "offset_x86_64": 16,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "hkbFootIkControlData",
+  "version": 0,
+  "signature": "0xa111b704",
+  "size_x86": 48,
+  "size_x86_64": 48,
+  "vtable": false,
+  "members": [
+    {
+      "name": "gains",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "class_ref": "hkbFootIkGains",
+      "ctype": "struct hkbFootIkGains",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|ALIGN_16",
+      "default": 0
+    }
+  ]
+}

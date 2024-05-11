@@ -1,0 +1,121 @@
+{
+  "name": "hkpVehicleDefaultEngine",
+  "version": 0,
+  "signature": "0x56f8ca24",
+  "size_x86": 48,
+  "size_x86_64": 56,
+  "parent": "hkpVehicleEngine",
+  "vtable": true,
+  "members": [
+    {
+      "name": "minRPM",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "optRPM",
+      "offset_x86": 12,
+      "offset_x86_64": 20,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "maxRPM",
+      "offset_x86": 16,
+      "offset_x86_64": 24,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "maxTorque",
+      "offset_x86": 20,
+      "offset_x86_64": 28,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "torqueFactorAtMinRPM",
+      "offset_x86": 24,
+      "offset_x86_64": 32,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "torqueFactorAtMaxRPM",
+      "offset_x86": 28,
+      "offset_x86_64": 36,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "resistanceFactorAtMinRPM",
+      "offset_x86": 32,
+      "offset_x86_64": 40,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "resistanceFactorAtOptRPM",
+      "offset_x86": 36,
+      "offset_x86_64": 44,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "resistanceFactorAtMaxRPM",
+      "offset_x86": 40,
+      "offset_x86_64": 48,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "clutchSlipRPM",
+      "offset_x86": 44,
+      "offset_x86_64": 52,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "name": "hkSemanticsAttribute",
+  "version": 0,
+  "signature": "0x837099c3",
+  "size_x86": 1,
+  "size_x86_64": 1,
+  "vtable": false,
+  "enums": [
+    {
+      "name": "Semantics",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "UNKNOWN",
+          "value": 0
+        },
+        {
+          "name": "DISTANCE",
+          "value": 1
+        },
+        {
+          "name": "ANGLE",
+          "value": 2
+        },
+        {
+          "name": "NORMAL",
+          "value": 3
+        },
+        {
+          "name": "POSITION",
+          "value": 4
+        },
+        {
+          "name": "COSINE_ANGLE",
+          "value": 5
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "type",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "enum_ref": "Semantics",
+      "ctype": "enum Semantics",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

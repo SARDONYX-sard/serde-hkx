@@ -1,0 +1,70 @@
+{
+  "name": "hkpHingeConstraintDataAtoms",
+  "version": 1,
+  "signature": "0x6958371c",
+  "size_x86": 192,
+  "size_x86_64": 192,
+  "vtable": false,
+  "enums": [
+    {
+      "name": "Axis",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "AXIS_AXLE",
+          "value": 0
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "transforms",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "class_ref": "hkpSetLocalTransformsConstraintAtom",
+      "ctype": "struct hkpSetLocalTransformsConstraintAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "setupStabilization",
+      "offset_x86": 144,
+      "offset_x86_64": 144,
+      "class_ref": "hkpSetupStabilizationAtom",
+      "ctype": "struct hkpSetupStabilizationAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "2dAng",
+      "offset_x86": 160,
+      "offset_x86_64": 160,
+      "class_ref": "hkp2dAngConstraintAtom",
+      "ctype": "struct hkp2dAngConstraintAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "ballSocket",
+      "offset_x86": 164,
+      "offset_x86_64": 164,
+      "class_ref": "hkpBallSocketConstraintAtom",
+      "ctype": "struct hkpBallSocketConstraintAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

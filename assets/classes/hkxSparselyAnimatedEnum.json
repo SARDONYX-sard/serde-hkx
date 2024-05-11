@@ -1,0 +1,23 @@
+{
+  "name": "hkxSparselyAnimatedEnum",
+  "version": 1,
+  "signature": "0x68a47b64",
+  "size_x86": 36,
+  "size_x86_64": 56,
+  "parent": "hkxSparselyAnimatedInt",
+  "vtable": true,
+  "members": [
+    {
+      "name": "enum",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "class_ref": "hkxEnum",
+      "ctype": "struct hkxEnum*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "name": "hkbDampingModifierInternalState",
+  "version": 0,
+  "signature": "0x508d3b36",
+  "size_x86": 80,
+  "size_x86_64": 80,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "dampedVector",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "vecErrorSum",
+      "offset_x86": 32,
+      "offset_x86_64": 32,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "vecPreviousError",
+      "offset_x86": 48,
+      "offset_x86_64": 48,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "dampedValue",
+      "offset_x86": 64,
+      "offset_x86_64": 64,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "errorSum",
+      "offset_x86": 68,
+      "offset_x86_64": 68,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "previousError",
+      "offset_x86": 72,
+      "offset_x86_64": 72,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

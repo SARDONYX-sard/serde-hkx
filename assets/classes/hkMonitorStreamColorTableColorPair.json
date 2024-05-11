@@ -1,0 +1,33 @@
+{
+  "name": "hkMonitorStreamColorTableColorPair",
+  "version": 0,
+  "signature": "0x738fca05",
+  "size_x86": 8,
+  "size_x86_64": 16,
+  "vtable": false,
+  "members": [
+    {
+      "name": "colorName",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "color",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "enum_ref": "ExtendedColors",
+      "ctype": "enum ExtendedColors",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT32",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "name": "BSDecomposeVectorModifier",
+  "version": 0,
+  "signature": "0x31f6b8b6",
+  "size_x86": 80,
+  "size_x86_64": 112,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "members": [
+    {
+      "name": "vector",
+      "offset_x86": 48,
+      "offset_x86_64": 80,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "x",
+      "offset_x86": 64,
+      "offset_x86_64": 96,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "y",
+      "offset_x86": 68,
+      "offset_x86_64": 100,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "z",
+      "offset_x86": 72,
+      "offset_x86_64": 104,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "w",
+      "offset_x86": 76,
+      "offset_x86_64": 108,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

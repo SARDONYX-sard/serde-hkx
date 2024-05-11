@@ -1,0 +1,33 @@
+{
+  "name": "hkbBehaviorReferenceGenerator",
+  "version": 0,
+  "signature": "0xfcb5423",
+  "size_x86": 48,
+  "size_x86_64": 88,
+  "parent": "hkbGenerator",
+  "vtable": true,
+  "members": [
+    {
+      "name": "behaviorName",
+      "offset_x86": 40,
+      "offset_x86_64": 72,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "behavior",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

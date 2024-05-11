@@ -1,0 +1,101 @@
+{
+  "name": "hkbExpressionData",
+  "version": 0,
+  "signature": "0x6740042a",
+  "size_x86": 16,
+  "size_x86_64": 24,
+  "vtable": false,
+  "enums": [
+    {
+      "name": "ExpressionEventMode",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "EVENT_MODE_SEND_ONCE",
+          "value": 0
+        },
+        {
+          "name": "EVENT_MODE_SEND_ON_TRUE",
+          "value": 1
+        },
+        {
+          "name": "EVENT_MODE_SEND_ON_FALSE_TO_TRUE",
+          "value": 2
+        },
+        {
+          "name": "EVENT_MODE_SEND_EVERY_FRAME_ONCE_TRUE",
+          "value": 3
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "expression",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "assignmentVariableIndex",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "assignmentEventIndex",
+      "offset_x86": 8,
+      "offset_x86_64": 12,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "eventMode",
+      "offset_x86": 12,
+      "offset_x86_64": 16,
+      "enum_ref": "ExpressionEventMode",
+      "ctype": "enum ExpressionEventMode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "raisedEvent",
+      "offset_x86": 13,
+      "offset_x86_64": 17,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "wasTrueInPreviousFrame",
+      "offset_x86": 14,
+      "offset_x86_64": 18,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

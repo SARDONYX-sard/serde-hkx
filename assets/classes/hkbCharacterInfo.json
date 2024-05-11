@@ -1,0 +1,65 @@
+{
+  "name": "hkbCharacterInfo",
+  "version": 2,
+  "signature": "0xd9709ff2",
+  "size_x86": 24,
+  "size_x86_64": 32,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "Event",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "REMOVED_FROM_WORLD",
+          "value": 0
+        },
+        {
+          "name": "SHOWN",
+          "value": 1
+        },
+        {
+          "name": "HIDDEN",
+          "value": 2
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "characterId",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "ctype": "hkUint64",
+      "vtype": "TYPE_UINT64",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "event",
+      "offset_x86": 16,
+      "offset_x86_64": 24,
+      "enum_ref": "Event",
+      "ctype": "enum Event",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "padding",
+      "offset_x86": 20,
+      "offset_x86_64": 28,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

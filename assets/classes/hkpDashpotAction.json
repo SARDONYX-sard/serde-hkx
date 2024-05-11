@@ -1,0 +1,55 @@
+{
+  "name": "hkpDashpotAction",
+  "version": 0,
+  "signature": "0x50746c6e",
+  "size_x86": 96,
+  "size_x86_64": 128,
+  "parent": "hkpBinaryAction",
+  "vtable": true,
+  "members": [
+    {
+      "name": "point",
+      "offset_x86": 32,
+      "offset_x86_64": 64,
+      "ctype": "hkVector4[2]",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 2,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "strength",
+      "offset_x86": 64,
+      "offset_x86_64": 96,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "damping",
+      "offset_x86": 68,
+      "offset_x86_64": 100,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "impulse",
+      "offset_x86": 80,
+      "offset_x86_64": 112,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

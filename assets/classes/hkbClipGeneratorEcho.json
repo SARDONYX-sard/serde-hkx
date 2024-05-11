@@ -1,0 +1,43 @@
+{
+  "name": "hkbClipGeneratorEcho",
+  "version": 0,
+  "signature": "0x750edf40",
+  "size_x86": 16,
+  "size_x86_64": 16,
+  "vtable": false,
+  "members": [
+    {
+      "name": "offsetLocalTime",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|ALIGN_16",
+      "default": 0
+    },
+    {
+      "name": "weight",
+      "offset_x86": 4,
+      "offset_x86_64": 4,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "dwdt",
+      "offset_x86": 8,
+      "offset_x86_64": 8,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

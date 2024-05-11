@@ -1,0 +1,82 @@
+{
+  "name": "hkbVariableInfo",
+  "version": 1,
+  "signature": "0x9e746ba2",
+  "size_x86": 6,
+  "size_x86_64": 6,
+  "vtable": false,
+  "enums": [
+    {
+      "name": "VariableType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "VARIABLE_TYPE_INVALID",
+          "value": -1
+        },
+        {
+          "name": "VARIABLE_TYPE_BOOL",
+          "value": 0
+        },
+        {
+          "name": "VARIABLE_TYPE_INT8",
+          "value": 1
+        },
+        {
+          "name": "VARIABLE_TYPE_INT16",
+          "value": 2
+        },
+        {
+          "name": "VARIABLE_TYPE_INT32",
+          "value": 3
+        },
+        {
+          "name": "VARIABLE_TYPE_REAL",
+          "value": 4
+        },
+        {
+          "name": "VARIABLE_TYPE_POINTER",
+          "value": 5
+        },
+        {
+          "name": "VARIABLE_TYPE_VECTOR3",
+          "value": 6
+        },
+        {
+          "name": "VARIABLE_TYPE_VECTOR4",
+          "value": 7
+        },
+        {
+          "name": "VARIABLE_TYPE_QUATERNION",
+          "value": 8
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "role",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "class_ref": "hkbRoleAttribute",
+      "ctype": "struct hkbRoleAttribute",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "type",
+      "offset_x86": 4,
+      "offset_x86_64": 4,
+      "enum_ref": "VariableType",
+      "ctype": "enum VariableType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

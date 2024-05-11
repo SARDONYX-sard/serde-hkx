@@ -1,0 +1,68 @@
+{
+  "name": "hkpVehicleLinearCastWheelCollide",
+  "version": 0,
+  "signature": "0xc59399d0",
+  "size_x86": 52,
+  "size_x86_64": 80,
+  "parent": "hkpVehicleWheelCollide",
+  "vtable": true,
+  "members": [
+    {
+      "name": "wheelCollisionFilterInfo",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "wheelStates",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "class_ref": "hkpVehicleLinearCastWheelCollideWheelState",
+      "ctype": "hkArray<struct hkpVehicleLinearCastWheelCollideWheelState>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "rejectChassisListener",
+      "offset_x86": 28,
+      "offset_x86_64": 48,
+      "class_ref": "hkpRejectChassisListener",
+      "ctype": "struct hkpRejectChassisListener",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "maxExtraPenetration",
+      "offset_x86": 44,
+      "offset_x86_64": 72,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "startPointTolerance",
+      "offset_x86": 48,
+      "offset_x86_64": 76,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

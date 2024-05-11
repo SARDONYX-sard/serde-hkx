@@ -1,0 +1,363 @@
+{
+  "name": "hkbProxyModifier",
+  "version": 1,
+  "signature": "0x8a41554f",
+  "size_x86": 256,
+  "size_x86_64": 288,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "PhantomType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "PHANTOM_TYPE_SIMPLE",
+          "value": 0
+        },
+        {
+          "name": "PHANTOM_TYPE_CACHING",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "LinearVelocityMode",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "LINEAR_VELOCITY_MODE_WORLD",
+          "value": 0
+        },
+        {
+          "name": "LINEAR_VELOCITY_MODE_MODEL",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "proxyInfo",
+      "offset_x86": 48,
+      "offset_x86_64": 80,
+      "class_ref": "hkbProxyModifierProxyInfo",
+      "ctype": "struct hkbProxyModifierProxyInfo",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "linearVelocity",
+      "offset_x86": 128,
+      "offset_x86_64": 160,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "horizontalGain",
+      "offset_x86": 144,
+      "offset_x86_64": 176,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "verticalGain",
+      "offset_x86": 148,
+      "offset_x86_64": 180,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "maxHorizontalSeparation",
+      "offset_x86": 152,
+      "offset_x86_64": 184,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "maxVerticalSeparation",
+      "offset_x86": 156,
+      "offset_x86_64": 188,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "verticalDisplacementError",
+      "offset_x86": 160,
+      "offset_x86_64": 192,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "verticalDisplacementErrorGain",
+      "offset_x86": 164,
+      "offset_x86_64": 196,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "maxVerticalDisplacement",
+      "offset_x86": 168,
+      "offset_x86_64": 200,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "minVerticalDisplacement",
+      "offset_x86": 172,
+      "offset_x86_64": 204,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "capsuleHeight",
+      "offset_x86": 176,
+      "offset_x86_64": 208,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "capsuleRadius",
+      "offset_x86": 180,
+      "offset_x86_64": 212,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "maxSlopeForRotation",
+      "offset_x86": 184,
+      "offset_x86_64": 216,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "collisionFilterInfo",
+      "offset_x86": 188,
+      "offset_x86_64": 220,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "phantomType",
+      "offset_x86": 192,
+      "offset_x86_64": 224,
+      "enum_ref": "PhantomType",
+      "ctype": "enum PhantomType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "linearVelocityMode",
+      "offset_x86": 193,
+      "offset_x86_64": 225,
+      "enum_ref": "LinearVelocityMode",
+      "ctype": "enum LinearVelocityMode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "ignoreIncomingRotation",
+      "offset_x86": 194,
+      "offset_x86_64": 226,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "ignoreCollisionDuringRotation",
+      "offset_x86": 195,
+      "offset_x86_64": 227,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "ignoreIncomingTranslation",
+      "offset_x86": 196,
+      "offset_x86_64": 228,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "includeDownwardMomentum",
+      "offset_x86": 197,
+      "offset_x86_64": 229,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "followWorldFromModel",
+      "offset_x86": 198,
+      "offset_x86_64": 230,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "isTouchingGround",
+      "offset_x86": 199,
+      "offset_x86_64": 231,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "characterProxy",
+      "offset_x86": 200,
+      "offset_x86_64": 232,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "phantom",
+      "offset_x86": 204,
+      "offset_x86_64": 240,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "phantomShape",
+      "offset_x86": 208,
+      "offset_x86_64": 248,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "horizontalDisplacement",
+      "offset_x86": 224,
+      "offset_x86_64": 256,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "verticalDisplacement",
+      "offset_x86": 240,
+      "offset_x86_64": 272,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "timestep",
+      "offset_x86": 244,
+      "offset_x86_64": 276,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "previousFrameFollowWorldFromModel",
+      "offset_x86": 248,
+      "offset_x86_64": 280,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

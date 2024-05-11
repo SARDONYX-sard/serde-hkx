@@ -1,0 +1,21 @@
+{
+  "name": "hkpMoppCodeCodeInfo",
+  "version": 0,
+  "signature": "0xd8fdbb08",
+  "size_x86": 16,
+  "size_x86_64": 16,
+  "vtable": false,
+  "members": [
+    {
+      "name": "offset",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

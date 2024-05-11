@@ -1,0 +1,46 @@
+{
+  "name": "hkpMalleableConstraintData",
+  "version": 0,
+  "signature": "0x6748b2cf",
+  "size_x86": 32,
+  "size_x86_64": 64,
+  "parent": "hkpConstraintData",
+  "vtable": true,
+  "members": [
+    {
+      "name": "constraintData",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "class_ref": "hkpConstraintData",
+      "ctype": "struct hkpConstraintData*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "atoms",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "class_ref": "hkpBridgeAtoms",
+      "ctype": "struct hkpBridgeAtoms",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "strength",
+      "offset_x86": 28,
+      "offset_x86_64": 56,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

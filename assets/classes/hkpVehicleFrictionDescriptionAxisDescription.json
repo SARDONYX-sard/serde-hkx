@@ -1,0 +1,120 @@
+{
+  "name": "hkpVehicleFrictionDescriptionAxisDescription",
+  "version": 0,
+  "signature": "0x59ce153f",
+  "size_x86": 100,
+  "size_x86_64": 100,
+  "vtable": false,
+  "members": [
+    {
+      "name": "frictionCircleYtab",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkReal[16]",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 16,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "xStep",
+      "offset_x86": 64,
+      "offset_x86_64": 64,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "xStart",
+      "offset_x86": 68,
+      "offset_x86_64": 68,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "wheelSurfaceInertia",
+      "offset_x86": 72,
+      "offset_x86_64": 72,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "wheelSurfaceInertiaInv",
+      "offset_x86": 76,
+      "offset_x86_64": 76,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "wheelChassisMassRatio",
+      "offset_x86": 80,
+      "offset_x86_64": 80,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "wheelRadius",
+      "offset_x86": 84,
+      "offset_x86_64": 84,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "wheelRadiusInv",
+      "offset_x86": 88,
+      "offset_x86_64": 88,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "wheelDownForceFactor",
+      "offset_x86": 92,
+      "offset_x86_64": 92,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "wheelDownForceSumFactor",
+      "offset_x86": 96,
+      "offset_x86_64": 96,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

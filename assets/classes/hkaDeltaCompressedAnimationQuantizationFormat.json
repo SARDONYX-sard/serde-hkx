@@ -1,0 +1,76 @@
+{
+  "name": "hkaDeltaCompressedAnimationQuantizationFormat",
+  "version": 0,
+  "signature": "0x724a7561",
+  "size_x86": 20,
+  "size_x86_64": 20,
+  "vtable": false,
+  "members": [
+    {
+      "name": "maxBitWidth",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "preserved",
+      "offset_x86": 1,
+      "offset_x86_64": 1,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numD",
+      "offset_x86": 4,
+      "offset_x86_64": 4,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "offsetIdx",
+      "offset_x86": 8,
+      "offset_x86_64": 8,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "scaleIdx",
+      "offset_x86": 12,
+      "offset_x86_64": 12,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "bitWidthIdx",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "name": "hkpTriangleShape",
+  "version": 0,
+  "signature": "0x95ad1a25",
+  "size_x86": 96,
+  "size_x86_64": 112,
+  "parent": "hkpConvexShape",
+  "vtable": true,
+  "members": [
+    {
+      "name": "weldingInfo",
+      "offset_x86": 20,
+      "offset_x86_64": 40,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 10000000
+    },
+    {
+      "name": "weldingType",
+      "offset_x86": 22,
+      "offset_x86_64": 42,
+      "enum_ref": "WeldingType",
+      "ctype": "enum WeldingType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 6
+    },
+    {
+      "name": "isExtruded",
+      "offset_x86": 23,
+      "offset_x86_64": 43,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "vertexA",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "vertexB",
+      "offset_x86": 48,
+      "offset_x86_64": 64,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "vertexC",
+      "offset_x86": 64,
+      "offset_x86_64": 80,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "extrusion",
+      "offset_x86": 80,
+      "offset_x86_64": 96,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

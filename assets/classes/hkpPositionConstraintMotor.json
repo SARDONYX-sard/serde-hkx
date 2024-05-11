@@ -1,0 +1,55 @@
+{
+  "name": "hkpPositionConstraintMotor",
+  "version": 0,
+  "signature": "0x748fb303",
+  "size_x86": 36,
+  "size_x86_64": 48,
+  "parent": "hkpLimitedForceConstraintMotor",
+  "vtable": true,
+  "members": [
+    {
+      "name": "tau",
+      "offset_x86": 20,
+      "offset_x86_64": 32,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "damping",
+      "offset_x86": 24,
+      "offset_x86_64": 36,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "proportionalRecoveryVelocity",
+      "offset_x86": 28,
+      "offset_x86_64": 40,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "constantRecoveryVelocity",
+      "offset_x86": 32,
+      "offset_x86_64": 44,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "name": "hkbPoweredRagdollControlsModifier",
+  "version": 5,
+  "signature": "0x7cb54065",
+  "size_x86": 96,
+  "size_x86_64": 144,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "members": [
+    {
+      "name": "controlData",
+      "offset_x86": 48,
+      "offset_x86_64": 80,
+      "class_ref": "hkbPoweredRagdollControlData",
+      "ctype": "struct hkbPoweredRagdollControlData",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "bones",
+      "offset_x86": 80,
+      "offset_x86_64": 112,
+      "class_ref": "hkbBoneIndexArray",
+      "ctype": "struct hkbBoneIndexArray*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "worldFromModelModeData",
+      "offset_x86": 84,
+      "offset_x86_64": 120,
+      "class_ref": "hkbWorldFromModelModeData",
+      "ctype": "struct hkbWorldFromModelModeData",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "boneWeights",
+      "offset_x86": 92,
+      "offset_x86_64": 128,
+      "class_ref": "hkbBoneWeightArray",
+      "ctype": "struct hkbBoneWeightArray*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

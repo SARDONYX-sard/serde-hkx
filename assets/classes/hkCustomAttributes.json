@@ -1,0 +1,22 @@
+{
+  "name": "hkCustomAttributes",
+  "version": 0,
+  "signature": "0xbff19005",
+  "size_x86": 8,
+  "size_x86_64": 16,
+  "vtable": false,
+  "members": [
+    {
+      "name": "attributes",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "class_ref": "hkCustomAttributesAttribute",
+      "ctype": "hkSimpleArray<struct hkCustomAttributesAttribute>",
+      "vtype": "TYPE_SIMPLEARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

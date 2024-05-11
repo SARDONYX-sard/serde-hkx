@@ -1,0 +1,22 @@
+{
+  "name": "hkpConvexTransformShape",
+  "version": 0,
+  "signature": "0xae3e5017",
+  "size_x86": 96,
+  "size_x86_64": 128,
+  "parent": "hkpConvexTransformShapeBase",
+  "vtable": true,
+  "members": [
+    {
+      "name": "transform",
+      "offset_x86": 32,
+      "offset_x86_64": 64,
+      "ctype": "hkTransform",
+      "vtype": "TYPE_TRANSFORM",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

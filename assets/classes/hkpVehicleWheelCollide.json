@@ -1,0 +1,73 @@
+{
+  "name": "hkpVehicleWheelCollide",
+  "version": 0,
+  "signature": "0x4a50fcb",
+  "size_x86": 12,
+  "size_x86_64": 24,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "WheelCollideType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "INVALID_WHEEL_COLLIDE",
+          "value": 0
+        },
+        {
+          "name": "RAY_CAST_WHEEL_COLLIDE",
+          "value": 1
+        },
+        {
+          "name": "LINEAR_CAST_WHEEL_COLLIDE",
+          "value": 2
+        },
+        {
+          "name": "USER_WHEEL_COLLIDE1",
+          "value": 3
+        },
+        {
+          "name": "USER_WHEEL_COLLIDE2",
+          "value": 4
+        },
+        {
+          "name": "USER_WHEEL_COLLIDE3",
+          "value": 5
+        },
+        {
+          "name": "USER_WHEEL_COLLIDE4",
+          "value": 6
+        },
+        {
+          "name": "USER_WHEEL_COLLIDE5",
+          "value": 7
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "alreadyUsed",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "type",
+      "offset_x86": 9,
+      "offset_x86_64": 17,
+      "ctype": "enum unknown",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

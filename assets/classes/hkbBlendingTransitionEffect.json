@@ -1,0 +1,188 @@
+{
+  "name": "hkbBlendingTransitionEffect",
+  "version": 1,
+  "signature": "0xfd8584fe",
+  "size_x86": 88,
+  "size_x86_64": 144,
+  "parent": "hkbTransitionEffect",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "FlagBits",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "FLAG_NONE",
+          "value": 0
+        },
+        {
+          "name": "FLAG_IGNORE_FROM_WORLD_FROM_MODEL",
+          "value": 1
+        },
+        {
+          "name": "FLAG_SYNC",
+          "value": 2
+        },
+        {
+          "name": "FLAG_IGNORE_TO_WORLD_FROM_MODEL",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "EndMode",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "END_MODE_NONE",
+          "value": 0
+        },
+        {
+          "name": "END_MODE_TRANSITION_UNTIL_END_OF_FROM_GENERATOR",
+          "value": 1
+        },
+        {
+          "name": "END_MODE_CAP_DURATION_AT_END_OF_FROM_GENERATOR",
+          "value": 2
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "duration",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "toGeneratorStartTimeFraction",
+      "offset_x86": 48,
+      "offset_x86_64": 84,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "flags",
+      "offset_x86": 52,
+      "offset_x86_64": 88,
+      "enum_ref": "FlagBits",
+      "ctype": "flags FlagBits",
+      "vtype": "TYPE_FLAGS",
+      "vsubtype": "TYPE_UINT16",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "endMode",
+      "offset_x86": 54,
+      "offset_x86_64": 90,
+      "enum_ref": "EndMode",
+      "ctype": "enum EndMode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "blendCurve",
+      "offset_x86": 55,
+      "offset_x86_64": 91,
+      "enum_ref": "BlendCurve",
+      "ctype": "enum BlendCurve",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "fromGenerator",
+      "offset_x86": 56,
+      "offset_x86_64": 96,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "toGenerator",
+      "offset_x86": 60,
+      "offset_x86_64": 104,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "characterPoseAtBeginningOfTransition",
+      "offset_x86": 64,
+      "offset_x86_64": 112,
+      "ctype": "hkArray<void>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "timeRemaining",
+      "offset_x86": 76,
+      "offset_x86_64": 128,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "timeInTransition",
+      "offset_x86": 80,
+      "offset_x86_64": 132,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "applySelfTransition",
+      "offset_x86": 84,
+      "offset_x86_64": 136,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "initializeCharacterPose",
+      "offset_x86": 85,
+      "offset_x86_64": 137,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

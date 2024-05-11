@@ -1,0 +1,55 @@
+{
+  "name": "hkbRotateCharacterModifier",
+  "version": 1,
+  "signature": "0x877ebc0b",
+  "size_x86": 96,
+  "size_x86_64": 128,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "members": [
+    {
+      "name": "degreesPerSecond",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "speedMultiplier",
+      "offset_x86": 48,
+      "offset_x86_64": 84,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "axisOfRotation",
+      "offset_x86": 64,
+      "offset_x86_64": 96,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "angle",
+      "offset_x86": 80,
+      "offset_x86_64": 112,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

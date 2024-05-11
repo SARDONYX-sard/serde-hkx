@@ -1,0 +1,23 @@
+{
+  "name": "hkpSingleShapeContainer",
+  "version": 0,
+  "signature": "0x73aa1d38",
+  "size_x86": 8,
+  "size_x86_64": 16,
+  "parent": "hkpShapeContainer",
+  "vtable": true,
+  "members": [
+    {
+      "name": "childShape",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "class_ref": "hkpShape",
+      "ctype": "struct hkpShape*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

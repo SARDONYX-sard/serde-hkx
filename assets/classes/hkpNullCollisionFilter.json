@@ -1,0 +1,10 @@
+{
+  "name": "hkpNullCollisionFilter",
+  "version": 0,
+  "signature": "0xb120a34f",
+  "size_x86": 48,
+  "size_x86_64": 72,
+  "parent": "hkpCollisionFilter",
+  "vtable": true,
+  "members": []
+}

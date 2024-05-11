@@ -1,0 +1,45 @@
+{
+  "name": "hkpStorageExtendedMeshShapeShapeSubpartStorage",
+  "version": 2,
+  "signature": "0x3f7d804c",
+  "size_x86": 44,
+  "size_x86_64": 64,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "materialIndices",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "ctype": "hkArray<hkUint8>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "materials",
+      "offset_x86": 20,
+      "offset_x86_64": 32,
+      "class_ref": "hkpStorageExtendedMeshShapeMaterial",
+      "ctype": "hkArray<struct hkpStorageExtendedMeshShapeMaterial>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "materialIndices16",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "ctype": "hkArray<hkUint16>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_UINT16",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

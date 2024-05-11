@@ -1,0 +1,162 @@
+{
+  "name": "hkpFirstPersonGun",
+  "version": 0,
+  "signature": "0x852ab70b",
+  "size_x86": 32,
+  "size_x86_64": 56,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "Type",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "WEAPON_TYPE_INVALID",
+          "value": 0
+        },
+        {
+          "name": "WEAPON_TYPE_BALLGUN",
+          "value": 1
+        },
+        {
+          "name": "WEAPON_TYPE_GRENADEGUN",
+          "value": 2
+        },
+        {
+          "name": "WEAPON_TYPE_GRAVITYGUN",
+          "value": 3
+        },
+        {
+          "name": "WEAPON_TYPE_MOUNTEDBALLGUN",
+          "value": 4
+        },
+        {
+          "name": "WEAPON_TYPE_TWEAKERGUN",
+          "value": 5
+        },
+        {
+          "name": "WEAPON_TYPE_MISSILEGUN",
+          "value": 6
+        },
+        {
+          "name": "WEAPON_TYPE_RAYCASTGUN",
+          "value": 7
+        },
+        {
+          "name": "WEAPON_TYPE_SPHEREGUN",
+          "value": 8
+        },
+        {
+          "name": "WEAPON_TYPE_STICKYGUN",
+          "value": 9
+        },
+        {
+          "name": "WEAPON_TYPE_NUM_TYPES",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "name": "KeyboardKey",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "KEY_F1",
+          "value": 112
+        },
+        {
+          "name": "KEY_F2",
+          "value": 113
+        },
+        {
+          "name": "KEY_F3",
+          "value": 114
+        },
+        {
+          "name": "KEY_F4",
+          "value": 115
+        },
+        {
+          "name": "KEY_F5",
+          "value": 116
+        },
+        {
+          "name": "KEY_F6",
+          "value": 117
+        },
+        {
+          "name": "KEY_F7",
+          "value": 118
+        },
+        {
+          "name": "KEY_F8",
+          "value": 119
+        },
+        {
+          "name": "KEY_F9",
+          "value": 120
+        },
+        {
+          "name": "KEY_F10",
+          "value": 121
+        },
+        {
+          "name": "KEY_F11",
+          "value": 122
+        },
+        {
+          "name": "KEY_F12",
+          "value": 123
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "type",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "ctype": "enum unknown",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "name",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "keyboardKey",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "enum_ref": "KeyboardKey",
+      "ctype": "enum KeyboardKey",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 71
+    },
+    {
+      "name": "listeners",
+      "offset_x86": 20,
+      "offset_x86_64": 40,
+      "ctype": "hkArray<void*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "hkbBlenderGeneratorChildInternalState",
+  "version": 0,
+  "signature": "0xff7327c0",
+  "size_x86": 2,
+  "size_x86_64": 2,
+  "vtable": false,
+  "members": [
+    {
+      "name": "isActive",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "syncNextFrame",
+      "offset_x86": 1,
+      "offset_x86_64": 1,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

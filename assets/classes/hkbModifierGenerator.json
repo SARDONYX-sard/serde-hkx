@@ -1,0 +1,35 @@
+{
+  "name": "hkbModifierGenerator",
+  "version": 0,
+  "signature": "0x1f81fae6",
+  "size_x86": 48,
+  "size_x86_64": 88,
+  "parent": "hkbGenerator",
+  "vtable": true,
+  "members": [
+    {
+      "name": "modifier",
+      "offset_x86": 40,
+      "offset_x86_64": 72,
+      "class_ref": "hkbModifier",
+      "ctype": "struct hkbModifier*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "generator",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "class_ref": "hkbGenerator",
+      "ctype": "struct hkbGenerator*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

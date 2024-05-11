@@ -1,0 +1,68 @@
+{
+  "name": "hkGizmoAttribute",
+  "version": 0,
+  "signature": "0x23aadfb6",
+  "size_x86": 12,
+  "size_x86_64": 24,
+  "vtable": false,
+  "enums": [
+    {
+      "name": "GizmoType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "POINT",
+          "value": 0
+        },
+        {
+          "name": "SPHERE",
+          "value": 1
+        },
+        {
+          "name": "PLANE",
+          "value": 2
+        },
+        {
+          "name": "ARROW",
+          "value": 3
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "visible",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "label",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "ctype": "char*",
+      "vtype": "TYPE_CSTRING",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "type",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "enum_ref": "GizmoType",
+      "ctype": "enum GizmoType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "hkDocumentationAttribute",
+  "version": 0,
+  "signature": "0x630edd9e",
+  "size_x86": 4,
+  "size_x86_64": 8,
+  "vtable": false,
+  "members": [
+    {
+      "name": "docsSectionTag",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "char*",
+      "vtype": "TYPE_CSTRING",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

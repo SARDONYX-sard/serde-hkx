@@ -1,0 +1,22 @@
+{
+  "name": "hkbBoneWeightArray",
+  "version": 0,
+  "signature": "0xcd902b77",
+  "size_x86": 40,
+  "size_x86_64": 64,
+  "parent": "hkbBindable",
+  "vtable": true,
+  "members": [
+    {
+      "name": "boneWeights",
+      "offset_x86": 28,
+      "offset_x86_64": 48,
+      "ctype": "hkArray<hkReal>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_REAL",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

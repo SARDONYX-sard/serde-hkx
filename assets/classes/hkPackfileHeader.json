@@ -1,0 +1,142 @@
+{
+  "name": "hkPackfileHeader",
+  "version": 1,
+  "signature": "0x79f9ffda",
+  "size_x86": 64,
+  "size_x86_64": 64,
+  "vtable": false,
+  "members": [
+    {
+      "name": "magic",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkInt32[2]",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 2,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "userTag",
+      "offset_x86": 8,
+      "offset_x86_64": 8,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "fileVersion",
+      "offset_x86": 12,
+      "offset_x86_64": 12,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "layoutRules",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkUint8[4]",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 4,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numSections",
+      "offset_x86": 20,
+      "offset_x86_64": 20,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "contentsSectionIndex",
+      "offset_x86": 24,
+      "offset_x86_64": 24,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "contentsSectionOffset",
+      "offset_x86": 28,
+      "offset_x86_64": 28,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "contentsClassNameSectionIndex",
+      "offset_x86": 32,
+      "offset_x86_64": 32,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "contentsClassNameSectionOffset",
+      "offset_x86": 36,
+      "offset_x86_64": 36,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "contentsVersion",
+      "offset_x86": 40,
+      "offset_x86_64": 40,
+      "ctype": "hkChar[16]",
+      "vtype": "TYPE_CHAR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 16,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "flags",
+      "offset_x86": 56,
+      "offset_x86_64": 56,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "pad",
+      "offset_x86": 60,
+      "offset_x86_64": 60,
+      "ctype": "hkInt32[1]",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 1,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

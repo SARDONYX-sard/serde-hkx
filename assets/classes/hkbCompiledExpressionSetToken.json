@@ -1,0 +1,267 @@
+{
+  "name": "hkbCompiledExpressionSetToken",
+  "version": 0,
+  "signature": "0xc6aaccc8",
+  "size_x86": 8,
+  "size_x86_64": 8,
+  "vtable": false,
+  "enums": [
+    {
+      "name": "TokenType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "TOKEN_TYPE_NONE",
+          "value": 0
+        },
+        {
+          "name": "TOKEN_TYPE_OPERATOR",
+          "value": 1
+        },
+        {
+          "name": "TOKEN_TYPE_NUMBER",
+          "value": 2
+        },
+        {
+          "name": "TOKEN_TYPE_VARIABLE_INDEX",
+          "value": 3
+        },
+        {
+          "name": "TOKEN_TYPE_OPENING_PAREN",
+          "value": 4
+        },
+        {
+          "name": "TOKEN_TYPE_CLOSING_PAREN",
+          "value": 5
+        },
+        {
+          "name": "TOKEN_TYPE_COMMA",
+          "value": 6
+        },
+        {
+          "name": "TOKEN_TYPE_CHARACTER_PROPERTY_INDEX",
+          "value": 7
+        }
+      ]
+    },
+    {
+      "name": "Operator",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "OP_NOP",
+          "value": 0
+        },
+        {
+          "name": "OP_RAND01",
+          "value": 1
+        },
+        {
+          "name": "OP_LOGICAL_NOT",
+          "value": 2
+        },
+        {
+          "name": "OP_UNARY_MINUS",
+          "value": 3
+        },
+        {
+          "name": "OP_UNARY_PLUS",
+          "value": 4
+        },
+        {
+          "name": "OP_SIN",
+          "value": 5
+        },
+        {
+          "name": "OP_COS",
+          "value": 6
+        },
+        {
+          "name": "OP_ASIN",
+          "value": 7
+        },
+        {
+          "name": "OP_ACOS",
+          "value": 8
+        },
+        {
+          "name": "OP_SQRT",
+          "value": 9
+        },
+        {
+          "name": "OP_FABS",
+          "value": 10
+        },
+        {
+          "name": "OP_CEIL",
+          "value": 11
+        },
+        {
+          "name": "OP_FLOOR",
+          "value": 12
+        },
+        {
+          "name": "OP_SQRTINV",
+          "value": 13
+        },
+        {
+          "name": "OP_MUL",
+          "value": 14
+        },
+        {
+          "name": "OP_DIV",
+          "value": 15
+        },
+        {
+          "name": "OP_ADD",
+          "value": 16
+        },
+        {
+          "name": "OP_SUB",
+          "value": 17
+        },
+        {
+          "name": "OP_LOGICAL_OR",
+          "value": 18
+        },
+        {
+          "name": "OP_LOGICAL_AND",
+          "value": 19
+        },
+        {
+          "name": "OP_EQ",
+          "value": 20
+        },
+        {
+          "name": "OP_NEQ",
+          "value": 21
+        },
+        {
+          "name": "OP_LT",
+          "value": 22
+        },
+        {
+          "name": "OP_GT",
+          "value": 23
+        },
+        {
+          "name": "OP_LEQ",
+          "value": 24
+        },
+        {
+          "name": "OP_GEQ",
+          "value": 25
+        },
+        {
+          "name": "OP_POW",
+          "value": 26
+        },
+        {
+          "name": "OP_MAX2",
+          "value": 27
+        },
+        {
+          "name": "OP_MIN2",
+          "value": 28
+        },
+        {
+          "name": "OP_RANDRANGE",
+          "value": 29
+        },
+        {
+          "name": "OP_ATAN2APPROX",
+          "value": 30
+        },
+        {
+          "name": "OP_CLAMP",
+          "value": 31
+        },
+        {
+          "name": "OP_MOD",
+          "value": 32
+        },
+        {
+          "name": "OP_DEG2RAD",
+          "value": 33
+        },
+        {
+          "name": "OP_RAD2DEG",
+          "value": 34
+        },
+        {
+          "name": "OP_COSD",
+          "value": 35
+        },
+        {
+          "name": "OP_SIND",
+          "value": 36
+        },
+        {
+          "name": "OP_ACOSD",
+          "value": 37
+        },
+        {
+          "name": "OP_ASIND",
+          "value": 38
+        },
+        {
+          "name": "OP_ATAN2APPROXD",
+          "value": 39
+        },
+        {
+          "name": "OP_SIGN",
+          "value": 40
+        },
+        {
+          "name": "OP_LERP",
+          "value": 41
+        },
+        {
+          "name": "OP_CLERP",
+          "value": 42
+        },
+        {
+          "name": "OP_COND",
+          "value": 43
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "data",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "type",
+      "offset_x86": 4,
+      "offset_x86_64": 4,
+      "enum_ref": "TokenType",
+      "ctype": "enum TokenType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "operator",
+      "offset_x86": 5,
+      "offset_x86_64": 5,
+      "enum_ref": "Operator",
+      "ctype": "enum Operator",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

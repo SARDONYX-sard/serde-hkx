@@ -1,0 +1,32 @@
+{
+  "name": "hkbFootIkModifierInternalLegData",
+  "version": 1,
+  "signature": "0xe5ca3677",
+  "size_x86": 32,
+  "size_x86_64": 32,
+  "vtable": false,
+  "members": [
+    {
+      "name": "groundPosition",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "footIkSolver",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "name": "hkpBallAndSocketConstraintDataAtoms",
+  "version": 1,
+  "signature": "0xc73dcaf9",
+  "size_x86": 80,
+  "size_x86_64": 80,
+  "vtable": false,
+  "members": [
+    {
+      "name": "pivots",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "class_ref": "hkpSetLocalTranslationsConstraintAtom",
+      "ctype": "struct hkpSetLocalTranslationsConstraintAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "setupStabilization",
+      "offset_x86": 48,
+      "offset_x86_64": 48,
+      "class_ref": "hkpSetupStabilizationAtom",
+      "ctype": "struct hkpSetupStabilizationAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "ballSocket",
+      "offset_x86": 64,
+      "offset_x86_64": 64,
+      "class_ref": "hkpBallSocketConstraintAtom",
+      "ctype": "struct hkpBallSocketConstraintAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

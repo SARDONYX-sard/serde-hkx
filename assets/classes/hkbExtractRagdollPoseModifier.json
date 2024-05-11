@@ -1,0 +1,55 @@
+{
+  "name": "hkbExtractRagdollPoseModifier",
+  "version": 1,
+  "signature": "0x804dcbab",
+  "size_x86": 52,
+  "size_x86_64": 88,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "members": [
+    {
+      "name": "poseMatchingBone0",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "poseMatchingBone1",
+      "offset_x86": 46,
+      "offset_x86_64": 82,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "poseMatchingBone2",
+      "offset_x86": 48,
+      "offset_x86_64": 84,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "enableComputeWorldFromModel",
+      "offset_x86": 50,
+      "offset_x86_64": 86,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

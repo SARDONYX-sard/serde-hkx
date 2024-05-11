@@ -1,0 +1,47 @@
+{
+  "name": "hkpBvTreeShape",
+  "version": 0,
+  "signature": "0xa823d623",
+  "size_x86": 20,
+  "size_x86_64": 40,
+  "parent": "hkpShape",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "BvTreeType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "BVTREE_MOPP",
+          "value": 0
+        },
+        {
+          "name": "BVTREE_TRISAMPLED_HEIGHTFIELD",
+          "value": 1
+        },
+        {
+          "name": "BVTREE_USER",
+          "value": 2
+        },
+        {
+          "name": "BVTREE_MAX",
+          "value": 3
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "bvTreeType",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "enum_ref": "BvTreeType",
+      "ctype": "enum BvTreeType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 2
+    }
+  ]
+}

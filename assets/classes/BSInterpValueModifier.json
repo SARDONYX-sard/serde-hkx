@@ -1,0 +1,66 @@
+{
+  "name": "BSInterpValueModifier",
+  "version": 0,
+  "signature": "0x29adc802",
+  "size_x86": 64,
+  "size_x86_64": 104,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "members": [
+    {
+      "name": "source",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "target",
+      "offset_x86": 48,
+      "offset_x86_64": 84,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "result",
+      "offset_x86": 52,
+      "offset_x86_64": 88,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "gain",
+      "offset_x86": 56,
+      "offset_x86_64": 92,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "timeStep",
+      "offset_x86": 60,
+      "offset_x86_64": 96,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

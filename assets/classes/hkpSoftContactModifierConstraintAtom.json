@@ -1,0 +1,33 @@
+{
+  "name": "hkpSoftContactModifierConstraintAtom",
+  "version": 0,
+  "signature": "0xecb34e27",
+  "size_x86": 48,
+  "size_x86_64": 64,
+  "parent": "hkpModifierConstraintAtom",
+  "vtable": false,
+  "members": [
+    {
+      "name": "tau",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "maxAcceleration",
+      "offset_x86": 36,
+      "offset_x86_64": 52,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

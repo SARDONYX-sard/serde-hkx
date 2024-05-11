@@ -1,0 +1,368 @@
+{
+  "name": "hkbClipGenerator",
+  "version": 2,
+  "signature": "0x333b85b9",
+  "size_x86": 208,
+  "size_x86_64": 272,
+  "parent": "hkbGenerator",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "PlaybackMode",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "MODE_SINGLE_PLAY",
+          "value": 0
+        },
+        {
+          "name": "MODE_LOOPING",
+          "value": 1
+        },
+        {
+          "name": "MODE_USER_CONTROLLED",
+          "value": 2
+        },
+        {
+          "name": "MODE_PING_PONG",
+          "value": 3
+        },
+        {
+          "name": "MODE_COUNT",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "ClipFlags",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "FLAG_CONTINUE_MOTION_AT_END",
+          "value": 1
+        },
+        {
+          "name": "FLAG_SYNC_HALF_CYCLE_IN_PING_PONG_MODE",
+          "value": 2
+        },
+        {
+          "name": "FLAG_MIRROR",
+          "value": 4
+        },
+        {
+          "name": "FLAG_FORCE_DENSE_POSE",
+          "value": 8
+        },
+        {
+          "name": "FLAG_DONT_CONVERT_ANNOTATIONS_TO_TRIGGERS",
+          "value": 16
+        },
+        {
+          "name": "FLAG_IGNORE_MOTION",
+          "value": 32
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "animationName",
+      "offset_x86": 40,
+      "offset_x86_64": 72,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "triggers",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "class_ref": "hkbClipTriggerArray",
+      "ctype": "struct hkbClipTriggerArray*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "cropStartAmountLocalTime",
+      "offset_x86": 48,
+      "offset_x86_64": 88,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "cropEndAmountLocalTime",
+      "offset_x86": 52,
+      "offset_x86_64": 92,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "startTime",
+      "offset_x86": 56,
+      "offset_x86_64": 96,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "playbackSpeed",
+      "offset_x86": 60,
+      "offset_x86_64": 100,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "enforcedDuration",
+      "offset_x86": 64,
+      "offset_x86_64": 104,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "userControlledTimeFraction",
+      "offset_x86": 68,
+      "offset_x86_64": 108,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "animationBindingIndex",
+      "offset_x86": 72,
+      "offset_x86_64": 112,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "mode",
+      "offset_x86": 74,
+      "offset_x86_64": 114,
+      "enum_ref": "PlaybackMode",
+      "ctype": "enum PlaybackMode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "flags",
+      "offset_x86": 75,
+      "offset_x86_64": 115,
+      "ctype": "hkInt8",
+      "vtype": "TYPE_INT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "animDatas",
+      "offset_x86": 76,
+      "offset_x86_64": 120,
+      "ctype": "hkArray<void>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "animationControl",
+      "offset_x86": 88,
+      "offset_x86_64": 136,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "originalTriggers",
+      "offset_x86": 92,
+      "offset_x86_64": 144,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "mapperData",
+      "offset_x86": 96,
+      "offset_x86_64": 152,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "binding",
+      "offset_x86": 100,
+      "offset_x86_64": 160,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "mirroredAnimation",
+      "offset_x86": 104,
+      "offset_x86_64": 168,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "extractedMotion",
+      "offset_x86": 112,
+      "offset_x86_64": 176,
+      "ctype": "hkQsTransform",
+      "vtype": "TYPE_QSTRANSFORM",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "echos",
+      "offset_x86": 160,
+      "offset_x86_64": 224,
+      "ctype": "hkArray<void>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "localTime",
+      "offset_x86": 172,
+      "offset_x86_64": 240,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "time",
+      "offset_x86": 176,
+      "offset_x86_64": 244,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "previousUserControlledTimeFraction",
+      "offset_x86": 180,
+      "offset_x86_64": 248,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "bufferSize",
+      "offset_x86": 184,
+      "offset_x86_64": 252,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "echoBufferSize",
+      "offset_x86": 188,
+      "offset_x86_64": 256,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "atEnd",
+      "offset_x86": 192,
+      "offset_x86_64": 260,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "ignoreStartTime",
+      "offset_x86": 193,
+      "offset_x86_64": 261,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "pingPongBackward",
+      "offset_x86": 194,
+      "offset_x86_64": 262,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

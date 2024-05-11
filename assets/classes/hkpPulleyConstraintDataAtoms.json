@@ -1,0 +1,34 @@
+{
+  "name": "hkpPulleyConstraintDataAtoms",
+  "version": 0,
+  "signature": "0xb149e5a",
+  "size_x86": 112,
+  "size_x86_64": 112,
+  "vtable": false,
+  "members": [
+    {
+      "name": "translations",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "class_ref": "hkpSetLocalTranslationsConstraintAtom",
+      "ctype": "struct hkpSetLocalTranslationsConstraintAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "pulley",
+      "offset_x86": 48,
+      "offset_x86_64": 48,
+      "class_ref": "hkpPulleyConstraintAtom",
+      "ctype": "struct hkpPulleyConstraintAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

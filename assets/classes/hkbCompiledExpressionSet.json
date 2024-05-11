@@ -1,0 +1,45 @@
+{
+  "name": "hkbCompiledExpressionSet",
+  "version": 1,
+  "signature": "0x3a7d76cc",
+  "size_x86": 36,
+  "size_x86_64": 56,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "rpn",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "class_ref": "hkbCompiledExpressionSetToken",
+      "ctype": "hkArray<struct hkbCompiledExpressionSetToken>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "expressionToRpnIndex",
+      "offset_x86": 20,
+      "offset_x86_64": 32,
+      "ctype": "hkArray<hkInt32>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_INT32",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numExpressions",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "ctype": "hkInt8",
+      "vtype": "TYPE_INT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

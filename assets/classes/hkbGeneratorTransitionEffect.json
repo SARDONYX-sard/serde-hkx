@@ -1,0 +1,230 @@
+{
+  "name": "hkbGeneratorTransitionEffect",
+  "version": 1,
+  "signature": "0x5f771b12",
+  "size_x86": 92,
+  "size_x86_64": 144,
+  "parent": "hkbTransitionEffect",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "ToGeneratorState",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "STATE_INACTIVE",
+          "value": 0
+        },
+        {
+          "name": "STATE_READY_FOR_SET_LOCAL_TIME",
+          "value": 1
+        },
+        {
+          "name": "STATE_READY_FOR_APPLY_SELF_TRANSITION_MODE",
+          "value": 2
+        },
+        {
+          "name": "STATE_ACTIVE",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Stage",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "STAGE_BLENDING_IN",
+          "value": 0
+        },
+        {
+          "name": "STAGE_PLAYING_TRANSITION_GENERATOR",
+          "value": 1
+        },
+        {
+          "name": "STAGE_BLENDING_OUT",
+          "value": 2
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "transitionGenerator",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "class_ref": "hkbGenerator",
+      "ctype": "struct hkbGenerator*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "blendInDuration",
+      "offset_x86": 48,
+      "offset_x86_64": 88,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "blendOutDuration",
+      "offset_x86": 52,
+      "offset_x86_64": 92,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "syncToGeneratorStartTime",
+      "offset_x86": 56,
+      "offset_x86_64": 96,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "fromGenerator",
+      "offset_x86": 60,
+      "offset_x86_64": 104,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "toGenerator",
+      "offset_x86": 64,
+      "offset_x86_64": 112,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "timeInTransition",
+      "offset_x86": 68,
+      "offset_x86_64": 120,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "duration",
+      "offset_x86": 72,
+      "offset_x86_64": 124,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "effectiveBlendInDuration",
+      "offset_x86": 76,
+      "offset_x86_64": 128,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "effectiveBlendOutDuration",
+      "offset_x86": 80,
+      "offset_x86_64": 132,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "toGeneratorState",
+      "offset_x86": 84,
+      "offset_x86_64": 136,
+      "ctype": "enum unknown",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "echoTransitionGenerator",
+      "offset_x86": 85,
+      "offset_x86_64": 137,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "echoToGenerator",
+      "offset_x86": 86,
+      "offset_x86_64": 138,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "justActivated",
+      "offset_x86": 87,
+      "offset_x86_64": 139,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "updateActiveNodes",
+      "offset_x86": 88,
+      "offset_x86_64": 140,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "stage",
+      "offset_x86": 89,
+      "offset_x86_64": 141,
+      "ctype": "enum unknown",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

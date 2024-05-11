@@ -1,0 +1,35 @@
+{
+  "name": "BSModifyOnceModifier",
+  "version": 1,
+  "signature": "0x1e20a97a",
+  "size_x86": 80,
+  "size_x86_64": 112,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "members": [
+    {
+      "name": "pOnActivateModifier",
+      "offset_x86": 48,
+      "offset_x86_64": 80,
+      "class_ref": "hkbModifier",
+      "ctype": "struct hkbModifier*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|ALIGN_16",
+      "default": 0
+    },
+    {
+      "name": "pOnDeactivateModifier",
+      "offset_x86": 64,
+      "offset_x86_64": 96,
+      "class_ref": "hkbModifier",
+      "ctype": "struct hkbModifier*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|ALIGN_16",
+      "default": 0
+    }
+  ]
+}

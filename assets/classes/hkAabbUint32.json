@@ -1,0 +1,76 @@
+{
+  "name": "hkAabbUint32",
+  "version": 0,
+  "signature": "0x11e7c11",
+  "size_x86": 32,
+  "size_x86_64": 32,
+  "vtable": false,
+  "members": [
+    {
+      "name": "min",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkUint32[3]",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 3,
+      "flags": "FLAGS_NONE|ALIGN_16",
+      "default": 0
+    },
+    {
+      "name": "expansionMin",
+      "offset_x86": 12,
+      "offset_x86_64": 12,
+      "ctype": "hkUint8[3]",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 3,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "expansionShift",
+      "offset_x86": 15,
+      "offset_x86_64": 15,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "max",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkUint32[3]",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 3,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "expansionMax",
+      "offset_x86": 28,
+      "offset_x86_64": 28,
+      "ctype": "hkUint8[3]",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 3,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "shapeKeyByte",
+      "offset_x86": 31,
+      "offset_x86_64": 31,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

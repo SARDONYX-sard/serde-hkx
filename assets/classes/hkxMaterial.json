@@ -1,0 +1,252 @@
+{
+  "name": "hkxMaterial",
+  "version": 1,
+  "signature": "0x2954537a",
+  "size_x86": 144,
+  "size_x86_64": 176,
+  "parent": "hkxAttributeHolder",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "TextureType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "TEX_UNKNOWN",
+          "value": 0
+        },
+        {
+          "name": "TEX_DIFFUSE",
+          "value": 1
+        },
+        {
+          "name": "TEX_REFLECTION",
+          "value": 2
+        },
+        {
+          "name": "TEX_BUMP",
+          "value": 3
+        },
+        {
+          "name": "TEX_NORMAL",
+          "value": 4
+        },
+        {
+          "name": "TEX_DISPLACEMENT",
+          "value": 5
+        },
+        {
+          "name": "TEX_SPECULAR",
+          "value": 6
+        },
+        {
+          "name": "TEX_SPECULARANDGLOSS",
+          "value": 7
+        },
+        {
+          "name": "TEX_OPACITY",
+          "value": 8
+        },
+        {
+          "name": "TEX_EMISSIVE",
+          "value": 9
+        },
+        {
+          "name": "TEX_REFRACTION",
+          "value": 10
+        },
+        {
+          "name": "TEX_GLOSS",
+          "value": 11
+        },
+        {
+          "name": "TEX_NOTEXPORTED",
+          "value": 12
+        }
+      ]
+    },
+    {
+      "name": "PropertyKey",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "PROPERTY_MTL_TYPE_BLEND",
+          "value": 1
+        },
+        {
+          "name": "PROPERTY_MTL_UV_ID_STAGE0",
+          "value": 256
+        },
+        {
+          "name": "PROPERTY_MTL_UV_ID_STAGE1",
+          "value": 257
+        },
+        {
+          "name": "PROPERTY_MTL_UV_ID_STAGE2",
+          "value": 258
+        },
+        {
+          "name": "PROPERTY_MTL_UV_ID_STAGE3",
+          "value": 259
+        },
+        {
+          "name": "PROPERTY_MTL_UV_ID_STAGE4",
+          "value": 260
+        },
+        {
+          "name": "PROPERTY_MTL_UV_ID_STAGE5",
+          "value": 261
+        },
+        {
+          "name": "PROPERTY_MTL_UV_ID_STAGE6",
+          "value": 262
+        },
+        {
+          "name": "PROPERTY_MTL_UV_ID_STAGE7",
+          "value": 263
+        },
+        {
+          "name": "PROPERTY_MTL_UV_ID_STAGE8",
+          "value": 264
+        },
+        {
+          "name": "PROPERTY_MTL_UV_ID_STAGE9",
+          "value": 265
+        },
+        {
+          "name": "PROPERTY_MTL_UV_ID_STAGE10",
+          "value": 266
+        },
+        {
+          "name": "PROPERTY_MTL_UV_ID_STAGE11",
+          "value": 267
+        },
+        {
+          "name": "PROPERTY_MTL_UV_ID_STAGE12",
+          "value": 268
+        },
+        {
+          "name": "PROPERTY_MTL_UV_ID_STAGE13",
+          "value": 269
+        },
+        {
+          "name": "PROPERTY_MTL_UV_ID_STAGE14",
+          "value": 270
+        },
+        {
+          "name": "PROPERTY_MTL_UV_ID_STAGE15",
+          "value": 271
+        },
+        {
+          "name": "PROPERTY_MTL_UV_ID_STAGE_MAX",
+          "value": 272
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "name",
+      "offset_x86": 20,
+      "offset_x86_64": 32,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "stages",
+      "offset_x86": 24,
+      "offset_x86_64": 40,
+      "class_ref": "hkxMaterialTextureStage",
+      "ctype": "hkArray<struct hkxMaterialTextureStage>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "diffuseColor",
+      "offset_x86": 48,
+      "offset_x86_64": 64,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "ambientColor",
+      "offset_x86": 64,
+      "offset_x86_64": 80,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "specularColor",
+      "offset_x86": 80,
+      "offset_x86_64": 96,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "emissiveColor",
+      "offset_x86": 96,
+      "offset_x86_64": 112,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "subMaterials",
+      "offset_x86": 112,
+      "offset_x86_64": 128,
+      "class_ref": "hkxMaterial",
+      "ctype": "hkArray<hkxMaterial*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "extraData",
+      "offset_x86": 124,
+      "offset_x86_64": 144,
+      "class_ref": "hkReferencedObject",
+      "ctype": "struct hkReferencedObject*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "properties",
+      "offset_x86": 128,
+      "offset_x86_64": 152,
+      "class_ref": "hkxMaterialProperty",
+      "ctype": "hkArray<struct hkxMaterialProperty>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

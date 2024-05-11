@@ -1,0 +1,35 @@
+{
+  "name": "BSBoneSwitchGenerator",
+  "version": 1,
+  "signature": "0xf33d3eea",
+  "size_x86": 64,
+  "size_x86_64": 112,
+  "parent": "hkbGenerator",
+  "vtable": true,
+  "members": [
+    {
+      "name": "pDefaultGenerator",
+      "offset_x86": 48,
+      "offset_x86_64": 80,
+      "class_ref": "hkbGenerator",
+      "ctype": "struct hkbGenerator*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|ALIGN_16",
+      "default": 0
+    },
+    {
+      "name": "ChildrenA",
+      "offset_x86": 52,
+      "offset_x86_64": 88,
+      "class_ref": "BSBoneSwitchGeneratorBoneData",
+      "ctype": "hkArray<BSBoneSwitchGeneratorBoneData*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

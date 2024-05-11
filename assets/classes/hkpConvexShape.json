@@ -1,0 +1,42 @@
+{
+  "name": "hkpConvexShape",
+  "version": 0,
+  "signature": "0xf8f74f85",
+  "size_x86": 20,
+  "size_x86_64": 40,
+  "parent": "hkpSphereRepShape",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "WeldResult",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "WELD_RESULT_REJECT_CONTACT_POINT",
+          "value": 0
+        },
+        {
+          "name": "WELD_RESULT_ACCEPT_CONTACT_POINT_MODIFIED",
+          "value": 1
+        },
+        {
+          "name": "WELD_RESULT_ACCEPT_CONTACT_POINT_UNMODIFIED",
+          "value": 2
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "radius",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

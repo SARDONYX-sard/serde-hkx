@@ -1,0 +1,33 @@
+{
+  "name": "hkaInterleavedUncompressedAnimation",
+  "version": 0,
+  "signature": "0x930af031",
+  "size_x86": 64,
+  "size_x86_64": 88,
+  "parent": "hkaAnimation",
+  "vtable": true,
+  "members": [
+    {
+      "name": "transforms",
+      "offset_x86": 40,
+      "offset_x86_64": 56,
+      "ctype": "hkArray<hkQsTransform>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_QSTRANSFORM",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "floats",
+      "offset_x86": 52,
+      "offset_x86_64": 72,
+      "ctype": "hkArray<hkReal>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_REAL",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

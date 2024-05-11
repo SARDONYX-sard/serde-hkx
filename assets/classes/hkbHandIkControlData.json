@@ -1,0 +1,160 @@
+{
+  "name": "hkbHandIkControlData",
+  "version": 2,
+  "signature": "0xd72b8d17",
+  "size_x86": 80,
+  "size_x86_64": 96,
+  "vtable": false,
+  "enums": [
+    {
+      "name": "HandleChangeMode",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "HANDLE_CHANGE_MODE_ABRUPT",
+          "value": 0
+        },
+        {
+          "name": "HANDLE_CHANGE_MODE_CONSTANT_VELOCITY",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "targetPosition",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "targetRotation",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkQuaternion",
+      "vtype": "TYPE_QUATERNION",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "targetNormal",
+      "offset_x86": 32,
+      "offset_x86_64": 32,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "targetHandle",
+      "offset_x86": 48,
+      "offset_x86_64": 48,
+      "class_ref": "hkbHandle",
+      "ctype": "struct hkbHandle*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "transformOnFraction",
+      "offset_x86": 52,
+      "offset_x86_64": 56,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "normalOnFraction",
+      "offset_x86": 56,
+      "offset_x86_64": 60,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "fadeInDuration",
+      "offset_x86": 60,
+      "offset_x86_64": 64,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "fadeOutDuration",
+      "offset_x86": 64,
+      "offset_x86_64": 68,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "extrapolationTimeStep",
+      "offset_x86": 68,
+      "offset_x86_64": 72,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "handleChangeSpeed",
+      "offset_x86": 72,
+      "offset_x86_64": 76,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "handleChangeMode",
+      "offset_x86": 76,
+      "offset_x86_64": 80,
+      "enum_ref": "HandleChangeMode",
+      "ctype": "enum HandleChangeMode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "fixUp",
+      "offset_x86": 77,
+      "offset_x86_64": 81,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

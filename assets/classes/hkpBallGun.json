@@ -1,0 +1,88 @@
+{
+  "name": "hkpBallGun",
+  "version": 0,
+  "signature": "0x57b06d35",
+  "size_x86": 96,
+  "size_x86_64": 112,
+  "parent": "hkpFirstPersonGun",
+  "vtable": true,
+  "members": [
+    {
+      "name": "bulletRadius",
+      "offset_x86": 32,
+      "offset_x86_64": 56,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "bulletVelocity",
+      "offset_x86": 36,
+      "offset_x86_64": 60,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 42200000
+    },
+    {
+      "name": "bulletMass",
+      "offset_x86": 40,
+      "offset_x86_64": 64,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 42480000
+    },
+    {
+      "name": "damageMultiplier",
+      "offset_x86": 44,
+      "offset_x86_64": 68,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 42480000
+    },
+    {
+      "name": "maxBulletsInWorld",
+      "offset_x86": 48,
+      "offset_x86_64": 72,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 64
+    },
+    {
+      "name": "bulletOffsetFromCenter",
+      "offset_x86": 64,
+      "offset_x86_64": 80,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "addedBodies",
+      "offset_x86": 80,
+      "offset_x86_64": 96,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

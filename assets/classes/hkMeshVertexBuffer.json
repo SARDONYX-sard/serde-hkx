@@ -1,0 +1,56 @@
+{
+  "name": "hkMeshVertexBuffer",
+  "version": 0,
+  "signature": "0x534b08c8",
+  "size_x86": 8,
+  "size_x86_64": 16,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "Flags",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "ACCESS_READ",
+          "value": 1
+        },
+        {
+          "name": "ACCESS_WRITE",
+          "value": 2
+        },
+        {
+          "name": "ACCESS_READ_WRITE",
+          "value": 3
+        },
+        {
+          "name": "ACCESS_WRITE_DISCARD",
+          "value": 4
+        },
+        {
+          "name": "ACCESS_ELEMENT_ARRAY",
+          "value": 8
+        }
+      ]
+    },
+    {
+      "name": "LockResult",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "RESULT_FAILURE",
+          "value": 0
+        },
+        {
+          "name": "RESULT_SUCCESS",
+          "value": 1
+        },
+        {
+          "name": "RESULT_IN_USE",
+          "value": 2
+        }
+      ]
+    }
+  ],
+  "members": []
+}

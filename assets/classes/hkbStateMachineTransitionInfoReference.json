@@ -1,0 +1,43 @@
+{
+  "name": "hkbStateMachineTransitionInfoReference",
+  "version": 1,
+  "signature": "0x9810c2d0",
+  "size_x86": 6,
+  "size_x86_64": 6,
+  "vtable": false,
+  "members": [
+    {
+      "name": "fromStateIndex",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "transitionIndex",
+      "offset_x86": 2,
+      "offset_x86_64": 2,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "stateMachineId",
+      "offset_x86": 4,
+      "offset_x86_64": 4,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

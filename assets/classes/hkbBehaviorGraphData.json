@@ -1,0 +1,106 @@
+{
+  "name": "hkbBehaviorGraphData",
+  "version": 2,
+  "signature": "0x95aca5d",
+  "size_x86": 88,
+  "size_x86_64": 128,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "attributeDefaults",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "ctype": "hkArray<hkReal>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_REAL",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "variableInfos",
+      "offset_x86": 20,
+      "offset_x86_64": 32,
+      "class_ref": "hkbVariableInfo",
+      "ctype": "hkArray<struct hkbVariableInfo>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "characterPropertyInfos",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "class_ref": "hkbVariableInfo",
+      "ctype": "hkArray<struct hkbVariableInfo>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "eventInfos",
+      "offset_x86": 44,
+      "offset_x86_64": 64,
+      "class_ref": "hkbEventInfo",
+      "ctype": "hkArray<struct hkbEventInfo>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "wordMinVariableValues",
+      "offset_x86": 56,
+      "offset_x86_64": 80,
+      "class_ref": "hkbVariableValue",
+      "ctype": "hkArray<struct hkbVariableValue>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "wordMaxVariableValues",
+      "offset_x86": 68,
+      "offset_x86_64": 96,
+      "class_ref": "hkbVariableValue",
+      "ctype": "hkArray<struct hkbVariableValue>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "variableInitialValues",
+      "offset_x86": 80,
+      "offset_x86_64": 112,
+      "class_ref": "hkbVariableValueSet",
+      "ctype": "struct hkbVariableValueSet*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "stringData",
+      "offset_x86": 84,
+      "offset_x86_64": 120,
+      "class_ref": "hkbBehaviorGraphStringData",
+      "ctype": "struct hkbBehaviorGraphStringData*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

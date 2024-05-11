@@ -1,0 +1,123 @@
+{
+  "name": "hkbGeneratorTransitionEffectInternalState",
+  "version": 0,
+  "signature": "0xd6692b5d",
+  "size_x86": 32,
+  "size_x86_64": 40,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "timeInTransition",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "duration",
+      "offset_x86": 12,
+      "offset_x86_64": 20,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "effectiveBlendInDuration",
+      "offset_x86": 16,
+      "offset_x86_64": 24,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "effectiveBlendOutDuration",
+      "offset_x86": 20,
+      "offset_x86_64": 28,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "toGeneratorState",
+      "offset_x86": 24,
+      "offset_x86_64": 32,
+      "enum_ref": "ToGeneratorState",
+      "ctype": "enum ToGeneratorState",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "echoTransitionGenerator",
+      "offset_x86": 25,
+      "offset_x86_64": 33,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "echoToGenerator",
+      "offset_x86": 26,
+      "offset_x86_64": 34,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "justActivated",
+      "offset_x86": 27,
+      "offset_x86_64": 35,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "updateActiveNodes",
+      "offset_x86": 28,
+      "offset_x86_64": 36,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "stage",
+      "offset_x86": 29,
+      "offset_x86_64": 37,
+      "enum_ref": "Stage",
+      "ctype": "enum Stage",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "name": "hkpPhysicsSystem",
+  "version": 0,
+  "signature": "0xff724c17",
+  "size_x86": 68,
+  "size_x86_64": 104,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "rigidBodies",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "class_ref": "hkpRigidBody",
+      "ctype": "hkArray<hkpRigidBody*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "constraints",
+      "offset_x86": 20,
+      "offset_x86_64": 32,
+      "class_ref": "hkpConstraintInstance",
+      "ctype": "hkArray<hkpConstraintInstance*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "actions",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "class_ref": "hkpAction",
+      "ctype": "hkArray<hkpAction*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "phantoms",
+      "offset_x86": 44,
+      "offset_x86_64": 64,
+      "class_ref": "hkpPhantom",
+      "ctype": "hkArray<hkpPhantom*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "name",
+      "offset_x86": 56,
+      "offset_x86_64": 80,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "userData",
+      "offset_x86": 60,
+      "offset_x86_64": 88,
+      "ctype": "hkUlong",
+      "vtype": "TYPE_ULONG",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "active",
+      "offset_x86": 64,
+      "offset_x86_64": 96,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 1
+    }
+  ]
+}

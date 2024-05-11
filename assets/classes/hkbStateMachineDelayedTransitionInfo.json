@@ -1,0 +1,55 @@
+{
+  "name": "hkbStateMachineDelayedTransitionInfo",
+  "version": 1,
+  "signature": "0x26d5499",
+  "size_x86": 24,
+  "size_x86_64": 24,
+  "vtable": false,
+  "members": [
+    {
+      "name": "delayedTransition",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "class_ref": "hkbStateMachineProspectiveTransitionInfo",
+      "ctype": "struct hkbStateMachineProspectiveTransitionInfo",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "timeDelayed",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "isDelayedTransitionReturnToPreviousState",
+      "offset_x86": 20,
+      "offset_x86_64": 20,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "wasInAbutRangeLastFrame",
+      "offset_x86": 21,
+      "offset_x86_64": 21,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

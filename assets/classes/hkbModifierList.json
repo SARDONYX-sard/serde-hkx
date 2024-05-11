@@ -1,0 +1,23 @@
+{
+  "name": "hkbModifierList",
+  "version": 0,
+  "signature": "0xa4180ca1",
+  "size_x86": 56,
+  "size_x86_64": 96,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "members": [
+    {
+      "name": "modifiers",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "class_ref": "hkbModifier",
+      "ctype": "hkArray<hkbModifier*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

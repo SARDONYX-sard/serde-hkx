@@ -1,0 +1,33 @@
+{
+  "name": "hkxSparselyAnimatedInt",
+  "version": 1,
+  "signature": "0xca961951",
+  "size_x86": 32,
+  "size_x86_64": 48,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "ints",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "ctype": "hkArray<hkInt32>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_INT32",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "times",
+      "offset_x86": 20,
+      "offset_x86_64": 32,
+      "ctype": "hkArray<hkReal>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_REAL",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

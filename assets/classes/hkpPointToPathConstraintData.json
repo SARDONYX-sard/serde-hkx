@@ -1,0 +1,97 @@
+{
+  "name": "hkpPointToPathConstraintData",
+  "version": 0,
+  "signature": "0x8e7cb5da",
+  "size_x86": 176,
+  "size_x86_64": 192,
+  "parent": "hkpConstraintData",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "OrientationConstraintType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "CONSTRAIN_ORIENTATION_INVALID",
+          "value": 0
+        },
+        {
+          "name": "CONSTRAIN_ORIENTATION_NONE",
+          "value": 1
+        },
+        {
+          "name": "CONSTRAIN_ORIENTATION_ALLOW_SPIN",
+          "value": 2
+        },
+        {
+          "name": "CONSTRAIN_ORIENTATION_TO_PATH",
+          "value": 3
+        },
+        {
+          "name": "CONSTRAIN_ORIENTATION_MAX_ID",
+          "value": 4
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "atoms",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "class_ref": "hkpBridgeAtoms",
+      "ctype": "struct hkpBridgeAtoms",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "path",
+      "offset_x86": 24,
+      "offset_x86_64": 48,
+      "class_ref": "hkpParametricCurve",
+      "ctype": "struct hkpParametricCurve*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "maxFrictionForce",
+      "offset_x86": 28,
+      "offset_x86_64": 56,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "angularConstrainedDOF",
+      "offset_x86": 32,
+      "offset_x86_64": 60,
+      "enum_ref": "OrientationConstraintType",
+      "ctype": "enum OrientationConstraintType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "transform_OS_KS",
+      "offset_x86": 48,
+      "offset_x86_64": 64,
+      "ctype": "hkTransform[2]",
+      "vtype": "TYPE_TRANSFORM",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 2,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

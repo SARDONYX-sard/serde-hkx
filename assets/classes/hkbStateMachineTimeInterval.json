@@ -1,0 +1,54 @@
+{
+  "name": "hkbStateMachineTimeInterval",
+  "version": 0,
+  "signature": "0x60a881e5",
+  "size_x86": 16,
+  "size_x86_64": 16,
+  "vtable": false,
+  "members": [
+    {
+      "name": "enterEventId",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "exitEventId",
+      "offset_x86": 4,
+      "offset_x86_64": 4,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "enterTime",
+      "offset_x86": 8,
+      "offset_x86_64": 8,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "exitTime",
+      "offset_x86": 12,
+      "offset_x86_64": 12,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

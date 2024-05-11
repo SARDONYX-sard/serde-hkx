@@ -1,0 +1,56 @@
+{
+  "name": "hkbGetHandleOnBoneModifier",
+  "version": 0,
+  "signature": "0x50c34a17",
+  "size_x86": 56,
+  "size_x86_64": 104,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "members": [
+    {
+      "name": "handleOut",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "class_ref": "hkbHandle",
+      "ctype": "struct hkbHandle*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "localFrameName",
+      "offset_x86": 48,
+      "offset_x86_64": 88,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "ragdollBoneIndex",
+      "offset_x86": 52,
+      "offset_x86_64": 96,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "animationBoneIndex",
+      "offset_x86": 54,
+      "offset_x86_64": 98,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

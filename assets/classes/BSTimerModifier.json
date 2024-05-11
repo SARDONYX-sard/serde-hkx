@@ -1,0 +1,56 @@
+{
+  "name": "BSTimerModifier",
+  "version": 0,
+  "signature": "0x531f3292",
+  "size_x86": 64,
+  "size_x86_64": 112,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "members": [
+    {
+      "name": "alarmTimeSeconds",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "alarmEvent",
+      "offset_x86": 48,
+      "offset_x86_64": 88,
+      "class_ref": "hkbEventProperty",
+      "ctype": "struct hkbEventProperty",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "resetAlarm",
+      "offset_x86": 56,
+      "offset_x86_64": 104,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "secondsElapsed",
+      "offset_x86": 60,
+      "offset_x86_64": 108,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

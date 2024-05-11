@@ -1,0 +1,44 @@
+{
+  "name": "hkpVehicleDefaultSteering",
+  "version": 0,
+  "signature": "0x8f0411c8",
+  "size_x86": 28,
+  "size_x86_64": 40,
+  "parent": "hkpVehicleSteering",
+  "vtable": true,
+  "members": [
+    {
+      "name": "maxSteeringAngle",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "maxSpeedFullSteeringAngle",
+      "offset_x86": 12,
+      "offset_x86_64": 20,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "doesWheelSteer",
+      "offset_x86": 16,
+      "offset_x86_64": 24,
+      "ctype": "hkArray<hkBool>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_BOOL",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

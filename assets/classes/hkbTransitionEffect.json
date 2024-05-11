@@ -1,0 +1,92 @@
+{
+  "name": "hkbTransitionEffect",
+  "version": 0,
+  "signature": "0x945da157",
+  "size_x86": 44,
+  "size_x86_64": 80,
+  "parent": "hkbGenerator",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "SelfTransitionMode",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "SELF_TRANSITION_MODE_CONTINUE_IF_CYCLIC_BLEND_IF_ACYCLIC",
+          "value": 0
+        },
+        {
+          "name": "SELF_TRANSITION_MODE_CONTINUE",
+          "value": 1
+        },
+        {
+          "name": "SELF_TRANSITION_MODE_RESET",
+          "value": 2
+        },
+        {
+          "name": "SELF_TRANSITION_MODE_BLEND",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "EventMode",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "EVENT_MODE_DEFAULT",
+          "value": 0
+        },
+        {
+          "name": "EVENT_MODE_PROCESS_ALL",
+          "value": 1
+        },
+        {
+          "name": "EVENT_MODE_IGNORE_FROM_GENERATOR",
+          "value": 2
+        },
+        {
+          "name": "EVENT_MODE_IGNORE_TO_GENERATOR",
+          "value": 3
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "selfTransitionMode",
+      "offset_x86": 40,
+      "offset_x86_64": 72,
+      "enum_ref": "SelfTransitionMode",
+      "ctype": "enum SelfTransitionMode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "eventMode",
+      "offset_x86": 41,
+      "offset_x86_64": 73,
+      "enum_ref": "EventMode",
+      "ctype": "enum EventMode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "defaultEventMode",
+      "offset_x86": 42,
+      "offset_x86_64": 74,
+      "ctype": "enum unknown",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

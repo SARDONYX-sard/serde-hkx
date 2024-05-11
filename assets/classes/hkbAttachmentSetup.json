@@ -1,0 +1,128 @@
+{
+  "name": "hkbAttachmentSetup",
+  "version": 1,
+  "signature": "0x774632b",
+  "size_x86": 40,
+  "size_x86_64": 48,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "AttachmentType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "ATTACHMENT_TYPE_KEYFRAME_RIGID_BODY",
+          "value": 0
+        },
+        {
+          "name": "ATTACHMENT_TYPE_BALL_SOCKET_CONSTRAINT",
+          "value": 1
+        },
+        {
+          "name": "ATTACHMENT_TYPE_RAGDOLL_CONSTRAINT",
+          "value": 2
+        },
+        {
+          "name": "ATTACHMENT_TYPE_SET_WORLD_FROM_MODEL",
+          "value": 3
+        },
+        {
+          "name": "ATTACHMENT_TYPE_NONE",
+          "value": 4
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "blendInTime",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "moveAttacherFraction",
+      "offset_x86": 12,
+      "offset_x86_64": 20,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "gain",
+      "offset_x86": 16,
+      "offset_x86_64": 24,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "extrapolationTimeStep",
+      "offset_x86": 20,
+      "offset_x86_64": 28,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "fixUpGain",
+      "offset_x86": 24,
+      "offset_x86_64": 32,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "maxLinearDistance",
+      "offset_x86": 28,
+      "offset_x86_64": 36,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "maxAngularDistance",
+      "offset_x86": 32,
+      "offset_x86_64": 40,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "attachmentType",
+      "offset_x86": 36,
+      "offset_x86_64": 44,
+      "enum_ref": "AttachmentType",
+      "ctype": "enum AttachmentType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

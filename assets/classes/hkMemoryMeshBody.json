@@ -1,0 +1,69 @@
+{
+  "name": "hkMemoryMeshBody",
+  "version": 0,
+  "signature": "0x94a620a8",
+  "size_x86": 112,
+  "size_x86_64": 128,
+  "parent": "hkMeshBody",
+  "vtable": true,
+  "members": [
+    {
+      "name": "transform",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkMatrix4",
+      "vtype": "TYPE_MATRIX4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "transformSet",
+      "offset_x86": 80,
+      "offset_x86_64": 80,
+      "class_ref": "hkIndexedTransformSet",
+      "ctype": "struct hkIndexedTransformSet*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "shape",
+      "offset_x86": 84,
+      "offset_x86_64": 88,
+      "class_ref": "hkMeshShape",
+      "ctype": "struct hkMeshShape*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "vertexBuffers",
+      "offset_x86": 88,
+      "offset_x86_64": 96,
+      "class_ref": "hkMeshVertexBuffer",
+      "ctype": "hkArray<hkMeshVertexBuffer*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "name",
+      "offset_x86": 100,
+      "offset_x86_64": 112,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

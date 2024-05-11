@@ -1,0 +1,89 @@
+{
+  "name": "hkContactPointMaterial",
+  "version": 0,
+  "signature": "0x4e32287c",
+  "size_x86": 8,
+  "size_x86_64": 16,
+  "vtable": false,
+  "enums": [
+    {
+      "name": "FlagEnum",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "CONTACT_IS_NEW",
+          "value": 1
+        },
+        {
+          "name": "CONTACT_USES_SOLVER_PATH2",
+          "value": 2
+        },
+        {
+          "name": "CONTACT_BREAKOFF_OBJECT_ID",
+          "value": 4
+        },
+        {
+          "name": "CONTACT_IS_DISABLED",
+          "value": 8
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "userData",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkUlong",
+      "vtype": "TYPE_ULONG",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "friction",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "restitution",
+      "offset_x86": 5,
+      "offset_x86_64": 9,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "maxImpulse",
+      "offset_x86": 6,
+      "offset_x86_64": 10,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "flags",
+      "offset_x86": 7,
+      "offset_x86_64": 11,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

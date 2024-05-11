@@ -1,0 +1,56 @@
+{
+  "name": "hkpVehicleLinearCastWheelCollideWheelState",
+  "version": 0,
+  "signature": "0x2a9acf98",
+  "size_x86": 96,
+  "size_x86_64": 96,
+  "vtable": false,
+  "members": [
+    {
+      "name": "phantom",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "class_ref": "hkpAabbPhantom",
+      "ctype": "struct hkpAabbPhantom*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "shape",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "class_ref": "hkpShape",
+      "ctype": "struct hkpShape*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "transform",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkTransform",
+      "vtype": "TYPE_TRANSFORM",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "to",
+      "offset_x86": 80,
+      "offset_x86_64": 80,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

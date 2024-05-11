@@ -1,0 +1,23 @@
+{
+  "name": "hkpArrayAction",
+  "version": 0,
+  "signature": "0x674bcd2d",
+  "size_x86": 36,
+  "size_x86_64": 64,
+  "parent": "hkpAction",
+  "vtable": true,
+  "members": [
+    {
+      "name": "entities",
+      "offset_x86": 24,
+      "offset_x86_64": 48,
+      "class_ref": "hkpEntity",
+      "ctype": "hkArray<hkpEntity*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

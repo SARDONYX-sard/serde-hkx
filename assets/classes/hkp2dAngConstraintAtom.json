@@ -1,0 +1,22 @@
+{
+  "name": "hkp2dAngConstraintAtom",
+  "version": 0,
+  "signature": "0xdcdb8b8b",
+  "size_x86": 4,
+  "size_x86_64": 4,
+  "parent": "hkpConstraintAtom",
+  "vtable": false,
+  "members": [
+    {
+      "name": "freeRotationAxis",
+      "offset_x86": 2,
+      "offset_x86_64": 2,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

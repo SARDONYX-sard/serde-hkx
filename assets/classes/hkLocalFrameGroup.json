@@ -1,0 +1,22 @@
+{
+  "name": "hkLocalFrameGroup",
+  "version": 0,
+  "signature": "0xb1a96c2f",
+  "size_x86": 12,
+  "size_x86_64": 24,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "name",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

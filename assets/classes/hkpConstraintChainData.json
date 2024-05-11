@@ -1,0 +1,10 @@
+{
+  "name": "hkpConstraintChainData",
+  "version": 0,
+  "signature": "0x5facc7ff",
+  "size_x86": 12,
+  "size_x86_64": 24,
+  "parent": "hkpConstraintData",
+  "vtable": true,
+  "members": []
+}

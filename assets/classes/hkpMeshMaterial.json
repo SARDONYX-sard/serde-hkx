@@ -1,0 +1,21 @@
+{
+  "name": "hkpMeshMaterial",
+  "version": 0,
+  "signature": "0x886cde0c",
+  "size_x86": 4,
+  "size_x86_64": 4,
+  "vtable": false,
+  "members": [
+    {
+      "name": "filterInfo",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "name": "hkpTriSampledHeightFieldBvTreeShape",
+  "version": 0,
+  "signature": "0x58e1e585",
+  "size_x86": 48,
+  "size_x86_64": 80,
+  "parent": "hkpBvTreeShape",
+  "vtable": true,
+  "members": [
+    {
+      "name": "childContainer",
+      "offset_x86": 20,
+      "offset_x86_64": 40,
+      "class_ref": "hkpSingleShapeContainer",
+      "ctype": "struct hkpSingleShapeContainer",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "childSize",
+      "offset_x86": 28,
+      "offset_x86_64": 56,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "wantAabbRejectionTest",
+      "offset_x86": 32,
+      "offset_x86_64": 60,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "padding",
+      "offset_x86": 33,
+      "offset_x86_64": 61,
+      "ctype": "hkUint8[12]",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 12,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "name": "hkpSampledHeightFieldShape",
+  "version": 0,
+  "signature": "0x11213421",
+  "size_x86": 96,
+  "size_x86_64": 112,
+  "parent": "hkpHeightFieldShape",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "HeightFieldType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "HEIGHTFIELD_STORAGE",
+          "value": 0
+        },
+        {
+          "name": "HEIGHTFIELD_COMPRESSED",
+          "value": 1
+        },
+        {
+          "name": "HEIGHTFIELD_USER",
+          "value": 2
+        },
+        {
+          "name": "HEIGHTFIELD_MAX_ID",
+          "value": 3
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "xRes",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "zRes",
+      "offset_x86": 20,
+      "offset_x86_64": 36,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "heightCenter",
+      "offset_x86": 24,
+      "offset_x86_64": 40,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "useProjectionBasedHeight",
+      "offset_x86": 28,
+      "offset_x86_64": 44,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "heightfieldType",
+      "offset_x86": 29,
+      "offset_x86_64": 45,
+      "enum_ref": "HeightFieldType",
+      "ctype": "enum HeightFieldType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 2
+    },
+    {
+      "name": "intToFloatScale",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "floatToIntScale",
+      "offset_x86": 48,
+      "offset_x86_64": 64,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "floatToIntOffsetFloorCorrected",
+      "offset_x86": 64,
+      "offset_x86_64": 80,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "extents",
+      "offset_x86": 80,
+      "offset_x86_64": 96,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

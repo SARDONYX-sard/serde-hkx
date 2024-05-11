@@ -1,0 +1,67 @@
+{
+  "name": "hkpRagdollMotorConstraintAtom",
+  "version": 0,
+  "signature": "0x71013826",
+  "size_x86": 80,
+  "size_x86_64": 96,
+  "parent": "hkpConstraintAtom",
+  "vtable": false,
+  "members": [
+    {
+      "name": "isEnabled",
+      "offset_x86": 2,
+      "offset_x86_64": 2,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "initializedOffset",
+      "offset_x86": 4,
+      "offset_x86_64": 4,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "previousTargetAnglesOffset",
+      "offset_x86": 6,
+      "offset_x86_64": 6,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "target_bRca",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkMatrix3",
+      "vtype": "TYPE_MATRIX3",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "motors",
+      "offset_x86": 64,
+      "offset_x86_64": 64,
+      "class_ref": "hkpConstraintMotor",
+      "ctype": "struct hkpConstraintMotor*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 3,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

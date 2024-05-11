@@ -1,0 +1,10 @@
+{
+  "name": "hkpMultithreadedVehicleManager",
+  "version": 0,
+  "signature": "0xc03af40d",
+  "size_x86": 20,
+  "size_x86_64": 32,
+  "parent": "hkpVehicleManager",
+  "vtable": true,
+  "members": []
+}

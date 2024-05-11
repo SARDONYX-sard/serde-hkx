@@ -1,0 +1,142 @@
+{
+  "name": "BSCyclicBlendTransitionGenerator",
+  "version": 1,
+  "signature": "0x5119eb06",
+  "size_x86": 112,
+  "size_x86_64": 176,
+  "parent": "hkbGenerator",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "CurrentBlendMode",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "MODE_INACTIVE",
+          "value": -1
+        },
+        {
+          "name": "MODE_DEFAULT",
+          "value": 0
+        },
+        {
+          "name": "MODE_FROZEN",
+          "value": 1
+        },
+        {
+          "name": "MODE_BLENDING",
+          "value": 2
+        },
+        {
+          "name": "MODE_WAITINGFORBLENDING",
+          "value": 3
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "pBlenderGenerator",
+      "offset_x86": 48,
+      "offset_x86_64": 80,
+      "class_ref": "hkbGenerator",
+      "ctype": "struct hkbGenerator*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|ALIGN_16",
+      "default": 0
+    },
+    {
+      "name": "EventToFreezeBlendValue",
+      "offset_x86": 52,
+      "offset_x86_64": 88,
+      "class_ref": "hkbEventProperty",
+      "ctype": "struct hkbEventProperty",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "EventToCrossBlend",
+      "offset_x86": 60,
+      "offset_x86_64": 104,
+      "class_ref": "hkbEventProperty",
+      "ctype": "struct hkbEventProperty",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "fBlendParameter",
+      "offset_x86": 68,
+      "offset_x86_64": 120,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "fTransitionDuration",
+      "offset_x86": 72,
+      "offset_x86_64": 124,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "eBlendCurve",
+      "offset_x86": 76,
+      "offset_x86_64": 128,
+      "enum_ref": "BlendCurve",
+      "ctype": "enum BlendCurve",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "pTransitionBlenderGenerator",
+      "offset_x86": 80,
+      "offset_x86_64": 144,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|ALIGN_16|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "pTransitionEffect",
+      "offset_x86": 96,
+      "offset_x86_64": 160,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|ALIGN_16|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "currentMode",
+      "offset_x86": 100,
+      "offset_x86_64": 168,
+      "ctype": "enum unknown",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

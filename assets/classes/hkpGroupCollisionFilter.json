@@ -1,0 +1,33 @@
+{
+  "name": "hkpGroupCollisionFilter",
+  "version": 0,
+  "signature": "0x5cc01561",
+  "size_x86": 180,
+  "size_x86_64": 208,
+  "parent": "hkpCollisionFilter",
+  "vtable": true,
+  "members": [
+    {
+      "name": "noGroupCollisionEnabled",
+      "offset_x86": 48,
+      "offset_x86_64": 72,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "collisionGroups",
+      "offset_x86": 52,
+      "offset_x86_64": 76,
+      "ctype": "hkUint32[32]",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 32,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "name": "hkpPhantom",
+  "version": 0,
+  "signature": "0x9b7e6f86",
+  "size_x86": 164,
+  "size_x86_64": 240,
+  "parent": "hkpWorldObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "overlapListeners",
+      "offset_x86": 140,
+      "offset_x86_64": 208,
+      "ctype": "hkArray<void*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "phantomListeners",
+      "offset_x86": 152,
+      "offset_x86_64": 224,
+      "ctype": "hkArray<void*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "name": "hkbTransformVectorModifier",
+  "version": 0,
+  "signature": "0xf93e0e24",
+  "size_x86": 128,
+  "size_x86_64": 160,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "members": [
+    {
+      "name": "rotation",
+      "offset_x86": 48,
+      "offset_x86_64": 80,
+      "ctype": "hkQuaternion",
+      "vtype": "TYPE_QUATERNION",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "translation",
+      "offset_x86": 64,
+      "offset_x86_64": 96,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "vectorIn",
+      "offset_x86": 80,
+      "offset_x86_64": 112,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "vectorOut",
+      "offset_x86": 96,
+      "offset_x86_64": 128,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "rotateOnly",
+      "offset_x86": 112,
+      "offset_x86_64": 144,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "inverse",
+      "offset_x86": 113,
+      "offset_x86_64": 145,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "computeOnActivate",
+      "offset_x86": 114,
+      "offset_x86_64": 146,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "computeOnModify",
+      "offset_x86": 115,
+      "offset_x86_64": 147,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

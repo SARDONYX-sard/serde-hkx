@@ -1,0 +1,45 @@
+{
+  "name": "hkbBindable",
+  "version": 0,
+  "signature": "0x2c1432d7",
+  "size_x86": 28,
+  "size_x86_64": 48,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "variableBindingSet",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "class_ref": "hkbVariableBindingSet",
+      "ctype": "struct hkbVariableBindingSet*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "cachedBindables",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "ctype": "hkArray<void>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "areBindablesCached",
+      "offset_x86": 24,
+      "offset_x86_64": 40,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

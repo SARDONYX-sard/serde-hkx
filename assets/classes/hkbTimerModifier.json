@@ -1,0 +1,45 @@
+{
+  "name": "hkbTimerModifier",
+  "version": 1,
+  "signature": "0x338b4879",
+  "size_x86": 60,
+  "size_x86_64": 112,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "members": [
+    {
+      "name": "alarmTimeSeconds",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "alarmEvent",
+      "offset_x86": 48,
+      "offset_x86_64": 88,
+      "class_ref": "hkbEventProperty",
+      "ctype": "struct hkbEventProperty",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "secondsElapsed",
+      "offset_x86": 56,
+      "offset_x86_64": 104,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

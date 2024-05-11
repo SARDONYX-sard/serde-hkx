@@ -1,0 +1,42 @@
+{
+  "name": "hkArrayTypeAttribute",
+  "version": 0,
+  "signature": "0xd404a39a",
+  "size_x86": 1,
+  "size_x86_64": 1,
+  "vtable": false,
+  "enums": [
+    {
+      "name": "ArrayType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "NONE",
+          "value": 0
+        },
+        {
+          "name": "POINTSOUP",
+          "value": 1
+        },
+        {
+          "name": "ENTITIES",
+          "value": 2
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "type",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "enum_ref": "ArrayType",
+      "ctype": "enum ArrayType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

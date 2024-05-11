@@ -1,0 +1,22 @@
+{
+  "name": "BSGetTimeStepModifier",
+  "version": 0,
+  "signature": "0xbda33bfe",
+  "size_x86": 48,
+  "size_x86_64": 88,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "members": [
+    {
+      "name": "timeStep",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

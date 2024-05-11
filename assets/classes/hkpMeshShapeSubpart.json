@@ -1,0 +1,177 @@
+{
+  "name": "hkpMeshShapeSubpart",
+  "version": 0,
+  "signature": "0x27336e5d",
+  "size_x86": 56,
+  "size_x86_64": 80,
+  "vtable": false,
+  "members": [
+    {
+      "name": "vertexBase",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "vertexStriding",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numVertices",
+      "offset_x86": 8,
+      "offset_x86_64": 12,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "indexBase",
+      "offset_x86": 12,
+      "offset_x86_64": 16,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "stridingType",
+      "offset_x86": 16,
+      "offset_x86_64": 24,
+      "enum_ref": "MeshShapeIndexStridingType",
+      "ctype": "enum MeshShapeIndexStridingType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "materialIndexStridingType",
+      "offset_x86": 17,
+      "offset_x86_64": 25,
+      "enum_ref": "MeshShapeMaterialIndexStridingType",
+      "ctype": "enum MeshShapeMaterialIndexStridingType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "indexStriding",
+      "offset_x86": 20,
+      "offset_x86_64": 28,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "flipAlternateTriangles",
+      "offset_x86": 24,
+      "offset_x86_64": 32,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numTriangles",
+      "offset_x86": 28,
+      "offset_x86_64": 36,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "materialIndexBase",
+      "offset_x86": 32,
+      "offset_x86_64": 40,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "materialIndexStriding",
+      "offset_x86": 36,
+      "offset_x86_64": 48,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "materialBase",
+      "offset_x86": 40,
+      "offset_x86_64": 56,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "materialStriding",
+      "offset_x86": 44,
+      "offset_x86_64": 64,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numMaterials",
+      "offset_x86": 48,
+      "offset_x86_64": 68,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "triangleOffset",
+      "offset_x86": 52,
+      "offset_x86_64": 72,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

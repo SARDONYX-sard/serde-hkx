@@ -1,0 +1,90 @@
+{
+  "name": "BSEventEveryNEventsModifier",
+  "version": 1,
+  "signature": "0x6030970c",
+  "size_x86": 72,
+  "size_x86_64": 128,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "members": [
+    {
+      "name": "eventToCheckFor",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "class_ref": "hkbEventProperty",
+      "ctype": "struct hkbEventProperty",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "eventToSend",
+      "offset_x86": 52,
+      "offset_x86_64": 96,
+      "class_ref": "hkbEventProperty",
+      "ctype": "struct hkbEventProperty",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numberOfEventsBeforeSend",
+      "offset_x86": 60,
+      "offset_x86_64": 112,
+      "ctype": "hkInt8",
+      "vtype": "TYPE_INT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "minimumNumberOfEventsBeforeSend",
+      "offset_x86": 61,
+      "offset_x86_64": 113,
+      "ctype": "hkInt8",
+      "vtype": "TYPE_INT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "randomizeNumberOfEvents",
+      "offset_x86": 62,
+      "offset_x86_64": 114,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numberOfEventsSeen",
+      "offset_x86": 64,
+      "offset_x86_64": 116,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "calculatedNumberOfEventsBeforeSend",
+      "offset_x86": 68,
+      "offset_x86_64": 120,
+      "ctype": "hkInt8",
+      "vtype": "TYPE_INT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

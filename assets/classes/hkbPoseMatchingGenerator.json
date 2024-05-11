@@ -1,0 +1,226 @@
+{
+  "name": "hkbPoseMatchingGenerator",
+  "version": 2,
+  "signature": "0x29e271b4",
+  "size_x86": 208,
+  "size_x86_64": 240,
+  "parent": "hkbBlenderGenerator",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "Mode",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "MODE_MATCH",
+          "value": 0
+        },
+        {
+          "name": "MODE_PLAY",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "worldFromModelRotation",
+      "offset_x86": 128,
+      "offset_x86_64": 160,
+      "ctype": "hkQuaternion",
+      "vtype": "TYPE_QUATERNION",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "blendSpeed",
+      "offset_x86": 144,
+      "offset_x86_64": 176,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "minSpeedToSwitch",
+      "offset_x86": 148,
+      "offset_x86_64": 180,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "minSwitchTimeNoError",
+      "offset_x86": 152,
+      "offset_x86_64": 184,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "minSwitchTimeFullError",
+      "offset_x86": 156,
+      "offset_x86_64": 188,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "startPlayingEventId",
+      "offset_x86": 160,
+      "offset_x86_64": 192,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "startMatchingEventId",
+      "offset_x86": 164,
+      "offset_x86_64": 196,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "rootBoneIndex",
+      "offset_x86": 168,
+      "offset_x86_64": 200,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "otherBoneIndex",
+      "offset_x86": 170,
+      "offset_x86_64": 202,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "anotherBoneIndex",
+      "offset_x86": 172,
+      "offset_x86_64": 204,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "pelvisIndex",
+      "offset_x86": 174,
+      "offset_x86_64": 206,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "mode",
+      "offset_x86": 176,
+      "offset_x86_64": 208,
+      "enum_ref": "Mode",
+      "ctype": "enum Mode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "currentMatch",
+      "offset_x86": 180,
+      "offset_x86_64": 212,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "bestMatch",
+      "offset_x86": 184,
+      "offset_x86_64": 216,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "timeSinceBetterMatch",
+      "offset_x86": 188,
+      "offset_x86_64": 220,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "error",
+      "offset_x86": 192,
+      "offset_x86_64": 224,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "resetCurrentMatchLocalTime",
+      "offset_x86": 196,
+      "offset_x86_64": 228,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "poseMatchingUtility",
+      "offset_x86": 200,
+      "offset_x86_64": 232,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

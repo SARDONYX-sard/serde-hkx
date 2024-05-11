@@ -1,0 +1,65 @@
+{
+  "name": "hkSweptTransform",
+  "version": 0,
+  "signature": "0xb4e5770",
+  "size_x86": 80,
+  "size_x86_64": 80,
+  "vtable": false,
+  "members": [
+    {
+      "name": "centerOfMass0",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "centerOfMass1",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "rotation0",
+      "offset_x86": 32,
+      "offset_x86_64": 32,
+      "ctype": "hkQuaternion",
+      "vtype": "TYPE_QUATERNION",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "rotation1",
+      "offset_x86": 48,
+      "offset_x86_64": 48,
+      "ctype": "hkQuaternion",
+      "vtype": "TYPE_QUATERNION",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "centerOfMassLocal",
+      "offset_x86": 64,
+      "offset_x86_64": 64,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

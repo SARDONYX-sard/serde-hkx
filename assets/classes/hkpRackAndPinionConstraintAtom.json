@@ -1,0 +1,66 @@
+{
+  "name": "hkpRackAndPinionConstraintAtom",
+  "version": 0,
+  "signature": "0x30cae006",
+  "size_x86": 12,
+  "size_x86_64": 12,
+  "parent": "hkpConstraintAtom",
+  "vtable": false,
+  "members": [
+    {
+      "name": "pinionRadiusOrScrewPitch",
+      "offset_x86": 4,
+      "offset_x86_64": 4,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "isScrew",
+      "offset_x86": 8,
+      "offset_x86_64": 8,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "memOffsetToInitialAngleOffset",
+      "offset_x86": 9,
+      "offset_x86_64": 9,
+      "ctype": "hkInt8",
+      "vtype": "TYPE_INT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "memOffsetToPrevAngle",
+      "offset_x86": 10,
+      "offset_x86_64": 10,
+      "ctype": "hkInt8",
+      "vtype": "TYPE_INT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "memOffsetToRevolutionCounter",
+      "offset_x86": 11,
+      "offset_x86_64": 11,
+      "ctype": "hkInt8",
+      "vtype": "TYPE_INT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

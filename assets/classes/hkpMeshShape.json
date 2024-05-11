@@ -1,0 +1,136 @@
+{
+  "name": "hkpMeshShape",
+  "version": 0,
+  "signature": "0x3bf12c0f",
+  "size_x86": 96,
+  "size_x86_64": 128,
+  "parent": "hkpShapeCollection",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "MeshShapeIndexStridingType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "INDICES_INVALID",
+          "value": 0
+        },
+        {
+          "name": "INDICES_INT16",
+          "value": 1
+        },
+        {
+          "name": "INDICES_INT32",
+          "value": 2
+        },
+        {
+          "name": "INDICES_MAX_ID",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "MeshShapeMaterialIndexStridingType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "MATERIAL_INDICES_INVALID",
+          "value": 0
+        },
+        {
+          "name": "MATERIAL_INDICES_INT8",
+          "value": 1
+        },
+        {
+          "name": "MATERIAL_INDICES_INT16",
+          "value": 2
+        },
+        {
+          "name": "MATERIAL_INDICES_MAX_ID",
+          "value": 3
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "scaling",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numBitsForSubpartIndex",
+      "offset_x86": 48,
+      "offset_x86_64": 64,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "subparts",
+      "offset_x86": 52,
+      "offset_x86_64": 72,
+      "class_ref": "hkpMeshShapeSubpart",
+      "ctype": "hkArray<struct hkpMeshShapeSubpart>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "weldingInfo",
+      "offset_x86": 64,
+      "offset_x86_64": 88,
+      "ctype": "hkArray<hkUint16>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_UINT16",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "weldingType",
+      "offset_x86": 76,
+      "offset_x86_64": 104,
+      "enum_ref": "WeldingType",
+      "ctype": "enum WeldingType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 6
+    },
+    {
+      "name": "radius",
+      "offset_x86": 80,
+      "offset_x86_64": 108,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "pad",
+      "offset_x86": 84,
+      "offset_x86_64": 112,
+      "ctype": "hkInt32[3]",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 3,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

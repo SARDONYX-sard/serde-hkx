@@ -1,0 +1,100 @@
+{
+  "name": "hkpSimpleContactConstraintAtom",
+  "version": 0,
+  "signature": "0x920df11a",
+  "size_x86": 48,
+  "size_x86_64": 48,
+  "parent": "hkpConstraintAtom",
+  "vtable": false,
+  "members": [
+    {
+      "name": "sizeOfAllAtoms",
+      "offset_x86": 2,
+      "offset_x86_64": 2,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numContactPoints",
+      "offset_x86": 4,
+      "offset_x86_64": 4,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numReservedContactPoints",
+      "offset_x86": 6,
+      "offset_x86_64": 6,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numUserDatasForBodyA",
+      "offset_x86": 8,
+      "offset_x86_64": 8,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numUserDatasForBodyB",
+      "offset_x86": 9,
+      "offset_x86_64": 9,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "contactPointPropertiesStriding",
+      "offset_x86": 10,
+      "offset_x86_64": 10,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "maxNumContactPoints",
+      "offset_x86": 12,
+      "offset_x86_64": 12,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "info",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "class_ref": "hkpSimpleContactConstraintDataInfo",
+      "ctype": "struct hkpSimpleContactConstraintDataInfo",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|ALIGN_16",
+      "default": 0
+    }
+  ]
+}

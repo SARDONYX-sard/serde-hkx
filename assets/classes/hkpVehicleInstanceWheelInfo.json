@@ -1,0 +1,198 @@
+{
+  "name": "hkpVehicleInstanceWheelInfo",
+  "version": 1,
+  "signature": "0x99f693f0",
+  "size_x86": 224,
+  "size_x86_64": 224,
+  "vtable": false,
+  "members": [
+    {
+      "name": "contactPoint",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "class_ref": "hkContactPoint",
+      "ctype": "struct hkContactPoint",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "contactFriction",
+      "offset_x86": 32,
+      "offset_x86_64": 32,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "contactBody",
+      "offset_x86": 36,
+      "offset_x86_64": 40,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "contactShapeKey",
+      "offset_x86": 40,
+      "offset_x86_64": 48,
+      "ctype": "hkUint32[8]",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 8,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "hardPointWs",
+      "offset_x86": 80,
+      "offset_x86_64": 80,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "rayEndPointWs",
+      "offset_x86": 96,
+      "offset_x86_64": 96,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "currentSuspensionLength",
+      "offset_x86": 112,
+      "offset_x86_64": 112,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "suspensionDirectionWs",
+      "offset_x86": 128,
+      "offset_x86_64": 128,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "spinAxisChassisSpace",
+      "offset_x86": 144,
+      "offset_x86_64": 144,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "spinAxisWs",
+      "offset_x86": 160,
+      "offset_x86_64": 160,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "steeringOrientationChassisSpace",
+      "offset_x86": 176,
+      "offset_x86_64": 176,
+      "ctype": "hkQuaternion",
+      "vtype": "TYPE_QUATERNION",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "spinVelocity",
+      "offset_x86": 192,
+      "offset_x86_64": 192,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "spinAngle",
+      "offset_x86": 196,
+      "offset_x86_64": 196,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "skidEnergyDensity",
+      "offset_x86": 200,
+      "offset_x86_64": 200,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "sideForce",
+      "offset_x86": 204,
+      "offset_x86_64": 204,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "forwardSlipVelocity",
+      "offset_x86": 208,
+      "offset_x86_64": 208,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "sideSlipVelocity",
+      "offset_x86": 212,
+      "offset_x86_64": 212,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

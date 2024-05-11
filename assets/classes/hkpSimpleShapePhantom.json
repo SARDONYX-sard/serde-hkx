@@ -1,0 +1,34 @@
+{
+  "name": "hkpSimpleShapePhantom",
+  "version": 0,
+  "signature": "0x32a2a8a8",
+  "size_x86": 368,
+  "size_x86_64": 448,
+  "parent": "hkpShapePhantom",
+  "vtable": true,
+  "members": [
+    {
+      "name": "collisionDetails",
+      "offset_x86": 352,
+      "offset_x86_64": 416,
+      "class_ref": "hkpSimpleShapePhantomCollisionDetail",
+      "ctype": "hkArray<struct hkpSimpleShapePhantomCollisionDetail>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "orderDirty",
+      "offset_x86": 364,
+      "offset_x86_64": 432,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

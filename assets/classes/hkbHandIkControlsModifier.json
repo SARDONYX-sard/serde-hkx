@@ -1,0 +1,23 @@
+{
+  "name": "hkbHandIkControlsModifier",
+  "version": 0,
+  "signature": "0x9f0488bb",
+  "size_x86": 56,
+  "size_x86_64": 96,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "members": [
+    {
+      "name": "hands",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "class_ref": "hkbHandIkControlsModifierHand",
+      "ctype": "hkArray<struct hkbHandIkControlsModifierHand>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

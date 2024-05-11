@@ -1,0 +1,22 @@
+{
+  "name": "hkpBoxShape",
+  "version": 0,
+  "signature": "0x3444d2d5",
+  "size_x86": 48,
+  "size_x86_64": 64,
+  "parent": "hkpConvexShape",
+  "vtable": true,
+  "members": [
+    {
+      "name": "halfExtents",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

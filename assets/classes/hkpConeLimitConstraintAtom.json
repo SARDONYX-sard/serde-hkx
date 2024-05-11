@@ -1,0 +1,116 @@
+{
+  "name": "hkpConeLimitConstraintAtom",
+  "version": 0,
+  "signature": "0xf19443c8",
+  "size_x86": 20,
+  "size_x86_64": 20,
+  "parent": "hkpConstraintAtom",
+  "vtable": false,
+  "enums": [
+    {
+      "name": "MeasurementMode",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "ZERO_WHEN_VECTORS_ALIGNED",
+          "value": 0
+        },
+        {
+          "name": "ZERO_WHEN_VECTORS_PERPENDICULAR",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "isEnabled",
+      "offset_x86": 2,
+      "offset_x86_64": 2,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "twistAxisInA",
+      "offset_x86": 3,
+      "offset_x86_64": 3,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "refAxisInB",
+      "offset_x86": 4,
+      "offset_x86_64": 4,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "angleMeasurementMode",
+      "offset_x86": 5,
+      "offset_x86_64": 5,
+      "enum_ref": "MeasurementMode",
+      "ctype": "enum MeasurementMode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "memOffsetToAngleOffset",
+      "offset_x86": 6,
+      "offset_x86_64": 6,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 10002001
+    },
+    {
+      "name": "minAngle",
+      "offset_x86": 8,
+      "offset_x86_64": 8,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "maxAngle",
+      "offset_x86": 12,
+      "offset_x86_64": 12,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "angularLimitsTauFactor",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

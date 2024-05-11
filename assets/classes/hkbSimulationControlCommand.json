@@ -1,0 +1,55 @@
+{
+  "name": "hkbSimulationControlCommand",
+  "version": 0,
+  "signature": "0x2a241367",
+  "size_x86": 12,
+  "size_x86_64": 24,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "SimulationControlCommand",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "COMMAND_PLAY",
+          "value": 0
+        },
+        {
+          "name": "COMMAND_PAUSE",
+          "value": 1
+        },
+        {
+          "name": "COMMAND_STEP",
+          "value": 2
+        },
+        {
+          "name": "COMMAND_STOP",
+          "value": 3
+        },
+        {
+          "name": "COMMAND_ACCUMULATE_MOTION",
+          "value": 4
+        },
+        {
+          "name": "COMMAND_DO_NOT_ACCUMULATE_MOTION",
+          "value": 5
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "command",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "enum_ref": "SimulationControlCommand",
+      "ctype": "enum SimulationControlCommand",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

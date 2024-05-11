@@ -1,0 +1,33 @@
+{
+  "name": "hkaAnnotationTrack",
+  "version": 0,
+  "signature": "0xd4114fdd",
+  "size_x86": 16,
+  "size_x86_64": 24,
+  "vtable": false,
+  "members": [
+    {
+      "name": "trackName",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "annotations",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "class_ref": "hkaAnnotationTrackAnnotation",
+      "ctype": "hkArray<struct hkaAnnotationTrackAnnotation>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

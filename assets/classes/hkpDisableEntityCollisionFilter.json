@@ -1,0 +1,23 @@
+{
+  "name": "hkpDisableEntityCollisionFilter",
+  "version": 0,
+  "signature": "0xfac3351c",
+  "size_x86": 64,
+  "size_x86_64": 96,
+  "parent": "hkpCollisionFilter",
+  "vtable": true,
+  "members": [
+    {
+      "name": "disabledEntities",
+      "offset_x86": 52,
+      "offset_x86_64": 80,
+      "class_ref": "hkpEntity",
+      "ctype": "hkArray<hkpEntity*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

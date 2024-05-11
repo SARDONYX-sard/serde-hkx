@@ -1,0 +1,103 @@
+{
+  "name": "hkpCollidable",
+  "version": 0,
+  "signature": "0x9a0e42a5",
+  "size_x86": 80,
+  "size_x86_64": 112,
+  "parent": "hkpCdBody",
+  "vtable": false,
+  "enums": [
+    {
+      "name": "ForceCollideOntoPpuReasons",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "FORCE_PPU_USER_REQUEST",
+          "value": 1
+        },
+        {
+          "name": "FORCE_PPU_SHAPE_REQUEST",
+          "value": 2
+        },
+        {
+          "name": "FORCE_PPU_MODIFIER_REQUEST",
+          "value": 4
+        },
+        {
+          "name": "FORCE_PPU_SHAPE_UNCHECKED",
+          "value": 8
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "ownerOffset",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "ctype": "hkInt8",
+      "vtype": "TYPE_INT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "forceCollideOntoPpu",
+      "offset_x86": 17,
+      "offset_x86_64": 33,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "shapeSizeOnSpu",
+      "offset_x86": 18,
+      "offset_x86_64": 34,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "broadPhaseHandle",
+      "offset_x86": 20,
+      "offset_x86_64": 36,
+      "class_ref": "hkpTypedBroadPhaseHandle",
+      "ctype": "struct hkpTypedBroadPhaseHandle",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "boundingVolumeData",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "class_ref": "hkpCollidableBoundingVolumeData",
+      "ctype": "struct hkpCollidableBoundingVolumeData",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "allowedPenetrationDepth",
+      "offset_x86": 76,
+      "offset_x86_64": 104,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

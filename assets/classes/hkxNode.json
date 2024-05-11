@@ -1,0 +1,91 @@
+{
+  "name": "hkxNode",
+  "version": 1,
+  "signature": "0x5a218502",
+  "size_x86": 72,
+  "size_x86_64": 112,
+  "parent": "hkxAttributeHolder",
+  "vtable": true,
+  "members": [
+    {
+      "name": "name",
+      "offset_x86": 20,
+      "offset_x86_64": 32,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "object",
+      "offset_x86": 24,
+      "offset_x86_64": 40,
+      "class_ref": "hkReferencedObject",
+      "ctype": "struct hkReferencedObject*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "keyFrames",
+      "offset_x86": 28,
+      "offset_x86_64": 48,
+      "ctype": "hkArray<hkMatrix4>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_MATRIX4",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "children",
+      "offset_x86": 40,
+      "offset_x86_64": 64,
+      "class_ref": "hkxNode",
+      "ctype": "hkArray<hkxNode*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "annotations",
+      "offset_x86": 52,
+      "offset_x86_64": 80,
+      "class_ref": "hkxNodeAnnotationData",
+      "ctype": "hkArray<struct hkxNodeAnnotationData>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "userProperties",
+      "offset_x86": 64,
+      "offset_x86_64": 96,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "selected",
+      "offset_x86": 68,
+      "offset_x86_64": 104,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

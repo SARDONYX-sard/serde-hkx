@@ -1,0 +1,94 @@
+{
+  "name": "hkpListShape",
+  "version": 0,
+  "signature": "0xa1937cbd",
+  "size_x86": 112,
+  "size_x86_64": 144,
+  "parent": "hkpShapeCollection",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "ListShapeFlags",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "ALL_FLAGS_CLEAR",
+          "value": 0
+        },
+        {
+          "name": "DISABLE_SPU_CACHE_FOR_LIST_CHILD_INFO",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "childInfo",
+      "offset_x86": 24,
+      "offset_x86_64": 48,
+      "class_ref": "hkpListShapeChildInfo",
+      "ctype": "hkArray<struct hkpListShapeChildInfo>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "flags",
+      "offset_x86": 36,
+      "offset_x86_64": 64,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numDisabledChildren",
+      "offset_x86": 38,
+      "offset_x86_64": 66,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "aabbHalfExtents",
+      "offset_x86": 48,
+      "offset_x86_64": 80,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "aabbCenter",
+      "offset_x86": 64,
+      "offset_x86_64": 96,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "enabledChildren",
+      "offset_x86": 80,
+      "offset_x86_64": 112,
+      "ctype": "hkUint32[8]",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 8,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

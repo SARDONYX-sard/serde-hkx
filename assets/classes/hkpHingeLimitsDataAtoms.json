@@ -1,0 +1,66 @@
+{
+  "name": "hkpHingeLimitsDataAtoms",
+  "version": 0,
+  "signature": "0x555876ff",
+  "size_x86": 144,
+  "size_x86_64": 144,
+  "vtable": false,
+  "enums": [
+    {
+      "name": "Axis",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "AXIS_AXLE",
+          "value": 0
+        },
+        {
+          "name": "AXIS_PERP_TO_AXLE_1",
+          "value": 1
+        },
+        {
+          "name": "AXIS_PERP_TO_AXLE_2",
+          "value": 2
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "rotations",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "class_ref": "hkpSetLocalRotationsConstraintAtom",
+      "ctype": "struct hkpSetLocalRotationsConstraintAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "angLimit",
+      "offset_x86": 112,
+      "offset_x86_64": 112,
+      "class_ref": "hkpAngLimitConstraintAtom",
+      "ctype": "struct hkpAngLimitConstraintAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "2dAng",
+      "offset_x86": 128,
+      "offset_x86_64": 128,
+      "class_ref": "hkp2dAngConstraintAtom",
+      "ctype": "struct hkp2dAngConstraintAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

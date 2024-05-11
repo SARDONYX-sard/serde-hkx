@@ -1,0 +1,104 @@
+{
+  "name": "hkbCharacterSetup",
+  "version": 2,
+  "signature": "0xe5a2a413",
+  "size_x86": 48,
+  "size_x86_64": 88,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "retargetingSkeletonMappers",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "class_ref": "hkaSkeletonMapper",
+      "ctype": "hkArray<hkaSkeletonMapper*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "animationSkeleton",
+      "offset_x86": 20,
+      "offset_x86_64": 32,
+      "class_ref": "hkaSkeleton",
+      "ctype": "struct hkaSkeleton*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "ragdollToAnimationSkeletonMapper",
+      "offset_x86": 24,
+      "offset_x86_64": 40,
+      "class_ref": "hkaSkeletonMapper",
+      "ctype": "struct hkaSkeletonMapper*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "animationToRagdollSkeletonMapper",
+      "offset_x86": 28,
+      "offset_x86_64": 48,
+      "class_ref": "hkaSkeletonMapper",
+      "ctype": "struct hkaSkeletonMapper*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "animationBindingSet",
+      "offset_x86": 32,
+      "offset_x86_64": 56,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "data",
+      "offset_x86": 36,
+      "offset_x86_64": 64,
+      "class_ref": "hkbCharacterData",
+      "ctype": "struct hkbCharacterData*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "mirroredSkeleton",
+      "offset_x86": 40,
+      "offset_x86_64": 72,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "characterPropertyIdMap",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "name": "hkpGravityGun",
+  "version": 0,
+  "signature": "0x5e2754cd",
+  "size_x86": 96,
+  "size_x86_64": 128,
+  "parent": "hkpFirstPersonGun",
+  "vtable": true,
+  "members": [
+    {
+      "name": "grabbedBodies",
+      "offset_x86": 32,
+      "offset_x86_64": 56,
+      "ctype": "hkArray<void*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "maxNumObjectsPicked",
+      "offset_x86": 44,
+      "offset_x86_64": 72,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "maxMassOfObjectPicked",
+      "offset_x86": 48,
+      "offset_x86_64": 76,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 43480000
+    },
+    {
+      "name": "maxDistOfObjectPicked",
+      "offset_x86": 52,
+      "offset_x86_64": 80,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 42480000
+    },
+    {
+      "name": "impulseAppliedWhenObjectNotPicked",
+      "offset_x86": 56,
+      "offset_x86_64": 84,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "throwVelocity",
+      "offset_x86": 60,
+      "offset_x86_64": 88,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 42480000
+    },
+    {
+      "name": "capturedObjectPosition",
+      "offset_x86": 64,
+      "offset_x86_64": 96,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 40200000
+    },
+    {
+      "name": "capturedObjectsOffset",
+      "offset_x86": 80,
+      "offset_x86_64": 112,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

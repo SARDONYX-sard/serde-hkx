@@ -1,0 +1,33 @@
+{
+  "name": "hkpSerializedSubTrack1nInfo",
+  "version": 0,
+  "signature": "0x10155a",
+  "size_x86": 32,
+  "size_x86_64": 40,
+  "parent": "hkpSerializedTrack1nInfo",
+  "vtable": false,
+  "members": [
+    {
+      "name": "sectorIndex",
+      "offset_x86": 24,
+      "offset_x86_64": 32,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "offsetInSector",
+      "offset_x86": 28,
+      "offset_x86_64": 36,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

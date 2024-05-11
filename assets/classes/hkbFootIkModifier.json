@@ -1,0 +1,273 @@
+{
+  "name": "hkbFootIkModifier",
+  "version": 3,
+  "signature": "0xed8966c0",
+  "size_x86": 208,
+  "size_x86_64": 256,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "AlignMode",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "ALIGN_MODE_FORWARD_RIGHT",
+          "value": 0
+        },
+        {
+          "name": "ALIGN_MODE_FORWARD",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "gains",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "class_ref": "hkbFootIkGains",
+      "ctype": "struct hkbFootIkGains",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "legs",
+      "offset_x86": 92,
+      "offset_x86_64": 128,
+      "class_ref": "hkbFootIkModifierLeg",
+      "ctype": "hkArray<struct hkbFootIkModifierLeg>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "raycastDistanceUp",
+      "offset_x86": 104,
+      "offset_x86_64": 144,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "raycastDistanceDown",
+      "offset_x86": 108,
+      "offset_x86_64": 148,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "originalGroundHeightMS",
+      "offset_x86": 112,
+      "offset_x86_64": 152,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "errorOut",
+      "offset_x86": 116,
+      "offset_x86_64": 156,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "errorOutTranslation",
+      "offset_x86": 128,
+      "offset_x86_64": 160,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "alignWithGroundRotation",
+      "offset_x86": 144,
+      "offset_x86_64": 176,
+      "ctype": "hkQuaternion",
+      "vtype": "TYPE_QUATERNION",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "verticalOffset",
+      "offset_x86": 160,
+      "offset_x86_64": 192,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "collisionFilterInfo",
+      "offset_x86": 164,
+      "offset_x86_64": 196,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "forwardAlignFraction",
+      "offset_x86": 168,
+      "offset_x86_64": 200,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "sidewaysAlignFraction",
+      "offset_x86": 172,
+      "offset_x86_64": 204,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "sidewaysSampleWidth",
+      "offset_x86": 176,
+      "offset_x86_64": 208,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "useTrackData",
+      "offset_x86": 180,
+      "offset_x86_64": 212,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "lockFeetWhenPlanted",
+      "offset_x86": 181,
+      "offset_x86_64": 213,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "useCharacterUpVector",
+      "offset_x86": 182,
+      "offset_x86_64": 214,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "alignMode",
+      "offset_x86": 183,
+      "offset_x86_64": 215,
+      "enum_ref": "AlignMode",
+      "ctype": "enum AlignMode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "internalLegData",
+      "offset_x86": 184,
+      "offset_x86_64": 216,
+      "class_ref": "hkbFootIkModifierInternalLegData",
+      "ctype": "hkArray<struct hkbFootIkModifierInternalLegData>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "prevIsFootIkEnabled",
+      "offset_x86": 196,
+      "offset_x86_64": 232,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "isSetUp",
+      "offset_x86": 200,
+      "offset_x86_64": 236,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "isGroundPositionValid",
+      "offset_x86": 201,
+      "offset_x86_64": 237,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "timeStep",
+      "offset_x86": 204,
+      "offset_x86_64": 240,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

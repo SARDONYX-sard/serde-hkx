@@ -1,0 +1,774 @@
+{
+  "name": "hkpWorldCinfo",
+  "version": 11,
+  "signature": "0xa5255445",
+  "size_x86": 240,
+  "size_x86_64": 256,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "SolverType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "SOLVER_TYPE_INVALID",
+          "value": 0
+        },
+        {
+          "name": "SOLVER_TYPE_2ITERS_SOFT",
+          "value": 1
+        },
+        {
+          "name": "SOLVER_TYPE_2ITERS_MEDIUM",
+          "value": 2
+        },
+        {
+          "name": "SOLVER_TYPE_2ITERS_HARD",
+          "value": 3
+        },
+        {
+          "name": "SOLVER_TYPE_4ITERS_SOFT",
+          "value": 4
+        },
+        {
+          "name": "SOLVER_TYPE_4ITERS_MEDIUM",
+          "value": 5
+        },
+        {
+          "name": "SOLVER_TYPE_4ITERS_HARD",
+          "value": 6
+        },
+        {
+          "name": "SOLVER_TYPE_8ITERS_SOFT",
+          "value": 7
+        },
+        {
+          "name": "SOLVER_TYPE_8ITERS_MEDIUM",
+          "value": 8
+        },
+        {
+          "name": "SOLVER_TYPE_8ITERS_HARD",
+          "value": 9
+        },
+        {
+          "name": "SOLVER_TYPE_MAX_ID",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "name": "SimulationType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "SIMULATION_TYPE_INVALID",
+          "value": 0
+        },
+        {
+          "name": "SIMULATION_TYPE_DISCRETE",
+          "value": 1
+        },
+        {
+          "name": "SIMULATION_TYPE_CONTINUOUS",
+          "value": 2
+        },
+        {
+          "name": "SIMULATION_TYPE_MULTITHREADED",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "ContactPointGeneration",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "CONTACT_POINT_ACCEPT_ALWAYS",
+          "value": 0
+        },
+        {
+          "name": "CONTACT_POINT_REJECT_DUBIOUS",
+          "value": 1
+        },
+        {
+          "name": "CONTACT_POINT_REJECT_MANY",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "BroadPhaseBorderBehaviour",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "BROADPHASE_BORDER_ASSERT",
+          "value": 0
+        },
+        {
+          "name": "BROADPHASE_BORDER_FIX_ENTITY",
+          "value": 1
+        },
+        {
+          "name": "BROADPHASE_BORDER_REMOVE_ENTITY",
+          "value": 2
+        },
+        {
+          "name": "BROADPHASE_BORDER_DO_NOTHING",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "TreeUpdateType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "REBUILD_ACTIVE",
+          "value": 0
+        },
+        {
+          "name": "REBUILD_ALL",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "gravity",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "broadPhaseQuerySize",
+      "offset_x86": 32,
+      "offset_x86_64": 32,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 400
+    },
+    {
+      "name": "contactRestingVelocity",
+      "offset_x86": 36,
+      "offset_x86_64": 36,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "broadPhaseBorderBehaviour",
+      "offset_x86": 40,
+      "offset_x86_64": 40,
+      "enum_ref": "BroadPhaseBorderBehaviour",
+      "ctype": "enum BroadPhaseBorderBehaviour",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "mtPostponeAndSortBroadPhaseBorderCallbacks",
+      "offset_x86": 41,
+      "offset_x86_64": 41,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 400
+    },
+    {
+      "name": "broadPhaseWorldAabb",
+      "offset_x86": 48,
+      "offset_x86_64": 48,
+      "class_ref": "hkAabb",
+      "ctype": "struct hkAabb",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "useKdTree",
+      "offset_x86": 80,
+      "offset_x86_64": 80,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 400
+    },
+    {
+      "name": "useMultipleTree",
+      "offset_x86": 81,
+      "offset_x86_64": 81,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 400
+    },
+    {
+      "name": "treeUpdateType",
+      "offset_x86": 82,
+      "offset_x86_64": 82,
+      "enum_ref": "TreeUpdateType",
+      "ctype": "enum TreeUpdateType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "autoUpdateKdTree",
+      "offset_x86": 83,
+      "offset_x86_64": 83,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 401
+    },
+    {
+      "name": "collisionTolerance",
+      "offset_x86": 84,
+      "offset_x86_64": 84,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "collisionFilter",
+      "offset_x86": 88,
+      "offset_x86_64": 88,
+      "class_ref": "hkpCollisionFilter",
+      "ctype": "struct hkpCollisionFilter*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "convexListFilter",
+      "offset_x86": 92,
+      "offset_x86_64": 96,
+      "class_ref": "hkpConvexListFilter",
+      "ctype": "struct hkpConvexListFilter*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "expectedMaxLinearVelocity",
+      "offset_x86": 96,
+      "offset_x86_64": 104,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 43480000
+    },
+    {
+      "name": "sizeOfToiEventQueue",
+      "offset_x86": 100,
+      "offset_x86_64": 108,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "expectedMinPsiDeltaTime",
+      "offset_x86": 104,
+      "offset_x86_64": 112,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "memoryWatchDog",
+      "offset_x86": 108,
+      "offset_x86_64": 120,
+      "class_ref": "hkWorldMemoryAvailableWatchDog",
+      "ctype": "struct hkWorldMemoryAvailableWatchDog*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "broadPhaseNumMarkers",
+      "offset_x86": 112,
+      "offset_x86_64": 128,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "contactPointGeneration",
+      "offset_x86": 116,
+      "offset_x86_64": 132,
+      "enum_ref": "ContactPointGeneration",
+      "ctype": "enum ContactPointGeneration",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "allowToSkipConfirmedCallbacks",
+      "offset_x86": 117,
+      "offset_x86_64": 133,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "useHybridBroadphase",
+      "offset_x86": 118,
+      "offset_x86_64": 134,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "solverTau",
+      "offset_x86": 120,
+      "offset_x86_64": 136,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "solverDamp",
+      "offset_x86": 124,
+      "offset_x86_64": 140,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "solverIterations",
+      "offset_x86": 128,
+      "offset_x86_64": 144,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 4
+    },
+    {
+      "name": "solverMicrosteps",
+      "offset_x86": 132,
+      "offset_x86_64": 148,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 1
+    },
+    {
+      "name": "maxConstraintViolation",
+      "offset_x86": 136,
+      "offset_x86_64": 152,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "forceCoherentConstraintOrderingInSolver",
+      "offset_x86": 140,
+      "offset_x86_64": 156,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "snapCollisionToConvexEdgeThreshold",
+      "offset_x86": 144,
+      "offset_x86_64": 160,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "snapCollisionToConcaveEdgeThreshold",
+      "offset_x86": 148,
+      "offset_x86_64": 164,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "enableToiWeldRejection",
+      "offset_x86": 152,
+      "offset_x86_64": 168,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "enableDeprecatedWelding",
+      "offset_x86": 153,
+      "offset_x86_64": 169,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "iterativeLinearCastEarlyOutDistance",
+      "offset_x86": 156,
+      "offset_x86_64": 172,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "iterativeLinearCastMaxIterations",
+      "offset_x86": 160,
+      "offset_x86_64": 176,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 14
+    },
+    {
+      "name": "deactivationNumInactiveFramesSelectFlag0",
+      "offset_x86": 164,
+      "offset_x86_64": 180,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "deactivationNumInactiveFramesSelectFlag1",
+      "offset_x86": 165,
+      "offset_x86_64": 181,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "deactivationIntegrateCounter",
+      "offset_x86": 166,
+      "offset_x86_64": 182,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "shouldActivateOnRigidBodyTransformChange",
+      "offset_x86": 167,
+      "offset_x86_64": 183,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 1
+    },
+    {
+      "name": "deactivationReferenceDistance",
+      "offset_x86": 168,
+      "offset_x86_64": 184,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "toiCollisionResponseRotateNormal",
+      "offset_x86": 172,
+      "offset_x86_64": 188,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "maxSectorsPerMidphaseCollideTask",
+      "offset_x86": 176,
+      "offset_x86_64": 192,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 2
+    },
+    {
+      "name": "maxSectorsPerNarrowphaseCollideTask",
+      "offset_x86": 180,
+      "offset_x86_64": 196,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 4
+    },
+    {
+      "name": "processToisMultithreaded",
+      "offset_x86": 184,
+      "offset_x86_64": 200,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 1
+    },
+    {
+      "name": "maxEntriesPerToiMidphaseCollideTask",
+      "offset_x86": 188,
+      "offset_x86_64": 204,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "maxEntriesPerToiNarrowphaseCollideTask",
+      "offset_x86": 192,
+      "offset_x86_64": 208,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "maxNumToiCollisionPairsSinglethreaded",
+      "offset_x86": 196,
+      "offset_x86_64": 212,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numToisTillAllowedPenetrationSimplifiedToi",
+      "offset_x86": 200,
+      "offset_x86_64": 216,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 40400000
+    },
+    {
+      "name": "numToisTillAllowedPenetrationToi",
+      "offset_x86": 204,
+      "offset_x86_64": 220,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 40400000
+    },
+    {
+      "name": "numToisTillAllowedPenetrationToiHigher",
+      "offset_x86": 208,
+      "offset_x86_64": 224,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 40800000
+    },
+    {
+      "name": "numToisTillAllowedPenetrationToiForced",
+      "offset_x86": 212,
+      "offset_x86_64": 228,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "enableDeactivation",
+      "offset_x86": 216,
+      "offset_x86_64": 232,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "simulationType",
+      "offset_x86": 217,
+      "offset_x86_64": 233,
+      "enum_ref": "SimulationType",
+      "ctype": "enum SimulationType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "enableSimulationIslands",
+      "offset_x86": 218,
+      "offset_x86_64": 234,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "minDesiredIslandSize",
+      "offset_x86": 220,
+      "offset_x86_64": 236,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 40
+    },
+    {
+      "name": "processActionsInSingleThread",
+      "offset_x86": 224,
+      "offset_x86_64": 240,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 1
+    },
+    {
+      "name": "allowIntegrationOfIslandsWithoutConstraintsInASeparateJob",
+      "offset_x86": 225,
+      "offset_x86_64": 241,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "frameMarkerPsiSnap",
+      "offset_x86": 228,
+      "offset_x86_64": 244,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "fireCollisionCallbacks",
+      "offset_x86": 232,
+      "offset_x86_64": 248,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

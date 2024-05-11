@@ -1,0 +1,33 @@
+{
+  "name": "hkbCombineTransformsModifierInternalState",
+  "version": 0,
+  "signature": "0xa92ed39f",
+  "size_x86": 48,
+  "size_x86_64": 48,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "translationOut",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "rotationOut",
+      "offset_x86": 32,
+      "offset_x86_64": 32,
+      "ctype": "hkQuaternion",
+      "vtype": "TYPE_QUATERNION",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

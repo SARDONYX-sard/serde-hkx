@@ -1,0 +1,35 @@
+{
+  "name": "hkpGenericConstraintData",
+  "version": 0,
+  "signature": "0xfa824640",
+  "size_x86": 88,
+  "size_x86_64": 128,
+  "parent": "hkpConstraintData",
+  "vtable": true,
+  "members": [
+    {
+      "name": "atoms",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "class_ref": "hkpBridgeAtoms",
+      "ctype": "struct hkpBridgeAtoms",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "scheme",
+      "offset_x86": 24,
+      "offset_x86_64": 48,
+      "class_ref": "hkpGenericConstraintDataScheme",
+      "ctype": "struct hkpGenericConstraintDataScheme",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

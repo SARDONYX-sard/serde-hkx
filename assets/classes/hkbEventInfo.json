@@ -1,0 +1,38 @@
+{
+  "name": "hkbEventInfo",
+  "version": 0,
+  "signature": "0x5874eed4",
+  "size_x86": 4,
+  "size_x86_64": 4,
+  "vtable": false,
+  "enums": [
+    {
+      "name": "Flags",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "FLAG_SILENT",
+          "value": 1
+        },
+        {
+          "name": "FLAG_SYNC_POINT",
+          "value": 2
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "flags",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "enum_ref": "Flags",
+      "ctype": "flags Flags",
+      "vtype": "TYPE_FLAGS",
+      "vsubtype": "TYPE_UINT32",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

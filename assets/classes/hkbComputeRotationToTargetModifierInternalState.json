@@ -1,0 +1,22 @@
+{
+  "name": "hkbComputeRotationToTargetModifierInternalState",
+  "version": 0,
+  "signature": "0x71cd1eb0",
+  "size_x86": 32,
+  "size_x86_64": 32,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "rotationOut",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkQuaternion",
+      "vtype": "TYPE_QUATERNION",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

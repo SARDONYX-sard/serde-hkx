@@ -1,0 +1,221 @@
+{
+  "name": "BSSynchronizedClipGenerator",
+  "version": 1,
+  "signature": "0xd83bea64",
+  "size_x86": 256,
+  "size_x86_64": 304,
+  "parent": "hkbGenerator",
+  "vtable": true,
+  "members": [
+    {
+      "name": "pClipGenerator",
+      "offset_x86": 48,
+      "offset_x86_64": 80,
+      "class_ref": "hkbGenerator",
+      "ctype": "struct hkbGenerator*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|ALIGN_16",
+      "default": 0
+    },
+    {
+      "name": "SyncAnimPrefix",
+      "offset_x86": 52,
+      "offset_x86_64": 88,
+      "ctype": "char*",
+      "vtype": "TYPE_CSTRING",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "bSyncClipIgnoreMarkPlacement",
+      "offset_x86": 56,
+      "offset_x86_64": 96,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "fGetToMarkTime",
+      "offset_x86": 60,
+      "offset_x86_64": 100,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "fMarkErrorThreshold",
+      "offset_x86": 64,
+      "offset_x86_64": 104,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "bLeadCharacter",
+      "offset_x86": 68,
+      "offset_x86_64": 108,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "bReorientSupportChar",
+      "offset_x86": 69,
+      "offset_x86_64": 109,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "bApplyMotionFromRoot",
+      "offset_x86": 70,
+      "offset_x86_64": 110,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "pSyncScene",
+      "offset_x86": 72,
+      "offset_x86_64": 112,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "StartMarkWS",
+      "offset_x86": 80,
+      "offset_x86_64": 128,
+      "ctype": "hkQsTransform",
+      "vtype": "TYPE_QSTRANSFORM",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "EndMarkWS",
+      "offset_x86": 128,
+      "offset_x86_64": 176,
+      "ctype": "hkQsTransform",
+      "vtype": "TYPE_QSTRANSFORM",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "StartMarkMS",
+      "offset_x86": 176,
+      "offset_x86_64": 224,
+      "ctype": "hkQsTransform",
+      "vtype": "TYPE_QSTRANSFORM",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "fCurrentLerp",
+      "offset_x86": 224,
+      "offset_x86_64": 272,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "pLocalSyncBinding",
+      "offset_x86": 228,
+      "offset_x86_64": 280,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "pEventMap",
+      "offset_x86": 232,
+      "offset_x86_64": 288,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "sAnimationBindingIndex",
+      "offset_x86": 236,
+      "offset_x86_64": 296,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "bAtMark",
+      "offset_x86": 238,
+      "offset_x86_64": 298,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "bAllCharactersInScene",
+      "offset_x86": 239,
+      "offset_x86_64": 299,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "bAllCharactersAtMarks",
+      "offset_x86": 240,
+      "offset_x86_64": 300,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

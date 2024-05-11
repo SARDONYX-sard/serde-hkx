@@ -1,0 +1,45 @@
+{
+  "name": "hkbVariableBindingSet",
+  "version": 2,
+  "signature": "0x338ad4ff",
+  "size_x86": 28,
+  "size_x86_64": 40,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "bindings",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "class_ref": "hkbVariableBindingSetBinding",
+      "ctype": "hkArray<struct hkbVariableBindingSetBinding>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "indexOfBindingToEnable",
+      "offset_x86": 20,
+      "offset_x86_64": 32,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "hasOutputBinding",
+      "offset_x86": 24,
+      "offset_x86_64": 36,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

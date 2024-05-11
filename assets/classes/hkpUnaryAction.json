@@ -1,0 +1,23 @@
+{
+  "name": "hkpUnaryAction",
+  "version": 0,
+  "signature": "0x895532c0",
+  "size_x86": 28,
+  "size_x86_64": 56,
+  "parent": "hkpAction",
+  "vtable": true,
+  "members": [
+    {
+      "name": "entity",
+      "offset_x86": 24,
+      "offset_x86_64": 48,
+      "class_ref": "hkpEntity",
+      "ctype": "struct hkpEntity*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

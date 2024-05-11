@@ -1,0 +1,55 @@
+{
+  "name": "hkbEventDrivenModifier",
+  "version": 0,
+  "signature": "0x7ed3f44e",
+  "size_x86": 60,
+  "size_x86_64": 104,
+  "parent": "hkbModifierWrapper",
+  "vtable": true,
+  "members": [
+    {
+      "name": "activateEventId",
+      "offset_x86": 48,
+      "offset_x86_64": 88,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "deactivateEventId",
+      "offset_x86": 52,
+      "offset_x86_64": 92,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "activeByDefault",
+      "offset_x86": 56,
+      "offset_x86_64": 96,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "isActive",
+      "offset_x86": 57,
+      "offset_x86_64": 97,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

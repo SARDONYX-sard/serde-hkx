@@ -1,0 +1,34 @@
+{
+  "name": "hkpStiffSpringConstraintDataAtoms",
+  "version": 0,
+  "signature": "0x207eb376",
+  "size_x86": 64,
+  "size_x86_64": 64,
+  "vtable": false,
+  "members": [
+    {
+      "name": "pivots",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "class_ref": "hkpSetLocalTranslationsConstraintAtom",
+      "ctype": "struct hkpSetLocalTranslationsConstraintAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "spring",
+      "offset_x86": 48,
+      "offset_x86_64": 48,
+      "class_ref": "hkpStiffSpringConstraintAtom",
+      "ctype": "struct hkpStiffSpringConstraintAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

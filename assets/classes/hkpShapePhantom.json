@@ -1,0 +1,23 @@
+{
+  "name": "hkpShapePhantom",
+  "version": 0,
+  "signature": "0xcb22fbcd",
+  "size_x86": 352,
+  "size_x86_64": 416,
+  "parent": "hkpPhantom",
+  "vtable": true,
+  "members": [
+    {
+      "name": "motionState",
+      "offset_x86": 176,
+      "offset_x86_64": 240,
+      "class_ref": "hkMotionState",
+      "ctype": "struct hkMotionState",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "hkbStringCondition",
+  "version": 0,
+  "signature": "0x5ab50487",
+  "size_x86": 12,
+  "size_x86_64": 24,
+  "parent": "hkbCondition",
+  "vtable": true,
+  "members": [
+    {
+      "name": "conditionString",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

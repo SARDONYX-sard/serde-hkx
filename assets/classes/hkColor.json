@@ -1,0 +1,589 @@
+{
+  "name": "hkColor",
+  "version": 0,
+  "signature": "0x106b96ce",
+  "size_x86": 1,
+  "size_x86_64": 1,
+  "vtable": false,
+  "enums": [
+    {
+      "name": "ExtendedColors",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "MAROON",
+          "value": -8388608
+        },
+        {
+          "name": "DARKRED",
+          "value": -7667712
+        },
+        {
+          "name": "RED",
+          "value": -65536
+        },
+        {
+          "name": "LIGHTPINK",
+          "value": -18751
+        },
+        {
+          "name": "CRIMSON",
+          "value": -2354116
+        },
+        {
+          "name": "PALEVIOLETRED",
+          "value": -2396013
+        },
+        {
+          "name": "HOTPINK",
+          "value": -38476
+        },
+        {
+          "name": "DEEPPINK",
+          "value": -60269
+        },
+        {
+          "name": "MEDIUMVIOLETRED",
+          "value": -3730043
+        },
+        {
+          "name": "PURPLE",
+          "value": -8388480
+        },
+        {
+          "name": "DARKMAGENTA",
+          "value": -7667573
+        },
+        {
+          "name": "ORCHID",
+          "value": -2461482
+        },
+        {
+          "name": "THISTLE",
+          "value": -2572328
+        },
+        {
+          "name": "PLUM",
+          "value": -2252579
+        },
+        {
+          "name": "VIOLET",
+          "value": -1146130
+        },
+        {
+          "name": "FUCHSIA",
+          "value": -65281
+        },
+        {
+          "name": "MAGENTA",
+          "value": -65281
+        },
+        {
+          "name": "MEDIUMORCHID",
+          "value": -4565549
+        },
+        {
+          "name": "DARKVIOLET",
+          "value": -7077677
+        },
+        {
+          "name": "DARKORCHID",
+          "value": -6737204
+        },
+        {
+          "name": "BLUEVIOLET",
+          "value": -7722014
+        },
+        {
+          "name": "INDIGO",
+          "value": -11861886
+        },
+        {
+          "name": "MEDIUMPURPLE",
+          "value": -7114533
+        },
+        {
+          "name": "SLATEBLUE",
+          "value": -9807155
+        },
+        {
+          "name": "MEDIUMSLATEBLUE",
+          "value": -8689426
+        },
+        {
+          "name": "DARKBLUE",
+          "value": -16777077
+        },
+        {
+          "name": "MEDIUMBLUE",
+          "value": -16777011
+        },
+        {
+          "name": "BLUE",
+          "value": -16776961
+        },
+        {
+          "name": "NAVY",
+          "value": -16777088
+        },
+        {
+          "name": "MIDNIGHTBLUE",
+          "value": -15132304
+        },
+        {
+          "name": "DARKSLATEBLUE",
+          "value": -12042869
+        },
+        {
+          "name": "ROYALBLUE",
+          "value": -12490271
+        },
+        {
+          "name": "CORNFLOWERBLUE",
+          "value": -10185235
+        },
+        {
+          "name": "LIGHTSTEELBLUE",
+          "value": -5192482
+        },
+        {
+          "name": "ALICEBLUE",
+          "value": -984833
+        },
+        {
+          "name": "GHOSTWHITE",
+          "value": -460545
+        },
+        {
+          "name": "LAVENDER",
+          "value": -1644806
+        },
+        {
+          "name": "DODGERBLUE",
+          "value": -14774017
+        },
+        {
+          "name": "STEELBLUE",
+          "value": -12156236
+        },
+        {
+          "name": "DEEPSKYBLUE",
+          "value": -16728065
+        },
+        {
+          "name": "SLATEGRAY",
+          "value": -9404272
+        },
+        {
+          "name": "LIGHTSLATEGRAY",
+          "value": -8943463
+        },
+        {
+          "name": "LIGHTSKYBLUE",
+          "value": -7876870
+        },
+        {
+          "name": "SKYBLUE",
+          "value": -7876885
+        },
+        {
+          "name": "LIGHTBLUE",
+          "value": -5383962
+        },
+        {
+          "name": "TEAL",
+          "value": -16744320
+        },
+        {
+          "name": "DARKCYAN",
+          "value": -16741493
+        },
+        {
+          "name": "DARKTURQUOISE",
+          "value": -16724271
+        },
+        {
+          "name": "CYAN",
+          "value": -16711681
+        },
+        {
+          "name": "MEDIUMTURQUOISE",
+          "value": -12004916
+        },
+        {
+          "name": "CADETBLUE",
+          "value": -10510688
+        },
+        {
+          "name": "PALETURQUOISE",
+          "value": -5247250
+        },
+        {
+          "name": "LIGHTCYAN",
+          "value": -2031617
+        },
+        {
+          "name": "AZURE",
+          "value": -983041
+        },
+        {
+          "name": "LIGHTSEAGREEN",
+          "value": -14634326
+        },
+        {
+          "name": "TURQUOISE",
+          "value": -12525360
+        },
+        {
+          "name": "POWDERBLUE",
+          "value": -5185306
+        },
+        {
+          "name": "DARKSLATEGRAY",
+          "value": -13676721
+        },
+        {
+          "name": "AQUAMARINE",
+          "value": -8388652
+        },
+        {
+          "name": "MEDIUMSPRINGGREEN",
+          "value": -16713062
+        },
+        {
+          "name": "MEDIUMAQUAMARINE",
+          "value": -10039894
+        },
+        {
+          "name": "SPRINGGREEN",
+          "value": -16711809
+        },
+        {
+          "name": "MEDIUMSEAGREEN",
+          "value": -12799119
+        },
+        {
+          "name": "SEAGREEN",
+          "value": -13726889
+        },
+        {
+          "name": "LIMEGREEN",
+          "value": -13447886
+        },
+        {
+          "name": "DARKGREEN",
+          "value": -16751616
+        },
+        {
+          "name": "GREEN",
+          "value": -16744448
+        },
+        {
+          "name": "LIME",
+          "value": -16711936
+        },
+        {
+          "name": "FORESTGREEN",
+          "value": -14513374
+        },
+        {
+          "name": "DARKSEAGREEN",
+          "value": -7357297
+        },
+        {
+          "name": "LIGHTGREEN",
+          "value": -7278960
+        },
+        {
+          "name": "PALEGREEN",
+          "value": -6751336
+        },
+        {
+          "name": "MINTCREAM",
+          "value": -655366
+        },
+        {
+          "name": "HONEYDEW",
+          "value": -983056
+        },
+        {
+          "name": "CHARTREUSE",
+          "value": -8388864
+        },
+        {
+          "name": "LAWNGREEN",
+          "value": -8586240
+        },
+        {
+          "name": "OLIVEDRAB",
+          "value": -9728477
+        },
+        {
+          "name": "DARKOLIVEGREEN",
+          "value": -11179217
+        },
+        {
+          "name": "YELLOWGREEN",
+          "value": -6632142
+        },
+        {
+          "name": "GREENYELLOW",
+          "value": -5374161
+        },
+        {
+          "name": "BEIGE",
+          "value": -657956
+        },
+        {
+          "name": "LINEN",
+          "value": -331546
+        },
+        {
+          "name": "LIGHTGOLDENRODYELLOW",
+          "value": -329006
+        },
+        {
+          "name": "OLIVE",
+          "value": -8355840
+        },
+        {
+          "name": "YELLOW",
+          "value": -256
+        },
+        {
+          "name": "LIGHTYELLOW",
+          "value": -32
+        },
+        {
+          "name": "IVORY",
+          "value": -16
+        },
+        {
+          "name": "DARKKHAKI",
+          "value": -4343957
+        },
+        {
+          "name": "KHAKI",
+          "value": -989556
+        },
+        {
+          "name": "PALEGOLDENROD",
+          "value": -1120086
+        },
+        {
+          "name": "WHEAT",
+          "value": -663885
+        },
+        {
+          "name": "GOLD",
+          "value": -10496
+        },
+        {
+          "name": "LEMONCHIFFON",
+          "value": -1331
+        },
+        {
+          "name": "PAPAYAWHIP",
+          "value": -4139
+        },
+        {
+          "name": "DARKGOLDENROD",
+          "value": -4684277
+        },
+        {
+          "name": "GOLDENROD",
+          "value": -2448096
+        },
+        {
+          "name": "ANTIQUEWHITE",
+          "value": -332841
+        },
+        {
+          "name": "CORNSILK",
+          "value": -1828
+        },
+        {
+          "name": "OLDLACE",
+          "value": -133658
+        },
+        {
+          "name": "MOCCASIN",
+          "value": -6987
+        },
+        {
+          "name": "NAVAJOWHITE",
+          "value": -8531
+        },
+        {
+          "name": "ORANGE",
+          "value": -23296
+        },
+        {
+          "name": "BISQUE",
+          "value": -6972
+        },
+        {
+          "name": "TAN",
+          "value": -2968436
+        },
+        {
+          "name": "DARKORANGE",
+          "value": -29696
+        },
+        {
+          "name": "BURLYWOOD",
+          "value": -2180985
+        },
+        {
+          "name": "SADDLEBROWN",
+          "value": -7650029
+        },
+        {
+          "name": "SANDYBROWN",
+          "value": -744352
+        },
+        {
+          "name": "BLANCHEDALMOND",
+          "value": -5171
+        },
+        {
+          "name": "LAVENDERBLUSH",
+          "value": -3851
+        },
+        {
+          "name": "SEASHELL",
+          "value": -2578
+        },
+        {
+          "name": "FLORALWHITE",
+          "value": -1296
+        },
+        {
+          "name": "SNOW",
+          "value": -1286
+        },
+        {
+          "name": "PERU",
+          "value": -3308225
+        },
+        {
+          "name": "PEACHPUFF",
+          "value": -9543
+        },
+        {
+          "name": "CHOCOLATE",
+          "value": -2987746
+        },
+        {
+          "name": "SIENNA",
+          "value": -6270419
+        },
+        {
+          "name": "LIGHTSALMON",
+          "value": -24454
+        },
+        {
+          "name": "CORAL",
+          "value": -32944
+        },
+        {
+          "name": "DARKSALMON",
+          "value": -1468806
+        },
+        {
+          "name": "MISTYROSE",
+          "value": -6943
+        },
+        {
+          "name": "ORANGERED",
+          "value": -47872
+        },
+        {
+          "name": "SALMON",
+          "value": -360334
+        },
+        {
+          "name": "TOMATO",
+          "value": -40121
+        },
+        {
+          "name": "ROSYBROWN",
+          "value": -4419697
+        },
+        {
+          "name": "PINK",
+          "value": -16181
+        },
+        {
+          "name": "INDIANRED",
+          "value": -3318692
+        },
+        {
+          "name": "LIGHTCORAL",
+          "value": -1015680
+        },
+        {
+          "name": "BROWN",
+          "value": -5952982
+        },
+        {
+          "name": "FIREBRICK",
+          "value": -5103070
+        },
+        {
+          "name": "BLACK",
+          "value": -16777216
+        },
+        {
+          "name": "DIMGRAY",
+          "value": -9868951
+        },
+        {
+          "name": "GRAY",
+          "value": -8355712
+        },
+        {
+          "name": "DARKGRAY",
+          "value": -5658199
+        },
+        {
+          "name": "SILVER",
+          "value": -4144960
+        },
+        {
+          "name": "LIGHTGREY",
+          "value": -2894893
+        },
+        {
+          "name": "GAINSBORO",
+          "value": -2302756
+        },
+        {
+          "name": "WHITESMOKE",
+          "value": -657931
+        },
+        {
+          "name": "WHITE",
+          "value": -1
+        },
+        {
+          "name": "GREY",
+          "value": -7829368
+        },
+        {
+          "name": "GREY25",
+          "value": -12566464
+        },
+        {
+          "name": "GREY50",
+          "value": -8355712
+        },
+        {
+          "name": "GREY75",
+          "value": -4144960
+        }
+      ]
+    }
+  ],
+  "members": []
+}

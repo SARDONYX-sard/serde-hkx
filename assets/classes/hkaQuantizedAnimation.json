@@ -1,0 +1,44 @@
+{
+  "name": "hkaQuantizedAnimation",
+  "version": 0,
+  "signature": "0x3920f053",
+  "size_x86": 60,
+  "size_x86_64": 88,
+  "parent": "hkaAnimation",
+  "vtable": true,
+  "members": [
+    {
+      "name": "data",
+      "offset_x86": 40,
+      "offset_x86_64": 56,
+      "ctype": "hkArray<hkUint8>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "endian",
+      "offset_x86": 52,
+      "offset_x86_64": 72,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "skeleton",
+      "offset_x86": 56,
+      "offset_x86_64": 80,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

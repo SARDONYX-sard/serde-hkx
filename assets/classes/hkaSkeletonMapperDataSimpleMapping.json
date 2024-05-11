@@ -1,0 +1,43 @@
+{
+  "name": "hkaSkeletonMapperDataSimpleMapping",
+  "version": 0,
+  "signature": "0x3405deca",
+  "size_x86": 64,
+  "size_x86_64": 64,
+  "vtable": false,
+  "members": [
+    {
+      "name": "boneA",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "boneB",
+      "offset_x86": 2,
+      "offset_x86_64": 2,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "aFromBTransform",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkQsTransform",
+      "vtype": "TYPE_QSTRANSFORM",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

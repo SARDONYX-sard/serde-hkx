@@ -1,0 +1,22 @@
+{
+  "name": "hkbMoveCharacterModifierInternalState",
+  "version": 0,
+  "signature": "0x28f67ba0",
+  "size_x86": 12,
+  "size_x86_64": 24,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "timeSinceLastModify",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

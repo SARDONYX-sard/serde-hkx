@@ -1,0 +1,23 @@
+{
+  "name": "hkbModifierWrapper",
+  "version": 0,
+  "signature": "0x3697e044",
+  "size_x86": 48,
+  "size_x86_64": 88,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "members": [
+    {
+      "name": "modifier",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "class_ref": "hkbModifier",
+      "ctype": "struct hkbModifier*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

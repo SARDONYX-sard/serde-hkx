@@ -1,0 +1,55 @@
+{
+  "name": "hkpCompressedSampledHeightFieldShape",
+  "version": 0,
+  "signature": "0x97b6e143",
+  "size_x86": 128,
+  "size_x86_64": 144,
+  "parent": "hkpSampledHeightFieldShape",
+  "vtable": true,
+  "members": [
+    {
+      "name": "storage",
+      "offset_x86": 96,
+      "offset_x86_64": 112,
+      "ctype": "hkArray<hkUint16>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_UINT16",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "triangleFlip",
+      "offset_x86": 108,
+      "offset_x86_64": 128,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "offset",
+      "offset_x86": 112,
+      "offset_x86_64": 132,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "scale",
+      "offset_x86": 116,
+      "offset_x86_64": 136,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

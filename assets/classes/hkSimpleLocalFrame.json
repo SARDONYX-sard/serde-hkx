@@ -1,0 +1,69 @@
+{
+  "name": "hkSimpleLocalFrame",
+  "version": 1,
+  "signature": "0xe758f63c",
+  "size_x86": 112,
+  "size_x86_64": 128,
+  "parent": "hkLocalFrame",
+  "vtable": true,
+  "members": [
+    {
+      "name": "transform",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkTransform",
+      "vtype": "TYPE_TRANSFORM",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "children",
+      "offset_x86": 80,
+      "offset_x86_64": 80,
+      "class_ref": "hkLocalFrame",
+      "ctype": "hkArray<hkLocalFrame*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "parentFrame",
+      "offset_x86": 92,
+      "offset_x86_64": 96,
+      "class_ref": "hkLocalFrame",
+      "ctype": "struct hkLocalFrame*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|NOT_OWNED",
+      "default": 0
+    },
+    {
+      "name": "group",
+      "offset_x86": 96,
+      "offset_x86_64": 104,
+      "class_ref": "hkLocalFrameGroup",
+      "ctype": "struct hkLocalFrameGroup*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "name",
+      "offset_x86": 100,
+      "offset_x86_64": 112,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "name": "hkbRoleAttribute",
+  "version": 0,
+  "signature": "0x3eb2e082",
+  "size_x86": 4,
+  "size_x86_64": 4,
+  "vtable": false,
+  "enums": [
+    {
+      "name": "Role",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "ROLE_DEFAULT",
+          "value": 0
+        },
+        {
+          "name": "ROLE_FILE_NAME",
+          "value": 1
+        },
+        {
+          "name": "ROLE_BONE_INDEX",
+          "value": 2
+        },
+        {
+          "name": "ROLE_BONE_INDEX_MAP",
+          "value": 3
+        },
+        {
+          "name": "ROLE_EVENT_ID",
+          "value": 4
+        },
+        {
+          "name": "ROLE_VARIABLE_INDEX",
+          "value": 5
+        },
+        {
+          "name": "ROLE_ATTRIBUTE_INDEX",
+          "value": 6
+        },
+        {
+          "name": "ROLE_TIME",
+          "value": 7
+        }
+      ]
+    },
+    {
+      "name": "RoleFlags",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "FLAG_NONE",
+          "value": 0
+        },
+        {
+          "name": "FLAG_RAGDOLL",
+          "value": 1
+        },
+        {
+          "name": "FLAG_NORMALIZED",
+          "value": 2
+        },
+        {
+          "name": "FLAG_NOT_VARIABLE",
+          "value": 4
+        },
+        {
+          "name": "FLAG_HIDDEN",
+          "value": 8
+        },
+        {
+          "name": "FLAG_OUTPUT",
+          "value": 16
+        },
+        {
+          "name": "FLAG_NOT_CHARACTER_PROPERTY",
+          "value": 32
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "role",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "enum_ref": "Role",
+      "ctype": "enum Role",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT16",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "flags",
+      "offset_x86": 2,
+      "offset_x86_64": 2,
+      "enum_ref": "RoleFlags",
+      "ctype": "flags RoleFlags",
+      "vtype": "TYPE_FLAGS",
+      "vsubtype": "TYPE_INT16",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,172 @@
+{
+  "name": "hkbCharacterData",
+  "version": 7,
+  "signature": "0x300d6808",
+  "size_x86": 144,
+  "size_x86_64": 176,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "characterControllerInfo",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "class_ref": "hkbCharacterDataCharacterControllerInfo",
+      "ctype": "struct hkbCharacterDataCharacterControllerInfo",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "modelUpMS",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "modelForwardMS",
+      "offset_x86": 48,
+      "offset_x86_64": 64,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "modelRightMS",
+      "offset_x86": 64,
+      "offset_x86_64": 80,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "characterPropertyInfos",
+      "offset_x86": 80,
+      "offset_x86_64": 96,
+      "class_ref": "hkbVariableInfo",
+      "ctype": "hkArray<struct hkbVariableInfo>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numBonesPerLod",
+      "offset_x86": 92,
+      "offset_x86_64": 112,
+      "ctype": "hkArray<hkInt32>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_INT32",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "characterPropertyValues",
+      "offset_x86": 104,
+      "offset_x86_64": 128,
+      "class_ref": "hkbVariableValueSet",
+      "ctype": "struct hkbVariableValueSet*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "footIkDriverInfo",
+      "offset_x86": 108,
+      "offset_x86_64": 136,
+      "class_ref": "hkbFootIkDriverInfo",
+      "ctype": "struct hkbFootIkDriverInfo*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "handIkDriverInfo",
+      "offset_x86": 112,
+      "offset_x86_64": 144,
+      "class_ref": "hkbHandIkDriverInfo",
+      "ctype": "struct hkbHandIkDriverInfo*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "stringData",
+      "offset_x86": 116,
+      "offset_x86_64": 152,
+      "class_ref": "hkbCharacterStringData",
+      "ctype": "struct hkbCharacterStringData*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "mirroredSkeletonInfo",
+      "offset_x86": 120,
+      "offset_x86_64": 160,
+      "class_ref": "hkbMirroredSkeletonInfo",
+      "ctype": "struct hkbMirroredSkeletonInfo*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "scale",
+      "offset_x86": 124,
+      "offset_x86_64": 168,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numHands",
+      "offset_x86": 128,
+      "offset_x86_64": 172,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "numFloatSlots",
+      "offset_x86": 130,
+      "offset_x86_64": 174,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

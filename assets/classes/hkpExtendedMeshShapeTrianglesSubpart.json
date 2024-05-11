@@ -1,0 +1,133 @@
+{
+  "name": "hkpExtendedMeshShapeTrianglesSubpart",
+  "version": 3,
+  "signature": "0x44c32df6",
+  "size_x86": 112,
+  "size_x86_64": 160,
+  "parent": "hkpExtendedMeshShapeSubpart",
+  "vtable": false,
+  "members": [
+    {
+      "name": "numTriangleShapes",
+      "offset_x86": 20,
+      "offset_x86_64": 40,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "vertexBase",
+      "offset_x86": 24,
+      "offset_x86_64": 48,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "numVertices",
+      "offset_x86": 28,
+      "offset_x86_64": 56,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "indexBase",
+      "offset_x86": 32,
+      "offset_x86_64": 64,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "vertexStriding",
+      "offset_x86": 36,
+      "offset_x86_64": 72,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "triangleOffset",
+      "offset_x86": 40,
+      "offset_x86_64": 76,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "indexStriding",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "stridingType",
+      "offset_x86": 46,
+      "offset_x86_64": 82,
+      "enum_ref": "IndexStridingType",
+      "ctype": "enum IndexStridingType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "flipAlternateTriangles",
+      "offset_x86": 47,
+      "offset_x86_64": 83,
+      "ctype": "hkInt8",
+      "vtype": "TYPE_INT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "extrusion",
+      "offset_x86": 48,
+      "offset_x86_64": 96,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "transform",
+      "offset_x86": 64,
+      "offset_x86_64": 112,
+      "ctype": "hkQsTransform",
+      "vtype": "TYPE_QSTRANSFORM",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

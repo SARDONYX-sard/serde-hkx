@@ -1,0 +1,34 @@
+{
+  "name": "hkpSerializedTrack1nInfo",
+  "version": 0,
+  "signature": "0xf12d48d9",
+  "size_x86": 24,
+  "size_x86_64": 32,
+  "vtable": false,
+  "members": [
+    {
+      "name": "sectors",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "class_ref": "hkpAgent1nSector",
+      "ctype": "hkArray<hkpAgent1nSector*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "subTracks",
+      "offset_x86": 12,
+      "offset_x86_64": 16,
+      "class_ref": "hkpSerializedSubTrack1nInfo",
+      "ctype": "hkArray<hkpSerializedSubTrack1nInfo*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

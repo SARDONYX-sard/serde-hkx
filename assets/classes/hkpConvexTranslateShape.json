@@ -1,0 +1,22 @@
+{
+  "name": "hkpConvexTranslateShape",
+  "version": 0,
+  "signature": "0x5ba0a5f7",
+  "size_x86": 48,
+  "size_x86_64": 80,
+  "parent": "hkpConvexTransformShapeBase",
+  "vtable": true,
+  "members": [
+    {
+      "name": "translation",
+      "offset_x86": 32,
+      "offset_x86_64": 64,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

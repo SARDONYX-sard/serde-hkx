@@ -1,0 +1,35 @@
+{
+  "name": "hkxVertexBuffer",
+  "version": 1,
+  "signature": "0x4ab10615",
+  "size_x86": 104,
+  "size_x86_64": 136,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "data",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "class_ref": "hkxVertexBufferVertexData",
+      "ctype": "struct hkxVertexBufferVertexData",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "desc",
+      "offset_x86": 92,
+      "offset_x86_64": 120,
+      "class_ref": "hkxVertexDescription",
+      "ctype": "struct hkxVertexDescription",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

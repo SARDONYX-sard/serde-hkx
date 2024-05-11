@@ -1,0 +1,32 @@
+{
+  "name": "hkpTyremarkPoint",
+  "version": 0,
+  "signature": "0x6bb7c5e8",
+  "size_x86": 32,
+  "size_x86_64": 32,
+  "vtable": false,
+  "members": [
+    {
+      "name": "pointLeft",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "pointRight",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

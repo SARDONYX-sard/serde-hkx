@@ -1,0 +1,22 @@
+{
+  "name": "hkbNamedIntEventPayload",
+  "version": 0,
+  "signature": "0x3c99bda4",
+  "size_x86": 16,
+  "size_x86_64": 32,
+  "parent": "hkbNamedEventPayload",
+  "vtable": true,
+  "members": [
+    {
+      "name": "data",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

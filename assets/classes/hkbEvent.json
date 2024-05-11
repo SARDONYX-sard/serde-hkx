@@ -1,0 +1,22 @@
+{
+  "name": "hkbEvent",
+  "version": 1,
+  "signature": "0x3e0fd810",
+  "size_x86": 12,
+  "size_x86_64": 24,
+  "parent": "hkbEventBase",
+  "vtable": false,
+  "members": [
+    {
+      "name": "sender",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

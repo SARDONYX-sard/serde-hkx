@@ -1,0 +1,22 @@
+{
+  "name": "hkpLinConstraintAtom",
+  "version": 0,
+  "signature": "0x7b6b0210",
+  "size_x86": 4,
+  "size_x86_64": 4,
+  "parent": "hkpConstraintAtom",
+  "vtable": false,
+  "members": [
+    {
+      "name": "axisIndex",
+      "offset_x86": 2,
+      "offset_x86_64": 2,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

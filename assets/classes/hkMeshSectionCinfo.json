@@ -1,0 +1,102 @@
+{
+  "name": "hkMeshSectionCinfo",
+  "version": 1,
+  "signature": "0x6075f3ff",
+  "size_x86": 32,
+  "size_x86_64": 48,
+  "vtable": false,
+  "members": [
+    {
+      "name": "vertexBuffer",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "class_ref": "hkMeshVertexBuffer",
+      "ctype": "struct hkMeshVertexBuffer*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "material",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "class_ref": "hkMeshMaterial",
+      "ctype": "struct hkMeshMaterial*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "primitiveType",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "enum_ref": "PrimitiveType",
+      "ctype": "enum PrimitiveType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numPrimitives",
+      "offset_x86": 12,
+      "offset_x86_64": 20,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "indexType",
+      "offset_x86": 16,
+      "offset_x86_64": 24,
+      "enum_ref": "MeshSectionIndexType",
+      "ctype": "enum MeshSectionIndexType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "indices",
+      "offset_x86": 20,
+      "offset_x86_64": 32,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "vertexStartIndex",
+      "offset_x86": 24,
+      "offset_x86_64": 40,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "transformIndex",
+      "offset_x86": 28,
+      "offset_x86_64": 44,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

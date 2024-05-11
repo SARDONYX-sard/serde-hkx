@@ -1,0 +1,87 @@
+{
+  "name": "hkMultipleVertexBufferLockedElement",
+  "version": 0,
+  "signature": "0xa0e22afc",
+  "size_x86": 7,
+  "size_x86_64": 7,
+  "vtable": false,
+  "members": [
+    {
+      "name": "vertexBufferIndex",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "elementIndex",
+      "offset_x86": 1,
+      "offset_x86_64": 1,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "lockedBufferIndex",
+      "offset_x86": 2,
+      "offset_x86_64": 2,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "vertexFormatIndex",
+      "offset_x86": 3,
+      "offset_x86_64": 3,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "lockFlags",
+      "offset_x86": 4,
+      "offset_x86_64": 4,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "outputBufferIndex",
+      "offset_x86": 5,
+      "offset_x86_64": 5,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "emulatedIndex",
+      "offset_x86": 6,
+      "offset_x86_64": 6,
+      "ctype": "hkInt8",
+      "vtype": "TYPE_INT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "name": "hkPackfileSectionHeader",
+  "version": 0,
+  "signature": "0xf2a92154",
+  "size_x86": 48,
+  "size_x86_64": 48,
+  "vtable": false,
+  "members": [
+    {
+      "name": "sectionTag",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkChar[19]",
+      "vtype": "TYPE_CHAR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 19,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "nullByte",
+      "offset_x86": 19,
+      "offset_x86_64": 19,
+      "ctype": "hkChar",
+      "vtype": "TYPE_CHAR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "absoluteDataStart",
+      "offset_x86": 20,
+      "offset_x86_64": 20,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "localFixupsOffset",
+      "offset_x86": 24,
+      "offset_x86_64": 24,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "globalFixupsOffset",
+      "offset_x86": 28,
+      "offset_x86_64": 28,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "virtualFixupsOffset",
+      "offset_x86": 32,
+      "offset_x86_64": 32,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "exportsOffset",
+      "offset_x86": 36,
+      "offset_x86_64": 36,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "importsOffset",
+      "offset_x86": 40,
+      "offset_x86_64": 40,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "endOffset",
+      "offset_x86": 44,
+      "offset_x86_64": 44,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

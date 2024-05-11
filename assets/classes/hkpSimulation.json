@@ -1,0 +1,164 @@
+{
+  "name": "hkpSimulation",
+  "version": 0,
+  "signature": "0x97aba922",
+  "size_x86": 44,
+  "size_x86_64": 64,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "FindContacts",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "FIND_CONTACTS_DEFAULT",
+          "value": 0
+        },
+        {
+          "name": "FIND_CONTACTS_EXTRA",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "ResetCollisionInformation",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "RESET_TOI",
+          "value": 1
+        },
+        {
+          "name": "RESET_TIM",
+          "value": 2
+        },
+        {
+          "name": "RESET_AABB",
+          "value": 4
+        },
+        {
+          "name": "RESET_ALL",
+          "value": 7
+        }
+      ]
+    },
+    {
+      "name": "LastProcessingStep",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "INTEGRATE",
+          "value": 0
+        },
+        {
+          "name": "COLLIDE",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "determinismCheckFrameCounter",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "world",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "class_ref": "hkpWorld",
+      "ctype": "struct hkpWorld*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "lastProcessingStep",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "enum_ref": "LastProcessingStep",
+      "ctype": "enum LastProcessingStep",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "currentTime",
+      "offset_x86": 20,
+      "offset_x86_64": 36,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "currentPsiTime",
+      "offset_x86": 24,
+      "offset_x86_64": 40,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "physicsDeltaTime",
+      "offset_x86": 28,
+      "offset_x86_64": 44,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "simulateUntilTime",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "frameMarkerPsiSnap",
+      "offset_x86": 36,
+      "offset_x86_64": 52,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "previousStepResult",
+      "offset_x86": 40,
+      "offset_x86_64": 56,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

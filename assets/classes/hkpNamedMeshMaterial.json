@@ -1,0 +1,22 @@
+{
+  "name": "hkpNamedMeshMaterial",
+  "version": 0,
+  "signature": "0x66b42df1",
+  "size_x86": 8,
+  "size_x86_64": 16,
+  "parent": "hkpMeshMaterial",
+  "vtable": false,
+  "members": [
+    {
+      "name": "name",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

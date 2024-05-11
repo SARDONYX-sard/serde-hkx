@@ -1,0 +1,32 @@
+{
+  "name": "hkMemoryResourceHandleExternalLink",
+  "version": 1,
+  "signature": "0x3144d17c",
+  "size_x86": 8,
+  "size_x86_64": 16,
+  "vtable": false,
+  "members": [
+    {
+      "name": "memberName",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "externalId",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

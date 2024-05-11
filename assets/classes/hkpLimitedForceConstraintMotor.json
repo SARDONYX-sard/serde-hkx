@@ -1,0 +1,33 @@
+{
+  "name": "hkpLimitedForceConstraintMotor",
+  "version": 0,
+  "signature": "0x3377b0b0",
+  "size_x86": 20,
+  "size_x86_64": 32,
+  "parent": "hkpConstraintMotor",
+  "vtable": true,
+  "members": [
+    {
+      "name": "minForce",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "maxForce",
+      "offset_x86": 16,
+      "offset_x86_64": 28,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

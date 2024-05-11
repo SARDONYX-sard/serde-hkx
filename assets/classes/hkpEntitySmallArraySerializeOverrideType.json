@@ -1,0 +1,43 @@
+{
+  "name": "hkpEntitySmallArraySerializeOverrideType",
+  "version": 1,
+  "signature": "0xee3c2aec",
+  "size_x86": 8,
+  "size_x86_64": 16,
+  "vtable": false,
+  "members": [
+    {
+      "name": "data",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "size",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "capacityAndFlags",
+      "offset_x86": 6,
+      "offset_x86_64": 10,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

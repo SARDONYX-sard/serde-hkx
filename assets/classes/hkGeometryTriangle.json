@@ -1,0 +1,54 @@
+{
+  "name": "hkGeometryTriangle",
+  "version": 0,
+  "signature": "0x9687513b",
+  "size_x86": 16,
+  "size_x86_64": 16,
+  "vtable": false,
+  "members": [
+    {
+      "name": "a",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "b",
+      "offset_x86": 4,
+      "offset_x86_64": 4,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "c",
+      "offset_x86": 8,
+      "offset_x86_64": 8,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "material",
+      "offset_x86": 12,
+      "offset_x86_64": 12,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

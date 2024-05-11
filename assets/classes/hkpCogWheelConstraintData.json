@@ -1,0 +1,23 @@
+{
+  "name": "hkpCogWheelConstraintData",
+  "version": 0,
+  "signature": "0x7f0e53fc",
+  "size_x86": 176,
+  "size_x86_64": 192,
+  "parent": "hkpConstraintData",
+  "vtable": true,
+  "members": [
+    {
+      "name": "atoms",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "class_ref": "hkpCogWheelConstraintDataAtoms",
+      "ctype": "struct hkpCogWheelConstraintDataAtoms",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|ALIGN_16",
+      "default": 0
+    }
+  ]
+}

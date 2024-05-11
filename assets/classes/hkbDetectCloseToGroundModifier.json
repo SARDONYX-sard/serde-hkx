@@ -1,0 +1,89 @@
+{
+  "name": "hkbDetectCloseToGroundModifier",
+  "version": 2,
+  "signature": "0x981687b2",
+  "size_x86": 72,
+  "size_x86_64": 120,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "members": [
+    {
+      "name": "closeToGroundEvent",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "class_ref": "hkbEventProperty",
+      "ctype": "struct hkbEventProperty",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "closeToGroundHeight",
+      "offset_x86": 52,
+      "offset_x86_64": 96,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "raycastDistanceDown",
+      "offset_x86": 56,
+      "offset_x86_64": 100,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "collisionFilterInfo",
+      "offset_x86": 60,
+      "offset_x86_64": 104,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "boneIndex",
+      "offset_x86": 64,
+      "offset_x86_64": 108,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "animBoneIndex",
+      "offset_x86": 66,
+      "offset_x86_64": 110,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "isCloseToGround",
+      "offset_x86": 68,
+      "offset_x86_64": 112,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

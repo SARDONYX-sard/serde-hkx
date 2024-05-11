@@ -1,0 +1,78 @@
+{
+  "name": "hkpRagdollLimitsDataAtoms",
+  "version": 0,
+  "signature": "0x82b894c3",
+  "size_x86": 176,
+  "size_x86_64": 176,
+  "vtable": false,
+  "enums": [
+    {
+      "name": "Axis",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "AXIS_TWIST",
+          "value": 0
+        },
+        {
+          "name": "AXIS_PLANES",
+          "value": 1
+        },
+        {
+          "name": "AXIS_CROSS_PRODUCT",
+          "value": 2
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "rotations",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "class_ref": "hkpSetLocalRotationsConstraintAtom",
+      "ctype": "struct hkpSetLocalRotationsConstraintAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "twistLimit",
+      "offset_x86": 112,
+      "offset_x86_64": 112,
+      "class_ref": "hkpTwistLimitConstraintAtom",
+      "ctype": "struct hkpTwistLimitConstraintAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "coneLimit",
+      "offset_x86": 132,
+      "offset_x86_64": 132,
+      "class_ref": "hkpConeLimitConstraintAtom",
+      "ctype": "struct hkpConeLimitConstraintAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "planesLimit",
+      "offset_x86": 152,
+      "offset_x86_64": 152,
+      "class_ref": "hkpConeLimitConstraintAtom",
+      "ctype": "struct hkpConeLimitConstraintAtom",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

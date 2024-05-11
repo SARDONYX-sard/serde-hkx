@@ -1,0 +1,68 @@
+{
+  "name": "hkpSimpleMeshShape",
+  "version": 0,
+  "signature": "0x16b3c811",
+  "size_x86": 68,
+  "size_x86_64": 96,
+  "parent": "hkpShapeCollection",
+  "vtable": true,
+  "members": [
+    {
+      "name": "vertices",
+      "offset_x86": 24,
+      "offset_x86_64": 40,
+      "ctype": "hkArray<hkVector4>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_VECTOR4",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "triangles",
+      "offset_x86": 36,
+      "offset_x86_64": 56,
+      "class_ref": "hkpSimpleMeshShapeTriangle",
+      "ctype": "hkArray<struct hkpSimpleMeshShapeTriangle>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "materialIndices",
+      "offset_x86": 48,
+      "offset_x86_64": 72,
+      "ctype": "hkArray<hkUint8>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "radius",
+      "offset_x86": 60,
+      "offset_x86_64": 88,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "weldingType",
+      "offset_x86": 64,
+      "offset_x86_64": 92,
+      "enum_ref": "WeldingType",
+      "ctype": "enum WeldingType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 6
+    }
+  ]
+}

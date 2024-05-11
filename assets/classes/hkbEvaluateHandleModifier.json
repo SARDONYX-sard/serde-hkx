@@ -1,0 +1,162 @@
+{
+  "name": "hkbEvaluateHandleModifier",
+  "version": 2,
+  "signature": "0x79757102",
+  "size_x86": 176,
+  "size_x86_64": 240,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "HandleChangeMode",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "HANDLE_CHANGE_MODE_ABRUPT",
+          "value": 0
+        },
+        {
+          "name": "HANDLE_CHANGE_MODE_CONSTANT_VELOCITY",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "handle",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "class_ref": "hkbHandle",
+      "ctype": "struct hkbHandle*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "handlePositionOut",
+      "offset_x86": 48,
+      "offset_x86_64": 96,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "handleRotationOut",
+      "offset_x86": 64,
+      "offset_x86_64": 112,
+      "ctype": "hkQuaternion",
+      "vtype": "TYPE_QUATERNION",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "isValidOut",
+      "offset_x86": 80,
+      "offset_x86_64": 128,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "extrapolationTimeStep",
+      "offset_x86": 84,
+      "offset_x86_64": 132,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "handleChangeSpeed",
+      "offset_x86": 88,
+      "offset_x86_64": 136,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "handleChangeMode",
+      "offset_x86": 92,
+      "offset_x86_64": 140,
+      "enum_ref": "HandleChangeMode",
+      "ctype": "enum HandleChangeMode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "oldHandle",
+      "offset_x86": 96,
+      "offset_x86_64": 144,
+      "class_ref": "hkbHandle",
+      "ctype": "struct hkbHandle",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "oldHandlePosition",
+      "offset_x86": 128,
+      "offset_x86_64": 192,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "oldHandleRotation",
+      "offset_x86": 144,
+      "offset_x86_64": 208,
+      "ctype": "hkQuaternion",
+      "vtype": "TYPE_QUATERNION",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "timeSinceLastModify",
+      "offset_x86": 160,
+      "offset_x86_64": 224,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "smoothlyChangingHandles",
+      "offset_x86": 164,
+      "offset_x86_64": 228,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

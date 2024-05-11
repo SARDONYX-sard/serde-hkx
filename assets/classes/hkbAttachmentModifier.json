@@ -1,0 +1,150 @@
+{
+  "name": "hkbAttachmentModifier",
+  "version": 1,
+  "signature": "0xcc0aab32",
+  "size_x86": 108,
+  "size_x86_64": 200,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "members": [
+    {
+      "name": "sendToAttacherOnAttach",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "class_ref": "hkbEventProperty",
+      "ctype": "struct hkbEventProperty",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "sendToAttacheeOnAttach",
+      "offset_x86": 52,
+      "offset_x86_64": 96,
+      "class_ref": "hkbEventProperty",
+      "ctype": "struct hkbEventProperty",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "sendToAttacherOnDetach",
+      "offset_x86": 60,
+      "offset_x86_64": 112,
+      "class_ref": "hkbEventProperty",
+      "ctype": "struct hkbEventProperty",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "sendToAttacheeOnDetach",
+      "offset_x86": 68,
+      "offset_x86_64": 128,
+      "class_ref": "hkbEventProperty",
+      "ctype": "struct hkbEventProperty",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "attachmentSetup",
+      "offset_x86": 76,
+      "offset_x86_64": 144,
+      "class_ref": "hkbAttachmentSetup",
+      "ctype": "struct hkbAttachmentSetup*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "attacherHandle",
+      "offset_x86": 80,
+      "offset_x86_64": 152,
+      "class_ref": "hkbHandle",
+      "ctype": "struct hkbHandle*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "attacheeHandle",
+      "offset_x86": 84,
+      "offset_x86_64": 160,
+      "class_ref": "hkbHandle",
+      "ctype": "struct hkbHandle*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "attacheeLayer",
+      "offset_x86": 88,
+      "offset_x86_64": 168,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "attacheeRB",
+      "offset_x86": 92,
+      "offset_x86_64": 176,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "oldMotionType",
+      "offset_x86": 96,
+      "offset_x86_64": 184,
+      "ctype": "enum unknown",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "oldFilterInfo",
+      "offset_x86": 100,
+      "offset_x86_64": 188,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "attachment",
+      "offset_x86": 104,
+      "offset_x86_64": 192,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

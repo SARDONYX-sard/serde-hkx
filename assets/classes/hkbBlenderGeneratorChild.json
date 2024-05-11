@@ -1,0 +1,57 @@
+{
+  "name": "hkbBlenderGeneratorChild",
+  "version": 2,
+  "signature": "0xe2b384b0",
+  "size_x86": 48,
+  "size_x86_64": 80,
+  "parent": "hkbBindable",
+  "vtable": true,
+  "members": [
+    {
+      "name": "generator",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "class_ref": "hkbGenerator",
+      "ctype": "struct hkbGenerator*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|ALIGN_16",
+      "default": 0
+    },
+    {
+      "name": "boneWeights",
+      "offset_x86": 36,
+      "offset_x86_64": 56,
+      "class_ref": "hkbBoneWeightArray",
+      "ctype": "struct hkbBoneWeightArray*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "weight",
+      "offset_x86": 40,
+      "offset_x86_64": 64,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "worldFromModelWeight",
+      "offset_x86": 44,
+      "offset_x86_64": 68,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

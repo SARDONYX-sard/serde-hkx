@@ -1,0 +1,116 @@
+{
+  "name": "hkaAnimation",
+  "version": 1,
+  "signature": "0xa6fa7e88",
+  "size_x86": 40,
+  "size_x86_64": 56,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "AnimationType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "HK_UNKNOWN_ANIMATION",
+          "value": 0
+        },
+        {
+          "name": "HK_INTERLEAVED_ANIMATION",
+          "value": 1
+        },
+        {
+          "name": "HK_DELTA_COMPRESSED_ANIMATION",
+          "value": 2
+        },
+        {
+          "name": "HK_WAVELET_COMPRESSED_ANIMATION",
+          "value": 3
+        },
+        {
+          "name": "HK_MIRRORED_ANIMATION",
+          "value": 4
+        },
+        {
+          "name": "HK_SPLINE_COMPRESSED_ANIMATION",
+          "value": 5
+        },
+        {
+          "name": "HK_QUANTIZED_COMPRESSED_ANIMATION",
+          "value": 6
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "type",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "enum_ref": "AnimationType",
+      "ctype": "enum AnimationType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT32",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "duration",
+      "offset_x86": 12,
+      "offset_x86_64": 20,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numberOfTransformTracks",
+      "offset_x86": 16,
+      "offset_x86_64": 24,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numberOfFloatTracks",
+      "offset_x86": 20,
+      "offset_x86_64": 28,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "extractedMotion",
+      "offset_x86": 24,
+      "offset_x86_64": 32,
+      "class_ref": "hkaAnimatedReferenceFrame",
+      "ctype": "struct hkaAnimatedReferenceFrame*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "annotationTracks",
+      "offset_x86": 28,
+      "offset_x86_64": 40,
+      "class_ref": "hkaAnnotationTrack",
+      "ctype": "hkArray<struct hkaAnnotationTrack>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

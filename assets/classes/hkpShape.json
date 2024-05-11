@@ -1,0 +1,33 @@
+{
+  "name": "hkpShape",
+  "version": 0,
+  "signature": "0x666490a1",
+  "size_x86": 16,
+  "size_x86_64": 32,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "userData",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "ctype": "hkUlong",
+      "vtype": "TYPE_ULONG",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "type",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "ctype": "enum unknown",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT32",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

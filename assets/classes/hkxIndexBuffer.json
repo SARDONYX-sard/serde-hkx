@@ -1,0 +1,95 @@
+{
+  "name": "hkxIndexBuffer",
+  "version": 1,
+  "signature": "0xc12c8197",
+  "size_x86": 44,
+  "size_x86_64": 64,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "IndexType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "INDEX_TYPE_INVALID",
+          "value": 0
+        },
+        {
+          "name": "INDEX_TYPE_TRI_LIST",
+          "value": 1
+        },
+        {
+          "name": "INDEX_TYPE_TRI_STRIP",
+          "value": 2
+        },
+        {
+          "name": "INDEX_TYPE_TRI_FAN",
+          "value": 3
+        },
+        {
+          "name": "INDEX_TYPE_MAX_ID",
+          "value": 4
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "indexType",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "enum_ref": "IndexType",
+      "ctype": "enum IndexType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "indices16",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "ctype": "hkArray<hkUint16>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_UINT16",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "indices32",
+      "offset_x86": 24,
+      "offset_x86_64": 40,
+      "ctype": "hkArray<hkUint32>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_UINT32",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "vertexBaseOffset",
+      "offset_x86": 36,
+      "offset_x86_64": 56,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "length",
+      "offset_x86": 40,
+      "offset_x86_64": 60,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

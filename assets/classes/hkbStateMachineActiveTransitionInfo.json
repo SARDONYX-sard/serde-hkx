@@ -1,0 +1,90 @@
+{
+  "name": "hkbStateMachineActiveTransitionInfo",
+  "version": 1,
+  "signature": "0xbb90d54f",
+  "size_x86": 32,
+  "size_x86_64": 40,
+  "vtable": false,
+  "members": [
+    {
+      "name": "transitionEffect",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "transitionEffectInternalStateInfo",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "class_ref": "hkbNodeInternalStateInfo",
+      "ctype": "struct hkbNodeInternalStateInfo*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "transitionInfoReference",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "class_ref": "hkbStateMachineTransitionInfoReference",
+      "ctype": "struct hkbStateMachineTransitionInfoReference",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "transitionInfoReferenceForTE",
+      "offset_x86": 14,
+      "offset_x86_64": 22,
+      "class_ref": "hkbStateMachineTransitionInfoReference",
+      "ctype": "struct hkbStateMachineTransitionInfoReference",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "fromStateId",
+      "offset_x86": 20,
+      "offset_x86_64": 28,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "toStateId",
+      "offset_x86": 24,
+      "offset_x86_64": 32,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "isReturnToPreviousState",
+      "offset_x86": 28,
+      "offset_x86_64": 36,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

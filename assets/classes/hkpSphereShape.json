@@ -1,0 +1,22 @@
+{
+  "name": "hkpSphereShape",
+  "version": 0,
+  "signature": "0x795d9fa",
+  "size_x86": 32,
+  "size_x86_64": 56,
+  "parent": "hkpConvexShape",
+  "vtable": true,
+  "members": [
+    {
+      "name": "pad16",
+      "offset_x86": 20,
+      "offset_x86_64": 40,
+      "ctype": "hkUint32[3]",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 3,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

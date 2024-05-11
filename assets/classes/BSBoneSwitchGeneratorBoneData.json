@@ -1,0 +1,35 @@
+{
+  "name": "BSBoneSwitchGeneratorBoneData",
+  "version": 1,
+  "signature": "0xc1215be6",
+  "size_x86": 48,
+  "size_x86_64": 64,
+  "parent": "hkbBindable",
+  "vtable": true,
+  "members": [
+    {
+      "name": "pGenerator",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "class_ref": "hkbGenerator",
+      "ctype": "struct hkbGenerator*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|ALIGN_16",
+      "default": 0
+    },
+    {
+      "name": "spBoneWeight",
+      "offset_x86": 36,
+      "offset_x86_64": 56,
+      "class_ref": "hkbBoneWeightArray",
+      "ctype": "struct hkbBoneWeightArray*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

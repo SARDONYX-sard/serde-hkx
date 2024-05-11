@@ -1,0 +1,32 @@
+{
+  "name": "hkpMoppCodeReindexedTerminal",
+  "version": 0,
+  "signature": "0x6ed8ac06",
+  "size_x86": 8,
+  "size_x86_64": 8,
+  "vtable": false,
+  "members": [
+    {
+      "name": "origShapeKey",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "reindexedShapeKey",
+      "offset_x86": 4,
+      "offset_x86_64": 4,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

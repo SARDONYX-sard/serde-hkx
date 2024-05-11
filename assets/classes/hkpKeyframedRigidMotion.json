@@ -1,0 +1,10 @@
+{
+  "name": "hkpKeyframedRigidMotion",
+  "version": 0,
+  "signature": "0xbafa2bb7",
+  "size_x86": 288,
+  "size_x86_64": 320,
+  "parent": "hkpMotion",
+  "vtable": true,
+  "members": []
+}

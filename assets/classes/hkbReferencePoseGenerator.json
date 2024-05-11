@@ -1,0 +1,22 @@
+{
+  "name": "hkbReferencePoseGenerator",
+  "version": 0,
+  "signature": "0x26a5675a",
+  "size_x86": 44,
+  "size_x86_64": 80,
+  "parent": "hkbGenerator",
+  "vtable": true,
+  "members": [
+    {
+      "name": "skeleton",
+      "offset_x86": 40,
+      "offset_x86_64": 72,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

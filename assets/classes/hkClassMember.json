@@ -1,0 +1,323 @@
+{
+  "name": "hkClassMember",
+  "version": 0,
+  "signature": "0x5c7ea4c2",
+  "size_x86": 24,
+  "size_x86_64": 40,
+  "vtable": false,
+  "enums": [
+    {
+      "name": "Type",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "TYPE_VOID",
+          "value": 0
+        },
+        {
+          "name": "TYPE_BOOL",
+          "value": 1
+        },
+        {
+          "name": "TYPE_CHAR",
+          "value": 2
+        },
+        {
+          "name": "TYPE_INT8",
+          "value": 3
+        },
+        {
+          "name": "TYPE_UINT8",
+          "value": 4
+        },
+        {
+          "name": "TYPE_INT16",
+          "value": 5
+        },
+        {
+          "name": "TYPE_UINT16",
+          "value": 6
+        },
+        {
+          "name": "TYPE_INT32",
+          "value": 7
+        },
+        {
+          "name": "TYPE_UINT32",
+          "value": 8
+        },
+        {
+          "name": "TYPE_INT64",
+          "value": 9
+        },
+        {
+          "name": "TYPE_UINT64",
+          "value": 10
+        },
+        {
+          "name": "TYPE_REAL",
+          "value": 11
+        },
+        {
+          "name": "TYPE_VECTOR4",
+          "value": 12
+        },
+        {
+          "name": "TYPE_QUATERNION",
+          "value": 13
+        },
+        {
+          "name": "TYPE_MATRIX3",
+          "value": 14
+        },
+        {
+          "name": "TYPE_ROTATION",
+          "value": 15
+        },
+        {
+          "name": "TYPE_QSTRANSFORM",
+          "value": 16
+        },
+        {
+          "name": "TYPE_MATRIX4",
+          "value": 17
+        },
+        {
+          "name": "TYPE_TRANSFORM",
+          "value": 18
+        },
+        {
+          "name": "TYPE_ZERO",
+          "value": 19
+        },
+        {
+          "name": "TYPE_POINTER",
+          "value": 20
+        },
+        {
+          "name": "TYPE_FUNCTIONPOINTER",
+          "value": 21
+        },
+        {
+          "name": "TYPE_ARRAY",
+          "value": 22
+        },
+        {
+          "name": "TYPE_INPLACEARRAY",
+          "value": 23
+        },
+        {
+          "name": "TYPE_ENUM",
+          "value": 24
+        },
+        {
+          "name": "TYPE_STRUCT",
+          "value": 25
+        },
+        {
+          "name": "TYPE_SIMPLEARRAY",
+          "value": 26
+        },
+        {
+          "name": "TYPE_HOMOGENEOUSARRAY",
+          "value": 27
+        },
+        {
+          "name": "TYPE_VARIANT",
+          "value": 28
+        },
+        {
+          "name": "TYPE_CSTRING",
+          "value": 29
+        },
+        {
+          "name": "TYPE_ULONG",
+          "value": 30
+        },
+        {
+          "name": "TYPE_FLAGS",
+          "value": 31
+        },
+        {
+          "name": "TYPE_HALF",
+          "value": 32
+        },
+        {
+          "name": "TYPE_STRINGPTR",
+          "value": 33
+        },
+        {
+          "name": "TYPE_RELARRAY",
+          "value": 34
+        },
+        {
+          "name": "TYPE_MAX",
+          "value": 35
+        }
+      ]
+    },
+    {
+      "name": "FlagValues",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "FLAGS_NONE",
+          "value": 0
+        },
+        {
+          "name": "ALIGN_8",
+          "value": 128
+        },
+        {
+          "name": "ALIGN_16",
+          "value": 256
+        },
+        {
+          "name": "NOT_OWNED",
+          "value": 512
+        },
+        {
+          "name": "SERIALIZE_IGNORED",
+          "value": 1024
+        }
+      ]
+    },
+    {
+      "name": "DeprecatedFlagValues",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "DEPRECATED_SIZE_8",
+          "value": 8
+        },
+        {
+          "name": "DEPRECATED_ENUM_8",
+          "value": 8
+        },
+        {
+          "name": "DEPRECATED_SIZE_16",
+          "value": 16
+        },
+        {
+          "name": "DEPRECATED_ENUM_16",
+          "value": 16
+        },
+        {
+          "name": "DEPRECATED_SIZE_32",
+          "value": 32
+        },
+        {
+          "name": "DEPRECATED_ENUM_32",
+          "value": 32
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "name",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "char*",
+      "vtype": "TYPE_CSTRING",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "class",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "class_ref": "hkClass",
+      "ctype": "struct hkClass*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "enum",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "class_ref": "hkClassEnum",
+      "ctype": "struct hkClassEnum*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "type",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "enum_ref": "Type",
+      "ctype": "enum Type",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "subtype",
+      "offset_x86": 13,
+      "offset_x86_64": 25,
+      "enum_ref": "Type",
+      "ctype": "enum Type",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "cArraySize",
+      "offset_x86": 14,
+      "offset_x86_64": 26,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "flags",
+      "offset_x86": 16,
+      "offset_x86_64": 28,
+      "enum_ref": "FlagValues",
+      "ctype": "flags FlagValues",
+      "vtype": "TYPE_FLAGS",
+      "vsubtype": "TYPE_UINT16",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "offset",
+      "offset_x86": 18,
+      "offset_x86_64": 30,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "attributes",
+      "offset_x86": 20,
+      "offset_x86_64": 32,
+      "class_ref": "hkCustomAttributes",
+      "ctype": "struct hkCustomAttributes*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

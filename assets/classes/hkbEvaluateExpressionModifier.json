@@ -1,0 +1,45 @@
+{
+  "name": "hkbEvaluateExpressionModifier",
+  "version": 1,
+  "signature": "0xf900f6be",
+  "size_x86": 64,
+  "size_x86_64": 112,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "members": [
+    {
+      "name": "expressions",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "class_ref": "hkbExpressionDataArray",
+      "ctype": "struct hkbExpressionDataArray*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "compiledExpressionSet",
+      "offset_x86": 48,
+      "offset_x86_64": 88,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "internalExpressionsData",
+      "offset_x86": 52,
+      "offset_x86_64": 96,
+      "ctype": "hkArray<void>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

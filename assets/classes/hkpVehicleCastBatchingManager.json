@@ -1,0 +1,22 @@
+{
+  "name": "hkpVehicleCastBatchingManager",
+  "version": 0,
+  "signature": "0x53340a9",
+  "size_x86": 24,
+  "size_x86_64": 40,
+  "parent": "hkpVehicleManager",
+  "vtable": true,
+  "members": [
+    {
+      "name": "totalNumWheels",
+      "offset_x86": 20,
+      "offset_x86_64": 32,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

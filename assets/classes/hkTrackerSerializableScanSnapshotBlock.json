@@ -1,0 +1,76 @@
+{
+  "name": "hkTrackerSerializableScanSnapshotBlock",
+  "version": 0,
+  "signature": "0xe7f23e6d",
+  "size_x86": 24,
+  "size_x86_64": 40,
+  "vtable": false,
+  "members": [
+    {
+      "name": "typeIndex",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "start",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "ctype": "hkUlong",
+      "vtype": "TYPE_ULONG",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "size",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "ctype": "hkUlong",
+      "vtype": "TYPE_ULONG",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "arraySize",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "startReferenceIndex",
+      "offset_x86": 16,
+      "offset_x86_64": 28,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numReferences",
+      "offset_x86": 20,
+      "offset_x86_64": 32,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

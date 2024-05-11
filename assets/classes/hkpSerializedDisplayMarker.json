@@ -1,0 +1,22 @@
+{
+  "name": "hkpSerializedDisplayMarker",
+  "version": 0,
+  "signature": "0xd7c8c54f",
+  "size_x86": 80,
+  "size_x86_64": 80,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "transform",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkTransform",
+      "vtype": "TYPE_TRANSFORM",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

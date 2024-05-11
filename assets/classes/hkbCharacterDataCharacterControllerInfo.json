@@ -1,0 +1,55 @@
+{
+  "name": "hkbCharacterDataCharacterControllerInfo",
+  "version": 0,
+  "signature": "0xa0f415bf",
+  "size_x86": 16,
+  "size_x86_64": 24,
+  "vtable": false,
+  "members": [
+    {
+      "name": "capsuleHeight",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "capsuleRadius",
+      "offset_x86": 4,
+      "offset_x86_64": 4,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "collisionFilterInfo",
+      "offset_x86": 8,
+      "offset_x86_64": 8,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "characterControllerCinfo",
+      "offset_x86": 12,
+      "offset_x86_64": 16,
+      "class_ref": "hkpCharacterControllerCinfo",
+      "ctype": "struct hkpCharacterControllerCinfo*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

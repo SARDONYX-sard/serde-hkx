@@ -1,0 +1,10 @@
+{
+  "name": "hkpVehicleRayCastBatchingManager",
+  "version": 0,
+  "signature": "0xed529f13",
+  "size_x86": 24,
+  "size_x86_64": 40,
+  "parent": "hkpVehicleCastBatchingManager",
+  "vtable": true,
+  "members": []
+}

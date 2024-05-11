@@ -1,0 +1,34 @@
+{
+  "name": "hkpConvexTransformShapeBase",
+  "version": 0,
+  "signature": "0xfbd72f9",
+  "size_x86": 32,
+  "size_x86_64": 64,
+  "parent": "hkpConvexShape",
+  "vtable": true,
+  "members": [
+    {
+      "name": "childShape",
+      "offset_x86": 20,
+      "offset_x86_64": 40,
+      "class_ref": "hkpSingleShapeContainer",
+      "ctype": "struct hkpSingleShapeContainer",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "childShapeSize",
+      "offset_x86": 28,
+      "offset_x86_64": 56,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

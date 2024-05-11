@@ -1,0 +1,10 @@
+{
+  "name": "hkbGenerator",
+  "version": 0,
+  "signature": "0xd68aefc",
+  "size_x86": 40,
+  "size_x86_64": 72,
+  "parent": "hkbNode",
+  "vtable": true,
+  "members": []
+}

@@ -1,0 +1,137 @@
+{
+  "name": "hkMultipleVertexBuffer",
+  "version": 0,
+  "signature": "0xde3ab602",
+  "size_x86": 324,
+  "size_x86_64": 352,
+  "parent": "hkMeshVertexBuffer",
+  "vtable": true,
+  "members": [
+    {
+      "name": "vertexFormat",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "class_ref": "hkVertexFormat",
+      "ctype": "struct hkVertexFormat",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "lockedElements",
+      "offset_x86": 268,
+      "offset_x86_64": 280,
+      "class_ref": "hkMultipleVertexBufferLockedElement",
+      "ctype": "hkArray<struct hkMultipleVertexBufferLockedElement>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "lockedBuffer",
+      "offset_x86": 280,
+      "offset_x86_64": 296,
+      "class_ref": "hkMemoryMeshVertexBuffer",
+      "ctype": "struct hkMemoryMeshVertexBuffer*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "elementInfos",
+      "offset_x86": 284,
+      "offset_x86_64": 304,
+      "class_ref": "hkMultipleVertexBufferElementInfo",
+      "ctype": "hkArray<struct hkMultipleVertexBufferElementInfo>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "vertexBufferInfos",
+      "offset_x86": 296,
+      "offset_x86_64": 320,
+      "class_ref": "hkMultipleVertexBufferVertexBufferInfo",
+      "ctype": "hkArray<struct hkMultipleVertexBufferVertexBufferInfo>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numVertices",
+      "offset_x86": 308,
+      "offset_x86_64": 336,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "isLocked",
+      "offset_x86": 312,
+      "offset_x86_64": 340,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "updateCount",
+      "offset_x86": 316,
+      "offset_x86_64": 344,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "writeLock",
+      "offset_x86": 320,
+      "offset_x86_64": 348,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "isSharable",
+      "offset_x86": 321,
+      "offset_x86_64": 349,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "constructionComplete",
+      "offset_x86": 322,
+      "offset_x86_64": 350,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

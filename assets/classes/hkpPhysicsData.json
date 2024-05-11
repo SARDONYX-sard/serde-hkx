@@ -1,0 +1,35 @@
+{
+  "name": "hkpPhysicsData",
+  "version": 0,
+  "signature": "0xc2a461e4",
+  "size_x86": 24,
+  "size_x86_64": 40,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "worldCinfo",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "class_ref": "hkpWorldCinfo",
+      "ctype": "struct hkpWorldCinfo*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "systems",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "class_ref": "hkpPhysicsSystem",
+      "ctype": "hkArray<hkpPhysicsSystem*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

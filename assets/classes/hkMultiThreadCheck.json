@@ -1,0 +1,88 @@
+{
+  "name": "hkMultiThreadCheck",
+  "version": 0,
+  "signature": "0x11e4408b",
+  "size_x86": 12,
+  "size_x86_64": 12,
+  "vtable": false,
+  "enums": [
+    {
+      "name": "AccessType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "HK_ACCESS_IGNORE",
+          "value": 0
+        },
+        {
+          "name": "HK_ACCESS_RO",
+          "value": 1
+        },
+        {
+          "name": "HK_ACCESS_RW",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "ReadMode",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "THIS_OBJECT_ONLY",
+          "value": 0
+        },
+        {
+          "name": "RECURSIVE",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "threadId",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "stackTraceId",
+      "offset_x86": 4,
+      "offset_x86_64": 4,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "markCount",
+      "offset_x86": 8,
+      "offset_x86_64": 8,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "markBitStack",
+      "offset_x86": 10,
+      "offset_x86_64": 10,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

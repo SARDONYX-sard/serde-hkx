@@ -1,0 +1,55 @@
+{
+  "name": "hkpConstraintMotor",
+  "version": 0,
+  "signature": "0x6a44c317",
+  "size_x86": 12,
+  "size_x86_64": 24,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "MotorType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "TYPE_INVALID",
+          "value": 0
+        },
+        {
+          "name": "TYPE_POSITION",
+          "value": 1
+        },
+        {
+          "name": "TYPE_VELOCITY",
+          "value": 2
+        },
+        {
+          "name": "TYPE_SPRING_DAMPER",
+          "value": 3
+        },
+        {
+          "name": "TYPE_CALLBACK",
+          "value": 4
+        },
+        {
+          "name": "TYPE_MAX",
+          "value": 5
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "type",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "enum_ref": "MotorType",
+      "ctype": "enum MotorType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

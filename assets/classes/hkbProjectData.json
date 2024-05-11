@@ -1,0 +1,46 @@
+{
+  "name": "hkbProjectData",
+  "version": 2,
+  "signature": "0x13a39ba7",
+  "size_x86": 48,
+  "size_x86_64": 48,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "worldUpWS",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "stringData",
+      "offset_x86": 32,
+      "offset_x86_64": 32,
+      "class_ref": "hkbProjectStringData",
+      "ctype": "struct hkbProjectStringData*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "defaultEventMode",
+      "offset_x86": 36,
+      "offset_x86_64": 40,
+      "enum_ref": "EventMode",
+      "ctype": "enum EventMode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

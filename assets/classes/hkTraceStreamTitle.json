@@ -1,0 +1,21 @@
+{
+  "name": "hkTraceStreamTitle",
+  "version": 0,
+  "signature": "0x6a4ca82c",
+  "size_x86": 32,
+  "size_x86_64": 32,
+  "vtable": false,
+  "members": [
+    {
+      "name": "value",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkChar[32]",
+      "vtype": "TYPE_CHAR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 32,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

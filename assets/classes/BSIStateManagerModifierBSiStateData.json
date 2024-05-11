@@ -1,0 +1,44 @@
+{
+  "name": "BSIStateManagerModifierBSiStateData",
+  "version": 0,
+  "signature": "0x6b8a15fc",
+  "size_x86": 12,
+  "size_x86_64": 16,
+  "vtable": false,
+  "members": [
+    {
+      "name": "pStateMachine",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "class_ref": "hkbGenerator",
+      "ctype": "struct hkbGenerator*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "StateID",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "iStateToSetAs",
+      "offset_x86": 8,
+      "offset_x86_64": 12,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

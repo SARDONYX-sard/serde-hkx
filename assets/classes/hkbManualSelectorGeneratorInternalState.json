@@ -1,0 +1,22 @@
+{
+  "name": "hkbManualSelectorGeneratorInternalState",
+  "version": 0,
+  "signature": "0x492c6137",
+  "size_x86": 12,
+  "size_x86_64": 24,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "currentGeneratorIndex",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "ctype": "hkInt8",
+      "vtype": "TYPE_INT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

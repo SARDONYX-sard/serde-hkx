@@ -1,0 +1,35 @@
+{
+  "name": "hkpPairCollisionFilter",
+  "version": 0,
+  "signature": "0x4abc140e",
+  "size_x86": 64,
+  "size_x86_64": 96,
+  "parent": "hkpCollisionFilter",
+  "vtable": true,
+  "members": [
+    {
+      "name": "disabledPairs",
+      "offset_x86": 48,
+      "offset_x86_64": 72,
+      "class_ref": "hkpPairCollisionFilterMapPairFilterKeyOverrideType",
+      "ctype": "struct hkpPairCollisionFilterMapPairFilterKeyOverrideType",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "childFilter",
+      "offset_x86": 60,
+      "offset_x86_64": 88,
+      "class_ref": "hkpCollisionFilter",
+      "ctype": "struct hkpCollisionFilter*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

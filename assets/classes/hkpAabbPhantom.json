@@ -1,0 +1,45 @@
+{
+  "name": "hkpAabbPhantom",
+  "version": 0,
+  "signature": "0x2c5189dd",
+  "size_x86": 224,
+  "size_x86_64": 304,
+  "parent": "hkpPhantom",
+  "vtable": true,
+  "members": [
+    {
+      "name": "aabb",
+      "offset_x86": 176,
+      "offset_x86_64": 240,
+      "class_ref": "hkAabb",
+      "ctype": "struct hkAabb",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "overlappingCollidables",
+      "offset_x86": 208,
+      "offset_x86_64": 272,
+      "ctype": "hkArray<void*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "orderDirty",
+      "offset_x86": 220,
+      "offset_x86_64": 288,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

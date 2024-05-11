@@ -1,0 +1,23 @@
+{
+  "name": "hkpVehicleDefaultSuspension",
+  "version": 0,
+  "signature": "0x21735a24",
+  "size_x86": 32,
+  "size_x86_64": 48,
+  "parent": "hkpVehicleSuspension",
+  "vtable": true,
+  "members": [
+    {
+      "name": "wheelSpringParams",
+      "offset_x86": 20,
+      "offset_x86_64": 32,
+      "class_ref": "hkpVehicleDefaultSuspensionWheelSpringSuspensionParameters",
+      "ctype": "hkArray<struct hkpVehicleDefaultSuspensionWheelSpringSuspensionParameters>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

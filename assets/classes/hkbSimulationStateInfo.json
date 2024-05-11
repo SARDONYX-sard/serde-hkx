@@ -1,0 +1,23 @@
+{
+  "name": "hkbSimulationStateInfo",
+  "version": 0,
+  "signature": "0xa40822b4",
+  "size_x86": 12,
+  "size_x86_64": 24,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "simulationState",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "enum_ref": "SimulationState",
+      "ctype": "enum SimulationState",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

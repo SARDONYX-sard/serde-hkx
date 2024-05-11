@@ -1,0 +1,9 @@
+{
+  "name": "hkpRayCollidableFilter",
+  "version": 0,
+  "signature": "0xe0708a00",
+  "size_x86": 4,
+  "size_x86_64": 8,
+  "vtable": true,
+  "members": []
+}

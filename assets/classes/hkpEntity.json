@@ -1,0 +1,290 @@
+{
+  "name": "hkpEntity",
+  "version": 3,
+  "signature": "0xa03c774b",
+  "size_x86": 544,
+  "size_x86_64": 720,
+  "parent": "hkpWorldObject",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "SpuCollisionCallbackEventFilter",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "SPU_SEND_NONE",
+          "value": 0
+        },
+        {
+          "name": "SPU_SEND_CONTACT_POINT_ADDED",
+          "value": 1
+        },
+        {
+          "name": "SPU_SEND_CONTACT_POINT_PROCESS",
+          "value": 2
+        },
+        {
+          "name": "SPU_SEND_CONTACT_POINT_REMOVED",
+          "value": 4
+        },
+        {
+          "name": "SPU_SEND_CONTACT_POINT_ADDED_OR_PROCESS",
+          "value": 3
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "material",
+      "offset_x86": 140,
+      "offset_x86_64": 208,
+      "class_ref": "hkpMaterial",
+      "ctype": "struct hkpMaterial",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "limitContactImpulseUtilAndFlag",
+      "offset_x86": 152,
+      "offset_x86_64": 224,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "damageMultiplier",
+      "offset_x86": 156,
+      "offset_x86_64": 232,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "breakableBody",
+      "offset_x86": 160,
+      "offset_x86_64": 240,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "solverData",
+      "offset_x86": 164,
+      "offset_x86_64": 248,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "storageIndex",
+      "offset_x86": 168,
+      "offset_x86_64": 252,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "contactPointCallbackDelay",
+      "offset_x86": 170,
+      "offset_x86_64": 254,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "constraintsMaster",
+      "offset_x86": 172,
+      "offset_x86_64": 256,
+      "class_ref": "hkpEntitySmallArraySerializeOverrideType",
+      "ctype": "struct hkpEntitySmallArraySerializeOverrideType",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "constraintsSlave",
+      "offset_x86": 180,
+      "offset_x86_64": 272,
+      "class_ref": "hkpConstraintInstance",
+      "ctype": "hkArray<hkpConstraintInstance*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|NOT_OWNED|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "constraintRuntime",
+      "offset_x86": 192,
+      "offset_x86_64": 288,
+      "ctype": "hkArray<hkUint8>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "simulationIsland",
+      "offset_x86": 204,
+      "offset_x86_64": 304,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "autoRemoveLevel",
+      "offset_x86": 208,
+      "offset_x86_64": 312,
+      "ctype": "hkInt8",
+      "vtype": "TYPE_INT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numShapeKeysInContactPointProperties",
+      "offset_x86": 209,
+      "offset_x86_64": 313,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "responseModifierFlags",
+      "offset_x86": 210,
+      "offset_x86_64": 314,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "uid",
+      "offset_x86": 212,
+      "offset_x86_64": 316,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "spuCollisionCallback",
+      "offset_x86": 216,
+      "offset_x86_64": 320,
+      "class_ref": "hkpEntitySpuCollisionCallback",
+      "ctype": "struct hkpEntitySpuCollisionCallback",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "motion",
+      "offset_x86": 224,
+      "offset_x86_64": 336,
+      "class_ref": "hkpMaxSizeMotion",
+      "ctype": "struct hkpMaxSizeMotion",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "contactListeners",
+      "offset_x86": 512,
+      "offset_x86_64": 656,
+      "class_ref": "hkpEntitySmallArraySerializeOverrideType",
+      "ctype": "struct hkpEntitySmallArraySerializeOverrideType",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "actions",
+      "offset_x86": 520,
+      "offset_x86_64": 672,
+      "class_ref": "hkpEntitySmallArraySerializeOverrideType",
+      "ctype": "struct hkpEntitySmallArraySerializeOverrideType",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "localFrame",
+      "offset_x86": 528,
+      "offset_x86_64": 688,
+      "class_ref": "hkLocalFrame",
+      "ctype": "struct hkLocalFrame*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "extendedListeners",
+      "offset_x86": 532,
+      "offset_x86_64": 696,
+      "class_ref": "hkpEntityExtendedListeners",
+      "ctype": "struct hkpEntityExtendedListeners*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "npData",
+      "offset_x86": 536,
+      "offset_x86_64": 704,
+      "ctype": "hkUint32",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

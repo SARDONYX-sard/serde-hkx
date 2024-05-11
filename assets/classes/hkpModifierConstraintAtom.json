@@ -1,0 +1,56 @@
+{
+  "name": "hkpModifierConstraintAtom",
+  "version": 0,
+  "signature": "0xb13fef1f",
+  "size_x86": 32,
+  "size_x86_64": 48,
+  "parent": "hkpConstraintAtom",
+  "vtable": false,
+  "members": [
+    {
+      "name": "modifierAtomSize",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|ALIGN_16",
+      "default": 0
+    },
+    {
+      "name": "childSize",
+      "offset_x86": 18,
+      "offset_x86_64": 18,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "child",
+      "offset_x86": 20,
+      "offset_x86_64": 24,
+      "class_ref": "hkpConstraintAtom",
+      "ctype": "struct hkpConstraintAtom*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "pad",
+      "offset_x86": 24,
+      "offset_x86_64": 32,
+      "ctype": "hkUint32[2]",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 2,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

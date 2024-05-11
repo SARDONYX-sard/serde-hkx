@@ -1,0 +1,99 @@
+{
+  "name": "hkbGeneratorSyncInfo",
+  "version": 0,
+  "signature": "0xa3c341f8",
+  "size_x86": 80,
+  "size_x86_64": 80,
+  "vtable": false,
+  "members": [
+    {
+      "name": "syncPoints",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "class_ref": "hkbGeneratorSyncInfoSyncPoint",
+      "ctype": "struct hkbGeneratorSyncInfoSyncPoint[8]",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 8,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "baseFrequency",
+      "offset_x86": 64,
+      "offset_x86_64": 64,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "localTime",
+      "offset_x86": 68,
+      "offset_x86_64": 68,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "playbackSpeed",
+      "offset_x86": 72,
+      "offset_x86_64": 72,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numSyncPoints",
+      "offset_x86": 76,
+      "offset_x86_64": 76,
+      "ctype": "hkInt8",
+      "vtype": "TYPE_INT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "isCyclic",
+      "offset_x86": 77,
+      "offset_x86_64": 77,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "isMirrored",
+      "offset_x86": 78,
+      "offset_x86_64": 78,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "isAdditive",
+      "offset_x86": 79,
+      "offset_x86_64": 79,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

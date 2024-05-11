@@ -1,0 +1,44 @@
+{
+  "name": "hkxTextureFile",
+  "version": 1,
+  "signature": "0x1e289259",
+  "size_x86": 20,
+  "size_x86_64": 40,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "filename",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "name",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "originalFilename",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

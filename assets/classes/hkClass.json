@@ -1,0 +1,151 @@
+{
+  "name": "hkClass",
+  "version": 0,
+  "signature": "0x75585ef6",
+  "size_x86": 48,
+  "size_x86_64": 80,
+  "vtable": false,
+  "enums": [
+    {
+      "name": "SignatureFlags",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "SIGNATURE_LOCAL",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "FlagValues",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "FLAGS_NONE",
+          "value": 0
+        },
+        {
+          "name": "FLAGS_NOT_SERIALIZABLE",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "name",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "char*",
+      "vtype": "TYPE_CSTRING",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "parent",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "class_ref": "hkClass",
+      "ctype": "struct hkClass*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "objectSize",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numImplementedInterfaces",
+      "offset_x86": 12,
+      "offset_x86_64": 20,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "declaredEnums",
+      "offset_x86": 16,
+      "offset_x86_64": 24,
+      "class_ref": "hkClassEnum",
+      "ctype": "hkSimpleArray<struct hkClassEnum>",
+      "vtype": "TYPE_SIMPLEARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "declaredMembers",
+      "offset_x86": 24,
+      "offset_x86_64": 40,
+      "class_ref": "hkClassMember",
+      "ctype": "hkSimpleArray<struct hkClassMember>",
+      "vtype": "TYPE_SIMPLEARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "defaults",
+      "offset_x86": 32,
+      "offset_x86_64": 56,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "attributes",
+      "offset_x86": 36,
+      "offset_x86_64": 64,
+      "class_ref": "hkCustomAttributes",
+      "ctype": "struct hkCustomAttributes*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "flags",
+      "offset_x86": 40,
+      "offset_x86_64": 72,
+      "enum_ref": "FlagValues",
+      "ctype": "flags FlagValues",
+      "vtype": "TYPE_FLAGS",
+      "vsubtype": "TYPE_UINT32",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "describedVersion",
+      "offset_x86": 44,
+      "offset_x86_64": 76,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "name": "hkpBinaryAction",
+  "version": 0,
+  "signature": "0xc00f3403",
+  "size_x86": 32,
+  "size_x86_64": 64,
+  "parent": "hkpAction",
+  "vtable": true,
+  "members": [
+    {
+      "name": "entityA",
+      "offset_x86": 24,
+      "offset_x86_64": 48,
+      "class_ref": "hkpEntity",
+      "ctype": "struct hkpEntity*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "entityB",
+      "offset_x86": 28,
+      "offset_x86_64": 56,
+      "class_ref": "hkpEntity",
+      "ctype": "struct hkpEntity*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

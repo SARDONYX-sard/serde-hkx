@@ -1,0 +1,44 @@
+{
+  "name": "hkpPoweredChainMapperLinkInfo",
+  "version": 0,
+  "signature": "0xcf071a1b",
+  "size_x86": 12,
+  "size_x86_64": 16,
+  "vtable": false,
+  "members": [
+    {
+      "name": "firstTargetIdx",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numTargets",
+      "offset_x86": 4,
+      "offset_x86_64": 4,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "limitConstraint",
+      "offset_x86": 8,
+      "offset_x86_64": 8,
+      "class_ref": "hkpConstraintInstance",
+      "ctype": "struct hkpConstraintInstance*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

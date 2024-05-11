@@ -1,0 +1,76 @@
+{
+  "name": "hkpCompressedMeshShapeConvexPiece",
+  "version": 3,
+  "signature": "0x385bb842",
+  "size_x86": 64,
+  "size_x86_64": 80,
+  "vtable": false,
+  "members": [
+    {
+      "name": "offset",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "vertices",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkArray<hkUint16>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_UINT16",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "faceVertices",
+      "offset_x86": 28,
+      "offset_x86_64": 32,
+      "ctype": "hkArray<hkUint8>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "faceOffsets",
+      "offset_x86": 40,
+      "offset_x86_64": 48,
+      "ctype": "hkArray<hkUint16>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_UINT16",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "reference",
+      "offset_x86": 52,
+      "offset_x86_64": 64,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "transformIndex",
+      "offset_x86": 54,
+      "offset_x86_64": 66,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

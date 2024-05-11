@@ -1,0 +1,23 @@
+{
+  "name": "BSEventOnDeactivateModifier",
+  "version": 1,
+  "signature": "0x1062d993",
+  "size_x86": 52,
+  "size_x86_64": 96,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "members": [
+    {
+      "name": "event",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "class_ref": "hkbEventProperty",
+      "ctype": "struct hkbEventProperty",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

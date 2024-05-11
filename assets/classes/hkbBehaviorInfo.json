@@ -1,0 +1,46 @@
+{
+  "name": "hkbBehaviorInfo",
+  "version": 1,
+  "signature": "0xf7645395",
+  "size_x86": 32,
+  "size_x86_64": 48,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "members": [
+    {
+      "name": "characterId",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "ctype": "hkUint64",
+      "vtype": "TYPE_UINT64",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "data",
+      "offset_x86": 16,
+      "offset_x86_64": 24,
+      "class_ref": "hkbBehaviorGraphData",
+      "ctype": "struct hkbBehaviorGraphData*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "idToNamePairs",
+      "offset_x86": 20,
+      "offset_x86_64": 32,
+      "class_ref": "hkbBehaviorInfoIdToNamePair",
+      "ctype": "hkArray<struct hkbBehaviorInfoIdToNamePair>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

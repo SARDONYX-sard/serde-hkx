@@ -1,0 +1,108 @@
+{
+  "name": "hkbNode",
+  "version": 1,
+  "signature": "0x6d26f61d",
+  "size_x86": 40,
+  "size_x86_64": 72,
+  "parent": "hkbBindable",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "GetChildrenFlagBits",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "FLAG_ACTIVE_ONLY",
+          "value": 1
+        },
+        {
+          "name": "FLAG_GENERATORS_ONLY",
+          "value": 2
+        },
+        {
+          "name": "FLAG_IGNORE_REFERENCED_BEHAVIORS",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "CloneState",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "CLONE_STATE_DEFAULT",
+          "value": 0
+        },
+        {
+          "name": "CLONE_STATE_TEMPLATE",
+          "value": 1
+        },
+        {
+          "name": "CLONE_STATE_CLONE",
+          "value": 2
+        },
+        {
+          "name": "CLONE_STATE_SHARABLE",
+          "value": 3
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "userData",
+      "offset_x86": 28,
+      "offset_x86_64": 48,
+      "ctype": "hkUlong",
+      "vtype": "TYPE_ULONG",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "name",
+      "offset_x86": 32,
+      "offset_x86_64": 56,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "id",
+      "offset_x86": 36,
+      "offset_x86_64": 64,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "cloneState",
+      "offset_x86": 38,
+      "offset_x86_64": 66,
+      "ctype": "enum unknown",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "padNode",
+      "offset_x86": 39,
+      "offset_x86_64": 67,
+      "ctype": "hkBool[1]",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 1,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

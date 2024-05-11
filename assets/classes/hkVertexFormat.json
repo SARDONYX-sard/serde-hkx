@@ -1,0 +1,191 @@
+{
+  "name": "hkVertexFormat",
+  "version": 0,
+  "signature": "0xf11e3ff7",
+  "size_x86": 260,
+  "size_x86_64": 260,
+  "vtable": false,
+  "enums": [
+    {
+      "name": "ComponentType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "TYPE_NONE",
+          "value": 0
+        },
+        {
+          "name": "TYPE_INT8",
+          "value": 1
+        },
+        {
+          "name": "TYPE_UINT8",
+          "value": 2
+        },
+        {
+          "name": "TYPE_INT16",
+          "value": 3
+        },
+        {
+          "name": "TYPE_UINT16",
+          "value": 4
+        },
+        {
+          "name": "TYPE_INT32",
+          "value": 5
+        },
+        {
+          "name": "TYPE_UINT32",
+          "value": 6
+        },
+        {
+          "name": "TYPE_UINT8_DWORD",
+          "value": 7
+        },
+        {
+          "name": "TYPE_ARGB32",
+          "value": 8
+        },
+        {
+          "name": "TYPE_FLOAT16",
+          "value": 9
+        },
+        {
+          "name": "TYPE_FLOAT32",
+          "value": 10
+        },
+        {
+          "name": "TYPE_VECTOR4",
+          "value": 11
+        },
+        {
+          "name": "TYPE_LAST",
+          "value": 12
+        }
+      ]
+    },
+    {
+      "name": "ComponentUsage",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "USAGE_NONE",
+          "value": 0
+        },
+        {
+          "name": "USAGE_POSITION",
+          "value": 1
+        },
+        {
+          "name": "USAGE_NORMAL",
+          "value": 2
+        },
+        {
+          "name": "USAGE_COLOR",
+          "value": 3
+        },
+        {
+          "name": "USAGE_TANGENT",
+          "value": 4
+        },
+        {
+          "name": "USAGE_BINORMAL",
+          "value": 5
+        },
+        {
+          "name": "USAGE_BLEND_MATRIX_INDEX",
+          "value": 6
+        },
+        {
+          "name": "USAGE_BLEND_WEIGHTS",
+          "value": 7
+        },
+        {
+          "name": "USAGE_BLEND_WEIGHTS_LAST_IMPLIED",
+          "value": 8
+        },
+        {
+          "name": "USAGE_TEX_COORD",
+          "value": 9
+        },
+        {
+          "name": "USAGE_POINT_SIZE",
+          "value": 10
+        },
+        {
+          "name": "USAGE_USER",
+          "value": 11
+        },
+        {
+          "name": "USAGE_LAST",
+          "value": 12
+        }
+      ]
+    },
+    {
+      "name": "HintFlags",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "FLAG_READ",
+          "value": 1
+        },
+        {
+          "name": "FLAG_WRITE",
+          "value": 2
+        },
+        {
+          "name": "FLAG_DYNAMIC",
+          "value": 4
+        },
+        {
+          "name": "FLAG_NOT_SHARED",
+          "value": 8
+        }
+      ]
+    },
+    {
+      "name": "SharingType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "SHARING_ALL_SHARED",
+          "value": 0
+        },
+        {
+          "name": "SHARING_ALL_NOT_SHARED",
+          "value": 1
+        },
+        {
+          "name": "SHARING_MIXTURE",
+          "value": 2
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "elements",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "class_ref": "hkVertexFormatElement",
+      "ctype": "struct hkVertexFormatElement[32]",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 32,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numElements",
+      "offset_x86": 256,
+      "offset_x86_64": 256,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

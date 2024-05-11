@@ -1,0 +1,190 @@
+{
+  "name": "hkpMotion",
+  "version": 3,
+  "signature": "0x98aadb4f",
+  "size_x86": 288,
+  "size_x86_64": 320,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "MotionType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "MOTION_INVALID",
+          "value": 0
+        },
+        {
+          "name": "MOTION_DYNAMIC",
+          "value": 1
+        },
+        {
+          "name": "MOTION_SPHERE_INERTIA",
+          "value": 2
+        },
+        {
+          "name": "MOTION_BOX_INERTIA",
+          "value": 3
+        },
+        {
+          "name": "MOTION_KEYFRAMED",
+          "value": 4
+        },
+        {
+          "name": "MOTION_FIXED",
+          "value": 5
+        },
+        {
+          "name": "MOTION_THIN_BOX_INERTIA",
+          "value": 6
+        },
+        {
+          "name": "MOTION_CHARACTER",
+          "value": 7
+        },
+        {
+          "name": "MOTION_MAX_ID",
+          "value": 8
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "type",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "enum_ref": "MotionType",
+      "ctype": "enum MotionType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "deactivationIntegrateCounter",
+      "offset_x86": 9,
+      "offset_x86_64": 17,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "deactivationNumInactiveFrames",
+      "offset_x86": 10,
+      "offset_x86_64": 18,
+      "ctype": "hkUint16[2]",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 2,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "motionState",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "class_ref": "hkMotionState",
+      "ctype": "struct hkMotionState",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "inertiaAndMassInv",
+      "offset_x86": 192,
+      "offset_x86_64": 208,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "linearVelocity",
+      "offset_x86": 208,
+      "offset_x86_64": 224,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "angularVelocity",
+      "offset_x86": 224,
+      "offset_x86_64": 240,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "deactivationRefPosition",
+      "offset_x86": 240,
+      "offset_x86_64": 256,
+      "ctype": "hkVector4[2]",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 2,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "deactivationRefOrientation",
+      "offset_x86": 272,
+      "offset_x86_64": 288,
+      "ctype": "hkUint32[2]",
+      "vtype": "TYPE_UINT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 2,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "savedMotion",
+      "offset_x86": 280,
+      "offset_x86_64": 296,
+      "class_ref": "hkpMaxSizeMotion",
+      "ctype": "struct hkpMaxSizeMotion*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "savedQualityTypeIndex",
+      "offset_x86": 284,
+      "offset_x86_64": 304,
+      "ctype": "hkUint16",
+      "vtype": "TYPE_UINT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "gravityFactor",
+      "offset_x86": 286,
+      "offset_x86_64": 306,
+      "ctype": "hkHalf",
+      "vtype": "TYPE_HALF",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

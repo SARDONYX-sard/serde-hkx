@@ -1,0 +1,165 @@
+{
+  "name": "hkbCharacterControllerModifier",
+  "version": 0,
+  "signature": "0xf675d6fb",
+  "size_x86": 144,
+  "size_x86_64": 176,
+  "parent": "hkbModifier",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "InitialVelocityCoordinates",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "INITIAL_VELOCITY_IN_WORLD_COORDINATES",
+          "value": 0
+        },
+        {
+          "name": "INITIAL_VELOCITY_IN_MODEL_COORDINATES",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "MotionMode",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "MOTION_MODE_FOLLOW_ANIMATION",
+          "value": 0
+        },
+        {
+          "name": "MOTION_MODE_DYNAMIC",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "controlData",
+      "offset_x86": 48,
+      "offset_x86_64": 80,
+      "class_ref": "hkbCharacterControllerControlData",
+      "ctype": "struct hkbCharacterControllerControlData",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "initialVelocity",
+      "offset_x86": 80,
+      "offset_x86_64": 112,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "initialVelocityCoordinates",
+      "offset_x86": 96,
+      "offset_x86_64": 128,
+      "enum_ref": "InitialVelocityCoordinates",
+      "ctype": "enum InitialVelocityCoordinates",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "motionMode",
+      "offset_x86": 97,
+      "offset_x86_64": 129,
+      "enum_ref": "MotionMode",
+      "ctype": "enum MotionMode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "forceDownwardMomentum",
+      "offset_x86": 98,
+      "offset_x86_64": 130,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "applyGravity",
+      "offset_x86": 99,
+      "offset_x86_64": 131,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "setInitialVelocity",
+      "offset_x86": 100,
+      "offset_x86_64": 132,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "isTouchingGround",
+      "offset_x86": 101,
+      "offset_x86_64": 133,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "gravity",
+      "offset_x86": 112,
+      "offset_x86_64": 144,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "timestep",
+      "offset_x86": 128,
+      "offset_x86_64": 160,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "isInitialVelocityAdded",
+      "offset_x86": 132,
+      "offset_x86_64": 164,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "name": "hkaSkeletonMapperDataChainMapping",
+  "version": 0,
+  "signature": "0xa528f7cf",
+  "size_x86": 112,
+  "size_x86_64": 112,
+  "vtable": false,
+  "members": [
+    {
+      "name": "startBoneA",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "endBoneA",
+      "offset_x86": 2,
+      "offset_x86_64": 2,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "startBoneB",
+      "offset_x86": 4,
+      "offset_x86_64": 4,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "endBoneB",
+      "offset_x86": 6,
+      "offset_x86_64": 6,
+      "ctype": "hkInt16",
+      "vtype": "TYPE_INT16",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "startAFromBTransform",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkQsTransform",
+      "vtype": "TYPE_QSTRANSFORM",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "endAFromBTransform",
+      "offset_x86": 64,
+      "offset_x86_64": 64,
+      "ctype": "hkQsTransform",
+      "vtype": "TYPE_QSTRANSFORM",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

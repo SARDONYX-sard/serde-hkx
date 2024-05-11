@@ -1,0 +1,67 @@
+{
+  "name": "hkpGenericConstraintDataScheme",
+  "version": 0,
+  "signature": "0x11fd6f6c",
+  "size_x86": 64,
+  "size_x86_64": 80,
+  "vtable": false,
+  "members": [
+    {
+      "name": "info",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "class_ref": "hkpGenericConstraintDataSchemeConstraintInfo",
+      "ctype": "struct hkpGenericConstraintDataSchemeConstraintInfo",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "data",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkArray<hkVector4>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_VECTOR4",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "commands",
+      "offset_x86": 28,
+      "offset_x86_64": 32,
+      "ctype": "hkArray<hkInt32>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_INT32",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "modifiers",
+      "offset_x86": 40,
+      "offset_x86_64": 48,
+      "ctype": "hkArray<void*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "motors",
+      "offset_x86": 52,
+      "offset_x86_64": 64,
+      "class_ref": "hkpConstraintMotor",
+      "ctype": "hkArray<hkpConstraintMotor*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

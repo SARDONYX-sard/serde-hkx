@@ -1,0 +1,33 @@
+{
+  "name": "hkbModifier",
+  "version": 0,
+  "signature": "0x96ec5ced",
+  "size_x86": 44,
+  "size_x86_64": 80,
+  "parent": "hkbNode",
+  "vtable": true,
+  "members": [
+    {
+      "name": "enable",
+      "offset_x86": 40,
+      "offset_x86_64": 72,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "padModifier",
+      "offset_x86": 41,
+      "offset_x86_64": 73,
+      "ctype": "hkBool[3]",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 3,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

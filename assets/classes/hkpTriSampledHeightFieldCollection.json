@@ -1,0 +1,67 @@
+{
+  "name": "hkpTriSampledHeightFieldCollection",
+  "version": 0,
+  "signature": "0xc291ddde",
+  "size_x86": 64,
+  "size_x86_64": 96,
+  "parent": "hkpShapeCollection",
+  "vtable": true,
+  "members": [
+    {
+      "name": "heightfield",
+      "offset_x86": 24,
+      "offset_x86_64": 48,
+      "class_ref": "hkpSampledHeightFieldShape",
+      "ctype": "struct hkpSampledHeightFieldShape*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "childSize",
+      "offset_x86": 28,
+      "offset_x86_64": 56,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "radius",
+      "offset_x86": 32,
+      "offset_x86_64": 60,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "weldingInfo",
+      "offset_x86": 36,
+      "offset_x86_64": 64,
+      "ctype": "hkArray<hkUint16>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_UINT16",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "triangleExtrusion",
+      "offset_x86": 48,
+      "offset_x86_64": 80,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "name": "hkpConvexListFilter",
+  "version": 0,
+  "signature": "0x81d074a4",
+  "size_x86": 8,
+  "size_x86_64": 16,
+  "parent": "hkReferencedObject",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "ConvexListCollisionType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "TREAT_CONVEX_LIST_AS_NORMAL",
+          "value": 0
+        },
+        {
+          "name": "TREAT_CONVEX_LIST_AS_LIST",
+          "value": 1
+        },
+        {
+          "name": "TREAT_CONVEX_LIST_AS_CONVEX",
+          "value": 2
+        }
+      ]
+    }
+  ],
+  "members": []
+}

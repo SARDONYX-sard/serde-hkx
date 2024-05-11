@@ -1,0 +1,162 @@
+{
+  "name": "hkbVariableBindingSetBinding",
+  "version": 1,
+  "signature": "0x4d592f72",
+  "size_x86": 32,
+  "size_x86_64": 40,
+  "vtable": false,
+  "enums": [
+    {
+      "name": "BindingType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "BINDING_TYPE_VARIABLE",
+          "value": 0
+        },
+        {
+          "name": "BINDING_TYPE_CHARACTER_PROPERTY",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "InternalBindingFlags",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "FLAG_NONE",
+          "value": 0
+        },
+        {
+          "name": "FLAG_OUTPUT",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "memberPath",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "memberClass",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "ctype": "void*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "offsetInObjectPlusOne",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "offsetInArrayPlusOne",
+      "offset_x86": 12,
+      "offset_x86_64": 20,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "rootVariableIndex",
+      "offset_x86": 16,
+      "offset_x86_64": 24,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "variableIndex",
+      "offset_x86": 20,
+      "offset_x86_64": 28,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "bitIndex",
+      "offset_x86": 24,
+      "offset_x86_64": 32,
+      "ctype": "hkInt8",
+      "vtype": "TYPE_INT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "bindingType",
+      "offset_x86": 25,
+      "offset_x86_64": 33,
+      "enum_ref": "BindingType",
+      "ctype": "enum BindingType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "memberType",
+      "offset_x86": 26,
+      "offset_x86_64": 34,
+      "ctype": "enum unknown",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "variableType",
+      "offset_x86": 27,
+      "offset_x86_64": 35,
+      "ctype": "hkInt8",
+      "vtype": "TYPE_INT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    },
+    {
+      "name": "flags",
+      "offset_x86": 28,
+      "offset_x86_64": 36,
+      "ctype": "flags unknown",
+      "vtype": "TYPE_FLAGS",
+      "vsubtype": "TYPE_INT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
+      "default": 0
+    }
+  ]
+}

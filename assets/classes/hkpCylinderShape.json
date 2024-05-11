@@ -1,0 +1,105 @@
+{
+  "name": "hkpCylinderShape",
+  "version": 0,
+  "signature": "0x3e463c3a",
+  "size_x86": 96,
+  "size_x86_64": 112,
+  "parent": "hkpConvexShape",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "VertexIdEncoding",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "VERTEX_ID_ENCODING_IS_BASE_A_SHIFT",
+          "value": 7
+        },
+        {
+          "name": "VERTEX_ID_ENCODING_SIN_SIGN_SHIFT",
+          "value": 6
+        },
+        {
+          "name": "VERTEX_ID_ENCODING_COS_SIGN_SHIFT",
+          "value": 5
+        },
+        {
+          "name": "VERTEX_ID_ENCODING_IS_SIN_LESSER_SHIFT",
+          "value": 4
+        },
+        {
+          "name": "VERTEX_ID_ENCODING_VALUE_MASK",
+          "value": 15
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "cylRadius",
+      "offset_x86": 20,
+      "offset_x86_64": 40,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "cylBaseRadiusFactorForHeightFieldCollisions",
+      "offset_x86": 24,
+      "offset_x86_64": 44,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "vertexA",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "vertexB",
+      "offset_x86": 48,
+      "offset_x86_64": 64,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "perpendicular1",
+      "offset_x86": 64,
+      "offset_x86_64": 80,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "perpendicular2",
+      "offset_x86": 80,
+      "offset_x86_64": 96,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "name": "hkpShapeCollection",
+  "version": 0,
+  "signature": "0xe8c3991d",
+  "size_x86": 24,
+  "size_x86_64": 48,
+  "parent": "hkpShape",
+  "vtable": true,
+  "enums": [
+    {
+      "name": "CollectionType",
+      "flags": "00000000",
+      "enum_item": [
+        {
+          "name": "COLLECTION_LIST",
+          "value": 0
+        },
+        {
+          "name": "COLLECTION_EXTENDED_MESH",
+          "value": 1
+        },
+        {
+          "name": "COLLECTION_TRISAMPLED_HEIGHTFIELD",
+          "value": 2
+        },
+        {
+          "name": "COLLECTION_USER",
+          "value": 3
+        },
+        {
+          "name": "COLLECTION_SIMPLE_MESH",
+          "value": 4
+        },
+        {
+          "name": "COLLECTION_MESH_SHAPE",
+          "value": 5
+        },
+        {
+          "name": "COLLECTION_COMPRESSED_MESH",
+          "value": 6
+        },
+        {
+          "name": "COLLECTION_MAX",
+          "value": 7
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "name": "disableWelding",
+      "offset_x86": 20,
+      "offset_x86_64": 40,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "collectionType",
+      "offset_x86": 21,
+      "offset_x86_64": 41,
+      "enum_ref": "CollectionType",
+      "ctype": "enum CollectionType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 3
+    }
+  ]
+}

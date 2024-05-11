@@ -1,0 +1,10 @@
+{
+  "name": "hkpRigidBody",
+  "version": 0,
+  "signature": "0x75f8d805",
+  "size_x86": 544,
+  "size_x86_64": 720,
+  "parent": "hkpEntity",
+  "vtable": true,
+  "members": []
+}

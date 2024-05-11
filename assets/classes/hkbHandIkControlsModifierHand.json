@@ -1,0 +1,44 @@
+{
+  "name": "hkbHandIkControlsModifierHand",
+  "version": 0,
+  "signature": "0x9c72e9e3",
+  "size_x86": 96,
+  "size_x86_64": 112,
+  "vtable": false,
+  "members": [
+    {
+      "name": "controlData",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "class_ref": "hkbHandIkControlData",
+      "ctype": "struct hkbHandIkControlData",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "handIndex",
+      "offset_x86": 80,
+      "offset_x86_64": 96,
+      "ctype": "hkInt32",
+      "vtype": "TYPE_INT32",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "enable",
+      "offset_x86": 84,
+      "offset_x86_64": 100,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

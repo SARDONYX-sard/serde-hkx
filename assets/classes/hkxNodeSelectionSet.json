@@ -1,0 +1,34 @@
+{
+  "name": "hkxNodeSelectionSet",
+  "version": 0,
+  "signature": "0xd753fc4d",
+  "size_x86": 36,
+  "size_x86_64": 56,
+  "parent": "hkxAttributeHolder",
+  "vtable": true,
+  "members": [
+    {
+      "name": "selectedNodes",
+      "offset_x86": 20,
+      "offset_x86_64": 32,
+      "class_ref": "hkxNode",
+      "ctype": "hkArray<hkxNode*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "name",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "ctype": "hkStringPtr",
+      "vtype": "TYPE_STRINGPTR",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

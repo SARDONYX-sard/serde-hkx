@@ -1,0 +1,77 @@
+{
+  "name": "hkpPoweredChainDataConstraintInfo",
+  "version": 0,
+  "signature": "0xf88aee25",
+  "size_x86": 80,
+  "size_x86_64": 96,
+  "vtable": false,
+  "members": [
+    {
+      "name": "pivotInA",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "pivotInB",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "aTc",
+      "offset_x86": 32,
+      "offset_x86_64": 32,
+      "ctype": "hkQuaternion",
+      "vtype": "TYPE_QUATERNION",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "bTc",
+      "offset_x86": 48,
+      "offset_x86_64": 48,
+      "ctype": "hkQuaternion",
+      "vtype": "TYPE_QUATERNION",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "motors",
+      "offset_x86": 64,
+      "offset_x86_64": 64,
+      "class_ref": "hkpConstraintMotor",
+      "ctype": "struct hkpConstraintMotor*",
+      "vtype": "TYPE_POINTER",
+      "vsubtype": "TYPE_STRUCT",
+      "arrsize": 3,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "switchBodies",
+      "offset_x86": 76,
+      "offset_x86_64": 88,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

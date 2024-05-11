@@ -1,0 +1,45 @@
+{
+  "name": "hkpWheelConstraintData",
+  "version": 0,
+  "signature": "0xb4c46671",
+  "size_x86": 352,
+  "size_x86_64": 368,
+  "parent": "hkpConstraintData",
+  "vtable": true,
+  "members": [
+    {
+      "name": "atoms",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "class_ref": "hkpWheelConstraintDataAtoms",
+      "ctype": "struct hkpWheelConstraintDataAtoms",
+      "vtype": "TYPE_STRUCT",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE|ALIGN_16",
+      "default": 0
+    },
+    {
+      "name": "initialAxleInB",
+      "offset_x86": 320,
+      "offset_x86_64": 336,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "initialSteeringAxisInB",
+      "offset_x86": 336,
+      "offset_x86_64": 352,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

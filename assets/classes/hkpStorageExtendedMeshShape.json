@@ -1,0 +1,35 @@
+{
+  "name": "hkpStorageExtendedMeshShape",
+  "version": 0,
+  "signature": "0xb469efbc",
+  "size_x86": 272,
+  "size_x86_64": 368,
+  "parent": "hkpExtendedMeshShape",
+  "vtable": true,
+  "members": [
+    {
+      "name": "meshstorage",
+      "offset_x86": 240,
+      "offset_x86_64": 336,
+      "class_ref": "hkpStorageExtendedMeshShapeMeshSubpartStorage",
+      "ctype": "hkArray<hkpStorageExtendedMeshShapeMeshSubpartStorage*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "shapestorage",
+      "offset_x86": 252,
+      "offset_x86_64": 352,
+      "class_ref": "hkpStorageExtendedMeshShapeShapeSubpartStorage",
+      "ctype": "hkArray<hkpStorageExtendedMeshShapeShapeSubpartStorage*>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_POINTER",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

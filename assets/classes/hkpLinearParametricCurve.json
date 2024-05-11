@@ -1,0 +1,66 @@
+{
+  "name": "hkpLinearParametricCurve",
+  "version": 0,
+  "signature": "0xd7b3be03",
+  "size_x86": 64,
+  "size_x86_64": 80,
+  "parent": "hkpParametricCurve",
+  "vtable": true,
+  "members": [
+    {
+      "name": "smoothingFactor",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "ctype": "hkReal",
+      "vtype": "TYPE_REAL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "closedLoop",
+      "offset_x86": 12,
+      "offset_x86_64": 20,
+      "ctype": "hkBool",
+      "vtype": "TYPE_BOOL",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "dirNotParallelToTangentAlongWholePath",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "ctype": "hkVector4",
+      "vtype": "TYPE_VECTOR4",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "points",
+      "offset_x86": 32,
+      "offset_x86_64": 48,
+      "ctype": "hkArray<hkVector4>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_VECTOR4",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "distance",
+      "offset_x86": 44,
+      "offset_x86_64": 64,
+      "ctype": "hkArray<hkReal>",
+      "vtype": "TYPE_ARRAY",
+      "vsubtype": "TYPE_REAL",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}

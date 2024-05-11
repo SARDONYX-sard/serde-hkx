@@ -1,0 +1,33 @@
+{
+  "name": "hkpAngConstraintAtom",
+  "version": 0,
+  "signature": "0x35bb3cd0",
+  "size_x86": 4,
+  "size_x86_64": 4,
+  "parent": "hkpConstraintAtom",
+  "vtable": false,
+  "members": [
+    {
+      "name": "firstConstrainedAxis",
+      "offset_x86": 2,
+      "offset_x86_64": 2,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    },
+    {
+      "name": "numConstrainedAxes",
+      "offset_x86": 3,
+      "offset_x86_64": 3,
+      "ctype": "hkUint8",
+      "vtype": "TYPE_UINT8",
+      "vsubtype": "TYPE_VOID",
+      "arrsize": 0,
+      "flags": "FLAGS_NONE",
+      "default": 0
+    }
+  ]
+}
