@@ -3,44 +3,44 @@
 - Offset and Size: This is used to adjust the size of binary data to be read or written, as well as the current read/write position.
 - Never used(In the Havok classes): `Zero`, `FunctionPointer`, `InplaceArray`, `HomogeneousArray`, `RelArray`, `Max`
 
-| TypeKind           | C++ Type                          |  Bytes size(x86) | Bytes size(x86_64) | Align bytes Size(x86) |  Align bytes Size(x64) |
-| ------------------ | --------------------------------- | ---------------: | -----------------: | --------------------: | ---------------------: |
-| `Void`             | `void`                            |                  |                    |                       |                        |
-| `Bool`             | `hkBool` (`bool`)                 |                1 |                  1 |                     1 |                      1 |
-| `Char`             | `hkChar` (`signed char`)          |                1 |                  1 |                     1 |                      1 |
-| `Int8`             | `hkInt8` (`signed char`)          |                1 |                  1 |                     1 |                      1 |
-| `Uint8`            | `hkUint8` (`unsigned char`)       |                1 |                  1 |                     1 |                      1 |
-| `Int16`            | `hkInt16` (`signed short`)        |                2 |                  2 |                     2 |                      2 |
-| `Uint16`           | `hkUint16` (`unsigned short`)     |                2 |                  2 |                     2 |                      2 |
-| `Int32`            | `hkInt32` (`signed int`)          |                4 |                  4 |                     4 |                      4 |
-| `Uint32`           | `hkUint32` (`unsigned int`)       |                4 |                  4 |                     4 |                      4 |
-| `Int64`            | `hkInt64` (`signed long long`)    |                8 |                  8 |                     8 |                      8 |
-| `Uint64`           | `hkUint64` (`unsigned long long`) |                8 |                  8 |                     8 |                      8 |
-| `Real`             | `hkReal` (`float`)                |                4 |                  4 |                     4 |                      4 |
-| `Vector4`          | `hkVector4`                       |               16 |                 16 |                    16 |                     16 |
-| `Quaternion`       | `hkQuaternion`                    |               16 |                 16 |                    16 |                     16 |
-| `Matrix3`          | `hkMatrix3`                       |               48 |                 48 |                    16 |                     16 |
-| `Rotation`         | `hkRotation`                      |               48 |                 48 |                    16 |                     16 |
-| `QsTransform`      | `hkQsTransform`                   |               48 |                 48 |                    16 |                     16 |
-| `Matrix4`          | `hkMatrix4`                       |               64 |                 64 |                    16 |                     16 |
-| `Transform`        | `hkTransform`                     |               64 |                 64 |                    16 |                     16 |
-| `Zero`             |                                   |                  |                    |                       |                        |
-| `Pointer`          | `T*`                              |                4 |                  8 |                     4 |                      8 |
-| `FunctionPointer`  |                                   |                4 |                  8 |                     4 |                      8 |
-| `Array`            | `hkArray<T>`                      |               12 |                 16 |                     4 |                      8 |
-| `InplaceArray`     | `InplaceArray`                    |                  |                    |                       |                        |
-| `Enum`             | `hkEnum<Enum, SizeType>`          | sizeof(SizeType) |   sizeof(SizeType) |      sizeof(SizeType) |       sizeof(SizeType) |
-| `Struct`           | `class` or `struct`               |   sizeof(Struct) |     sizeof(Struct) |                       | Maximum value of field |
-| `SimpleArray`      | `hkSimpleArray`                   |                8 |                 12 |                     4 |                      4 |
-| `HomogeneousArray` |                                   |                  |                    |                       |                        |
-| `Variant`          | `hkVariant`                       |                8 |                 16 |                     4 |                      8 |
-| `CString`          | `char*`                           |                4 |                  8 |                     4 |                      8 |
-| `Ulong`            | `hkUlong`(`unsigned long`)        |                4 |                  8 |                     4 |                      8 |
-| `Flags`            | `hkFlags<FlagEnum, SizeType>`     | sizeof(SizeType) |   sizeof(SizeType) |      sizeof(SizeType) |       sizeof(SizeType) |
-| `Half`             | `hkHalf` (`hkInt16`)              |                2 |                  2 |                     2 |                      2 |
-| `StringPtr`        | `hkStringPtr`                     |                4 |                  8 |                     4 |                      8 |
-| `RelArray`         | `hkRelArray<T>`                   |                4 |                  4 |                     2 |                      2 |
-| `Max`              |                                   |                  |                    |                       |                        |
+| TypeKind           | C++ Type                          |  Bytes size(x86) | Bytes size(x86_64) | Align bytes Size(x86) | Align bytes Size(x64) |
+| ------------------ | --------------------------------- | ---------------: | -----------------: | --------------------: | --------------------: |
+| `Void`             | `void`                            |                  |                    |                       |                       |
+| `Bool`             | `hkBool` (`bool`)                 |                1 |                  1 |                     1 |                     1 |
+| `Char`             | `hkChar` (`signed char`)          |                1 |                  1 |                     1 |                     1 |
+| `Int8`             | `hkInt8` (`signed char`)          |                1 |                  1 |                     1 |                     1 |
+| `Uint8`            | `hkUint8` (`unsigned char`)       |                1 |                  1 |                     1 |                     1 |
+| `Int16`            | `hkInt16` (`signed short`)        |                2 |                  2 |                     2 |                     2 |
+| `Uint16`           | `hkUint16` (`unsigned short`)     |                2 |                  2 |                     2 |                     2 |
+| `Int32`            | `hkInt32` (`signed int`)          |                4 |                  4 |                     4 |                     4 |
+| `Uint32`           | `hkUint32` (`unsigned int`)       |                4 |                  4 |                     4 |                     4 |
+| `Int64`            | `hkInt64` (`signed long long`)    |                8 |                  8 |                     8 |                     8 |
+| `Uint64`           | `hkUint64` (`unsigned long long`) |                8 |                  8 |                     8 |                     8 |
+| `Real`             | `hkReal` (`float`)                |                4 |                  4 |                     4 |                     4 |
+| `Vector4`          | `hkVector4`                       |               16 |                 16 |                    16 |                    16 |
+| `Quaternion`       | `hkQuaternion`                    |               16 |                 16 |                    16 |                    16 |
+| `Matrix3`          | `hkMatrix3`                       |               48 |                 48 |                    16 |                    16 |
+| `Rotation`         | `hkRotation`                      |               48 |                 48 |                    16 |                    16 |
+| `QsTransform`      | `hkQsTransform`                   |               48 |                 48 |                    16 |                    16 |
+| `Matrix4`          | `hkMatrix4`                       |               64 |                 64 |                    16 |                    16 |
+| `Transform`        | `hkTransform`                     |               64 |                 64 |                    16 |                    16 |
+| `Zero`             |                                   |                  |                    |                       |                       |
+| `Pointer`          | `T*`                              |                4 |                  8 |                     4 |                     8 |
+| `FunctionPointer`  |                                   |                4 |                  8 |                     4 |                     8 |
+| `Array`            | `hkArray<T>`                      |               12 |                 16 |                     4 |                     8 |
+| `InplaceArray`     | `InplaceArray`                    |                  |                    |                       |                       |
+| `Enum`             | `hkEnum<Enum, SizeType>`          | sizeof(SizeType) |   sizeof(SizeType) |      sizeof(SizeType) |      sizeof(SizeType) |
+| `Struct`           | `class` or `struct`               |   sizeof(Struct) |     sizeof(Struct) |    Max value of field |    Max value of field |
+| `SimpleArray`      | `hkSimpleArray`                   |                8 |                 12 |                     4 |                     4 |
+| `HomogeneousArray` |                                   |                  |                    |                       |                       |
+| `Variant`          | `hkVariant`                       |                8 |                 16 |                     4 |                     8 |
+| `CString`          | `char*`                           |                4 |                  8 |                     4 |                     8 |
+| `Ulong`            | `hkUlong`(`unsigned long`)        |                4 |                  8 |                     4 |                     8 |
+| `Flags`            | `hkFlags<FlagEnum, SizeType>`     | sizeof(SizeType) |   sizeof(SizeType) |      sizeof(SizeType) |      sizeof(SizeType) |
+| `Half`             | `hkHalf` (`hkInt16`)              |                2 |                  2 |                     2 |                     2 |
+| `StringPtr`        | `hkStringPtr`                     |                4 |                  8 |                     4 |                     8 |
+| `RelArray`         | `hkRelArray<T>`                   |                4 |                  4 |                     2 |                     2 |
+| `Max`              |                                   |                  |                    |                       |                       |
 
 - Which Array pattern is `hkBool[3]` etc.?
 
@@ -61,6 +61,7 @@ This is often used to fill in generics elements with types for which generics ar
 
 - `hkArray<hkBool>` -> vtype: TYPE_ARRAY, vsubtype: TYPE_BOOL
 - `hkBool` -> vtype: TYPE_BOOL, vsubtype: TYPE_VOID
+- There is also a pattern `hkArray<void>`. The type information is unknown, but this member always contains the `SERIALIZE_IGNORED` flag and can be skipped.
 
 ---
 
