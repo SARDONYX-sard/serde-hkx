@@ -36,7 +36,7 @@ C++ Class members
   The following types of flags exist.(Note that any flag will contain `FLAGS_NONE` if it ends in 0)
 
   ```c
-  enum Flags {
+  enum FlagValues {
     FLAGS_NONE = 0;
     ALIGN_8 = 128;
     ALIGN_16 = 256;
