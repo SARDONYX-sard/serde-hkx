@@ -426,6 +426,12 @@ Pointers are indicated by using the index of name.
 </hkobject>
 ```
 
+In case of null pointer
+
+```xml
+<hkparam name="variableBindingSet">null</hkparam>
+```
+
 ---
 
 ### ~~`FunctionPointer`~~
