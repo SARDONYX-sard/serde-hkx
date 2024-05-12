@@ -1,0 +1,18 @@
+[package]
+name = "snafu_location_derive"
+edition.workspace = true
+authors.workspace = true
+description = "Automatic generation of a method to retrieve the location of an enum Error in snaf."
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+proc-macro = true
+
+[dependencies]
+syn = "2.0.63"
+quote = "1.0.36"
