@@ -696,6 +696,69 @@ class hkFlags {
 <hkparam>ALIGN_8|ALIGN_16|SERIALIZE_IGNORE|64</hkparam>
 ```
 
+<details><summary>Proof of Concept</summary><div>
+
+1.hkx -> xml
+
+```shell
+./HavokBehaviorPostProcess.exe -x ./1hm_behavior.hkx ./1hm_behavior.xml
+```
+
+2.Change flags
+
+```xml
+<hkobject name="#0027" class="hkbBehaviorGraphData" signature="0x95aca5d">
+	<!-- memSizeAndFlags SERIALIZE_IGNORED -->
+	<!-- referenceCount SERIALIZE_IGNORED -->
+	<hkparam name="attributeDefaults" numelements="0"></hkparam>
+	<hkparam name="variableInfos" numelements="101">
+		<hkobject>
+			<hkparam name="role">
+				<hkobject> <!-- hkbRoleAttribute -->
+					<hkparam name="role">ROLE_DEFAULT</hkparam>
+          <!-- FLAG_NONE is assigned the value 0, so it is replaced by "0" when xml -> hkx -> xml. -->
+					<hkparam name="flags">FLAG_NONE</hkparam><!-- Changed -->
+				</hkobject>
+			</hkparam>
+			<hkparam name="type">VARIABLE_TYPE_REAL</hkparam>
+		</hkobject>
+    <!-- ... -->
+</hkobject>
+```
+
+2.Alternate change flags
+
+```xml
+<hkobject name="#0027" class="hkbBehaviorGraphData" signature="0x95aca5d">
+	<!-- memSizeAndFlags SERIALIZE_IGNORED -->
+	<!-- referenceCount SERIALIZE_IGNORED -->
+	<hkparam name="attributeDefaults" numelements="0"></hkparam>
+	<hkparam name="variableInfos" numelements="101">
+		<hkobject>
+			<hkparam name="role">
+				<hkobject> <!-- hkbRoleAttribute -->
+					<hkparam name="role">ROLE_DEFAULT</hkparam>
+          <!-- In this case, xml => hkx => xml again made no change -->
+					<hkparam name="flags">FLAG_RAGDOLL|FLAG_NORMALIZED</hkparam><!-- Changed -->
+				</hkobject>
+			</hkparam>
+			<hkparam name="type">VARIABLE_TYPE_REAL</hkparam>
+		</hkobject>
+    <!-- ... -->
+</hkobject>
+```
+
+3.hkx -> xml
+
+```shell
+./HavokBehaviorPostProcess.exe --platformWin32 .\1hm_behavior.xml ./1hm_behavior_x86.hkx
+./HavokBehaviorPostProcess.exe -x ./1hm_behavior_x86.hkx ./1hm_behavior_re.xml
+```
+
+4.If you look at the same part of the XML, only FLAG_NONE is replaced by 0.
+
+</div></details>
+
 ---
 
 ### `Half`(`hkHalf`)
