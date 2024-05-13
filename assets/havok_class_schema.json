@@ -170,7 +170,8 @@
               "TYPE_FLAGS",
               "TYPE_HALF",
               "TYPE_STRINGPTR",
-              "TYPE_RELARRAY"
+              "TYPE_RELARRAY",
+              "TYPE_MAX"
             ],
             "description": "Subtype of the member."
           },
