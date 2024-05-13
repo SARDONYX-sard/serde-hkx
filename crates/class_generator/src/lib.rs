@@ -34,6 +34,10 @@ pub fn generate_havok_class<P: AsRef<Path>>(classes_json_dir: P, output_dir: P) 
     for (class_name, json_str) in &json_map {
         let class: Class = serde_json::from_str(json_str)?;
         dbg!(&class);
+
+        for member in &class.members {
+            dbg!(&member.vtype, &member.vsubtype, &member.size_of_type(8));
+        }
         class_map.insert(class_name.as_str(), class);
     }
 
@@ -45,6 +49,7 @@ mod tests {
     use super::*;
     use std::path::PathBuf;
 
+    #[ignore = "because it generates code and is not strictly a test."]
     #[test]
     fn should_json_parse() {
         let repo_root = PathBuf::from(env!("CARGO_MANIFEST_DIR"))

@@ -4,6 +4,7 @@
 #[derive(Debug, snafu::Snafu, snafu_location_derive::Location)]
 #[snafu(visibility(pub))]
 pub enum ClassGeneratorError {
+    /// File meta-information not found error
     #[snafu(display("Not found file stem: {path}"))]
     NotFoundFileStem {
         path: String,
@@ -11,18 +12,23 @@ pub enum ClassGeneratorError {
         location: snafu::Location,
     },
 
+    /// Directory walker error
     #[snafu(transparent)]
     JWalkError {
         source: jwalk::Error,
         #[snafu(implicit)]
         location: snafu::Location,
     },
+
+    /// Standard library io error
     #[snafu(transparent)]
     IoError {
         source: std::io::Error,
         #[snafu(implicit)]
         location: snafu::Location,
     },
+
+    /// Json (De)Serialization error
     #[snafu(transparent)]
     SerdeJsonError {
         source: serde_json::Error,

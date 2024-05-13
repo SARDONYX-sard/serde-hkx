@@ -45,59 +45,27 @@ pub struct Member<'a> {
 }
 
 impl Member<'_> {
-    /// Byte size that must be read. Used to calculate the padding of the structure representing the Havok class.
+    /// Byte size of member.
+    ///
+    /// Used to calculate the padding of the structure representing the Havok class.
     ///
     /// # Assumptions
     /// Assume that the pointer size is 4 or larger.
     ///
-    /// # Panics
+    /// # Errors
     /// - If entered
     /// `TypeKind::Void | TypeKind::Zero | TypeKind::FnPtr |
     ///  TypeKind::InplaceArray | TypeKind::HomogeneousArray |
     ///  TypeKind::RelArray | TypeKind::Max` => These are not used inside the 2010 Havok Class.
     ///
-    /// - `TypeKind::Array` & ptr_size > 8 => Unsupported
     /// - `TypeKind::Struct` => This cannot be calculated here. It is calculated externally using `HashMap` or similar.
-    pub fn type_size(&self, vtype: &TypeKind, ptr_size: u32) -> u32 {
-        match vtype {
-            TypeKind::Bool => 1,
-            TypeKind::Char => 1,
-            TypeKind::Int8 => 1,
-            TypeKind::Uint8 => 1,
-            TypeKind::Int16 => 2,
-            TypeKind::Uint16 => 2,
-            TypeKind::Int32 => 4,
-            TypeKind::Uint32 => 4,
-            TypeKind::Int64 => 8,
-            TypeKind::Uint64 => 8,
-            TypeKind::Real => 4,
+    pub fn size_of_type(&self, ptr_size: u32) -> Result<u32, MemberError> {
+        self.size_of_vtype(ptr_size)
+    }
 
-            TypeKind::Vector4 => 16,
-            TypeKind::Quaternion => 16, // Vector3<f32>(12) + Scalar<f32>(4) = 16
-            TypeKind::QsTransform => 48, // Vector4<f32>(16) + Quaternion<f32>(16) + Vector4<f32>(16)
-            TypeKind::Rotation => 48,    // Vector4<f32>(12) * 3
-            TypeKind::Matrix3 => 48,     // Vector4<f32> * 3
-            TypeKind::Matrix4 => 64,     // Vector4<f32>(16) * 4
-            TypeKind::Transform => 64,   // Matrix3<f32>(48) + Vector4<f32>(16)
-
-            TypeKind::Array => match ptr_size {
-                4 => 12,
-                8 => 16,
-                ptr_size => ptr_size + 4 + 4, // ptr + size(int) + capAndFlags(int)
-            },
-            TypeKind::Struct => panic!("Struct cannot calculate the size here. This is obtained by caching members in a HashMap or similar."),
-            TypeKind::SimpleArray => match ptr_size {
-                4 => 8,
-                8 => 12,
-                ptr_size => ptr_size + 4, // ptr + array_len(int)
-            },
-            TypeKind::Enum | TypeKind::Flags => self.type_size(&self.vsubtype, ptr_size),
-            TypeKind::Half => 2,
-
-            TypeKind::Pointer | TypeKind::Ulong | TypeKind::CString | TypeKind::StringPtr => {
-                ptr_size
-            }
-            TypeKind::Variant => ptr_size * 2,
+    fn size_of_vtype(&self, ptr_size: u32) -> Result<u32, MemberError> {
+        Ok(match self.vtype {
+            TypeKind::Enum | TypeKind::Flags => self.size_of_vsubtype(ptr_size)?,
 
             TypeKind::Void
             | TypeKind::Zero
@@ -105,12 +73,39 @@ impl Member<'_> {
             | TypeKind::InplaceArray
             | TypeKind::HomogeneousArray
             | TypeKind::RelArray
-            | TypeKind::Max => unimplemented!(
-                "Unsupported vtype: {:?}, vsubtype: {:?}",
-                self.vtype,
-                self.vsubtype
-            ),
-        }
+            | TypeKind::Max => {
+                return UnsupportedVTypeSnafu {
+                    vtype: self.vtype.clone(),
+                }
+                .fail()
+            }
+
+            _ => size_of_type_common(&self.vtype, ptr_size)?,
+        })
+    }
+
+    fn size_of_vsubtype(&self, ptr_size: u32) -> Result<u32, MemberError> {
+        Ok(match self.vsubtype {
+            TypeKind::Enum | TypeKind::Flags => {
+                return UnsupportedFlagAndEnumOnVSubTypeSnafu.fail()
+            }
+
+            TypeKind::Void
+            | TypeKind::Zero
+            | TypeKind::FnPtr
+            | TypeKind::InplaceArray
+            | TypeKind::HomogeneousArray
+            | TypeKind::RelArray
+            | TypeKind::Max => {
+                return UnsupportedVSubTypeSnafu {
+                    vtype: self.vtype.clone(),
+                    vsubtype: self.vsubtype.clone(),
+                }
+                .fail()
+            }
+
+            _ => size_of_type_common(&self.vsubtype, ptr_size)?,
+        })
     }
 
     /// Returns the alignment size of the type.
@@ -130,8 +125,8 @@ impl Member<'_> {
     /// These are not used inside the 2010 Havok Class.
     ///
     /// `TypeKind::Struct`: This cannot be calculated here. It is calculated externally using `HashMap` or similar.
-    pub fn size_of_align(&self, vtype: &TypeKind, ptr_size: u32) -> u32 {
-        match vtype {
+    pub fn size_of_align(&self, vtype: &TypeKind, ptr_size: u32) -> Result<u32, MemberError> {
+        Ok(match vtype {
             TypeKind::Bool => 1,
             TypeKind::Char => 1,
             TypeKind::Int8 => 1,
@@ -157,8 +152,8 @@ impl Member<'_> {
                 true => ptr_size, // T* m_data size
                 false => 4,       // flag is int
             },
-            TypeKind::Struct => panic!("Unsupported Struct. use cache by HashMap"),
-            TypeKind::Enum | TypeKind::Flags => self.type_size(&self.vsubtype, ptr_size),
+            TypeKind::Struct => return UnsupportedTypeKindStructSnafu.fail(),
+            TypeKind::Enum | TypeKind::Flags => self.size_of_type(ptr_size)?,
             TypeKind::Half => 2,
 
             TypeKind::Pointer
@@ -174,12 +169,130 @@ impl Member<'_> {
             | TypeKind::HomogeneousArray
             | TypeKind::RelArray
             | TypeKind::Max => {
-                unimplemented!(
-                    "Unsupported vtype: {:?}, vsubtype: {:?}",
-                    self.vtype,
-                    self.vsubtype
-                )
+                return UnsupportedVSubTypeSnafu {
+                    vtype: self.vtype.clone(),
+                    vsubtype: self.vsubtype.clone(),
+                }
+                .fail()
             }
+        })
+    }
+}
+
+/// Common processing of vtype and vsubtype.
+///
+/// The reason for not using recursion is to avoid having to put self.vtype as a borrow argument each time it is called.
+/// This makes it easier for the caller.
+///
+/// # Assumptions
+/// Assume that the pointer size is 4 or larger.
+///
+/// # Errors
+/// - If entered
+/// `TypeKind::Void(vtype) | TypeKind::Zero | TypeKind::FnPtr |
+///  TypeKind::InplaceArray | TypeKind::HomogeneousArray |
+///  TypeKind::RelArray | TypeKind::Max` => These are not used inside the 2010 Havok Class.
+///
+/// - `TypeKind::Struct` => This cannot be calculated here. It is calculated externally using `HashMap` or similar.
+fn size_of_type_common(type_kind: &TypeKind, ptr_size: u32) -> Result<u32, MemberError> {
+    Ok(match type_kind {
+        TypeKind::Bool | TypeKind::Char | TypeKind::Int8 | TypeKind::Uint8 => 1,
+        TypeKind::Int16 | TypeKind::Uint16 => 2,
+        TypeKind::Int32 | TypeKind::Uint32 => 4,
+        TypeKind::Int64 | TypeKind::Uint64 => 8,
+        TypeKind::Real => 4,
+
+        TypeKind::Vector4 => 16,
+        TypeKind::Quaternion => 16, // Vector3<f32>(12) + Scalar<f32>(4) = 16
+        TypeKind::QsTransform => 48, // Vector4<f32>(16) + Quaternion<f32>(16) + Vector4<f32>(16)
+        TypeKind::Rotation => 48,   // Vector4<f32>(16) * 3
+        TypeKind::Matrix3 => 48,    // Vector4<f32>(16) * 3
+        TypeKind::Matrix4 => 64,    // Vector4<f32>(16) * 4
+        TypeKind::Transform => 64,  // Matrix3<f32>(48) + Vector4<f32>(16)
+
+        TypeKind::Array => match ptr_size {
+            4 => 12,
+            8 => 16,
+            ptr_size => ptr_size + 4 + 4, // ptr_size + size(int) + capAndFlags(int)
+        },
+        TypeKind::Struct => return UnsupportedTypeKindStructSnafu.fail(),
+        TypeKind::SimpleArray => match ptr_size {
+            4 => 8,
+            8 => 12,
+            ptr_size => ptr_size + 4, // ptr + array_len(int)
+        },
+
+        TypeKind::Half => 2,
+        TypeKind::RelArray => 4, // Not used in havok class of ver. hk2010
+        TypeKind::Pointer| TypeKind::FnPtr | TypeKind::Ulong | TypeKind::CString | TypeKind::StringPtr => ptr_size,
+        TypeKind::Variant => ptr_size * 2,
+
+        // The following is not common, but vtype and vsubtype have different conditions.
+        TypeKind::Enum
+        | TypeKind::Flags
+
+        // This is always unsupported.
+        | TypeKind::Void
+        | TypeKind::Zero
+        | TypeKind::InplaceArray
+        | TypeKind::HomogeneousArray
+        | TypeKind::Max => {
+            return UnsupportedVTypeSnafu {
+                vtype: type_kind.clone(),
+            }
+            .fail()
         }
+    })
+}
+
+#[derive(Debug, PartialEq, snafu::Snafu)]
+pub enum MemberError {
+    #[snafu(display("Struct cannot calculate the size here. This is obtained by caching members in a HashMap or similar."))]
+    UnsupportedTypeKindStruct,
+
+    #[snafu(display(
+        "Unsupported vtype: {vtype}. This is because they are not used in the 2010 Havok classes."
+    ))]
+    UnsupportedVType { vtype: TypeKind },
+
+    #[snafu(display("Unsupported vtype: {vtype}, vsubtype: {vsubtype}. This is because they are not used in the 2010 Havok classes."))]
+    UnsupportedVSubType { vtype: TypeKind, vsubtype: TypeKind },
+
+    #[snafu(display("TypeKind::Flag and TypeKind::Enum should not come in generics (vsubtype), so they are not supported (at least in ver. hk2010)."))]
+    UnsupportedFlagAndEnumOnVSubType,
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use pretty_assertions::assert_eq;
+
+    #[test]
+    fn should_return_correct_type_size_and_align_for_bool() {
+        let member = Member {
+            vtype: TypeKind::Bool,
+            vsubtype: TypeKind::Bool,
+            ..Default::default()
+        };
+        let ptr_size = 4; // Just for testing purposes
+
+        let actual_size = member.size_of_vtype(ptr_size);
+        assert_eq!(actual_size, Ok(1));
+
+        let actual_align = member.size_of_align(&member.vtype, ptr_size);
+        assert_eq!(actual_align, Ok(1));
+    }
+
+    #[test]
+    fn should_return_correct_type_size_and_align_for_char() {
+        let member = Member {
+            vtype: TypeKind::Char,
+            vsubtype: TypeKind::Char,
+            ..Default::default()
+        };
+        let ptr_size = 4;
+        let actual_size = member.size_of_type(ptr_size);
+        let actual_align = member.size_of_align(&member.vtype, ptr_size);
+        assert_eq!((actual_size, actual_align), (Ok(1), Ok(1)));
     }
 }

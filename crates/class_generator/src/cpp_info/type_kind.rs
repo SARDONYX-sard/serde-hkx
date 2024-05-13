@@ -1,5 +1,7 @@
 #![doc = include_str!("../../../../docs/specification/hkx_types.md")]
 //! Type kinds used for `vtype` or `vsubtype` in Havok Class.
+//!
+//! e.g. `hkArray<hkBool>` => `vtype: hkArray, vsubtype: hkBool`
 use num_derive::{FromPrimitive, ToPrimitive};
 use parse_display::{Display, FromStr};
 use serde_with::{DeserializeFromStr, SerializeDisplay};
