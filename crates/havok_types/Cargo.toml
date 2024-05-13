@@ -20,6 +20,7 @@ parse_int = { version = "0.6" }
 serde = { version = "1.0", features = [
   "derive",
 ], optional = true } # Implement (De)Serializer
+serde_with = "3.8.1"
 tracing = "0.1" # Logger
 
 [dev-dependencies]

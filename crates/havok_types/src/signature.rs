@@ -19,6 +19,10 @@ use parse_display::Display;
 ///
 /// assert_eq!("0x13a39ba7".parse(), Ok(Signature::new(0x13a39ba7)));
 /// ```
+#[cfg_attr(
+    feature = "serde",
+    derive(serde_with::SerializeDisplay, serde_with::DeserializeFromStr)
+)]
 #[repr(transparent)]
 #[derive(Debug, Clone, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Display, new)]
 #[display("0x{0:08x}")]
@@ -33,6 +37,3 @@ impl FromStr for Signature {
         ))
     }
 }
-
-#[cfg(feature = "serde")]
-crate::impl_str_serde!(Signature);

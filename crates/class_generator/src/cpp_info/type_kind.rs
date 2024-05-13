@@ -1,13 +1,23 @@
 #![doc = include_str!("../../../../docs/specification/hkx_types.md")]
 //! Type kinds used for `vtype` or `vsubtype` in Havok Class.
-use havok_types::impl_str_serde;
 use num_derive::{FromPrimitive, ToPrimitive};
 use parse_display::{Display, FromStr};
-
-impl_str_serde!(TypeKind);
+use serde_with::{DeserializeFromStr, SerializeDisplay};
 
 /// Type kinds used in Havok Class.
-#[derive(Debug, Clone, Default, PartialEq, Eq, FromStr, Display, FromPrimitive, ToPrimitive)]
+#[derive(
+    Debug,
+    Clone,
+    Default,
+    PartialEq,
+    Eq,
+    FromStr,
+    Display,
+    SerializeDisplay,
+    DeserializeFromStr,
+    FromPrimitive,
+    ToPrimitive,
+)]
 #[display("TYPE_{}", style = "UPPERCASE")]
 pub enum TypeKind {
     /// No type information.
@@ -173,7 +183,7 @@ mod tests {
     use pretty_assertions::assert_eq;
 
     #[test]
-    fn should_cast_to_string() {
+    fn to_string_should_start_with_type_prefix() {
         assert_eq!(TypeKind::Void.to_string(), "TYPE_VOID");
         assert_eq!(TypeKind::Bool.to_string(), "TYPE_BOOL");
         assert_eq!(TypeKind::Char.to_string(), "TYPE_CHAR");
@@ -181,7 +191,7 @@ mod tests {
     }
 
     #[test]
-    fn should_cast_from_str() {
+    fn from_str() {
         assert_eq!("TYPE_BOOL".parse(), Ok(TypeKind::Bool));
         assert_eq!("TYPE_REAL".parse(), Ok(TypeKind::Real));
         assert_eq!("TYPE_QSTRANSFORM".parse(), Ok(TypeKind::QsTransform));

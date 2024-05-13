@@ -1,5 +1,5 @@
 //! Flags for field alignment needs, skipping serialization, etc.
-use havok_types::impl_str_serde;
+use serde_with::{DeserializeFromStr, SerializeDisplay};
 use std::{borrow::Cow, str::FromStr};
 
 bitflags::bitflags! {
@@ -8,7 +8,8 @@ bitflags::bitflags! {
     /// # On XML
     /// When all bits are 0, "0" is inserted.
     /// (Even if `FLAGS_NONE = 0` and 0 is replaced by `FLAGS_NONE`, "0" will appear when reconverting xml -> hkx -> xml.)
-    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, SerializeDisplay, DeserializeFromStr)]
+    #[repr(transparent)]
     pub struct FlagValues: u16 {
         /// Flags is empty: 0
         const FLAGS_NONE = 0;
@@ -28,8 +29,6 @@ impl Default for FlagValues {
         Self::empty()
     }
 }
-
-impl_str_serde!(FlagValues);
 
 impl FromStr for FlagValues {
     type Err = String;
@@ -88,7 +87,7 @@ mod tests {
     use pretty_assertions::assert_eq;
 
     #[test]
-    fn flags_to_str() {
+    fn to_string() {
         assert_eq!(
             FlagValues::FLAGS_NONE.to_string(),
             "0",
@@ -104,7 +103,7 @@ mod tests {
     }
 
     #[test]
-    fn str_to_flags() {
+    fn from_str() {
         assert_eq!("0".parse(), Ok(FlagValues::FLAGS_NONE));
         assert_eq!("FLAGS_NONE".parse(), Ok(FlagValues::FLAGS_NONE));
 
@@ -119,8 +118,7 @@ mod tests {
 
         assert_eq!(
             "ALIGN_8|ALIGN_16|SERIALIZE_IGNORED|64".parse(),
-            Ok(FlagValues::FLAGS_NONE
-                | FlagValues::ALIGN_8
+            Ok(FlagValues::ALIGN_8
                 | FlagValues::ALIGN_16
                 | FlagValues::SERIALIZE_IGNORED
                 | FlagValues::from_bits_retain(64)),

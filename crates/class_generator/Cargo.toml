@@ -24,6 +24,7 @@ parse-display = "0.9.0"                                         # Derive Display
 parse_int = { version = "0.6" }
 serde = { version = "1.0", features = ["derive"] }              # Implement (De)Serializer
 serde_json = { version = "1.0.116" }                            # To read and write Json files
+serde_with = "3.8.1"                                            # Serde utility
 snafu_location_derive = { path = "../snafu_location_derive" }
 snafu = "0.8.2"                                                 # Define all error patterns(with backtrace)
 topo_sort = "0.4.0"                                             # Necessary to generate code in order of class dependencies.

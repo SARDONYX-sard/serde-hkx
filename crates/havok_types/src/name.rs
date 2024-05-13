@@ -29,6 +29,10 @@ use parse_display::Display;
 /// assert_eq!("#1000".parse(), Ok(Name::new(1000)));
 /// assert_eq!("#10000".parse(), Ok(Name::new(10000)));
 /// ```
+#[cfg_attr(
+    feature = "serde",
+    derive(serde_with::SerializeDisplay, serde_with::DeserializeFromStr)
+)]
 #[repr(transparent)]
 #[derive(Debug, Clone, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Display, new)]
 #[display("#{0:04}")]
@@ -44,6 +48,3 @@ impl FromStr for Name {
         ))
     }
 }
-
-#[cfg(feature = "serde")]
-crate::impl_str_serde!(Name);
