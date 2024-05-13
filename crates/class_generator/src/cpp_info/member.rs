@@ -28,10 +28,10 @@ pub struct Member<'a> {
     #[serde(bound(deserialize = "Cow<'a, str>: Deserialize<'de>"))]
     pub ctype: Cow<'a, str>,
 
-    /// Havok Type enumeration (Rough category of `Self::type_name`.)
+    /// Havok C++ type kind
     pub vtype: TypeKind,
 
-    /// Type in generics when arrays, etc. come in.
+    /// Type in generics when array, flag or enum member size, pointer of struct, etc. come in.
     pub vsubtype: TypeKind,
 
     /// If an array is used, its size .
