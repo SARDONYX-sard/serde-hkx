@@ -4,6 +4,13 @@ use proc_macro::TokenStream;
 use quote::{quote, ToTokens};
 use syn::{braced, parse::Parse, punctuated::Punctuated, token::PathSep, Ident, Token};
 
+/// Automatically implement [`core::str::FromStr`], [`core::fmt::Display`] in string notation according
+/// to Havok's `hkFlags<Enum, SizeType>` XML notation.
+///
+/// In addition, [`core::default::Default`] is implemented.
+///
+/// # Note
+/// This attribute macro is automatically implemented by parsing `bitflags!` macro, so it cannot be implemented in a normal structure.
 #[proc_macro_attribute]
 pub fn impl_flags_methods(_attr: TokenStream, input: TokenStream) -> TokenStream {
     let bit_flags = syn::parse_macro_input!(input as BitFlagsMacro);
