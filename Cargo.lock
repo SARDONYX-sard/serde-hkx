@@ -40,9 +40,9 @@ checksum = "72b3254f16251a8381aa12e40e3c4d2f0199f8c6508fbecb9d91f575e0fbb8c6"
 
 [[package]]
 name = "bitflags"
-version = "2.4.2"
+version = "2.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ed570934406eb16438a4e976b1b4500774099c13b8cb96eec99f620f05090ddf"
+checksum = "cf4b9d6a944f767f8e5e0db018570623c85f3d925ac718db4e06d0187adb21c1"
 
 [[package]]
 name = "bumpalo"
@@ -90,7 +90,6 @@ dependencies = [
  "num-derive",
  "num-traits",
  "parse-display",
- "parse_int",
  "pretty_assertions",
  "serde",
  "serde_json",
@@ -295,6 +294,16 @@ dependencies = [
 name = "havok_types_derive"
 version = "0.1.0"
 dependencies = [
+ "havok_types_derive_proc_macros",
+ "parse_int",
+]
+
+[[package]]
+name = "havok_types_derive_proc_macros"
+version = "0.1.0"
+dependencies = [
+ "parse_int",
+ "proc-macro2",
  "quote",
  "syn",
 ]

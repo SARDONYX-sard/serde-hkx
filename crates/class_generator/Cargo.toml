@@ -22,7 +22,6 @@ nom = "7.1.3"                                                   # Fast parser co
 num-derive = "0.4"
 num-traits = "0.2"
 parse-display = "0.9.0"                                         # Derive Display
-parse_int = { version = "0.6" }
 serde = { version = "1.0", features = ["derive"] }              # Implement (De)Serializer
 serde_json = { version = "1.0.116" }                            # To read and write Json files
 serde_with = "3.8.1"                                            # Serde utility
