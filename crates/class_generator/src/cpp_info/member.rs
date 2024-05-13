@@ -119,7 +119,7 @@ impl Member<'_> {
     ///   but in fact they are 16 bytes aligned for SIMD and alignment. `Vector4<f32>` -> 16
     /// - `Variant` -> ptr size
     ///
-    /// # Panics
+    /// # Errors
     /// If entered `TypeKind::Void | TypeKind::Zero | TypeKind::FnPtr | TypeKind::InplaceArray | TypeKind::HomogeneousArray | TypeKind::RelArray | TypeKind::Max`.
     ///
     /// These are not used inside the 2010 Havok Class.
