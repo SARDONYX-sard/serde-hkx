@@ -11,6 +11,7 @@ edition = "2021"
 members = [
   "crates/class_generator",
   "crates/havok_types",
+  "crates/havok_types_derive",
   "crates/snafu_location_derive",
 ]
 default-members = ["crates/class_generator"]

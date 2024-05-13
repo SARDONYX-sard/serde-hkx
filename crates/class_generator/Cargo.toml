@@ -15,6 +15,7 @@ bitflags = "2.4"                                                # To generate fl
 convert_case = "0.6"                                            # Case Changer
 derive-new = "0.6"
 havok_types = { path = "../havok_types", features = ["serde"] }
+havok_types_derive = { path = "../havok_types_derive" }
 indexmap = "2.2"                                                # To cache class
 jwalk = { version = "0.8" }                                     # To enumarate json class files
 nom = "7.1.3"                                                   # Fast parser compibnator

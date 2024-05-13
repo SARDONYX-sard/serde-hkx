@@ -83,6 +83,7 @@ dependencies = [
  "convert_case",
  "derive-new",
  "havok_types",
+ "havok_types_derive",
  "indexmap 2.2.3",
  "jwalk",
  "nom",
@@ -288,6 +289,14 @@ dependencies = [
  "serde_json",
  "serde_with",
  "tracing",
+]
+
+[[package]]
+name = "havok_types_derive"
+version = "0.1.0"
+dependencies = [
+ "quote",
+ "syn",
 ]
 
 [[package]]
