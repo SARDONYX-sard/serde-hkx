@@ -4,7 +4,7 @@ The [`hkxcmd Report` (32bit info)](https://github.com/figment/hkxcmd) and the SK
 
 We then generated a set of Json files here using this offset & size information.
 
-As the Json file prefixed with `BS`, it contains some `Bethesda` proprietary extension classes.
+Json files prefixed with `BS` are `Bethesda` proprietary extension classes.
 
 ## Details of this Json format
 
@@ -47,7 +47,7 @@ C++ Class members
 
 - `default`: The default value. The default value is basically 0, but some values are different.
 
-## Exertions
+## Exceptions
 
 - Reflection data in `hk_2010.2.0-r1`, but some data hidden by multiple inheritance of parent classes etc. do not exist.
 

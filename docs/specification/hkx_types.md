@@ -757,6 +757,25 @@ class hkFlags {
 
 4.If you look at the same part of the XML, only FLAG_NONE is replaced by 0.
 
+```xml
+<hkobject name="#0027" class="hkbBehaviorGraphData" signature="0x95aca5d">
+	<!-- memSizeAndFlags SERIALIZE_IGNORED -->
+	<!-- referenceCount SERIALIZE_IGNORED -->
+	<hkparam name="attributeDefaults" numelements="0"></hkparam>
+	<hkparam name="variableInfos" numelements="101">
+		<hkobject>
+			<hkparam name="role">
+				<hkobject> <!-- hkbRoleAttribute -->
+					<hkparam name="role">ROLE_DEFAULT</hkparam>
+					<hkparam name="flags">0</hkparam><!-- Replaced from FLAG_NONE to 0-->
+				</hkobject>
+			</hkparam>
+			<hkparam name="type">VARIABLE_TYPE_REAL</hkparam>
+		</hkobject>
+    <!-- ... -->
+</hkobject>
+```
+
 </div></details>
 
 ---
