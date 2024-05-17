@@ -22,25 +22,27 @@
 
 ## Hkx file header(64bytes)
 
-| Field                              | Description                                                     | Size (bytes) | Offset (bytes) |
-| ---------------------------------- | --------------------------------------------------------------- | ------------ | -------------- |
-| magic0                             | First magic number (`0x57E0E057`)                               | 4            | 0              |
-| magic1                             | Second magic number (`0x10C0C010`)                              | 4            | 4              |
-| user_tag                           | User-defined tag.                                               | 4            | 8              |
-| file_version                       | Version of the file.                                            | 4            | 12             |
-| pointer_size                       | Size of pointers in bytes (4 or 8)                              | 1            | 16             |
-| endian                             | Endianness of the file (0 for big-endian, 1 for little-endian). | 1            | 17             |
-| padding_option                     | Padding option used in the file.                                | 1            | 18             |
-| base_class                         | Base class.                                                     | 1            | 19             |
-| section_count                      | Number of sections in the HKX file.                             | 4            | 20             |
-| contents_section_index             | Index of the contents section.                                  | 4            | 24             |
-| contents_section_offset            | Offset of the contents section.                                 | 4            | 28             |
-| contents_class_name_section_index  | Index of the contents class name section.                       | 4            | 32             |
-| contents_class_name_section_offset | Offset of the contents class name section.                      | 4            | 36             |
-| contents_version_string            | Version string of the contents. + separator(0xFF)               | 16           | 40             |
-| flags                              | Various flags.                                                  | 4            | 56             |
-| max_predicate                      | Maximum predicate. None is -1 (== `0xFF 0xFF`)                  | 2            | 60             |
-| section_offset                     | Section offset. None is -1 (== `0xFF 0xFF`)                     | 2            | 62             |
+| Field                              | Description                                                     | Rust Type | Size (bytes) | Offset (bytes) |
+| ---------------------------------- | --------------------------------------------------------------- | --------: | -----------: | -------------: |
+| magic0                             | First magic number (`0x57E0E057`)                               |       i32 |            4 |              0 |
+| magic1                             | Second magic number (`0x10C0C010`)                              |       i32 |            4 |              4 |
+| user_tag                           | User-defined tag.                                               |       i32 |            4 |              8 |
+| file_version                       | Version of the file.                                            |       i32 |            4 |             12 |
+| pointer_size                       | Size of pointers in bytes (4 or 8)                              |        u8 |            1 |             16 |
+| endian                             | Endianness of the file (0 for big-endian, 1 for little-endian). |        u8 |            1 |             17 |
+| padding_option                     | Padding option used in the file.                                |        u8 |            1 |             18 |
+| base_class                         | Base class.                                                     |        u8 |            1 |             19 |
+| section_count                      | Number of sections in the HKX file.                             |       i32 |            4 |             20 |
+| contents_section_index             | Index of the contents section.                                  |       i32 |            4 |             24 |
+| contents_section_offset            | Offset of the contents section.                                 |       i32 |            4 |             28 |
+| contents_class_name_section_index  | Index of the contents class name section.                       |       i32 |            4 |             32 |
+| contents_class_name_section_offset | Offset of the contents class name section.                      |       i32 |            4 |             36 |
+| contents_version_string            | Version string of the contents. + separator(0xFF)               |   [u8;16] |           16 |             40 |
+| flags                              | Various flags.                                                  |       i32 |            4 |             56 |
+| max_predicate                      | Maximum predicate. (Fill in ff as pad in 2010 `0xFF 0xFF`)      |       i16 |            2 |             60 |
+| section_offset                     | Section offset. (Fill in ff as pad in 2010 `0xFF 0xFF`)         |       i16 |            2 |             62 |
+
+- `max_predicate` and `section_offset` are not used in version `hk_2010.2.0-r1`. Therefore, they are filled with `0xff`.
 
 - padding_option:
   Alignment or not until ptr size?
