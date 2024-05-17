@@ -396,12 +396,6 @@ dst_section_index: 2
 
 Location information for the name of the C++ class that must call the constructor.
 
-- Why is the name `virtual' the actual class?
-
-  The SDK description says that `hkBaseObject`, a 'class without fields', is inherited by all Havok classes so that the vtable comes first before the data.
-
-  And All Havok managed objects inherit from `hkReferencedObject`(which inherits from `hkBaseObject`), stores memory size and reference count.
-
 - section_index: 0 means that virtualFixup's name_offset(dst) indicates a `__classnames__` section.
 
 ```log
@@ -496,7 +490,8 @@ VirtualFixup {
 }
 ```
 
-- The following code is almost identical to the actual definitions of the Havok types and Havok classes required for this project.
+- The following code is the Havok types and Havok classes required for this project.
+  NOTE: The code shown here could very well be completely different from the SDK except for the offset and size.
   (The reason this is necessary is that **the binary read size is highly dependent on the C++ class offset and size**.)
 
   View Assembly and C++ code in Compiler Explorer
@@ -595,10 +590,6 @@ VirtualFixup {
   #endif
 
   /// The class size is pointer size.
-  /// The SDK description says that the `hkBaseObject`, a virtual function without
-  /// a field, is the source of inheritance for all Havok Classes so that the
-  /// vtable does not come after the data.
-  ///
   /// - size: 32bit: 4, 64bit: 8
   class hkBaseObject {
      public:
@@ -633,11 +624,9 @@ VirtualFixup {
       /// alignment will be to the vtable of hkBaseObject, so (32bit: 4bytes,
       /// 64bit: 8bytes) is needed.
   #if defined __i386__
-      // 32bit: 2 + 2 = 4
-      char _pad0[0];
+      char _pad0[0]; // 32bit: 4 + 2 + 2 =  8 -> No need padding.(already 4bytes aligned)
   #elif defined __x86_64__
-      // 64bit: 2 + 2 + 4 = 8
-      char _pad0[4];
+      char _pad0[4]; // 64bit: 8 + 2 + 2 = 12 -> need 4bytes for 8bytes align
   #endif
   };
   #if defined __i386__
