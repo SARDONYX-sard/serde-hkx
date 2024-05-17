@@ -47,6 +47,18 @@
   It does not seem to be classified as `TYPE_ARRAY` or any other array.
   `vtype: TYPE_BOOL, array size: 3`, only the array size changes. There is an editing software that calls this C style Array.
 
+## Precautions for reading and writing binary data
+
+- All complex types have aligned(16), so they must always be adjusted to a multiple of 16 before this type comes in.
+
+  Complex types: `Vector4`, `Quaternion`, `Matrix3`, `Rotation`, `QsTransform`, `Matrix4`, `Transform`
+
+- Only pointer type uses `local_fixups` to read and write the actual data.
+
+  Pointer types: `Array`, `CString`, and `StringPtr`
+
+  All other types write data in place according to alignment and size.
+
 ## Types details
 
 These are a summary of the assumed C++ code, the binary read/write method derived from it, and the representation method on XML.
@@ -149,6 +161,12 @@ class __attribute__((aligned(16))) hkVector4 {
 </hkparam>
 ```
 
+- Read/Write bytes
+  Since it is not a pointer, it exists directly at that location.
+
+  - Size to be loaded: exactly the same size as the C++ class.
+  - Note that Vector4 has align(16), so 16 bytes are aligned before reading.
+
 ---
 
 ### `Quaternion`(`hkQuaternion`)
@@ -162,18 +180,12 @@ class __attribute__((aligned(16))) hkVector4 {
  */
 class hkQuaternion {
     /**
-     * Vector part
+     * Vector3 + scalar
      *
      * -    offset:  0
-     * - byte size: 12(x86)/12(x86_64)
-     */
-    hkVector3 v;
-    /**
-     * Scalar part
-     *
      * - byte size: 16(x86)/16(x86_64)
      */
-    hkReal s;
+    hkVector4 v;
 };
 ```
 
@@ -183,7 +195,7 @@ The w component, which is unused on XML, is not displayed.
 
 ```xml
 <hkparam>
-  <!--       Vector3 x      --><!-- scalar -->
+  <!--      Vector part     --><!-- scalar -->
   (-0.000000 0.000000 -0.000000 1.000000)
 </hkparam>
 ```
@@ -242,6 +254,12 @@ The w component, which is unused on XML, is not displayed.
 </hkparam>
 ```
 
+- Read/Write bytes
+  Since it is not a pointer, it exists directly at that location.
+
+  - Size to be loaded: exactly the same size as the C++ class.
+  - Note that Vector4 has align(16), so 16 bytes are aligned before reading/writing.
+
 ---
 
 ### `Rotation`(`hkRotation`)
@@ -258,6 +276,12 @@ Same as `hkMatrix3`.
 class __attribute__((aligned(16))) hkRotation: public hkMatrix3 {
 };
 ```
+
+- Read/Write bytes
+  Since it is not a pointer, it exists directly at that location.
+
+  - Size to be loaded: exactly the same size as the C++ class.
+  - Note that Vector4 has align(16), so 16 bytes are aligned before reading/writing.
 
 ---
 
@@ -303,6 +327,12 @@ class hkQsTransform {
   (1.000000 1.000000 1.000000)
 </hkparam>
 ```
+
+- Read/Write bytes
+  Since it is not a pointer, it exists directly at that location.
+
+  - Size to be loaded: exactly the same size as the C++ class.
+  - Note that Vector4 has align(16), so 16 bytes are aligned before reading/writing.
 
 ---
 
@@ -353,7 +383,13 @@ class hkMatrix4 {
 </hkparam>
 ```
 
----
+- Read/Write bytes
+  Since it is not a pointer, it exists directly at that location.
+
+  - Size to be loaded: exactly the same size as the C++ class.
+  - Note that Vector4 has align(16), so 16 bytes are aligned before reading/writing.
+
+--
 
 ### `Transform`(`hkTransform`)
 
@@ -393,6 +429,12 @@ class hkTransform {
 </hkparam>
 ```
 
+- Read/Write bytes
+  Since it is not a pointer, it exists directly at that location.
+
+  - Size to be loaded: exactly the same size as the C++ class.
+  - Note that Vector4 has align(16), so 16 bytes are aligned before reading/writing.
+
 ---
 
 ### ~~`Zero`~~
@@ -431,6 +473,12 @@ In case of null pointer
 ```xml
 <hkparam name="variableBindingSet">null</hkparam>
 ```
+
+- Read/Write bytes
+
+  Data such as `#0859` does not exist in binary data. This is an index that is automatically added when reading and writing.
+
+  However, there is information about where it points to. That is global_fixup.This is to retrieve the location of the data pointed to by using the current read/write position as a key.
 
 ---
 
@@ -541,6 +589,33 @@ class hkArray {
     </hkparam>
     ```
 
+- Read/Write bytes
+
+  First, read/write the information in `hkArray<T>`.
+
+1. Read/Write pointer size(32bit: 4bytes/64bit: 8bytes).This value will always be 0.
+2. Next is size. In x86 and x86_64, `int` is 4bytes.
+3. Next, flags and capacity. In x86 and x86_64, `int` is 4bytes.
+
+   - Sample(defaultmale.hkx)
+
+   ```log
+   000001f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80  ................
+             <--------------------------------------------->  animationFilenames: hkArray<hkStringPtr>
+             <--------------------->                          consume pointer size
+                                     <--------->              array size: int(u32) -> 0
+                                                 <--------->  capacityAndFlags: int(u32) -> 0 | 0x80 << 24
+   ```
+
+4. Next, the value of local_fixup is extracted using the current position (the position indicating how many bytes from the starting position of abs) as key. Then, jump to the location of the value, since the value is the location of `T` in `hkArray<T>`.
+
+   `backup_prev_position` <- `current_reader_or_writer_position`
+   content of `T` position <- local_fixups[`current_reader_or_writer_position`]
+   jump to content of `T` position.
+
+5. Read `T`(e.g. `hkStringPtr`)
+6. Return to the previous position that was backed up. jump to `backup_prev_position`
+
 ---
 
 ### ~~`InplaceArray`~~
@@ -569,6 +644,10 @@ class hkEnum {
 ```xml
 <hkparam name="type">TYPE_ANG_FRICTION</hkparam>
 ```
+
+- Read/Write bytes
+
+  Read binary data for the storage size of the enum. The data resides directly there.
 
 ---
 
@@ -651,6 +730,23 @@ struct hkVariant {
 
 - Null-terminated string type.
 - It is unclear which segment (stack, heap, or other) is being pointed to because of the raw pointer.
+
+- Read/Write bytes
+
+1. Read/Write pointer size(32bit: 4bytes/64bit: 8bytes).This value will always be 0.
+2. Because `CString` is a pointer type, the data position is taken from local_fixups.
+
+   `backup_prev_position` <- `current_reader_or_writer_position`
+   content position <- local_fixups[`current_reader_or_writer_position`]
+   jump to content position.
+
+   NOTE: If there is no key, the content does not exist and the following actions(3~) are not performed.
+
+3. On read: Continue reading until the byte reaches zero(null-terminated).
+
+   On write: Write all.
+
+4. Return to the previous position that was backed up. jump to `backup_prev_position`
 
 ---
 
@@ -821,6 +917,23 @@ class hkStringPtr {
 ```xml
 <hkparam name="name">Ragdoll_Wisp L Hand01</hkparam>
 ```
+
+- Read/Write bytes
+
+1. Read/Write pointer size(32bit: 4bytes/64bit: 8bytes).This value will always be 0.
+2. Because `StringPtr` is a pointer type, the data position is taken from local_fixups.
+
+   `backup_prev_position` <- `current_reader_or_writer_position`
+   content position <- local_fixups[`current_reader_or_writer_position`]
+   jump to content position.
+
+   NOTE: If there is no key, the content does not exist and the following actions(3~) are not performed.
+
+3. On read: Continue reading until the byte reaches zero(null-terminated).
+
+   On write: Write all.
+
+4. Return to the previous position that was backed up. jump to `backup_prev_position`
 
 ---
 
