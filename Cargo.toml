@@ -10,11 +10,11 @@ edition = "2021"
 [workspace]
 members = [
   "crates/class_generator",
+  "crates/havok_serde",
   "crates/havok_types",
   "crates/havok_types_derive",
-  "crates/snafu_location_derive",
-
   "crates/havok_types_derive/src/proc_macros",
+  "crates/snafu_location_derive",
 ]
 default-members = ["crates/class_generator"]
 resolver = "2"
