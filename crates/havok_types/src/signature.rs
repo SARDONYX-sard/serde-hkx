@@ -8,10 +8,10 @@ use parse_display::Display;
 
 /// Havok C++ Class signature hex number.
 ///
-/// The [`Copy`] is derive for [`u32`] wrapper type.
+/// - XML: hex string(At least 8 digits)
+/// - hkx binary data: Endianness bytes
 ///
 /// # Examples
-///
 /// ```
 /// use havok_types::signature::Signature;
 ///
@@ -21,6 +21,9 @@ use parse_display::Display;
 ///
 /// assert_eq!("0x13a39ba7".parse(), Ok(Signature::new(0x13a39ba7)));
 /// ```
+///
+/// # NOte
+/// The [`Copy`] is derive for [`usize`] wrapper type.
 #[cfg_attr(
     feature = "serde",
     derive(serde_with::SerializeDisplay, serde_with::DeserializeFromStr)
