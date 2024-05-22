@@ -10,18 +10,35 @@ use havok_types::{
 #[derive(Debug)]
 struct Serializer {
     output: String,
-    is_root: bool,
     indent: &'static str,
     depth: usize,
+    start_root: Option<String>,
+    end_root: Option<String>,
 }
 
 impl Default for Serializer {
     fn default() -> Self {
         Self {
             output: String::new(),
-            is_root: true,
             indent: "    ",
-            depth: 0,
+            depth: 2,
+            start_root: Some(
+                r###"
+<?xml version="1.0" encoding="ascii"?>
+<hkpackfile classversion="8" contentsversion="hk_2010.2.0-r1" toplevelobject="#0050">
+
+    <hksection name="__data__">"
+
+"###
+                .to_owned(),
+            ),
+            end_root: Some(
+                r###"    </hksection>
+
+</hkpackfile>
+"###
+                .to_owned(),
+            ),
         }
     }
 }
@@ -31,34 +48,16 @@ pub fn to_string<T>(value: &T) -> Result<String>
 where
     T: super::Serialize,
 {
-    let mut serializer = Serializer {
-        output: String::new(),
-        is_root: true,
-        indent: "    ",
-        depth: 0,
+    let mut serializer = Serializer::default();
+
+    if let Some(ref start_root) = serializer.start_root {
+        serializer.output += start_root;
     };
 
-    if serializer.is_root {
-        let start_root = r###"
-<?xml version="1.0" encoding="ascii"?>
-<hkpackfile classversion="8" contentsversion="hk_2010.2.0-r1" toplevelobject="#0050">
+    value.serialize(&mut serializer)?;
 
-    <hksection name="__data__">"
-
-"###;
-        let end_root = r###"
-    </hksection>
-
-</hkpackfile>
-"###;
-
-        serializer.output += start_root;
-        serializer.depth += 2;
-
-        value.serialize(&mut serializer)?;
+    if let Some(ref end_root) = serializer.end_root {
         serializer.output += end_root;
-    } else {
-        value.serialize(&mut serializer)?;
     };
     Ok(serializer.output)
 }
