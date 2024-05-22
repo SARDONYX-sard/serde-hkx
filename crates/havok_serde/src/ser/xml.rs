@@ -3,15 +3,27 @@ use crate::lib::*;
 
 use crate::error::{Error, Result};
 use havok_types::{
-    f16, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature, Transform,
-    Vector4,
+    f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature,
+    StringPtr, Transform, Vector4,
 };
 
+#[derive(Debug)]
 struct Serializer {
     output: String,
     is_root: bool,
     indent: &'static str,
     depth: usize,
+}
+
+impl Default for Serializer {
+    fn default() -> Self {
+        Self {
+            output: String::new(),
+            is_root: true,
+            indent: "    ",
+            depth: 0,
+        }
+    }
 }
 
 /// To XML String.
@@ -33,9 +45,8 @@ where
 
     <hksection name="__data__">"
 
-        "###;
+"###;
         let end_root = r###"
-
     </hksection>
 
 </hkpackfile>
@@ -213,8 +224,8 @@ impl<'a> super::Serializer for &'a mut Serializer {
         todo!()
     }
 
-    fn serialize_cstring(self, v: &Cow<'_, CStr>) -> Result<Self::Ok> {
-        self.output += &v.to_string_lossy();
+    fn serialize_cstring(self, v: &CString) -> Result<Self::Ok> {
+        self.output += &v;
         Ok(())
     }
 
@@ -233,8 +244,8 @@ impl<'a> super::Serializer for &'a mut Serializer {
         Ok(())
     }
 
-    fn serialize_stringptr(self, s: &Cow<'_, CStr>) -> Result<Self::Ok> {
-        self.output += &s.to_str()?;
+    fn serialize_stringptr(self, s: &StringPtr) -> Result<Self::Ok> {
+        self.output += &s;
         Ok(())
     }
 
@@ -267,6 +278,16 @@ impl Serializer {
 impl<'a> super::SerializeSeq for &'a mut Serializer {
     type Ok = ();
     type Error = Error;
+
+    fn serialize_class_element<T>(&mut self, value: &T) -> Result<()>
+    where
+        T: ?Sized + super::Serialize,
+    {
+        self.indent();
+        value.serialize(&mut **self)?;
+        self.output += "\n";
+        Ok(())
+    }
 
     fn serialize_math_element<T>(&mut self, value: &T) -> Result<()>
     where
@@ -350,12 +371,12 @@ impl<'a> super::SerializeStruct for &'a mut Serializer {
     ///     (0.000000 0.000000 0.000000 0.000000)
     /// </hkparam>
     /// ```
-    fn serialize_array_field<T>(&mut self, key: &'static str, value: &T, len: usize) -> Result<()>
+    fn serialize_array_field<V, T>(&mut self, key: &'static str, value: V) -> Result<()>
     where
-        T: ?Sized + super::Serialize,
+        V: AsRef<[T]> + super::Serialize,
+        T: super::Serialize,
     {
-        if !self.output.ends_with("</hkobject>") {}
-
+        let len = value.as_ref().len();
         self.indent();
         self.output += &format!("<hkparam name=\"{key}\" numelements=\"{len}\">\n");
 
@@ -371,7 +392,7 @@ impl<'a> super::SerializeStruct for &'a mut Serializer {
     /// # XML Examples
     ///
     /// ```xml
-    /// <!-- key SERIALIZE_IGNORED -->
+    /// <!-- key SERIALIZE_IGNORED --><!-- This is skip_field -->
     /// <hkparam name="otherKey"></hkparam>
     /// ```
     fn skip_field(&mut self, key: &'static str) -> Result<()> {
@@ -390,14 +411,14 @@ impl<'a> super::SerializeStruct for &'a mut Serializer {
 
 #[cfg(test)]
 mod tests {
-    use std::{borrow::Cow, ffi::CStr};
-
     use super::*;
     use crate::ser::Serialize;
     use havok_types::{Pointer, Signature, Transform};
 
     #[derive(Debug, Clone, Default, PartialEq)]
     struct HkReferencedObject {
+        pub name: Option<Pointer>,
+
         /// # C++ Parent class(`hkReferencedObject` => parent: `hkBaseObject`) field Info
         /// -   name:`"memSizeAndFlags"`
         /// -   type: `hkUint16`
@@ -412,18 +433,17 @@ mod tests {
         pub reference_count: i16,
     }
 
+    impl crate::HavokClass for HkReferencedObject {}
     impl Serialize for HkReferencedObject {
         fn serialize<S: crate::ser::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
             use crate::ser::SerializeStruct;
 
-            let mut rgb = serializer.serialize_struct(
-                "hkReferencedObject",
-                Some((Pointer::new(51), Signature::new(0xea7f1d08))),
-            )?;
+            let class_meta = self.name.map(|name| (name, Signature::new(0xea7f1d08)));
+            let mut serializer = serializer.serialize_struct("hkReferencedObject", class_meta)?;
 
-            rgb.skip_field("referenceCount")?;
-            rgb.skip_field("memSizeAndFlags")?;
-            rgb.end()
+            serializer.skip_field("referenceCount")?;
+            serializer.skip_field("memSizeAndFlags")?;
+            serializer.end()
         }
     }
 
@@ -436,6 +456,8 @@ mod tests {
     #[derive(Debug, Clone, Default, PartialEq)]
     struct HkpShapeInfo<'a> {
         pub parent: HkReferencedObject,
+
+        pub name: Option<Pointer>,
 
         /// # C++ Class Fields Info
         /// -   name:`"shape"`
@@ -460,7 +482,7 @@ mod tests {
         /// -   type: `hkArray<hkStringPtr>`
         /// - offset: 16
         /// -  flags: `FLAGS_NONE`
-        pub child_shape_names: Vec<Cow<'a, CStr>>,
+        pub child_shape_names: Vec<StringPtr<'a>>,
         /// # C++ Class Fields Info
         /// -   name:`"childTransforms"`
         /// -   type: `hkArray<hkTransform>`
@@ -473,16 +495,17 @@ mod tests {
         /// - offset: 48
         /// -  flags: `FLAGS_NONE`
         pub transform: Transform,
+
+        pub v: Vec<HkReferencedObject>,
     }
 
+    impl crate::HavokClass for HkpShapeInfo<'_> {}
     impl Serialize for HkpShapeInfo<'_> {
         fn serialize<S: crate::ser::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
             use crate::ser::SerializeStruct;
 
-            let mut serializer = serializer.serialize_struct(
-                "hkpShapeInfo",
-                Some((Pointer::new(50), Signature::new(0xea7f1d08))),
-            )?;
+            let class_meta = self.name.map(|name| (name, Signature::new(0xea7f1d08)));
+            let mut serializer = serializer.serialize_struct("hkpShapeInfo", class_meta)?;
 
             // Serialize fields of parent (flatten)
             serializer.skip_field("memSizeAndFlags")?;
@@ -491,38 +514,66 @@ mod tests {
             serializer.serialize_field("shape", &self.shape)?;
             serializer.serialize_field("isHierarchicalCompound", &self.is_hierarchical_compound)?;
             serializer.serialize_field("hkdShapesCollected", &self.hkd_shapes_collected)?;
-            serializer.serialize_array_field(
-                "childShapeNames",
-                &self.child_shape_names,
-                self.child_shape_names.len(),
-            )?;
-            serializer.serialize_array_field(
-                "childTransforms",
-                &self.child_transforms,
-                self.child_transforms.len(),
-            )?;
+            serializer.serialize_array_field("childShapeNames", &self.child_shape_names)?;
+            serializer.serialize_array_field("childTransforms", &self.child_transforms)?;
             serializer.serialize_field("transform", &self.transform)?;
+            serializer.serialize_array_field("v", &self.v)?;
             serializer.end()
+        }
+    }
+
+    enum Classes<'a> {
+        HkpShapeInfo(HkpShapeInfo<'a>),
+        HkReferencedObject(HkReferencedObject),
+    }
+
+    impl crate::HavokClass for Classes<'_> {}
+    impl<'a> Serialize for Classes<'a> {
+        fn serialize<S: crate::ser::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+            match self {
+                Classes::HkpShapeInfo(class) => class.serialize(serializer),
+                Classes::HkReferencedObject(class) => class.serialize(serializer),
+            }
         }
     }
 
     #[test]
     fn test_serialize() {
-        println!(
-            "{}",
-            to_string(&HkpShapeInfo {
-                shape: Pointer::new(50),
-                is_hierarchical_compound: true,
-                hkd_shapes_collected: false,
-                child_shape_names: vec![c"child".into(), c"Hi".into()],
-                child_transforms: vec![
-                    Transform::default(),
-                    Transform::default(),
-                    Transform::default()
-                ],
-                ..Default::default()
-            })
-            .unwrap()
-        );
+        let hk_referenced_object = HkReferencedObject {
+            name: Some(51.into()),
+            mem_size_and_flags: 5,
+            reference_count: 6,
+        };
+
+        let hk_referenced_object_inline = HkReferencedObject {
+            name: None,
+            mem_size_and_flags: 5,
+            reference_count: 6,
+        };
+
+        let hkp_shape_info = HkpShapeInfo {
+            name: Some(50.into()),
+            shape: Pointer::new(50),
+            is_hierarchical_compound: true,
+            hkd_shapes_collected: false,
+            child_shape_names: vec!["child".into(), "Hi".into()],
+            child_transforms: vec![
+                Transform::default(),
+                Transform::default(),
+                Transform::default(),
+            ],
+            v: vec![
+                hk_referenced_object_inline.clone(),
+                hk_referenced_object_inline,
+            ],
+            ..Default::default()
+        };
+
+        let classes = vec![
+            Classes::HkpShapeInfo(hkp_shape_info.clone()),
+            Classes::HkpShapeInfo(hkp_shape_info),
+            Classes::HkReferencedObject(hk_referenced_object),
+        ];
+        println!("{}", to_string(&classes).unwrap());
     }
 }

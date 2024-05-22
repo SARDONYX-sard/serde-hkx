@@ -20,8 +20,8 @@ pub mod bytes;
 pub mod xml;
 
 use havok_types::{
-    f16, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature, Transform,
-    Vector4,
+    f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature,
+    StringPtr, Transform, Vector4,
 };
 
 #[cfg(feature = "std")]
@@ -333,8 +333,8 @@ pub trait Serializer {
     /// Serialize an `Variant` value.
     fn serialize_variant(self, v: u32) -> Result<Self::Ok, Self::Error>;
 
-    /// Serialize an `CString`(`Cow<'_, CStr>`) value.
-    fn serialize_cstring(self, v: &Cow<'_, CStr>) -> Result<Self::Ok, Self::Error>;
+    /// Serialize an `CString` value.
+    fn serialize_cstring(self, v: &CString) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `ULong`(`u64`) value.
     fn serialize_ulong(self, v: u64) -> Result<Self::Ok, Self::Error>;
@@ -345,8 +345,8 @@ pub trait Serializer {
     /// Serialize an `Half`(`f16`) value.
     fn serialize_half(self, v: f16) -> Result<Self::Ok, Self::Error>;
 
-    /// Serialize an `StringPtr`(`Cow<'_, CStr>`) value.
-    fn serialize_stringptr(self, v: &Cow<'_, CStr>) -> Result<Self::Ok, Self::Error>;
+    /// Serialize an `StringPtr` value.
+    fn serialize_stringptr(self, v: &StringPtr) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `RelArray`(``) value.
     fn serialize_relarray(self, v: ()) -> Result<Self::Ok, Self::Error>;
@@ -362,6 +362,11 @@ pub trait SerializeSeq {
 
     /// Must match the `Error` type of our `Serializer`.
     type Error: Error;
+
+    /// Serialize a Havok Class sequence element.(e.g. `T: impl HavokClass`)
+    fn serialize_class_element<T>(&mut self, value: &T) -> Result<(), Self::Error>
+    where
+        T: ?Sized + Serialize;
 
     /// Serialize a math sequence element.(e.g. `Matrix3`)
     fn serialize_math_element<T>(&mut self, value: &T) -> Result<(), Self::Error>
@@ -423,14 +428,14 @@ pub trait SerializeStruct {
         T: ?Sized + Serialize;
 
     /// Serialize a struct field for array.
-    fn serialize_array_field<T>(
+    fn serialize_array_field<V, T>(
         &mut self,
         key: &'static str,
-        value: &T,
-        len: usize,
+        value: V,
     ) -> Result<(), Self::Error>
     where
-        T: ?Sized + Serialize;
+        V: AsRef<[T]> + Serialize,
+        T: Serialize;
 
     /// Indicate that a struct field has been skipped.
     ///

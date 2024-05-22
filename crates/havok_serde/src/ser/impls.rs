@@ -5,7 +5,8 @@ use crate::lib::*;
 
 use super::{Serialize, Serializer};
 use havok_types::{
-    half::f16, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Transform, Vector4,
+    half::f16, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, StringPtr, Transform,
+    Vector4,
 };
 
 macro_rules! impl_serialize {
@@ -58,14 +59,14 @@ impl_serialize!(Transform, serialize_transform);
 
 impl_serialize!(*Pointer, serialize_pointer);
 
-impl Serialize for CStr {
+impl Serialize for &str {
     #[inline]
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        serializer.serialize_stringptr(&self.into())
+        serializer.serialize_stringptr(&((*self).into()))
     }
 }
 
-impl<'a> Serialize for Cow<'a, CStr> {
+impl Serialize for Cow<'_, str> {
     #[inline]
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         serializer.serialize_stringptr(&self)
@@ -74,7 +75,8 @@ impl<'a> Serialize for Cow<'a, CStr> {
 
 macro_rules! impl_serialize_vec {
     ($($ty:ty),+ $(,)? => $fn_name:tt) => {
-        $(impl Serialize for Vec<$ty> {
+        $(
+        impl Serialize for Vec<$ty> {
             fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
                 use super::SerializeSeq;
 
@@ -84,11 +86,75 @@ macro_rules! impl_serialize_vec {
                 }
                 seq.end()
             }
-        })*
+        }
+
+        impl Serialize for &Vec<$ty> {
+            fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+                use super::SerializeSeq;
+
+                let mut seq = serializer.serialize_array(Some(self.len()))?;
+                for element in *self {
+                    seq.$fn_name(element)?;
+                }
+                seq.end()
+            }
+        }
+
+        impl Serialize for &[$ty] {
+            fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+                use super::SerializeSeq;
+
+                let mut seq = serializer.serialize_array(Some(self.len()))?;
+                for element in *self {
+                    seq.$fn_name(element)?;
+                }
+                seq.end()
+            }
+        }
+      )*
     };
 }
 
-impl_serialize_vec!(Cow<'_, CStr> => serialize_string_element);
+// impl_serialize_vec!(CString<'_> => serialize_string_element); // Already implemented(By StringPtr).
+impl_serialize_vec!(StringPtr<'_> => serialize_string_element);
 impl_serialize_vec!(
   Vector4, Quaternion, Matrix3, Rotation, QsTransform, Matrix4, Transform
   => serialize_math_element);
+
+// impl for Any ClassT.
+impl<T: Serialize + crate::HavokClass> Serialize for Vec<T> {
+    fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        use super::SerializeSeq;
+
+        let mut seq = serializer.serialize_array(Some(self.len()))?;
+        for element in self {
+            seq.serialize_class_element(element)?;
+        }
+        seq.end()
+    }
+}
+
+// impl for Any ClassT.
+impl<T: Serialize + crate::HavokClass> Serialize for &Vec<T> {
+    fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        use super::SerializeSeq;
+
+        let mut seq = serializer.serialize_array(Some(self.len()))?;
+        for element in *self {
+            seq.serialize_class_element(element)?;
+        }
+        seq.end()
+    }
+}
+
+impl<T: Serialize + crate::HavokClass> Serialize for &[T] {
+    fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        use super::SerializeSeq;
+
+        let mut seq = serializer.serialize_array(Some(self.len()))?;
+        for element in *self {
+            seq.serialize_class_element(element)?;
+        }
+        seq.end()
+    }
+}

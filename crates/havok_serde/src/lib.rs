@@ -55,10 +55,10 @@ mod lib {
     #[cfg(feature = "std")]
     pub use std::vec::Vec;
 
-    #[cfg(all(not(no_core_cstr), not(feature = "std")))]
-    pub use self::core::ffi::CStr;
-    #[cfg(feature = "std")]
-    pub use std::ffi::CStr;
+    // #[cfg(all(not(no_core_cstr), not(feature = "std")))]
+    // pub use self::core::ffi::CStr;
+    // #[cfg(feature = "std")]
+    // pub use std::ffi::CStr;
 
     // #[cfg(all(not(no_core_cstr), feature = "alloc", not(feature = "std")))]
     // pub use alloc::ffi::CString;
@@ -71,3 +71,8 @@ mod lib {
 pub mod de;
 pub mod error;
 pub mod ser;
+
+/// Marker trait whether it is Havok Class or not.
+///
+/// This is used to make the array class (de)serializable.
+pub trait HavokClass {}
