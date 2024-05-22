@@ -23,8 +23,7 @@ impl Default for Serializer {
             indent: "    ",
             depth: 2,
             start_root: Some(
-                r###"
-<?xml version="1.0" encoding="ascii"?>
+                r###"<?xml version="1.0" encoding="ascii"?>
 <hkpackfile classversion="8" contentsversion="hk_2010.2.0-r1" toplevelobject="#0050">
 
     <hksection name="__data__">"
@@ -204,6 +203,7 @@ impl<'a> super::Serializer for &'a mut Serializer {
             self.output +=
                 &format!("<hkobject name=\"{ptr_name}\" class=\"{name}\" signature=\"{sig}\">\n");
         } else {
+            self.indent();
             self.output += "<hkobject>\n";
         }
 
@@ -284,7 +284,6 @@ impl<'a> super::SerializeSeq for &'a mut Serializer {
     where
         T: ?Sized + super::Serialize,
     {
-        self.indent();
         value.serialize(&mut **self)?;
         self.output += "\n";
         Ok(())
@@ -453,6 +452,7 @@ mod tests {
             Classes::HkReferencedObject(hk_referenced_object),
         ];
 
+        std::fs::write("./xml.xml", to_string(&classes).unwrap()).unwrap();
         println!("{}", to_string(&classes).unwrap());
     }
 }
