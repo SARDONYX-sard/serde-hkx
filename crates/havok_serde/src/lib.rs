@@ -72,6 +72,9 @@ pub mod de;
 pub mod error;
 pub mod ser;
 
+#[cfg(test)]
+mod test;
+
 /// Marker trait whether it is Havok Class or not.
 ///
 /// This is used to make the array class (de)serializable.
