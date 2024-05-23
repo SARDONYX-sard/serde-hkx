@@ -45,7 +45,7 @@ impl Default for Serializer {
 /// To XML String.
 pub fn to_string<T>(value: &T) -> Result<String>
 where
-    T: super::Serialize,
+    T: crate::ser::Serialize,
 {
     let mut serializer = Serializer::default();
 
@@ -61,7 +61,7 @@ where
     Ok(serializer.output)
 }
 
-impl<'a> super::Serializer for &'a mut Serializer {
+impl<'a> crate::ser::Serializer for &'a mut Serializer {
     type Ok = ();
     type Error = Error;
 
@@ -270,7 +270,7 @@ impl Serializer {
     }
 }
 
-impl<'a> super::SerializeSeq for &'a mut Serializer {
+impl<'a> crate::ser::SerializeSeq for &'a mut Serializer {
     type Ok = ();
     type Error = Error;
 
@@ -281,7 +281,7 @@ impl<'a> super::SerializeSeq for &'a mut Serializer {
         len: usize,
     ) -> Result<(), Self::Error>
     where
-        T: ?Sized + super::Serialize,
+        T: ?Sized + crate::ser::Serialize,
     {
         if index == 0 {
             self.indent();
@@ -308,7 +308,7 @@ impl<'a> super::SerializeSeq for &'a mut Serializer {
 
     fn serialize_class_element<T>(&mut self, value: &T) -> Result<()>
     where
-        T: ?Sized + super::Serialize,
+        T: ?Sized + crate::ser::Serialize,
     {
         value.serialize(&mut **self)?;
         self.output += "\n";
@@ -317,7 +317,7 @@ impl<'a> super::SerializeSeq for &'a mut Serializer {
 
     fn serialize_math_element<T>(&mut self, value: &T) -> Result<()>
     where
-        T: ?Sized + super::Serialize,
+        T: ?Sized + crate::ser::Serialize,
     {
         self.indent();
         value.serialize(&mut **self)?;
@@ -332,7 +332,7 @@ impl<'a> super::SerializeSeq for &'a mut Serializer {
     /// ```
     fn serialize_string_element<T>(&mut self, value: &T) -> Result<()>
     where
-        T: ?Sized + super::Serialize,
+        T: ?Sized + crate::ser::Serialize,
     {
         self.indent();
         self.output += "<hkcstring>";
@@ -347,7 +347,7 @@ impl<'a> super::SerializeSeq for &'a mut Serializer {
     }
 }
 
-impl<'a> super::SerializeStruct for &'a mut Serializer {
+impl<'a> crate::ser::SerializeStruct for &'a mut Serializer {
     type Ok = ();
     type Error = Error;
 
@@ -358,7 +358,7 @@ impl<'a> super::SerializeStruct for &'a mut Serializer {
     /// ```
     fn serialize_field<T>(&mut self, key: &'static str, value: &T) -> Result<()>
     where
-        T: ?Sized + super::Serialize,
+        T: ?Sized + crate::ser::Serialize,
     {
         self.indent();
         self.output += "<hkparam name=\"";
@@ -399,8 +399,8 @@ impl<'a> super::SerializeStruct for &'a mut Serializer {
     /// ```
     fn serialize_array_field<V, T>(&mut self, key: &'static str, value: V) -> Result<()>
     where
-        V: AsRef<[T]> + super::Serialize,
-        T: super::Serialize,
+        V: AsRef<[T]> + crate::ser::Serialize,
+        T: crate::ser::Serialize,
     {
         let len = value.as_ref().len();
         self.indent();
@@ -435,7 +435,7 @@ impl<'a> super::SerializeStruct for &'a mut Serializer {
     }
 }
 
-impl<'a> super::SerializeFlags for &'a mut Serializer {
+impl<'a> crate::ser::SerializeFlags for &'a mut Serializer {
     type Ok = ();
     type Error = Error;
 
@@ -446,7 +446,7 @@ impl<'a> super::SerializeFlags for &'a mut Serializer {
 
     fn serialize_field<T>(&mut self, key: &str, _value: &T) -> Result<(), Self::Error>
     where
-        T: ?Sized + super::Serialize,
+        T: ?Sized + crate::ser::Serialize,
     {
         if !self.output.ends_with(">") {
             self.output += "|";

@@ -15,9 +15,7 @@
 use crate::lib::*;
 
 mod impls;
-
-pub mod bytes;
-pub mod xml;
+pub mod serializers;
 
 use havok_types::{
     f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature,
@@ -192,21 +190,6 @@ pub trait Serializer {
     fn serialize_void(self, v: ()) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize a `bool` value.
-    ///
-    /// ```edition2021
-    /// # use serde::Serializer;
-    /// #
-    /// # serde::__private_serialize!();
-    /// #
-    /// impl Serialize for bool {
-    ///     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-    ///     where
-    ///         S: Serializer,
-    ///     {
-    ///         serializer.serialize_bool(*self)
-    ///     }
-    /// }
-    /// ```
     fn serialize_bool(self, v: bool) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `char` value.
@@ -217,46 +200,12 @@ pub trait Serializer {
     /// If the format does not differentiate between `i8` and `i64`, a
     /// reasonable implementation would be to cast the value to `i64` and
     /// forward to `serialize_i64`.
-    ///
-    /// ```edition2021
-    /// # use serde::Serializer;
-    /// #
-    /// # serde::__private_serialize!();
-    /// #
-    /// impl Serialize for i8 {
-    ///     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-    ///     where
-    ///         S: Serializer,
-    ///     {
-    ///         serializer.serialize_int8(*self)
-    ///     }
-    /// }
-    /// ```
     fn serialize_int8(self, v: i8) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `u8` value.
     fn serialize_uint8(self, v: u8) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `i16` value.
-    ///
-    /// If the format does not differentiate between `i16` and `i64`, a
-    /// reasonable implementation would be to cast the value to `i64` and
-    /// forward to `serialize_i64`.
-    ///
-    /// ```edition2021
-    /// # use serde::Serializer;
-    /// #
-    /// # serde::__private_serialize!();
-    /// #
-    /// impl Serialize for i16 {
-    ///     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-    ///     where
-    ///         S: Serializer,
-    ///     {
-    ///         serializer.serialize_int16(*self)
-    ///     }
-    /// }
-    /// ```
     fn serialize_int16(self, v: i16) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `u16` value.
@@ -381,7 +330,7 @@ pub trait Serializer {
     fn serialize_max(self, x: ()) -> Result<Self::Ok, Self::Error>;
 }
 
-/// Array
+/// Returned from `Serializer::serialize_array`.
 pub trait SerializeSeq {
     /// Must match the `Ok` type of our `Serializer`.
     type Ok;
@@ -503,28 +452,10 @@ pub trait SerializeFlags {
         Ok(())
     }
 
-    /// Serialize a bit field.(Mainly for XML)
-    ///
-    /// The default implementation does nothing.
+    /// Serialize a bit field.
     fn serialize_field<T>(&mut self, key: &str, value: &T) -> Result<(), Self::Error>
     where
-        T: ?Sized + Serialize,
-    {
-        let _ = key;
-        let _ = value;
-        Ok(())
-    }
-
-    /// Serialize bit(Mainly for bytes serialization)
-    ///
-    /// The default implementation does nothing.
-    fn serialize_bits<T>(&mut self, value: &T) -> Result<(), Self::Error>
-    where
-        T: ?Sized + Serialize,
-    {
-        let _ = value;
-        Ok(())
-    }
+        T: ?Sized + Serialize;
 
     /// Indicate that a struct variant field has been skipped.
     ///
@@ -535,6 +466,6 @@ pub trait SerializeFlags {
         Ok(())
     }
 
-    /// Finish serializing a struct variant.
+    /// Finish serializing flags.
     fn end(self) -> Result<Self::Ok, Self::Error>;
 }
