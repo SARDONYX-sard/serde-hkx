@@ -73,6 +73,53 @@ impl Serialize for Cow<'_, str> {
     }
 }
 
+macro_rules! impl_serialize_primitive_array {
+    ($($ty:ty),+ $(,)? => $fn_name:tt) => {
+        $(
+        impl Serialize for Vec<$ty> {
+            fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+                use super::SerializeSeq;
+
+                let mut seq = serializer.serialize_array(Some(self.len()))?;
+                for (index, element) in self.iter().enumerate() {
+                    seq.$fn_name(element, index, self.len())?;
+                }
+                seq.end()
+            }
+        }
+
+        impl Serialize for &Vec<$ty> {
+            fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+                use super::SerializeSeq;
+
+                let mut seq = serializer.serialize_array(Some(self.len()))?;
+                for (index, element) in self.iter().enumerate() {
+                    seq.$fn_name(element, index, self.len())?;
+                }
+                seq.end()
+            }
+        }
+
+        impl Serialize for &[$ty] {
+            fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+                use super::SerializeSeq;
+
+                let mut seq = serializer.serialize_array(Some(self.len()))?;
+                for (index, element) in self.iter().enumerate() {
+                    seq.$fn_name(element, index, self.len())?;
+                }
+                seq.end()
+            }
+        }
+      )*
+    };
+}
+
+impl_serialize_primitive_array!(
+  bool, char, u8, u16, u32, u64, i8, i16, i32, i64, f32, Pointer
+  => serialize_primitive_element
+);
+
 macro_rules! impl_serialize_vec {
     ($($ty:ty),+ $(,)? => $fn_name:tt) => {
         $(
@@ -117,9 +164,7 @@ macro_rules! impl_serialize_vec {
 
 // impl_serialize_vec!(CString<'_> => serialize_string_element); // Already implemented(By StringPtr).
 impl_serialize_vec!(StringPtr<'_> => serialize_string_element);
-impl_serialize_vec!(
-  Vector4, Quaternion, Matrix3, Rotation, QsTransform, Matrix4, Transform
-  => serialize_math_element);
+impl_serialize_vec!(Vector4, Quaternion, Matrix3, Rotation, QsTransform, Matrix4, Transform => serialize_math_element);
 
 // impl for Any ClassT.
 impl<T: Serialize + crate::HavokClass> Serialize for Vec<T> {

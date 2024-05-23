@@ -73,7 +73,7 @@ pub mod error;
 pub mod ser;
 
 #[cfg(test)]
-mod test;
+mod tests;
 
 /// Marker trait whether it is Havok Class or not.
 ///

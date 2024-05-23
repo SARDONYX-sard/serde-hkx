@@ -118,7 +118,7 @@ impl<'a> super::Serializer for &'a mut Serializer {
     }
 
     fn serialize_real(self, v: f32) -> Result<Self::Ok> {
-        self.output += &v.to_string();
+        self.output += &format!("{v:.06}");
         Ok(())
     }
 
@@ -215,9 +215,9 @@ impl<'a> super::Serializer for &'a mut Serializer {
         Ok(())
     }
 
-    fn serialize_variant(self, v: u32) -> Result<Self::Ok> {
+    fn serialize_variant(self, v: u64) -> Result<Self::Ok> {
         let _ = v;
-        todo!()
+        Ok(())
     }
 
     fn serialize_cstring(self, v: &CString) -> Result<Self::Ok> {
@@ -240,7 +240,7 @@ impl<'a> super::Serializer for &'a mut Serializer {
     }
 
     fn serialize_stringptr(self, s: &StringPtr) -> Result<Self::Ok> {
-        self.output += &s;
+        self.output += s;
         Ok(())
     }
 
@@ -273,6 +273,38 @@ impl Serializer {
 impl<'a> super::SerializeSeq for &'a mut Serializer {
     type Ok = ();
     type Error = Error;
+
+    fn serialize_primitive_element<T>(
+        &mut self,
+        value: &T,
+        index: usize,
+        len: usize,
+    ) -> Result<(), Self::Error>
+    where
+        T: ?Sized + super::Serialize,
+    {
+        if index == 0 {
+            self.indent();
+        };
+
+        value.serialize(&mut **self)?;
+        self.output += " ";
+
+        // Align the closing tag of `</hkparam>` by breaking the line at the end of the output,
+        // regardless of whether it is every 16 or not.
+        if index + 1 == len {
+            self.output.push('\n');
+            return Ok(());
+        }
+
+        // After 16 outputs, indent and make 16 columns.
+        if (index + 1) % 16 == 0 {
+            self.output.push('\n');
+            self.indent();
+        }
+
+        Ok(())
+    }
 
     fn serialize_class_element<T>(&mut self, value: &T) -> Result<()>
     where
@@ -432,18 +464,14 @@ impl<'a> super::SerializeFlags for &'a mut Serializer {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::test::{Classes, HkReferencedObject, HkpShapeInfo};
+    use crate::tests::mocks::classes::{
+        AllTypesTestClass, Classes, HkReferencedObject, HkpShapeInfo,
+    };
 
     #[test]
     fn test_serialize() {
         let hk_referenced_object = HkReferencedObject {
             name: Some(51.into()),
-            mem_size_and_flags: 5,
-            reference_count: 6,
-        };
-
-        let hk_referenced_object_inline = HkReferencedObject {
-            name: None,
             mem_size_and_flags: 5,
             reference_count: 6,
         };
@@ -459,10 +487,6 @@ mod tests {
                 Transform::default(),
                 Transform::default(),
             ],
-            v: vec![
-                hk_referenced_object_inline.clone(),
-                hk_referenced_object_inline,
-            ],
             ..Default::default()
         };
 
@@ -470,9 +494,12 @@ mod tests {
             Classes::HkpShapeInfo(hkp_shape_info.clone()),
             Classes::HkpShapeInfo(hkp_shape_info),
             Classes::HkReferencedObject(hk_referenced_object),
+            Classes::AllTypesTestClass(AllTypesTestClass {
+                name: Some(150.into()),
+                ..Default::default()
+            }),
         ];
 
-        std::fs::write("./xml.xml", to_string(&classes).unwrap()).unwrap();
         println!("{}", to_string(&classes).unwrap());
     }
 }

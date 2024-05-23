@@ -38,6 +38,7 @@
     "repr",
     "rodata",
     "Rustc",
+    "rustfmt",
     "SIMD",
     "SIMPLEARRAY",
     "SKSE",

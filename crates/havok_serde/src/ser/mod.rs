@@ -174,28 +174,21 @@ pub trait Serializer {
     /// [`serialize_struct`]: #tymethod.serialize_struct
     type SerializeStruct: SerializeStruct<Ok = Self::Ok, Error = Self::Error>;
 
-    /// Type returned from [`serialize_struct_variant`] for serializing the
+    /// Type returned from [`serialize_flags`] for serializing the
     /// content of the struct variant.
     ///
     /// [`serialize_flags`]: #tymethod.serialize_flags
     type SerializeFlags: SerializeFlags<Ok = Self::Ok, Error = Self::Error>;
 
-    /// Serialize a `()` value. (Unused ver.hk2010)
+    /// Serialize a `Void` value.
     ///
-    /// ```edition2021
-    /// # use serde::Serializer;
-    /// #
-    /// # serde::__private_serialize!();
-    /// #
-    /// impl Serialize for () {
-    ///     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-    ///     where
-    ///         S: Serializer,
-    ///     {
-    ///         serializer.serialize_void(*self)
-    ///     }
-    /// }
-    /// ```
+    /// No type information.
+    ///
+    /// This is often used to fill in generics elements with types for which generics are not used.
+    ///
+    /// - `hkArray<hkBool>` -> `vtype`: `TYPE_ARRAY`, `vsubtype`: `TYPE_BOOL`
+    /// - `hkBool -> `vtype`: `TYPE_BOOL`, `vsubtype`: `TYPE_VOID`
+    /// - There is also a pattern `hkArray<void>`. The type information is unknown, but this member always contains the `SERIALIZE_IGNORED` flag and can be skipped.
     fn serialize_void(self, v: ()) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize a `bool` value.
@@ -305,19 +298,28 @@ pub trait Serializer {
     /// Serialize an `Transform` value.
     fn serialize_transform(self, v: &Transform) -> Result<Self::Ok, Self::Error>;
 
-    /// Serialize an `Zero` value. (Never used)
+    /// Serialize an `Zero` value.
+    ///
+    /// # Note
+    /// Never used(In the 2010 Havok classes)
     fn serialize_zero(self, v: ()) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `Vector4` value.
     fn serialize_pointer(self, v: Pointer) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `Vector4` value. (Never used)
+    ///
+    /// # Note
+    /// Never used(In the 2010 Havok classes)
     fn serialize_functionpointer(self, v: ()) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `Vector4` value.
     fn serialize_array(self, len: Option<usize>) -> Result<Self::SerializeSeq, Self::Error>;
 
     /// Serialize an `Vector4` value. (Never used)
+    ///
+    /// # Note
+    /// Never used(In the 2010 Havok classes)
     fn serialize_inplacearray(self, v: ()) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `Vector4` value.
@@ -331,13 +333,25 @@ pub trait Serializer {
     ) -> Result<Self::SerializeStruct, Self::Error>;
 
     /// Serialize an `Vector4` value.
+    ///
+    /// # Note
+    /// Never used(In the 2010 Havok classes)
     fn serialize_simplearray(self, v: ()) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `HomogeneousArray`(``) value. (Never used)
+    ///
+    /// # Note
+    /// Never used(In the 2010 Havok classes)
     fn serialize_homogeneousarray(self, v: ()) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `Variant` value.
-    fn serialize_variant(self, v: u32) -> Result<Self::Ok, Self::Error>;
+    ///
+    /// # Note
+    /// Never used(In the 2010 Havok classes)
+    ///
+    /// `hkVariant` is a structure with two pointers, but its identity is unknown,
+    /// so u64([u8; 2]) of binary data is used as an argument instead. (If it is 32bit, you would need to cast it to u32.)
+    fn serialize_variant(self, v: u64) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `CString` value.
     fn serialize_cstring(self, v: &CString) -> Result<Self::Ok, Self::Error>;
@@ -345,7 +359,7 @@ pub trait Serializer {
     /// Serialize an `ULong`(`u64`) value.
     fn serialize_ulong(self, v: u64) -> Result<Self::Ok, Self::Error>;
 
-    /// Serialize an `Flag` value.
+    /// Serialize an `enum` or `Flags` value.
     fn serialize_flags(self) -> Result<Self::SerializeFlags, Self::Error>;
 
     /// Serialize an `Half`(`f16`) value.
@@ -354,10 +368,16 @@ pub trait Serializer {
     /// Serialize an `StringPtr` value.
     fn serialize_stringptr(self, v: &StringPtr) -> Result<Self::Ok, Self::Error>;
 
-    /// Serialize an `RelArray`(``) value.
+    /// Serialize an `RelArray` value.
+    ///
+    /// # Note
+    /// Never used(In the 2010 Havok classes)
     fn serialize_relarray(self, v: ()) -> Result<Self::Ok, Self::Error>;
 
-    /// Serialize an `Max`(``) value.
+    /// Serialize an `Max` value.
+    ///
+    /// # Note
+    /// Never used(In the 2010 Havok classes)
     fn serialize_max(self, x: ()) -> Result<Self::Ok, Self::Error>;
 }
 
@@ -369,10 +389,24 @@ pub trait SerializeSeq {
     /// Must match the `Error` type of our `Serializer`.
     type Error: Error;
 
+    /// Serialize a primitive sequence element.
+    /// (e.g. `char`, `bool` `u8`..`u64`, `i8`..`i64`, `f32`, `Pointer`)
+    ///
+    /// # Note
+    /// index must be 0 based.
+    fn serialize_primitive_element<T>(
+        &mut self,
+        value: &T,
+        index: usize,
+        len: usize,
+    ) -> Result<(), Self::Error>
+    where
+        T: ?Sized + Serialize;
+
     /// Serialize a Havok Class sequence element.(e.g. `T: impl HavokClass`)
     fn serialize_class_element<T>(&mut self, value: &T) -> Result<(), Self::Error>
     where
-        T: ?Sized + Serialize;
+        T: ?Sized + Serialize + crate::HavokClass;
 
     /// Serialize a math sequence element.(e.g. `Matrix3`)
     fn serialize_math_element<T>(&mut self, value: &T) -> Result<(), Self::Error>
