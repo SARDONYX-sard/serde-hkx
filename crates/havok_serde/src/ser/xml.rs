@@ -67,6 +67,7 @@ impl<'a> super::Serializer for &'a mut Serializer {
 
     type SerializeSeq = Self;
     type SerializeStruct = Self;
+    type SerializeFlags = Self;
 
     fn serialize_void(self, _: ()) -> Result<Self::Ok> {
         Ok(())
@@ -83,33 +84,27 @@ impl<'a> super::Serializer for &'a mut Serializer {
     }
 
     fn serialize_int8(self, v: i8) -> Result<Self::Ok> {
-        self.output += &v.to_string();
-        Ok(())
+        self.serialize_int64(v as i64)
     }
 
     fn serialize_uint8(self, v: u8) -> Result<Self::Ok> {
-        self.output += &v.to_string();
-        Ok(())
+        self.serialize_uint64(v as u64)
     }
 
     fn serialize_int16(self, v: i16) -> Result<Self::Ok> {
-        self.output += &v.to_string();
-        Ok(())
+        self.serialize_int64(v as i64)
     }
 
     fn serialize_uint16(self, v: u16) -> Result<Self::Ok> {
-        self.output += &v.to_string();
-        Ok(())
+        self.serialize_uint64(v as u64)
     }
 
     fn serialize_int32(self, v: i32) -> Result<Self::Ok> {
-        self.output += &v.to_string();
-        Ok(())
+        self.serialize_int64(v as i64)
     }
 
     fn serialize_uint32(self, v: u32) -> Result<Self::Ok> {
-        self.output += &v.to_string();
-        Ok(())
+        self.serialize_uint64(v as u64)
     }
 
     fn serialize_int64(self, v: i64) -> Result<Self::Ok> {
@@ -235,9 +230,8 @@ impl<'a> super::Serializer for &'a mut Serializer {
         Ok(())
     }
 
-    fn serialize_flags(self, v: u32) -> Result<Self::Ok> {
-        let _ = v;
-        todo!()
+    fn serialize_flags(self) -> Result<Self::SerializeFlags> {
+        Ok(self)
     }
 
     fn serialize_half(self, v: f16) -> Result<Self::Ok> {
@@ -405,6 +399,32 @@ impl<'a> super::SerializeStruct for &'a mut Serializer {
         self.decrement_depth();
         self.indent();
         self.output += "</hkobject>";
+        Ok(())
+    }
+}
+
+impl<'a> super::SerializeFlags for &'a mut Serializer {
+    type Ok = ();
+    type Error = Error;
+
+    fn serialize_empty_bit(&mut self) -> Result<(), Self::Error> {
+        self.output += "0";
+        Ok(())
+    }
+
+    fn serialize_field<T>(&mut self, key: &str, _value: &T) -> Result<(), Self::Error>
+    where
+        T: ?Sized + super::Serialize,
+    {
+        if !self.output.ends_with(">") {
+            self.output += "|";
+        }
+        self.output += key;
+
+        Ok(())
+    }
+
+    fn end(self) -> Result<Self::Ok, Self::Error> {
         Ok(())
     }
 }

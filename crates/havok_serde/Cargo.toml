@@ -12,6 +12,9 @@ edition.workspace = true
 havok_types = { path = "../havok_types", features = ["serde"] }
 snafu = "0.8.2"                                                 # Define all error patterns(with backtrace)
 
+[dev-dependencies]
+bitflags = "2.4" # To generate flags type
+
 [features]
 default = ["std"]
 

@@ -174,6 +174,12 @@ pub trait Serializer {
     /// [`serialize_struct`]: #tymethod.serialize_struct
     type SerializeStruct: SerializeStruct<Ok = Self::Ok, Error = Self::Error>;
 
+    /// Type returned from [`serialize_struct_variant`] for serializing the
+    /// content of the struct variant.
+    ///
+    /// [`serialize_flags`]: #tymethod.serialize_flags
+    type SerializeFlags: SerializeFlags<Ok = Self::Ok, Error = Self::Error>;
+
     /// Serialize a `()` value. (Unused ver.hk2010)
     ///
     /// ```edition2021
@@ -340,7 +346,7 @@ pub trait Serializer {
     fn serialize_ulong(self, v: u64) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `Flag` value.
-    fn serialize_flags(self, v: u32) -> Result<Self::Ok, Self::Error>;
+    fn serialize_flags(self) -> Result<Self::SerializeFlags, Self::Error>;
 
     /// Serialize an `Half`(`f16`) value.
     fn serialize_half(self, v: f16) -> Result<Self::Ok, Self::Error>;
@@ -447,5 +453,54 @@ pub trait SerializeStruct {
     }
 
     /// Finish serializing a struct.
+    fn end(self) -> Result<Self::Ok, Self::Error>;
+}
+
+/// Returned from `Serializer::serialize_flags`.
+pub trait SerializeFlags {
+    /// Must match the `Ok` type of our `Serializer`.
+    type Ok;
+
+    /// Must match the `Error` type of our `Serializer`.
+    type Error: Error;
+
+    /// Serialization process when the flag is 0bits.
+    fn serialize_empty_bit(&mut self) -> Result<(), Self::Error> {
+        Ok(())
+    }
+
+    /// Serialize a bit field.(Mainly for XML)
+    ///
+    /// The default implementation does nothing.
+    fn serialize_field<T>(&mut self, key: &str, value: &T) -> Result<(), Self::Error>
+    where
+        T: ?Sized + Serialize,
+    {
+        let _ = key;
+        let _ = value;
+        Ok(())
+    }
+
+    /// Serialize bit(Mainly for bytes serialization)
+    ///
+    /// The default implementation does nothing.
+    fn serialize_bits<T>(&mut self, value: &T) -> Result<(), Self::Error>
+    where
+        T: ?Sized + Serialize,
+    {
+        let _ = value;
+        Ok(())
+    }
+
+    /// Indicate that a struct variant field has been skipped.
+    ///
+    /// The default implementation does nothing.
+    #[inline]
+    fn skip_field(&mut self, key: &'static str) -> Result<(), Self::Error> {
+        let _ = key;
+        Ok(())
+    }
+
+    /// Finish serializing a struct variant.
     fn end(self) -> Result<Self::Ok, Self::Error>;
 }
