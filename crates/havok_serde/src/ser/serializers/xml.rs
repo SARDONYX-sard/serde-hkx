@@ -274,6 +274,15 @@ impl<'a> crate::ser::SerializeSeq for &'a mut Serializer {
     type Ok = ();
     type Error = Error;
 
+    /// # Expected XML Examples
+    ///
+    /// - `hkArray<hkInt8>`(same as ptr, hkReal, etc...)
+    /// ```xml
+    /// <hkparam name="key" numelements="20">
+    ///     0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+    ///     16 17 18 19 20
+    /// </hkparam>
+    /// ```
     fn serialize_primitive_element<T>(
         &mut self,
         value: &T,
@@ -439,6 +448,7 @@ impl<'a> crate::ser::SerializeFlags for &'a mut Serializer {
     type Ok = ();
     type Error = Error;
 
+    /// e.g. <hkparam>0</hkparam>
     fn serialize_empty_bit(&mut self) -> Result<(), Self::Error> {
         self.output += "0";
         Ok(())
@@ -448,6 +458,8 @@ impl<'a> crate::ser::SerializeFlags for &'a mut Serializer {
     where
         T: ?Sized + crate::ser::Serialize,
     {
+        // Always prefix all flags except the first with `|` to indicate an OR operation.
+        // e.g. <hkparam>EXAMPLE|EXAMPLE</hkparam>
         if !self.output.ends_with(">") {
             self.output += "|";
         }
