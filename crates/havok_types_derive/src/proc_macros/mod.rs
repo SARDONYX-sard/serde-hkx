@@ -16,6 +16,7 @@ pub fn impl_flags_methods(_attr: TokenStream, input: TokenStream) -> TokenStream
     let bit_flags = syn::parse_macro_input!(input as BitFlagsMacro);
     let struct_ = &bit_flags.struct_;
     let struct_name = struct_.ident.clone();
+    let struct_name_str = struct_.ident.clone().to_string();
 
     let fields_to_str = struct_.fields.iter().map(|field| {
         let field_name = &field.name;
@@ -73,7 +74,8 @@ pub fn impl_flags_methods(_attr: TokenStream, input: TokenStream) -> TokenStream
                         #(#str_to_fields)*
                         unknown => {
                             let bits = ::havok_types_derive::parse_int::parse(unknown).map_err(|_| {
-                                format!("Expected #name or bits, but it is not a number: '{unknown}'")
+                                let name = #struct_name_str;
+                                format!("Expected {name} or bits, but it is not a number: '{unknown}'")
                             })?;
                             flags |= #struct_name::from_bits_retain(bits);
                         }
