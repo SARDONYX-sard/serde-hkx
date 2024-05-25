@@ -64,7 +64,7 @@ impl Vector4 {
         let y = f32::from_le_bytes(bytes[4..8].try_into().unwrap());
         let z = f32::from_le_bytes(bytes[8..12].try_into().unwrap());
         let w = f32::from_le_bytes(bytes[12..16].try_into().unwrap());
-        Vector4 { x, y, z, w }
+        Self { x, y, z, w }
     }
 
     #[inline]
@@ -73,7 +73,7 @@ impl Vector4 {
         let y = f32::from_be_bytes(bytes[4..8].try_into().unwrap());
         let z = f32::from_be_bytes(bytes[8..12].try_into().unwrap());
         let w = f32::from_be_bytes(bytes[12..16].try_into().unwrap());
-        Vector4 { x, y, z, w }
+        Self { x, y, z, w }
     }
 }
 
@@ -86,7 +86,7 @@ impl FromStr for Vector4 {
     #[inline]
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         use winnow::error::ErrMode;
-        match vector4(s) {
+        match parse_vector4(s) {
             Ok((_, vec)) => Ok(vec),
             Err(e) => Err(match e {
                 ErrMode::Incomplete(e) => format!("{e:?}"),
@@ -96,7 +96,7 @@ impl FromStr for Vector4 {
     }
 }
 
-fn vector4(input: &str) -> winnow::PResult<(&str, Vector4)> {
+pub fn parse_vector4(input: &str) -> winnow::PResult<(&str, Vector4)> {
     use winnow::ascii::{float, space0};
     use winnow::combinator::{cut_err, delimited, seq};
     use winnow::error::{StrContext, StrContextValue};
@@ -118,6 +118,45 @@ fn vector4(input: &str) -> winnow::PResult<(&str, Vector4)> {
         cut_err(')').context(StrContext::Expected(StrContextValue::CharLiteral(')'))),
     )
     .parse_peek(input)
+}
+
+#[allow(dead_code)]
+pub fn parse_vector3(input: &str) -> winnow::PResult<(&str, Vector4)> {
+    use winnow::ascii::{float, space0};
+    use winnow::combinator::{cut_err, delimited, seq};
+    use winnow::error::{StrContext, StrContextValue};
+    use winnow::Parser;
+
+    struct Vector3 {
+        x: f32,
+        y: f32,
+        z: f32,
+    }
+
+    let v = delimited(
+        cut_err('(').context(StrContext::Expected(StrContextValue::CharLiteral('('))),
+        seq!(Vector3 {
+                    _: space0,
+                    x: float.context(StrContext::Expected(StrContextValue::Description("float for x component"))),
+                    _: space0,
+                    y: float.context(StrContext::Expected(StrContextValue::Description("float for y component"))),
+                    _: space0,
+                    z: float.context(StrContext::Expected(StrContextValue::Description("float for z component"))),
+                    _:space0,
+                }),
+        cut_err(')').context(StrContext::Expected(StrContextValue::CharLiteral(')'))),
+    )
+    .parse_peek(input)?;
+
+    Ok((
+        v.0,
+        Vector4 {
+            x: v.1.x,
+            y: v.1.y,
+            z: v.1.z,
+            w: 0.0,
+        },
+    ))
 }
 
 #[cfg(test)]

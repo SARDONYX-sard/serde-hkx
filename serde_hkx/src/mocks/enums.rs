@@ -1,7 +1,9 @@
-use crate::ser::Serialize;
+use havok_serde::ser::{Serialize, SerializeFlags, Serializer};
 
 #[allow(unused)]
+#[derive(Debug, Clone, Default, PartialEq)]
 pub enum EventMode {
+    #[default]
     EventModeDefault = 0,
     EventModeProcessAll = 1,
     EventModeIgnoreFromGenerator = 2,
@@ -9,10 +11,8 @@ pub enum EventMode {
 }
 
 impl Serialize for EventMode {
-    fn serialize<S: crate::ser::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        use crate::ser::SerializeFlags;
-
-        let mut sv = serializer.serialize_flags()?;
+    fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        let mut sv = serializer.serialize_enum_flags()?;
 
         match self {
             EventMode::EventModeDefault => sv.serialize_field("EVENT_MODE_DEFAULT", &0),

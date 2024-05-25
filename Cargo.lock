@@ -57,6 +57,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b"
 
 [[package]]
+name = "bytes"
+version = "1.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "514de17de45fdb8dc022b1a7975556c53c86f9f0aa5f534b98977b171857c2c9"
+
+[[package]]
 name = "cc"
 version = "1.0.97"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -299,9 +305,7 @@ checksum = "290f1a1d9242c78d09ce40a5e87e7554ee637af1351968159f4952f028f75604"
 name = "havok_serde"
 version = "0.1.0"
 dependencies = [
- "bitflags",
  "havok_types",
- "snafu",
 ]
 
 [[package]]
@@ -653,6 +657,17 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn",
+]
+
+[[package]]
+name = "serde_hkx"
+version = "0.1.0"
+dependencies = [
+ "bitflags",
+ "bytes",
+ "havok_serde",
+ "havok_types",
+ "snafu",
 ]
 
 [[package]]

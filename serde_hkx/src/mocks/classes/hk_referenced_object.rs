@@ -1,10 +1,11 @@
-use havok_types::{Pointer, Signature};
-
-use crate::ser::Serialize;
+use super::class::*;
+use super::hk_base_object::HkBaseObject;
 
 #[derive(Debug, Clone, Default, PartialEq)]
 pub struct HkReferencedObject {
-    pub name: Option<Pointer>,
+    pub parent: HkBaseObject,
+
+    pub _name: Option<Pointer>,
 
     /// # C++ Parent class(`hkReferencedObject` => parent: `hkBaseObject`) field Info
     /// -   name:`"memSizeAndFlags"`
@@ -20,16 +21,16 @@ pub struct HkReferencedObject {
     pub reference_count: i16,
 }
 
-impl crate::HavokClass for HkReferencedObject {}
+impl HavokClass for HkReferencedObject {}
 impl Serialize for HkReferencedObject {
-    fn serialize<S: crate::ser::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        use crate::ser::SerializeStruct;
+    fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        use havok_serde::ser::SerializeStruct;
 
-        let class_meta = self.name.map(|name| (name, Signature::new(0xea7f1d08)));
+        let class_meta = self._name.map(|name| (name, Signature::new(0xea7f1d08)));
         let mut serializer = serializer.serialize_struct("hkReferencedObject", class_meta)?;
 
-        serializer.skip_field("referenceCount")?;
-        serializer.skip_field("memSizeAndFlags")?;
+        serializer.skip_field("referenceCount", &self.reference_count)?;
+        serializer.skip_field("memSizeAndFlags", &self.mem_size_and_flags)?;
         serializer.end()
     }
 }

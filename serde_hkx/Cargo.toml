@@ -1,5 +1,5 @@
 [package]
-name = "havok_serde"
+name = "serde_hkx"
 authors.workspace = true
 version.workspace = true
 license.workspace = true
@@ -8,8 +8,15 @@ repository.workspace = true
 rust-version.workspace = true
 edition.workspace = true
 
+
 [dependencies]
-havok_types = { path = "../havok_types", features = ["serde"] }
+bytes = "1.6"
+havok_types = { path = "../crates/havok_types", features = ["serde"] }
+havok_serde = { path = "../crates/havok_serde" }
+snafu = "0.8.2"                                                        # Define all error patterns(with backtrace)
+
+[dev-dependencies]
+bitflags = "2.4" # To generate flags type
 
 [features]
 default = ["std"]

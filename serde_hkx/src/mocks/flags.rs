@@ -1,4 +1,4 @@
-use crate::ser::Serialize;
+use havok_serde::ser::{Serialize, SerializeFlags, Serializer};
 
 bitflags::bitflags! {
     /// Bit flags that represented `enum hkFlags<Enum, SizeType>`(C++).
@@ -23,10 +23,8 @@ bitflags::bitflags! {
 }
 
 impl Serialize for FlagValues {
-    fn serialize<S: crate::ser::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        use crate::ser::SerializeFlags;
-
-        let mut sv = serializer.serialize_flags()?;
+    fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        let mut sv = serializer.serialize_enum_flags()?;
         if self.is_empty() {
             sv.serialize_empty_bit()?;
             return sv.end();

@@ -22,3 +22,23 @@ pub struct Matrix4 {
     /// The fourth column of the matrix.
     pub w: Vector4,
 }
+
+impl Matrix4 {
+    pub fn to_le_bytes(&self) -> [u8; 16 * 4] {
+        let mut bytes = [0u8; 16 * 4];
+        bytes[0..16].copy_from_slice(&self.x.to_le_bytes());
+        bytes[16..32].copy_from_slice(&self.y.to_le_bytes());
+        bytes[32..48].copy_from_slice(&self.z.to_le_bytes());
+        bytes[48..64].copy_from_slice(&self.w.to_le_bytes());
+        bytes
+    }
+
+    pub fn to_be_bytes(&self) -> [u8; 16 * 4] {
+        let mut bytes = [0u8; 16 * 4];
+        bytes[0..16].copy_from_slice(&self.x.to_be_bytes());
+        bytes[16..32].copy_from_slice(&self.y.to_be_bytes());
+        bytes[32..48].copy_from_slice(&self.z.to_be_bytes());
+        bytes[48..64].copy_from_slice(&self.w.to_be_bytes());
+        bytes
+    }
+}

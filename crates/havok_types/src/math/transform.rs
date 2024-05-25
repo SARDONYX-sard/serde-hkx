@@ -20,3 +20,19 @@ pub struct Transform {
     #[display("({x:.06} {y:.06} {z:.06})")]
     pub transition: Vector4,
 }
+
+impl Transform {
+    pub fn to_le_bytes(&self) -> [u8; 48 + 16] {
+        let mut bytes = [0u8; 48 + 16];
+        bytes[0..48].copy_from_slice(&self.rotation.to_le_bytes());
+        bytes[48..64].copy_from_slice(&self.transition.to_le_bytes());
+        bytes
+    }
+
+    pub fn to_be_bytes(&self) -> [u8; 48 + 16] {
+        let mut bytes = [0u8; 48 + 16];
+        bytes[0..48].copy_from_slice(&self.rotation.to_be_bytes());
+        bytes[48..64].copy_from_slice(&self.transition.to_be_bytes());
+        bytes
+    }
+}

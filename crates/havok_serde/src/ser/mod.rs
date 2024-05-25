@@ -15,7 +15,6 @@
 use crate::lib::*;
 
 mod impls;
-pub mod serializers;
 
 use havok_types::{
     f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature,
@@ -95,8 +94,6 @@ declare_error_trait!(Error: Sized + Debug + Display);
 /// by Serde.
 ///
 /// Serde provides `Serialize` implementations for all C++ Havok types.
-/// The complete list is [here][crate::ser]. All of these can be serialized using
-/// Serde out of the box.
 ///
 /// Additionally, Serde provides a procedural macro called [`havok_serde_derive`] to
 /// automatically generate `Serialize` implementations for structs and enums in
@@ -106,9 +103,11 @@ declare_error_trait!(Error: Sized + Debug + Display);
 /// type in your program. See the [Implementing `Serialize`] section of the
 /// manual for more about this.
 ///
-/// [Implementing `Serialize`]: https://serde.rs/impl-serialize.html
-/// [`havok_serde_derive`]: https://crates.io/crates/havok_serde_derive
-/// [derive section of the manual]: https://serde.rs/derive.html
+/// # Support types
+///
+/// # Unsupported types
+/// There're never used in the Havok classes.(ver. hk2010)
+/// - `Zero`, `FunctionPointer`, `InplaceArray`, `HomogeneousArray`, `RelArray`, `Max`
 pub trait Serialize {
     /// Serialize this value into the given Serde serializer.
     ///
@@ -175,7 +174,7 @@ pub trait Serializer {
     /// Type returned from [`serialize_flags`] for serializing the
     /// content of the struct variant.
     ///
-    /// [`serialize_flags`]: #tymethod.serialize_flags
+    /// [`serialize_enum_flags`]: #tymethod.serialize_flags
     type SerializeFlags: SerializeFlags<Ok = Self::Ok, Error = Self::Error>;
 
     /// Serialize a `Void` value.
@@ -247,20 +246,8 @@ pub trait Serializer {
     /// Serialize an `Transform` value.
     fn serialize_transform(self, v: &Transform) -> Result<Self::Ok, Self::Error>;
 
-    /// Serialize an `Zero` value.
-    ///
-    /// # Note
-    /// Never used(In the 2010 Havok classes)
-    fn serialize_zero(self, v: ()) -> Result<Self::Ok, Self::Error>;
-
     /// Serialize an `Vector4` value.
     fn serialize_pointer(self, v: Pointer) -> Result<Self::Ok, Self::Error>;
-
-    /// Serialize an `Vector4` value. (Never used)
-    ///
-    /// # Note
-    /// Never used(In the 2010 Havok classes)
-    fn serialize_functionpointer(self, v: ()) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `Vector4` value.
     fn serialize_array(self, len: Option<usize>) -> Result<Self::SerializeSeq, Self::Error>;
@@ -269,10 +256,7 @@ pub trait Serializer {
     ///
     /// # Note
     /// Never used(In the 2010 Havok classes)
-    fn serialize_inplacearray(self, v: ()) -> Result<Self::Ok, Self::Error>;
-
-    /// Serialize an `Vector4` value.
-    fn serialize_enum(self, v: u32) -> Result<Self::Ok, Self::Error>;
+    // fn serialize_inplacearray(self, v: ()) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `Vector4` value.
     fn serialize_struct(
@@ -281,53 +265,29 @@ pub trait Serializer {
         class_meta: Option<(Pointer, Signature)>,
     ) -> Result<Self::SerializeStruct, Self::Error>;
 
-    /// Serialize an `Vector4` value.
-    ///
-    /// # Note
-    /// Never used(In the 2010 Havok classes)
-    fn serialize_simplearray(self, v: ()) -> Result<Self::Ok, Self::Error>;
-
-    /// Serialize an `HomogeneousArray`(``) value. (Never used)
-    ///
-    /// # Note
-    /// Never used(In the 2010 Havok classes)
-    fn serialize_homogeneousarray(self, v: ()) -> Result<Self::Ok, Self::Error>;
-
     /// Serialize an `Variant` value.
     ///
     /// # Note
     /// Never used(In the 2010 Havok classes)
     ///
     /// `hkVariant` is a structure with two pointers, but its identity is unknown,
-    /// so u64([u8; 2]) of binary data is used as an argument instead. (If it is 32bit, you would need to cast it to u32.)
-    fn serialize_variant(self, v: u64) -> Result<Self::Ok, Self::Error>;
+    /// so u128(`[u64; 2]`) of binary data is used as an argument instead. (If it is 32bit, you would need to cast it to u64(`[u32;2]`).)
+    fn serialize_variant(self, v: u128) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `CString` value.
     fn serialize_cstring(self, v: &CString) -> Result<Self::Ok, Self::Error>;
 
-    /// Serialize an `ULong`(`u64`) value.
+    /// Serialize an `ULong`(pointer size(u32 or u64)) value.
     fn serialize_ulong(self, v: u64) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `enum` or `Flags` value.
-    fn serialize_flags(self) -> Result<Self::SerializeFlags, Self::Error>;
+    fn serialize_enum_flags(self) -> Result<Self::SerializeFlags, Self::Error>;
 
     /// Serialize an `Half`(`f16`) value.
     fn serialize_half(self, v: f16) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `StringPtr` value.
     fn serialize_stringptr(self, v: &StringPtr) -> Result<Self::Ok, Self::Error>;
-
-    /// Serialize an `RelArray` value.
-    ///
-    /// # Note
-    /// Never used(In the 2010 Havok classes)
-    fn serialize_relarray(self, v: ()) -> Result<Self::Ok, Self::Error>;
-
-    /// Serialize an `Max` value.
-    ///
-    /// # Note
-    /// Never used(In the 2010 Havok classes)
-    fn serialize_max(self, x: ()) -> Result<Self::Ok, Self::Error>;
 }
 
 /// Returned from `Serializer::serialize_array`.
@@ -426,12 +386,30 @@ pub trait SerializeStruct {
         V: AsRef<[T]> + Serialize,
         T: Serialize;
 
-    /// Indicate that a struct field has been skipped.
+    /// Process for fields with `SERIALIZE_IGNORED` flag.
+    /// - XML: Replaced by a comment and the actual data is not displayed.
+    /// - Bytes: the data itself is read/written
     ///
     /// The default implementation does nothing.
     #[inline]
-    fn skip_field(&mut self, key: &'static str) -> Result<(), Self::Error> {
+    fn skip_field<T>(&mut self, key: &'static str, value: &T) -> Result<(), Self::Error>
+    where
+        T: ?Sized + Serialize,
+    {
         let _ = key;
+        let _ = value;
+        Ok(())
+    }
+
+    /// Processing for padding to serialize binary data
+    ///
+    /// The default implementation does nothing.
+    #[inline]
+    fn pad_field<T>(&mut self, pads: &T) -> Result<(), Self::Error>
+    where
+        T: ?Sized + Serialize,
+    {
+        let _ = pads;
         Ok(())
     }
 
@@ -439,7 +417,7 @@ pub trait SerializeStruct {
     fn end(self) -> Result<Self::Ok, Self::Error>;
 }
 
-/// Returned from `Serializer::serialize_flags`.
+/// Returned from `Serializer::serialize_enum_flags`.
 pub trait SerializeFlags {
     /// Must match the `Ok` type of our `Serializer`.
     type Ok;
@@ -452,12 +430,12 @@ pub trait SerializeFlags {
         Ok(())
     }
 
-    /// Serialize a bit field.
+    /// Serialize a enum or bit field.
     fn serialize_field<T>(&mut self, key: &str, value: &T) -> Result<(), Self::Error>
     where
         T: ?Sized + Serialize;
 
-    /// Indicate that a struct variant field has been skipped.
+    /// Indicate that a enum or flag bit has been skipped.
     ///
     /// The default implementation does nothing.
     #[inline]

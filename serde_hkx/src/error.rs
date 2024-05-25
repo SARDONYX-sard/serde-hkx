@@ -32,7 +32,7 @@ pub enum Error {
     },
 }
 
-impl crate::ser::Error for Error {
+impl havok_serde::ser::Error for Error {
     fn custom<T>(msg: T) -> Self
     where
         T: Display,

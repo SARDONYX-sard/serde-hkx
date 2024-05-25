@@ -1,5 +1,5 @@
+use super::class::*;
 use super::hk_referenced_object::HkReferencedObject;
-use crate::ser::Serialize;
 use havok_types::{Pointer, Signature, StringPtr, Transform};
 
 /// # C++ Class Info
@@ -12,7 +12,7 @@ use havok_types::{Pointer, Signature, StringPtr, Transform};
 pub struct HkpShapeInfo<'a> {
     pub parent: HkReferencedObject,
 
-    pub name: Option<Pointer>,
+    pub _name: Option<Pointer>,
 
     /// # C++ Class Fields Info
     /// -   name:`"shape"`
@@ -52,17 +52,17 @@ pub struct HkpShapeInfo<'a> {
     pub transform: Transform,
 }
 
-impl crate::HavokClass for HkpShapeInfo<'_> {}
+impl HavokClass for HkpShapeInfo<'_> {}
 impl Serialize for HkpShapeInfo<'_> {
-    fn serialize<S: crate::ser::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        use crate::ser::SerializeStruct;
+    fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        use havok_serde::ser::SerializeStruct;
 
-        let class_meta = self.name.map(|name| (name, Signature::new(0xea7f1d08)));
+        let class_meta = self._name.map(|name| (name, Signature::new(0xea7f1d08)));
         let mut serializer = serializer.serialize_struct("hkpShapeInfo", class_meta)?;
 
         // Serialize fields of parent (flatten)
-        serializer.skip_field("memSizeAndFlags")?;
-        serializer.skip_field("referenceCount")?;
+        serializer.skip_field("referenceCount", &self.parent.reference_count)?;
+        serializer.skip_field("memSizeAndFlags", &self.parent.mem_size_and_flags)?;
 
         serializer.serialize_field("shape", &self.shape)?;
         serializer.serialize_field("isHierarchicalCompound", &self.is_hierarchical_compound)?;

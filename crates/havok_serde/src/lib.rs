@@ -46,34 +46,15 @@ mod lib {
     pub use std::borrow::Cow;
 
     #[cfg(all(feature = "alloc", not(feature = "std")))]
-    pub use alloc::string::{String, ToString};
-    #[cfg(feature = "std")]
-    pub use std::string::{String, ToString};
-
-    #[cfg(all(feature = "alloc", not(feature = "std")))]
     pub use alloc::vec::Vec;
     #[cfg(feature = "std")]
     pub use std::vec::Vec;
-
-    // #[cfg(all(not(no_core_cstr), not(feature = "std")))]
-    // pub use self::core::ffi::CStr;
-    // #[cfg(feature = "std")]
-    // pub use std::ffi::CStr;
-
-    // #[cfg(all(not(no_core_cstr), feature = "alloc", not(feature = "std")))]
-    // pub use alloc::ffi::CString;
-    // #[cfg(feature = "std")]
-    // pub use std::ffi::CString;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 pub mod de;
-pub mod error;
 pub mod ser;
-
-#[cfg(test)]
-mod tests;
 
 /// Marker trait whether it is Havok Class or not.
 ///

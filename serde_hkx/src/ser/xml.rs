@@ -2,13 +2,14 @@
 use crate::lib::*;
 
 use crate::error::{Error, Result};
+use havok_serde::ser::{Serialize, SerializeFlags, SerializeStruct};
 use havok_types::{
     f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature,
     StringPtr, Transform, Vector4,
 };
 
 #[derive(Debug)]
-struct Serializer {
+struct XmlSerializer {
     output: String,
     indent: &'static str,
     depth: usize,
@@ -16,7 +17,7 @@ struct Serializer {
     end_root: Option<String>,
 }
 
-impl Default for Serializer {
+impl Default for XmlSerializer {
     fn default() -> Self {
         Self {
             output: String::new(),
@@ -45,9 +46,9 @@ impl Default for Serializer {
 /// To XML String.
 pub fn to_string<T>(value: &T) -> Result<String>
 where
-    T: crate::ser::Serialize,
+    T: havok_serde::ser::Serialize,
 {
-    let mut serializer = Serializer::default();
+    let mut serializer = XmlSerializer::default();
 
     if let Some(ref start_root) = serializer.start_root {
         serializer.output += start_root;
@@ -61,7 +62,7 @@ where
     Ok(serializer.output)
 }
 
-impl<'a> crate::ser::Serializer for &'a mut Serializer {
+impl<'a> havok_serde::ser::Serializer for &'a mut XmlSerializer {
     type Ok = ();
     type Error = Error;
 
@@ -157,10 +158,6 @@ impl<'a> crate::ser::Serializer for &'a mut Serializer {
         Ok(())
     }
 
-    fn serialize_zero(self, _: ()) -> Result<Self::Ok> {
-        Ok(())
-    }
-
     fn serialize_pointer(self, v: Pointer) -> Result<Self::Ok> {
         if v.get() == 0 {
             self.output += "null"; // Null pointer
@@ -170,21 +167,8 @@ impl<'a> crate::ser::Serializer for &'a mut Serializer {
         Ok(())
     }
 
-    fn serialize_functionpointer(self, _: ()) -> Result<Self::Ok> {
-        Ok(())
-    }
-
     fn serialize_array(self, _len: Option<usize>) -> Result<Self::SerializeSeq> {
         Ok(self)
-    }
-
-    fn serialize_inplacearray(self, _: ()) -> Result<Self::Ok> {
-        Ok(())
-    }
-
-    fn serialize_enum(self, v: u32) -> Result<Self::Ok> {
-        self.output += &v.to_string();
-        Ok(())
     }
 
     fn serialize_struct(
@@ -207,15 +191,7 @@ impl<'a> crate::ser::Serializer for &'a mut Serializer {
         Ok(self)
     }
 
-    fn serialize_simplearray(self, _: ()) -> Result<Self::Ok> {
-        Ok(())
-    }
-
-    fn serialize_homogeneousarray(self, _: ()) -> Result<Self::Ok> {
-        Ok(())
-    }
-
-    fn serialize_variant(self, v: u64) -> Result<Self::Ok> {
+    fn serialize_variant(self, v: u128) -> Result<Self::Ok> {
         let _ = v;
         Ok(())
     }
@@ -230,7 +206,7 @@ impl<'a> crate::ser::Serializer for &'a mut Serializer {
         Ok(())
     }
 
-    fn serialize_flags(self) -> Result<Self::SerializeFlags> {
+    fn serialize_enum_flags(self) -> Result<Self::SerializeFlags> {
         Ok(self)
     }
 
@@ -243,17 +219,9 @@ impl<'a> crate::ser::Serializer for &'a mut Serializer {
         self.output += s;
         Ok(())
     }
-
-    fn serialize_relarray(self, _: ()) -> Result<Self::Ok> {
-        Ok(())
-    }
-
-    fn serialize_max(self, _: ()) -> Result<Self::Ok> {
-        Ok(())
-    }
 }
 
-impl Serializer {
+impl XmlSerializer {
     /// Do indentation by `self.depth`.
     fn indent(&mut self) {
         self.output += &self.indent.repeat(self.depth);
@@ -270,7 +238,7 @@ impl Serializer {
     }
 }
 
-impl<'a> crate::ser::SerializeSeq for &'a mut Serializer {
+impl<'a> havok_serde::ser::SerializeSeq for &'a mut XmlSerializer {
     type Ok = ();
     type Error = Error;
 
@@ -290,7 +258,7 @@ impl<'a> crate::ser::SerializeSeq for &'a mut Serializer {
         len: usize,
     ) -> Result<(), Self::Error>
     where
-        T: ?Sized + crate::ser::Serialize,
+        T: ?Sized + havok_serde::ser::Serialize,
     {
         if index == 0 {
             self.indent();
@@ -317,7 +285,7 @@ impl<'a> crate::ser::SerializeSeq for &'a mut Serializer {
 
     fn serialize_class_element<T>(&mut self, value: &T) -> Result<()>
     where
-        T: ?Sized + crate::ser::Serialize,
+        T: ?Sized + Serialize,
     {
         value.serialize(&mut **self)?;
         self.output += "\n";
@@ -326,7 +294,7 @@ impl<'a> crate::ser::SerializeSeq for &'a mut Serializer {
 
     fn serialize_math_element<T>(&mut self, value: &T) -> Result<()>
     where
-        T: ?Sized + crate::ser::Serialize,
+        T: ?Sized + Serialize,
     {
         self.indent();
         value.serialize(&mut **self)?;
@@ -341,7 +309,7 @@ impl<'a> crate::ser::SerializeSeq for &'a mut Serializer {
     /// ```
     fn serialize_string_element<T>(&mut self, value: &T) -> Result<()>
     where
-        T: ?Sized + crate::ser::Serialize,
+        T: ?Sized + Serialize,
     {
         self.indent();
         self.output += "<hkcstring>";
@@ -356,7 +324,7 @@ impl<'a> crate::ser::SerializeSeq for &'a mut Serializer {
     }
 }
 
-impl<'a> crate::ser::SerializeStruct for &'a mut Serializer {
+impl<'a> SerializeStruct for &'a mut XmlSerializer {
     type Ok = ();
     type Error = Error;
 
@@ -367,7 +335,7 @@ impl<'a> crate::ser::SerializeStruct for &'a mut Serializer {
     /// ```
     fn serialize_field<T>(&mut self, key: &'static str, value: &T) -> Result<()>
     where
-        T: ?Sized + crate::ser::Serialize,
+        T: ?Sized + Serialize,
     {
         self.indent();
         self.output += "<hkparam name=\"";
@@ -408,8 +376,8 @@ impl<'a> crate::ser::SerializeStruct for &'a mut Serializer {
     /// ```
     fn serialize_array_field<V, T>(&mut self, key: &'static str, value: V) -> Result<()>
     where
-        V: AsRef<[T]> + crate::ser::Serialize,
-        T: crate::ser::Serialize,
+        V: AsRef<[T]> + Serialize,
+        T: Serialize,
     {
         let len = value.as_ref().len();
         self.indent();
@@ -430,7 +398,10 @@ impl<'a> crate::ser::SerializeStruct for &'a mut Serializer {
     /// <!-- key SERIALIZE_IGNORED --><!-- This is skip_field -->
     /// <hkparam name="otherKey"></hkparam>
     /// ```
-    fn skip_field(&mut self, key: &'static str) -> Result<()> {
+    fn skip_field<T>(&mut self, key: &'static str, _: &T) -> Result<()>
+    where
+        T: ?Sized + Serialize,
+    {
         self.indent();
         self.output += &format!("<!-- {key} SERIALIZE_IGNORED -->\n");
         Ok(())
@@ -444,7 +415,7 @@ impl<'a> crate::ser::SerializeStruct for &'a mut Serializer {
     }
 }
 
-impl<'a> crate::ser::SerializeFlags for &'a mut Serializer {
+impl<'a> SerializeFlags for &'a mut XmlSerializer {
     type Ok = ();
     type Error = Error;
 
@@ -456,7 +427,7 @@ impl<'a> crate::ser::SerializeFlags for &'a mut Serializer {
 
     fn serialize_field<T>(&mut self, key: &str, _value: &T) -> Result<(), Self::Error>
     where
-        T: ?Sized + crate::ser::Serialize,
+        T: ?Sized + Serialize,
     {
         // Always prefix all flags except the first with `|` to indicate an OR operation.
         // e.g. <hkparam>EXAMPLE|EXAMPLE</hkparam>
@@ -476,38 +447,19 @@ impl<'a> crate::ser::SerializeFlags for &'a mut Serializer {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::tests::mocks::classes::{
-        AllTypesTestClass, Classes, HkReferencedObject, HkpShapeInfo,
-    };
+    use crate::mocks::classes::*;
 
     #[test]
     fn test_serialize() {
-        let hk_referenced_object = HkReferencedObject {
-            name: Some(51.into()),
-            mem_size_and_flags: 5,
-            reference_count: 6,
-        };
-
-        let hkp_shape_info = HkpShapeInfo {
-            name: Some(50.into()),
-            shape: Pointer::new(50),
-            is_hierarchical_compound: true,
-            hkd_shapes_collected: false,
-            child_shape_names: vec!["child".into(), "Hi".into()],
-            child_transforms: vec![
-                Transform::default(),
-                Transform::default(),
-                Transform::default(),
-            ],
-            ..Default::default()
-        };
-
         let classes = vec![
-            Classes::HkpShapeInfo(hkp_shape_info.clone()),
-            Classes::HkpShapeInfo(hkp_shape_info),
-            Classes::HkReferencedObject(hk_referenced_object),
+            Classes::HkbProjectStringData(HkbProjectStringData {
+                _name: Some(54.into()),
+                animation_filenames: vec!["Hi".into(), "Hello".into(), "World".into()],
+                ..Default::default()
+            }),
+            //
             Classes::AllTypesTestClass(AllTypesTestClass {
-                name: Some(150.into()),
+                _name: Some(53.into()),
                 ..Default::default()
             }),
         ];

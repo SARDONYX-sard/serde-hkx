@@ -1,25 +1,26 @@
-use havok_types::{Pointer, Signature, StringPtr, Transform};
-
-use crate::{ser::Serialize, tests::mocks::classes::HkReferencedObject};
-
-use crate::tests::mocks::{enums::EventMode, flags::FlagValues};
+use super::class::*;
+use crate::mocks::{
+    classes::{HkReferencedObject, HkpShapeInfo},
+    enums::EventMode,
+    flags::FlagValues,
+};
 
 #[derive(Debug, Default)]
 pub struct AllTypesTestClass {
-    pub name: Option<Pointer>,
+    pub _name: Option<Pointer>,
 }
 
-impl crate::HavokClass for AllTypesTestClass {}
+impl HavokClass for AllTypesTestClass {}
 
 impl Serialize for AllTypesTestClass {
-    fn serialize<S: crate::ser::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        use crate::ser::SerializeStruct;
+    fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        use havok_serde::ser::SerializeStruct;
 
-        let class_meta = self.name.map(|name| (name, Signature::new(0x12345678)));
+        let class_meta = self._name.map(|name| (name, Signature::new(0x12345678)));
         let mut serializer = serializer.serialize_struct("AllTypesTestClass", class_meta)?;
 
         // Serialize fields of parent (flatten)
-        serializer.skip_field("skip_test")?;
+        serializer.skip_field("skip_test", &0)?;
 
         serializer.serialize_field("bool", &true)?;
         serializer.serialize_field("char", &'C')?;
@@ -58,10 +59,21 @@ impl Serialize for AllTypesTestClass {
             "transform_array",
             vec![Transform::default(), Transform::default()],
         )?;
-        serializer.serialize_array_field(
-            "class_array",
-            &vec![HkReferencedObject::default(), HkReferencedObject::default()],
-        )?;
+
+        let hkp_shape_info = HkpShapeInfo {
+            shape: Pointer::new(50),
+            is_hierarchical_compound: true,
+            hkd_shapes_collected: false,
+            child_shape_names: vec!["child".into(), "Hi".into()],
+            child_transforms: vec![
+                Transform::default(),
+                Transform::default(),
+                Transform::default(),
+            ],
+            ..Default::default()
+        };
+        serializer
+            .serialize_array_field("class_array", &vec![hkp_shape_info.clone(), hkp_shape_info])?;
 
         serializer.serialize_field("string_ptr", &StringPtr::from("StringPtr"))?;
 
