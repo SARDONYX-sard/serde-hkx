@@ -3,6 +3,7 @@ use crate::lib::*;
 
 use crate::error::{Error, Result};
 use havok_serde::ser::{Serialize, SerializeFlags, SerializeStruct};
+use havok_types::variant::Variant;
 use havok_types::{
     f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature,
     StringPtr, Transform, Vector4,
@@ -191,7 +192,7 @@ impl<'a> havok_serde::ser::Serializer for &'a mut XmlSerializer {
         Ok(self)
     }
 
-    fn serialize_variant(self, v: u128) -> Result<Self::Ok> {
+    fn serialize_variant(self, v: &Variant) -> Result<Self::Ok> {
         let _ = v;
         Ok(())
     }

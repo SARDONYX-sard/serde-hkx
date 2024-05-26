@@ -1,6 +1,7 @@
 pub mod math;
 pub mod pointer;
 pub mod signature;
+pub mod variant;
 
 pub use half;
 pub use half::f16;

@@ -17,8 +17,8 @@ use crate::lib::*;
 mod impls;
 
 use havok_types::{
-    f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature,
-    StringPtr, Transform, Vector4,
+    f16, variant::Variant, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation,
+    Signature, StringPtr, Transform, Vector4,
 };
 
 #[cfg(feature = "std")]
@@ -272,7 +272,7 @@ pub trait Serializer {
     ///
     /// `hkVariant` is a structure with two pointers, but its identity is unknown,
     /// so u128(`[u64; 2]`) of binary data is used as an argument instead. (If it is 32bit, you would need to cast it to u64(`[u32;2]`).)
-    fn serialize_variant(self, v: u128) -> Result<Self::Ok, Self::Error>;
+    fn serialize_variant(self, v: &Variant) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `CString` value.
     fn serialize_cstring(self, v: &CString) -> Result<Self::Ok, Self::Error>;

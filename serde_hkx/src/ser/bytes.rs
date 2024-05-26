@@ -1,12 +1,14 @@
 //! Bytes Serialization
+use std::collections::HashMap;
+
 use crate::error::{Error, Result};
 use bytes::{BufMut, BytesMut};
 use havok_serde::ser::{
     Error as _, Serialize, SerializeFlags, SerializeSeq, SerializeStruct, Serializer,
 };
 use havok_types::{
-    f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature,
-    StringPtr, Transform, Vector4,
+    f16, variant::Variant, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation,
+    Signature, StringPtr, Transform, Vector4,
 };
 
 /// Bytes endianness
@@ -35,6 +37,8 @@ pub struct ByteSerializer {
     endian: ByteOrder,
     target_platform: Platform,
     output: BytesMut,
+    /// current reader position, actual data position
+    local_fixups: HashMap<u32, u32>,
 }
 
 impl ByteSerializer {
@@ -46,6 +50,10 @@ impl ByteSerializer {
     /// Serializer is win32(x86) mode?
     pub fn is_x86(&self) -> bool {
         self.target_platform == Platform::Win32
+    }
+
+    pub fn current_position(&self) -> u32 {
+        self.output.len() as u32
     }
 }
 
@@ -214,6 +222,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
     fn serialize_array(self, _len: Option<usize>) -> Result<Self::SerializeSeq, Self::Error> {
         self.serialize_ulong(0)?;
         self.serialize_uint32(0 | 80 << 24)?;
+        self.local_fixups.insert(self.current_position(), 0);
         Ok(self)
     }
 
@@ -225,18 +234,9 @@ impl<'a> Serializer for &'a mut ByteSerializer {
         Ok(self)
     }
 
-    fn serialize_variant(self, v: u128) -> Result<Self::Ok, Self::Error> {
-        if self.is_x86() {
-            match self.is_little_endian() {
-                true => self.output.put_u64_le(v as u64),
-                false => self.output.put_u64(v as u64),
-            }
-        } else {
-            match self.is_little_endian() {
-                true => self.output.put_u128_le(v),
-                false => self.output.put_u128(v),
-            }
-        }
+    fn serialize_variant(self, v: &Variant) -> Result<Self::Ok, Self::Error> {
+        self.serialize_ulong(v.object as u64)?;
+        self.serialize_ulong(v.class as u64)?;
         Ok(())
     }
 
@@ -388,37 +388,19 @@ impl<'a> SerializeFlags for &'a mut ByteSerializer {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::mocks::classes::{AllTypesTestClass, Classes, HkReferencedObject, HkpShapeInfo};
+    use crate::mocks::classes::*;
 
     #[test]
     fn test_serialize() {
-        let hk_referenced_object = HkReferencedObject {
-            _name: Some(51.into()),
-            mem_size_and_flags: 5,
-            reference_count: 6,
-            ..Default::default()
-        };
-
-        let hkp_shape_info = HkpShapeInfo {
-            _name: Some(50.into()),
-            shape: Pointer::new(50),
-            is_hierarchical_compound: true,
-            hkd_shapes_collected: false,
-            child_shape_names: vec!["child".into(), "Hi".into()],
-            child_transforms: vec![
-                Transform::default(),
-                Transform::default(),
-                Transform::default(),
-            ],
-            ..Default::default()
-        };
-
         let classes = vec![
-            Classes::HkpShapeInfo(hkp_shape_info.clone()),
-            Classes::HkpShapeInfo(hkp_shape_info),
-            Classes::HkReferencedObject(hk_referenced_object),
+            Classes::HkbProjectStringData(HkbProjectStringData {
+                _name: Some(54.into()),
+                animation_filenames: vec!["Hi".into(), "Hello".into(), "World".into()],
+                ..Default::default()
+            }),
+            //
             Classes::AllTypesTestClass(AllTypesTestClass {
-                _name: Some(150.into()),
+                _name: Some(53.into()),
                 ..Default::default()
             }),
         ];
