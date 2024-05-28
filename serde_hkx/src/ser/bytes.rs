@@ -1,15 +1,15 @@
 //! Bytes Serialization
-use std::collections::HashMap;
-
 use crate::error::{Error, Result};
-use bytes::{BufMut, BytesMut};
+use byteorder::WriteBytesExt as _;
 use havok_serde::ser::{
     Error as _, Serialize, SerializeFlags, SerializeSeq, SerializeStruct, Serializer,
 };
 use havok_types::{
-    f16, variant::Variant, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation,
-    Signature, StringPtr, Transform, Vector4,
+    f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature,
+    StringPtr, Transform, Variant, Vector4,
 };
+use std::io::{Cursor, Write as _};
+use zerocopy::{BigEndian, LittleEndian};
 
 /// Bytes endianness
 #[derive(Debug, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -36,24 +36,35 @@ pub enum Platform {
 pub struct ByteSerializer {
     endian: ByteOrder,
     target_platform: Platform,
-    output: BytesMut,
-    /// current reader position, actual data position
-    local_fixups: HashMap<u32, u32>,
+    /// Bytes
+    output: Cursor<Vec<u8>>,
 }
 
 impl ByteSerializer {
     /// Serializer is little endian mode?
-    pub fn is_little_endian(&self) -> bool {
+    fn is_little_endian(&self) -> bool {
         self.endian == ByteOrder::LittleEndian
     }
 
     /// Serializer is win32(x86) mode?
-    pub fn is_x86(&self) -> bool {
+    fn is_x86(&self) -> bool {
         self.target_platform == Platform::Win32
     }
 
-    pub fn current_position(&self) -> u32 {
-        self.output.len() as u32
+    /// Align bytes.
+    fn align(&mut self, align: usize) -> Result<()> {
+        let position = self.output.position() as usize;
+        let offset = position % align;
+
+        if offset != 0 {
+            debug_assert!(align >= offset);
+            let padding = align - offset;
+
+            // Length cannot be determined at compile time, so vec must be used.
+            let padding_bytes = vec![0u8; padding];
+            self.output.write_all(&padding_bytes)?;
+        }
+        Ok(())
     }
 }
 
@@ -66,7 +77,7 @@ where
 
     value.serialize(&mut serializer)?;
 
-    Ok(serializer.output.into())
+    Ok(serializer.output.into_inner())
 }
 
 impl<'a> Serializer for &'a mut ByteSerializer {
@@ -82,135 +93,135 @@ impl<'a> Serializer for &'a mut ByteSerializer {
     }
 
     fn serialize_bool(self, v: bool) -> Result<Self::Ok, Self::Error> {
-        self.output.put_u8(v as u8);
+        self.serialize_uint8(v as u8)?;
         Ok(())
     }
 
     /// Assume that the characters are ASCII characters. In that case, u8 is used to fit into 128 characters.
     fn serialize_char(self, v: char) -> Result<Self::Ok, Self::Error> {
-        self.output.put_u8(v as u8);
+        self.serialize_int8(v as i8)?;
         Ok(())
     }
 
     fn serialize_int8(self, v: i8) -> Result<Self::Ok, Self::Error> {
-        self.output.put_i8(v);
+        self.output.write_i8(v)?;
         Ok(())
     }
 
     fn serialize_uint8(self, v: u8) -> Result<Self::Ok, Self::Error> {
-        self.output.put_u8(v);
+        self.output.write_u8(v)?;
         Ok(())
     }
 
     fn serialize_int16(self, v: i16) -> Result<Self::Ok, Self::Error> {
         match self.is_little_endian() {
-            true => self.output.put_i16_le(v),
-            false => self.output.put_i16(v),
-        }
+            true => self.output.write_i16::<LittleEndian>(v),
+            false => self.output.write_i16::<BigEndian>(v),
+        }?;
         Ok(())
     }
 
     fn serialize_uint16(self, v: u16) -> Result<Self::Ok, Self::Error> {
         match self.is_little_endian() {
-            true => self.output.put_u16_le(v),
-            false => self.output.put_u16(v),
-        }
+            true => self.output.write_u16::<LittleEndian>(v),
+            false => self.output.write_u16::<BigEndian>(v),
+        }?;
         Ok(())
     }
 
     fn serialize_int32(self, v: i32) -> Result<Self::Ok, Self::Error> {
         match self.is_little_endian() {
-            true => self.output.put_i32_le(v),
-            false => self.output.put_i32(v),
-        }
+            true => self.output.write_i32::<LittleEndian>(v),
+            false => self.output.write_i32::<BigEndian>(v),
+        }?;
         Ok(())
     }
 
     fn serialize_uint32(self, v: u32) -> Result<Self::Ok, Self::Error> {
         match self.is_little_endian() {
-            true => self.output.put_u32_le(v),
-            false => self.output.put_u32(v),
-        }
+            true => self.output.write_u32::<LittleEndian>(v),
+            false => self.output.write_u32::<BigEndian>(v),
+        }?;
         Ok(())
     }
 
     fn serialize_int64(self, v: i64) -> Result<Self::Ok, Self::Error> {
         match self.is_little_endian() {
-            true => self.output.put_i64_le(v),
-            false => self.output.put_i64(v),
-        }
+            true => self.output.write_i64::<LittleEndian>(v),
+            false => self.output.write_i64::<BigEndian>(v),
+        }?;
         Ok(())
     }
 
     fn serialize_uint64(self, v: u64) -> Result<Self::Ok, Self::Error> {
         match self.is_little_endian() {
-            true => self.output.put_u64_le(v),
-            false => self.output.put_u64(v),
-        }
+            true => self.output.write_u64::<LittleEndian>(v),
+            false => self.output.write_u64::<BigEndian>(v),
+        }?;
         Ok(())
     }
 
     fn serialize_real(self, v: f32) -> Result<Self::Ok, Self::Error> {
         match self.is_little_endian() {
-            true => self.output.put_f32_le(v),
-            false => self.output.put_f32(v),
-        }
+            true => self.output.write_f32::<LittleEndian>(v),
+            false => self.output.write_f32::<BigEndian>(v),
+        }?;
         Ok(())
     }
 
     fn serialize_vector4(self, v: &Vector4) -> Result<Self::Ok, Self::Error> {
         match self.is_little_endian() {
-            true => self.output.put(&v.to_le_bytes()[..]),
-            false => self.output.put(&v.to_be_bytes()[..]),
-        }
+            true => self.output.write(v.to_le_bytes().as_slice()),
+            false => self.output.write(v.to_be_bytes().as_slice()),
+        }?;
         Ok(())
     }
 
     fn serialize_quaternion(self, v: &Quaternion) -> Result<Self::Ok, Self::Error> {
         match self.is_little_endian() {
-            true => self.output.put(&v.to_le_bytes()[..]),
-            false => self.output.put(&v.to_be_bytes()[..]),
-        }
+            true => self.output.write(v.to_le_bytes().as_slice()),
+            false => self.output.write(v.to_be_bytes().as_slice()),
+        }?;
         Ok(())
     }
 
     fn serialize_matrix3(self, v: &Matrix3) -> Result<Self::Ok, Self::Error> {
         match self.is_little_endian() {
-            true => self.output.put(&v.to_le_bytes()[..]),
-            false => self.output.put(&v.to_be_bytes()[..]),
-        }
+            true => self.output.write(v.to_le_bytes().as_slice()),
+            false => self.output.write(v.to_be_bytes().as_slice()),
+        }?;
         Ok(())
     }
 
     fn serialize_rotation(self, v: &Rotation) -> Result<Self::Ok, Self::Error> {
         match self.is_little_endian() {
-            true => self.output.put(v.to_le_bytes().as_slice()),
-            false => self.output.put(v.to_le_bytes().as_slice()),
-        }
+            true => self.output.write(v.to_le_bytes().as_slice()),
+            false => self.output.write(v.to_le_bytes().as_slice()),
+        }?;
         Ok(())
     }
 
     fn serialize_qstransform(self, v: &QsTransform) -> Result<Self::Ok, Self::Error> {
         match self.is_little_endian() {
-            true => self.output.put(&v.to_le_bytes()[..]),
-            false => self.output.put(&v.to_be_bytes()[..]),
-        }
+            true => self.output.write(&v.to_le_bytes()[..]),
+            false => self.output.write(&v.to_be_bytes()[..]),
+        }?;
         Ok(())
     }
 
     fn serialize_matrix4(self, v: &Matrix4) -> Result<Self::Ok, Self::Error> {
         match self.is_little_endian() {
-            true => self.output.put(&v.to_le_bytes()[..]),
-            false => self.output.put(&v.to_be_bytes()[..]),
-        }
+            true => self.output.write(v.to_le_bytes().as_slice()),
+            false => self.output.write(v.to_be_bytes().as_slice()),
+        }?;
         Ok(())
     }
 
     fn serialize_transform(self, v: &Transform) -> Result<Self::Ok, Self::Error> {
         match self.is_little_endian() {
-            true => self.output.put(v.to_le_bytes().as_slice()),
-            false => self.output.put(v.to_le_bytes().as_slice()),
-        }
+            true => self.output.write(v.to_le_bytes().as_slice()),
+            false => self.output.write(v.to_le_bytes().as_slice()),
+        }?;
         Ok(())
     }
 
@@ -220,9 +231,6 @@ impl<'a> Serializer for &'a mut ByteSerializer {
     }
 
     fn serialize_array(self, _len: Option<usize>) -> Result<Self::SerializeSeq, Self::Error> {
-        self.serialize_ulong(0)?;
-        self.serialize_uint32(0 | 80 << 24)?;
-        self.local_fixups.insert(self.current_position(), 0);
         Ok(self)
     }
 
@@ -245,17 +253,10 @@ impl<'a> Serializer for &'a mut ByteSerializer {
     }
 
     fn serialize_ulong(self, v: u64) -> Result<Self::Ok, Self::Error> {
-        if self.is_x86() {
-            match self.is_little_endian() {
-                true => self.output.put_u32_le(v as u32),
-                false => self.output.put_u32(v as u32),
-            }
-        } else {
-            match self.is_little_endian() {
-                true => self.output.put_u64_le(v),
-                false => self.output.put_u64(v),
-            }
-        }
+        match self.is_x86() {
+            true => self.serialize_uint32(v as u32),
+            false => self.serialize_uint64(v),
+        }?;
         Ok(())
     }
 
@@ -264,17 +265,15 @@ impl<'a> Serializer for &'a mut ByteSerializer {
     }
 
     fn serialize_half(self, v: f16) -> Result<Self::Ok, Self::Error> {
-        match self.is_little_endian() {
-            true => self.output.put_u16_le(v.to_bits()),
-            false => self.output.put_u16(v.to_bits()),
-        }
+        self.serialize_uint16(v.to_bits())?;
         Ok(())
     }
 
     fn serialize_stringptr(self, v: &StringPtr) -> Result<Self::Ok, Self::Error> {
+        self.serialize_ulong(0)?; // Must alloc ptr size.
         let c_string = std::ffi::CString::new(v.as_bytes()).map_err(Error::custom)?;
-        self.output.put(c_string.as_bytes());
-        Ok(())
+        self.output.write(&c_string.into_bytes())?;
+        self.align(16)
     }
 }
 
@@ -340,16 +339,19 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         V: AsRef<[T]> + Serialize,
         T: Serialize,
     {
-        let _len = value.as_ref().len();
+        let size = value.as_ref().len() as u32;
+        self.serialize_ulong(0)?; // ptr size
+        self.serialize_uint32(size)?; // array size
+        self.serialize_uint32(size | 0x80 << 24)?; // capacity | flags
         value.serialize(&mut **self)?;
         Ok(())
     }
 
+    /// Even if it is skipped on XML, it is not skipped because it exists in binary data.
     fn skip_field<T>(&mut self, _key: &'static str, value: &T) -> Result<()>
     where
         T: ?Sized + Serialize,
     {
-        // Even if it is skipped on XML, it is not skipped because it exists in binary data.
         value.serialize(&mut **self)
     }
 
@@ -405,6 +407,6 @@ mod tests {
             }),
         ];
 
-        println!("{:?}", to_bytes(&classes).unwrap());
+        rhexdump::rhexdump!(to_bytes(&classes).unwrap());
     }
 }

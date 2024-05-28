@@ -30,6 +30,15 @@ pub enum Error {
         #[snafu(implicit)]
         location: snafu::Location,
     },
+
+    #[snafu(transparent)]
+    IoError {
+        /// I/O Error
+        source: std::io::Error,
+        /// error location
+        #[snafu(implicit)]
+        location: snafu::Location,
+    },
 }
 
 impl havok_serde::ser::Error for Error {
