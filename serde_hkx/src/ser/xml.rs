@@ -225,7 +225,11 @@ impl<'a> havok_serde::ser::Serializer for &'a mut XmlSerializer {
 impl XmlSerializer {
     /// Do indentation by `self.depth`.
     fn indent(&mut self) {
-        self.output += &self.indent.repeat(self.depth);
+        match self.depth {
+            0 => (),
+            1 => self.output += self.indent,
+            _ => self.output += &self.indent.repeat(self.depth),
+        }
     }
 
     /// Increment `self.depth` for indentation.
