@@ -23,9 +23,11 @@ pub struct Matrix4 {
     pub w: Vector4,
 }
 
+static_assertions::assert_eq_size!(Matrix4, [u8; 64]);
+
 impl Matrix4 {
-    pub fn to_le_bytes(&self) -> [u8; 16 * 4] {
-        let mut bytes = [0u8; 16 * 4];
+    pub fn to_le_bytes(&self) -> [u8; 64] {
+        let mut bytes = [0; 64];
         bytes[0..16].copy_from_slice(&self.x.to_le_bytes());
         bytes[16..32].copy_from_slice(&self.y.to_le_bytes());
         bytes[32..48].copy_from_slice(&self.z.to_le_bytes());
@@ -33,8 +35,8 @@ impl Matrix4 {
         bytes
     }
 
-    pub fn to_be_bytes(&self) -> [u8; 16 * 4] {
-        let mut bytes = [0u8; 16 * 4];
+    pub fn to_be_bytes(&self) -> [u8; 64] {
+        let mut bytes = [0u8; 64];
         bytes[0..16].copy_from_slice(&self.x.to_be_bytes());
         bytes[16..32].copy_from_slice(&self.y.to_be_bytes());
         bytes[32..48].copy_from_slice(&self.z.to_be_bytes());

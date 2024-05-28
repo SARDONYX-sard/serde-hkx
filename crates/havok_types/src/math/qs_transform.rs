@@ -28,16 +28,16 @@ pub struct QsTransform {
 }
 
 impl QsTransform {
-    pub fn to_le_bytes(&self) -> [u8; 16 * 3] {
-        let mut bytes = [0u8; 16 * 3];
+    pub fn to_le_bytes(&self) -> [u8; 48] {
+        let mut bytes = [0; 48];
         bytes[0..16].copy_from_slice(&self.transition.to_le_bytes());
         bytes[16..32].copy_from_slice(&self.quaternion.to_le_bytes());
         bytes[32..48].copy_from_slice(&self.scale.to_le_bytes());
         bytes
     }
 
-    pub fn to_be_bytes(&self) -> [u8; 16 * 3] {
-        let mut bytes = [0u8; 16 * 3];
+    pub fn to_be_bytes(&self) -> [u8; 48] {
+        let mut bytes = [0; 48];
         bytes[0..16].copy_from_slice(&self.transition.to_le_bytes());
         bytes[16..32].copy_from_slice(&self.quaternion.to_le_bytes());
         bytes[32..48].copy_from_slice(&self.scale.to_le_bytes());

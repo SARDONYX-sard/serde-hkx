@@ -37,6 +37,8 @@ pub struct Vector4 {
     pub w: f32,
 }
 
+static_assertions::assert_eq_size!(Vector4, [u8; 16]);
+
 impl Vector4 {
     #[inline]
     pub fn to_le_bytes(&self) -> [u8; 16] {

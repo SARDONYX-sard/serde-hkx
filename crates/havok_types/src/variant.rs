@@ -1,3 +1,5 @@
+//! Variant: object pointer + class meta pointer
+
 /// C++ info
 /// - byte size: 8(x86)/ 16(x86_64)
 ///

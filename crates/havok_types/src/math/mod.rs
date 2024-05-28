@@ -1,3 +1,7 @@
+//! Math types
+//!
+//! # Examples
+//! - `Matrix3`
 mod matrix3;
 mod matrix4;
 mod qs_transform;

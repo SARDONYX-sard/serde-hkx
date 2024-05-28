@@ -249,16 +249,10 @@ pub trait Serializer {
     /// Serialize an `Vector4` value.
     fn serialize_pointer(self, v: Pointer) -> Result<Self::Ok, Self::Error>;
 
-    /// Serialize an `Vector4` value.
+    /// Serialize an `Array` value.
     fn serialize_array(self, len: Option<usize>) -> Result<Self::SerializeSeq, Self::Error>;
 
-    /// Serialize an `Vector4` value. (Never used)
-    ///
-    /// # Note
-    /// Never used(In the 2010 Havok classes)
-    // fn serialize_inplacearray(self, v: ()) -> Result<Self::Ok, Self::Error>;
-
-    /// Serialize an `Vector4` value.
+    /// Serialize an `Struct` value.
     fn serialize_struct(
         self,
         name: &'static str,

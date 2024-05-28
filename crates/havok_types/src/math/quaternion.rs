@@ -16,10 +16,12 @@ pub struct Quaternion {
     scaler: f32,
 }
 
+static_assertions::assert_eq_size!(Quaternion, [u8; 16]);
+
 impl Quaternion {
     #[inline]
     pub fn to_le_bytes(&self) -> [u8; 16] {
-        let mut bytes = [0u8; 16];
+        let mut bytes = [0; 16];
         bytes[0..4].copy_from_slice(&self.x.to_le_bytes());
         bytes[4..8].copy_from_slice(&self.y.to_le_bytes());
         bytes[8..12].copy_from_slice(&self.z.to_le_bytes());
@@ -29,7 +31,7 @@ impl Quaternion {
 
     #[inline]
     pub fn to_be_bytes(&self) -> [u8; 16] {
-        let mut bytes = [0u8; 16];
+        let mut bytes = [0; 16];
         bytes[0..4].copy_from_slice(&self.x.to_be_bytes());
         bytes[4..8].copy_from_slice(&self.y.to_be_bytes());
         bytes[8..12].copy_from_slice(&self.z.to_be_bytes());

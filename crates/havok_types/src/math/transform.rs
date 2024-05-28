@@ -21,16 +21,18 @@ pub struct Transform {
     pub transition: Vector4,
 }
 
+static_assertions::assert_eq_size!(Transform, [u8; 64]);
+
 impl Transform {
-    pub fn to_le_bytes(&self) -> [u8; 48 + 16] {
-        let mut bytes = [0u8; 48 + 16];
+    pub fn to_le_bytes(&self) -> [u8; 64] {
+        let mut bytes = [0u8; 64];
         bytes[0..48].copy_from_slice(&self.rotation.to_le_bytes());
         bytes[48..64].copy_from_slice(&self.transition.to_le_bytes());
         bytes
     }
 
-    pub fn to_be_bytes(&self) -> [u8; 48 + 16] {
-        let mut bytes = [0u8; 48 + 16];
+    pub fn to_be_bytes(&self) -> [u8; 64] {
+        let mut bytes = [0u8; 64];
         bytes[0..48].copy_from_slice(&self.rotation.to_be_bytes());
         bytes[48..64].copy_from_slice(&self.transition.to_be_bytes());
         bytes

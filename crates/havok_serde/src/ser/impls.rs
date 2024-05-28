@@ -5,8 +5,8 @@ use crate::lib::*;
 
 use super::{Serialize, Serializer};
 use havok_types::{
-    half::f16, variant::Variant, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation,
-    StringPtr, Transform, Vector4,
+    f16, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, StringPtr, Transform,
+    Variant, Vector4,
 };
 
 macro_rules! impl_serialize {
