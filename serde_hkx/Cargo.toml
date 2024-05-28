@@ -10,13 +10,17 @@ edition.workspace = true
 
 
 [dependencies]
-bytes = "1.6"
-havok_types = { path = "../crates/havok_types", features = ["serde"] }
+byteorder = "1.5.0"
 havok_serde = { path = "../crates/havok_serde" }
+havok_types = { path = "../crates/havok_types", features = ["serde"] }
+indexmap = "2.2.6"
 snafu = "0.8.2"                                                        # Define all error patterns(with backtrace)
+static_assertions = "1.1.0"
+zerocopy = "0.7.34"
 
 [dev-dependencies]
-bitflags = "2.4" # To generate flags type
+bitflags = "2.4"   # To generate flags type
+rhexdump = "0.2.0"
 
 [features]
 default = ["std"]
