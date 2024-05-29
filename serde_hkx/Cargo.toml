@@ -11,6 +11,7 @@ edition.workspace = true
 
 [dependencies]
 byteorder = "1.5.0"
+educe = "0.5.11"
 havok_serde = { path = "../crates/havok_serde" }
 havok_types = { path = "../crates/havok_types", features = ["serde"] }
 indexmap = "2.2.6"

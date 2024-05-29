@@ -67,8 +67,8 @@ impl Serialize for HkpShapeInfo<'_> {
         serializer.serialize_field("shape", &self.shape)?;
         serializer.serialize_field("isHierarchicalCompound", &self.is_hierarchical_compound)?;
         serializer.serialize_field("hkdShapesCollected", &self.hkd_shapes_collected)?;
-        serializer.serialize_array_field("childShapeNames", &self.child_shape_names)?;
-        serializer.serialize_array_field("childTransforms", &self.child_transforms)?;
+        serializer.serialize_array_meta_field("childShapeNames", &self.child_shape_names)?;
+        serializer.serialize_array_meta_field("childTransforms", &self.child_transforms)?;
         serializer.serialize_field("transform", &self.transform)?;
 
         serializer.end()

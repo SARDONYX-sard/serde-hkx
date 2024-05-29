@@ -198,8 +198,7 @@ impl<'a> havok_serde::ser::Serializer for &'a mut XmlSerializer {
     }
 
     fn serialize_cstring(self, v: &CString) -> Result<Self::Ok> {
-        self.output += &v;
-        Ok(())
+        self.serialize_stringptr(v)
     }
 
     fn serialize_ulong(self, v: u64) -> Result<Self::Ok> {
@@ -216,8 +215,8 @@ impl<'a> havok_serde::ser::Serializer for &'a mut XmlSerializer {
         Ok(())
     }
 
-    fn serialize_stringptr(self, s: &StringPtr) -> Result<Self::Ok> {
-        self.output += s;
+    fn serialize_stringptr(self, v: &StringPtr) -> Result<Self::Ok> {
+        self.output += &v.as_deref().unwrap_or_default();
         Ok(())
     }
 }
@@ -353,6 +352,17 @@ impl<'a> SerializeStruct for &'a mut XmlSerializer {
         Ok(())
     }
 
+    fn serialize_string_meta_field<T>(
+        &mut self,
+        key: &'static str,
+        value: &T,
+    ) -> Result<(), Self::Error>
+    where
+        T: ?Sized + Serialize,
+    {
+        SerializeStruct::serialize_field(self, key, value)
+    }
+
     /// # XML Examples
     ///
     /// - `hkArray<hkInt8>`(same as ptr, hkReal, etc...)
@@ -379,7 +389,7 @@ impl<'a> SerializeStruct for &'a mut XmlSerializer {
     ///     (0.000000 0.000000 0.000000 0.000000)
     /// </hkparam>
     /// ```
-    fn serialize_array_field<V, T>(&mut self, key: &'static str, value: V) -> Result<()>
+    fn serialize_array_meta_field<V, T>(&mut self, key: &'static str, value: V) -> Result<()>
     where
         V: AsRef<[T]> + Serialize,
         T: Serialize,
@@ -459,7 +469,11 @@ mod tests {
         let classes = vec![
             Classes::HkbProjectStringData(HkbProjectStringData {
                 _name: Some(54.into()),
-                animation_filenames: vec!["Hi".into(), "Hello".into(), "World".into()],
+                animation_filenames: vec![
+                    Some("Hi".into()),
+                    Some("Hello".into()),
+                    Some("World".into()),
+                ],
                 ..Default::default()
             }),
             //

@@ -63,11 +63,12 @@ impl_serialize!(*Pointer, serialize_pointer);
 impl Serialize for &str {
     #[inline]
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        serializer.serialize_stringptr(&((*self).into()))
+        let cow = (*self).into();
+        serializer.serialize_stringptr(&Some(cow))
     }
 }
 
-impl Serialize for Cow<'_, str> {
+impl Serialize for StringPtr<'_> {
     #[inline]
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         serializer.serialize_stringptr(&self)

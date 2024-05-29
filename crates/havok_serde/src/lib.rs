@@ -41,11 +41,6 @@ mod lib {
     pub use self::core::fmt::Display;
 
     #[cfg(all(feature = "alloc", not(feature = "std")))]
-    pub use alloc::borrow::Cow;
-    #[cfg(feature = "std")]
-    pub use std::borrow::Cow;
-
-    #[cfg(all(feature = "alloc", not(feature = "std")))]
     pub use alloc::vec::Vec;
     #[cfg(feature = "std")]
     pub use std::vec::Vec;

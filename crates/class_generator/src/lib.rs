@@ -1,16 +1,18 @@
 pub mod cpp_info;
 pub mod error;
 
+use cpp_info::{FlagValues, TypeKind};
+
 use crate::{cpp_info::Class, error::*};
 use std::path::Path;
 
 /// Generate havok class code(For Rust) from class info json files.
-pub fn generate_havok_class<P: AsRef<Path>>(classes_json_dir: P, output_dir: P) -> Result<()> {
+pub fn generate_havok_class<P: AsRef<Path>>(classes_json_dir: P, _output_dir: P) -> Result<()> {
     use indexmap::IndexMap;
     use snafu::OptionExt;
     use std::fs;
 
-    fs::create_dir_all(&output_dir)?;
+    // fs::create_dir_all(&output_dir)?;
 
     //? Tips: Breaking through the lifetime constraint of Cow<'a, str> by caching the ownership type in the first round loop.
     let mut json_map = IndexMap::new();
@@ -33,10 +35,17 @@ pub fn generate_havok_class<P: AsRef<Path>>(classes_json_dir: P, output_dir: P) 
     let mut class_map = IndexMap::new();
     for (class_name, json_str) in &json_map {
         let class: Class = serde_json::from_str(json_str)?;
-        dbg!(&class);
 
         for member in &class.members {
-            dbg!(&member.vtype, &member.vsubtype, &member.size_of_type(8));
+            if (member.vtype == TypeKind::StringPtr
+                || member.vsubtype == TypeKind::StringPtr
+                || member.vtype == TypeKind::CString
+                || member.vsubtype == TypeKind::CString)
+                && member.flags.contains(FlagValues::SERIALIZE_IGNORED)
+            {
+                dbg!("{:?}", &class);
+            }
+            // dbg!(&member.vtype, &member.vsubtype, &member.size_of_type(8));
         }
         class_map.insert(class_name.as_str(), class);
     }
@@ -58,7 +67,6 @@ mod tests {
 
         let classes_json_dir = repo_root.join("assets").join("classes");
         let output_dir = repo_root
-            .join("crates")
             .join("serde_hkx")
             .join("src")
             .join("classes")

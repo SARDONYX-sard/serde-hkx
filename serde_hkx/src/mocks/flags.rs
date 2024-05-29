@@ -1,3 +1,4 @@
+use bitflags::Flags;
 use havok_serde::ser::{Serialize, SerializeFlags, Serializer};
 
 bitflags::bitflags! {
@@ -42,6 +43,9 @@ impl Serialize for FlagValues {
                 remain => sv.serialize_field(&remain.bits().to_string(), &remain.bits()),
             }?
         }
+
+        // For binary
+        sv.serialize_bits(&self.bits())?;
         sv.end()
     }
 }

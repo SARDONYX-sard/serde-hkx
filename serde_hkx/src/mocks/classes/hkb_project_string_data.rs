@@ -84,15 +84,33 @@ impl Serialize for HkbProjectStringData<'_> {
         let class_meta = self._name.map(|name| (name, Signature::new(0xea7f1d08)));
         let mut serializer = serializer.serialize_struct("hkbProjectStringData", class_meta)?;
 
+        // flattened parent's fields
+        serializer.pad_field(&Pointer::new(0), &Pointer::new(0))?; // hkBaseObject size
+        serializer.skip_field("referenceCount", &self.parent.reference_count)?;
+        serializer.skip_field("memSizeAndFlags", &self.parent.mem_size_and_flags)?;
+        serializer.pad_field(&[0u8; 0].as_slice(), &[0u8; 4].as_slice())?;
+
+        // self fields
+        serializer.serialize_array_meta_field("animationFilenames", &self.animation_filenames)?;
+        serializer.serialize_array_meta_field("behaviorFilenames", &self.behavior_filenames)?;
+        serializer.serialize_array_meta_field("characterFilenames", &self.character_filenames)?;
+        serializer.serialize_array_meta_field("eventNames", &self.event_names)?;
+        serializer.serialize_string_meta_field("animationPath", &self.animation_path)?;
+        serializer.serialize_string_meta_field("behaviorPath", &self.behavior_path)?;
+        serializer.serialize_string_meta_field("characterPath", &self.character_path)?;
+        serializer.serialize_string_meta_field("fullPathToSource", &self.full_path_to_source)?;
+        serializer.skip_string_meta_field("rootPath", &self.root_path)?;
+
+        // For pointer type binary.
         serializer.serialize_array_field("animationFilenames", &self.animation_filenames)?;
         serializer.serialize_array_field("behaviorFilenames", &self.behavior_filenames)?;
         serializer.serialize_array_field("characterFilenames", &self.character_filenames)?;
         serializer.serialize_array_field("eventNames", &self.event_names)?;
-        serializer.serialize_field("animationPath", &self.animation_path)?;
-        serializer.serialize_field("behaviorPath", &self.behavior_path)?;
-        serializer.serialize_field("characterPath", &self.character_path)?;
-        serializer.serialize_field("fullPathToSource", &self.full_path_to_source)?;
-        serializer.skip_field("rootPath", &self.root_path)?;
+        serializer.serialize_string_field("animationPath", &self.animation_path)?;
+        serializer.serialize_string_field("behaviorPath", &self.behavior_path)?;
+        serializer.serialize_string_field("characterPath", &self.character_path)?;
+        serializer.serialize_string_field("fullPathToSource", &self.full_path_to_source)?;
+
         serializer.end()
     }
 }

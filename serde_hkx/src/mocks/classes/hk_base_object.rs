@@ -12,7 +12,7 @@ impl Serialize for HkBaseObject {
 
         let class_meta = self._name.map(|name| (name, Signature::new(0xea7f1d08)));
         let mut ser = serializer.serialize_struct("hkBaseObject", class_meta)?;
-        ser.pad_field(&Pointer::new(0))?; // vtable pointer size
+        ser.pad_field(&Pointer::new(0), &Pointer::new(0))?; // vtable pointer size
         ser.end()
     }
 }

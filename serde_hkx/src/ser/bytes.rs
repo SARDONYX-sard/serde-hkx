@@ -1,4 +1,5 @@
 //! Bytes Serialization
+use crate::cursor_ext::Align as _;
 use crate::error::{Error, Result};
 use byteorder::WriteBytesExt as _;
 use havok_serde::ser::{
@@ -21,6 +22,13 @@ pub enum ByteOrder {
     BigEndian,
 }
 
+impl ByteOrder {
+    /// Is little endian mode?
+    fn is_little(&self) -> bool {
+        *self == ByteOrder::LittleEndian
+    }
+}
+
 /// Binary target platform
 #[derive(Debug, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub enum Platform {
@@ -31,6 +39,13 @@ pub enum Platform {
     Amd64,
 }
 
+impl Platform {
+    /// Serializer is win32(x86) mode?
+    fn is_x86(&self) -> bool {
+        *self == Platform::Win32
+    }
+}
+
 /// Binary data serializer
 #[derive(Debug, Default)]
 pub struct ByteSerializer {
@@ -38,34 +53,52 @@ pub struct ByteSerializer {
     target_platform: Platform,
     /// Bytes
     output: Cursor<Vec<u8>>,
+
+    /// Temporary area to deal with pointer types within pointer types.
+    ///
+    /// # Details
+    /// During serialization of [`SerializeSeq`], that is, during processing of an array, this will be [`Some`].
+    /// Most write problems are eliminated thanks to the separation of ptr-type meta byte writes and pointer-pointed data writes.
+    ///
+    /// The exception is `Array<StringPtr>`.
+    /// This is a pointer type with a pointer type inside.
+    ///
+    /// To write this data, follow these steps:
+    /// 1. Do a 16-byte alignment before starting to write the data in the Array.
+    /// 2. Write the meta information of StringPtr for the length of the Array.
+    /// 3. Write the data pointed to by the pointer of StringPtr.
+    /// 4. Do a 16-byte alignment for StringPtr.
+    str_array_buf: Option<Vec<std::ffi::CString>>,
 }
 
-impl ByteSerializer {
-    /// Serializer is little endian mode?
-    fn is_little_endian(&self) -> bool {
-        self.endian == ByteOrder::LittleEndian
-    }
+/// Endianness and a common write process that takes into account whether the array is being serialized or not.
+macro_rules! impl_serialize_primitive {
+    ($method:ident, $value_type:ty, $write:ident) => {
+        fn $method(self, v: $value_type) -> Result<Self::Ok, Self::Error> {
+            let little_endian = self.endian.is_little();
 
-    /// Serializer is win32(x86) mode?
-    fn is_x86(&self) -> bool {
-        self.target_platform == Platform::Win32
-    }
-
-    /// Align bytes.
-    fn align(&mut self, align: usize) -> Result<()> {
-        let position = self.output.position() as usize;
-        let offset = position % align;
-
-        if offset != 0 {
-            debug_assert!(align >= offset);
-            let padding = align - offset;
-
-            // Length cannot be determined at compile time, so vec must be used.
-            let padding_bytes = vec![0u8; padding];
-            self.output.write_all(&padding_bytes)?;
+            match little_endian {
+                true => self.output.$write::<LittleEndian>(v),
+                false => self.output.$write::<BigEndian>(v),
+            }?;
+            Ok(())
         }
-        Ok(())
-    }
+    };
+}
+
+/// Endianness and a common write process that takes into account whether the array is being serialized or not.
+macro_rules! impl_serialize_math {
+    ($method:ident, $value_type:ty) => {
+        fn $method(self, v: &$value_type) -> Result<Self::Ok, Self::Error> {
+            let little_endian = self.endian.is_little();
+
+            match little_endian {
+                true => self.output.write(v.to_le_bytes().as_slice()),
+                false => self.output.write(v.to_be_bytes().as_slice()),
+            }?;
+            Ok(())
+        }
+    };
 }
 
 /// Serialize to bytes
@@ -74,9 +107,7 @@ where
     T: Serialize,
 {
     let mut serializer = ByteSerializer::default();
-
     value.serialize(&mut serializer)?;
-
     Ok(serializer.output.into_inner())
 }
 
@@ -113,120 +144,31 @@ impl<'a> Serializer for &'a mut ByteSerializer {
         Ok(())
     }
 
-    fn serialize_int16(self, v: i16) -> Result<Self::Ok, Self::Error> {
-        match self.is_little_endian() {
-            true => self.output.write_i16::<LittleEndian>(v),
-            false => self.output.write_i16::<BigEndian>(v),
-        }?;
-        Ok(())
-    }
+    impl_serialize_primitive!(serialize_int16, i16, write_i16);
+    impl_serialize_primitive!(serialize_uint16, u16, write_u16);
 
-    fn serialize_uint16(self, v: u16) -> Result<Self::Ok, Self::Error> {
-        match self.is_little_endian() {
-            true => self.output.write_u16::<LittleEndian>(v),
-            false => self.output.write_u16::<BigEndian>(v),
-        }?;
-        Ok(())
-    }
+    impl_serialize_primitive!(serialize_int32, i32, write_i32);
+    impl_serialize_primitive!(serialize_uint32, u32, write_u32);
 
-    fn serialize_int32(self, v: i32) -> Result<Self::Ok, Self::Error> {
-        match self.is_little_endian() {
-            true => self.output.write_i32::<LittleEndian>(v),
-            false => self.output.write_i32::<BigEndian>(v),
-        }?;
-        Ok(())
-    }
+    impl_serialize_primitive!(serialize_int64, i64, write_i64);
+    impl_serialize_primitive!(serialize_uint64, u64, write_u64);
 
-    fn serialize_uint32(self, v: u32) -> Result<Self::Ok, Self::Error> {
-        match self.is_little_endian() {
-            true => self.output.write_u32::<LittleEndian>(v),
-            false => self.output.write_u32::<BigEndian>(v),
-        }?;
-        Ok(())
-    }
+    impl_serialize_primitive!(serialize_real, f32, write_f32);
 
-    fn serialize_int64(self, v: i64) -> Result<Self::Ok, Self::Error> {
-        match self.is_little_endian() {
-            true => self.output.write_i64::<LittleEndian>(v),
-            false => self.output.write_i64::<BigEndian>(v),
-        }?;
-        Ok(())
-    }
+    impl_serialize_math!(serialize_vector4, Vector4);
 
-    fn serialize_uint64(self, v: u64) -> Result<Self::Ok, Self::Error> {
-        match self.is_little_endian() {
-            true => self.output.write_u64::<LittleEndian>(v),
-            false => self.output.write_u64::<BigEndian>(v),
-        }?;
-        Ok(())
-    }
+    impl_serialize_math!(serialize_quaternion, Quaternion);
+    impl_serialize_math!(serialize_matrix3, Matrix3);
 
-    fn serialize_real(self, v: f32) -> Result<Self::Ok, Self::Error> {
-        match self.is_little_endian() {
-            true => self.output.write_f32::<LittleEndian>(v),
-            false => self.output.write_f32::<BigEndian>(v),
-        }?;
-        Ok(())
-    }
+    impl_serialize_math!(serialize_rotation, Rotation);
+    impl_serialize_math!(serialize_matrix4, Matrix4);
 
-    fn serialize_vector4(self, v: &Vector4) -> Result<Self::Ok, Self::Error> {
-        match self.is_little_endian() {
-            true => self.output.write(v.to_le_bytes().as_slice()),
-            false => self.output.write(v.to_be_bytes().as_slice()),
-        }?;
-        Ok(())
-    }
-
-    fn serialize_quaternion(self, v: &Quaternion) -> Result<Self::Ok, Self::Error> {
-        match self.is_little_endian() {
-            true => self.output.write(v.to_le_bytes().as_slice()),
-            false => self.output.write(v.to_be_bytes().as_slice()),
-        }?;
-        Ok(())
-    }
-
-    fn serialize_matrix3(self, v: &Matrix3) -> Result<Self::Ok, Self::Error> {
-        match self.is_little_endian() {
-            true => self.output.write(v.to_le_bytes().as_slice()),
-            false => self.output.write(v.to_be_bytes().as_slice()),
-        }?;
-        Ok(())
-    }
-
-    fn serialize_rotation(self, v: &Rotation) -> Result<Self::Ok, Self::Error> {
-        match self.is_little_endian() {
-            true => self.output.write(v.to_le_bytes().as_slice()),
-            false => self.output.write(v.to_le_bytes().as_slice()),
-        }?;
-        Ok(())
-    }
-
-    fn serialize_qstransform(self, v: &QsTransform) -> Result<Self::Ok, Self::Error> {
-        match self.is_little_endian() {
-            true => self.output.write(&v.to_le_bytes()[..]),
-            false => self.output.write(&v.to_be_bytes()[..]),
-        }?;
-        Ok(())
-    }
-
-    fn serialize_matrix4(self, v: &Matrix4) -> Result<Self::Ok, Self::Error> {
-        match self.is_little_endian() {
-            true => self.output.write(v.to_le_bytes().as_slice()),
-            false => self.output.write(v.to_be_bytes().as_slice()),
-        }?;
-        Ok(())
-    }
-
-    fn serialize_transform(self, v: &Transform) -> Result<Self::Ok, Self::Error> {
-        match self.is_little_endian() {
-            true => self.output.write(v.to_le_bytes().as_slice()),
-            false => self.output.write(v.to_le_bytes().as_slice()),
-        }?;
-        Ok(())
-    }
+    impl_serialize_math!(serialize_qstransform, QsTransform);
+    impl_serialize_math!(serialize_transform, Transform);
 
     /// Pointer(Name attribute on XML) does not exist in bytes data(`.hkx`).
-    fn serialize_pointer(self, _: Pointer) -> Result<Self::Ok, Self::Error> {
+    fn serialize_pointer(self, v: Pointer) -> Result<Self::Ok, Self::Error> {
+        self.serialize_ulong(v.get() as u64)?;
         Ok(())
     }
 
@@ -249,11 +191,17 @@ impl<'a> Serializer for &'a mut ByteSerializer {
     }
 
     fn serialize_cstring(self, v: &CString) -> Result<Self::Ok, Self::Error> {
-        self.serialize_stringptr(v)
+        if let Some(s) = v {
+            if s.is_empty() || s == "\u{2400}" {
+                return Ok(());
+            };
+            self.serialize_stringptr(v)?;
+        };
+        Ok(())
     }
 
     fn serialize_ulong(self, v: u64) -> Result<Self::Ok, Self::Error> {
-        match self.is_x86() {
+        match self.target_platform.is_x86() {
             true => self.serialize_uint32(v as u32),
             false => self.serialize_uint64(v),
         }?;
@@ -269,11 +217,25 @@ impl<'a> Serializer for &'a mut ByteSerializer {
         Ok(())
     }
 
+    /// In the binary serialization of hkx, this is the actual data writing process beyond
+    /// the pointer that is called only after all fields of the structure have been written.
     fn serialize_stringptr(self, v: &StringPtr) -> Result<Self::Ok, Self::Error> {
-        self.serialize_ulong(0)?; // Must alloc ptr size.
-        let c_string = std::ffi::CString::new(v.as_bytes()).map_err(Error::custom)?;
-        self.output.write(&c_string.into_bytes())?;
-        self.align(16)
+        // Skip if `Option::None`(null pointer).
+        if let Some(v) = v {
+            let _local_dst = self.output.position() as usize;
+
+            let c_string = std::ffi::CString::new(v.as_bytes()).map_err(Error::custom)?;
+            match self.str_array_buf {
+                Some(ref mut array_buf) => array_buf.push(c_string),
+                None => {
+                    // If it is not a StringPtr inside an Array, it must be written here because the pointers are
+                    // not nested and there is no additional overhead.
+                    let _ = self.output.write(c_string.as_bytes_with_nul())?;
+                    self.output.align(16)?;
+                }
+            };
+        };
+        Ok(())
     }
 }
 
@@ -298,8 +260,7 @@ impl<'a> SerializeSeq for &'a mut ByteSerializer {
     where
         T: ?Sized + Serialize,
     {
-        value.serialize(&mut **self)?;
-        Ok(())
+        value.serialize(&mut **self)
     }
 
     fn serialize_math_element<T>(&mut self, value: &T) -> Result<()>
@@ -313,11 +274,19 @@ impl<'a> SerializeSeq for &'a mut ByteSerializer {
     where
         T: ?Sized + Serialize,
     {
-        value.serialize(&mut **self)?;
-        Ok(())
+        self.serialize_ulong(0)?; // ptr size
+        value.serialize(&mut **self)
     }
 
+    /// In Byte Serializer, [`SerializeSeq`] is called only when writing the data pointed to by the pointer.
+    /// When the data has been written, if it is a StringPtr, the actual state of the data must be written here.
     fn end(self) -> Result<()> {
+        if let Some(c_strings) = self.str_array_buf.take() {
+            for c_string in c_strings {
+                self.output.write(c_string.as_bytes_with_nul())?;
+                self.output.align(16)?;
+            }
+        };
         Ok(())
     }
 }
@@ -330,8 +299,53 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
     where
         T: ?Sized + Serialize,
     {
-        value.serialize(&mut **self)?;
+        value.serialize(&mut **self)
+    }
+
+    /// In the binary serialization of hkx, we are at this stage writing each field of the structure.
+    /// ptr type writes only the size of C++ `StringPtr` here, since the data pointed to by the pointer
+    /// will be written later.
+    ///
+    /// That is, ptr(x86: 4bytes, x64: 8bytes).
+    fn serialize_string_meta_field<T>(
+        &mut self,
+        _key: &'static str,
+        _value: &T,
+    ) -> Result<(), Self::Error>
+    where
+        T: ?Sized + Serialize,
+    {
+        self.serialize_ulong(0) // ptr size
+    }
+
+    /// In the binary serialization of hkx, we are at this stage writing each field of the structure.
+    /// ptr type writes only the size of C++ `Array` here, since the data pointed to by the pointer
+    /// will be written later.
+    ///
+    /// That is, ptr(x86: 12bytes, x64: 16bytes).
+    fn serialize_array_meta_field<V, T>(&mut self, _key: &'static str, value: V) -> Result<()>
+    where
+        V: AsRef<[T]> + Serialize,
+        T: Serialize,
+    {
+        let _array_start_pos = self.output.position() as usize; // TODO: local_fixup
+
+        let size = value.as_ref().len() as u32;
+        self.serialize_ulong(0)?; // ptr size
+        self.serialize_uint32(size)?; // array size
+        self.serialize_uint32(size | 0x80 << 24)?; // capacity | flags
         Ok(())
+    }
+
+    fn serialize_string_field<T>(
+        &mut self,
+        _key: &'static str,
+        value: &T,
+    ) -> Result<(), Self::Error>
+    where
+        T: ?Sized + Serialize,
+    {
+        value.serialize(&mut **self)
     }
 
     fn serialize_array_field<V, T>(&mut self, _key: &'static str, value: V) -> Result<()>
@@ -339,12 +353,9 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         V: AsRef<[T]> + Serialize,
         T: Serialize,
     {
-        let size = value.as_ref().len() as u32;
-        self.serialize_ulong(0)?; // ptr size
-        self.serialize_uint32(size)?; // array size
-        self.serialize_uint32(size | 0x80 << 24)?; // capacity | flags
-        value.serialize(&mut **self)?;
-        Ok(())
+        // The data pointed to by the Array pointer (`T* m_data`) must first be aligned 16 bytes before it is written.
+        self.output.align(16)?;
+        value.serialize(&mut **self)
     }
 
     /// Even if it is skipped on XML, it is not skipped because it exists in binary data.
@@ -355,11 +366,31 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         value.serialize(&mut **self)
     }
 
-    fn pad_field<T>(&mut self, pads: &T) -> Result<(), Self::Error>
+    #[inline]
+    fn skip_string_meta_field<T>(&mut self, key: &'static str, value: &T) -> Result<()>
     where
         T: ?Sized + Serialize,
     {
-        pads.serialize(&mut **self)
+        self.serialize_string_meta_field(key, value)
+    }
+
+    #[inline]
+    fn skip_array_meta_field<V, T>(&mut self, key: &'static str, value: V) -> Result<()>
+    where
+        V: AsRef<[T]> + Serialize,
+        T: Serialize,
+    {
+        self.serialize_array_meta_field(key, value)
+    }
+
+    fn pad_field<T>(&mut self, x86_pads: &T, x64_pads: &T) -> Result<(), Self::Error>
+    where
+        T: ?Sized + Serialize,
+    {
+        match self.target_platform.is_x86() {
+            true => x86_pads.serialize(&mut **self),
+            false => x64_pads.serialize(&mut **self),
+        }
     }
 
     fn end(self) -> Result<()> {
@@ -375,11 +406,19 @@ impl<'a> SerializeFlags for &'a mut ByteSerializer {
         Ok(())
     }
 
+    #[inline]
     fn serialize_field<T>(&mut self, _key: &str, _value: &T) -> Result<(), Self::Error>
     where
         T: ?Sized + Serialize,
     {
         Ok(())
+    }
+
+    fn serialize_bits<T>(&mut self, value: &T) -> Result<(), Self::Error>
+    where
+        T: ?Sized + Serialize,
+    {
+        value.serialize(&mut **self)
     }
 
     fn end(self) -> Result<Self::Ok, Self::Error> {
@@ -394,17 +433,26 @@ mod tests {
 
     #[test]
     fn test_serialize() {
+        let hkb_project_string_data = HkbProjectStringData {
+            _name: Some(54.into()),
+            animation_filenames: vec![Some("Characters\\DefaultMale.hkx".into())],
+            behavior_filenames: vec![],
+            character_filenames: vec![],
+            event_names: vec![],
+            animation_path: Some("".into()),
+            behavior_path: Some("".into()),
+            character_path: Some("".into()),
+            full_path_to_source: Some("".into()),
+            root_path: Some("".into()),
+            ..Default::default()
+        };
+
         let classes = vec![
-            Classes::HkbProjectStringData(HkbProjectStringData {
-                _name: Some(54.into()),
-                animation_filenames: vec!["Hi".into(), "Hello".into(), "World".into()],
-                ..Default::default()
-            }),
-            //
-            Classes::AllTypesTestClass(AllTypesTestClass {
-                _name: Some(53.into()),
-                ..Default::default()
-            }),
+            Classes::HkbProjectStringData(hkb_project_string_data),
+            // Classes::AllTypesTestClass(AllTypesTestClass {
+            //     _name: Some(53.into()),
+            //     ..Default::default()
+            // }),
         ];
 
         rhexdump::rhexdump!(to_bytes(&classes).unwrap());

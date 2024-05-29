@@ -126,7 +126,7 @@ pub trait Serialize {
     ///     where
     ///         S: Serializer,
     ///     {
-    ///         let mut s = serializer.serialize_struct("hkDummyClass", Some(50, 0x12345678))?;
+    ///         let mut s = serializer.serialize_struct("hkDummyClass", Some(50.into(), 0x12345678.into()))?;
     ///         s.serialize_field("name", &self.name)?;
     ///         s.serialize_field("age", &self.age)?;
     ///         s.serialize_field("phones", &self.phones)?;
@@ -370,8 +370,24 @@ pub trait SerializeStruct {
     where
         T: ?Sized + Serialize;
 
+    /// Serialize a struct field for `CString` and `StringPtr`.
+    /// -   XML: Same as `serialize_field`.
+    /// - Bytes: Alloc ptr size -> Write String after write all struct fields.
+    ///
+    /// # Reason for method separation
+    /// In Bytes(hkx), this method is separated because the write position of an `Array` and a single `StringPtr` are different.
+    fn serialize_string_meta_field<T>(
+        &mut self,
+        key: &'static str,
+        value: &T,
+    ) -> Result<(), Self::Error>
+    where
+        T: ?Sized + Serialize;
+
     /// Serialize a struct field for array.
-    fn serialize_array_field<V, T>(
+    /// -   XML: add `numelements` attribute to `hkparam` and write vec contents.
+    /// - Bytes: Alloc meta(ptr size + size + capAndFlags) bytes. (x86: 12, x64: 16)
+    fn serialize_array_meta_field<V, T>(
         &mut self,
         key: &'static str,
         value: V,
@@ -380,8 +396,39 @@ pub trait SerializeStruct {
         V: AsRef<[T]> + Serialize,
         T: Serialize;
 
+    /// - XML: Do nothing (because writing has already finished at the meta stage)
+    /// - Bytes: Writes the data to which the pointer points
+    ///
+    /// The default implementation does nothing.
+    #[inline]
+    fn serialize_string_field<T>(&mut self, key: &'static str, value: &T) -> Result<(), Self::Error>
+    where
+        T: ?Sized + Serialize,
+    {
+        let _ = (key, value);
+        Ok(())
+    }
+
+    /// - XML: Do nothing (because writing has already finished at the meta stage)
+    /// - Bytes: Writes the data to which the pointer points.
+    ///
+    /// The default implementation does nothing.
+    #[inline]
+    fn serialize_array_field<V, T>(
+        &mut self,
+        key: &'static str,
+        value: V,
+    ) -> Result<(), Self::Error>
+    where
+        V: AsRef<[T]> + Serialize,
+        T: Serialize,
+    {
+        let _ = (key, value);
+        Ok(())
+    }
+
     /// Process for fields with `SERIALIZE_IGNORED` flag.
-    /// - XML: Replaced by a comment and the actual data is not displayed.
+    /// -   XML: Replaced by a comment and the actual data is not displayed.
     /// - Bytes: the data itself is read/written
     ///
     /// The default implementation does nothing.
@@ -395,15 +442,47 @@ pub trait SerializeStruct {
         Ok(())
     }
 
+    /// Process for fields with `SERIALIZE_IGNORED` flag.
+    /// -   XML: Replaced by a comment and the actual data is not displayed.
+    /// - Bytes: Serialize ptr size of string ptr.
+    ///
+    /// The default implementation same as `skip_field`
+    #[inline]
+    fn skip_string_meta_field<T>(&mut self, key: &'static str, value: &T) -> Result<(), Self::Error>
+    where
+        T: ?Sized + Serialize,
+    {
+        self.skip_field(key, value)
+    }
+
+    /// Process for fields with `SERIALIZE_IGNORED` flag.
+    /// -   XML: Replaced by a comment and the actual data is not displayed.
+    /// - Bytes: Serialize Array meta(ptr size, size and capAndFlags).
+    ///
+    /// The default implementation same as `skip_field`
+    #[inline]
+    fn skip_array_meta_field<V, T>(
+        &mut self,
+        key: &'static str,
+        value: V,
+    ) -> Result<(), Self::Error>
+    where
+        V: AsRef<[T]> + Serialize,
+        T: Serialize,
+    {
+        self.skip_field(key, &value)
+    }
+
     /// Processing for padding to serialize binary data
     ///
     /// The default implementation does nothing.
     #[inline]
-    fn pad_field<T>(&mut self, pads: &T) -> Result<(), Self::Error>
+    fn pad_field<T>(&mut self, x86_pads: &T, x64_pads: &T) -> Result<(), Self::Error>
     where
         T: ?Sized + Serialize,
     {
-        let _ = pads;
+        let _ = x86_pads;
+        let _ = x64_pads;
         Ok(())
     }
 
@@ -420,21 +499,27 @@ pub trait SerializeFlags {
     type Error: Error;
 
     /// Serialization process when the flag is 0bits.
+    ///
+    /// The default implementation does nothing.
+    #[inline]
     fn serialize_empty_bit(&mut self) -> Result<(), Self::Error> {
         Ok(())
     }
 
-    /// Serialize a enum or bit field.
+    /// Serialize a enum or bit field.(Only used by XML serializer.)
     fn serialize_field<T>(&mut self, key: &str, value: &T) -> Result<(), Self::Error>
     where
         T: ?Sized + Serialize;
 
-    /// Indicate that a enum or flag bit has been skipped.
+    /// Serialize all bits of a flag.(Only used by binary serializer.)
     ///
     /// The default implementation does nothing.
     #[inline]
-    fn skip_field(&mut self, key: &'static str) -> Result<(), Self::Error> {
-        let _ = key;
+    fn serialize_bits<T>(&mut self, value: &T) -> Result<(), Self::Error>
+    where
+        T: ?Sized + Serialize,
+    {
+        let _ = value;
         Ok(())
     }
 

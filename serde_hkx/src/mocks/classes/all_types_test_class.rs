@@ -39,7 +39,7 @@ impl Serialize for AllTypesTestClass {
         serializer.serialize_field("class_ptr", &Pointer::new(400))?;
 
         #[rustfmt::skip]
-        serializer.serialize_array_field(
+        serializer.serialize_array_meta_field(
             "should_primitive_array_16_columns",
             &vec![
                  0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15,
@@ -52,10 +52,12 @@ impl Serialize for AllTypesTestClass {
                  0.0,  1.0,  2.0,  3.0,  4.0,  5.0,  6.0,  7.0,  8.0,  9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0,
                 16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0, 28.0, 29.0, 30.0, 31.0,
             ];
-        serializer
-            .serialize_array_field("should_primitive_array_16_columns_if_aligned16", &floats)?;
+        serializer.serialize_array_meta_field(
+            "should_primitive_array_16_columns_if_aligned16",
+            &floats,
+        )?;
 
-        serializer.serialize_array_field(
+        serializer.serialize_array_meta_field(
             "transform_array",
             vec![Transform::default(), Transform::default()],
         )?;
@@ -64,7 +66,7 @@ impl Serialize for AllTypesTestClass {
             shape: Pointer::new(50),
             is_hierarchical_compound: true,
             hkd_shapes_collected: false,
-            child_shape_names: vec!["child".into(), "Hi".into()],
+            child_shape_names: vec![Some("child".into()), Some("Hi".into())],
             child_transforms: vec![
                 Transform::default(),
                 Transform::default(),
@@ -72,10 +74,12 @@ impl Serialize for AllTypesTestClass {
             ],
             ..Default::default()
         };
-        serializer
-            .serialize_array_field("class_array", &vec![hkp_shape_info.clone(), hkp_shape_info])?;
+        serializer.serialize_array_meta_field(
+            "class_array",
+            &vec![hkp_shape_info.clone(), hkp_shape_info],
+        )?;
 
-        serializer.serialize_field("string_ptr", &StringPtr::from("StringPtr"))?;
+        serializer.serialize_field("string_ptr", &Some("StringPtr".into()))?;
 
         serializer.serialize_field("enum", &EventMode::EventModeDefault)?;
         serializer.serialize_field("flags_none_is_0", &FlagValues::FLAGS_NONE)?;

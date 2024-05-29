@@ -9,3 +9,5 @@ pub use class::Class;
 pub use enum_item::{Enum, EnumItem};
 pub use flag_values::FlagValues;
 pub use member::Member;
+
+pub use type_kind::TypeKind;
