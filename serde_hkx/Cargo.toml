@@ -15,6 +15,8 @@ educe = "0.5.11"
 havok_serde = { path = "../crates/havok_serde" }
 havok_types = { path = "../crates/havok_types", features = ["serde"] }
 indexmap = "2.2.6"
+num-derive = "0.4"                                                     # enum to number
+num-traits = "0.2"
 snafu = "0.8.2"                                                        # Define all error patterns(with backtrace)
 static_assertions = "1.1.0"
 zerocopy = "0.7.34"

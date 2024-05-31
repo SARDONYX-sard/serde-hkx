@@ -15,7 +15,7 @@ pub fn generate_havok_class<P: AsRef<Path>>(classes_json_dir: P, _output_dir: P)
     // fs::create_dir_all(&output_dir)?;
 
     //? Tips: Breaking through the lifetime constraint of Cow<'a, str> by caching the ownership type in the first round loop.
-    let mut json_map = IndexMap::new();
+    let mut class_map = IndexMap::new();
     for path in jwalk::WalkDir::new(classes_json_dir) {
         let path = path?.path();
         let path = path.as_path();
@@ -29,12 +29,7 @@ pub fn generate_havok_class<P: AsRef<Path>>(classes_json_dir: P, _output_dir: P)
         let class_name = class_name.to_string_lossy().into_owned();
 
         let json_str = fs::read_to_string(path)?;
-        json_map.insert(class_name, json_str);
-    }
-
-    let mut class_map = IndexMap::new();
-    for (class_name, json_str) in &json_map {
-        let class: Class = serde_json::from_str(json_str)?;
+        let class: Class = serde_json::from_str(&json_str)?;
 
         for member in &class.members {
             if (member.vtype == TypeKind::StringPtr
@@ -47,9 +42,11 @@ pub fn generate_havok_class<P: AsRef<Path>>(classes_json_dir: P, _output_dir: P)
             }
             // dbg!(&member.vtype, &member.vsubtype, &member.size_of_type(8));
         }
-        class_map.insert(class_name.as_str(), class);
+
+        class_map.insert(class_name, class);
     }
 
+    class_map.first();
     Ok(())
 }
 

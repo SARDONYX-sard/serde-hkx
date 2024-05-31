@@ -9,7 +9,8 @@ use havok_types::{
     f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature,
     StringPtr, Transform, Variant, Vector4,
 };
-use std::io::{Cursor, Write as _};
+use std::collections::HashMap;
+use std::io::{Cursor, Write};
 use zerocopy::{BigEndian, LittleEndian};
 
 /// Bytes endianness
@@ -51,8 +52,37 @@ impl Platform {
 pub struct ByteSerializer {
     endian: ByteOrder,
     target_platform: Platform,
+
     /// Bytes
     output: Cursor<Vec<u8>>,
+
+    /// Coordination information to associate a pointer of a pointer type of a field in a class with the data location to which it points.
+    ///
+    /// # Note
+    /// All of these fixups are from the DATA SECTION.
+    local_fixups: Vec<u8>,
+    /// Coordination information to associate the starting point of the class field write with the class name that must be called the class constructor.
+    /// # Note
+    /// All of these fixups are from the DATA SECTION.
+    virtual_fixups: Vec<u8>,
+
+    /// A map that holds the src of global_fixups until the dst of virtual_fixups is known.
+    /// - key: Unique class pointer.(e.g. XML: #0050 -> 50)
+    /// - value: Starting point of the binary for which the pointer class write is requested.
+    ///
+    /// # Note
+    /// All of these fixups are from the DATA SECTION.
+    global_fixups_src_ref: HashMap<Pointer, u32>,
+    /// The `dst` of `global_fixup` is the write start position of `virtual_fixup`.
+    ///
+    /// Therefore, the write start position must be retained.
+    /// The position of dst of global_fixup will be known after all the binary data of all classes are written.
+    /// - key: Unique class pointer.(e.g. XML: #0050 -> 50)
+    /// - value: Starting point where Havok Class binary data is written.
+    ///
+    /// # Note
+    /// All of these fixups are from the DATA SECTION.
+    virtual_fixups_dst_ref: HashMap<Pointer, u32>,
 
     /// Temporary area to deal with pointer types within pointer types.
     ///
@@ -69,6 +99,43 @@ pub struct ByteSerializer {
     /// 3. Write the data pointed to by the pointer of StringPtr.
     /// 4. Do a 16-byte alignment for StringPtr.
     str_array_buf: Option<Vec<std::ffi::CString>>,
+}
+
+impl ByteSerializer {
+    /// Write `global_fixups` of data section bytes to writer.
+    fn write_global_fixups(&mut self) -> Result<()> {
+        for (ptr, g_src) in &self.global_fixups_src_ref {
+            // NOTE: `global_fixup.dst` == `virtual_fixup.src`
+            let g_dst = self.virtual_fixups_dst_ref.get(ptr);
+
+            if let Some(g_dst) = g_dst {
+                match self.endian.is_little() {
+                    true => {
+                        self.output.write_u32::<LittleEndian>(*g_src)?;
+                        self.output.write_u32::<LittleEndian>(*g_dst)?;
+                    }
+                    false => {
+                        self.output.write_u32::<LittleEndian>(*g_src)?;
+                        self.output.write_u32::<LittleEndian>(*g_dst)?;
+                    }
+                }
+            }
+        }
+        Ok(())
+    }
+
+    /// Write all(`local`, `global` and `virtual`) fixups of data section.
+    fn write_fixups(&mut self) -> Result<()> {
+        self.output.write(&self.local_fixups)?;
+        self.output.align(16, 0xff)?;
+
+        self.write_global_fixups()?;
+        self.output.align(16, 0xff)?;
+
+        self.output.write(&self.virtual_fixups)?;
+        self.output.align(16, 0xff)?;
+        Ok(())
+    }
 }
 
 /// Endianness and a common write process that takes into account whether the array is being serialized or not.
@@ -108,6 +175,7 @@ where
 {
     let mut serializer = ByteSerializer::default();
     value.serialize(&mut serializer)?;
+    serializer.write_fixups()?;
     Ok(serializer.output.into_inner())
 }
 
@@ -119,26 +187,31 @@ impl<'a> Serializer for &'a mut ByteSerializer {
     type SerializeStruct = Self;
     type SerializeFlags = Self;
 
+    #[inline]
     fn serialize_void(self, _: ()) -> Result<Self::Ok, Self::Error> {
         Ok(())
     }
 
+    #[inline]
     fn serialize_bool(self, v: bool) -> Result<Self::Ok, Self::Error> {
         self.serialize_uint8(v as u8)?;
         Ok(())
     }
 
+    #[inline]
     /// Assume that the characters are ASCII characters. In that case, u8 is used to fit into 128 characters.
     fn serialize_char(self, v: char) -> Result<Self::Ok, Self::Error> {
         self.serialize_int8(v as i8)?;
         Ok(())
     }
 
+    #[inline]
     fn serialize_int8(self, v: i8) -> Result<Self::Ok, Self::Error> {
         self.output.write_i8(v)?;
         Ok(())
     }
 
+    #[inline]
     fn serialize_uint8(self, v: u8) -> Result<Self::Ok, Self::Error> {
         self.output.write_u8(v)?;
         Ok(())
@@ -167,8 +240,12 @@ impl<'a> Serializer for &'a mut ByteSerializer {
     impl_serialize_math!(serialize_transform, Transform);
 
     /// Pointer(Name attribute on XML) does not exist in bytes data(`.hkx`).
-    fn serialize_pointer(self, v: Pointer) -> Result<Self::Ok, Self::Error> {
-        self.serialize_ulong(v.get() as u64)?;
+    fn serialize_pointer(self, ptr: Pointer) -> Result<Self::Ok, Self::Error> {
+        // Write global_fixup src(write start) position.
+        let start = self.output.position() as u32;
+        self.global_fixups_src_ref.insert(ptr, start);
+
+        self.serialize_ulong(ptr.get() as u64)?;
         Ok(())
     }
 
@@ -176,11 +253,26 @@ impl<'a> Serializer for &'a mut ByteSerializer {
         Ok(self)
     }
 
+    /// This is called in the Havok Class array or HashMap, or in a serializer in a field.
+    /// Classes in the field may be inlined, in which case `class_meta` will be [`None`].
     fn serialize_struct(
         self,
         _name: &'static str,
-        _class_meta: Option<(Pointer, Signature)>,
+        class_meta: Option<(Pointer, Signature)>,
     ) -> Result<Self::SerializeStruct, Self::Error> {
+        // If `class_meta` exists, it is when writing an `hkobject` with the `name` attribute in XML.
+        // This must be written to virtual_fixup so that the constructor can be called.
+        if let Some((ptr, _)) = class_meta {
+            // Write virtual_fixup source position.
+            let start_pos = self.output.position() as u32;
+            match self.endian.is_little() {
+                true => self.virtual_fixups.write_u32::<LittleEndian>(start_pos)?,
+                false => self.virtual_fixups.write_u32::<BigEndian>(start_pos)?,
+            };
+
+            self.virtual_fixups_dst_ref.insert(ptr, start_pos);
+        }
+
         Ok(self)
     }
 
@@ -222,7 +314,12 @@ impl<'a> Serializer for &'a mut ByteSerializer {
     fn serialize_stringptr(self, v: &StringPtr) -> Result<Self::Ok, Self::Error> {
         // Skip if `Option::None`(null pointer).
         if let Some(v) = v {
-            let _local_dst = self.output.position() as usize;
+            // Write local destination position.
+            let start = self.output.position() as u32;
+            match self.endian.is_little() {
+                true => self.local_fixups.write_u32::<LittleEndian>(start)?,
+                false => self.local_fixups.write_u32::<BigEndian>(start)?,
+            };
 
             let c_string = std::ffi::CString::new(v.as_bytes()).map_err(Error::custom)?;
             match self.str_array_buf {
@@ -231,7 +328,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
                     // If it is not a StringPtr inside an Array, it must be written here because the pointers are
                     // not nested and there is no additional overhead.
                     let _ = self.output.write(c_string.as_bytes_with_nul())?;
-                    self.output.align(16)?;
+                    self.output.zero_fill_align(16)?;
                 }
             };
         };
@@ -256,6 +353,9 @@ impl<'a> SerializeSeq for &'a mut ByteSerializer {
         Ok(())
     }
 
+    /// This method is called on HavokClasses array.(Write start)
+    ///
+    /// Therefore, it is necessary to record the write position of this in virtual_fixup.
     fn serialize_class_element<T>(&mut self, value: &T) -> Result<()>
     where
         T: ?Sized + Serialize,
@@ -284,7 +384,7 @@ impl<'a> SerializeSeq for &'a mut ByteSerializer {
         if let Some(c_strings) = self.str_array_buf.take() {
             for c_string in c_strings {
                 self.output.write(c_string.as_bytes_with_nul())?;
-                self.output.align(16)?;
+                self.output.zero_fill_align(16)?;
             }
         };
         Ok(())
@@ -295,6 +395,7 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
     type Ok = ();
     type Error = Error;
 
+    #[inline]
     fn serialize_field<T>(&mut self, _key: &'static str, value: &T) -> Result<()>
     where
         T: ?Sized + Serialize,
@@ -315,6 +416,16 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
     where
         T: ?Sized + Serialize,
     {
+        // Write local_fixup source position,
+        // because it is a pointer type, the position of the pointer and the write position of the data it points
+        // to must be noted in local_fixup.
+        let start_pos = self.output.position() as u32;
+        match self.endian.is_little() {
+            true => self.local_fixups.write_u32::<LittleEndian>(start_pos)?,
+            false => self.local_fixups.write_u32::<BigEndian>(start_pos)?,
+        };
+
+        // Write meta fields
         self.serialize_ulong(0) // ptr size
     }
 
@@ -328,8 +439,16 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         V: AsRef<[T]> + Serialize,
         T: Serialize,
     {
-        let _array_start_pos = self.output.position() as usize; // TODO: local_fixup
+        // Write local_fixup source position,
+        // because it is a pointer type, the position of the pointer and the write position of the data it points
+        // to must be noted in local_fixup.
+        let start_pos = self.output.position() as u32;
+        match self.endian.is_little() {
+            true => self.local_fixups.write_u32::<LittleEndian>(start_pos)?,
+            false => self.local_fixups.write_u32::<BigEndian>(start_pos)?,
+        };
 
+        // Write Array meta field
         let size = value.as_ref().len() as u32;
         self.serialize_ulong(0)?; // ptr size
         self.serialize_uint32(size)?; // array size
@@ -337,6 +456,8 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         Ok(())
     }
 
+    /// Write `T` of `T* m_data`.
+    #[inline]
     fn serialize_string_field<T>(
         &mut self,
         _key: &'static str,
@@ -354,7 +475,7 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         T: Serialize,
     {
         // The data pointed to by the Array pointer (`T* m_data`) must first be aligned 16 bytes before it is written.
-        self.output.align(16)?;
+        self.output.zero_fill_align(16)?;
         value.serialize(&mut **self)
     }
 
@@ -393,6 +514,7 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         }
     }
 
+    #[inline]
     fn end(self) -> Result<()> {
         Ok(())
     }
@@ -401,10 +523,6 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
 impl<'a> SerializeFlags for &'a mut ByteSerializer {
     type Ok = ();
     type Error = Error;
-
-    fn serialize_empty_bit(&mut self) -> Result<(), Self::Error> {
-        Ok(())
-    }
 
     #[inline]
     fn serialize_field<T>(&mut self, _key: &str, _value: &T) -> Result<(), Self::Error>
@@ -421,6 +539,7 @@ impl<'a> SerializeFlags for &'a mut ByteSerializer {
         value.serialize(&mut **self)
     }
 
+    #[inline]
     fn end(self) -> Result<Self::Ok, Self::Error> {
         Ok(())
     }
@@ -449,10 +568,10 @@ mod tests {
 
         let classes = vec![
             Classes::HkbProjectStringData(hkb_project_string_data),
-            // Classes::AllTypesTestClass(AllTypesTestClass {
-            //     _name: Some(53.into()),
-            //     ..Default::default()
-            // }),
+            Classes::AllTypesTestClass(AllTypesTestClass {
+                _name: Some(53.into()),
+                ..Default::default()
+            }),
         ];
 
         rhexdump::rhexdump!(to_bytes(&classes).unwrap());

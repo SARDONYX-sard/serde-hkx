@@ -700,6 +700,8 @@ dependencies = [
  "havok_serde",
  "havok_types",
  "indexmap 2.2.6",
+ "num-derive",
+ "num-traits",
  "rhexdump",
  "snafu",
  "static_assertions",

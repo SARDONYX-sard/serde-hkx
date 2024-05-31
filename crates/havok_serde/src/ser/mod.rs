@@ -171,7 +171,7 @@ pub trait Serializer {
     /// [`serialize_struct`]: #tymethod.serialize_struct
     type SerializeStruct: SerializeStruct<Ok = Self::Ok, Error = Self::Error>;
 
-    /// Type returned from [`serialize_flags`] for serializing the
+    /// Type returned from [`serialize_enum_flags`] for serializing the
     /// content of the struct variant.
     ///
     /// [`serialize_enum_flags`]: #tymethod.serialize_flags
@@ -498,7 +498,7 @@ pub trait SerializeFlags {
     /// Must match the `Error` type of our `Serializer`.
     type Error: Error;
 
-    /// Serialization process when the flag is 0bits.
+    /// Serialization process when the flag is 0bits.(Only used by XML serializer.)
     ///
     /// The default implementation does nothing.
     #[inline]
