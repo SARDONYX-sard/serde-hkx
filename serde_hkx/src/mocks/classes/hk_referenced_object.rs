@@ -1,5 +1,5 @@
-use super::class::*;
 use super::hk_base_object::HkBaseObject;
+use crate::mocks::mock_requires::*;
 
 #[derive(Debug, Clone, Default, PartialEq)]
 pub struct HkReferencedObject {
@@ -24,8 +24,6 @@ pub struct HkReferencedObject {
 impl HavokClass for HkReferencedObject {}
 impl Serialize for HkReferencedObject {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        use havok_serde::ser::SerializeStruct;
-
         let class_meta = self._name.map(|name| (name, Signature::new(0xea7f1d08)));
         let mut serializer = serializer.serialize_struct("hkReferencedObject", class_meta)?;
 

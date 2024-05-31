@@ -1,5 +1,4 @@
-use bitflags::Flags;
-use havok_serde::ser::{Serialize, SerializeFlags, Serializer};
+use super::mock_requires::*;
 
 bitflags::bitflags! {
     /// Bit flags that represented `enum hkFlags<Enum, SizeType>`(C++).

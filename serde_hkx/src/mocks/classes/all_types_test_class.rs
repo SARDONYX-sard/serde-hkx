@@ -1,4 +1,4 @@
-use super::class::*;
+use crate::mocks::mock_requires::*;
 use crate::mocks::{
     classes::{HkReferencedObject, HkpShapeInfo},
     enums::EventMode,
@@ -14,8 +14,6 @@ impl HavokClass for AllTypesTestClass {}
 
 impl Serialize for AllTypesTestClass {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        use havok_serde::ser::SerializeStruct;
-
         let class_meta = self._name.map(|name| (name, Signature::new(0x12345678)));
         let mut serializer = serializer.serialize_struct("AllTypesTestClass", class_meta)?;
 

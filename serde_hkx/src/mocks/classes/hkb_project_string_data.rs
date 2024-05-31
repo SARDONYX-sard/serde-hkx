@@ -1,5 +1,5 @@
-use super::class::*;
 use super::HkReferencedObject;
+use crate::mocks::mock_requires::*;
 
 /// `hkbProjectStringData`
 ///
@@ -79,8 +79,6 @@ pub struct HkbProjectStringData<'a> {
 impl HavokClass for HkbProjectStringData<'_> {}
 impl Serialize for HkbProjectStringData<'_> {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        use havok_serde::ser::SerializeStruct;
-
         let class_meta = self._name.map(|name| (name, Signature::new(0xea7f1d08)));
         let mut serializer = serializer.serialize_struct("hkbProjectStringData", class_meta)?;
 

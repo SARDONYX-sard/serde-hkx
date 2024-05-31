@@ -1,7 +1,9 @@
-use havok_serde::ser::{Serialize, SerializeFlags, Serializer};
+use super::mock_requires::*;
+use num_derive::{FromPrimitive, ToPrimitive};
+use num_traits::ToPrimitive;
 
 #[allow(unused)]
-#[derive(Debug, Clone, Default, PartialEq)]
+#[derive(Debug, Clone, Default, PartialEq, ToPrimitive, FromPrimitive)]
 pub enum EventMode {
     #[default]
     EventModeDefault = 0,
@@ -14,6 +16,7 @@ impl Serialize for EventMode {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         let mut sv = serializer.serialize_enum_flags()?;
 
+        // For XML
         match self {
             EventMode::EventModeDefault => sv.serialize_field("EVENT_MODE_DEFAULT", &0),
             EventMode::EventModeProcessAll => sv.serialize_field("EVENT_MODE_PROCESS_ALL", &1),
@@ -24,6 +27,13 @@ impl Serialize for EventMode {
                 sv.serialize_field("EVENT_MODE_IGNORE_TO_GENERATOR", &3)
             }
         }?;
+
+        // For binary
+        let n = self
+            .to_i8()
+            .ok_or(S::Error::custom("Failed enum to cast number"))?;
+        sv.serialize_bits(&n)?;
+
         sv.end()
     }
 }

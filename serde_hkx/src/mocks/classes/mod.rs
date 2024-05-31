@@ -9,16 +9,7 @@ mod hkb_project_data;
 mod hkb_project_string_data;
 mod hkp_shape_info;
 
-/// Reduce the burden of individual imports by importing a set of types needed to create a havok class structure here.
-mod class {
-    pub use havok_serde::{
-        ser::{Serialize, Serializer},
-        HavokClass,
-    };
-    pub use havok_types::*;
-}
-use class::*;
-
+use crate::mocks::mock_requires::*;
 pub use all_types_test_class::*;
 pub use hk_base_object::*;
 pub use hk_referenced_object::*;
