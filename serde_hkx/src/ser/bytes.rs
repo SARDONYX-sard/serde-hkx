@@ -1,4 +1,6 @@
 //! Bytes Serialization
+use crate::common::bytes::hkx_header::HkxHeader;
+use crate::common::bytes::section_header::SectionHeader;
 use crate::cursor_ext::Align as _;
 use crate::error::{Error, Result};
 use byteorder::WriteBytesExt as _;
@@ -11,7 +13,51 @@ use havok_types::{
 };
 use std::collections::HashMap;
 use std::io::{Cursor, Write};
-use zerocopy::{BigEndian, LittleEndian};
+use zerocopy::{AsBytes, BigEndian, LittleEndian};
+
+/// Serialize to bytes
+pub fn to_bytes<T, O>(value: &T, header: HkxHeader<O>) -> Result<Vec<u8>>
+where
+    T: Serialize,
+    O: zerocopy::ByteOrder,
+{
+    let mut serializer = ByteSerializer::default();
+
+    // 1/6: root header
+    serializer.output.write(header.as_bytes())?;
+
+    // Section headers
+    let section_offset = header.section_offset.get();
+    // 2/6: classnames section header
+    SectionHeader::<O>::write_classnames(&mut serializer.output, section_offset)?;
+    // 3/6: types section header
+    SectionHeader::<O>::write_types(&mut serializer.output, section_offset)?;
+    // 4/6: data section header
+    let fixups_offset_header =
+        SectionHeader::<O>::write_data(&mut serializer.output, section_offset)?;
+
+    // section contents
+    // TODO: 5/6: `__classnames__` section
+    // 6/6:  `__data__` section
+    value.serialize(&mut serializer)?;
+
+    // 7/7: Write fixups_offsets of `__data__` section header.
+    let (local_offset, global_offset, virtual_offset) = serializer.write_fixups()?; // Write local, global and virtual fixups
+
+    // Move back to fixup_offset of `__data__` section header.
+    let exports_offset = serializer.output.position() as u32;
+    serializer.output.set_position(fixups_offset_header);
+
+    // Fixup offsets for `__data__` section header.
+    serializer.output.write_u32::<O>(local_offset)?;
+    serializer.output.write_u32::<O>(global_offset)?;
+    serializer.output.write_u32::<O>(virtual_offset)?;
+    serializer.output.write_u32::<O>(exports_offset)?; // exports offset
+    serializer.output.write_u32::<O>(exports_offset)?; // imports offset
+    serializer.output.write_u32::<O>(exports_offset)?; // end offset
+
+    Ok(serializer.output.into_inner())
+}
 
 /// Bytes endianness
 #[derive(Debug, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -125,16 +171,19 @@ impl ByteSerializer {
     }
 
     /// Write all(`local`, `global` and `virtual`) fixups of data section.
-    fn write_fixups(&mut self) -> Result<()> {
+    fn write_fixups(&mut self) -> Result<(u32, u32, u32)> {
+        let local_offset = self.output.position() as u32;
         self.output.write(&self.local_fixups)?;
         self.output.align(16, 0xff)?;
 
+        let global_offset = self.output.position() as u32;
         self.write_global_fixups()?;
         self.output.align(16, 0xff)?;
 
+        let virtual_offset = self.output.position() as u32;
         self.output.write(&self.virtual_fixups)?;
         self.output.align(16, 0xff)?;
-        Ok(())
+        Ok((local_offset, global_offset, virtual_offset))
     }
 }
 
@@ -166,17 +215,6 @@ macro_rules! impl_serialize_math {
             Ok(())
         }
     };
-}
-
-/// Serialize to bytes
-pub fn to_bytes<T>(value: &T) -> Result<Vec<u8>>
-where
-    T: Serialize,
-{
-    let mut serializer = ByteSerializer::default();
-    value.serialize(&mut serializer)?;
-    serializer.write_fixups()?;
-    Ok(serializer.output.into_inner())
 }
 
 impl<'a> Serializer for &'a mut ByteSerializer {
@@ -574,6 +612,6 @@ mod tests {
             }),
         ];
 
-        rhexdump::rhexdump!(to_bytes(&classes).unwrap());
+        rhexdump::rhexdump!(to_bytes(&classes, HkxHeader::new_skyrim_se()).unwrap());
     }
 }
