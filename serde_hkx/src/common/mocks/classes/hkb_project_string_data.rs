@@ -1,3 +1,5 @@
+use zerocopy::AsBytes;
+
 use super::*;
 
 /// `hkbProjectStringData`
@@ -91,7 +93,7 @@ impl Serialize for HkbProjectStringData<'_> {
         let mut serializer = serializer.serialize_struct("hkbProjectStringData", class_meta)?;
 
         // flattened parent's fields
-        serializer.pad_field(&Pointer::new(0), &Pointer::new(0))?; // hkBaseObject size
+        serializer.pad_field([0; 1].as_slice(), [0; 1].as_slice())?; // hkBaseObject size
         serializer.skip_field("referenceCount", &self.parent.reference_count)?;
         serializer.skip_field("memSizeAndFlags", &self.parent.mem_size_and_flags)?;
         serializer.pad_field(&[0u8; 0].as_slice(), &[0u8; 4].as_slice())?;

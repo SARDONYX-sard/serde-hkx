@@ -20,7 +20,8 @@ impl Serialize for HkBaseObject {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         let class_meta = self._name.map(|name| (name, self.signature()));
         let mut ser = serializer.serialize_struct("hkBaseObject", class_meta)?;
-        ser.pad_field(&Pointer::new(0), &Pointer::new(0))?; // vtable pointer size
+        ser.pad_field([0; 1].as_slice(), [0; 1].as_slice())?; // To vtable ptr size
+
         ser.end()
     }
 }

@@ -42,10 +42,10 @@ impl HavokClass for HkbProjectData {
 impl Serialize for HkbProjectData {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         let class_meta = self._name.map(|name| (name, self.signature()));
-        let mut serializer = serializer.serialize_struct("HkbProjectData", class_meta)?;
+        let mut serializer = serializer.serialize_struct("hkbProjectData", class_meta)?;
 
         // flattened parent's fields
-        serializer.pad_field(&Pointer::new(0), &Pointer::new(0))?; // hkBaseObject size
+        serializer.pad_field([0; 1].as_slice(), [0; 1].as_slice())?; // hkBaseObject size
         serializer.skip_field("referenceCount", &self.parent.reference_count)?;
         serializer.skip_field("memSizeAndFlags", &self.parent.mem_size_and_flags)?;
         serializer.pad_field(&[0u8; 0].as_slice(), &[0u8; 4].as_slice())?;

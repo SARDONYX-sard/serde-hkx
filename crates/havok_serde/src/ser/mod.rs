@@ -479,7 +479,7 @@ pub trait SerializeStruct {
     #[inline]
     fn pad_field<T>(&mut self, x86_pads: &T, x64_pads: &T) -> Result<(), Self::Error>
     where
-        T: ?Sized + Serialize,
+        T: ?Sized + AsRef<[u8]>,
     {
         let _ = x86_pads;
         let _ = x64_pads;
