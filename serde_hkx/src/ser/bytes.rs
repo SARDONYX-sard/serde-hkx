@@ -35,15 +35,12 @@ where
 
     // 2/5: Section headers
     let section_offset = header.section_offset.get();
-    // - classnames section header
     SectionHeader::<O>::write_classnames(&mut serializer.output, section_offset)?;
-    // - types section header
     SectionHeader::<O>::write_types(&mut serializer.output, section_offset)?;
-    // - data section header
-    let fixups_offset = SectionHeader::<O>::write_data(&mut serializer.output)?;
+    let data_fixups_start = SectionHeader::<O>::write_data(&mut serializer.output)?;
 
     // 3/5: section contents
-    // The start position can be determined from the name. This information is needed in `virtual_fixup.name_offset`.
+    // Need `class_starts` to write `virtual_fixups`
     serializer.class_starts = serializer.output.write_classnames_section::<T, O>(value)?;
 
     // Calculate absolute data offset
@@ -63,7 +60,7 @@ where
     let exports_offset = serializer.relative_position()? as u32; // This is where the exports_offset is finally obtained.
 
     // Move back to fixup_offset of `__data__` section header.
-    serializer.output.set_position(fixups_offset);
+    serializer.output.set_position(data_fixups_start);
 
     // 5/5 Write remain Fixup offsets for `__data__` section header.
     serializer
@@ -150,12 +147,14 @@ pub struct ByteSerializer {
     virtual_fixups_ptr_src: HashMap<Pointer, u32>,
 
     // ---- Virtual fixup information
-    // - key: class name
-    // - value: virtual_fixup.src(start position)
+    /// - key: class name
+    /// - value: virtual_fixup.src(start position)
     virtual_fixups_name_src: IndexMap<&'static str, u32>,
-    // This information is needed in `virtual_fixup.name_offset`.
-    // - key: class name
-    // - value: class name start position
+    /// This information is needed in `virtual_fixup.name_offset`.
+    ///
+    /// This is found when writing the `__classnames__` section.
+    /// - key: class name
+    /// - value: class name start position
     class_starts: HashMap<&'static str, u32>,
 
     /// Temporary area to deal with pointer types within pointer types.
@@ -271,9 +270,7 @@ impl ByteSerializer {
 macro_rules! impl_serialize_primitive {
     ($method:ident, $value_type:ty, $write:ident) => {
         fn $method(self, v: $value_type) -> Result<Self::Ok, Self::Error> {
-            let little_endian = self.endian.is_little();
-
-            match little_endian {
+            match self.endian.is_little() {
                 true => self.output.$write::<LittleEndian>(v),
                 false => self.output.$write::<BigEndian>(v),
             }?;
@@ -286,9 +283,7 @@ macro_rules! impl_serialize_primitive {
 macro_rules! impl_serialize_math {
     ($method:ident, $value_type:ty) => {
         fn $method(self, v: &$value_type) -> Result<Self::Ok, Self::Error> {
-            let little_endian = self.endian.is_little();
-
-            match little_endian {
+            match self.endian.is_little() {
                 true => self.output.write(v.to_le_bytes().as_slice()),
                 false => self.output.write(v.to_be_bytes().as_slice()),
             }?;
@@ -317,7 +312,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
     }
 
     #[inline]
-    /// Assume that the characters are ASCII characters. In that case, u8 is used to fit into 128 characters.
+    /// Assume that the characters are ASCII characters`c_char`. In that case, i8 is used to fit into 128 characters.
     fn serialize_char(self, v: char) -> Result<Self::Ok, Self::Error> {
         self.serialize_int8(v as i8)?;
         Ok(())
@@ -541,7 +536,7 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         // to must be noted in local_fixup.
         let local_src = self.relative_position()?;
         #[cfg(feature = "tracing")]
-        tracing::trace!("local_dst = {local_src:#0x})");
+        tracing::trace!("local_src = {local_src:#0x})");
 
         match self.endian.is_little() {
             true => self.local_fixups.write_u32::<LittleEndian>(local_src)?,
@@ -567,7 +562,7 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         // to must be noted in local_fixup.
         let local_src = self.relative_position()?;
         #[cfg(feature = "tracing")]
-        tracing::trace!("local_dst = {local_src:#0x})");
+        tracing::trace!("local_src = {local_src:#0x})");
 
         match self.endian.is_little() {
             true => self.local_fixups.write_u32::<LittleEndian>(local_src)?,
