@@ -1,9 +1,5 @@
-use crate::mocks::mock_requires::*;
-use crate::mocks::{
-    classes::{HkReferencedObject, HkpShapeInfo},
-    enums::EventMode,
-    flags::FlagValues,
-};
+use super::*;
+use crate::common::mocks::{enums::EventMode, flags::FlagValues};
 
 #[derive(Debug, Default)]
 pub struct AllTypesTestClass {

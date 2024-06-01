@@ -462,7 +462,7 @@ impl<'a> SerializeFlags for &'a mut XmlSerializer {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::mocks::classes::*;
+    use crate::common::mocks::classes::*;
 
     #[test]
     fn test_serialize() {

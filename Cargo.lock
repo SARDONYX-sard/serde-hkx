@@ -702,6 +702,7 @@ dependencies = [
  "indexmap 2.2.6",
  "num-derive",
  "num-traits",
+ "pretty_assertions",
  "rhexdump",
  "snafu",
  "static_assertions",

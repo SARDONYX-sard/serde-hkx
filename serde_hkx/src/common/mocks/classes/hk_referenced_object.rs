@@ -1,5 +1,4 @@
-use super::hk_base_object::HkBaseObject;
-use crate::mocks::mock_requires::*;
+use super::*;
 
 #[derive(Debug, Clone, Default, PartialEq)]
 pub struct HkReferencedObject {

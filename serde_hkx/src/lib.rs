@@ -1,10 +1,7 @@
+pub mod common;
 pub mod cursor_ext;
 pub mod error;
-pub mod sections;
 pub mod ser;
-
-#[cfg(test)]
-mod mocks;
 
 /// A facade around all the types we need from the `std`, `core`, and `alloc`
 /// crates. This avoids elaborate import wrangling having to happen in every

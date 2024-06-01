@@ -1,5 +1,4 @@
-use crate::mocks::mock_requires::*;
-use havok_types::{Pointer, StringPtr};
+use super::*;
 
 #[derive(Debug, Clone, Default, PartialEq)]
 pub struct HkRootLevelContainerNamedVariant<'a> {

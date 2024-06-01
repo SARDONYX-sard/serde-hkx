@@ -1,4 +1,4 @@
-use crate::mocks::mock_requires::*;
+use super::*;
 
 #[derive(Debug, Clone, Default, PartialEq)]
 pub struct HkBaseObject {

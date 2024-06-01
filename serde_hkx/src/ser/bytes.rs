@@ -71,7 +71,7 @@ pub struct ByteSerializer {
     /// - value: Starting point of the binary for which the pointer class write is requested.
     ///
     /// # Note
-    /// All of these fixups are from the DATA SECTION.
+    /// These are fixups of the data section.
     global_fixups_src_ref: HashMap<Pointer, u32>,
     /// The `dst` of `global_fixup` is the write start position of `virtual_fixup`.
     ///
@@ -548,7 +548,7 @@ impl<'a> SerializeFlags for &'a mut ByteSerializer {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::mocks::classes::*;
+    use crate::common::mocks::classes::*;
 
     #[test]
     fn test_serialize() {

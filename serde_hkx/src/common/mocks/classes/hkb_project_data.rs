@@ -1,6 +1,5 @@
-use super::HkReferencedObject;
-use crate::mocks::enums::EventMode;
-use crate::mocks::mock_requires::*;
+use super::*;
+use crate::common::mocks::enums::EventMode;
 
 #[derive(Debug, Clone, Default, PartialEq)]
 pub struct HkbProjectData {

@@ -1,6 +1,9 @@
 //! The 48bytes each HKX section header contains metadata information about the HKX file.
 //!
 //! This information is placed immediately after the Hkx header. (In some cases, padding is inserted in between.)
+use std::io::{self, Write as _};
+
+use byteorder::WriteBytesExt;
 use zerocopy::{AsBytes, ByteOrder, FromBytes, FromZeroes, LittleEndian, U32};
 
 /// The 48bytes each HKX section header contains metadata information about the HKX file.
@@ -84,6 +87,70 @@ impl<O: ByteOrder> SectionHeader<O> {
 
         Ok(ref_header)
     }
+
+    /// Create new `__classnames__` section header
+    ///
+    /// - `section_offset`: usually 0xff(ver. hk2010), this case padding is none.
+    pub fn write_classnames(mut writer: impl WriteBytesExt, section_offset: i16) -> io::Result<()> {
+        let section_offset = match section_offset <= 0 {
+            true => 0,
+            false => section_offset as u32,
+        };
+
+        writer.write(b"__classnames__\0\0\0\0\0")?;
+        writer.write_u8(0xff)?; // separator
+        writer.write_u32::<O>(section_offset + 0xd0)?; // absolute_data_start
+
+        // Fixup does not exist in `classnames` section, the same data is written.
+        let fixups_offset = section_offset + 0x90;
+        writer.write_u32::<O>(fixups_offset)?; // local_fixups_offset
+        writer.write_u32::<O>(fixups_offset)?; // global_fixups_offset
+        writer.write_u32::<O>(fixups_offset)?; // virtual_fixups_offset
+        writer.write_u32::<O>(fixups_offset)?; // exports_offset
+        writer.write_u32::<O>(fixups_offset)?; // imports_offset
+        writer.write_u32::<O>(fixups_offset) // end_offset
+    }
+
+    /// Create new `__types__` section header
+    ///
+    /// - `section_offset`: usually 0xff(ver. hk2010), this case padding is none.
+    pub fn write_types(mut writer: impl WriteBytesExt, section_offset: i16) -> io::Result<()> {
+        let section_offset = match section_offset <= 0 {
+            true => 0,
+            false => section_offset as u32,
+        };
+
+        writer.write(b"__types__\0\0\0\0\0\0\0\0\0\0")?;
+        writer.write_u8(0xff)?; // separator
+        writer.write_u32::<O>(section_offset + 0x160)?; // absolute_data_start
+
+        // Fixup does not exist in `types` section, always 0.
+        writer.write([0u8; 24].as_bytes())?;
+        Ok(())
+    }
+
+    /// Create new `__types__` section header
+    ///
+    /// - `section_offset`: usually 0xff(ver. hk2010), this case padding is none.
+    ///
+    /// # Return
+    /// Starting point where `local_fixup_offset`.
+    pub fn write_data(mut writer: &mut [u8], section_offset: i16) -> io::Result<usize> {
+        let section_offset = match section_offset <= 0 {
+            true => 0,
+            false => section_offset as u32,
+        };
+
+        writer.write(b"__data__\0\0\0\0\0\0\0\0\0\0\0")?;
+        writer.write_u8(0xff)?; // separator
+        writer.write_u32::<O>(section_offset + 0x160)?; // absolute_data_start
+
+        let local_fixup_start = writer.len();
+        // The fixups offset in the data section is temporarily set to 0 because it will be known after the data section is written.
+        writer.write([0u8; 24].as_bytes())?;
+
+        Ok(local_fixup_start) // Return index for later writing.
+    }
 }
 
 // Must be 48bytes.
@@ -140,12 +207,12 @@ Offsets:
 }
 
 /// Result for [`SectionHeader`]
-type Result<T, E = SectionHeaderError> = core::result::Result<T, E>;
+type Result<T, E = Error> = core::result::Result<T, E>;
 
 /// HKX Section header Error
 #[derive(Debug, snafu::Snafu)]
 #[snafu(visibility(pub))]
-pub enum SectionHeaderError {
+pub enum Error {
     /// Binary data is interpreted as a section header, but it was less than 48bytes.
     #[snafu(display(
         "Binary data is interpreted as a section header, but it was less than 48bytes."
