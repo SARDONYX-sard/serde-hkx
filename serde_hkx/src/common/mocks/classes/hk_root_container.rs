@@ -27,7 +27,11 @@ impl Serialize for HkRootLevelContainer<'_> {
         let class_meta = self._name.map(|name| (name, Signature::new(0xea7f1d08)));
         let mut serializer = serializer.serialize_struct("HkRootLevelContainer", class_meta)?;
 
+        // For XML & binary
         serializer.serialize_array_meta_field("namedVariants", &self.named_variants)?;
+
+        // For binary
+        serializer.serialize_array_field("namedVariants", &self.named_variants)?;
         serializer.end()
     }
 }

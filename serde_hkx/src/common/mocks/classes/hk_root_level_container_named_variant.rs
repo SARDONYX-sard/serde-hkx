@@ -40,9 +40,14 @@ impl Serialize for HkRootLevelContainerNamedVariant<'_> {
         let mut serializer =
             serializer.serialize_struct("hkRootLevelContainerNamedVariant", class_meta)?;
 
+        // For XML & Binary
+        serializer.serialize_string_meta_field("name", &self.name)?;
+        serializer.serialize_string_meta_field("className", &self.class_name)?;
+        serializer.serialize_field("variant", &self.variant)?;
+
+        // For binary
         serializer.serialize_field("name", &self.name)?;
         serializer.serialize_field("className", &self.class_name)?;
-        serializer.serialize_field("variant", &self.variant)?;
         serializer.end()
     }
 }

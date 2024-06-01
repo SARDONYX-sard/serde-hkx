@@ -31,7 +31,7 @@ pub struct HkbProjectData {
 
 impl HavokClass for HkbProjectData {
     fn name(&self) -> &'static CStr {
-        c"hkbProjectStringData"
+        c"hkbProjectData"
     }
 
     fn signature(&self) -> Signature {
@@ -44,9 +44,17 @@ impl Serialize for HkbProjectData {
         let class_meta = self._name.map(|name| (name, self.signature()));
         let mut serializer = serializer.serialize_struct("HkbProjectData", class_meta)?;
 
+        // flattened parent's fields
+        serializer.pad_field(&Pointer::new(0), &Pointer::new(0))?; // hkBaseObject size
+        serializer.skip_field("referenceCount", &self.parent.reference_count)?;
+        serializer.skip_field("memSizeAndFlags", &self.parent.mem_size_and_flags)?;
+        serializer.pad_field(&[0u8; 0].as_slice(), &[0u8; 4].as_slice())?;
+
         serializer.serialize_field("worldUpWS", &self.world_up_ws)?;
         serializer.serialize_field("stringData", &self.string_data)?;
         serializer.serialize_field("defaultEventMode", &self.default_event_mode)?;
+
+        serializer.pad_field(&[0u8; 11].as_slice(), &[0u8; 7].as_slice())?; // tailing alignment for struct
         serializer.end()
     }
 }

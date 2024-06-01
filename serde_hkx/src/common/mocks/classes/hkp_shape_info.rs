@@ -69,12 +69,17 @@ impl Serialize for HkpShapeInfo<'_> {
         serializer.skip_field("referenceCount", &self.parent.reference_count)?;
         serializer.skip_field("memSizeAndFlags", &self.parent.mem_size_and_flags)?;
 
+        // For XML & binary
         serializer.serialize_field("shape", &self.shape)?;
         serializer.serialize_field("isHierarchicalCompound", &self.is_hierarchical_compound)?;
         serializer.serialize_field("hkdShapesCollected", &self.hkd_shapes_collected)?;
         serializer.serialize_array_meta_field("childShapeNames", &self.child_shape_names)?;
         serializer.serialize_array_meta_field("childTransforms", &self.child_transforms)?;
         serializer.serialize_field("transform", &self.transform)?;
+
+        // For binary
+        serializer.serialize_array_field("childShapeNames", &self.child_shape_names)?;
+        serializer.serialize_array_field("childTransforms", &self.child_transforms)?;
 
         serializer.end()
     }
