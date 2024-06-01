@@ -1,4 +1,4 @@
-use std::{fs, io};
+use std::{fs, io, path::Path};
 use tracing::{
     level_filters::LevelFilter,
     subscriber::{set_default, DefaultGuard},
@@ -40,7 +40,7 @@ impl LoggerBuilder {
     /// # Examples
     ///
     /// ```
-    /// let builder = LoggerBuilder::new();
+    /// let builder =  tracing_easy::builder::LoggerBuilder::new();
     /// ```
     pub fn new() -> Self {
         LoggerBuilder {
@@ -57,6 +57,7 @@ impl LoggerBuilder {
     ///
     /// # Examples
     /// ```
+    /// use tracing_easy::builder::LoggerBuilder;
     /// let builder = LoggerBuilder::new().test_name("my_test");
     /// ```
     ///
@@ -68,13 +69,21 @@ impl LoggerBuilder {
         Ok(self)
     }
 
+    /// Write log to arbitrary file.
+    ///
+    /// # Examples
+    /// ```
+    /// std::fs::create_dir_all("../logs").expect("Failed to create directory");
+    /// let builder =  tracing_easy::builder::LoggerBuilder::new().file("../logs/test.log");
+    /// ```
+    pub fn file<P: AsRef<Path>>(mut self, path: P) -> Self {
+        self.output_file = Some(path.as_ref().to_string_lossy().to_string());
+        self
+    }
+
     /// Enables or disables standard I/O output for the logger.
     ///
     /// When enabled, log output will also be written to stdout with ANSI colors.
-    ///
-    /// # Arguments
-    ///
-    /// * `with_stdio` - A boolean indicating whether to enable stdout output.
     ///
     /// # Examples
     ///
@@ -97,6 +106,8 @@ impl LoggerBuilder {
     /// # Examples
     ///
     /// ```
+    /// use tracing::metadata::LevelFilter;
+    /// use tracing_easy::builder::LoggerBuilder;
     /// let builder = LoggerBuilder::new().filter(LevelFilter::DEBUG);
     /// ```
     pub fn filter(mut self, filter: LevelFilter) -> Self {
@@ -116,11 +127,15 @@ impl LoggerBuilder {
     /// # Examples
     ///
     /// ```
+    /// use tracing::metadata::LevelFilter;
+    /// use tracing_easy::builder::LoggerBuilder;
+    ///
     /// let (worker_guard, default_guard) = LoggerBuilder::new()
     ///     .test_name("my_test")
-    ///     .stdio(true)
+    ///     .expect("Failed to create log directory")
+    ///     .stdio()
     ///     .filter(LevelFilter::DEBUG)
-    ///     .build()?;
+    ///     .build().expect("Failed to build builder");
     /// ```
     pub fn build(self) -> io::Result<(Option<WorkerGuard>, DefaultGuard)> {
         let (worker_guard, default_guard) = match self.output_file {
