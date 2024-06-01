@@ -2,7 +2,7 @@
 use crate::common::bytes::hkx_header::HkxHeader;
 use crate::common::bytes::section_header::SectionHeader;
 use crate::cursor_ext::{Align as _, HavokWrite};
-use crate::error::{Error, Result};
+use crate::error::{Error, Result, SubAbsOverflowSnafu};
 use byteorder::WriteBytesExt as _;
 use havok_serde::ser::{
     Error as _, Serialize, SerializeFlags, SerializeSeq, SerializeStruct, Serializer,
@@ -12,10 +12,10 @@ use havok_types::{
     f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature,
     StringPtr, Transform, Variant, Vector4,
 };
+use snafu::ensure;
 use std::collections::HashMap;
 use std::io::{Cursor, Write};
 use zerocopy::{AsBytes, BigEndian, LittleEndian};
-
 
 // TODO: If we have the classnames information at deserialization time, we can reuse it and may not need this loop. If that happens, you should create another method such as `to_bytes_with_cache`.
 /// Serialize to bytes
@@ -48,20 +48,22 @@ where
         ..=0 => 0,
         others => others as u32,
     };
-    let abs_data_offset = section_offset + serializer.output.position() as u32;
+    serializer.abs_data_offset = section_offset + serializer.output.position() as u32;
 
     // - `__data__` section
     value.serialize(&mut serializer)?;
 
     // 4/5: Write fixups_offsets of `__data__` section header.
     let (local_offset, global_offset, virtual_offset) = serializer.write_fixups()?; // Write local, global and virtual fixups
-    let exports_offset = serializer.output.position() as u32; // This is where the exports_offset is finally obtained.
+    let exports_offset = serializer.relative_position()? as u32; // This is where the exports_offset is finally obtained.
 
     // Move back to fixup_offset of `__data__` section header.
     serializer.output.set_position(fixups_offset);
 
     // 5/5 Write remain Fixup offsets for `__data__` section header.
-    serializer.output.write_u32::<O>(abs_data_offset)?;
+    serializer
+        .output
+        .write_u32::<O>(serializer.abs_data_offset)?;
     serializer.output.write_u32::<O>(local_offset)?;
     serializer.output.write_u32::<O>(global_offset)?;
     serializer.output.write_u32::<O>(virtual_offset)?;
@@ -115,6 +117,8 @@ pub struct ByteSerializer {
     /// Bytes
     output: Cursor<Vec<u8>>,
 
+    abs_data_offset: u32,
+
     /// Coordination information to associate a pointer of a pointer type of a field in a class with the data location to which it points.
     ///
     /// # Note
@@ -161,6 +165,21 @@ pub struct ByteSerializer {
 }
 
 impl ByteSerializer {
+    /// Get the position relative to the start of the `__data__` section.
+    #[inline]
+    fn relative_position(&self) -> Result<u32> {
+        let position = self.output.position() as u32;
+        ensure!(
+            position >= self.abs_data_offset,
+            SubAbsOverflowSnafu {
+                position,
+                abs_data_offset: self.abs_data_offset
+            }
+        );
+
+        Ok(position - self.abs_data_offset)
+    }
+
     /// Write `global_fixups` of data section bytes to writer.
     fn write_global_fixups(&mut self) -> Result<()> {
         for (ptr, g_src) in &self.global_fixups_src_ref {
@@ -185,15 +204,15 @@ impl ByteSerializer {
 
     /// Write all(`local`, `global` and `virtual`) fixups of data section.
     fn write_fixups(&mut self) -> Result<(u32, u32, u32)> {
-        let local_offset = self.output.position() as u32;
+        let local_offset = self.relative_position()?;
         self.output.write(&self.local_fixups)?;
         self.output.align(16, 0xff)?;
 
-        let global_offset = self.output.position() as u32;
+        let global_offset = self.relative_position()?;
         self.write_global_fixups()?;
         self.output.align(16, 0xff)?;
 
-        let virtual_offset = self.output.position() as u32;
+        let virtual_offset = self.relative_position()?;
         self.output.write(&self.virtual_fixups)?;
         self.output.align(16, 0xff)?;
         Ok((local_offset, global_offset, virtual_offset))
@@ -293,10 +312,10 @@ impl<'a> Serializer for &'a mut ByteSerializer {
     /// Pointer(Name attribute on XML) does not exist in bytes data(`.hkx`).
     fn serialize_pointer(self, ptr: Pointer) -> Result<Self::Ok, Self::Error> {
         // Write global_fixup src(write start) position.
-        let start = self.output.position() as u32;
+        let start = self.relative_position()?;
         self.global_fixups_src_ref.insert(ptr, start);
 
-        self.serialize_ulong(ptr.get() as u64)?;
+        self.serialize_ulong(0 as u64)?;
         Ok(())
     }
 
@@ -315,7 +334,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
         // This must be written to virtual_fixup so that the constructor can be called.
         if let Some((ptr, _)) = class_meta {
             // Write virtual_fixup source position.
-            let start_pos = self.output.position() as u32;
+            let start_pos = self.relative_position()?;
             match self.endian.is_little() {
                 true => self.virtual_fixups.write_u32::<LittleEndian>(start_pos)?,
                 false => self.virtual_fixups.write_u32::<BigEndian>(start_pos)?,
@@ -365,11 +384,11 @@ impl<'a> Serializer for &'a mut ByteSerializer {
     fn serialize_stringptr(self, v: &StringPtr) -> Result<Self::Ok, Self::Error> {
         // Skip if `Option::None`(null pointer).
         if let Some(v) = v {
-            // Write local destination position.
-            let start = self.output.position() as u32;
+            let local_dst = self.relative_position()?;
+            dbg!(format!("{:#0x})", local_dst));
             match self.endian.is_little() {
-                true => self.local_fixups.write_u32::<LittleEndian>(start)?,
-                false => self.local_fixups.write_u32::<BigEndian>(start)?,
+                true => self.local_fixups.write_u32::<LittleEndian>(local_dst)?,
+                false => self.local_fixups.write_u32::<BigEndian>(local_dst)?,
             };
 
             let c_string = std::ffi::CString::new(v.as_bytes()).map_err(Error::custom)?;
@@ -404,6 +423,7 @@ impl<'a> SerializeSeq for &'a mut ByteSerializer {
         Ok(())
     }
 
+    #[inline]
     /// This method is called on HavokClasses array.(Write start)
     ///
     /// Therefore, it is necessary to record the write position of this in virtual_fixup.
@@ -414,6 +434,7 @@ impl<'a> SerializeSeq for &'a mut ByteSerializer {
         value.serialize(&mut **self)
     }
 
+    #[inline]
     fn serialize_math_element<T>(&mut self, value: &T) -> Result<()>
     where
         T: ?Sized + Serialize,
@@ -421,6 +442,7 @@ impl<'a> SerializeSeq for &'a mut ByteSerializer {
         value.serialize(&mut **self)
     }
 
+    #[inline]
     fn serialize_string_element<T>(&mut self, value: &T) -> Result<()>
     where
         T: ?Sized + Serialize,
@@ -470,10 +492,11 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         // Write local_fixup source position,
         // because it is a pointer type, the position of the pointer and the write position of the data it points
         // to must be noted in local_fixup.
-        let start_pos = self.output.position() as u32;
+        let local_src = self.relative_position()?;
+        dbg!(format!("{:#0x})", local_src));
         match self.endian.is_little() {
-            true => self.local_fixups.write_u32::<LittleEndian>(start_pos)?,
-            false => self.local_fixups.write_u32::<BigEndian>(start_pos)?,
+            true => self.local_fixups.write_u32::<LittleEndian>(local_src)?,
+            false => self.local_fixups.write_u32::<BigEndian>(local_src)?,
         };
 
         // Write meta fields
@@ -493,10 +516,12 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         // Write local_fixup source position,
         // because it is a pointer type, the position of the pointer and the write position of the data it points
         // to must be noted in local_fixup.
-        let start_pos = self.output.position() as u32;
+        let local_src = self.relative_position()?;
+        dbg!(format!("{:#0x})", local_src));
+
         match self.endian.is_little() {
-            true => self.local_fixups.write_u32::<LittleEndian>(start_pos)?,
-            false => self.local_fixups.write_u32::<BigEndian>(start_pos)?,
+            true => self.local_fixups.write_u32::<LittleEndian>(local_src)?,
+            false => self.local_fixups.write_u32::<BigEndian>(local_src)?,
         };
 
         // Write Array meta field
@@ -599,12 +624,30 @@ impl<'a> SerializeFlags for &'a mut ByteSerializer {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::common::mocks::classes::*;
+    use crate::common::mocks::{classes::*, enums::EventMode};
 
     #[test]
     fn test_serialize() {
+        let hk_root_level_container = HkRootLevelContainer {
+            _name: Some(50.into()),
+            named_variants: vec![HkRootLevelContainerNamedVariant {
+                _name: None,
+                name: Some("HkbProjectData".into()),
+                class_name: Some("HkbProjectData".into()),
+                variant: Pointer::new(51),
+            }],
+        };
+
+        let hkb_project_data = HkbProjectData {
+            _name: Some(52.into()),
+            world_up_ws: Vector4::new(0.0, 0.0, 1.0, 0.0),
+            string_data: Pointer::new(52),
+            default_event_mode: EventMode::EventModeIgnoreFromGenerator,
+            ..Default::default()
+        };
+
         let hkb_project_string_data = HkbProjectStringData {
-            _name: Some(54.into()),
+            _name: Some(53.into()),
             animation_filenames: vec![Some("Characters\\DefaultMale.hkx".into())],
             behavior_filenames: vec![],
             character_filenames: vec![],
@@ -613,16 +656,18 @@ mod tests {
             behavior_path: Some("".into()),
             character_path: Some("".into()),
             full_path_to_source: Some("".into()),
-            root_path: Some("".into()),
+            root_path: None,
             ..Default::default()
         };
 
         let classes = vec![
+            Classes::HkRootLevelContainer(hk_root_level_container),
+            Classes::HkbProjectData(hkb_project_data),
             Classes::HkbProjectStringData(hkb_project_string_data),
-            Classes::AllTypesTestClass(AllTypesTestClass {
-                _name: Some(53.into()),
-                ..Default::default()
-            }),
+            // Classes::AllTypesTestClass(AllTypesTestClass {
+            //     _name: Some(53.into()),
+            //     ..Default::default()
+            // }),
         ];
 
         rhexdump::rhexdump!(to_bytes(&classes, HkxHeader::new_skyrim_se()).unwrap());

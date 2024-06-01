@@ -11,6 +11,10 @@ pub enum Error {
         msg: String,
     },
 
+    /// Relative position cannot be obtained because abs is larger than {position}.
+    /// This indicates that the value of `absolute_data_offset` in the header is wrong.
+    SubAbsOverflowError { position: u64, abs_data_offset: u32 },
+
     /// Invalid utf8 error
     #[snafu(transparent)]
     Utf8Error {
