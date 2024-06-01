@@ -110,6 +110,9 @@ impl<O: ByteOrder> SectionHeader<O> {
     /// Create new `__classnames__` section header
     ///
     /// - `section_offset`: usually 0xff(ver. hk2010), this case padding is none.
+    ///
+    /// # Tips
+    /// Here, some data values are determined by taking advantage of the fact that the section header is of fixed length size for the sake of speed.
     pub fn write_classnames(mut writer: impl WriteBytesExt, section_offset: i16) -> io::Result<()> {
         let section_offset = match section_offset <= 0 {
             true => 0,
@@ -133,6 +136,9 @@ impl<O: ByteOrder> SectionHeader<O> {
     /// Create new `__types__` section header
     ///
     /// - `section_offset`: usually 0xff(ver. hk2010), this case padding is none.
+    ///
+    /// # Tips
+    /// Here, some data values are determined by taking advantage of the fact that the section header is of fixed length size for the sake of speed.
     pub fn write_types(mut writer: impl WriteBytesExt, section_offset: i16) -> io::Result<()> {
         let section_offset = match section_offset <= 0 {
             true => 0,
@@ -153,25 +159,22 @@ impl<O: ByteOrder> SectionHeader<O> {
     /// - `section_offset`: usually 0xff(ver. hk2010), this case padding is none.
     ///
     /// # Return
-    /// Starting point where fixup_offsets.
+    /// (Starting point where fixup_offsets, `absolute_data_start`)
     ///
     /// At this point the fixups have not yet been written correctly. (They are occupied by 0).
     ///
     /// The reason for this is that the fixups offsets is unknown at the time the `section_header` is written.
     /// so when you finish writing `__data__` section and the offset is known, use that start position to write it.
-    pub fn write_data(writer: &mut Cursor<Vec<u8>>, section_offset: i16) -> io::Result<u64> {
-        let section_offset = match section_offset <= 0 {
-            true => 0,
-            false => section_offset as u32,
-        };
-
+    ///
+    /// # Tips
+    /// Here, some data values are determined by taking advantage of the fact that the section header is of fixed length size for the sake of speed.
+    pub fn write_data(writer: &mut Cursor<Vec<u8>>) -> io::Result<u64> {
         writer.write(b"__data__\0\0\0\0\0\0\0\0\0\0\0")?;
         writer.write_u8(0xff)?; // separator
-        writer.write_u32::<O>(section_offset + 0x160)?; // absolute_data_start
 
         let fixup_offset_start = writer.position();
         // The fixups offset in the data section is temporarily set to 0 because it will be known after the data section is written.
-        writer.write([0u8; 24].as_bytes())?;
+        writer.write([0u8; 28].as_bytes())?;
 
         Ok(fixup_offset_start) // Return index for later writing.
     }
@@ -319,14 +322,13 @@ mod tests {
     #[test]
     fn test_write_data() {
         let mut buffer = Cursor::new(Vec::new());
-        let offset = SectionHeader::<LittleEndian>::write_data(&mut buffer, 0).unwrap();
+        SectionHeader::<LittleEndian>::write_data(&mut buffer).unwrap();
         let written = buffer.into_inner();
 
         assert_eq!(written.len(), 48);
         assert_eq!(&written[0..19], b"__data__\0\0\0\0\0\0\0\0\0\0\0");
         assert_eq!(written[19], 0xff);
-        assert_eq!(offset, 24);
-        assert_eq!(&written[24..48], &[0; 24]);
+        assert_eq!(&written[20..48], &[0; 28]);
     }
 
     #[test]

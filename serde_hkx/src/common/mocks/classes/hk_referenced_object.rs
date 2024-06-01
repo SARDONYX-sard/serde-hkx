@@ -20,10 +20,19 @@ pub struct HkReferencedObject {
     pub reference_count: i16,
 }
 
-impl HavokClass for HkReferencedObject {}
+impl HavokClass for HkReferencedObject {
+    fn name(&self) -> &'static CStr {
+        c"hkReferencedObject"
+    }
+
+    fn signature(&self) -> Signature {
+        Signature::new(0xea7f1d08)
+    }
+}
+
 impl Serialize for HkReferencedObject {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        let class_meta = self._name.map(|name| (name, Signature::new(0xea7f1d08)));
+        let class_meta = self._name.map(|name| (name, self.signature()));
         let mut serializer = serializer.serialize_struct("hkReferencedObject", class_meta)?;
 
         serializer.skip_field("referenceCount", &self.reference_count)?;

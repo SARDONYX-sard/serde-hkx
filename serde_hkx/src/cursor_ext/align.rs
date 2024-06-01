@@ -8,6 +8,8 @@ pub trait Align {
 
     /// Alignment of binary data in Cursor with arbitrary byte data.
     fn align(&mut self, align: usize, byte: u8) -> io::Result<()>;
+
+    fn fill_until(&mut self, target_pos: u64, byte: u8) -> io::Result<()>;
 }
 
 impl Align for Cursor<Vec<u8>> {
@@ -38,6 +40,23 @@ impl Align for Cursor<Vec<u8>> {
             let padding_bytes = vec![byte; padding];
             self.write_all(&padding_bytes)?;
         }
+        Ok(())
+    }
+
+    fn fill_until(&mut self, target_pos: u64, byte: u8) -> io::Result<()> {
+        let current_pos = self.position();
+        if target_pos < current_pos {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidInput,
+                "Target position is before the current position",
+            ));
+        }
+
+        let num_bytes_to_write = (target_pos - current_pos) as usize;
+        let buffer = vec![byte; num_bytes_to_write];
+        self.write_all(&buffer)?;
+        self.set_position(target_pos);
+
         Ok(())
     }
 }

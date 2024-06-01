@@ -12,7 +12,16 @@ pub struct HkRootLevelContainer<'a> {
     pub named_variants: Vec<HkRootLevelContainerNamedVariant<'a>>,
 }
 
-impl HavokClass for HkRootLevelContainer<'_> {}
+impl HavokClass for HkRootLevelContainer<'_> {
+    fn name(&self) -> &'static CStr {
+        c"HkRootLevelContainer"
+    }
+
+    fn signature(&self) -> Signature {
+        Signature::new(0xea7f1d08)
+    }
+}
+
 impl Serialize for HkRootLevelContainer<'_> {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         let class_meta = self._name.map(|name| (name, Signature::new(0xea7f1d08)));

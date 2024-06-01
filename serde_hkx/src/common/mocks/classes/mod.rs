@@ -19,6 +19,7 @@ pub use hkb_project_data::*;
 pub use hkb_project_string_data::*;
 pub use hkp_shape_info::*;
 
+#[derive(Debug, Clone, PartialEq)]
 pub enum Classes<'a> {
     AllTypesTestClass(AllTypesTestClass),
     HkBaseObject(HkBaseObject),
@@ -31,7 +32,34 @@ pub enum Classes<'a> {
     HkpShapeInfo(HkpShapeInfo<'a>),
 }
 
-impl HavokClass for Classes<'_> {}
+impl HavokClass for Classes<'_> {
+    fn name(&self) -> &'static CStr {
+        match &self {
+            Classes::AllTypesTestClass(class) => class.name(),
+            Classes::HkBaseObject(class) => class.name(),
+            Classes::HkbProjectData(class) => class.name(),
+            Classes::HkbProjectStringData(class) => class.name(),
+            Classes::HkReferencedObject(class) => class.name(),
+            Classes::HkRootLevelContainer(class) => class.name(),
+            Classes::HkRootLevelContainerNamedVariant(class) => class.name(),
+            Classes::HkpShapeInfo(class) => class.name(),
+        }
+    }
+
+    fn signature(&self) -> Signature {
+        match &self {
+            Classes::AllTypesTestClass(class) => class.signature(),
+            Classes::HkBaseObject(class) => class.signature(),
+            Classes::HkbProjectData(class) => class.signature(),
+            Classes::HkbProjectStringData(class) => class.signature(),
+            Classes::HkReferencedObject(class) => class.signature(),
+            Classes::HkRootLevelContainer(class) => class.signature(),
+            Classes::HkRootLevelContainerNamedVariant(class) => class.signature(),
+            Classes::HkpShapeInfo(class) => class.signature(),
+        }
+    }
+}
+
 impl<'a> Serialize for Classes<'a> {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
@@ -42,7 +70,6 @@ impl<'a> Serialize for Classes<'a> {
             Classes::HkReferencedObject(class) => class.serialize(serializer),
             Classes::HkRootLevelContainer(class) => class.serialize(serializer),
             Classes::HkRootLevelContainerNamedVariant(class) => class.serialize(serializer),
-
             Classes::HkpShapeInfo(class) => class.serialize(serializer),
         }
     }

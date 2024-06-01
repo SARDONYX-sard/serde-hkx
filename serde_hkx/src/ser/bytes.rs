@@ -1,12 +1,13 @@
 //! Bytes Serialization
 use crate::common::bytes::hkx_header::HkxHeader;
 use crate::common::bytes::section_header::SectionHeader;
-use crate::cursor_ext::Align as _;
+use crate::cursor_ext::{Align as _, HavokWrite};
 use crate::error::{Error, Result};
 use byteorder::WriteBytesExt as _;
 use havok_serde::ser::{
     Error as _, Serialize, SerializeFlags, SerializeSeq, SerializeStruct, Serializer,
 };
+use havok_serde::HavokClass;
 use havok_types::{
     f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature,
     StringPtr, Transform, Variant, Vector4,
@@ -15,44 +16,56 @@ use std::collections::HashMap;
 use std::io::{Cursor, Write};
 use zerocopy::{AsBytes, BigEndian, LittleEndian};
 
+
+// TODO: If we have the classnames information at deserialization time, we can reuse it and may not need this loop. If that happens, you should create another method such as `to_bytes_with_cache`.
 /// Serialize to bytes
-pub fn to_bytes<T, O>(value: &T, header: HkxHeader<O>) -> Result<Vec<u8>>
+pub fn to_bytes<T, O>(value: &[T], header: HkxHeader<O>) -> Result<Vec<u8>>
 where
-    T: Serialize,
+    T: Serialize + HavokClass,
     O: zerocopy::ByteOrder,
 {
     let mut serializer = ByteSerializer::default();
 
-    // 1/6: root header
+    // 1/5: root header
     serializer.output.write(header.as_bytes())?;
 
-    // Section headers
+    // 2/5: Section headers
     let section_offset = header.section_offset.get();
-    // 2/6: classnames section header
+    // - classnames section header
     SectionHeader::<O>::write_classnames(&mut serializer.output, section_offset)?;
-    // 3/6: types section header
+    // - types section header
     SectionHeader::<O>::write_types(&mut serializer.output, section_offset)?;
-    // 4/6: data section header
-    let fixups_offset_header =
-        SectionHeader::<O>::write_data(&mut serializer.output, section_offset)?;
+    // - data section header
+    let fixups_offset = SectionHeader::<O>::write_data(&mut serializer.output)?;
 
-    // section contents
-    // TODO: 5/6: `__classnames__` section
-    // 6/6:  `__data__` section
+    // 3/5: section contents
+    serializer.output.write_classnames_section::<T, O>(value)?;
+
+    // Calculate absolute data offset
+    // - The position after the `classnames__` section write is the starting point of the data section, which is the abs_offset itself.
+    //   Therefore, abs_offset must be calculated at this point.
+    let section_offset = match header.section_offset.get() {
+        ..=0 => 0,
+        others => others as u32,
+    };
+    let abs_data_offset = section_offset + serializer.output.position() as u32;
+
+    // - `__data__` section
     value.serialize(&mut serializer)?;
 
-    // 7/7: Write fixups_offsets of `__data__` section header.
+    // 4/5: Write fixups_offsets of `__data__` section header.
     let (local_offset, global_offset, virtual_offset) = serializer.write_fixups()?; // Write local, global and virtual fixups
+    let exports_offset = serializer.output.position() as u32; // This is where the exports_offset is finally obtained.
 
     // Move back to fixup_offset of `__data__` section header.
-    let exports_offset = serializer.output.position() as u32;
-    serializer.output.set_position(fixups_offset_header);
+    serializer.output.set_position(fixups_offset);
 
-    // Fixup offsets for `__data__` section header.
+    // 5/5 Write remain Fixup offsets for `__data__` section header.
+    serializer.output.write_u32::<O>(abs_data_offset)?;
     serializer.output.write_u32::<O>(local_offset)?;
     serializer.output.write_u32::<O>(global_offset)?;
     serializer.output.write_u32::<O>(virtual_offset)?;
-    serializer.output.write_u32::<O>(exports_offset)?; // exports offset
+    serializer.output.write_u32::<O>(exports_offset)?;
     serializer.output.write_u32::<O>(exports_offset)?; // imports offset
     serializer.output.write_u32::<O>(exports_offset)?; // end offset
 

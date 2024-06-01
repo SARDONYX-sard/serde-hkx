@@ -29,10 +29,19 @@ pub struct HkbProjectData {
     pub default_event_mode: EventMode,
 }
 
-impl HavokClass for HkbProjectData {}
+impl HavokClass for HkbProjectData {
+    fn name(&self) -> &'static CStr {
+        c"hkbProjectStringData"
+    }
+
+    fn signature(&self) -> Signature {
+        Signature::new(0xea7f1d08)
+    }
+}
+
 impl Serialize for HkbProjectData {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        let class_meta = self._name.map(|name| (name, Signature::new(0xea7f1d08)));
+        let class_meta = self._name.map(|name| (name, self.signature()));
         let mut serializer = serializer.serialize_struct("HkbProjectData", class_meta)?;
 
         serializer.serialize_field("worldUpWS", &self.world_up_ws)?;

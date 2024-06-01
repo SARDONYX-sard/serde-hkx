@@ -40,6 +40,11 @@ mod lib {
 
     pub use self::core::fmt::Display;
 
+    #[cfg(not(feature = "std"))]
+    pub use core::ffi::CStr;
+    #[cfg(feature = "std")]
+    pub use std::ffi::CStr;
+
     #[cfg(all(feature = "alloc", not(feature = "std")))]
     pub use alloc::vec::Vec;
     #[cfg(feature = "std")]
@@ -51,7 +56,18 @@ mod lib {
 pub mod de;
 pub mod ser;
 
-/// Marker trait whether it is Havok Class or not.
+use havok_types::Signature;
+use lib::*;
+
+/// Trait whether it is Havok Class or not.
 ///
-/// This is used to make the array class (de)serializable.
-pub trait HavokClass {}
+/// # Purpose
+/// This tray exists for the following purposes.
+/// - Writing `__classnames__` sections when creating binary data.
+/// - (De)Serialization process for array classes.
+pub trait HavokClass {
+    /// Get Class name.
+    fn name(&self) -> &'static CStr;
+    /// Get signature.
+    fn signature(&self) -> Signature;
+}

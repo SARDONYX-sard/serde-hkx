@@ -75,10 +75,19 @@ pub struct HkbProjectStringData<'a> {
     pub root_path: StringPtr<'a>,
 }
 
-impl HavokClass for HkbProjectStringData<'_> {}
+impl HavokClass for HkbProjectStringData<'_> {
+    fn name(&self) -> &'static CStr {
+        c"hkbProjectStringData"
+    }
+
+    fn signature(&self) -> Signature {
+        Signature::new(0xea7f1d08)
+    }
+}
+
 impl Serialize for HkbProjectStringData<'_> {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        let class_meta = self._name.map(|name| (name, Signature::new(0xea7f1d08)));
+        let class_meta = self._name.map(|name| (name, self.signature()));
         let mut serializer = serializer.serialize_struct("hkbProjectStringData", class_meta)?;
 
         // flattened parent's fields

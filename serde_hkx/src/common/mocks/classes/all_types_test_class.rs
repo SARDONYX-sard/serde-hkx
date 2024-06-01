@@ -1,16 +1,27 @@
 use super::*;
 use crate::common::mocks::{enums::EventMode, flags::FlagValues};
 
-#[derive(Debug, Default)]
+#[derive(Debug, Clone, Default, PartialEq)]
+
 pub struct AllTypesTestClass {
     pub _name: Option<Pointer>,
 }
 
-impl HavokClass for AllTypesTestClass {}
+impl HavokClass for AllTypesTestClass {
+    #[inline]
+    fn name(&self) -> &'static CStr {
+        c"AllTypesTestClass"
+    }
+
+    #[inline]
+    fn signature(&self) -> Signature {
+        Signature::new(0x12345678)
+    }
+}
 
 impl Serialize for AllTypesTestClass {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        let class_meta = self._name.map(|name| (name, Signature::new(0x12345678)));
+        let class_meta = self._name.map(|name| (name, self.signature()));
         let mut serializer = serializer.serialize_struct("AllTypesTestClass", class_meta)?;
 
         // Serialize fields of parent (flatten)
