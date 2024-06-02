@@ -673,9 +673,8 @@ mod tests {
     use crate::common::mocks::{classes::*, enums::EventMode};
 
     #[test]
+    #[quick_tracing::init]
     fn test_serialize() {
-        let _guard = tracing_easy::init();
-
         let hk_root_level_container = HkRootLevelContainer {
             _name: Some(50.into()),
             named_variants: vec![HkRootLevelContainerNamedVariant {

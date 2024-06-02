@@ -24,10 +24,10 @@ zerocopy = "0.7.34"
 
 
 [dev-dependencies]
-bitflags = "2.4"                                   # To generate flags type
-pretty_assertions = "1.4"                          # Color diff assertion
+bitflags = "2.4"                                           # To generate flags type
+pretty_assertions = "1.4"                                  # Color diff assertion
+quick_tracing = { version = "0.1", features = ["derive"] }
 rhexdump = "0.2.0"
-tracing_easy = { path = "../crates/tracing_easy" } # execute tracing(logger)
 
 [features]
 default = ["std", "tracing"]

@@ -15,7 +15,6 @@ members = [
   "crates/havok_types_derive",
   "crates/havok_types_derive/src/proc_macros",
   "crates/snafu_location_derive",
-  "crates/tracing_easy",
   "serde_hkx",
 ]
 default-members = ["crates/class_generator"]
