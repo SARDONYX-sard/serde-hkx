@@ -154,7 +154,7 @@ impl<O: ByteOrder> SectionHeader<O> {
         Ok(())
     }
 
-    /// Create new `__types__` section header
+    /// Create new `__data__` section header
     ///
     /// - `section_offset`: usually 0xff(ver. hk2010), this case padding is none.
     ///
