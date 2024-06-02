@@ -21,7 +21,8 @@ use std::collections::{HashMap, VecDeque};
 use std::io::{Cursor, Write};
 use zerocopy::{AsBytes, BigEndian, LittleEndian};
 
-// TODO: If we have the classnames information at deserialization time, we can reuse it and may not need this loop. If that happens, you should create another method such as `to_bytes_with_cache`.
+// TODO: It may be possible to cache classnames obtained at deserialization time.
+
 /// Serialize to bytes
 pub fn to_bytes<T, O>(value: &[T], header: HkxHeader<O>) -> Result<Vec<u8>>
 where
@@ -159,9 +160,10 @@ pub struct ByteSerializer {
     virtual_fixups_ptr_src: HashMap<Pointer, u32>,
 
     // ---- Virtual fixup information
-    /// - key: class name
-    /// - value: virtual_fixup.src(start position)
-    virtual_fixups_name_src: IndexMap<&'static str, u32>,
+    /// C++ Class constructor positions map binary temporally buffer.
+    ///
+    /// Finally, write to the data for output.
+    virtual_fixups: Vec<u8>,
     /// This information is needed in `virtual_fixup.name_offset`.
     ///
     /// This is created by writing the `__classnames__` section.
@@ -213,8 +215,11 @@ impl ByteSerializer {
         Ok(())
     }
 
-    /// If determined src & dst, then write with this method.
-    fn write_local_fixup_to_buffer(&mut self, local_dst: u32) -> Result<()> {
+    /// Write a pair of local_fixups to the temporary local_fixups buffer
+    ///
+    /// # Info
+    /// When dst is known, src is already known and can be written.
+    fn write_local_fixup_pair(&mut self, local_dst: u32) -> Result<()> {
         match self.local_fixups_pending.pop_front() {
             Some(local_src) => {
                 #[cfg(feature = "tracing")]
@@ -237,6 +242,9 @@ impl ByteSerializer {
     }
 
     /// Write `global_fixups` of data section bytes to writer.
+    ///
+    /// # Info
+    /// If all virtual_fixups are not obtained, references may not be available?
     fn write_global_fixups(&mut self) -> Result<()> {
         #[cfg(feature = "tracing")]
         {
@@ -270,30 +278,35 @@ impl ByteSerializer {
         Ok(())
     }
 
-    /// Write `virtual_fixups` of data section bytes to writer.
-    fn write_virtual_fixups(&mut self) -> Result<()> {
-        for (class_name, v_src) in &self.virtual_fixups_name_src {
-            if let Some(class_name_offset) = self.class_starts.get(class_name) {
-                #[cfg(feature = "tracing")]
-                tracing::trace!("virtual src: {v_src}, dst: {class_name_offset}");
-
-                match self.endian.is_little() {
-                    true => {
-                        self.output.write_u32::<LittleEndian>(*v_src)?; // src
-                        self.output.write_u32::<LittleEndian>(0)?; // dst_section_index, `__classnames__` section is 0
-                        self.output.write_u32::<LittleEndian>(*class_name_offset)?;
-                        // dst(virtual_fixup.dst)
-                    }
-                    false => {
-                        self.output.write_u32::<BigEndian>(*v_src)?; // src
-                        self.output.write_u32::<BigEndian>(0)?; // dst_section_index, `__classnames__` section is 0
-                        self.output.write_u32::<BigEndian>(*class_name_offset)?;
-                        // dst(virtual_fixup.dst)
-                    }
+    /// Write to temporary virtual_fixup data.
+    ///
+    /// # Info
+    /// Since the `class_name` and its location are known when the `__classnames__` section is written, the pair can be
+    /// written the moment virtual_fixup.src is available.
+    fn write_virtual_fixups_pair(
+        &mut self,
+        class_name: &'static str,
+        virtual_src: u32,
+    ) -> Result<()> {
+        if let Some(class_name_offset) = self.class_starts.get(class_name) {
+            match self.endian.is_little() {
+                true => {
+                    self.virtual_fixups.write_u32::<LittleEndian>(virtual_src)?; // src
+                    self.virtual_fixups.write_u32::<LittleEndian>(0)?; // dst_section_index, `__classnames__` section is 0
+                    self.virtual_fixups
+                        .write_u32::<LittleEndian>(*class_name_offset)?;
+                    // dst(virtual_fixup.dst)
                 }
-            } else {
-                return MissingClassInClassnamesSectionSnafu { class: *class_name }.fail();
+                false => {
+                    self.virtual_fixups.write_u32::<BigEndian>(virtual_src)?; // src
+                    self.virtual_fixups.write_u32::<BigEndian>(0)?; // dst_section_index, `__classnames__` section is 0
+                    self.virtual_fixups
+                        .write_u32::<BigEndian>(*class_name_offset)?;
+                    // dst(virtual_fixup.dst)
+                }
             }
+        } else {
+            return MissingClassInClassnamesSectionSnafu { class_name }.fail();
         }
         Ok(())
     }
@@ -309,7 +322,7 @@ impl ByteSerializer {
         self.output.align(16, 0xff)?;
 
         let virtual_offset = self.relative_position()?;
-        self.write_virtual_fixups()?;
+        self.output.write(&self.virtual_fixups)?;
         self.output.align(16, 0xff)?;
         Ok((local_offset, global_offset, virtual_offset))
     }
@@ -427,9 +440,12 @@ impl<'a> Serializer for &'a mut ByteSerializer {
         class_meta: Option<(Pointer, Signature)>,
     ) -> Result<Self::SerializeStruct, Self::Error> {
         if let Some((ptr, _)) = class_meta {
-            let start_pos = self.relative_position()?; // Write virtual_fixup source position.
-            self.virtual_fixups_ptr_src.insert(ptr, start_pos);
-            self.virtual_fixups_name_src.insert(name, start_pos);
+            let virtual_src = self.relative_position()?; // Write virtual_fixup source position.
+            self.virtual_fixups_ptr_src.insert(ptr, virtual_src); // For global_fixups
+            self.write_virtual_fixups_pair(name, virtual_src)?;
+
+            #[cfg(feature = "tracing")]
+            tracing::trace!(name, virtual_src);
         }
         Ok(self)
     }
@@ -475,7 +491,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
         // Skip if `Option::None`(null pointer).
         if let Some(v) = v {
             let str_dst = self.relative_position()?;
-            self.write_local_fixup_to_buffer(str_dst)?;
+            self.write_local_fixup_pair(str_dst)?;
             #[cfg(feature = "tracing")]
             tracing::trace!(?v, str_dst);
 
@@ -640,7 +656,7 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         if !value.as_ref().is_empty() {
             // The actual data location, i.e., the data position pointed to by ptr. It is local_fixup.dst.
             let array_dst = self.relative_position()?;
-            self.write_local_fixup_to_buffer(array_dst)?;
+            self.write_local_fixup_pair(array_dst)?;
             #[cfg(feature = "tracing")]
             tracing::trace!(array_dst);
         }

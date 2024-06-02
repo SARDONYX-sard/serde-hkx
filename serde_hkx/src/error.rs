@@ -42,9 +42,9 @@ pub enum Error {
 
     /// The constructor class for virtual_fixup did not exist in the class
     /// in the `__classnames__` section written.
-    #[snafu(display("The constructor class for virtual_fixup did not exist in the class in the `__classnames__` section written.: {class}"))]
+    #[snafu(display("The constructor class for virtual_fixup did not exist in the class in the `__classnames__` section written.: {class_name}"))]
     MissingClassInClassnamesSection {
-        class: &'static str,
+        class_name: &'static str,
         /// error location
         #[snafu(implicit)]
         location: snafu::Location,
