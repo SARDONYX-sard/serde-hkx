@@ -19,9 +19,9 @@ impl HavokClass for HkBaseObject {
 impl Serialize for HkBaseObject {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         let class_meta = self._name.map(|name| (name, self.signature()));
-        let mut ser = serializer.serialize_struct("hkBaseObject", class_meta)?;
-        ser.pad_field([0; 1].as_slice(), [0; 1].as_slice())?; // To vtable ptr size
+        let mut serializer = serializer.serialize_struct("hkBaseObject", class_meta)?;
 
-        ser.end()
+        serializer.pad_field([0u8; 4].as_slice(), [0u8; 8].as_slice())?; // hkBaseObject ptr size
+        serializer.end()
     }
 }

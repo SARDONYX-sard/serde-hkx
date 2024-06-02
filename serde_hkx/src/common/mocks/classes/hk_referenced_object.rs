@@ -35,8 +35,10 @@ impl Serialize for HkReferencedObject {
         let class_meta = self._name.map(|name| (name, self.signature()));
         let mut serializer = serializer.serialize_struct("hkReferencedObject", class_meta)?;
 
+        serializer.pad_field([0u8; 4].as_slice(), [0u8; 8].as_slice())?; // hkBaseObject ptr size
         serializer.skip_field("referenceCount", &self.reference_count)?;
         serializer.skip_field("memSizeAndFlags", &self.mem_size_and_flags)?;
+        serializer.pad_field(&[0u8; 0].as_slice(), &[0u8; 4].as_slice())?; // tailing align by ptr size bytes
         serializer.end()
     }
 }

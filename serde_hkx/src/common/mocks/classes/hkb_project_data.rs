@@ -45,7 +45,7 @@ impl Serialize for HkbProjectData {
         let mut serializer = serializer.serialize_struct("hkbProjectData", class_meta)?;
 
         // flattened parent's fields
-        serializer.pad_field([0; 1].as_slice(), [0; 1].as_slice())?; // hkBaseObject size
+        serializer.pad_field([0u8; 4].as_slice(), [0u8; 8].as_slice())?; // hkBaseObject ptr size
         serializer.skip_field("referenceCount", &self.parent.reference_count)?;
         serializer.skip_field("memSizeAndFlags", &self.parent.mem_size_and_flags)?;
         serializer.pad_field(&[0u8; 0].as_slice(), &[0u8; 4].as_slice())?;
@@ -53,7 +53,6 @@ impl Serialize for HkbProjectData {
         serializer.serialize_field("worldUpWS", &self.world_up_ws)?;
         serializer.serialize_field("stringData", &self.string_data)?;
         serializer.serialize_field("defaultEventMode", &self.default_event_mode)?;
-
         serializer.pad_field(&[0u8; 11].as_slice(), &[0u8; 7].as_slice())?; // tailing alignment for struct
         serializer.end()
     }

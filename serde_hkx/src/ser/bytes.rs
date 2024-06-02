@@ -3,8 +3,8 @@ use crate::common::bytes::hkx_header::HkxHeader;
 use crate::common::bytes::section_header::SectionHeader;
 use crate::cursor_ext::{Align as _, HavokWrite};
 use crate::error::{
-    Error, MissingClassInClassnamesSectionSnafu, MissingGlobalFixupClassSnafu, Result,
-    SubAbsOverflowSnafu,
+    Error, MissingClassInClassnamesSectionSnafu, MissingGlobalFixupClassSnafu,
+    MissingLocalFixupsSrcSnafu, Result, SubAbsOverflowSnafu,
 };
 use byteorder::WriteBytesExt as _;
 use havok_serde::ser::{
@@ -17,7 +17,7 @@ use havok_types::{
 };
 use indexmap::IndexMap;
 use snafu::ensure;
-use std::collections::HashMap;
+use std::collections::{HashMap, VecDeque};
 use std::io::{Cursor, Write};
 use zerocopy::{AsBytes, BigEndian, LittleEndian};
 
@@ -66,6 +66,10 @@ where
     serializer
         .output
         .write_u32::<O>(serializer.abs_data_offset)?;
+
+    #[cfg(feature = "tracing")]
+    tracing::trace!(local_offset, global_offset, virtual_offset, exports_offset);
+
     serializer.output.write_u32::<O>(local_offset)?;
     serializer.output.write_u32::<O>(global_offset)?;
     serializer.output.write_u32::<O>(virtual_offset)?;
@@ -121,10 +125,18 @@ pub struct ByteSerializer {
 
     abs_data_offset: u32,
 
+    // ---- local fixup information
+    /// The local_fixup.src is submitted in succession, and dst is found later each time the pointer destination is written.
+    /// The pointer is temporarily stored in this queue until the destination of the pointer is written and dst is found.
+    local_fixups_pending: VecDeque<u32>,
     /// Coordination information to associate a pointer of a pointer type of a field in a class with the data location to which it points.
     ///
     /// # Note
     /// All of these fixups are from the DATA SECTION.
+    ///
+    /// The following are not recorded in `local_fixup`.
+    /// - If `Array<T>` is empty.
+    /// - `CString`, `StringPtr` points to null ptr.
     local_fixups: Vec<u8>,
 
     // ---- Global fixup information
@@ -152,12 +164,12 @@ pub struct ByteSerializer {
     virtual_fixups_name_src: IndexMap<&'static str, u32>,
     /// This information is needed in `virtual_fixup.name_offset`.
     ///
-    /// This is found when writing the `__classnames__` section.
+    /// This is created by writing the `__classnames__` section.
     /// - key: class name
     /// - value: class name start position
     class_starts: HashMap<&'static str, u32>,
 
-    /// Temporary area to deal with pointer types within pointer types.
+    /// Only used to writing `Array<StringPtr>`.
     ///
     /// # Details
     /// During serialization of [`SerializeSeq`], that is, during processing of an array, this will be [`Some`].
@@ -166,11 +178,14 @@ pub struct ByteSerializer {
     /// The exception is `Array<StringPtr>`.
     /// This is a pointer type with a pointer type inside.
     ///
-    /// To write this data, follow these steps:
-    /// 1. Do a 16-byte alignment before starting to write the data in the Array.
-    /// 2. Write the meta information of StringPtr for the length of the Array.
-    /// 3. Write the data pointed to by the pointer of StringPtr.
-    /// 4. Do a 16-byte alignment for StringPtr.
+    /// each `StringPtr` of `Array<StringPtr>` writing steps:
+    ///
+    /// First, Align(16-byte) once.
+    ///
+    /// Next Foreach `StringPtr`:
+    /// 1. Write the meta(0 of Ptr size) of `StringPtr`.
+    /// 2. Write the string of StringPtr.
+    /// 3. Align(16-byte)
     str_array_buf: Option<Vec<std::ffi::CString>>,
 }
 
@@ -188,6 +203,37 @@ impl ByteSerializer {
         );
 
         Ok(position - self.abs_data_offset)
+    }
+
+    /// # Note
+    /// If the src here was previously an Array (i.e. Array<StringPtr>), the data (dst) pointed to
+    /// by the pointer (src) becomes the pointer (dst). Therefore, a flag is used to deal with it.
+    fn push_local_fixup_pending(&mut self, local_src: u32) -> Result<()> {
+        self.local_fixups_pending.push_back(local_src);
+        Ok(())
+    }
+
+    /// If determined src & dst, then write with this method.
+    fn write_local_fixup_to_buffer(&mut self, local_dst: u32) -> Result<()> {
+        match self.local_fixups_pending.pop_front() {
+            Some(local_src) => {
+                #[cfg(feature = "tracing")]
+                tracing::trace!("local_fixup src: {local_src}, dst: {local_dst}");
+
+                match self.endian.is_little() {
+                    true => {
+                        self.local_fixups.write_u32::<LittleEndian>(local_src)?;
+                        self.local_fixups.write_u32::<LittleEndian>(local_dst)?;
+                    }
+                    false => {
+                        self.local_fixups.write_u32::<BigEndian>(local_src)?;
+                        self.local_fixups.write_u32::<BigEndian>(local_dst)?;
+                    }
+                };
+            }
+            None => MissingLocalFixupsSrcSnafu { dst: local_dst }.fail()?,
+        };
+        Ok(())
     }
 
     /// Write `global_fixups` of data section bytes to writer.
@@ -228,6 +274,9 @@ impl ByteSerializer {
     fn write_virtual_fixups(&mut self) -> Result<()> {
         for (class_name, v_src) in &self.virtual_fixups_name_src {
             if let Some(class_name_offset) = self.class_starts.get(class_name) {
+                #[cfg(feature = "tracing")]
+                tracing::trace!("virtual src: {v_src}, dst: {class_name_offset}");
+
                 match self.endian.is_little() {
                     true => {
                         self.output.write_u32::<LittleEndian>(*v_src)?; // src
@@ -394,6 +443,8 @@ impl<'a> Serializer for &'a mut ByteSerializer {
     fn serialize_cstring(self, v: &CString) -> Result<Self::Ok, Self::Error> {
         if let Some(s) = v {
             if s.is_empty() || s == "\u{2400}" {
+                // The written local_fixup.src is not needed because it is null.
+                let _ = self.local_fixups_pending.pop_front();
                 return Ok(());
             };
             self.serialize_stringptr(v)?;
@@ -423,15 +474,10 @@ impl<'a> Serializer for &'a mut ByteSerializer {
     fn serialize_stringptr(self, v: &StringPtr) -> Result<Self::Ok, Self::Error> {
         // Skip if `Option::None`(null pointer).
         if let Some(v) = v {
-            let local_dst = self.relative_position()?;
-
+            let str_dst = self.relative_position()?;
+            self.write_local_fixup_to_buffer(str_dst)?;
             #[cfg(feature = "tracing")]
-            tracing::trace!("local_dst = {local_dst:#0x})");
-
-            match self.endian.is_little() {
-                true => self.local_fixups.write_u32::<LittleEndian>(local_dst)?,
-                false => self.local_fixups.write_u32::<BigEndian>(local_dst)?,
-            };
+            tracing::trace!(?v, str_dst);
 
             let c_string = std::ffi::CString::new(v.as_bytes()).map_err(Error::custom)?;
             match self.str_array_buf {
@@ -443,6 +489,9 @@ impl<'a> Serializer for &'a mut ByteSerializer {
                     self.output.zero_fill_align(16)?;
                 }
             };
+        } else {
+            // The written local_fixup.src is not needed because it is null.
+            let _ = self.local_fixups_pending.pop_front();
         };
         Ok(())
     }
@@ -525,48 +574,38 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
     /// That is, ptr(x86: 4bytes, x64: 8bytes).
     fn serialize_string_meta_field<T>(
         &mut self,
-        _key: &'static str,
+        key: &'static str,
         _value: &T,
     ) -> Result<(), Self::Error>
     where
         T: ?Sized + Serialize,
     {
-        // Write local_fixup source position,
-        // because it is a pointer type, the position of the pointer and the write position of the data it points
-        // to must be noted in local_fixup.
-        let local_src = self.relative_position()?;
+        let str_start = self.relative_position()?;
+        self.push_local_fixup_pending(str_start)?;
         #[cfg(feature = "tracing")]
-        tracing::trace!("local_src = {local_src:#0x})");
-
-        match self.endian.is_little() {
-            true => self.local_fixups.write_u32::<LittleEndian>(local_src)?,
-            false => self.local_fixups.write_u32::<BigEndian>(local_src)?,
-        };
+        tracing::trace!(key, str_start);
 
         // Write meta fields
         self.serialize_ulong(0) // ptr size
     }
 
+    // 0x2c0
     /// In the binary serialization of hkx, we are at this stage writing each field of the structure.
     /// ptr type writes only the size of C++ `Array` here, since the data pointed to by the pointer
     /// will be written later.
     ///
     /// That is, ptr(x86: 12bytes, x64: 16bytes).
-    fn serialize_array_meta_field<V, T>(&mut self, _key: &'static str, value: V) -> Result<()>
+    fn serialize_array_meta_field<V, T>(&mut self, key: &'static str, value: V) -> Result<()>
     where
         V: AsRef<[T]> + Serialize,
         T: Serialize,
     {
-        // Write local_fixup source position,
-        // because it is a pointer type, the position of the pointer and the write position of the data it points
-        // to must be noted in local_fixup.
-        let local_src = self.relative_position()?;
-        #[cfg(feature = "tracing")]
-        tracing::trace!("local_src = {local_src:#0x})");
-
-        match self.endian.is_little() {
-            true => self.local_fixups.write_u32::<LittleEndian>(local_src)?,
-            false => self.local_fixups.write_u32::<BigEndian>(local_src)?,
+        if !value.as_ref().is_empty() {
+            // Ptr type need to pointing data position(local.dst).
+            let array_start = self.relative_position()?;
+            self.local_fixups_pending.push_back(array_start); // as `local_fixup.src`
+            #[cfg(feature = "tracing")]
+            tracing::trace!(key, array_start);
         };
 
         // Write Array meta field
@@ -597,6 +636,15 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
     {
         // The data pointed to by the Array pointer (`T* m_data`) must first be aligned 16 bytes before it is written.
         self.output.zero_fill_align(16)?;
+
+        if !value.as_ref().is_empty() {
+            // The actual data location, i.e., the data position pointed to by ptr. It is local_fixup.dst.
+            let array_dst = self.relative_position()?;
+            self.write_local_fixup_to_buffer(array_dst)?;
+            #[cfg(feature = "tracing")]
+            tracing::trace!(array_dst);
+        }
+
         value.serialize(&mut **self)
     }
 
@@ -695,9 +743,9 @@ mod tests {
 
         let hkb_project_string_data = HkbProjectStringData {
             _name: Some(52.into()),
-            animation_filenames: vec![Some("Characters\\DefaultMale.hkx".into())],
+            animation_filenames: vec![],
             behavior_filenames: vec![],
-            character_filenames: vec![],
+            character_filenames: vec![Some("Characters\\DefaultMale.hkx".into())],
             event_names: vec![],
             animation_path: Some("".into()),
             behavior_path: Some("".into()),

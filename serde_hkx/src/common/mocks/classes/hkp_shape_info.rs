@@ -66,8 +66,10 @@ impl Serialize for HkpShapeInfo<'_> {
         let mut serializer = serializer.serialize_struct("hkpShapeInfo", class_meta)?;
 
         // Serialize fields of parent (flatten)
+        serializer.pad_field([0; 4].as_slice(), [0; 8].as_slice())?; // hkBaseObject ptr size
         serializer.skip_field("referenceCount", &self.parent.reference_count)?;
         serializer.skip_field("memSizeAndFlags", &self.parent.mem_size_and_flags)?;
+        serializer.pad_field(&[0u8; 0].as_slice(), &[0u8; 4].as_slice())?;
 
         // For XML & binary
         serializer.serialize_field("shape", &self.shape)?;

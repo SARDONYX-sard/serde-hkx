@@ -93,7 +93,7 @@ impl Serialize for HkbProjectStringData<'_> {
         let mut serializer = serializer.serialize_struct("hkbProjectStringData", class_meta)?;
 
         // flattened parent's fields
-        serializer.pad_field([0; 1].as_slice(), [0; 1].as_slice())?; // hkBaseObject size
+        serializer.pad_field([0u8; 4].as_slice(), [0u8; 8].as_slice())?; // hkBaseObject ptr size
         serializer.skip_field("referenceCount", &self.parent.reference_count)?;
         serializer.skip_field("memSizeAndFlags", &self.parent.mem_size_and_flags)?;
         serializer.pad_field(&[0u8; 0].as_slice(), &[0u8; 4].as_slice())?;
@@ -108,6 +108,7 @@ impl Serialize for HkbProjectStringData<'_> {
         serializer.serialize_string_meta_field("characterPath", &self.character_path)?;
         serializer.serialize_string_meta_field("fullPathToSource", &self.full_path_to_source)?;
         serializer.skip_string_meta_field("rootPath", &self.root_path)?;
+        // Tailing alignment pads is none. already aligned.
 
         // For pointer type binary.
         serializer.serialize_array_field("animationFilenames", &self.animation_filenames)?;
