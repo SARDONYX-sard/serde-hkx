@@ -687,9 +687,9 @@ dependencies = [
 
 [[package]]
 name = "quick_tracing"
-version = "0.1.4"
+version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6e65c2e37e3ef71cc6e1da93722f2f0d7fd1236ce60087ac45a8f27c93541d02"
+checksum = "ad66124d69ce8125da5c9dacbc92a07b94d12c98003bef061bfdb5bb6d33bcec"
 dependencies = [
  "quick_tracing_derive",
  "tracing",
