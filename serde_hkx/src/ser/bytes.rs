@@ -792,7 +792,7 @@ mod tests {
     use crate::common::mocks::{classes::*, enums::EventMode};
 
     #[test]
-    #[quick_tracing::init(test = "serialize_bytes", stdio = false)]
+    #[quick_tracing::try_init(test = "serialize_bytes")]
     fn test_serialize() -> std::io::Result<()> {
         let hk_root_level_container = HkRootLevelContainer {
             _name: Some(50.into()),
