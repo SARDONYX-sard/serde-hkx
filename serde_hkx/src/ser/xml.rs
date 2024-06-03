@@ -71,89 +71,108 @@ impl<'a> havok_serde::ser::Serializer for &'a mut XmlSerializer {
     type SerializeStruct = Self;
     type SerializeFlags = Self;
 
+    #[inline]
     fn serialize_void(self, _: ()) -> Result<Self::Ok> {
         Ok(())
     }
 
+    #[inline]
     fn serialize_bool(self, v: bool) -> Result<Self::Ok> {
         self.output += if v { "true" } else { "false" };
         Ok(())
     }
 
+    #[inline]
     fn serialize_char(self, v: char) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
+    #[inline]
     fn serialize_int8(self, v: i8) -> Result<Self::Ok> {
         self.serialize_int64(v as i64)
     }
 
+    #[inline]
     fn serialize_uint8(self, v: u8) -> Result<Self::Ok> {
         self.serialize_uint64(v as u64)
     }
 
+    #[inline]
     fn serialize_int16(self, v: i16) -> Result<Self::Ok> {
         self.serialize_int64(v as i64)
     }
 
+    #[inline]
     fn serialize_uint16(self, v: u16) -> Result<Self::Ok> {
         self.serialize_uint64(v as u64)
     }
 
+    #[inline]
     fn serialize_int32(self, v: i32) -> Result<Self::Ok> {
         self.serialize_int64(v as i64)
     }
 
+    #[inline]
     fn serialize_uint32(self, v: u32) -> Result<Self::Ok> {
         self.serialize_uint64(v as u64)
     }
 
+    #[inline]
     fn serialize_int64(self, v: i64) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
+    #[inline]
     fn serialize_uint64(self, v: u64) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
+    #[inline]
     fn serialize_real(self, v: f32) -> Result<Self::Ok> {
         self.output += &format!("{v:.06}");
         Ok(())
     }
 
+    #[inline]
     fn serialize_vector4(self, v: &Vector4) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
+    #[inline]
     fn serialize_quaternion(self, v: &Quaternion) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
+    #[inline]
     fn serialize_matrix3(self, v: &Matrix3) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
+    #[inline]
     fn serialize_rotation(self, v: &Rotation) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
+    #[inline]
     fn serialize_qstransform(self, v: &QsTransform) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
+    #[inline]
     fn serialize_matrix4(self, v: &Matrix4) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
+    #[inline]
     fn serialize_transform(self, v: &Transform) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
@@ -168,6 +187,7 @@ impl<'a> havok_serde::ser::Serializer for &'a mut XmlSerializer {
         Ok(())
     }
 
+    #[inline]
     fn serialize_array(self, _len: Option<usize>) -> Result<Self::SerializeSeq> {
         Ok(self)
     }
@@ -192,31 +212,43 @@ impl<'a> havok_serde::ser::Serializer for &'a mut XmlSerializer {
         Ok(self)
     }
 
+    /// TODO: Ignore the XML notation since it is unclear. (Fortunately this is only used for one class.)
+    #[inline]
     fn serialize_variant(self, v: &Variant) -> Result<Self::Ok> {
         let _ = v;
         Ok(())
     }
 
+    #[inline]
     fn serialize_cstring(self, v: &CString) -> Result<Self::Ok> {
-        self.serialize_stringptr(v)
+        if let Some(s) = v.get_ref() {
+            self.output += s;
+        };
+        Ok(())
     }
 
+    #[inline]
     fn serialize_ulong(self, v: u64) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
+    #[inline]
     fn serialize_enum_flags(self) -> Result<Self::SerializeFlags> {
         Ok(self)
     }
 
+    #[inline]
     fn serialize_half(self, v: f16) -> Result<Self::Ok> {
         self.output += &v.to_string();
         Ok(())
     }
 
+    #[inline]
     fn serialize_stringptr(self, v: &StringPtr) -> Result<Self::Ok> {
-        self.output += &v.as_deref().unwrap_or_default();
+        if let Some(s) = v.get_ref() {
+            self.output += s;
+        };
         Ok(())
     }
 }
@@ -232,11 +264,13 @@ impl XmlSerializer {
     }
 
     /// Increment `self.depth` for indentation.
+    #[inline]
     fn increment_depth(&mut self) {
         self.depth += 1;
     }
 
     /// Decrement `self.depth` for indentation.
+    #[inline]
     fn decrement_depth(&mut self) {
         self.depth -= 1;
     }
@@ -309,12 +343,9 @@ impl<'a> havok_serde::ser::SerializeSeq for &'a mut XmlSerializer {
     /// # XML Examples
     ///
     /// ```xml
-    ///     <hkcstring>StringPtr</hkcstring>
+    ///     <hkcstring>CString</hkcstring>
     /// ```
-    fn serialize_string_element<T>(&mut self, value: &T) -> Result<()>
-    where
-        T: ?Sized + Serialize,
-    {
+    fn serialize_cstring_element(&mut self, value: &CString) -> Result<()> {
         self.indent();
         self.output += "<hkcstring>";
         value.serialize(&mut **self)?;
@@ -322,7 +353,20 @@ impl<'a> havok_serde::ser::SerializeSeq for &'a mut XmlSerializer {
         Ok(())
     }
 
-    // Close the sequence.
+    /// # XML Examples
+    ///
+    /// ```xml
+    ///     <hkcstring>StringPtr</hkcstring>
+    /// ```
+    fn serialize_stringptr_element(&mut self, value: &StringPtr) -> Result<()> {
+        self.indent();
+        self.output += "<hkcstring>";
+        value.serialize(&mut **self)?;
+        self.output += "</hkcstring>\n";
+        Ok(())
+    }
+
+    #[inline]
     fn end(self) -> Result<()> {
         Ok(())
     }
@@ -352,14 +396,17 @@ impl<'a> SerializeStruct for &'a mut XmlSerializer {
         Ok(())
     }
 
-    fn serialize_string_meta_field<T>(
+    #[inline]
+    fn serialize_cstring_meta_field(&mut self, key: &'static str, value: &CString) -> Result<()> {
+        SerializeStruct::serialize_field(self, key, value)
+    }
+
+    #[inline]
+    fn serialize_stringptr_meta_field(
         &mut self,
         key: &'static str,
-        value: &T,
-    ) -> Result<(), Self::Error>
-    where
-        T: ?Sized + Serialize,
-    {
+        value: &StringPtr,
+    ) -> Result<()> {
         SerializeStruct::serialize_field(self, key, value)
     }
 
@@ -435,6 +482,7 @@ impl<'a> SerializeFlags for &'a mut XmlSerializer {
     type Error = Error;
 
     /// e.g. <hkparam>0</hkparam>
+    #[inline]
     fn serialize_empty_bit(&mut self) -> Result<(), Self::Error> {
         self.output += "0";
         Ok(())
@@ -454,6 +502,7 @@ impl<'a> SerializeFlags for &'a mut XmlSerializer {
         Ok(())
     }
 
+    #[inline]
     fn end(self) -> Result<Self::Ok, Self::Error> {
         Ok(())
     }
@@ -469,11 +518,7 @@ mod tests {
         let classes = vec![
             Classes::HkbProjectStringData(HkbProjectStringData {
                 _name: Some(54.into()),
-                animation_filenames: vec![
-                    Some("Hi".into()),
-                    Some("Hello".into()),
-                    Some("World".into()),
-                ],
+                animation_filenames: vec!["Hi".into(), "Hello".into(), "World".into()],
                 ..Default::default()
             }),
             //

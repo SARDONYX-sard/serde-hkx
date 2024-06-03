@@ -103,11 +103,11 @@ impl Serialize for HkbProjectStringData<'_> {
         serializer.serialize_array_meta_field("behaviorFilenames", &self.behavior_filenames)?;
         serializer.serialize_array_meta_field("characterFilenames", &self.character_filenames)?;
         serializer.serialize_array_meta_field("eventNames", &self.event_names)?;
-        serializer.serialize_string_meta_field("animationPath", &self.animation_path)?;
-        serializer.serialize_string_meta_field("behaviorPath", &self.behavior_path)?;
-        serializer.serialize_string_meta_field("characterPath", &self.character_path)?;
-        serializer.serialize_string_meta_field("fullPathToSource", &self.full_path_to_source)?;
-        serializer.skip_string_meta_field("rootPath", &self.root_path)?;
+        serializer.serialize_stringptr_meta_field("animationPath", &self.animation_path)?;
+        serializer.serialize_stringptr_meta_field("behaviorPath", &self.behavior_path)?;
+        serializer.serialize_stringptr_meta_field("characterPath", &self.character_path)?;
+        serializer.serialize_stringptr_meta_field("fullPathToSource", &self.full_path_to_source)?;
+        serializer.skip_stringptr_meta_field("rootPath", &self.root_path)?;
         // Tailing alignment pads is none. already aligned.
 
         // For pointer type binary.
@@ -115,10 +115,10 @@ impl Serialize for HkbProjectStringData<'_> {
         serializer.serialize_array_field("behaviorFilenames", &self.behavior_filenames)?;
         serializer.serialize_array_field("characterFilenames", &self.character_filenames)?;
         serializer.serialize_array_field("eventNames", &self.event_names)?;
-        serializer.serialize_string_field("animationPath", &self.animation_path)?;
-        serializer.serialize_string_field("behaviorPath", &self.behavior_path)?;
-        serializer.serialize_string_field("characterPath", &self.character_path)?;
-        serializer.serialize_string_field("fullPathToSource", &self.full_path_to_source)?;
+        serializer.serialize_stringptr_field("animationPath", &self.animation_path)?;
+        serializer.serialize_stringptr_field("behaviorPath", &self.behavior_path)?;
+        serializer.serialize_stringptr_field("characterPath", &self.character_path)?;
+        serializer.serialize_stringptr_field("fullPathToSource", &self.full_path_to_source)?;
 
         serializer.end()
     }

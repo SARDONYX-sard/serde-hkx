@@ -71,7 +71,7 @@ impl Serialize for AllTypesTestClass {
             shape: Pointer::new(50),
             is_hierarchical_compound: true,
             hkd_shapes_collected: false,
-            child_shape_names: vec![Some("child".into()), Some("Hi".into())],
+            child_shape_names: vec!["child".into(), "Hi".into()],
             child_transforms: vec![
                 Transform::default(),
                 Transform::default(),
@@ -84,7 +84,7 @@ impl Serialize for AllTypesTestClass {
             &vec![hkp_shape_info.clone(), hkp_shape_info],
         )?;
 
-        serializer.serialize_field("string_ptr", &Some("StringPtr".into()))?;
+        serializer.serialize_stringptr_field("string_ptr", &"StringPtr".into())?;
 
         serializer.serialize_field("enum", &EventMode::EventModeDefault)?;
         serializer.serialize_field("flags_none_is_0", &FlagValues::FLAGS_NONE)?;

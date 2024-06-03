@@ -1,49 +1,21 @@
 //! All havok types definitions.
+pub mod cstring;
 pub mod math;
 pub mod pointer;
 pub mod signature;
+pub mod string_ptr;
 pub mod variant;
-
 #[doc(hidden)]
 pub use half;
 
+pub use cstring::*;
 pub use half::f16;
 pub use math::*;
 pub use pointer::*;
 pub use signature::*;
+pub use string_ptr::*;
 pub use variant::*;
 
-use std::borrow::Cow;
-/// - binary data(.hkx): null-terminated string
-/// - XML: `&str`
-///
-/// If it is null (substitute [`Option::None`] in Rust), it will not be written to the binary data.
-///
-/// # Alloc patterns
-/// If `StringPtr` is `&str`
-/// - hkx: [`CStr`] -> xml:  [`str`] => Need alloc: [`String`]
-/// - xml:  [`str`] -> hkx: [`CStr`] => Need alloc: [`CString`]
-/// ---
-/// -  xml: [`str`] -> json: [`str`] => [`str`]
-/// - json: [`str`] ->  xml: [`str`] => [`str`]
-///
-/// [`CStr`]: https://doc.rust-lang.org/stable/core/ffi/c_str/struct.CStr.html
-/// [`CString`]: https://doc.rust-lang.org/stable/alloc/ffi/c_str/struct.CString.html
-pub type StringPtr<'a> = Option<Cow<'a, str>>;
-
-/// - binary data(.hkx): null-terminated string
-/// - XML: `&str`
-///
-/// If it is null (substitute [`Option::None`] in Rust), an empty string or `\u{2400}`,
-/// it will not be written to the binary data.
-///
-/// # Alloc patterns
-/// - hkx: [`CStr`] -> xml:  [`str`] => Need alloc: [`String`]
-/// - xml:  [`str`] -> hkx: [`CStr`] => Need alloc: [`CString`]
-/// ---
-/// -  xml: [`str`] -> json: [`str`] => [`str`]
-/// - json: [`str`] ->  xml: [`str`] => [`str`]
-///
-/// [`CStr`]: https://doc.rust-lang.org/stable/core/ffi/c_str/struct.CStr.html
-/// [`CString`]: https://doc.rust-lang.org/stable/alloc/ffi/c_str/struct.CString.html
-pub type CString<'a> = Option<Cow<'a, str>>;
+mod lib {
+    pub use std::borrow::Cow;
+}

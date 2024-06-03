@@ -5,8 +5,8 @@ use crate::lib::*;
 
 use super::{Serialize, Serializer};
 use havok_types::{
-    f16, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, StringPtr, Transform,
-    Variant, Vector4,
+    f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, StringPtr,
+    Transform, Variant, Vector4,
 };
 
 macro_rules! impl_serialize {
@@ -63,8 +63,7 @@ impl_serialize!(*Pointer, serialize_pointer);
 impl Serialize for &str {
     #[inline]
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        let cow = (*self).into();
-        serializer.serialize_stringptr(&Some(cow))
+        serializer.serialize_stringptr(&StringPtr::from_str(self))
     }
 }
 
@@ -72,6 +71,13 @@ impl Serialize for StringPtr<'_> {
     #[inline]
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         serializer.serialize_stringptr(&self)
+    }
+}
+
+impl Serialize for CString<'_> {
+    #[inline]
+    fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        serializer.serialize_cstring(&self)
     }
 }
 
@@ -164,8 +170,8 @@ macro_rules! impl_serialize_vec {
     };
 }
 
-// impl_serialize_vec!(CString<'_> => serialize_string_element); // Already implemented(By StringPtr).
-impl_serialize_vec!(StringPtr<'_> => serialize_string_element);
+impl_serialize_vec!(StringPtr<'_> => serialize_stringptr_element);
+impl_serialize_vec!(CString<'_> => serialize_cstring_element);
 impl_serialize_vec!(Vector4, Quaternion, Matrix3, Rotation, QsTransform, Matrix4, Transform => serialize_math_element);
 
 // impl for Any ClassT.

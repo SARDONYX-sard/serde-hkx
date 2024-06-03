@@ -316,10 +316,15 @@ pub trait SerializeSeq {
     where
         T: ?Sized + Serialize;
 
-    /// Serialize a string sequence element.(e.g. `CString`, `StringPtr`)
-    fn serialize_string_element<T>(&mut self, value: &T) -> Result<(), Self::Error>
-    where
-        T: ?Sized + Serialize;
+    // # Reason for existence of `cstring` & `stringptr` methods.
+    // - The work on XML is different from bytes and could not be abstracted.
+    // - Creating a combined type of `CString` and `StringPtr` would require cloning in array processing.
+
+    /// Serialize a cstring sequence element.
+    fn serialize_cstring_element(&mut self, value: &CString) -> Result<(), Self::Error>;
+
+    /// Serialize a stringptr sequence element.
+    fn serialize_stringptr_element(&mut self, value: &StringPtr) -> Result<(), Self::Error>;
 
     /// Finish serializing a sequence.
     fn end(self) -> Result<Self::Ok, Self::Error>;
@@ -370,19 +375,29 @@ pub trait SerializeStruct {
     where
         T: ?Sized + Serialize;
 
-    /// Serialize a struct field for `CString` and `StringPtr`.
+    /// Serialize a struct field for `CString`.
     /// -   XML: Same as `serialize_field`.
     /// - Bytes: Alloc ptr size -> Write String after write all struct fields.
     ///
     /// # Reason for method separation
     /// In Bytes(hkx), this method is separated because the write position of an `Array` and a single `StringPtr` are different.
-    fn serialize_string_meta_field<T>(
+    fn serialize_cstring_meta_field(
         &mut self,
         key: &'static str,
-        value: &T,
-    ) -> Result<(), Self::Error>
-    where
-        T: ?Sized + Serialize;
+        value: &CString,
+    ) -> Result<(), Self::Error>;
+
+    /// Serialize a struct field for `StringPtr`.
+    /// -   XML: Same as `serialize_field`.
+    /// - Bytes: Alloc ptr size -> Write String after write all struct fields.
+    ///
+    /// # Reason for method separation
+    /// In Bytes(hkx), this method is separated because the write position of an `Array` and a single `StringPtr` are different.
+    fn serialize_stringptr_meta_field(
+        &mut self,
+        key: &'static str,
+        value: &StringPtr,
+    ) -> Result<(), Self::Error>;
 
     /// Serialize a struct field for array.
     /// -   XML: add `numelements` attribute to `hkparam` and write vec contents.
@@ -397,14 +412,29 @@ pub trait SerializeStruct {
         T: Serialize;
 
     /// - XML: Do nothing (because writing has already finished at the meta stage)
-    /// - Bytes: Writes the data to which the pointer points
+    /// - Bytes: Writes the data to which the pointer points if not null
     ///
     /// The default implementation does nothing.
     #[inline]
-    fn serialize_string_field<T>(&mut self, key: &'static str, value: &T) -> Result<(), Self::Error>
-    where
-        T: ?Sized + Serialize,
-    {
+    fn serialize_cstring_field(
+        &mut self,
+        key: &'static str,
+        value: &CString,
+    ) -> Result<(), Self::Error> {
+        let _ = (key, value);
+        Ok(())
+    }
+
+    /// - XML: Do nothing (because writing has already finished at the meta stage)
+    /// - Bytes: Writes the data to which the pointer points if not null
+    ///
+    /// The default implementation does nothing.
+    #[inline]
+    fn serialize_stringptr_field(
+        &mut self,
+        key: &'static str,
+        value: &StringPtr,
+    ) -> Result<(), Self::Error> {
         let _ = (key, value);
         Ok(())
     }
@@ -448,10 +478,25 @@ pub trait SerializeStruct {
     ///
     /// The default implementation same as `skip_field`
     #[inline]
-    fn skip_string_meta_field<T>(&mut self, key: &'static str, value: &T) -> Result<(), Self::Error>
-    where
-        T: ?Sized + Serialize,
-    {
+    fn skip_cstring_meta_field(
+        &mut self,
+        key: &'static str,
+        value: &CString,
+    ) -> Result<(), Self::Error> {
+        self.skip_field(key, value)
+    }
+
+    /// Process for fields with `SERIALIZE_IGNORED` flag.
+    /// -   XML: Replaced by a comment and the actual data is not displayed.
+    /// - Bytes: Serialize ptr size of string ptr.
+    ///
+    /// The default implementation same as `skip_field`
+    #[inline]
+    fn skip_stringptr_meta_field(
+        &mut self,
+        key: &'static str,
+        value: &StringPtr,
+    ) -> Result<(), Self::Error> {
         self.skip_field(key, value)
     }
 

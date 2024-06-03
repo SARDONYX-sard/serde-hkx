@@ -17,6 +17,7 @@ use havok_types::{
 };
 use indexmap::IndexMap;
 use snafu::ensure;
+use std::borrow::Cow;
 use std::collections::{HashMap, VecDeque};
 use std::io::{Cursor, Write};
 use zerocopy::{AsBytes, BigEndian, LittleEndian};
@@ -58,7 +59,7 @@ where
 
     // 4/5: Write fixups_offsets of `__data__` section header.
     let (local_offset, global_offset, virtual_offset) = serializer.write_fixups()?; // Write local, global and virtual fixups
-    let exports_offset = serializer.relative_position()? as u32; // This is where the exports_offset is finally obtained.
+    let exports_offset = serializer.relative_position()?; // This is where the exports_offset is finally obtained.
 
     // Move back to fixup_offset of `__data__` section header.
     serializer.output.set_position(data_fixups_start);
@@ -326,6 +327,31 @@ impl ByteSerializer {
         self.output.align(16, 0xff)?;
         Ok((local_offset, global_offset, virtual_offset))
     }
+
+    pub fn serialize_cow(&mut self, v: &Option<Cow<'_, str>>) -> Result<()> {
+        // Skip if `Option::None`(null pointer).
+        if let Some(v) = v {
+            let str_dst = self.relative_position()?;
+            self.write_local_fixup_pair(str_dst)?;
+            #[cfg(feature = "tracing")]
+            tracing::trace!(?v, str_dst);
+
+            let c_string = std::ffi::CString::new(v.as_bytes()).map_err(Error::custom)?;
+            match self.str_array_buf {
+                Some(ref mut array_buf) => array_buf.push(c_string),
+                None => {
+                    // If it is not a StringPtr inside an Array, it must be written here because the pointers are
+                    // not nested and there is no additional overhead.
+                    let _ = self.output.write(c_string.as_bytes_with_nul())?;
+                    self.output.zero_fill_align(16)?;
+                }
+            };
+        } else {
+            // The written local_fixup.src is not needed because it is null.
+            let _ = self.local_fixups_pending.pop_front();
+        };
+        Ok(())
+    }
 }
 
 /// Endianness and a common write process that takes into account whether the array is being serialized or not.
@@ -457,13 +483,13 @@ impl<'a> Serializer for &'a mut ByteSerializer {
     }
 
     fn serialize_cstring(self, v: &CString) -> Result<Self::Ok, Self::Error> {
-        if let Some(s) = v {
+        if let Some(s) = v.get_ref() {
             if s.is_empty() || s == "\u{2400}" {
                 // The written local_fixup.src is not needed because it is null.
                 let _ = self.local_fixups_pending.pop_front();
                 return Ok(());
             };
-            self.serialize_stringptr(v)?;
+            self.serialize_cow(v.get_ref())?;
         };
         Ok(())
     }
@@ -488,28 +514,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
     /// In the binary serialization of hkx, this is the actual data writing process beyond
     /// the pointer that is called only after all fields of the structure have been written.
     fn serialize_stringptr(self, v: &StringPtr) -> Result<Self::Ok, Self::Error> {
-        // Skip if `Option::None`(null pointer).
-        if let Some(v) = v {
-            let str_dst = self.relative_position()?;
-            self.write_local_fixup_pair(str_dst)?;
-            #[cfg(feature = "tracing")]
-            tracing::trace!(?v, str_dst);
-
-            let c_string = std::ffi::CString::new(v.as_bytes()).map_err(Error::custom)?;
-            match self.str_array_buf {
-                Some(ref mut array_buf) => array_buf.push(c_string),
-                None => {
-                    // If it is not a StringPtr inside an Array, it must be written here because the pointers are
-                    // not nested and there is no additional overhead.
-                    let _ = self.output.write(c_string.as_bytes_with_nul())?;
-                    self.output.zero_fill_align(16)?;
-                }
-            };
-        } else {
-            // The written local_fixup.src is not needed because it is null.
-            let _ = self.local_fixups_pending.pop_front();
-        };
-        Ok(())
+        self.serialize_cow(v.get_ref())
     }
 }
 
@@ -550,10 +555,13 @@ impl<'a> SerializeSeq for &'a mut ByteSerializer {
     }
 
     #[inline]
-    fn serialize_string_element<T>(&mut self, value: &T) -> Result<()>
-    where
-        T: ?Sized + Serialize,
-    {
+    fn serialize_cstring_element(&mut self, value: &CString) -> Result<()> {
+        self.serialize_ulong(0)?; // ptr size
+        value.serialize(&mut **self)
+    }
+
+    #[inline]
+    fn serialize_stringptr_element(&mut self, value: &StringPtr) -> Result<()> {
         self.serialize_ulong(0)?; // ptr size
         value.serialize(&mut **self)
     }
@@ -583,19 +591,30 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         value.serialize(&mut **self)
     }
 
+    fn serialize_cstring_meta_field(
+        &mut self,
+        key: &'static str,
+        _value: &CString,
+    ) -> Result<(), Self::Error> {
+        let str_start = self.relative_position()?;
+        self.push_local_fixup_pending(str_start)?;
+        #[cfg(feature = "tracing")]
+        tracing::trace!(key, str_start);
+
+        // Write meta fields
+        self.serialize_ulong(0) // ptr size
+    }
+
     /// In the binary serialization of hkx, we are at this stage writing each field of the structure.
     /// ptr type writes only the size of C++ `StringPtr` here, since the data pointed to by the pointer
     /// will be written later.
     ///
     /// That is, ptr(x86: 4bytes, x64: 8bytes).
-    fn serialize_string_meta_field<T>(
+    fn serialize_stringptr_meta_field(
         &mut self,
         key: &'static str,
-        _value: &T,
-    ) -> Result<(), Self::Error>
-    where
-        T: ?Sized + Serialize,
-    {
+        _value: &StringPtr,
+    ) -> Result<(), Self::Error> {
         let str_start = self.relative_position()?;
         self.push_local_fixup_pending(str_start)?;
         #[cfg(feature = "tracing")]
@@ -634,14 +653,21 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
 
     /// Write `T` of `T* m_data`.
     #[inline]
-    fn serialize_string_field<T>(
+    fn serialize_cstring_field(
         &mut self,
         _key: &'static str,
-        value: &T,
-    ) -> Result<(), Self::Error>
-    where
-        T: ?Sized + Serialize,
-    {
+        value: &CString,
+    ) -> Result<(), Self::Error> {
+        value.serialize(&mut **self)
+    }
+
+    /// Write `T` of `T* m_data`.
+    #[inline]
+    fn serialize_stringptr_field(
+        &mut self,
+        _key: &'static str,
+        value: &StringPtr,
+    ) -> Result<(), Self::Error> {
         value.serialize(&mut **self)
     }
 
@@ -673,11 +699,13 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
     }
 
     #[inline]
-    fn skip_string_meta_field<T>(&mut self, key: &'static str, value: &T) -> Result<()>
-    where
-        T: ?Sized + Serialize,
-    {
-        self.serialize_string_meta_field(key, value)
+    fn skip_cstring_meta_field(&mut self, key: &'static str, value: &CString) -> Result<()> {
+        self.serialize_cstring_meta_field(key, value)
+    }
+
+    #[inline]
+    fn skip_stringptr_meta_field(&mut self, key: &'static str, value: &StringPtr) -> Result<()> {
+        self.serialize_stringptr_meta_field(key, value)
     }
 
     #[inline]
@@ -743,8 +771,8 @@ mod tests {
             _name: Some(50.into()),
             named_variants: vec![HkRootLevelContainerNamedVariant {
                 _name: None,
-                name: Some("hkbProjectData".into()),
-                class_name: Some("hkbProjectData".into()),
+                name: "hkbProjectData".into(),
+                class_name: "hkbProjectData".into(),
                 variant: Pointer::new(51),
             }],
         };
@@ -761,13 +789,13 @@ mod tests {
             _name: Some(52.into()),
             animation_filenames: vec![],
             behavior_filenames: vec![],
-            character_filenames: vec![Some("Characters\\DefaultMale.hkx".into())],
+            character_filenames: vec!["Characters\\DefaultMale.hkx".into()],
             event_names: vec![],
-            animation_path: Some("".into()),
-            behavior_path: Some("".into()),
-            character_path: Some("".into()),
-            full_path_to_source: Some("".into()),
-            root_path: None,
+            animation_path: "".into(),
+            behavior_path: "".into(),
+            character_path: "".into(),
+            full_path_to_source: "".into(),
+            root_path: None.into(),
             ..Default::default()
         };
 
