@@ -83,7 +83,7 @@ impl HavokClass for HkbProjectStringData<'_> {
     }
 
     fn signature(&self) -> Signature {
-        Signature::new(0xea7f1d08)
+        Signature::new(0x076ad60a)
     }
 }
 

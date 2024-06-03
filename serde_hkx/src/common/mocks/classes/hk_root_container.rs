@@ -14,18 +14,18 @@ pub struct HkRootLevelContainer<'a> {
 
 impl HavokClass for HkRootLevelContainer<'_> {
     fn name(&self) -> &'static CStr {
-        c"HkRootLevelContainer"
+        c"hkRootLevelContainer"
     }
 
     fn signature(&self) -> Signature {
-        Signature::new(0xea7f1d08)
+        Signature::new(0x2772c11e)
     }
 }
 
 impl Serialize for HkRootLevelContainer<'_> {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         let class_meta = self._name.map(|name| (name, Signature::new(0xea7f1d08)));
-        let mut serializer = serializer.serialize_struct("HkRootLevelContainer", class_meta)?;
+        let mut serializer = serializer.serialize_struct("hkRootLevelContainer", class_meta)?;
 
         // For XML & binary
         serializer.serialize_array_meta_field("namedVariants", &self.named_variants)?;

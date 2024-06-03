@@ -35,7 +35,7 @@ impl HavokClass for HkbProjectData {
     }
 
     fn signature(&self) -> Signature {
-        Signature::new(0xea7f1d08)
+        Signature::new(0x13a39ba7)
     }
 }
 
