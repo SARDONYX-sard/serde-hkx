@@ -24,9 +24,9 @@ zerocopy = "0.7.34"
 
 
 [dev-dependencies]
-bitflags = "2.4"                                           # To generate flags type
-pretty_assertions = "1.4"                                  # Color diff assertion
-quick_tracing = { version = "0.1", features = ["derive"] }
+bitflags = "2.4"                                             # To generate flags type
+pretty_assertions = "1.4"                                    # Color diff assertion
+quick_tracing = { version = "0.1.4", features = ["derive"] }
 rhexdump = "0.2.0"
 
 [features]

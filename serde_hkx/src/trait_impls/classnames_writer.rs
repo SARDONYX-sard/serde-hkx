@@ -1,5 +1,5 @@
 //! Trait that defines a set of dedicated methods for writing Havok Class data.
-use crate::cursor_ext::align::Align as _;
+use crate::trait_impls::align::Align as _;
 use byteorder::WriteBytesExt as _;
 use havok_serde::HavokClass;
 use std::{
@@ -9,7 +9,7 @@ use std::{
 use zerocopy::ByteOrder;
 
 /// Trait that defines a set of dedicated methods for writing Havok Class data.
-pub trait HavokWrite {
+pub trait ClassNamesWriter {
     /// Write classnames section
     fn write_classnames_section<T, O>(
         &mut self,
@@ -20,7 +20,7 @@ pub trait HavokWrite {
         O: ByteOrder;
 }
 
-impl HavokWrite for Cursor<Vec<u8>> {
+impl ClassNamesWriter for Cursor<Vec<u8>> {
     fn write_classnames_section<T, O>(
         &mut self,
         classes: &[T],

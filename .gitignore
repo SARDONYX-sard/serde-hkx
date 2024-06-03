@@ -5,3 +5,5 @@
 
 # Rust build cache
 **/target
+
+**/logs/

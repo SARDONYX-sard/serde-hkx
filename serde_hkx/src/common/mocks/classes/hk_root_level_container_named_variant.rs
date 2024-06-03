@@ -46,8 +46,8 @@ impl Serialize for HkRootLevelContainerNamedVariant<'_> {
         serializer.serialize_field("variant", &self.variant)?;
 
         // For binary
-        serializer.serialize_field("name", &self.name)?;
-        serializer.serialize_field("className", &self.class_name)?;
+        serializer.serialize_stringptr_field("name", &self.name)?;
+        serializer.serialize_stringptr_field("className", &self.class_name)?;
         serializer.end()
     }
 }

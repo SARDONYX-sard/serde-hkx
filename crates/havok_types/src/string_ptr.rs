@@ -5,16 +5,12 @@ use crate::lib::*;
 ///
 /// If it is null (substitute [`Option::None`] in Rust), it will not be written to the binary data.
 ///
-/// # Alloc patterns
-/// If `StringPtr` is `&str`
-/// - hkx: [`CStr`] -> xml:  [`str`] => Need alloc: [`String`]
-/// - xml:  [`str`] -> hkx: [`CStr`] => Need alloc: [`CString`]
-/// ---
-/// -  xml: [`str`] -> json: [`str`] => [`str`]
-/// - json: [`str`] ->  xml: [`str`] => [`str`]
+/// # Deserialization alloc patterns
+/// - hkx(`Vec<u8>` -> [`CStr`]) -> Struct(alloc [`String`]) => Need copy
+/// - xml([`String`]) -> Struct([`str`])                     => non copy
+/// - json: [`String`] -> Struct([`str`])                    => non copy
 ///
 /// [`CStr`]: https://doc.rust-lang.org/stable/core/ffi/c_str/struct.CStr.html
-/// [`CString`]: https://doc.rust-lang.org/stable/alloc/ffi/c_str/struct.CString.html
 #[derive(Debug, Default, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, derive_new::new)]
 pub struct StringPtr<'a> {
     inner: Option<Cow<'a, str>>,
@@ -22,19 +18,41 @@ pub struct StringPtr<'a> {
 
 impl<'a> StringPtr<'a> {
     /// Get inner value.
+    #[inline]
     pub fn into_inner(self) -> Option<Cow<'a, str>> {
         self.inner
     }
 
     /// Get inner ref.
+    #[inline]
     pub fn get_ref(&self) -> &Option<Cow<'a, str>> {
         &self.inner
     }
 
     /// Cast [`str`] with non copying.
+    #[inline]
     pub fn from_str(s: &'a str) -> StringPtr<'a> {
         Self {
             inner: Some(Cow::Borrowed(s)),
+        }
+    }
+
+    /// Null pointer or not?
+    ///
+    /// This indicates that no binary data was present.
+    #[inline]
+    pub fn is_null(&self) -> bool {
+        self.get_ref().is_none()
+    }
+
+    /// Should the data pointed to by the pointer be written to the binary data or not?
+    ///
+    /// This is an invalid value or not.
+    #[inline]
+    pub fn should_write_binary(&self) -> bool {
+        match self.get_ref() {
+            Some(_) => return true,
+            _ => false,
         }
     }
 }

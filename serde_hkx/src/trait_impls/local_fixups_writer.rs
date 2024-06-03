@@ -1,0 +1,23 @@
+use byteorder::WriteBytesExt as _;
+use std::io;
+use zerocopy::{BigEndian, LittleEndian};
+
+pub trait LocalFixupsWriter {
+    /// Write local fixups data
+    fn write_local_fixups(&mut self, src: u32, dst: u32, is_little_endian: bool) -> io::Result<()>;
+}
+
+impl LocalFixupsWriter for Vec<u8> {
+    fn write_local_fixups(&mut self, src: u32, dst: u32, is_little_endian: bool) -> io::Result<()> {
+        match is_little_endian {
+            true => {
+                self.write_u32::<LittleEndian>(src)?;
+                self.write_u32::<LittleEndian>(dst)
+            }
+            false => {
+                self.write_u32::<BigEndian>(src)?;
+                self.write_u32::<BigEndian>(dst)
+            }
+        }
+    }
+}

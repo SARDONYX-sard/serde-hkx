@@ -1,11 +1,11 @@
 //! Bytes Serialization
 use crate::common::bytes::hkx_header::HkxHeader;
 use crate::common::bytes::section_header::SectionHeader;
-use crate::cursor_ext::{Align as _, HavokWrite};
 use crate::error::{
     Error, MissingClassInClassnamesSectionSnafu, MissingGlobalFixupClassSnafu,
     MissingLocalFixupsSrcSnafu, Result, SubAbsOverflowSnafu,
 };
+use crate::trait_impls::{Align as _, ClassNamesWriter, LocalFixupsWriter};
 use byteorder::WriteBytesExt as _;
 use havok_serde::ser::{
     Error as _, Serialize, SerializeFlags, SerializeSeq, SerializeStruct, Serializer,
@@ -18,7 +18,7 @@ use havok_types::{
 use indexmap::IndexMap;
 use snafu::ensure;
 use std::borrow::Cow;
-use std::collections::{HashMap, VecDeque};
+use std::collections::HashMap;
 use std::io::{Cursor, Write};
 use zerocopy::{AsBytes, BigEndian, LittleEndian};
 
@@ -128,9 +128,13 @@ pub struct ByteSerializer {
     abs_data_offset: u32,
 
     // ---- local fixup information
-    /// The local_fixup.src is submitted in succession, and dst is found later each time the pointer destination is written.
-    /// The pointer is temporarily stored in this queue until the destination of the pointer is written and dst is found.
-    local_fixups_pending: VecDeque<u32>,
+    /// - key: struct field name
+    /// - value: local_fixup.src (i.e., the start position where the pointer size is written)
+    local_fixups_name_src: HashMap<&'static str, u32>,
+    /// Temporary standby location in local_fixup.src for iterators such as `Array<CString>`, `Array<StringPtr>`.
+    ///
+    /// A separate temporary save location is reserved in consideration of the possibility that it may be covered by the name of `field`.
+    local_fixups_iter_src: Vec<u32>,
     /// Coordination information to associate a pointer of a pointer type of a field in a class with the data location to which it points.
     ///
     /// # Note
@@ -208,38 +212,46 @@ impl ByteSerializer {
         Ok(position - self.abs_data_offset)
     }
 
-    /// # Note
-    /// If the src here was previously an Array (i.e. Array<StringPtr>), the data (dst) pointed to
-    /// by the pointer (src) becomes the pointer (dst). Therefore, a flag is used to deal with it.
-    fn push_local_fixup_pending(&mut self, local_src: u32) -> Result<()> {
-        self.local_fixups_pending.push_back(local_src);
-        Ok(())
+    /// Write a pair of local_fixups to the temporary local_fixups buffer
+    ///
+    /// # Info
+    /// When dst is known, src is already known and can be written.
+    fn write_local_fixup_pair(&mut self, key: &str, local_dst: u32) -> Result<()> {
+        match self.local_fixups_name_src.get(key) {
+            Some(local_src) => {
+                #[cfg(feature = "tracing")]
+                tracing::trace!(key, local_src, local_dst);
+
+                self.local_fixups.write_local_fixups(
+                    *local_src,
+                    local_dst,
+                    self.endian.is_little(),
+                )?;
+                Ok(())
+            }
+            None => MissingLocalFixupsSrcSnafu { dst: local_dst }.fail()?,
+        }
     }
 
     /// Write a pair of local_fixups to the temporary local_fixups buffer
     ///
     /// # Info
     /// When dst is known, src is already known and can be written.
-    fn write_local_fixup_pair(&mut self, local_dst: u32) -> Result<()> {
-        match self.local_fixups_pending.pop_front() {
+    fn write_iter_local_fixup_pair(&mut self, index: usize, local_dst: u32) -> Result<()> {
+        match self.local_fixups_iter_src.get(index) {
             Some(local_src) => {
                 #[cfg(feature = "tracing")]
-                tracing::trace!("local_fixup src: {local_src}, dst: {local_dst}");
+                tracing::trace!(index, local_src, local_dst);
 
-                match self.endian.is_little() {
-                    true => {
-                        self.local_fixups.write_u32::<LittleEndian>(local_src)?;
-                        self.local_fixups.write_u32::<LittleEndian>(local_dst)?;
-                    }
-                    false => {
-                        self.local_fixups.write_u32::<BigEndian>(local_src)?;
-                        self.local_fixups.write_u32::<BigEndian>(local_dst)?;
-                    }
-                };
+                self.local_fixups.write_local_fixups(
+                    *local_src,
+                    local_dst,
+                    self.endian.is_little(),
+                )?;
+                Ok(())
             }
             None => MissingLocalFixupsSrcSnafu { dst: local_dst }.fail()?,
-        };
-        Ok(())
+        }
     }
 
     /// Write `global_fixups` of data section bytes to writer.
@@ -328,14 +340,10 @@ impl ByteSerializer {
         Ok((local_offset, global_offset, virtual_offset))
     }
 
+    /// Write the internal data pointed to by the pointer of `CString` or `StringPtr`.
     pub fn serialize_cow(&mut self, v: &Option<Cow<'_, str>>) -> Result<()> {
         // Skip if `Option::None`(null pointer).
         if let Some(v) = v {
-            let str_dst = self.relative_position()?;
-            self.write_local_fixup_pair(str_dst)?;
-            #[cfg(feature = "tracing")]
-            tracing::trace!(?v, str_dst);
-
             let c_string = std::ffi::CString::new(v.as_bytes()).map_err(Error::custom)?;
             match self.str_array_buf {
                 Some(ref mut array_buf) => array_buf.push(c_string),
@@ -346,9 +354,6 @@ impl ByteSerializer {
                     self.output.zero_fill_align(16)?;
                 }
             };
-        } else {
-            // The written local_fixup.src is not needed because it is null.
-            let _ = self.local_fixups_pending.pop_front();
         };
         Ok(())
     }
@@ -430,13 +435,10 @@ impl<'a> Serializer for &'a mut ByteSerializer {
     impl_serialize_primitive!(serialize_real, f32, write_f32);
 
     impl_serialize_math!(serialize_vector4, Vector4);
-
     impl_serialize_math!(serialize_quaternion, Quaternion);
     impl_serialize_math!(serialize_matrix3, Matrix3);
-
     impl_serialize_math!(serialize_rotation, Rotation);
     impl_serialize_math!(serialize_matrix4, Matrix4);
-
     impl_serialize_math!(serialize_qstransform, QsTransform);
     impl_serialize_math!(serialize_transform, Transform);
 
@@ -450,6 +452,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
         Ok(())
     }
 
+    #[inline]
     fn serialize_array(self, _len: Option<usize>) -> Result<Self::SerializeSeq, Self::Error> {
         Ok(self)
     }
@@ -466,32 +469,25 @@ impl<'a> Serializer for &'a mut ByteSerializer {
         class_meta: Option<(Pointer, Signature)>,
     ) -> Result<Self::SerializeStruct, Self::Error> {
         if let Some((ptr, _)) = class_meta {
-            let virtual_src = self.relative_position()?; // Write virtual_fixup source position.
-            self.virtual_fixups_ptr_src.insert(ptr, virtual_src); // For global_fixups
-            self.write_virtual_fixups_pair(name, virtual_src)?;
+            let virtual_src = self.relative_position()?;
 
-            #[cfg(feature = "tracing")]
-            tracing::trace!(name, virtual_src);
+            self.virtual_fixups_ptr_src.insert(ptr, virtual_src); // For global_fixups
+                                                                  // At this point, one set of values for virtual_fixup is known.
+            self.write_virtual_fixups_pair(name, virtual_src)?;
         }
         Ok(self)
     }
 
+    #[inline]
     fn serialize_variant(self, v: &Variant) -> Result<Self::Ok, Self::Error> {
         self.serialize_ulong(v.object as u64)?;
         self.serialize_ulong(v.class as u64)?;
         Ok(())
     }
 
+    #[inline]
     fn serialize_cstring(self, v: &CString) -> Result<Self::Ok, Self::Error> {
-        if let Some(s) = v.get_ref() {
-            if s.is_empty() || s == "\u{2400}" {
-                // The written local_fixup.src is not needed because it is null.
-                let _ = self.local_fixups_pending.pop_front();
-                return Ok(());
-            };
-            self.serialize_cow(v.get_ref())?;
-        };
-        Ok(())
+        self.serialize_cow(v.get_ref())
     }
 
     fn serialize_ulong(self, v: u64) -> Result<Self::Ok, Self::Error> {
@@ -502,10 +498,12 @@ impl<'a> Serializer for &'a mut ByteSerializer {
         Ok(())
     }
 
+    #[inline]
     fn serialize_enum_flags(self) -> Result<Self::SerializeFlags, Self::Error> {
         Ok(self)
     }
 
+    #[inline]
     fn serialize_half(self, v: f16) -> Result<Self::Ok, Self::Error> {
         self.serialize_uint16(v.to_bits())?;
         Ok(())
@@ -513,6 +511,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
 
     /// In the binary serialization of hkx, this is the actual data writing process beyond
     /// the pointer that is called only after all fields of the structure have been written.
+    #[inline]
     fn serialize_stringptr(self, v: &StringPtr) -> Result<Self::Ok, Self::Error> {
         self.serialize_cow(v.get_ref())
     }
@@ -535,10 +534,10 @@ impl<'a> SerializeSeq for &'a mut ByteSerializer {
         Ok(())
     }
 
-    #[inline]
     /// This method is called on HavokClasses array.(Write start)
     ///
     /// Therefore, it is necessary to record the write position of this in virtual_fixup.
+    #[inline]
     fn serialize_class_element<T>(&mut self, value: &T) -> Result<()>
     where
         T: ?Sized + Serialize,
@@ -556,25 +555,44 @@ impl<'a> SerializeSeq for &'a mut ByteSerializer {
 
     #[inline]
     fn serialize_cstring_element(&mut self, value: &CString) -> Result<()> {
+        let iter_src = self.relative_position()?;
+        self.local_fixups_iter_src.push(iter_src);
         self.serialize_ulong(0)?; // ptr size
+
+        // At this point, the data pointed to by the pointer is written to the temporary save
+        // area. (Merged into output at the end of the array.
+        if self.str_array_buf.is_none() {
+            self.str_array_buf = Some(Vec::new());
+        }
         value.serialize(&mut **self)
     }
 
     #[inline]
     fn serialize_stringptr_element(&mut self, value: &StringPtr) -> Result<()> {
+        let iter_src = self.relative_position()?;
+        self.local_fixups_iter_src.push(iter_src);
         self.serialize_ulong(0)?; // ptr size
+
+        // At this point, the data pointed to by the pointer is written to the temporary save
+        // area. (Merged into output at the end of the array.
+        if self.str_array_buf.is_none() {
+            self.str_array_buf = Some(Vec::new());
+        }
         value.serialize(&mut **self)
     }
 
     /// In Byte Serializer, [`SerializeSeq`] is called only when writing the data pointed to by the pointer.
     /// When the data has been written, if it is a StringPtr, the actual state of the data must be written here.
     fn end(self) -> Result<()> {
-        if let Some(c_strings) = self.str_array_buf.take() {
-            for c_string in c_strings {
-                self.output.write(c_string.as_bytes_with_nul())?;
+        if let Some(strings) = self.str_array_buf.take() {
+            for (index, string) in strings.iter().enumerate() {
+                self.write_iter_local_fixup_pair(index, self.relative_position()?)?;
+
+                self.output.write(string.as_bytes_with_nul())?;
                 self.output.zero_fill_align(16)?;
             }
         };
+        self.local_fixups_iter_src.clear();
         Ok(())
     }
 }
@@ -594,12 +612,12 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
     fn serialize_cstring_meta_field(
         &mut self,
         key: &'static str,
-        _value: &CString,
+        value: &CString,
     ) -> Result<(), Self::Error> {
-        let str_start = self.relative_position()?;
-        self.push_local_fixup_pending(str_start)?;
-        #[cfg(feature = "tracing")]
-        tracing::trace!(key, str_start);
+        if value.should_write_binary() {
+            let str_start = self.relative_position()?;
+            self.local_fixups_name_src.insert(key, str_start);
+        };
 
         // Write meta fields
         self.serialize_ulong(0) // ptr size
@@ -613,12 +631,12 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
     fn serialize_stringptr_meta_field(
         &mut self,
         key: &'static str,
-        _value: &StringPtr,
+        value: &StringPtr,
     ) -> Result<(), Self::Error> {
-        let str_start = self.relative_position()?;
-        self.push_local_fixup_pending(str_start)?;
-        #[cfg(feature = "tracing")]
-        tracing::trace!(key, str_start);
+        if value.should_write_binary() {
+            let str_start = self.relative_position()?;
+            self.local_fixups_name_src.insert(key, str_start);
+        };
 
         // Write meta fields
         self.serialize_ulong(0) // ptr size
@@ -638,16 +656,14 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         if !value.as_ref().is_empty() {
             // Ptr type need to pointing data position(local.dst).
             let array_start = self.relative_position()?;
-            self.local_fixups_pending.push_back(array_start); // as `local_fixup.src`
-            #[cfg(feature = "tracing")]
-            tracing::trace!(key, array_start);
+            self.local_fixups_name_src.insert(key, array_start);
         };
 
         // Write Array meta field
         let size = value.as_ref().len() as u32;
         self.serialize_ulong(0)?; // ptr size
         self.serialize_uint32(size)?; // array size
-        self.serialize_uint32(size | 0x80 << 24)?; // capacity | flags
+        self.serialize_uint32(size | 0x80 << 24)?; // capacity | Owned flag
         Ok(())
     }
 
@@ -655,9 +671,12 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
     #[inline]
     fn serialize_cstring_field(
         &mut self,
-        _key: &'static str,
+        key: &'static str,
         value: &CString,
     ) -> Result<(), Self::Error> {
+        let str_dst = self.relative_position()?;
+        self.write_local_fixup_pair(key, str_dst)?;
+
         value.serialize(&mut **self)
     }
 
@@ -665,13 +684,16 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
     #[inline]
     fn serialize_stringptr_field(
         &mut self,
-        _key: &'static str,
+        key: &'static str,
         value: &StringPtr,
     ) -> Result<(), Self::Error> {
+        let str_dst = self.relative_position()?;
+        self.write_local_fixup_pair(key, str_dst)?;
+
         value.serialize(&mut **self)
     }
 
-    fn serialize_array_field<V, T>(&mut self, _key: &'static str, value: V) -> Result<()>
+    fn serialize_array_field<V, T>(&mut self, key: &'static str, value: V) -> Result<()>
     where
         V: AsRef<[T]> + Serialize,
         T: Serialize,
@@ -682,15 +704,14 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         if !value.as_ref().is_empty() {
             // The actual data location, i.e., the data position pointed to by ptr. It is local_fixup.dst.
             let array_dst = self.relative_position()?;
-            self.write_local_fixup_pair(array_dst)?;
-            #[cfg(feature = "tracing")]
-            tracing::trace!(array_dst);
+            self.write_local_fixup_pair(key, array_dst)?;
         }
 
         value.serialize(&mut **self)
     }
 
     /// Even if it is skipped on XML, it is not skipped because it exists in binary data.
+    #[inline]
     fn skip_field<T>(&mut self, _key: &'static str, value: &T) -> Result<()>
     where
         T: ?Sized + Serialize,
@@ -698,11 +719,13 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         value.serialize(&mut **self)
     }
 
+    /// This skip is for XML. Binary data must be written as usual.
     #[inline]
     fn skip_cstring_meta_field(&mut self, key: &'static str, value: &CString) -> Result<()> {
         self.serialize_cstring_meta_field(key, value)
     }
 
+    /// This skip is for XML. Binary data must be written as usual.
     #[inline]
     fn skip_stringptr_meta_field(&mut self, key: &'static str, value: &StringPtr) -> Result<()> {
         self.serialize_stringptr_meta_field(key, value)
@@ -738,6 +761,7 @@ impl<'a> SerializeFlags for &'a mut ByteSerializer {
     type Ok = ();
     type Error = Error;
 
+    /// Ignore this method because it is an XML method.
     #[inline]
     fn serialize_field<T>(&mut self, _key: &str, _value: &T) -> Result<(), Self::Error>
     where
@@ -746,6 +770,7 @@ impl<'a> SerializeFlags for &'a mut ByteSerializer {
         Ok(())
     }
 
+    #[inline]
     fn serialize_bits<T>(&mut self, value: &T) -> Result<(), Self::Error>
     where
         T: ?Sized + Serialize,
@@ -759,14 +784,16 @@ impl<'a> SerializeFlags for &'a mut ByteSerializer {
     }
 }
 
+// src: 0x100
+// dst: 0x108
 #[cfg(test)]
 mod tests {
     use super::*;
     use crate::common::mocks::{classes::*, enums::EventMode};
 
     #[test]
-    #[quick_tracing::init]
-    fn test_serialize() {
+    #[quick_tracing::init(test = "serialize_bytes", stdio = false)]
+    fn test_serialize() -> std::io::Result<()> {
         let hk_root_level_container = HkRootLevelContainer {
             _name: Some(50.into()),
             named_variants: vec![HkRootLevelContainerNamedVariant {
@@ -806,5 +833,6 @@ mod tests {
         ];
 
         rhexdump::rhexdump!(to_bytes(&classes, HkxHeader::new_skyrim_se()).unwrap());
+        Ok(())
     }
 }

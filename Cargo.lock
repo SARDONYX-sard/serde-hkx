@@ -678,18 +678,18 @@ dependencies = [
 
 [[package]]
 name = "proc-macro2"
-version = "1.0.82"
+version = "1.0.85"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8ad3d49ab951a01fbaafe34f2ec74122942fe18a3f9814c3268f1bb72042131b"
+checksum = "22244ce15aa966053a896d1accb3a6e68469b97c7f33f284b99f0d576879fc23"
 dependencies = [
  "unicode-ident",
 ]
 
 [[package]]
 name = "quick_tracing"
-version = "0.1.2"
+version = "0.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "15cd04a7645bf2c5d6ff978d6df71d13d9ce21dd18f7f755a2017348c8b9bd74"
+checksum = "6e65c2e37e3ef71cc6e1da93722f2f0d7fd1236ce60087ac45a8f27c93541d02"
 dependencies = [
  "quick_tracing_derive",
  "tracing",
@@ -699,11 +699,12 @@ dependencies = [
 
 [[package]]
 name = "quick_tracing_derive"
-version = "0.1.2"
+version = "0.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f80d271d075642cc5e794d946fcb70ada95884c4c1debbb337cae56e88303178"
+checksum = "ea36c74b7f417887bd1ee81ba6c2c8f97cc85d71b6dce3f0257c694b155bcccf"
 dependencies = [
  "deluxe",
+ "proc-macro2",
  "quote",
  "syn",
 ]
