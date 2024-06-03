@@ -2,7 +2,7 @@
 use crate::common::bytes::hkx_header::HkxHeader;
 use crate::common::bytes::section_header::SectionHeader;
 use crate::error::{
-    Error, MissingClassInClassnamesSectionSnafu, MissingGlobalFixupClassSnafu,
+    Error, InvalidEndianSnafu, MissingClassInClassnamesSectionSnafu, MissingGlobalFixupClassSnafu,
     MissingLocalFixupsSrcSnafu, Result, SubAbsOverflowSnafu,
 };
 use crate::trait_impls::{Align as _, ClassNamesWriter, LocalFixupsWriter};
@@ -25,6 +25,11 @@ use zerocopy::{AsBytes, BigEndian, LittleEndian};
 // TODO: It may be possible to cache classnames obtained at deserialization time.
 
 /// Serialize to bytes
+///
+/// # Note
+/// This serializer assumes the following.
+/// - `contents_class_name_section_index`: It is always assumed to be 0.
+/// - `contents_section_index`: It is always assumed to be 2.
 pub fn to_bytes<T, O>(value: &[T], header: HkxHeader<O>) -> Result<Vec<u8>>
 where
     T: Serialize + HavokClass,
@@ -34,6 +39,12 @@ where
 
     // 1/5: root header
     serializer.output.write(header.as_bytes())?;
+
+    match header.endian {
+        0 => serializer.endian = ByteOrder::BigEndian,
+        1 => serializer.endian = ByteOrder::LittleEndian,
+        invalid => InvalidEndianSnafu { invalid }.fail()?,
+    };
 
     // 2/5: Section headers
     let section_offset = header.section_offset.get();
@@ -784,8 +795,6 @@ impl<'a> SerializeFlags for &'a mut ByteSerializer {
     }
 }
 
-// src: 0x100
-// dst: 0x108
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -832,7 +841,12 @@ mod tests {
             Classes::HkbProjectStringData(hkb_project_string_data),
         ];
 
-        rhexdump::rhexdump!(to_bytes(&classes, HkxHeader::new_skyrim_se()).unwrap());
+        let actual = rhexdump::rhexdumps!(to_bytes(&classes, HkxHeader::new_skyrim_se()).unwrap());
+        let expected = rhexdump::rhexdumps!(include_bytes!(
+            "../../../docs/handson_hex_dump/defaultmale/defaultmale.hkx"
+        ));
+        pretty_assertions::assert_eq!(actual, expected);
+        tracing::debug!("\n{actual}");
         Ok(())
     }
 }

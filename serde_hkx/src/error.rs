@@ -11,6 +11,17 @@ pub enum Error {
         msg: String,
     },
 
+    /// Only 0 (big) or 1 (little) can be specified for the header endian. But got {invalid}
+    #[snafu(display(
+        "Only 0 (big) or 1 (little) can be specified for the header endian. But got {invalid}"
+    ))]
+    InvalidEndianError {
+        invalid: u8,
+        /// error location
+        #[snafu(implicit)]
+        location: snafu::Location,
+    },
+
     /// Relative position cannot be obtained because abs is larger than {position}.
     /// This indicates that the value of `absolute_data_offset` in the header is wrong.
     SubAbsOverflowError {
