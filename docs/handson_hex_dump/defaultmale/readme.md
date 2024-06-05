@@ -936,11 +936,16 @@ The next virtual_fixup is 128. Therefore, 0x160 + 0x80(128) = 0x1e0
 
 00000250: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
           <=====================>                          seek ptr size rootPath: hkStringPtr
-                                  <=====================>  TODO: Unknown
+                                  <=====================>  When writing beyond the pointer of hkArray, always do align 16 first.
+                                  <-        NOTE       ->  :This part is only relevant at serialization time,
+                                                            since you only need to look at the data in local_fixup when deserializing.
 
 00000260: 00 00 00 00 00 00 00 00 43 68 61 72 61 63 74 65  ........Characte
-          <=====================>                          TODO: Unknown
+          <=====================>                          seek ptr size: hkStringPtr 1th of characterFilenames
                                   <----------------------  hkStringPtr 1th of characterFilenames
+If the pointer type points to a pointer type, as in hkArray<StringPtr>, further processing for the pointer type is required in dst.
+It is necessary to take out dst with local_fixup.src as the seek position at this point.
+If there are two StringPtr(s), the 0 fill of ptr size comes twice at this point.
 
 00000270: 72 73 5c 44 65 66 61 75 6c 74 4d 61 6c 65 2e 68  rs\DefaultMale.h
           -----------------------------------------------  hkStringPtr 1th
