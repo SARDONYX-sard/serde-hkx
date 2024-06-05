@@ -1,7 +1,7 @@
+pub mod bytes;
 pub mod common;
 pub mod error;
-pub mod ser;
-pub mod trait_impls;
+pub mod xml;
 
 /// A facade around all the types we need from the `std`, `core`, and `alloc`
 /// crates. This avoids elaborate import wrangling having to happen in every
@@ -26,3 +26,6 @@ mod lib {
     #[cfg(feature = "std")]
     pub use std::string::{String, ToString};
 }
+
+pub use bytes::ser::to_bytes;
+pub use xml::ser::to_string;

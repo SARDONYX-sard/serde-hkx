@@ -1,5 +1,4 @@
 //! Trait that defines a set of dedicated methods for writing Havok Class data.
-use crate::trait_impls::align::Align as _;
 use byteorder::WriteBytesExt as _;
 use havok_serde::HavokClass;
 use std::{
@@ -7,6 +6,8 @@ use std::{
     io::{self, Cursor, Write as _},
 };
 use zerocopy::ByteOrder;
+
+use crate::common::trait_impls::Align as _;
 
 /// Trait that defines a set of dedicated methods for writing Havok Class data.
 pub trait ClassNamesWriter {

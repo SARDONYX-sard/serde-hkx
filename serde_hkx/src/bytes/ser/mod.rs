@@ -1,11 +1,12 @@
 //! Bytes Serialization
-use crate::common::bytes::hkx_header::HkxHeader;
-use crate::common::bytes::section_header::SectionHeader;
+mod trait_impls;
+
+use crate::bytes::serde::section_header::SectionHeader;
+use crate::common::trait_impls::Align as _;
 use crate::error::{
     Error, InvalidEndianSnafu, MissingClassInClassnamesSectionSnafu, MissingGlobalFixupClassSnafu,
-    MissingLocalFixupsSrcSnafu, Result, SubAbsOverflowSnafu,
+    MissingLocalFixupsSrcSnafu, Result, SubAbsOverflowSnafu, UnsupportedPtrSizeSnafu,
 };
-use crate::trait_impls::{Align as _, ClassNamesWriter, LocalFixupsWriter};
 use byteorder::WriteBytesExt as _;
 use havok_serde::ser::{
     Error as _, Serialize, SerializeFlags, SerializeSeq, SerializeStruct, Serializer,
@@ -20,7 +21,10 @@ use snafu::ensure;
 use std::borrow::Cow;
 use std::collections::HashMap;
 use std::io::{Cursor, Write};
+use trait_impls::{ClassNamesWriter as _, LocalFixupsWriter as _};
 use zerocopy::{AsBytes, BigEndian, LittleEndian};
+
+use super::serde::hkx_header::HkxHeader;
 
 // TODO: It may be possible to cache classnames obtained at deserialization time.
 
@@ -30,21 +34,27 @@ use zerocopy::{AsBytes, BigEndian, LittleEndian};
 /// This serializer assumes the following.
 /// - `contents_class_name_section_index`: It is always assumed to be 0.
 /// - `contents_section_index`: It is always assumed to be 2.
-pub fn to_bytes<T, O>(value: &[T], header: HkxHeader<O>) -> Result<Vec<u8>>
+pub fn to_bytes<T, O>(value: &[T], header: &HkxHeader<O>) -> Result<Vec<u8>>
 where
     T: Serialize + HavokClass,
     O: zerocopy::ByteOrder,
 {
-    let mut serializer = ByteSerializer::default();
+    let mut serializer = ByteSerializer {
+        is_little_endian: match header.endian {
+            0 => false, // big endian
+            1 => true,  // little endian
+            invalid => InvalidEndianSnafu { invalid }.fail()?,
+        },
+        is_x86: match header.pointer_size {
+            4 => true,
+            8 => false,
+            invalid => UnsupportedPtrSizeSnafu { invalid }.fail()?,
+        },
+        ..Default::default()
+    };
 
     // 1/5: root header
     serializer.output.write(header.as_bytes())?;
-
-    match header.endian {
-        0 => serializer.endian = ByteOrder::BigEndian,
-        1 => serializer.endian = ByteOrder::LittleEndian,
-        invalid => InvalidEndianSnafu { invalid }.fail()?,
-    };
 
     // 2/5: Section headers
     let section_offset = header.section_offset.get();
@@ -53,11 +63,11 @@ where
     let data_fixups_start = SectionHeader::<O>::write_data(&mut serializer.output)?;
 
     // 3/5: section contents
-    // Need `class_starts` to write `virtual_fixups`
+    // - `__classnames__` section
     serializer.class_starts = serializer.output.write_classnames_section::<T, O>(value)?;
 
     // Calculate absolute data offset
-    // - The position after the `classnames__` section write is the starting point of the data section, which is the abs_offset itself.
+    // - The position after the `__classnames__` section write is the starting point of the data section, which is the abs_offset itself.
     //   Therefore, abs_offset must be calculated at this point.
     let section_offset = match header.section_offset.get() {
         ..=0 => 0,
@@ -93,49 +103,19 @@ where
     Ok(serializer.output.into_inner())
 }
 
-/// Bytes endianness
-#[derive(Debug, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub enum ByteOrder {
-    /// Little endian mode
-    #[default]
-    LittleEndian,
-    /// Big endian mode
-    BigEndian,
-}
-
-impl ByteOrder {
-    /// Is little endian mode?
-    fn is_little(&self) -> bool {
-        *self == ByteOrder::LittleEndian
-    }
-}
-
-/// Binary target platform
-#[derive(Debug, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub enum Platform {
-    /// x86
-    Win32,
-    /// x86_64
-    #[default]
-    Amd64,
-}
-
-impl Platform {
-    /// Serializer is win32(x86) mode?
-    fn is_x86(&self) -> bool {
-        *self == Platform::Win32
-    }
-}
-
 /// Binary data serializer
 #[derive(Debug, Default)]
 pub struct ByteSerializer {
-    endian: ByteOrder,
-    target_platform: Platform,
+    /// Endianness of serialization target
+    is_little_endian: bool,
+    /// Ptr size of serialization target.
+    /// 32bit: x86
+    is_x86: bool,
 
     /// Bytes
     output: Cursor<Vec<u8>>,
 
+    /// This is cached to find the relative position of the binary.
     abs_data_offset: u32,
 
     // ---- local fixup information
@@ -236,7 +216,7 @@ impl ByteSerializer {
                 self.local_fixups.write_local_fixups(
                     *local_src,
                     local_dst,
-                    self.endian.is_little(),
+                    self.is_little_endian,
                 )?;
                 Ok(())
             }
@@ -257,7 +237,7 @@ impl ByteSerializer {
                 self.local_fixups.write_local_fixups(
                     *local_src,
                     local_dst,
-                    self.endian.is_little(),
+                    self.is_little_endian,
                 )?;
                 Ok(())
             }
@@ -280,7 +260,7 @@ impl ByteSerializer {
         for (ptr, g_src) in &self.global_fixups_ptr_src {
             // NOTE: `global_fixup.dst` == `virtual_fixup.src`
             if let Some(g_dst) = self.virtual_fixups_ptr_src.get(ptr) {
-                match self.endian.is_little() {
+                match self.is_little_endian {
                     true => {
                         self.output.write_u32::<LittleEndian>(*g_src)?; // src
                         self.output.write_u32::<LittleEndian>(2)?; // dst_section_index
@@ -313,7 +293,7 @@ impl ByteSerializer {
         virtual_src: u32,
     ) -> Result<()> {
         if let Some(class_name_offset) = self.class_starts.get(class_name) {
-            match self.endian.is_little() {
+            match self.is_little_endian {
                 true => {
                     self.virtual_fixups.write_u32::<LittleEndian>(virtual_src)?; // src
                     self.virtual_fixups.write_u32::<LittleEndian>(0)?; // dst_section_index, `__classnames__` section is 0
@@ -336,6 +316,9 @@ impl ByteSerializer {
     }
 
     /// Write all(`local`, `global` and `virtual`) fixups of data section.
+    ///
+    /// # Returns
+    /// (`local_offset`, `global_offset`, `virtual_offset`)
     fn write_fixups(&mut self) -> Result<(u32, u32, u32)> {
         let local_offset = self.relative_position()?;
         self.output.write(&self.local_fixups)?;
@@ -374,7 +357,7 @@ impl ByteSerializer {
 macro_rules! impl_serialize_primitive {
     ($method:ident, $value_type:ty, $write:ident) => {
         fn $method(self, v: $value_type) -> Result<Self::Ok, Self::Error> {
-            match self.endian.is_little() {
+            match self.is_little_endian {
                 true => self.output.$write::<LittleEndian>(v),
                 false => self.output.$write::<BigEndian>(v),
             }?;
@@ -387,7 +370,7 @@ macro_rules! impl_serialize_primitive {
 macro_rules! impl_serialize_math {
     ($method:ident, $value_type:ty) => {
         fn $method(self, v: &$value_type) -> Result<Self::Ok, Self::Error> {
-            match self.endian.is_little() {
+            match self.is_little_endian {
                 true => self.output.write(v.to_le_bytes().as_slice()),
                 false => self.output.write(v.to_be_bytes().as_slice()),
             }?;
@@ -502,7 +485,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
     }
 
     fn serialize_ulong(self, v: u64) -> Result<Self::Ok, Self::Error> {
-        match self.target_platform.is_x86() {
+        match self.is_x86 {
             true => self.serialize_uint32(v as u32),
             false => self.serialize_uint64(v),
         }?;
@@ -532,6 +515,7 @@ impl<'a> SerializeSeq for &'a mut ByteSerializer {
     type Ok = ();
     type Error = Error;
 
+    #[inline]
     fn serialize_primitive_element<T>(
         &mut self,
         value: &T,
@@ -755,7 +739,7 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
     where
         T: ?Sized + AsRef<[u8]>,
     {
-        match self.target_platform.is_x86() {
+        match self.is_x86 {
             true => self.output.write(x86_pads.as_ref()),
             false => self.output.write(x64_pads.as_ref()),
         }?;
@@ -798,7 +782,10 @@ impl<'a> SerializeFlags for &'a mut ByteSerializer {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::common::mocks::{classes::*, enums::EventMode};
+    use crate::{
+        bytes::serde::hkx_header::HkxHeader,
+        common::mocks::{classes::*, enums::EventMode},
+    };
 
     #[test]
     #[quick_tracing::try_init(test = "serialize_bytes")]
@@ -841,9 +828,9 @@ mod tests {
             Classes::HkbProjectStringData(hkb_project_string_data),
         ];
 
-        let actual = rhexdump::rhexdumps!(to_bytes(&classes, HkxHeader::new_skyrim_se()).unwrap());
+        let actual = rhexdump::rhexdumps!(to_bytes(&classes, &HkxHeader::new_skyrim_se()).unwrap());
         let expected = rhexdump::rhexdumps!(include_bytes!(
-            "../../../docs/handson_hex_dump/defaultmale/defaultmale.hkx"
+            "../../../../docs/handson_hex_dump/defaultmale/defaultmale.hkx"
         ));
         pretty_assertions::assert_eq!(actual, expected);
         tracing::debug!("\n{actual}");

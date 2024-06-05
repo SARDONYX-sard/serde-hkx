@@ -1,4 +1,4 @@
-pub mod bytes;
+pub mod trait_impls;
 
 #[cfg(test)]
-pub mod mocks;
+pub(crate) mod mocks;

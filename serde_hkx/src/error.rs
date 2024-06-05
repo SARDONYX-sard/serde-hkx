@@ -22,6 +22,15 @@ pub enum Error {
         location: snafu::Location,
     },
 
+    /// The only supported pointer sizes are 4 and 8. But got {invalid}
+    #[snafu(display("The only supported pointer sizes are 4 and 8. But got {invalid}"))]
+    UnsupportedPtrSizeError {
+        invalid: u8,
+        /// error location
+        #[snafu(implicit)]
+        location: snafu::Location,
+    },
+
     /// Relative position cannot be obtained because abs is larger than {position}.
     /// This indicates that the value of `absolute_data_offset` in the header is wrong.
     SubAbsOverflowError {
