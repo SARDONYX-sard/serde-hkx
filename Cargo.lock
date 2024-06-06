@@ -379,6 +379,7 @@ name = "havok_serde"
 version = "0.1.0"
 dependencies = [
  "havok_types",
+ "indexmap 2.2.6",
 ]
 
 [[package]]

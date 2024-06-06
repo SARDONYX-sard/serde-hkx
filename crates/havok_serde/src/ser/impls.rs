@@ -211,3 +211,37 @@ impl<T: Serialize + crate::HavokClass> Serialize for &[T] {
         seq.end()
     }
 }
+
+#[cfg(feature = "indexmap")]
+impl<K, V> Serialize for &indexmap::IndexMap<K, V>
+where
+    K: core::fmt::Debug,
+    V: Serialize + crate::HavokClass,
+{
+    fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        use super::SerializeSeq;
+
+        let mut seq = serializer.serialize_array(Some(self.len()))?;
+        for (_index, element) in self.iter() {
+            seq.serialize_class_element(element)?;
+        }
+        seq.end()
+    }
+}
+
+#[cfg(feature = "indexmap")]
+impl<K, V> Serialize for indexmap::IndexMap<K, V>
+where
+    K: core::fmt::Debug,
+    V: Serialize + crate::HavokClass,
+{
+    fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        use super::SerializeSeq;
+
+        let mut seq = serializer.serialize_array(Some(self.len()))?;
+        for (_index, element) in self.iter() {
+            seq.serialize_class_element(element)?;
+        }
+        seq.end()
+    }
+}

@@ -511,22 +511,53 @@ impl<'a> SerializeFlags for &'a mut XmlSerializer {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::common::mocks::classes::*;
+    use crate::common::mocks::{classes::*, enums::EventMode};
 
     #[test]
     fn test_serialize() {
-        let classes = vec![
-            Classes::HkbProjectStringData(HkbProjectStringData {
-                _name: Some(54.into()),
-                animation_filenames: vec!["Hi".into(), "Hello".into(), "World".into()],
-                ..Default::default()
-            }),
-            //
-            Classes::AllTypesTestClass(AllTypesTestClass {
-                _name: Some(53.into()),
-                ..Default::default()
-            }),
-        ];
+        let hk_root_level_container = HkRootLevelContainer {
+            _name: Some(50.into()),
+            named_variants: vec![HkRootLevelContainerNamedVariant {
+                _name: None,
+                name: "hkbProjectData".into(),
+                class_name: "hkbProjectData".into(),
+                variant: Pointer::new(51),
+            }],
+        };
+
+        let hkb_project_data = HkbProjectData {
+            _name: Some(51.into()),
+            world_up_ws: Vector4::new(0.0, 0.0, 1.0, 0.0),
+            string_data: Pointer::new(52),
+            default_event_mode: EventMode::EventModeIgnoreFromGenerator,
+            ..Default::default()
+        };
+
+        let hkb_project_string_data = HkbProjectStringData {
+            _name: Some(52.into()),
+            animation_filenames: vec![],
+            behavior_filenames: vec![],
+            character_filenames: vec!["Characters\\DefaultMale.hkx".into()],
+            event_names: vec![],
+            animation_path: "".into(),
+            behavior_path: "".into(),
+            character_path: "".into(),
+            full_path_to_source: "".into(),
+            root_path: None.into(),
+            ..Default::default()
+        };
+
+        let all_types_test_class = AllTypesTestClass {
+            _name: Some(53.into()),
+            ..Default::default()
+        };
+
+        let mut classes = indexmap::IndexMap::new();
+        classes.insert(50, Classes::HkRootLevelContainer(hk_root_level_container));
+        classes.insert(51, Classes::HkbProjectData(hkb_project_data));
+        classes.insert(52, Classes::HkbProjectStringData(hkb_project_string_data));
+        classes.insert(53, Classes::AllTypesTestClass(all_types_test_class));
+        classes.sort_keys();
 
         println!("{}", to_string(&classes).unwrap());
     }

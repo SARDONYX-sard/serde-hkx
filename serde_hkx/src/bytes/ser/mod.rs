@@ -34,10 +34,11 @@ use super::serde::hkx_header::HkxHeader;
 /// This serializer assumes the following.
 /// - `contents_class_name_section_index`: It is always assumed to be 0.
 /// - `contents_section_index`: It is always assumed to be 2.
-pub fn to_bytes<T, O>(value: &[T], header: &HkxHeader<O>) -> Result<Vec<u8>>
+pub fn to_bytes<O, K, V>(value: &IndexMap<K, V>, header: &HkxHeader<O>) -> Result<Vec<u8>>
 where
-    T: Serialize + HavokClass,
     O: zerocopy::ByteOrder,
+    K: core::fmt::Debug,
+    V: Serialize + HavokClass,
 {
     let mut serializer = ByteSerializer {
         is_little_endian: match header.endian {
@@ -64,7 +65,9 @@ where
 
     // 3/5: section contents
     // - `__classnames__` section
-    serializer.class_starts = serializer.output.write_classnames_section::<T, O>(value)?;
+    serializer.class_starts = serializer
+        .output
+        .write_classnames_section::<O, K, V>(value)?;
 
     // Calculate absolute data offset
     // - The position after the `__classnames__` section write is the starting point of the data section, which is the abs_offset itself.
@@ -822,11 +825,16 @@ mod tests {
             ..Default::default()
         };
 
-        let classes = vec![
-            Classes::HkRootLevelContainer(hk_root_level_container),
-            Classes::HkbProjectData(hkb_project_data),
-            Classes::HkbProjectStringData(hkb_project_string_data),
-        ];
+        let mut classes = IndexMap::new();
+        // let classes = vec![
+        //     Classes::HkRootLevelContainer(hk_root_level_container),
+        //     Classes::HkbProjectData(hkb_project_data),
+        //     Classes::HkbProjectStringData(hkb_project_string_data),
+        // ];
+        classes.insert(50, Classes::HkRootLevelContainer(hk_root_level_container));
+        classes.insert(52, Classes::HkbProjectStringData(hkb_project_string_data));
+        classes.insert(51, Classes::HkbProjectData(hkb_project_data));
+        classes.sort_keys();
 
         let actual = rhexdump::rhexdumps!(to_bytes(&classes, &HkxHeader::new_skyrim_se()).unwrap());
         let expected = rhexdump::rhexdumps!(include_bytes!(

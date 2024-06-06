@@ -12,23 +12,25 @@ use crate::common::trait_impls::Align as _;
 /// Trait that defines a set of dedicated methods for writing Havok Class data.
 pub trait ClassNamesWriter {
     /// Write classnames section
-    fn write_classnames_section<T, O>(
+    fn write_classnames_section<O, K, V>(
         &mut self,
-        classes: &[T],
+        classes: &indexmap::IndexMap<K, V>,
     ) -> io::Result<HashMap<&'static str, u32>>
     where
-        T: HavokClass,
-        O: ByteOrder;
+        O: ByteOrder,
+        K: core::fmt::Debug,
+        V: HavokClass;
 }
 
 impl ClassNamesWriter for Cursor<Vec<u8>> {
-    fn write_classnames_section<T, O>(
+    fn write_classnames_section<O, K, V>(
         &mut self,
-        classes: &[T],
+        classes: &indexmap::IndexMap<K, V>,
     ) -> io::Result<HashMap<&'static str, u32>>
     where
-        T: HavokClass,
         O: ByteOrder,
+        K: core::fmt::Debug,
+        V: HavokClass,
     {
         let classnames_section_start = self.position() as u32;
 
@@ -52,7 +54,7 @@ impl ClassNamesWriter for Cursor<Vec<u8>> {
         self.write_u8(0x09)?;
         self.write(c"hkClassEnumItem".to_bytes_with_nul())?;
 
-        for class in classes.iter() {
+        for (_, class) in classes.iter() {
             self.write_u32::<O>(class.signature().into())?;
             self.write_u8(0x09)?;
 

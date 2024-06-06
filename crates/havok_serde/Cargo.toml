@@ -10,6 +10,7 @@ edition.workspace = true
 
 [dependencies]
 havok_types = { path = "../havok_types", features = ["serde"] }
+indexmap = { version = "2.2.6", optional = true }
 
 [features]
 default = ["std"]
@@ -25,3 +26,7 @@ std = []
 # including Vec<T>, and Cow<T>. This is a subset of std but may
 # be enabled without depending on all of std.
 alloc = []
+
+# impl Serialize/Deserialize for IndexMap.
+# Need indexmap
+indexmap = ["dep:indexmap"]
