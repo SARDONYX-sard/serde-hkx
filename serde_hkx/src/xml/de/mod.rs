@@ -1,5 +1,6 @@
 use havok_serde::de::{self, Visitor};
 use havok_serde::Deserialize;
+use havok_types::{CString, StringPtr};
 
 use crate::de_error::{DeError as Error, Result};
 
@@ -119,10 +120,10 @@ impl<'de> Deserializer<'de> {
     // Makes no attempt to handle escape sequences. What did you expect? This is
     // example code!
     fn parse_string(&mut self) -> Result<&'de str> {
-        if self.next_char()? != '"' {
+        if self.input.ends_with("<hkcstring>") {
             return Err(Error::ExpectedString);
         }
-        match self.input.find('"') {
+        match self.input.find("</hkcstring>") {
             Some(len) => {
                 let s = &self.input[..len];
                 self.input = &self.input[len + 1..];
@@ -136,18 +137,19 @@ impl<'de> Deserializer<'de> {
 impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     type Error = Error;
 
+    #[inline]
     fn deserialize_void<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        todo!()
+        visitor.visit_void(())
     }
 
     fn deserialize_bool<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        todo!()
+        visitor.visit_bool(self.parse_bool()?)
     }
 
     fn deserialize_char<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
@@ -161,28 +163,28 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        todo!()
+        visitor.visit_int8(self.parse_signed()?)
     }
 
     fn deserialize_uint8<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        todo!()
+        visitor.visit_uint8(self.parse_unsigned()?)
     }
 
     fn deserialize_int16<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        todo!()
+        visitor.visit_int16(self.parse_signed()?)
     }
 
     fn deserialize_uint16<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        todo!()
+        visitor.visit_uint16(self.parse_unsigned()?)
     }
 
     fn deserialize_int32<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
@@ -196,34 +198,35 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        todo!()
+        visitor.visit_uint32(self.parse_unsigned()?)
     }
 
     fn deserialize_int64<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        todo!()
+        visitor.visit_int64(self.parse_signed()?)
     }
 
     fn deserialize_uint64<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        todo!()
+        visitor.visit_uint64(self.parse_unsigned()?)
     }
 
     fn deserialize_real<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        todo!()
+        visitor.visit_real(self.parse_signed()?)
     }
 
     fn deserialize_vector4<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
+        // visitor.visit_vector4()
         todo!()
     }
 
@@ -311,7 +314,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        todo!()
+        visitor.visit_cstring(CString::from_str(self.parse_string()?))
     }
 
     fn deserialize_ulong<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
@@ -342,7 +345,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        todo!()
+        visitor.visit_stringptr(StringPtr::from_str(self.parse_string()?))
     }
 }
 
