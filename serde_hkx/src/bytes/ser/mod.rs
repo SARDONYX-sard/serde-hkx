@@ -170,7 +170,7 @@ pub struct ByteSerializer {
     /// - value: class name start position
     class_starts: HashMap<&'static str, u32>,
 
-    /// Only used to writing `Array<StringPtr>`.
+    /// Used only when writing `Array<StringPtr>` or `Array<CString>`.
     ///
     /// # Details
     /// During serialization of [`SerializeSeq`], that is, during processing of an array, this will be [`Some`].
