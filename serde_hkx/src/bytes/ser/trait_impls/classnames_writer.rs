@@ -40,19 +40,19 @@ impl ClassNamesWriter for Cursor<Vec<u8>> {
         // Not sure where this is used.
         self.write_u32::<O>(0x75585ef6)?;
         self.write_u8(0x09)?;
-        self.write(c"hkClass".to_bytes_with_nul())?;
+        self.write(b"hkClass\0")?;
 
         self.write_u32::<O>(0x5C7EA4C2)?;
         self.write_u8(0x09)?;
-        self.write(c"hkClassMember".to_bytes_with_nul())?;
+        self.write(b"hkClassMember\0")?;
 
         self.write_u32::<O>(0x8A3609CF)?;
         self.write_u8(0x09)?;
-        self.write(c"hkClassEnum".to_bytes_with_nul())?;
+        self.write(b"hkClassEnum\0")?;
 
         self.write_u32::<O>(0xCE6F8A6C)?;
         self.write_u8(0x09)?;
-        self.write(c"hkClassEnumItem".to_bytes_with_nul())?;
+        self.write(b"hkClassEnumItem\0")?;
 
         for (_, class) in classes.iter() {
             self.write_u32::<O>(class.signature().into())?;

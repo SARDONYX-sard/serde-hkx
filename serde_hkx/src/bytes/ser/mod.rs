@@ -252,17 +252,15 @@ impl ByteSerializer {
     ///
     /// # Info
     /// If all virtual_fixups are not obtained, references may not be available?
+    ///
+    /// # Note
+    /// `global_fixup.dst` == `virtual_fixup.src`
     fn write_global_fixups(&mut self) -> Result<()> {
-        #[cfg(feature = "tracing")]
-        {
-            tracing::debug!(global_fixups_ptr_src = ?&self.global_fixups_ptr_src);
-            tracing::debug!(virtual_fixups_ptr_src = ?&self.virtual_fixups_ptr_src);
-        }
-
-        self.global_fixups_ptr_src.sort_keys();
         for (ptr, g_src) in &self.global_fixups_ptr_src {
-            // NOTE: `global_fixup.dst` == `virtual_fixup.src`
             if let Some(g_dst) = self.virtual_fixups_ptr_src.get(ptr) {
+                #[cfg(feature = "tracing")]
+                tracing::debug!("[global_fixups] src: {g_src}, dst: {g_dst}");
+
                 match self.is_little_endian {
                     true => {
                         self.output.write_u32::<LittleEndian>(*g_src)?; // src
@@ -327,6 +325,12 @@ impl ByteSerializer {
         self.output.write(&self.local_fixups)?;
         self.output.align(16, 0xff)?;
 
+        #[cfg(feature = "tracing")]
+        tracing::debug!(
+            "[global_fixups]\nsources: {:#?},\ndestinations: {:#?}",
+            self.global_fixups_ptr_src,
+            self.virtual_fixups_ptr_src
+        );
         let global_offset = self.relative_position()?;
         self.write_global_fixups()?;
         self.output.align(16, 0xff)?;
@@ -787,61 +791,30 @@ mod tests {
     use super::*;
     use crate::{
         bytes::serde::hkx_header::HkxHeader,
-        common::mocks::{classes::*, enums::EventMode},
+        common::mocks::{classes::*, constructors::new_defaultmale},
     };
 
     #[test]
     #[quick_tracing::try_init(test = "serialize_bytes")]
-    fn test_serialize() -> std::io::Result<()> {
-        let hk_root_level_container = HkRootLevelContainer {
-            _name: Some(50.into()),
-            named_variants: vec![HkRootLevelContainerNamedVariant {
-                _name: None,
-                name: "hkbProjectData".into(),
-                class_name: "hkbProjectData".into(),
-                variant: Pointer::new(51),
-            }],
-        };
+    fn test_serialize() -> Result<()> {
+        let mut classes = new_defaultmale();
 
-        let hkb_project_data = HkbProjectData {
-            _name: Some(51.into()),
-            world_up_ws: Vector4::new(0.0, 0.0, 1.0, 0.0),
-            string_data: Pointer::new(52),
-            default_event_mode: EventMode::EventModeIgnoreFromGenerator,
-            ..Default::default()
-        };
+        // For binary writing, the youngest pointer index must be first after sorting in reverse order.
+        // Usually a shift operation is required, but a dummy and a swap can speed up the process.
+        classes.insert(usize::MAX, Classes::PhantomData);
+        classes.sort_by(|k_1, _v_1, k_2, _v_2| k_2.cmp(&k_1)); // Reverse order
+        classes.swap_indices(0, classes.len() - 1);
+        let _ = classes.pop();
+        tracing::debug!("{classes:#?}");
 
-        let hkb_project_string_data = HkbProjectStringData {
-            _name: Some(52.into()),
-            animation_filenames: vec![],
-            behavior_filenames: vec![],
-            character_filenames: vec!["Characters\\DefaultMale.hkx".into()],
-            event_names: vec![],
-            animation_path: "".into(),
-            behavior_path: "".into(),
-            character_path: "".into(),
-            full_path_to_source: "".into(),
-            root_path: None.into(),
-            ..Default::default()
-        };
+        let bytes = to_bytes(&classes, &HkxHeader::new_skyrim_se())?;
+        let actual = rhexdump::rhexdumps!(bytes);
+        tracing::debug!("\n{actual}");
 
-        let mut classes = IndexMap::new();
-        // let classes = vec![
-        //     Classes::HkRootLevelContainer(hk_root_level_container),
-        //     Classes::HkbProjectData(hkb_project_data),
-        //     Classes::HkbProjectStringData(hkb_project_string_data),
-        // ];
-        classes.insert(50, Classes::HkRootLevelContainer(hk_root_level_container));
-        classes.insert(52, Classes::HkbProjectStringData(hkb_project_string_data));
-        classes.insert(51, Classes::HkbProjectData(hkb_project_data));
-        classes.sort_keys();
-
-        let actual = rhexdump::rhexdumps!(to_bytes(&classes, &HkxHeader::new_skyrim_se()).unwrap());
         let expected = rhexdump::rhexdumps!(include_bytes!(
             "../../../../docs/handson_hex_dump/defaultmale/defaultmale.hkx"
         ));
         pretty_assertions::assert_eq!(actual, expected);
-        tracing::debug!("\n{actual}");
         Ok(())
     }
 }

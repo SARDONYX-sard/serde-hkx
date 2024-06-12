@@ -520,7 +520,7 @@ impl<'a> SerializeFlags for &'a mut XmlSerializer {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::common::mocks::{classes::*, enums::EventMode};
+    use crate::common::mocks::{classes::*, constructors::new_defaultmale};
 
     #[test]
     #[quick_tracing::try_init]
@@ -538,42 +538,7 @@ mod tests {
 
     #[test]
     fn test_serialize_defaultmale() -> Result<()> {
-        let hk_root_level_container = HkRootLevelContainer {
-            _name: Some(8.into()),
-            named_variants: vec![HkRootLevelContainerNamedVariant {
-                _name: None,
-                name: "hkbProjectData".into(),
-                class_name: "hkbProjectData".into(),
-                variant: Pointer::new(10),
-            }],
-        };
-
-        let hkb_project_string_data = HkbProjectStringData {
-            _name: Some(9.into()),
-            animation_filenames: vec![],
-            behavior_filenames: vec![],
-            character_filenames: vec!["Characters\\DefaultMale.hkx".into()],
-            event_names: vec![],
-            animation_path: "".into(),
-            behavior_path: "".into(),
-            character_path: "".into(),
-            full_path_to_source: "".into(),
-            root_path: None.into(),
-            ..Default::default()
-        };
-
-        let hkb_project_data = HkbProjectData {
-            _name: Some(10.into()),
-            world_up_ws: Vector4::new(0.0, 0.0, 1.0, 0.0),
-            string_data: Pointer::new(9),
-            default_event_mode: EventMode::EventModeIgnoreFromGenerator,
-            ..Default::default()
-        };
-
-        let mut classes = indexmap::IndexMap::new();
-        classes.insert(8, Classes::HkRootLevelContainer(hk_root_level_container));
-        classes.insert(9, Classes::HkbProjectStringData(hkb_project_string_data));
-        classes.insert(10, Classes::HkbProjectData(hkb_project_data));
+        let mut classes = new_defaultmale();
 
         // hkRootContainer" is processed last.
         classes.sort_keys();

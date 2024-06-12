@@ -21,6 +21,12 @@ pub use hkp_shape_info::*;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum Classes<'a> {
+    /// For binary writing, the youngest pointer index must be first after sorting in reverse order.
+    ///
+    /// To speed up the process, swap the first and last indexes instead of using shift.
+    /// This dummy class exists to reserve space for this purpose.
+    PhantomData,
+
     AllTypesTestClass(AllTypesTestClass),
     HkBaseObject(HkBaseObject),
     HkReferencedObject(HkReferencedObject),
@@ -35,6 +41,8 @@ pub enum Classes<'a> {
 impl HavokClass for Classes<'_> {
     fn name(&self) -> &'static CStr {
         match &self {
+            Classes::PhantomData => panic!("The dummy class is used only for sorting, so being called name is not a good use of the API."),
+
             Classes::AllTypesTestClass(class) => class.name(),
             Classes::HkBaseObject(class) => class.name(),
             Classes::HkbProjectData(class) => class.name(),
@@ -48,6 +56,8 @@ impl HavokClass for Classes<'_> {
 
     fn signature(&self) -> Signature {
         match &self {
+            Classes::PhantomData => panic!("The dummy class is used only for sorting, so being called signature is not a good use of the API."),
+
             Classes::AllTypesTestClass(class) => class.signature(),
             Classes::HkBaseObject(class) => class.signature(),
             Classes::HkbProjectData(class) => class.signature(),
@@ -63,6 +73,8 @@ impl HavokClass for Classes<'_> {
 impl<'a> Serialize for Classes<'a> {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
+            Classes::PhantomData => panic!("The dummy class is used only for sorting, so being called serialize is not a good use of the API."),
+
             Classes::AllTypesTestClass(class) => class.serialize(serializer),
             Classes::HkBaseObject(class) => class.serialize(serializer),
             Classes::HkbProjectData(class) => class.serialize(serializer),
