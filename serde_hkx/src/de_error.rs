@@ -4,12 +4,18 @@ use crate::lib::*;
 /// Crate root error
 #[derive(Debug, snafu::Snafu)]
 #[snafu(visibility(pub))]
-pub enum Error {
+pub enum DeError {
     /// User custom error.
     Message {
         /// Error message
         msg: String,
     },
+
+    ExpectedString,
+    ExpectedBoolean,
+    ExpectedInteger,
+    Eof,
+    TrailingCharacters,
 
     /// Only 0 (big) or 1 (little) can be specified for the header endian. But got {invalid}
     #[snafu(display(
@@ -100,18 +106,7 @@ pub enum Error {
     },
 }
 
-impl havok_serde::ser::Error for Error {
-    fn custom<T>(msg: T) -> Self
-    where
-        T: Display,
-    {
-        Self::Message {
-            msg: msg.to_string(),
-        }
-    }
-}
-
-impl havok_serde::de::Error for Error {
+impl havok_serde::de::Error for DeError {
     fn custom<T>(msg: T) -> Self
     where
         T: Display,
@@ -123,4 +118,4 @@ impl havok_serde::de::Error for Error {
 }
 
 /// Wrapper on [`core::result::Result`] for Havok Serde.
-pub type Result<T, E = Error> = core::result::Result<T, E>;
+pub type Result<T, E = DeError> = core::result::Result<T, E>;

@@ -1,5 +1,6 @@
 pub mod bytes;
 pub mod common;
+pub mod de_error;
 pub mod error;
 pub mod xml;
 

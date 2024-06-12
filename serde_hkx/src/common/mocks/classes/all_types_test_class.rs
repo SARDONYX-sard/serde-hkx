@@ -83,6 +83,10 @@ impl Serialize for AllTypesTestClass {
             "class_array",
             &vec![hkp_shape_info.clone(), hkp_shape_info],
         )?;
+        serializer.serialize_array_meta_field(
+            "stringptr_fixed_array",
+            [StringPtr::from_str("hello"), "world".into()].as_slice(),
+        )?;
 
         serializer.serialize_stringptr_field("string_ptr", &"StringPtr".into())?;
 

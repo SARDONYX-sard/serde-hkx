@@ -38,6 +38,7 @@ mod lib {
     pub use self::core::{i16, i32, i64, i8};
     pub use self::core::{u16, u32, u64, u8, usize};
 
+    pub use self::core::fmt;
     pub use self::core::fmt::Display;
 
     #[cfg(not(feature = "std"))]
@@ -51,10 +52,26 @@ mod lib {
     pub use std::vec::Vec;
 }
 
+// None of this crate's error handling needs the `From::from` error conversion
+// performed implicitly by the `?` operator or the standard library's `try!`
+// macro. This simplified macro gives a 5.5% improvement in compile time
+// compared to standard `try!`, and 9% improvement compared to `?`.
+macro_rules! tri {
+    ($expr:expr) => {
+        match $expr {
+            Ok(val) => val,
+            Err(err) => return Err(err),
+        }
+    };
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 
 pub mod de;
 pub mod ser;
+
+pub use de::Deserialize;
+pub use ser::Serialize;
 
 use havok_types::Signature;
 use lib::*;
