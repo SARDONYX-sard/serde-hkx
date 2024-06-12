@@ -1,5 +1,7 @@
 # `skeleton.hkx`(`meshes/actors/wisp/character assets/skeleton.hkx`) hex dump Journey
 
+- Note that the output XML provided is from hkxcmd; in the case of HavokBehaviorProcess, the types section will appear and index will change.
+
 ```log
 // HKX header
 00000000: 57 e0 e0 57 10 c0 c0 10 00 00 00 00 08 00 00 00  W..W............
