@@ -14,38 +14,27 @@ struct XmlSerializer {
     output: String,
     indent: &'static str,
     depth: usize,
-    start_root: Option<String>,
-    end_root: Option<String>,
+    start_root: Option<&'static str>,
+    end_root: Option<&'static str>,
 }
 
 impl Default for XmlSerializer {
     fn default() -> Self {
         Self {
             output: String::new(),
-            indent: "    ",
-            depth: 2,
+            indent: "\t",
+            depth: 0,
             start_root: Some(
                 r###"<?xml version="1.0" encoding="ascii"?>
-<hkpackfile classversion="8" contentsversion="hk_2010.2.0-r1" toplevelobject="#0050">
-
-    <hksection name="__data__">"
-"###
-                .to_owned(),
+<hkpackfile classversion="8" contentsversion="hk_2010.2.0-r1" toplevelobject=""###,
             ),
-            end_root: Some(
-                r###"
-    </hksection>
-
-</hkpackfile>
-"###
-                .to_owned(),
-            ),
+            end_root: Some("</hkpackfile>\n"),
         }
     }
 }
 
 /// To XML String.
-pub fn to_string<T>(value: &T) -> Result<String>
+pub fn to_string<T>(value: &T, top_ptr: usize) -> Result<String>
 where
     T: havok_serde::ser::Serialize,
 {
@@ -53,11 +42,24 @@ where
 
     if let Some(ref start_root) = serializer.start_root {
         serializer.output += start_root;
+        serializer.output += &Pointer::new(top_ptr).to_string();
+        serializer.output += "\">";
+        serializer.output += "\n\n";
+        serializer.increment_depth();
+        serializer.indent();
+        serializer.output += "<hksection name=\"__data__\">\n";
+        serializer.increment_depth();
     };
 
     value.serialize(&mut serializer)?;
 
-    if let Some(ref end_root) = serializer.end_root {
+    if let Some(end_root) = serializer.end_root {
+        serializer.decrement_depth();
+        serializer.output += "\n";
+        serializer.indent();
+        serializer.output += "</hksection>";
+        serializer.decrement_depth();
+        serializer.output += "\n\n";
         serializer.output += end_root;
     };
     Ok(serializer.output)
@@ -441,14 +443,21 @@ impl<'a> SerializeStruct for &'a mut XmlSerializer {
         V: AsRef<[T]> + Serialize,
         T: Serialize,
     {
-        let len = value.as_ref().len();
         self.indent();
-        self.output += &format!("<hkparam name=\"{key}\" numelements=\"{len}\">\n");
+        self.output += "<hkparam name=\"";
+        self.output += key;
 
+        let array = value.as_ref();
+        if array.is_empty() {
+            self.output += "\" numelements=\"0\"></hkparam>\n";
+            return Ok(());
+        };
+
+        let len = array.len();
+        self.output += &format!("\" numelements=\"{len}\">\n");
         self.increment_depth();
         value.serialize(&mut **self)?;
         self.decrement_depth();
-
         self.indent();
         self.output += "</hkparam>\n";
         Ok(())
@@ -514,27 +523,33 @@ mod tests {
     use crate::common::mocks::{classes::*, enums::EventMode};
 
     #[test]
-    fn test_serialize() {
+    #[quick_tracing::try_init]
+    fn test_serialize_types_all() -> Result<()> {
+        let all_types_class = AllTypesTestClass {
+            _name: Some(Pointer::new(11)),
+            ..Default::default()
+        };
+        let mut classes = indexmap::IndexMap::new();
+        classes.insert(11, Classes::AllTypesTestClass(all_types_class));
+
+        tracing::trace!("\n{}", to_string(&classes, 11)?);
+        Ok(())
+    }
+
+    #[test]
+    fn test_serialize_defaultmale() -> Result<()> {
         let hk_root_level_container = HkRootLevelContainer {
-            _name: Some(50.into()),
+            _name: Some(8.into()),
             named_variants: vec![HkRootLevelContainerNamedVariant {
                 _name: None,
                 name: "hkbProjectData".into(),
                 class_name: "hkbProjectData".into(),
-                variant: Pointer::new(51),
+                variant: Pointer::new(10),
             }],
         };
 
-        let hkb_project_data = HkbProjectData {
-            _name: Some(51.into()),
-            world_up_ws: Vector4::new(0.0, 0.0, 1.0, 0.0),
-            string_data: Pointer::new(52),
-            default_event_mode: EventMode::EventModeIgnoreFromGenerator,
-            ..Default::default()
-        };
-
         let hkb_project_string_data = HkbProjectStringData {
-            _name: Some(52.into()),
+            _name: Some(9.into()),
             animation_filenames: vec![],
             behavior_filenames: vec![],
             character_filenames: vec!["Characters\\DefaultMale.hkx".into()],
@@ -547,18 +562,33 @@ mod tests {
             ..Default::default()
         };
 
-        let all_types_test_class = AllTypesTestClass {
-            _name: Some(53.into()),
+        let hkb_project_data = HkbProjectData {
+            _name: Some(10.into()),
+            world_up_ws: Vector4::new(0.0, 0.0, 1.0, 0.0),
+            string_data: Pointer::new(9),
+            default_event_mode: EventMode::EventModeIgnoreFromGenerator,
             ..Default::default()
         };
 
         let mut classes = indexmap::IndexMap::new();
-        classes.insert(50, Classes::HkRootLevelContainer(hk_root_level_container));
-        classes.insert(51, Classes::HkbProjectData(hkb_project_data));
-        classes.insert(52, Classes::HkbProjectStringData(hkb_project_string_data));
-        classes.insert(53, Classes::AllTypesTestClass(all_types_test_class));
-        classes.sort_keys();
+        classes.insert(8, Classes::HkRootLevelContainer(hk_root_level_container));
+        classes.insert(9, Classes::HkbProjectStringData(hkb_project_string_data));
+        classes.insert(10, Classes::HkbProjectData(hkb_project_data));
 
-        println!("{}", to_string(&classes).unwrap());
+        // hkRootContainer" is processed last.
+        classes.sort_keys();
+        let mut top_ptr = None;
+        if !classes.is_empty() {
+            if let Some((first_key, first_value)) = classes.shift_remove_index(0) {
+                classes.insert(first_key, first_value);
+                top_ptr = Some(first_key);
+            }
+        }
+
+        let actual = to_string(&classes, top_ptr.unwrap_or_default())?;
+        let expected =
+            include_str!("../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
+        pretty_assertions::assert_eq!(actual, expected);
+        Ok(())
     }
 }

@@ -46,8 +46,8 @@ impl Serialize for HkbProjectData {
 
         // flattened parent's fields
         serializer.pad_field([0u8; 4].as_slice(), [0u8; 8].as_slice())?; // hkBaseObject ptr size
-        serializer.skip_field("referenceCount", &self.parent.reference_count)?;
         serializer.skip_field("memSizeAndFlags", &self.parent.mem_size_and_flags)?;
+        serializer.skip_field("referenceCount", &self.parent.reference_count)?;
         serializer.pad_field(&[0u8; 0].as_slice(), &[0u8; 4].as_slice())?;
 
         serializer.serialize_field("worldUpWS", &self.world_up_ws)?;

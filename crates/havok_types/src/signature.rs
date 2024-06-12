@@ -16,8 +16,9 @@ use parse_display::Display;
 /// use havok_types::signature::Signature;
 ///
 /// assert_eq!(Signature::new(0x13a39ba7).to_string(), "0x13a39ba7");
-/// assert_eq!(Signature::new(0x00000001).to_string(), "0x00000001");
-/// assert_eq!(Signature::new(0x000000001).to_string(), "0x00000001");
+/// assert_eq!(Signature::new(0x00000001).to_string(), "0x1");
+/// assert_eq!(Signature::new(0x000000001).to_string(), "0x1");
+/// assert_eq!(Signature::new(0x076ad60a).to_string(), "0x76ad60a");
 ///
 /// assert_eq!("0x13a39ba7".parse(), Ok(Signature::new(0x13a39ba7)));
 /// ```
@@ -30,7 +31,7 @@ use parse_display::Display;
 )]
 #[repr(transparent)]
 #[derive(Debug, Copy, Clone, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Display, new)]
-#[display("0x{0:08x}")]
+#[display("{0:#x}")]
 pub struct Signature(u32);
 
 impl FromStr for Signature {
