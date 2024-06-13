@@ -111,16 +111,5 @@ impl havok_serde::ser::Error for Error {
     }
 }
 
-impl havok_serde::de::Error for Error {
-    fn custom<T>(msg: T) -> Self
-    where
-        T: Display,
-    {
-        Self::Message {
-            msg: msg.to_string(),
-        }
-    }
-}
-
 /// Wrapper on [`core::result::Result`] for Havok Serde.
 pub type Result<T, E = Error> = core::result::Result<T, E>;

@@ -37,4 +37,24 @@ impl Transform {
         bytes[48..64].copy_from_slice(&self.transition.to_be_bytes());
         bytes
     }
+
+    #[inline]
+    pub fn from_str(s: &str) -> crate::error::Result<(&str, Self)> {
+        let (remain, quaternion) = crate::tri!(parse_transform(s));
+        Ok((remain, quaternion))
+    }
+}
+
+pub fn parse_transform(input: &str) -> winnow::PResult<(&str, Transform)> {
+    use crate::{parse_rotation, parse_vector4};
+
+    let (input, rotation) = parse_rotation(input)?;
+    let (remain, transition) = parse_vector4(input)?;
+    Ok((
+        remain,
+        Transform {
+            rotation,
+            transition,
+        },
+    ))
 }

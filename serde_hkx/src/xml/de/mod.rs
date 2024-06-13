@@ -1,6 +1,8 @@
 use havok_serde::de::{self, Visitor};
 use havok_serde::Deserialize;
-use havok_types::{CString, StringPtr};
+use havok_types::{
+    CString, Matrix3, Matrix4, QsTransform, Quaternion, Rotation, StringPtr, Transform, Vector4,
+};
 
 use crate::de_error::{DeError as Error, Result};
 
@@ -138,210 +140,210 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     type Error = Error;
 
     #[inline]
-    fn deserialize_void<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_void<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
         visitor.visit_void(())
     }
 
-    fn deserialize_bool<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_bool<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
         visitor.visit_bool(self.parse_bool()?)
     }
 
-    fn deserialize_char<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_char<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        todo!()
+        visitor.visit_char(self.next_char()?)
     }
 
-    fn deserialize_int8<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_int8<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
         visitor.visit_int8(self.parse_signed()?)
     }
 
-    fn deserialize_uint8<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_uint8<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
         visitor.visit_uint8(self.parse_unsigned()?)
     }
 
-    fn deserialize_int16<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_int16<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
         visitor.visit_int16(self.parse_signed()?)
     }
 
-    fn deserialize_uint16<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_uint16<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
         visitor.visit_uint16(self.parse_unsigned()?)
     }
 
-    fn deserialize_int32<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_int32<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
         visitor.visit_int32(self.parse_signed()?)
     }
 
-    fn deserialize_uint32<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_uint32<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
         visitor.visit_uint32(self.parse_unsigned()?)
     }
 
-    fn deserialize_int64<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_int64<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
         visitor.visit_int64(self.parse_signed()?)
     }
 
-    fn deserialize_uint64<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_uint64<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
         visitor.visit_uint64(self.parse_unsigned()?)
     }
 
-    fn deserialize_real<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_real<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
         visitor.visit_real(self.parse_signed()?)
     }
 
-    fn deserialize_vector4<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_vector4<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        // visitor.visit_vector4()
-        todo!()
+        let (remain, vec) = Vector4::from_str(&self.input)?;
+        self.input = remain;
+        visitor.visit_vector4(vec)
     }
 
-    fn deserialize_quaternion<V>(
-        self,
-        visitor: V,
-    ) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_quaternion<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        todo!()
+        let (remain, quaternion) = Quaternion::from_str(&self.input)?;
+        self.input = remain;
+        visitor.visit_quaternion(quaternion)
     }
 
-    fn deserialize_matrix3<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_matrix3<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        todo!()
+        let (remain, matrix) = Matrix3::from_str(&self.input)?;
+        self.input = remain;
+        visitor.visit_matrix3(matrix)
     }
 
-    fn deserialize_rotation<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_rotation<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        todo!()
+        let (remain, rotation) = Rotation::from_str(&self.input)?;
+        self.input = remain;
+        visitor.visit_rotation(rotation)
     }
 
-    fn deserialize_qstransform<V>(
-        self,
-        visitor: V,
-    ) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_qstransform<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        todo!()
+        let (remain, qstransform) = QsTransform::from_str(&self.input)?;
+        self.input = remain;
+        visitor.visit_qstransform(qstransform)
     }
 
-    fn deserialize_matrix4<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_matrix4<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        todo!()
+        let (remain, matrix) = Matrix4::from_str(&self.input)?;
+        self.input = remain;
+        visitor.visit_matrix4(matrix)
     }
 
-    fn deserialize_transform<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_transform<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        todo!()
+        let (remain, transform) = Transform::from_str(&self.input)?;
+        self.input = remain;
+        visitor.visit_transform(transform)
     }
 
-    fn deserialize_pointer<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
-    where
-        V: Visitor<'de>,
-    {
-        todo!()
-    }
-
-    fn deserialize_array<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
-    where
-        V: Visitor<'de>,
-    {
-        todo!()
-    }
-
-    fn deserialize_struct<V>(
-        self,
-        name: &'static str,
-        visitor: V,
-    ) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_pointer<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
         todo!()
     }
 
-    fn deserialize_variant<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_array<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
         todo!()
     }
 
-    fn deserialize_cstring<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_struct<V>(self, name: &'static str, visitor: V) -> Result<V::Value, Self::Error>
+    where
+        V: Visitor<'de>,
+    {
+        todo!()
+    }
+
+    fn deserialize_variant<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    where
+        V: Visitor<'de>,
+    {
+        todo!()
+    }
+
+    fn deserialize_cstring<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
         visitor.visit_cstring(CString::from_str(self.parse_string()?))
     }
 
-    fn deserialize_ulong<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_ulong<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    where
+        V: Visitor<'de>,
+    {
+        visitor.visit_ulong(self.parse_unsigned()?)
+    }
+
+    fn deserialize_enum_flags<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
         todo!()
     }
 
-    fn deserialize_enum_flags<V>(
-        self,
-        visitor: V,
-    ) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_half<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
         todo!()
     }
 
-    fn deserialize_half<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
-    where
-        V: Visitor<'de>,
-    {
-        todo!()
-    }
-
-    fn deserialize_stringptr<V>(self, visitor: V) -> std::prelude::v1::Result<V::Value, Self::Error>
+    fn deserialize_stringptr<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {

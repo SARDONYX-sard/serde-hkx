@@ -43,4 +43,20 @@ impl Matrix4 {
         bytes[48..64].copy_from_slice(&self.w.to_be_bytes());
         bytes
     }
+
+    #[inline]
+    pub fn from_str(s: &str) -> crate::error::Result<(&str, Self)> {
+        let res = crate::tri!(parse_matrix4(s));
+        Ok(res)
+    }
+}
+
+fn parse_matrix4(input: &str) -> winnow::PResult<(&str, Matrix4)> {
+    use crate::parse_vector4;
+
+    let (input, x) = parse_vector4(input)?;
+    let (input, y) = parse_vector4(input)?;
+    let (input, z) = parse_vector4(input)?;
+    let (remain, w) = parse_vector4(input)?;
+    Ok((remain, Matrix4 { x, y, z, w }))
 }

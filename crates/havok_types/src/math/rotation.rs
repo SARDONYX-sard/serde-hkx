@@ -1,4 +1,4 @@
-use crate::Vector4;
+use crate::{Matrix3, Vector4};
 use derive_new::new;
 use parse_display::Display;
 
@@ -45,4 +45,16 @@ impl Rotation {
         bytes[32..48].copy_from_slice(&self.z.to_be_bytes());
         bytes
     }
+
+    #[inline]
+    pub fn from_str(s: &str) -> crate::error::Result<(&str, Self)> {
+        let (remain, rotation) = crate::tri!(crate::parse_rotation(s));
+        Ok((remain, rotation))
+    }
+}
+
+#[inline]
+pub fn parse_rotation(input: &str) -> winnow::PResult<(&str, Rotation)> {
+    let (remain, Matrix3 { x, y, z }) = crate::parse_matrix3(input)?;
+    Ok((remain, Rotation { x, y, z }))
 }

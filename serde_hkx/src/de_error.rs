@@ -104,6 +104,15 @@ pub enum DeError {
         #[snafu(implicit)]
         location: snafu::Location,
     },
+
+    #[snafu(transparent)]
+    ParseError {
+        /// Parse Error
+        source: havok_types::error::Error,
+        /// error location
+        #[snafu(implicit)]
+        location: snafu::Location,
+    },
 }
 
 impl havok_serde::de::Error for DeError {

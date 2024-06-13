@@ -37,6 +37,12 @@ impl<'a> StringPtr<'a> {
         }
     }
 
+    /// Inner to [`Self`]
+    #[inline]
+    pub fn from_option(s: Option<Cow<'a, str>>) -> StringPtr<'a> {
+        Self { inner: s }
+    }
+
     /// Null pointer or not?
     ///
     /// This indicates that no binary data was present.
@@ -58,19 +64,22 @@ impl<'a> StringPtr<'a> {
 }
 
 impl<'a> From<&'a str> for StringPtr<'a> {
-    fn from(value: &'a str) -> Self {
-        Self::from_str(value)
+    #[inline]
+    fn from(s: &'a str) -> Self {
+        Self::from_str(s)
     }
 }
 
 impl<'a> From<Cow<'a, str>> for StringPtr<'a> {
+    #[inline]
     fn from(value: Cow<'a, str>) -> Self {
         Self { inner: Some(value) }
     }
 }
 
 impl<'a> From<Option<Cow<'a, str>>> for StringPtr<'a> {
-    fn from(value: Option<Cow<'a, str>>) -> Self {
-        Self { inner: value }
+    #[inline]
+    fn from(inner: Option<Cow<'a, str>>) -> Self {
+        Self { inner }
     }
 }

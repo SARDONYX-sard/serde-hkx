@@ -397,6 +397,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_with",
+ "snafu",
  "static_assertions",
  "tracing",
  "winnow 0.6.8",

@@ -63,14 +63,26 @@ impl<'a> CString<'a> {
     }
 }
 
+impl fmt::Display for CString<'_> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let s = match self.inner.as_ref() {
+            Some(s) => unsafe { from_utf8_unchecked(s.as_bytes()) }, // Safety: str is always utf8
+            None => "",
+        };
+        write!(f, "{s}")
+    }
+}
+
 impl<'a> From<&'a str> for CString<'a> {
+    #[inline]
     fn from(value: &'a str) -> Self {
         Self::from_str(value)
     }
 }
 
 impl<'a> From<CString<'a>> for StringPtr<'a> {
+    #[inline]
     fn from(value: CString<'a>) -> Self {
-        value.into_inner().into()
+        Self::from_option(value.into_inner())
     }
 }

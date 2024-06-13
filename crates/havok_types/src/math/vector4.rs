@@ -1,9 +1,5 @@
-use std::str::FromStr;
-
 use derive_new::new;
 use parse_display::Display;
-#[cfg(feature = "bytes")]
-use zerocopy::{AsBytes, FromBytes, FromZeroes};
 
 /// Vector4 for Havok C++ Class.
 ///
@@ -16,6 +12,7 @@ use zerocopy::{AsBytes, FromBytes, FromZeroes};
 ///
 /// assert_eq!("(1.000000 1.000000 1.000000 0.000000)".parse(), Ok(Vector4::new(1.0, 1.0, 1.0, 0.0)));
 /// assert_eq!("(-0.000000 0.000000 -0.000000 1.000000)".parse(), Ok(Vector4::new(-0.0, 0.0, -0.0, 1.0)));
+/// assert_eq!("   (   -0.000000 0.000000 -0.000000 1.000000  ) ".parse(), Ok(Vector4::new(-0.0, 0.0, -0.0, 1.0)));
 /// ```
 ///
 /// # XML representation
@@ -26,7 +23,6 @@ use zerocopy::{AsBytes, FromBytes, FromZeroes};
 /// </hkparam>
 /// ```
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-#[cfg_attr(feature = "bytes", derive(AsBytes, FromBytes, FromZeroes))]
 #[repr(C, align(16))]
 #[derive(Debug, Clone, Default, PartialEq, PartialOrd, Display, new)]
 #[display("({x:.06} {y:.06} {z:.06} {w:.06})")]
@@ -40,6 +36,7 @@ pub struct Vector4 {
 static_assertions::assert_eq_size!(Vector4, [u8; 16]);
 
 impl Vector4 {
+    /// As a byte array in little endian.
     #[inline]
     pub fn to_le_bytes(&self) -> [u8; 16] {
         let mut bytes = [0u8; 16];
@@ -50,6 +47,7 @@ impl Vector4 {
         bytes
     }
 
+    /// As a byte array in big endian.
     #[inline]
     pub fn to_be_bytes(&self) -> [u8; 16] {
         let mut bytes = [0u8; 16];
@@ -60,111 +58,66 @@ impl Vector4 {
         bytes
     }
 
+    /// Create a [`Vector4`] value from its representation as a byte array in little endian.
     #[inline]
     pub fn from_le_bytes(bytes: &[u8; 16]) -> Self {
-        let x = f32::from_le_bytes(bytes[0..4].try_into().unwrap());
-        let y = f32::from_le_bytes(bytes[4..8].try_into().unwrap());
-        let z = f32::from_le_bytes(bytes[8..12].try_into().unwrap());
-        let w = f32::from_le_bytes(bytes[12..16].try_into().unwrap());
-        Self { x, y, z, w }
+        Self {
+            x: f32::from_le_bytes([bytes[0], bytes[1], bytes[2], bytes[3]]),
+            y: f32::from_le_bytes([bytes[4], bytes[5], bytes[6], bytes[7]]),
+            z: f32::from_le_bytes([bytes[8], bytes[9], bytes[10], bytes[11]]),
+            w: f32::from_le_bytes([bytes[12], bytes[13], bytes[14], bytes[15]]),
+        }
     }
 
+    /// Create a [`Vector4`] value from its representation as a byte array in big endian.
     #[inline]
     pub fn from_be_bytes(bytes: &[u8; 16]) -> Self {
-        let x = f32::from_be_bytes(bytes[0..4].try_into().unwrap());
-        let y = f32::from_be_bytes(bytes[4..8].try_into().unwrap());
-        let z = f32::from_be_bytes(bytes[8..12].try_into().unwrap());
-        let w = f32::from_be_bytes(bytes[12..16].try_into().unwrap());
-        Self { x, y, z, w }
+        Self {
+            x: f32::from_be_bytes([bytes[0], bytes[1], bytes[2], bytes[3]]),
+            y: f32::from_be_bytes([bytes[4], bytes[5], bytes[6], bytes[7]]),
+            z: f32::from_be_bytes([bytes[8], bytes[9], bytes[10], bytes[11]]),
+            w: f32::from_be_bytes([bytes[12], bytes[13], bytes[14], bytes[15]]),
+        }
+    }
+
+    /// Parse to (remain, Self)
+    #[inline]
+    pub fn from_str(s: &str) -> crate::error::Result<(&str, Self)> {
+        let res = crate::tri!(parse_vector4(s));
+        Ok(res)
     }
 }
 
 static_assertions::assert_eq_size!(Vector4, [u8; 16]); // Vector4 must be 16bytes size.
 static_assertions::assert_eq_align!(Vector4, u128); // Vector4 must be 16bytes(16 * 8 = 128bit) align.
 
-impl FromStr for Vector4 {
-    type Err = String;
-
-    #[inline]
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        use winnow::error::ErrMode;
-        match parse_vector4(s) {
-            Ok((_, vec)) => Ok(vec),
-            Err(e) => Err(match e {
-                ErrMode::Incomplete(e) => format!("{e:?}"),
-                ErrMode::Backtrack(e) | ErrMode::Cut(e) => e.to_string(),
-            }),
-        }
-    }
-}
-
 pub fn parse_vector4(input: &str) -> winnow::PResult<(&str, Vector4)> {
     use winnow::ascii::{float, space0};
-    use winnow::combinator::{cut_err, delimited, seq};
+    use winnow::combinator::{cut_err, seq};
     use winnow::error::{StrContext, StrContextValue};
     use winnow::Parser;
 
-    delimited(
-        cut_err('(').context(StrContext::Expected(StrContextValue::CharLiteral('('))),
-        seq!(Vector4 {
-                    _: space0,
-                    x: float.context(StrContext::Expected(StrContextValue::Description("float for x component"))),
-                    _: space0,
-                    y: float.context(StrContext::Expected(StrContextValue::Description("float for y component"))),
-                    _: space0,
-                    z: float.context(StrContext::Expected(StrContextValue::Description("float for z component"))),
-                    _:space0,
-                    w: float.context(StrContext::Expected(StrContextValue::Description("float for w component"))),
-                    _:space0,
-                }),
-        cut_err(')').context(StrContext::Expected(StrContextValue::CharLiteral(')'))),
-    )
+    seq!(Vector4 {
+            _: space0,
+            _: cut_err('(').context(StrContext::Expected(StrContextValue::CharLiteral('('))),
+            _: space0,
+            x: float.context(StrContext::Expected(StrContextValue::Description("float for x component"))),
+            _: space0,
+            y: float.context(StrContext::Expected(StrContextValue::Description("float for y component"))),
+            _: space0,
+            z: float.context(StrContext::Expected(StrContextValue::Description("float for z component"))),
+            _:space0,
+            w: float.context(StrContext::Expected(StrContextValue::Description("float for w component"))),
+            _:space0,
+            _:  cut_err(')').context(StrContext::Expected(StrContextValue::CharLiteral(')'))),
+            _: space0,
+        })
     .parse_peek(input)
-}
-
-#[allow(dead_code)]
-pub fn parse_vector3(input: &str) -> winnow::PResult<(&str, Vector4)> {
-    use winnow::ascii::{float, space0};
-    use winnow::combinator::{cut_err, delimited, seq};
-    use winnow::error::{StrContext, StrContextValue};
-    use winnow::Parser;
-
-    struct Vector3 {
-        x: f32,
-        y: f32,
-        z: f32,
-    }
-
-    let v = delimited(
-        cut_err('(').context(StrContext::Expected(StrContextValue::CharLiteral('('))),
-        seq!(Vector3 {
-                    _: space0,
-                    x: float.context(StrContext::Expected(StrContextValue::Description("float for x component"))),
-                    _: space0,
-                    y: float.context(StrContext::Expected(StrContextValue::Description("float for y component"))),
-                    _: space0,
-                    z: float.context(StrContext::Expected(StrContextValue::Description("float for z component"))),
-                    _:space0,
-                }),
-        cut_err(')').context(StrContext::Expected(StrContextValue::CharLiteral(')'))),
-    )
-    .parse_peek(input)?;
-
-    Ok((
-        v.0,
-        Vector4 {
-            x: v.1.x,
-            y: v.1.y,
-            z: v.1.z,
-            w: 0.0,
-        },
-    ))
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    // use pretty_assertions::assert_eq;
 
     #[test]
     fn test() {
@@ -177,22 +130,15 @@ mod tests {
         ];
 
         assert_eq!(
-            Vector4::read_from_prefix(expected_bytes),
-            Some(Vector4::new(1.0, 1.0, 1.0, 0.0))
-        );
-        assert_eq!(
             &Vector4::new(1.0, 1.0, 1.0, 0.0).to_le_bytes(),
             expected_bytes,
         );
-        assert_eq!(Vector4::new(1.0, 1.0, 1.0, 0.0).as_bytes(), expected_bytes);
 
         assert_eq!(
-            "(-0.000000 0.000000 -0.000000 1.000000) others".parse(),
-            Ok(Vector4::new(-0.0, 0.0, -0.0, 1.0))
+            Vector4::from_str("(-0.000000 0.000000 -0.000000 1.000000)").unwrap(),
+            ("", Vector4::new(-0.0, 0.0, -0.0, 1.0))
         );
-        assert_eq!(
-            "(-0.000000 0.000000j -0.000000 1.000000)".parse(),
-            Ok(Vector4::new(-0.0, 0.0, -0.0, 1.0))
-        );
+
+        assert!(Vector4::from_str("(-0.000000 0.000000j -0.000000 1.000000)").is_err());
     }
 }

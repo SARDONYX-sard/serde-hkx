@@ -1,3 +1,5 @@
+use crate::error::Result;
+use crate::{parse_vector4, Vector4};
 use derive_new::new;
 use parse_display::Display;
 
@@ -39,21 +41,46 @@ impl Quaternion {
         bytes
     }
 
+    /// Create a [`Quaternion`] value from its representation as a byte array in little endian.
     #[inline]
     pub fn from_le_bytes(bytes: &[u8; 16]) -> Self {
-        let x = f32::from_le_bytes(bytes[0..4].try_into().unwrap());
-        let y = f32::from_le_bytes(bytes[4..8].try_into().unwrap());
-        let z = f32::from_le_bytes(bytes[8..12].try_into().unwrap());
-        let scaler = f32::from_le_bytes(bytes[12..16].try_into().unwrap());
-        Self { x, y, z, scaler }
+        Self {
+            x: f32::from_le_bytes([bytes[0], bytes[1], bytes[2], bytes[3]]),
+            y: f32::from_le_bytes([bytes[4], bytes[5], bytes[6], bytes[7]]),
+            z: f32::from_le_bytes([bytes[8], bytes[9], bytes[10], bytes[11]]),
+            scaler: f32::from_le_bytes([bytes[12], bytes[13], bytes[14], bytes[15]]),
+        }
     }
 
+    /// Create a [`Quaternion`] value from its representation as a byte array in big endian.
     #[inline]
     pub fn from_be_bytes(bytes: &[u8; 16]) -> Self {
-        let x = f32::from_be_bytes(bytes[0..4].try_into().unwrap());
-        let y = f32::from_be_bytes(bytes[4..8].try_into().unwrap());
-        let z = f32::from_be_bytes(bytes[8..12].try_into().unwrap());
-        let scaler = f32::from_be_bytes(bytes[12..16].try_into().unwrap());
-        Self { x, y, z, scaler }
+        Self {
+            x: f32::from_be_bytes([bytes[0], bytes[1], bytes[2], bytes[3]]),
+            y: f32::from_be_bytes([bytes[4], bytes[5], bytes[6], bytes[7]]),
+            z: f32::from_be_bytes([bytes[8], bytes[9], bytes[10], bytes[11]]),
+            scaler: f32::from_be_bytes([bytes[12], bytes[13], bytes[14], bytes[15]]),
+        }
     }
+
+    /// Attempt to extract from the string representation in the tag on XML.
+    ///
+    /// # Examples
+    /// ```
+    /// use havok_types::Quaternion;
+    /// let (remain, actual) = Quaternion::from_str("   (   -0.000000 0.000000 -0.000000 1.000000  ) ").unwrap();
+    /// assert_eq!(remain, "");
+    /// assert_eq!(actual, Quaternion::new(-0.0, 0.0, -0.0, 1.0));
+    /// ```
+    #[inline]
+    pub fn from_str(s: &str) -> Result<(&str, Self)> {
+        let (remain, quaternion) = crate::tri!(parse_quaternion(s));
+        Ok((remain, quaternion))
+    }
+}
+
+#[inline]
+pub fn parse_quaternion(s: &str) -> winnow::PResult<(&str, Quaternion)> {
+    let (remain, Vector4 { x, y, z, w }) = parse_vector4(s)?;
+    Ok((remain, Quaternion { x, y, z, scaler: w }))
 }

@@ -1,4 +1,6 @@
 //! All havok types definitions.
+pub mod error;
+
 pub mod cstring;
 pub mod math;
 pub mod pointer;
@@ -18,4 +20,25 @@ pub use variant::*;
 
 mod lib {
     pub use std::borrow::Cow;
+
+    pub use core::fmt;
+    pub use core::str::from_utf8_unchecked;
+    pub use core::str::FromStr;
 }
+
+/// Try parse to error
+macro_rules! tri {
+    ($parser:expr) => {
+        match $parser {
+            Ok(res) => res,
+            Err(err) => {
+                return Err(crate::error::ParseSnafu {
+                    reason: err.to_string(),
+                }
+                .build());
+            }
+        }
+    };
+}
+
+pub(crate) use tri;
