@@ -1,6 +1,6 @@
 use crate::lib::*;
 
-use havok_serde::de::{self, Visitor};
+use havok_serde::de::{self, DeserializeSeed, SeqAccess, Visitor};
 use havok_serde::Deserialize;
 use havok_types::str_parser::{parse_bool, parse_float};
 use havok_types::{
@@ -50,6 +50,16 @@ impl<'de> Deserializer<'de> {
         let ch = self.peek_char()?;
         self.input = &self.input[ch.len_utf8()..];
         Ok(ch)
+    }
+
+    /// If the data is expected data, consume and return true.
+    fn next_str(&mut self, s: &str) -> bool {
+        if self.input.starts_with(s) {
+            self.input = &self.input[s.len()..];
+            true
+        } else {
+            false
+        }
     }
 
     // Parse a group of decimal digits as an unsigned integer of type T.
@@ -113,13 +123,10 @@ impl<'de> Deserializer<'de> {
     // Makes no attempt to handle escape sequences. What did you expect? This is
     // example code!
     fn parse_string(&mut self) -> Result<&'de str> {
-        if self.input.ends_with("<hkcstring>") {
-            return Err(Error::ExpectedString);
-        }
-        match self.input.find("</hkcstring>") {
+        match self.input.find("</") {
             Some(len) => {
                 let s = &self.input[..len];
-                self.input = &self.input[len + 1..];
+                self.input = &self.input[len..];
                 Ok(s)
             }
             None => Err(Error::Eof),
@@ -302,7 +309,21 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        todo!()
+        // TODO: parse <hkparam name="key" numelements="3"><hkparam> & multiline
+        // Parse the opening bracket of the sequence.
+        if self.next_str("<hkparam>") {
+            // Give the visitor access to each element of the sequence.
+            let value = visitor.visit_array(Separated::new(self))?;
+
+            // Parse the closing bracket of the sequence.
+            if self.next_str("</hkparam>") {
+                Ok(value)
+            } else {
+                Err(Error::ExpectedArrayEnd)
+            }
+        } else {
+            Err(Error::ExpectedArray)
+        }
     }
 
     fn deserialize_struct<V>(self, name: &'static str, visitor: V) -> Result<V::Value, Self::Error>
@@ -360,6 +381,120 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     }
 }
 
+// In order to handle commas correctly when deserializing a JSON array or map,
+// we need to track whether we are on the first element or past the first
+// element.
+struct Separated<'a, 'de: 'a> {
+    de: &'a mut Deserializer<'de>,
+    first: bool,
+}
+
+impl<'a, 'de> Separated<'a, 'de> {
+    fn new(de: &'a mut Deserializer<'de>) -> Self {
+        Separated { de, first: true }
+    }
+}
+
+// `SeqAccess` is provided to the `Visitor` to give it the ability to iterate
+// through elements of the sequence.
+impl<'de, 'a> SeqAccess<'de> for Separated<'a, 'de> {
+    type Error = Error;
+
+    fn next_primitive_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>>
+    where
+        T: DeserializeSeed<'de>,
+    {
+        // Check if there are no more elements.
+        if self.de.input.starts_with("</hkparam>") {
+            return Ok(None);
+        }
+
+        // Space is required before every element except the first.
+        if !self.first && self.de.next_char()? != ' ' {
+            return Err(Error::ExpectedArraySpace);
+        }
+        self.first = false;
+
+        #[cfg(feature = "tracing")]
+        tracing::trace!(self.de.input);
+
+        // Deserialize an array element.
+        seed.deserialize(&mut *self.de).map(Some)
+    }
+
+    fn next_class_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
+    where
+        T: DeserializeSeed<'de>,
+    {
+        // Check if there are no more elements.
+        if self.de.input.starts_with("</hkparam>") {
+            return Ok(None);
+        }
+
+        // Space is required before every element except the first.
+        if !self.first && self.de.next_char()? != ' ' {
+            return Err(Error::ExpectedArraySpace);
+        }
+        self.first = false;
+
+        #[cfg(feature = "tracing")]
+        tracing::trace!(self.de.input);
+
+        // Deserialize an array element.
+        seed.deserialize(&mut *self.de).map(Some)
+    }
+
+    fn next_math_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
+    where
+        T: DeserializeSeed<'de>,
+    {
+        todo!()
+    }
+
+    #[inline]
+    fn next_cstring_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
+    where
+        T: DeserializeSeed<'de>,
+    {
+        self.next_stringptr_element_seed(seed)
+    }
+
+    /// - `hkArray<hkStringPtr>`
+    /// ```xml
+    /// <hkparam name="key" numelements="3">
+    ///     <hkcstring>StringPtr1</hkcstring>
+    ///     <hkcstring>StringPtr2</hkcstring>
+    ///     <hkcstring>StringPtr3</hkcstring>
+    /// </hkparam>
+    /// ```
+    fn next_stringptr_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
+    where
+        T: DeserializeSeed<'de>,
+    {
+        // Check if there are no more elements.
+        if self.de.input.starts_with("</hkparam>") {
+            return Ok(None);
+        }
+
+        // Space is required before every element except the first.
+        if !self.de.next_str("<hkcstring>") {
+            return Err(Error::ExpectedArrayStringStartTag);
+        }
+        self.first = false;
+
+        let ret = seed.deserialize(&mut *self.de).map(Some)?;
+
+        #[cfg(feature = "tracing")]
+        tracing::trace!(self.de.input);
+        // Space is required before every element except the first.
+        if !self.de.next_str("</hkcstring>") {
+            return Err(Error::ExpectedArrayStringEndTag);
+        }
+
+        Ok(ret)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -367,8 +502,20 @@ mod tests {
     // use havok_types::*;
 
     #[test]
+    #[quick_tracing::init]
     fn test_serialize() {
         // let xml = &include_str!("../../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
-        assert_eq!(from_str::<i32>("32").unwrap(), 32);
+        assert_eq!(
+            from_str::<Vec<i32>>("<hkparam>1 2 3 4</hkparam>").unwrap(),
+            vec![1, 2, 3, 4]
+        );
+
+        assert_eq!(
+            from_str::<Vec<StringPtr>>(
+                "<hkparam><hkcstring>Hello</hkcstring><hkcstring>World</hkcstring></hkparam>"
+            )
+            .unwrap(),
+            vec!["Hello".into(), "World".into()]
+        );
     }
 }

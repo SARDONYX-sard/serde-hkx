@@ -13,6 +13,8 @@
 //! Deserialization
 
 mod impls;
+mod seed;
+mod size_hint;
 
 use havok_types::{
     f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, StringPtr,
@@ -859,7 +861,7 @@ pub trait Deserializer<'de>: Sized {
     where
         V: Visitor<'de>;
 
-    /// Deserialize an `Vector4` value.
+    /// Deserialize an `Pointer` value.
     fn deserialize_pointer<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>;
@@ -1192,8 +1194,17 @@ pub trait Visitor<'de>: Sized {
         Err(Error::invalid_type(Unexpected::Variant(v), &self))
     }
 
-    // TODO: Array
-    //
+    /// The input contains an Array.
+    ///
+    /// The default implementation fails with a type error.
+    fn visit_array<A>(self, seq: A) -> Result<Self::Value, A::Error>
+    where
+        A: SeqAccess<'de>,
+    {
+        let _ = seq;
+        Err(Error::invalid_type(Unexpected::Array, &self))
+    }
+
     // TODO: Struct
 
     /// The input contains a CString.
@@ -1269,8 +1280,44 @@ pub trait SeqAccess<'de> {
     /// `Ok(None)` if there are no more remaining items.
     ///
     /// `Deserialize` implementations should typically use
-    /// `SeqAccess::next_element` instead.
-    fn next_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
+    /// `SeqAccess::next_primitive_element` instead.
+    fn next_primitive_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
+    where
+        T: DeserializeSeed<'de>;
+
+    /// This returns `Ok(Some(value))` for the next value in the sequence, or
+    /// `Ok(None)` if there are no more remaining items.
+    ///
+    /// `Deserialize` implementations should typically use
+    /// `SeqAccess::next_class_element` instead.
+    fn next_class_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
+    where
+        T: DeserializeSeed<'de>; // + crate::HavokClass
+
+    /// This returns `Ok(Some(value))` for the next value in the sequence, or
+    /// `Ok(None)` if there are no more remaining items.
+    ///
+    /// `Deserialize` implementations should typically use
+    /// `SeqAccess::next_math_element` instead.
+    fn next_math_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
+    where
+        T: DeserializeSeed<'de>;
+
+    /// This returns `Ok(Some(value))` for the next value in the sequence, or
+    /// `Ok(None)` if there are no more remaining items.
+    ///
+    /// `Deserialize` implementations should typically use
+    /// `SeqAccess::next_cstring_element` instead.
+    fn next_cstring_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
+    where
+        T: DeserializeSeed<'de>;
+
+    /// This returns `Ok(Some(value))` for the next value in the sequence, or
+    /// `Ok(None)` if there are no more remaining items.
+    ///
+    /// `Deserialize` implementations should typically use
+    /// `SeqAccess::next_stringptr_element` instead.
+    fn next_stringptr_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
     where
         T: DeserializeSeed<'de>;
 
@@ -1280,11 +1327,57 @@ pub trait SeqAccess<'de> {
     /// This method exists as a convenience for `Deserialize` implementations.
     /// `SeqAccess` implementations should not override the default behavior.
     #[inline]
-    fn next_element<T>(&mut self) -> Result<Option<T>, Self::Error>
+    fn next_primitive_element<T>(&mut self) -> Result<Option<T>, Self::Error>
     where
         T: Deserialize<'de>,
     {
-        self.next_element_seed(PhantomData)
+        self.next_primitive_element_seed(PhantomData)
+    }
+
+    /// This returns `Ok(Some(value))` for the next value in the sequence, or
+    /// `Ok(None)` if there are no more remaining items.
+    ///
+    /// This method exists as a convenience for `Deserialize` implementations.
+    /// `SeqAccess` implementations should not override the default behavior.
+    #[inline]
+    fn next_class_element<T>(&mut self) -> Result<Option<T>, Self::Error>
+    where
+        T: Deserialize<'de> + crate::HavokClass,
+    {
+        self.next_class_element_seed(PhantomData)
+    }
+
+    /// This returns `Ok(Some(value))` for the next value in the sequence, or
+    /// `Ok(None)` if there are no more remaining items.
+    ///
+    /// This method exists as a convenience for `Deserialize` implementations.
+    /// `SeqAccess` implementations should not override the default behavior.
+    #[inline]
+    fn next_math_element<T>(&mut self) -> Result<Option<T>, Self::Error>
+    where
+        T: Deserialize<'de>,
+    {
+        self.next_math_element_seed(PhantomData)
+    }
+
+    /// This returns `Ok(Some(value))` for the next value in the sequence, or
+    /// `Ok(None)` if there are no more remaining items.
+    ///
+    /// This method exists as a convenience for `Deserialize` implementations.
+    /// `SeqAccess` implementations should not override the default behavior.
+    #[inline]
+    fn next_cstring_element(&mut self) -> Result<Option<CString<'de>>, Self::Error> {
+        self.next_cstring_element_seed(PhantomData)
+    }
+
+    /// This returns `Ok(Some(value))` for the next value in the sequence, or
+    /// `Ok(None)` if there are no more remaining items.
+    ///
+    /// This method exists as a convenience for `Deserialize` implementations.
+    /// `SeqAccess` implementations should not override the default behavior.
+    #[inline]
+    fn next_stringptr_element(&mut self) -> Result<Option<StringPtr<'de>>, Self::Error> {
+        self.next_stringptr_element_seed(PhantomData)
     }
 
     /// Returns the number of elements remaining in the sequence, if known.
@@ -1301,19 +1394,47 @@ where
     type Error = A::Error;
 
     #[inline]
-    fn next_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
+    fn next_primitive_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
     where
         T: DeserializeSeed<'de>,
     {
-        (**self).next_element_seed(seed)
+        (**self).next_primitive_element_seed(seed)
+    }
+
+    fn next_class_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
+    where
+        T: DeserializeSeed<'de>,
+    {
+        (**self).next_class_element_seed(seed)
+    }
+
+    fn next_math_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
+    where
+        T: DeserializeSeed<'de>,
+    {
+        (**self).next_math_element_seed(seed)
+    }
+
+    fn next_cstring_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
+    where
+        T: DeserializeSeed<'de>,
+    {
+        (**self).next_cstring_element_seed(seed)
+    }
+
+    fn next_stringptr_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
+    where
+        T: DeserializeSeed<'de>,
+    {
+        (**self).next_stringptr_element_seed(seed)
     }
 
     #[inline]
-    fn next_element<T>(&mut self) -> Result<Option<T>, Self::Error>
+    fn next_primitive_element<T>(&mut self) -> Result<Option<T>, Self::Error>
     where
         T: Deserialize<'de>,
     {
-        (**self).next_element()
+        (**self).next_primitive_element()
     }
 
     #[inline]

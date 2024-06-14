@@ -481,8 +481,8 @@ impl<'a> Serializer for &'a mut ByteSerializer {
 
     #[inline]
     fn serialize_variant(self, v: &Variant) -> Result<Self::Ok, Self::Error> {
-        self.serialize_ulong(v.object as u64)?;
-        self.serialize_ulong(v.class as u64)?;
+        self.serialize_pointer(v.object)?;
+        self.serialize_pointer(v.class)?;
         Ok(())
     }
 

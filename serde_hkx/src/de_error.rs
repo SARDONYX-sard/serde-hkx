@@ -11,10 +11,16 @@ pub enum DeError {
         msg: String,
     },
 
-    ExpectedString,
+    Eof,
+    ExpectedArray,
+    ExpectedArrayEnd,
+    ExpectedArraySpace,
+    ExpectedArrayStringEndTag,
+    ExpectedArrayStringStartTag,
+
     ExpectedBoolean,
     ExpectedInteger,
-    Eof,
+    ExpectedString,
     TrailingCharacters,
 
     /// Only 0 (big) or 1 (little) can be specified for the header endian. But got {invalid}

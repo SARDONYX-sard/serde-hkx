@@ -214,11 +214,11 @@ impl<'a> havok_serde::ser::Serializer for &'a mut XmlSerializer {
         Ok(self)
     }
 
-    /// TODO: Ignore the XML notation since it is unclear. (Fortunately this is only used for one class.)
+    /// FIXME: Unclear XML representation
     #[inline]
     fn serialize_variant(self, v: &Variant) -> Result<Self::Ok> {
-        let _ = v;
-        Ok(())
+        self.serialize_pointer(v.object)?;
+        self.serialize_pointer(v.class)
     }
 
     #[inline]

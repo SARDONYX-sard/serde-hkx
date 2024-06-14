@@ -38,10 +38,11 @@ mod lib {
     pub use self::core::{i16, i32, i64, i8};
     pub use self::core::{u16, u32, u64, u8, usize};
 
-    pub use self::core::marker::PhantomData;
-
+    pub use self::core::cmp;
     pub use self::core::fmt;
     pub use self::core::fmt::Display;
+    pub use self::core::marker::PhantomData;
+    pub use self::core::mem;
 
     #[cfg(not(feature = "std"))]
     pub use core::ffi::CStr;

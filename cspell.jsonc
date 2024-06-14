@@ -35,6 +35,7 @@
     "Mopp",
     "numelements",
     "offsetof",
+    "PREALLOC",
     "QSTRANSFORM",
     "Ragdoll",
     "RELARRAY",
