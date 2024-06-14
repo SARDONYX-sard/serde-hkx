@@ -1387,6 +1387,7 @@ pub trait SeqAccess<'de> {
     }
 }
 
+// NOTE: Deref does not result in a circular call error for `&mut A` because it calls the method of A.
 impl<'de, 'a, A> SeqAccess<'de> for &'a mut A
 where
     A: ?Sized + SeqAccess<'de>,
