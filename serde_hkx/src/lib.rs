@@ -16,6 +16,9 @@ mod lib {
     }
 
     pub use self::core::f32;
+    pub use self::core::ops::AddAssign;
+    pub use self::core::ops::MulAssign;
+    pub use self::core::ops::Neg;
     pub use self::core::str;
     pub use self::core::{i16, i32, i64, i8};
     pub use self::core::{u16, u32, u64, u8, usize};

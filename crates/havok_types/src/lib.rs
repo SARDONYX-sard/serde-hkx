@@ -1,5 +1,6 @@
 //! All havok types definitions.
 pub mod error;
+pub mod str_parser;
 
 pub mod cstring;
 pub mod math;

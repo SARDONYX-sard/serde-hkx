@@ -1,7 +1,11 @@
+use crate::lib::*;
+
 use havok_serde::de::{self, Visitor};
 use havok_serde::Deserialize;
+use havok_types::str_parser::{parse_bool, parse_float};
 use havok_types::{
-    CString, Matrix3, Matrix4, QsTransform, Quaternion, Rotation, StringPtr, Transform, Vector4,
+    f16, CString, Matrix3, Matrix4, QsTransform, Quaternion, Rotation, StringPtr, Transform,
+    Vector4,
 };
 
 use crate::de_error::{DeError as Error, Result};
@@ -48,19 +52,6 @@ impl<'de> Deserializer<'de> {
         Ok(ch)
     }
 
-    // Parse the JSON identifier `true` or `false`.
-    fn parse_bool(&mut self) -> Result<bool> {
-        if self.input.starts_with("true") {
-            self.input = &self.input["true".len()..];
-            Ok(true)
-        } else if self.input.starts_with("false") {
-            self.input = &self.input["false".len()..];
-            Ok(false)
-        } else {
-            Err(Error::ExpectedBoolean)
-        }
-    }
-
     // Parse a group of decimal digits as an unsigned integer of type T.
     //
     // This implementation is a bit too lenient, for example `001` is not
@@ -94,7 +85,7 @@ impl<'de> Deserializer<'de> {
     // signed integer of type T.
     fn parse_signed<T>(&mut self) -> Result<T>
     where
-        T: std::ops::Neg<Output = T> + std::ops::AddAssign<T> + std::ops::MulAssign<T> + From<i8>,
+        T: Neg<Output = T> + AddAssign<T> + MulAssign<T> + From<i8>,
     {
         // Optional minus sign, delegate to `parse_unsigned`, negate if negative.
         let mut int = match self.next_char()? {
@@ -151,9 +142,12 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_bool(self.parse_bool()?)
+        let (remain, boolean) = parse_bool(&self.input)?;
+        self.input = remain;
+        visitor.visit_bool(boolean)
     }
 
+    #[inline]
     fn deserialize_char<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -161,6 +155,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
         visitor.visit_char(self.next_char()?)
     }
 
+    #[inline]
     fn deserialize_int8<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -168,6 +163,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
         visitor.visit_int8(self.parse_signed()?)
     }
 
+    #[inline]
     fn deserialize_uint8<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -175,6 +171,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
         visitor.visit_uint8(self.parse_unsigned()?)
     }
 
+    #[inline]
     fn deserialize_int16<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -182,6 +179,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
         visitor.visit_int16(self.parse_signed()?)
     }
 
+    #[inline]
     fn deserialize_uint16<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -189,6 +187,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
         visitor.visit_uint16(self.parse_unsigned()?)
     }
 
+    #[inline]
     fn deserialize_int32<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -196,6 +195,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
         visitor.visit_int32(self.parse_signed()?)
     }
 
+    #[inline]
     fn deserialize_uint32<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -203,6 +203,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
         visitor.visit_uint32(self.parse_unsigned()?)
     }
 
+    #[inline]
     fn deserialize_int64<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -210,6 +211,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
         visitor.visit_int64(self.parse_signed()?)
     }
 
+    #[inline]
     fn deserialize_uint64<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -221,7 +223,9 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_real(self.parse_signed()?)
+        let (remain, float) = parse_float(&self.input)?;
+        self.input = remain;
+        visitor.visit_real(float)
     }
 
     fn deserialize_vector4<V>(self, visitor: V) -> Result<V::Value, Self::Error>
@@ -315,6 +319,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
         todo!()
     }
 
+    #[inline]
     fn deserialize_cstring<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -322,6 +327,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
         visitor.visit_cstring(CString::from_str(self.parse_string()?))
     }
 
+    #[inline]
     fn deserialize_ulong<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -340,9 +346,12 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        todo!()
+        let (remain, float) = parse_float(self.input)?;
+        self.input = remain;
+        visitor.visit_half(f16::from_f32(float))
     }
 
+    #[inline]
     fn deserialize_stringptr<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -360,7 +369,6 @@ mod tests {
     #[test]
     fn test_serialize() {
         // let xml = &include_str!("../../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
-
         assert_eq!(from_str::<i32>("32").unwrap(), 32);
     }
 }
