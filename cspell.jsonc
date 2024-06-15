@@ -33,6 +33,7 @@
     "jwalk",
     "malloc",
     "Mopp",
+    "multispace",
     "numelements",
     "offsetof",
     "PREALLOC",

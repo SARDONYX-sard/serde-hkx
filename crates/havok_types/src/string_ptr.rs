@@ -63,6 +63,13 @@ impl<'a> StringPtr<'a> {
     }
 }
 
+impl fmt::Display for StringPtr<'_> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let s = self.inner.as_ref().map(|s| s.as_ref()).unwrap_or("");
+        write!(f, "{s}")
+    }
+}
+
 impl<'a> From<&'a str> for StringPtr<'a> {
     #[inline]
     fn from(s: &'a str) -> Self {

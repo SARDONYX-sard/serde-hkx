@@ -23,7 +23,6 @@ mod lib {
     pub use std::borrow::Cow;
 
     pub use core::fmt;
-    pub use core::str::from_utf8_unchecked;
     pub use core::str::FromStr;
 }
 

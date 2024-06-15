@@ -29,3 +29,16 @@ pub fn parse_vector3(input: &str) -> winnow::PResult<(&str, Vector4)> {
 
     Ok((remain, Vector4 { x, y, z, w: 0.0 }))
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(
+            parse_vector3("(-0.000000 0.000000 1.000000)").unwrap(),
+            ("", Vector4::new(-0.0, 0.0, 1.0, 0.0))
+        );
+    }
+}

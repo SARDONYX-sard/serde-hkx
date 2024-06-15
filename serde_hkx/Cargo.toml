@@ -10,6 +10,7 @@ edition.workspace = true
 
 
 [dependencies]
+annotate-snippets = "0.11.4"                                              # Error reporting display
 byteorder = "1.5.0"
 educe = "0.6.0"
 havok_serde = { path = "../crates/havok_serde", features = ["indexmap"] }
@@ -20,6 +21,7 @@ num-traits = "0.2"
 snafu = "0.8.2"                                                           # Define all error patterns(with backtrace)
 static_assertions = "1.1.0"
 tracing = { version = "0.1.40", optional = true }
+winnow = "0.6.8"                                                          # Parser conbinator
 zerocopy = "0.7.34"
 
 

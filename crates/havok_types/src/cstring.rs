@@ -65,10 +65,7 @@ impl<'a> CString<'a> {
 
 impl fmt::Display for CString<'_> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let s = match self.inner.as_ref() {
-            Some(s) => unsafe { from_utf8_unchecked(s.as_bytes()) }, // Safety: str is always utf8
-            None => "",
-        };
+        let s = self.inner.as_ref().map(|s| s.as_ref()).unwrap_or("");
         write!(f, "{s}")
     }
 }

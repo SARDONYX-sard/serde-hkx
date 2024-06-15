@@ -12,10 +12,10 @@ use parse_display::Display;
 #[derive(Debug, Clone, Default, PartialEq, PartialOrd, Display, new)]
 #[display("({x:.06} {y:.06} {z:.06} {scaler:.06})")]
 pub struct Quaternion {
-    x: f32,
-    y: f32,
-    z: f32,
-    scaler: f32,
+    pub x: f32,
+    pub y: f32,
+    pub z: f32,
+    pub scaler: f32,
 }
 
 static_assertions::assert_eq_size!(Quaternion, [u8; 16]);

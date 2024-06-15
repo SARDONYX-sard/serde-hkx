@@ -1,3 +1,7 @@
+mod parser;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 use crate::lib::*;
 
 use havok_serde::de::{self, DeserializeSeed, SeqAccess, Visitor};
@@ -472,6 +476,8 @@ impl<'de, 'a> SeqAccess<'de> for Separated<'a, 'de> {
         T: DeserializeSeed<'de>,
     {
         // Check if there are no more elements.
+        (self.de.input);
+
         if self.de.input.starts_with("</hkparam>") {
             return Ok(None);
         }
