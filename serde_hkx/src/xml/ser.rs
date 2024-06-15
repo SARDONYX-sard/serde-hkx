@@ -194,6 +194,16 @@ impl<'a> havok_serde::ser::Serializer for &'a mut XmlSerializer {
         Ok(self)
     }
 
+    /// Create an XML string like the following
+    /// ```xml
+    /// <hkobject name="#0010" class="hkbProjectData" signature="0x13a39ba7">
+    ///   <!-- memSizeAndFlags SERIALIZE_IGNORED -->
+    ///   <!-- referenceCount SERIALIZE_IGNORED -->
+    ///   <hkparam name="worldUpWS">(0.000000 0.000000 1.000000 0.000000)</hkparam>
+    ///   <hkparam name="stringData">#0009</hkparam>
+    ///   <hkparam name="defaultEventMode">EVENT_MODE_IGNORE_FROM_GENERATOR</hkparam>
+    /// </hkobject>
+    /// ```
     fn serialize_struct(
         self,
         name: &'static str,
@@ -206,11 +216,10 @@ impl<'a> havok_serde::ser::Serializer for &'a mut XmlSerializer {
                 &format!("<hkobject name=\"{ptr_name}\" class=\"{name}\" signature=\"{sig}\">\n");
         } else {
             self.indent();
-            self.output += "<hkobject>\n";
+            self.output += "<hkobject>\n"; // If ptr & signature are not provided, the class is considered to be an in-field class. (e.g. `Array<hkRootContainerNamedVariant>`)
         }
 
-        // entered <hkparam>. so we increment indent.
-        self.increment_depth();
+        self.increment_depth(); // entered <hkparam>(each fields process). so we increment indent.
         Ok(self)
     }
 

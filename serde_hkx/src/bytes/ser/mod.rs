@@ -68,6 +68,8 @@ where
     serializer.class_starts = serializer
         .output
         .write_classnames_section::<O, K, V>(value)?;
+    #[cfg(feature = "tracing")]
+    tracing::trace!("class_starts: {:#?}", serializer.class_starts);
 
     // Calculate absolute data offset
     // - The position after the `__classnames__` section write is the starting point of the data section, which is the abs_offset itself.
@@ -82,7 +84,7 @@ where
     value.serialize(&mut serializer)?;
 
     // 4/5: Write fixups_offsets of `__data__` section header.
-    let (local_offset, global_offset, virtual_offset) = serializer.write_fixups()?; // Write local, global and virtual fixups
+    let (local_offset, global_offset, virtual_offset) = serializer.write_data_fixups()?; // Write local, global and virtual fixups
     let exports_offset = serializer.relative_position()?; // This is where the exports_offset is finally obtained.
 
     // Move back to fixup_offset of `__data__` section header.
@@ -94,7 +96,30 @@ where
         .write_u32::<O>(serializer.abs_data_offset)?;
 
     #[cfg(feature = "tracing")]
-    tracing::trace!(local_offset, global_offset, virtual_offset, exports_offset);
+    {
+        let abs = serializer.abs_data_offset;
+        let l_offset = abs + local_offset;
+        let g_offset = abs + global_offset;
+        let v_offset = abs + virtual_offset;
+        let e_offset = abs + exports_offset;
+        tracing::trace!(
+            r#"
+Offsets:
+  absolute data start: {abs:#02X}
+         local fixups: {local_offset:#02X}
+        global fixups: {global_offset:#02X}
+       virtual fixups: {virtual_offset:#02X}
+  exports/imports/end: {exports_offset:#02X}
+
+        abs +   local: {l_offset:#02X}
+        abs +  global: {g_offset:#02X}
+        abs + virtual: {v_offset:#02X}
+        abs + exports: {e_offset:#02X}
+        abs + imports: {e_offset:#02X}
+        abs +     end: {e_offset:#02X}
+"#,
+        );
+    }
 
     serializer.output.write_u32::<O>(local_offset)?;
     serializer.output.write_u32::<O>(global_offset)?;
@@ -320,14 +345,14 @@ impl ByteSerializer {
     ///
     /// # Returns
     /// (`local_offset`, `global_offset`, `virtual_offset`)
-    fn write_fixups(&mut self) -> Result<(u32, u32, u32)> {
+    fn write_data_fixups(&mut self) -> Result<(u32, u32, u32)> {
         let local_offset = self.relative_position()?;
         self.output.write(&self.local_fixups)?;
         self.output.align(16, 0xff)?;
 
         #[cfg(feature = "tracing")]
         tracing::debug!(
-            "[global_fixups]\nsources: {:#?},\ndestinations: {:#?}",
+            "[global_fixups pointers]\nsrc: {:#?},\ndest(same as virtual.src): {:#?}",
             self.global_fixups_ptr_src,
             self.virtual_fixups_ptr_src
         );
@@ -644,7 +669,6 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         self.serialize_ulong(0) // ptr size
     }
 
-    // 0x2c0
     /// In the binary serialization of hkx, we are at this stage writing each field of the structure.
     /// ptr type writes only the size of C++ `Array` here, since the data pointed to by the pointer
     /// will be written later.
