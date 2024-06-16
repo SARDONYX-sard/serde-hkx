@@ -158,6 +158,7 @@ pub fn string<'a>() -> impl Parser<&'a str, &'a str, ContextError> {
                 "e.g. Hello</hkparam>",
             )))
             .parse_next(input)?;
+
         let _ = tri!(end_tag("hkparam").parse_peek(input));
         Ok(s)
     }
@@ -166,15 +167,18 @@ pub fn string<'a>() -> impl Parser<&'a str, &'a str, ContextError> {
 /// Parses a string in `Array` e.g. `Hello` in `<hkcstring>Hello</hkcstring>`
 /// - The corresponding type for this XML: `Array<CString>`, `Array<StringPtr>`
 pub fn string_in_array<'a>() -> impl Parser<&'a str, &'a str, ContextError> {
-    delimited(
-        "<hkcstring>",
-        take_until(0.., "</hkcstring>"),
-        "</hkcstring>",
-    )
-    .context(StrContext::Label("string in Array"))
-    .context(StrContext::Expected(StrContextValue::Description(
-        "e.g. <hkcstring>Hello</hkcstring>",
-    )))
+    move |input: &mut &'a str| {
+        let s = take_until(0.., '<')
+            .context(StrContext::Label(
+                "string in Array marker tag(`</hkcstring>`)",
+            ))
+            .context(StrContext::Expected(StrContextValue::Description(
+                "e.g. Hello</hkcstring>",
+            )))
+            .parse_next(input)?;
+        let _ = tri!(end_tag("hkcstring").parse_peek(input));
+        Ok(s)
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -235,10 +239,10 @@ mod tests {
 
     #[test]
     fn test_string_in_array() {
-        let input = "<hkcstring>Hello</hkcstring>";
+        let input = "Hello</hkcstring>";
         assert_eq!(string_in_array().parse(input), Ok("Hello"));
 
-        let invalid_input = "<hkcstring>Hello<hkcstring>";
+        let invalid_input = "Hello<hkcstring>";
         assert!(string_in_array().parse(invalid_input).is_err());
     }
 }

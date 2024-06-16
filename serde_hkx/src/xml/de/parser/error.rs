@@ -1,11 +1,12 @@
 use crate::lib::*;
-use winnow::error::{ContextError, ParseError};
+use winnow::error::{ContextError, ErrMode, ParseError};
 
 /// Error struct to represent parsing errors in a more user-friendly way.
 #[derive(Debug)]
 pub struct ReadableError {
+    title: String,
     message: String,
-    span: std::ops::Range<usize>,
+    span: Range<usize>,
     input: String,
 }
 
@@ -19,6 +20,43 @@ impl ReadableError {
             .find(|e| input.is_char_boundary(*e))
             .unwrap_or(start);
         Self {
+            title: "Parse Error".to_string(),
+            message,
+            span: start..end,
+            input,
+        }
+    }
+
+    /// Constructs [`Self`] from parse error & input.
+    pub fn from_context(error: ErrMode<ContextError>, input: &str, err_pos: usize) -> Self {
+        let (labels, message) = error
+            .map(|ctx| {
+                let mut labels = String::new();
+                let mut msg = "Expected ".to_string();
+                for c in ctx.context() {
+                    match c {
+                        winnow::error::StrContext::Label(label) => {
+                            labels += *label;
+                        }
+                        winnow::error::StrContext::Expected(expected) => {
+                            msg += &expected.to_string();
+                            msg += ". ";
+                        }
+                        _ => (),
+                    }
+                }
+                (labels, msg)
+            })
+            .into_inner()
+            .unwrap_or_default();
+
+        let input = input.to_owned();
+        let start = err_pos;
+        let end = (start + 1..)
+            .find(|e| input.is_char_boundary(*e))
+            .unwrap_or(start);
+        Self {
+            title: labels,
             message,
             span: start..end,
             input,
@@ -28,17 +66,15 @@ impl ReadableError {
 
 impl fmt::Display for ReadableError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let message = annotate_snippets::Level::Error
-            .title(&self.message)
-            .snippet(
-                annotate_snippets::Snippet::source(&self.input)
-                    .fold(true)
-                    .annotation(
-                        annotate_snippets::Level::Error
-                            .span(self.span.clone())
-                            .label(&self.message),
-                    ),
-            );
+        let message = annotate_snippets::Level::Error.title(&self.title).snippet(
+            annotate_snippets::Snippet::source(&self.input)
+                .fold(true)
+                .annotation(
+                    annotate_snippets::Level::Error
+                        .span(self.span.clone())
+                        .label(&self.message),
+                ),
+        );
         let renderer = annotate_snippets::Renderer::plain();
         let rendered = renderer.render(message);
         rendered.fmt(f)
@@ -46,17 +82,3 @@ impl fmt::Display for ReadableError {
 }
 
 impl std::error::Error for ReadableError {}
-
-#[cfg(test)]
-macro_rules! readable_assert_eq {
-    ($parser:tt($input:ident), $expected:expr) => {
-        match $parser().parse($input).map_err(|e| {
-            crate::xml::de::parser::error::ReadableError::from_parse(e, $input).to_string()
-        }) {
-            Ok(res) => assert_eq!(res, $expected),
-            Err(err) => panic!("{err}"),
-        }
-    };
-}
-#[cfg(test)]
-pub(crate) use readable_assert_eq;

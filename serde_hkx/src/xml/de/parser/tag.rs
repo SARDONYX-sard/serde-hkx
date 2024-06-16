@@ -6,7 +6,6 @@ use winnow::token::take_until;
 use winnow::Parser;
 
 use super::delimited_with_multispace0;
-use super::type_kind::string;
 
 /// Parses the start tag `<tag>`
 pub fn start_tag<'a>(tag: &'static str) -> impl Parser<&'a str, (), ContextError> {
@@ -24,7 +23,8 @@ pub fn start_tag<'a>(tag: &'static str) -> impl Parser<&'a str, (), ContextError
 /// Parses the end tag `</tag>`
 pub fn end_tag<'a>(tag: &'static str) -> impl Parser<&'a str, (), ContextError> {
     move |input: &mut &'a str| {
-        let _ = delimited_with_multispace0("<").parse_next(input)?;
+        let _ = '<'.parse_next(input)?;
+
         delimited(
             delimited_with_multispace0("/"),
             delimited_with_multispace0(tag),
@@ -36,6 +36,9 @@ pub fn end_tag<'a>(tag: &'static str) -> impl Parser<&'a str, (), ContextError> 
 }
 
 /// Parses the array start tag `<hkparam name="key" numelements="3">`
+///
+/// # Returns
+/// (name, numelements) -> e.g. (`key`, 3)
 pub fn array_start_tag<'a>() -> impl Parser<&'a str, (&'a str, u64), ContextError> {
     move |input: &mut &'a str| {
         delimited_with_multispace0("<")
@@ -45,7 +48,7 @@ pub fn array_start_tag<'a>() -> impl Parser<&'a str, (&'a str, u64), ContextErro
         delimited_with_multispace0("hkparam").parse_next(input)?;
         delimited_with_multispace0("name").parse_next(input)?;
         delimited_with_multispace0("=").parse_next(input)?;
-        let name = string().parse_next(input)?;
+        let name = attr_string().parse_next(input)?;
         delimited_with_multispace0("numelements").parse_next(input)?;
         delimited_with_multispace0("=").parse_next(input)?;
         let num = number_in_string().parse_next(input)?;
@@ -73,6 +76,15 @@ where
     }
 }
 
+/// Parses a xml attribute string, e.g., `"string"`
+fn attr_string<'a>() -> impl Parser<&'a str, &'a str, ContextError> {
+    delimited("\"", take_until(0.., "\""), "\"")
+        .context(StrContext::Label("attribute string in XML"))
+        .context(StrContext::Expected(StrContextValue::Description(
+            "e.g. \"String\"",
+        )))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -91,8 +103,8 @@ mod tests {
         assert!(end_tag("tag").parse("</ tag >").is_ok());
         assert!(end_tag("tag").parse("</  tag  >").is_ok());
 
-        let input = "</  tag  >";
-        match end_tag("tag").parse(input).map_err(|e| {
+        let input = "</  hkparam >\n";
+        match end_tag("hkparam").parse(input).map_err(|e| {
             crate::xml::de::parser::error::ReadableError::from_parse(e, input).to_string()
         }) {
             Ok(res) => assert_eq!(res, ()),

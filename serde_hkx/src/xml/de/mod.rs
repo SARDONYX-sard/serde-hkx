@@ -1,16 +1,17 @@
-mod parser;
+pub mod parser;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-use crate::lib::*;
+use crate::{lib::*, tri};
 
 use havok_serde::de::{self, DeserializeSeed, SeqAccess, Visitor};
 use havok_serde::Deserialize;
-use havok_types::str_parser::{parse_bool, parse_float};
-use havok_types::{
-    f16, CString, Matrix3, Matrix4, QsTransform, Quaternion, Rotation, StringPtr, Transform,
-    Vector4,
-};
+use havok_types::*;
+use parser::error::ReadableError;
+use parser::tag::{array_start_tag, end_tag, start_tag};
+use parser::type_kind::*;
+use winnow::ascii::{dec_int, dec_uint, multispace1};
+use winnow::Parser;
 
 use crate::de_error::{DeError as Error, Result};
 
@@ -18,12 +19,21 @@ pub struct Deserializer<'de> {
     // This string starts with the input data and characters are truncated off
     // the beginning as data is parsed.
     input: &'de str,
+
+    // This is readonly for error report. not used.
+    original: &'de str,
+
+    in_array: bool,
 }
 
 impl<'de> Deserializer<'de> {
     /// from xml string
     pub fn from_str(input: &'de str) -> Self {
-        Deserializer { input }
+        Deserializer {
+            input,
+            original: input,
+            in_array: false,
+        }
     }
 }
 
@@ -56,85 +66,36 @@ impl<'de> Deserializer<'de> {
         Ok(ch)
     }
 
-    /// If the data is expected data, consume and return true.
-    fn next_str(&mut self, s: &str) -> bool {
-        if self.input.starts_with(s) {
-            self.input = &self.input[s.len()..];
-            true
-        } else {
-            false
-        }
+    fn try_parse<O>(
+        &mut self,
+        mut parser: impl Parser<&'de str, O, winnow::error::ContextError>,
+    ) -> Result<O> {
+        let res = parser
+            .parse_next(&mut self.input)
+            .map_err(|err| Error::ReadableError {
+                source: ReadableError::from_context(
+                    err,
+                    &self.original,
+                    self.original.len() - self.input.len(),
+                ),
+            })?;
+        Ok(res)
     }
 
-    // Parse a group of decimal digits as an unsigned integer of type T.
-    //
-    // This implementation is a bit too lenient, for example `001` is not
-    // allowed in JSON. Also the various arithmetic operations can overflow and
-    // panic or return bogus data. But it is good enough for example code!
-    fn parse_unsigned<T>(&mut self) -> Result<T>
-    where
-        T: std::ops::AddAssign<T> + std::ops::MulAssign<T> + From<u8>,
-    {
-        let mut int = match self.next_char()? {
-            ch @ '0'..='9' => T::from(ch as u8 - b'0'),
-            _ => {
-                return Err(Error::ExpectedInteger);
-            }
-        };
-        loop {
-            match self.input.chars().next() {
-                Some(ch @ '0'..='9') => {
-                    self.input = &self.input[1..];
-                    int *= T::from(10);
-                    int += T::from(ch as u8 - b'0');
-                }
-                _ => {
-                    return Ok(int);
-                }
-            }
-        }
-    }
-
-    // Parse a possible minus sign followed by a group of decimal digits as a
-    // signed integer of type T.
-    fn parse_signed<T>(&mut self) -> Result<T>
-    where
-        T: Neg<Output = T> + AddAssign<T> + MulAssign<T> + From<i8>,
-    {
-        // Optional minus sign, delegate to `parse_unsigned`, negate if negative.
-        let mut int = match self.next_char()? {
-            ch @ '0'..='9' => T::from((ch as u8 - b'0') as i8),
-            _ => {
-                return Err(Error::ExpectedInteger);
-            }
-        };
-        loop {
-            match self.input.chars().next() {
-                Some(ch @ '0'..='9') => {
-                    self.input = &self.input[1..];
-                    int *= T::from(10);
-                    int += T::from((ch as u8 - b'0') as i8);
-                }
-                _ => {
-                    return Ok(int);
-                }
-            }
-        }
-    }
-
-    // Parse a string until the next '"' character.
-    //
-    // Makes no attempt to handle escape sequences. What did you expect? This is
-    // example code!
-    fn parse_string(&mut self) -> Result<&'de str> {
-        match self.input.find("</") {
-            Some(len) => {
-                let s = &self.input[..len];
-                self.input = &self.input[len..];
-                Ok(s)
-            }
-            None => Err(Error::Eof),
-        }
+    fn try_parse_peek<O>(
+        &mut self,
+        mut parser: impl Parser<&'de str, O, winnow::error::ContextError>,
+    ) -> Result<O> {
+        let (_, res) = parser
+            .parse_peek(&self.input)
+            .map_err(|err| Error::ReadableError {
+                source: ReadableError::from_context(
+                    err,
+                    &self.original,
+                    self.original.len() - self.input.len(),
+                ),
+            })?;
+        Ok(res)
     }
 }
 
@@ -153,9 +114,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let (remain, boolean) = parse_bool(&self.input)?;
-        self.input = remain;
-        visitor.visit_bool(boolean)
+        visitor.visit_bool(tri!(self.try_parse(boolean())))
     }
 
     #[inline]
@@ -171,7 +130,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_int8(self.parse_signed()?)
+        visitor.visit_int8(tri!(self.try_parse(dec_int)))
     }
 
     #[inline]
@@ -179,7 +138,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_uint8(self.parse_unsigned()?)
+        visitor.visit_uint8(tri!(self.try_parse(dec_uint)))
     }
 
     #[inline]
@@ -187,7 +146,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_int16(self.parse_signed()?)
+        visitor.visit_int16(tri!(self.try_parse(dec_int)))
     }
 
     #[inline]
@@ -195,7 +154,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_uint16(self.parse_unsigned()?)
+        visitor.visit_uint16(tri!(self.try_parse(dec_uint)))
     }
 
     #[inline]
@@ -203,7 +162,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_int32(self.parse_signed()?)
+        visitor.visit_int32(tri!(self.try_parse(dec_int)))
     }
 
     #[inline]
@@ -211,7 +170,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_uint32(self.parse_unsigned()?)
+        visitor.visit_uint32(tri!(self.try_parse(dec_uint)))
     }
 
     #[inline]
@@ -219,7 +178,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_int64(self.parse_signed()?)
+        visitor.visit_int64(tri!(self.try_parse(dec_int)))
     }
 
     #[inline]
@@ -227,107 +186,86 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_uint64(self.parse_unsigned()?)
+        visitor.visit_uint64(tri!(self.try_parse(dec_uint)))
     }
 
     fn deserialize_real<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        let (remain, float) = parse_float(&self.input)?;
-        self.input = remain;
-        visitor.visit_real(float)
+        visitor.visit_real(tri!(self.try_parse(real())))
     }
 
     fn deserialize_vector4<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        let (remain, vec) = Vector4::from_str(&self.input)?;
-        self.input = remain;
-        visitor.visit_vector4(vec)
+        visitor.visit_vector4(tri!(self.try_parse(vector4())))
     }
 
     fn deserialize_quaternion<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        let (remain, quaternion) = Quaternion::from_str(&self.input)?;
-        self.input = remain;
-        visitor.visit_quaternion(quaternion)
+        visitor.visit_quaternion(tri!(self.try_parse(quaternion())))
     }
 
     fn deserialize_matrix3<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        let (remain, matrix) = Matrix3::from_str(&self.input)?;
-        self.input = remain;
-        visitor.visit_matrix3(matrix)
+        visitor.visit_matrix3(tri!(self.try_parse(matrix3())))
     }
 
     fn deserialize_rotation<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        let (remain, rotation) = Rotation::from_str(&self.input)?;
-        self.input = remain;
-        visitor.visit_rotation(rotation)
+        visitor.visit_rotation(tri!(self.try_parse(rotation())))
     }
 
     fn deserialize_qstransform<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        let (remain, qstransform) = QsTransform::from_str(&self.input)?;
-        self.input = remain;
-        visitor.visit_qstransform(qstransform)
+        visitor.visit_qstransform(tri!(self.try_parse(qstransform())))
     }
 
     fn deserialize_matrix4<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        let (remain, matrix) = Matrix4::from_str(&self.input)?;
-        self.input = remain;
-        visitor.visit_matrix4(matrix)
+        visitor.visit_matrix4(tri!(self.try_parse(matrix4())))
     }
 
     fn deserialize_transform<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        let (remain, transform) = Transform::from_str(&self.input)?;
-        self.input = remain;
-        visitor.visit_transform(transform)
+        visitor.visit_transform(tri!(self.try_parse(transform())))
     }
 
     fn deserialize_pointer<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        todo!()
+        visitor.visit_pointer(tri!(self.try_parse(pointer())))
     }
 
     fn deserialize_array<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        // TODO: parse <hkparam name="key" numelements="3"><hkparam> & multiline
-        // Parse the opening bracket of the sequence.
-        if self.next_str("<hkparam>") {
-            // Give the visitor access to each element of the sequence.
-            let value = visitor.visit_array(Separated::new(self))?;
+        let (name, len) = tri!(self.try_parse(array_start_tag())); // Parse `<hkparam name="key" numelements="3">`
+        #[cfg(feature = "tracing")]
+        tracing::debug!(name, len);
 
-            // Parse the closing bracket of the sequence.
-            if self.next_str("</hkparam>") {
-                Ok(value)
-            } else {
-                Err(Error::ExpectedArrayEnd)
-            }
-        } else {
-            Err(Error::ExpectedArray)
-        }
+        self.in_array = true;
+        let value = tri!(visitor.visit_array(Separated::new(self))); // Give the visitor access to each element of the sequence.
+        self.in_array = false;
+
+        tri!(self.try_parse(end_tag("hkparam"))); // Parse the closing tag of the sequence.
+        Ok(value)
     }
 
     fn deserialize_struct<V>(self, name: &'static str, visitor: V) -> Result<V::Value, Self::Error>
@@ -349,7 +287,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_cstring(CString::from_str(self.parse_string()?))
+        visitor.visit_cstring(CString::from_str(tri!(self.try_parse(string()))))
     }
 
     #[inline]
@@ -357,7 +295,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_ulong(self.parse_unsigned()?)
+        self.deserialize_uint64(visitor)
     }
 
     fn deserialize_enum_flags<V>(self, visitor: V) -> Result<V::Value, Self::Error>
@@ -371,8 +309,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let (remain, float) = parse_float(self.input)?;
-        self.input = remain;
+        let float = tri!(self.try_parse(real()));
         visitor.visit_half(f16::from_f32(float))
     }
 
@@ -381,7 +318,11 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_stringptr(StringPtr::from_str(self.parse_string()?))
+        let s = match self.in_array {
+            true => tri!(self.try_parse(string_in_array())), // </hkcstring>
+            false => tri!(self.try_parse(string())),         // until  </hkparam>
+        };
+        visitor.visit_stringptr(StringPtr::from_str(s))
     }
 }
 
@@ -408,22 +349,21 @@ impl<'de, 'a> SeqAccess<'de> for Separated<'a, 'de> {
     where
         T: DeserializeSeed<'de>,
     {
+        // Space is required before every element except the first.
+        if !self.first {
+            tri!(self.de.try_parse(multispace1));
+        }
+
         // Check if there are no more elements.
-        if self.de.input.starts_with("</hkparam>") {
+        if self.de.try_parse_peek(end_tag("hkparam")).is_ok() {
             return Ok(None);
         }
-
-        // Space is required before every element except the first.
-        if !self.first && self.de.next_char()? != ' ' {
-            return Err(Error::ExpectedArraySpace);
-        }
-        self.first = false;
-
         #[cfg(feature = "tracing")]
         tracing::trace!(self.de.input);
 
-        // Deserialize an array element.
-        seed.deserialize(&mut *self.de).map(Some)
+        self.first = false;
+        let value = seed.deserialize(&mut *self.de).map(Some)?; // Deserialize an array element.
+        Ok(value)
     }
 
     fn next_class_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
@@ -463,6 +403,14 @@ impl<'de, 'a> SeqAccess<'de> for Separated<'a, 'de> {
         self.next_stringptr_element_seed(seed)
     }
 
+    /// struct S {
+    ///    key: StringPtr
+    /// }
+    ///
+    /// ```xml
+    /// <hkparam name="key">StringPtr1</hkparam>
+    /// ```
+    ///
     /// - `hkArray<hkStringPtr>`
     /// ```xml
     /// <hkparam name="key" numelements="3">
@@ -475,28 +423,21 @@ impl<'de, 'a> SeqAccess<'de> for Separated<'a, 'de> {
     where
         T: DeserializeSeed<'de>,
     {
-        // Check if there are no more elements.
-        (self.de.input);
+        // Space is required before every element except the first.
+        if !self.first {
+            tri!(self.de.try_parse(multispace1));
+        }
 
-        if self.de.input.starts_with("</hkparam>") {
+        // Check if there are no more elements.
+        if self.de.try_parse_peek(end_tag("hkparam")).is_ok() {
             return Ok(None);
         }
-
-        // Space is required before every element except the first.
-        if !self.de.next_str("<hkcstring>") {
-            return Err(Error::ExpectedArrayStringStartTag);
-        }
-        self.first = false;
-
-        let ret = seed.deserialize(&mut *self.de).map(Some)?;
-
         #[cfg(feature = "tracing")]
         tracing::trace!(self.de.input);
-        // Space is required before every element except the first.
-        if !self.de.next_str("</hkcstring>") {
-            return Err(Error::ExpectedArrayStringEndTag);
-        }
 
+        tri!(self.de.try_parse(start_tag("hkcstring")));
+        let ret = seed.deserialize(&mut *self.de).map(Some)?;
+        tri!(self.de.try_parse(end_tag("hkcstring")));
         Ok(ret)
     }
 }
@@ -507,21 +448,48 @@ mod tests {
     // use crate::common::mocks::{classes::*, enums::EventMode};
     // use havok_types::*;
 
+    fn from_str_assert<'a, T>(s: &'a str, expected: T)
+    where
+        T: Deserialize<'a> + PartialEq + fmt::Debug,
+    {
+        match from_str::<T>(s) {
+            Ok(res) => assert_eq!(res, expected),
+            Err(err) => match err {
+                Error::ReadableError { source } => panic!("{source}"),
+                _ => panic!("{err}"),
+            },
+        }
+    }
+
     #[test]
-    #[quick_tracing::init]
-    fn test_serialize() {
+    #[quick_tracing::init(test = "xml_deserialize")]
+    fn test_deserialize() {
         // let xml = &include_str!("../../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
-        assert_eq!(
-            from_str::<Vec<i32>>("<hkparam>1 2 3 4</hkparam>").unwrap(),
-            vec![1, 2, 3, 4]
+
+        from_str_assert(
+            r#"
+        <hkparam name="bool" numelements="2">
+          true false
+        </hkparam>"#,
+            vec![true, false],
         );
 
-        assert_eq!(
-            from_str::<Vec<StringPtr>>(
-                "<hkparam><hkcstring>Hello</hkcstring><hkcstring>World</hkcstring></hkparam>"
-            )
-            .unwrap(),
-            vec!["Hello".into(), "World".into()]
+        from_str_assert(
+            r#"
+<hkparam name="i32" numelements="2">
+  1 2 3 4
+</hkparam>
+"#,
+            vec![1, 2, 3, 4],
+        );
+
+        from_str_assert::<Vec<StringPtr>>(
+            r#"
+<hkparam name="string" numelements="2">
+  <hkcstring>Hello</hkcstring>
+  <hkcstring>World</hkcstring>
+</hkparam>"#,
+            vec!["Hello".into(), "World".into()],
         );
     }
 }
