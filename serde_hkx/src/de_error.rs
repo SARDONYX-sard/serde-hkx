@@ -12,15 +12,7 @@ pub enum DeError {
     },
 
     Eof,
-    ExpectedArray,
-    ExpectedArrayEnd,
     ExpectedArraySpace,
-    ExpectedArrayStringEndTag,
-    ExpectedArrayStringStartTag,
-
-    ExpectedBoolean,
-    ExpectedInteger,
-    ExpectedString,
     TrailingCharacters,
 
     ReadableError {

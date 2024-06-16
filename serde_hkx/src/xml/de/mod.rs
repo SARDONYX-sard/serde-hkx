@@ -4,14 +4,15 @@ pub mod parser;
 
 use crate::{lib::*, tri};
 
-use havok_serde::de::{self, DeserializeSeed, SeqAccess, Visitor};
-use havok_serde::Deserialize;
+use havok_serde::de::{self, Deserialize, DeserializeSeed, SeqAccess, Visitor};
 use havok_types::*;
+use winnow::ascii::{dec_int, dec_uint, multispace0, multispace1};
+use winnow::error::StrContext;
+use winnow::Parser;
+
 use parser::error::ReadableError;
 use parser::tag::{array_start_tag, end_tag, start_tag};
 use parser::type_kind::*;
-use winnow::ascii::{dec_int, dec_uint, multispace1};
-use winnow::Parser;
 
 use crate::de_error::{DeError as Error, Result};
 
@@ -398,7 +399,20 @@ impl<'de, 'a> SeqAccess<'de> for Separated<'a, 'de> {
     where
         T: DeserializeSeed<'de>,
     {
-        todo!()
+        // Check if there are no more elements.
+        if self.de.input.starts_with("</hkparam>") {
+            return Ok(None);
+        }
+
+        // Space is required before every element except the first.
+        tri!(self
+            .de
+            .try_parse(multispace0.context(StrContext::Label("Array math seed multispace"))));
+        self.first = false;
+
+        #[cfg(feature = "tracing")]
+        tracing::trace!(self.de.input);
+        seed.deserialize(&mut *self.de).map(Some) // Deserialize an array element.
     }
 
     #[inline]
@@ -451,6 +465,7 @@ impl<'de, 'a> SeqAccess<'de> for Separated<'a, 'de> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use pretty_assertions::assert_eq;
     // use crate::common::mocks::{classes::*, enums::EventMode};
     // use havok_types::*;
 
@@ -487,6 +502,45 @@ mod tests {
 </hkparam>
 "#,
             vec![1, 2, 3, 4],
+        );
+
+        from_str_assert(
+            r#"
+<hkparam name="string" numelements="1">
+  (0.000000 0.000000 0.000000 0.000000  )
+  (   0.000000 0.000000 0.000000 0.000000  )
+  (   0.000000 0.000000 0.000000 0.000000 )
+</hkparam>"#,
+            vec![QsTransform::default()],
+        );
+
+        from_str_assert(
+            r#"
+<hkparam name="string" numelements="3">
+  (-0.000000 0.000000 -0.000000 1.000000  )
+  (   0.000000 0.000000 -0.000000 1.000000  )
+  (   -0.000000 0.000000 -0.000000 1.000000 )
+</hkparam>"#,
+            vec![
+                Vector4 {
+                    x: -0.0,
+                    y: 0.0,
+                    z: -0.0,
+                    w: 1.0,
+                },
+                Vector4 {
+                    x: 0.0,
+                    y: 0.0,
+                    z: -0.0,
+                    w: 1.0,
+                },
+                Vector4 {
+                    x: -0.0,
+                    y: 0.0,
+                    z: -0.0,
+                    w: 1.0,
+                },
+            ],
         );
 
         from_str_assert::<Vec<StringPtr>>(

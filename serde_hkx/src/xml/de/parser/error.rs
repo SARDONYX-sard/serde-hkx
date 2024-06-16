@@ -1,5 +1,5 @@
 use crate::lib::*;
-use winnow::error::{ContextError, ErrMode, ParseError};
+use winnow::error::{ContextError, ErrMode, ParseError, StrContext};
 
 /// Error struct to represent parsing errors in a more user-friendly way.
 #[derive(Debug)]
@@ -34,12 +34,15 @@ impl ReadableError {
                 let mut labels = String::new();
                 let mut msg = "expected ".to_string();
 
-                for ctx in ctx_err.context() {
+                for (index, ctx) in ctx_err.context().enumerate() {
                     match ctx {
-                        winnow::error::StrContext::Label(label) => {
+                        StrContext::Label(label) => {
+                            if index > 0 {
+                                labels += " <- ";
+                            };
                             labels += label;
                         }
-                        winnow::error::StrContext::Expected(expected) => {
+                        StrContext::Expected(expected) => {
                             msg += &expected.to_string();
                         }
                         _ => (),
