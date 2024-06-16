@@ -2,7 +2,7 @@ use crate::lib::*;
 use crate::tri;
 
 use winnow::ascii::{digit1, multispace0};
-use winnow::combinator::{alt, cut_err, delimited, preceded, seq};
+use winnow::combinator::{alt, cut_err, preceded, seq};
 use winnow::error::{ContextError, StrContext, StrContextValue};
 use winnow::token::take_until;
 use winnow::Parser;
