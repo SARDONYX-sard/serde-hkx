@@ -14,13 +14,13 @@ impl ReadableError {
     /// Constructs [`Self`] from parse error & input.
     pub fn from_parse(error: ParseError<&str, ContextError>, input: &str) -> Self {
         let message = error.inner().to_string();
-        let input = input.to_owned();
+        let input = input.to_string();
         let start = error.offset();
         let end = (start + 1..)
             .find(|e| input.is_char_boundary(*e))
             .unwrap_or(start);
         Self {
-            title: "Parse Error".to_string(),
+            title: "Parse error".to_string(),
             message,
             span: start..end,
             input,
@@ -30,17 +30,17 @@ impl ReadableError {
     /// Constructs [`Self`] from parse error & input.
     pub fn from_context(error: ErrMode<ContextError>, input: &str, err_pos: usize) -> Self {
         let (labels, message) = error
-            .map(|ctx| {
+            .map(|ctx_err| {
                 let mut labels = String::new();
-                let mut msg = "Expected ".to_string();
-                for c in ctx.context() {
-                    match c {
+                let mut msg = "expected ".to_string();
+
+                for ctx in ctx_err.context() {
+                    match ctx {
                         winnow::error::StrContext::Label(label) => {
-                            labels += *label;
+                            labels += label;
                         }
                         winnow::error::StrContext::Expected(expected) => {
                             msg += &expected.to_string();
-                            msg += ". ";
                         }
                         _ => (),
                     }
@@ -50,11 +50,12 @@ impl ReadableError {
             .into_inner()
             .unwrap_or_default();
 
-        let input = input.to_owned();
+        let input = input.to_string();
         let start = err_pos;
         let end = (start + 1..)
             .find(|e| input.is_char_boundary(*e))
             .unwrap_or(start);
+
         Self {
             title: labels,
             message,

@@ -1,5 +1,4 @@
-use crate::lib::*;
-use crate::tri;
+use crate::{lib::*, tri};
 
 use winnow::ascii::{digit1, multispace0};
 use winnow::combinator::{alt, cut_err, preceded, seq};
@@ -7,6 +6,7 @@ use winnow::error::{ContextError, StrContext, StrContextValue};
 use winnow::token::take_until;
 use winnow::Parser;
 
+use super::delimited_with_multispace0;
 use super::tag::end_tag;
 use havok_types::*;
 
@@ -56,9 +56,7 @@ pub fn real<'a>() -> impl Parser<&'a str, f32, ContextError> {
 /// ```
 pub fn vector4<'a>() -> impl Parser<&'a str, Vector4, ContextError> {
     seq!(Vector4 {
-        _: multispace0,
-        _: cut_err('(').context(StrContext::Expected(StrContextValue::CharLiteral('('))),
-        _: multispace0,
+        _: delimited_with_multispace0("("),
         x: real(),
         _: multispace0,
         y: real(),
@@ -66,13 +64,20 @@ pub fn vector4<'a>() -> impl Parser<&'a str, Vector4, ContextError> {
         z: real(),
         _: multispace0,
         w: real(),
-        _: multispace0,
-        _:  cut_err(')').context(StrContext::Expected(StrContextValue::CharLiteral(')'))),
-        _: multispace0,
+        _: delimited_with_multispace0(")"),
     })
     .context(StrContext::Label("Vector4"))
 }
 
+/// Attempt to extract from the string representation in the tag on XML.
+///
+/// # Examples
+/// ```
+/// use havok_types::Quaternion;
+/// use serde_hkx::xml::de::parser::type_kind::quaternion;
+/// use winnow::Parser as _;
+/// assert_eq!(quaternion().parse("   (   -0.000000 0.000000 -0.000000 1.000000  ) "), Ok(Quaternion::new(-0.0, 0.0, -0.0, 1.0)));
+/// ```
 #[inline]
 pub fn quaternion<'a>() -> impl Parser<&'a str, Quaternion, ContextError> {
     move |input: &mut &'a str| {
@@ -153,7 +158,7 @@ pub fn pointer<'a>() -> impl Parser<&'a str, Pointer, ContextError> {
 pub fn string<'a>() -> impl Parser<&'a str, &'a str, ContextError> {
     move |input: &mut &'a str| {
         let s = take_until(0.., '<')
-            .context(StrContext::Label("end-of-string marker tag(`</hkparam>`)"))
+            .context(StrContext::Label("end-of-string tag(`</hkparam>`)"))
             .context(StrContext::Expected(StrContextValue::Description(
                 "e.g. Hello</hkparam>",
             )))
@@ -226,6 +231,26 @@ mod tests {
         assert_eq!(boolean().parse("true"), Ok(true));
         assert_eq!(boolean().parse("false"), Ok(false));
         assert!(boolean().parse("yes").is_err());
+    }
+
+    #[test]
+    fn test_vector4() {
+        assert_eq!(
+            vector4().parse("(-0.000000 0.000000 -0.000000 1.000000)"),
+            Ok(Vector4::new(-0.0, 0.0, -0.0, 1.0))
+        )
+    }
+
+    #[test]
+    fn test_matrix3() {
+        assert_eq!(
+            matrix3().parse("(0.000000 0.000000 0.000000)(-0.000000 0.000000 1.000000)(1.000000 1.000000 0.000000)"),
+            Ok(Matrix3 {
+                x: Vector4::default(),
+                y: Vector4 { x: -0.0, y: 0.0, z: 1.0, w: 0.0 },
+                z: Vector4 { x: 1.0, y: 1.0, z: 0.0, w: 0.0 }
+            })
+        );
     }
 
     #[test]

@@ -1,38 +1,30 @@
 use crate::lib::*;
 
-use winnow::combinator::delimited;
+use super::delimited_with_multispace0;
+use winnow::combinator::{delimited, seq};
 use winnow::error::{ContextError, StrContext, StrContextValue};
 use winnow::token::take_until;
 use winnow::Parser;
 
-use super::delimited_with_multispace0;
-
 /// Parses the start tag `<tag>`
 pub fn start_tag<'a>(tag: &'static str) -> impl Parser<&'a str, (), ContextError> {
-    move |input: &mut &'a str| {
-        delimited(
-            delimited_with_multispace0("<"),
-            delimited_with_multispace0(tag),
-            delimited_with_multispace0(">"),
-        )
-        .parse_next(input)?;
-        Ok(())
-    }
+    seq!(
+        _: delimited_with_multispace0("<"),
+        _: delimited_with_multispace0(tag),
+        _: delimited_with_multispace0(">"),
+    )
+    .context(StrContext::Label("start tag"))
 }
 
 /// Parses the end tag `</tag>`
 pub fn end_tag<'a>(tag: &'static str) -> impl Parser<&'a str, (), ContextError> {
-    move |input: &mut &'a str| {
-        let _ = '<'.parse_next(input)?;
-
-        delimited(
-            delimited_with_multispace0("/"),
-            delimited_with_multispace0(tag),
-            delimited_with_multispace0(">"),
-        )
-        .parse_next(input)?;
-        Ok(())
-    }
+    seq!(
+        _: delimited_with_multispace0("<"),
+        _: delimited_with_multispace0("/"),
+        _: delimited_with_multispace0(tag),
+        _: delimited_with_multispace0(">"),
+    )
+    .context(StrContext::Label("end tag"))
 }
 
 /// Parses the array start tag `<hkparam name="key" numelements="3">`
@@ -40,21 +32,21 @@ pub fn end_tag<'a>(tag: &'static str) -> impl Parser<&'a str, (), ContextError> 
 /// # Returns
 /// (name, numelements) -> e.g. (`key`, 3)
 pub fn array_start_tag<'a>() -> impl Parser<&'a str, (&'a str, u64), ContextError> {
-    move |input: &mut &'a str| {
-        delimited_with_multispace0("<")
-            .context(StrContext::Expected(StrContextValue::CharLiteral('<')))
-            .parse_next(input)?;
-
-        delimited_with_multispace0("hkparam").parse_next(input)?;
-        delimited_with_multispace0("name").parse_next(input)?;
-        delimited_with_multispace0("=").parse_next(input)?;
-        let name = attr_string().parse_next(input)?;
-        delimited_with_multispace0("numelements").parse_next(input)?;
-        delimited_with_multispace0("=").parse_next(input)?;
-        let num = number_in_string().parse_next(input)?;
-        delimited_with_multispace0(">").parse_next(input)?;
-        Ok((name, num))
-    }
+    seq!(
+        _: delimited_with_multispace0("<"),
+        _: delimited_with_multispace0("hkparam"),
+        _: delimited_with_multispace0("name"),
+        _: delimited_with_multispace0("="),
+        attr_string(),
+        _: delimited_with_multispace0("numelements"),
+        _: delimited_with_multispace0("="),
+        number_in_string(),
+        _: delimited_with_multispace0(">")
+    )
+    .context(StrContext::Label("Array start tag"))
+    .context(StrContext::Expected(StrContextValue::Description(
+        "e.g. `<hkparam name=\"key\" numelements=\"3\">`",
+    )))
 }
 
 // There are support functions that exists only to parse the attributes in the tag.
@@ -64,16 +56,12 @@ fn number_in_string<'a, Num>() -> impl Parser<&'a str, Num, ContextError>
 where
     Num: AddAssign<Num> + MulAssign<Num> + From<u8> + FromStr,
 {
-    |input: &mut &'a str| {
-        let num = delimited("\"", take_until(0.., "\""), "\"")
-            .parse_to()
-            .context(StrContext::Label("number in string"))
-            .context(StrContext::Expected(StrContextValue::Description(
-                "e.g. \"64\"",
-            )))
-            .parse_next(input)?;
-        Ok(num)
-    }
+    attr_string()
+        .parse_to()
+        .context(StrContext::Label("number in string"))
+        .context(StrContext::Expected(StrContextValue::Description(
+            "e.g. \"64\"",
+        )))
 }
 
 /// Parses a xml attribute string, e.g., `"string"`
@@ -103,7 +91,7 @@ mod tests {
         assert!(end_tag("tag").parse("</ tag >").is_ok());
         assert!(end_tag("tag").parse("</  tag  >").is_ok());
 
-        let input = "</  hkparam >\n";
+        let input = "<  hkparam >\n";
         match end_tag("hkparam").parse(input).map_err(|e| {
             crate::xml::de::parser::error::ReadableError::from_parse(e, input).to_string()
         }) {
@@ -140,8 +128,8 @@ mod tests {
 
     #[test]
     fn test_parse_number_in_string() {
-        assert_eq!(number_in_string().parse("\"33\""), Ok(33));
-        assert_eq!(number_in_string().parse("\"100\""), Ok(100));
-        assert_eq!(number_in_string().parse("\"0\""), Ok(0));
+        assert_eq!(number_in_string().parse(r#""33""#), Ok(33));
+        assert_eq!(number_in_string().parse(r#""100""#), Ok(100));
+        assert_eq!(number_in_string().parse(r#""0""#), Ok(0));
     }
 }

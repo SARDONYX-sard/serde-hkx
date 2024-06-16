@@ -42,25 +42,4 @@ impl QsTransform {
         bytes[32..48].copy_from_slice(&self.scale.to_le_bytes());
         bytes
     }
-
-    pub fn from_str(s: &str) -> crate::error::Result<(&str, Self)> {
-        let res = crate::tri!(parse_qstransform(s));
-        Ok(res)
-    }
-}
-
-fn parse_qstransform(input: &str) -> winnow::PResult<(&str, QsTransform)> {
-    use crate::{parse_quaternion, parse_vector3};
-
-    let (input, transition) = parse_vector3(input)?;
-    let (input, quaternion) = parse_quaternion(input)?;
-    let (remain, scale) = parse_vector3(input)?;
-    Ok((
-        remain,
-        QsTransform {
-            transition,
-            quaternion,
-            scale,
-        },
-    ))
 }

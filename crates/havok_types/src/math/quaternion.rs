@@ -1,5 +1,3 @@
-use crate::error::Result;
-use crate::{parse_vector4, Vector4};
 use derive_new::new;
 use parse_display::Display;
 
@@ -62,25 +60,4 @@ impl Quaternion {
             scaler: f32::from_be_bytes([bytes[12], bytes[13], bytes[14], bytes[15]]),
         }
     }
-
-    /// Attempt to extract from the string representation in the tag on XML.
-    ///
-    /// # Examples
-    /// ```
-    /// use havok_types::Quaternion;
-    /// let (remain, actual) = Quaternion::from_str("   (   -0.000000 0.000000 -0.000000 1.000000  ) ").unwrap();
-    /// assert_eq!(remain, "");
-    /// assert_eq!(actual, Quaternion::new(-0.0, 0.0, -0.0, 1.0));
-    /// ```
-    #[inline]
-    pub fn from_str(s: &str) -> Result<(&str, Self)> {
-        let (remain, quaternion) = crate::tri!(parse_quaternion(s));
-        Ok((remain, quaternion))
-    }
-}
-
-#[inline]
-pub fn parse_quaternion(s: &str) -> winnow::PResult<(&str, Quaternion)> {
-    let (remain, Vector4 { x, y, z, w }) = parse_vector4(s)?;
-    Ok((remain, Quaternion { x, y, z, scaler: w }))
 }

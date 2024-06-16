@@ -1,4 +1,3 @@
-use crate::error::Result;
 use crate::Vector4;
 use derive_new::new;
 use parse_display::Display;
@@ -46,53 +45,5 @@ impl Matrix3 {
         bytes[16..32].copy_from_slice(&self.y.to_be_bytes());
         bytes[32..48].copy_from_slice(&self.z.to_be_bytes());
         bytes
-    }
-
-    #[inline]
-    pub fn from_str(s: &str) -> Result<(&str, Self)> {
-        let res = crate::tri!(parse_matrix3(s));
-        Ok(res)
-    }
-}
-
-pub fn parse_matrix3(input: &str) -> winnow::PResult<(&str, Matrix3)> {
-    use crate::parse_vector3;
-
-    let (input, x) = parse_vector3(input)?;
-    let (input, y) = parse_vector3(input)?;
-    let (remain, z) = parse_vector3(input)?;
-    Ok((remain, Matrix3 { x, y, z }))
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use pretty_assertions::assert_eq;
-
-    #[test]
-    fn should_parse_str() -> Result<()> {
-        let (remain, matrix3) = Matrix3::from_str(
-            "(0.000000 0.000000 0.000000)(-0.000000 0.000000 1.000000)(1.000000 1.000000 0.000000)",
-        )?;
-        assert_eq!(remain, "");
-        assert_eq!(
-            matrix3,
-            Matrix3 {
-                x: Vector4::default(),
-                y: Vector4 {
-                    x: -0.0,
-                    y: 0.0,
-                    z: 1.0,
-                    w: 0.0
-                },
-                z: Vector4 {
-                    x: 1.0,
-                    y: 1.0,
-                    z: 0.0,
-                    w: 0.0
-                }
-            }
-        );
-        Ok(())
     }
 }

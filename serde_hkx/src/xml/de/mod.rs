@@ -54,18 +54,21 @@ where
 // functions from scratch. More complicated formats may wish to use a dedicated
 // parsing library to help implement their Serde deserializer.
 impl<'de> Deserializer<'de> {
-    // Look at the first character in the input without consuming it.
+    /// Look at the first character in the input without consuming it.
     fn peek_char(&mut self) -> Result<char> {
         self.input.chars().next().ok_or(Error::Eof)
     }
 
-    // Consume the first character in the input.
+    /// Consume the first character in the input.
     fn next_char(&mut self) -> Result<char> {
         let ch = self.peek_char()?;
         self.input = &self.input[ch.len_utf8()..];
         Ok(ch)
     }
 
+    /// Parse by argument parser.
+    ///
+    /// If an error occurs, it is converted to [`ReadableError`] and returned.
     fn try_parse<O>(
         &mut self,
         mut parser: impl Parser<&'de str, O, winnow::error::ContextError>,
@@ -82,6 +85,9 @@ impl<'de> Deserializer<'de> {
         Ok(res)
     }
 
+    /// Parse by argument parser no consume.
+    ///
+    /// If an error occurs, it is converted to [`ReadableError`] and returned.
     fn try_parse_peek<O>(
         &mut self,
         mut parser: impl Parser<&'de str, O, winnow::error::ContextError>,

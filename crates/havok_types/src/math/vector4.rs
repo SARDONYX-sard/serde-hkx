@@ -79,41 +79,10 @@ impl Vector4 {
             w: f32::from_be_bytes([bytes[12], bytes[13], bytes[14], bytes[15]]),
         }
     }
-
-    /// Parse to (remain, Self)
-    #[inline]
-    pub fn from_str(s: &str) -> crate::error::Result<(&str, Self)> {
-        let res = crate::tri!(parse_vector4(s));
-        Ok(res)
-    }
 }
 
 static_assertions::assert_eq_size!(Vector4, [u8; 16]); // Vector4 must be 16bytes size.
 static_assertions::assert_eq_align!(Vector4, u128); // Vector4 must be 16bytes(16 * 8 = 128bit) align.
-
-pub fn parse_vector4(input: &str) -> winnow::PResult<(&str, Vector4)> {
-    use winnow::ascii::{float, space0};
-    use winnow::combinator::{cut_err, seq};
-    use winnow::error::{StrContext, StrContextValue};
-    use winnow::Parser;
-
-    seq!(Vector4 {
-            _: space0,
-            _: cut_err('(').context(StrContext::Expected(StrContextValue::CharLiteral('('))),
-            _: space0,
-            x: float.context(StrContext::Expected(StrContextValue::Description("float for x component"))),
-            _: space0,
-            y: float.context(StrContext::Expected(StrContextValue::Description("float for y component"))),
-            _: space0,
-            z: float.context(StrContext::Expected(StrContextValue::Description("float for z component"))),
-            _:space0,
-            w: float.context(StrContext::Expected(StrContextValue::Description("float for w component"))),
-            _:space0,
-            _:  cut_err(')').context(StrContext::Expected(StrContextValue::CharLiteral(')'))),
-            _: space0,
-        })
-    .parse_peek(input)
-}
 
 #[cfg(test)]
 mod tests {
@@ -133,12 +102,5 @@ mod tests {
             &Vector4::new(1.0, 1.0, 1.0, 0.0).to_le_bytes(),
             expected_bytes,
         );
-
-        assert_eq!(
-            Vector4::from_str("(-0.000000 0.000000 -0.000000 1.000000)").unwrap(),
-            ("", Vector4::new(-0.0, 0.0, -0.0, 1.0))
-        );
-
-        assert!(Vector4::from_str("(-0.000000 0.000000j -0.000000 1.000000)").is_err());
     }
 }
