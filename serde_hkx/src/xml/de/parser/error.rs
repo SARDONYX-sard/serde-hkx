@@ -1,3 +1,4 @@
+//! XML human-readable error message
 use crate::lib::*;
 use winnow::error::{ContextError, ErrMode, ParseError, StrContext};
 

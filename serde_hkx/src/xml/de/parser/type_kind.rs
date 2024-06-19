@@ -1,3 +1,4 @@
+//! TypeKind XML parsers
 use crate::{lib::*, tri};
 
 use super::delimited_with_multispace0;

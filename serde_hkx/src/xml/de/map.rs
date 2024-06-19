@@ -36,7 +36,7 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
         K: havok_serde::de::DeserializeSeed<'de>,
     {
         // Check if there are no more elements.
-        if self.de.try_parse_peek(end_tag("hkobject")).is_ok() {
+        if self.de.parse_peek(end_tag("hkobject")).is_ok() {
             return Ok(None);
         }
 

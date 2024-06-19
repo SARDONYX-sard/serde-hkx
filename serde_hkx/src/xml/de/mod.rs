@@ -28,6 +28,7 @@ pub struct XmlDeserializer<'de> {
     /// This is readonly for error report. not used.
     original: &'de str,
 
+    ///Flag to deal with cases where the XML notation differs between within an `Array` and without, as in `StringPtr`.
     in_array: bool,
 }
 
@@ -74,7 +75,7 @@ impl<'de> XmlDeserializer<'de> {
     /// Parse by argument parser.
     ///
     /// If an error occurs, it is converted to [`ReadableError`] and returned.
-    fn try_parse<O>(
+    fn parse<O>(
         &mut self,
         mut parser: impl Parser<&'de str, O, winnow::error::ContextError>,
     ) -> Result<O> {
@@ -93,7 +94,7 @@ impl<'de> XmlDeserializer<'de> {
     /// Parse by argument parser no consume.
     ///
     /// If an error occurs, it is converted to [`ReadableError`] and returned.
-    fn try_parse_peek<O>(
+    fn parse_peek<O>(
         &mut self,
         mut parser: impl Parser<&'de str, O, winnow::error::ContextError>,
     ) -> Result<O> {
@@ -125,7 +126,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_bool(tri!(self.try_parse(boolean())))
+        visitor.visit_bool(tri!(self.parse(boolean())))
     }
 
     #[inline]
@@ -141,7 +142,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_int8(tri!(self.try_parse(dec_int)))
+        visitor.visit_int8(tri!(self.parse(dec_int)))
     }
 
     #[inline]
@@ -149,7 +150,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_uint8(tri!(self.try_parse(dec_uint)))
+        visitor.visit_uint8(tri!(self.parse(dec_uint)))
     }
 
     #[inline]
@@ -157,7 +158,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_int16(tri!(self.try_parse(dec_int)))
+        visitor.visit_int16(tri!(self.parse(dec_int)))
     }
 
     #[inline]
@@ -165,7 +166,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_uint16(tri!(self.try_parse(dec_uint)))
+        visitor.visit_uint16(tri!(self.parse(dec_uint)))
     }
 
     #[inline]
@@ -173,7 +174,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_int32(tri!(self.try_parse(dec_int)))
+        visitor.visit_int32(tri!(self.parse(dec_int)))
     }
 
     #[inline]
@@ -181,7 +182,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_uint32(tri!(self.try_parse(dec_uint)))
+        visitor.visit_uint32(tri!(self.parse(dec_uint)))
     }
 
     #[inline]
@@ -189,7 +190,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_int64(tri!(self.try_parse(dec_int)))
+        visitor.visit_int64(tri!(self.parse(dec_int)))
     }
 
     #[inline]
@@ -197,77 +198,78 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_uint64(tri!(self.try_parse(dec_uint)))
+        visitor.visit_uint64(tri!(self.parse(dec_uint)))
     }
 
     fn deserialize_real<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_real(tri!(self.try_parse(real())))
+        visitor.visit_real(tri!(self.parse(real())))
     }
 
     fn deserialize_vector4<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_vector4(tri!(self.try_parse(vector4())))
+        visitor.visit_vector4(tri!(self.parse(vector4())))
     }
 
     fn deserialize_quaternion<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_quaternion(tri!(self.try_parse(quaternion())))
+        visitor.visit_quaternion(tri!(self.parse(quaternion())))
     }
 
     fn deserialize_matrix3<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_matrix3(tri!(self.try_parse(matrix3())))
+        visitor.visit_matrix3(tri!(self.parse(matrix3())))
     }
 
     fn deserialize_rotation<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_rotation(tri!(self.try_parse(rotation())))
+        visitor.visit_rotation(tri!(self.parse(rotation())))
     }
 
     fn deserialize_qstransform<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_qstransform(tri!(self.try_parse(qstransform())))
+        visitor.visit_qstransform(tri!(self.parse(qstransform())))
     }
 
     fn deserialize_matrix4<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_matrix4(tri!(self.try_parse(matrix4())))
+        visitor.visit_matrix4(tri!(self.parse(matrix4())))
     }
 
     fn deserialize_transform<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_transform(tri!(self.try_parse(transform())))
+        visitor.visit_transform(tri!(self.parse(transform())))
     }
 
     fn deserialize_pointer<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_pointer(tri!(self.try_parse(pointer())))
+        visitor.visit_pointer(tri!(self.parse(pointer())))
     }
 
     fn deserialize_array<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        let (name, len) = tri!(self.try_parse(array_start_tag())); // Parse `<hkparam name="key" numelements="3">`
+        // TODO: TODO: This should be parsed there with more patterns of keys in MapDeserializer
+        let (name, len) = tri!(self.parse(array_start_tag())); // Parse `<hkparam name="key" numelements="3">`
         #[cfg(feature = "tracing")]
         tracing::debug!(name, len);
 
@@ -275,7 +277,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         let value = tri!(visitor.visit_array(SeqDeserializer::new(self))); // Give the visitor access to each element of the sequence.
         self.in_array = false;
 
-        tri!(self.try_parse(end_tag("hkparam"))); // Parse the closing tag of the sequence.
+        tri!(self.parse(end_tag("hkparam"))); // Parse the closing tag of the sequence.
         Ok(value)
     }
 
@@ -299,7 +301,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         V: Visitor<'de>,
     {
         // Parse Sequence start tag.
-        let (ptr_name, class_name, signature) = tri!(self.try_parse(class_start_tag()));
+        let (ptr_name, class_name, signature) = tri!(self.parse(class_start_tag()));
         #[cfg(feature = "tracing")]
         {
             tracing::debug!(?ptr_name, class_name, ?signature);
@@ -314,7 +316,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
 
         let value = tri!(visitor.visit_struct(MapDeserializer::new(self)));
 
-        tri!(self.try_parse(end_tag("hkobject")));
+        tri!(self.parse(end_tag("hkobject")));
         Ok(value)
     }
 
@@ -323,7 +325,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_pointer(tri!(self.try_parse(pointer())))
+        visitor.visit_pointer(tri!(self.parse(pointer())))
     }
 
     #[inline]
@@ -331,7 +333,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_cstring(CString::from_str(tri!(self.try_parse(string()))))
+        visitor.visit_cstring(CString::from_str(tri!(self.parse(string()))))
     }
 
     #[inline]
@@ -353,7 +355,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let float = tri!(self.try_parse(real()));
+        let float = tri!(self.parse(real()));
         visitor.visit_half(f16::from_f32(float))
     }
 
@@ -363,8 +365,8 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         V: Visitor<'de>,
     {
         let s = match self.in_array {
-            true => tri!(self.try_parse(string_in_array())), // take until `</hkcstring>`
-            false => tri!(self.try_parse(string())),         // take until `</hkparam>`
+            true => tri!(self.parse(string_in_array())), // take until `</hkcstring>`
+            false => tri!(self.parse(string())),         // take until `</hkparam>`
         };
         visitor.visit_stringptr(StringPtr::from_str(s))
     }
@@ -383,10 +385,7 @@ mod tests {
     {
         match from_str::<T>(s) {
             Ok(res) => assert_eq!(res, expected),
-            Err(err) => match err {
-                Error::ReadableError { source } => panic!("{source}"),
-                _ => panic!("{err}"),
-            },
+            Err(err) => panic!("{err}"),
         }
     }
 
@@ -461,8 +460,9 @@ mod tests {
 <hkparam name="string" numelements="2">
   <hkcstring>Hello</hkcstring>
   <hkcstring>World</hkcstring>
+  <hkcstring></hkcstring>
 </hkparam>"#,
-            vec!["Hello".into(), "World".into()],
+            vec!["Hello".into(), "World".into(), "".into()],
         );
     }
 }

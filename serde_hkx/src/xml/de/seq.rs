@@ -49,13 +49,13 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
         T: DeserializeSeed<'de>,
     {
         // Check if there are no more elements.
-        if self.de.try_parse_peek(end_tag("hkparam")).is_ok() {
+        if self.de.parse_peek(end_tag("hkparam")).is_ok() {
             return Ok(None);
         }
 
         // Space is required before every element except the first.
         if !self.first {
-            tri!(self.de.try_parse(
+            tri!(self.de.parse(
                 multispace1.context(StrContext::Expected(StrContextValue::CharLiteral(' ')))
             ));
         }
@@ -72,7 +72,7 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
         T: DeserializeSeed<'de>,
     {
         // Check if there are no more elements.
-        if self.de.try_parse_peek(end_tag("hkobject")).is_ok() {
+        if self.de.parse_peek(end_tag("hkobject")).is_ok() {
             return Ok(None);
         }
         self.first = false;
@@ -122,14 +122,14 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
         T: DeserializeSeed<'de>,
     {
         // Check if there are no more elements.
-        if self.de.try_parse_peek(end_tag("hkparam")).is_ok() {
+        if self.de.parse_peek(end_tag("hkparam")).is_ok() {
             return Ok(None);
         }
         self.first = false;
 
-        tri!(self.de.try_parse(start_tag("hkcstring")));
+        tri!(self.de.parse(start_tag("hkcstring")));
         let ret = seed.deserialize(&mut *self.de).map(Some)?;
-        tri!(self.de.try_parse(end_tag("hkcstring")));
+        tri!(self.de.parse(end_tag("hkcstring")));
         Ok(ret)
     }
 }

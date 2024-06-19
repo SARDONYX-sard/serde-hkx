@@ -1,7 +1,10 @@
+//! XML tag parsers
 use crate::lib::*;
-use crate::xml::de::pointer;
 
-use super::delimited_with_multispace0;
+use super::type_kind::pointer;
+use super::{
+    delimited_comment_multispace0, delimited_multispace0_comment, delimited_with_multispace0,
+};
 use havok_types::{Pointer, Signature};
 use winnow::ascii::{digit1, hex_digit1, oct_digit1};
 use winnow::combinator::{delimited, dispatch, fail, seq};
@@ -12,9 +15,9 @@ use winnow::Parser;
 /// Parses the start tag `<tag>`
 pub fn start_tag<'a>(tag: &'static str) -> impl Parser<&'a str, (), ContextError> {
     seq!(
-        _: delimited_with_multispace0("<"),
+        _: delimited_comment_multispace0("<"),
         _: delimited_with_multispace0(tag),
-        _: delimited_with_multispace0(">"),
+        _: delimited_multispace0_comment(">")
     )
     .context(StrContext::Label("start tag"))
 }
@@ -22,10 +25,10 @@ pub fn start_tag<'a>(tag: &'static str) -> impl Parser<&'a str, (), ContextError
 /// Parses the end tag `</tag>`
 pub fn end_tag<'a>(tag: &'static str) -> impl Parser<&'a str, (), ContextError> {
     seq!(
-        _: delimited_with_multispace0("<"),
+        _: delimited_comment_multispace0("<"),
         _: delimited_with_multispace0("/"),
         _: delimited_with_multispace0(tag),
-        _: delimited_with_multispace0(">"),
+        _: delimited_multispace0_comment(">")
     )
     .context(StrContext::Label("end tag"))
 }
@@ -36,7 +39,7 @@ pub fn end_tag<'a>(tag: &'static str) -> impl Parser<&'a str, (), ContextError> 
 /// (name, numelements) -> e.g. (`key`, 3)
 pub fn array_start_tag<'a>() -> impl Parser<&'a str, (&'a str, u64), ContextError> {
     seq!(
-        _: delimited_with_multispace0("<"),
+        _: delimited_comment_multispace0("<"),
         _: delimited_with_multispace0("hkparam"),
         _: delimited_with_multispace0("name"),
         _: delimited_with_multispace0("="),
@@ -45,7 +48,7 @@ pub fn array_start_tag<'a>() -> impl Parser<&'a str, (&'a str, u64), ContextErro
         _: delimited_with_multispace0("numelements"),
         _: delimited_with_multispace0("="),
         number_in_string(), // e.g. "8"
-        _: delimited_with_multispace0(">")
+        _: delimited_multispace0_comment(">")
     )
     .context(StrContext::Label("Array start tag"))
     .context(StrContext::Expected(StrContextValue::Description(
@@ -59,7 +62,7 @@ pub fn array_start_tag<'a>() -> impl Parser<&'a str, (&'a str, u64), ContextErro
 /// ([`Pointer`], ClassName, [`Signature`]) -> e.g. (`#0010`, `"hkbProjectData"`, `0x13a39ba7`)
 pub fn class_start_tag<'a>() -> impl Parser<&'a str, (Pointer, &'a str, Signature), ContextError> {
     seq!(
-        _: delimited_with_multispace0("<"),
+        _: delimited_comment_multispace0("<"),
         _: delimited_with_multispace0("hkobject"),
         _: delimited_with_multispace0("name"),
         _: delimited_with_multispace0("="),
@@ -72,11 +75,31 @@ pub fn class_start_tag<'a>() -> impl Parser<&'a str, (Pointer, &'a str, Signatur
         _: delimited_with_multispace0("signature"),
         _: delimited_with_multispace0("="),
         radix_digits().map(|digits| Signature::new(digits as u32)),
-        _: delimited_with_multispace0(">")
+        _: delimited_multispace0_comment(">")
     )
     .context(StrContext::Label("Class start tag"))
     .context(StrContext::Expected(StrContextValue::Description(
         r##"Class start(e.g. `<hkobject name="#0010" class="hkbProjectData" signature="0x13a39ba7">`)"##,
+    )))
+}
+
+/// Parses the field of class start tag `<hkparam name="key">`
+///
+/// # Returns
+/// name -> e.g. `key`
+pub fn class_field_start_tag<'a>() -> impl Parser<&'a str, &'a str, ContextError> {
+    seq!(
+        _: delimited_comment_multispace0("<"),
+        _: delimited_with_multispace0("hkparam"),
+        _: delimited_with_multispace0("name"),
+        _: delimited_with_multispace0("="),
+        attr_string(), // e.g. "key"
+        _: delimited_multispace0_comment(">")
+    )
+    .map(|s| s.0)
+    .context(StrContext::Label("Array start tag"))
+    .context(StrContext::Expected(StrContextValue::Description(
+        "e.g. `<hkparam name=\"key\" numelements=\"3\">`",
     )))
 }
 
