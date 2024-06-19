@@ -1,17 +1,17 @@
 use crate::{lib::*, tri};
 
+use super::delimited_with_multispace0;
+use super::tag::end_tag;
+
+use havok_types::*;
 use winnow::ascii::{digit1, multispace0};
 use winnow::combinator::{alt, preceded, seq};
 use winnow::error::{ContextError, StrContext, StrContextValue};
 use winnow::token::take_until;
 use winnow::Parser;
 
-use super::delimited_with_multispace0;
-use super::tag::end_tag;
-use havok_types::*;
-
 /// Parses [`bool`]. `true` or `false``
-/// - The corresponding type for this XML: `Bool`
+/// - The corresponding type kind: `Bool`
 pub fn boolean<'a>() -> impl Parser<&'a str, bool, ContextError> {
     alt(("true".value(true), "false".value(false)))
         .context(StrContext::Label("bool"))
@@ -148,7 +148,7 @@ pub fn pointer<'a>() -> impl Parser<&'a str, Pointer, ContextError> {
 }
 
 /// Parses a string literal until `</hkparam>`, e.g., `example` in (`example</hkparam>`).
-/// - The corresponding type for this XML: `CString`, `StringPtr`
+/// - The corresponding type kind: `CString`, `StringPtr`
 ///
 /// # Attention during unit testing
 /// This will get any string until the end tag `</hkparam>` exists, so testing with [`Parser::parse`] will fail
@@ -170,7 +170,7 @@ pub fn string<'a>() -> impl Parser<&'a str, &'a str, ContextError> {
 }
 
 /// Parses a string in `Array` e.g. `Hello` in `<hkcstring>Hello</hkcstring>`
-/// - The corresponding type for this XML: `Array<CString>`, `Array<StringPtr>`
+/// - The corresponding type kind: `Array<CString>`, `Array<StringPtr>`
 pub fn string_in_array<'a>() -> impl Parser<&'a str, &'a str, ContextError> {
     move |input: &mut &'a str| {
         let s = take_until(0.., '<')

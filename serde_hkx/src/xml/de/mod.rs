@@ -1,36 +1,40 @@
+mod map;
 pub mod parser;
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+mod seq;
 
 use crate::{lib::*, tri};
 
-use havok_serde::de::{self, Deserialize, DeserializeSeed, SeqAccess, Visitor};
+use self::map::MapDeserializer;
+use self::parser::error::ReadableError;
+use self::parser::tag::{array_start_tag, class_start_tag, end_tag};
+use self::parser::type_kind::{
+    boolean, matrix3, matrix4, pointer, qstransform, quaternion, real, rotation, string,
+    string_in_array, transform, vector4,
+};
+use self::seq::SeqDeserializer;
+use crate::de_error::{DeError as Error, Result};
+use havok_serde::de::{self, Deserialize, Visitor};
 use havok_types::*;
-use winnow::ascii::{dec_int, dec_uint, multispace0, multispace1};
-use winnow::error::StrContext;
+use winnow::ascii::{dec_int, dec_uint};
 use winnow::Parser;
 
-use parser::error::ReadableError;
-use parser::tag::{array_start_tag, end_tag, start_tag};
-use parser::type_kind::*;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-use crate::de_error::{DeError as Error, Result};
-
-pub struct Deserializer<'de> {
-    // This string starts with the input data and characters are truncated off
-    // the beginning as data is parsed.
+pub struct XmlDeserializer<'de> {
+    /// This string starts with the input data and characters are truncated off
+    /// the beginning as data is parsed.
     input: &'de str,
 
-    // This is readonly for error report. not used.
+    /// This is readonly for error report. not used.
     original: &'de str,
 
     in_array: bool,
 }
 
-impl<'de> Deserializer<'de> {
+impl<'de> XmlDeserializer<'de> {
     /// from xml string
     pub fn from_str(input: &'de str) -> Self {
-        Deserializer {
+        XmlDeserializer {
             input,
             original: input,
             in_array: false,
@@ -42,7 +46,7 @@ pub fn from_str<'a, T>(s: &'a str) -> Result<T>
 where
     T: Deserialize<'a>,
 {
-    let mut deserializer = Deserializer::from_str(s);
+    let mut deserializer = XmlDeserializer::from_str(s);
     let t = T::deserialize(&mut deserializer)?;
     if deserializer.input.is_empty() {
         Ok(t)
@@ -54,7 +58,7 @@ where
 // SERDE IS NOT A PARSING LIBRARY. This impl block defines a few basic parsing
 // functions from scratch. More complicated formats may wish to use a dedicated
 // parsing library to help implement their Serde deserializer.
-impl<'de> Deserializer<'de> {
+impl<'de> XmlDeserializer<'de> {
     /// Look at the first character in the input without consuming it.
     fn peek_char(&mut self) -> Result<char> {
         self.input.chars().next().ok_or(Error::Eof)
@@ -106,7 +110,7 @@ impl<'de> Deserializer<'de> {
     }
 }
 
-impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
+impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     type Error = Error;
 
     #[inline]
@@ -268,25 +272,58 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
         tracing::debug!(name, len);
 
         self.in_array = true;
-        let value = tri!(visitor.visit_array(Separated::new(self))); // Give the visitor access to each element of the sequence.
+        let value = tri!(visitor.visit_array(SeqDeserializer::new(self))); // Give the visitor access to each element of the sequence.
         self.in_array = false;
 
         tri!(self.try_parse(end_tag("hkparam"))); // Parse the closing tag of the sequence.
         Ok(value)
     }
 
-    fn deserialize_struct<V>(self, name: &'static str, visitor: V) -> Result<V::Value, Self::Error>
+    /// # Example of XML to be parsed
+    /// ```xml
+    /// <hkobject name="#0010" class="hkbProjectData" signature="0x13a39ba7">
+    ///   <!-- memSizeAndFlags SERIALIZE_IGNORED -->
+    ///   <!-- referenceCount SERIALIZE_IGNORED -->
+    ///   <hkparam name="worldUpWS">(0.000000 0.000000 1.000000 0.000000)</hkparam>
+    ///   <hkparam name="stringData">#0009</hkparam>
+    ///   <hkparam name="defaultEventMode">EVENT_MODE_IGNORE_FROM_GENERATOR</hkparam>
+    /// </hkobject>
+    /// ```
+    fn deserialize_struct<V>(
+        self,
+        name: &'static str,
+        fields: &'static [&'static str],
+        visitor: V,
+    ) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        todo!()
+        // Parse Sequence start tag.
+        let (ptr_name, class_name, signature) = tri!(self.try_parse(class_start_tag()));
+        #[cfg(feature = "tracing")]
+        {
+            tracing::debug!(?ptr_name, class_name, ?signature);
+            tracing::debug!(name, ?fields);
+        }
+        if name != class_name {
+            return Err(Error::MismatchClassName {
+                actual: name,
+                expected: class_name.to_string(),
+            });
+        };
+
+        let value = tri!(visitor.visit_struct(MapDeserializer::new(self)));
+
+        tri!(self.try_parse(end_tag("hkobject")));
+        Ok(value)
     }
 
+    /// TODO: XML representation of Variant is unknown.
     fn deserialize_variant<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        todo!()
+        visitor.visit_pointer(tri!(self.try_parse(pointer())))
     }
 
     #[inline]
@@ -305,7 +342,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
         self.deserialize_uint64(visitor)
     }
 
-    fn deserialize_enum_flags<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    fn deserialize_enum_flags<V>(self, _visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
@@ -326,139 +363,10 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
         V: Visitor<'de>,
     {
         let s = match self.in_array {
-            true => tri!(self.try_parse(string_in_array())), // </hkcstring>
-            false => tri!(self.try_parse(string())),         // until  </hkparam>
+            true => tri!(self.try_parse(string_in_array())), // take until `</hkcstring>`
+            false => tri!(self.try_parse(string())),         // take until `</hkparam>`
         };
         visitor.visit_stringptr(StringPtr::from_str(s))
-    }
-}
-
-// In order to handle commas correctly when deserializing a JSON array or map,
-// we need to track whether we are on the first element or past the first
-// element.
-struct Separated<'a, 'de: 'a> {
-    de: &'a mut Deserializer<'de>,
-    first: bool,
-}
-
-impl<'a, 'de> Separated<'a, 'de> {
-    fn new(de: &'a mut Deserializer<'de>) -> Self {
-        Separated { de, first: true }
-    }
-}
-
-// `SeqAccess` is provided to the `Visitor` to give it the ability to iterate
-// through elements of the sequence.
-impl<'de, 'a> SeqAccess<'de> for Separated<'a, 'de> {
-    type Error = Error;
-
-    fn next_primitive_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>>
-    where
-        T: DeserializeSeed<'de>,
-    {
-        // Space is required before every element except the first.
-        if !self.first {
-            tri!(self.de.try_parse(multispace1));
-        }
-
-        // Check if there are no more elements.
-        if self.de.try_parse_peek(end_tag("hkparam")).is_ok() {
-            return Ok(None);
-        }
-        #[cfg(feature = "tracing")]
-        tracing::trace!(self.de.input);
-
-        self.first = false;
-        let value = seed.deserialize(&mut *self.de).map(Some)?; // Deserialize an array element.
-        Ok(value)
-    }
-
-    fn next_class_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
-    where
-        T: DeserializeSeed<'de>,
-    {
-        // Check if there are no more elements.
-        if self.de.input.starts_with("</hkparam>") {
-            return Ok(None);
-        }
-
-        // Space is required before every element except the first.
-        if !self.first && self.de.next_char()? != ' ' {
-            return Err(Error::ExpectedArraySpace);
-        }
-        self.first = false;
-
-        #[cfg(feature = "tracing")]
-        tracing::trace!(self.de.input);
-
-        // Deserialize an array element.
-        seed.deserialize(&mut *self.de).map(Some)
-    }
-
-    fn next_math_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
-    where
-        T: DeserializeSeed<'de>,
-    {
-        // Check if there are no more elements.
-        if self.de.input.starts_with("</hkparam>") {
-            return Ok(None);
-        }
-
-        // Space is required before every element except the first.
-        tri!(self
-            .de
-            .try_parse(multispace0.context(StrContext::Label("Array math seed multispace"))));
-        self.first = false;
-
-        #[cfg(feature = "tracing")]
-        tracing::trace!(self.de.input);
-        seed.deserialize(&mut *self.de).map(Some) // Deserialize an array element.
-    }
-
-    #[inline]
-    fn next_cstring_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
-    where
-        T: DeserializeSeed<'de>,
-    {
-        self.next_stringptr_element_seed(seed)
-    }
-
-    /// struct S {
-    ///    key: StringPtr
-    /// }
-    ///
-    /// ```xml
-    /// <hkparam name="key">StringPtr1</hkparam>
-    /// ```
-    ///
-    /// - `hkArray<hkStringPtr>`
-    /// ```xml
-    /// <hkparam name="key" numelements="3">
-    ///     <hkcstring>StringPtr1</hkcstring>
-    ///     <hkcstring>StringPtr2</hkcstring>
-    ///     <hkcstring>StringPtr3</hkcstring>
-    /// </hkparam>
-    /// ```
-    fn next_stringptr_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
-    where
-        T: DeserializeSeed<'de>,
-    {
-        // Space is required before every element except the first.
-        if !self.first {
-            tri!(self.de.try_parse(multispace1));
-        }
-
-        // Check if there are no more elements.
-        if self.de.try_parse_peek(end_tag("hkparam")).is_ok() {
-            return Ok(None);
-        }
-        #[cfg(feature = "tracing")]
-        tracing::trace!(self.de.input);
-
-        tri!(self.de.try_parse(start_tag("hkcstring")));
-        let ret = seed.deserialize(&mut *self.de).map(Some)?;
-        tri!(self.de.try_parse(end_tag("hkcstring")));
-        Ok(ret)
     }
 }
 
@@ -490,7 +398,11 @@ mod tests {
         from_str_assert(
             r#"
         <hkparam name="bool" numelements="2">
+        <!-- Hi? -->
+        <!-- Hi? -->
+        <!-- Hi? -->
           true false
+        <!-- Hi?2 -->
         </hkparam>"#,
             vec![true, false],
         );
@@ -498,10 +410,11 @@ mod tests {
         from_str_assert(
             r#"
 <hkparam name="i32" numelements="2">
-  1 2 3 4
+    0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+    16 17 18 19 20
 </hkparam>
 "#,
-            vec![1, 2, 3, 4],
+            (0..21).collect::<Vec<i32>>(),
         );
 
         from_str_assert(

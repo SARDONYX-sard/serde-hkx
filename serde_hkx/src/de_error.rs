@@ -6,15 +6,24 @@ use crate::lib::*;
 #[snafu(visibility(pub))]
 pub enum DeError {
     /// User custom error.
+    #[snafu(display(""))]
     Message {
         /// Error message
         msg: String,
     },
 
+    #[snafu(display("Still need to parse the syntax but the string provided is not enough."))]
     Eof,
-    ExpectedArraySpace,
+    #[snafu(display("Incomplete parsing of syntax."))]
     TrailingCharacters,
 
+    #[snafu(display("Expected class {expected}, but got {actual}."))]
+    MismatchClassName {
+        actual: &'static str,
+        expected: String,
+    },
+
+    #[snafu(transparent)]
     ReadableError {
         source: crate::xml::de::parser::error::ReadableError,
     },
@@ -31,5 +40,5 @@ impl havok_serde::de::Error for DeError {
     }
 }
 
-/// Wrapper on [`core::result::Result`] for Havok Serde.
+/// Wrapper on [`core::result::Result`] for Deserializer.
 pub type Result<T, E = DeError> = core::result::Result<T, E>;

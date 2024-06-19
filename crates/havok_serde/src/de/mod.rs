@@ -872,7 +872,12 @@ pub trait Deserializer<'de>: Sized {
         V: Visitor<'de>;
 
     /// Deserialize an `Struct` value.
-    fn deserialize_struct<V>(self, name: &'static str, visitor: V) -> Result<V::Value, Self::Error>
+    fn deserialize_struct<V>(
+        self,
+        name: &'static str,
+        fields: &'static [&'static str],
+        visitor: V,
+    ) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>;
 
@@ -1205,7 +1210,16 @@ pub trait Visitor<'de>: Sized {
         Err(Error::invalid_type(Unexpected::Array, &self))
     }
 
-    // TODO: Struct
+    /// The input contains a key-value map.(serde: `visit_map`)
+    ///
+    /// The default implementation fails with a type error.
+    fn visit_struct<A>(self, map: A) -> Result<Self::Value, A::Error>
+    where
+        A: MapAccess<'de>,
+    {
+        let _ = map;
+        Err(Error::invalid_type(Unexpected::Struct, &self))
+    }
 
     /// The input contains a CString.
     ///
@@ -1436,6 +1450,197 @@ where
         T: Deserialize<'de>,
     {
         (**self).next_primitive_element()
+    }
+
+    #[inline]
+    fn size_hint(&self) -> Option<usize> {
+        (**self).size_hint()
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+/// Provides a `Visitor` access to each entry of a map in the input.
+///
+/// This is a trait that a `Deserializer` passes to a `Visitor` implementation.
+///
+/// # Lifetime
+///
+/// The `'de` lifetime of this trait is the lifetime of data that may be
+/// borrowed by deserialized map entries. See the page [Understanding
+/// deserializer lifetimes] for a more detailed explanation of these lifetimes.
+///
+/// [Understanding deserializer lifetimes]: https://serde.rs/lifetimes.html
+///
+/// # Example implementation
+///
+/// The [example data format] presented on the website demonstrates an
+/// implementation of `MapAccess` for a basic JSON data format.
+///
+/// [example data format]: https://serde.rs/data-format.html
+pub trait MapAccess<'de> {
+    /// The error type that can be returned if some error occurs during
+    /// deserialization.
+    type Error: Error;
+
+    /// This returns `Ok(Some(key))` for the next key in the map, or `Ok(None)`
+    /// if there are no more remaining entries.
+    ///
+    /// `Deserialize` implementations should typically use
+    /// `MapAccess::next_key` or `MapAccess::next_entry` instead.
+    fn next_key_seed<K>(&mut self, seed: K) -> Result<Option<K::Value>, Self::Error>
+    where
+        K: DeserializeSeed<'de>;
+
+    /// This returns a `Ok(value)` for the next value in the map.
+    ///
+    /// `Deserialize` implementations should typically use
+    /// `MapAccess::next_value` instead.
+    ///
+    /// # Panics
+    ///
+    /// Calling `next_value_seed` before `next_key_seed` is incorrect and is
+    /// allowed to panic or return bogus results.
+    fn next_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
+    where
+        V: DeserializeSeed<'de>;
+
+    /// This returns `Ok(Some((key, value)))` for the next (key-value) pair in
+    /// the map, or `Ok(None)` if there are no more remaining items.
+    ///
+    /// `MapAccess` implementations should override the default behavior if a
+    /// more efficient implementation is possible.
+    ///
+    /// `Deserialize` implementations should typically use
+    /// `MapAccess::next_entry` instead.
+    #[inline]
+    fn next_entry_seed<K, V>(
+        &mut self,
+        kseed: K,
+        vseed: V,
+    ) -> Result<Option<(K::Value, V::Value)>, Self::Error>
+    where
+        K: DeserializeSeed<'de>,
+        V: DeserializeSeed<'de>,
+    {
+        match tri!(self.next_key_seed(kseed)) {
+            Some(key) => {
+                let value = tri!(self.next_value_seed(vseed));
+                Ok(Some((key, value)))
+            }
+            None => Ok(None),
+        }
+    }
+
+    /// This returns `Ok(Some(key))` for the next key in the map, or `Ok(None)`
+    /// if there are no more remaining entries.
+    ///
+    /// This method exists as a convenience for `Deserialize` implementations.
+    /// `MapAccess` implementations should not override the default behavior.
+    #[inline]
+    fn next_key<K>(&mut self) -> Result<Option<K>, Self::Error>
+    where
+        K: Deserialize<'de>,
+    {
+        self.next_key_seed(PhantomData)
+    }
+
+    /// This returns a `Ok(value)` for the next value in the map.
+    ///
+    /// This method exists as a convenience for `Deserialize` implementations.
+    /// `MapAccess` implementations should not override the default behavior.
+    ///
+    /// # Panics
+    ///
+    /// Calling `next_value` before `next_key` is incorrect and is allowed to
+    /// panic or return bogus results.
+    #[inline]
+    fn next_value<V>(&mut self) -> Result<V, Self::Error>
+    where
+        V: Deserialize<'de>,
+    {
+        self.next_value_seed(PhantomData)
+    }
+
+    /// This returns `Ok(Some((key, value)))` for the next (key-value) pair in
+    /// the map, or `Ok(None)` if there are no more remaining items.
+    ///
+    /// This method exists as a convenience for `Deserialize` implementations.
+    /// `MapAccess` implementations should not override the default behavior.
+    #[inline]
+    fn next_entry<K, V>(&mut self) -> Result<Option<(K, V)>, Self::Error>
+    where
+        K: Deserialize<'de>,
+        V: Deserialize<'de>,
+    {
+        self.next_entry_seed(PhantomData, PhantomData)
+    }
+
+    /// Returns the number of entries remaining in the map, if known.
+    #[inline]
+    fn size_hint(&self) -> Option<usize> {
+        None
+    }
+}
+
+impl<'de, 'a, A> MapAccess<'de> for &'a mut A
+where
+    A: ?Sized + MapAccess<'de>,
+{
+    type Error = A::Error;
+
+    #[inline]
+    fn next_key_seed<K>(&mut self, seed: K) -> Result<Option<K::Value>, Self::Error>
+    where
+        K: DeserializeSeed<'de>,
+    {
+        (**self).next_key_seed(seed)
+    }
+
+    #[inline]
+    fn next_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
+    where
+        V: DeserializeSeed<'de>,
+    {
+        (**self).next_value_seed(seed)
+    }
+
+    #[inline]
+    fn next_entry_seed<K, V>(
+        &mut self,
+        kseed: K,
+        vseed: V,
+    ) -> Result<Option<(K::Value, V::Value)>, Self::Error>
+    where
+        K: DeserializeSeed<'de>,
+        V: DeserializeSeed<'de>,
+    {
+        (**self).next_entry_seed(kseed, vseed)
+    }
+
+    #[inline]
+    fn next_entry<K, V>(&mut self) -> Result<Option<(K, V)>, Self::Error>
+    where
+        K: Deserialize<'de>,
+        V: Deserialize<'de>,
+    {
+        (**self).next_entry()
+    }
+
+    #[inline]
+    fn next_key<K>(&mut self) -> Result<Option<K>, Self::Error>
+    where
+        K: Deserialize<'de>,
+    {
+        (**self).next_key()
+    }
+
+    #[inline]
+    fn next_value<V>(&mut self) -> Result<V, Self::Error>
+    where
+        V: Deserialize<'de>,
+    {
+        (**self).next_value()
     }
 
     #[inline]

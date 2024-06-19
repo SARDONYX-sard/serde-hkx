@@ -111,5 +111,5 @@ impl havok_serde::ser::Error for Error {
     }
 }
 
-/// Wrapper on [`core::result::Result`] for Havok Serde.
+/// Wrapper on [`core::result::Result`] for Serializer.
 pub type Result<T, E = Error> = core::result::Result<T, E>;
