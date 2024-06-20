@@ -51,9 +51,14 @@ pub fn real<'a>() -> impl Parser<&'a str, f32, ContextError> {
 
 /// Parse as [`Vector4`]
 ///
-/// # XML Examples
-/// ```xml
-/// (-0.000000 0.000000 -0.000000 1.000000)
+/// ```
+/// use havok_types::Vector4;
+/// use serde_hkx::xml::de::parser::type_kind::vector4;
+/// use winnow::Parser as _;
+///
+/// assert_eq!(vector4().parse("(1.000000 1.000000 1.000000 0.000000)"), Ok(Vector4::new(1.0, 1.0, 1.0, 0.0)));
+/// assert_eq!(vector4().parse("(-0.000000 0.000000 -0.000000 1.000000)"), Ok(Vector4::new(-0.0, 0.0, -0.0, 1.0)));
+/// assert_eq!(vector4().parse("   (   -0.000000 0.000000 -0.000000 1.000000  ) "), Ok(Vector4::new(-0.0, 0.0, -0.0, 1.0)));
 /// ```
 pub fn vector4<'a>() -> impl Parser<&'a str, Vector4, ContextError> {
     seq!(Vector4 {

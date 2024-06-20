@@ -4,11 +4,19 @@ use parse_display::Display;
 
 /// Matrix3x3
 ///
-/// # XML representation
-/// - [`Vector4::w`] (4th) isn't used.
-/// ```xml
-/// <hkparam>(0.000000 0.000000 0.000000)(-0.000000 0.000000 1.000000)(1.000000 1.000000 0.000000)</hkparam>
+/// # Examples
 /// ```
+/// use havok_types::{Matrix3, Vector4};
+///
+/// assert_eq!(Matrix3::new(
+///  Vector4::new(0.0, 0.0, 0.0, 0.0),
+///  Vector4::new(-0.0, 0.0, 1.0, 0.0),
+///  Vector4::new(1.0, 1.0, 0.0, 0.0),
+/// ).to_string(), "(0.000000 0.000000 0.000000)(-0.000000 0.000000 1.000000)(1.000000 1.000000 0.000000)");
+/// ```
+///
+/// # Note
+/// - [`Vector4::w`] (4th) isn't used.
 #[repr(C, align(16))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(Debug, Clone, Default, PartialEq, PartialOrd, Display, new)]
