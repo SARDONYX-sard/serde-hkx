@@ -304,7 +304,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         let (ptr_name, class_name, signature) = tri!(self.parse(class_start_tag()));
         #[cfg(feature = "tracing")]
         {
-            tracing::debug!(?ptr_name, class_name, ?signature);
+            tracing::debug!("ptr_name={ptr_name}, class_name={class_name}, Signature={signature}");
             tracing::debug!(name, ?fields);
         }
         if name != class_name {
@@ -314,7 +314,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
             });
         };
 
-        let value = tri!(visitor.visit_struct(MapDeserializer::new(self)));
+        let value = tri!(visitor.visit_struct(MapDeserializer::new(self, fields)));
 
         tri!(self.parse(end_tag("hkobject")));
         Ok(value)
@@ -393,6 +393,23 @@ mod tests {
     #[quick_tracing::init(test = "xml_deserialize")]
     fn test_deserialize() {
         // let xml = &include_str!("../../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
+        from_str_assert(
+            r##"
+<hkobject name="#01000" class="hkReferencedObject" signature="0xea7f1d08">
+        <hkparam name="memSizeAndFlags">2</hkparam>
+        <!-- comment1 -->
+        <!-- comment2 -->
+        <hkparam name="referenceCount">0</hkparam>
+        <!-- comment3 -->
+        <!-- comment4 -->
+</hkobject>"##,
+            crate::common::mocks::classes::HkReferencedObject {
+                _name: None,
+                parent: crate::common::mocks::classes::HkBaseObject { _name: None },
+                mem_size_and_flags: 1,
+                reference_count: 2,
+            },
+        );
 
         from_str_assert(
             r#"

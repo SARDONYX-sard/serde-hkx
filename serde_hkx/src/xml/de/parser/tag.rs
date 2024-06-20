@@ -74,7 +74,9 @@ pub fn class_start_tag<'a>() -> impl Parser<&'a str, (Pointer, &'a str, Signatur
 
         _: delimited_with_multispace0("signature"),
         _: delimited_with_multispace0("="),
+        _: delimited_with_multispace0("\""),
         radix_digits().map(|digits| Signature::new(digits as u32)),
+        _: delimited_with_multispace0("\""),
         _: delimited_multispace0_comment(">")
     )
     .context(StrContext::Label("Class start tag"))
@@ -83,23 +85,30 @@ pub fn class_start_tag<'a>() -> impl Parser<&'a str, (Pointer, &'a str, Signatur
     )))
 }
 
-/// Parses the field of class start tag `<hkparam name="key">`
-///
-/// # Returns
-/// name -> e.g. `key`
-pub fn class_field_start_tag<'a>() -> impl Parser<&'a str, &'a str, ContextError> {
+/// Parses the field of class start tag opening `<hkparam name="`
+pub fn class_field_start_tag_open<'a>() -> impl Parser<&'a str, (), ContextError> {
     seq!(
         _: delimited_comment_multispace0("<"),
         _: delimited_with_multispace0("hkparam"),
         _: delimited_with_multispace0("name"),
         _: delimited_with_multispace0("="),
-        attr_string(), // e.g. "key"
+        _: '\"',
+    )
+    .context(StrContext::Label("class field start tag open"))
+    .context(StrContext::Expected(StrContextValue::Description(
+        "Class field start open(e.g. `<hkparam name=\">`)",
+    )))
+}
+
+/// Parse `">`
+pub fn class_field_start_tag_close<'a>() -> impl Parser<&'a str, (), ContextError> {
+    seq!(
+        _: '\"',
         _: delimited_multispace0_comment(">")
     )
-    .map(|s| s.0)
-    .context(StrContext::Label("Array start tag"))
+    .context(StrContext::Label("class field start tag"))
     .context(StrContext::Expected(StrContextValue::Description(
-        "e.g. `<hkparam name=\"key\" numelements=\"3\">`",
+        "Class field start close(e.g. `\">`)",
     )))
 }
 
@@ -127,11 +136,7 @@ fn attr_string<'a>() -> impl Parser<&'a str, &'a str, ContextError> {
 
 /// Parser a xml attribute pointer in string, e.g. `"#0050"`
 fn attr_ptr<'a>() -> impl Parser<&'a str, Pointer, ContextError> {
-    delimited(
-        delimited_with_multispace0("\""),
-        pointer(),
-        delimited_with_multispace0("\""),
-    )
+    delimited("\"", pointer(), "\"")
 }
 
 fn radix_digits<'a>() -> impl Parser<&'a str, usize, ContextError> {

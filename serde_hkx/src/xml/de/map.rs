@@ -1,7 +1,10 @@
 //! Deserializing each field element in an `Struct`
 
-use super::{parser::tag::end_tag, XmlDeserializer};
-use crate::de_error::DeError;
+use super::{
+    parser::tag::{class_field_start_tag_close, class_field_start_tag_open, end_tag},
+    XmlDeserializer,
+};
+use crate::{de_error::DeError, tri};
 use havok_serde::de::MapAccess;
 
 /// A structure for deserializing each element in an `Struct`.
@@ -19,12 +22,18 @@ use havok_serde::de::MapAccess;
 pub struct MapDeserializer<'a, 'de: 'a> {
     /// Deserializer
     de: &'a mut XmlDeserializer<'de>,
+    index: usize,
+    fields: &'static [&'static str],
 }
 
 impl<'a, 'de> MapDeserializer<'a, 'de> {
     /// Create a new map deserializer
-    pub fn new(de: &'a mut XmlDeserializer<'de>) -> Self {
-        Self { de }
+    pub fn new(de: &'a mut XmlDeserializer<'de>, fields: &'static [&'static str]) -> Self {
+        Self {
+            de,
+            index: 0,
+            fields,
+        }
     }
 }
 
@@ -36,11 +45,16 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
         K: havok_serde::de::DeserializeSeed<'de>,
     {
         // Check if there are no more elements.
-        if self.de.parse_peek(end_tag("hkobject")).is_ok() {
+        if self.de.parse_peek(end_tag("hkobject")).is_ok() && self.fields.len() == self.index {
             return Ok(None);
         }
 
-        seed.deserialize(&mut *self.de).map(Some) // Deserialize a map key.
+        tri!(self.de.parse(class_field_start_tag_open()));
+        self.index += 1;
+
+        let key = seed.deserialize(&mut *self.de).map(Some); // Deserialize a map key.
+        tri!(self.de.parse(class_field_start_tag_close()));
+        key
     }
 
     fn next_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>

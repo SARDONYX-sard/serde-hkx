@@ -2,7 +2,7 @@ use super::*;
 
 #[derive(Debug, Clone, Default, PartialEq)]
 pub struct HkBaseObject {
-    _name: Option<Pointer>,
+    pub _name: Option<Pointer>,
 }
 
 impl HavokClass for HkBaseObject {

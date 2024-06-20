@@ -38,6 +38,14 @@ mod lib {
     pub use self::core::{i16, i32, i64, i8};
     pub use self::core::{u16, u32, u64, u8, usize};
 
+    pub use self::core::clone;
+    pub use self::core::convert;
+    pub use self::core::default;
+    pub use self::core::marker;
+    pub use self::core::option;
+    pub use self::core::ptr;
+    pub use self::core::result;
+
     pub use self::core::cmp;
     pub use self::core::fmt;
     pub use self::core::fmt::Display;
@@ -73,7 +81,12 @@ macro_rules! tri {
 pub mod de;
 pub mod ser;
 
-pub use de::Deserialize;
+// Used by generated code and doc tests. Not public API.(For derive)
+#[doc(hidden)]
+#[path = "private/mod.rs"]
+pub mod __private;
+
+pub use de::{Deserialize, Deserializer};
 pub use ser::Serialize;
 
 use havok_types::Signature;
