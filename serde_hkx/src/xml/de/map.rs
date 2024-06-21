@@ -1,7 +1,7 @@
 //! Deserializing each field element in an `Struct`
 
 use super::{
-    parser::tag::{class_field_start_tag_close, class_field_start_tag_open, end_tag},
+    parser::tag::{end_tag, field_start_close_tag, field_start_open_tag},
     XmlDeserializer,
 };
 use crate::{de_error::DeError, tri};
@@ -49,11 +49,11 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
             return Ok(None);
         }
 
-        tri!(self.de.parse(class_field_start_tag_open()));
+        tri!(self.de.parse(field_start_open_tag()));
+        let key = seed.deserialize(&mut *self.de).map(Some); // Deserialize a map key.
+        tri!(self.de.parse(field_start_close_tag()));
         self.index += 1;
 
-        let key = seed.deserialize(&mut *self.de).map(Some); // Deserialize a map key.
-        tri!(self.de.parse(class_field_start_tag_close()));
         key
     }
 

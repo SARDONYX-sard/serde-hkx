@@ -85,8 +85,8 @@ pub fn class_start_tag<'a>() -> impl Parser<&'a str, (Pointer, &'a str, Signatur
     )))
 }
 
-/// Parses the field of class start tag opening `<hkparam name="`
-pub fn class_field_start_tag_open<'a>() -> impl Parser<&'a str, (), ContextError> {
+/// Parses the field of class start opening tag `<hkparam name="`
+pub fn field_start_open_tag<'a>() -> impl Parser<&'a str, (), ContextError> {
     seq!(
         _: delimited_comment_multispace0("<"),
         _: delimited_with_multispace0("hkparam"),
@@ -96,19 +96,19 @@ pub fn class_field_start_tag_open<'a>() -> impl Parser<&'a str, (), ContextError
     )
     .context(StrContext::Label("class field start tag open"))
     .context(StrContext::Expected(StrContextValue::Description(
-        "Class field start open(e.g. `<hkparam name=\">`)",
+        "Class field start open tag(e.g. `<hkparam name=\">`)",
     )))
 }
 
-/// Parse `">`
-pub fn class_field_start_tag_close<'a>() -> impl Parser<&'a str, (), ContextError> {
+/// Parses the field of class start closing tag `">`
+pub fn field_start_close_tag<'a>() -> impl Parser<&'a str, (), ContextError> {
     seq!(
         _: '\"',
         _: delimited_multispace0_comment(">")
     )
     .context(StrContext::Label("class field start tag"))
     .context(StrContext::Expected(StrContextValue::Description(
-        "Class field start close(e.g. `\">`)",
+        "Class field start close tag(e.g. `\">`)",
     )))
 }
 
