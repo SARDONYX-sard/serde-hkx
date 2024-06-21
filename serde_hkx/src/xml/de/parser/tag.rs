@@ -92,23 +92,21 @@ pub fn field_start_open_tag<'a>() -> impl Parser<&'a str, (), ContextError> {
         _: delimited_with_multispace0("hkparam"),
         _: delimited_with_multispace0("name"),
         _: delimited_with_multispace0("="),
-        _: '\"',
     )
     .context(StrContext::Label("class field start tag open"))
     .context(StrContext::Expected(StrContextValue::Description(
-        "Class field start open tag(e.g. `<hkparam name=\">`)",
+        "Class field start open tag(e.g. `<hkparam name=>`)",
     )))
 }
 
 /// Parses the field of class start closing tag `">`
 pub fn field_start_close_tag<'a>() -> impl Parser<&'a str, (), ContextError> {
     seq!(
-        _: '\"',
         _: delimited_multispace0_comment(">")
     )
     .context(StrContext::Label("class field start tag"))
     .context(StrContext::Expected(StrContextValue::Description(
-        "Class field start close tag(e.g. `\">`)",
+        "Class field start close tag(e.g. `>`)",
     )))
 }
 
@@ -127,8 +125,8 @@ where
         .context(StrContext::Expected(Description(r#"Number(e.g. `"64"`)"#)))
 }
 
-/// Parses a xml attribute string, e.g. `"string"`
-fn attr_string<'a>() -> impl Parser<&'a str, &'a str, ContextError> {
+/// Parses a xml attribute string(surrounded double quotes), e.g. `"string"`
+pub fn attr_string<'a>() -> impl Parser<&'a str, &'a str, ContextError> {
     delimited("\"", take_until(0.., "\""), "\"")
         .context(StrContext::Label("String in XML attribute"))
         .context(StrContext::Expected(Description(r#"String(e.g. `"Str"`)"#)))
@@ -139,13 +137,22 @@ fn attr_ptr<'a>() -> impl Parser<&'a str, Pointer, ContextError> {
     delimited("\"", pointer(), "\"")
 }
 
+/// Parse radix digits. e.g. `0b101`, `0xff`
 fn radix_digits<'a>() -> impl Parser<&'a str, usize, ContextError> {
-    dispatch!(take(2usize);
-        "0b" => digit1.try_map(|s| usize::from_str_radix(s, 2)),
-        "0o" => oct_digit1.try_map(|s| usize::from_str_radix(s, 8)),
-        "0d" => digit1.try_map(|s| usize::from_str_radix(s, 10)),
-        "0x" => hex_digit1.try_map(|s| usize::from_str_radix(s, 16)),
-        _ => fail,
+    dispatch!(take(2_usize);
+        "0b" | "0B" => digit1.try_map(|s| usize::from_str_radix(s, 2))
+                        .context(StrContext::Label("digit")).context(StrContext::Expected(StrContextValue::Description("binary"))),
+        "0o" | "0O" => oct_digit1.try_map(|s| usize::from_str_radix(s, 8))
+                        .context(StrContext::Label("digit")).context(StrContext::Expected(StrContextValue::Description("octal"))),
+        "0d" | "0D" => digit1.try_map(|s: &str| s.parse::<usize>())
+                        .context(StrContext::Label("digit")).context(StrContext::Expected(StrContextValue::Description("decimal"))),
+        "0x" | "0X" => hex_digit1.try_map(|s|usize::from_str_radix(s, 16))
+                        .context(StrContext::Label("digit")).context(StrContext::Expected(StrContextValue::Description("hexadecimal"))),
+        _ => fail.context(StrContext::Label("radix prefix"))
+                .context(StrContext::Expected(StrContextValue::StringLiteral("0b")))
+                .context(StrContext::Expected(StrContextValue::StringLiteral("0o")))
+                .context(StrContext::Expected(StrContextValue::StringLiteral("0d")))
+                .context(StrContext::Expected(StrContextValue::StringLiteral("0x"))),
     )
 }
 

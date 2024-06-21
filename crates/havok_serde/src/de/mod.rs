@@ -754,6 +754,19 @@ pub trait Deserializer<'de>: Sized {
     /// deserialization.
     type Error: Error;
 
+    /// Deserialize map key.
+    ///
+    /// - It is mainly called to deserialize the key of a field when implementing [`Deserialize`] of struct.
+    /// - The most intended use is to parse XML name strings. The `key` part of `<hkparam name="key">`.
+    ///
+    /// The default implementation does nothing.
+    fn deserialize_key<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    where
+        V: Visitor<'de>,
+    {
+        visitor.visit_void(())
+    }
+
     /// Deserialize a `Void` value.
     ///
     /// No type information.
@@ -989,7 +1002,18 @@ pub trait Visitor<'de>: Sized {
     /// ```
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result;
 
-    /// The input contains a boolean.
+    /// The input contains a [`MapAccess`] key.
+    ///
+    /// The default implementation fails with a type error.
+    fn visit_key<E>(self, key: &str) -> Result<Self::Value, E>
+    where
+        E: Error,
+    {
+        let _ = key;
+        Err(Error::invalid_type(Unexpected::Other(key), &self))
+    }
+
+    /// The input contains a void.
     ///
     /// The default implementation fails with a type error.
     fn visit_void<E>(self, _: ()) -> Result<Self::Value, E>
@@ -1483,6 +1507,9 @@ pub trait MapAccess<'de> {
     /// deserialization.
     type Error: Error;
 
+    /// Get this class pointer name (e.g. `Pointer::new(1`)
+    fn class_ptr(&self) -> Option<Pointer>;
+
     /// This returns `Ok(Some(key))` for the next key in the map, or `Ok(None)`
     /// if there are no more remaining entries.
     ///
@@ -1588,6 +1615,11 @@ where
     A: ?Sized + MapAccess<'de>,
 {
     type Error = A::Error;
+
+    #[inline]
+    fn class_ptr(&self) -> Option<Pointer> {
+        (**self).class_ptr()
+    }
 
     #[inline]
     fn next_key_seed<K>(&mut self, seed: K) -> Result<Option<K::Value>, Self::Error>

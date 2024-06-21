@@ -15,11 +15,13 @@ use self::seq::SeqDeserializer;
 use crate::de_error::{DeError as Error, Result};
 use havok_serde::de::{self, Deserialize, Visitor};
 use havok_types::*;
+use parser::tag::attr_string;
 use winnow::ascii::{dec_int, dec_uint};
 use winnow::Parser;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#[derive(Debug)]
 pub struct XmlDeserializer<'de> {
     /// This string starts with the input data and characters are truncated off
     /// the beginning as data is parsed.
@@ -113,6 +115,13 @@ impl<'de> XmlDeserializer<'de> {
 
 impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     type Error = Error;
+
+    fn deserialize_key<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    where
+        V: Visitor<'de>,
+    {
+        visitor.visit_key(tri!(self.parse(attr_string())))
+    }
 
     #[inline]
     fn deserialize_void<V>(self, visitor: V) -> Result<V::Value, Self::Error>
@@ -300,7 +309,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        // Parse Sequence start tag.
         let (ptr_name, class_name, signature) = tri!(self.parse(class_start_tag()));
         #[cfg(feature = "tracing")]
         {
@@ -314,8 +322,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
             });
         };
 
-        let value = tri!(visitor.visit_struct(MapDeserializer::new(self, fields)));
-
+        let value = tri!(visitor.visit_struct(MapDeserializer::new(self, Some(ptr_name), fields)));
         tri!(self.parse(end_tag("hkobject")));
         Ok(value)
     }
@@ -385,7 +392,10 @@ mod tests {
     {
         match from_str::<T>(s) {
             Ok(res) => assert_eq!(res, expected),
-            Err(err) => panic!("{err}"),
+            Err(err) => {
+                tracing::error!(?err);
+                panic!("{err}")
+            }
         }
     }
 
@@ -404,10 +414,10 @@ mod tests {
         <!-- comment4 -->
 </hkobject>"##,
             crate::common::mocks::classes::HkReferencedObject {
-                _name: None,
+                __ptr_name_attr: Some(Pointer::new(1000)),
                 parent: crate::common::mocks::classes::HkBaseObject { _name: None },
-                mem_size_and_flags: 1,
-                reference_count: 2,
+                mem_size_and_flags: 2,
+                reference_count: 0,
             },
         );
 
@@ -435,7 +445,7 @@ mod tests {
 
         from_str_assert(
             r#"
-<hkparam name="string" numelements="1">
+<hkparam name="Array<QsTransform>" numelements="1">
   (0.000000 0.000000 0.000000 0.000000  )
   (   0.000000 0.000000 0.000000 0.000000  )
   (   0.000000 0.000000 0.000000 0.000000 )
@@ -445,7 +455,7 @@ mod tests {
 
         from_str_assert(
             r#"
-<hkparam name="string" numelements="3">
+<hkparam name="Array<Vector4>" numelements="3">
   (-0.000000 0.000000 -0.000000 1.000000  )
   (   0.000000 0.000000 -0.000000 1.000000  )
   (   -0.000000 0.000000 -0.000000 1.000000 )
@@ -474,7 +484,7 @@ mod tests {
 
         from_str_assert::<Vec<StringPtr>>(
             r#"
-<hkparam name="string" numelements="2">
+<hkparam name="Array<StringPtr>" numelements="2">
   <hkcstring>Hello</hkcstring>
   <hkcstring>World</hkcstring>
   <hkcstring></hkcstring>

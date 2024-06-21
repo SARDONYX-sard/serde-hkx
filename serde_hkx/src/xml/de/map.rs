@@ -6,6 +6,7 @@ use super::{
 };
 use crate::{de_error::DeError, tri};
 use havok_serde::de::MapAccess;
+use havok_types::Pointer;
 
 /// A structure for deserializing each element in an `Struct`.
 ///
@@ -19,19 +20,26 @@ use havok_serde::de::MapAccess;
 ///   <hkparam name="defaultEventMode">EVENT_MODE_IGNORE_FROM_GENERATOR</hkparam>
 /// </hkobject>
 /// ```
+#[derive(Debug)]
 pub struct MapDeserializer<'a, 'de: 'a> {
     /// Deserializer
     de: &'a mut XmlDeserializer<'de>,
     index: usize,
+    ptr_name: Option<Pointer>,
     fields: &'static [&'static str],
 }
 
 impl<'a, 'de> MapDeserializer<'a, 'de> {
     /// Create a new map deserializer
-    pub fn new(de: &'a mut XmlDeserializer<'de>, fields: &'static [&'static str]) -> Self {
+    pub fn new(
+        de: &'a mut XmlDeserializer<'de>,
+        ptr_name: Option<Pointer>,
+        fields: &'static [&'static str],
+    ) -> Self {
         Self {
             de,
             index: 0,
+            ptr_name,
             fields,
         }
     }
@@ -39,6 +47,11 @@ impl<'a, 'de> MapDeserializer<'a, 'de> {
 
 impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
     type Error = DeError;
+
+    #[inline]
+    fn class_ptr(&self) -> Option<Pointer> {
+        self.ptr_name
+    }
 
     fn next_key_seed<K>(&mut self, seed: K) -> Result<Option<K::Value>, Self::Error>
     where
@@ -61,6 +74,8 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
     where
         V: havok_serde::de::DeserializeSeed<'de>,
     {
-        seed.deserialize(&mut *self.de) // Deserialize a map value.
+        let value = tri!(seed.deserialize(&mut *self.de));
+        tri!(self.de.parse(end_tag("hkparam")));
+        Ok(value)
     }
 }

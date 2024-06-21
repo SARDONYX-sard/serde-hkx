@@ -4,7 +4,14 @@ use super::*;
 pub struct HkReferencedObject {
     pub parent: HkBaseObject,
 
-    pub _name: Option<Pointer>,
+    /// Class index of itself.
+    ///
+    /// In XML, this takes the place of a pointer.
+    /// This index is generated when deserializing a binary file.
+    ///
+    /// # Note
+    /// The case of [`Option::None`] assumes that the class is embedded directly in a field within the class.
+    pub __ptr_name_attr: Option<Pointer>,
 
     /// # C++ Parent class(`hkReferencedObject` => parent: `hkBaseObject`) field Info
     /// -   name:`"memSizeAndFlags"`
@@ -32,13 +39,13 @@ impl HavokClass for HkReferencedObject {
 
 impl Serialize for HkReferencedObject {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        let class_meta = self._name.map(|name| (name, self.signature()));
+        let class_meta = self.__ptr_name_attr.map(|name| (name, self.signature()));
         let mut serializer = serializer.serialize_struct("hkReferencedObject", class_meta)?;
 
         serializer.pad_field([0u8; 4].as_slice(), [0u8; 8].as_slice())?; // hkBaseObject ptr size
-        serializer.skip_field("memSizeAndFlags", &self.mem_size_and_flags)?;
-        serializer.skip_field("referenceCount", &self.reference_count)?;
-        serializer.pad_field(&[0u8; 0].as_slice(), &[0u8; 4].as_slice())?; // tailing align by ptr size bytes
+        serializer.skip_field("memSizeAndFlags", &self.mem_size_and_flags)?; // offset: 4(+2), 8(+2)
+        serializer.skip_field("referenceCount", &self.reference_count)?; // offset: 6(+2), 10(+2)
+        serializer.pad_field(&[0u8; 0].as_slice(), &[0u8; 4].as_slice())?; // offset: 8(+0), 12(+4) Tailing align by ptr size bytes.
         serializer.end()
     }
 }
@@ -68,32 +75,14 @@ const _: () = {
                     core::fmt::Formatter::write_str(__formatter, "field identifier")
                 }
 
-                fn visit_uint64<E>(self, __value: u64) -> Result<Self::Value, E>
-                where
-                    E: havok_serde::de::Error,
-                {
-                    match __value {
-                        0u64 => Ok(__Field::__field0),
-                        1u64 => Ok(__Field::__field1),
-                        _ => Ok(__Field::__ignore),
-                    }
-                }
-
-                fn visit_stringptr<__E>(
-                    self,
-                    __value: StringPtr<'de>,
-                ) -> core::result::Result<Self::Value, __E>
+                fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
-                    if let Some(s) = __value.into_inner() {
-                        match s.as_ref() {
-                            "memSizeAndFlags" => Ok(__Field::__field0),
-                            "referenceCount" => Ok(__Field::__field1),
-                            _ => Ok(__Field::__ignore),
-                        }
-                    } else {
-                        Ok(__Field::__ignore)
+                    match __value {
+                        "memSizeAndFlags" => Ok(__Field::__field0),
+                        "referenceCount" => Ok(__Field::__field1),
+                        _ => Ok(__Field::__ignore),
                     }
                 }
             }
@@ -104,7 +93,7 @@ const _: () = {
                 where
                     __D: _serde::Deserializer<'de>,
                 {
-                    _serde::Deserializer::deserialize_stringptr(__deserializer, __FieldVisitor)
+                    _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
                 }
             }
 
@@ -117,56 +106,6 @@ const _: () = {
                 type Value = HkReferencedObject;
                 fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
                     core::fmt::Formatter::write_str(__formatter, "struct HkReferencedObject")
-                }
-
-                #[inline]
-                fn visit_array<__A>(
-                    self,
-                    mut __seq: __A,
-                ) -> core::result::Result<Self::Value, __A::Error>
-                where
-                    __A: _serde::de::SeqAccess<'de>,
-                {
-                    let __field0 = match match _serde::de::SeqAccess::next_primitive_element::<u16>(
-                        &mut __seq,
-                    ) {
-                        core::result::Result::Ok(__val) => __val,
-                        core::result::Result::Err(__err) => {
-                            return core::result::Result::Err(__err);
-                        }
-                    } {
-                        core::option::Option::Some(__value) => __value,
-                        core::option::Option::None => {
-                            return core::result::Result::Err(_serde::de::Error::invalid_length(
-                                0usize,
-                                &"struct HkReferencedObject with 1 element",
-                            ));
-                        }
-                    };
-
-                    let __field1 = match match _serde::de::SeqAccess::next_primitive_element::<i16>(
-                        &mut __seq,
-                    ) {
-                        core::result::Result::Ok(__val) => __val,
-                        core::result::Result::Err(__err) => {
-                            return core::result::Result::Err(__err);
-                        }
-                    } {
-                        core::option::Option::Some(__value) => __value,
-                        core::option::Option::None => {
-                            return core::result::Result::Err(_serde::de::Error::invalid_length(
-                                0usize,
-                                &"struct HkReferencedObject with 2 element",
-                            ));
-                        }
-                    };
-                    core::result::Result::Ok(HkReferencedObject {
-                        parent: HkBaseObject { _name: None },
-                        _name: None,
-
-                        mem_size_and_flags: __field0,
-                        reference_count: __field1,
-                    })
                 }
 
                 #[inline]
@@ -245,7 +184,7 @@ const _: () = {
                     };
                     _serde::__private::Ok(HkReferencedObject {
                         parent: HkBaseObject { _name: None },
-                        _name: None,
+                        __ptr_name_attr: __map.class_ptr(),
                         mem_size_and_flags: __field0,
                         reference_count: __field1,
                     })
