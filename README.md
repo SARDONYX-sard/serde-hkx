@@ -9,10 +9,10 @@ The only way to find out if it is possible or not is to try it out.
 - [x] Try to implement Serializer to design.
   - [x] XML
   - [x] Bytes
-- [] Try to implement Deserializer to design.
+- [ ] Try to implement Deserializer to design.
 
-  - [] XML <- Current working
-  - [] Bytes
+  - [ ] XML <- Current working
+  - [ ] Bytes
 
 - [ ] Try to implement procedural macro(`derive(Serialize, Deserialize)`).
 - [ ] Generate Classes.
