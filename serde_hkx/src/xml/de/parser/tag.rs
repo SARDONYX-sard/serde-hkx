@@ -85,7 +85,7 @@ pub fn class_start_tag<'a>() -> impl Parser<&'a str, (Pointer, &'a str, Signatur
     )))
 }
 
-/// Parses the field of class start opening tag `<hkparam name="`
+/// Parses the field of class start opening tag `<hkparam name=`
 pub fn field_start_open_tag<'a>() -> impl Parser<&'a str, (), ContextError> {
     seq!(
         _: delimited_comment_multispace0("<"),
@@ -99,7 +99,8 @@ pub fn field_start_open_tag<'a>() -> impl Parser<&'a str, (), ContextError> {
     )))
 }
 
-/// Parses the field of class start closing tag `">`
+#[inline]
+/// Parses the field of class start closing tag `>`
 pub fn field_start_close_tag<'a>() -> impl Parser<&'a str, (), ContextError> {
     seq!(
         _: delimited_multispace0_comment(">")

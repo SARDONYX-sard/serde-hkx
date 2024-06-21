@@ -53,6 +53,7 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
         self.ptr_name
     }
 
+    // Parse e.g. `<hkparam name="worldUpWS">`
     fn next_key_seed<K>(&mut self, seed: K) -> Result<Option<K::Value>, Self::Error>
     where
         K: havok_serde::de::DeserializeSeed<'de>,
@@ -70,6 +71,7 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
         key
     }
 
+    // Parse e.g. `(0.000000 0.000000 1.000000 0.000000)</hkparam>`
     fn next_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
     where
         V: havok_serde::de::DeserializeSeed<'de>,
