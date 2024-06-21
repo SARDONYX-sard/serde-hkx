@@ -1,28 +1,32 @@
 //! crate Root error
 use crate::lib::*;
 
-/// Crate root error
+/// Deserialize error
 #[derive(Debug, snafu::Snafu)]
 #[snafu(visibility(pub))]
 pub enum DeError {
     /// User custom error.
-    #[snafu(display(""))]
+    #[snafu(display("{msg}"))]
     Message {
         /// Error message
         msg: String,
     },
 
+    /// Still need to parse the syntax but the string provided is not enough.
     #[snafu(display("Still need to parse the syntax but the string provided is not enough."))]
     Eof,
+    /// Incomplete parsing of syntax.
     #[snafu(display("Incomplete parsing of syntax."))]
     TrailingCharacters,
 
+    /// Expected class {expected}, but got {actual}.
     #[snafu(display("Expected class {expected}, but got {actual}."))]
     MismatchClassName {
         actual: &'static str,
         expected: String,
     },
 
+    /// Human readable XML parsing error
     #[snafu(transparent)]
     ReadableError {
         source: crate::xml::de::parser::error::ReadableError,

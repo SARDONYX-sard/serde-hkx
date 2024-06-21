@@ -32,7 +32,7 @@ use parse_display::Display;
 /// assert_eq!("#10000".parse(),Ok(Pointer::new(10000)));
 /// ```
 ///
-/// # NOte
+/// # Note
 /// The [`Copy`] is derive for [`usize`] wrapper type.
 #[cfg_attr(
     feature = "serde",
