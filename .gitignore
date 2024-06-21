@@ -1,6 +1,7 @@
 # misc
 .DS_Store
 *.pem
+/logs/
 
 # Rust build cache
 **/target
