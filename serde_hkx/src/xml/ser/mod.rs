@@ -562,7 +562,7 @@ mod tests {
 
         let actual = tri!(to_string(&classes, top_ptr.unwrap_or_default()));
         let expected =
-            include_str!("../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
+            include_str!("../../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
         pretty_assertions::assert_eq!(actual, expected);
         Ok(())
     }
