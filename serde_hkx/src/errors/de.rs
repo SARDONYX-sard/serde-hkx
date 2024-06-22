@@ -1,10 +1,10 @@
-//! crate Root error
+//! Deserialize error
 use crate::lib::*;
 
 /// Deserialize error
 #[derive(Debug, snafu::Snafu)]
 #[snafu(visibility(pub))]
-pub enum DeError {
+pub enum Error {
     /// User custom error.
     #[snafu(display("{msg}"))]
     Message {
@@ -33,7 +33,7 @@ pub enum DeError {
     },
 }
 
-impl havok_serde::de::Error for DeError {
+impl havok_serde::de::Error for Error {
     fn custom<T>(msg: T) -> Self
     where
         T: Display,
@@ -45,4 +45,4 @@ impl havok_serde::de::Error for DeError {
 }
 
 /// Wrapper on [`core::result::Result`] for Deserializer.
-pub type Result<T, E = DeError> = core::result::Result<T, E>;
+pub type Result<T, E = Error> = core::result::Result<T, E>;

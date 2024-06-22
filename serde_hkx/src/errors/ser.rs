@@ -1,7 +1,7 @@
-//! crate Root error
+//! Serialize error
 use crate::lib::*;
 
-/// Crate root error
+/// Serialize error
 #[derive(Debug, snafu::Snafu)]
 #[snafu(visibility(pub))]
 pub enum Error {

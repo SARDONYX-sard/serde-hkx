@@ -2,7 +2,7 @@
 use super::parser::tag::{end_tag, start_tag};
 use super::XmlDeserializer;
 
-use crate::de_error::{DeError as Error, Result};
+use crate::errors::de::{Error, Result};
 use crate::tri;
 
 use havok_serde::de::{DeserializeSeed, SeqAccess};

@@ -1,8 +1,8 @@
 //! XML Serialization
-use crate::lib::*;
+use crate::{lib::*, tri};
 
-use crate::error::{Error, Result};
-use havok_serde::ser::{Serialize, SerializeFlags, SerializeStruct};
+use crate::errors::ser::{Error, Result};
+use havok_serde::ser::{Serialize, SerializeFlags, SerializeStruct, Serializer};
 use havok_types::variant::Variant;
 use havok_types::{
     f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature,
@@ -36,22 +36,21 @@ impl Default for XmlSerializer {
 /// To XML String.
 pub fn to_string<T>(value: &T, top_ptr: usize) -> Result<String>
 where
-    T: havok_serde::ser::Serialize,
+    T: Serialize,
 {
     let mut serializer = XmlSerializer::default();
 
-    if let Some(ref start_root) = serializer.start_root {
+    if let Some(start_root) = serializer.start_root {
         serializer.output += start_root;
         serializer.output += &Pointer::new(top_ptr).to_string();
-        serializer.output += "\">";
-        serializer.output += "\n\n";
+        serializer.output += "\">\n\n";
         serializer.increment_depth();
         serializer.indent();
         serializer.output += "<hksection name=\"__data__\">\n";
         serializer.increment_depth();
     };
 
-    value.serialize(&mut serializer)?;
+    tri!(value.serialize(&mut serializer));
 
     if let Some(end_root) = serializer.end_root {
         serializer.decrement_depth();
@@ -65,7 +64,7 @@ where
     Ok(serializer.output)
 }
 
-impl<'a> havok_serde::ser::Serializer for &'a mut XmlSerializer {
+impl<'a> Serializer for &'a mut XmlSerializer {
     type Ok = ();
     type Error = Error;
 
@@ -226,7 +225,7 @@ impl<'a> havok_serde::ser::Serializer for &'a mut XmlSerializer {
     /// FIXME: Unclear XML representation
     #[inline]
     fn serialize_variant(self, v: &Variant) -> Result<Self::Ok> {
-        self.serialize_pointer(v.object)?;
+        tri!(self.serialize_pointer(v.object));
         self.serialize_pointer(v.class)
     }
 
@@ -266,11 +265,13 @@ impl<'a> havok_serde::ser::Serializer for &'a mut XmlSerializer {
 
 impl XmlSerializer {
     /// Do indentation by `self.depth`.
+    #[inline]
     fn indent(&mut self) {
         match self.depth {
-            0 => (),
-            1 => self.output += self.indent,
-            _ => self.output += &self.indent.repeat(self.depth),
+            // Heap alloc optimizations
+            0 => (),                                             // 0 alloc
+            1 => self.output += self.indent,                     // 1 time alloc
+            _ => self.output += &self.indent.repeat(self.depth), // 2 time alloc
         }
     }
 
@@ -313,7 +314,7 @@ impl<'a> havok_serde::ser::SerializeSeq for &'a mut XmlSerializer {
             self.indent();
         };
 
-        value.serialize(&mut **self)?;
+        tri!(value.serialize(&mut **self));
         self.output += " ";
 
         // Align the closing tag of `</hkparam>` by breaking the line at the end of the output,
@@ -336,7 +337,7 @@ impl<'a> havok_serde::ser::SerializeSeq for &'a mut XmlSerializer {
     where
         T: ?Sized + Serialize,
     {
-        value.serialize(&mut **self)?;
+        tri!(value.serialize(&mut **self));
         self.output += "\n";
         Ok(())
     }
@@ -346,7 +347,7 @@ impl<'a> havok_serde::ser::SerializeSeq for &'a mut XmlSerializer {
         T: ?Sized + Serialize,
     {
         self.indent();
-        value.serialize(&mut **self)?;
+        tri!(value.serialize(&mut **self));
         self.output += "\n";
         Ok(())
     }
@@ -359,7 +360,7 @@ impl<'a> havok_serde::ser::SerializeSeq for &'a mut XmlSerializer {
     fn serialize_cstring_element(&mut self, value: &CString) -> Result<()> {
         self.indent();
         self.output += "<hkcstring>";
-        value.serialize(&mut **self)?;
+        tri!(value.serialize(&mut **self));
         self.output += "</hkcstring>\n";
         Ok(())
     }
@@ -372,7 +373,7 @@ impl<'a> havok_serde::ser::SerializeSeq for &'a mut XmlSerializer {
     fn serialize_stringptr_element(&mut self, value: &StringPtr) -> Result<()> {
         self.indent();
         self.output += "<hkcstring>";
-        value.serialize(&mut **self)?;
+        tri!(value.serialize(&mut **self));
         self.output += "</hkcstring>\n";
         Ok(())
     }
@@ -401,7 +402,7 @@ impl<'a> SerializeStruct for &'a mut XmlSerializer {
         self.output += key;
         self.output += "\">";
 
-        value.serialize(&mut **self)?;
+        tri!(value.serialize(&mut **self));
 
         self.output += "</hkparam>\n";
         Ok(())
@@ -465,7 +466,7 @@ impl<'a> SerializeStruct for &'a mut XmlSerializer {
         let len = array.len();
         self.output += &format!("\" numelements=\"{len}\">\n");
         self.increment_depth();
-        value.serialize(&mut **self)?;
+        tri!(value.serialize(&mut **self));
         self.decrement_depth();
         self.indent();
         self.output += "</hkparam>\n";
@@ -541,7 +542,7 @@ mod tests {
         let mut classes = indexmap::IndexMap::new();
         classes.insert(11, Classes::AllTypesTestClass(all_types_class));
 
-        tracing::trace!("\n{}", to_string(&classes, 11)?);
+        tracing::trace!("\n{}", tri!(to_string(&classes, 11)));
         Ok(())
     }
 
@@ -559,7 +560,7 @@ mod tests {
             }
         }
 
-        let actual = to_string(&classes, top_ptr.unwrap_or_default())?;
+        let actual = tri!(to_string(&classes, top_ptr.unwrap_or_default()));
         let expected =
             include_str!("../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
         pretty_assertions::assert_eq!(actual, expected);

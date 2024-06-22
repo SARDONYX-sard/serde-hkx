@@ -4,7 +4,7 @@ use super::{
     parser::tag::{end_tag, field_start_close_tag, field_start_open_tag},
     XmlDeserializer,
 };
-use crate::{de_error::DeError, tri};
+use crate::{errors::de::Error, tri};
 use havok_serde::de::MapAccess;
 use havok_types::Pointer;
 
@@ -46,7 +46,7 @@ impl<'a, 'de> MapDeserializer<'a, 'de> {
 }
 
 impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
-    type Error = DeError;
+    type Error = Error;
 
     #[inline]
     fn class_ptr(&self) -> Option<Pointer> {

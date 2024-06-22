@@ -3,7 +3,7 @@ mod trait_impls;
 
 use crate::bytes::serde::section_header::SectionHeader;
 use crate::common::trait_impls::Align as _;
-use crate::error::{
+use crate::errors::ser::{
     Error, InvalidEndianSnafu, MissingClassInClassnamesSectionSnafu, MissingGlobalFixupClassSnafu,
     MissingLocalFixupsSrcSnafu, Result, SubAbsOverflowSnafu, UnsupportedPtrSizeSnafu,
 };

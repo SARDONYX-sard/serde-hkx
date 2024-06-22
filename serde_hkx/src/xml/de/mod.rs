@@ -12,7 +12,7 @@ use self::parser::type_kind::{
     string_in_array, transform, vector4,
 };
 use self::seq::SeqDeserializer;
-use crate::de_error::{DeError as Error, Result};
+use crate::errors::de::{Error, Result};
 use havok_serde::de::{self, Deserialize, Visitor};
 use havok_types::*;
 use parser::tag::attr_string;

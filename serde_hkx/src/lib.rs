@@ -1,7 +1,6 @@
 pub mod bytes;
 pub mod common;
-pub mod de_error;
-pub mod error;
+pub mod errors;
 pub mod xml;
 
 /// A facade around all the types we need from the `std`, `core`, and `alloc`
