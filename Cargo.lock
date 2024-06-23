@@ -394,8 +394,19 @@ checksum = "290f1a1d9242c78d09ce40a5e87e7554ee637af1351968159f4952f028f75604"
 name = "havok_serde"
 version = "0.1.0"
 dependencies = [
+ "havok_serde_derive",
  "havok_types",
  "indexmap 2.2.6",
+]
+
+[[package]]
+name = "havok_serde_derive"
+version = "0.1.0"
+dependencies = [
+ "deluxe",
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]

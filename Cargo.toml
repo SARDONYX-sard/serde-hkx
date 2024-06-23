@@ -11,6 +11,7 @@ edition = "2021"
 members = [
   "crates/class_generator",
   "crates/havok_serde",
+  "crates/havok_serde_derive",
   "crates/havok_types",
   "crates/havok_types_derive",
   "crates/havok_types_derive/src/proc_macros",
@@ -19,3 +20,8 @@ members = [
 ]
 default-members = ["crates/class_generator"]
 resolver = "2"
+
+[workspace.dependencies]
+proc-macro2 = { version = "1.0.82", default-features = false }
+quote = { version = "1.0.36", default-features = false }
+syn = { version = "2.0.63", default-features = false }

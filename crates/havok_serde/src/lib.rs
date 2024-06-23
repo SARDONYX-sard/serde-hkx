@@ -92,6 +92,9 @@ pub use ser::Serialize;
 use havok_types::Signature;
 use lib::*;
 
+#[cfg(feature = "derive")]
+pub use havok_serde_derive::Serialize;
+
 /// Trait whether it is Havok Class or not.
 ///
 /// # Purpose
