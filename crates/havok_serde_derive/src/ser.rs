@@ -88,6 +88,8 @@ fn serialize_field_tokens(
     let mut x86_current_offset: usize = 0;
     let mut x64_current_offset: usize = 0;
     let mut field_tokens = Vec::new();
+
+    // The ptr type must serialize the data pointed to by ptr after serializing all fields. This is an array for that purpose.
     let mut ptr_after_write_fields = Vec::new();
 
     for field in s.fields.iter_mut() {
@@ -119,21 +121,30 @@ fn serialize_field_tokens(
                 let field_name = &field.ident;
                 if skip_serializing {
                     use syn::Type::*;
-                    match field.ty {
+                    match &field.ty {
                         Array(_) | Slice(_) => {
                             ptr_after_write_fields.push(quote! {
                                 serializer.skip_array_field(#rename, &self.#field_name)?;
                             });
                         }
-                        _ => {
-                            field_tokens.push(quote! {
-                                serializer.skip_field(#rename, &self.#field_name)?;
-                            });
+                        ty => {
+                            let ty_string = quote! {#ty}.to_string();
+                            if ty_string.starts_with("StringPtr")
+                                || ty_string.starts_with("CString")
+                            {
+                                field_tokens.push(quote! {
+                                    serializer.skip_stringptr_meta_field(#rename, &self.#field_name)?;
+                                });
+                            } else {
+                                field_tokens.push(quote! {
+                                    serializer.skip_field(#rename, &self.#field_name)?;
+                                });
+                            };
                         }
                     };
                 } else {
                     use syn::Type::*;
-                    match field.ty {
+                    match &field.ty {
                         Array(_) | Slice(_) => {
                             field_tokens.push(quote! {
                                 serializer.serialize_array_meta_field(#rename, &self.#field_name)?;
@@ -142,10 +153,22 @@ fn serialize_field_tokens(
                                 serializer.serialize_array_field(#rename, &self.#field_name)?;
                             });
                         }
-                        _ => {
-                            field_tokens.push(quote! {
-                                serializer.serialize_field(#rename, &self.#field_name)?;
+                        ty => {
+                            let ty_string = quote! {#ty}.to_string();
+                            if ty_string.starts_with("StringPtr")
+                                || ty_string.starts_with("CString")
+                            {
+                                field_tokens.push(quote! {
+                                serializer.serialize_stringptr_meta_field(#rename, &self.#field_name)?;
                             });
+                                ptr_after_write_fields.push(quote! {
+                                    serializer.serialize_stringptr_field(#rename, &self.#field_name)?;
+                                });
+                            } else {
+                                field_tokens.push(quote! {
+                                    serializer.serialize_field(#rename, &self.#field_name)?;
+                                });
+                            };
                         }
                     };
                 }
