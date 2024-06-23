@@ -363,6 +363,10 @@ pub trait SerializeSeq {
 /// implementation of `SerializeStruct` for a basic JSON data format.
 ///
 /// [example data format]: https://serde.rs/data-format.html
+///
+/// # Flatten is unsupportable
+/// If the parent is a ptr type, the process of simply writing the parent cannot be used as it is because the data writing of the ptr destination is waiting after the writing of all fields.
+/// Therefore, `serialize` of the parent struct cannot be reused.
 pub trait SerializeStruct {
     /// Must match the `Ok` type of our `Serializer`.
     type Ok;
