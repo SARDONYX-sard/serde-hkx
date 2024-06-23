@@ -15,7 +15,7 @@ use self::seq::SeqDeserializer;
 use crate::errors::de::{Error, Result};
 use havok_serde::de::{self, Deserialize, Visitor};
 use havok_types::*;
-use parser::tag::attr_string;
+use parser::tag::{attr_string, start_tag};
 use winnow::ascii::{dec_int, dec_uint};
 use winnow::Parser;
 
@@ -30,8 +30,11 @@ pub struct XmlDeserializer<'de> {
     /// This is readonly for error report. not used.
     original: &'de str,
 
-    ///Flag to deal with cases where the XML notation differs between within an `Array` and without, as in `StringPtr`.
+    /// Flag to deal with cases where the XML notation differs between within an `Array` and without, as in `StringPtr`.
     in_array: bool,
+
+    /// Flag to deal with cases where the XML notation differs between within an `Struct` and without, as in `Struct`.
+    in_struct: bool,
 }
 
 impl<'de> XmlDeserializer<'de> {
@@ -41,6 +44,7 @@ impl<'de> XmlDeserializer<'de> {
             input,
             original: input,
             in_array: false,
+            in_struct: false,
         }
     }
 }
@@ -309,20 +313,34 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let (ptr_name, class_name, signature) = tri!(self.parse(class_start_tag()));
-        #[cfg(feature = "tracing")]
-        {
-            tracing::debug!("ptr_name={ptr_name}, class_name={class_name}, Signature={signature}");
-            tracing::debug!(name, ?fields);
-        }
-        if name != class_name {
-            return Err(Error::MismatchClassName {
-                actual: name,
-                expected: class_name.to_string(),
-            });
+        let value = if self.in_struct {
+            // When a struct is present in the field of struct, the name and signature attributes are not present.
+            tri!(self.parse(start_tag("hkobject")));
+            tri!(visitor.visit_struct(MapDeserializer::new(self, None, fields)))
+        } else {
+            let (ptr_name, class_name, signature) = tri!(self.parse(class_start_tag()));
+            #[cfg(feature = "tracing")]
+            {
+                tracing::debug!(
+                    "ptr_name={ptr_name}, class_name={class_name}, Signature={signature}"
+                );
+                tracing::debug!(name, ?fields);
+            }
+
+            if name != class_name {
+                return Err(Error::MismatchClassName {
+                    actual: name,
+                    expected: class_name.to_string(),
+                });
+            };
+
+            self.in_struct = true;
+            let value =
+                tri!(visitor.visit_struct(MapDeserializer::new(self, Some(ptr_name), fields)));
+            self.in_struct = false;
+            value
         };
 
-        let value = tri!(visitor.visit_struct(MapDeserializer::new(self, Some(ptr_name), fields)));
         tri!(self.parse(end_tag("hkobject")));
         Ok(value)
     }
