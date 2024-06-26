@@ -10,15 +10,23 @@ pub struct SerdeClass {
 }
 
 #[derive(Default, deluxe::ParseMetaItem, deluxe::ExtractAttributes)]
+#[deluxe(attributes(havok_serde))]
 struct SerdeAttr {
     #[deluxe(default)]
     rename: String,
-    #[deluxe(default)]
     x86_offset: usize,
-    #[deluxe(default)]
     x64_offset: usize,
+    x86_type_size: usize,
+    x64_type_size: usize,
     #[deluxe(default)]
     skip_serializing: bool,
+}
+
+/// #[havok_serde(flatten = "hkBaseObject")]
+#[derive(Default, deluxe::ParseMetaItem, deluxe::ExtractAttributes)]
+#[deluxe(attributes(havok_serde))]
+struct FlattenAttr {
+    flatten: String,
 }
 
 pub fn expand_derive_serialize(input: &mut syn::DeriveInput) -> syn::Result<TokenStream> {
@@ -93,11 +101,26 @@ fn serialize_field_tokens(
     let mut ptr_after_write_fields = Vec::new();
 
     for field in s.fields.iter_mut() {
-        if field.ident.as_ref().map(|ident| ident.to_string())
-            == Some("__ptr_name_attr".to_string())
-        {
+        let field_name = field.ident.as_ref().map(|ident| ident.to_string());
+        if field_name == Some("__ptr_name_attr".to_string()) {
             continue;
         }
+
+        // Parse parent
+        if field_name == Some("__parent".to_string()) {
+            if let Ok(FlattenAttr { flatten }) = deluxe::extract_attributes(field) {
+                let repo_root = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+                    .join("..")
+                    .join("..");
+
+                let parent_info = std::fs::read_to_string(
+                    repo_root.join(format!("assets/classes/{flatten}.json")),
+                )
+                .unwrap();
+                // panic!("{parent_info}");
+                continue;
+            };
+        };
 
         // Aggregate any errors to avoid exiting the loop early
         match deluxe::extract_attributes(field) {
@@ -105,19 +128,23 @@ fn serialize_field_tokens(
                 rename,
                 x86_offset,
                 x64_offset,
+                x86_type_size,
+                x64_type_size,
                 skip_serializing,
             }) => {
-                if x86_current_offset > 0 {
-                    let x86_pad = x86_current_offset.abs_diff(x86_offset);
-                    let x64_pad = x64_current_offset.abs_diff(x64_offset);
+                let x86_pad = x86_offset - x86_current_offset;
+                let x64_pad = x64_offset - x64_current_offset;
+                if x86_pad != 0 || x64_pad != 0 {
                     field_tokens.push(quote! {
                             serializer.pad_field([0u8; #x86_pad].as_slice(), [0u8; #x64_pad].as_slice())?;
                         });
 
-                    x86_current_offset += x86_offset;
-                    x64_current_offset += x64_offset;
+                    x86_current_offset = x86_offset;
+                    x64_current_offset = x64_offset;
                 }
 
+                x86_current_offset += x86_type_size;
+                x64_current_offset += x64_type_size;
                 let field_name = &field.ident;
                 if skip_serializing {
                     use syn::Type::*;
@@ -173,22 +200,26 @@ fn serialize_field_tokens(
                     };
                 }
             }
-            Err(e) => panic!("{e}"),
+            Err(e) => panic!("Attribute proc-macro parsing error: {e}"),
         }
     }
 
     // Struct tailing alignment.
     let x86_pad = if x86_size > x86_current_offset {
         x86_current_offset.abs_diff(x86_size)
-    } else {
+    } else if x86_size == x86_current_offset {
         0
+    } else {
+        panic!("x86_size({x86_size}) < x86_current_offset({x86_current_offset})");
     };
-    let x64_pad = if x86_size > x64_current_offset {
+    let x64_pad = if x64_size > x64_current_offset {
         x64_current_offset.abs_diff(x64_size)
-    } else {
+    } else if x64_size == x64_current_offset {
         0
+    } else {
+        panic!("x64_size({x64_size}) < x64_current_offset({x64_current_offset})");
     };
-    if !(x86_pad == 0 && x64_pad == 0) {
+    if x86_pad != 0 || x64_pad != 0 {
         field_tokens.push(quote! {
             serializer.pad_field([0u8; #x86_pad].as_slice(), [0u8; #x64_pad].as_slice())?;
         });
