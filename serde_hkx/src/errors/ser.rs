@@ -33,6 +33,7 @@ pub enum Error {
 
     /// Relative position cannot be obtained because abs is larger than {position}.
     /// This indicates that the value of `absolute_data_offset` in the header is wrong.
+    #[snafu(display("Relative position cannot be obtained because abs is larger than {position}. This indicates that the value of `absolute_data_offset`({abs_data_offset}) in the header is wrong."))]
     SubAbsOverflowError {
         position: u64,
         abs_data_offset: u32,

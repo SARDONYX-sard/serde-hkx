@@ -5,7 +5,7 @@ use super::{
     XmlDeserializer,
 };
 use crate::{errors::de::Error, tri};
-use havok_serde::de::MapAccess;
+use havok_serde::de::{DeserializeSeed, MapAccess};
 use havok_types::Pointer;
 
 /// A structure for deserializing each element in an `Struct`.
@@ -56,7 +56,7 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
     // Parse e.g. `<hkparam name="worldUpWS">`
     fn next_key_seed<K>(&mut self, seed: K) -> Result<Option<K::Value>, Self::Error>
     where
-        K: havok_serde::de::DeserializeSeed<'de>,
+        K: DeserializeSeed<'de>,
     {
         // Check if there are no more elements.
         if self.de.parse_peek(end_tag("hkobject")).is_ok() && self.fields.len() == self.index {
@@ -74,7 +74,7 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
     // Parse e.g. `(0.000000 0.000000 1.000000 0.000000)</hkparam>`
     fn next_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
     where
-        V: havok_serde::de::DeserializeSeed<'de>,
+        V: DeserializeSeed<'de>,
     {
         let value = tri!(seed.deserialize(&mut *self.de));
         tri!(self.de.parse(end_tag("hkparam")));

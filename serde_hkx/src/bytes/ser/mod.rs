@@ -689,7 +689,7 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         let size = value.as_ref().len() as u32;
         self.serialize_ulong(0)?; // ptr size
         self.serialize_uint32(size)?; // array size
-        self.serialize_uint32(size | 0x80 << 24)?; // capacity | Owned flag
+        self.serialize_uint32(size | 1 << 31)?; // Capacity(same as size) | Owned flag(32nd bit)
         Ok(())
     }
 
