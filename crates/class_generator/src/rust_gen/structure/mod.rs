@@ -1,4 +1,8 @@
-use crate::{cpp_info::Class, rust_gen::field::gen_field};
+mod field;
+pub mod impl_serialize;
+
+use self::field::gen_field;
+use crate::cpp_info::Class;
 use proc_macro2::TokenStream;
 use quote::quote;
 

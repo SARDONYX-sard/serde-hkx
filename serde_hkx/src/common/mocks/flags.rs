@@ -6,7 +6,7 @@ bitflags::bitflags! {
     /// # On XML
     /// When all bits are 0, "0" is inserted.
     /// (Even if `FLAGS_NONE = 0` and 0 is replaced by `FLAGS_NONE`, "0" will appear when reconverting xml -> hkx -> xml.)
-    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    #[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Hash)]
     #[repr(transparent)]
     pub struct FlagValues: u16 {
         /// Flags is empty: 0

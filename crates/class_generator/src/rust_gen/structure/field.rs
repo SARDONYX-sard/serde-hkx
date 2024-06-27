@@ -1,5 +1,5 @@
-use super::to_rust_token::{to_rust_field_ident, to_rust_type};
 use crate::cpp_info::{Member, TypeKind};
+use crate::rust_gen::to_rust_token::{to_rust_field_ident, to_rust_type};
 use proc_macro2::TokenStream;
 use quote::{quote, ToTokens};
 

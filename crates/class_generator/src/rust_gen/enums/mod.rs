@@ -1,3 +1,5 @@
+pub mod impl_serialize;
+
 use crate::cpp_info::Class;
 use crate::cpp_info::Enum;
 use crate::cpp_info::EnumItem;
@@ -23,9 +25,9 @@ fn gen_enum(one_enum: &Enum) -> syn::ItemEnum {
             let variant = gen_enum_variant(enum_item);
             match index {
                 0 => quote! {
-                        #[default]
-                        #variant
-                    },
+                    #[default]
+                    #variant
+                },
                 _ => variant,
             }
         })
