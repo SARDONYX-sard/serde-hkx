@@ -45,7 +45,8 @@ pub struct Pointer(usize);
 
 impl Pointer {
     /// Get inner value.
-    pub fn get(&self) -> usize {
+    #[inline]
+    pub const fn get(&self) -> usize {
         self.0
     }
 }

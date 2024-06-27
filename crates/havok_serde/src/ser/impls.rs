@@ -36,6 +36,7 @@ macro_rules! impl_serialize {
     };
 }
 
+impl_serialize!(*(), serialize_void);
 impl_serialize!(*char, serialize_char);
 impl_serialize!(*bool, serialize_bool);
 impl_serialize!(*i8, serialize_int8);
@@ -124,7 +125,7 @@ macro_rules! impl_serialize_with_index_array {
 }
 
 impl_serialize_with_index_array!(
-  bool, char, u8, u16, u32, u64, i8, i16, i32, i64, f32, Pointer
+  (), bool, char, u8, u16, u32, u64, i8, i16, i32, i64, f32, Pointer
   => serialize_primitive_element
 );
 

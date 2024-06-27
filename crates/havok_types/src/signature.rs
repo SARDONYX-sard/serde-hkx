@@ -34,6 +34,14 @@ use parse_display::Display;
 #[display("{0:#x}")]
 pub struct Signature(u32);
 
+impl Signature {
+    /// Get inner value.
+    #[inline]
+    pub const fn get(self) -> u32 {
+        self.0
+    }
+}
+
 impl FromStr for Signature {
     type Err = &'static str;
 

@@ -1,7 +1,7 @@
 //! crate Root error
 
 /// Crate root error
-#[derive(Debug, snafu::Snafu, snafu_location_derive::Location)]
+#[derive(Debug, snafu::Snafu)]
 #[snafu(visibility(pub))]
 pub enum ClassGeneratorError {
     /// File meta-information not found error

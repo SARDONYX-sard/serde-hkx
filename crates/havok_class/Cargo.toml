@@ -1,0 +1,13 @@
+[package]
+name = "havok_class"
+edition = "2021"
+authors.workspace = true
+version.workspace = true
+license.workspace = true
+description.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+havok_serde = { path = "../havok_serde" }
+havok_types = { path = "../havok_types" }

@@ -9,15 +9,11 @@ rust-version.workspace = true
 edition.workspace = true
 
 [dependencies]
-havok_types = { path = "../havok_types", features = ["serde"] }
-havok_serde_derive = { path = "../havok_serde_derive", optional = true }
+havok_types = { path = "../havok_types" }
 indexmap = { version = "2.2.6", optional = true }
 
 [features]
-default = ["std", "derive"]
-
-# Provide derive(Serialize, Deserialize) macros.
-derive = ["dep:havok_serde_derive"]
+default = ["std"]
 
 # Provide impls for common standard library types like Vec<T> and HashMap<K, V>.
 # Requires a dependency on the Rust standard library.
