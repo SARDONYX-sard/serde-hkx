@@ -37,7 +37,7 @@
     {
       "name": "items",
       "class_ref": "hkClassEnumItem",
-      "has_string": false,
+      "has_string": true,
       "ctype": "hkSimpleArray<struct hkClassEnumItem>",
       "vtype": "TYPE_SIMPLEARRAY",
       "vsubtype": "TYPE_STRUCT",

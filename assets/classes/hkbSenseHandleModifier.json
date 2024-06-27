@@ -5,7 +5,7 @@
   "size_x86": 160,
   "size_x86_64": 224,
   "parent": "hkbModifier",
-  "parent_has_string": false,
+  "parent_has_string": true,
   "vtable": true,
   "has_string": true,
   "enums": [

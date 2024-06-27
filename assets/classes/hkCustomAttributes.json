@@ -11,7 +11,7 @@
     {
       "name": "attributes",
       "class_ref": "hkCustomAttributesAttribute",
-      "has_string": false,
+      "has_string": true,
       "ctype": "hkSimpleArray<struct hkCustomAttributesAttribute>",
       "vtype": "TYPE_SIMPLEARRAY",
       "vsubtype": "TYPE_STRUCT",

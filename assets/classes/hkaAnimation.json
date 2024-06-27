@@ -120,7 +120,7 @@
     {
       "name": "annotationTracks",
       "class_ref": "hkaAnnotationTrack",
-      "has_string": false,
+      "has_string": true,
       "ctype": "hkArray<struct hkaAnnotationTrack>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",

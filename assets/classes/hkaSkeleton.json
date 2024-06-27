@@ -40,7 +40,7 @@
     {
       "name": "bones",
       "class_ref": "hkaBone",
-      "has_string": false,
+      "has_string": true,
       "ctype": "hkArray<struct hkaBone>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",

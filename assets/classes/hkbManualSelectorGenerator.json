@@ -5,9 +5,9 @@
   "size_x86": 56,
   "size_x86_64": 96,
   "parent": "hkbGenerator",
-  "parent_has_string": false,
+  "parent_has_string": true,
   "vtable": true,
-  "has_string": false,
+  "has_string": true,
   "members": [
     {
       "name": "generators",

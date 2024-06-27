@@ -5,7 +5,7 @@
   "size_x86": 72,
   "size_x86_64": 112,
   "parent": "hkbGenerator",
-  "parent_has_string": false,
+  "parent_has_string": true,
   "vtable": true,
   "has_string": true,
   "enums": [

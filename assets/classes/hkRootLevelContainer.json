@@ -11,7 +11,7 @@
     {
       "name": "namedVariants",
       "class_ref": "hkRootLevelContainerNamedVariant",
-      "has_string": false,
+      "has_string": true,
       "ctype": "hkArray<struct hkRootLevelContainerNamedVariant>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
