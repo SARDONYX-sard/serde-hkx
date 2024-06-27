@@ -12,6 +12,10 @@
       "type": "string",
       "description": "Parent classes of the C++ class."
     },
+    "parent_has_string": {
+      "type": "boolean",
+      "description": "Type or subtype is `CString` or `StringPtr`, or `struct containing them` type?(To calculate lifetime)"
+    },
     "version": {
       "type": "integer",
       "description": "Version of the class."
@@ -31,6 +35,10 @@
     "vtable": {
       "type": "boolean",
       "description": "Flag indicating if the class has a vtable."
+    },
+    "has_string": {
+      "type": "boolean",
+      "description": "Type or subtype is `CString` or `StringPtr`, or `struct containing them` type?(To calculate lifetime)"
     },
     "enums": {
       "type": "array",
@@ -80,13 +88,9 @@
             "type": "string",
             "description": "Name of the referenced class if `vtype` or `vsubtype` is `TYPE_POINTER` or `TYPE_STRUCT`."
           },
-          "offset_x86": {
-            "type": "integer",
-            "description": "Offset of the member in 32-bit environment."
-          },
-          "offset_x86_64": {
-            "type": "integer",
-            "description": "Offset of the member in 64-bit environment."
+          "has_string": {
+            "type": "boolean",
+            "description": "Type or subtype is `CString` or `StringPtr`, or `struct containing them` type?(To calculate lifetime)"
           },
           "ctype": {
             "type": "string",
@@ -174,6 +178,22 @@
               "TYPE_MAX"
             ],
             "description": "Subtype of the member."
+          },
+          "offset_x86": {
+            "type": "integer",
+            "description": "Offset of the member in 32-bit environment."
+          },
+          "offset_x86_64": {
+            "type": "integer",
+            "description": "Offset of the member in 64-bit environment."
+          },
+          "type_size_x86": {
+            "type": "integer",
+            "description": "Type size of the member in 32-bit environment."
+          },
+          "type_size_x86_64": {
+            "type": "integer",
+            "description": "Type size of the member in 64-bit environment."
           },
           "arrsize": {
             "type": "integer",

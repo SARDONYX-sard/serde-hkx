@@ -10,12 +10,6 @@ pub struct Member<'a> {
     #[serde(bound(deserialize = "Cow<'a, str>: Deserialize<'de>"))]
     pub name: Cow<'a, str>,
 
-    /// Member offset for x86
-    pub offset_x86: u32,
-
-    /// Member offset for x86_64
-    pub offset_x86_64: u32,
-
     /// Used class name
     #[serde(skip_serializing_if = "Option::is_none")]
     pub class_ref: Option<Cow<'a, str>>,
@@ -23,6 +17,10 @@ pub struct Member<'a> {
     /// Used enum name
     #[serde(skip_serializing_if = "Option::is_none")]
     pub enum_ref: Option<Cow<'a, str>>,
+
+    /// Whether `CString` or `StringPtr` is contained in its own member or in a member of its parent?
+    /// (To calculate lifetime annotation)
+    pub has_string: bool,
 
     /// C++ Type
     #[serde(bound(deserialize = "Cow<'a, str>: Deserialize<'de>"))]
@@ -33,6 +31,18 @@ pub struct Member<'a> {
 
     /// Type in generics when array, flag or enum member size, pointer of struct, etc. come in.
     pub vsubtype: TypeKind,
+
+    /// Member offset for x86
+    pub offset_x86: u32,
+
+    /// Member offset for x86_64
+    pub offset_x86_64: u32,
+
+    /// Member size for x86
+    pub type_size_x86: u32,
+
+    /// Member size for x86_64
+    pub type_size_x86_64: u32,
 
     /// If an array is used, its size .
     pub arrsize: usize,

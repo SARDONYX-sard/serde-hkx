@@ -5,15 +5,20 @@
   "size_x86": 32,
   "size_x86_64": 32,
   "parent": "hkReferencedObject",
+  "parent_has_string": false,
   "vtable": true,
+  "has_string": false,
   "members": [
     {
       "name": "rotationOut",
-      "offset_x86": 16,
-      "offset_x86_64": 16,
+      "has_string": false,
       "ctype": "hkQuaternion",
       "vtype": "TYPE_QUATERNION",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "type_size_x86": 16,
+      "type_size_x86_64": 16,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0

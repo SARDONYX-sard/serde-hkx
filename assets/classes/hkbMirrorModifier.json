@@ -5,15 +5,20 @@
   "size_x86": 48,
   "size_x86_64": 88,
   "parent": "hkbModifier",
+  "parent_has_string": false,
   "vtable": true,
+  "has_string": false,
   "members": [
     {
       "name": "isAdditive",
-      "offset_x86": 44,
-      "offset_x86_64": 80,
+      "has_string": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0

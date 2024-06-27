@@ -5,16 +5,21 @@
   "size_x86": 52,
   "size_x86_64": 96,
   "parent": "hkbModifier",
+  "parent_has_string": false,
   "vtable": true,
+  "has_string": false,
   "members": [
     {
       "name": "event",
-      "offset_x86": 44,
-      "offset_x86_64": 80,
       "class_ref": "hkbEventProperty",
+      "has_string": false,
       "ctype": "struct hkbEventProperty",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "type_size_x86": 8,
+      "type_size_x86_64": 16,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0

@@ -4,7 +4,9 @@
   "signature": "0x3eb2e082",
   "size_x86": 4,
   "size_x86_64": 4,
+  "parent_has_string": false,
   "vtable": false,
+  "has_string": false,
   "enums": [
     {
       "name": "Role",
@@ -82,24 +84,30 @@
   "members": [
     {
       "name": "role",
-      "offset_x86": 0,
-      "offset_x86_64": 0,
       "enum_ref": "Role",
+      "has_string": false,
       "ctype": "enum Role",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT16",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 2,
+      "type_size_x86_64": 2,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0
     },
     {
       "name": "flags",
-      "offset_x86": 2,
-      "offset_x86_64": 2,
       "enum_ref": "RoleFlags",
+      "has_string": false,
       "ctype": "flags RoleFlags",
       "vtype": "TYPE_FLAGS",
       "vsubtype": "TYPE_INT16",
+      "offset_x86": 2,
+      "offset_x86_64": 2,
+      "type_size_x86": 2,
+      "type_size_x86_64": 2,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0

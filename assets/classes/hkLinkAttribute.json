@@ -4,7 +4,9 @@
   "signature": "0x255d8164",
   "size_x86": 1,
   "size_x86_64": 1,
+  "parent_has_string": false,
   "vtable": false,
+  "has_string": false,
   "enums": [
     {
       "name": "Link",
@@ -36,12 +38,15 @@
   "members": [
     {
       "name": "type",
-      "offset_x86": 0,
-      "offset_x86_64": 0,
       "enum_ref": "Link",
+      "has_string": false,
       "ctype": "enum Link",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0

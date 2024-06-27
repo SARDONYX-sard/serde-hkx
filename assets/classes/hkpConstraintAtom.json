@@ -4,7 +4,9 @@
   "signature": "0x59d67ef6",
   "size_x86": 2,
   "size_x86_64": 2,
+  "parent_has_string": false,
   "vtable": false,
+  "has_string": false,
   "enums": [
     {
       "name": "AtomType",
@@ -188,12 +190,15 @@
   "members": [
     {
       "name": "type",
-      "offset_x86": 0,
-      "offset_x86_64": 0,
       "enum_ref": "AtomType",
+      "has_string": false,
       "ctype": "enum AtomType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT16",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 2,
+      "type_size_x86_64": 2,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0

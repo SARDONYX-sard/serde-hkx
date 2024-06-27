@@ -5,7 +5,9 @@
   "size_x86": 20,
   "size_x86_64": 40,
   "parent": "hkpShape",
+  "parent_has_string": false,
   "vtable": true,
+  "has_string": false,
   "enums": [
     {
       "name": "BvTreeType",
@@ -33,12 +35,15 @@
   "members": [
     {
       "name": "bvTreeType",
-      "offset_x86": 16,
-      "offset_x86_64": 32,
       "enum_ref": "BvTreeType",
+      "has_string": false,
       "ctype": "enum BvTreeType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 2

@@ -5,7 +5,9 @@
   "size_x86": 128,
   "size_x86_64": 144,
   "parent": "hkReferencedObject",
+  "parent_has_string": false,
   "vtable": true,
+  "has_string": false,
   "enums": [
     {
       "name": "ConstraintSource",
@@ -29,12 +31,15 @@
   "members": [
     {
       "name": "mapping",
-      "offset_x86": 16,
-      "offset_x86_64": 16,
       "class_ref": "hkaSkeletonMapperData",
+      "has_string": false,
       "ctype": "struct hkaSkeletonMapperData",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 16,
+      "offset_x86_64": 16,
+      "type_size_x86": 112,
+      "type_size_x86_64": 128,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0

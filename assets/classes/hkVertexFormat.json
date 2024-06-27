@@ -4,7 +4,9 @@
   "signature": "0xf11e3ff7",
   "size_x86": 260,
   "size_x86_64": 260,
+  "parent_has_string": false,
   "vtable": false,
+  "has_string": false,
   "enums": [
     {
       "name": "ComponentType",
@@ -166,23 +168,29 @@
   "members": [
     {
       "name": "elements",
-      "offset_x86": 0,
-      "offset_x86_64": 0,
       "class_ref": "hkVertexFormatElement",
+      "has_string": false,
       "ctype": "struct hkVertexFormatElement[32]",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 8,
+      "type_size_x86_64": 256,
       "arrsize": 32,
       "flags": "FLAGS_NONE",
       "default": 0
     },
     {
       "name": "numElements",
-      "offset_x86": 256,
-      "offset_x86_64": 256,
+      "has_string": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 256,
+      "offset_x86_64": 256,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0

@@ -5,6 +5,8 @@
   "size_x86": 32,
   "size_x86_64": 48,
   "parent": "hkpModifierConstraintAtom",
+  "parent_has_string": false,
   "vtable": false,
+  "has_string": false,
   "members": []
 }

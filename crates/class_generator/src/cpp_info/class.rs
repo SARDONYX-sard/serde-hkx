@@ -24,11 +24,20 @@ pub struct Class<'a> {
     pub size_x86_64: u32,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    /// Super class name & signature
+    /// Super class name
     pub parent: Option<String>,
+
+    /// When type or subtype is `struct`, does it contain a `CString` or `StringPtr`, or "struct containing them" type?
+    ///
+    /// This information is needed for the lifetime annotation (life of the reference) calculation.
+    pub parent_has_string: bool,
 
     /// Is virtual table C++ class?
     pub vtable: bool,
+
+    /// Whether `CString` or `StringPtr` is contained in its own member or in a member of its parent?
+    /// (To calculate lifetime annotation)
+    pub has_string: bool,
 
     #[serde(skip_serializing_if = "Vec::is_empty", default)]
     /// Vector of enum names & enum fields

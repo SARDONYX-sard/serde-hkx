@@ -4,16 +4,21 @@
   "signature": "0xde152a4d",
   "size_x86": 12,
   "size_x86_64": 24,
+  "parent_has_string": false,
   "vtable": false,
+  "has_string": false,
   "members": [
     {
       "name": "bridgeAtom",
-      "offset_x86": 0,
-      "offset_x86_64": 0,
       "class_ref": "hkpBridgeConstraintAtom",
+      "has_string": false,
       "ctype": "struct hkpBridgeConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 12,
+      "type_size_x86_64": 24,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0

@@ -5,7 +5,9 @@
   "size_x86": 20,
   "size_x86_64": 40,
   "parent": "hkpSphereRepShape",
+  "parent_has_string": false,
   "vtable": true,
+  "has_string": false,
   "enums": [
     {
       "name": "WeldResult",
@@ -29,11 +31,14 @@
   "members": [
     {
       "name": "radius",
-      "offset_x86": 16,
-      "offset_x86_64": 32,
+      "has_string": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0

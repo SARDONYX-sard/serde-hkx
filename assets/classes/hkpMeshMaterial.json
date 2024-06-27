@@ -4,15 +4,20 @@
   "signature": "0x886cde0c",
   "size_x86": 4,
   "size_x86_64": 4,
+  "parent_has_string": false,
   "vtable": false,
+  "has_string": false,
   "members": [
     {
       "name": "filterInfo",
-      "offset_x86": 0,
-      "offset_x86_64": 0,
+      "has_string": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0

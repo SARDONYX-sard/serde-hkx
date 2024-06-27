@@ -4,15 +4,20 @@
   "signature": "0x1e3857bb",
   "size_x86": 4,
   "size_x86_64": 8,
+  "parent_has_string": false,
   "vtable": false,
+  "has_string": true,
   "members": [
     {
       "name": "typeName",
-      "offset_x86": 0,
-      "offset_x86_64": 0,
+      "has_string": true,
       "ctype": "char*",
       "vtype": "TYPE_CSTRING",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0

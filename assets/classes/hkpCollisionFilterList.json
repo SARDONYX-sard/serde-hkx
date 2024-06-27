@@ -5,16 +5,21 @@
   "size_x86": 60,
   "size_x86_64": 88,
   "parent": "hkpCollisionFilter",
+  "parent_has_string": false,
   "vtable": true,
+  "has_string": false,
   "members": [
     {
       "name": "collisionFilters",
-      "offset_x86": 48,
-      "offset_x86_64": 72,
       "class_ref": "hkpCollisionFilter",
+      "has_string": false,
       "ctype": "hkArray<hkpCollisionFilter*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
+      "offset_x86": 48,
+      "offset_x86_64": 72,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0

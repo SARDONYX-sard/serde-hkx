@@ -4,16 +4,21 @@
   "signature": "0x2772c11e",
   "size_x86": 12,
   "size_x86_64": 16,
+  "parent_has_string": false,
   "vtable": false,
+  "has_string": false,
   "members": [
     {
       "name": "namedVariants",
-      "offset_x86": 0,
-      "offset_x86_64": 0,
       "class_ref": "hkRootLevelContainerNamedVariant",
+      "has_string": false,
       "ctype": "hkArray<struct hkRootLevelContainerNamedVariant>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0

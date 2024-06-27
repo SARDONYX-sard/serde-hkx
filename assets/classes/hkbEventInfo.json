@@ -4,7 +4,9 @@
   "signature": "0x5874eed4",
   "size_x86": 4,
   "size_x86_64": 4,
+  "parent_has_string": false,
   "vtable": false,
+  "has_string": false,
   "enums": [
     {
       "name": "Flags",
@@ -24,12 +26,15 @@
   "members": [
     {
       "name": "flags",
-      "offset_x86": 0,
-      "offset_x86_64": 0,
       "enum_ref": "Flags",
+      "has_string": false,
       "ctype": "flags Flags",
       "vtype": "TYPE_FLAGS",
       "vsubtype": "TYPE_UINT32",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0

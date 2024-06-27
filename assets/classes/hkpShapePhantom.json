@@ -5,16 +5,21 @@
   "size_x86": 352,
   "size_x86_64": 416,
   "parent": "hkpPhantom",
+  "parent_has_string": false,
   "vtable": true,
+  "has_string": false,
   "members": [
     {
       "name": "motionState",
-      "offset_x86": 176,
-      "offset_x86_64": 240,
       "class_ref": "hkMotionState",
+      "has_string": false,
       "ctype": "struct hkMotionState",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 176,
+      "offset_x86_64": 240,
+      "type_size_x86": 176,
+      "type_size_x86_64": 176,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0

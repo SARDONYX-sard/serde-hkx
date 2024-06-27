@@ -4,7 +4,9 @@
   "signature": "0xb2b41feb",
   "size_x86": 1,
   "size_x86_64": 1,
+  "parent_has_string": false,
   "vtable": false,
+  "has_string": false,
   "enums": [
     {
       "name": "WeldingType",
