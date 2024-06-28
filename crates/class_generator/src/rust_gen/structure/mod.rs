@@ -1,5 +1,5 @@
 mod field;
-mod impl_serialize;
+mod impls;
 mod to_rust_token;
 
 use self::field::gen_field;
@@ -7,7 +7,7 @@ use crate::cpp_info::Class;
 use proc_macro2::TokenStream;
 use quote::quote;
 
-pub use self::impl_serialize::impl_serialize;
+pub use self::impls::serialize::impl_serialize;
 pub fn generate(class: &Class) -> syn::ItemStruct {
     let class_name = &class.name;
     let fields: Vec<TokenStream> = class

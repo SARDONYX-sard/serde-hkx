@@ -1,5 +1,7 @@
-use super::to_rust_token::to_rust_field_ident;
-use crate::cpp_info::{Class, Member, TypeKind};
+use crate::{
+    cpp_info::{Class, Member, TypeKind},
+    rust_gen::structure::to_rust_token::to_rust_field_ident,
+};
 use proc_macro2::TokenStream;
 use quote::quote;
 
