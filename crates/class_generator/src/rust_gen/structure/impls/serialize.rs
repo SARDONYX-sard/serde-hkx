@@ -1,16 +1,18 @@
 use crate::{
     cpp_info::{Class, Member, TypeKind},
+    get_all_members,
     rust_gen::structure::to_rust_token::to_rust_field_ident,
+    ClassMap,
 };
 use proc_macro2::TokenStream;
 use quote::quote;
 
-pub fn impl_serialize(class: &Class) -> TokenStream {
+pub fn impl_serialize(class: &Class, class_map: &ClassMap) -> TokenStream {
     let name = class.name.as_ref();
     let signature = class.signature.get();
     let class_name = syn::Ident::new(&name, proc_macro2::Span::call_site());
     let class_name_c_str = proc_macro2::Literal::c_string(&std::ffi::CString::new(name).unwrap());
-    let fields = impl_serialize_fields(class);
+    let fields = impl_serialize_fields(class, &class_map);
     let lifetime = match class.has_string {
         true => quote! { <'a> },
         false => quote! {},
@@ -45,7 +47,7 @@ pub fn impl_serialize(class: &Class) -> TokenStream {
     }
 }
 
-fn impl_serialize_fields(class: &Class) -> Vec<TokenStream> {
+fn impl_serialize_fields(class: &Class, class_map: &ClassMap) -> Vec<TokenStream> {
     let mut x86_current_offset = 0;
     let mut x64_current_offset = 0;
 
@@ -53,7 +55,7 @@ fn impl_serialize_fields(class: &Class) -> Vec<TokenStream> {
     // The ptr type must serialize the data pointed to by ptr after serializing all fields. This is an array for that purpose.
     let mut ptr_after_write_fields = Vec::new();
 
-    for member in &class.members {
+    for member in &get_all_members(&class.name, class_map) {
         let Member {
             name,
             vtype,
@@ -67,7 +69,9 @@ fn impl_serialize_fields(class: &Class) -> Vec<TokenStream> {
 
         // Align
         let pad_x86 = (offset_x86 - x86_current_offset) as usize;
+        tracing::trace!(?class.name, offset_x86_64, x64_current_offset);
         let pad_x64 = (offset_x86_64 - x64_current_offset) as usize;
+
         if pad_x86 != 0 || pad_x64 != 0 {
             serialize_calls.push(quote! {
                 serializer.pad_field([0u8; #pad_x86].as_slice(), [0u8; #pad_x64].as_slice())?;

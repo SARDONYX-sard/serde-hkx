@@ -1,11 +1,11 @@
 mod enum_or_flags;
 mod structure;
 
-use crate::cpp_info::Class;
+use crate::{cpp_info::Class, ClassMap};
 
-pub fn from_cpp_class(class: &Class) -> syn::File {
+pub fn from_cpp_class(class: &Class, class_map: &ClassMap) -> syn::File {
     let struct_define = structure::generate(&class);
-    let impl_ser_for_struct = structure::impl_serialize(&class);
+    let impl_ser_for_struct = structure::impl_serialize(&class, class_map);
 
     let enum_defines = enum_or_flags::generate(&class);
     let impl_ser_for_enum = enum_or_flags::impl_serialize(&class);
