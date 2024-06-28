@@ -6,10 +6,12 @@ use proc_macro2::TokenStream;
 use quote::quote;
 
 pub fn gen_enum(one_enum: &Enum) -> syn::ItemEnum {
-    let enum_name = syn::Ident::new(&one_enum.name, proc_macro2::Span::call_site());
+    let Enum {
+        name, enum_item, ..
+    } = one_enum;
 
-    let variants: Vec<TokenStream> = one_enum
-        .enum_item
+    let enum_name = syn::Ident::new(&name, proc_macro2::Span::call_site());
+    let variants: Vec<TokenStream> = enum_item
         .iter()
         .enumerate()
         .map(|(index, enum_item)| {
@@ -40,6 +42,6 @@ pub fn gen_enum(one_enum: &Enum) -> syn::ItemEnum {
 fn gen_enum_variant(one_enum: &EnumItem) -> TokenStream {
     let EnumItem { name, value } = one_enum;
     let name = syn::Ident::new(&name, proc_macro2::Span::call_site());
-    let value = (*value) as usize;
+    let value = (*value) as isize;
     quote! { #name = #value }
 }

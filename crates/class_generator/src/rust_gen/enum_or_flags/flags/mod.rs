@@ -17,7 +17,7 @@ pub fn gen_flag(one_enum: &Enum) -> syn::Macro {
 
     let variants: Vec<TokenStream> = enum_item
         .iter()
-        .map(|enum_item| gen_flag_variant(enum_item))
+        .map(|enum_item| gen_variant_token(enum_item, vsubtype))
         .collect();
 
     // Check
@@ -35,19 +35,12 @@ pub fn gen_flag(one_enum: &Enum) -> syn::Macro {
     }
 }
 
-fn gen_flag_variant(one_enum: &EnumItem) -> TokenStream {
-    let EnumItem { name, value } = one_enum;
-    let name = syn::Ident::new(&name, proc_macro2::Span::call_site());
-    let value = (*value) as usize;
-    quote! { #name = #value }
-}
-
 /// Returns the name of the rust type
 /// Return [`None`] except the following types.
-/// - "TYPE_INT8", "TYPE_UINT8",
-/// - "TYPE_INT16", "TYPE_UINT16",
-/// - "TYPE_INT32", "TYPE_UINT32",
-/// - "TYPE_INT64", "TYPE_UINT64"
+/// - `TYPE_INT8`, `TYPE_UINT8`,
+/// - `TYPE_INT16`, `TYPE_UINT16`,
+/// - `TYPE_INT32`, `TYPE_UINT32`,
+/// - `TYPE_INT64`, `TYPE_UINT64`
 fn to_rust_storage_type(ty: &TypeKind) -> Option<TokenStream> {
     Some(match ty {
         TypeKind::Int8 => quote!(i8),
@@ -60,4 +53,52 @@ fn to_rust_storage_type(ty: &TypeKind) -> Option<TokenStream> {
         TypeKind::Uint64 => quote!(u64),
         _ => return None,
     })
+}
+
+/// Returns `variant = value` expr.
+///
+/// # Panics
+/// The following types.
+/// - `TYPE_INT8`, `TYPE_UINT8`,
+/// - `TYPE_INT16`, `TYPE_UINT16`,
+/// - `TYPE_INT32`, `TYPE_UINT32`,
+/// - `TYPE_INT64`, `TYPE_UINT64`
+fn gen_variant_token(one_enum: &EnumItem, size_type: &TypeKind) -> TokenStream {
+    let EnumItem { name, value } = one_enum;
+    let name = syn::Ident::new(&name, proc_macro2::Span::call_site());
+    match size_type {
+        TypeKind::Int8 => {
+            let value = (*value) as i8;
+            quote! { #name = #value }
+        }
+        TypeKind::Uint8 => {
+            let value = (*value) as u8;
+            quote! { #name = #value }
+        }
+        TypeKind::Int16 => {
+            let value = (*value) as i16;
+            quote! { #name = #value }
+        }
+        TypeKind::Uint16 => {
+            let value = (*value) as u16;
+            quote! { #name = #value }
+        }
+        TypeKind::Int32 => {
+            let value = (*value) as i32;
+            quote! { #name = #value }
+        }
+        TypeKind::Uint32 => {
+            let value = (*value) as u32;
+            quote! { #name = #value }
+        }
+        TypeKind::Int64 => {
+            let value = (*value) as i64;
+            quote! { #name = #value }
+        }
+        TypeKind::Uint64 => {
+            let value = (*value) as u64;
+            quote! { #name = #value }
+        }
+        _ => panic!("Unknown size type"),
+    }
 }

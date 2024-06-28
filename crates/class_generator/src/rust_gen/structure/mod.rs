@@ -38,11 +38,13 @@ pub fn generate(class: &Class) -> syn::ItemStruct {
         None => quote! {},
     };
 
+    // `Default` implementations with huge sizes such as [0u8; 256] are not automatically supported, so use `educe` crate to define them.
     syn::parse_quote! {
         #doc_attrs
         #[allow(non_upper_case_globals, non_snake_case)]
         #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-        #[derive(Debug, Clone, Default, PartialEq)]
+        #[derive(educe::Educe)]
+        #[educe(Debug, Clone, Default, PartialEq)]
         pub struct #struct_name #lifetime {
             /// - Represents a pointer on XML (`<hkobject name="#0001">`)
             /// - [`Option::None`] => This class is `class in field`.(`<hkobject>`)

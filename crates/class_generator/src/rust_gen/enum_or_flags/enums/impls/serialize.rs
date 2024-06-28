@@ -38,17 +38,17 @@ pub fn impl_ser_for_enum(one_enum: &Enum) -> TokenStream {
                 fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
                     where S: __serde::ser::Serializer
                 {
-                    let mut serializer = __serializer.serialize_enum_flags()?;
+                    let mut __serializer = __serializer.serialize_enum_flags()?;
                     match self {
                         #(#variants,)*
                     }?;
 
-                    let for_bin = self.#cast_method().ok_or(S::Error::custom(#err_msg))?;
+                    let num = self.#cast_method().ok_or(S::Error::custom(#err_msg))?;
 
                     use num_traits::ToPrimitive as _;
-                    __serializer.serialize_bits(&for_bin)?;
+                    __serializer.serialize_bits(&num)?;
 
-                    serializer.end()
+                    __serializer.end()
                 }
         }
         };
@@ -58,9 +58,9 @@ pub fn impl_ser_for_enum(one_enum: &Enum) -> TokenStream {
 fn serialize_enum_variant(one_enum: &EnumItem) -> TokenStream {
     let EnumItem { name, value } = one_enum;
     let variant = syn::Ident::new(&name, proc_macro2::Span::call_site());
-    let value = (*value) as usize;
+    let value = (*value) as u64; // NOTE: This method is for XML and does not care about size.
     quote! {
-        Self::#variant => serializer.serialize_field(#name, &#value)
+        Self::#variant => __serializer.serialize_field(#name, &#value)
     }
 }
 

@@ -10,6 +10,7 @@ rust-version.workspace = true
 
 [dependencies]
 bitflags = "2.4"                          # To generate flags type
+educe = "0.6.0"
 havok_serde = { path = "../havok_serde" }
 havok_types = { path = "../havok_types" }
 num-derive = "0.4"

@@ -1,6 +1,6 @@
 use crate::{
     cpp_info::{Class, Member, TypeKind},
-    get_all_members,
+    get_inherited_class,
     rust_gen::structure::to_rust_token::to_rust_field_ident,
     ClassMap,
 };
@@ -48,14 +48,49 @@ pub fn impl_serialize(class: &Class, class_map: &ClassMap) -> TokenStream {
 }
 
 fn impl_serialize_fields(class: &Class, class_map: &ClassMap) -> Vec<TokenStream> {
+    let mut serialize_calls = Vec::new();
+    // The ptr type must serialize the data pointed to by ptr after serializing all fields. This is an array for that purpose.
+    let mut ptr_after_write_fields = Vec::new();
     let mut x86_current_offset = 0;
     let mut x64_current_offset = 0;
 
+    let all_class = &mut get_inherited_class(&class.name, class_map);
+
+    let mut parent_depth = all_class.len();
+    for class in all_class {
+        parent_depth -= 1;
+        let (meta_fields, ptr_fields) = impl_serialize_self_fields(
+            &class.members,
+            class.size_x86,
+            class.size_x86_64,
+            &mut x86_current_offset,
+            &mut x64_current_offset,
+            parent_depth,
+        );
+        serialize_calls.extend(meta_fields);
+        ptr_after_write_fields.extend(ptr_fields);
+    }
+    // if class.name == "hkbProjectStringData" {
+    //     panic!("end");
+    // }
+
+    serialize_calls.extend(ptr_after_write_fields);
+    serialize_calls
+}
+
+fn impl_serialize_self_fields(
+    members: &[Member],
+    x86_size: u32,
+    x64_size: u32,
+    x86_current_offset: &mut u32,
+    x64_current_offset: &mut u32,
+    parent_depth: usize,
+) -> (Vec<TokenStream>, Vec<TokenStream>) {
     let mut serialize_calls = Vec::new();
     // The ptr type must serialize the data pointed to by ptr after serializing all fields. This is an array for that purpose.
     let mut ptr_after_write_fields = Vec::new();
 
-    for member in &get_all_members(&class.name, class_map) {
+    for member in members {
         let Member {
             name,
             vtype,
@@ -63,28 +98,28 @@ fn impl_serialize_fields(class: &Class, class_map: &ClassMap) -> Vec<TokenStream
             offset_x86_64,
             type_size_x86,
             type_size_x86_64,
+            arrsize,
             flags,
             ..
         } = member;
 
         // Align
-        let pad_x86 = (offset_x86 - x86_current_offset) as usize;
-        tracing::trace!(?class.name, offset_x86_64, x64_current_offset);
-        let pad_x64 = (offset_x86_64 - x64_current_offset) as usize;
+        let pad_x86 = (*offset_x86 - *x86_current_offset) as usize;
+        let pad_x64 = (*offset_x86_64 - *x64_current_offset) as usize;
 
         if pad_x86 != 0 || pad_x64 != 0 {
+            tracing::debug!(?name, pad_x86, x86_current_offset);
+            tracing::debug!(?name, pad_x64, x64_current_offset);
             serialize_calls.push(quote! {
                 serializer.pad_field([0u8; #pad_x86].as_slice(), [0u8; #pad_x64].as_slice())?;
             });
 
-            x86_current_offset = *offset_x86;
-            x64_current_offset = *offset_x86_64;
+            *x86_current_offset = *offset_x86;
+            *x64_current_offset = *offset_x86_64;
         }
-        x86_current_offset += type_size_x86;
-        x64_current_offset += type_size_x86_64;
+        *x86_current_offset += type_size_x86;
+        *x64_current_offset += type_size_x86_64;
 
-        let cpp_field_key = &name;
-        let rust_field_name = to_rust_field_ident(name);
         use TypeKind::*;
         let (meta_method, pointed_method) = match vtype {
             Array => {
@@ -114,40 +149,61 @@ fn impl_serialize_fields(class: &Class, class_map: &ClassMap) -> Vec<TokenStream
             },
         };
 
-        serialize_calls
-            .push(quote! { serializer.#meta_method(#cpp_field_key, &self.#rust_field_name)?; });
+        let cpp_field_key = &name;
+        let rust_field_name = to_rust_field_ident(name);
+        let parent_ident = n_time_parent_ident(parent_depth);
 
+        let maybe_as_slice = match arrsize {
+            0 => quote! {},
+            1.. => quote! { .as_slice() },
+        };
+        serialize_calls
+            .push(quote! { serializer.#meta_method(#cpp_field_key, &self #parent_ident.#rust_field_name #maybe_as_slice)?; });
+
+        // For `Array`, `CString` or `StringPtr`.(Not use `[StringPtr; 4]`)
         if let Some(pointed_method) = pointed_method {
             ptr_after_write_fields.push(
-                quote! { serializer.#pointed_method(#cpp_field_key, &self.#rust_field_name)?; },
+                quote! { serializer.#pointed_method(#cpp_field_key, &self #parent_ident.#rust_field_name)?; },
             );
         };
     }
 
-    let x86_size = class.size_x86;
-    let x64_size = class.size_x86_64;
-
     // Struct tailing alignment.
-    let x86_pad = if x86_size > x86_current_offset {
+    let x86_pad = if x86_size > *x86_current_offset {
         x86_current_offset.abs_diff(x86_size) as usize
-    } else if x86_size == x86_current_offset {
+    } else if x86_size == *x86_current_offset {
         0
     } else {
         panic!("x86_size({x86_size}) < x86_current_offset({x86_current_offset})");
     };
-    let x64_pad = if x64_size > x64_current_offset {
+    let x64_pad = if x64_size > *x64_current_offset {
         x64_current_offset.abs_diff(x64_size) as usize
-    } else if x64_size == x64_current_offset {
+    } else if x64_size == *x64_current_offset {
         0
     } else {
         panic!("x64_size({x64_size}) < x64_current_offset({x64_current_offset})");
     };
     if x86_pad != 0 || x64_pad != 0 {
+        tracing::debug!(x86_pad, x86_current_offset);
+        tracing::debug!(x64_pad, x64_current_offset);
         serialize_calls.push(quote! {
             serializer.pad_field([0u8; #x86_pad].as_slice(), [0u8; #x64_pad].as_slice())?;
         });
+
+        *x86_current_offset = x86_size;
+        *x64_current_offset = x64_size;
     };
 
-    serialize_calls.extend(ptr_after_write_fields);
-    serialize_calls
+    (serialize_calls, ptr_after_write_fields)
+}
+
+fn n_time_parent_ident(time: usize) -> TokenStream {
+    let mut ident = Vec::new();
+    for _ in 0..time {
+        ident.push(quote! { parent });
+    }
+
+    quote! {
+        #(.#ident)*
+    }
 }

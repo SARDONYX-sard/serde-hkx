@@ -18,19 +18,21 @@ pub fn impl_ser_for_flag(one_enum: &Enum) -> TokenStream {
                 fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
                     where S: __serde::ser::Serializer
                 {
-                    let mut serializer = __serializer.serialize_enum_flags()?;
+                    let mut __serializer = __serializer.serialize_enum_flags()?;
                     if self.is_empty() {
                         __serializer.serialize_empty_bit()?;
                         return __serializer.end();
                     };
 
-                    match self {
-                        #(#variants,)*
-                        remain => __serializer.serialize_field(&remain.bits().to_string(), &remain.bits()),
-                    }?;
+                    for flag in self.iter() {
+                        match flag {
+                            #(#variants,)*
+                            remain => __serializer.serialize_field(&remain.bits().to_string(), &remain.bits()),
+                        }?;
+                    }
 
                     __serializer.serialize_bits(&self.bits())?;
-                    serializer.end()
+                    __serializer.end()
                 }
             }
         };
@@ -41,6 +43,6 @@ fn serialize_flag_variant(one_enum: &EnumItem) -> TokenStream {
     let EnumItem { name, .. } = one_enum;
     let variant = syn::Ident::new(&name, proc_macro2::Span::call_site());
     quote! {
-        Self::#variant => serializer.serialize_field(#name, &Self::#variant)
+        Self::#variant => __serializer.serialize_field(#name, &Self::#variant)
     }
 }

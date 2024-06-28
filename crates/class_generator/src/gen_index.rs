@@ -6,7 +6,7 @@ pub fn gen_index(mods: &[TokenStream]) -> String {
         /// Reduce the burden of individual imports by importing a set of types needed to create a havok class structure here.
         mod class_requires {
             pub use havok_serde::{
-                ser::{SerializeFlags, SerializeStruct, Serializer},
+                ser::{Error as _, SerializeFlags, SerializeStruct, Serializer},
                 HavokClass,
             };
             pub use havok_types::*;

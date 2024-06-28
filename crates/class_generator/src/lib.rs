@@ -46,11 +46,12 @@ pub fn generate_havok_class<P: AsRef<Path>>(classes_json_dir: P, out_dir: P) -> 
 
         class_index.push({
             let mod_name = class_name.to_case(convert_case::Case::Snake);
+            let out_file = format!("/src/generated/{class_name}.rs");
             let mod_name = syn::Ident::new(&mod_name, proc_macro2::Span::call_site());
 
             quote::quote! {
                 pub mod #mod_name {
-                    include!(concat!(env!("CARGO_MANIFEST_DIR"), #output_file));
+                    include!(concat!(env!("CARGO_MANIFEST_DIR"), #out_file));
                 }
                 pub use #mod_name::*;
             }
@@ -71,7 +72,10 @@ pub type ClassMap<'a> = IndexMap<String, Class<'a>>;
 ///
 /// # Returns
 /// Vec sorted by deepest parent class.
-fn get_parents<'a>(current_parent_name: &str, classes_map: &'a ClassMap) -> Vec<&'a Class<'a>> {
+pub fn get_inherited_class<'a>(
+    current_parent_name: &str,
+    classes_map: &'a ClassMap,
+) -> Vec<&'a Class<'a>> {
     // Cache variables
     let mut current_parent_name = current_parent_name;
     let mut parents = Vec::new();
@@ -91,18 +95,21 @@ fn get_parents<'a>(current_parent_name: &str, classes_map: &'a ClassMap) -> Vec<
     parents
 }
 
-pub fn get_all_members<'a>(class_name: &str, class_map: &'a ClassMap) -> Vec<&'a Member<'a>> {
+pub fn get_all_members<'a>(class_name: &str, class_map: &'a ClassMap) -> Vec<Vec<&'a Member<'a>>> {
     // parent members
     let mut members = Vec::new();
 
     let current_class = &class_map[class_name];
     if let Some(parent_name) = &current_class.parent {
-        for parent in get_parents(&parent_name, class_map) {
-            members.extend(&parent.members);
+        for parent in get_inherited_class(&parent_name, class_map) {
+            let parent_members = parent.members.iter().collect::<Vec<_>>();
+            members.push(parent_members);
         }
     }
 
-    members.extend(&current_class.members);
+    let current_members = current_class.members.iter().collect::<Vec<_>>();
+    members.push(current_members);
+
     members
 }
 
@@ -112,7 +119,7 @@ mod tests {
     use std::path::PathBuf;
 
     #[ignore = "because it generates code and is not strictly a test."]
-    #[quick_tracing::init(test = "should_generate_classes")]
+    // #[quick_tracing::init(test = "should_generate_classes")]
     #[test]
     fn should_generate_classes() {
         let repo_root = PathBuf::from(env!("CARGO_MANIFEST_DIR"))

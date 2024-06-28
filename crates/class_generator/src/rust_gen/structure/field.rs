@@ -12,6 +12,7 @@ pub(super) fn gen_field(member: &Member, class_name: &str) -> TokenStream {
         has_string,
         vtype,
         vsubtype,
+        arrsize,
         ..
     } = member;
 
@@ -38,7 +39,7 @@ pub(super) fn gen_field(member: &Member, class_name: &str) -> TokenStream {
                 ))
             }
         }
-        TypeKind::Array => {
+        TypeKind::SimpleArray | TypeKind::Array => {
             let field_subtype = match vsubtype {
                 TypeKind::Struct => {
                     let struct_name = syn::Ident::new(
@@ -64,9 +65,38 @@ pub(super) fn gen_field(member: &Member, class_name: &str) -> TokenStream {
 
     // let doc = field_doc_tokens(member);
     let field_name = to_rust_field_ident(name);
-    quote! {
-        // #doc
-        pub #field_name: #field_type
+
+    // `Default` implementations with huge sizes such as [0u8; 256] are not automatically supported, so use `educe` crate to define them.
+    let default_attr = if matches!(
+        vtype,
+        TypeKind::Int8
+            | TypeKind::Uint8
+            | TypeKind::Int32
+            | TypeKind::Uint32
+            | TypeKind::Int16
+            | TypeKind::Uint16
+            | TypeKind::Int64
+            | TypeKind::Uint64
+    ) && *arrsize > 32
+    {
+        quote! {
+            #[educe(Default = [0; #arrsize])]
+        }
+    } else {
+        quote! {}
+    };
+
+    if *arrsize > 0 {
+        quote! {
+            // #doc
+            #default_attr
+            pub #field_name: [#field_type; #arrsize]
+        }
+    } else {
+        quote! {
+            // #doc
+            pub #field_name: #field_type
+        }
     }
 }
 
