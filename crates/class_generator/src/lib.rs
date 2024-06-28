@@ -3,18 +3,16 @@ pub mod error;
 mod gen_index;
 mod rust_gen;
 
-use convert_case::Casing;
-
 use crate::{cpp_info::Class, error::*};
-use std::path::Path;
+use convert_case::Casing as _;
+use indexmap::IndexMap;
+use snafu::OptionExt as _;
+use std::{fs, path::Path};
 
 /// Generate havok class code(For Rust) from class info json files.
 pub fn generate_havok_class<P: AsRef<Path>>(classes_json_dir: P, out_dir: P) -> Result<()> {
     let class_out_dir = out_dir.as_ref().join("generated");
-
-    use indexmap::IndexMap;
-    use snafu::OptionExt;
-    use std::fs;
+    std::fs::create_dir_all(&class_out_dir)?;
 
     //? Tips: Breaking through the lifetime constraint of Cow<'a, str> by caching the ownership type in the first round loop.
     let mut class_map = IndexMap::new();
@@ -31,39 +29,23 @@ pub fn generate_havok_class<P: AsRef<Path>>(classes_json_dir: P, out_dir: P) -> 
         })?;
         let class_name = class_name.to_string_lossy().into_owned();
 
-        let json_str = fs::read_to_string(path)?;
-        let class: Class = serde_json::from_str(&json_str)?;
+        let output_file = class_out_dir.join(format!("{class_name}.rs"));
+        let output_file = output_file.to_string_lossy();
+        tracing::debug!(?path, ?output_file);
 
-        let struct_define = rust_gen::gen_struct(&class);
-        let enum_defines = rust_gen::gen_enums(&class);
-        let impl_ser_for_struct = rust_gen::impl_serialize_for_struct(&class);
-        let impl_ser_for_enum = rust_gen::impl_serialize_for_enum(&class);
-
-        let ast = match syn::parse2(quote::quote! {
-            use super::class_requires::*;
-            use super::*;
-            #struct_define
-            #impl_ser_for_struct
-
-            #(#enum_defines)*
-            #impl_ser_for_enum
-        }) {
-            Ok(ast) => ast,
-            Err(err) => panic!("{path:?} span = {:?}, {err}", err.span()),
-        };
-        let formatted = prettyplease::unparse(&ast);
-        std::fs::write(class_out_dir.join(format!("{class_name}.rs")), formatted)?;
+        let class: Class = serde_json::from_str(&fs::read_to_string(path)?)?;
+        let rust_code = prettyplease::unparse(&rust_gen::from_cpp_class(&class));
+        std::fs::write(output_file.as_ref(), rust_code)?;
 
         class_index.push({
             let mod_name = class_name.to_case(convert_case::Case::Snake);
-            let class_ident = syn::Ident::new(&mod_name, proc_macro2::Span::call_site());
+            let mod_name = syn::Ident::new(&mod_name, proc_macro2::Span::call_site());
 
-            let class_name = format!("/src/generated/{class_name}.rs");
             quote::quote! {
-                pub mod #class_ident {
-                    include!(concat!(env!("CARGO_MANIFEST_DIR"), #class_name));
+                pub mod #mod_name {
+                    include!(concat!(env!("CARGO_MANIFEST_DIR"), #output_file));
                 }
-                pub use #class_ident::*;
+                pub use #mod_name::*;
             }
         });
         class_map.insert(class_name, class);
@@ -84,6 +66,7 @@ mod tests {
     use std::path::PathBuf;
 
     #[ignore = "because it generates code and is not strictly a test."]
+    #[quick_tracing::init]
     #[test]
     fn should_json_parse() {
         let repo_root = PathBuf::from(env!("CARGO_MANIFEST_DIR"))

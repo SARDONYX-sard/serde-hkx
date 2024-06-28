@@ -1,11 +1,9 @@
-use crate::{
-    cpp_info::{Class, Member, TypeKind},
-    rust_gen::to_rust_token::to_rust_field_ident,
-};
+use super::to_rust_token::to_rust_field_ident;
+use crate::cpp_info::{Class, Member, TypeKind};
 use proc_macro2::TokenStream;
 use quote::quote;
 
-pub fn impl_serialize_for_struct(class: &Class) -> TokenStream {
+pub fn impl_serialize(class: &Class) -> TokenStream {
     let name = class.name.as_ref();
     let signature = class.signature.get();
     let class_name = syn::Ident::new(&name, proc_macro2::Span::call_site());

@@ -120,6 +120,7 @@ dependencies = [
  "pretty_assertions",
  "prettyplease",
  "proc-macro2",
+ "quick_tracing",
  "quote",
  "serde",
  "serde_json",
@@ -364,8 +365,11 @@ checksum = "290f1a1d9242c78d09ce40a5e87e7554ee637af1351968159f4952f028f75604"
 name = "havok_class"
 version = "0.1.0"
 dependencies = [
+ "bitflags",
  "havok_serde",
  "havok_types",
+ "num-derive",
+ "num-traits",
 ]
 
 [[package]]

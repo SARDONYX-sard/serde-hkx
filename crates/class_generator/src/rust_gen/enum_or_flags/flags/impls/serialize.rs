@@ -1,16 +1,8 @@
-use crate::cpp_info::{Class, Enum, EnumItem};
+use crate::cpp_info::{Enum, EnumItem};
 use proc_macro2::TokenStream;
 use quote::quote;
 
-pub fn impl_serialize_for_flags(class: &Class) -> TokenStream {
-    class
-        .enums
-        .iter()
-        .map(|one_enum| impl_one_flag(one_enum))
-        .collect()
-}
-
-fn impl_one_flag(one_enum: &Enum) -> TokenStream {
+pub fn impl_ser_for_flag(one_enum: &Enum) -> TokenStream {
     let flag_name = syn::Ident::new(&one_enum.name, proc_macro2::Span::call_site());
     let variants: Vec<TokenStream> = one_enum
         .enum_item
@@ -40,16 +32,15 @@ fn impl_one_flag(one_enum: &Enum) -> TokenStream {
                     __serializer.serialize_bits(&self.bits())?;
                     serializer.end()
                 }
-        }
+            }
         };
     }
 }
 
 fn serialize_flag_variant(one_enum: &EnumItem) -> TokenStream {
-    let EnumItem { name, value } = one_enum;
+    let EnumItem { name, .. } = one_enum;
     let variant = syn::Ident::new(&name, proc_macro2::Span::call_site());
-    let value = (*value) as usize;
     quote! {
-        Self::#variant => serializer.serialize_field(#name, &Self::#value)
+        Self::#variant => serializer.serialize_field(#name, &Self::#variant)
     }
 }

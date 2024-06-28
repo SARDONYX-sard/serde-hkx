@@ -1,4 +1,5 @@
 //! C++ Havok enum & it's name & value information.
+use super::TypeKind;
 use serde::{Deserialize, Serialize};
 use std::borrow::Cow;
 
@@ -9,6 +10,13 @@ pub struct Enum<'a> {
     #[serde(bound(deserialize = "Cow<'a, str>: Deserialize<'de>"))]
     pub name: Cow<'a, str>,
 
+    /// Is this enum an `TYPE_ENUM` or a `TYPE_FLAGS`?
+    pub vtype: TypeKind,
+
+    /// The size of this enum when it is written to the binary; if it is `TYPE_VOID`, it means that the enum is not used and is unknown.
+    pub vsubtype: TypeKind,
+
+    /// Unknown flags . Always `00000000` in hk2010 version
     #[serde(bound(deserialize = "Cow<'a, str>: Deserialize<'de>"))]
     pub flags: Cow<'a, str>,
 

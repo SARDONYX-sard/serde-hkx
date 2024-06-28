@@ -9,5 +9,8 @@ repository.workspace = true
 rust-version.workspace = true
 
 [dependencies]
+bitflags = "2.4"                          # To generate flags type
 havok_serde = { path = "../havok_serde" }
 havok_types = { path = "../havok_types" }
+num-derive = "0.4"
+num-traits = "0.2"

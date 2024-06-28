@@ -1,20 +1,11 @@
-pub mod impl_serialize;
+pub mod impls;
 
-use crate::cpp_info::Class;
 use crate::cpp_info::Enum;
 use crate::cpp_info::EnumItem;
 use proc_macro2::TokenStream;
 use quote::quote;
 
-pub fn gen_enums(class: &Class) -> Vec<syn::ItemEnum> {
-    class
-        .enums
-        .iter()
-        .map(|one_enum| gen_enum(one_enum))
-        .collect()
-}
-
-fn gen_enum(one_enum: &Enum) -> syn::ItemEnum {
+pub fn gen_enum(one_enum: &Enum) -> syn::ItemEnum {
     let enum_name = syn::Ident::new(&one_enum.name, proc_macro2::Span::call_site());
 
     let variants: Vec<TokenStream> = one_enum
@@ -36,7 +27,10 @@ fn gen_enum(one_enum: &Enum) -> syn::ItemEnum {
     syn::parse_quote! {
         #[allow(non_upper_case_globals, non_snake_case)]
         #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-        #[derive(Debug, Clone, Default, PartialEq)]
+        #[derive(
+            Debug, Clone, Default, PartialEq, Eq, PartialOrd, Ord,
+            num_derive::ToPrimitive, num_derive::FromPrimitive,
+        )]
         pub enum #enum_name {
             #(#variants,)*
         }
