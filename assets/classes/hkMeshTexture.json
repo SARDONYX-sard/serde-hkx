@@ -11,6 +11,8 @@
   "enums": [
     {
       "name": "Format",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
       "flags": "00000000",
       "enum_item": [
         {
@@ -37,6 +39,8 @@
     },
     {
       "name": "FilterMode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
       "flags": "00000000",
       "enum_item": [
         {
@@ -55,6 +59,8 @@
     },
     {
       "name": "TextureUsageType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
       "flags": "00000000",
       "enum_item": [
         {

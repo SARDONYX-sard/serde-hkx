@@ -11,6 +11,8 @@
   "enums": [
     {
       "name": "ConstraintPriority",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
       "flags": "00000000",
       "enum_item": [
         {
@@ -45,6 +47,8 @@
     },
     {
       "name": "InstanceType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
       "flags": "00000000",
       "enum_item": [
         {
@@ -59,6 +63,8 @@
     },
     {
       "name": "AddReferences",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
       "flags": "00000000",
       "enum_item": [
         {
@@ -73,6 +79,8 @@
     },
     {
       "name": "CloningMode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
       "flags": "00000000",
       "enum_item": [
         {
@@ -91,6 +99,8 @@
     },
     {
       "name": "OnDestructionRemapInfo",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
       "flags": "00000000",
       "enum_item": [
         {

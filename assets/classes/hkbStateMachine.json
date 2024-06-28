@@ -11,6 +11,8 @@
   "enums": [
     {
       "name": "StartStateMode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
       "flags": "00000000",
       "enum_item": [
         {
@@ -33,6 +35,8 @@
     },
     {
       "name": "StateMachineSelfTransitionMode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
       "flags": "00000000",
       "enum_item": [
         {

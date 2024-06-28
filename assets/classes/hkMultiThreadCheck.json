@@ -10,6 +10,8 @@
   "enums": [
     {
       "name": "AccessType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
       "flags": "00000000",
       "enum_item": [
         {
@@ -28,6 +30,8 @@
     },
     {
       "name": "ReadMode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
       "flags": "00000000",
       "enum_item": [
         {

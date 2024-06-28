@@ -11,6 +11,8 @@
   "enums": [
     {
       "name": "TextureType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT32",
       "flags": "00000000",
       "enum_item": [
         {
@@ -69,6 +71,8 @@
     },
     {
       "name": "PropertyKey",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
       "flags": "00000000",
       "enum_item": [
         {

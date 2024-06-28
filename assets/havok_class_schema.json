@@ -49,9 +49,29 @@
             "type": "string",
             "description": "Name of the enum."
           },
+          "vtype": {
+            "type": "string",
+            "enum": ["TYPE_ENUM", "TYPE_FLAGS"],
+            "description": "Is this enum an `TYPE_ENUM` or a `TYPE_FLAGS`?"
+          },
+          "vsubtype": {
+            "type": "string",
+            "enum": [
+              "TYPE_VOID",
+              "TYPE_INT8",
+              "TYPE_UINT8",
+              "TYPE_INT16",
+              "TYPE_UINT16",
+              "TYPE_INT32",
+              "TYPE_UINT32",
+              "TYPE_INT64",
+              "TYPE_UINT64"
+            ],
+            "description": "The size of this enum when it is written to the binary; if it is `TYPE_VOID`, it means that the enum is not used and is unknown."
+          },
           "flags": {
             "type": "string",
-            "description": "Flags associated with the enum."
+            "description": "Unknown flags . Always `00000000` in hk2010 version"
           },
           "enum_item": {
             "type": "array",
@@ -71,7 +91,7 @@
             }
           }
         },
-        "required": ["name", "flags", "enum_item"]
+        "required": ["name", "vtype", "vsubtype", "flags", "enum_item"]
       },
       "description": "Enums associated with the class."
     },

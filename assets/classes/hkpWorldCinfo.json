@@ -11,6 +11,8 @@
   "enums": [
     {
       "name": "SolverType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
       "flags": "00000000",
       "enum_item": [
         {
@@ -61,6 +63,8 @@
     },
     {
       "name": "SimulationType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
       "flags": "00000000",
       "enum_item": [
         {
@@ -83,6 +87,8 @@
     },
     {
       "name": "ContactPointGeneration",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
       "flags": "00000000",
       "enum_item": [
         {
@@ -101,6 +107,8 @@
     },
     {
       "name": "BroadPhaseBorderBehaviour",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
       "flags": "00000000",
       "enum_item": [
         {
@@ -123,6 +131,8 @@
     },
     {
       "name": "TreeUpdateType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
       "flags": "00000000",
       "enum_item": [
         {

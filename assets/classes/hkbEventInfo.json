@@ -10,6 +10,8 @@
   "enums": [
     {
       "name": "Flags",
+      "vtype": "TYPE_FLAGS",
+      "vsubtype": "TYPE_UINT32",
       "flags": "00000000",
       "enum_item": [
         {

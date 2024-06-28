@@ -10,6 +10,8 @@
   "enums": [
     {
       "name": "ResponseType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
       "flags": "00000000",
       "enum_item": [
         {

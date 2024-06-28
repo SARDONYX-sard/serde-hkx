@@ -10,6 +10,8 @@
   "enums": [
     {
       "name": "SimulationState",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
       "flags": "00000000",
       "enum_item": [
         {
@@ -32,6 +34,8 @@
     },
     {
       "name": "AccumulateMotionState",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
       "flags": "00000000",
       "enum_item": [
         {

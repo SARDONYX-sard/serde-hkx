@@ -10,6 +10,8 @@
   "enums": [
     {
       "name": "RotationQuantization",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
       "flags": "00000000",
       "enum_item": [
         {
@@ -40,6 +42,8 @@
     },
     {
       "name": "ScalarQuantization",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
       "flags": "00000000",
       "enum_item": [
         {

@@ -11,6 +11,8 @@
   "enums": [
     {
       "name": "GetChildrenFlagBits",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
       "flags": "00000000",
       "enum_item": [
         {
@@ -29,6 +31,8 @@
     },
     {
       "name": "CloneState",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
       "flags": "00000000",
       "enum_item": [
         {

@@ -11,6 +11,8 @@
   "enums": [
     {
       "name": "ConvexListCollisionType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
       "flags": "00000000",
       "enum_item": [
         {

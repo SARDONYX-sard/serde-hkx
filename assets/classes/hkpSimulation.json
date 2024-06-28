@@ -11,6 +11,8 @@
   "enums": [
     {
       "name": "FindContacts",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
       "flags": "00000000",
       "enum_item": [
         {
@@ -25,6 +27,8 @@
     },
     {
       "name": "ResetCollisionInformation",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
       "flags": "00000000",
       "enum_item": [
         {
@@ -47,6 +51,8 @@
     },
     {
       "name": "LastProcessingStep",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
       "flags": "00000000",
       "enum_item": [
         {

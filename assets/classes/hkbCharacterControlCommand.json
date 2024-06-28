@@ -11,6 +11,8 @@
   "enums": [
     {
       "name": "CharacterControlCommand",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
       "flags": "00000000",
       "enum_item": [
         {

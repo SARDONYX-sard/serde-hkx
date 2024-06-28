@@ -11,6 +11,8 @@
   "enums": [
     {
       "name": "FlagBits",
+      "vtype": "TYPE_FLAGS",
+      "vsubtype": "TYPE_UINT16",
       "flags": "00000000",
       "enum_item": [
         {
@@ -33,6 +35,8 @@
     },
     {
       "name": "EndMode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
       "flags": "00000000",
       "enum_item": [
         {

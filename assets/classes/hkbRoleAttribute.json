@@ -10,6 +10,8 @@
   "enums": [
     {
       "name": "Role",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT16",
       "flags": "00000000",
       "enum_item": [
         {
@@ -48,6 +50,8 @@
     },
     {
       "name": "RoleFlags",
+      "vtype": "TYPE_FLAGS",
+      "vsubtype": "TYPE_INT16",
       "flags": "00000000",
       "enum_item": [
         {

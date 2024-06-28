@@ -10,6 +10,8 @@
   "enums": [
     {
       "name": "BindingType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
       "flags": "00000000",
       "enum_item": [
         {
@@ -24,6 +26,8 @@
     },
     {
       "name": "InternalBindingFlags",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
       "flags": "00000000",
       "enum_item": [
         {

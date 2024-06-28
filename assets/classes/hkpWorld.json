@@ -11,6 +11,8 @@
   "enums": [
     {
       "name": "ReintegrationRecollideMode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
       "flags": "00000000",
       "enum_item": [
         {
@@ -33,6 +35,8 @@
     },
     {
       "name": "MtAccessChecking",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
       "flags": "00000000",
       "enum_item": [
         {
@@ -47,6 +51,8 @@
     },
     {
       "name": "CachedAabbUpdate",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
       "flags": "00000000",
       "enum_item": [
         {

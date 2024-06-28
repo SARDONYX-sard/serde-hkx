@@ -11,6 +11,8 @@
   "enums": [
     {
       "name": "InitialVelocityCoordinates",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
       "flags": "00000000",
       "enum_item": [
         {
@@ -25,6 +27,8 @@
     },
     {
       "name": "MotionMode",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
       "flags": "00000000",
       "enum_item": [
         {

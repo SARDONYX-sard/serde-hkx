@@ -11,6 +11,8 @@
   "enums": [
     {
       "name": "AnimationType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT32",
       "flags": "00000000",
       "enum_item": [
         {

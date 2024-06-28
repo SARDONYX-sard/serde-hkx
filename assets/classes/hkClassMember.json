@@ -10,6 +10,8 @@
   "enums": [
     {
       "name": "Type",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
       "flags": "00000000",
       "enum_item": [
         {
@@ -160,6 +162,8 @@
     },
     {
       "name": "FlagValues",
+      "vtype": "TYPE_FLAGS",
+      "vsubtype": "TYPE_UINT32",
       "flags": "00000000",
       "enum_item": [
         {
@@ -186,6 +190,8 @@
     },
     {
       "name": "DeprecatedFlagValues",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
       "flags": "00000000",
       "enum_item": [
         {

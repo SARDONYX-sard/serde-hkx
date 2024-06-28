@@ -10,6 +10,8 @@
   "enums": [
     {
       "name": "ExtendedColors",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT32",
       "flags": "00000000",
       "enum_item": [
         {

@@ -10,6 +10,8 @@
   "enums": [
     {
       "name": "DataType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT16",
       "flags": "00000000",
       "enum_item": [
         {
@@ -36,6 +38,8 @@
     },
     {
       "name": "DataUsage",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT16",
       "flags": "00000000",
       "enum_item": [
         {
