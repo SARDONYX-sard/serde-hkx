@@ -1,9 +1,17 @@
 use super::mock_requires::*;
-use num_derive::{FromPrimitive, ToPrimitive};
-use num_traits::ToPrimitive;
 
 #[allow(unused)]
-#[derive(Debug, Clone, Default, PartialEq, ToPrimitive, FromPrimitive)]
+#[derive(
+    Debug,
+    Clone,
+    Default,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    num_derive::ToPrimitive,
+    num_derive::FromPrimitive,
+)]
 pub enum EventMode {
     #[default]
     EventModeDefault = 0,
@@ -32,6 +40,8 @@ impl Serialize for EventMode {
         let n = self
             .to_i8()
             .ok_or(S::Error::custom("Failed enum to cast number"))?;
+
+        use num_traits::ToPrimitive as _;
         sv.serialize_bits(&n)?;
 
         sv.end()

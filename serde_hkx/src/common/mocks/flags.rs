@@ -32,12 +32,12 @@ impl Serialize for FlagValues {
 
         for flag in self.iter() {
             match flag {
-                FlagValues::FLAGS_NONE => sv.serialize_field("FLAGS_NONE", &FlagValues::FLAGS_NONE),
-                FlagValues::ALIGN_8 => sv.serialize_field("ALIGN_8", &FlagValues::ALIGN_8),
-                FlagValues::ALIGN_16 => sv.serialize_field("ALIGN_16", &FlagValues::ALIGN_16),
-                FlagValues::NOT_OWNED => sv.serialize_field("NOT_OWNED", &FlagValues::NOT_OWNED),
-                FlagValues::SERIALIZE_IGNORED => {
-                    sv.serialize_field("SERIALIZE_IGNORED", &FlagValues::SERIALIZE_IGNORED)
+                Self::FLAGS_NONE => sv.serialize_field("FLAGS_NONE", &Self::FLAGS_NONE),
+                Self::ALIGN_8 => sv.serialize_field("ALIGN_8", &Self::ALIGN_8),
+                Self::ALIGN_16 => sv.serialize_field("ALIGN_16", &Self::ALIGN_16),
+                Self::NOT_OWNED => sv.serialize_field("NOT_OWNED", &Self::NOT_OWNED),
+                Self::SERIALIZE_IGNORED => {
+                    sv.serialize_field("SERIALIZE_IGNORED", &Self::SERIALIZE_IGNORED)
                 }
                 remain => sv.serialize_field(&remain.bits().to_string(), &remain.bits()),
             }?
