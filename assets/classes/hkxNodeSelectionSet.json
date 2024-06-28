@@ -5,7 +5,7 @@
   "size_x86": 36,
   "size_x86_64": 56,
   "parent": "hkxAttributeHolder",
-  "parent_has_string": false,
+  "parent_has_string": true,
   "vtable": true,
   "has_string": true,
   "members": [

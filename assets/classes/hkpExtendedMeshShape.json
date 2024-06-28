@@ -87,7 +87,7 @@
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
       "offset_x86": 32,
-      "offset_x86_64": 40,
+      "offset_x86_64": 48,
       "type_size_x86": 112,
       "type_size_x86_64": 160,
       "arrsize": 0,

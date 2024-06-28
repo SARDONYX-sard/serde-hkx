@@ -6,7 +6,7 @@
   "size_x86_64": 16,
   "parent_has_string": false,
   "vtable": false,
-  "has_string": false,
+  "has_string": true,
   "members": [
     {
       "name": "map",
