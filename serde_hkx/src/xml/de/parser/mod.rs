@@ -65,6 +65,27 @@ pub fn comment_multispace0<'a>() -> impl Parser<&'a str, (), ContextError> {
     )
 }
 
+/// Skip comments and whitespace (1 or more times).
+pub fn comment_multispace1<'a>() -> impl Parser<&'a str, (), ContextError> {
+    repeat(
+        1..,
+        alt((
+            ' ',
+            '\t',
+            '\r',
+            '\n',
+            comment().map(|_| ' '),
+            fail.context(StrContext::Expected(StrContextValue::CharLiteral(' ')))
+                .context(StrContext::Expected(StrContextValue::CharLiteral('\t')))
+                .context(StrContext::Expected(StrContextValue::CharLiteral('\r')))
+                .context(StrContext::Expected(StrContextValue::CharLiteral('\n')))
+                .context(StrContext::Expected(StrContextValue::Description(
+                    "Comment: (e.g. `<!-- comment -->`",
+                ))),
+        )),
+    )
+}
+
 /// Parses a XML comment.
 /// - e.g. ` memSizeAndFlags SERIALIZE_IGNORED ` in `<!-- memSizeAndFlags SERIALIZE_IGNORED -->`
 pub fn comment<'a>() -> impl Parser<&'a str, &'a str, ContextError> {

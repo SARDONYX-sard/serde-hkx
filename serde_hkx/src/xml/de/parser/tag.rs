@@ -33,26 +33,23 @@ pub fn end_tag<'a>(tag: &'static str) -> impl Parser<&'a str, (), ContextError> 
     .context(StrContext::Label("end tag"))
 }
 
-/// Parses the array start tag `<hkparam name="key" numelements="3">`
+/// Parses the array start close tag ` numelements="3">`
+///
+/// Use the `field_start_open_tag` in combination with the `attr_string` parser.
 ///
 /// # Returns
-/// (name, numelements) -> e.g. (`key`, 3)
-pub fn array_start_tag<'a>() -> impl Parser<&'a str, (&'a str, u64), ContextError> {
+/// `numelements` -> e.g. `3`
+pub fn array_field_start_close_tag<'a>() -> impl Parser<&'a str, u64, ContextError> {
     seq!(
-        _: delimited_comment_multispace0("<"),
-        _: delimited_with_multispace0("hkparam"),
-        _: delimited_with_multispace0("name"),
-        _: delimited_with_multispace0("="),
-        attr_string(), // e.g. "key"
-
         _: delimited_with_multispace0("numelements"),
         _: delimited_with_multispace0("="),
         number_in_string(), // e.g. "8"
         _: delimited_multispace0_comment(">")
     )
-    .context(StrContext::Label("Array start tag"))
+    .map(|num| num.0)
+    .context(StrContext::Label("class field of array start closing tag"))
     .context(StrContext::Expected(StrContextValue::Description(
-        "e.g. `<hkparam name=\"key\" numelements=\"3\">`",
+        "e.g. `numelements=\"3\">`",
     )))
 }
 
@@ -93,7 +90,7 @@ pub fn field_start_open_tag<'a>() -> impl Parser<&'a str, (), ContextError> {
         _: delimited_with_multispace0("name"),
         _: delimited_with_multispace0("="),
     )
-    .context(StrContext::Label("class field start tag open"))
+    .context(StrContext::Label("class field start opening tag"))
     .context(StrContext::Expected(StrContextValue::Description(
         "Class field start open tag(e.g. `<hkparam name=>`)",
     )))
@@ -105,7 +102,7 @@ pub fn field_start_close_tag<'a>() -> impl Parser<&'a str, (), ContextError> {
     seq!(
         _: delimited_multispace0_comment(">")
     )
-    .context(StrContext::Label("class field start tag"))
+    .context(StrContext::Label("class field start closing tag"))
     .context(StrContext::Expected(StrContextValue::Description(
         "Class field start close tag(e.g. `>`)",
     )))
@@ -193,8 +190,8 @@ mod tests {
 
     #[test]
     fn test_parse_array_start_tag() {
-        fn test_parse(input: &str, expected: (&str, u64)) {
-            match array_start_tag()
+        fn test_parse(input: &str, expected: u64) {
+            match array_field_start_close_tag()
                 .parse(input)
                 .map_err(|e| ReadableError::from_parse(e, input).to_string())
             {
@@ -203,18 +200,16 @@ mod tests {
             }
         }
 
-        let ideal_input = r#"<hkparam name="key" numelements="3">"#;
-        test_parse(ideal_input, ("key", 3));
+        let ideal_input = r#" numelements="3">"#;
+        test_parse(ideal_input, 3);
 
         let indent_input = r#"
 
-
-        <      hkparam name  =  "key!"
           numelements
   = "85"
 
 >"#;
-        test_parse(indent_input, ("key!", 85));
+        test_parse(indent_input, 85);
     }
 
     #[test]

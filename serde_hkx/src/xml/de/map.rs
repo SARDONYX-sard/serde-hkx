@@ -1,10 +1,9 @@
 //! Deserializing each field element in an `Struct`
-
 use super::{
     parser::tag::{end_tag, field_start_close_tag, field_start_open_tag},
     XmlDeserializer,
 };
-use crate::{errors::de::Error, tri};
+use crate::{errors::de::Error, tri, xml::de::parser::tag::array_field_start_close_tag};
 use havok_serde::de::{DeserializeSeed, MapAccess};
 use havok_types::Pointer;
 
@@ -24,6 +23,7 @@ use havok_types::Pointer;
 pub struct MapDeserializer<'a, 'de: 'a> {
     /// Deserializer
     de: &'a mut XmlDeserializer<'de>,
+    /// To check fields length
     index: usize,
     ptr_name: Option<Pointer>,
     fields: &'static [&'static str],
@@ -63,9 +63,31 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
             return Ok(None);
         }
 
-        tri!(self.de.parse(field_start_open_tag()));
+        tri!(self.de.parse(field_start_open_tag())); // Parse `<hkparam name=`
         let key = seed.deserialize(&mut *self.de).map(Some); // Deserialize a map key.
-        tri!(self.de.parse(field_start_close_tag()));
+        tri!(self.de.parse(field_start_close_tag())); // Parse `>`
+        self.index += 1;
+
+        key
+    }
+
+    // Parse e.g. `<hkparam name="worldUpWS">`
+    fn next_array_key_seed<K>(&mut self, seed: K) -> Result<Option<K::Value>, Self::Error>
+    where
+        K: DeserializeSeed<'de>,
+    {
+        // Check if there are no more elements.
+        if self.de.parse_peek(end_tag("hkobject")).is_ok() && self.fields.len() == self.index {
+            return Ok(None);
+        }
+        // Parse `<hkparam name=`
+        tri!(self.de.parse(field_start_open_tag()));
+        //  `Deserialize` of the struct -> `deserialize_key` in `XmlDeserializer` -> Parse `"`, key, `"`
+        let key = seed.deserialize(&mut *self.de).map(Some);
+        // Parse ` numelements="3">`
+        let _len = tri!(self.de.parse(array_field_start_close_tag()));
+        #[cfg(feature = "tracing")]
+        tracing::debug!(_len);
         self.index += 1;
 
         key

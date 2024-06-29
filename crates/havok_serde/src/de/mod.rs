@@ -754,6 +754,12 @@ pub trait Deserializer<'de>: Sized {
     /// deserialization.
     type Error: Error;
 
+    /// Hint that the `Deserialize` type is expecting the name of a struct
+    /// field or the discriminant of an enum variant.
+    fn deserialize_identifier<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    where
+        V: Visitor<'de>;
+
     /// Deserialize map key.
     ///
     /// - It is mainly called to deserialize the key of a field when implementing [`Deserialize`] of struct.
@@ -916,7 +922,15 @@ pub trait Deserializer<'de>: Sized {
         V: Visitor<'de>;
 
     /// Deserialize an `enum` or `Flags` value.
-    fn deserialize_enum_flags<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    ///
+    /// Hint that the `Deserialize` type is expecting an enum value with a
+    /// particular name and possible variants.
+    fn deserialize_enum_flags<V>(
+        self,
+        name: &'static str,
+        variants: &'static [&'static str],
+        visitor: V,
+    ) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>;
 
@@ -1255,7 +1269,16 @@ pub trait Visitor<'de>: Sized {
         Err(Error::invalid_type(Unexpected::CString(v), &self))
     }
 
-    // TODO: Enum flags
+    /// The input contains an enum or flags.
+    ///
+    /// The default implementation fails with a type error.
+    fn visit_enum_flags<A>(self, data: A) -> Result<Self::Value, A::Error>
+    where
+        A: EnumAccess<'de>,
+    {
+        let _ = data;
+        Err(Error::invalid_type(Unexpected::Enum, &self))
+    }
 
     /// The input contains a u64.
     ///
@@ -1519,6 +1542,19 @@ pub trait MapAccess<'de> {
     where
         K: DeserializeSeed<'de>;
 
+    /// # For Array
+    /// In XML, key parsing is different as in `<hkparam name="" numelements="3">`,
+    /// so the API that exists to support this.
+    ///
+    /// This returns `Ok(Some(key))` for the next key in the map, or `Ok(None)`
+    /// if there are no more remaining entries.
+    ///
+    /// `Deserialize` implementations should typically use
+    /// `MapAccess::next_key` or `MapAccess::next_entry` instead.
+    fn next_array_key_seed<K>(&mut self, seed: K) -> Result<Option<K::Value>, Self::Error>
+    where
+        K: DeserializeSeed<'de>;
+
     /// This returns a `Ok(value)` for the next value in the map.
     ///
     /// `Deserialize` implementations should typically use
@@ -1570,6 +1606,20 @@ pub trait MapAccess<'de> {
         K: Deserialize<'de>,
     {
         self.next_key_seed(PhantomData)
+    }
+
+    /// # For Array
+    /// This returns `Ok(Some(key))` for the next key in the map, or `Ok(None)`
+    /// if there are no more remaining entries.
+    ///
+    /// This method exists as a convenience for `Deserialize` implementations.
+    /// `MapAccess` implementations should not override the default behavior.
+    #[inline]
+    fn next_array_key<K>(&mut self) -> Result<Option<K>, Self::Error>
+    where
+        K: Deserialize<'de>,
+    {
+        self.next_array_key_seed(PhantomData)
     }
 
     /// This returns a `Ok(value)` for the next value in the map.
@@ -1630,6 +1680,14 @@ where
     }
 
     #[inline]
+    fn next_array_key_seed<K>(&mut self, seed: K) -> Result<Option<K::Value>, Self::Error>
+    where
+        K: DeserializeSeed<'de>,
+    {
+        (**self).next_key_seed(seed)
+    }
+
+    #[inline]
     fn next_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
     where
         V: DeserializeSeed<'de>,
@@ -1668,6 +1726,14 @@ where
     }
 
     #[inline]
+    fn next_array_key<K>(&mut self) -> Result<Option<K>, Self::Error>
+    where
+        K: Deserialize<'de>,
+    {
+        (**self).next_array_key()
+    }
+
+    #[inline]
     fn next_value<V>(&mut self) -> Result<V, Self::Error>
     where
         V: Deserialize<'de>,
@@ -1679,6 +1745,86 @@ where
     fn size_hint(&self) -> Option<usize> {
         (**self).size_hint()
     }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+/// Provides a `Visitor` access to the data of an enum in the input.
+///
+/// `EnumAccess` is created by the `Deserializer` and passed to the
+/// `Visitor` in order to identify which variant of an enum to deserialize.
+///
+/// # Lifetime
+///
+/// The `'de` lifetime of this trait is the lifetime of data that may be
+/// borrowed by the deserialized enum variant. See the page [Understanding
+/// deserializer lifetimes] for a more detailed explanation of these lifetimes.
+///
+/// [Understanding deserializer lifetimes]: https://serde.rs/lifetimes.html
+///
+/// # Example implementation
+///
+/// The [example data format] presented on the website demonstrates an
+/// implementation of `EnumAccess` for a basic JSON data format.
+///
+/// [example data format]: https://serde.rs/data-format.html
+pub trait EnumAccess<'de>: Sized {
+    /// The error type that can be returned if some error occurs during
+    /// deserialization.
+    type Error: Error;
+    /// The `Visitor` that will be used to deserialize the content of the enum
+    /// variant.
+    type Variant: VariantAccess<'de, Error = Self::Error>;
+
+    /// `variant` is called to identify which variant to deserialize.
+    ///
+    /// `Deserialize` implementations should typically use `EnumAccess::variant`
+    /// instead.
+    fn variant_seed<V>(self, seed: V) -> Result<(V::Value, Self::Variant), Self::Error>
+    where
+        V: DeserializeSeed<'de>;
+
+    /// `variant` is called to identify which variant to deserialize.
+    ///
+    /// This method exists as a convenience for `Deserialize` implementations.
+    /// `EnumAccess` implementations should not override the default behavior.
+    #[inline]
+    fn variant<V>(self) -> Result<(V, Self::Variant), Self::Error>
+    where
+        V: Deserialize<'de>,
+    {
+        self.variant_seed(PhantomData)
+    }
+}
+
+/// `VariantAccess` is a visitor that is created by the `Deserializer` and
+/// passed to the `Deserialize` to deserialize the content of a particular enum
+/// variant.
+///
+/// # Lifetime
+///
+/// The `'de` lifetime of this trait is the lifetime of data that may be
+/// borrowed by the deserialized enum variant. See the page [Understanding
+/// deserializer lifetimes] for a more detailed explanation of these lifetimes.
+///
+/// [Understanding deserializer lifetimes]: https://serde.rs/lifetimes.html
+///
+/// # Example implementation
+///
+/// The [example data format] presented on the website demonstrates an
+/// implementation of `VariantAccess` for a basic JSON data format.
+///
+/// [example data format]: https://serde.rs/data-format.html
+pub trait VariantAccess<'de>: Sized {
+    /// The error type that can be returned if some error occurs during
+    /// deserialization. Must match the error type of our `EnumAccess`.
+    type Error: Error;
+
+    /// Called when deserializing a variant with no values.
+    ///
+    /// If the data contains a different type of variant, the following
+    /// `invalid_type` error should be constructed:
+    fn unit_variant(self) -> Result<(), Self::Error>;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -1,3 +1,4 @@
+mod enum_access;
 mod map;
 pub mod parser;
 mod seq;
@@ -6,15 +7,17 @@ use crate::{lib::*, tri};
 
 use self::map::MapDeserializer;
 use self::parser::error::ReadableError;
-use self::parser::tag::{array_start_tag, class_start_tag, end_tag};
+use self::parser::tag::{class_start_tag, end_tag};
 use self::parser::type_kind::{
     boolean, matrix3, matrix4, pointer, qstransform, quaternion, real, rotation, string,
     string_in_array, transform, vector4,
 };
 use self::seq::SeqDeserializer;
 use crate::errors::de::{Error, Result};
+use enum_access::Enum;
 use havok_serde::de::{self, Deserialize, Visitor};
 use havok_types::*;
+use parser::comment_multispace0;
 use parser::tag::{attr_string, start_tag};
 use winnow::ascii::{dec_int, dec_uint};
 use winnow::Parser;
@@ -117,8 +120,25 @@ impl<'de> XmlDeserializer<'de> {
     }
 }
 
+// INFO:
+// Where did the visit method come from?
+// It creates a visit when implementing each Deserialize and reads it. The default is to return an error.
 impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     type Error = Error;
+
+    /// # Note
+    /// The enum implementor must parse the incoming parsed enum (or bitflags) by calling
+    /// `visit_stringptr` in `impl Deserialize`.
+    ///
+    /// 1. Read `ANY_ENUM_VARIANT` in `<hkparam>ANY_ENUM_VARIANT</hkparam>`
+    /// 2. Check by calling `visit_stringptr` .
+    fn deserialize_identifier<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    where
+        V: Visitor<'de>,
+    {
+        let s = tri!(self.parse(string())); // Read Until `</hkparam>`
+        visitor.visit_stringptr(StringPtr::from_str(s))
+    }
 
     fn deserialize_key<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
@@ -281,16 +301,10 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        // TODO: TODO: This should be parsed there with more patterns of keys in MapDeserializer
-        let (name, len) = tri!(self.parse(array_start_tag())); // Parse `<hkparam name="key" numelements="3">`
-        #[cfg(feature = "tracing")]
-        tracing::debug!(name, len);
-
         self.in_array = true;
-        let value = tri!(visitor.visit_array(SeqDeserializer::new(self))); // Give the visitor access to each element of the sequence.
+        tri!(self.parse(comment_multispace0()));
+        let value = tri!(visitor.visit_array(SeqDeserializer::new(self)));
         self.in_array = false;
-
-        tri!(self.parse(end_tag("hkparam"))); // Parse the closing tag of the sequence.
         Ok(value)
     }
 
@@ -369,11 +383,17 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         self.deserialize_uint64(visitor)
     }
 
-    fn deserialize_enum_flags<V>(self, _visitor: V) -> Result<V::Value, Self::Error>
+    #[inline]
+    fn deserialize_enum_flags<V>(
+        self,
+        _name: &'static str,
+        _variants: &'static [&'static str],
+        visitor: V,
+    ) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        todo!()
+        visitor.visit_enum_flags(Enum::new(self))
     }
 
     fn deserialize_half<V>(self, visitor: V) -> Result<V::Value, Self::Error>
@@ -384,7 +404,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         visitor.visit_half(f16::from_f32(float))
     }
 
-    #[inline]
     fn deserialize_stringptr<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -418,66 +437,45 @@ mod tests {
     }
 
     #[test]
-    #[quick_tracing::init(test = "xml_deserialize")]
-    fn test_deserialize() {
-        // let xml = &include_str!("../../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
-        from_str_assert(
-            r##"
-<hkobject name="#01000" class="hkReferencedObject" signature="0xea7f1d08">
-        <hkparam name="memSizeAndFlags">2</hkparam>
-        <!-- comment1 -->
-        <!-- comment2 -->
-        <hkparam name="referenceCount">0</hkparam>
-        <!-- comment3 -->
-        <!-- comment4 -->
-</hkobject>"##,
-            crate::common::mocks::classes::HkReferencedObject {
-                __ptr_name_attr: Some(Pointer::new(1000)),
-                parent: crate::common::mocks::classes::HkBaseObject { _name: None },
-                mem_size_and_flags: 2,
-                reference_count: 0,
-            },
-        );
-
+    #[quick_tracing::init]
+    fn test_deserialize_primitive() {
         from_str_assert(
             r#"
-        <hkparam name="bool" numelements="2">
-        <!-- Hi? -->
-        <!-- Hi? -->
-        <!-- Hi? -->
-          true false
-        <!-- Hi?2 -->
-        </hkparam>"#,
+                <!-- Hi? -->
+                <!-- Hi? -->
+                true
+
+                <!-- Hi? -->
+                   false
+                <!-- Hi?2 -->
+        "#,
             vec![true, false],
         );
 
         from_str_assert(
             r#"
-<hkparam name="i32" numelements="2">
     0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
     16 17 18 19 20
-</hkparam>
 "#,
             (0..21).collect::<Vec<i32>>(),
         );
+    }
 
+    #[test]
+    fn test_deserialize_math() {
         from_str_assert(
-            r#"
-<hkparam name="Array<QsTransform>" numelements="1">
-  (0.000000 0.000000 0.000000 0.000000  )
-  (   0.000000 0.000000 0.000000 0.000000  )
-  (   0.000000 0.000000 0.000000 0.000000 )
-</hkparam>"#,
-            vec![QsTransform::default()],
-        );
+            r#"   <!-- comment -->
 
-        from_str_assert(
-            r#"
-<hkparam name="Array<Vector4>" numelements="3">
-  (-0.000000 0.000000 -0.000000 1.000000  )
-  (   0.000000 0.000000 -0.000000 1.000000  )
-  (   -0.000000 0.000000 -0.000000 1.000000 )
-</hkparam>"#,
+        (-0.000000 0.000000 -0.000000 1.000000  )
+<!-- comment -->
+
+            (   0.000000 0.000000 -0.000000 1.000000  )
+
+                <!-- COmment -->
+
+(   -0.000000 0.000000 -0.000000 1.000000 )
+                            <!-- comment -->
+"#,
             vec![
                 Vector4 {
                     x: -0.0,
@@ -499,15 +497,40 @@ mod tests {
                 },
             ],
         );
+    }
 
+    #[test]
+    fn test_deserialize_string() {
         from_str_assert::<Vec<StringPtr>>(
             r#"
-<hkparam name="Array<StringPtr>" numelements="2">
-  <hkcstring>Hello</hkcstring>
-  <hkcstring>World</hkcstring>
-  <hkcstring></hkcstring>
-</hkparam>"#,
+    <hkcstring>Hello</hkcstring>
+        <hkcstring>World</hkcstring>
+    <hkcstring></hkcstring>
+        "#,
             vec!["Hello".into(), "World".into(), "".into()],
+        );
+    }
+
+    #[test]
+    #[quick_tracing::init]
+    fn test_deserialize_class() {
+        // let xml = &include_str!("../../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
+        from_str_assert(
+            r##"
+<hkobject name="#01000" class="hkReferencedObject" signature="0xea7f1d08">
+        <hkparam name="memSizeAndFlags">2</hkparam>
+        <!-- comment1 -->
+        <!-- comment2 -->
+        <hkparam name="referenceCount">0</hkparam>
+        <!-- comment3 -->
+        <!-- comment4 -->
+</hkobject>"##,
+            crate::common::mocks::classes::HkReferencedObject {
+                __ptr_name_attr: Some(Pointer::new(1000)),
+                parent: crate::common::mocks::classes::HkBaseObject { _name: None },
+                mem_size_and_flags: 2,
+                reference_count: 0,
+            },
         );
     }
 }

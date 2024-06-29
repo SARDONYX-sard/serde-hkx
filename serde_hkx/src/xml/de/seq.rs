@@ -4,9 +4,9 @@ use super::XmlDeserializer;
 
 use crate::errors::de::{Error, Result};
 use crate::tri;
+use crate::xml::de::parser::{comment_multispace0, comment_multispace1};
 
 use havok_serde::de::{DeserializeSeed, SeqAccess};
-use winnow::ascii::multispace1;
 use winnow::error::{StrContext, StrContextValue};
 use winnow::Parser;
 
@@ -51,18 +51,24 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
         // Check if there are no more elements.
         if self.de.parse_peek(end_tag("hkparam")).is_ok() {
             return Ok(None);
-        }
+        };
 
         // Space is required before every element except the first.
         if !self.first {
             tri!(self.de.parse(
-                multispace1.context(StrContext::Expected(StrContextValue::CharLiteral(' ')))
+                comment_multispace1()
+                    .context(StrContext::Expected(StrContextValue::CharLiteral(' ')))
             ));
-        }
+        };
         self.first = false;
 
-        #[cfg(feature = "tracing")]
-        tracing::trace!(self.de.input);
+        // NOTE:
+        // If there is no value after leaving whitespace and it is the end, it is necessary
+        // to check here to avoid an infinite loop.
+        if self.de.input.is_empty() {
+            return Ok(None);
+        };
+
         let value = seed.deserialize(&mut *self.de).map(Some)?; // Deserialize an array element.
         Ok(value)
     }
@@ -72,9 +78,9 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
         T: DeserializeSeed<'de>,
     {
         // Check if there are no more elements.
-        if self.de.parse_peek(end_tag("hkobject")).is_ok() {
+        if self.de.input.is_empty() || self.de.parse_peek(end_tag("hkobject")).is_ok() {
             return Ok(None);
-        }
+        };
         self.first = false;
 
         seed.deserialize(&mut *self.de).map(Some) // Deserialize an array element.
@@ -85,12 +91,14 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
         T: DeserializeSeed<'de>,
     {
         // Check if there are no more elements.
-        if self.de.input.starts_with("</hkparam>") {
+        if self.de.input.is_empty() || self.de.parse_peek(end_tag("hkparam")).is_ok() {
             return Ok(None);
-        }
+        };
         self.first = false;
 
-        seed.deserialize(&mut *self.de).map(Some) // Deserialize an array element.
+        let value = tri!(seed.deserialize(&mut *self.de).map(Some));
+        tri!(self.de.parse(comment_multispace0()));
+        Ok(value)
     }
 
     #[inline]
@@ -122,9 +130,9 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
         T: DeserializeSeed<'de>,
     {
         // Check if there are no more elements.
-        if self.de.parse_peek(end_tag("hkparam")).is_ok() {
+        if self.de.input.is_empty() || self.de.parse_peek(end_tag("hkparam")).is_ok() {
             return Ok(None);
-        }
+        };
         self.first = false;
 
         tri!(self.de.parse(start_tag("hkcstring")));
