@@ -67,7 +67,6 @@ fn struct_doc_attrs(class: &Class) -> TokenStream {
         signature,
         size_x86,
         size_x86_64,
-        parent,
         vtable,
         ..
 
@@ -76,13 +75,7 @@ fn struct_doc_attrs(class: &Class) -> TokenStream {
     let name =             format!(" -            name: `{name}`");
     let version =          format!(" -         version: `{version}`");
     let signature =        format!(" -       signature: `{signature}`");
-    let class_size =       format!(" -          size: {size_x86:3}(x86)/{size_x86_64:3}(x86_64)");
-    let parent= {
-        match parent{
-          Some(parent) => format!(" -          parent: `{parent}`"),
-                              _ => format!(" -          parent: `None`"),
-        }
-    };
+    let class_sizes =       format!(" -          size: {size_x86:3}(x86)/{size_x86_64:3}(x86_64)");
     let vtable =           format!(" -          vtable: {vtable}");
 
     quote! {
@@ -90,8 +83,7 @@ fn struct_doc_attrs(class: &Class) -> TokenStream {
         #[doc = #name]
         #[doc = #version]
         #[doc = #signature]
-        #[doc = #class_size]
-        #[doc = #parent]
+        #[doc = #class_sizes]
         #[doc = #vtable]
         #[doc = ""]
     }

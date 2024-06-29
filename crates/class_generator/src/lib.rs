@@ -127,7 +127,7 @@ mod tests {
             .join("..");
 
         let classes_json_dir = repo_root.join("assets").join("classes");
-        let output_dir = repo_root.join("crates/havok_class/src");
+        let output_dir = repo_root.join("crates/havok_classes/src");
         std::fs::create_dir_all(&output_dir).unwrap();
 
         if let Err(err) = generate_havok_class(classes_json_dir, output_dir) {
