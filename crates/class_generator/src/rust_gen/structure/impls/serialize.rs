@@ -54,9 +54,9 @@ fn impl_serialize_fields(class: &Class, class_map: &ClassMap) -> Vec<TokenStream
     let mut x86_current_offset = 0;
     let mut x64_current_offset = 0;
 
-    let all_class = &mut get_inherited_class(&class.name, class_map);
-
+    let all_class = get_inherited_class(&class.name, class_map);
     let mut parent_depth = all_class.len();
+
     for class in all_class {
         parent_depth -= 1;
         let (meta_fields, ptr_fields) = impl_serialize_self_fields(
@@ -70,9 +70,6 @@ fn impl_serialize_fields(class: &Class, class_map: &ClassMap) -> Vec<TokenStream
         serialize_calls.extend(meta_fields);
         ptr_after_write_fields.extend(ptr_fields);
     }
-    // if class.name == "hkbProjectStringData" {
-    //     panic!("end");
-    // }
 
     serialize_calls.extend(ptr_after_write_fields);
     serialize_calls
