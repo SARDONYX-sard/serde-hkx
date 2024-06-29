@@ -5,7 +5,6 @@ mod rust_gen;
 
 use crate::{cpp_info::Class, error::*};
 use convert_case::Casing as _;
-use cpp_info::Member;
 use indexmap::IndexMap;
 use snafu::OptionExt as _;
 use std::{fs, path::Path};
@@ -35,7 +34,6 @@ pub fn generate_havok_class<P: AsRef<Path>>(classes_json_dir: P, out_dir: P) -> 
         class_map.insert(class_name, class);
     }
 
-    // class map loop
     for (class_name, class) in &class_map {
         let output_file = class_out_dir.join(format!("{class_name}.rs"));
         let output_file = output_file.to_string_lossy();
@@ -68,49 +66,30 @@ pub fn generate_havok_class<P: AsRef<Path>>(classes_json_dir: P, out_dir: P) -> 
 
 pub type ClassMap<'a> = IndexMap<String, Class<'a>>;
 
-/// Enumerate C++ parent class information by recursively tracing from the parent class name of the current class.
+/// Enumerate C++ class information by recursively tracing from the current class.
+/// - current class name -> Myself and all parent classes.
+/// - parent class name -> All parent classes.
 ///
 /// # Returns
 /// Vec sorted by deepest parent class.
-pub fn get_inherited_class<'a>(
-    current_parent_name: &str,
-    classes_map: &'a ClassMap,
-) -> Vec<&'a Class<'a>> {
+pub fn get_inherited_class<'a>(class_name: &str, classes_map: &'a ClassMap) -> Vec<&'a Class<'a>> {
     // Cache variables
-    let mut current_parent_name = current_parent_name;
-    let mut parents = Vec::new();
+    let mut current_class_name = class_name;
+    let mut inherited_class = Vec::new();
 
     // Get all parents
-    while let Some(parent_class) = classes_map.get(current_parent_name) {
-        parents.push(parent_class);
+    while let Some(class) = classes_map.get(current_class_name) {
+        inherited_class.push(class);
 
-        if let Some(parent_name) = &parent_class.parent {
-            current_parent_name = parent_name;
+        if let Some(parent_name) = &class.parent {
+            current_class_name = parent_name;
         } else {
             break; // No more parent to process
         }
     }
 
-    parents.reverse(); // This is because binary reads must be read from the most root parent class.
-    parents
-}
-
-pub fn get_all_members<'a>(class_name: &str, class_map: &'a ClassMap) -> Vec<Vec<&'a Member<'a>>> {
-    // parent members
-    let mut members = Vec::new();
-
-    let current_class = &class_map[class_name];
-    if let Some(parent_name) = &current_class.parent {
-        for parent in get_inherited_class(&parent_name, class_map) {
-            let parent_members = parent.members.iter().collect::<Vec<_>>();
-            members.push(parent_members);
-        }
-    }
-
-    let current_members = current_class.members.iter().collect::<Vec<_>>();
-    members.push(current_members);
-
-    members
+    inherited_class.reverse(); // This is because binary reads must be read from the most root parent class.
+    inherited_class
 }
 
 #[cfg(test)]
