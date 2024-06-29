@@ -1,5 +1,5 @@
 [package]
-name = "havok_class"
+name = "havok_classes"
 edition = "2021"
 authors.workspace = true
 version.workspace = true

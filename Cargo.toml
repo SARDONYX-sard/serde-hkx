@@ -10,7 +10,7 @@ edition = "2021"
 [workspace]
 members = [
   "crates/class_generator",
-  "crates/havok_class",
+  "crates/havok_classes",
   "crates/havok_serde",
   "crates/havok_types",
   "crates/havok_types_derive",
