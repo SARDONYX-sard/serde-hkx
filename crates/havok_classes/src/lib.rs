@@ -9,6 +9,9 @@
 //! # Note
 //!  Note that the following enum and bitFlags have duplicate names.
 //!
+//! To use it correctly, you must import it from a module as follows.
+//! - e.g. `havok_classes::hkbEvaluateHandleModifier_::HandleChangeMode`
+//!
 //! `enum HandleChangeMode`(`TYPE_ENUM`)
 //! - `hkbEvaluateHandleModifier`
 //! - `hkbHandIkControlData`
@@ -30,9 +33,12 @@ use generated::*;
 
 #[cfg(test)]
 mod tests {
+    use crate::BlendModeFunction;
+
     #[test]
     fn main() {
         let class = crate::BGSGamebryoSequenceGenerator::default();
+        dbg!(BlendModeFunction::BMF_PERCENT);
         dbg!(class);
     }
 }
