@@ -66,10 +66,9 @@ pub fn comment_multispace0<'a>() -> impl Parser<&'a str, (), ContextError> {
 }
 
 /// Parses a XML comment.
-fn comment<'a>() -> impl Parser<&'a str, &'a str, ContextError> {
+/// - e.g. ` memSizeAndFlags SERIALIZE_IGNORED ` in `<!-- memSizeAndFlags SERIALIZE_IGNORED -->`
+pub fn comment<'a>() -> impl Parser<&'a str, &'a str, ContextError> {
     delimited("<!--", take_until(0.., "-->"), "-->").context(StrContext::Expected(
         StrContextValue::Description("comment"),
     ))
 }
-
-// <!-- memSizeAndFlags SERIALIZE_IGNORED -->
