@@ -1,4 +1,7 @@
-use crate::cpp_info::{Enum, EnumItem, TypeKind};
+use crate::{
+    cpp_info::{Enum, EnumItem, TypeKind},
+    rust_gen::enum_or_flags::has_duplicate_value,
+};
 use proc_macro2::TokenStream;
 use quote::quote;
 
@@ -26,9 +29,32 @@ pub fn impl_ser_for_enum(one_enum: &Enum) -> TokenStream {
         return quote! {};
     };
 
-    let cast_method = to_rust_cast_method(vsubtype)
-        .unwrap_or_else(|| panic!("Unsupported enum storage type: {vsubtype}"));
-    let err_msg = format!("Failed enum {enum_name} {cast_method}");
+    // An enum with the same value is not valid as an enum in Rust.
+    // Therefore, express them as BitFlag.
+    let serialize_inner = if has_duplicate_value(one_enum) {
+        // NOTE: In the case of bit flags, since self is a reference, it is necessary to add deref.
+        let err_msg = format!("The enum {name} contains an unknown value ({{}}).");
+        quote! {
+            match *self {
+                #(#variants,)*
+                unknown => return Err(S::Error::custom(format!(#err_msg, unknown.bits())))
+            }?;
+            __serializer.serialize_bits(&self.bits())?;
+        }
+    } else {
+        let cast_method = to_rust_cast_method(vsubtype)
+            .unwrap_or_else(|| panic!("Unsupported enum storage type: {vsubtype}"));
+        let err_msg = format!("Failed enum {enum_name} {cast_method}");
+        quote! {
+            match self {
+                #(#variants,)*
+            }?;
+
+            use num_traits::ToPrimitive as _;
+            let num = self.#cast_method().ok_or(S::Error::custom(#err_msg))?;
+            __serializer.serialize_bits(&num)?;
+        }
+    };
 
     quote! {
         const _: () = {
@@ -39,15 +65,7 @@ pub fn impl_ser_for_enum(one_enum: &Enum) -> TokenStream {
                     where S: __serde::ser::Serializer
                 {
                     let mut __serializer = __serializer.serialize_enum_flags()?;
-                    match self {
-                        #(#variants,)*
-                    }?;
-
-                    let num = self.#cast_method().ok_or(S::Error::custom(#err_msg))?;
-
-                    use num_traits::ToPrimitive as _;
-                    __serializer.serialize_bits(&num)?;
-
+                    #serialize_inner
                     __serializer.end()
                 }
         }

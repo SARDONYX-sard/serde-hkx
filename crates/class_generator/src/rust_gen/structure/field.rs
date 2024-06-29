@@ -67,20 +67,32 @@ pub(super) fn gen_field(member: &Member, class_name: &str) -> TokenStream {
     let field_name = to_rust_field_ident(name);
 
     // `Default` implementations with huge sizes such as [0u8; 256] are not automatically supported, so use `educe` crate to define them.
-    let default_attr = if matches!(
-        vtype,
-        TypeKind::Int8
+    let default_attr = if *arrsize > 32 {
+        let as_value = format!("[_; {arrsize}]"); // NOTE: need `serde_with`
+        let serde_with_attr = quote! {
+            #[cfg_attr(feature = "serde", serde_as(as = #as_value))]
+        };
+
+        let default_attr = match vtype {
+            TypeKind::Int8
             | TypeKind::Uint8
             | TypeKind::Int32
             | TypeKind::Uint32
             | TypeKind::Int16
             | TypeKind::Uint16
             | TypeKind::Int64
-            | TypeKind::Uint64
-    ) && *arrsize > 32
-    {
+            | TypeKind::Uint64 => {
+                quote! {
+                    #[educe(Default = [0; #arrsize])]
+                }
+            }
+            _ => panic!(
+                "Giant fixed-size arrays are supported only for Int or Uint 8~64. Got {vtype}"
+            ),
+        };
         quote! {
-            #[educe(Default = [0; #arrsize])]
+            #serde_with_attr
+            #default_attr
         }
     } else {
         quote! {}

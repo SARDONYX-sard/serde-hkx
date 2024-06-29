@@ -4,7 +4,7 @@ use quote::quote;
 
 /// `field` -> `m_field`
 pub fn to_rust_field_ident(name: &str) -> syn::Ident {
-    syn::Ident::new(&format!("m_{name}"), proc_macro2::Span::call_site())
+    quote::format_ident!("m_{name}")
 }
 
 pub fn to_rust_type(ty: &TypeKind) -> Option<TokenStream> {

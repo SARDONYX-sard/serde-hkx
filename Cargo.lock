@@ -403,6 +403,8 @@ dependencies = [
  "havok_types",
  "num-derive",
  "num-traits",
+ "serde",
+ "serde_with",
 ]
 
 [[package]]
