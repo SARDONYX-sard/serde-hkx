@@ -771,8 +771,18 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         T: ?Sized + AsRef<[u8]>,
     {
         match self.is_x86 {
-            true => self.output.write(x86_pads.as_ref()),
-            false => self.output.write(x64_pads.as_ref()),
+            true => {
+                if x86_pads.as_ref().is_empty() {
+                    return Ok(());
+                };
+                self.output.write(x86_pads.as_ref())
+            }
+            false => {
+                if x64_pads.as_ref().is_empty() {
+                    return Ok(());
+                };
+                self.output.write(x64_pads.as_ref())
+            }
         }?;
         Ok(())
     }

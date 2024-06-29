@@ -10,7 +10,10 @@ use quote::quote;
 /// is left to upstream functions.
 pub fn gen_enum(one_enum: &Enum) -> syn::ItemEnum {
     let Enum {
-        name, enum_item, ..
+        name,
+        vsubtype,
+        enum_item,
+        ..
     } = one_enum;
 
     let enum_name = syn::Ident::new(&name, proc_macro2::Span::call_site());
@@ -29,7 +32,9 @@ pub fn gen_enum(one_enum: &Enum) -> syn::ItemEnum {
         })
         .collect();
 
+    let doc = format!("- size(C++): `{vsubtype}`");
     syn::parse_quote! {
+        #[doc = #doc]
         #[allow(non_upper_case_globals, non_snake_case)]
         #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
         #[derive(

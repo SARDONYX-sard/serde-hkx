@@ -24,9 +24,11 @@ pub fn gen_flag(one_enum: &Enum) -> syn::Macro {
         .map(|enum_item| gen_variant_token(enum_item, vsubtype))
         .collect();
 
+    let doc = format!("- size(C++): `{vsubtype}`");
     let doc = if *vtype == TypeKind::Enum {
         quote! {
            /// Bit flags that represented `enum hkEnum<Enum, SizeType>`(C++).
+           #[doc = #doc]
            ///
            /// # Why this `enum` defined as `bitflags`?
            /// These are not really `TYPE_FLAGS` but `TYPE_ENUM`, but since Rust does not allow the definition of
@@ -35,6 +37,7 @@ pub fn gen_flag(one_enum: &Enum) -> syn::Macro {
     } else {
         quote! {
            /// Bit flags that represented `enum hkFlags<Enum, SizeType>`(C++).
+           #[doc = #doc]
         }
     };
 
