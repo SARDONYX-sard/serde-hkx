@@ -46,12 +46,13 @@ pub fn generate(class: &Class) -> syn::ItemStruct {
         #[derive(educe::Educe)]
         #[educe(Debug, Clone, Default, PartialEq)]
         pub struct #struct_name #lifetime {
-            /// - Represents a pointer on XML (`<hkobject name="#0001">`)
-            /// - [`Option::None`] => This class is `class in field`.(`<hkobject>`)
+            /// # Unique index for this class
+            /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
+            /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
             ///
             /// # Note
-            /// Not present in the binary or actual C++ field
-            pub __ptr_name_attr: Option<Pointer>,
+            /// Not present in the binary & Not exist actual C++ field.
+            pub __ptr: Option<Pointer>,
             #parent
             #(#fields,)*
         }

@@ -10,7 +10,9 @@ rust-version.workspace = true
 
 [dependencies]
 bitflags = "2.4" # To generate flags type
-educe = "0.6.0" # To support the `Default` trait implementation for huge fixed-size arrays.
+educe = { version = "0.6.0", features = [
+  "full",
+] } # To support the `Default` trait implementation for huge fixed-size arrays.
 havok_serde = { path = "../havok_serde" }
 havok_types = { path = "../havok_types" }
 num-derive = "0.4" # To serialize Enum & Flags

@@ -37,7 +37,7 @@ pub fn impl_serialize(class: &Class, class_map: &ClassMap) -> TokenStream {
                 fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
                     where S: __serde::ser::Serializer
                 {
-                    let class_meta = self.__ptr_name_attr.map(|name| (name, self.signature()));
+                    let class_meta = self.__ptr.map(|name| (name, self.signature()));
                     let mut serializer = __serializer.serialize_struct(#name, class_meta)?;
                     #(#fields)*
                     serializer.end()

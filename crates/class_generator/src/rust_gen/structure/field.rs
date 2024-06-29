@@ -63,9 +63,6 @@ pub(super) fn gen_field(member: &Member, class_name: &str) -> TokenStream {
         )),
     };
 
-    // let doc = field_doc_tokens(member);
-    let field_name = to_rust_field_ident(name);
-
     // `Default` implementations with huge sizes such as [0u8; 256] are not automatically supported, so use `educe` crate to define them.
     let default_attr = if *arrsize > 32 {
         let as_value = format!("[_; {arrsize}]"); // NOTE: need `serde_with`
@@ -98,15 +95,17 @@ pub(super) fn gen_field(member: &Member, class_name: &str) -> TokenStream {
         quote! {}
     };
 
+    let doc = field_doc_tokens(member);
+    let field_name = to_rust_field_ident(name);
     if *arrsize > 0 {
         quote! {
-            // #doc
+            #doc
             #default_attr
             pub #field_name: [#field_type; #arrsize]
         }
     } else {
         quote! {
-            // #doc
+            #doc
             pub #field_name: #field_type
         }
     }
@@ -117,53 +116,32 @@ pub(super) fn gen_field(member: &Member, class_name: &str) -> TokenStream {
 fn field_doc_tokens(member: &Member) -> TokenStream {
     let Member {
         name,
-        class_ref,
-        enum_ref,
         ctype,
-        vtype,
-        vsubtype,
         offset_x86,
         offset_x86_64,
         type_size_x86,
         type_size_x86_64,
-        arrsize,
         flags,
         ..
     } = member;
 
-    let name =             format!(" -                 name: `{name}`");
-    let class_ref = {
-        match class_ref {
-     Some(class_ref) => format!(" -            class_ref: `{class_ref}`"),
-                              _ => format!(" -            class_ref: `None`"),
+    let name =             format!(" -          name: `{name}`(ctype: `{ctype}`)");
+    let offsets =          format!(" -        offset: {offset_x86:3}(x86)/{offset_x86_64:3}(x86_64)");
+    let type_sizes =       format!(" -     type_size: {type_size_x86:3}(x86)/{type_size_x86_64:3}(x86_64)");
+    let flags_doc = match flags.bits() {
+        0 => quote! {},
+        _ => {
+            let doc =      format!(" -         flags: `{flags}`");
+            quote! { #[doc = #doc]}
         }
     };
-    let enum_ref = {
-        match enum_ref {
-      Some(enum_ref) => format!(" -             enum_ref: `{enum_ref}`"),
-            _ =>                   format!(" -             enum_ref: `None`"),
-        }
-    };
-    let ctype =            format!(" -                ctype: `{ctype}`");
-    let vtype =            format!(" -                vtype: `{vtype}`");
-    let vsubtype =         format!(" -             vsubtype: `{vsubtype}`");
-    let offset =           format!(" -               offset: {offset_x86:3}(x86)/{offset_x86_64:3}(x86_64)");
-    let type_size =        format!(" -            type_size: {type_size_x86:3}(x86)/{type_size_x86_64:3}(x86_64)");
-    let arrsize =          format!(" -              arrsize: {arrsize:3}");
-    let flags =            format!(" -                flags: `{flags}`");
 
     quote! {
         /// # C++ Info
         #[doc = #name]
-        #[doc = #class_ref]
-        #[doc = #enum_ref]
-        #[doc = #ctype]
-        #[doc = #vtype]
-        #[doc = #vsubtype]
-        #[doc = #offset]
-        #[doc = #type_size]
-        #[doc = #arrsize]
-        #[doc = #flags]
+        #[doc = #offsets]
+        #[doc = #type_sizes]
+        #flags_doc
         #[doc = ""]
     }
 }
