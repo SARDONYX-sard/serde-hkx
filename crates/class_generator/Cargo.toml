@@ -12,7 +12,6 @@ version.workspace = true
 
 [dependencies]
 bitflags = "2.4"                                                # To generate flags type
-convert_case = "0.6"                                            # Case Changer
 derive-new = "0.6"
 havok_types = { path = "../havok_types", features = ["serde"] }
 havok_types_derive = { path = "../havok_types_derive" }

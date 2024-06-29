@@ -4,7 +4,6 @@ mod gen_index;
 mod rust_gen;
 
 use crate::{cpp_info::Class, error::*};
-use convert_case::Casing as _;
 use indexmap::IndexMap;
 use snafu::OptionExt as _;
 use std::{fs, path::Path};
@@ -35,6 +34,7 @@ pub fn generate_havok_class<P: AsRef<Path>>(classes_json_dir: P, out_dir: P) -> 
     }
 
     for (class_name, class) in &class_map {
+        let class_name = format!("{class_name}_");
         let output_file = class_out_dir.join(format!("{class_name}.rs"));
         let output_file = output_file.to_string_lossy();
         tracing::debug!(?output_file);
@@ -43,14 +43,9 @@ pub fn generate_havok_class<P: AsRef<Path>>(classes_json_dir: P, out_dir: P) -> 
         std::fs::write(output_file.as_ref(), rust_code)?;
 
         class_index.push({
-            let mod_name = class_name.to_case(convert_case::Case::Snake);
-            let out_file = format!("/src/generated/{class_name}.rs");
-            let mod_name = syn::Ident::new(&mod_name, proc_macro2::Span::call_site());
-
+            let mod_name = quote::format_ident!("{class_name}");
             quote::quote! {
-                pub mod #mod_name {
-                    include!(concat!(env!("CARGO_MANIFEST_DIR"), #out_file));
-                }
+                pub mod #mod_name;
                 pub use #mod_name::*;
             }
         });
