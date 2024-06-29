@@ -39,7 +39,7 @@ pub fn generate(class: &Class) -> Vec<TokenStream> {
                     let item_enum = gen_enum(one_enum);
                     quote! { #item_enum }
                 };
-                enums.push(quote! { #item_enum });
+                enums.push(item_enum);
             }
             _ => panic!(
                 "Expected TYPE_ENUM|TYPE_FLAGS, but another type is mixed in. Got enum {name}(vtype: {vtype})"

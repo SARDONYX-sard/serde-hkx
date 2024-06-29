@@ -5,6 +5,9 @@ use crate::cpp_info::EnumItem;
 use proc_macro2::TokenStream;
 use quote::quote;
 
+/// # Note
+/// This function is a code generator for `TYPE_ENUM` but does not check for `TypeKind` since that
+/// is left to upstream functions.
 pub fn gen_enum(one_enum: &Enum) -> syn::ItemEnum {
     let Enum {
         name, enum_item, ..

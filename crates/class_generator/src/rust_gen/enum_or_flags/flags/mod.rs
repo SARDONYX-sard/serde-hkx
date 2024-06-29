@@ -4,8 +4,12 @@ use crate::cpp_info::{Enum, EnumItem, TypeKind};
 use proc_macro2::TokenStream;
 use quote::quote;
 
+/// # Note
+/// This function is a code generator for `TYPE_FLAGS` or `TYPE_ENUM` (`enum` with duplicate blood),
+/// but does not check for `TypeKind` since that is left to upstream functions.
 pub fn gen_flag(one_enum: &Enum) -> syn::Macro {
     let Enum {
+        vtype,
         vsubtype,
         enum_item,
         ..
@@ -20,16 +24,30 @@ pub fn gen_flag(one_enum: &Enum) -> syn::Macro {
         .map(|enum_item| gen_variant_token(enum_item, vsubtype))
         .collect();
 
+    let doc = if *vtype == TypeKind::Enum {
+        quote! {
+           /// Bit flags that represented `enum hkEnum<Enum, SizeType>`(C++).
+           ///
+           /// # Why this `enum` defined as `bitflags`?
+           /// These are not really `TYPE_FLAGS` but `TYPE_ENUM`, but since Rust does not allow the definition of
+           /// `enum` with duplicate discriminant values, they are defined as `bitflags`.
+        }
+    } else {
+        quote! {
+           /// Bit flags that represented `enum hkFlags<Enum, SizeType>`(C++).
+        }
+    };
+
     // Check
     syn::parse_quote! {
         bitflags::bitflags! {
-            /// Bit flags that represented `enum hkFlags<Enum, SizeType>`(C++).
+            #doc
             #[allow(non_upper_case_globals, non_snake_case)]
             #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
             #[repr(transparent)]
             #[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Hash)]
             pub struct #enum_name: #size_ty {
-                #(const #variants;)*
+                #(#variants)*
             }
         }
     }
@@ -66,7 +84,7 @@ fn to_rust_storage_type(ty: &TypeKind) -> Option<TokenStream> {
 fn gen_variant_token(one_enum: &EnumItem, size_type: &TypeKind) -> TokenStream {
     let EnumItem { name, value } = one_enum;
     let name = syn::Ident::new(&name, proc_macro2::Span::call_site());
-    match size_type {
+    let variant_stmt = match size_type {
         TypeKind::Int8 => {
             let value = (*value) as i8;
             quote! { #name = #value }
@@ -100,5 +118,14 @@ fn gen_variant_token(one_enum: &EnumItem, size_type: &TypeKind) -> TokenStream {
             quote! { #name = #value }
         }
         _ => panic!("Unknown size type"),
+    };
+
+    // NOTE:
+    // flag is displayed as <layout-error> even if it is hovered and the value is unknown,
+    // so write the value in doc for ease of API use
+    let doc = format!("{value}");
+    quote! {
+        #[doc = #doc]
+        const #variant_stmt;
     }
 }
