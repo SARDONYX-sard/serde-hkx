@@ -79,7 +79,12 @@ pub fn impl_de_for_enum(one_enum: &Enum) -> TokenStream {
         // To define enum. e.g.  `__field1`, `__field2`, ...
         field_variants.push(field_variant);
     }
-    let expected_msg_in_visit_number = format!("value of variant is one of {}", values.join(", "));
+    let rust_storage_type = to_rust_storage_type(vsubtype)
+        .unwrap_or_else(|| panic!("Unsupported enum storage type: {vsubtype}"));
+    let expected_msg_in_visit_number = format!(
+        "value({rust_storage_type}) of variant is one of {}",
+        values.join(", ")
+    );
     let expecting = format!("enum {enum_name}"); // For `__Visitor`
 
     let storage_size_ident = to_rust_storage_size_ident(vsubtype)
