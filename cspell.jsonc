@@ -65,6 +65,7 @@
     "Uchar",
     "Ulong",
     "unexp",
+    "Uninit",
     "unparse",
     "vseed",
     "vsubtype",

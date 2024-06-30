@@ -45,12 +45,14 @@ mod lib {
     pub use self::core::option;
     pub use self::core::ptr;
     pub use self::core::result;
+    pub use self::core::slice;
 
     pub use self::core::cmp;
     pub use self::core::fmt;
     pub use self::core::fmt::Display;
     pub use self::core::marker::PhantomData;
     pub use self::core::mem;
+    pub use self::core::mem::MaybeUninit;
 
     #[cfg(not(feature = "std"))]
     pub use core::ffi::CStr;
