@@ -495,7 +495,7 @@ mod tests {
         );
 
         parse_peek_assert(
-            "EVENT_MOE_DEFAULT</hkparam>",
+            "EVENT_MODE_DEFAULT</hkparam>",
             ("</hkparam>", EventMode::EventModeDefault),
         );
 
