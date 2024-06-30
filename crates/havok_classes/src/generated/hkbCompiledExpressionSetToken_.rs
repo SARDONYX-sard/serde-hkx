@@ -274,3 +274,788 @@ const _: () = {
         }
     }
 };
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[allow(unused_extern_crates, clippy::useless_attribute)]
+    extern crate havok_serde as _serde;
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for TokenType {
+        fn deserialize<__D>(
+            __deserializer: __D,
+        ) -> _serde::__private::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            #[allow(non_camel_case_types)]
+            #[doc(hidden)]
+            enum __Field {
+                __field0,
+                __field1,
+                __field2,
+                __field3,
+                __field4,
+                __field5,
+                __field6,
+                __field7,
+            }
+            #[doc(hidden)]
+            struct __FieldVisitor;
+            impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+                type Value = __Field;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(
+                        __formatter,
+                        "variant identifier",
+                    )
+                }
+                fn visit_int8<__E>(
+                    self,
+                    __value: i8,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match __value {
+                        0i8 => _serde::__private::Ok(__Field::__field0),
+                        1i8 => _serde::__private::Ok(__Field::__field1),
+                        2i8 => _serde::__private::Ok(__Field::__field2),
+                        3i8 => _serde::__private::Ok(__Field::__field3),
+                        4i8 => _serde::__private::Ok(__Field::__field4),
+                        5i8 => _serde::__private::Ok(__Field::__field5),
+                        6i8 => _serde::__private::Ok(__Field::__field6),
+                        7i8 => _serde::__private::Ok(__Field::__field7),
+                        _ => {
+                            _serde::__private::Err(
+                                _serde::de::Error::invalid_value(
+                                    _serde::de::Unexpected::Int8(__value),
+                                    &"value(i8) of variant is one of 0, 1, 2, 3, 4, 5, 6, 7",
+                                ),
+                            )
+                        }
+                    }
+                }
+                fn visit_stringptr<__E>(
+                    self,
+                    __value: StringPtr<'de>,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    if let Some(__value) = __value.into_inner() {
+                        match __value.as_ref() {
+                            v if v == "0"
+                                || v.eq_ignore_ascii_case("TOKEN_TYPE_NONE") => {
+                                _serde::__private::Ok(__Field::__field0)
+                            }
+                            v if v == "1"
+                                || v.eq_ignore_ascii_case("TOKEN_TYPE_OPERATOR") => {
+                                _serde::__private::Ok(__Field::__field1)
+                            }
+                            v if v == "2"
+                                || v.eq_ignore_ascii_case("TOKEN_TYPE_NUMBER") => {
+                                _serde::__private::Ok(__Field::__field2)
+                            }
+                            v if v == "3"
+                                || v.eq_ignore_ascii_case("TOKEN_TYPE_VARIABLE_INDEX") => {
+                                _serde::__private::Ok(__Field::__field3)
+                            }
+                            v if v == "4"
+                                || v.eq_ignore_ascii_case("TOKEN_TYPE_OPENING_PAREN") => {
+                                _serde::__private::Ok(__Field::__field4)
+                            }
+                            v if v == "5"
+                                || v.eq_ignore_ascii_case("TOKEN_TYPE_CLOSING_PAREN") => {
+                                _serde::__private::Ok(__Field::__field5)
+                            }
+                            v if v == "6"
+                                || v.eq_ignore_ascii_case("TOKEN_TYPE_COMMA") => {
+                                _serde::__private::Ok(__Field::__field6)
+                            }
+                            v if v == "7"
+                                || v
+                                    .eq_ignore_ascii_case(
+                                        "TOKEN_TYPE_CHARACTER_PROPERTY_INDEX",
+                                    ) => _serde::__private::Ok(__Field::__field7),
+                            _ => {
+                                _serde::__private::Err(
+                                    _serde::de::Error::unknown_variant(&__value, VARIANTS),
+                                )
+                            }
+                        }
+                    } else {
+                        _serde::__private::Err(
+                            _serde::de::Error::unknown_variant("None", VARIANTS),
+                        )
+                    }
+                }
+            }
+            impl<'de> _serde::Deserialize<'de> for __Field {
+                #[inline]
+                fn deserialize<__D>(
+                    __deserializer: __D,
+                ) -> _serde::__private::Result<Self, __D::Error>
+                where
+                    __D: _serde::Deserializer<'de>,
+                {
+                    _serde::Deserializer::deserialize_identifier(
+                        __deserializer,
+                        __FieldVisitor,
+                    )
+                }
+            }
+            #[doc(hidden)]
+            struct __Visitor<'de> {
+                marker: _serde::__private::PhantomData<TokenType>,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            impl<'de> _serde::de::Visitor<'de> for __Visitor<'de> {
+                type Value = TokenType;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(
+                        __formatter,
+                        "enum TokenType",
+                    )
+                }
+                fn visit_enum<__A>(
+                    self,
+                    __data: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::EnumAccess<'de>,
+                {
+                    match _serde::de::EnumAccess::variant(__data)? {
+                        (__Field::__field0, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(TokenType::TOKEN_TYPE_NONE)
+                        }
+                        (__Field::__field1, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(TokenType::TOKEN_TYPE_OPERATOR)
+                        }
+                        (__Field::__field2, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(TokenType::TOKEN_TYPE_NUMBER)
+                        }
+                        (__Field::__field3, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(TokenType::TOKEN_TYPE_VARIABLE_INDEX)
+                        }
+                        (__Field::__field4, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(TokenType::TOKEN_TYPE_OPENING_PAREN)
+                        }
+                        (__Field::__field5, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(TokenType::TOKEN_TYPE_CLOSING_PAREN)
+                        }
+                        (__Field::__field6, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(TokenType::TOKEN_TYPE_COMMA)
+                        }
+                        (__Field::__field7, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(
+                                TokenType::TOKEN_TYPE_CHARACTER_PROPERTY_INDEX,
+                            )
+                        }
+                    }
+                }
+            }
+            #[doc(hidden)]
+            const VARIANTS: &'static [&'static str] = &[
+                "TOKEN_TYPE_NONE",
+                "TOKEN_TYPE_OPERATOR",
+                "TOKEN_TYPE_NUMBER",
+                "TOKEN_TYPE_VARIABLE_INDEX",
+                "TOKEN_TYPE_OPENING_PAREN",
+                "TOKEN_TYPE_CLOSING_PAREN",
+                "TOKEN_TYPE_COMMA",
+                "TOKEN_TYPE_CHARACTER_PROPERTY_INDEX",
+            ];
+            _serde::Deserializer::deserialize_enum(
+                __deserializer,
+                "TokenType",
+                VARIANTS,
+                _serde::de::ReadEnumSize::Int8,
+                __Visitor {
+                    marker: _serde::__private::PhantomData::<TokenType>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[allow(unused_extern_crates, clippy::useless_attribute)]
+    extern crate havok_serde as _serde;
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for Operator {
+        fn deserialize<__D>(
+            __deserializer: __D,
+        ) -> _serde::__private::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            #[allow(non_camel_case_types)]
+            #[doc(hidden)]
+            enum __Field {
+                __field0,
+                __field1,
+                __field2,
+                __field3,
+                __field4,
+                __field5,
+                __field6,
+                __field7,
+                __field8,
+                __field9,
+                __field10,
+                __field11,
+                __field12,
+                __field13,
+                __field14,
+                __field15,
+                __field16,
+                __field17,
+                __field18,
+                __field19,
+                __field20,
+                __field21,
+                __field22,
+                __field23,
+                __field24,
+                __field25,
+                __field26,
+                __field27,
+                __field28,
+                __field29,
+                __field30,
+                __field31,
+                __field32,
+                __field33,
+                __field34,
+                __field35,
+                __field36,
+                __field37,
+                __field38,
+                __field39,
+                __field40,
+                __field41,
+                __field42,
+                __field43,
+            }
+            #[doc(hidden)]
+            struct __FieldVisitor;
+            impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+                type Value = __Field;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(
+                        __formatter,
+                        "variant identifier",
+                    )
+                }
+                fn visit_int8<__E>(
+                    self,
+                    __value: i8,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match __value {
+                        0i8 => _serde::__private::Ok(__Field::__field0),
+                        1i8 => _serde::__private::Ok(__Field::__field1),
+                        2i8 => _serde::__private::Ok(__Field::__field2),
+                        3i8 => _serde::__private::Ok(__Field::__field3),
+                        4i8 => _serde::__private::Ok(__Field::__field4),
+                        5i8 => _serde::__private::Ok(__Field::__field5),
+                        6i8 => _serde::__private::Ok(__Field::__field6),
+                        7i8 => _serde::__private::Ok(__Field::__field7),
+                        8i8 => _serde::__private::Ok(__Field::__field8),
+                        9i8 => _serde::__private::Ok(__Field::__field9),
+                        10i8 => _serde::__private::Ok(__Field::__field10),
+                        11i8 => _serde::__private::Ok(__Field::__field11),
+                        12i8 => _serde::__private::Ok(__Field::__field12),
+                        13i8 => _serde::__private::Ok(__Field::__field13),
+                        14i8 => _serde::__private::Ok(__Field::__field14),
+                        15i8 => _serde::__private::Ok(__Field::__field15),
+                        16i8 => _serde::__private::Ok(__Field::__field16),
+                        17i8 => _serde::__private::Ok(__Field::__field17),
+                        18i8 => _serde::__private::Ok(__Field::__field18),
+                        19i8 => _serde::__private::Ok(__Field::__field19),
+                        20i8 => _serde::__private::Ok(__Field::__field20),
+                        21i8 => _serde::__private::Ok(__Field::__field21),
+                        22i8 => _serde::__private::Ok(__Field::__field22),
+                        23i8 => _serde::__private::Ok(__Field::__field23),
+                        24i8 => _serde::__private::Ok(__Field::__field24),
+                        25i8 => _serde::__private::Ok(__Field::__field25),
+                        26i8 => _serde::__private::Ok(__Field::__field26),
+                        27i8 => _serde::__private::Ok(__Field::__field27),
+                        28i8 => _serde::__private::Ok(__Field::__field28),
+                        29i8 => _serde::__private::Ok(__Field::__field29),
+                        30i8 => _serde::__private::Ok(__Field::__field30),
+                        31i8 => _serde::__private::Ok(__Field::__field31),
+                        32i8 => _serde::__private::Ok(__Field::__field32),
+                        33i8 => _serde::__private::Ok(__Field::__field33),
+                        34i8 => _serde::__private::Ok(__Field::__field34),
+                        35i8 => _serde::__private::Ok(__Field::__field35),
+                        36i8 => _serde::__private::Ok(__Field::__field36),
+                        37i8 => _serde::__private::Ok(__Field::__field37),
+                        38i8 => _serde::__private::Ok(__Field::__field38),
+                        39i8 => _serde::__private::Ok(__Field::__field39),
+                        40i8 => _serde::__private::Ok(__Field::__field40),
+                        41i8 => _serde::__private::Ok(__Field::__field41),
+                        42i8 => _serde::__private::Ok(__Field::__field42),
+                        43i8 => _serde::__private::Ok(__Field::__field43),
+                        _ => {
+                            _serde::__private::Err(
+                                _serde::de::Error::invalid_value(
+                                    _serde::de::Unexpected::Int8(__value),
+                                    &"value(i8) of variant is one of 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43",
+                                ),
+                            )
+                        }
+                    }
+                }
+                fn visit_stringptr<__E>(
+                    self,
+                    __value: StringPtr<'de>,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    if let Some(__value) = __value.into_inner() {
+                        match __value.as_ref() {
+                            v if v == "0" || v.eq_ignore_ascii_case("OP_NOP") => {
+                                _serde::__private::Ok(__Field::__field0)
+                            }
+                            v if v == "1" || v.eq_ignore_ascii_case("OP_RAND01") => {
+                                _serde::__private::Ok(__Field::__field1)
+                            }
+                            v if v == "2" || v.eq_ignore_ascii_case("OP_LOGICAL_NOT") => {
+                                _serde::__private::Ok(__Field::__field2)
+                            }
+                            v if v == "3" || v.eq_ignore_ascii_case("OP_UNARY_MINUS") => {
+                                _serde::__private::Ok(__Field::__field3)
+                            }
+                            v if v == "4" || v.eq_ignore_ascii_case("OP_UNARY_PLUS") => {
+                                _serde::__private::Ok(__Field::__field4)
+                            }
+                            v if v == "5" || v.eq_ignore_ascii_case("OP_SIN") => {
+                                _serde::__private::Ok(__Field::__field5)
+                            }
+                            v if v == "6" || v.eq_ignore_ascii_case("OP_COS") => {
+                                _serde::__private::Ok(__Field::__field6)
+                            }
+                            v if v == "7" || v.eq_ignore_ascii_case("OP_ASIN") => {
+                                _serde::__private::Ok(__Field::__field7)
+                            }
+                            v if v == "8" || v.eq_ignore_ascii_case("OP_ACOS") => {
+                                _serde::__private::Ok(__Field::__field8)
+                            }
+                            v if v == "9" || v.eq_ignore_ascii_case("OP_SQRT") => {
+                                _serde::__private::Ok(__Field::__field9)
+                            }
+                            v if v == "10" || v.eq_ignore_ascii_case("OP_FABS") => {
+                                _serde::__private::Ok(__Field::__field10)
+                            }
+                            v if v == "11" || v.eq_ignore_ascii_case("OP_CEIL") => {
+                                _serde::__private::Ok(__Field::__field11)
+                            }
+                            v if v == "12" || v.eq_ignore_ascii_case("OP_FLOOR") => {
+                                _serde::__private::Ok(__Field::__field12)
+                            }
+                            v if v == "13" || v.eq_ignore_ascii_case("OP_SQRTINV") => {
+                                _serde::__private::Ok(__Field::__field13)
+                            }
+                            v if v == "14" || v.eq_ignore_ascii_case("OP_MUL") => {
+                                _serde::__private::Ok(__Field::__field14)
+                            }
+                            v if v == "15" || v.eq_ignore_ascii_case("OP_DIV") => {
+                                _serde::__private::Ok(__Field::__field15)
+                            }
+                            v if v == "16" || v.eq_ignore_ascii_case("OP_ADD") => {
+                                _serde::__private::Ok(__Field::__field16)
+                            }
+                            v if v == "17" || v.eq_ignore_ascii_case("OP_SUB") => {
+                                _serde::__private::Ok(__Field::__field17)
+                            }
+                            v if v == "18" || v.eq_ignore_ascii_case("OP_LOGICAL_OR") => {
+                                _serde::__private::Ok(__Field::__field18)
+                            }
+                            v if v == "19"
+                                || v.eq_ignore_ascii_case("OP_LOGICAL_AND") => {
+                                _serde::__private::Ok(__Field::__field19)
+                            }
+                            v if v == "20" || v.eq_ignore_ascii_case("OP_EQ") => {
+                                _serde::__private::Ok(__Field::__field20)
+                            }
+                            v if v == "21" || v.eq_ignore_ascii_case("OP_NEQ") => {
+                                _serde::__private::Ok(__Field::__field21)
+                            }
+                            v if v == "22" || v.eq_ignore_ascii_case("OP_LT") => {
+                                _serde::__private::Ok(__Field::__field22)
+                            }
+                            v if v == "23" || v.eq_ignore_ascii_case("OP_GT") => {
+                                _serde::__private::Ok(__Field::__field23)
+                            }
+                            v if v == "24" || v.eq_ignore_ascii_case("OP_LEQ") => {
+                                _serde::__private::Ok(__Field::__field24)
+                            }
+                            v if v == "25" || v.eq_ignore_ascii_case("OP_GEQ") => {
+                                _serde::__private::Ok(__Field::__field25)
+                            }
+                            v if v == "26" || v.eq_ignore_ascii_case("OP_POW") => {
+                                _serde::__private::Ok(__Field::__field26)
+                            }
+                            v if v == "27" || v.eq_ignore_ascii_case("OP_MAX2") => {
+                                _serde::__private::Ok(__Field::__field27)
+                            }
+                            v if v == "28" || v.eq_ignore_ascii_case("OP_MIN2") => {
+                                _serde::__private::Ok(__Field::__field28)
+                            }
+                            v if v == "29" || v.eq_ignore_ascii_case("OP_RANDRANGE") => {
+                                _serde::__private::Ok(__Field::__field29)
+                            }
+                            v if v == "30"
+                                || v.eq_ignore_ascii_case("OP_ATAN2APPROX") => {
+                                _serde::__private::Ok(__Field::__field30)
+                            }
+                            v if v == "31" || v.eq_ignore_ascii_case("OP_CLAMP") => {
+                                _serde::__private::Ok(__Field::__field31)
+                            }
+                            v if v == "32" || v.eq_ignore_ascii_case("OP_MOD") => {
+                                _serde::__private::Ok(__Field::__field32)
+                            }
+                            v if v == "33" || v.eq_ignore_ascii_case("OP_DEG2RAD") => {
+                                _serde::__private::Ok(__Field::__field33)
+                            }
+                            v if v == "34" || v.eq_ignore_ascii_case("OP_RAD2DEG") => {
+                                _serde::__private::Ok(__Field::__field34)
+                            }
+                            v if v == "35" || v.eq_ignore_ascii_case("OP_COSD") => {
+                                _serde::__private::Ok(__Field::__field35)
+                            }
+                            v if v == "36" || v.eq_ignore_ascii_case("OP_SIND") => {
+                                _serde::__private::Ok(__Field::__field36)
+                            }
+                            v if v == "37" || v.eq_ignore_ascii_case("OP_ACOSD") => {
+                                _serde::__private::Ok(__Field::__field37)
+                            }
+                            v if v == "38" || v.eq_ignore_ascii_case("OP_ASIND") => {
+                                _serde::__private::Ok(__Field::__field38)
+                            }
+                            v if v == "39"
+                                || v.eq_ignore_ascii_case("OP_ATAN2APPROXD") => {
+                                _serde::__private::Ok(__Field::__field39)
+                            }
+                            v if v == "40" || v.eq_ignore_ascii_case("OP_SIGN") => {
+                                _serde::__private::Ok(__Field::__field40)
+                            }
+                            v if v == "41" || v.eq_ignore_ascii_case("OP_LERP") => {
+                                _serde::__private::Ok(__Field::__field41)
+                            }
+                            v if v == "42" || v.eq_ignore_ascii_case("OP_CLERP") => {
+                                _serde::__private::Ok(__Field::__field42)
+                            }
+                            v if v == "43" || v.eq_ignore_ascii_case("OP_COND") => {
+                                _serde::__private::Ok(__Field::__field43)
+                            }
+                            _ => {
+                                _serde::__private::Err(
+                                    _serde::de::Error::unknown_variant(&__value, VARIANTS),
+                                )
+                            }
+                        }
+                    } else {
+                        _serde::__private::Err(
+                            _serde::de::Error::unknown_variant("None", VARIANTS),
+                        )
+                    }
+                }
+            }
+            impl<'de> _serde::Deserialize<'de> for __Field {
+                #[inline]
+                fn deserialize<__D>(
+                    __deserializer: __D,
+                ) -> _serde::__private::Result<Self, __D::Error>
+                where
+                    __D: _serde::Deserializer<'de>,
+                {
+                    _serde::Deserializer::deserialize_identifier(
+                        __deserializer,
+                        __FieldVisitor,
+                    )
+                }
+            }
+            #[doc(hidden)]
+            struct __Visitor<'de> {
+                marker: _serde::__private::PhantomData<Operator>,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            impl<'de> _serde::de::Visitor<'de> for __Visitor<'de> {
+                type Value = Operator;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(__formatter, "enum Operator")
+                }
+                fn visit_enum<__A>(
+                    self,
+                    __data: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::EnumAccess<'de>,
+                {
+                    match _serde::de::EnumAccess::variant(__data)? {
+                        (__Field::__field0, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_NOP)
+                        }
+                        (__Field::__field1, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_RAND01)
+                        }
+                        (__Field::__field2, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_LOGICAL_NOT)
+                        }
+                        (__Field::__field3, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_UNARY_MINUS)
+                        }
+                        (__Field::__field4, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_UNARY_PLUS)
+                        }
+                        (__Field::__field5, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_SIN)
+                        }
+                        (__Field::__field6, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_COS)
+                        }
+                        (__Field::__field7, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_ASIN)
+                        }
+                        (__Field::__field8, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_ACOS)
+                        }
+                        (__Field::__field9, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_SQRT)
+                        }
+                        (__Field::__field10, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_FABS)
+                        }
+                        (__Field::__field11, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_CEIL)
+                        }
+                        (__Field::__field12, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_FLOOR)
+                        }
+                        (__Field::__field13, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_SQRTINV)
+                        }
+                        (__Field::__field14, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_MUL)
+                        }
+                        (__Field::__field15, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_DIV)
+                        }
+                        (__Field::__field16, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_ADD)
+                        }
+                        (__Field::__field17, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_SUB)
+                        }
+                        (__Field::__field18, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_LOGICAL_OR)
+                        }
+                        (__Field::__field19, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_LOGICAL_AND)
+                        }
+                        (__Field::__field20, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_EQ)
+                        }
+                        (__Field::__field21, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_NEQ)
+                        }
+                        (__Field::__field22, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_LT)
+                        }
+                        (__Field::__field23, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_GT)
+                        }
+                        (__Field::__field24, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_LEQ)
+                        }
+                        (__Field::__field25, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_GEQ)
+                        }
+                        (__Field::__field26, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_POW)
+                        }
+                        (__Field::__field27, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_MAX2)
+                        }
+                        (__Field::__field28, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_MIN2)
+                        }
+                        (__Field::__field29, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_RANDRANGE)
+                        }
+                        (__Field::__field30, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_ATAN2APPROX)
+                        }
+                        (__Field::__field31, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_CLAMP)
+                        }
+                        (__Field::__field32, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_MOD)
+                        }
+                        (__Field::__field33, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_DEG2RAD)
+                        }
+                        (__Field::__field34, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_RAD2DEG)
+                        }
+                        (__Field::__field35, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_COSD)
+                        }
+                        (__Field::__field36, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_SIND)
+                        }
+                        (__Field::__field37, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_ACOSD)
+                        }
+                        (__Field::__field38, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_ASIND)
+                        }
+                        (__Field::__field39, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_ATAN2APPROXD)
+                        }
+                        (__Field::__field40, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_SIGN)
+                        }
+                        (__Field::__field41, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_LERP)
+                        }
+                        (__Field::__field42, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_CLERP)
+                        }
+                        (__Field::__field43, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(Operator::OP_COND)
+                        }
+                    }
+                }
+            }
+            #[doc(hidden)]
+            const VARIANTS: &'static [&'static str] = &[
+                "OP_NOP",
+                "OP_RAND01",
+                "OP_LOGICAL_NOT",
+                "OP_UNARY_MINUS",
+                "OP_UNARY_PLUS",
+                "OP_SIN",
+                "OP_COS",
+                "OP_ASIN",
+                "OP_ACOS",
+                "OP_SQRT",
+                "OP_FABS",
+                "OP_CEIL",
+                "OP_FLOOR",
+                "OP_SQRTINV",
+                "OP_MUL",
+                "OP_DIV",
+                "OP_ADD",
+                "OP_SUB",
+                "OP_LOGICAL_OR",
+                "OP_LOGICAL_AND",
+                "OP_EQ",
+                "OP_NEQ",
+                "OP_LT",
+                "OP_GT",
+                "OP_LEQ",
+                "OP_GEQ",
+                "OP_POW",
+                "OP_MAX2",
+                "OP_MIN2",
+                "OP_RANDRANGE",
+                "OP_ATAN2APPROX",
+                "OP_CLAMP",
+                "OP_MOD",
+                "OP_DEG2RAD",
+                "OP_RAD2DEG",
+                "OP_COSD",
+                "OP_SIND",
+                "OP_ACOSD",
+                "OP_ASIND",
+                "OP_ATAN2APPROXD",
+                "OP_SIGN",
+                "OP_LERP",
+                "OP_CLERP",
+                "OP_COND",
+            ];
+            _serde::Deserializer::deserialize_enum(
+                __deserializer,
+                "Operator",
+                VARIANTS,
+                _serde::de::ReadEnumSize::Int8,
+                __Visitor {
+                    marker: _serde::__private::PhantomData::<Operator>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};

@@ -176,3 +176,250 @@ const _: () = {
         }
     }
 };
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[allow(unused_extern_crates, clippy::useless_attribute)]
+    extern crate havok_serde as _serde;
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for NodeType {
+        fn deserialize<__D>(
+            __deserializer: __D,
+        ) -> _serde::__private::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            #[allow(non_camel_case_types)]
+            #[doc(hidden)]
+            enum __Field {
+                __field0,
+                __field1,
+                __field2,
+                __field3,
+                __field4,
+                __field5,
+                __field6,
+                __field7,
+                __field8,
+                __field9,
+                __field10,
+            }
+            #[doc(hidden)]
+            struct __FieldVisitor;
+            impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+                type Value = __Field;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(
+                        __formatter,
+                        "variant identifier",
+                    )
+                }
+                fn visit_uint8<__E>(
+                    self,
+                    __value: u8,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match __value {
+                        0u8 => _serde::__private::Ok(__Field::__field0),
+                        1u8 => _serde::__private::Ok(__Field::__field1),
+                        2u8 => _serde::__private::Ok(__Field::__field2),
+                        3u8 => _serde::__private::Ok(__Field::__field3),
+                        4u8 => _serde::__private::Ok(__Field::__field4),
+                        5u8 => _serde::__private::Ok(__Field::__field5),
+                        6u8 => _serde::__private::Ok(__Field::__field6),
+                        7u8 => _serde::__private::Ok(__Field::__field7),
+                        8u8 => _serde::__private::Ok(__Field::__field8),
+                        9u8 => _serde::__private::Ok(__Field::__field9),
+                        10u8 => _serde::__private::Ok(__Field::__field10),
+                        _ => {
+                            _serde::__private::Err(
+                                _serde::de::Error::invalid_value(
+                                    _serde::de::Unexpected::Uint8(__value),
+                                    &"value(u8) of variant is one of 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10",
+                                ),
+                            )
+                        }
+                    }
+                }
+                fn visit_stringptr<__E>(
+                    self,
+                    __value: StringPtr<'de>,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    if let Some(__value) = __value.into_inner() {
+                        match __value.as_ref() {
+                            v if v == "0"
+                                || v.eq_ignore_ascii_case("NODE_TYPE_UNKNOWN") => {
+                                _serde::__private::Ok(__Field::__field0)
+                            }
+                            v if v == "1" || v.eq_ignore_ascii_case("NODE_TYPE_NODE") => {
+                                _serde::__private::Ok(__Field::__field1)
+                            }
+                            v if v == "2"
+                                || v.eq_ignore_ascii_case("NODE_TYPE_TRANSITION") => {
+                                _serde::__private::Ok(__Field::__field2)
+                            }
+                            v if v == "3"
+                                || v
+                                    .eq_ignore_ascii_case("NODE_TYPE_WILDCARD_TRANSITION") => {
+                                _serde::__private::Ok(__Field::__field3)
+                            }
+                            v if v == "4"
+                                || v.eq_ignore_ascii_case("NODE_TYPE_STATE") => {
+                                _serde::__private::Ok(__Field::__field4)
+                            }
+                            v if v == "5"
+                                || v.eq_ignore_ascii_case("NODE_TYPE_STATE_MACHINE") => {
+                                _serde::__private::Ok(__Field::__field5)
+                            }
+                            v if v == "6"
+                                || v
+                                    .eq_ignore_ascii_case("NODE_TYPE_MODIFIER_GENERATOR") => {
+                                _serde::__private::Ok(__Field::__field6)
+                            }
+                            v if v == "7"
+                                || v.eq_ignore_ascii_case("NODE_TYPE_MODIFIER") => {
+                                _serde::__private::Ok(__Field::__field7)
+                            }
+                            v if v == "8" || v.eq_ignore_ascii_case("NODE_TYPE_CLIP") => {
+                                _serde::__private::Ok(__Field::__field8)
+                            }
+                            v if v == "9"
+                                || v.eq_ignore_ascii_case("NODE_TYPE_BLEND") => {
+                                _serde::__private::Ok(__Field::__field9)
+                            }
+                            v if v == "10"
+                                || v.eq_ignore_ascii_case("NODE_TYPE_TRANSITION_EFFECT") => {
+                                _serde::__private::Ok(__Field::__field10)
+                            }
+                            _ => {
+                                _serde::__private::Err(
+                                    _serde::de::Error::unknown_variant(&__value, VARIANTS),
+                                )
+                            }
+                        }
+                    } else {
+                        _serde::__private::Err(
+                            _serde::de::Error::unknown_variant("None", VARIANTS),
+                        )
+                    }
+                }
+            }
+            impl<'de> _serde::Deserialize<'de> for __Field {
+                #[inline]
+                fn deserialize<__D>(
+                    __deserializer: __D,
+                ) -> _serde::__private::Result<Self, __D::Error>
+                where
+                    __D: _serde::Deserializer<'de>,
+                {
+                    _serde::Deserializer::deserialize_identifier(
+                        __deserializer,
+                        __FieldVisitor,
+                    )
+                }
+            }
+            #[doc(hidden)]
+            struct __Visitor<'de> {
+                marker: _serde::__private::PhantomData<NodeType>,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            impl<'de> _serde::de::Visitor<'de> for __Visitor<'de> {
+                type Value = NodeType;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(__formatter, "enum NodeType")
+                }
+                fn visit_enum<__A>(
+                    self,
+                    __data: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::EnumAccess<'de>,
+                {
+                    match _serde::de::EnumAccess::variant(__data)? {
+                        (__Field::__field0, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(NodeType::NODE_TYPE_UNKNOWN)
+                        }
+                        (__Field::__field1, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(NodeType::NODE_TYPE_NODE)
+                        }
+                        (__Field::__field2, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(NodeType::NODE_TYPE_TRANSITION)
+                        }
+                        (__Field::__field3, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(
+                                NodeType::NODE_TYPE_WILDCARD_TRANSITION,
+                            )
+                        }
+                        (__Field::__field4, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(NodeType::NODE_TYPE_STATE)
+                        }
+                        (__Field::__field5, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(NodeType::NODE_TYPE_STATE_MACHINE)
+                        }
+                        (__Field::__field6, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(NodeType::NODE_TYPE_MODIFIER_GENERATOR)
+                        }
+                        (__Field::__field7, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(NodeType::NODE_TYPE_MODIFIER)
+                        }
+                        (__Field::__field8, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(NodeType::NODE_TYPE_CLIP)
+                        }
+                        (__Field::__field9, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(NodeType::NODE_TYPE_BLEND)
+                        }
+                        (__Field::__field10, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(NodeType::NODE_TYPE_TRANSITION_EFFECT)
+                        }
+                    }
+                }
+            }
+            #[doc(hidden)]
+            const VARIANTS: &'static [&'static str] = &[
+                "NODE_TYPE_UNKNOWN",
+                "NODE_TYPE_NODE",
+                "NODE_TYPE_TRANSITION",
+                "NODE_TYPE_WILDCARD_TRANSITION",
+                "NODE_TYPE_STATE",
+                "NODE_TYPE_STATE_MACHINE",
+                "NODE_TYPE_MODIFIER_GENERATOR",
+                "NODE_TYPE_MODIFIER",
+                "NODE_TYPE_CLIP",
+                "NODE_TYPE_BLEND",
+                "NODE_TYPE_TRANSITION_EFFECT",
+            ];
+            _serde::Deserializer::deserialize_enum(
+                __deserializer,
+                "NodeType",
+                VARIANTS,
+                _serde::de::ReadEnumSize::Uint8,
+                __Visitor {
+                    marker: _serde::__private::PhantomData::<NodeType>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};

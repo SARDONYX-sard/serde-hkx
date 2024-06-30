@@ -802,3 +802,676 @@ const _: () = {
         }
     }
 };
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[allow(unused_extern_crates, clippy::useless_attribute)]
+    extern crate havok_serde as _serde;
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for SimulationType {
+        fn deserialize<__D>(
+            __deserializer: __D,
+        ) -> _serde::__private::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            #[allow(non_camel_case_types)]
+            #[doc(hidden)]
+            enum __Field {
+                __field0,
+                __field1,
+                __field2,
+                __field3,
+            }
+            #[doc(hidden)]
+            struct __FieldVisitor;
+            impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+                type Value = __Field;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(
+                        __formatter,
+                        "variant identifier",
+                    )
+                }
+                fn visit_int8<__E>(
+                    self,
+                    __value: i8,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match __value {
+                        0i8 => _serde::__private::Ok(__Field::__field0),
+                        1i8 => _serde::__private::Ok(__Field::__field1),
+                        2i8 => _serde::__private::Ok(__Field::__field2),
+                        3i8 => _serde::__private::Ok(__Field::__field3),
+                        _ => {
+                            _serde::__private::Err(
+                                _serde::de::Error::invalid_value(
+                                    _serde::de::Unexpected::Int8(__value),
+                                    &"value(i8) of variant is one of 0, 1, 2, 3",
+                                ),
+                            )
+                        }
+                    }
+                }
+                fn visit_stringptr<__E>(
+                    self,
+                    __value: StringPtr<'de>,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    if let Some(__value) = __value.into_inner() {
+                        match __value.as_ref() {
+                            v if v == "0"
+                                || v.eq_ignore_ascii_case("SIMULATION_TYPE_INVALID") => {
+                                _serde::__private::Ok(__Field::__field0)
+                            }
+                            v if v == "1"
+                                || v.eq_ignore_ascii_case("SIMULATION_TYPE_DISCRETE") => {
+                                _serde::__private::Ok(__Field::__field1)
+                            }
+                            v if v == "2"
+                                || v.eq_ignore_ascii_case("SIMULATION_TYPE_CONTINUOUS") => {
+                                _serde::__private::Ok(__Field::__field2)
+                            }
+                            v if v == "3"
+                                || v
+                                    .eq_ignore_ascii_case("SIMULATION_TYPE_MULTITHREADED") => {
+                                _serde::__private::Ok(__Field::__field3)
+                            }
+                            _ => {
+                                _serde::__private::Err(
+                                    _serde::de::Error::unknown_variant(&__value, VARIANTS),
+                                )
+                            }
+                        }
+                    } else {
+                        _serde::__private::Err(
+                            _serde::de::Error::unknown_variant("None", VARIANTS),
+                        )
+                    }
+                }
+            }
+            impl<'de> _serde::Deserialize<'de> for __Field {
+                #[inline]
+                fn deserialize<__D>(
+                    __deserializer: __D,
+                ) -> _serde::__private::Result<Self, __D::Error>
+                where
+                    __D: _serde::Deserializer<'de>,
+                {
+                    _serde::Deserializer::deserialize_identifier(
+                        __deserializer,
+                        __FieldVisitor,
+                    )
+                }
+            }
+            #[doc(hidden)]
+            struct __Visitor<'de> {
+                marker: _serde::__private::PhantomData<SimulationType>,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            impl<'de> _serde::de::Visitor<'de> for __Visitor<'de> {
+                type Value = SimulationType;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(
+                        __formatter,
+                        "enum SimulationType",
+                    )
+                }
+                fn visit_enum<__A>(
+                    self,
+                    __data: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::EnumAccess<'de>,
+                {
+                    match _serde::de::EnumAccess::variant(__data)? {
+                        (__Field::__field0, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(
+                                SimulationType::SIMULATION_TYPE_INVALID,
+                            )
+                        }
+                        (__Field::__field1, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(
+                                SimulationType::SIMULATION_TYPE_DISCRETE,
+                            )
+                        }
+                        (__Field::__field2, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(
+                                SimulationType::SIMULATION_TYPE_CONTINUOUS,
+                            )
+                        }
+                        (__Field::__field3, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(
+                                SimulationType::SIMULATION_TYPE_MULTITHREADED,
+                            )
+                        }
+                    }
+                }
+            }
+            #[doc(hidden)]
+            const VARIANTS: &'static [&'static str] = &[
+                "SIMULATION_TYPE_INVALID",
+                "SIMULATION_TYPE_DISCRETE",
+                "SIMULATION_TYPE_CONTINUOUS",
+                "SIMULATION_TYPE_MULTITHREADED",
+            ];
+            _serde::Deserializer::deserialize_enum(
+                __deserializer,
+                "SimulationType",
+                VARIANTS,
+                _serde::de::ReadEnumSize::Int8,
+                __Visitor {
+                    marker: _serde::__private::PhantomData::<SimulationType>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[allow(unused_extern_crates, clippy::useless_attribute)]
+    extern crate havok_serde as _serde;
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for ContactPointGeneration {
+        fn deserialize<__D>(
+            __deserializer: __D,
+        ) -> _serde::__private::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            #[allow(non_camel_case_types)]
+            #[doc(hidden)]
+            enum __Field {
+                __field0,
+                __field1,
+                __field2,
+            }
+            #[doc(hidden)]
+            struct __FieldVisitor;
+            impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+                type Value = __Field;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(
+                        __formatter,
+                        "variant identifier",
+                    )
+                }
+                fn visit_int8<__E>(
+                    self,
+                    __value: i8,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match __value {
+                        0i8 => _serde::__private::Ok(__Field::__field0),
+                        1i8 => _serde::__private::Ok(__Field::__field1),
+                        2i8 => _serde::__private::Ok(__Field::__field2),
+                        _ => {
+                            _serde::__private::Err(
+                                _serde::de::Error::invalid_value(
+                                    _serde::de::Unexpected::Int8(__value),
+                                    &"value(i8) of variant is one of 0, 1, 2",
+                                ),
+                            )
+                        }
+                    }
+                }
+                fn visit_stringptr<__E>(
+                    self,
+                    __value: StringPtr<'de>,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    if let Some(__value) = __value.into_inner() {
+                        match __value.as_ref() {
+                            v if v == "0"
+                                || v.eq_ignore_ascii_case("CONTACT_POINT_ACCEPT_ALWAYS") => {
+                                _serde::__private::Ok(__Field::__field0)
+                            }
+                            v if v == "1"
+                                || v
+                                    .eq_ignore_ascii_case("CONTACT_POINT_REJECT_DUBIOUS") => {
+                                _serde::__private::Ok(__Field::__field1)
+                            }
+                            v if v == "2"
+                                || v.eq_ignore_ascii_case("CONTACT_POINT_REJECT_MANY") => {
+                                _serde::__private::Ok(__Field::__field2)
+                            }
+                            _ => {
+                                _serde::__private::Err(
+                                    _serde::de::Error::unknown_variant(&__value, VARIANTS),
+                                )
+                            }
+                        }
+                    } else {
+                        _serde::__private::Err(
+                            _serde::de::Error::unknown_variant("None", VARIANTS),
+                        )
+                    }
+                }
+            }
+            impl<'de> _serde::Deserialize<'de> for __Field {
+                #[inline]
+                fn deserialize<__D>(
+                    __deserializer: __D,
+                ) -> _serde::__private::Result<Self, __D::Error>
+                where
+                    __D: _serde::Deserializer<'de>,
+                {
+                    _serde::Deserializer::deserialize_identifier(
+                        __deserializer,
+                        __FieldVisitor,
+                    )
+                }
+            }
+            #[doc(hidden)]
+            struct __Visitor<'de> {
+                marker: _serde::__private::PhantomData<ContactPointGeneration>,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            impl<'de> _serde::de::Visitor<'de> for __Visitor<'de> {
+                type Value = ContactPointGeneration;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(
+                        __formatter,
+                        "enum ContactPointGeneration",
+                    )
+                }
+                fn visit_enum<__A>(
+                    self,
+                    __data: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::EnumAccess<'de>,
+                {
+                    match _serde::de::EnumAccess::variant(__data)? {
+                        (__Field::__field0, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(
+                                ContactPointGeneration::CONTACT_POINT_ACCEPT_ALWAYS,
+                            )
+                        }
+                        (__Field::__field1, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(
+                                ContactPointGeneration::CONTACT_POINT_REJECT_DUBIOUS,
+                            )
+                        }
+                        (__Field::__field2, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(
+                                ContactPointGeneration::CONTACT_POINT_REJECT_MANY,
+                            )
+                        }
+                    }
+                }
+            }
+            #[doc(hidden)]
+            const VARIANTS: &'static [&'static str] = &[
+                "CONTACT_POINT_ACCEPT_ALWAYS",
+                "CONTACT_POINT_REJECT_DUBIOUS",
+                "CONTACT_POINT_REJECT_MANY",
+            ];
+            _serde::Deserializer::deserialize_enum(
+                __deserializer,
+                "ContactPointGeneration",
+                VARIANTS,
+                _serde::de::ReadEnumSize::Int8,
+                __Visitor {
+                    marker: _serde::__private::PhantomData::<ContactPointGeneration>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[allow(unused_extern_crates, clippy::useless_attribute)]
+    extern crate havok_serde as _serde;
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for BroadPhaseBorderBehaviour {
+        fn deserialize<__D>(
+            __deserializer: __D,
+        ) -> _serde::__private::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            #[allow(non_camel_case_types)]
+            #[doc(hidden)]
+            enum __Field {
+                __field0,
+                __field1,
+                __field2,
+                __field3,
+            }
+            #[doc(hidden)]
+            struct __FieldVisitor;
+            impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+                type Value = __Field;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(
+                        __formatter,
+                        "variant identifier",
+                    )
+                }
+                fn visit_int8<__E>(
+                    self,
+                    __value: i8,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match __value {
+                        0i8 => _serde::__private::Ok(__Field::__field0),
+                        1i8 => _serde::__private::Ok(__Field::__field1),
+                        2i8 => _serde::__private::Ok(__Field::__field2),
+                        3i8 => _serde::__private::Ok(__Field::__field3),
+                        _ => {
+                            _serde::__private::Err(
+                                _serde::de::Error::invalid_value(
+                                    _serde::de::Unexpected::Int8(__value),
+                                    &"value(i8) of variant is one of 0, 1, 2, 3",
+                                ),
+                            )
+                        }
+                    }
+                }
+                fn visit_stringptr<__E>(
+                    self,
+                    __value: StringPtr<'de>,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    if let Some(__value) = __value.into_inner() {
+                        match __value.as_ref() {
+                            v if v == "0"
+                                || v.eq_ignore_ascii_case("BROADPHASE_BORDER_ASSERT") => {
+                                _serde::__private::Ok(__Field::__field0)
+                            }
+                            v if v == "1"
+                                || v
+                                    .eq_ignore_ascii_case("BROADPHASE_BORDER_FIX_ENTITY") => {
+                                _serde::__private::Ok(__Field::__field1)
+                            }
+                            v if v == "2"
+                                || v
+                                    .eq_ignore_ascii_case("BROADPHASE_BORDER_REMOVE_ENTITY") => {
+                                _serde::__private::Ok(__Field::__field2)
+                            }
+                            v if v == "3"
+                                || v
+                                    .eq_ignore_ascii_case("BROADPHASE_BORDER_DO_NOTHING") => {
+                                _serde::__private::Ok(__Field::__field3)
+                            }
+                            _ => {
+                                _serde::__private::Err(
+                                    _serde::de::Error::unknown_variant(&__value, VARIANTS),
+                                )
+                            }
+                        }
+                    } else {
+                        _serde::__private::Err(
+                            _serde::de::Error::unknown_variant("None", VARIANTS),
+                        )
+                    }
+                }
+            }
+            impl<'de> _serde::Deserialize<'de> for __Field {
+                #[inline]
+                fn deserialize<__D>(
+                    __deserializer: __D,
+                ) -> _serde::__private::Result<Self, __D::Error>
+                where
+                    __D: _serde::Deserializer<'de>,
+                {
+                    _serde::Deserializer::deserialize_identifier(
+                        __deserializer,
+                        __FieldVisitor,
+                    )
+                }
+            }
+            #[doc(hidden)]
+            struct __Visitor<'de> {
+                marker: _serde::__private::PhantomData<BroadPhaseBorderBehaviour>,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            impl<'de> _serde::de::Visitor<'de> for __Visitor<'de> {
+                type Value = BroadPhaseBorderBehaviour;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(
+                        __formatter,
+                        "enum BroadPhaseBorderBehaviour",
+                    )
+                }
+                fn visit_enum<__A>(
+                    self,
+                    __data: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::EnumAccess<'de>,
+                {
+                    match _serde::de::EnumAccess::variant(__data)? {
+                        (__Field::__field0, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(
+                                BroadPhaseBorderBehaviour::BROADPHASE_BORDER_ASSERT,
+                            )
+                        }
+                        (__Field::__field1, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(
+                                BroadPhaseBorderBehaviour::BROADPHASE_BORDER_FIX_ENTITY,
+                            )
+                        }
+                        (__Field::__field2, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(
+                                BroadPhaseBorderBehaviour::BROADPHASE_BORDER_REMOVE_ENTITY,
+                            )
+                        }
+                        (__Field::__field3, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(
+                                BroadPhaseBorderBehaviour::BROADPHASE_BORDER_DO_NOTHING,
+                            )
+                        }
+                    }
+                }
+            }
+            #[doc(hidden)]
+            const VARIANTS: &'static [&'static str] = &[
+                "BROADPHASE_BORDER_ASSERT",
+                "BROADPHASE_BORDER_FIX_ENTITY",
+                "BROADPHASE_BORDER_REMOVE_ENTITY",
+                "BROADPHASE_BORDER_DO_NOTHING",
+            ];
+            _serde::Deserializer::deserialize_enum(
+                __deserializer,
+                "BroadPhaseBorderBehaviour",
+                VARIANTS,
+                _serde::de::ReadEnumSize::Int8,
+                __Visitor {
+                    marker: _serde::__private::PhantomData::<BroadPhaseBorderBehaviour>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[allow(unused_extern_crates, clippy::useless_attribute)]
+    extern crate havok_serde as _serde;
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for TreeUpdateType {
+        fn deserialize<__D>(
+            __deserializer: __D,
+        ) -> _serde::__private::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            #[allow(non_camel_case_types)]
+            #[doc(hidden)]
+            enum __Field {
+                __field0,
+                __field1,
+            }
+            #[doc(hidden)]
+            struct __FieldVisitor;
+            impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+                type Value = __Field;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(
+                        __formatter,
+                        "variant identifier",
+                    )
+                }
+                fn visit_int8<__E>(
+                    self,
+                    __value: i8,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match __value {
+                        0i8 => _serde::__private::Ok(__Field::__field0),
+                        1i8 => _serde::__private::Ok(__Field::__field1),
+                        _ => {
+                            _serde::__private::Err(
+                                _serde::de::Error::invalid_value(
+                                    _serde::de::Unexpected::Int8(__value),
+                                    &"value(i8) of variant is one of 0, 1",
+                                ),
+                            )
+                        }
+                    }
+                }
+                fn visit_stringptr<__E>(
+                    self,
+                    __value: StringPtr<'de>,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    if let Some(__value) = __value.into_inner() {
+                        match __value.as_ref() {
+                            v if v == "0" || v.eq_ignore_ascii_case("REBUILD_ACTIVE") => {
+                                _serde::__private::Ok(__Field::__field0)
+                            }
+                            v if v == "1" || v.eq_ignore_ascii_case("REBUILD_ALL") => {
+                                _serde::__private::Ok(__Field::__field1)
+                            }
+                            _ => {
+                                _serde::__private::Err(
+                                    _serde::de::Error::unknown_variant(&__value, VARIANTS),
+                                )
+                            }
+                        }
+                    } else {
+                        _serde::__private::Err(
+                            _serde::de::Error::unknown_variant("None", VARIANTS),
+                        )
+                    }
+                }
+            }
+            impl<'de> _serde::Deserialize<'de> for __Field {
+                #[inline]
+                fn deserialize<__D>(
+                    __deserializer: __D,
+                ) -> _serde::__private::Result<Self, __D::Error>
+                where
+                    __D: _serde::Deserializer<'de>,
+                {
+                    _serde::Deserializer::deserialize_identifier(
+                        __deserializer,
+                        __FieldVisitor,
+                    )
+                }
+            }
+            #[doc(hidden)]
+            struct __Visitor<'de> {
+                marker: _serde::__private::PhantomData<TreeUpdateType>,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            impl<'de> _serde::de::Visitor<'de> for __Visitor<'de> {
+                type Value = TreeUpdateType;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(
+                        __formatter,
+                        "enum TreeUpdateType",
+                    )
+                }
+                fn visit_enum<__A>(
+                    self,
+                    __data: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::EnumAccess<'de>,
+                {
+                    match _serde::de::EnumAccess::variant(__data)? {
+                        (__Field::__field0, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(TreeUpdateType::REBUILD_ACTIVE)
+                        }
+                        (__Field::__field1, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(TreeUpdateType::REBUILD_ALL)
+                        }
+                    }
+                }
+            }
+            #[doc(hidden)]
+            const VARIANTS: &'static [&'static str] = &["REBUILD_ACTIVE", "REBUILD_ALL"];
+            _serde::Deserializer::deserialize_enum(
+                __deserializer,
+                "TreeUpdateType",
+                VARIANTS,
+                _serde::de::ReadEnumSize::Int8,
+                __Visitor {
+                    marker: _serde::__private::PhantomData::<TreeUpdateType>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};

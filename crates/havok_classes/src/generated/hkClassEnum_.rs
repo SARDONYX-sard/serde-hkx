@@ -75,12 +75,13 @@ const _: () = {
         }
     }
 };
+#[havok_types_derive::impl_flags_methods]
 bitflags::bitflags! {
     #[doc = r" Bit flags that represented `enum hkFlags<Enum, SizeType>`(C++)."] #[doc =
     "- size(C++): `TYPE_UINT32`"] #[allow(non_upper_case_globals, non_snake_case)]
     #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-    #[repr(transparent)] #[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Hash)] pub
-    struct FlagValues : u32 { #[doc = "0"] const FLAGS_NONE = 0u32; }
+    #[repr(transparent)] #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)] pub struct
+    FlagValues : u32 { #[doc = "0"] const FLAGS_NONE = 0u32; }
 }
 const _: () = {
     use havok_serde as __serde;
@@ -107,6 +108,71 @@ const _: () = {
             }
             __serializer.serialize_bits(&self.bits())?;
             __serializer.end()
+        }
+    }
+};
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[allow(unused_extern_crates, clippy::useless_attribute)]
+    extern crate havok_serde as _serde;
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for FlagValues {
+        fn deserialize<__D>(
+            __deserializer: __D,
+        ) -> _serde::__private::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            #[doc(hidden)]
+            struct __Visitor<'de> {
+                marker: _serde::__private::PhantomData<FlagValues>,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            impl<'de> _serde::de::Visitor<'de> for __Visitor<'de> {
+                type Value = FlagValues;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(
+                        __formatter,
+                        "struct FlagValues(flags)",
+                    )
+                }
+                #[inline]
+                fn visit_uint32<__E>(
+                    self,
+                    __value: u32,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    Ok(FlagValues::from_bits_retain(__value as _))
+                }
+                fn visit_stringptr<__E>(
+                    self,
+                    __value: StringPtr<'de>,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match <FlagValues as core::str::FromStr>::from_str(
+                        __value.into_inner().unwrap().as_ref(),
+                    ) {
+                        Ok(flags) => Ok(flags),
+                        Err(err) => Err(_serde::de::Error::custom(err)),
+                    }
+                }
+            }
+            _serde::Deserializer::deserialize_flags(
+                __deserializer,
+                _serde::de::ReadEnumSize::Uint32,
+                __Visitor {
+                    marker: _serde::__private::PhantomData::<FlagValues>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
         }
     }
 };

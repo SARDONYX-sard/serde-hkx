@@ -208,12 +208,13 @@ const _: () = {
         }
     }
 };
+#[havok_types_derive::impl_flags_methods]
 bitflags::bitflags! {
     #[doc = r" Bit flags that represented `enum hkFlags<Enum, SizeType>`(C++)."] #[doc =
     "- size(C++): `TYPE_UINT16`"] #[allow(non_upper_case_globals, non_snake_case)]
     #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-    #[repr(transparent)] #[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Hash)] pub
-    struct FlagBits : u16 { #[doc = "0"] const FLAG_NONE = 0u16; #[doc = "1"] const
+    #[repr(transparent)] #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)] pub struct
+    FlagBits : u16 { #[doc = "0"] const FLAG_NONE = 0u16; #[doc = "1"] const
     FLAG_IGNORE_FROM_WORLD_FROM_MODEL = 1u16; #[doc = "2"] const FLAG_SYNC = 2u16; #[doc
     = "4"] const FLAG_IGNORE_TO_WORLD_FROM_MODEL = 4u16; }
 }
@@ -313,6 +314,233 @@ const _: () = {
             let num = self.to_i8().ok_or(S::Error::custom("Failed enum EndMode to_i8"))?;
             __serializer.serialize_bits(&num)?;
             __serializer.end()
+        }
+    }
+};
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[allow(unused_extern_crates, clippy::useless_attribute)]
+    extern crate havok_serde as _serde;
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for FlagBits {
+        fn deserialize<__D>(
+            __deserializer: __D,
+        ) -> _serde::__private::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            #[doc(hidden)]
+            struct __Visitor<'de> {
+                marker: _serde::__private::PhantomData<FlagBits>,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            impl<'de> _serde::de::Visitor<'de> for __Visitor<'de> {
+                type Value = FlagBits;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(
+                        __formatter,
+                        "struct FlagBits(flags)",
+                    )
+                }
+                #[inline]
+                fn visit_uint16<__E>(
+                    self,
+                    __value: u16,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    Ok(FlagBits::from_bits_retain(__value as _))
+                }
+                fn visit_stringptr<__E>(
+                    self,
+                    __value: StringPtr<'de>,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match <FlagBits as core::str::FromStr>::from_str(
+                        __value.into_inner().unwrap().as_ref(),
+                    ) {
+                        Ok(flags) => Ok(flags),
+                        Err(err) => Err(_serde::de::Error::custom(err)),
+                    }
+                }
+            }
+            _serde::Deserializer::deserialize_flags(
+                __deserializer,
+                _serde::de::ReadEnumSize::Uint16,
+                __Visitor {
+                    marker: _serde::__private::PhantomData::<FlagBits>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[allow(unused_extern_crates, clippy::useless_attribute)]
+    extern crate havok_serde as _serde;
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for EndMode {
+        fn deserialize<__D>(
+            __deserializer: __D,
+        ) -> _serde::__private::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            #[allow(non_camel_case_types)]
+            #[doc(hidden)]
+            enum __Field {
+                __field0,
+                __field1,
+                __field2,
+            }
+            #[doc(hidden)]
+            struct __FieldVisitor;
+            impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+                type Value = __Field;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(
+                        __formatter,
+                        "variant identifier",
+                    )
+                }
+                fn visit_int8<__E>(
+                    self,
+                    __value: i8,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match __value {
+                        0i8 => _serde::__private::Ok(__Field::__field0),
+                        1i8 => _serde::__private::Ok(__Field::__field1),
+                        2i8 => _serde::__private::Ok(__Field::__field2),
+                        _ => {
+                            _serde::__private::Err(
+                                _serde::de::Error::invalid_value(
+                                    _serde::de::Unexpected::Int8(__value),
+                                    &"value(i8) of variant is one of 0, 1, 2",
+                                ),
+                            )
+                        }
+                    }
+                }
+                fn visit_stringptr<__E>(
+                    self,
+                    __value: StringPtr<'de>,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    if let Some(__value) = __value.into_inner() {
+                        match __value.as_ref() {
+                            v if v == "0" || v.eq_ignore_ascii_case("END_MODE_NONE") => {
+                                _serde::__private::Ok(__Field::__field0)
+                            }
+                            v if v == "1"
+                                || v
+                                    .eq_ignore_ascii_case(
+                                        "END_MODE_TRANSITION_UNTIL_END_OF_FROM_GENERATOR",
+                                    ) => _serde::__private::Ok(__Field::__field1),
+                            v if v == "2"
+                                || v
+                                    .eq_ignore_ascii_case(
+                                        "END_MODE_CAP_DURATION_AT_END_OF_FROM_GENERATOR",
+                                    ) => _serde::__private::Ok(__Field::__field2),
+                            _ => {
+                                _serde::__private::Err(
+                                    _serde::de::Error::unknown_variant(&__value, VARIANTS),
+                                )
+                            }
+                        }
+                    } else {
+                        _serde::__private::Err(
+                            _serde::de::Error::unknown_variant("None", VARIANTS),
+                        )
+                    }
+                }
+            }
+            impl<'de> _serde::Deserialize<'de> for __Field {
+                #[inline]
+                fn deserialize<__D>(
+                    __deserializer: __D,
+                ) -> _serde::__private::Result<Self, __D::Error>
+                where
+                    __D: _serde::Deserializer<'de>,
+                {
+                    _serde::Deserializer::deserialize_identifier(
+                        __deserializer,
+                        __FieldVisitor,
+                    )
+                }
+            }
+            #[doc(hidden)]
+            struct __Visitor<'de> {
+                marker: _serde::__private::PhantomData<EndMode>,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            impl<'de> _serde::de::Visitor<'de> for __Visitor<'de> {
+                type Value = EndMode;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(__formatter, "enum EndMode")
+                }
+                fn visit_enum<__A>(
+                    self,
+                    __data: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::EnumAccess<'de>,
+                {
+                    match _serde::de::EnumAccess::variant(__data)? {
+                        (__Field::__field0, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(EndMode::END_MODE_NONE)
+                        }
+                        (__Field::__field1, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(
+                                EndMode::END_MODE_TRANSITION_UNTIL_END_OF_FROM_GENERATOR,
+                            )
+                        }
+                        (__Field::__field2, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(
+                                EndMode::END_MODE_CAP_DURATION_AT_END_OF_FROM_GENERATOR,
+                            )
+                        }
+                    }
+                }
+            }
+            #[doc(hidden)]
+            const VARIANTS: &'static [&'static str] = &[
+                "END_MODE_NONE",
+                "END_MODE_TRANSITION_UNTIL_END_OF_FROM_GENERATOR",
+                "END_MODE_CAP_DURATION_AT_END_OF_FROM_GENERATOR",
+            ];
+            _serde::Deserializer::deserialize_enum(
+                __deserializer,
+                "EndMode",
+                VARIANTS,
+                _serde::de::ReadEnumSize::Int8,
+                __Visitor {
+                    marker: _serde::__private::PhantomData::<EndMode>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
         }
     }
 };

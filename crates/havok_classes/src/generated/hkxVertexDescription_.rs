@@ -171,3 +171,410 @@ const _: () = {
         }
     }
 };
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[allow(unused_extern_crates, clippy::useless_attribute)]
+    extern crate havok_serde as _serde;
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for DataType {
+        fn deserialize<__D>(
+            __deserializer: __D,
+        ) -> _serde::__private::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            #[allow(non_camel_case_types)]
+            #[doc(hidden)]
+            enum __Field {
+                __field0,
+                __field1,
+                __field2,
+                __field3,
+                __field4,
+            }
+            #[doc(hidden)]
+            struct __FieldVisitor;
+            impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+                type Value = __Field;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(
+                        __formatter,
+                        "variant identifier",
+                    )
+                }
+                fn visit_uint16<__E>(
+                    self,
+                    __value: u16,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match __value {
+                        0u16 => _serde::__private::Ok(__Field::__field0),
+                        1u16 => _serde::__private::Ok(__Field::__field1),
+                        2u16 => _serde::__private::Ok(__Field::__field2),
+                        3u16 => _serde::__private::Ok(__Field::__field3),
+                        4u16 => _serde::__private::Ok(__Field::__field4),
+                        _ => {
+                            _serde::__private::Err(
+                                _serde::de::Error::invalid_value(
+                                    _serde::de::Unexpected::Uint16(__value),
+                                    &"value(u16) of variant is one of 0, 1, 2, 3, 4",
+                                ),
+                            )
+                        }
+                    }
+                }
+                fn visit_stringptr<__E>(
+                    self,
+                    __value: StringPtr<'de>,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    if let Some(__value) = __value.into_inner() {
+                        match __value.as_ref() {
+                            v if v == "0" || v.eq_ignore_ascii_case("HKX_DT_NONE") => {
+                                _serde::__private::Ok(__Field::__field0)
+                            }
+                            v if v == "1" || v.eq_ignore_ascii_case("HKX_DT_UINT8") => {
+                                _serde::__private::Ok(__Field::__field1)
+                            }
+                            v if v == "2" || v.eq_ignore_ascii_case("HKX_DT_INT16") => {
+                                _serde::__private::Ok(__Field::__field2)
+                            }
+                            v if v == "3" || v.eq_ignore_ascii_case("HKX_DT_UINT32") => {
+                                _serde::__private::Ok(__Field::__field3)
+                            }
+                            v if v == "4" || v.eq_ignore_ascii_case("HKX_DT_FLOAT") => {
+                                _serde::__private::Ok(__Field::__field4)
+                            }
+                            _ => {
+                                _serde::__private::Err(
+                                    _serde::de::Error::unknown_variant(&__value, VARIANTS),
+                                )
+                            }
+                        }
+                    } else {
+                        _serde::__private::Err(
+                            _serde::de::Error::unknown_variant("None", VARIANTS),
+                        )
+                    }
+                }
+            }
+            impl<'de> _serde::Deserialize<'de> for __Field {
+                #[inline]
+                fn deserialize<__D>(
+                    __deserializer: __D,
+                ) -> _serde::__private::Result<Self, __D::Error>
+                where
+                    __D: _serde::Deserializer<'de>,
+                {
+                    _serde::Deserializer::deserialize_identifier(
+                        __deserializer,
+                        __FieldVisitor,
+                    )
+                }
+            }
+            #[doc(hidden)]
+            struct __Visitor<'de> {
+                marker: _serde::__private::PhantomData<DataType>,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            impl<'de> _serde::de::Visitor<'de> for __Visitor<'de> {
+                type Value = DataType;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(__formatter, "enum DataType")
+                }
+                fn visit_enum<__A>(
+                    self,
+                    __data: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::EnumAccess<'de>,
+                {
+                    match _serde::de::EnumAccess::variant(__data)? {
+                        (__Field::__field0, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(DataType::HKX_DT_NONE)
+                        }
+                        (__Field::__field1, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(DataType::HKX_DT_UINT8)
+                        }
+                        (__Field::__field2, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(DataType::HKX_DT_INT16)
+                        }
+                        (__Field::__field3, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(DataType::HKX_DT_UINT32)
+                        }
+                        (__Field::__field4, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(DataType::HKX_DT_FLOAT)
+                        }
+                    }
+                }
+            }
+            #[doc(hidden)]
+            const VARIANTS: &'static [&'static str] = &[
+                "HKX_DT_NONE",
+                "HKX_DT_UINT8",
+                "HKX_DT_INT16",
+                "HKX_DT_UINT32",
+                "HKX_DT_FLOAT",
+            ];
+            _serde::Deserializer::deserialize_enum(
+                __deserializer,
+                "DataType",
+                VARIANTS,
+                _serde::de::ReadEnumSize::Uint16,
+                __Visitor {
+                    marker: _serde::__private::PhantomData::<DataType>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[allow(unused_extern_crates, clippy::useless_attribute)]
+    extern crate havok_serde as _serde;
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for DataUsage {
+        fn deserialize<__D>(
+            __deserializer: __D,
+        ) -> _serde::__private::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            #[allow(non_camel_case_types)]
+            #[doc(hidden)]
+            enum __Field {
+                __field0,
+                __field1,
+                __field2,
+                __field3,
+                __field4,
+                __field5,
+                __field6,
+                __field7,
+                __field8,
+                __field9,
+            }
+            #[doc(hidden)]
+            struct __FieldVisitor;
+            impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+                type Value = __Field;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(
+                        __formatter,
+                        "variant identifier",
+                    )
+                }
+                fn visit_uint16<__E>(
+                    self,
+                    __value: u16,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match __value {
+                        0u16 => _serde::__private::Ok(__Field::__field0),
+                        1u16 => _serde::__private::Ok(__Field::__field1),
+                        2u16 => _serde::__private::Ok(__Field::__field2),
+                        4u16 => _serde::__private::Ok(__Field::__field3),
+                        8u16 => _serde::__private::Ok(__Field::__field4),
+                        16u16 => _serde::__private::Ok(__Field::__field5),
+                        32u16 => _serde::__private::Ok(__Field::__field6),
+                        64u16 => _serde::__private::Ok(__Field::__field7),
+                        128u16 => _serde::__private::Ok(__Field::__field8),
+                        256u16 => _serde::__private::Ok(__Field::__field9),
+                        _ => {
+                            _serde::__private::Err(
+                                _serde::de::Error::invalid_value(
+                                    _serde::de::Unexpected::Uint16(__value),
+                                    &"value(u16) of variant is one of 0, 1, 2, 4, 8, 16, 32, 64, 128, 256",
+                                ),
+                            )
+                        }
+                    }
+                }
+                fn visit_stringptr<__E>(
+                    self,
+                    __value: StringPtr<'de>,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    if let Some(__value) = __value.into_inner() {
+                        match __value.as_ref() {
+                            v if v == "0" || v.eq_ignore_ascii_case("HKX_DU_NONE") => {
+                                _serde::__private::Ok(__Field::__field0)
+                            }
+                            v if v == "1"
+                                || v.eq_ignore_ascii_case("HKX_DU_POSITION") => {
+                                _serde::__private::Ok(__Field::__field1)
+                            }
+                            v if v == "2" || v.eq_ignore_ascii_case("HKX_DU_COLOR") => {
+                                _serde::__private::Ok(__Field::__field2)
+                            }
+                            v if v == "4" || v.eq_ignore_ascii_case("HKX_DU_NORMAL") => {
+                                _serde::__private::Ok(__Field::__field3)
+                            }
+                            v if v == "8" || v.eq_ignore_ascii_case("HKX_DU_TANGENT") => {
+                                _serde::__private::Ok(__Field::__field4)
+                            }
+                            v if v == "16"
+                                || v.eq_ignore_ascii_case("HKX_DU_BINORMAL") => {
+                                _serde::__private::Ok(__Field::__field5)
+                            }
+                            v if v == "32"
+                                || v.eq_ignore_ascii_case("HKX_DU_TEXCOORD") => {
+                                _serde::__private::Ok(__Field::__field6)
+                            }
+                            v if v == "64"
+                                || v.eq_ignore_ascii_case("HKX_DU_BLENDWEIGHTS") => {
+                                _serde::__private::Ok(__Field::__field7)
+                            }
+                            v if v == "128"
+                                || v.eq_ignore_ascii_case("HKX_DU_BLENDINDICES") => {
+                                _serde::__private::Ok(__Field::__field8)
+                            }
+                            v if v == "256"
+                                || v.eq_ignore_ascii_case("HKX_DU_USERDATA") => {
+                                _serde::__private::Ok(__Field::__field9)
+                            }
+                            _ => {
+                                _serde::__private::Err(
+                                    _serde::de::Error::unknown_variant(&__value, VARIANTS),
+                                )
+                            }
+                        }
+                    } else {
+                        _serde::__private::Err(
+                            _serde::de::Error::unknown_variant("None", VARIANTS),
+                        )
+                    }
+                }
+            }
+            impl<'de> _serde::Deserialize<'de> for __Field {
+                #[inline]
+                fn deserialize<__D>(
+                    __deserializer: __D,
+                ) -> _serde::__private::Result<Self, __D::Error>
+                where
+                    __D: _serde::Deserializer<'de>,
+                {
+                    _serde::Deserializer::deserialize_identifier(
+                        __deserializer,
+                        __FieldVisitor,
+                    )
+                }
+            }
+            #[doc(hidden)]
+            struct __Visitor<'de> {
+                marker: _serde::__private::PhantomData<DataUsage>,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            impl<'de> _serde::de::Visitor<'de> for __Visitor<'de> {
+                type Value = DataUsage;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(
+                        __formatter,
+                        "enum DataUsage",
+                    )
+                }
+                fn visit_enum<__A>(
+                    self,
+                    __data: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::EnumAccess<'de>,
+                {
+                    match _serde::de::EnumAccess::variant(__data)? {
+                        (__Field::__field0, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(DataUsage::HKX_DU_NONE)
+                        }
+                        (__Field::__field1, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(DataUsage::HKX_DU_POSITION)
+                        }
+                        (__Field::__field2, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(DataUsage::HKX_DU_COLOR)
+                        }
+                        (__Field::__field3, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(DataUsage::HKX_DU_NORMAL)
+                        }
+                        (__Field::__field4, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(DataUsage::HKX_DU_TANGENT)
+                        }
+                        (__Field::__field5, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(DataUsage::HKX_DU_BINORMAL)
+                        }
+                        (__Field::__field6, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(DataUsage::HKX_DU_TEXCOORD)
+                        }
+                        (__Field::__field7, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(DataUsage::HKX_DU_BLENDWEIGHTS)
+                        }
+                        (__Field::__field8, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(DataUsage::HKX_DU_BLENDINDICES)
+                        }
+                        (__Field::__field9, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(DataUsage::HKX_DU_USERDATA)
+                        }
+                    }
+                }
+            }
+            #[doc(hidden)]
+            const VARIANTS: &'static [&'static str] = &[
+                "HKX_DU_NONE",
+                "HKX_DU_POSITION",
+                "HKX_DU_COLOR",
+                "HKX_DU_NORMAL",
+                "HKX_DU_TANGENT",
+                "HKX_DU_BINORMAL",
+                "HKX_DU_TEXCOORD",
+                "HKX_DU_BLENDWEIGHTS",
+                "HKX_DU_BLENDINDICES",
+                "HKX_DU_USERDATA",
+            ];
+            _serde::Deserializer::deserialize_enum(
+                __deserializer,
+                "DataUsage",
+                VARIANTS,
+                _serde::de::ReadEnumSize::Uint16,
+                __Visitor {
+                    marker: _serde::__private::PhantomData::<DataUsage>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};

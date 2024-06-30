@@ -202,3 +202,264 @@ const _: () = {
         }
     }
 };
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[allow(unused_extern_crates, clippy::useless_attribute)]
+    extern crate havok_serde as _serde;
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for TextureType {
+        fn deserialize<__D>(
+            __deserializer: __D,
+        ) -> _serde::__private::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            #[allow(non_camel_case_types)]
+            #[doc(hidden)]
+            enum __Field {
+                __field0,
+                __field1,
+                __field2,
+                __field3,
+                __field4,
+                __field5,
+                __field6,
+                __field7,
+                __field8,
+                __field9,
+                __field10,
+                __field11,
+                __field12,
+            }
+            #[doc(hidden)]
+            struct __FieldVisitor;
+            impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+                type Value = __Field;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(
+                        __formatter,
+                        "variant identifier",
+                    )
+                }
+                fn visit_int32<__E>(
+                    self,
+                    __value: i32,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match __value {
+                        0i32 => _serde::__private::Ok(__Field::__field0),
+                        1i32 => _serde::__private::Ok(__Field::__field1),
+                        2i32 => _serde::__private::Ok(__Field::__field2),
+                        3i32 => _serde::__private::Ok(__Field::__field3),
+                        4i32 => _serde::__private::Ok(__Field::__field4),
+                        5i32 => _serde::__private::Ok(__Field::__field5),
+                        6i32 => _serde::__private::Ok(__Field::__field6),
+                        7i32 => _serde::__private::Ok(__Field::__field7),
+                        8i32 => _serde::__private::Ok(__Field::__field8),
+                        9i32 => _serde::__private::Ok(__Field::__field9),
+                        10i32 => _serde::__private::Ok(__Field::__field10),
+                        11i32 => _serde::__private::Ok(__Field::__field11),
+                        12i32 => _serde::__private::Ok(__Field::__field12),
+                        _ => {
+                            _serde::__private::Err(
+                                _serde::de::Error::invalid_value(
+                                    _serde::de::Unexpected::Int32(__value),
+                                    &"value(i32) of variant is one of 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12",
+                                ),
+                            )
+                        }
+                    }
+                }
+                fn visit_stringptr<__E>(
+                    self,
+                    __value: StringPtr<'de>,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    if let Some(__value) = __value.into_inner() {
+                        match __value.as_ref() {
+                            v if v == "0" || v.eq_ignore_ascii_case("TEX_UNKNOWN") => {
+                                _serde::__private::Ok(__Field::__field0)
+                            }
+                            v if v == "1" || v.eq_ignore_ascii_case("TEX_DIFFUSE") => {
+                                _serde::__private::Ok(__Field::__field1)
+                            }
+                            v if v == "2" || v.eq_ignore_ascii_case("TEX_REFLECTION") => {
+                                _serde::__private::Ok(__Field::__field2)
+                            }
+                            v if v == "3" || v.eq_ignore_ascii_case("TEX_BUMP") => {
+                                _serde::__private::Ok(__Field::__field3)
+                            }
+                            v if v == "4" || v.eq_ignore_ascii_case("TEX_NORMAL") => {
+                                _serde::__private::Ok(__Field::__field4)
+                            }
+                            v if v == "5"
+                                || v.eq_ignore_ascii_case("TEX_DISPLACEMENT") => {
+                                _serde::__private::Ok(__Field::__field5)
+                            }
+                            v if v == "6" || v.eq_ignore_ascii_case("TEX_SPECULAR") => {
+                                _serde::__private::Ok(__Field::__field6)
+                            }
+                            v if v == "7"
+                                || v.eq_ignore_ascii_case("TEX_SPECULARANDGLOSS") => {
+                                _serde::__private::Ok(__Field::__field7)
+                            }
+                            v if v == "8" || v.eq_ignore_ascii_case("TEX_OPACITY") => {
+                                _serde::__private::Ok(__Field::__field8)
+                            }
+                            v if v == "9" || v.eq_ignore_ascii_case("TEX_EMISSIVE") => {
+                                _serde::__private::Ok(__Field::__field9)
+                            }
+                            v if v == "10"
+                                || v.eq_ignore_ascii_case("TEX_REFRACTION") => {
+                                _serde::__private::Ok(__Field::__field10)
+                            }
+                            v if v == "11" || v.eq_ignore_ascii_case("TEX_GLOSS") => {
+                                _serde::__private::Ok(__Field::__field11)
+                            }
+                            v if v == "12"
+                                || v.eq_ignore_ascii_case("TEX_NOTEXPORTED") => {
+                                _serde::__private::Ok(__Field::__field12)
+                            }
+                            _ => {
+                                _serde::__private::Err(
+                                    _serde::de::Error::unknown_variant(&__value, VARIANTS),
+                                )
+                            }
+                        }
+                    } else {
+                        _serde::__private::Err(
+                            _serde::de::Error::unknown_variant("None", VARIANTS),
+                        )
+                    }
+                }
+            }
+            impl<'de> _serde::Deserialize<'de> for __Field {
+                #[inline]
+                fn deserialize<__D>(
+                    __deserializer: __D,
+                ) -> _serde::__private::Result<Self, __D::Error>
+                where
+                    __D: _serde::Deserializer<'de>,
+                {
+                    _serde::Deserializer::deserialize_identifier(
+                        __deserializer,
+                        __FieldVisitor,
+                    )
+                }
+            }
+            #[doc(hidden)]
+            struct __Visitor<'de> {
+                marker: _serde::__private::PhantomData<TextureType>,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            impl<'de> _serde::de::Visitor<'de> for __Visitor<'de> {
+                type Value = TextureType;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(
+                        __formatter,
+                        "enum TextureType",
+                    )
+                }
+                fn visit_enum<__A>(
+                    self,
+                    __data: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::EnumAccess<'de>,
+                {
+                    match _serde::de::EnumAccess::variant(__data)? {
+                        (__Field::__field0, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(TextureType::TEX_UNKNOWN)
+                        }
+                        (__Field::__field1, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(TextureType::TEX_DIFFUSE)
+                        }
+                        (__Field::__field2, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(TextureType::TEX_REFLECTION)
+                        }
+                        (__Field::__field3, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(TextureType::TEX_BUMP)
+                        }
+                        (__Field::__field4, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(TextureType::TEX_NORMAL)
+                        }
+                        (__Field::__field5, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(TextureType::TEX_DISPLACEMENT)
+                        }
+                        (__Field::__field6, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(TextureType::TEX_SPECULAR)
+                        }
+                        (__Field::__field7, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(TextureType::TEX_SPECULARANDGLOSS)
+                        }
+                        (__Field::__field8, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(TextureType::TEX_OPACITY)
+                        }
+                        (__Field::__field9, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(TextureType::TEX_EMISSIVE)
+                        }
+                        (__Field::__field10, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(TextureType::TEX_REFRACTION)
+                        }
+                        (__Field::__field11, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(TextureType::TEX_GLOSS)
+                        }
+                        (__Field::__field12, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(TextureType::TEX_NOTEXPORTED)
+                        }
+                    }
+                }
+            }
+            #[doc(hidden)]
+            const VARIANTS: &'static [&'static str] = &[
+                "TEX_UNKNOWN",
+                "TEX_DIFFUSE",
+                "TEX_REFLECTION",
+                "TEX_BUMP",
+                "TEX_NORMAL",
+                "TEX_DISPLACEMENT",
+                "TEX_SPECULAR",
+                "TEX_SPECULARANDGLOSS",
+                "TEX_OPACITY",
+                "TEX_EMISSIVE",
+                "TEX_REFRACTION",
+                "TEX_GLOSS",
+                "TEX_NOTEXPORTED",
+            ];
+            _serde::Deserializer::deserialize_enum(
+                __deserializer,
+                "TextureType",
+                VARIANTS,
+                _serde::de::ReadEnumSize::Int32,
+                __Visitor {
+                    marker: _serde::__private::PhantomData::<TextureType>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};

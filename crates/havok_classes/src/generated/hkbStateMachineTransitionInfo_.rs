@@ -114,13 +114,14 @@ const _: () = {
         }
     }
 };
+#[havok_types_derive::impl_flags_methods]
 bitflags::bitflags! {
     #[doc = r" Bit flags that represented `enum hkFlags<Enum, SizeType>`(C++)."] #[doc =
     "- size(C++): `TYPE_INT16`"] #[allow(non_upper_case_globals, non_snake_case)]
     #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-    #[repr(transparent)] #[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Hash)] pub
-    struct TransitionFlags : i16 { #[doc = "1"] const FLAG_USE_TRIGGER_INTERVAL = 1i16;
-    #[doc = "2"] const FLAG_USE_INITIATE_INTERVAL = 2i16; #[doc = "4"] const
+    #[repr(transparent)] #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)] pub struct
+    TransitionFlags : i16 { #[doc = "1"] const FLAG_USE_TRIGGER_INTERVAL = 1i16; #[doc =
+    "2"] const FLAG_USE_INITIATE_INTERVAL = 2i16; #[doc = "4"] const
     FLAG_UNINTERRUPTIBLE_WHILE_PLAYING = 4i16; #[doc = "8"] const
     FLAG_UNINTERRUPTIBLE_WHILE_DELAYED = 8i16; #[doc = "16"] const
     FLAG_DELAY_STATE_CHANGE = 16i16; #[doc = "32"] const FLAG_DISABLED = 32i16; #[doc =
@@ -257,6 +258,71 @@ const _: () = {
             }
             __serializer.serialize_bits(&self.bits())?;
             __serializer.end()
+        }
+    }
+};
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[allow(unused_extern_crates, clippy::useless_attribute)]
+    extern crate havok_serde as _serde;
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for TransitionFlags {
+        fn deserialize<__D>(
+            __deserializer: __D,
+        ) -> _serde::__private::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            #[doc(hidden)]
+            struct __Visitor<'de> {
+                marker: _serde::__private::PhantomData<TransitionFlags>,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            impl<'de> _serde::de::Visitor<'de> for __Visitor<'de> {
+                type Value = TransitionFlags;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(
+                        __formatter,
+                        "struct TransitionFlags(flags)",
+                    )
+                }
+                #[inline]
+                fn visit_int16<__E>(
+                    self,
+                    __value: i16,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    Ok(TransitionFlags::from_bits_retain(__value as _))
+                }
+                fn visit_stringptr<__E>(
+                    self,
+                    __value: StringPtr<'de>,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match <TransitionFlags as core::str::FromStr>::from_str(
+                        __value.into_inner().unwrap().as_ref(),
+                    ) {
+                        Ok(flags) => Ok(flags),
+                        Err(err) => Err(_serde::de::Error::custom(err)),
+                    }
+                }
+            }
+            _serde::Deserializer::deserialize_flags(
+                __deserializer,
+                _serde::de::ReadEnumSize::Int16,
+                __Visitor {
+                    marker: _serde::__private::PhantomData::<TransitionFlags>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
         }
     }
 };

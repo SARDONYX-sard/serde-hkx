@@ -248,3 +248,638 @@ const _: () = {
         }
     }
 };
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[allow(unused_extern_crates, clippy::useless_attribute)]
+    extern crate havok_serde as _serde;
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for AtomType {
+        fn deserialize<__D>(
+            __deserializer: __D,
+        ) -> _serde::__private::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            #[allow(non_camel_case_types)]
+            #[doc(hidden)]
+            enum __Field {
+                __field0,
+                __field1,
+                __field2,
+                __field3,
+                __field4,
+                __field5,
+                __field6,
+                __field7,
+                __field8,
+                __field9,
+                __field10,
+                __field11,
+                __field12,
+                __field13,
+                __field14,
+                __field15,
+                __field16,
+                __field17,
+                __field18,
+                __field19,
+                __field20,
+                __field21,
+                __field22,
+                __field23,
+                __field24,
+                __field25,
+                __field26,
+                __field27,
+                __field28,
+                __field29,
+                __field30,
+                __field31,
+                __field32,
+            }
+            #[doc(hidden)]
+            struct __FieldVisitor;
+            impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+                type Value = __Field;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(
+                        __formatter,
+                        "variant identifier",
+                    )
+                }
+                fn visit_uint16<__E>(
+                    self,
+                    __value: u16,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match __value {
+                        0u16 => _serde::__private::Ok(__Field::__field0),
+                        1u16 => _serde::__private::Ok(__Field::__field1),
+                        2u16 => _serde::__private::Ok(__Field::__field2),
+                        3u16 => _serde::__private::Ok(__Field::__field3),
+                        4u16 => _serde::__private::Ok(__Field::__field4),
+                        5u16 => _serde::__private::Ok(__Field::__field5),
+                        6u16 => _serde::__private::Ok(__Field::__field6),
+                        7u16 => _serde::__private::Ok(__Field::__field7),
+                        8u16 => _serde::__private::Ok(__Field::__field8),
+                        9u16 => _serde::__private::Ok(__Field::__field9),
+                        10u16 => _serde::__private::Ok(__Field::__field10),
+                        11u16 => _serde::__private::Ok(__Field::__field11),
+                        12u16 => _serde::__private::Ok(__Field::__field12),
+                        13u16 => _serde::__private::Ok(__Field::__field13),
+                        14u16 => _serde::__private::Ok(__Field::__field14),
+                        15u16 => _serde::__private::Ok(__Field::__field15),
+                        16u16 => _serde::__private::Ok(__Field::__field16),
+                        17u16 => _serde::__private::Ok(__Field::__field17),
+                        18u16 => _serde::__private::Ok(__Field::__field18),
+                        19u16 => _serde::__private::Ok(__Field::__field19),
+                        20u16 => _serde::__private::Ok(__Field::__field20),
+                        21u16 => _serde::__private::Ok(__Field::__field21),
+                        22u16 => _serde::__private::Ok(__Field::__field22),
+                        23u16 => _serde::__private::Ok(__Field::__field23),
+                        24u16 => _serde::__private::Ok(__Field::__field24),
+                        25u16 => _serde::__private::Ok(__Field::__field25),
+                        26u16 => _serde::__private::Ok(__Field::__field26),
+                        27u16 => _serde::__private::Ok(__Field::__field27),
+                        28u16 => _serde::__private::Ok(__Field::__field28),
+                        29u16 => _serde::__private::Ok(__Field::__field29),
+                        30u16 => _serde::__private::Ok(__Field::__field30),
+                        31u16 => _serde::__private::Ok(__Field::__field31),
+                        32u16 => _serde::__private::Ok(__Field::__field32),
+                        _ => {
+                            _serde::__private::Err(
+                                _serde::de::Error::invalid_value(
+                                    _serde::de::Unexpected::Uint16(__value),
+                                    &"value(u16) of variant is one of 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32",
+                                ),
+                            )
+                        }
+                    }
+                }
+                fn visit_stringptr<__E>(
+                    self,
+                    __value: StringPtr<'de>,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    if let Some(__value) = __value.into_inner() {
+                        match __value.as_ref() {
+                            v if v == "0" || v.eq_ignore_ascii_case("TYPE_INVALID") => {
+                                _serde::__private::Ok(__Field::__field0)
+                            }
+                            v if v == "1" || v.eq_ignore_ascii_case("TYPE_BRIDGE") => {
+                                _serde::__private::Ok(__Field::__field1)
+                            }
+                            v if v == "2"
+                                || v.eq_ignore_ascii_case("TYPE_SET_LOCAL_TRANSFORMS") => {
+                                _serde::__private::Ok(__Field::__field2)
+                            }
+                            v if v == "3"
+                                || v.eq_ignore_ascii_case("TYPE_SET_LOCAL_TRANSLATIONS") => {
+                                _serde::__private::Ok(__Field::__field3)
+                            }
+                            v if v == "4"
+                                || v.eq_ignore_ascii_case("TYPE_SET_LOCAL_ROTATIONS") => {
+                                _serde::__private::Ok(__Field::__field4)
+                            }
+                            v if v == "5"
+                                || v.eq_ignore_ascii_case("TYPE_BALL_SOCKET") => {
+                                _serde::__private::Ok(__Field::__field5)
+                            }
+                            v if v == "6"
+                                || v.eq_ignore_ascii_case("TYPE_STIFF_SPRING") => {
+                                _serde::__private::Ok(__Field::__field6)
+                            }
+                            v if v == "7" || v.eq_ignore_ascii_case("TYPE_LIN") => {
+                                _serde::__private::Ok(__Field::__field7)
+                            }
+                            v if v == "8" || v.eq_ignore_ascii_case("TYPE_LIN_SOFT") => {
+                                _serde::__private::Ok(__Field::__field8)
+                            }
+                            v if v == "9" || v.eq_ignore_ascii_case("TYPE_LIN_LIMIT") => {
+                                _serde::__private::Ok(__Field::__field9)
+                            }
+                            v if v == "10"
+                                || v.eq_ignore_ascii_case("TYPE_LIN_FRICTION") => {
+                                _serde::__private::Ok(__Field::__field10)
+                            }
+                            v if v == "11"
+                                || v.eq_ignore_ascii_case("TYPE_LIN_MOTOR") => {
+                                _serde::__private::Ok(__Field::__field11)
+                            }
+                            v if v == "12" || v.eq_ignore_ascii_case("TYPE_2D_ANG") => {
+                                _serde::__private::Ok(__Field::__field12)
+                            }
+                            v if v == "13" || v.eq_ignore_ascii_case("TYPE_ANG") => {
+                                _serde::__private::Ok(__Field::__field13)
+                            }
+                            v if v == "14"
+                                || v.eq_ignore_ascii_case("TYPE_ANG_LIMIT") => {
+                                _serde::__private::Ok(__Field::__field14)
+                            }
+                            v if v == "15"
+                                || v.eq_ignore_ascii_case("TYPE_TWIST_LIMIT") => {
+                                _serde::__private::Ok(__Field::__field15)
+                            }
+                            v if v == "16"
+                                || v.eq_ignore_ascii_case("TYPE_CONE_LIMIT") => {
+                                _serde::__private::Ok(__Field::__field16)
+                            }
+                            v if v == "17"
+                                || v.eq_ignore_ascii_case("TYPE_ANG_FRICTION") => {
+                                _serde::__private::Ok(__Field::__field17)
+                            }
+                            v if v == "18"
+                                || v.eq_ignore_ascii_case("TYPE_ANG_MOTOR") => {
+                                _serde::__private::Ok(__Field::__field18)
+                            }
+                            v if v == "19"
+                                || v.eq_ignore_ascii_case("TYPE_RAGDOLL_MOTOR") => {
+                                _serde::__private::Ok(__Field::__field19)
+                            }
+                            v if v == "20" || v.eq_ignore_ascii_case("TYPE_PULLEY") => {
+                                _serde::__private::Ok(__Field::__field20)
+                            }
+                            v if v == "21"
+                                || v.eq_ignore_ascii_case("TYPE_RACK_AND_PINION") => {
+                                _serde::__private::Ok(__Field::__field21)
+                            }
+                            v if v == "22"
+                                || v.eq_ignore_ascii_case("TYPE_COG_WHEEL") => {
+                                _serde::__private::Ok(__Field::__field22)
+                            }
+                            v if v == "23"
+                                || v.eq_ignore_ascii_case("TYPE_SETUP_STABILIZATION") => {
+                                _serde::__private::Ok(__Field::__field23)
+                            }
+                            v if v == "24"
+                                || v.eq_ignore_ascii_case("TYPE_OVERWRITE_PIVOT") => {
+                                _serde::__private::Ok(__Field::__field24)
+                            }
+                            v if v == "25" || v.eq_ignore_ascii_case("TYPE_CONTACT") => {
+                                _serde::__private::Ok(__Field::__field25)
+                            }
+                            v if v == "26"
+                                || v.eq_ignore_ascii_case("TYPE_MODIFIER_SOFT_CONTACT") => {
+                                _serde::__private::Ok(__Field::__field26)
+                            }
+                            v if v == "27"
+                                || v.eq_ignore_ascii_case("TYPE_MODIFIER_MASS_CHANGER") => {
+                                _serde::__private::Ok(__Field::__field27)
+                            }
+                            v if v == "28"
+                                || v
+                                    .eq_ignore_ascii_case("TYPE_MODIFIER_VISCOUS_SURFACE") => {
+                                _serde::__private::Ok(__Field::__field28)
+                            }
+                            v if v == "29"
+                                || v
+                                    .eq_ignore_ascii_case("TYPE_MODIFIER_MOVING_SURFACE") => {
+                                _serde::__private::Ok(__Field::__field29)
+                            }
+                            v if v == "30"
+                                || v
+                                    .eq_ignore_ascii_case("TYPE_MODIFIER_IGNORE_CONSTRAINT") => {
+                                _serde::__private::Ok(__Field::__field30)
+                            }
+                            v if v == "31"
+                                || v
+                                    .eq_ignore_ascii_case(
+                                        "TYPE_MODIFIER_CENTER_OF_MASS_CHANGER",
+                                    ) => _serde::__private::Ok(__Field::__field31),
+                            v if v == "32" || v.eq_ignore_ascii_case("TYPE_MAX") => {
+                                _serde::__private::Ok(__Field::__field32)
+                            }
+                            _ => {
+                                _serde::__private::Err(
+                                    _serde::de::Error::unknown_variant(&__value, VARIANTS),
+                                )
+                            }
+                        }
+                    } else {
+                        _serde::__private::Err(
+                            _serde::de::Error::unknown_variant("None", VARIANTS),
+                        )
+                    }
+                }
+            }
+            impl<'de> _serde::Deserialize<'de> for __Field {
+                #[inline]
+                fn deserialize<__D>(
+                    __deserializer: __D,
+                ) -> _serde::__private::Result<Self, __D::Error>
+                where
+                    __D: _serde::Deserializer<'de>,
+                {
+                    _serde::Deserializer::deserialize_identifier(
+                        __deserializer,
+                        __FieldVisitor,
+                    )
+                }
+            }
+            #[doc(hidden)]
+            struct __Visitor<'de> {
+                marker: _serde::__private::PhantomData<AtomType>,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            impl<'de> _serde::de::Visitor<'de> for __Visitor<'de> {
+                type Value = AtomType;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(__formatter, "enum AtomType")
+                }
+                fn visit_enum<__A>(
+                    self,
+                    __data: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::EnumAccess<'de>,
+                {
+                    match _serde::de::EnumAccess::variant(__data)? {
+                        (__Field::__field0, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_INVALID)
+                        }
+                        (__Field::__field1, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_BRIDGE)
+                        }
+                        (__Field::__field2, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_SET_LOCAL_TRANSFORMS)
+                        }
+                        (__Field::__field3, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_SET_LOCAL_TRANSLATIONS)
+                        }
+                        (__Field::__field4, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_SET_LOCAL_ROTATIONS)
+                        }
+                        (__Field::__field5, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_BALL_SOCKET)
+                        }
+                        (__Field::__field6, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_STIFF_SPRING)
+                        }
+                        (__Field::__field7, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_LIN)
+                        }
+                        (__Field::__field8, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_LIN_SOFT)
+                        }
+                        (__Field::__field9, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_LIN_LIMIT)
+                        }
+                        (__Field::__field10, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_LIN_FRICTION)
+                        }
+                        (__Field::__field11, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_LIN_MOTOR)
+                        }
+                        (__Field::__field12, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_2D_ANG)
+                        }
+                        (__Field::__field13, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_ANG)
+                        }
+                        (__Field::__field14, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_ANG_LIMIT)
+                        }
+                        (__Field::__field15, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_TWIST_LIMIT)
+                        }
+                        (__Field::__field16, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_CONE_LIMIT)
+                        }
+                        (__Field::__field17, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_ANG_FRICTION)
+                        }
+                        (__Field::__field18, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_ANG_MOTOR)
+                        }
+                        (__Field::__field19, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_RAGDOLL_MOTOR)
+                        }
+                        (__Field::__field20, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_PULLEY)
+                        }
+                        (__Field::__field21, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_RACK_AND_PINION)
+                        }
+                        (__Field::__field22, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_COG_WHEEL)
+                        }
+                        (__Field::__field23, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_SETUP_STABILIZATION)
+                        }
+                        (__Field::__field24, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_OVERWRITE_PIVOT)
+                        }
+                        (__Field::__field25, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_CONTACT)
+                        }
+                        (__Field::__field26, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_MODIFIER_SOFT_CONTACT)
+                        }
+                        (__Field::__field27, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_MODIFIER_MASS_CHANGER)
+                        }
+                        (__Field::__field28, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(
+                                AtomType::TYPE_MODIFIER_VISCOUS_SURFACE,
+                            )
+                        }
+                        (__Field::__field29, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_MODIFIER_MOVING_SURFACE)
+                        }
+                        (__Field::__field30, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(
+                                AtomType::TYPE_MODIFIER_IGNORE_CONSTRAINT,
+                            )
+                        }
+                        (__Field::__field31, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(
+                                AtomType::TYPE_MODIFIER_CENTER_OF_MASS_CHANGER,
+                            )
+                        }
+                        (__Field::__field32, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(AtomType::TYPE_MAX)
+                        }
+                    }
+                }
+            }
+            #[doc(hidden)]
+            const VARIANTS: &'static [&'static str] = &[
+                "TYPE_INVALID",
+                "TYPE_BRIDGE",
+                "TYPE_SET_LOCAL_TRANSFORMS",
+                "TYPE_SET_LOCAL_TRANSLATIONS",
+                "TYPE_SET_LOCAL_ROTATIONS",
+                "TYPE_BALL_SOCKET",
+                "TYPE_STIFF_SPRING",
+                "TYPE_LIN",
+                "TYPE_LIN_SOFT",
+                "TYPE_LIN_LIMIT",
+                "TYPE_LIN_FRICTION",
+                "TYPE_LIN_MOTOR",
+                "TYPE_2D_ANG",
+                "TYPE_ANG",
+                "TYPE_ANG_LIMIT",
+                "TYPE_TWIST_LIMIT",
+                "TYPE_CONE_LIMIT",
+                "TYPE_ANG_FRICTION",
+                "TYPE_ANG_MOTOR",
+                "TYPE_RAGDOLL_MOTOR",
+                "TYPE_PULLEY",
+                "TYPE_RACK_AND_PINION",
+                "TYPE_COG_WHEEL",
+                "TYPE_SETUP_STABILIZATION",
+                "TYPE_OVERWRITE_PIVOT",
+                "TYPE_CONTACT",
+                "TYPE_MODIFIER_SOFT_CONTACT",
+                "TYPE_MODIFIER_MASS_CHANGER",
+                "TYPE_MODIFIER_VISCOUS_SURFACE",
+                "TYPE_MODIFIER_MOVING_SURFACE",
+                "TYPE_MODIFIER_IGNORE_CONSTRAINT",
+                "TYPE_MODIFIER_CENTER_OF_MASS_CHANGER",
+                "TYPE_MAX",
+            ];
+            _serde::Deserializer::deserialize_enum(
+                __deserializer,
+                "AtomType",
+                VARIANTS,
+                _serde::de::ReadEnumSize::Uint16,
+                __Visitor {
+                    marker: _serde::__private::PhantomData::<AtomType>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[allow(unused_extern_crates, clippy::useless_attribute)]
+    extern crate havok_serde as _serde;
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for SolvingMethod {
+        fn deserialize<__D>(
+            __deserializer: __D,
+        ) -> _serde::__private::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            #[allow(non_camel_case_types)]
+            #[doc(hidden)]
+            enum __Field {
+                __field0,
+                __field1,
+            }
+            #[doc(hidden)]
+            struct __FieldVisitor;
+            impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+                type Value = __Field;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(
+                        __formatter,
+                        "variant identifier",
+                    )
+                }
+                fn visit_uint8<__E>(
+                    self,
+                    __value: u8,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match __value {
+                        0u8 => _serde::__private::Ok(__Field::__field0),
+                        1u8 => _serde::__private::Ok(__Field::__field1),
+                        _ => {
+                            _serde::__private::Err(
+                                _serde::de::Error::invalid_value(
+                                    _serde::de::Unexpected::Uint8(__value),
+                                    &"value(u8) of variant is one of 0, 1",
+                                ),
+                            )
+                        }
+                    }
+                }
+                fn visit_stringptr<__E>(
+                    self,
+                    __value: StringPtr<'de>,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    if let Some(__value) = __value.into_inner() {
+                        match __value.as_ref() {
+                            v if v == "0"
+                                || v.eq_ignore_ascii_case("METHOD_STABILIZED") => {
+                                _serde::__private::Ok(__Field::__field0)
+                            }
+                            v if v == "1" || v.eq_ignore_ascii_case("METHOD_OLD") => {
+                                _serde::__private::Ok(__Field::__field1)
+                            }
+                            _ => {
+                                _serde::__private::Err(
+                                    _serde::de::Error::unknown_variant(&__value, VARIANTS),
+                                )
+                            }
+                        }
+                    } else {
+                        _serde::__private::Err(
+                            _serde::de::Error::unknown_variant("None", VARIANTS),
+                        )
+                    }
+                }
+            }
+            impl<'de> _serde::Deserialize<'de> for __Field {
+                #[inline]
+                fn deserialize<__D>(
+                    __deserializer: __D,
+                ) -> _serde::__private::Result<Self, __D::Error>
+                where
+                    __D: _serde::Deserializer<'de>,
+                {
+                    _serde::Deserializer::deserialize_identifier(
+                        __deserializer,
+                        __FieldVisitor,
+                    )
+                }
+            }
+            #[doc(hidden)]
+            struct __Visitor<'de> {
+                marker: _serde::__private::PhantomData<SolvingMethod>,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            impl<'de> _serde::de::Visitor<'de> for __Visitor<'de> {
+                type Value = SolvingMethod;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(
+                        __formatter,
+                        "enum SolvingMethod",
+                    )
+                }
+                fn visit_enum<__A>(
+                    self,
+                    __data: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::EnumAccess<'de>,
+                {
+                    match _serde::de::EnumAccess::variant(__data)? {
+                        (__Field::__field0, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(SolvingMethod::METHOD_STABILIZED)
+                        }
+                        (__Field::__field1, __variant) => {
+                            _serde::de::VariantAccess::unit_variant(__variant)?;
+                            _serde::__private::Ok(SolvingMethod::METHOD_OLD)
+                        }
+                    }
+                }
+            }
+            #[doc(hidden)]
+            const VARIANTS: &'static [&'static str] = &[
+                "METHOD_STABILIZED",
+                "METHOD_OLD",
+            ];
+            _serde::Deserializer::deserialize_enum(
+                __deserializer,
+                "SolvingMethod",
+                VARIANTS,
+                _serde::de::ReadEnumSize::Uint8,
+                __Visitor {
+                    marker: _serde::__private::PhantomData::<SolvingMethod>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};
