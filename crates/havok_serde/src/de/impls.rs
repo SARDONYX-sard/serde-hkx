@@ -624,7 +624,7 @@ where
             //
             // # Safety
             //
-            //  1. - array[.. initiliazed_count] only
+            //  1. - array[.. initialized_count] only
             //       contains init elements, thus there is no risk of dropping
             //       uninit data;
             //  2. - We are within the array since we start from the
