@@ -76,9 +76,9 @@ const _: () = {
                 }
 
                 #[inline]
-                fn visit_uint64<__E>(
+                fn visit_uint16<__E>(
                     self,
-                    __value: u64,
+                    __value: u16,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
@@ -104,6 +104,7 @@ const _: () = {
 
             _serde::Deserializer::deserialize_flags(
                 __deserializer,
+                _serde::de::ReadEnumSize::Uint16,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<FlagValues>,
                     lifetime: _serde::__private::PhantomData,

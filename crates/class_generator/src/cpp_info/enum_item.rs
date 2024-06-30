@@ -29,5 +29,8 @@ pub struct Enum<'a> {
 pub struct EnumItem<'a> {
     #[serde(bound(deserialize = "Cow<'a, str>: Deserialize<'de>"))]
     pub name: Cow<'a, str>,
-    pub value: i32,
+    /// If the value of `enum_item` is set to [`i32`] and it is `u32`, the value is interpreted as [`i128`] because the numbers do not match.
+    ///
+    /// This allows you to convert the value to [`i64`], [`u64`] with `as` and still get the value correctly.
+    pub value: i128,
 }

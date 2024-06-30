@@ -77,20 +77,17 @@ const _: () = {
                 ) -> _serde::__private::fmt::Result {
                     _serde::__private::Formatter::write_str(__formatter, "variant identifier")
                 }
-                fn visit_uint64<__E>(
-                    self,
-                    __value: u64,
-                ) -> _serde::__private::Result<Self::Value, __E>
+                fn visit_int8<__E>(self, __value: i8) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u64 => _serde::__private::Ok(__Field::__field0),
-                        1u64 => _serde::__private::Ok(__Field::__field1),
-                        2u64 => _serde::__private::Ok(__Field::__field2),
-                        3u64 => _serde::__private::Ok(__Field::__field3),
+                        0i8 => _serde::__private::Ok(__Field::__field0),
+                        1i8 => _serde::__private::Ok(__Field::__field1),
+                        2i8 => _serde::__private::Ok(__Field::__field2),
+                        3i8 => _serde::__private::Ok(__Field::__field3),
                         _ => _serde::__private::Err(_serde::de::Error::invalid_value(
-                            _serde::de::Unexpected::Uint64(__value),
+                            _serde::de::Unexpected::Int8(__value),
                             &"variant index 0 <= i < 4",
                         )),
                     }
@@ -191,6 +188,7 @@ const _: () = {
                 __deserializer,
                 "EventMode",
                 VARIANTS,
+                _serde::de::ReadEnumSize::Int8,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<EventMode>,
                     lifetime: _serde::__private::PhantomData,

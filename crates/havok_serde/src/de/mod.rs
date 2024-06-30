@@ -898,6 +898,7 @@ pub trait Deserializer<'de>: Sized {
         self,
         name: &'static str,
         variants: &'static [&'static str],
+        size: ReadEnumSize,
         visitor: V,
     ) -> Result<V::Value, Self::Error>
     where
@@ -936,9 +937,9 @@ pub trait Deserializer<'de>: Sized {
 
     /// Deserialize an `Flags` value.
     ///
-    /// Hint that the `Deserialize` type is expecting an enum value with a
+    /// Hint that the `Deserialize` type is expecting flags value with a
     /// particular name and possible variants.
-    fn deserialize_flags<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    fn deserialize_flags<V>(self, size: ReadEnumSize, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>;
 
@@ -1767,6 +1768,27 @@ where
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+
+/// Size to read to deserialize `enum` and `flags`.
+/// This is used to deserialize binary data
+pub enum ReadEnumSize {
+    /// Deserialize binary data from i8
+    Int8,
+    /// Deserialize binary data from i16
+    Int16,
+    /// Deserialize binary data from i32
+    Int32,
+    /// Deserialize binary data from i64
+    Int64,
+    /// Deserialize binary data from u8
+    Uint8,
+    /// Deserialize binary data from u16
+    Uint16,
+    /// Deserialize binary data from u32
+    Uint32,
+    /// Deserialize binary data from u64
+    Uint64,
+}
 
 /// Provides a `Visitor` access to the data of an enum in the input.
 ///

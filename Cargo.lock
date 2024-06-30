@@ -391,6 +391,7 @@ dependencies = [
  "educe",
  "havok_serde",
  "havok_types",
+ "havok_types_derive",
  "num-derive",
  "num-traits",
  "serde",

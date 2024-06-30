@@ -15,6 +15,7 @@ educe = { version = "0.6.0", features = [
 ] } # To support the `Default` trait implementation for huge fixed-size arrays.
 havok_serde = { path = "../havok_serde" }
 havok_types = { path = "../havok_types" }
+havok_types_derive = { path = "../havok_types_derive" }
 num-derive = "0.4" # To serialize Enum & Flags
 num-traits = "0.2" # To serialize Enum & Flags
 serde = { version = "1.0", features = [

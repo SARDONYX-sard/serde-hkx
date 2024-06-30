@@ -15,7 +15,7 @@ use self::parser::type_kind::{
 use self::seq::SeqDeserializer;
 use crate::errors::de::{Error, Result};
 use enum_access::EnumDeserializer;
-use havok_serde::de::{self, Deserialize, Visitor};
+use havok_serde::de::{self, Deserialize, ReadEnumSize, Visitor};
 use havok_types::*;
 use parser::comment_multispace0;
 use parser::tag::{attr_string, start_tag};
@@ -335,6 +335,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         self,
         _name: &'static str,
         _variants: &'static [&'static str],
+        _size: ReadEnumSize,
         visitor: V,
     ) -> Result<V::Value, Self::Error>
     where
@@ -419,7 +420,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         self.deserialize_uint64(visitor)
     }
 
-    fn deserialize_flags<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    fn deserialize_flags<V>(self, _size: ReadEnumSize, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
