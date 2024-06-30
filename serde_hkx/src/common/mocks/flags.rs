@@ -1,12 +1,13 @@
 use super::mock_requires::*;
 
+#[havok_types_derive::impl_flags_methods]
 bitflags::bitflags! {
     /// Bit flags that represented `enum hkFlags<Enum, SizeType>`(C++).
     ///
     /// # On XML
     /// When all bits are 0, "0" is inserted.
     /// (Even if `FLAGS_NONE = 0` and 0 is replaced by `FLAGS_NONE`, "0" will appear when reconverting xml -> hkx -> xml.)
-    #[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Hash)]
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
     #[repr(transparent)]
     pub struct FlagValues: u16 {
         /// Flags is empty: 0
@@ -48,3 +49,66 @@ impl Serialize for FlagValues {
         sv.end()
     }
 }
+
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[allow(unused_extern_crates, clippy::useless_attribute)]
+    extern crate havok_serde as _serde;
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for FlagValues {
+        fn deserialize<__D>(__deserializer: __D) -> _serde::__private::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            #[doc(hidden)]
+            struct __Visitor<'de> {
+                marker: _serde::__private::PhantomData<FlagValues>,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            impl<'de> _serde::de::Visitor<'de> for __Visitor<'de> {
+                type Value = FlagValues;
+                fn expecting(
+                    &self,
+                    __formatter: &mut _serde::__private::Formatter,
+                ) -> _serde::__private::fmt::Result {
+                    _serde::__private::Formatter::write_str(__formatter, "struct FlagValues")
+                }
+
+                #[inline]
+                fn visit_uint64<__E>(
+                    self,
+                    __value: u64,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    Ok(FlagValues::from_bits_retain(__value as _)) // Contain unknown bits.
+                }
+
+                fn visit_stringptr<__E>(
+                    self,
+                    __value: StringPtr<'de>,
+                ) -> _serde::__private::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match <FlagValues as core::str::FromStr>::from_str(
+                        __value.into_inner().unwrap().as_ref(),
+                    ) {
+                        Ok(flags) => Ok(flags),
+                        Err(err) => Err(_serde::de::Error::custom(err)),
+                    }
+                }
+            }
+
+            _serde::Deserializer::deserialize_flags(
+                __deserializer,
+                __Visitor {
+                    marker: _serde::__private::PhantomData::<FlagValues>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};

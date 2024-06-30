@@ -3,7 +3,7 @@ use crate::lib::*;
 use winnow::error::{ContextError, ErrMode, ParseError, StrContext};
 
 /// Error struct to represent parsing errors in a more user-friendly way.
-#[derive(Debug)]
+#[derive(Debug, Clone, Default, PartialEq, Eq, Hash)]
 pub struct ReadableError {
     title: String,
     message: String,
@@ -63,6 +63,24 @@ impl ReadableError {
         Self {
             title: labels,
             message,
+            span: start..end,
+            input,
+        }
+    }
+
+    pub fn from_display<T>(message: T, input: &str, err_pos: usize) -> Self
+    where
+        T: core::fmt::Display,
+    {
+        let input = input.to_string();
+        let start = err_pos;
+        let end = (start + 1..)
+            .find(|e| input.is_char_boundary(*e))
+            .unwrap_or(start);
+
+        Self {
+            title: "Validation Error".to_string(),
+            message: message.to_string(),
             span: start..end,
             input,
         }

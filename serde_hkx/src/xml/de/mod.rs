@@ -14,7 +14,7 @@ use self::parser::type_kind::{
 };
 use self::seq::SeqDeserializer;
 use crate::errors::de::{Error, Result};
-use enum_access::Enum;
+use enum_access::EnumDeserializer;
 use havok_serde::de::{self, Deserialize, Visitor};
 use havok_types::*;
 use parser::comment_multispace0;
@@ -61,26 +61,29 @@ where
     if deserializer.input.is_empty() {
         Ok(t)
     } else {
-        Err(Error::TrailingCharacters)
+        Err(Error::TrailingCharacters {
+            remain: deserializer.input.to_string(),
+        })
     }
+}
+
+/// Deserializes any value and returns the rest of the string together.
+///
+/// # Returns
+/// (remain input, deserialized value)
+pub fn from_str_peek<'a, T>(s: &'a str) -> Result<(&'a str, T)>
+where
+    T: Deserialize<'a>,
+{
+    let mut deserializer = XmlDeserializer::from_str(s);
+    let t = T::deserialize(&mut deserializer)?;
+    Ok((deserializer.input, t))
 }
 
 // SERDE IS NOT A PARSING LIBRARY. This impl block defines a few basic parsing
 // functions from scratch. More complicated formats may wish to use a dedicated
 // parsing library to help implement their Serde deserializer.
 impl<'de> XmlDeserializer<'de> {
-    /// Look at the first character in the input without consuming it.
-    fn peek_char(&mut self) -> Result<char> {
-        self.input.chars().next().ok_or(Error::Eof)
-    }
-
-    /// Consume the first character in the input.
-    fn next_char(&mut self) -> Result<char> {
-        let ch = self.peek_char()?;
-        self.input = &self.input[ch.len_utf8()..];
-        Ok(ch)
-    }
-
     /// Parse by argument parser.
     ///
     /// If an error occurs, it is converted to [`ReadableError`] and returned.
@@ -117,6 +120,24 @@ impl<'de> XmlDeserializer<'de> {
                 ),
             })?;
         Ok(res)
+    }
+
+    /// Convert Visitor errors to position-assigned errors.
+    ///
+    /// # Why is this necessary?
+    /// Because Visitor errors that occur within each `Deserialize` implementation cannot indicate the error location in XML.
+    #[cold]
+    fn to_readable_err<T>(&self, result: Result<T>) -> Result<T> {
+        match result {
+            Ok(value) => Ok(value),
+            Err(err) => Err(Error::ReadableError {
+                source: ReadableError::from_display(
+                    err.to_string(),
+                    &self.original,
+                    self.original.len() - self.input.len(),
+                ),
+            }),
+        }
     }
 }
 
@@ -162,12 +183,13 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         visitor.visit_bool(tri!(self.parse(boolean())))
     }
 
-    #[inline]
     fn deserialize_char<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_char(self.next_char()?)
+        let ch = self.input.chars().next().ok_or(Error::Eof)?;
+        self.input = &self.input[ch.len_utf8()..];
+        visitor.visit_char(ch)
     }
 
     #[inline]
@@ -308,6 +330,20 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         Ok(value)
     }
 
+    #[inline]
+    fn deserialize_enum<V>(
+        self,
+        _name: &'static str,
+        _variants: &'static [&'static str],
+        visitor: V,
+    ) -> Result<V::Value, Self::Error>
+    where
+        V: Visitor<'de>,
+    {
+        let result = visitor.visit_enum(EnumDeserializer::new(self));
+        self.to_readable_err(result)
+    }
+
     /// # Example of XML to be parsed
     /// ```xml
     /// <hkobject name="#0010" class="hkbProjectData" signature="0x13a39ba7">
@@ -383,17 +419,13 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         self.deserialize_uint64(visitor)
     }
 
-    #[inline]
-    fn deserialize_enum_flags<V>(
-        self,
-        _name: &'static str,
-        _variants: &'static [&'static str],
-        visitor: V,
-    ) -> Result<V::Value, Self::Error>
+    fn deserialize_flags<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_enum_flags(Enum::new(self))
+        let s = tri!(self.parse(string()));
+        let result = visitor.visit_stringptr(StringPtr::from_str(s));
+        self.to_readable_err(result)
     }
 
     fn deserialize_half<V>(self, visitor: V) -> Result<V::Value, Self::Error>
@@ -418,12 +450,14 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
 
 #[cfg(test)]
 mod tests {
+    use crate::common::mocks::{enums::EventMode, flags::FlagValues};
+
     use super::*;
     use pretty_assertions::assert_eq;
     // use crate::common::mocks::{classes::*, enums::EventMode};
     // use havok_types::*;
 
-    fn from_str_assert<'a, T>(s: &'a str, expected: T)
+    fn parse_assert<'a, T>(s: &'a str, expected: T)
     where
         T: Deserialize<'a> + PartialEq + fmt::Debug,
     {
@@ -436,10 +470,36 @@ mod tests {
         }
     }
 
+    fn parse_peek_assert<'a, T>(s: &'a str, expected: (&str, T))
+    where
+        T: Deserialize<'a> + PartialEq + fmt::Debug,
+    {
+        match from_str_peek::<T>(s) {
+            Ok(res) => assert_eq!(res, expected),
+            Err(err) => {
+                tracing::error!(?err);
+                panic!("{err}")
+            }
+        }
+    }
+
     #[test]
     #[quick_tracing::init]
     fn test_deserialize_primitive() {
-        from_str_assert(
+        parse_peek_assert(
+            "ALIGN_8|ALiGN_16|SERIALIZE_IGNORED</hkparam>",
+            (
+                "</hkparam>",
+                FlagValues::ALIGN_8 | FlagValues::ALIGN_16 | FlagValues::SERIALIZE_IGNORED,
+            ),
+        );
+
+        parse_peek_assert(
+            "EVENT_MOE_DEFAULT</hkparam>",
+            ("</hkparam>", EventMode::EventModeDefault),
+        );
+
+        parse_assert(
             r#"
                 <!-- Hi? -->
                 <!-- Hi? -->
@@ -452,7 +512,7 @@ mod tests {
             vec![true, false],
         );
 
-        from_str_assert(
+        parse_assert(
             r#"
     0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
     16 17 18 19 20
@@ -463,7 +523,7 @@ mod tests {
 
     #[test]
     fn test_deserialize_math() {
-        from_str_assert(
+        parse_assert(
             r#"   <!-- comment -->
 
         (-0.000000 0.000000 -0.000000 1.000000  )
@@ -501,7 +561,7 @@ mod tests {
 
     #[test]
     fn test_deserialize_string() {
-        from_str_assert::<Vec<StringPtr>>(
+        parse_assert::<Vec<StringPtr>>(
             r#"
     <hkcstring>Hello</hkcstring>
         <hkcstring>World</hkcstring>
@@ -515,7 +575,7 @@ mod tests {
     #[quick_tracing::init]
     fn test_deserialize_class() {
         // let xml = &include_str!("../../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
-        from_str_assert(
+        parse_assert(
             r##"
 <hkobject name="#01000" class="hkReferencedObject" signature="0xea7f1d08">
         <hkparam name="memSizeAndFlags">2</hkparam>

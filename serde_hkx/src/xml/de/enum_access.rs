@@ -3,13 +3,21 @@ use super::XmlDeserializer;
 use crate::errors::de::{Error, Result};
 use havok_serde::de::{DeserializeSeed, EnumAccess, VariantAccess};
 
-pub struct Enum<'a, 'de: 'a> {
+/// A enum for deserializing each variant in an `enum`.
+///
+/// # Expected XML
+/// - Note that `</hkparam>` confirms the presence but does not consume.
+/// ```xml
+/// EVENT_MODE_IGNORE_FROM_GENERATOR</hkparam>
+/// ```
+#[derive(Debug)]
+pub struct EnumDeserializer<'a, 'de: 'a> {
     de: &'a mut XmlDeserializer<'de>,
 }
 
-impl<'a, 'de> Enum<'a, 'de> {
+impl<'a, 'de> EnumDeserializer<'a, 'de> {
     pub fn new(de: &'a mut XmlDeserializer<'de>) -> Self {
-        Enum { de }
+        EnumDeserializer { de }
     }
 }
 
@@ -18,33 +26,27 @@ impl<'a, 'de> Enum<'a, 'de> {
 //
 // Note that all enum deserialization methods in Serde refer exclusively to the
 // "externally tagged" enum representation.
-impl<'de, 'a> EnumAccess<'de> for Enum<'a, 'de> {
+impl<'de, 'a> EnumAccess<'de> for EnumDeserializer<'a, 'de> {
     type Error = Error;
     type Variant = Self;
 
+    #[inline]
     fn variant_seed<V>(self, seed: V) -> Result<(V::Value, Self::Variant)>
     where
         V: DeserializeSeed<'de>,
     {
-        // The `deserialize_enum` method parsed a `{` character so we are
-        // currently inside of a map. The seed will be deserializing itself from
-        // the key of the map.
         let val = seed.deserialize(&mut *self.de)?;
-        // Parse the colon separating map key from value.
-        if self.de.next_char()? == ':' {
-            Ok((val, self))
-        } else {
-            Err(Error::Eof)
-        }
+        Ok((val, self))
     }
 }
 
-// `VariantAccess` is provided to the `Visitor` to give it the ability to see
-// the content of the single variant that it decided to deserialize.
-impl<'de, 'a> VariantAccess<'de> for Enum<'a, 'de> {
+/// `VariantAccess` is provided to the `Visitor` to give it the ability to see
+/// the content of the single variant that it decided to deserialize.
+impl<'de, 'a> VariantAccess<'de> for EnumDeserializer<'a, 'de> {
     type Error = Error;
 
+    #[inline]
     fn unit_variant(self) -> Result<(), Self::Error> {
-        Err(Error::Eof)
+        Ok(())
     }
 }

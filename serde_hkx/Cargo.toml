@@ -14,6 +14,7 @@ annotate-snippets = "0.11.4"                                              # Erro
 byteorder = "1.5.0"
 havok_serde = { path = "../crates/havok_serde", features = ["indexmap"] }
 havok_types = { path = "../crates/havok_types" }
+havok_types_derive = { path = "../crates/havok_types_derive" }            # To impl `Default`&`FromStr` for Bitflags
 indexmap = "2.2.6"
 snafu = "0.8.2"                                                           # Define all error patterns(with backtrace)
 static_assertions = "1.1.0"

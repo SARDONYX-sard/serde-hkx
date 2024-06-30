@@ -820,6 +820,7 @@ dependencies = [
  "byteorder",
  "havok_serde",
  "havok_types",
+ "havok_types_derive",
  "indexmap 2.2.6",
  "num-derive",
  "num-traits",

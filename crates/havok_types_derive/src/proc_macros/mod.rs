@@ -15,34 +15,42 @@ use syn::{braced, parse::Parse, punctuated::Punctuated, token::PathSep, Ident, T
 pub fn impl_flags_methods(_attr: TokenStream, input: TokenStream) -> TokenStream {
     let bit_flags = syn::parse_macro_input!(input as BitFlagsMacro);
     let struct_ = &bit_flags.struct_;
-    let struct_name = struct_.ident.clone();
-    let struct_name_str = struct_.ident.clone().to_string();
+    let struct_ident = &struct_.ident;
+    let struct_name_str = struct_.ident.to_string();
 
-    let fields_to_str = struct_.fields.iter().map(|field| {
-        let field_name = &field.name;
-        let field_name_str = &field.name.to_string();
-        quote! {
-            #struct_name::#field_name => flags.push(#field_name_str.into()),
-        }
-    });
-    let str_to_fields = struct_.fields.iter().map(|field| {
-        let field_name = &field.name;
-        let field_name_str = &field.name.to_string();
-        quote! {
-            #field_name_str => flags |= #struct_name::#field_name,
-        }
-    });
+    let mut str_push_matchers = Vec::new();
+    let mut matchers = Vec::new();
+    let mut field_names = Vec::new();
+    for field in &struct_.fields {
+        let field_ident = &field.name;
+        let flag_str = field.name.to_string();
 
-    let code = quote! {
+        str_push_matchers.push(quote! {
+            #struct_ident::#field_ident => flags.push(#flag_str.into()),
+        });
+
+        matchers.push(quote! {
+            s if s.eq_ignore_ascii_case(#flag_str) => flags |= #struct_ident::#field_ident,
+        });
+
+        field_names.push(flag_str);
+    }
+
+    let err_msg = format!(
+        "Invalid {struct_name_str}: '{{unknown}}'. Expected one or more values separated by '|', or custom bits. Valid values are: {}.",
+        field_names.join(", ")
+    );
+
+    quote! {
         #bit_flags
 
-        impl Default for #struct_name {
+        impl Default for #struct_ident {
             fn default() -> Self {
                 Self::empty()
             }
         }
 
-        impl core::fmt::Display for #struct_name {
+        impl core::fmt::Display for #struct_ident {
             fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
                 if self.is_empty() {
                     return write!(f, "0");
@@ -51,7 +59,7 @@ pub fn impl_flags_methods(_attr: TokenStream, input: TokenStream) -> TokenStream
                 let mut flags: Vec<std::borrow::Cow<'_, str>> = Vec::new();
                 for flag in self.iter() {
                     match flag {
-                        #(#fields_to_str)*
+                        #(#str_push_matchers)*
                         remain => flags.push(remain.bits().to_string().into()),
                     };
                 }
@@ -60,24 +68,24 @@ pub fn impl_flags_methods(_attr: TokenStream, input: TokenStream) -> TokenStream
             }
         }
 
-        impl core::str::FromStr for #struct_name {
+        impl core::str::FromStr for #struct_ident {
             type Err = String;
 
             fn from_str(s: &str) -> Result<Self, Self::Err> {
                 if s == "0" {
-                    return Ok(#struct_name::empty());
+                    return Ok(#struct_ident::empty());
                 }
 
-                let mut flags = #struct_name::empty();
+                let mut flags = #struct_ident::empty();
                 for token in s.split('|') {
                     match token.trim() {
-                        #(#str_to_fields)*
+                        #(#matchers)*
                         unknown => {
                             let bits = ::havok_types_derive::parse_int::parse(unknown).map_err(|_| {
                                 let name = #struct_name_str;
-                                format!("Expected {name} or bits, but it is not a number: '{unknown}'")
+                                format!(#err_msg)
                             })?;
-                            flags |= #struct_name::from_bits_retain(bits);
+                            flags |= #struct_ident::from_bits_retain(bits);
                         }
                     }
                 }
@@ -85,9 +93,8 @@ pub fn impl_flags_methods(_attr: TokenStream, input: TokenStream) -> TokenStream
                 Ok(flags)
             }
         }
-    };
-
-    code.into()
+    }
+    .into()
 }
 
 /// bitflags::bitflags! {

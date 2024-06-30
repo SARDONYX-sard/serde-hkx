@@ -890,6 +890,19 @@ pub trait Deserializer<'de>: Sized {
     where
         V: Visitor<'de>;
 
+    /// Deserialize an `enum` or `Flags` value.
+    ///
+    /// Hint that the `Deserialize` type is expecting an enum value with a
+    /// particular name and possible variants.
+    fn deserialize_enum<V>(
+        self,
+        name: &'static str,
+        variants: &'static [&'static str],
+        visitor: V,
+    ) -> Result<V::Value, Self::Error>
+    where
+        V: Visitor<'de>;
+
     /// Deserialize an `Struct` value.
     fn deserialize_struct<V>(
         self,
@@ -921,16 +934,11 @@ pub trait Deserializer<'de>: Sized {
     where
         V: Visitor<'de>;
 
-    /// Deserialize an `enum` or `Flags` value.
+    /// Deserialize an `Flags` value.
     ///
     /// Hint that the `Deserialize` type is expecting an enum value with a
     /// particular name and possible variants.
-    fn deserialize_enum_flags<V>(
-        self,
-        name: &'static str,
-        variants: &'static [&'static str],
-        visitor: V,
-    ) -> Result<V::Value, Self::Error>
+    fn deserialize_flags<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>;
 
@@ -1248,6 +1256,17 @@ pub trait Visitor<'de>: Sized {
         Err(Error::invalid_type(Unexpected::Array, &self))
     }
 
+    /// The input contains an enum.
+    ///
+    /// The default implementation fails with a type error.
+    fn visit_enum<A>(self, data: A) -> Result<Self::Value, A::Error>
+    where
+        A: EnumAccess<'de>,
+    {
+        let _ = data;
+        Err(Error::invalid_type(Unexpected::Enum, &self))
+    }
+
     /// The input contains a key-value map.(serde: `visit_map`)
     ///
     /// The default implementation fails with a type error.
@@ -1269,17 +1288,6 @@ pub trait Visitor<'de>: Sized {
         Err(Error::invalid_type(Unexpected::CString(v), &self))
     }
 
-    /// The input contains an enum or flags.
-    ///
-    /// The default implementation fails with a type error.
-    fn visit_enum_flags<A>(self, data: A) -> Result<Self::Value, A::Error>
-    where
-        A: EnumAccess<'de>,
-    {
-        let _ = data;
-        Err(Error::invalid_type(Unexpected::Enum, &self))
-    }
-
     /// The input contains a u64.
     ///
     /// The default implementation fails with a type error.
@@ -1288,6 +1296,17 @@ pub trait Visitor<'de>: Sized {
         E: Error,
     {
         Err(Error::invalid_type(Unexpected::Ulong(v), &self))
+    }
+
+    /// The input contains flags.
+    ///
+    /// The default implementation fails with a type error.
+    fn visit_flags<A>(self, data: A) -> Result<Self::Value, A::Error>
+    where
+        A: EnumAccess<'de>,
+    {
+        let _ = data;
+        Err(Error::invalid_type(Unexpected::Flags, &self))
     }
 
     /// The input contains a f16.
@@ -1822,8 +1841,7 @@ pub trait VariantAccess<'de>: Sized {
 
     /// Called when deserializing a variant with no values.
     ///
-    /// If the data contains a different type of variant, the following
-    /// `invalid_type` error should be constructed:
+    /// Check that the value of the enum is of a valid type immediately after deserialization with `EnumAccess::variant`.
     fn unit_variant(self) -> Result<(), Self::Error>;
 }
 
