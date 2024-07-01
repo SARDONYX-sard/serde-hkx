@@ -250,6 +250,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Uint8,
                         __FieldVisitor,
                     )
                 }
@@ -302,7 +303,6 @@ const _: () = {
                 __deserializer,
                 "MeasurementMode",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Uint8,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<MeasurementMode>,
                     lifetime: _serde::__private::PhantomData,

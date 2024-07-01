@@ -304,6 +304,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Int8,
                         __FieldVisitor,
                     )
                 }
@@ -364,7 +365,6 @@ const _: () = {
                 __deserializer,
                 "Format",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Int8,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<Format>,
                     lifetime: _serde::__private::PhantomData,
@@ -468,6 +468,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Int8,
                         __FieldVisitor,
                     )
                 }
@@ -521,7 +522,6 @@ const _: () = {
                 __deserializer,
                 "FilterMode",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Int8,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<FilterMode>,
                     lifetime: _serde::__private::PhantomData,
@@ -676,6 +676,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Int8,
                         __FieldVisitor,
                     )
                 }
@@ -779,7 +780,6 @@ const _: () = {
                 __deserializer,
                 "TextureUsageType",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Int8,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<TextureUsageType>,
                     lifetime: _serde::__private::PhantomData,

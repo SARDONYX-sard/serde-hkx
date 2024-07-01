@@ -368,6 +368,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Int8,
                         __FieldVisitor,
                     )
                 }
@@ -420,7 +421,6 @@ const _: () = {
                 __deserializer,
                 "InitialVelocityCoordinates",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Int8,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<InitialVelocityCoordinates>,
                     lifetime: _serde::__private::PhantomData,
@@ -522,6 +522,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Int8,
                         __FieldVisitor,
                     )
                 }
@@ -572,7 +573,6 @@ const _: () = {
                 __deserializer,
                 "MotionMode",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Int8,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<MotionMode>,
                     lifetime: _serde::__private::PhantomData,

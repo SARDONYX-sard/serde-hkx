@@ -309,6 +309,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Int16,
                         __FieldVisitor,
                     )
                 }
@@ -384,7 +385,6 @@ const _: () = {
                 __deserializer,
                 "Role",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Int16,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<Role>,
                     lifetime: _serde::__private::PhantomData,

@@ -334,6 +334,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Int8,
                         __FieldVisitor,
                     )
                 }
@@ -400,7 +401,6 @@ const _: () = {
                 __deserializer,
                 "MeshShapeIndexStridingType",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Int8,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<MeshShapeIndexStridingType>,
                     lifetime: _serde::__private::PhantomData,
@@ -513,6 +513,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Int8,
                         __FieldVisitor,
                     )
                 }
@@ -581,7 +582,6 @@ const _: () = {
                 __deserializer,
                 "MeshShapeMaterialIndexStridingType",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Int8,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<
                         MeshShapeMaterialIndexStridingType,

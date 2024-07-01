@@ -1419,6 +1419,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Uint32,
                         __FieldVisitor,
                     )
                 }
@@ -2172,7 +2173,6 @@ const _: () = {
                 __deserializer,
                 "ExtendedColors",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Uint32,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<ExtendedColors>,
                     lifetime: _serde::__private::PhantomData,

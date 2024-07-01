@@ -276,6 +276,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Uint16,
                         __FieldVisitor,
                     )
                 }
@@ -336,7 +337,6 @@ const _: () = {
                 __deserializer,
                 "DataType",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Uint16,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<DataType>,
                     lifetime: _serde::__private::PhantomData,
@@ -481,6 +481,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Uint16,
                         __FieldVisitor,
                     )
                 }
@@ -569,7 +570,6 @@ const _: () = {
                 __deserializer,
                 "DataUsage",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Uint16,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<DataUsage>,
                     lifetime: _serde::__private::PhantomData,

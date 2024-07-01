@@ -531,6 +531,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Int8,
                         __FieldVisitor,
                     )
                 }
@@ -579,7 +580,6 @@ const _: () = {
                 __deserializer,
                 "PhantomType",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Int8,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<PhantomType>,
                     lifetime: _serde::__private::PhantomData,
@@ -680,6 +680,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Int8,
                         __FieldVisitor,
                     )
                 }
@@ -732,7 +733,6 @@ const _: () = {
                 __deserializer,
                 "LinearVelocityMode",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Int8,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<LinearVelocityMode>,
                     lifetime: _serde::__private::PhantomData,

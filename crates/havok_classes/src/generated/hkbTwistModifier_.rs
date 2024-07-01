@@ -343,6 +343,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Int8,
                         __FieldVisitor,
                     )
                 }
@@ -388,7 +389,6 @@ const _: () = {
                 __deserializer,
                 "SetAngleMethod",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Int8,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<SetAngleMethod>,
                     lifetime: _serde::__private::PhantomData,
@@ -491,6 +491,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Int8,
                         __FieldVisitor,
                     )
                 }
@@ -543,7 +544,6 @@ const _: () = {
                 __deserializer,
                 "RotationAxisCoordinates",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Int8,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<RotationAxisCoordinates>,
                     lifetime: _serde::__private::PhantomData,

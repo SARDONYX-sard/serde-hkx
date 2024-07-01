@@ -907,6 +907,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Int8,
                         __FieldVisitor,
                     )
                 }
@@ -973,7 +974,6 @@ const _: () = {
                 __deserializer,
                 "SimulationType",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Int8,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<SimulationType>,
                     lifetime: _serde::__private::PhantomData,
@@ -1081,6 +1081,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Int8,
                         __FieldVisitor,
                     )
                 }
@@ -1140,7 +1141,6 @@ const _: () = {
                 __deserializer,
                 "ContactPointGeneration",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Int8,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<ContactPointGeneration>,
                     lifetime: _serde::__private::PhantomData,
@@ -1256,6 +1256,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Int8,
                         __FieldVisitor,
                     )
                 }
@@ -1322,7 +1323,6 @@ const _: () = {
                 __deserializer,
                 "BroadPhaseBorderBehaviour",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Int8,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<BroadPhaseBorderBehaviour>,
                     lifetime: _serde::__private::PhantomData,
@@ -1421,6 +1421,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Int8,
                         __FieldVisitor,
                     )
                 }
@@ -1466,7 +1467,6 @@ const _: () = {
                 __deserializer,
                 "TreeUpdateType",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Int8,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<TreeUpdateType>,
                     lifetime: _serde::__private::PhantomData,

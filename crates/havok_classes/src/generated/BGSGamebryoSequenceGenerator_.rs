@@ -284,6 +284,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Int8,
                         __FieldVisitor,
                     )
                 }
@@ -339,7 +340,6 @@ const _: () = {
                 __deserializer,
                 "BlendModeFunction",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Int8,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<BlendModeFunction>,
                     lifetime: _serde::__private::PhantomData,

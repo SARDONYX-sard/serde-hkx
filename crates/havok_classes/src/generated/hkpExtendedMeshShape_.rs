@@ -439,6 +439,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Int8,
                         __FieldVisitor,
                     )
                 }
@@ -502,7 +503,6 @@ const _: () = {
                 __deserializer,
                 "IndexStridingType",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Int8,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<IndexStridingType>,
                     lifetime: _serde::__private::PhantomData,
@@ -615,6 +615,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Int8,
                         __FieldVisitor,
                     )
                 }
@@ -681,7 +682,6 @@ const _: () = {
                 __deserializer,
                 "MaterialIndexStridingType",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Int8,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<MaterialIndexStridingType>,
                     lifetime: _serde::__private::PhantomData,
@@ -781,6 +781,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Int8,
                         __FieldVisitor,
                     )
                 }
@@ -829,7 +830,6 @@ const _: () = {
                 __deserializer,
                 "SubpartType",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Int8,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<SubpartType>,
                     lifetime: _serde::__private::PhantomData,

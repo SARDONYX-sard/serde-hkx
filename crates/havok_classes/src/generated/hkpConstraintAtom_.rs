@@ -520,6 +520,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Uint16,
                         __FieldVisitor,
                     )
                 }
@@ -726,7 +727,6 @@ const _: () = {
                 __deserializer,
                 "AtomType",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Uint16,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<AtomType>,
                     lifetime: _serde::__private::PhantomData,
@@ -826,6 +826,7 @@ const _: () = {
                 {
                     _serde::Deserializer::deserialize_identifier(
                         __deserializer,
+                        _serde::de::ReadEnumSize::Uint8,
                         __FieldVisitor,
                     )
                 }
@@ -874,7 +875,6 @@ const _: () = {
                 __deserializer,
                 "SolvingMethod",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Uint8,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<SolvingMethod>,
                     lifetime: _serde::__private::PhantomData,
