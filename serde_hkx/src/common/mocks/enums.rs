@@ -134,7 +134,11 @@ const _: () = {
                 where
                     __D: _serde::Deserializer<'de>,
                 {
-                    _serde::Deserializer::deserialize_identifier(__deserializer, __FieldVisitor)
+                    _serde::Deserializer::deserialize_identifier(
+                        __deserializer,
+                        _serde::de::ReadEnumSize::Int8,
+                        __FieldVisitor,
+                    )
                 }
             }
             #[doc(hidden)]
@@ -188,7 +192,6 @@ const _: () = {
                 __deserializer,
                 "EventMode",
                 VARIANTS,
-                _serde::de::ReadEnumSize::Int8,
                 __Visitor {
                     marker: _serde::__private::PhantomData::<EventMode>,
                     lifetime: _serde::__private::PhantomData,

@@ -165,7 +165,11 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     ///
     /// 1. Read `ANY_ENUM_VARIANT` in `<hkparam>ANY_ENUM_VARIANT</hkparam>`
     /// 2. Check by calling `visit_stringptr` .
-    fn deserialize_identifier<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    fn deserialize_identifier<V>(
+        self,
+        _size: ReadEnumSize,
+        visitor: V,
+    ) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
@@ -353,7 +357,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         self,
         _name: &'static str,
         _variants: &'static [&'static str],
-        _size: ReadEnumSize,
         visitor: V,
     ) -> Result<V::Value, Self::Error>
     where

@@ -12,12 +12,20 @@ pub enum Error {
         msg: String,
     },
 
+    /// Incomplete parsing binary.
+    #[snafu(display("Index to hold processing deserialization status of struct is not found."))]
+    NotFoundIndex,
+
+    /// Incomplete parsing binary.
+    #[snafu(display("Incomplete parsing binary. Remain: {remain:?}"))]
+    TrailingBytes { remain: Vec<u8> },
+
     /// Still need to parse the syntax but the string provided is not enough.
     #[snafu(display("Still need to parse the syntax but the string provided is not enough."))]
     Eof,
 
-    /// Incomplete parsing of syntax.
-    #[snafu(display("Incomplete parsing of syntax. Remain: {remain}"))]
+    /// Incomplete parsing of XML.
+    #[snafu(display("Incomplete parsing XML. Remain: {remain}"))]
     TrailingCharacters { remain: String },
 
     /// Expected class {expected}, but got {actual}.

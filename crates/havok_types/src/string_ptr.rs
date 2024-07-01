@@ -31,7 +31,7 @@ impl<'a> StringPtr<'a> {
 
     /// Cast [`str`] with non copying.
     #[inline]
-    pub fn from_str(s: &'a str) -> StringPtr<'a> {
+    pub fn from_str(s: &'a str) -> Self {
         Self {
             inner: Some(Cow::Borrowed(s)),
         }
@@ -39,7 +39,7 @@ impl<'a> StringPtr<'a> {
 
     /// Inner to [`Self`]
     #[inline]
-    pub fn from_option(s: Option<Cow<'a, str>>) -> StringPtr<'a> {
+    pub fn from_option(s: Option<Cow<'a, str>>) -> Self {
         Self { inner: s }
     }
 

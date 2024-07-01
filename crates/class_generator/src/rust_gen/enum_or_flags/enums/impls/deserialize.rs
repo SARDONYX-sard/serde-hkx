@@ -163,7 +163,11 @@ pub fn impl_de_for_enum(one_enum: &Enum) -> TokenStream {
                         where
                             __D: _serde::Deserializer<'de>,
                         {
-                            _serde::Deserializer::deserialize_identifier(__deserializer, __FieldVisitor)
+                            _serde::Deserializer::deserialize_identifier(
+                                __deserializer,
+                                _serde::de::ReadEnumSize::#storage_size_ident,
+                                __FieldVisitor
+                            )
                         }
                     }
                     #[doc(hidden)]
@@ -197,7 +201,6 @@ pub fn impl_de_for_enum(one_enum: &Enum) -> TokenStream {
                         __deserializer,
                         #enum_name,
                         VARIANTS,
-                        _serde::de::ReadEnumSize::#storage_size_ident,
                         __Visitor {
                             marker: _serde::__private::PhantomData::<#enum_ident>,
                             lifetime: _serde::__private::PhantomData,

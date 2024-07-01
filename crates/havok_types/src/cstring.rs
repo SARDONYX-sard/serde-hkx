@@ -32,10 +32,16 @@ impl<'a> CString<'a> {
 
     /// Cast [`str`] with non copying.
     #[inline]
-    pub fn from_str(s: &'a str) -> CString<'a> {
+    pub fn from_str(s: &'a str) -> Self {
         Self {
             inner: Some(Cow::Borrowed(s)),
         }
+    }
+
+    /// Inner to [`Self`]
+    #[inline]
+    pub fn from_option(s: Option<Cow<'a, str>>) -> Self {
+        Self { inner: s }
     }
 
     /// Null pointer or not?

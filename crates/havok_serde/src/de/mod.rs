@@ -754,9 +754,12 @@ pub trait Deserializer<'de>: Sized {
     /// deserialization.
     type Error: Error;
 
-    /// Hint that the `Deserialize` type is expecting the name of a struct
-    /// field or the discriminant of an enum variant.
-    fn deserialize_identifier<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    /// Hint that the `Deserialize` type is expecting the discriminant of an enum variant.
+    fn deserialize_identifier<V>(
+        self,
+        size: ReadEnumSize,
+        visitor: V,
+    ) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>;
 
@@ -890,7 +893,7 @@ pub trait Deserializer<'de>: Sized {
     where
         V: Visitor<'de>;
 
-    /// Deserialize an `enum` or `Flags` value.
+    /// Deserialize an `enum` value.
     ///
     /// Hint that the `Deserialize` type is expecting an enum value with a
     /// particular name and possible variants.
@@ -898,7 +901,6 @@ pub trait Deserializer<'de>: Sized {
         self,
         name: &'static str,
         variants: &'static [&'static str],
-        size: ReadEnumSize,
         visitor: V,
     ) -> Result<V::Value, Self::Error>
     where
