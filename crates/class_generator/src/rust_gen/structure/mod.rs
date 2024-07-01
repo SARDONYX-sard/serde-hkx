@@ -7,6 +7,7 @@ use crate::cpp_info::Class;
 use proc_macro2::TokenStream;
 use quote::quote;
 
+pub use self::impls::deserialize::impl_deserialize;
 pub use self::impls::serialize::impl_serialize;
 pub fn generate(class: &Class) -> syn::ItemStruct {
     let class_name = &class.name;

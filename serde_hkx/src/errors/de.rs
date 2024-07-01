@@ -40,6 +40,13 @@ pub enum Error {
     ReadableError {
         source: super::readable::ReadableError,
     },
+
+    /// Contain null bytes in a string error
+    #[snafu(transparent)]
+    FromBytesWithNulError {
+        /// Contain null bytes in a string error
+        source: std::ffi::FromBytesWithNulError,
+    },
 }
 
 impl havok_serde::de::Error for Error {

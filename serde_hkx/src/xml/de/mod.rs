@@ -142,13 +142,16 @@ impl<'de> XmlDeserializer<'de> {
     fn to_readable_err<T>(&self, result: Result<T>) -> Result<T> {
         match result {
             Ok(value) => Ok(value),
-            Err(err) => Err(Error::ReadableError {
-                source: ReadableError::from_display(
-                    err,
-                    &self.original,
-                    self.original.len() - self.input.len(),
-                ),
-            }),
+            Err(err) => match err {
+                Error::ReadableError { .. } => Err(err),
+                _ => Err(Error::ReadableError {
+                    source: ReadableError::from_display(
+                        err,
+                        &self.original,
+                        self.original.len() - self.input.len(),
+                    ),
+                }),
+            },
         }
     }
 }

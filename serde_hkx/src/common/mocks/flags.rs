@@ -12,13 +12,13 @@ bitflags::bitflags! {
     pub struct FlagValues: u16 {
         /// Flags is empty: 0
         const FLAGS_NONE = 0;
-        /// Force 8-byte align: 1 << 7
+        /// Force 8-byte align: 1 << 7 => 128
         const ALIGN_8 = 128;
-        /// Forced 16-byte align: 1 << 8
+        /// Forced 16-byte align: 1 << 8 => 256
         const ALIGN_16 = 256;
         /// Not owned by class: 1 << 9
         const NOT_OWNED = 512;
-        /// Skip serializing: 1 << 10
+        /// Skip serializing: 1 << 10 => 1024
         const SERIALIZE_IGNORED = 1024;
     }
 }

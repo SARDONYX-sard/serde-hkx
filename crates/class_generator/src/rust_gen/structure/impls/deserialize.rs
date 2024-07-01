@@ -7,47 +7,39 @@ use crate::{
 use proc_macro2::TokenStream;
 use quote::quote;
 
-pub fn impl_serialize(class: &Class, class_map: &ClassMap) -> TokenStream {
+/// TODO: Implement binary deserializer
+///
+/// Note: that it is only temporarily placed until the specifications are finalized.
+pub fn impl_deserialize(class: &Class, class_map: &ClassMap) -> TokenStream {
     let name = class.name.as_ref();
-    let signature = class.signature.get();
     let class_name = syn::Ident::new(&name, proc_macro2::Span::call_site());
-    let class_name_c_str = proc_macro2::Literal::c_string(&std::ffi::CString::new(name).unwrap());
-    let fields = impl_serialize_fields(class, &class_map);
+    let fields = impl_deserialize_fields(class, &class_map);
     let lifetime = match class.has_string {
         true => quote! { <'a> },
         false => quote! {},
     };
 
     quote::quote! {
+        #[doc(hidden)]
+        #[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
         const _: () = {
-            use havok_serde as __serde;
-            use __serde::HavokClass;
-
-            impl #lifetime __serde::HavokClass for #class_name #lifetime {
-                fn name(&self) -> &'static core::ffi::CStr {
-                    #class_name_c_str
-                }
-
-                fn signature(&self) -> __serde::__private::Signature {
-                    __serde::__private::Signature::new(#signature)
-                }
-            }
-
-            impl #lifetime __serde::Serialize for #class_name #lifetime {
-                fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
-                    where S: __serde::ser::Serializer
+            #[allow(unused_extern_crates, clippy::useless_attribute)]
+            extern crate havok_serde as _serde;
+            #[automatically_derived]
+            impl<'de> _serde::Deserialize<'de> for #class_name<#lifetime> {
+                fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
+                where
+                    __D: _serde::Deserializer<'de>,
                 {
-                    let class_meta = self.__ptr.map(|name| (name, self.signature()));
-                    let mut serializer = __serializer.serialize_struct(#name, class_meta)?;
+
                     #(#fields)*
-                    serializer.end()
                 }
+            };
         }
-        };
     }
 }
 
-fn impl_serialize_fields(class: &Class, class_map: &ClassMap) -> Vec<TokenStream> {
+fn impl_deserialize_fields(class: &Class, class_map: &ClassMap) -> Vec<TokenStream> {
     let mut serialize_calls = Vec::new();
     // The ptr type must serialize the data pointed to by ptr after serializing all fields. This is an array for that purpose.
     let mut ptr_after_write_fields = Vec::new();
