@@ -6,14 +6,16 @@ mod seq;
 use crate::{lib::*, tri};
 
 use self::map::MapDeserializer;
-use self::parser::error::ReadableError;
 use self::parser::tag::{class_start_tag, end_tag};
 use self::parser::type_kind::{
     boolean, matrix3, matrix4, pointer, qstransform, quaternion, real, rotation, string,
     string_in_array, transform, vector4,
 };
 use self::seq::SeqDeserializer;
-use crate::errors::de::{Error, Result};
+use crate::errors::{
+    de::{Error, Result},
+    readable::ReadableError,
+};
 use enum_access::EnumDeserializer;
 use havok_serde::de::{self, Deserialize, ReadEnumSize, Visitor};
 use havok_types::*;

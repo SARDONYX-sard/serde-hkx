@@ -157,7 +157,7 @@ fn radix_digits<'a>() -> impl Parser<&'a str, usize, ContextError> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::xml::de::parser::error::ReadableError;
+    use crate::errors::readable::ReadableError;
 
     #[test]
     fn test_radix_digits() {
@@ -180,9 +180,10 @@ mod tests {
         assert!(end_tag("tag").parse("</  tag  >").is_ok());
 
         let input = "</ hkparam >\n";
-        match end_tag("hkparam").parse(input).map_err(|e| {
-            crate::xml::de::parser::error::ReadableError::from_parse(e, input).to_string()
-        }) {
+        match end_tag("hkparam")
+            .parse(input)
+            .map_err(|e| ReadableError::from_parse(e, input).to_string())
+        {
             Ok(res) => assert_eq!(res, ()),
             Err(err) => panic!("{err}"),
         }

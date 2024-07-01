@@ -1,4 +1,4 @@
-//! XML human-readable error message
+//! HexDump Display(For binary)/XML human-readable error message
 use crate::lib::*;
 use winnow::error::{ContextError, ErrMode, ParseError, StrContext};
 

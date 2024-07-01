@@ -30,7 +30,7 @@ pub enum Error {
     /// Human readable XML parsing error
     #[snafu(transparent)]
     ReadableError {
-        source: crate::xml::de::parser::error::ReadableError,
+        source: super::readable::ReadableError,
     },
 }
 

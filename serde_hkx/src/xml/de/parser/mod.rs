@@ -1,5 +1,4 @@
 //! XML parser combinator
-pub mod error;
 pub mod tag;
 pub mod type_kind;
 
