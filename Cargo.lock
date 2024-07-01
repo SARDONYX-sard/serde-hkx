@@ -508,6 +508,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "inheritance_tree_gen"
+version = "0.1.0"
+dependencies = [
+ "class_generator",
+ "jwalk",
+ "pretty_assertions",
+ "serde_json",
+]
+
+[[package]]
 name = "itoa"
 version = "1.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
