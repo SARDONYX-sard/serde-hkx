@@ -45,6 +45,7 @@ impl Signature {
 impl FromStr for Signature {
     type Err = &'static str;
 
+    #[inline]
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         Ok(Self::new(
             parse_int::parse(s).map_err(|_err| "Invalid integer for Signature")?,
@@ -53,12 +54,14 @@ impl FromStr for Signature {
 }
 
 impl From<u32> for Signature {
+    #[inline]
     fn from(value: u32) -> Self {
         Self(value)
     }
 }
 
 impl From<Signature> for u32 {
+    #[inline]
     fn from(value: Signature) -> Self {
         value.0
     }

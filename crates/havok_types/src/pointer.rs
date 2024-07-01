@@ -54,6 +54,7 @@ impl Pointer {
 impl FromStr for Pointer {
     type Err = &'static str;
 
+    #[inline]
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         Ok(Self::new(
             parse_int::parse(s.trim_start_matches('#'))
@@ -63,12 +64,14 @@ impl FromStr for Pointer {
 }
 
 impl From<usize> for Pointer {
+    #[inline]
     fn from(value: usize) -> Self {
         Self(value)
     }
 }
 
 impl From<Pointer> for usize {
+    #[inline]
     fn from(value: Pointer) -> Self {
         value.0
     }
