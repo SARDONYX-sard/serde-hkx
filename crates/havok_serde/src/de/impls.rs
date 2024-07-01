@@ -314,6 +314,98 @@ seq_vec_impl!(
 seq_vec_impl!(Vector4, Quaternion, Matrix3, Rotation, QsTransform, Matrix4, Transform => next_math_element, next_math_element_seed);
 
 ////////////////////////////////////////////////////////////////////////////////
+// For `hkClass`, etc vector.
+
+#[cfg(any(feature = "std", feature = "alloc"))]
+#[cfg_attr(docsrs, doc(cfg(any(feature = "std", feature = "alloc"))))]
+impl<'de, T> Deserialize<'de> for Vec<T>
+where
+    T: Deserialize<'de> + crate::HavokClass,
+{
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        struct VecVisitor<T>(PhantomData<T>);
+
+        impl<'de, T> Visitor<'de> for VecVisitor<T>
+        where
+            T: Deserialize<'de> + crate::HavokClass,
+        {
+            type Value = Vec<T>;
+
+            fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+                formatter.write_str("a sequence")
+            }
+
+            fn visit_array<A>(self, mut seq: A) -> Result<Self::Value, A::Error>
+            where
+                A: SeqAccess<'de>,
+            {
+                let capacity = size_hint::cautious::<T>(seq.size_hint());
+                let mut values = Vec::with_capacity(capacity);
+
+                while let Some(value) = tri!(seq.next_class_element()) {
+                    values.push(value);
+                }
+
+                Ok(values)
+            }
+        }
+
+        let visitor = VecVisitor(PhantomData);
+        deserializer.deserialize_array(visitor)
+    }
+
+    fn deserialize_in_place<D>(deserializer: D, place: &mut Self) -> Result<(), D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        struct VecInPlaceVisitor<'a, T>(&'a mut Vec<T>);
+
+        impl<'a, 'de: 'a, T> Visitor<'de> for VecInPlaceVisitor<'a, T>
+        where
+            T: Deserialize<'de> + crate::HavokClass,
+        {
+            type Value = ();
+
+            fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+                formatter.write_str("a sequence")
+            }
+
+            fn visit_array<A>(self, mut seq: A) -> Result<Self::Value, A::Error>
+            where
+                A: SeqAccess<'de>,
+            {
+                let hint = size_hint::cautious::<T>(seq.size_hint());
+                if let Some(additional) = hint.checked_sub(self.0.len()) {
+                    self.0.reserve(additional);
+                }
+
+                for i in 0..self.0.len() {
+                    let next = {
+                        let next_place = InPlaceSeed(&mut self.0[i]);
+                        tri!(seq.next_class_element_seed(next_place))
+                    };
+                    if next.is_none() {
+                        self.0.truncate(i);
+                        return Ok(());
+                    }
+                }
+
+                while let Some(value) = tri!(seq.next_class_element()) {
+                    self.0.push(value);
+                }
+
+                Ok(())
+            }
+        }
+
+        deserializer.deserialize_array(VecInPlaceVisitor(place))
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
 
 struct ArrayVisitor<A> {
     marker: PhantomData<A>,
@@ -327,32 +419,6 @@ impl<A> ArrayVisitor<A> {
         }
     }
 }
-
-// impl<'de, T> Visitor<'de> for ArrayVisitor<[T; 0]> {
-//     type Value = [T; 0];
-
-//     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
-//         formatter.write_str("an empty array")
-//     }
-
-//     #[inline]
-//     fn visit_array<A>(self, _: A) -> Result<Self::Value, A::Error>
-//     where
-//         A: SeqAccess<'de>,
-//     {
-//         Ok([])
-//     }
-// }
-
-// // Does not require T: Deserialize<'de>.
-// impl<'de, T> Deserialize<'de> for [T; 0] {
-//     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-//     where
-//         D: Deserializer<'de>,
-//     {
-//         deserializer.deserialize_array(ArrayVisitor::<[T; 0]>::new())
-//     }
-// }
 
 macro_rules! array_impls {
     ($($ty:ty),+ $(,)? => $fn_name:tt,  $fn_name_seed:tt) => {
@@ -442,7 +508,7 @@ macro_rules! array_impls {
                             //
                             // # Safety
                             //
-                            //  1. - array[.. initiliazed_count] only
+                            //  1. - array[.. initialized_count] only
                             //       contains init elements, thus there is no risk of dropping
                             //       uninit data;
                             //  2. - We are within the array since we start from the

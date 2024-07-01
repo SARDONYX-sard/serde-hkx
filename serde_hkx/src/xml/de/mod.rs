@@ -514,7 +514,45 @@ mod tests {
             "EVENT_MODE_DEFAULT</hkparam>",
             ("</hkparam>", EventMode::EventModeDefault),
         );
+    }
 
+    #[test]
+    fn test_deserialize_string() {
+        parse_assert::<Vec<StringPtr>>(
+            r#"
+    <hkcstring>Hello</hkcstring>
+        <hkcstring>World</hkcstring>
+    <hkcstring></hkcstring>
+        "#,
+            vec!["Hello".into(), "World".into(), "".into()],
+        );
+    }
+
+    #[test]
+    #[quick_tracing::init]
+    fn test_deserialize_class() {
+        parse_assert(
+            r##"
+<hkobject name="#01000" class="hkReferencedObject" signature="0xea7f1d08">
+        <hkparam name="memSizeAndFlags">2</hkparam>
+        <!-- comment1 -->
+        <!-- comment2 -->
+        <hkparam name="referenceCount">0</hkparam>
+        <!-- comment3 -->
+        <!-- comment4 -->
+</hkobject>"##,
+            crate::common::mocks::classes::HkReferencedObject {
+                __ptr_name_attr: Some(Pointer::new(1000)),
+                parent: crate::common::mocks::classes::HkBaseObject { _name: None },
+                mem_size_and_flags: 2,
+                reference_count: 0,
+            },
+        );
+    }
+
+    #[test]
+    #[quick_tracing::init]
+    fn test_deserialize_primitive_vec() {
         parse_assert(
             r#"
                 <!-- Hi? -->
@@ -538,7 +576,7 @@ mod tests {
     }
 
     #[test]
-    fn test_deserialize_math() {
+    fn test_deserialize_math_vec() {
         parse_assert(
             r#"   <!-- comment -->
 
@@ -576,38 +614,15 @@ mod tests {
     }
 
     #[test]
-    fn test_deserialize_string() {
-        parse_assert::<Vec<StringPtr>>(
-            r#"
-    <hkcstring>Hello</hkcstring>
-        <hkcstring>World</hkcstring>
-    <hkcstring></hkcstring>
-        "#,
-            vec!["Hello".into(), "World".into(), "".into()],
-        );
+    #[quick_tracing::init]
+    fn test_deserialize_primitive_array() {
+        parse_assert::<[char; 0]>("", []);
     }
 
     #[test]
     #[quick_tracing::init]
-    fn test_deserialize_class() {
+    fn test_deserialize_class_fixed_array() {
         // let xml = &include_str!("../../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
-        parse_assert(
-            r##"
-<hkobject name="#01000" class="hkReferencedObject" signature="0xea7f1d08">
-        <hkparam name="memSizeAndFlags">2</hkparam>
-        <!-- comment1 -->
-        <!-- comment2 -->
-        <hkparam name="referenceCount">0</hkparam>
-        <!-- comment3 -->
-        <!-- comment4 -->
-</hkobject>"##,
-            crate::common::mocks::classes::HkReferencedObject {
-                __ptr_name_attr: Some(Pointer::new(1000)),
-                parent: crate::common::mocks::classes::HkBaseObject { _name: None },
-                mem_size_and_flags: 2,
-                reference_count: 0,
-            },
-        );
 
         parse_assert(
             r##"
