@@ -34,23 +34,16 @@ pub struct BytesDeserializer<'de> {
     original: &'de [u8],
 
     endian: Endianness,
+    is_x86: bool,
 
-    /// Unique Class index & XML name attribute.
+    /// Unique Class index & XML name attribute(e.g. `#0050`).
     ///
     /// Incremented each time deserialize_struct is called.
     class_index: usize,
-
-    ///  In `Struct` deserialization?
-    ///
-    /// # Why need this flag?
-    /// This flag is necessary because XML handles deserialization of a field in a struct differently
-    /// than it handles deserialization of a struct in a field in a struct.
-    ///
-    /// - struct in field: `<hkobject name="#0050" class="" signature=""></hkobject>`
-    /// - root struct: `<hkobject></hkobject>`
-    in_struct: bool,
     /// Field index currently being processed
     field_index: Option<usize>,
+    /// Field length currently being processed
+    field_length: Option<usize>,
 }
 
 impl<'de> BytesDeserializer<'de> {
@@ -60,9 +53,10 @@ impl<'de> BytesDeserializer<'de> {
             input,
             original: input,
             endian: Endianness::Little,
+            is_x86: false,
             class_index: 0,
-            in_struct: false,
             field_index: None,
+            field_length: None,
         }
     }
 }
@@ -155,7 +149,21 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_uint64(tri!(self.field_index.ok_or(Error::NotFoundIndex)) as u64)
+        if let (Some(index), Some(length)) = (self.field_index, self.field_index) {
+            let res = visitor.visit_uint64(index as u64);
+            tracing::debug!(index);
+            self.field_index = Some(index + 1);
+            if length < index {
+                return Err(Error::OverFlowIndex {
+                    expected: length,
+                    actual: index,
+                });
+            } else {
+                res
+            }
+        } else {
+            return Err(Error::NotFoundIndex);
+        }
     }
 
     #[inline]
@@ -368,14 +376,16 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        self.in_struct = true;
         self.class_index += 1;
+        self.field_index = Some(0);
+        self.field_length = Some(fields.len());
+
         let value = tri!(visitor.visit_struct(MapDeserializer::new(
             self,
             Some(Pointer::new(self.class_index)),
-            fields
         )));
-        self.in_struct = false;
+        self.field_index = None;
+        self.field_length = None;
 
         Ok(value)
     }
@@ -523,5 +533,24 @@ mod tests {
     #[quick_tracing::init]
     fn test_deserialize_primitive_array() {
         parse_assert::<[char; 0]>(b"", []);
+    }
+
+    #[test]
+    #[quick_tracing::init]
+    fn test_deserialize_class() {
+        parse_assert(
+            &[
+                0, 0, 0, 0, 0, 0, 0, 0, // hkBaseObject
+                2, 0, // mem_size_and_flags
+                0, 0, // reference_count
+                0, 0, 0, 0, 0, 0, 0, 0, // 8bytes align for struct
+            ],
+            crate::common::mocks::classes::HkReferencedObject {
+                __ptr_name_attr: Some(Pointer::new(1)),
+                parent: crate::common::mocks::classes::HkBaseObject { _name: None },
+                mem_size_and_flags: 2,
+                reference_count: 0,
+            },
+        );
     }
 }

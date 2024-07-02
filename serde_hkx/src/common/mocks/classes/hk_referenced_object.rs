@@ -75,6 +75,18 @@ const _: () = {
                     core::fmt::Formatter::write_str(__formatter, "field identifier")
                 }
 
+                /// Index for binary
+                fn visit_uint64<E>(self, __value: u64) -> Result<Self::Value, E>
+                where
+                    E: havok_serde::de::Error,
+                {
+                    match __value {
+                        0 => Ok(__Field::__field0),
+                        1 => Ok(__Field::__field1),
+                        _ => Ok(__Field::__ignore),
+                    }
+                }
+
                 fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
@@ -119,6 +131,7 @@ const _: () = {
                     let mut __field0: _serde::__private::Option<u16> = _serde::__private::None;
                     let mut __field1: _serde::__private::Option<i16> = _serde::__private::None;
 
+                    __A::pad(&mut __map, 4, 8); // hkBaseObject to vtable of ptr size
                     while let _serde::__private::Some(__key) =
                         match _serde::de::MapAccess::next_key::<__Field>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,
@@ -155,7 +168,10 @@ const _: () = {
                                 }
                                 __field1 = _serde::__private::Some(
                                     match _serde::de::MapAccess::next_value::<i16>(&mut __map) {
-                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Ok(__val) => {
+                                            __A::pad(&mut __map, 4, 8);
+                                            __val
+                                        }
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
                                         }

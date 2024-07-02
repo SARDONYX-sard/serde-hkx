@@ -10,24 +10,13 @@ pub struct MapDeserializer<'a, 'de: 'a> {
     /// Deserializer
     de: &'a mut BytesDeserializer<'de>,
     /// To check fields length
-    index: usize,
     ptr_name: Option<Pointer>,
-    fields: &'static [&'static str],
 }
 
 impl<'a, 'de> MapDeserializer<'a, 'de> {
     /// Create a new map deserializer
-    pub fn new(
-        de: &'a mut BytesDeserializer<'de>,
-        ptr_name: Option<Pointer>,
-        fields: &'static [&'static str],
-    ) -> Self {
-        Self {
-            de,
-            index: 0,
-            ptr_name,
-            fields,
-        }
+    pub fn new(de: &'a mut BytesDeserializer<'de>, ptr_name: Option<Pointer>) -> Self {
+        Self { de, ptr_name }
     }
 }
 
@@ -39,20 +28,33 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
         self.ptr_name
     }
 
-    // Parse e.g. `<hkparam name="worldUpWS">`
+    #[inline]
+    fn pad(&mut self, x86_pad: usize, x64_pad: usize) -> Result<(), Self::Error> {
+        let pad = match self.de.is_x86 {
+            true => x86_pad,
+            false => x64_pad,
+        };
+
+        if self.de.input.len() >= pad {
+            self.de.input = &self.de.input[pad..];
+            Ok(())
+        } else {
+            Err(Error::Eof)
+        }
+    }
+
+    // Parse
     fn next_key_seed<K>(&mut self, seed: K) -> Result<Option<K::Value>, Self::Error>
     where
         K: DeserializeSeed<'de>,
     {
         // Check if there are no more elements.
-        if self.fields.len() == self.index {
+        if self.de.field_length == self.de.field_index {
             return Ok(None);
         }
 
-        let key = seed.deserialize(&mut *self.de).map(Some); // Deserialize a map key.
-        self.index += 1;
-
-        key
+        // Now call `deserialize_key` with `impl Deserialize` and increment `self.de.field_index`.
+        seed.deserialize(&mut *self.de).map(Some)
     }
 
     // Parse e.g. `<hkparam name="worldUpWS">`
@@ -61,13 +63,11 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
         K: DeserializeSeed<'de>,
     {
         // Check if there are no more elements.
-        if self.fields.len() == self.index {
+        if self.de.field_length == self.de.field_index {
             return Ok(None);
         }
-        let key = seed.deserialize(&mut *self.de).map(Some);
-        self.index += 1;
-
-        key
+        // Now call `deserialize_key` with `impl Deserialize` and increment `self.de.field_index`.
+        seed.deserialize(&mut *self.de).map(Some)
     }
 
     // Parse e.g. `(0.000000 0.000000 1.000000 0.000000)</hkparam>`

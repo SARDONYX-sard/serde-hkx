@@ -12,6 +12,10 @@ pub enum Error {
         msg: String,
     },
 
+    /// The number of key calls ({actual}) must not be more than the length of the field ({expected}).
+    #[snafu(display("The number of key calls ({actual}) must not be more than the length of the field ({expected})."))]
+    OverFlowIndex { actual: usize, expected: usize },
+
     /// Incomplete parsing binary.
     #[snafu(display("Index to hold processing deserialization status of struct is not found."))]
     NotFoundIndex,

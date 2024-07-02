@@ -1556,6 +1556,17 @@ pub trait MapAccess<'de> {
     /// Get this class pointer name (e.g. `Pointer::new(1`)
     fn class_ptr(&self) -> Option<Pointer>;
 
+    /// - Skip reading the current position of binary data by pad minutes.
+    /// - The XML deserializer does nothing.
+    ///
+    /// The default implementation does nothing.
+    #[inline]
+    fn pad(&mut self, x86_pad: usize, x64_pad: usize) -> Result<(), Self::Error> {
+        let _ = x86_pad;
+        let _ = x64_pad;
+        Ok(())
+    }
+
     /// This returns `Ok(Some(key))` for the next key in the map, or `Ok(None)`
     /// if there are no more remaining entries.
     ///
