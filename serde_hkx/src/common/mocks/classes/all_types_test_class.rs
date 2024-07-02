@@ -9,8 +9,8 @@ pub struct AllTypesTestClass {
 
 impl HavokClass for AllTypesTestClass {
     #[inline]
-    fn name(&self) -> &'static CStr {
-        c"AllTypesTestClass"
+    fn name(&self) -> &'static str {
+        "AllTypesTestClass"
     }
 
     #[inline]

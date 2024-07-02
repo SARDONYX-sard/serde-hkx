@@ -1,13 +1,12 @@
 //! TypeKind XML parsers
-use core::ffi::CStr;
-
 use crate::{lib::*, tri};
 
 use super::BytesStream;
 use havok_types::*;
 use winnow::binary::{self, Endianness};
-use winnow::combinator::{alt, seq};
+use winnow::combinator::{alt, seq, terminated};
 use winnow::error::{ContextError, StrContext, StrContextValue};
+use winnow::token::take_until;
 use winnow::Parser;
 
 /// Parses [`bool`]. `true` or `false``
@@ -131,10 +130,13 @@ pub fn transform<'a>(
 /// NOTE: No Pointer parsing exists because it is automatically created as an index.
 
 /// Parses a string literal until `\0`
-pub fn c_str<'a>(bytes: &mut BytesStream<'a>) -> crate::errors::de::Result<&'a CStr> {
-    let s = CStr::from_bytes_with_nul(bytes)?;
-    *bytes = &bytes[s.count_bytes() - 1..];
-    Ok(s)
+pub fn string<'a>() -> impl Parser<BytesStream<'a>, &'a str, ContextError> {
+    terminated(take_until(0.., b'\0'), b'\0')
+        .try_map(|bytes| core::str::from_utf8(bytes))
+        .context(StrContext::Label("string"))
+        .context(StrContext::Expected(StrContextValue::Description(
+            "Valid ASCII string literal",
+        )))
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -188,9 +190,7 @@ mod tests {
 
     #[test]
     fn test_string() {
-        let mut input = b"example\0".as_slice();
-        assert_eq!(c_str(&mut input), Ok(c"example"));
-        let mut input = b"example".as_slice();
-        assert!(c_str(&mut input).is_err());
+        assert_eq!(string().parse(b"example\0"), Ok("example"));
+        assert!(string().parse(b"example").is_err());
     }
 }

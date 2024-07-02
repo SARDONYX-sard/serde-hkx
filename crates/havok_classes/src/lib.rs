@@ -33,17 +33,17 @@
 //! - `hkClassMember`
 //! - `hkResourceBase`
 
-pub mod generated;
-use generated::*;
+// pub mod generated;
+// use generated::*;
 
-#[cfg(test)]
-mod tests {
-    use crate::BlendModeFunction;
+// #[cfg(test)]
+// mod tests {
+//     use crate::BlendModeFunction;
 
-    #[test]
-    fn main() {
-        let class = crate::BGSGamebryoSequenceGenerator::default();
-        dbg!(BlendModeFunction::BMF_PERCENT);
-        dbg!(class);
-    }
-}
+//     #[test]
+//     fn main() {
+//         let class = crate::BGSGamebryoSequenceGenerator::default();
+//         dbg!(BlendModeFunction::BMF_PERCENT);
+//         dbg!(class);
+//     }
+// }

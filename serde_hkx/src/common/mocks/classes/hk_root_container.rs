@@ -13,8 +13,8 @@ pub struct HkRootLevelContainer<'a> {
 }
 
 impl HavokClass for HkRootLevelContainer<'_> {
-    fn name(&self) -> &'static CStr {
-        c"hkRootLevelContainer"
+    fn name(&self) -> &'static str {
+        "hkRootLevelContainer"
     }
 
     fn signature(&self) -> Signature {

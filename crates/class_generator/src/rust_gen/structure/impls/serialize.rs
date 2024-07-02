@@ -11,7 +11,6 @@ pub fn impl_serialize(class: &Class, class_map: &ClassMap) -> TokenStream {
     let name = class.name.as_ref();
     let signature = class.signature.get();
     let class_name = syn::Ident::new(name, proc_macro2::Span::call_site());
-    let class_name_c_str = proc_macro2::Literal::c_string(&std::ffi::CString::new(name).unwrap());
     let fields = impl_serialize_fields(class, class_map);
     let lifetime = match class.has_string {
         true => quote! { <'a> },
@@ -24,10 +23,12 @@ pub fn impl_serialize(class: &Class, class_map: &ClassMap) -> TokenStream {
             use __serde::HavokClass;
 
             impl #lifetime __serde::HavokClass for #class_name #lifetime {
-                fn name(&self) -> &'static core::ffi::CStr {
-                    #class_name_c_str
+                #[inline]
+                fn name(&self) -> &'static str {
+                    #name
                 }
 
+                #[inline]
                 fn signature(&self) -> __serde::__private::Signature {
                     __serde::__private::Signature::new(#signature)
                 }
@@ -37,7 +38,7 @@ pub fn impl_serialize(class: &Class, class_map: &ClassMap) -> TokenStream {
                 fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
                     where S: __serde::ser::Serializer
                 {
-                    let class_meta = self.__ptr.map(|name| (name, self.signature()));
+                    let class_meta = self.__ptr.map(|name| (name, __serde::__private::Signature::new(#signature)));
                     let mut serializer = __serializer.serialize_struct(#name, class_meta)?;
                     #(#fields)*
                     serializer.end()
@@ -75,6 +76,8 @@ fn impl_serialize_fields(class: &Class, class_map: &ClassMap) -> Vec<TokenStream
     serialize_calls
 }
 
+/// # Returns
+/// (serialize_method_calls, serialize_ptr_pointed_data_method_calls)
 fn impl_serialize_self_fields(
     members: &[Member],
     x86_size: u32,

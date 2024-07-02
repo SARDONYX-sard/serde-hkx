@@ -25,8 +25,8 @@ pub struct HkRootLevelContainerNamedVariant<'a> {
 }
 
 impl HavokClass for HkRootLevelContainerNamedVariant<'_> {
-    fn name(&self) -> &'static CStr {
-        c"hkRootLevelContainerNamedVariant"
+    fn name(&self) -> &'static str {
+        "hkRootLevelContainerNamedVariant"
     }
 
     fn signature(&self) -> Signature {

@@ -50,11 +50,6 @@ mod lib {
     pub use self::core::marker::PhantomData;
     pub use self::core::mem;
 
-    #[cfg(not(feature = "std"))]
-    pub use core::ffi::CStr;
-    #[cfg(feature = "std")]
-    pub use std::ffi::CStr;
-
     #[cfg(all(feature = "alloc", not(feature = "std")))]
     pub use alloc::vec::Vec;
     #[cfg(feature = "std")]
@@ -98,7 +93,7 @@ use lib::*;
 /// - (De)Serialization process for array classes.
 pub trait HavokClass {
     /// Get Class name.
-    fn name(&self) -> &'static CStr;
+    fn name(&self) -> &'static str;
     /// Get signature.
     fn signature(&self) -> Signature;
 }

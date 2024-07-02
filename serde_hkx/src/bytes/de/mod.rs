@@ -8,7 +8,7 @@ use crate::{lib::*, tri};
 use self::enum_access::EnumDeserializer;
 use self::map::MapDeserializer;
 use self::parser::type_kind::{
-    boolean, c_str, matrix3, matrix4, qstransform, quaternion, real, rotation, transform, vector4,
+    boolean, matrix3, matrix4, qstransform, quaternion, real, rotation, string, transform, vector4,
 };
 use self::seq::SeqDeserializer;
 use crate::errors::{
@@ -400,13 +400,11 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         visitor.visit_variant(Variant::new(Pointer::new(0), Pointer::new(0)))
     }
 
-    #[inline]
     fn deserialize_cstring<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        let c_str = tri!(c_str(&mut self.input)).to_string_lossy();
-        visitor.visit_cstring(CString::from_option(Some(c_str)))
+        visitor.visit_cstring(CString::from_str(tri!(self.parse(string()))))
     }
 
     #[inline]
@@ -446,8 +444,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let c_str = tri!(c_str(&mut self.input)).to_string_lossy();
-        visitor.visit_stringptr(StringPtr::from_option(Some(c_str)))
+        visitor.visit_stringptr(StringPtr::from_str(tri!(self.parse(string()))))
     }
 }
 

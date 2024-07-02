@@ -30,8 +30,8 @@ pub struct HkbProjectData {
 }
 
 impl HavokClass for HkbProjectData {
-    fn name(&self) -> &'static CStr {
-        c"hkbProjectData"
+    fn name(&self) -> &'static str {
+        "hkbProjectData"
     }
 
     fn signature(&self) -> Signature {

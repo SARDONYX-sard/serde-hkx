@@ -60,7 +60,8 @@ impl ClassNamesWriter for Cursor<Vec<u8>> {
 
             let name_start = self.position() as u32;
             let class_name = class.name();
-            self.write_all(class_name.to_bytes_with_nul())?;
+            self.write_all(class_name.as_bytes())?;
+            self.write_u8(0)?;
 
             if classnames_section_start >= name_start {
                 return Err(io::Error::new(
@@ -68,12 +69,6 @@ impl ClassNamesWriter for Cursor<Vec<u8>> {
                     "abs position is before the name_start position",
                 ));
             }
-            let class_name = class_name.to_str().map_err(|_| {
-                io::Error::new(
-                    io::ErrorKind::InvalidData,
-                    "Failed to cast CStr to utf8 str",
-                )
-            })?;
 
             class_map.insert(class_name, name_start - classnames_section_start);
         }

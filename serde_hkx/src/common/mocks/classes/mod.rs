@@ -39,7 +39,7 @@ pub enum Classes<'a> {
 }
 
 impl HavokClass for Classes<'_> {
-    fn name(&self) -> &'static CStr {
+    fn name(&self) -> &'static str {
         match &self {
             Classes::PhantomData => panic!("The dummy class is used only for sorting, so being called name is not a good use of the API."),
 

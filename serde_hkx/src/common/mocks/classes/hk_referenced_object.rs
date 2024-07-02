@@ -28,8 +28,8 @@ pub struct HkReferencedObject {
 }
 
 impl HavokClass for HkReferencedObject {
-    fn name(&self) -> &'static CStr {
-        c"hkReferencedObject"
+    fn name(&self) -> &'static str {
+        "hkReferencedObject"
     }
 
     fn signature(&self) -> Signature {

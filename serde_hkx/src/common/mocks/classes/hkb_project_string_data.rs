@@ -78,8 +78,8 @@ pub struct HkbProjectStringData<'a> {
 }
 
 impl HavokClass for HkbProjectStringData<'_> {
-    fn name(&self) -> &'static CStr {
-        c"hkbProjectStringData"
+    fn name(&self) -> &'static str {
+        "hkbProjectStringData"
     }
 
     fn signature(&self) -> Signature {

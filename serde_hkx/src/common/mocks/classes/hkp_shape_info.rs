@@ -51,8 +51,8 @@ pub struct HkpShapeInfo<'a> {
 }
 
 impl HavokClass for HkpShapeInfo<'_> {
-    fn name(&self) -> &'static CStr {
-        c"hkpShapeInfo"
+    fn name(&self) -> &'static str {
+        "hkpShapeInfo"
     }
 
     fn signature(&self) -> Signature {

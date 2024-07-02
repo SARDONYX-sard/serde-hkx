@@ -7,8 +7,8 @@ pub struct HkBaseObject {
 
 impl HavokClass for HkBaseObject {
     #[inline]
-    fn name(&self) -> &'static CStr {
-        c"hkBaseObject"
+    fn name(&self) -> &'static str {
+        "hkBaseObject"
     }
 
     #[inline]
