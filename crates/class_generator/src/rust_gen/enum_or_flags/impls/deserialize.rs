@@ -15,9 +15,9 @@ pub fn impl_deserialize(class: &Class) -> Vec<TokenStream> {
         };
 
         if one_enum.vtype == TypeKind::Flags {
-            enums.push(impl_de_for_flag(&one_enum));
+            enums.push(impl_de_for_flag(one_enum));
         } else if one_enum.vtype == TypeKind::Enum {
-            enums.push(impl_de_for_enum(&one_enum));
+            enums.push(impl_de_for_enum(one_enum));
         } else {
             panic!(
                 "Expected TYPE_ENUM but another type is mixed in. Got enum {}(vtype: {})",

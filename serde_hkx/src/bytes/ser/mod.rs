@@ -55,7 +55,7 @@ where
     };
 
     // 1/5: root header
-    serializer.output.write(header.as_bytes())?;
+    serializer.output.write_all(header.as_bytes())?;
 
     // 2/5: Section headers
     let section_offset = header.section_offset.get();
@@ -347,7 +347,7 @@ impl ByteSerializer {
     /// (`local_offset`, `global_offset`, `virtual_offset`)
     fn write_data_fixups(&mut self) -> Result<(u32, u32, u32)> {
         let local_offset = self.relative_position()?;
-        self.output.write(&self.local_fixups)?;
+        self.output.write_all(&self.local_fixups)?;
         self.output.align(16, 0xff)?;
 
         #[cfg(feature = "tracing")]
@@ -361,7 +361,7 @@ impl ByteSerializer {
         self.output.align(16, 0xff)?;
 
         let virtual_offset = self.relative_position()?;
-        self.output.write(&self.virtual_fixups)?;
+        self.output.write_all(&self.virtual_fixups)?;
         self.output.align(16, 0xff)?;
         Ok((local_offset, global_offset, virtual_offset))
     }
@@ -474,7 +474,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
         let start = self.relative_position()?;
         self.global_fixups_ptr_src.insert(ptr, start);
 
-        self.serialize_ulong(0 as u64)?;
+        self.serialize_ulong(0_u64)?;
         Ok(())
     }
 
@@ -615,7 +615,7 @@ impl<'a> SerializeSeq for &'a mut ByteSerializer {
             for (index, string) in strings.iter().enumerate() {
                 self.write_iter_local_fixup_pair(index, self.relative_position()?)?;
 
-                self.output.write(string.as_bytes_with_nul())?;
+                self.output.write_all(string.as_bytes_with_nul())?;
                 self.output.zero_fill_align(16)?;
             }
         };
@@ -836,7 +836,7 @@ mod tests {
         // For binary writing, the youngest pointer index must be first after sorting in reverse order.
         // Usually a shift operation is required, but a dummy and a swap can speed up the process.
         classes.insert(usize::MAX, Classes::PhantomData);
-        classes.sort_by(|k_1, _v_1, k_2, _v_2| k_2.cmp(&k_1)); // Reverse order
+        classes.sort_by(|k_1, _v_1, k_2, _v_2| k_2.cmp(k_1)); // Reverse order
         classes.swap_indices(0, classes.len() - 1);
         let _ = classes.pop();
         tracing::debug!("{classes:#?}");

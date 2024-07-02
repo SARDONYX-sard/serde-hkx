@@ -31,6 +31,7 @@ impl<'a> CString<'a> {
     }
 
     /// Cast [`str`] with non copying.
+    #[allow(clippy::should_implement_trait)]
     #[inline]
     pub fn from_str(s: &'a str) -> Self {
         Self {
@@ -62,7 +63,7 @@ impl<'a> CString<'a> {
                 if s.is_empty() || s == "\u{2400}" {
                     return false;
                 };
-                return true;
+                true
             }
             _ => false,
         }

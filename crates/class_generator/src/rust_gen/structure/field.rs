@@ -34,9 +34,9 @@ pub(super) fn gen_field(member: &Member, class_name: &str) -> TokenStream {
                 syn::Ident::new(enum_ref, proc_macro2::Span::call_site()).to_token_stream()
             } else {
                 // NOTE: Fall back `enum Unknown` to enum storage size type(`vsubtype`).
-                to_rust_type(&vsubtype).expect(&format!(
-                    "{class_name}({name}) couldn't cast {vsubtype} to Rust type"
-                ))
+                to_rust_type(vsubtype).unwrap_or_else(|| {
+                    panic!("{class_name}({name}) couldn't cast {vsubtype} to Rust type")
+                })
             }
         }
         TypeKind::SimpleArray | TypeKind::Array => {
@@ -52,15 +52,14 @@ pub(super) fn gen_field(member: &Member, class_name: &str) -> TokenStream {
                     syn::Ident::new(enum_ref.as_ref().unwrap(), proc_macro2::Span::call_site())
                         .to_token_stream()
                 }
-                _ => to_rust_type(&vsubtype).expect(&format!(
-                    "{class_name}({name}) couldn't cast {vsubtype} to Rust type"
-                )),
+                _ => to_rust_type(vsubtype).unwrap_or_else(|| {
+                    panic!("{class_name}({name}) couldn't cast {vsubtype} to Rust type")
+                }),
             };
             quote! { Vec<#field_subtype> }
         }
-        _ => to_rust_type(&vtype).expect(&format!(
-            "{class_name}({name}) couldn't cast {vtype} to Rust type"
-        )),
+        _ => to_rust_type(vtype)
+            .unwrap_or_else(|| panic!("{class_name}({name}) couldn't cast {vtype} to Rust type")),
     };
 
     // `Default` implementations with huge sizes such as [0u8; 256] are not automatically supported, so use `educe` crate to define them.

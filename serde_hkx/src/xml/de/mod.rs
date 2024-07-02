@@ -54,6 +54,7 @@ pub struct XmlDeserializer<'de> {
 
 impl<'de> XmlDeserializer<'de> {
     /// from xml string
+    #[allow(clippy::should_implement_trait)]
     pub fn from_str(input: &'de str) -> Self {
         XmlDeserializer {
             input,
@@ -69,7 +70,8 @@ where
     T: Deserialize<'a>,
 {
     let mut deserializer = XmlDeserializer::from_str(s);
-    let t = T::deserialize(&mut deserializer)?;
+    let t = tri!(T::deserialize(&mut deserializer));
+
     if deserializer.input.is_empty() {
         Ok(t)
     } else {
@@ -108,7 +110,7 @@ impl<'de> XmlDeserializer<'de> {
             .map_err(|err| Error::ReadableError {
                 source: ReadableError::from_context(
                     err,
-                    &self.original,
+                    self.original,
                     self.original.len() - self.input.len(),
                 ),
             })?;
@@ -123,11 +125,11 @@ impl<'de> XmlDeserializer<'de> {
         mut parser: impl Parser<&'de str, O, winnow::error::ContextError>,
     ) -> Result<O> {
         let (_, res) = parser
-            .parse_peek(&self.input)
+            .parse_peek(self.input)
             .map_err(|err| Error::ReadableError {
                 source: ReadableError::from_context(
                     err,
-                    &self.original,
+                    self.original,
                     self.original.len() - self.input.len(),
                 ),
             })?;
@@ -144,13 +146,16 @@ impl<'de> XmlDeserializer<'de> {
             Ok(value) => Ok(value),
             Err(err) => match err {
                 Error::ReadableError { .. } => Err(err),
-                _ => Err(Error::ReadableError {
-                    source: ReadableError::from_display(
-                        err,
-                        &self.original,
-                        self.original.len() - self.input.len(),
-                    ),
-                }),
+                _ => {
+                    tracing::debug!("{err}");
+                    Err(Error::ReadableError {
+                        source: ReadableError::from_display(
+                            err,
+                            self.original,
+                            self.original.len() - self.input.len(),
+                        ),
+                    })
+                }
             },
         }
     }

@@ -40,19 +40,19 @@ impl ClassNamesWriter for Cursor<Vec<u8>> {
         // Not sure where this is used.
         self.write_u32::<O>(0x75585ef6)?;
         self.write_u8(0x09)?;
-        self.write(b"hkClass\0")?;
+        self.write_all(b"hkClass\0")?;
 
         self.write_u32::<O>(0x5C7EA4C2)?;
         self.write_u8(0x09)?;
-        self.write(b"hkClassMember\0")?;
+        self.write_all(b"hkClassMember\0")?;
 
         self.write_u32::<O>(0x8A3609CF)?;
         self.write_u8(0x09)?;
-        self.write(b"hkClassEnum\0")?;
+        self.write_all(b"hkClassEnum\0")?;
 
         self.write_u32::<O>(0xCE6F8A6C)?;
         self.write_u8(0x09)?;
-        self.write(b"hkClassEnumItem\0")?;
+        self.write_all(b"hkClassEnumItem\0")?;
 
         for (_, class) in classes.iter() {
             self.write_u32::<O>(class.signature().into())?;
@@ -60,7 +60,7 @@ impl ClassNamesWriter for Cursor<Vec<u8>> {
 
             let name_start = self.position() as u32;
             let class_name = class.name();
-            self.write(class_name.to_bytes_with_nul())?;
+            self.write_all(class_name.to_bytes_with_nul())?;
 
             if classnames_section_start >= name_start {
                 return Err(io::Error::new(

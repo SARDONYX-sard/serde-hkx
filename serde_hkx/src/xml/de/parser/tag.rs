@@ -180,13 +180,12 @@ mod tests {
         assert!(end_tag("tag").parse("</  tag  >").is_ok());
 
         let input = "</ hkparam >\n";
-        match end_tag("hkparam")
+        if let Err(err) = end_tag("hkparam")
             .parse(input)
             .map_err(|e| ReadableError::from_parse(e, input).to_string())
         {
-            Ok(res) => assert_eq!(res, ()),
-            Err(err) => panic!("{err}"),
-        }
+            panic!("{err}");
+        };
     }
 
     #[test]

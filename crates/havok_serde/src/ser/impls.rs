@@ -71,14 +71,14 @@ impl Serialize for &str {
 impl Serialize for StringPtr<'_> {
     #[inline]
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        serializer.serialize_stringptr(&self)
+        serializer.serialize_stringptr(self)
     }
 }
 
 impl Serialize for CString<'_> {
     #[inline]
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        serializer.serialize_cstring(&self)
+        serializer.serialize_cstring(self)
     }
 }
 
@@ -89,9 +89,9 @@ macro_rules! impl_serialize_with_index_array {
             fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
                 use super::SerializeSeq;
 
-                let mut seq = serializer.serialize_array(Some(self.len()))?;
+                let mut seq = tri!(serializer.serialize_array(Some(self.len())));
                 for (index, element) in self.iter().enumerate() {
-                    seq.$fn_name(element, index, self.len())?;
+                    tri!(seq.$fn_name(element, index, self.len()));
                 }
                 seq.end()
             }
@@ -101,9 +101,9 @@ macro_rules! impl_serialize_with_index_array {
             fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
                 use super::SerializeSeq;
 
-                let mut seq = serializer.serialize_array(Some(self.len()))?;
+                let mut seq = tri!(serializer.serialize_array(Some(self.len())));
                 for (index, element) in self.iter().enumerate() {
-                    seq.$fn_name(element, index, self.len())?;
+                    tri!(seq.$fn_name(element, index, self.len()));
                 }
                 seq.end()
             }
@@ -113,9 +113,9 @@ macro_rules! impl_serialize_with_index_array {
             fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
                 use super::SerializeSeq;
 
-                let mut seq = serializer.serialize_array(Some(self.len()))?;
+                let mut seq = tri!(serializer.serialize_array(Some(self.len())));
                 for (index, element) in self.iter().enumerate() {
-                    seq.$fn_name(element, index, self.len())?;
+                    tri!(seq.$fn_name(element, index, self.len()));
                 }
                 seq.end()
             }
@@ -136,9 +136,9 @@ macro_rules! impl_serialize_vec {
             fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
                 use super::SerializeSeq;
 
-                let mut seq = serializer.serialize_array(Some(self.len()))?;
+                let mut seq = tri!(serializer.serialize_array(Some(self.len())));
                 for element in self {
-                    seq.$fn_name(element)?;
+                    tri!(seq.$fn_name(element));
                 }
                 seq.end()
             }
@@ -148,9 +148,9 @@ macro_rules! impl_serialize_vec {
             fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
                 use super::SerializeSeq;
 
-                let mut seq = serializer.serialize_array(Some(self.len()))?;
+                let mut seq = tri!(serializer.serialize_array(Some(self.len())));
                 for element in *self {
-                    seq.$fn_name(element)?;
+                    tri!(seq.$fn_name(element));
                 }
                 seq.end()
             }
@@ -160,9 +160,9 @@ macro_rules! impl_serialize_vec {
             fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
                 use super::SerializeSeq;
 
-                let mut seq = serializer.serialize_array(Some(self.len()))?;
+                let mut seq = tri!(serializer.serialize_array(Some(self.len())));
                 for element in *self {
-                    seq.$fn_name(element)?;
+                    tri!(seq.$fn_name(element));
                 }
                 seq.end()
             }
@@ -180,9 +180,9 @@ impl<T: Serialize + crate::HavokClass> Serialize for Vec<T> {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         use super::SerializeSeq;
 
-        let mut seq = serializer.serialize_array(Some(self.len()))?;
+        let mut seq = tri!(serializer.serialize_array(Some(self.len())));
         for element in self {
-            seq.serialize_class_element(element)?;
+            tri!(seq.serialize_class_element(element));
         }
         seq.end()
     }
@@ -193,9 +193,9 @@ impl<T: Serialize + crate::HavokClass> Serialize for &Vec<T> {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         use super::SerializeSeq;
 
-        let mut seq = serializer.serialize_array(Some(self.len()))?;
+        let mut seq = tri!(serializer.serialize_array(Some(self.len())));
         for element in *self {
-            seq.serialize_class_element(element)?;
+            tri!(seq.serialize_class_element(element));
         }
         seq.end()
     }
@@ -205,9 +205,9 @@ impl<T: Serialize + crate::HavokClass> Serialize for &[T] {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         use super::SerializeSeq;
 
-        let mut seq = serializer.serialize_array(Some(self.len()))?;
+        let mut seq = tri!(serializer.serialize_array(Some(self.len())));
         for element in *self {
-            seq.serialize_class_element(element)?;
+            tri!(seq.serialize_class_element(element));
         }
         seq.end()
     }
@@ -222,9 +222,9 @@ where
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         use super::SerializeSeq;
 
-        let mut seq = serializer.serialize_array(Some(self.len()))?;
+        let mut seq = tri!(serializer.serialize_array(Some(self.len())));
         for (_index, element) in self.iter() {
-            seq.serialize_class_element(element)?;
+            tri!(seq.serialize_class_element(element));
         }
         seq.end()
     }
@@ -239,9 +239,9 @@ where
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         use super::SerializeSeq;
 
-        let mut seq = serializer.serialize_array(Some(self.len()))?;
+        let mut seq = tri!(serializer.serialize_array(Some(self.len())));
         for (_index, element) in self.iter() {
-            seq.serialize_class_element(element)?;
+            tri!(seq.serialize_class_element(element));
         }
         seq.end()
     }

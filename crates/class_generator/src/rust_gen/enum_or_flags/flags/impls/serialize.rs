@@ -41,7 +41,7 @@ pub fn impl_ser_for_flag(one_enum: &Enum) -> TokenStream {
 
 fn serialize_flag_variant(one_enum: &EnumItem) -> TokenStream {
     let EnumItem { name, .. } = one_enum;
-    let variant = syn::Ident::new(&name, proc_macro2::Span::call_site());
+    let variant = syn::Ident::new(name, proc_macro2::Span::call_site());
     quote! {
         Self::#variant => __serializer.serialize_field(#name, &Self::#variant)
     }

@@ -154,15 +154,15 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
             tracing::debug!(index);
             self.field_index = Some(index + 1);
             if length < index {
-                return Err(Error::OverFlowIndex {
+                Err(Error::OverFlowIndex {
                     expected: length,
                     actual: index,
-                });
+                })
             } else {
                 res
             }
         } else {
-            return Err(Error::NotFoundIndex);
+            Err(Error::NotFoundIndex)
         }
     }
 

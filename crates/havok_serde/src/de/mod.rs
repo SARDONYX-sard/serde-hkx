@@ -367,7 +367,7 @@ impl<'a> fmt::Display for Unexpected<'a> {
             Flags => formatter.write_str("flags"),
             Half(h) => write!(formatter, "half `{}`", h),
             StringPtr(ref s) => write!(formatter, "string pointer `{:?}`", s),
-            Other(ref other) => formatter.write_str(other),
+            Other(other) => formatter.write_str(other),
         }
     }
 }
@@ -1610,6 +1610,7 @@ pub trait MapAccess<'de> {
     ///
     /// `Deserialize` implementations should typically use
     /// `MapAccess::next_entry` instead.
+    #[allow(clippy::type_complexity)]
     #[inline]
     fn next_entry_seed<K, V>(
         &mut self,

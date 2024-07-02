@@ -24,7 +24,6 @@ serde = { version = "1.0", features = ["derive"] }              # Implement (De)
 serde_json = { version = "1.0.116" }                            # To read and write Json files
 serde_with = "3.8.1"                                            # Serde utility
 snafu = "0.8.2"                                                 # Define all error patterns(with backtrace)
-topo_sort = "0.4.0"                                             # Necessary to generate code in order of class dependencies.
 tracing = "0.1"                                                 # Logger
 
 prettyplease = "0.2.20"

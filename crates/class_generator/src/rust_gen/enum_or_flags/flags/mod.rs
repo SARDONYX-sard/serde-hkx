@@ -69,7 +69,7 @@ pub fn gen_flag(one_enum: &Enum) -> syn::Macro {
 /// - `TYPE_INT64`, `TYPE_UINT64`
 fn gen_variant_token(one_enum: &EnumItem, size_type: &TypeKind) -> TokenStream {
     let EnumItem { name, value, .. } = one_enum;
-    let name = syn::Ident::new(&name, proc_macro2::Span::call_site());
+    let name = syn::Ident::new(name, proc_macro2::Span::call_site());
     let num_with_suffix = cast_number_to_token(one_enum, size_type);
 
     // NOTE:

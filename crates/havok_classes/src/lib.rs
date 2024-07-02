@@ -1,6 +1,11 @@
 #![allow(non_camel_case_types, non_snake_case, unused)]
 // https://doc.rust-lang.org/stable/rustc/lints/listing/warn-by-default.html?highlight=abi#ambiguous-glob-reexports
 #![allow(ambiguous_glob_reexports)]
+#![allow(
+    clippy::enum_variant_names,
+    clippy::match_overlapping_arm,
+    clippy::redundant_static_lifetimes
+)]
 //! If the file name is the same as the struct name representing each generated class,
 //! a troublesome error will occur in namespace invocation, so a trailing `_` is added to avoid this.
 //!

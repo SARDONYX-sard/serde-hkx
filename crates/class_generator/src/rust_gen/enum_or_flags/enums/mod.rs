@@ -16,7 +16,7 @@ pub fn gen_enum(one_enum: &Enum) -> syn::ItemEnum {
         ..
     } = one_enum;
 
-    let enum_name = syn::Ident::new(&name, proc_macro2::Span::call_site());
+    let enum_name = syn::Ident::new(name, proc_macro2::Span::call_site());
     let variants: Vec<TokenStream> = enum_item
         .iter()
         .enumerate()
@@ -49,7 +49,7 @@ pub fn gen_enum(one_enum: &Enum) -> syn::ItemEnum {
 
 fn gen_enum_variant(one_enum: &EnumItem) -> TokenStream {
     let EnumItem { name, value } = one_enum;
-    let name = syn::Ident::new(&name, proc_macro2::Span::call_site());
+    let name = syn::Ident::new(name, proc_macro2::Span::call_site());
     let value = (*value) as isize;
     quote! { #name = #value }
 }

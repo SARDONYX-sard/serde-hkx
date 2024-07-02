@@ -12,6 +12,7 @@ use super::mock_requires::*;
     num_derive::ToPrimitive,
     num_derive::FromPrimitive,
 )]
+#[allow(clippy::enum_variant_names)]
 pub enum EventMode {
     #[default]
     EventModeDefault = 0,
@@ -182,7 +183,7 @@ const _: () = {
                 }
             }
             #[doc(hidden)]
-            const VARIANTS: &'static [&'static str] = &[
+            const VARIANTS: &[&str] = &[
                 "EVENT_MODE_DEFAULT",
                 "EVENT_MODE_PROCESS_ALL",
                 "EVENT_MODE_IGNORE_FROM_GENERATOR",

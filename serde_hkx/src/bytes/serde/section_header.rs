@@ -119,7 +119,7 @@ impl<O: ByteOrder> SectionHeader<O> {
             false => section_offset as u32,
         };
 
-        writer.write(b"__classnames__\0\0\0\0\0")?;
+        writer.write_all(b"__classnames__\0\0\0\0\0")?;
         writer.write_u8(0xff)?; // separator
         writer.write_u32::<O>(section_offset + 0xd0)?; // absolute_data_start
 
@@ -145,12 +145,12 @@ impl<O: ByteOrder> SectionHeader<O> {
             false => section_offset as u32,
         };
 
-        writer.write(b"__types__\0\0\0\0\0\0\0\0\0\0")?;
+        writer.write_all(b"__types__\0\0\0\0\0\0\0\0\0\0")?;
         writer.write_u8(0xff)?; // separator
         writer.write_u32::<O>(section_offset + 0x160)?; // absolute_data_start
 
         // Fixup does not exist in `types` section, always 0.
-        writer.write([0u8; 24].as_bytes())?;
+        writer.write_all([0u8; 24].as_bytes())?;
         Ok(())
     }
 
@@ -169,12 +169,12 @@ impl<O: ByteOrder> SectionHeader<O> {
     /// # Tips
     /// Here, some data values are determined by taking advantage of the fact that the section header is of fixed length size for the sake of speed.
     pub fn write_data(writer: &mut Cursor<Vec<u8>>) -> io::Result<u64> {
-        writer.write(b"__data__\0\0\0\0\0\0\0\0\0\0\0")?;
+        writer.write_all(b"__data__\0\0\0\0\0\0\0\0\0\0\0")?;
         writer.write_u8(0xff)?; // separator
 
         let fixup_offset_start = writer.position();
         // The fixups offset in the data section is temporarily set to 0 because it will be known after the data section is written.
-        writer.write([0u8; 28].as_bytes())?;
+        writer.write_all([0u8; 28].as_bytes())?;
 
         Ok(fixup_offset_start) // Return index for later writing.
     }

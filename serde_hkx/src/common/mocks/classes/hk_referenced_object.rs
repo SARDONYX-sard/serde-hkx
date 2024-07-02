@@ -207,7 +207,7 @@ const _: () = {
                 }
             }
 
-            const FIELDS: &'static [&'static str] = &["memSizeAndFlags", "referenceCount"];
+            const FIELDS: &[&str] = &["memSizeAndFlags", "referenceCount"];
             _serde::Deserializer::deserialize_struct(
                 deserializer,
                 "hkReferencedObject",

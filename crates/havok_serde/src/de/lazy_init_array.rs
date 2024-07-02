@@ -126,7 +126,7 @@ pub struct UnsafeDropSliceGuard<Item> {
 }
 
 impl<Item> Drop for UnsafeDropSliceGuard<Item> {
-    fn drop(self: &'_ mut Self) {
+    fn drop(&'_ mut self) {
         if self.needs_drop {
             unsafe {
                 // # Safety

@@ -14,7 +14,7 @@ pub fn impl_ser_for_enum(one_enum: &Enum) -> TokenStream {
         ..
     } = one_enum;
 
-    let enum_name = syn::Ident::new(&name, proc_macro2::Span::call_site());
+    let enum_name = syn::Ident::new(name, proc_macro2::Span::call_site());
     let variants: Vec<TokenStream> = enum_item
         .iter()
         .map(|enum_item| serialize_enum_variant(enum_item))
@@ -75,7 +75,7 @@ pub fn impl_ser_for_enum(one_enum: &Enum) -> TokenStream {
 
 fn serialize_enum_variant(one_enum: &EnumItem) -> TokenStream {
     let EnumItem { name, value } = one_enum;
-    let variant = syn::Ident::new(&name, proc_macro2::Span::call_site());
+    let variant = syn::Ident::new(name, proc_macro2::Span::call_site());
     let value = (*value) as u64; // NOTE: This method is for XML and does not care about size.
     quote! {
         Self::#variant => __serializer.serialize_field(#name, &#value)

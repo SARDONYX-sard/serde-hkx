@@ -4,7 +4,7 @@ version = "0.1.0"
 license = "MIT OR Apache-2.0"
 description = "Havok(ver. hk_2010.2.0-r1) Animation (De)Serialization library."
 repository = "https://github.com/SARDONYX-sard/serde-hkx"                       # NOTE: Without it, CLI & CI build will error.
-rust-version = "1.69"
+rust-version = "1.79"                                                           # For count_bytes method
 edition = "2021"
 
 [workspace]

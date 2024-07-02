@@ -39,7 +39,7 @@ pub fn generate_havok_class<P: AsRef<Path>>(classes_json_dir: P, out_dir: P) -> 
         let output_file = output_file.to_string_lossy();
         tracing::debug!(?output_file);
 
-        let rust_code = prettyplease::unparse(&rust_gen::from_cpp_class(&class, &class_map));
+        let rust_code = prettyplease::unparse(&rust_gen::from_cpp_class(class, &class_map));
         std::fs::write(output_file.as_ref(), rust_code)?;
 
         class_index.push({

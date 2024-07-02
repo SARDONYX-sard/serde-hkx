@@ -8,7 +8,7 @@ use quote::quote;
 pub fn impl_de_for_flag(one_enum: &Enum) -> TokenStream {
     let Enum { name, vsubtype, .. } = one_enum;
 
-    let flag_ident = syn::Ident::new(&name, proc_macro2::Span::call_site());
+    let flag_ident = syn::Ident::new(name, proc_macro2::Span::call_site());
     let expected = format!("struct {}(flags)", name);
 
     // e.g. `u64`

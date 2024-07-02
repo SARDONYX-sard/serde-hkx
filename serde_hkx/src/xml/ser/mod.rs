@@ -513,7 +513,7 @@ impl<'a> SerializeFlags for &'a mut XmlSerializer {
     {
         // Always prefix all flags except the first with `|` to indicate an OR operation.
         // e.g. <hkparam>EXAMPLE|EXAMPLE</hkparam>
-        if !self.output.ends_with(">") {
+        if !self.output.ends_with('>') {
             self.output += "|";
         }
         self.output += key;
@@ -537,7 +537,6 @@ mod tests {
     fn test_serialize_types_all() -> Result<()> {
         let all_types_class = AllTypesTestClass {
             _name: Some(Pointer::new(11)),
-            ..Default::default()
         };
         let mut classes = indexmap::IndexMap::new();
         classes.insert(11, Classes::AllTypesTestClass(all_types_class));

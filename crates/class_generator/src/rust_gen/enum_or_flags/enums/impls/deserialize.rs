@@ -25,7 +25,7 @@ pub fn impl_de_for_enum(one_enum: &Enum) -> TokenStream {
         tracing::info!("Skip automatic enum generation because this enum {enum_name} is a void storage type, indicating that it is not used.");
         return quote! {};
     };
-    let enum_ident = syn::Ident::new(&enum_name, proc_macro2::Span::call_site());
+    let enum_ident = syn::Ident::new(enum_name, proc_macro2::Span::call_site());
 
     let mut values = Vec::new();
     let mut fields_str = Vec::new();

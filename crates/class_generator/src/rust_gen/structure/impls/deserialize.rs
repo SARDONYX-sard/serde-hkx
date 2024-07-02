@@ -12,8 +12,8 @@ use quote::quote;
 /// Note: that it is only temporarily placed until the specifications are finalized.
 pub fn impl_deserialize(class: &Class, class_map: &ClassMap) -> TokenStream {
     let name = class.name.as_ref();
-    let class_name = syn::Ident::new(&name, proc_macro2::Span::call_site());
-    let fields = impl_deserialize_fields(class, &class_map);
+    let class_name = syn::Ident::new(name, proc_macro2::Span::call_site());
+    let fields = impl_deserialize_fields(class, class_map);
     let lifetime = match class.has_string {
         true => quote! { <'a> },
         false => quote! {},
@@ -158,20 +158,22 @@ fn impl_serialize_self_fields(
     }
 
     // Struct tailing alignment.
-    let x86_pad = if x86_size > *x86_current_offset {
-        x86_current_offset.abs_diff(x86_size) as usize
-    } else if x86_size == *x86_current_offset {
-        0
-    } else {
-        panic!("x86_size({x86_size}) < x86_current_offset({x86_current_offset})");
+    let x86_pad = match x86_size {
+        x86_size if x86_size > *x86_current_offset => {
+            x86_current_offset.abs_diff(x86_size) as usize
+        }
+        x86_size if x86_size == *x86_current_offset => 0,
+        _ => panic!("x86_size({x86_size}) < x86_current_offset({x86_current_offset})"),
     };
-    let x64_pad = if x64_size > *x64_current_offset {
-        x64_current_offset.abs_diff(x64_size) as usize
-    } else if x64_size == *x64_current_offset {
-        0
-    } else {
-        panic!("x64_size({x64_size}) < x64_current_offset({x64_current_offset})");
+
+    let x64_pad = match x64_size {
+        x64_size if x64_size > *x64_current_offset => {
+            x64_current_offset.abs_diff(x64_size) as usize
+        }
+        x64_size if x64_size == *x64_current_offset => 0,
+        _ => panic!("x64_size({x64_size}) < x64_current_offset({x64_current_offset})"),
     };
+
     if x86_pad != 0 || x64_pad != 0 {
         tracing::debug!(x86_pad, x86_current_offset);
         tracing::debug!(x64_pad, x64_current_offset);

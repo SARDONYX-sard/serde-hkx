@@ -255,6 +255,7 @@ fn size_of_type_common(type_kind: &TypeKind, ptr_size: u32) -> Result<u32, Membe
     })
 }
 
+#[allow(clippy::enum_variant_names)]
 #[derive(Debug, PartialEq, snafu::Snafu)]
 pub enum MemberError {
     #[snafu(display("Struct cannot calculate the size here. This is obtained by caching members in a HashMap or similar."))]

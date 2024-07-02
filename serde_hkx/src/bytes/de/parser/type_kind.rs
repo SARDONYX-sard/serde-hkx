@@ -132,7 +132,7 @@ pub fn transform<'a>(
 
 /// Parses a string literal until `\0`
 pub fn c_str<'a>(bytes: &mut BytesStream<'a>) -> crate::errors::de::Result<&'a CStr> {
-    let s = CStr::from_bytes_with_nul(&bytes)?;
+    let s = CStr::from_bytes_with_nul(bytes)?;
     *bytes = &bytes[s.count_bytes() - 1..];
     Ok(s)
 }

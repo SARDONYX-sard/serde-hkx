@@ -30,6 +30,7 @@ impl<'a> StringPtr<'a> {
     }
 
     /// Cast [`str`] with non copying.
+    #[allow(clippy::should_implement_trait)]
     #[inline]
     pub fn from_str(s: &'a str) -> Self {
         Self {
@@ -56,10 +57,7 @@ impl<'a> StringPtr<'a> {
     /// This is an invalid value or not.
     #[inline]
     pub fn should_write_binary(&self) -> bool {
-        match self.get_ref() {
-            Some(_) => return true,
-            _ => false,
-        }
+        self.get_ref().is_some()
     }
 }
 
