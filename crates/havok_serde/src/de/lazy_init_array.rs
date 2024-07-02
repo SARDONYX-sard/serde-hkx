@@ -61,7 +61,6 @@ impl<T, const N: usize> LazyInitArray<T, N> {
     /// - N < initialized_count
     /// - forgot to call `self.set_stack_ptr` once
     pub fn write_next(&mut self, value: T) {
-        dbg!(self.array.as_mut_ptr(), self.current_ptr, self.base_ptr);
         debug_assert!(
             self.initialized_count < N,
             "Should be initialized_count < {N}",
