@@ -38,9 +38,11 @@ const _: () = {
     use havok_serde as __serde;
     use __serde::HavokClass;
     impl __serde::HavokClass for hkpEntityExtendedListeners {
-        fn name(&self) -> &'static core::ffi::CStr {
-            c"hkpEntityExtendedListeners"
+        #[inline]
+        fn name(&self) -> &'static str {
+            "hkpEntityExtendedListeners"
         }
+        #[inline]
         fn signature(&self) -> __serde::__private::Signature {
             __serde::__private::Signature::new(4116120124u32)
         }
@@ -50,7 +52,9 @@ const _: () = {
         where
             S: __serde::ser::Serializer,
         {
-            let class_meta = self.__ptr.map(|name| (name, self.signature()));
+            let class_meta = self
+                .__ptr
+                .map(|name| (name, __serde::__private::Signature::new(4116120124u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkpEntityExtendedListeners", class_meta)?;
             serializer.skip_field("activationListeners", &self.m_activationListeners)?;

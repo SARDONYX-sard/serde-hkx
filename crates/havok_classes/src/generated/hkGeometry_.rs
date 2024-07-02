@@ -36,9 +36,11 @@ const _: () = {
     use havok_serde as __serde;
     use __serde::HavokClass;
     impl __serde::HavokClass for hkGeometry {
-        fn name(&self) -> &'static core::ffi::CStr {
-            c"hkGeometry"
+        #[inline]
+        fn name(&self) -> &'static str {
+            "hkGeometry"
         }
+        #[inline]
         fn signature(&self) -> __serde::__private::Signature {
             __serde::__private::Signature::new(2564656092u32)
         }
@@ -48,7 +50,9 @@ const _: () = {
         where
             S: __serde::ser::Serializer,
         {
-            let class_meta = self.__ptr.map(|name| (name, self.signature()));
+            let class_meta = self
+                .__ptr
+                .map(|name| (name, __serde::__private::Signature::new(2564656092u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkGeometry", class_meta)?;
             serializer.serialize_array_meta_field("vertices", &self.m_vertices)?;

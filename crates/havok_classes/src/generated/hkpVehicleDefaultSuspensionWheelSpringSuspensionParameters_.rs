@@ -43,9 +43,11 @@ const _: () = {
     use __serde::HavokClass;
     impl __serde::HavokClass
     for hkpVehicleDefaultSuspensionWheelSpringSuspensionParameters {
-        fn name(&self) -> &'static core::ffi::CStr {
-            c"hkpVehicleDefaultSuspensionWheelSpringSuspensionParameters"
+        #[inline]
+        fn name(&self) -> &'static str {
+            "hkpVehicleDefaultSuspensionWheelSpringSuspensionParameters"
         }
+        #[inline]
         fn signature(&self) -> __serde::__private::Signature {
             __serde::__private::Signature::new(2078654161u32)
         }
@@ -56,7 +58,9 @@ const _: () = {
         where
             S: __serde::ser::Serializer,
         {
-            let class_meta = self.__ptr.map(|name| (name, self.signature()));
+            let class_meta = self
+                .__ptr
+                .map(|name| (name, __serde::__private::Signature::new(2078654161u32)));
             let mut serializer = __serializer
                 .serialize_struct(
                     "hkpVehicleDefaultSuspensionWheelSpringSuspensionParameters",

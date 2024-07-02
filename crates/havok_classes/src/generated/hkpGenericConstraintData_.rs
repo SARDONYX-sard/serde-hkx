@@ -38,9 +38,11 @@ const _: () = {
     use havok_serde as __serde;
     use __serde::HavokClass;
     impl __serde::HavokClass for hkpGenericConstraintData {
-        fn name(&self) -> &'static core::ffi::CStr {
-            c"hkpGenericConstraintData"
+        #[inline]
+        fn name(&self) -> &'static str {
+            "hkpGenericConstraintData"
         }
+        #[inline]
         fn signature(&self) -> __serde::__private::Signature {
             __serde::__private::Signature::new(4202841664u32)
         }
@@ -50,7 +52,9 @@ const _: () = {
         where
             S: __serde::ser::Serializer,
         {
-            let class_meta = self.__ptr.map(|name| (name, self.signature()));
+            let class_meta = self
+                .__ptr
+                .map(|name| (name, __serde::__private::Signature::new(4202841664u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkpGenericConstraintData", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

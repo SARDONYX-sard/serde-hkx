@@ -32,9 +32,11 @@ const _: () = {
     use havok_serde as __serde;
     use __serde::HavokClass;
     impl __serde::HavokClass for hkbRotateCharacterModifierInternalState {
-        fn name(&self) -> &'static core::ffi::CStr {
-            c"hkbRotateCharacterModifierInternalState"
+        #[inline]
+        fn name(&self) -> &'static str {
+            "hkbRotateCharacterModifierInternalState"
         }
+        #[inline]
         fn signature(&self) -> __serde::__private::Signature {
             __serde::__private::Signature::new(3695230794u32)
         }
@@ -44,7 +46,9 @@ const _: () = {
         where
             S: __serde::ser::Serializer,
         {
-            let class_meta = self.__ptr.map(|name| (name, self.signature()));
+            let class_meta = self
+                .__ptr
+                .map(|name| (name, __serde::__private::Signature::new(3695230794u32)));
             let mut serializer = __serializer
                 .serialize_struct(
                     "hkbRotateCharacterModifierInternalState",

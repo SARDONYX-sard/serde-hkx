@@ -30,9 +30,11 @@ const _: () = {
     use havok_serde as __serde;
     use __serde::HavokClass;
     impl __serde::HavokClass for hkpMeshMaterial {
-        fn name(&self) -> &'static core::ffi::CStr {
-            c"hkpMeshMaterial"
+        #[inline]
+        fn name(&self) -> &'static str {
+            "hkpMeshMaterial"
         }
+        #[inline]
         fn signature(&self) -> __serde::__private::Signature {
             __serde::__private::Signature::new(2288836108u32)
         }
@@ -42,7 +44,9 @@ const _: () = {
         where
             S: __serde::ser::Serializer,
         {
-            let class_meta = self.__ptr.map(|name| (name, self.signature()));
+            let class_meta = self
+                .__ptr
+                .map(|name| (name, __serde::__private::Signature::new(2288836108u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkpMeshMaterial", class_meta)?;
             serializer.serialize_field("filterInfo", &self.m_filterInfo)?;

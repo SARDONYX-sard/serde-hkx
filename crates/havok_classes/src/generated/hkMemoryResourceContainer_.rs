@@ -51,9 +51,11 @@ const _: () = {
     use havok_serde as __serde;
     use __serde::HavokClass;
     impl<'a> __serde::HavokClass for hkMemoryResourceContainer<'a> {
-        fn name(&self) -> &'static core::ffi::CStr {
-            c"hkMemoryResourceContainer"
+        #[inline]
+        fn name(&self) -> &'static str {
+            "hkMemoryResourceContainer"
         }
+        #[inline]
         fn signature(&self) -> __serde::__private::Signature {
             __serde::__private::Signature::new(1197668650u32)
         }
@@ -63,7 +65,9 @@ const _: () = {
         where
             S: __serde::ser::Serializer,
         {
-            let class_meta = self.__ptr.map(|name| (name, self.signature()));
+            let class_meta = self
+                .__ptr
+                .map(|name| (name, __serde::__private::Signature::new(1197668650u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkMemoryResourceContainer", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

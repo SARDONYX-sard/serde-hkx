@@ -24,9 +24,11 @@ const _: () = {
     use havok_serde as __serde;
     use __serde::HavokClass;
     impl __serde::HavokClass for hkbBlendCurveUtils {
-        fn name(&self) -> &'static core::ffi::CStr {
-            c"hkbBlendCurveUtils"
+        #[inline]
+        fn name(&self) -> &'static str {
+            "hkbBlendCurveUtils"
         }
+        #[inline]
         fn signature(&self) -> __serde::__private::Signature {
             __serde::__private::Signature::new(587471600u32)
         }
@@ -36,7 +38,9 @@ const _: () = {
         where
             S: __serde::ser::Serializer,
         {
-            let class_meta = self.__ptr.map(|name| (name, self.signature()));
+            let class_meta = self
+                .__ptr
+                .map(|name| (name, __serde::__private::Signature::new(587471600u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkbBlendCurveUtils", class_meta)?;
             serializer.pad_field([0u8; 1usize].as_slice(), [0u8; 1usize].as_slice())?;
