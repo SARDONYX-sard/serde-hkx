@@ -13,6 +13,7 @@
 //! Deserialization
 
 mod impls;
+mod lazy_init_array;
 mod seed;
 mod size_hint;
 

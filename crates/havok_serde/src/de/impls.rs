@@ -435,121 +435,23 @@ macro_rules! array_impls {
                 where
                     A: SeqAccess<'de>,
                 {
-                    // Since initializing hundreds of fixed-length arrays first would be wasteful
-                    // and costly, they are written sequentially in an uninitialized state and treated
-                    // as initialized when all writes are completed.
-
-                    // The implementation differentiates two cases:
-                    //   A) `T` does not need to be dropped. Even if the initializer panics
-                    //      or returns `Err` we will not leak memory.
-                    //   B) `T` needs to be dropped. We must keep track of which elements have
-                    //      been initialized so far, and drop them if we encounter a panic or `Err` midway.
-                    if !mem::needs_drop::<$ty>() {
-                        // If only a stack is used, it goes into individual processing.
-
-                        let mut array: MaybeUninit<[$ty; N]> = MaybeUninit::uninit();
-                        // pointer to array = *mut [T; N] <-> *mut T = pointer to first element
-                        let mut ptr_i = array.as_mut_ptr() as *mut $ty;
-
-                        // # Safety
-                        //
-                        //   - We are within the array since we start from the
-                        //     beginning of the array, and we have `0 <= i < N`.
-                        unsafe {
-                            let mut init_count = 0;
-                            for _ in 0..N {
-                                if let Some(value_i) = tri!(seq.$fn_name()) {
-                                    ptr_i.write(value_i);
-                                    ptr_i = ptr_i.add(1); // wrote index.
-                                    init_count += 1;
-                                } else {
-                                    break;
-                                        };
-                                    }
-
-                                    if init_count == N {
-                                        Ok(array.assume_init())
-                                    } else {
-                                        Err(Error::invalid_length(init_count, &(N.to_string().as_str())))
-                                    }
-                                }
+                    let mut array = super::lazy_init_array::LazyInitArray::<$ty, N>::new();
+                    array.set_stack_ptr();
+                    for _ in 0..N {
+                        if let Some(value_i) = tri!(seq.$fn_name()) {
+                            array.write_next(value_i);
                         } else {
-                            // else: `mem::needs_drop::<T>()`
-
-                            /// # Safety
-                            ///
-                            ///   - `base_ptr[.. initialized_count]` must be a slice of init elements...
-                            ///
-                            ///   - ... that must be sound to `ptr::drop_in_place` if/when
-                            ///     `UnsafeDropSliceGuard` is dropped: "symbolic ownership"
-                            struct UnsafeDropSliceGuard<Item> {
-                                /// started address of the slice.
-                                base_ptr: *mut Item,
-                                /// Wrote value count
-                                initialized_count: usize,
-                            }
-
-                            impl<Item> Drop for UnsafeDropSliceGuard<Item> {
-                                fn drop(self: &'_ mut Self) {
-                                    unsafe {
-                                        // # Safety
-                                        //
-                                        //   - the contract of the struct guarantees that this is sound
-                                        ptr::drop_in_place(slice::from_raw_parts_mut(
-                                            self.base_ptr,
-                                            self.initialized_count,
-                                        ));
-                                    }
-                                }
-                            }
-
-                            //  If the `initializer(i)` call panics, `panic_guard` is dropped,
-                            //  dropping `array[.. initialized_count]` => no memory leak!
-                            //
-                            // # Safety
-                            //
-                            //  1. - array[.. initialized_count] only
-                            //       contains init elements, thus there is no risk of dropping
-                            //       uninit data;
-                            //  2. - We are within the array since we start from the
-                            //       beginning of the array, and we have `0 <= i < N`.
-                            //
-                            unsafe {
-                                let mut array: MaybeUninit<[$ty; N]> = MaybeUninit::uninit();
-                                // pointer to array = *mut [T; N] <-> *mut T = pointer to first element
-                                let mut ptr_i = array.as_mut_ptr() as *mut $ty;
-                                let mut panic_guard = UnsafeDropSliceGuard {
-                                    base_ptr: ptr_i,
-                                    initialized_count: 0,
-                                };
-
-                                for i in 0..N {
-                                    // Invariant: `i` elements have already been initialized
-                                    panic_guard.initialized_count = i;
-                                    // If this panics or fails, `panic_guard` is dropped, thus
-                                    // dropping the elements in `base_ptr[.. i]`
-                                    if let Some(value_i) = tri!(seq.$fn_name()) {
-                                        ptr_i.write(value_i);
-                                        ptr_i = ptr_i.add(1); // wrote index.
-                                    } else {
-                                        break;
-                                    };
-                                }
-
-                                if panic_guard.initialized_count == N {
-                                    // From now on, the code can no longer `panic!`, let's take the
-                                    // symbolic ownership back
-                                    mem::forget(panic_guard);
-                                    Ok(array.assume_init())
-                                } else {
-                                    Err(Error::invalid_length(
-                                        panic_guard.initialized_count,
-                                        &(N.to_string().as_str()),
-                                    ))
-                                }
-                            }
-                        }
+                            break;
+                        };
                     }
+                    match array.try_init() {
+                        Ok(array) => Ok(array),
+                        Err(guard) => Err(Error::invalid_length(
+                            guard.initialized_count,
+                            &(N.to_string().as_str()),
+                        )),
+                    }
+                }
             }
 
             impl<'a, 'de, const N: usize> Visitor<'de> for ArrayInPlaceVisitor<'a, [$ty; N]>
@@ -617,119 +519,21 @@ where
     where
         A: SeqAccess<'de>,
     {
-        // Since initializing hundreds of fixed-length arrays first would be wasteful
-        // and costly, they are written sequentially in an uninitialized state and treated
-        // as initialized when all writes are completed.
-
-        // The implementation differentiates two cases:
-        //   A) `T` does not need to be dropped. Even if the initializer panics
-        //      or returns `Err` we will not leak memory.
-        //   B) `T` needs to be dropped. We must keep track of which elements have
-        //      been initialized so far, and drop them if we encounter a panic or `Err` midway.
-        if !mem::needs_drop::<T>() {
-            // If only a stack is used, it goes into individual processing.
-
-            let mut array: MaybeUninit<[T; N]> = MaybeUninit::uninit();
-            // pointer to array = *mut [T; N] <-> *mut T = pointer to first element
-            let mut ptr_i = array.as_mut_ptr() as *mut T;
-
-            // # Safety
-            //
-            //   - We are within the array since we start from the
-            //     beginning of the array, and we have `0 <= i < N`.
-            unsafe {
-                let mut init_count = 0;
-                for _ in 0..N {
-                    if let Some(value_i) = tri!(seq.next_class_element()) {
-                        ptr_i.write(value_i);
-                        ptr_i = ptr_i.add(1); // wrote index.
-                        init_count += 1;
-                    } else {
-                        break;
-                    };
-                }
-
-                if init_count == N {
-                    Ok(array.assume_init())
-                } else {
-                    Err(Error::invalid_length(init_count, &(N.to_string().as_str())))
-                }
-            }
-        } else {
-            // else: `mem::needs_drop::<T>()`
-
-            /// # Safety
-            ///
-            ///   - `base_ptr[.. initialized_count]` must be a slice of init elements...
-            ///
-            ///   - ... that must be sound to `ptr::drop_in_place` if/when
-            ///     `UnsafeDropSliceGuard` is dropped: "symbolic ownership"
-            struct UnsafeDropSliceGuard<Item> {
-                /// started address of the slice.
-                base_ptr: *mut Item,
-                /// Wrote value count
-                initialized_count: usize,
-            }
-
-            impl<Item> Drop for UnsafeDropSliceGuard<Item> {
-                fn drop(self: &'_ mut Self) {
-                    unsafe {
-                        // # Safety
-                        //
-                        //   - the contract of the struct guarantees that this is sound
-                        ptr::drop_in_place(slice::from_raw_parts_mut(
-                            self.base_ptr,
-                            self.initialized_count,
-                        ));
-                    }
-                }
-            }
-
-            //  If the `initializer(i)` call panics, `panic_guard` is dropped,
-            //  dropping `array[.. initialized_count]` => no memory leak!
-            //
-            // # Safety
-            //
-            //  1. - array[.. initialized_count] only
-            //       contains init elements, thus there is no risk of dropping
-            //       uninit data;
-            //  2. - We are within the array since we start from the
-            //       beginning of the array, and we have `0 <= i < N`.
-            //
-            unsafe {
-                let mut array: MaybeUninit<[T; N]> = MaybeUninit::uninit();
-                // pointer to array = *mut [T; N] <-> *mut T = pointer to first element
-                let mut ptr_i = array.as_mut_ptr() as *mut T;
-                let mut panic_guard = UnsafeDropSliceGuard {
-                    base_ptr: ptr_i,
-                    initialized_count: 0,
-                };
-
-                for i in 0..N {
-                    // Invariant: `i` elements have already been initialized
-                    panic_guard.initialized_count = i;
-                    // If this panics or fails, `panic_guard` is dropped, thus
-                    // dropping the elements in `base_ptr[.. i]`
-                    if let Some(value_i) = tri!(seq.next_class_element()) {
-                        ptr_i.write(value_i);
-                        ptr_i = ptr_i.add(1); // wrote index.
-                    } else {
-                        break;
-                    };
-                }
-
-                if panic_guard.initialized_count == N {
-                    // From now on, the code can no longer `panic!`, let's take the
-                    // symbolic ownership back
-                    mem::forget(panic_guard);
-                    Ok(array.assume_init())
-                } else {
-                    Err(Error::invalid_length(
-                        panic_guard.initialized_count,
-                        &(N.to_string().as_str()),
-                    ))
-                }
-            }
+        let mut array = super::lazy_init_array::LazyInitArray::<T, N>::new();
+        array.set_stack_ptr();
+        for _ in 0..N {
+            if let Some(value_i) = tri!(seq.next_class_element()) {
+                array.write_next(value_i);
+            } else {
+                break;
+            };
+        }
+        match array.try_init() {
+            Ok(array) => Ok(array),
+            Err(guard) => Err(Error::invalid_length(
+                guard.initialized_count,
+                &(N.to_string().as_str()),
+            )),
         }
     }
 }
