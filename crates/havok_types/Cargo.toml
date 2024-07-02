@@ -11,7 +11,6 @@ version.workspace = true
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-derive-new = "0.6"
 half = "2.4.1"
 parse-display = "0.9.0" # Display derive
 parse_int = { version = "0.6" }

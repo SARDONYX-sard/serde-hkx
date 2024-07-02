@@ -409,7 +409,6 @@ dependencies = [
 name = "havok_types"
 version = "0.1.0"
 dependencies = [
- "derive-new",
  "half",
  "parse-display",
  "parse_int",

@@ -1,5 +1,4 @@
 use super::vector4::Vector4;
-use derive_new::new;
 use parse_display::Display;
 
 /// Matrix4x4 for havok.
@@ -10,7 +9,7 @@ use parse_display::Display;
 /// ```
 #[repr(C, align(16))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-#[derive(Debug, Clone, Default, PartialEq, PartialOrd, Display, new)]
+#[derive(Debug, Clone, Default, PartialEq, PartialOrd, Display)]
 #[display("{x}{y}{z}{w}")]
 pub struct Matrix4 {
     /// The first column of the matrix.
@@ -26,6 +25,11 @@ pub struct Matrix4 {
 static_assertions::assert_eq_size!(Matrix4, [u8; 64]);
 
 impl Matrix4 {
+    /// Creates a new `Matrix4`
+    pub const fn new(x: Vector4, y: Vector4, z: Vector4, w: Vector4) -> Self {
+        Self { x, y, z, w }
+    }
+
     pub fn to_le_bytes(&self) -> [u8; 64] {
         let mut bytes = [0; 64];
         bytes[0..16].copy_from_slice(&self.x.to_le_bytes());

@@ -1,4 +1,3 @@
-use derive_new::new;
 use parse_display::Display;
 
 /// # XML
@@ -7,7 +6,7 @@ use parse_display::Display;
 /// ```
 #[repr(C, align(16))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-#[derive(Debug, Clone, Default, PartialEq, PartialOrd, Display, new)]
+#[derive(Debug, Clone, Default, PartialEq, PartialOrd, Display)]
 #[display("({x:.06} {y:.06} {z:.06} {scaler:.06})")]
 pub struct Quaternion {
     pub x: f32,
@@ -19,6 +18,11 @@ pub struct Quaternion {
 static_assertions::assert_eq_size!(Quaternion, [u8; 16]);
 
 impl Quaternion {
+    /// Creates a new `Quaternion`
+    pub const fn new(x: f32, y: f32, z: f32, scaler: f32) -> Self {
+        Self { x, y, z, scaler }
+    }
+
     #[inline]
     pub fn to_le_bytes(&self) -> [u8; 16] {
         let mut bytes = [0; 16];

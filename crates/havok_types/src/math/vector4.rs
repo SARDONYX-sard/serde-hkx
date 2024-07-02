@@ -1,4 +1,3 @@
-use derive_new::new;
 use parse_display::Display;
 
 /// Vector4 for Havok C++ Class.
@@ -20,7 +19,7 @@ use parse_display::Display;
 /// ```
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[repr(C, align(16))]
-#[derive(Debug, Clone, Default, PartialEq, PartialOrd, Display, new)]
+#[derive(Debug, Clone, Default, PartialEq, PartialOrd, Display)]
 #[display("({x:.06} {y:.06} {z:.06} {w:.06})")]
 pub struct Vector4 {
     pub x: f32,
@@ -32,6 +31,11 @@ pub struct Vector4 {
 static_assertions::assert_eq_size!(Vector4, [u8; 16]);
 
 impl Vector4 {
+    /// Creates a new `Vector4`
+    pub const fn new(x: f32, y: f32, z: f32, w: f32) -> Self {
+        Self { x, y, z, w }
+    }
+
     /// As a byte array in little endian.
     #[inline]
     pub fn to_le_bytes(&self) -> [u8; 16] {

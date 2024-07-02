@@ -1,5 +1,4 @@
 use crate::{Rotation, Vector4};
-use derive_new::new;
 use parse_display::Display;
 
 /// # XML representation
@@ -10,7 +9,7 @@ use parse_display::Display;
 /// ```
 #[repr(C, align(16))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-#[derive(Debug, Clone, Default, PartialEq, PartialOrd, Display, new)]
+#[derive(Debug, Clone, Default, PartialEq, PartialOrd, Display)]
 #[display("{rotation}{transition}")]
 pub struct Transform {
     /// Rotation part
@@ -24,6 +23,14 @@ pub struct Transform {
 static_assertions::assert_eq_size!(Transform, [u8; 64]);
 
 impl Transform {
+    /// Create a new `Transform`
+    pub const fn new(rotation: Rotation, transition: Vector4) -> Self {
+        Self {
+            rotation,
+            transition,
+        }
+    }
+
     pub fn to_le_bytes(&self) -> [u8; 64] {
         let mut bytes = [0u8; 64];
         bytes[0..48].copy_from_slice(&self.rotation.to_le_bytes());

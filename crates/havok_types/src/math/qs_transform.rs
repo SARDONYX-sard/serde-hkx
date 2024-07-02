@@ -1,5 +1,4 @@
 use crate::{Quaternion, Vector4};
-use derive_new::new;
 use parse_display::Display;
 
 /// # XML representation
@@ -12,7 +11,7 @@ use parse_display::Display;
 /// [`Vector4::w`](Vector4)
 #[repr(C, align(16))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-#[derive(Debug, Clone, Default, PartialEq, PartialOrd, Display, new)]
+#[derive(Debug, Clone, Default, PartialEq, PartialOrd, Display)]
 #[display("{transition}{quaternion}{scale}")]
 pub struct QsTransform {
     /// # NOTE
@@ -27,6 +26,15 @@ pub struct QsTransform {
 }
 
 impl QsTransform {
+    /// Creates a new `QsTransform`
+    pub const fn new(transition: Vector4, quaternion: Quaternion, scale: Vector4) -> Self {
+        Self {
+            transition,
+            quaternion,
+            scale,
+        }
+    }
+
     pub fn to_le_bytes(&self) -> [u8; 48] {
         let mut bytes = [0; 48];
         bytes[0..16].copy_from_slice(&self.transition.to_le_bytes());

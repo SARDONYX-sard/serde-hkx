@@ -7,7 +7,6 @@
 //! - `#0457`
 //! - `#0007`use core::str::FromStr;
 use core::str::FromStr;
-use derive_new::new;
 use parse_display::Display;
 
 /// Havok C++ Class unique number.
@@ -39,11 +38,16 @@ use parse_display::Display;
     derive(serde_with::SerializeDisplay, serde_with::DeserializeFromStr)
 )]
 #[repr(transparent)]
-#[derive(Debug, Copy, Clone, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Display, new)]
+#[derive(Debug, Copy, Clone, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Display)]
 #[display("#{0:04}")]
 pub struct Pointer(usize);
 
 impl Pointer {
+    /// Creates a new `Pointer`
+    pub const fn new(ptr: usize) -> Self {
+        Self(ptr)
+    }
+
     /// Get inner value.
     #[inline]
     pub const fn get(&self) -> usize {

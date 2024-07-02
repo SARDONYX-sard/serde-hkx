@@ -11,12 +11,17 @@ use crate::lib::*;
 /// - json: [`String`] -> Struct([`str`])                    => non copy
 ///
 /// [`CStr`]: https://doc.rust-lang.org/stable/core/ffi/c_str/struct.CStr.html
-#[derive(Debug, Default, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, derive_new::new)]
+#[derive(Debug, Default, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct StringPtr<'a> {
     inner: Option<Cow<'a, str>>,
 }
 
 impl<'a> StringPtr<'a> {
+    /// Create a new `StringPtr`
+    pub const fn new(inner: Option<Cow<'a, str>>) -> Self {
+        Self { inner }
+    }
+
     /// Get inner value.
     #[inline]
     pub fn into_inner(self) -> Option<Cow<'a, str>> {

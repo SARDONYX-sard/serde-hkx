@@ -6,18 +6,26 @@ use crate::{lib::*, StringPtr};
 /// If it is null (substitute [`Option::None`] in Rust), an empty string or `\u{2400}`,
 /// it will not be written to the binary data.
 ///
-/// # Deserialization alloc patterns
-/// - hkx(`Vec<u8>` -> [`CStr`]) -> Struct(alloc [`String`]) => Need copy
-/// - xml([`String`]) -> Struct([`str`])                     => non copy
-/// - json: [`String`] -> Struct([`str`])                    => non copy
+/// # Deserialization patterns
+/// - hkx(`Vec<u8>`)   -> Struct([`str`] in `Cow<'_, str>`) => non copy
+/// - xml([`String`])  -> Struct([`str`] in `Cow<'_, str>`) => non copy
+/// - json: [`String`] -> Struct([`str`] in `Cow<'_, str>`) => non copy
 ///
-/// [`CStr`]: https://doc.rust-lang.org/stable/core/ffi/c_str/struct.CStr.html
-#[derive(Debug, Default, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, derive_new::new)]
+/// # Serialization is alloc
+/// Struct([`str`]) -> (alloc [`String`])
+///
+/// [`str`]: https://doc.rust-lang.org/stable/core/ffi/c_str/struct.CStr.html
+#[derive(Debug, Default, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct CString<'a> {
     inner: Option<Cow<'a, str>>,
 }
 
 impl<'a> CString<'a> {
+    /// Create a new `CString`
+    pub const fn new(inner: Option<Cow<'a, str>>) -> Self {
+        Self { inner }
+    }
+
     /// Get inner value.
     #[inline]
     pub fn into_inner(self) -> Option<Cow<'a, str>> {
