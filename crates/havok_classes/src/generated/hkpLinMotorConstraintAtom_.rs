@@ -59,26 +59,25 @@ pub struct hkpLinMotorConstraintAtom {
     pub m_motor: Pointer,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkpLinMotorConstraintAtom {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkpLinMotorConstraintAtom {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpLinMotorConstraintAtom"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(271656036u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(271656036u32)
         }
     }
-    impl __serde::Serialize for hkpLinMotorConstraintAtom {
+    impl _serde::Serialize for hkpLinMotorConstraintAtom {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(271656036u32)));
+                .map(|name| (name, _serde::__private::Signature::new(271656036u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkpLinMotorConstraintAtom", class_meta)?;
             serializer.serialize_field("type", &self.parent.m_type)?;

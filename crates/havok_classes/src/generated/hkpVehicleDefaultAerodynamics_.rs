@@ -53,26 +53,25 @@ pub struct hkpVehicleDefaultAerodynamics {
     pub m_extraGravityws: Vector4,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkpVehicleDefaultAerodynamics {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkpVehicleDefaultAerodynamics {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpVehicleDefaultAerodynamics"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(1123834813u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(1123834813u32)
         }
     }
-    impl __serde::Serialize for hkpVehicleDefaultAerodynamics {
+    impl _serde::Serialize for hkpVehicleDefaultAerodynamics {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(1123834813u32)));
+                .map(|name| (name, _serde::__private::Signature::new(1123834813u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkpVehicleDefaultAerodynamics", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

@@ -89,26 +89,25 @@ pub struct hkbStateMachineInternalState {
     pub m_echoNextUpdate: bool,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkbStateMachineInternalState {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkbStateMachineInternalState {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbStateMachineInternalState"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(3172627714u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(3172627714u32)
         }
     }
-    impl __serde::Serialize for hkbStateMachineInternalState {
+    impl _serde::Serialize for hkbStateMachineInternalState {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(3172627714u32)));
+                .map(|name| (name, _serde::__private::Signature::new(3172627714u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkbStateMachineInternalState", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

@@ -33,26 +33,25 @@ pub struct hkxNodeAnnotationData<'a> {
     pub m_description: StringPtr<'a>,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl<'a> __serde::HavokClass for hkxNodeAnnotationData<'a> {
+    use havok_serde as _serde;
+    impl<'a> _serde::HavokClass for hkxNodeAnnotationData<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkxNodeAnnotationData"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(1128132242u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(1128132242u32)
         }
     }
-    impl<'a> __serde::Serialize for hkxNodeAnnotationData<'a> {
+    impl<'a> _serde::Serialize for hkxNodeAnnotationData<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(1128132242u32)));
+                .map(|name| (name, _serde::__private::Signature::new(1128132242u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkxNodeAnnotationData", class_meta)?;
             serializer.serialize_field("time", &self.m_time)?;

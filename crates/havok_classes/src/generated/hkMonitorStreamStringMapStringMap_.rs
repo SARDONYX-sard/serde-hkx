@@ -34,26 +34,25 @@ pub struct hkMonitorStreamStringMapStringMap<'a> {
     pub m_string: StringPtr<'a>,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl<'a> __serde::HavokClass for hkMonitorStreamStringMapStringMap<'a> {
+    use havok_serde as _serde;
+    impl<'a> _serde::HavokClass for hkMonitorStreamStringMapStringMap<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkMonitorStreamStringMapStringMap"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(745983510u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(745983510u32)
         }
     }
-    impl<'a> __serde::Serialize for hkMonitorStreamStringMapStringMap<'a> {
+    impl<'a> _serde::Serialize for hkMonitorStreamStringMapStringMap<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(745983510u32)));
+                .map(|name| (name, _serde::__private::Signature::new(745983510u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkMonitorStreamStringMapStringMap", class_meta)?;
             serializer.serialize_field("id", &self.m_id)?;

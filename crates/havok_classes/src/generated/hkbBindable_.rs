@@ -43,26 +43,25 @@ pub struct hkbBindable {
     pub m_areBindablesCached: bool,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkbBindable {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkbBindable {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbBindable"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(739521239u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(739521239u32)
         }
     }
-    impl __serde::Serialize for hkbBindable {
+    impl _serde::Serialize for hkbBindable {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(739521239u32)));
+                .map(|name| (name, _serde::__private::Signature::new(739521239u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkbBindable", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

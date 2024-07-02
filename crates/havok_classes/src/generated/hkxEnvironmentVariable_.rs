@@ -33,26 +33,25 @@ pub struct hkxEnvironmentVariable<'a> {
     pub m_value: StringPtr<'a>,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl<'a> __serde::HavokClass for hkxEnvironmentVariable<'a> {
+    use havok_serde as _serde;
+    impl<'a> _serde::HavokClass for hkxEnvironmentVariable<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkxEnvironmentVariable"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(2793492757u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(2793492757u32)
         }
     }
-    impl<'a> __serde::Serialize for hkxEnvironmentVariable<'a> {
+    impl<'a> _serde::Serialize for hkxEnvironmentVariable<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(2793492757u32)));
+                .map(|name| (name, _serde::__private::Signature::new(2793492757u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkxEnvironmentVariable", class_meta)?;
             serializer.serialize_stringptr_meta_field("name", &self.m_name)?;

@@ -33,26 +33,25 @@ pub struct hkpPointToPlaneConstraintDataAtoms {
     pub m_lin: hkpLinConstraintAtom,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkpPointToPlaneConstraintDataAtoms {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkpPointToPlaneConstraintDataAtoms {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpPointToPlaneConstraintDataAtoms"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(1956364896u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(1956364896u32)
         }
     }
-    impl __serde::Serialize for hkpPointToPlaneConstraintDataAtoms {
+    impl _serde::Serialize for hkpPointToPlaneConstraintDataAtoms {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(1956364896u32)));
+                .map(|name| (name, _serde::__private::Signature::new(1956364896u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkpPointToPlaneConstraintDataAtoms", class_meta)?;
             serializer.serialize_field("transforms", &self.m_transforms)?;

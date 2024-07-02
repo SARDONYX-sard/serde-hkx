@@ -41,26 +41,25 @@ pub struct hkMemoryResourceHandle<'a> {
     pub m_references: Vec<hkMemoryResourceHandleExternalLink<'a>>,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl<'a> __serde::HavokClass for hkMemoryResourceHandle<'a> {
+    use havok_serde as _serde;
+    impl<'a> _serde::HavokClass for hkMemoryResourceHandle<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkMemoryResourceHandle"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(3220881542u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(3220881542u32)
         }
     }
-    impl<'a> __serde::Serialize for hkMemoryResourceHandle<'a> {
+    impl<'a> _serde::Serialize for hkMemoryResourceHandle<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(3220881542u32)));
+                .map(|name| (name, _serde::__private::Signature::new(3220881542u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkMemoryResourceHandle", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

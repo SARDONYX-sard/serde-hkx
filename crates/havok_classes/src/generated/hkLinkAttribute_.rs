@@ -27,26 +27,25 @@ pub struct hkLinkAttribute {
     pub m_type: Link,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkLinkAttribute {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkLinkAttribute {
         #[inline]
         fn name(&self) -> &'static str {
             "hkLinkAttribute"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(626884964u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(626884964u32)
         }
     }
-    impl __serde::Serialize for hkLinkAttribute {
+    impl _serde::Serialize for hkLinkAttribute {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(626884964u32)));
+                .map(|name| (name, _serde::__private::Signature::new(626884964u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkLinkAttribute", class_meta)?;
             serializer.serialize_field("type", &self.m_type)?;

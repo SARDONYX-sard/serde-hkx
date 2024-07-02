@@ -23,26 +23,25 @@ pub struct hkpConstraintChainData {
     pub parent: hkpConstraintData,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkpConstraintChainData {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkpConstraintChainData {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpConstraintChainData"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(1605158911u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(1605158911u32)
         }
     }
-    impl __serde::Serialize for hkpConstraintChainData {
+    impl _serde::Serialize for hkpConstraintChainData {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(1605158911u32)));
+                .map(|name| (name, _serde::__private::Signature::new(1605158911u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkpConstraintChainData", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

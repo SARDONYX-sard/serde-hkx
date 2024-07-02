@@ -35,26 +35,25 @@ pub struct hkMemoryMeshMaterial<'a> {
     pub m_textures: Vec<Pointer>,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl<'a> __serde::HavokClass for hkMemoryMeshMaterial<'a> {
+    use havok_serde as _serde;
+    impl<'a> _serde::HavokClass for hkMemoryMeshMaterial<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkMemoryMeshMaterial"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(303394531u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(303394531u32)
         }
     }
-    impl<'a> __serde::Serialize for hkMemoryMeshMaterial<'a> {
+    impl<'a> _serde::Serialize for hkMemoryMeshMaterial<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(303394531u32)));
+                .map(|name| (name, _serde::__private::Signature::new(303394531u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkMemoryMeshMaterial", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

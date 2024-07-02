@@ -45,26 +45,25 @@ pub struct hkpVehicleLinearCastWheelCollideWheelState {
     pub m_to: Vector4,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkpVehicleLinearCastWheelCollideWheelState {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkpVehicleLinearCastWheelCollideWheelState {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpVehicleLinearCastWheelCollideWheelState"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(714788760u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(714788760u32)
         }
     }
-    impl __serde::Serialize for hkpVehicleLinearCastWheelCollideWheelState {
+    impl _serde::Serialize for hkpVehicleLinearCastWheelCollideWheelState {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(714788760u32)));
+                .map(|name| (name, _serde::__private::Signature::new(714788760u32)));
             let mut serializer = __serializer
                 .serialize_struct(
                     "hkpVehicleLinearCastWheelCollideWheelState",

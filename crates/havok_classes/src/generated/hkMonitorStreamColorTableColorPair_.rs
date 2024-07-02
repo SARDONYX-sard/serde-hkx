@@ -33,26 +33,25 @@ pub struct hkMonitorStreamColorTableColorPair<'a> {
     pub m_color: ExtendedColors,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl<'a> __serde::HavokClass for hkMonitorStreamColorTableColorPair<'a> {
+    use havok_serde as _serde;
+    impl<'a> _serde::HavokClass for hkMonitorStreamColorTableColorPair<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkMonitorStreamColorTableColorPair"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(1938803205u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(1938803205u32)
         }
     }
-    impl<'a> __serde::Serialize for hkMonitorStreamColorTableColorPair<'a> {
+    impl<'a> _serde::Serialize for hkMonitorStreamColorTableColorPair<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(1938803205u32)));
+                .map(|name| (name, _serde::__private::Signature::new(1938803205u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkMonitorStreamColorTableColorPair", class_meta)?;
             serializer.serialize_stringptr_meta_field("colorName", &self.m_colorName)?;

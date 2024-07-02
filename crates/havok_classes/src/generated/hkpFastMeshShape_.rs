@@ -23,26 +23,25 @@ pub struct hkpFastMeshShape {
     pub parent: hkpMeshShape,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkpFastMeshShape {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkpFastMeshShape {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpFastMeshShape"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(1027449617u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(1027449617u32)
         }
     }
-    impl __serde::Serialize for hkpFastMeshShape {
+    impl _serde::Serialize for hkpFastMeshShape {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(1027449617u32)));
+                .map(|name| (name, _serde::__private::Signature::new(1027449617u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkpFastMeshShape", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

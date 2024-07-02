@@ -49,26 +49,25 @@ pub struct hkpAction<'a> {
     pub m_name: StringPtr<'a>,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl<'a> __serde::HavokClass for hkpAction<'a> {
+    use havok_serde as _serde;
+    impl<'a> _serde::HavokClass for hkpAction<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpAction"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(3187083857u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(3187083857u32)
         }
     }
-    impl<'a> __serde::Serialize for hkpAction<'a> {
+    impl<'a> _serde::Serialize for hkpAction<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(3187083857u32)));
+                .map(|name| (name, _serde::__private::Signature::new(3187083857u32)));
             let mut serializer = __serializer.serialize_struct("hkpAction", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;

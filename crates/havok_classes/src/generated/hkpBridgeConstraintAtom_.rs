@@ -37,26 +37,25 @@ pub struct hkpBridgeConstraintAtom {
     pub m_constraintData: Pointer,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkpBridgeConstraintAtom {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkpBridgeConstraintAtom {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpBridgeConstraintAtom"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(2275734299u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(2275734299u32)
         }
     }
-    impl __serde::Serialize for hkpBridgeConstraintAtom {
+    impl _serde::Serialize for hkpBridgeConstraintAtom {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(2275734299u32)));
+                .map(|name| (name, _serde::__private::Signature::new(2275734299u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkpBridgeConstraintAtom", class_meta)?;
             serializer.serialize_field("type", &self.parent.m_type)?;

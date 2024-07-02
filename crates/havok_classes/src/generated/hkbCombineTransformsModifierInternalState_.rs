@@ -35,26 +35,25 @@ pub struct hkbCombineTransformsModifierInternalState {
     pub m_rotationOut: Quaternion,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkbCombineTransformsModifierInternalState {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkbCombineTransformsModifierInternalState {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbCombineTransformsModifierInternalState"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(2838418335u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(2838418335u32)
         }
     }
-    impl __serde::Serialize for hkbCombineTransformsModifierInternalState {
+    impl _serde::Serialize for hkbCombineTransformsModifierInternalState {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(2838418335u32)));
+                .map(|name| (name, _serde::__private::Signature::new(2838418335u32)));
             let mut serializer = __serializer
                 .serialize_struct(
                     "hkbCombineTransformsModifierInternalState",

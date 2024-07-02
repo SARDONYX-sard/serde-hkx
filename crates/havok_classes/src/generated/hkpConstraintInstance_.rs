@@ -99,26 +99,25 @@ pub struct hkpConstraintInstance<'a> {
     pub m_uid: u32,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl<'a> __serde::HavokClass for hkpConstraintInstance<'a> {
+    use havok_serde as _serde;
+    impl<'a> _serde::HavokClass for hkpConstraintInstance<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpConstraintInstance"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(55491167u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(55491167u32)
         }
     }
-    impl<'a> __serde::Serialize for hkpConstraintInstance<'a> {
+    impl<'a> _serde::Serialize for hkpConstraintInstance<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(55491167u32)));
+                .map(|name| (name, _serde::__private::Signature::new(55491167u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkpConstraintInstance", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

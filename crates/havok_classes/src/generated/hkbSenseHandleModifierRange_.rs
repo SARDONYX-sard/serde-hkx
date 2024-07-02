@@ -45,26 +45,25 @@ pub struct hkbSenseHandleModifierRange {
     pub m_ignoreHandle: bool,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkbSenseHandleModifierRange {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkbSenseHandleModifierRange {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbSenseHandleModifierRange"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(4216764050u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(4216764050u32)
         }
     }
-    impl __serde::Serialize for hkbSenseHandleModifierRange {
+    impl _serde::Serialize for hkbSenseHandleModifierRange {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(4216764050u32)));
+                .map(|name| (name, _serde::__private::Signature::new(4216764050u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkbSenseHandleModifierRange", class_meta)?;
             serializer.serialize_field("event", &self.m_event)?;

@@ -27,26 +27,25 @@ pub struct hkTraceStreamTitle {
     pub m_value: [char; 32usize],
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkTraceStreamTitle {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkTraceStreamTitle {
         #[inline]
         fn name(&self) -> &'static str {
             "hkTraceStreamTitle"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(1783408684u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(1783408684u32)
         }
     }
-    impl __serde::Serialize for hkTraceStreamTitle {
+    impl _serde::Serialize for hkTraceStreamTitle {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(1783408684u32)));
+                .map(|name| (name, _serde::__private::Signature::new(1783408684u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkTraceStreamTitle", class_meta)?;
             serializer.serialize_field("value", &self.m_value.as_slice())?;

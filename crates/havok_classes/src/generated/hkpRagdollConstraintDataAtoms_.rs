@@ -69,26 +69,25 @@ pub struct hkpRagdollConstraintDataAtoms {
     pub m_ballSocket: hkpBallSocketConstraintAtom,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkpRagdollConstraintDataAtoms {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkpRagdollConstraintDataAtoms {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpRagdollConstraintDataAtoms"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(4007095040u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(4007095040u32)
         }
     }
-    impl __serde::Serialize for hkpRagdollConstraintDataAtoms {
+    impl _serde::Serialize for hkpRagdollConstraintDataAtoms {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(4007095040u32)));
+                .map(|name| (name, _serde::__private::Signature::new(4007095040u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkpRagdollConstraintDataAtoms", class_meta)?;
             serializer.serialize_field("transforms", &self.m_transforms)?;

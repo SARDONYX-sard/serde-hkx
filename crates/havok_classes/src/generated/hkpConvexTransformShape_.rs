@@ -29,26 +29,25 @@ pub struct hkpConvexTransformShape {
     pub m_transform: Transform,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkpConvexTransformShape {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkpConvexTransformShape {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpConvexTransformShape"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(2923319319u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(2923319319u32)
         }
     }
-    impl __serde::Serialize for hkpConvexTransformShape {
+    impl _serde::Serialize for hkpConvexTransformShape {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(2923319319u32)));
+                .map(|name| (name, _serde::__private::Signature::new(2923319319u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkpConvexTransformShape", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

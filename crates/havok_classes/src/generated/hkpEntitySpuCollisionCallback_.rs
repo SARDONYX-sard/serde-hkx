@@ -47,26 +47,25 @@ pub struct hkpEntitySpuCollisionCallback {
     pub m_userFilter: u8,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkpEntitySpuCollisionCallback {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkpEntitySpuCollisionCallback {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpEntitySpuCollisionCallback"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(2165604101u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(2165604101u32)
         }
     }
-    impl __serde::Serialize for hkpEntitySpuCollisionCallback {
+    impl _serde::Serialize for hkpEntitySpuCollisionCallback {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(2165604101u32)));
+                .map(|name| (name, _serde::__private::Signature::new(2165604101u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkpEntitySpuCollisionCallback", class_meta)?;
             serializer.skip_field("util", &self.m_util)?;

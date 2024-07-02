@@ -45,26 +45,25 @@ pub struct hkbCharacterDataCharacterControllerInfo {
     pub m_characterControllerCinfo: Pointer,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkbCharacterDataCharacterControllerInfo {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkbCharacterDataCharacterControllerInfo {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbCharacterDataCharacterControllerInfo"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(2700350911u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(2700350911u32)
         }
     }
-    impl __serde::Serialize for hkbCharacterDataCharacterControllerInfo {
+    impl _serde::Serialize for hkbCharacterDataCharacterControllerInfo {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(2700350911u32)));
+                .map(|name| (name, _serde::__private::Signature::new(2700350911u32)));
             let mut serializer = __serializer
                 .serialize_struct(
                     "hkbCharacterDataCharacterControllerInfo",

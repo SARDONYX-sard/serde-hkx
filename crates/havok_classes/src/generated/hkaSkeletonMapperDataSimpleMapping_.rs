@@ -39,26 +39,25 @@ pub struct hkaSkeletonMapperDataSimpleMapping {
     pub m_aFromBTransform: QsTransform,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkaSkeletonMapperDataSimpleMapping {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkaSkeletonMapperDataSimpleMapping {
         #[inline]
         fn name(&self) -> &'static str {
             "hkaSkeletonMapperDataSimpleMapping"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(872799946u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(872799946u32)
         }
     }
-    impl __serde::Serialize for hkaSkeletonMapperDataSimpleMapping {
+    impl _serde::Serialize for hkaSkeletonMapperDataSimpleMapping {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(872799946u32)));
+                .map(|name| (name, _serde::__private::Signature::new(872799946u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkaSkeletonMapperDataSimpleMapping", class_meta)?;
             serializer.serialize_field("boneA", &self.m_boneA)?;

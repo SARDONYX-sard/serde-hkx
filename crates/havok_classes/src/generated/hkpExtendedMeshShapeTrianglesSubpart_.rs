@@ -91,26 +91,25 @@ pub struct hkpExtendedMeshShapeTrianglesSubpart {
     pub m_transform: QsTransform,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkpExtendedMeshShapeTrianglesSubpart {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkpExtendedMeshShapeTrianglesSubpart {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpExtendedMeshShapeTrianglesSubpart"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(1153641974u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(1153641974u32)
         }
     }
-    impl __serde::Serialize for hkpExtendedMeshShapeTrianglesSubpart {
+    impl _serde::Serialize for hkpExtendedMeshShapeTrianglesSubpart {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(1153641974u32)));
+                .map(|name| (name, _serde::__private::Signature::new(1153641974u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkpExtendedMeshShapeTrianglesSubpart", class_meta)?;
             serializer.serialize_field("type", &self.parent.m_type)?;

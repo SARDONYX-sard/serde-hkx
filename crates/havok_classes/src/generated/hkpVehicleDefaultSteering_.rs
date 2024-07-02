@@ -41,26 +41,25 @@ pub struct hkpVehicleDefaultSteering {
     pub m_doesWheelSteer: Vec<bool>,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkpVehicleDefaultSteering {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkpVehicleDefaultSteering {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpVehicleDefaultSteering"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(2399408584u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(2399408584u32)
         }
     }
-    impl __serde::Serialize for hkpVehicleDefaultSteering {
+    impl _serde::Serialize for hkpVehicleDefaultSteering {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(2399408584u32)));
+                .map(|name| (name, _serde::__private::Signature::new(2399408584u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkpVehicleDefaultSteering", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

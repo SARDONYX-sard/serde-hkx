@@ -57,26 +57,25 @@ pub struct hkVertexFormatElement {
     pub m_pad: [u8; 3usize],
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkVertexFormatElement {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkVertexFormatElement {
         #[inline]
         fn name(&self) -> &'static str {
             "hkVertexFormatElement"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(1418099903u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(1418099903u32)
         }
     }
-    impl __serde::Serialize for hkVertexFormatElement {
+    impl _serde::Serialize for hkVertexFormatElement {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(1418099903u32)));
+                .map(|name| (name, _serde::__private::Signature::new(1418099903u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkVertexFormatElement", class_meta)?;
             serializer.serialize_field("dataType", &self.m_dataType)?;

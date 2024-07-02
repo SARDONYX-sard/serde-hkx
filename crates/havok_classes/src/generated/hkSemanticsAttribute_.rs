@@ -27,26 +27,25 @@ pub struct hkSemanticsAttribute {
     pub m_type: Semantics,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkSemanticsAttribute {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkSemanticsAttribute {
         #[inline]
         fn name(&self) -> &'static str {
             "hkSemanticsAttribute"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(2205194691u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(2205194691u32)
         }
     }
-    impl __serde::Serialize for hkSemanticsAttribute {
+    impl _serde::Serialize for hkSemanticsAttribute {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(2205194691u32)));
+                .map(|name| (name, _serde::__private::Signature::new(2205194691u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkSemanticsAttribute", class_meta)?;
             serializer.serialize_field("type", &self.m_type)?;

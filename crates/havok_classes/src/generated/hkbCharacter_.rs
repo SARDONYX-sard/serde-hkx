@@ -150,26 +150,25 @@ pub struct hkbCharacter<'a> {
     pub m_deletePoseLocal: bool,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl<'a> __serde::HavokClass for hkbCharacter<'a> {
+    use havok_serde as _serde;
+    impl<'a> _serde::HavokClass for hkbCharacter<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbCharacter"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(814261701u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(814261701u32)
         }
     }
-    impl<'a> __serde::Serialize for hkbCharacter<'a> {
+    impl<'a> _serde::Serialize for hkbCharacter<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(814261701u32)));
+                .map(|name| (name, _serde::__private::Signature::new(814261701u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkbCharacter", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

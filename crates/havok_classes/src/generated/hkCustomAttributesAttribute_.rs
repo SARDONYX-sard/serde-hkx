@@ -33,26 +33,25 @@ pub struct hkCustomAttributesAttribute<'a> {
     pub m_value: Variant,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl<'a> __serde::HavokClass for hkCustomAttributesAttribute<'a> {
+    use havok_serde as _serde;
+    impl<'a> _serde::HavokClass for hkCustomAttributesAttribute<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkCustomAttributesAttribute"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(327734785u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(327734785u32)
         }
     }
-    impl<'a> __serde::Serialize for hkCustomAttributesAttribute<'a> {
+    impl<'a> _serde::Serialize for hkCustomAttributesAttribute<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(327734785u32)));
+                .map(|name| (name, _serde::__private::Signature::new(327734785u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkCustomAttributesAttribute", class_meta)?;
             serializer.serialize_cstring_meta_field("name", &self.m_name)?;

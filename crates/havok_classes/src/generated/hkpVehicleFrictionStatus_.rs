@@ -27,26 +27,25 @@ pub struct hkpVehicleFrictionStatus {
     pub m_axis: [hkpVehicleFrictionStatusAxisStatus; 2usize],
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkpVehicleFrictionStatus {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkpVehicleFrictionStatus {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpVehicleFrictionStatus"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(470248068u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(470248068u32)
         }
     }
-    impl __serde::Serialize for hkpVehicleFrictionStatus {
+    impl _serde::Serialize for hkpVehicleFrictionStatus {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(470248068u32)));
+                .map(|name| (name, _serde::__private::Signature::new(470248068u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkpVehicleFrictionStatus", class_meta)?;
             serializer.serialize_field("axis", &self.m_axis.as_slice())?;

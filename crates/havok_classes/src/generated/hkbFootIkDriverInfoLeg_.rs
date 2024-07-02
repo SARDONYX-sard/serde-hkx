@@ -100,26 +100,25 @@ pub struct hkbFootIkDriverInfoLeg {
     pub m_ankleIndex: i16,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkbFootIkDriverInfoLeg {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkbFootIkDriverInfoLeg {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbFootIkDriverInfoLeg"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(575346897u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(575346897u32)
         }
     }
-    impl __serde::Serialize for hkbFootIkDriverInfoLeg {
+    impl _serde::Serialize for hkbFootIkDriverInfoLeg {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(575346897u32)));
+                .map(|name| (name, _serde::__private::Signature::new(575346897u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkbFootIkDriverInfoLeg", class_meta)?;
             serializer.skip_field("prevAnkleRotLS", &self.m_prevAnkleRotLS)?;

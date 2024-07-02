@@ -39,26 +39,25 @@ pub struct hkpPoweredChainMapperLinkInfo {
     pub m_limitConstraint: Pointer,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkpPoweredChainMapperLinkInfo {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkpPoweredChainMapperLinkInfo {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpPoweredChainMapperLinkInfo"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(3473349147u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(3473349147u32)
         }
     }
-    impl __serde::Serialize for hkpPoweredChainMapperLinkInfo {
+    impl _serde::Serialize for hkpPoweredChainMapperLinkInfo {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(3473349147u32)));
+                .map(|name| (name, _serde::__private::Signature::new(3473349147u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkpPoweredChainMapperLinkInfo", class_meta)?;
             serializer.serialize_field("firstTargetIdx", &self.m_firstTargetIdx)?;

@@ -39,26 +39,25 @@ pub struct hkpVehicleFrictionDescription {
     pub m_axleDescr: [hkpVehicleFrictionDescriptionAxisDescription; 2usize],
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkpVehicleFrictionDescription {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkpVehicleFrictionDescription {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpVehicleFrictionDescription"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(271864986u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(271864986u32)
         }
     }
-    impl __serde::Serialize for hkpVehicleFrictionDescription {
+    impl _serde::Serialize for hkpVehicleFrictionDescription {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(271864986u32)));
+                .map(|name| (name, _serde::__private::Signature::new(271864986u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkpVehicleFrictionDescription", class_meta)?;
             serializer.serialize_field("wheelDistance", &self.m_wheelDistance)?;

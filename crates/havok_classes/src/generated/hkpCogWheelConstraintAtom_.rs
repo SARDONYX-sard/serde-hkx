@@ -59,26 +59,25 @@ pub struct hkpCogWheelConstraintAtom {
     pub m_memOffsetToRevolutionCounter: i8,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkpCogWheelConstraintAtom {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkpCogWheelConstraintAtom {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpCogWheelConstraintAtom"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(4071748505u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(4071748505u32)
         }
     }
-    impl __serde::Serialize for hkpCogWheelConstraintAtom {
+    impl _serde::Serialize for hkpCogWheelConstraintAtom {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(4071748505u32)));
+                .map(|name| (name, _serde::__private::Signature::new(4071748505u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkpCogWheelConstraintAtom", class_meta)?;
             serializer.serialize_field("type", &self.parent.m_type)?;

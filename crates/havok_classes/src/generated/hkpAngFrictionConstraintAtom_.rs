@@ -47,26 +47,25 @@ pub struct hkpAngFrictionConstraintAtom {
     pub m_maxFrictionTorque: f32,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkpAngFrictionConstraintAtom {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkpAngFrictionConstraintAtom {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpAngFrictionConstraintAtom"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(4078152320u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(4078152320u32)
         }
     }
-    impl __serde::Serialize for hkpAngFrictionConstraintAtom {
+    impl _serde::Serialize for hkpAngFrictionConstraintAtom {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(4078152320u32)));
+                .map(|name| (name, _serde::__private::Signature::new(4078152320u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkpAngFrictionConstraintAtom", class_meta)?;
             serializer.serialize_field("type", &self.parent.m_type)?;

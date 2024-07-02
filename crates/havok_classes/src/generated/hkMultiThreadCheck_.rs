@@ -49,26 +49,25 @@ pub struct hkMultiThreadCheck {
     pub m_markBitStack: u16,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkMultiThreadCheck {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkMultiThreadCheck {
         #[inline]
         fn name(&self) -> &'static str {
             "hkMultiThreadCheck"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(300171403u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(300171403u32)
         }
     }
-    impl __serde::Serialize for hkMultiThreadCheck {
+    impl _serde::Serialize for hkMultiThreadCheck {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(300171403u32)));
+                .map(|name| (name, _serde::__private::Signature::new(300171403u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkMultiThreadCheck", class_meta)?;
             serializer.skip_field("threadId", &self.m_threadId)?;

@@ -57,26 +57,25 @@ pub struct hkaWaveletCompressedAnimationQuantizationFormat {
     pub m_bitWidthIdx: u32,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkaWaveletCompressedAnimationQuantizationFormat {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkaWaveletCompressedAnimationQuantizationFormat {
         #[inline]
         fn name(&self) -> &'static str {
             "hkaWaveletCompressedAnimationQuantizationFormat"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(1917482337u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(1917482337u32)
         }
     }
-    impl __serde::Serialize for hkaWaveletCompressedAnimationQuantizationFormat {
+    impl _serde::Serialize for hkaWaveletCompressedAnimationQuantizationFormat {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(1917482337u32)));
+                .map(|name| (name, _serde::__private::Signature::new(1917482337u32)));
             let mut serializer = __serializer
                 .serialize_struct(
                     "hkaWaveletCompressedAnimationQuantizationFormat",

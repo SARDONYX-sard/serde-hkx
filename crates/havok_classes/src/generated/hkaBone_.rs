@@ -33,26 +33,25 @@ pub struct hkaBone<'a> {
     pub m_lockTranslation: bool,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl<'a> __serde::HavokClass for hkaBone<'a> {
+    use havok_serde as _serde;
+    impl<'a> _serde::HavokClass for hkaBone<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkaBone"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(898707338u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(898707338u32)
         }
     }
-    impl<'a> __serde::Serialize for hkaBone<'a> {
+    impl<'a> _serde::Serialize for hkaBone<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(898707338u32)));
+                .map(|name| (name, _serde::__private::Signature::new(898707338u32)));
             let mut serializer = __serializer.serialize_struct("hkaBone", class_meta)?;
             serializer.serialize_stringptr_meta_field("name", &self.m_name)?;
             serializer.serialize_field("lockTranslation", &self.m_lockTranslation)?;

@@ -93,26 +93,25 @@ pub struct hkbHandIkControlData {
     pub m_fixUp: bool,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkbHandIkControlData {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkbHandIkControlData {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbHandIkControlData"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(3609955607u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(3609955607u32)
         }
     }
-    impl __serde::Serialize for hkbHandIkControlData {
+    impl _serde::Serialize for hkbHandIkControlData {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(3609955607u32)));
+                .map(|name| (name, _serde::__private::Signature::new(3609955607u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkbHandIkControlData", class_meta)?;
             serializer.serialize_field("targetPosition", &self.m_targetPosition)?;

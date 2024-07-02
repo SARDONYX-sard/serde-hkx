@@ -35,26 +35,25 @@ pub struct hkpEntityExtendedListeners {
     pub m_entityListeners: hkpEntitySmallArraySerializeOverrideType,
 }
 const _: () = {
-    use havok_serde as __serde;
-    use __serde::HavokClass;
-    impl __serde::HavokClass for hkpEntityExtendedListeners {
+    use havok_serde as _serde;
+    impl _serde::HavokClass for hkpEntityExtendedListeners {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpEntityExtendedListeners"
         }
         #[inline]
-        fn signature(&self) -> __serde::__private::Signature {
-            __serde::__private::Signature::new(4116120124u32)
+        fn signature(&self) -> _serde::__private::Signature {
+            _serde::__private::Signature::new(4116120124u32)
         }
     }
-    impl __serde::Serialize for hkpEntityExtendedListeners {
+    impl _serde::Serialize for hkpEntityExtendedListeners {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
-            S: __serde::ser::Serializer,
+            S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, __serde::__private::Signature::new(4116120124u32)));
+                .map(|name| (name, _serde::__private::Signature::new(4116120124u32)));
             let mut serializer = __serializer
                 .serialize_struct("hkpEntityExtendedListeners", class_meta)?;
             serializer.skip_field("activationListeners", &self.m_activationListeners)?;
