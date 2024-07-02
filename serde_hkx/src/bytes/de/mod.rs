@@ -112,6 +112,13 @@ impl<'de> BytesDeserializer<'de> {
             Ok(value) => Ok(value),
             Err(err) => match err {
                 Error::ReadableError { .. } => Err(err),
+                Error::Message { msg } => Err(Error::ReadableError {
+                    source: ReadableError::from_display(
+                        msg,
+                        &hexdump::RhexdumpString::new().hexdump_bytes(self.original),
+                        self.original.len() - self.input.len() + HEXDUMP_OFFSET,
+                    ),
+                }),
                 _ => Err(Error::ReadableError {
                     source: ReadableError::from_display(
                         err,

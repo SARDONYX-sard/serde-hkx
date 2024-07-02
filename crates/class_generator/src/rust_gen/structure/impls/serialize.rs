@@ -19,26 +19,25 @@ pub fn impl_serialize(class: &Class, class_map: &ClassMap) -> TokenStream {
 
     quote::quote! {
         const _: () = {
-            use havok_serde as __serde;
-            use __serde::HavokClass;
+            use havok_serde as _serde;
 
-            impl #lifetime __serde::HavokClass for #class_name #lifetime {
+            impl #lifetime _serde::HavokClass for #class_name #lifetime {
                 #[inline]
                 fn name(&self) -> &'static str {
                     #name
                 }
 
                 #[inline]
-                fn signature(&self) -> __serde::__private::Signature {
-                    __serde::__private::Signature::new(#signature)
+                fn signature(&self) -> _serde::__private::Signature {
+                    _serde::__private::Signature::new(#signature)
                 }
             }
 
-            impl #lifetime __serde::Serialize for #class_name #lifetime {
+            impl #lifetime _serde::Serialize for #class_name #lifetime {
                 fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
-                    where S: __serde::ser::Serializer
+                    where S: _serde::ser::Serializer
                 {
-                    let class_meta = self.__ptr.map(|name| (name, __serde::__private::Signature::new(#signature)));
+                    let class_meta = self.__ptr.map(|name| (name, _serde::__private::Signature::new(#signature)));
                     let mut serializer = __serializer.serialize_struct(#name, class_meta)?;
                     #(#fields)*
                     serializer.end()
