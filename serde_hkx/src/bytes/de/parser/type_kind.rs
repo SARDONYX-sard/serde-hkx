@@ -208,6 +208,35 @@ mod tests {
     }
 
     #[test]
+    fn test_half() {
+        assert_eq!(
+            half(Endianness::Little).parse(&[0x00, 0x00]),
+            Ok(f16::from_f32(0.0))
+        );
+        assert_eq!(
+            half(Endianness::Little).parse(&[0x00, 0x3C]),
+            Ok(f16::from_f32(1.0))
+        );
+        assert_eq!(
+            half(Endianness::Little).parse(&[0x00, 0xC0]),
+            Ok(f16::from_f32(-2.0))
+        );
+
+        assert_eq!(
+            half(Endianness::Big).parse(&[0x00, 0x00]),
+            Ok(f16::from_f32(0.0))
+        );
+        assert_eq!(
+            half(Endianness::Big).parse(&[0x3C, 0x00]),
+            Ok(f16::from_f32(1.0))
+        );
+        assert_eq!(
+            half(Endianness::Big).parse(&[0xC0, 0x00]),
+            Ok(f16::from_f32(-2.0))
+        );
+    }
+
+    #[test]
     fn test_string() {
         assert_eq!(string().parse(b"example\0"), Ok("example"));
         assert!(string().parse(b"example").is_err());
