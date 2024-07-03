@@ -216,7 +216,6 @@ impl<T: Serialize + crate::HavokClass> Serialize for &[T] {
 #[cfg(feature = "indexmap")]
 impl<K, V> Serialize for &indexmap::IndexMap<K, V>
 where
-    K: core::fmt::Debug,
     V: Serialize + crate::HavokClass,
 {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
@@ -233,7 +232,6 @@ where
 #[cfg(feature = "indexmap")]
 impl<K, V> Serialize for indexmap::IndexMap<K, V>
 where
-    K: core::fmt::Debug,
     V: Serialize + crate::HavokClass,
 {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {

@@ -1,13 +1,15 @@
 //! Bytes Serialization
 mod trait_impls;
 
-use crate::bytes::serde::section_header::SectionHeader;
+use crate::{lib::*, tri};
+
+use crate::bytes::serde::{hkx_header::HkxHeader, section_header::SectionHeader};
 use crate::common::trait_impls::Align as _;
 use crate::errors::ser::{
     Error, InvalidEndianSnafu, MissingClassInClassnamesSectionSnafu, MissingGlobalFixupClassSnafu,
     MissingLocalFixupsSrcSnafu, Result, SubAbsOverflowSnafu, UnsupportedPtrSizeSnafu,
 };
-use byteorder::WriteBytesExt as _;
+use byteorder::{BigEndian, LittleEndian, WriteBytesExt as _};
 use havok_serde::ser::{
     Error as _, Serialize, SerializeFlags, SerializeSeq, SerializeStruct, Serializer,
 };
@@ -22,9 +24,6 @@ use std::borrow::Cow;
 use std::collections::HashMap;
 use std::io::{Cursor, Write};
 use trait_impls::{ClassNamesWriter as _, LocalFixupsWriter as _};
-use zerocopy::{AsBytes, BigEndian, LittleEndian};
-
-use super::serde::hkx_header::HkxHeader;
 
 // TODO: It may be possible to cache classnames obtained at deserialization time.
 
@@ -34,10 +33,8 @@ use super::serde::hkx_header::HkxHeader;
 /// This serializer assumes the following.
 /// - `contents_class_name_section_index`: It is always assumed to be 0.
 /// - `contents_section_index`: It is always assumed to be 2.
-pub fn to_bytes<O, K, V>(value: &IndexMap<K, V>, header: &HkxHeader<O>) -> Result<Vec<u8>>
+pub fn to_bytes<K, V>(value: &IndexMap<K, V>, header: &HkxHeader) -> Result<Vec<u8>>
 where
-    O: zerocopy::ByteOrder,
-    K: core::fmt::Debug,
     V: Serialize + HavokClass,
 {
     let mut serializer = ByteSerializer {
@@ -55,45 +52,41 @@ where
     };
 
     // 1/5: root header
-    serializer.output.write_all(header.as_bytes())?;
+    serializer.output.write_all(&header.to_bytes())?;
 
     // 2/5: Section headers
-    let section_offset = header.section_offset.get();
-    SectionHeader::<O>::write_classnames(&mut serializer.output, section_offset)?;
-    SectionHeader::<O>::write_types(&mut serializer.output, section_offset)?;
-    let data_fixups_start = SectionHeader::<O>::write_data(&mut serializer.output)?;
+    let section_offset = header.section_offset;
+    if serializer.is_little_endian {
+        SectionHeader::write_classnames::<LittleEndian>(&mut serializer.output, section_offset)?;
+        SectionHeader::write_types::<LittleEndian>(&mut serializer.output, section_offset)?;
+    } else {
+        SectionHeader::write_classnames::<BigEndian>(&mut serializer.output, section_offset)?;
+        SectionHeader::write_types::<BigEndian>(&mut serializer.output, section_offset)?;
+    };
+    // Fixups are written after the data is actually written to the class data.
+    let data_fixups_start = SectionHeader::write_data(&mut serializer.output)?;
 
     // 3/5: section contents
     // - `__classnames__` section
-    serializer.class_starts = serializer
-        .output
-        .write_classnames_section::<O, K, V>(value)?;
+    if serializer.is_little_endian {
+        serializer.class_starts = serializer
+            .output
+            .write_classnames_section::<LittleEndian, K, V>(value)?;
+    } else {
+        serializer.class_starts = serializer
+            .output
+            .write_classnames_section::<BigEndian, K, V>(value)?;
+    };
     #[cfg(feature = "tracing")]
     tracing::trace!("class_starts: {:#?}", serializer.class_starts);
 
-    // Calculate absolute data offset
-    // - The position after the `__classnames__` section write is the starting point of the data section, which is the abs_offset itself.
-    //   Therefore, abs_offset must be calculated at this point.
-    let section_offset = match header.section_offset.get() {
-        ..=0 => 0,
-        others => others as u32,
-    };
-    serializer.abs_data_offset = section_offset + serializer.output.position() as u32;
-
-    // - `__data__` section
-    value.serialize(&mut serializer)?;
+    // We can calculate absolute data offset(__data__ section start position) now.
+    serializer.abs_data_offset = header.padding_size() + serializer.output.position() as u32;
+    value.serialize(&mut serializer)?; // - `__data__` section
 
     // 4/5: Write fixups_offsets of `__data__` section header.
     let (local_offset, global_offset, virtual_offset) = serializer.write_data_fixups()?; // Write local, global and virtual fixups
     let exports_offset = serializer.relative_position()?; // This is where the exports_offset is finally obtained.
-
-    // Move back to fixup_offset of `__data__` section header.
-    serializer.output.set_position(data_fixups_start);
-
-    // 5/5 Write remain Fixup offsets for `__data__` section header.
-    serializer
-        .output
-        .write_u32::<O>(serializer.abs_data_offset)?;
 
     #[cfg(feature = "tracing")]
     {
@@ -121,12 +114,15 @@ Offsets:
         );
     }
 
-    serializer.output.write_u32::<O>(local_offset)?;
-    serializer.output.write_u32::<O>(global_offset)?;
-    serializer.output.write_u32::<O>(virtual_offset)?;
-    serializer.output.write_u32::<O>(exports_offset)?;
-    serializer.output.write_u32::<O>(exports_offset)?; // imports offset
-    serializer.output.write_u32::<O>(exports_offset)?; // end offset
+    // 5/5 Write remain Fixup offsets for `__data__` section header.
+    serializer.output.set_position(data_fixups_start); // Move back to fixup_offset of `__data__` section header.
+    tri!(serializer.serialize_uint32(serializer.abs_data_offset));
+    tri!(serializer.serialize_uint32(local_offset));
+    tri!(serializer.serialize_uint32(global_offset));
+    tri!(serializer.serialize_uint32(virtual_offset));
+    tri!(serializer.serialize_uint32(exports_offset));
+    tri!(serializer.serialize_uint32(exports_offset)); // imports offset
+    tri!(serializer.serialize_uint32(exports_offset)); // end offset
 
     Ok(serializer.output.into_inner())
 }

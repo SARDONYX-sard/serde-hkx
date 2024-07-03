@@ -12,6 +12,7 @@ edition.workspace = true
 [dependencies]
 annotate-snippets = "0.11.4"                                              # Error reporting display
 byteorder = "1.5.0"
+educe = "0.6.0"
 havok_serde = { path = "../crates/havok_serde", features = ["indexmap"] }
 havok_types = { path = "../crates/havok_types" }
 havok_types_derive = { path = "../crates/havok_types_derive" }            # To impl `Default`&`FromStr` for Bitflags

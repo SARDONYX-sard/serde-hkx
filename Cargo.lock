@@ -827,6 +827,7 @@ dependencies = [
  "annotate-snippets",
  "bitflags",
  "byteorder",
+ "educe",
  "havok_serde",
  "havok_types",
  "havok_types_derive",

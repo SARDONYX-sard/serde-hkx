@@ -12,6 +12,7 @@ use self::parser::type_kind::{
 };
 use self::parser::BytesStream;
 use self::seq::SeqDeserializer;
+use super::serde::{hkx_header::HkxHeader, section_header::SectionHeader};
 use crate::errors::{
     de::{Error, Result},
     readable::ReadableError,
@@ -46,6 +47,20 @@ pub struct BytesDeserializer<'de> {
     field_length: Option<usize>,
 }
 
+impl Default for BytesDeserializer<'_> {
+    fn default() -> Self {
+        Self {
+            input: b"",
+            original: b"",
+            endian: Endianness::Little,
+            is_x86: false,
+            class_index: 0,
+            field_index: None,
+            field_length: None,
+        }
+    }
+}
+
 impl<'de> BytesDeserializer<'de> {
     /// from xml string
     pub fn from_bytes(input: &'de [u8]) -> Self {
@@ -61,11 +76,42 @@ impl<'de> BytesDeserializer<'de> {
     }
 }
 
+/// Parse binary data as the type specified in the partial generics.
+///
+/// # Note
+/// If pointer types are included, it is impossible to deserialize correctly because fixups information is required.
 pub fn from_bytes<'a, T>(s: &'a [u8]) -> Result<T>
 where
     T: Deserialize<'a>,
 {
     let mut deserializer = BytesDeserializer::from_bytes(s);
+    let t = T::deserialize(&mut deserializer)?;
+    if deserializer.input.is_empty() {
+        Ok(t)
+    } else {
+        Err(Error::TrailingBytes {
+            remain: deserializer.input.to_owned(),
+        })
+    }
+}
+
+/// Analyze as binary data of one file in order from hkx header.
+pub fn from_bytes_file<'a, T>(bytes: &'a [u8]) -> Result<T>
+where
+    T: Deserialize<'a>,
+{
+    let mut deserializer = BytesDeserializer::from_bytes(bytes);
+
+    let header = tri!(deserializer.parse(HkxHeader::from_bytes()));
+    deserializer.is_x86 = header.pointer_size == 4;
+    deserializer.endian = header.endian();
+
+    let endian = deserializer.endian;
+    // TODO: parse fixups
+    // let classnames_header = tri!(deserializer.parse(SectionHeader::from_bytes(endian)));
+    // let types_header = tri!(deserializer.parse(SectionHeader::from_bytes(endian)));
+    // let data_header = tri!(deserializer.parse(SectionHeader::from_bytes(endian)));
+
     let t = T::deserialize(&mut deserializer)?;
     if deserializer.input.is_empty() {
         Ok(t)

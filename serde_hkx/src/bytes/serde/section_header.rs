@@ -1,10 +1,17 @@
 //! The 48bytes each HKX section header contains metadata information about the HKX file.
 //!
 //! This information is placed immediately after the Hkx header. (In some cases, padding is inserted in between.)
-use std::io::{self, Cursor, Write as _};
+use crate::{lib::*, tri};
 
-use byteorder::WriteBytesExt;
-use zerocopy::{AsBytes, ByteOrder, FromBytes, FromZeroes, LittleEndian, U32};
+use byteorder::{ByteOrder, WriteBytesExt};
+use std::io::{self, Cursor, Write as _};
+use winnow::{
+    binary::{self, Endianness},
+    error::{ContextError, StrContext},
+    seq,
+    token::take,
+    Parser,
+};
 
 /// The 48bytes each HKX section header contains metadata information about the HKX file.
 ///
@@ -18,9 +25,9 @@ use zerocopy::{AsBytes, ByteOrder, FromBytes, FromZeroes, LittleEndian, U32};
 ///
 /// Depending on the havok version, there may be padding after the section header group.
 /// (at least not in SkyrimSE).
-#[derive(Debug, Clone, Default, Eq, PartialEq, Hash, FromBytes, AsBytes, FromZeroes)]
-#[repr(C, packed)]
-pub struct SectionHeader<O: ByteOrder> {
+#[derive(Debug, Clone, Default, Eq, PartialEq, Hash)]
+#[repr(C)]
+pub struct SectionHeader {
     /// Section name.
     ///
     /// For SkyrimSE, the bytes are arranged in the following order.
@@ -46,65 +53,56 @@ pub struct SectionHeader<O: ByteOrder> {
     /// - Calculation formula
     ///
     ///   Hkx header 64bytes + 48bytes * 3 sections = 208bytes == `0xD0`
-    pub absolute_data_start: U32<O>,
+    pub absolute_data_start: u32,
     /// Offset from absolute offset to local fixup map.
-    pub local_fixups_offset: U32<O>,
+    pub local_fixups_offset: u32,
     /// Offset from absolute offset to global fixup map.
-    pub global_fixups_offset: U32<O>,
+    pub global_fixups_offset: u32,
     /// Offset from absolute offset to virtual class fixup map.
-    pub virtual_fixups_offset: U32<O>,
+    pub virtual_fixups_offset: u32,
 
     /// Unknown offset information.
     ///
     /// Known information.
     /// - This value is the end position of the virtual_fixups_offset.
     /// - The `exports`, `imports` and `end` offsets are all the same value.
-    pub exports_offset: U32<O>,
+    pub exports_offset: u32,
     /// Unknown offset information.
     ///
     /// Known information.
     /// - This value is the end position of the virtual_fixups_offset.
     /// - The `exports`, `imports` and `end` offsets are all the same value.
-    pub imports_offset: U32<O>,
+    pub imports_offset: u32,
     /// Unknown offset information.
     ///
     /// Known information.
     /// - This value is the end position of the virtual_fixups_offset.
     /// - The `exports`, `imports` and `end` offsets are all the same value.
-    pub end_offset: U32<O>,
+    pub end_offset: u32,
 }
-static_assertions::assert_eq_size!(SectionHeader<LittleEndian>, [u8; 48]); // Must be 48bytes.
+static_assertions::assert_eq_size!(SectionHeader, [u8; 48]); // Must be 48bytes.
 
-impl SectionHeader<LittleEndian> {
-    /// Get header length. 48(bytes)
-    pub const fn len() -> usize {
-        core::mem::size_of::<Self>()
-    }
-}
-
-impl<O: ByteOrder> SectionHeader<O> {
-    /// Interprets the given `bytes` as a `&Self` without copying.
-    ///
-    /// If `bytes.len() != size_of::<Self>()` or `bytes` is not aligned to
-    /// `align_of::<Self>()`, this returns `Result::Err`.
-    #[inline]
-    pub fn ref_from_bytes(bytes: &[u8]) -> Result<&Self> {
-        snafu::ensure!(
-            bytes.len() >= core::mem::size_of::<Self>(),
-            InsufficientLengthSnafu {
-                actual: bytes.len()
+impl SectionHeader {
+    pub fn from_bytes<'a>(endian: Endianness) -> impl Parser<&'a [u8], Self, ContextError> {
+        move |bytes: &mut &[u8]| {
+            {
+                seq! {
+                    Self {
+                        section_tag: take(19usize).try_map(TryFrom::try_from),
+                        section_tag_separator: 0xff,
+                        absolute_data_start: binary::u32(endian),
+                        local_fixups_offset: binary::u32(endian),
+                        global_fixups_offset: binary::u32(endian),
+                        virtual_fixups_offset: binary::u32(endian),
+                        exports_offset: binary::u32(endian),
+                        imports_offset: binary::u32(endian),
+                        end_offset: binary::u32(endian),
+                    }
+                }
             }
-        );
-
-        let ref_header = Self::ref_from_prefix(bytes).ok_or(UnAlignmentSnafu.build())?;
-        let separator = ref_header.section_tag_separator; // Separator must set `0xFF`.
-
-        snafu::ensure!(
-            separator == 0xFF,
-            InvalidSeparatorByteSnafu { sep: separator }
-        );
-
-        Ok(ref_header)
+            .context(StrContext::Label("Hkx Section Header"))
+            .parse_next(bytes)
+        }
     }
 
     /// Create new `__classnames__` section header
@@ -113,18 +111,23 @@ impl<O: ByteOrder> SectionHeader<O> {
     ///
     /// # Tips
     /// Here, some data values are determined by taking advantage of the fact that the section header is of fixed length size for the sake of speed.
-    pub fn write_classnames(mut writer: impl WriteBytesExt, section_offset: i16) -> io::Result<()> {
-        let section_offset = match section_offset <= 0 {
-            true => 0,
-            false => section_offset as u32,
+    pub fn write_classnames<O>(
+        mut writer: impl WriteBytesExt,
+        section_offset: i16,
+    ) -> io::Result<()>
+    where
+        O: ByteOrder,
+    {
+        writer.write_all(b"__classnames__\0\0\0\0\0\xff")?; // with separator(0xff)
+        let section_offset = match section_offset {
+            i16::MIN..=0_i16 => 0,
+            1.. => section_offset as u32,
         };
-
-        writer.write_all(b"__classnames__\0\0\0\0\0")?;
-        writer.write_u8(0xff)?; // separator
-        writer.write_u32::<O>(section_offset + 0xd0)?; // absolute_data_start
+        const ABSOLUTE_CLASSNAMES_OFFSET: u32 = 0xd0;
+        writer.write_u32::<O>(ABSOLUTE_CLASSNAMES_OFFSET + section_offset)?; // write absolute_data_start
 
         // Fixup does not exist in `classnames` section, the same data is written.
-        let fixups_offset = section_offset + 0x90;
+        let fixups_offset = 0x90 + section_offset;
         writer.write_u32::<O>(fixups_offset)?; // local_fixups_offset
         writer.write_u32::<O>(fixups_offset)?; // global_fixups_offset
         writer.write_u32::<O>(fixups_offset)?; // virtual_fixups_offset
@@ -139,18 +142,22 @@ impl<O: ByteOrder> SectionHeader<O> {
     ///
     /// # Tips
     /// Here, some data values are determined by taking advantage of the fact that the section header is of fixed length size for the sake of speed.
-    pub fn write_types(mut writer: impl WriteBytesExt, section_offset: i16) -> io::Result<()> {
-        let section_offset = match section_offset <= 0 {
-            true => 0,
-            false => section_offset as u32,
+    pub fn write_types<O>(mut writer: impl WriteBytesExt, section_offset: i16) -> io::Result<()>
+    where
+        O: ByteOrder,
+    {
+        writer.write_all(b"__types__\0\0\0\0\0\0\0\0\0\0\xff")?; // with separator(0xff)
+
+        ///? INFO:
+        /// The fact that the header size is fixed indicates that abs is 0x160 or greater.
+        /// But this is shifted in the increasing direction when section_offset is present.
+        const ABSOLUTE_DATA_OFFSET: u32 = 0x160;
+        let section_offset = match section_offset {
+            i16::MIN..=0_i16 => 0,
+            1.. => section_offset as u32,
         };
-
-        writer.write_all(b"__types__\0\0\0\0\0\0\0\0\0\0")?;
-        writer.write_u8(0xff)?; // separator
-        writer.write_u32::<O>(section_offset + 0x160)?; // absolute_data_start
-
-        // Fixup does not exist in `types` section, always 0.
-        writer.write_all([0u8; 24].as_bytes())?;
+        writer.write_u32::<O>(ABSOLUTE_DATA_OFFSET + section_offset)?; // write absolute_data_start
+        tri!(writer.write_all([0u8; 24].as_slice())); // Fixup does not exist in `types` section, always 0.
         Ok(())
     }
 
@@ -169,19 +176,16 @@ impl<O: ByteOrder> SectionHeader<O> {
     /// # Tips
     /// Here, some data values are determined by taking advantage of the fact that the section header is of fixed length size for the sake of speed.
     pub fn write_data(writer: &mut Cursor<Vec<u8>>) -> io::Result<u64> {
-        writer.write_all(b"__data__\0\0\0\0\0\0\0\0\0\0\0")?;
-        writer.write_u8(0xff)?; // separator
-
+        writer.write_all(b"__data__\0\0\0\0\0\0\0\0\0\0\0\xff")?; // with separator(0xff)
         let fixup_offset_start = writer.position();
         // The fixups offset in the data section is temporarily set to 0 because it will be known after the data section is written.
-        writer.write_all([0u8; 28].as_bytes())?;
-
+        writer.write_all([0u8; 28].as_slice())?;
         Ok(fixup_offset_start) // Return index for later writing.
     }
 }
 
 // To improve visualization of hex dump.
-impl<O: ByteOrder> core::fmt::Display for SectionHeader<O> {
+impl Display for SectionHeader {
     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
         let Self {
             section_tag,
@@ -230,53 +234,6 @@ Offsets:
     }
 }
 
-/// Result for [`SectionHeader`]
-type Result<T, E = Error> = core::result::Result<T, E>;
-
-/// HKX Section header Error
-#[derive(Debug, snafu::Snafu)]
-#[snafu(visibility(pub))]
-pub enum Error {
-    /// Binary data is interpreted as a section header, but it was less than 48bytes.
-    #[snafu(display(
-        "Binary data is interpreted as a section header, but it was less than 48bytes. but got {actual}"
-    ))]
-    InsufficientLength {
-        actual: usize,
-        /// error location
-        #[snafu(implicit)]
-        location: snafu::Location,
-    },
-
-    /// The next byte after section_tag (e.g. `__classnames__`) in section header should be `0xFF`, but got `{sep:#2X}` came.
-    InvalidSeparatorByte {
-        sep: u8,
-        /// error location
-        #[snafu(implicit)]
-        location: snafu::Location,
-    },
-
-    /// Binary data is interpreted as a section header, but has an alignment violation.
-    #[snafu(display(
-        "Binary data is interpreted as a section header, but has an alignment violation."
-    ))]
-    UnAlignment {
-        /// error location
-        #[snafu(implicit)]
-        location: snafu::Location,
-    },
-
-    /// Binary data is interpreted as a section header, but has an alignment violation.
-    #[snafu(transparent)]
-    IoError {
-        /// std I/O error.
-        source: io::Error,
-        /// error location
-        #[snafu(implicit)]
-        location: snafu::Location,
-    },
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -286,74 +243,86 @@ mod tests {
     #[test]
     fn test_write_classnames() {
         let mut buffer = Cursor::new(Vec::new());
-        SectionHeader::<LittleEndian>::write_classnames(&mut buffer, 0).unwrap();
+        SectionHeader::write_classnames::<LittleEndian>(&mut buffer, 0).unwrap();
         let written = buffer.into_inner();
-        let header = SectionHeader::<LittleEndian>::read_from_prefix(&written).unwrap();
 
-        assert_eq!(&header.section_tag, b"__classnames__\0\0\0\0\0");
-        assert_eq!(header.section_tag_separator, 0xff);
-        assert_eq!(header.absolute_data_start.get(), 0xd0);
-        assert_eq!(header.local_fixups_offset.get(), 0x90);
-        assert_eq!(header.global_fixups_offset.get(), 0x90);
-        assert_eq!(header.virtual_fixups_offset.get(), 0x90);
-        assert_eq!(header.exports_offset.get(), 0x90);
-        assert_eq!(header.imports_offset.get(), 0x90);
-        assert_eq!(header.end_offset.get(), 0x90);
+        #[rustfmt::skip]
+        const CLASSNAMES_SECTION_HEADER: [u8; 48] = [
+            // __classnames__\0\0\0\0\0: [u8; 19]
+            0x5F, 0x5F, 0x63, 0x6C, 0x61, 0x73, 0x73, 0x6E, 0x61, 0x6D, 0x65, 0x73, 0x5F, 0x5F, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0xff, // separator
+            0xd0, 0x00, 0x00, 0x00, // absolute_data_start
+            0x90, 0x00, 0x00, 0x00, // local_fixups_offset
+            0x90, 0x00, 0x00, 0x00, // global_fixups_offset
+            0x90, 0x00, 0x00, 0x00, // virtual_fixups_offset
+            0x90, 0x00, 0x00, 0x00, // exports_offset
+            0x90, 0x00, 0x00, 0x00, // imports_offset
+            0x90, 0x00, 0x00, 0x00, // end_offset
+        ];
+        assert_eq!(&written, CLASSNAMES_SECTION_HEADER.as_slice());
     }
 
     #[test]
     fn test_write_types() {
         let mut buffer = Cursor::new(Vec::new());
-        SectionHeader::<LittleEndian>::write_types(&mut buffer, 0).unwrap();
+        SectionHeader::write_types::<LittleEndian>(&mut buffer, 0).unwrap();
         let written = buffer.into_inner();
-        let header = SectionHeader::<LittleEndian>::read_from_prefix(&written).unwrap();
-
-        assert_eq!(&header.section_tag, b"__types__\0\0\0\0\0\0\0\0\0\0");
-        assert_eq!(header.section_tag_separator, 0xff);
-        assert_eq!(header.absolute_data_start.get(), 0x160);
-        assert_eq!(header.local_fixups_offset.get(), 0);
-        assert_eq!(header.global_fixups_offset.get(), 0);
-        assert_eq!(header.virtual_fixups_offset.get(), 0);
-        assert_eq!(header.exports_offset.get(), 0);
-        assert_eq!(header.imports_offset.get(), 0);
-        assert_eq!(header.end_offset.get(), 0);
+        #[rustfmt::skip]
+        const TYPES_SECTION_HEADER: [u8; 48] = [
+            // __types__\0\0\0\0\0\0\0\0\0\0: [u8; 19]
+            0x5f, 0x5f,  0x74, 0x79, 0x70, 0x65, 0x73, 0x5f, 0x5f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0xff, // separator
+            // # Fixups
+            // These are pending because the location cannot be determined without actually writing the data.
+            0x60, 0x01, 0x00, 0x00, // absolute_data_start(0x160)
+            0x00, 0x00, 0x00, 0x00, // local_fixups_offset
+            0x00, 0x00, 0x00, 0x00, // global_fixups_offset
+            0x00, 0x00, 0x00, 0x00, // virtual_fixups_offset
+            0x00, 0x00, 0x00, 0x00, // exports_offset
+            0x00, 0x00, 0x00, 0x00, // imports_offset
+            0x00, 0x00, 0x00, 0x00, // end_offset
+        ];
+        assert_eq!(&written, TYPES_SECTION_HEADER.as_slice());
     }
 
     #[test]
     fn test_write_data() {
         let mut buffer = Cursor::new(Vec::new());
-        SectionHeader::<LittleEndian>::write_data(&mut buffer).unwrap();
+        SectionHeader::write_data(&mut buffer).unwrap();
         let written = buffer.into_inner();
 
-        assert_eq!(written.len(), 48);
-        assert_eq!(&written[0..19], b"__data__\0\0\0\0\0\0\0\0\0\0\0");
-        assert_eq!(written[19], 0xff);
-        assert_eq!(&written[20..48], &[0; 28]);
-    }
-
-    #[test]
-    fn test_ref_from_bytes_valid() {
-        let mut buffer = Cursor::new(Vec::new());
-        SectionHeader::<LittleEndian>::write_classnames(&mut buffer, 0).unwrap();
-        let written = buffer.into_inner();
-
-        let header = SectionHeader::<LittleEndian>::ref_from_bytes(&written).unwrap();
-        assert_eq!(header.section_tag, *b"__classnames__\0\0\0\0\0");
-        assert_eq!(header.section_tag_separator, 0xff);
+        #[rustfmt::skip]
+        const DATA_SECTION_HEADER: [u8; 48] = [
+            // __data__\0\0\0\0\0\0\0\0\0\0\0: [u8; 19]
+            0x5f, 0x5f, 0x64, 0x61, 0x74, 0x61, 0x5f, 0x5f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0xff, // separator
+            // # Fixups
+            // These are pending because the location cannot be determined without actually writing the data.
+            0x00, 0x00, 0x00, 0x00, // absolute_data_start
+            0x00, 0x00, 0x00, 0x00, // local_fixups_offset
+            0x00, 0x00, 0x00, 0x00, // global_fixups_offset
+            0x00, 0x00, 0x00, 0x00, // virtual_fixups_offset
+            0x00, 0x00, 0x00, 0x00, // exports_offset
+            0x00, 0x00, 0x00, 0x00, // imports_offset
+            0x00, 0x00, 0x00, 0x00, // end_offset
+        ];
+        assert_eq!(&written, DATA_SECTION_HEADER.as_slice());
     }
 
     #[test]
     fn test_ref_from_bytes_invalid_length() {
         let written = vec![0; 40];
-        let result = SectionHeader::<LittleEndian>::ref_from_bytes(&written);
-        assert!(matches!(result, Err(Error::InsufficientLength { .. })));
+        let result =
+            SectionHeader::from_bytes(Endianness::Little).parse_next(&mut written.as_slice());
+        assert!(result.is_err());
     }
 
     #[test]
     fn test_ref_from_bytes_invalid_separator() {
         let mut written = vec![0; 48];
         written[19] = 0x00; // Invalid separator
-        let result = SectionHeader::<LittleEndian>::ref_from_bytes(&written);
-        assert!(matches!(result, Err(Error::InvalidSeparatorByte { .. })));
+        let result =
+            SectionHeader::from_bytes(Endianness::Little).parse_next(&mut written.as_slice());
+        assert!(result.is_err());
     }
 }

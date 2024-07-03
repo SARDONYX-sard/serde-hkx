@@ -18,7 +18,6 @@ pub trait ClassNamesWriter {
     ) -> io::Result<HashMap<&'static str, u32>>
     where
         O: ByteOrder,
-        K: core::fmt::Debug,
         V: HavokClass;
 }
 

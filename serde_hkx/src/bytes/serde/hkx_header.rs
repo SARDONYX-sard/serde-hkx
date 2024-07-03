@@ -36,20 +36,28 @@
 //! | Unk44                          | Unknown field (Hex offset: 44)                                 | 4            | 68             |
 //! | Unk48                          | Unknown field (Hex offset: 48)                                 | 4            | 72             |
 //! | Unk4C                          | Unknown field (Hex offset: 4C)                                 | 4            | 76             |
-use zerocopy::{AsBytes, ByteOrder, FromBytes, FromZeroes, LittleEndian, I16, I32};
+
+use winnow::{
+    binary::{self, Endianness},
+    combinator::{dispatch, empty, fail},
+    error::{ContextError, StrContext, StrContextValue::*},
+    seq,
+    token::{take, take_until},
+    Parser,
+};
 
 /// The 64bytes HKX header contains metadata information about the HKX file.
-#[derive(Debug, Clone, Default, Eq, PartialEq, Hash, FromBytes, AsBytes, FromZeroes)]
-#[repr(C, packed)]
-pub struct HkxHeader<O: ByteOrder> {
+#[derive(Debug, Clone, Default, Eq, PartialEq, Hash)]
+#[repr(C)]
+pub struct HkxHeader {
     /// First magic number (`0x57E0E057`)
-    pub magic0: I32<O>,
+    pub magic0: i32,
     /// Second magic number (`0x10C0C010`)
-    pub magic1: I32<O>,
+    pub magic1: i32,
     /// User-defined tag.
-    pub user_tag: I32<O>,
+    pub user_tag: i32,
     /// Version of the file.
-    pub file_version: I32<O>,
+    pub file_version: i32,
     /// Size of pointers in bytes (4 or 8)
     pub pointer_size: u8,
     /// Endianness of the file (0 for big-endian, 1 for little-endian).
@@ -65,39 +73,191 @@ pub struct HkxHeader<O: ByteOrder> {
     /// - `__classnames__`
     /// - `__types__`
     /// - `__data__`
-    pub section_count: I32<O>,
+    pub section_count: i32,
     /// Index of the contents section.
-    pub contents_section_index: I32<O>,
+    pub contents_section_index: i32,
     /// Offset of the contents section.
-    pub contents_section_offset: I32<O>,
+    pub contents_section_offset: i32,
     /// Index of the contents class name section.
-    pub contents_class_name_section_index: I32<O>,
+    pub contents_class_name_section_index: i32,
     /// Offset of the contents class name section.
-    pub contents_class_name_section_offset: I32<O>,
-    /// Version string of the contents. + separator(0xFF)
+    pub contents_class_name_section_offset: i32,
+    /// Version string of the contents.
     ///
     /// # Bytes Example
     /// - SkyrimSE
     /// ```rust
     /// assert_eq!(
-    ///   *b"hk_2010.2.0-r1\0\xFF",
-    ///   [0x68, 0x6B, 0x5F, 0x32, 0x30, 0x31, 0x30, 0x2E, 0x32, 0x2E, 0x30, 0x2D, 0x72, 0x31, 0x00, 0xFF]
+    ///   *b"hk_2010.2.0-r1\0",
+    ///   [0x68, 0x6B, 0x5F, 0x32, 0x30, 0x31, 0x30, 0x2E, 0x32, 0x2E, 0x30, 0x2D, 0x72, 0x31, 0x00]
     /// );
     /// ```
-    pub contents_version_string: [u8; 16],
+    pub contents_version_string: [u8; 15],
+    /// Version string of the contents separator. Always 0xff
+    pub contents_version_string_separator: u8,
     /// Various flags.
-    pub flags: I32<O>,
+    pub flags: i32,
     /// Maximum predicate. None is -1 (== `0xFF 0xFF`)
-    pub max_predicate: I16<O>,
+    pub max_predicate: i16,
     /// Section offset. None is -1 (== `0xFF 0xFF`)
     ///
     /// If this number is 16, read 64bytes header plus an extra 16bytes as padding.
-    pub section_offset: I16<O>,
+    pub section_offset: i16,
 }
 
-static_assertions::assert_eq_size!(HkxHeader<LittleEndian>, [u8; 64]); // Must be 64 bytes.
+impl HkxHeader {
+    /// Return Big-endian or little-endian
+    ///
+    /// # Note
+    /// Little when endian is not 0 or 1.
+    /// - If you used the `from_bytes` constructor, it is not a problem because the endian check is already done.
+    pub const fn endian(&self) -> Endianness {
+        match self.endian {
+            0 => Endianness::Big,
+            _ => Endianness::Little,
+        }
+    }
 
-impl HkxHeader<LittleEndian> {
+    /// Check valid endian & Parse as hkx root header.
+    pub fn from_bytes<'a>() -> impl Parser<&'a [u8], Self, ContextError> {
+        move |bytes: &mut &[u8]| {
+            let endianness = {
+                let (mut bytes, _) = take(17usize).parse_peek(*bytes)?;
+                dispatch!(binary::u8; // 18th of bytes
+                    0 => empty.value(Endianness::Big),
+                    1 => empty.value(Endianness::Little),
+                    _ => fail.context(StrContext::Expected(Description("Big-Endian: 0")))
+                            .context(StrContext::Expected(Description("Little-Endian: 1")))
+                )
+                .context(StrContext::Label("Root header endianness"))
+                .parse_next(&mut bytes)?
+            };
+
+            let mut verify_magic0 = binary::i32(endianness)
+                .verify(|magic0| *magic0 == 0x57E0E057)
+                .context(StrContext::Label("magic0"))
+                .context(StrContext::Expected(StringLiteral("0x57E0E057")));
+            let mut verify_magic1 = binary::i32(endianness)
+                .verify(|magic0| *magic0 == 0x10C0C010)
+                .context(StrContext::Label("magic1"))
+                .context(StrContext::Expected(StringLiteral("0x10C0C010")));
+
+            seq! {
+                Self {
+                    magic0: verify_magic0,
+                    magic1: verify_magic1,
+                    user_tag: binary::i32(endianness),
+                    file_version: binary::i32(endianness),
+                    pointer_size: binary::u8,
+                    endian: binary::u8,
+                    padding_option: binary::u8,
+                    base_class: binary::u8,
+                    section_count: binary::i32(endianness),
+                    contents_section_index: binary::i32(endianness),
+                    contents_section_offset: binary::i32(endianness),
+                    contents_class_name_section_index: binary::i32(endianness),
+                    contents_class_name_section_offset: binary::i32(endianness),
+                    contents_version_string: take(15usize).try_map(TryFrom::try_from),
+                    contents_version_string_separator: 0xff.context(StrContext::Expected(StringLiteral("0xFF"))),
+                    flags: binary::i32(endianness),
+                    max_predicate: binary::i16(endianness),
+                    section_offset: binary::i16(endianness),
+                }
+            }.context(StrContext::Label("Hkx Root Header"))
+            .parse_next(bytes)
+        }
+    }
+
+    /// To bytes
+    ///
+    /// # Panics
+    /// When `self.endian` is other than 0 or 1
+    pub fn to_bytes(&self) -> [u8; 64] {
+        let mut result = [0; 64];
+
+        match self.endian {
+            0 => {
+                result[..4].copy_from_slice(&self.magic0.to_be_bytes());
+                result[4..8].copy_from_slice(&self.magic1.to_be_bytes());
+                result[8..12].copy_from_slice(&self.user_tag.to_be_bytes());
+                result[12..16].copy_from_slice(&self.file_version.to_be_bytes());
+                result[16] = self.pointer_size;
+                result[17] = self.endian;
+                result[18] = self.padding_option;
+                result[19] = self.base_class;
+                result[20..24].copy_from_slice(&self.section_count.to_be_bytes());
+                result[24..28].copy_from_slice(&self.contents_section_index.to_be_bytes());
+                result[28..32].copy_from_slice(&self.contents_section_offset.to_be_bytes());
+                result[32..36]
+                    .copy_from_slice(&self.contents_class_name_section_index.to_be_bytes());
+                result[36..40]
+                    .copy_from_slice(&self.contents_class_name_section_offset.to_be_bytes());
+                result[40..55].copy_from_slice(self.contents_version_string.as_slice());
+                result[55] = self.contents_version_string_separator;
+                result[56..60].copy_from_slice(&self.flags.to_be_bytes());
+                result[60..62].copy_from_slice(&self.max_predicate.to_be_bytes());
+                result[62..64].copy_from_slice(&self.section_offset.to_be_bytes());
+                result
+            }
+            1 => {
+                result[..4].copy_from_slice(&self.magic0.to_le_bytes());
+                result[4..8].copy_from_slice(&self.magic1.to_le_bytes());
+                result[8..12].copy_from_slice(&self.user_tag.to_le_bytes());
+                result[12..16].copy_from_slice(&self.file_version.to_le_bytes());
+                result[16] = self.pointer_size;
+                result[17] = self.endian;
+                result[18] = self.padding_option;
+                result[19] = self.base_class;
+                result[20..24].copy_from_slice(&self.section_count.to_le_bytes());
+                result[24..28].copy_from_slice(&self.contents_section_index.to_le_bytes());
+                result[28..32].copy_from_slice(&self.contents_section_offset.to_le_bytes());
+                result[32..36]
+                    .copy_from_slice(&self.contents_class_name_section_index.to_le_bytes());
+                result[36..40]
+                    .copy_from_slice(&self.contents_class_name_section_offset.to_le_bytes());
+                result[40..55].copy_from_slice(self.contents_version_string.as_slice());
+                result[55] = self.contents_version_string_separator;
+                result[56..60].copy_from_slice(&self.flags.to_le_bytes());
+                result[60..62].copy_from_slice(&self.max_predicate.to_le_bytes());
+                result[62..64].copy_from_slice(&self.section_offset.to_le_bytes());
+                result
+            }
+            _ => panic!("Invalid endianness. Expected 0 or 1"),
+        }
+    }
+
+    /// Get padding size.
+    ///
+    /// # Note
+    /// If `Self.section_offset` is negative, 0 is returned.
+    #[inline]
+    pub const fn padding_size(&self) -> u32 {
+        match self.section_offset {
+            i16::MIN..=0 => 0,
+            pad => pad as u32,
+        }
+    }
+
+    /// Get `contents_version_string` as [`str`]
+    ///
+    /// # Errors
+    /// Returns `Err` if the slice is not UTF-8.
+    ///
+    /// # Expected bytes examples
+    /// - SkyrimSE
+    /// ```rust:no_run
+    /// assert_eq!(
+    ///     b"hk_2010.2.0-r1\0",
+    ///     [0x68, 0x6B, 0x5F, 0x32, 0x30, 0x31, 0x30, 0x2E, 0x32, 0x2E, 0x30, 0x2D, 0x72, 0x31, 0x00].as_slice()
+    /// ); // To "hk_2010.2.0-r1"
+    /// ```
+    pub fn contents_version_string(&self) -> winnow::PResult<&str> {
+        let mut bytes = self.contents_version_string.as_slice();
+        take_until(0.., b'\0')
+            .try_map(|bytes| core::str::from_utf8(bytes))
+            .parse_next(&mut bytes)
+    }
+
     /// Create a new `HkXHeader` instance with default values for Skyrim Special Edition.
     ///
     /// # Features
@@ -112,23 +272,24 @@ impl HkxHeader<LittleEndian> {
     /// - section offset: -1 (This mean is None)
     pub const fn new_skyrim_se() -> Self {
         Self {
-            magic0: I32::from_bytes([0x57, 0xE0, 0xE0, 0x57]),
-            magic1: I32::from_bytes([0x10, 0xC0, 0xC0, 0x10]),
-            user_tag: I32::ZERO,
-            file_version: I32::from_bytes([0x08, 0x00, 0x00, 0x00]),
+            magic0: i32::from_le_bytes([0x57, 0xE0, 0xE0, 0x57]),
+            magic1: i32::from_le_bytes([0x10, 0xC0, 0xC0, 0x10]),
+            user_tag: 0,
+            file_version: i32::from_le_bytes([0x08, 0x00, 0x00, 0x00]),
             pointer_size: 8,
             endian: 1,
             padding_option: 0,
             base_class: 1,
-            section_count: I32::from_bytes([0x03, 0x00, 0x00, 0x00]),
-            contents_section_index: I32::from_bytes([0x02, 0x00, 0x00, 0x00]),
-            contents_section_offset: I32::ZERO,
-            contents_class_name_section_index: I32::ZERO,
-            contents_class_name_section_offset: I32::from_bytes([0x4B, 0x00, 0x00, 0x00]),
-            contents_version_string: *b"hk_2010.2.0-r1\0\xFF",
-            flags: I32::ZERO,
-            max_predicate: I16::from_bytes([0xFF, 0xFF]),
-            section_offset: I16::from_bytes([0xFF, 0xFF]),
+            section_count: i32::from_le_bytes([0x03, 0x00, 0x00, 0x00]),
+            contents_section_index: i32::from_le_bytes([0x02, 0x00, 0x00, 0x00]),
+            contents_section_offset: 0,
+            contents_class_name_section_index: 0,
+            contents_class_name_section_offset: i32::from_le_bytes([0x4B, 0x00, 0x00, 0x00]),
+            contents_version_string: *b"hk_2010.2.0-r1\0",
+            contents_version_string_separator: 0xff,
+            flags: 0,
+            max_predicate: -1,
+            section_offset: -1,
         }
     }
 
@@ -140,163 +301,120 @@ impl HkxHeader<LittleEndian> {
         le_header.pointer_size = 4;
         le_header
     }
-
-    /// Get pointer size of this hkx file from header information.
-    ///
-    /// # Assumptions
-    /// Passed argument bytes are first hkx header bytes.
-    ///
-    /// # Panics
-    /// - If `bytes` < 17(bytes)
-    pub const fn ptr_size(bytes: &[u8]) -> u8 {
-        bytes[16]
-    }
-
-    /// Is the binary in the Hkx file big-endian?
-    ///
-    /// # Assumptions
-    /// Passed argument bytes are first hkx header bytes.
-    ///
-    /// # Panics
-    /// - If `bytes` < 18(bytes)
-    pub const fn is_big_endian(bytes: &[u8]) -> bool {
-        bytes[17] == 0
-    }
-
-    /// Get header length. 64(bytes)
-    pub const fn len() -> usize {
-        core::mem::size_of::<Self>()
-    }
 }
 
-impl<O: ByteOrder> HkxHeader<O> {
-    /// Interprets the given `bytes` as a `&Self` without copying.
-    ///
-    /// If `bytes.len() != size_of::<Self>()` or `bytes` is not aligned to
-    /// `align_of::<Self>()`, this returns `Result::Err`.
-    #[inline]
-    pub fn ref_from_bytes(bytes: &[u8]) -> Result<&Self> {
-        if bytes.len() < core::mem::size_of::<Self>() {
-            return InsufficientLengthSnafu.fail();
-        }
-        Self::ref_from_prefix(bytes).ok_or(UnAlignmentSnafu.build())
-    }
+/// Skyrim SpecialEdition(64bit) header binary
+/// ```txt
+/// 0x57, 0xE0, 0xE0, 0x57, // magic0(Always 0x57, 0xE0, 0xE0, 0x57)
+/// 0x10, 0xC0, 0xC0, 0x10, // magic1(Always 0x10, 0xC0, 0xC0, 0x10) 0x00,
+/// 0x00, 0x00, 0x00, // user tag
+/// 0x08, 0x00, 0x00, 0x00, // file version
+/// 0x08, // pointer size
+/// 0x01, // endian(1 is little)
+/// 0x00, // padding option
+/// 0x01, // base class
+/// 0x03, 0x00, 0x00, 0x00, // section count
+/// 0x02, 0x00, 0x00, 0x00, // contents section index
+/// 0x00, 0x00, 0x00, 0x00, // content section offset
+/// 0x00, 0x00, 0x00, 0x00, // contents class name section index
+/// 0x4b, 0x00, 0x00, 0x00, // contents class name section offset
+/// 0x68, 0x6B, 0x5F, 0x32, 0x30, 0x31, 0x30, 0x2E, 0x32, 0x2E, 0x30, 0x2D, 0x72, 0x31, 0x00, // contents version: b"hk_2010.2.0-r1\0\0" =  ([u8;15])
+/// 0xFF, // separator always 0xFF
+/// 0x00, 0x00, 0x00, 0x00, // flags
+/// 0xFF, 0xFF, //  max predicate: -1 as i16. This means is none.
+/// 0xFF, 0xFF, // section offset: -1 as i16. This means is none.
+/// ```
+#[rustfmt::skip]
+pub const SKYRIM_SE_ROW_HEADER: [u8; 64] = [
+    0x57, 0xE0, 0xE0, 0x57, // magic0
+    0x10, 0xC0, 0xC0, 0x10, // magic1
+    0x00, 0x00, 0x00, 0x00, // user tag
+    0x08, 0x00, 0x00, 0x00, // file version
+    0x08, // pointer size
+    0x01, // endian
+    0x00, // padding option
+    0x01, // base class
+    0x03, 0x00, 0x00, 0x00, // section count
+    0x02, 0x00, 0x00, 0x00, // contents section index
+    0x00, 0x00, 0x00, 0x00, // content section offset
+    0x00, 0x00, 0x00, 0x00, // contents class name section index
+    0x4b, 0x00, 0x00, 0x00, // contents class name section offset
+    // contents version: b"hk_2010.2.0-r1\0\0" + separator 0xFF =  ([u8;16])
+    0x68, 0x6B, 0x5F, 0x32, 0x30, 0x31, 0x30, 0x2E, 0x32, 0x2E, 0x30, 0x2D, 0x72, 0x31, 0x00, 0xFF,
+    0x00, 0x00, 0x00, 0x00, // flags
+    0xFF, 0xFF, //  max predicate: -1 as i16. This means is none.
+    0xFF, 0xFF, // section offset: -1 as i16. This means is none.
+];
 
-    /// Get padding size.
-    ///
-    /// # Note
-    /// If `Self.section_offset` is negative, 0 is returned.
-    pub fn padding_size(&self) -> usize {
-        let padding = self.section_offset.get();
-        if padding < 0 {
-            0
-        } else {
-            padding as usize
-        }
-    }
-
-    /// Get version string of the contents that trimmed null str and separator(0xFF).
-    ///
-    /// # Errors
-    ///
-    /// Returns `Err` if the slice is not UTF-8.
-    ///
-    /// # Value Examples
-    /// - SkyrimSE
-    /// ```rust:no_run
-    /// "hk_2010.2.0-r1";
-    /// [0x68, 0x6B, 0x5F, 0x32, 0x30, 0x31, 0x30, 0x2E, 0x32, 0x2E, 0x30, 0x2D, 0x72, 0x31];
-    /// ```
-    pub fn contents_version_string_as_str(&self) -> Result<&str> {
-        let end_position = self
-            .contents_version_string
-            .iter()
-            .position(|c| *c == 0 || *c == 0xFF) // Search null str or separator byte.
-            .unwrap_or(self.contents_version_string.len() - 1); // If not present, all.
-
-        Ok(core::str::from_utf8(
-            &self.contents_version_string[..end_position],
-        )?)
-    }
-}
-
-/// Hkx header Error Result
-type Result<T, E = Error> = core::result::Result<T, E>;
-#[derive(Debug, snafu::Snafu)]
-#[snafu(visibility(pub))]
-pub enum Error {
-    /// Binary data is interpreted as a header, but it was less than 64bytes.
-    #[snafu(display("Binary data is interpreted as a header, but it was less than 64bytes."))]
-    InsufficientLength {
-        /// error location
-        #[snafu(implicit)]
-        location: snafu::Location,
-    },
-
-    /// Binary data is interpreted as a header, but has an alignment violation.
-    #[snafu(display("Binary data is interpreted as a header, but has an alignment violation."))]
-    UnAlignment {
-        /// error location
-        #[snafu(implicit)]
-        location: snafu::Location,
-    },
-
-    #[snafu(transparent)]
-    Utf8Error {
-        source: core::str::Utf8Error,
-        /// error location
-        #[snafu(implicit)]
-        location: snafu::Location,
-    },
-}
+/// Skyrim LegendaryEdition(32bit) header binary
+/// ```txt
+/// 0x57, 0xE0, 0xE0, 0x57, // magic0(Always 0x57, 0xE0, 0xE0, 0x57)
+/// 0x10, 0xC0, 0xC0, 0x10, // magic1(Always 0x10, 0xC0, 0xC0, 0x10) 0x00,
+/// 0x00, 0x00, 0x00, // user tag
+/// 0x08, 0x00, 0x00, 0x00, // file version
+/// 0x04, // pointer size
+/// 0x01, // endian
+/// 0x00, // padding option
+/// 0x01, // base class
+/// 0x03, 0x00, 0x00, 0x00, // section count
+/// 0x02, 0x00, 0x00, 0x00, // contents section index
+/// 0x00, 0x00, 0x00, 0x00, // content section offset
+/// 0x00, 0x00, 0x00, 0x00, // contents class name section index
+/// 0x4b, 0x00, 0x00, 0x00, // contents class name section offset
+/// 0x68, 0x6B, 0x5F, 0x32, 0x30, 0x31, 0x30, 0x2E, 0x32, 0x2E, 0x30, 0x2D, 0x72, 0x31, 0x00, // contents version: b"hk_2010.2.0-r1\0\0" =  ([u8;15])
+/// 0xFF, // separator always 0xFF
+/// 0x00, 0x00, 0x00, 0x00, // flags
+/// 0xFF, 0xFF, //  max predicate: -1 as i16. This means is none.
+/// 0xFF, 0xFF, // section offset: -1 as i16. This means is none.
+/// ```
+#[rustfmt::skip]
+pub const SKYRIM_LE_ROW_HEADER: [u8; 64] = [
+    0x57, 0xE0, 0xE0, 0x57, // magic0(Always 0x57, 0xE0, 0xE0, 0x57)
+    0x10, 0xC0, 0xC0, 0x10, // magic1(Always 0x10, 0xC0, 0xC0, 0x10)
+    0x00, 0x00, 0x00, 0x00, // user tag
+    0x08, 0x00, 0x00, 0x00, // file version
+    0x04, // pointer size
+    0x01, // endian
+    0x00, // padding option
+    0x01, // base class
+    0x03, 0x00, 0x00, 0x00, // section count
+    0x02, 0x00, 0x00, 0x00, // contents section index
+    0x00, 0x00, 0x00, 0x00, // content section offset
+    0x00, 0x00, 0x00, 0x00, // contents class name section index
+    0x4b, 0x00, 0x00, 0x00, // contents class name section offset
+    // contents version string: b"hk_2010.2.0-r1\0\0" =  ([u8;15])
+    0x68, 0x6B, 0x5F, 0x32, 0x30, 0x31, 0x30, 0x2E, 0x32, 0x2E, 0x30, 0x2D, 0x72, 0x31, 0x00,
+    0xFF, //  separator (always 0xFF)
+    0x00, 0x00, 0x00, 0x00, // flags
+    0xFF, 0xFF, //  max predicate: -1 as i16. This means is none.
+    0xFF, 0xFF, // section offset: -1 as i16. This means is none.
+];
 
 #[cfg(test)]
 mod tests {
     use super::*;
     use pretty_assertions::assert_eq;
 
-    #[rustfmt::skip]
-    const SKYRIM_SE_ROW_HEADER: [u8; 64] = [
-        0x57, 0xE0, 0xE0, 0x57, // magic0
-        0x10, 0xC0, 0xC0, 0x10, // magic1
-        0x00, 0x00, 0x00, 0x00, // user tag
-        0x08, 0x00, 0x00, 0x00, // file version
-        0x08, // pointer size
-        0x01, // endian
-        0x00, // padding option
-        0x01, // base class
-        0x03, 0x00, 0x00, 0x00, // section count
-        0x02, 0x00, 0x00, 0x00, // contents section index
-        0x00, 0x00, 0x00, 0x00, // content section offset
-        0x00, 0x00, 0x00, 0x00, // contents class name section index
-        0x4b, 0x00, 0x00, 0x00, // contents class name section offset
-        // contents version: b"hk_2010.2.0-r1\0\0" + separator 0xFF =  ([u8;16])
-        0x68, 0x6B, 0x5F, 0x32, 0x30, 0x31, 0x30, 0x2E, 0x32, 0x2E, 0x30, 0x2D, 0x72, 0x31, 0x00, 0xFF,
-        0x00, 0x00, 0x00, 0x00, // flags
-        0xFF, 0xFF, //  max predicate: -1 as i16. This means is none.
-        0xFF, 0xFF, // section offset: -1 as i16. This means is none.
-    ];
-
     #[test]
     fn should_parse_endian_bytes() {
         assert_eq!(SKYRIM_SE_ROW_HEADER[16], 0x08); // pointer size
         assert_eq!(SKYRIM_SE_ROW_HEADER[17], 0x01); // endian
-        assert_eq!(HkxHeader::is_big_endian(&SKYRIM_SE_ROW_HEADER), false);
+        assert_eq!(HkxHeader::new_skyrim_se().endian(), Endianness::Little);
     }
 
     #[test]
     fn should_read_hkx_bytes() {
-        let header = HkxHeader::ref_from_bytes(&SKYRIM_SE_ROW_HEADER).unwrap();
-        assert_eq!(header, &HkxHeader::new_skyrim_se());
+        let header = HkxHeader::from_bytes()
+            .parse(&SKYRIM_SE_ROW_HEADER)
+            .unwrap();
 
+        assert_eq!(header, HkxHeader::new_skyrim_se());
         assert_eq!(header.padding_size(), 0); // SkyrimSE, no padding.
-
-        let content_ver_str = header.contents_version_string_as_str().unwrap();
-        assert_eq!(content_ver_str, "hk_2010.2.0-r1");
+        assert_eq!(header.contents_version_string(), Ok("hk_2010.2.0-r1"));
     }
 
     #[test]
     fn should_write_hkx_bytes() {
-        assert_eq!(HkxHeader::new_skyrim_se().as_bytes(), &SKYRIM_SE_ROW_HEADER);
+        assert_eq!(HkxHeader::new_skyrim_se().to_bytes(), SKYRIM_SE_ROW_HEADER);
     }
 }
