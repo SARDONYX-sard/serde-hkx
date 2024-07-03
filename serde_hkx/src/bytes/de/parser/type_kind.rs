@@ -11,6 +11,7 @@ use winnow::Parser;
 
 /// Parses [`bool`]. `true` or `false``
 /// - The corresponding type kind: `Bool`
+#[inline]
 pub fn boolean<'a>() -> impl Parser<BytesStream<'a>, bool, ContextError> {
     alt((1.value(true), 0.value(false)))
         .context(StrContext::Label("bool(u8)"))
@@ -23,8 +24,9 @@ pub fn boolean<'a>() -> impl Parser<BytesStream<'a>, bool, ContextError> {
 //   Signed integers -> use `dec_nit`
 
 /// Parses [`f32`](`Real`)
-pub fn real<'a>(endianness: Endianness) -> impl Parser<BytesStream<'a>, f32, ContextError> {
-    binary::f32(endianness)
+#[inline]
+pub fn real<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, f32, ContextError> {
+    binary::f32(endian)
         .context(StrContext::Label("real(f32)"))
         .context(StrContext::Expected(StrContextValue::Description(
             "Real(e.g. `0.100000`)",
@@ -45,12 +47,12 @@ pub fn real<'a>(endianness: Endianness) -> impl Parser<BytesStream<'a>, f32, Con
 /// assert_eq!(vector4().parse("(-0.000000 0.000000 -0.000000 1.000000)"), Ok(Vector4::new(-0.0, 0.0, -0.0, 1.0)));
 /// assert_eq!(vector4().parse("   (   -0.000000 0.000000 -0.000000 1.000000  ) "), Ok(Vector4::new(-0.0, 0.0, -0.0, 1.0)));
 /// ```
-pub fn vector4<'a>(endianness: Endianness) -> impl Parser<BytesStream<'a>, Vector4, ContextError> {
+pub fn vector4<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, Vector4, ContextError> {
     seq!(Vector4 {
-        x: real(endianness).context(StrContext::Label("x")),
-        y: real(endianness).context(StrContext::Label("y")),
-        z: real(endianness).context(StrContext::Label("z")),
-        w: real(endianness).context(StrContext::Label("w")),
+        x: real(endian).context(StrContext::Label("x")),
+        y: real(endian).context(StrContext::Label("y")),
+        z: real(endian).context(StrContext::Label("z")),
+        w: real(endian).context(StrContext::Label("w")),
     })
     .context(StrContext::Label("Vector4"))
 }
@@ -66,68 +68,85 @@ pub fn vector4<'a>(endianness: Endianness) -> impl Parser<BytesStream<'a>, Vecto
 /// ```
 #[inline]
 pub fn quaternion<'a>(
-    endianness: Endianness,
+    endian: Endianness,
 ) -> impl Parser<BytesStream<'a>, Quaternion, ContextError> {
     move |input: &mut &'a [u8]| {
-        let Vector4 { x, y, z, w } = tri!(vector4(endianness).parse_next(input));
+        let Vector4 { x, y, z, w } = tri!(vector4(endian).parse_next(input));
         Ok(Quaternion { x, y, z, scaler: w })
     }
 }
 
-pub fn matrix3<'a>(endianness: Endianness) -> impl Parser<BytesStream<'a>, Matrix3, ContextError> {
+pub fn matrix3<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, Matrix3, ContextError> {
     seq!(Matrix3 {
-        x: vector4(endianness).context(StrContext::Label("x")),
-        y: vector4(endianness).context(StrContext::Label("y")),
-        z: vector4(endianness).context(StrContext::Label("z")),
+        x: vector4(endian).context(StrContext::Label("x")),
+        y: vector4(endian).context(StrContext::Label("y")),
+        z: vector4(endian).context(StrContext::Label("z")),
     })
     .context(StrContext::Label("Matrix3"))
 }
 
-pub fn rotation<'a>(
-    endianness: Endianness,
-) -> impl Parser<BytesStream<'a>, Rotation, ContextError> {
+pub fn rotation<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, Rotation, ContextError> {
     seq!(Rotation {
-        x: vector4(endianness).context(StrContext::Label("x")),
-        y: vector4(endianness).context(StrContext::Label("y")),
-        z: vector4(endianness).context(StrContext::Label("z")),
+        x: vector4(endian).context(StrContext::Label("x")),
+        y: vector4(endian).context(StrContext::Label("y")),
+        z: vector4(endian).context(StrContext::Label("z")),
     })
     .context(StrContext::Label("Rotation"))
 }
 
 pub fn qstransform<'a>(
-    endianness: Endianness,
+    endian: Endianness,
 ) -> impl Parser<BytesStream<'a>, QsTransform, ContextError> {
     seq!(QsTransform {
-        transition: vector4(endianness).context(StrContext::Label("transition")),
-        quaternion: quaternion(endianness).context(StrContext::Label("quaternion")),
-        scale: vector4(endianness).context(StrContext::Label("scale")),
+        transition: vector4(endian).context(StrContext::Label("transition")),
+        quaternion: quaternion(endian).context(StrContext::Label("quaternion")),
+        scale: vector4(endian).context(StrContext::Label("scale")),
     })
     .context(StrContext::Label("QsTransform"))
 }
 
-pub fn matrix4<'a>(endianness: Endianness) -> impl Parser<BytesStream<'a>, Matrix4, ContextError> {
+pub fn matrix4<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, Matrix4, ContextError> {
     seq!(Matrix4 {
-        x: vector4(endianness).context(StrContext::Label("x")),
-        y: vector4(endianness).context(StrContext::Label("y")),
-        z: vector4(endianness).context(StrContext::Label("z")),
-        w: vector4(endianness).context(StrContext::Label("w")),
+        x: vector4(endian).context(StrContext::Label("x")),
+        y: vector4(endian).context(StrContext::Label("y")),
+        z: vector4(endian).context(StrContext::Label("z")),
+        w: vector4(endian).context(StrContext::Label("w")),
     })
     .context(StrContext::Label("Matrix4"))
 }
 
-pub fn transform<'a>(
-    endianness: Endianness,
-) -> impl Parser<BytesStream<'a>, Transform, ContextError> {
+pub fn transform<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, Transform, ContextError> {
     seq!(Transform {
-        rotation: rotation(endianness).context(StrContext::Label("rotation")),
-        transition: vector4(endianness).context(StrContext::Label("transition")),
+        rotation: rotation(endian).context(StrContext::Label("rotation")),
+        transition: vector4(endian).context(StrContext::Label("transition")),
     })
     .context(StrContext::Label("Transform"))
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/// NOTE: No Pointer parsing exists because it is automatically created as an index.
+// NOTE: No Pointer parsing exists because it is automatically created as an index.
+
+/// Parses f16
+#[inline]
+pub fn half<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, f16, ContextError> {
+    move |bytes: &mut BytesStream<'a>| {
+        let (b0, b1) = tri!(seq! {
+            binary::u8,
+            binary::u8,
+        }
+        .context(StrContext::Label("half(f16)"))
+        .context(StrContext::Expected(StrContextValue::Description(
+            "half(f16)",
+        )))
+        .parse_next(bytes));
+
+        Ok(match endian {
+            Endianness::Little => f16::from_le_bytes([b0, b1]),
+            _ => f16::from_be_bytes([b0, b1]),
+        })
+    }
+}
 
 /// Parses a string literal until `\0`
 pub fn string<'a>() -> impl Parser<BytesStream<'a>, &'a str, ContextError> {

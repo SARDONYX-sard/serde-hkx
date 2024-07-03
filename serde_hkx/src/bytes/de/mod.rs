@@ -10,6 +10,7 @@ use self::map::MapDeserializer;
 use self::parser::type_kind::{
     boolean, matrix3, matrix4, qstransform, quaternion, real, rotation, string, transform, vector4,
 };
+use self::parser::BytesStream;
 use self::seq::SeqDeserializer;
 use crate::errors::{
     de::{Error, Result},
@@ -17,7 +18,6 @@ use crate::errors::{
 };
 use havok_serde::de::{self, Deserialize, ReadEnumSize, Visitor};
 use havok_types::*;
-use parser::BytesStream;
 use rhexdump::hexdump;
 use winnow::binary::Endianness;
 use winnow::error::{StrContext, StrContextValue};
@@ -352,6 +352,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         visitor.visit_pointer(Pointer::new(0)) // TODO: get from global fixups
     }
 
+    #[inline]
     fn deserialize_array<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -407,6 +408,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         visitor.visit_variant(Variant::new(Pointer::new(0), Pointer::new(0)))
     }
 
+    #[inline]
     fn deserialize_cstring<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -439,14 +441,15 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         self.to_readable_err(result)
     }
 
+    #[inline]
     fn deserialize_half<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        let float = tri!(self.parse(real(self.endian)));
-        visitor.visit_half(f16::from_f32(float))
+        visitor.visit_half(tri!(self.parse(parser::type_kind::half(self.endian))))
     }
 
+    #[inline]
     fn deserialize_stringptr<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
