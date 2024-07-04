@@ -20,6 +20,18 @@ pub enum Error {
     #[snafu(display("Data section fixups were not found in the binary data."))]
     NotFoundDataFixups,
 
+    /// The data position pointed to by the pointer of the read position ({key}) is not found in local_fixups.
+    #[snafu(display("The data position pointed to by the pointer of the read position ({key}) is not found in local_fixups."))]
+    NotFoundDataLocalFixupsValue { key: u32 },
+
+    /// The data position pointed to by the pointer of the read position ({key}) is not found in global_fixups.
+    #[snafu(display("The data position pointed to by the pointer of the read position ({key}) is not found in global_fixups."))]
+    NotFoundDataGlobalFixupsValue { key: u32 },
+
+    /// The data position pointed to by the pointer of the read position ({key}) is not found in virtual_fixups.
+    #[snafu(display("The data position pointed to by the pointer of the read position ({key}) is not found in virtual_fixups."))]
+    NotFoundDataVirtualFixupsValue { key: u32 },
+
     /// The number of key calls ({actual}) must not be more than the length of the field ({expected}).
     #[snafu(display("The number of key calls ({actual}) must not be more than the length of the field ({expected})."))]
     OverFlowIndex { actual: usize, expected: usize },

@@ -31,11 +31,11 @@ use winnow::{binary, Parser};
 #[derive(Debug, educe::Educe)]
 #[educe(Default)]
 pub struct BytesDeserializer<'de> {
-    /// This string starts with the input data and bytes are truncated off the beginning as data is parsed.
+    /// This is readonly bytes data.
     input: &'de [u8],
 
-    /// This is readonly for error report. Not move position.
-    original: &'de [u8],
+    /// Binary data position currently being read
+    current_position: usize,
 
     /// Big or Little Endian
     #[educe(Default = Endianness::Little)]
@@ -66,7 +66,6 @@ impl<'de> BytesDeserializer<'de> {
     pub fn from_bytes(input: &'de [u8]) -> Self {
         BytesDeserializer {
             input,
-            original: input,
             ..Default::default()
         }
     }
@@ -84,11 +83,11 @@ where
 {
     let mut deserializer = BytesDeserializer::from_bytes(s);
     let t = T::deserialize(&mut deserializer)?;
-    if deserializer.input.is_empty() {
+    if deserializer.input[deserializer.current_position..].is_empty() {
         Ok(t)
     } else {
         Err(Error::TrailingBytes {
-            remain: deserializer.input.to_owned(),
+            remain: deserializer.input[deserializer.current_position..].to_owned(),
         })
     }
 }
@@ -137,13 +136,13 @@ impl<'de> BytesDeserializer<'de> {
         &mut self,
         mut parser: impl Parser<BytesStream<'de>, O, winnow::error::ContextError>,
     ) -> Result<O> {
-        let res = parser
-            .parse_next(&mut self.input)
+        let (_, res) = parser
+            .parse_peek(&self.input[self.current_position..])
             .map_err(|err| Error::ReadableError {
                 source: ReadableError::from_context(
                     err,
-                    &hexdump::RhexdumpString::new().hexdump_bytes(self.original),
-                    self.original.len() - self.input.len() + HEXDUMP_OFFSET,
+                    &hexdump::RhexdumpString::new().hexdump_bytes(self.input),
+                    self.current_position + HEXDUMP_OFFSET,
                 ),
             })?;
         Ok(res)
@@ -162,15 +161,15 @@ impl<'de> BytesDeserializer<'de> {
                 Error::Message { msg } => Err(Error::ReadableError {
                     source: ReadableError::from_display(
                         msg,
-                        &hexdump::RhexdumpString::new().hexdump_bytes(self.original),
-                        self.original.len() - self.input.len() + HEXDUMP_OFFSET,
+                        &hexdump::RhexdumpString::new().hexdump_bytes(self.input),
+                        self.current_position + HEXDUMP_OFFSET,
                     ),
                 }),
                 _ => Err(Error::ReadableError {
                     source: ReadableError::from_display(
                         err,
-                        &hexdump::RhexdumpString::new().hexdump_bytes(self.original),
-                        self.original.len() - self.input.len() + HEXDUMP_OFFSET,
+                        &hexdump::RhexdumpString::new().hexdump_bytes(self.input),
+                        self.current_position + HEXDUMP_OFFSET,
                     ),
                 }),
             },
@@ -178,34 +177,27 @@ impl<'de> BytesDeserializer<'de> {
     }
 
     /// Deserialize the fixups in the `classnames` and `data` sections, relying on the information in the root header.
+    ///
+    /// And, write fixups to deserializer.
     fn deserialize_fixups(
         &mut self,
         classnames_section_index: i32,
         data_section_index: i32,
         section_len: i32,
     ) -> Result<()> {
-        let mut classnames_header = None;
         let mut classnames_fixups = None;
-        let mut data_header = None;
         let mut data_fixups = None;
 
         for i in 0..section_len {
             match i {
-                i if classnames_section_index == i
-                    && classnames_header.is_none()
-                    && classnames_fixups.is_none() =>
-                {
-                    let section_header = tri!(self.parse(SectionHeader::from_bytes(self.endian)));
-                    let fixups =
-                        tri!(self.parse(Fixups::from_section_heder(&section_header, self.endian)));
-                    classnames_header = Some(section_header);
+                i if classnames_section_index == i && classnames_fixups.is_none() => {
+                    let header = tri!(self.parse(SectionHeader::from_bytes(self.endian)));
+                    let fixups = tri!(self.parse(Fixups::from_section_heder(&header, self.endian)));
                     classnames_fixups = Some(fixups);
                 }
-                i if data_section_index == i && data_header.is_none() && data_fixups.is_none() => {
-                    let section_header = tri!(self.parse(SectionHeader::from_bytes(self.endian)));
-                    let fixups =
-                        tri!(self.parse(Fixups::from_section_heder(&section_header, self.endian)));
-                    data_header = Some(section_header);
+                i if data_section_index == i && data_fixups.is_none() => {
+                    let header = tri!(self.parse(SectionHeader::from_bytes(self.endian)));
+                    let fixups = tri!(self.parse(Fixups::from_section_heder(&header, self.endian)));
                     data_fixups = Some(fixups);
                 }
                 _ => {} // Skip unused __types__ section
@@ -221,6 +213,35 @@ impl<'de> BytesDeserializer<'de> {
             None => return Err(Error::NotFoundDataFixups),
         };
         Ok(())
+    }
+
+    /// Skip until align N.
+    fn skip_align(&mut self, n: usize) -> Result<()> {
+        let alignment = (n - (self.current_position % n)) % n;
+        if alignment > 0 && alignment <= self.input.len() {
+            self.input = &self.input[alignment..];
+            Ok(())
+        } else {
+            Err(Error::Eof)
+        }
+    }
+
+    #[inline]
+    fn skip_ptr_size(&mut self) {
+        match self.is_x86 {
+            true => self.current_position += 4,
+            false => self.current_position += 8,
+        }
+    }
+
+    /// Get current bytes position.
+    ///
+    /// # Note
+    /// This returns [`u32`] to be used as a key to retrieve the data position from the `fixups` that fixes
+    /// the data position pointed to by the pointer type.
+    #[inline]
+    const fn current_position(&self) -> u32 {
+        self.current_position as u32
     }
 }
 
@@ -279,7 +300,9 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_bool(tri!(self.parse(boolean())))
+        let res = visitor.visit_bool(tri!(self.parse(boolean())));
+        self.current_position += 1;
+        res
     }
 
     #[inline]
@@ -287,9 +310,11 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_char(tri!(self.parse(
+        let res = visitor.visit_char(tri!(self.parse(
             binary::le_u8.context(StrContext::Expected(StrContextValue::Description("char")))
-        )) as char)
+        )) as char);
+        self.current_position += 1;
+        res
     }
 
     #[inline]
@@ -297,9 +322,11 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_int8(tri!(self.parse(
+        let res = visitor.visit_int8(tri!(self.parse(
             binary::le_i8.context(StrContext::Expected(StrContextValue::Description("i8")))
-        )))
+        )));
+        self.current_position += 1;
+        res
     }
 
     #[inline]
@@ -307,9 +334,11 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_uint8(tri!(self.parse(
+        let res = visitor.visit_uint8(tri!(self.parse(
             binary::le_u8.context(StrContext::Expected(StrContextValue::Description("u8")))
-        )))
+        )));
+        self.current_position += 1;
+        res
     }
 
     #[inline]
@@ -317,10 +346,12 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_int16(tri!(self.parse(
+        let res = visitor.visit_int16(tri!(self.parse(
             binary::i16(self.endian)
                 .context(StrContext::Expected(StrContextValue::Description("i16")))
-        )))
+        )));
+        self.current_position += 2;
+        res
     }
 
     #[inline]
@@ -328,10 +359,12 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_uint16(tri!(self.parse(
+        let res = visitor.visit_uint16(tri!(self.parse(
             binary::u16(self.endian)
                 .context(StrContext::Expected(StrContextValue::Description("u16")))
-        )))
+        )));
+        self.current_position += 2;
+        res
     }
 
     #[inline]
@@ -339,10 +372,12 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_int32(tri!(self.parse(
+        let res = visitor.visit_int32(tri!(self.parse(
             binary::i32(self.endian)
                 .context(StrContext::Expected(StrContextValue::Description("i32")))
-        )))
+        )));
+        self.current_position += 4;
+        res
     }
 
     #[inline]
@@ -350,10 +385,12 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_uint32(tri!(self.parse(
+        let res = visitor.visit_uint32(tri!(self.parse(
             binary::u32(self.endian)
                 .context(StrContext::Expected(StrContextValue::Description("u32")))
-        )))
+        )));
+        self.current_position += 4;
+        res
     }
 
     #[inline]
@@ -361,10 +398,12 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_int64(tri!(self.parse(
+        let res = visitor.visit_int64(tri!(self.parse(
             binary::i64(self.endian)
                 .context(StrContext::Expected(StrContextValue::Description("i64")))
-        )))
+        )));
+        self.current_position += 8;
+        res
     }
 
     #[inline]
@@ -372,10 +411,12 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_uint64(tri!(self.parse(
+        let res = visitor.visit_uint64(tri!(self.parse(
             binary::u64(self.endian)
                 .context(StrContext::Expected(StrContextValue::Description("u64")))
-        )))
+        )));
+        self.current_position += 8;
+        res
     }
 
     #[inline]
@@ -383,58 +424,76 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_real(tri!(self.parse(
-            real(self.endian).context(StrContext::Expected(StrContextValue::Description("f32")))
-        )))
+        let res =
+            visitor
+                .visit_real(tri!(self.parse(real(self.endian).context(
+                    StrContext::Expected(StrContextValue::Description("f32"))
+                ))));
+        self.current_position += 4;
+        res
     }
 
     fn deserialize_vector4<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_vector4(tri!(self.parse(vector4(self.endian))))
+        let res = visitor.visit_vector4(tri!(self.parse(vector4(self.endian))));
+        self.current_position += 16;
+        res
     }
 
     fn deserialize_quaternion<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_quaternion(tri!(self.parse(quaternion(self.endian))))
+        let res = visitor.visit_quaternion(tri!(self.parse(quaternion(self.endian))));
+        self.current_position += 16;
+        res
     }
 
     fn deserialize_matrix3<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_matrix3(tri!(self.parse(matrix3(self.endian))))
+        let res = visitor.visit_matrix3(tri!(self.parse(matrix3(self.endian))));
+        self.current_position += 48;
+        res
     }
 
     fn deserialize_rotation<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_rotation(tri!(self.parse(rotation(self.endian))))
+        let res = visitor.visit_rotation(tri!(self.parse(rotation(self.endian))));
+        self.current_position += 48;
+        res
     }
 
     fn deserialize_qstransform<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_qstransform(tri!(self.parse(qstransform(self.endian))))
+        let res = visitor.visit_qstransform(tri!(self.parse(qstransform(self.endian))));
+        self.current_position += 48;
+        res
     }
 
     fn deserialize_matrix4<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_matrix4(tri!(self.parse(matrix4(self.endian))))
+        let res = visitor.visit_matrix4(tri!(self.parse(matrix4(self.endian))));
+        self.current_position += 68;
+        res
     }
 
     fn deserialize_transform<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_transform(tri!(self.parse(transform(self.endian))))
+        let res = visitor.visit_transform(tri!(self.parse(transform(self.endian))));
+        self.current_position += 68;
+        res
     }
 
     #[inline]
@@ -498,15 +557,34 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         V: Visitor<'de>,
     {
         // TODO: get from global fixups
-        visitor.visit_variant(Variant::new(Pointer::new(0), Pointer::new(0)))
+        let res = visitor.visit_variant(Variant::new(Pointer::new(0), Pointer::new(0)));
+        if self.is_x86 {
+            self.current_position += 8;
+        } else {
+            self.current_position += 16;
+        };
+        res
     }
 
-    #[inline]
     fn deserialize_cstring<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_cstring(CString::from_str(tri!(self.parse(string()))))
+        let local_src = self.current_position();
+
+        self.current_position = *tri!(self
+            .data_fixups
+            .local_fixups
+            .get(&local_src)
+            .ok_or(Error::NotFoundDataLocalFixupsValue { key: local_src }))
+            as usize;
+
+        let s = tri!(self.parse(string()));
+
+        self.current_position = local_src as usize;
+        self.skip_ptr_size();
+
+        visitor.visit_cstring(CString::from_str(s))
     }
 
     #[inline]
@@ -514,7 +592,10 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        self.deserialize_uint64(visitor)
+        match self.is_x86 {
+            true => self.deserialize_uint32(visitor),
+            false => self.deserialize_uint64(visitor),
+        }
     }
 
     fn deserialize_flags<V>(self, size: ReadEnumSize, visitor: V) -> Result<V::Value, Self::Error>
@@ -539,15 +620,30 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_half(tri!(self.parse(parser::type_kind::half(self.endian))))
+        let res = visitor.visit_half(tri!(self.parse(parser::type_kind::half(self.endian))));
+        self.current_position += 2;
+        res
     }
 
-    #[inline]
     fn deserialize_stringptr<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_stringptr(StringPtr::from_str(tri!(self.parse(string()))))
+        let local_src = self.current_position();
+
+        self.current_position = *tri!(self
+            .data_fixups
+            .local_fixups
+            .get(&local_src)
+            .ok_or(Error::NotFoundDataLocalFixupsValue { key: local_src }))
+            as usize;
+
+        let s = tri!(self.parse(string()));
+
+        self.current_position = local_src as usize;
+        self.skip_ptr_size();
+
+        visitor.visit_stringptr(StringPtr::from_str(s))
     }
 }
 
@@ -574,27 +670,35 @@ mod tests {
     #[quick_tracing::init]
     fn test_deserialize_primitive() {
         parse_assert(&[128, 0], FlagValues::ALIGN_8);
-        parse_assert(&[0, 0], EventMode::EventModeDefault);
+        parse_assert(&[0], EventMode::EventModeDefault);
     }
 
     #[test]
-    fn test_deserialize_string() {
-        parse_assert::<Vec<StringPtr>>(
-            b"Hello\0World\0\0",
-            vec!["Hello".into(), "World".into(), "".into()],
+    #[quick_tracing::init]
+    fn test_deserialize_primitive_array() {
+        parse_assert::<[char; 0]>(b"", []);
+
+        parse_assert(&[1, 0], [true, false]);
+        parse_assert(
+            zerocopy::AsBytes::as_bytes(&[
+                0u32, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+            ]),
+            [
+                0u32, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+            ],
         );
     }
 
     #[test]
     #[quick_tracing::init]
     fn test_deserialize_primitive_vec() {
-        parse_assert(&[1, 0], vec![true, false]);
-
         parse_assert(
             zerocopy::AsBytes::as_bytes(&[
                 0u32, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
             ]),
-            (0..21).collect::<Vec<i32>>(),
+            vec![
+                0u32, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+            ],
         );
     }
 
@@ -606,7 +710,7 @@ mod tests {
                 0.0, 0.0, -0.0, 1.0, // 2 vec4
                 -0.0, 0.0, -0.0, 1.0, // 3 vec4
             ]),
-            vec![
+            [
                 Vector4 {
                     x: -0.0,
                     y: 0.0,
@@ -627,12 +731,6 @@ mod tests {
                 },
             ],
         );
-    }
-
-    #[test]
-    #[quick_tracing::init]
-    fn test_deserialize_primitive_array() {
-        parse_assert::<[char; 0]>(b"", []);
     }
 
     #[test]

@@ -29,7 +29,7 @@ pub fn real<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, f32, Context
     binary::f32(endian)
         .context(StrContext::Label("real(f32)"))
         .context(StrContext::Expected(StrContextValue::Description(
-            "Real(e.g. `0.100000`)",
+            "Real(e.g. `00 00 80 3f`(0.1))",
         )))
 }
 

@@ -36,7 +36,7 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
         };
 
         if self.de.input.len() >= pad {
-            self.de.input = &self.de.input[pad..];
+            self.de.current_position += pad;
             Ok(())
         } else {
             Err(Error::Eof)
