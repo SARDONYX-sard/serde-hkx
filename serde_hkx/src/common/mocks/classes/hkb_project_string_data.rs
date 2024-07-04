@@ -1,5 +1,3 @@
-use zerocopy::AsBytes;
-
 use super::*;
 
 /// `hkbProjectStringData`

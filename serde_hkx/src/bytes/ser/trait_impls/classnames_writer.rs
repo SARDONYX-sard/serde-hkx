@@ -1,11 +1,10 @@
 //! Trait that defines a set of dedicated methods for writing Havok Class data.
-use byteorder::WriteBytesExt as _;
+use byteorder::{ByteOrder, WriteBytesExt as _};
 use havok_serde::HavokClass;
 use std::{
     collections::HashMap,
     io::{self, Cursor, Write as _},
 };
-use zerocopy::ByteOrder;
 
 use crate::common::trait_impls::Align as _;
 

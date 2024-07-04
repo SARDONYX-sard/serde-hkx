@@ -1,6 +1,5 @@
-use byteorder::WriteBytesExt as _;
+use byteorder::{BigEndian, LittleEndian, WriteBytesExt as _};
 use std::io;
-use zerocopy::{BigEndian, LittleEndian};
 
 pub trait LocalFixupsWriter {
     /// Write local fixups data
