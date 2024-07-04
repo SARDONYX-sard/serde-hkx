@@ -12,6 +12,14 @@ pub enum Error {
         msg: String,
     },
 
+    /// Classnames section fixups were not found in the binary data.
+    #[snafu(display("Classnames section fixups were not found in the binary data."))]
+    NotFoundClassNamesFixups,
+
+    /// Data section fixups were not found in the binary data.
+    #[snafu(display("Data section fixups were not found in the binary data."))]
+    NotFoundDataFixups,
+
     /// The number of key calls ({actual}) must not be more than the length of the field ({expected}).
     #[snafu(display("The number of key calls ({actual}) must not be more than the length of the field ({expected})."))]
     OverFlowIndex { actual: usize, expected: usize },

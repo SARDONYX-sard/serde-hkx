@@ -5,13 +5,15 @@ mod seq;
 
 use crate::{lib::*, tri};
 
-use self::enum_access::EnumDeserializer;
-use self::map::MapDeserializer;
 use self::parser::type_kind::{
     boolean, matrix3, matrix4, qstransform, quaternion, real, rotation, string, transform, vector4,
 };
-use self::parser::BytesStream;
+use self::parser::{fixups::Fixups, BytesStream};
+
+use self::enum_access::EnumDeserializer;
+use self::map::MapDeserializer;
 use self::seq::SeqDeserializer;
+
 use super::serde::{hkx_header::HkxHeader, section_header::SectionHeader};
 use crate::errors::{
     de::{Error, Result},
@@ -26,7 +28,8 @@ use winnow::{binary, Parser};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#[derive(Debug)]
+#[derive(Debug, educe::Educe)]
+#[educe(Default)]
 pub struct BytesDeserializer<'de> {
     /// This string starts with the input data and bytes are truncated off the beginning as data is parsed.
     input: &'de [u8],
@@ -34,8 +37,14 @@ pub struct BytesDeserializer<'de> {
     /// This is readonly for error report. Not move position.
     original: &'de [u8],
 
+    #[educe(Default = Endianness::Little)]
     endian: Endianness,
     is_x86: bool,
+
+    /// classnames section fixups
+    classnames_fixups: Fixups,
+    /// data section fixups
+    data_fixups: Fixups,
 
     /// Unique Class index & XML name attribute(e.g. `#0050`).
     ///
@@ -47,36 +56,20 @@ pub struct BytesDeserializer<'de> {
     field_length: Option<usize>,
 }
 
-impl Default for BytesDeserializer<'_> {
-    fn default() -> Self {
-        Self {
-            input: b"",
-            original: b"",
-            endian: Endianness::Little,
-            is_x86: false,
-            class_index: 0,
-            field_index: None,
-            field_length: None,
-        }
-    }
-}
-
 impl<'de> BytesDeserializer<'de> {
     /// from xml string
     pub fn from_bytes(input: &'de [u8]) -> Self {
         BytesDeserializer {
             input,
             original: input,
-            endian: Endianness::Little,
-            is_x86: false,
-            class_index: 0,
-            field_index: None,
-            field_length: None,
+            ..Default::default()
         }
     }
 }
 
 /// Parse binary data as the type specified in the partial generics.
+///
+/// e.g. one class, 3 booleans, [u32; 10],
 ///
 /// # Note
 /// If pointer types are included, it is impossible to deserialize correctly because fixups information is required.
@@ -102,16 +95,19 @@ where
 {
     let mut deserializer = BytesDeserializer::from_bytes(bytes);
 
+    // 1. Deserialize root file header.
     let header = tri!(deserializer.parse(HkxHeader::from_bytes()));
     deserializer.is_x86 = header.pointer_size == 4;
     deserializer.endian = header.endian();
 
-    let endian = deserializer.endian;
-    // TODO: parse fixups
-    // let classnames_header = tri!(deserializer.parse(SectionHeader::from_bytes(endian)));
-    // let types_header = tri!(deserializer.parse(SectionHeader::from_bytes(endian)));
-    // let data_header = tri!(deserializer.parse(SectionHeader::from_bytes(endian)));
+    // 2. Deserialize the fixups in the classnames and data sections.
+    tri!(deserializer.deserialize_fixups(
+        header.contents_class_name_section_index,
+        header.contents_section_index,
+        header.section_count
+    ));
 
+    // 3. class field parse.
     let t = T::deserialize(&mut deserializer)?;
     if deserializer.input.is_empty() {
         Ok(t)
@@ -174,6 +170,52 @@ impl<'de> BytesDeserializer<'de> {
                 }),
             },
         }
+    }
+
+    /// Deserialize the fixups in the `classnames` and `data` sections, relying on the information in the root header.
+    fn deserialize_fixups(
+        &mut self,
+        classnames_section_index: i32,
+        data_section_index: i32,
+        section_len: i32,
+    ) -> Result<()> {
+        let mut classnames_header = None;
+        let mut classnames_fixups = None;
+        let mut data_header = None;
+        let mut data_fixups = None;
+
+        for i in 0..section_len {
+            match i {
+                i if classnames_section_index == i
+                    && classnames_header.is_none()
+                    && classnames_fixups.is_none() =>
+                {
+                    let section_header = tri!(self.parse(SectionHeader::from_bytes(self.endian)));
+                    let fixups =
+                        tri!(self.parse(Fixups::from_section_heder(&section_header, self.endian)));
+                    classnames_header = Some(section_header);
+                    classnames_fixups = Some(fixups);
+                }
+                i if data_section_index == i && data_header.is_none() && data_fixups.is_none() => {
+                    let section_header = tri!(self.parse(SectionHeader::from_bytes(self.endian)));
+                    let fixups =
+                        tri!(self.parse(Fixups::from_section_heder(&section_header, self.endian)));
+                    data_header = Some(section_header);
+                    data_fixups = Some(fixups);
+                }
+                _ => {} // Skip unused __types__ section
+            }
+        }
+
+        match classnames_fixups {
+            Some(fixups) => self.classnames_fixups = fixups,
+            None => return Err(Error::NotFoundClassNamesFixups),
+        };
+        match data_fixups {
+            Some(fixups) => self.data_fixups = fixups,
+            None => return Err(Error::NotFoundDataFixups),
+        };
+        Ok(())
     }
 }
 
