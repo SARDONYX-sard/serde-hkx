@@ -11,11 +11,10 @@ The only way to find out if it is possible or not is to try it out.
   - [x] Bytes
 - [ ] Try to implement Deserializer to design.
 
-  - [ ] XML <- Current working
-  - [ ] Bytes
+  - [x] XML
+  - [ ] Bytes (Task: visit array) <- Current working
 
-- [ ] Try to implement procedural macro(`derive(Serialize, Deserialize)`).
-- [ ] Generate Classes.
+- [ ] Generate Classes (Task: struct).
 
 ### Implementations
 
