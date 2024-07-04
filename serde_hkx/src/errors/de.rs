@@ -3,7 +3,6 @@ use crate::lib::*;
 
 /// Deserialize error
 #[derive(Debug, PartialEq, snafu::Snafu)]
-#[snafu(visibility(pub))]
 pub enum Error {
     /// User custom error.
     #[snafu(display("{msg}"))]
@@ -11,6 +10,9 @@ pub enum Error {
         /// Error message
         msg: String,
     },
+
+    #[snafu(display("Unique index of class for this `global_fix.dst`{virtual_src} is missing"))]
+    NotFoundClassIndex { virtual_src: u32 },
 
     /// Classnames section fixups were not found in the binary data.
     #[snafu(display("Classnames section fixups were not found in the binary data."))]

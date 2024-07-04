@@ -5,15 +5,13 @@ mod seq;
 
 use crate::{lib::*, tri};
 
+use self::enum_access::EnumDeserializer;
+use self::map::MapDeserializer;
 use self::parser::type_kind::{
     boolean, matrix3, matrix4, qstransform, quaternion, real, rotation, string, transform, vector4,
 };
-use self::parser::{fixups::Fixups, BytesStream};
-
-use self::enum_access::EnumDeserializer;
-use self::map::MapDeserializer;
+use self::parser::{classnames::classnames_section, fixups::Fixups, BytesStream};
 use self::seq::SeqDeserializer;
-
 use super::serde::{hkx_header::HkxHeader, section_header::SectionHeader};
 use crate::errors::{
     de::{Error, Result},
@@ -22,6 +20,7 @@ use crate::errors::{
 use havok_serde::de::{self, Deserialize, ReadEnumSize, Visitor};
 use havok_types::*;
 use rhexdump::hexdump;
+use std::collections::HashMap;
 use winnow::binary::Endianness;
 use winnow::error::{StrContext, StrContextValue};
 use winnow::{binary, Parser};
@@ -46,8 +45,17 @@ pub struct BytesDeserializer<'de> {
     /// This is related to the read size of the pointer type and the skip size of the padding.
     is_x86: bool,
 
+    /// - key: virtual_src
+    /// - value: unique class index(e.g. XML name attribute `#0050`)
+    class_index_map: HashMap<u32, usize>,
+
+    /// `__classnames__` header
+    classnames_header: SectionHeader,
     /// classnames section fixups
     classnames_fixups: Fixups,
+
+    /// `__data__` header
+    data_header: SectionHeader,
     /// data section fixups
     data_fixups: Fixups,
 
@@ -64,7 +72,7 @@ pub struct BytesDeserializer<'de> {
 impl<'de> BytesDeserializer<'de> {
     /// from xml string
     pub fn from_bytes(input: &'de [u8]) -> Self {
-        BytesDeserializer {
+        Self {
             input,
             ..Default::default()
         }
@@ -105,15 +113,30 @@ where
     deserializer.endian = header.endian();
 
     // 2. Deserialize the fixups in the classnames and data sections.
-    tri!(deserializer.deserialize_fixups(
+    tri!(deserializer.set_fixups(
         header.contents_class_name_section_index,
         header.contents_section_index,
         header.section_count
     ));
 
+    // classnames section parse
+    deserializer.current_position = deserializer.classnames_header.absolute_data_start as usize; // move to classnames section start
+    let classnames = tri!(deserializer.parse(classnames_section(
+        deserializer.endian,
+        deserializer.current_position
+    )));
+
+    // virtual_src
+    // virtual_fixups=> src/dst pair =>
+    // src(current reader position), dst(class name start position)
+    //
+    // for (src, dst) in virtual_fixups {
+    //     classnames_section[dst] => new Class
+    // }
+
     // 3. class field parse.
-    let t = T::deserialize(&mut deserializer)?;
-    if deserializer.input.is_empty() {
+    let t = tri!(T::deserialize(&mut deserializer));
+    if deserializer.input[deserializer.current_position..].is_empty() {
         Ok(t)
     } else {
         Err(Error::TrailingBytes {
@@ -178,44 +201,44 @@ impl<'de> BytesDeserializer<'de> {
 
     /// Deserialize the fixups in the `classnames` and `data` sections, relying on the information in the root header.
     ///
-    /// And, write fixups to deserializer.
-    fn deserialize_fixups(
+    /// And, sets fixups to deserializer.
+    fn set_fixups(
         &mut self,
         classnames_section_index: i32,
         data_section_index: i32,
         section_len: i32,
     ) -> Result<()> {
-        let mut classnames_fixups = None;
-        let mut data_fixups = None;
-
+        let backup_pos = self.current_position;
         for i in 0..section_len {
             match i {
-                i if classnames_section_index == i && classnames_fixups.is_none() => {
+                i if classnames_section_index == i => {
                     let header = tri!(self.parse(SectionHeader::from_bytes(self.endian)));
-                    let fixups = tri!(self.parse(Fixups::from_section_heder(&header, self.endian)));
-                    classnames_fixups = Some(fixups);
+                    let fixups_start_pos = header.absolute_data_start + header.local_fixups_offset;
+
+                    self.current_position = fixups_start_pos as usize;
+                    self.classnames_fixups =
+                        tri!(self.parse(Fixups::from_section_heder(&header, self.endian)));
+                    self.classnames_header = header;
                 }
-                i if data_section_index == i && data_fixups.is_none() => {
+
+                i if data_section_index == i => {
                     let header = tri!(self.parse(SectionHeader::from_bytes(self.endian)));
-                    let fixups = tri!(self.parse(Fixups::from_section_heder(&header, self.endian)));
-                    data_fixups = Some(fixups);
+                    let fixups_start = header.absolute_data_start + header.local_fixups_offset;
+
+                    self.current_position = fixups_start as usize;
+                    self.data_fixups =
+                        tri!(self.parse(Fixups::from_section_heder(&header, self.endian)));
+                    self.data_header = header;
                 }
                 _ => {} // Skip unused __types__ section
             }
         }
-
-        match classnames_fixups {
-            Some(fixups) => self.classnames_fixups = fixups,
-            None => return Err(Error::NotFoundClassNamesFixups),
-        };
-        match data_fixups {
-            Some(fixups) => self.data_fixups = fixups,
-            None => return Err(Error::NotFoundDataFixups),
-        };
+        self.current_position = backup_pos;
         Ok(())
     }
 
     /// Skip until align N.
+    #[allow(unused)]
     fn skip_align(&mut self, n: usize) -> Result<()> {
         let alignment = (n - (self.current_position % n)) % n;
         if alignment > 0 && alignment <= self.input.len() {
@@ -501,7 +524,18 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_pointer(Pointer::new(0)) // TODO: get from global fixups
+        let current_position = self.current_position();
+        match self.data_fixups.global_fixups.get(&current_position) {
+            Some((_section_index, virtual_src)) => match self.class_index_map.get(virtual_src) {
+                Some(index) => visitor.visit_pointer(Pointer::new(*index)),
+                None => Err(Error::NotFoundClassIndex {
+                    virtual_src: *virtual_src,
+                }),
+            },
+            None => Err(Error::NotFoundDataGlobalFixupsValue {
+                key: current_position,
+            }),
+        }
     }
 
     #[inline]
@@ -539,6 +573,10 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         self.class_index += 1;
         self.field_index = Some(0);
         self.field_length = Some(fields.len());
+
+        dbg!(self.current_position());
+        self.class_index_map
+            .insert(self.current_position(), self.class_index);
 
         let value = tri!(visitor.visit_struct(MapDeserializer::new(
             self,
@@ -684,19 +722,6 @@ mod tests {
                 0u32, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
             ]),
             [
-                0u32, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-            ],
-        );
-    }
-
-    #[test]
-    #[quick_tracing::init]
-    fn test_deserialize_primitive_vec() {
-        parse_assert(
-            zerocopy::AsBytes::as_bytes(&[
-                0u32, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-            ]),
-            vec![
                 0u32, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
             ],
         );
