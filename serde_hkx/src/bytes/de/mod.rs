@@ -37,8 +37,13 @@ pub struct BytesDeserializer<'de> {
     /// This is readonly for error report. Not move position.
     original: &'de [u8],
 
+    /// Big or Little Endian
     #[educe(Default = Endianness::Little)]
     endian: Endianness,
+    /// Is this binary data for 32-bit?
+    ///
+    /// # Note
+    /// This is related to the read size of the pointer type and the skip size of the padding.
     is_x86: bool,
 
     /// classnames section fixups
