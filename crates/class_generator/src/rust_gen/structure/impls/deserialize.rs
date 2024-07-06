@@ -26,7 +26,7 @@ pub fn impl_deserialize(class: &Class, class_map: &ClassMap) -> TokenStream {
             #[allow(unused_extern_crates, clippy::useless_attribute)]
             extern crate havok_serde as _serde;
             #[automatically_derived]
-            impl<'de> _serde::Deserialize<'de> for #class_name<#lifetime> {
+            impl<'de> _serde::Deserialize<'de> for #class_name #lifetime {
                 fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
                 where
                     __D: _serde::Deserializer<'de>,

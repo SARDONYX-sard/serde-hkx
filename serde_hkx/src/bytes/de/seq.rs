@@ -1,7 +1,6 @@
 //! Deserializing each element in an `Array`
 use super::BytesDeserializer;
 use crate::errors::de::{Error, Result};
-use crate::tri;
 use havok_serde::de::{DeserializeSeed, SeqAccess};
 
 /// A structure for deserializing each element in an `Array`.
@@ -33,39 +32,30 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
     where
         T: DeserializeSeed<'de>,
     {
+        if self.first {};
         // Check if there are no more elements.
-        if self.de.input.is_empty() {
+        if self.de.input[self.de.current_position..].is_empty() {
             return Ok(None);
         };
+        self.first = false;
 
-        let value = seed.deserialize(&mut *self.de).map(Some)?; // Deserialize an array element.
-        Ok(value)
+        seed.deserialize(&mut *self.de).map(Some)
     }
 
+    #[inline]
     fn next_class_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
     where
         T: DeserializeSeed<'de>,
     {
-        // Check if there are no more elements.
-        if self.de.input.is_empty() {
-            return Ok(None);
-        };
-        self.first = false;
-
-        seed.deserialize(&mut *self.de).map(Some) // Deserialize an array element.
+        self.next_stringptr_element_seed(seed)
     }
 
+    #[inline]
     fn next_math_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
     where
         T: DeserializeSeed<'de>,
     {
-        // Check if there are no more elements.
-        if self.de.input.is_empty() {
-            return Ok(None);
-        };
-        self.first = false;
-
-        Ok(tri!(seed.deserialize(&mut *self.de).map(Some)))
+        self.next_primitive_element_seed(seed)
     }
 
     #[inline]
@@ -73,20 +63,14 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
     where
         T: DeserializeSeed<'de>,
     {
-        self.next_stringptr_element_seed(seed)
+        self.next_primitive_element_seed(seed)
     }
 
+    #[inline]
     fn next_stringptr_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
     where
         T: DeserializeSeed<'de>,
     {
-        // Check if there are no more elements.
-        if self.de.input.is_empty() {
-            return Ok(None);
-        };
-        self.first = false;
-
-        let ret = seed.deserialize(&mut *self.de).map(Some)?;
-        Ok(ret)
+        self.next_primitive_element_seed(seed)
     }
 }

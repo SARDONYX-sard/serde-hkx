@@ -34,9 +34,16 @@ pub enum Classes<'a> {
     HkRootLevelContainerNamedVariant(HkRootLevelContainerNamedVariant<'a>),
     HkbProjectData(HkbProjectData),
     HkbProjectStringData(HkbProjectStringData<'a>),
-
     HkpShapeInfo(HkpShapeInfo<'a>),
 }
+
+// impl core::str::FromStr for Classes<'a> {
+//     type Err ="";
+
+//     fn from_str(s: &str) -> Result<Self, Self::Err> {
+//         match
+//     }
+// }
 
 impl HavokClass for Classes<'_> {
     fn name(&self) -> &'static str {
@@ -84,5 +91,102 @@ impl<'a> Serialize for Classes<'a> {
             Classes::HkRootLevelContainerNamedVariant(class) => class.serialize(serializer),
             Classes::HkpShapeInfo(class) => class.serialize(serializer),
         }
+    }
+}
+
+impl<'a, 'de: 'a> Deserialize<'de> for Classes<'a> {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        struct ClassesVisitor<'a> {
+            marker: std::marker::PhantomData<Classes<'a>>,
+        }
+
+        impl<'a, 'de: 'a> Visitor<'de> for ClassesVisitor<'a> {
+            type Value = Classes<'a>;
+
+            fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+                formatter.write_str("a valid class enum")
+            }
+
+            fn visit_stringptr<E>(self, value: StringPtr<'de>) -> Result<Self::Value, E>
+            where
+                E: de::Error,
+            {
+                let binding = value.into_inner().expect("Class Name");
+                let s = binding.as_ref();
+                match s {
+                    "PhantomData" => Ok(Classes::PhantomData),
+                    _ => Err(de::Error::unknown_variant(
+                        s,
+                        &[
+                            "AllTypesTestClass",
+                            "HkBaseObject",
+                            "HkbProjectData",
+                            "HkbProjectStringData",
+                            "HkReferencedObject",
+                            "HkRootLevelContainer",
+                            "HkRootLevelContainerNamedVariant",
+                            "HkpShapeInfo",
+                        ],
+                    )),
+                }
+            }
+
+            fn visit_struct<V>(self, mut map: V) -> Result<Self::Value, V::Error>
+            where
+                V: MapAccess<'de>,
+            {
+                let key: StringPtr = map
+                    .next_key()?
+                    .ok_or_else(|| de::Error::missing_field("type"))?;
+                let binding = key.get_ref().as_ref().unwrap();
+                let key = binding.as_ref();
+                match key {
+                    // "AllTypesTestClass" => Ok(Classes::AllTypesTestClass(map.next_value()?)),
+                    // "HkBaseObject" => Ok(Classes::HkBaseObject(map.next_value()?)),
+                    // "HkbProjectData" => Ok(Classes::HkbProjectData(map.next_value()?)),
+                    // "HkbProjectStringData" => Ok(Classes::HkbProjectStringData(map.next_value()?)),
+                    "HkReferencedObject" => Ok(Classes::HkReferencedObject(map.next_value()?)),
+                    // "HkRootLevelContainer" => Ok(Classes::HkRootLevelContainer(map.next_value()?)),
+                    // "HkRootLevelContainerNamedVariant" => {
+                    //     Ok(Classes::HkRootLevelContainerNamedVariant(map.next_value()?))
+                    // }
+                    // "HkpShapeInfo" => Ok(Classes::HkpShapeInfo(map.next_value()?)),
+                    _ => Err(de::Error::unknown_field(
+                        key,
+                        &[
+                            "AllTypesTestClass",
+                            "HkBaseObject",
+                            "HkbProjectData",
+                            "HkbProjectStringData",
+                            "HkReferencedObject",
+                            "HkRootLevelContainer",
+                            "HkRootLevelContainerNamedVariant",
+                            "HkpShapeInfo",
+                        ],
+                    )),
+                }
+            }
+        }
+
+        const FIELDS: &[&str] = &[
+            "AllTypesTestClass",
+            "HkBaseObject",
+            "HkbProjectData",
+            "HkbProjectStringData",
+            "HkReferencedObject",
+            "HkRootLevelContainer",
+            "HkRootLevelContainerNamedVariant",
+            "HkpShapeInfo",
+        ];
+        deserializer.deserialize_enum(
+            "Classes",
+            FIELDS,
+            ClassesVisitor {
+                marker: std::marker::PhantomData,
+            },
+        )
     }
 }

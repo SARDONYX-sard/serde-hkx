@@ -35,6 +35,14 @@ pub fn classnames_section<'a>(
             tracing::trace!("{signature:#x}");
             offset += 4;
 
+            tri!(binary::u8::<&[u8], ContextError>
+                .verify(|byte| *byte == 0x9)
+                .context(StrContext::Expected(Description(
+                    "class name separator(0x9)"
+                )))
+                .parse_next(bytes));
+            offset += 1;
+
             let class_name = tri!(string()
                 .verify(|s: &str| s.chars().all(|c| c.is_ascii()))
                 .context(StrContext::Expected(Description(

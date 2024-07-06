@@ -119,22 +119,24 @@ where
         header.section_count
     ));
 
-    // classnames section parse
+    // 3. Parse classnames section.
     deserializer.current_position = deserializer.classnames_header.absolute_data_start as usize; // move to classnames section start
     let classnames = tri!(deserializer.parse(classnames_section(
         deserializer.endian,
         deserializer.current_position
     )));
 
-    // virtual_src
-    // virtual_fixups=> src/dst pair =>
-    // src(current reader position), dst(class name start position)
-    //
-    // for (src, dst) in virtual_fixups {
-    //     classnames_section[dst] => new Class
-    // }
+    // 4. Call constructor by class name
+    for (_section_index, name_start_offset) in deserializer.data_fixups.virtual_fixups.values() {
+        let class_name = tri!(classnames.get(name_start_offset).ok_or(Error::Message {
+            msg: format!("Couldn't find class by this name_offset: {name_start_offset}"),
+        }));
 
-    // 3. class field parse.
+        let _ = class_name;
+        todo!("deserialize classes")
+    }
+
+    // 5. class field parse.
     let t = tri!(T::deserialize(&mut deserializer));
     if deserializer.input[deserializer.current_position..].is_empty() {
         Ok(t)
@@ -249,12 +251,36 @@ impl<'de> BytesDeserializer<'de> {
         }
     }
 
+    /// Skip ptr size
+    ///
+    /// # Errors
+    /// Error if the value of ptr to skip is not 0.
     #[inline]
-    fn skip_ptr_size(&mut self) {
+    fn skip_ptr_size(&mut self) -> Result<()> {
         match self.is_x86 {
-            true => self.current_position += 4,
-            false => self.current_position += 8,
-        }
+            true => {
+                tri!(
+                    self.parse(binary::u32(self.endian).verify(|uint| *uint == 0).context(
+                        StrContext::Expected(StrContextValue::Description(
+                            "Skip x86 ptr size(0 fill 4bytes)"
+                        ))
+                    ))
+                );
+                self.current_position += 4;
+            }
+            false => {
+                tri!(self.parse(
+                    binary::u64(self.endian)
+                        .verify(|ulong| *ulong == 0)
+                        .context(StrContext::Expected(StrContextValue::Description(
+                            "Skip x64 ptr size(0 fill 8bytes)"
+                        )))
+                ));
+
+                self.current_position += 8;
+            }
+        };
+        Ok(())
     }
 
     /// Get current bytes position.
@@ -286,6 +312,8 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         self.deserialize_flags(size, visitor)
     }
 
+    /// This is used to determine which field in struct to deserialize.
+    ///
     /// When deserializing structs in order, this is called by the `Deserialize` implementation on the each struct side,
     /// so this calls `visit_u64` on the each struct side.
     #[inline]
@@ -456,6 +484,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         res
     }
 
+    #[inline]
     fn deserialize_vector4<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -465,6 +494,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         res
     }
 
+    #[inline]
     fn deserialize_quaternion<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -474,6 +504,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         res
     }
 
+    #[inline]
     fn deserialize_matrix3<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -483,6 +514,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         res
     }
 
+    #[inline]
     fn deserialize_rotation<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -492,6 +524,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         res
     }
 
+    #[inline]
     fn deserialize_qstransform<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -501,25 +534,26 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         res
     }
 
+    #[inline]
     fn deserialize_matrix4<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
         let res = visitor.visit_matrix4(tri!(self.parse(matrix4(self.endian))));
-        self.current_position += 68;
+        self.current_position += 64;
         res
     }
 
+    #[inline]
     fn deserialize_transform<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
         let res = visitor.visit_transform(tri!(self.parse(transform(self.endian))));
-        self.current_position += 68;
+        self.current_position += 64;
         res
     }
 
-    #[inline]
     fn deserialize_pointer<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -544,7 +578,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         V: Visitor<'de>,
     {
         visitor.visit_array(SeqDeserializer::new(self))
-        // NOTE: If to_readable_err is used here, for some reason the stack overflows and falls into an infinite loop.
     }
 
     #[inline]
@@ -620,7 +653,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         let s = tri!(self.parse(string()));
 
         self.current_position = local_src as usize;
-        self.skip_ptr_size();
+        tri!(self.skip_ptr_size());
 
         visitor.visit_cstring(CString::from_str(s))
     }
@@ -679,7 +712,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         let s = tri!(self.parse(string()));
 
         self.current_position = local_src as usize;
-        self.skip_ptr_size();
+        tri!(self.skip_ptr_size());
 
         visitor.visit_stringptr(StringPtr::from_str(s))
     }
