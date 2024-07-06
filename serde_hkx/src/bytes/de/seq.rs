@@ -10,16 +10,18 @@ use havok_serde::de::{DeserializeSeed, SeqAccess};
 pub struct SeqDeserializer<'a, 'de: 'a> {
     /// Deserializer
     de: &'a mut BytesDeserializer<'de>,
-    /// Flag to determine if primitives are space-separated when parsing.
-    ///
-    /// Currently, this flag is not used for anything other than primitives.
-    first: bool,
+
+    /// Array length
+    size: i32,
+
+    /// Array length
+    index: i32,
 }
 
 impl<'a, 'de> SeqDeserializer<'a, 'de> {
     /// Create a new seq deserializer
-    pub fn new(de: &'a mut BytesDeserializer<'de>) -> Self {
-        Self { de, first: true }
+    pub fn new(de: &'a mut BytesDeserializer<'de>, size: i32) -> Self {
+        Self { de, size, index: 0 }
     }
 }
 
@@ -32,12 +34,11 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
     where
         T: DeserializeSeed<'de>,
     {
-        if self.first {};
         // Check if there are no more elements.
-        if self.de.input[self.de.current_position..].is_empty() {
+        if self.de.input[self.de.current_position..].is_empty() || self.index == self.size {
             return Ok(None);
         };
-        self.first = false;
+        self.index += 1;
 
         seed.deserialize(&mut *self.de).map(Some)
     }

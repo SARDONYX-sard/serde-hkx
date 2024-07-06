@@ -172,6 +172,25 @@ impl<'de> BytesDeserializer<'de> {
         Ok(res)
     }
 
+    /// Jump current position(`local_fixup.src`) to dst, then parse, and back to current position.
+    fn parse_local_fixup<O>(
+        &mut self,
+        parser: impl Parser<BytesStream<'de>, O, winnow::error::ContextError>,
+    ) -> Result<O> {
+        let local_src = self.current_position();
+
+        self.current_position = *tri!(self
+            .data_fixups
+            .local_fixups
+            .get(&local_src)
+            .ok_or(Error::NotFoundDataLocalFixupsValue { key: local_src }))
+            as usize;
+
+        let res = tri!(self.parse(parser));
+        self.current_position = local_src as usize;
+        Ok(res)
+    }
+
     /// Convert Visitor errors to position-assigned errors.
     ///
     /// # Why is this necessary?
@@ -584,7 +603,27 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_array(SeqDeserializer::new(self))
+        let local_src = self.current_position();
+        self.current_position = *tri!(self
+            .data_fixups
+            .local_fixups
+            .get(&local_src)
+            .ok_or(Error::NotFoundDataLocalFixupsValue { key: local_src }))
+            as usize;
+
+        tri!(self.skip_ptr_size());
+        let size = tri!(
+            self.parse(binary::i32(self.endian).context(StrContext::Expected(
+                StrContextValue::Description("size(i32)")
+            )))
+        );
+        let _cap_and_flags = tri!(self.parse(binary::i32(self.endian).context(
+            StrContext::Expected(StrContextValue::Description("capacity&flags(i32)"))
+        )));
+
+        let res = visitor.visit_array(SeqDeserializer::new(self, size));
+        self.current_position = local_src as usize;
+        res
     }
 
     #[inline]
@@ -648,18 +687,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let local_src = self.current_position();
-
-        self.current_position = *tri!(self
-            .data_fixups
-            .local_fixups
-            .get(&local_src)
-            .ok_or(Error::NotFoundDataLocalFixupsValue { key: local_src }))
-            as usize;
-
-        let s = tri!(self.parse(string()));
-
-        self.current_position = local_src as usize;
+        let s = tri!(self.parse_local_fixup(string()));
         tri!(self.skip_ptr_size());
 
         visitor.visit_cstring(CString::from_str(s))
@@ -707,20 +735,8 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let local_src = self.current_position();
-
-        self.current_position = *tri!(self
-            .data_fixups
-            .local_fixups
-            .get(&local_src)
-            .ok_or(Error::NotFoundDataLocalFixupsValue { key: local_src }))
-            as usize;
-
-        let s = tri!(self.parse(string()));
-
-        self.current_position = local_src as usize;
+        let s = tri!(self.parse_local_fixup(string()));
         tri!(self.skip_ptr_size());
-
         visitor.visit_stringptr(StringPtr::from_str(s))
     }
 }
