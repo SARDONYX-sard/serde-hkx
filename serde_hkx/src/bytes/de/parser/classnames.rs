@@ -9,6 +9,10 @@ use winnow::{
 
 use crate::{bytes::de::parser::type_kind::string, tri};
 
+/// - key: class name start offset
+/// - value: class name
+pub type ClassNames<'a> = HashMap<u32, &'a str>;
+
 const FIXUP_VALUE_FOR_ALIGN: u32 = 0xffffff;
 
 /// Create `local_fixups` from bytes.
@@ -21,7 +25,7 @@ const FIXUP_VALUE_FOR_ALIGN: u32 = 0xffffff;
 pub fn classnames_section<'a>(
     endian: Endianness,
     base_offset: usize,
-) -> impl Parser<&'a [u8], HashMap<u32, &'a str>, ContextError> {
+) -> impl Parser<&'a [u8], ClassNames<'a>, ContextError> {
     move |bytes: &mut &'a [u8]| {
         let mut class_map = HashMap::new();
         let mut offset = base_offset;

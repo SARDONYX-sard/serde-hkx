@@ -1,3 +1,4 @@
+mod class_index_map;
 mod enum_access;
 mod map;
 pub mod parser;
@@ -17,8 +18,10 @@ use crate::errors::{
     de::{Error, Result},
     readable::ReadableError,
 };
+use class_index_map::BytesClassIndexMapDeserializer;
 use havok_serde::de::{self, Deserialize, ReadEnumSize, Visitor};
 use havok_types::*;
+use parser::classnames::ClassNames;
 use rhexdump::hexdump;
 use std::collections::HashMap;
 use winnow::binary::Endianness;
@@ -44,6 +47,12 @@ pub struct BytesDeserializer<'de> {
     /// # Note
     /// This is related to the read size of the pointer type and the skip size of the padding.
     is_x86: bool,
+
+    /// `__classnames__` section contents
+    ///
+    /// - key: class name start offset
+    /// - value: class name
+    classnames: ClassNames<'de>,
 
     /// - key: virtual_src
     /// - value: unique class index(e.g. XML name attribute `#0050`)
@@ -121,22 +130,12 @@ where
 
     // 3. Parse classnames section.
     deserializer.current_position = deserializer.classnames_header.absolute_data_start as usize; // move to classnames section start
-    let classnames = tri!(deserializer.parse(classnames_section(
+    deserializer.classnames = tri!(deserializer.parse(classnames_section(
         deserializer.endian,
         deserializer.current_position
     )));
 
-    // 4. Call constructor by class name
-    for (_section_index, name_start_offset) in deserializer.data_fixups.virtual_fixups.values() {
-        let class_name = tri!(classnames.get(name_start_offset).ok_or(Error::Message {
-            msg: format!("Couldn't find class by this name_offset: {name_start_offset}"),
-        }));
-
-        let _ = class_name;
-        todo!("deserialize classes")
-    }
-
-    // 5. class field parse.
+    // 4. class field parse.
     let t = tri!(T::deserialize(&mut deserializer));
     if deserializer.input[deserializer.current_position..].is_empty() {
         Ok(t)
@@ -336,6 +335,14 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         } else {
             Err(Error::NotFoundIndex)
         }
+    }
+
+    #[inline]
+    fn deserialize_class_index<V>(self, visitor: V) -> std::result::Result<V::Value, Self::Error>
+    where
+        V: Visitor<'de>,
+    {
+        visitor.visit_class_index(BytesClassIndexMapDeserializer::new(self))
     }
 
     #[inline]

@@ -1,3 +1,4 @@
+mod class_index_map;
 mod enum_access;
 mod map;
 pub mod parser;
@@ -16,6 +17,7 @@ use crate::errors::{
     de::{Error, Result},
     readable::ReadableError,
 };
+use class_index_map::ClassIndexMapDeserializer;
 use enum_access::EnumDeserializer;
 use havok_serde::de::{self, Deserialize, ReadEnumSize, Visitor};
 use havok_types::*;
@@ -121,7 +123,7 @@ impl<'de> XmlDeserializer<'de> {
     ///
     /// If an error occurs, it is converted to [`ReadableError`] and returned.
     fn parse_peek<O>(
-        &mut self,
+        &self,
         mut parser: impl Parser<&'de str, O, winnow::error::ContextError>,
     ) -> Result<O> {
         let (_, res) = parser
@@ -191,6 +193,14 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         V: Visitor<'de>,
     {
         visitor.visit_key(tri!(self.parse(attr_string())))
+    }
+
+    #[inline]
+    fn deserialize_class_index<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    where
+        V: Visitor<'de>,
+    {
+        visitor.visit_class_index(ClassIndexMapDeserializer::new(self))
     }
 
     #[inline]
@@ -699,6 +709,48 @@ mod tests {
                     mem_size_and_flags: 2,
                     reference_count: 0,
                 },
+            ],
+        );
+    }
+
+    #[test]
+    #[quick_tracing::init]
+    fn test_deserialize_class_indexes() {
+        // let xml = &include_str!("../../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
+
+        parse_assert(
+            r##"
+<hkobject name="#01000" class="hkReferencedObject" signature="0xea7f1d08">
+        <hkparam name="memSizeAndFlags">2</hkparam>
+        <!-- comment1 -->
+        <!-- comment2 -->
+        <hkparam name="referenceCount">0</hkparam>
+        <!-- comment3 -->
+        <!-- comment4 -->
+</hkobject>
+
+<hkobject name="#0100" class="hkReferencedObject" signature="0xea7f1d08">
+        <hkparam name="memSizeAndFlags">4</hkparam>
+        <hkparam name="referenceCount">0</hkparam>
+</hkobject>
+"##,
+            vec![
+                crate::common::mocks::classes::Classes::HkReferencedObject(
+                    crate::common::mocks::classes::HkReferencedObject {
+                        __ptr_name_attr: Some(Pointer::new(1000)),
+                        parent: crate::common::mocks::classes::HkBaseObject { _name: None },
+                        mem_size_and_flags: 2,
+                        reference_count: 0,
+                    },
+                ),
+                crate::common::mocks::classes::Classes::HkReferencedObject(
+                    crate::common::mocks::classes::HkReferencedObject {
+                        __ptr_name_attr: Some(Pointer::new(100)),
+                        parent: crate::common::mocks::classes::HkBaseObject { _name: None },
+                        mem_size_and_flags: 4,
+                        reference_count: 0,
+                    },
+                ),
             ],
         );
     }

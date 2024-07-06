@@ -777,6 +777,11 @@ pub trait Deserializer<'de>: Sized {
         visitor.visit_void(())
     }
 
+    /// Deserialize class index.
+    fn deserialize_class_index<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    where
+        V: Visitor<'de>;
+
     /// Deserialize a `Void` value.
     ///
     /// No type information.
@@ -1037,6 +1042,17 @@ pub trait Visitor<'de>: Sized {
     {
         let _ = key;
         Err(Error::invalid_type(Unexpected::Other(key), &self))
+    }
+
+    /// The input contains a havok class.
+    ///
+    /// The default implementation fails with a type error.
+    fn visit_class_index<A>(self, map: A) -> Result<Self::Value, A::Error>
+    where
+        A: ClassIndexAccess<'de>,
+    {
+        let _ = map;
+        Err(Error::invalid_type(Unexpected::Struct, &self))
     }
 
     /// The input contains a void.
@@ -1779,6 +1795,59 @@ where
     #[inline]
     fn size_hint(&self) -> Option<usize> {
         (**self).size_hint()
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+/// Class Indexed Deserializer trait
+pub trait ClassIndexAccess<'de> {
+    /// Class name Error
+    type Error: Error;
+
+    /// next class name.
+    fn next_key(&self) -> Result<&'de str, Self::Error>;
+
+    /// deserialize class method.
+    fn next_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
+    where
+        V: DeserializeSeed<'de>;
+
+    /// Deserialize class method
+    #[inline]
+    fn next_value<V>(&mut self) -> Result<V, Self::Error>
+    where
+        V: Deserialize<'de>,
+    {
+        self.next_value_seed(PhantomData)
+    }
+}
+
+impl<'de, 'a, A> ClassIndexAccess<'de> for &'a mut A
+where
+    A: ?Sized + ClassIndexAccess<'de>,
+{
+    type Error = A::Error;
+
+    #[inline]
+    fn next_key(&self) -> Result<&'de str, Self::Error> {
+        (**self).next_key()
+    }
+
+    #[inline]
+    fn next_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
+    where
+        V: DeserializeSeed<'de>,
+    {
+        (**self).next_value_seed(seed)
+    }
+
+    #[inline]
+    fn next_value<V>(&mut self) -> Result<V, Self::Error>
+    where
+        V: Deserialize<'de>,
+    {
+        self.next_value_seed(PhantomData)
     }
 }
 

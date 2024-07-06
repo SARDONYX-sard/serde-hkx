@@ -110,83 +110,41 @@ impl<'a, 'de: 'a> Deserialize<'de> for Classes<'a> {
                 formatter.write_str("a valid class enum")
             }
 
-            fn visit_stringptr<E>(self, value: StringPtr<'de>) -> Result<Self::Value, E>
+            fn visit_class_index<A>(self, mut map: A) -> Result<Self::Value, A::Error>
             where
-                E: de::Error,
+                A: de::ClassIndexAccess<'de>,
             {
-                let binding = value.into_inner().expect("Class Name");
-                let s = binding.as_ref();
-                match s {
-                    "PhantomData" => Ok(Classes::PhantomData),
-                    _ => Err(de::Error::unknown_variant(
-                        s,
-                        &[
-                            "AllTypesTestClass",
-                            "HkBaseObject",
-                            "HkbProjectData",
-                            "HkbProjectStringData",
-                            "HkReferencedObject",
-                            "HkRootLevelContainer",
-                            "HkRootLevelContainerNamedVariant",
-                            "HkpShapeInfo",
-                        ],
-                    )),
-                }
-            }
-
-            fn visit_struct<V>(self, mut map: V) -> Result<Self::Value, V::Error>
-            where
-                V: MapAccess<'de>,
-            {
-                let key: StringPtr = map
-                    .next_key()?
-                    .ok_or_else(|| de::Error::missing_field("type"))?;
-                let binding = key.get_ref().as_ref().unwrap();
-                let key = binding.as_ref();
-                match key {
+                let class_name = map.next_key()?;
+                match class_name {
                     // "AllTypesTestClass" => Ok(Classes::AllTypesTestClass(map.next_value()?)),
                     // "HkBaseObject" => Ok(Classes::HkBaseObject(map.next_value()?)),
                     // "HkbProjectData" => Ok(Classes::HkbProjectData(map.next_value()?)),
                     // "HkbProjectStringData" => Ok(Classes::HkbProjectStringData(map.next_value()?)),
-                    "HkReferencedObject" => Ok(Classes::HkReferencedObject(map.next_value()?)),
+                    "hkReferencedObject" => Ok(Classes::HkReferencedObject(map.next_value()?)),
                     // "HkRootLevelContainer" => Ok(Classes::HkRootLevelContainer(map.next_value()?)),
                     // "HkRootLevelContainerNamedVariant" => {
                     //     Ok(Classes::HkRootLevelContainerNamedVariant(map.next_value()?))
                     // }
                     // "HkpShapeInfo" => Ok(Classes::HkpShapeInfo(map.next_value()?)),
                     _ => Err(de::Error::unknown_field(
-                        key,
+                        class_name,
                         &[
                             "AllTypesTestClass",
-                            "HkBaseObject",
-                            "HkbProjectData",
-                            "HkbProjectStringData",
-                            "HkReferencedObject",
-                            "HkRootLevelContainer",
-                            "HkRootLevelContainerNamedVariant",
-                            "HkpShapeInfo",
+                            "hkBaseObject",
+                            "hkbProjectData",
+                            "hkbProjectStringData",
+                            "hkReferencedObject",
+                            "hkRootLevelContainer",
+                            "hkRootLevelContainerNamedVariant",
+                            "hkpShapeInfo",
                         ],
                     )),
                 }
             }
         }
 
-        const FIELDS: &[&str] = &[
-            "AllTypesTestClass",
-            "HkBaseObject",
-            "HkbProjectData",
-            "HkbProjectStringData",
-            "HkReferencedObject",
-            "HkRootLevelContainer",
-            "HkRootLevelContainerNamedVariant",
-            "HkpShapeInfo",
-        ];
-        deserializer.deserialize_enum(
-            "Classes",
-            FIELDS,
-            ClassesVisitor {
-                marker: std::marker::PhantomData,
-            },
-        )
+        deserializer.deserialize_class_index(ClassesVisitor {
+            marker: std::marker::PhantomData,
+        })
     }
 }
