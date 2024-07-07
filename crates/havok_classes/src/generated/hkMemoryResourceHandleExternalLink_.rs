@@ -41,7 +41,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(826593660u32)
+            _serde::__private::Signature::new(0x3144d17c)
         }
     }
     impl<'a> _serde::Serialize for hkMemoryResourceHandleExternalLink<'a> {
@@ -51,7 +51,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(826593660u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x3144d17c)));
             let mut serializer = __serializer
                 .serialize_struct("hkMemoryResourceHandleExternalLink", class_meta)?;
             serializer.serialize_stringptr_meta_field("memberName", &self.m_memberName)?;

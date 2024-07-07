@@ -43,7 +43,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(4116120124u32)
+            _serde::__private::Signature::new(0xf557023c)
         }
     }
     impl _serde::Serialize for hkpEntityExtendedListeners {
@@ -53,7 +53,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(4116120124u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0xf557023c)));
             let mut serializer = __serializer
                 .serialize_struct("hkpEntityExtendedListeners", class_meta)?;
             serializer.skip_field("activationListeners", &self.m_activationListeners)?;

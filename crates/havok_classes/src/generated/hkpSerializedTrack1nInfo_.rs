@@ -41,7 +41,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(4046276825u32)
+            _serde::__private::Signature::new(0xf12d48d9)
         }
     }
     impl _serde::Serialize for hkpSerializedTrack1nInfo {
@@ -51,7 +51,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(4046276825u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0xf12d48d9)));
             let mut serializer = __serializer
                 .serialize_struct("hkpSerializedTrack1nInfo", class_meta)?;
             serializer.serialize_array_meta_field("sectors", &self.m_sectors)?;

@@ -54,7 +54,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(2318797263u32)
+            _serde::__private::Signature::new(0x8a3609cf)
         }
     }
     impl<'a> _serde::Serialize for hkClassEnum<'a> {
@@ -64,7 +64,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(2318797263u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x8a3609cf)));
             let mut serializer = __serializer
                 .serialize_struct("hkClassEnum", class_meta)?;
             serializer.serialize_cstring_meta_field("name", &self.m_name)?;

@@ -59,7 +59,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(2125749482u32)
+            _serde::__private::Signature::new(0x7eb45cea)
         }
     }
     impl _serde::Serialize for hkbClipTrigger {
@@ -69,7 +69,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(2125749482u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x7eb45cea)));
             let mut serializer = __serializer
                 .serialize_struct("hkbClipTrigger", class_meta)?;
             serializer.serialize_field("localTime", &self.m_localTime)?;

@@ -29,7 +29,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(275486414u32)
+            _serde::__private::Signature::new(0x106b96ce)
         }
     }
     impl _serde::Serialize for hkColor {
@@ -39,7 +39,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(275486414u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x106b96ce)));
             let mut serializer = __serializer.serialize_struct("hkColor", class_meta)?;
             serializer.pad_field([0u8; 1usize].as_slice(), [0u8; 1usize].as_slice())?;
             serializer.end()

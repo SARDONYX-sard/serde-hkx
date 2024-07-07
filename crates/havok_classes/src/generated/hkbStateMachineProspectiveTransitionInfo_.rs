@@ -47,7 +47,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(984652334u32)
+            _serde::__private::Signature::new(0x3ab09a2e)
         }
     }
     impl _serde::Serialize for hkbStateMachineProspectiveTransitionInfo {
@@ -57,7 +57,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(984652334u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x3ab09a2e)));
             let mut serializer = __serializer
                 .serialize_struct(
                     "hkbStateMachineProspectiveTransitionInfo",

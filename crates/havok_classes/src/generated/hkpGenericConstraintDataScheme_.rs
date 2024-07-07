@@ -61,7 +61,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(301821804u32)
+            _serde::__private::Signature::new(0x11fd6f6c)
         }
     }
     impl _serde::Serialize for hkpGenericConstraintDataScheme {
@@ -71,7 +71,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(301821804u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x11fd6f6c)));
             let mut serializer = __serializer
                 .serialize_struct("hkpGenericConstraintDataScheme", class_meta)?;
             serializer.skip_field("info", &self.m_info)?;

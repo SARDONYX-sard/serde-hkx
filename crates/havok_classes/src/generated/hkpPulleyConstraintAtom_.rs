@@ -55,7 +55,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(2493548616u32)
+            _serde::__private::Signature::new(0x94a08848)
         }
     }
     impl _serde::Serialize for hkpPulleyConstraintAtom {
@@ -65,7 +65,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(2493548616u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x94a08848)));
             let mut serializer = __serializer
                 .serialize_struct("hkpPulleyConstraintAtom", class_meta)?;
             serializer.serialize_field("type", &self.parent.m_type)?;

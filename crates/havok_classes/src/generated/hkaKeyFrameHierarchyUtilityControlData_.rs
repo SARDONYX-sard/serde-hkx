@@ -101,7 +101,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(2748361841u32)
+            _serde::__private::Signature::new(0xa3d0ac71)
         }
     }
     impl _serde::Serialize for hkaKeyFrameHierarchyUtilityControlData {
@@ -111,7 +111,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(2748361841u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0xa3d0ac71)));
             let mut serializer = __serializer
                 .serialize_struct("hkaKeyFrameHierarchyUtilityControlData", class_meta)?;
             serializer.serialize_field("hierarchyGain", &self.m_hierarchyGain)?;

@@ -37,7 +37,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(1417174135u32)
+            _serde::__private::Signature::new(0x54785c77)
         }
     }
     impl _serde::Serialize for hkpSerializedDisplayMarkerList {
@@ -47,7 +47,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(1417174135u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x54785c77)));
             let mut serializer = __serializer
                 .serialize_struct("hkpSerializedDisplayMarkerList", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

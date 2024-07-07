@@ -41,7 +41,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(1220062546u32)
+            _serde::__private::Signature::new(0x48b8ad52)
         }
     }
     impl _serde::Serialize for hkbAttributeModifierAssignment {
@@ -51,7 +51,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(1220062546u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x48b8ad52)));
             let mut serializer = __serializer
                 .serialize_struct("hkbAttributeModifierAssignment", class_meta)?;
             serializer.serialize_field("attributeIndex", &self.m_attributeIndex)?;

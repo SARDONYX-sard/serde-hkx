@@ -41,7 +41,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(1648096079u32)
+            _serde::__private::Signature::new(0x623bf34f)
         }
     }
     impl<'a> _serde::Serialize for hkaAnnotationTrackAnnotation<'a> {
@@ -51,7 +51,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(1648096079u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x623bf34f)));
             let mut serializer = __serializer
                 .serialize_struct("hkaAnnotationTrackAnnotation", class_meta)?;
             serializer.serialize_field("time", &self.m_time)?;

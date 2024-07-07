@@ -73,7 +73,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(3814292226u32)
+            _serde::__private::Signature::new(0xe3597b02)
         }
     }
     impl _serde::Serialize for hkxCamera {
@@ -83,7 +83,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(3814292226u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0xe3597b02)));
             let mut serializer = __serializer.serialize_struct("hkxCamera", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;

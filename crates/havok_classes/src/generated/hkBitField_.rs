@@ -41,7 +41,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(3661741467u32)
+            _serde::__private::Signature::new(0xda41bd9b)
         }
     }
     impl _serde::Serialize for hkBitField {
@@ -51,7 +51,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(3661741467u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0xda41bd9b)));
             let mut serializer = __serializer
                 .serialize_struct("hkBitField", class_meta)?;
             serializer.serialize_array_meta_field("words", &self.m_words)?;

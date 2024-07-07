@@ -45,7 +45,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(3475144536u32)
+            _serde::__private::Signature::new(0xcf227f58)
         }
     }
     impl<'a> _serde::Serialize for hkpCachingShapePhantom<'a> {
@@ -55,7 +55,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(3475144536u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0xcf227f58)));
             let mut serializer = __serializer
                 .serialize_struct("hkpCachingShapePhantom", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

@@ -29,7 +29,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(587471600u32)
+            _serde::__private::Signature::new(0x23041af0)
         }
     }
     impl _serde::Serialize for hkbBlendCurveUtils {
@@ -39,7 +39,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(587471600u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x23041af0)));
             let mut serializer = __serializer
                 .serialize_struct("hkbBlendCurveUtils", class_meta)?;
             serializer.pad_field([0u8; 1usize].as_slice(), [0u8; 1usize].as_slice())?;

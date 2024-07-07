@@ -36,7 +36,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(2702292740u32)
+            _serde::__private::Signature::new(0xa111b704)
         }
     }
     impl _serde::Serialize for hkbFootIkControlData {
@@ -46,7 +46,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(2702292740u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0xa111b704)));
             let mut serializer = __serializer
                 .serialize_struct("hkbFootIkControlData", class_meta)?;
             serializer.serialize_field("gains", &self.m_gains)?;

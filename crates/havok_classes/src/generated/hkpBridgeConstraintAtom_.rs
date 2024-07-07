@@ -45,7 +45,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(2275734299u32)
+            _serde::__private::Signature::new(0x87a4f31b)
         }
     }
     impl _serde::Serialize for hkpBridgeConstraintAtom {
@@ -55,7 +55,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(2275734299u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x87a4f31b)));
             let mut serializer = __serializer
                 .serialize_struct("hkpBridgeConstraintAtom", class_meta)?;
             serializer.serialize_field("type", &self.parent.m_type)?;

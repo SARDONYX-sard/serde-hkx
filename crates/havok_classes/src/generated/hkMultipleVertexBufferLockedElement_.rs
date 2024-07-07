@@ -71,7 +71,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(2699176700u32)
+            _serde::__private::Signature::new(0xa0e22afc)
         }
     }
     impl _serde::Serialize for hkMultipleVertexBufferLockedElement {
@@ -81,7 +81,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(2699176700u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0xa0e22afc)));
             let mut serializer = __serializer
                 .serialize_struct("hkMultipleVertexBufferLockedElement", class_meta)?;
             serializer.serialize_field("vertexBufferIndex", &self.m_vertexBufferIndex)?;

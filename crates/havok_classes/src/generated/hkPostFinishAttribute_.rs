@@ -36,7 +36,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(2419768108u32)
+            _serde::__private::Signature::new(0x903abb2c)
         }
     }
     impl _serde::Serialize for hkPostFinishAttribute {
@@ -46,7 +46,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(2419768108u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x903abb2c)));
             let mut serializer = __serializer
                 .serialize_struct("hkPostFinishAttribute", class_meta)?;
             serializer.skip_field("postFinishFunction", &self.m_postFinishFunction)?;

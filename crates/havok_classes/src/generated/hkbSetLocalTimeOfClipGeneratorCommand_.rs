@@ -49,7 +49,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(4205914949u32)
+            _serde::__private::Signature::new(0xfab12b45)
         }
     }
     impl _serde::Serialize for hkbSetLocalTimeOfClipGeneratorCommand {
@@ -59,7 +59,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(4205914949u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0xfab12b45)));
             let mut serializer = __serializer
                 .serialize_struct("hkbSetLocalTimeOfClipGeneratorCommand", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

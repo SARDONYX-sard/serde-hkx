@@ -41,7 +41,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(4292610917u32)
+            _serde::__private::Signature::new(0xffdc0b65)
         }
     }
     impl _serde::Serialize for hkpMultiRayShapeRay {
@@ -51,7 +51,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(4292610917u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0xffdc0b65)));
             let mut serializer = __serializer
                 .serialize_struct("hkpMultiRayShapeRay", class_meta)?;
             serializer.serialize_field("start", &self.m_start)?;

@@ -29,7 +29,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(627313478u32)
+            _serde::__private::Signature::new(0x25640b46)
         }
     }
     impl _serde::Serialize for hkbWorldEnums {
@@ -39,7 +39,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(627313478u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x25640b46)));
             let mut serializer = __serializer
                 .serialize_struct("hkbWorldEnums", class_meta)?;
             serializer.pad_field([0u8; 1usize].as_slice(), [0u8; 1usize].as_slice())?;

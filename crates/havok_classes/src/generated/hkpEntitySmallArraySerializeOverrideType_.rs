@@ -48,7 +48,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(3996920556u32)
+            _serde::__private::Signature::new(0xee3c2aec)
         }
     }
     impl _serde::Serialize for hkpEntitySmallArraySerializeOverrideType {
@@ -58,7 +58,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(3996920556u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0xee3c2aec)));
             let mut serializer = __serializer
                 .serialize_struct(
                     "hkpEntitySmallArraySerializeOverrideType",

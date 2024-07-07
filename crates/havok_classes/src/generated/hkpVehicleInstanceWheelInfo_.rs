@@ -132,7 +132,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(2583073776u32)
+            _serde::__private::Signature::new(0x99f693f0)
         }
     }
     impl _serde::Serialize for hkpVehicleInstanceWheelInfo {
@@ -142,7 +142,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(2583073776u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x99f693f0)));
             let mut serializer = __serializer
                 .serialize_struct("hkpVehicleInstanceWheelInfo", class_meta)?;
             serializer.serialize_field("contactPoint", &self.m_contactPoint)?;

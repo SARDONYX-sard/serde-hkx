@@ -35,7 +35,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(1219292021u32)
+            _serde::__private::Signature::new(0x48aceb75)
         }
     }
     impl _serde::Serialize for hkaMeshBindingMapping {
@@ -45,7 +45,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(1219292021u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x48aceb75)));
             let mut serializer = __serializer
                 .serialize_struct("hkaMeshBindingMapping", class_meta)?;
             serializer.serialize_array_meta_field("mapping", &self.m_mapping)?;

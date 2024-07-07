@@ -67,7 +67,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(1732248618u32)
+            _serde::__private::Signature::new(0x6740042a)
         }
     }
     impl<'a> _serde::Serialize for hkbExpressionData<'a> {
@@ -77,7 +77,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(1732248618u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x6740042a)));
             let mut serializer = __serializer
                 .serialize_struct("hkbExpressionData", class_meta)?;
             serializer.serialize_stringptr_meta_field("expression", &self.m_expression)?;

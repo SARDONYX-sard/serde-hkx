@@ -113,7 +113,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(970875774u32)
+            _serde::__private::Signature::new(0x39de637e)
         }
     }
     impl _serde::Serialize for hkbProxyModifierProxyInfo {
@@ -123,7 +123,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(970875774u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x39de637e)));
             let mut serializer = __serializer
                 .serialize_struct("hkbProxyModifierProxyInfo", class_meta)?;
             serializer.serialize_field("dynamicFriction", &self.m_dynamicFriction)?;

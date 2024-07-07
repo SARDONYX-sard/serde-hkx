@@ -101,7 +101,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(2046427098u32)
+            _serde::__private::Signature::new(0x79f9ffda)
         }
     }
     impl _serde::Serialize for hkPackfileHeader {
@@ -111,7 +111,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(2046427098u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x79f9ffda)));
             let mut serializer = __serializer
                 .serialize_struct("hkPackfileHeader", class_meta)?;
             serializer.serialize_field("magic", &self.m_magic.as_slice())?;

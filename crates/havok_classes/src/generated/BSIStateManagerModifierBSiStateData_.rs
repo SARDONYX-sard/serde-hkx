@@ -47,7 +47,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(1804211708u32)
+            _serde::__private::Signature::new(0x6b8a15fc)
         }
     }
     impl _serde::Serialize for BSIStateManagerModifierBSiStateData {
@@ -57,7 +57,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(1804211708u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x6b8a15fc)));
             let mut serializer = __serializer
                 .serialize_struct("BSIStateManagerModifierBSiStateData", class_meta)?;
             serializer.serialize_field("pStateMachine", &self.m_pStateMachine)?;

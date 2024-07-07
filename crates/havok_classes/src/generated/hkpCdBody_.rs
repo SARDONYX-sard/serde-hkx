@@ -55,7 +55,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(1420081217u32)
+            _serde::__private::Signature::new(0x54a4b841)
         }
     }
     impl _serde::Serialize for hkpCdBody {
@@ -65,7 +65,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(1420081217u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x54a4b841)));
             let mut serializer = __serializer.serialize_struct("hkpCdBody", class_meta)?;
             serializer.serialize_field("shape", &self.m_shape)?;
             serializer.serialize_field("shapeKey", &self.m_shapeKey)?;

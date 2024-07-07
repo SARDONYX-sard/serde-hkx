@@ -37,7 +37,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(3246805164u32)
+            _serde::__private::Signature::new(0xc18650ac)
         }
     }
     impl _serde::Serialize for hkpSerializedDisplayRbTransforms {
@@ -47,7 +47,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(3246805164u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0xc18650ac)));
             let mut serializer = __serializer
                 .serialize_struct("hkpSerializedDisplayRbTransforms", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

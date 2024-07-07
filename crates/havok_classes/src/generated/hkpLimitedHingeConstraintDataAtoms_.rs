@@ -71,7 +71,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(1422356827u32)
+            _serde::__private::Signature::new(0x54c7715b)
         }
     }
     impl _serde::Serialize for hkpLimitedHingeConstraintDataAtoms {
@@ -81,7 +81,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(1422356827u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x54c7715b)));
             let mut serializer = __serializer
                 .serialize_struct("hkpLimitedHingeConstraintDataAtoms", class_meta)?;
             serializer.serialize_field("transforms", &self.m_transforms)?;

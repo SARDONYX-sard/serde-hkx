@@ -47,7 +47,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(536533361u32)
+            _serde::__private::Signature::new(0x1ffad971)
         }
     }
     impl _serde::Serialize for hkpVehicleDefaultBrakeWheelBrakingProperties {
@@ -57,7 +57,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(536533361u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x1ffad971)));
             let mut serializer = __serializer
                 .serialize_struct(
                     "hkpVehicleDefaultBrakeWheelBrakingProperties",

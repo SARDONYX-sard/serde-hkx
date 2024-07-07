@@ -44,7 +44,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(1253839886u32)
+            _serde::__private::Signature::new(0x4abc140e)
         }
     }
     impl _serde::Serialize for hkpPairCollisionFilter {
@@ -54,7 +54,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(1253839886u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x4abc140e)));
             let mut serializer = __serializer
                 .serialize_struct("hkpPairCollisionFilter", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

@@ -88,7 +88,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(221092356u32)
+            _serde::__private::Signature::new(0xd2d9a04)
         }
     }
     impl<'a> _serde::Serialize for BSTweenerModifier<'a> {
@@ -98,7 +98,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(221092356u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0xd2d9a04)));
             let mut serializer = __serializer
                 .serialize_struct("BSTweenerModifier", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

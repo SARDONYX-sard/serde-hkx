@@ -102,7 +102,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(1297690482u32)
+            _serde::__private::Signature::new(0x4d592f72)
         }
     }
     impl<'a> _serde::Serialize for hkbVariableBindingSetBinding<'a> {
@@ -112,7 +112,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(1297690482u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x4d592f72)));
             let mut serializer = __serializer
                 .serialize_struct("hkbVariableBindingSetBinding", class_meta)?;
             serializer.serialize_stringptr_meta_field("memberPath", &self.m_memberPath)?;

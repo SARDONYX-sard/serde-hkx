@@ -47,7 +47,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(3948999729u32)
+            _serde::__private::Signature::new(0xeb60f431)
         }
     }
     impl _serde::Serialize for hkpTriggerVolumeEventInfo {
@@ -57,7 +57,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(3948999729u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0xeb60f431)));
             let mut serializer = __serializer
                 .serialize_struct("hkpTriggerVolumeEventInfo", class_meta)?;
             serializer.serialize_field("sortValue", &self.m_sortValue)?;

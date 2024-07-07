@@ -90,7 +90,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(412336997u32)
+            _serde::__private::Signature::new(0x1893c365)
         }
     }
     impl _serde::Serialize for hkMeshSection {
@@ -100,7 +100,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(412336997u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x1893c365)));
             let mut serializer = __serializer
                 .serialize_struct("hkMeshSection", class_meta)?;
             serializer.serialize_field("primitiveType", &self.m_primitiveType)?;

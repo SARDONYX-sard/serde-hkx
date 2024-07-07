@@ -135,7 +135,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(585068871u32)
+            _serde::__private::Signature::new(0x22df7147)
         }
     }
     impl<'a> _serde::Serialize for hkbBlenderGenerator<'a> {
@@ -145,7 +145,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(585068871u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x22df7147)));
             let mut serializer = __serializer
                 .serialize_struct("hkbBlenderGenerator", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

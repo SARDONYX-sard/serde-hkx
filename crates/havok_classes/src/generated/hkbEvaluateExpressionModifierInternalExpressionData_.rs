@@ -41,7 +41,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(3093852011u32)
+            _serde::__private::Signature::new(0xb8686f6b)
         }
     }
     impl _serde::Serialize for hkbEvaluateExpressionModifierInternalExpressionData {
@@ -51,7 +51,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(3093852011u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0xb8686f6b)));
             let mut serializer = __serializer
                 .serialize_struct(
                     "hkbEvaluateExpressionModifierInternalExpressionData",

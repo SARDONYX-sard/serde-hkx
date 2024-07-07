@@ -38,7 +38,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(3785888919u32)
+            _serde::__private::Signature::new(0xe1a81497)
         }
     }
     impl _serde::Serialize for hkpLinkedCollidable {
@@ -48,7 +48,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(3785888919u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0xe1a81497)));
             let mut serializer = __serializer
                 .serialize_struct("hkpLinkedCollidable", class_meta)?;
             serializer.serialize_field("shape", &self.parent.parent.m_shape)?;

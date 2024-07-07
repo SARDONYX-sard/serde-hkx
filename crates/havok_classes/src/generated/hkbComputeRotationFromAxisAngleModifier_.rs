@@ -49,7 +49,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(2604624182u32)
+            _serde::__private::Signature::new(0x9b3f6936)
         }
     }
     impl<'a> _serde::Serialize for hkbComputeRotationFromAxisAngleModifier<'a> {
@@ -59,7 +59,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(2604624182u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x9b3f6936)));
             let mut serializer = __serializer
                 .serialize_struct(
                     "hkbComputeRotationFromAxisAngleModifier",

@@ -57,7 +57,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(300171403u32)
+            _serde::__private::Signature::new(0x11e4408b)
         }
     }
     impl _serde::Serialize for hkMultiThreadCheck {
@@ -67,7 +67,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(300171403u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x11e4408b)));
             let mut serializer = __serializer
                 .serialize_struct("hkMultiThreadCheck", class_meta)?;
             serializer.skip_field("threadId", &self.m_threadId)?;

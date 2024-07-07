@@ -56,7 +56,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(1394553490u32)
+            _serde::__private::Signature::new(0x531f3292)
         }
     }
     impl<'a> _serde::Serialize for BSTimerModifier<'a> {
@@ -66,7 +66,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(1394553490u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x531f3292)));
             let mut serializer = __serializer
                 .serialize_struct("BSTimerModifier", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

@@ -72,7 +72,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(703589977u32)
+            _serde::__private::Signature::new(0x29efee59)
         }
     }
     impl _serde::Serialize for BSLookAtModifierBoneData {
@@ -82,7 +82,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(703589977u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x29efee59)));
             let mut serializer = __serializer
                 .serialize_struct("BSLookAtModifierBoneData", class_meta)?;
             serializer.serialize_field("index", &self.m_index)?;

@@ -53,7 +53,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(1212595753u32)
+            _serde::__private::Signature::new(0x4846be29)
         }
     }
     impl _serde::Serialize for hkRangeInt32Attribute {
@@ -63,7 +63,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(1212595753u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x4846be29)));
             let mut serializer = __serializer
                 .serialize_struct("hkRangeInt32Attribute", class_meta)?;
             serializer.serialize_field("absmin", &self.m_absmin)?;

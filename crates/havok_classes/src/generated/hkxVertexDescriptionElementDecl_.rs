@@ -59,7 +59,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(1211777691u32)
+            _serde::__private::Signature::new(0x483a429b)
         }
     }
     impl _serde::Serialize for hkxVertexDescriptionElementDecl {
@@ -69,7 +69,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(1211777691u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x483a429b)));
             let mut serializer = __serializer
                 .serialize_struct("hkxVertexDescriptionElementDecl", class_meta)?;
             serializer.serialize_field("byteOffset", &self.m_byteOffset)?;

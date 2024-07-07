@@ -67,7 +67,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(271656036u32)
+            _serde::__private::Signature::new(0x10312464)
         }
     }
     impl _serde::Serialize for hkpLinMotorConstraintAtom {
@@ -77,7 +77,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(271656036u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x10312464)));
             let mut serializer = __serializer
                 .serialize_struct("hkpLinMotorConstraintAtom", class_meta)?;
             serializer.serialize_field("type", &self.parent.m_type)?;

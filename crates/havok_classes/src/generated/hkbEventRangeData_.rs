@@ -47,7 +47,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(1824074870u32)
+            _serde::__private::Signature::new(0x6cb92c76)
         }
     }
     impl _serde::Serialize for hkbEventRangeData {
@@ -57,7 +57,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(1824074870u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x6cb92c76)));
             let mut serializer = __serializer
                 .serialize_struct("hkbEventRangeData", class_meta)?;
             serializer.serialize_field("upperBound", &self.m_upperBound)?;

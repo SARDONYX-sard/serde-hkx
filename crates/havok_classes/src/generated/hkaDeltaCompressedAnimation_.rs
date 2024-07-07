@@ -115,7 +115,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(2426834240u32)
+            _serde::__private::Signature::new(0x90a68d40)
         }
     }
     impl<'a> _serde::Serialize for hkaDeltaCompressedAnimation<'a> {
@@ -125,7 +125,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(2426834240u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x90a68d40)));
             let mut serializer = __serializer
                 .serialize_struct("hkaDeltaCompressedAnimation", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

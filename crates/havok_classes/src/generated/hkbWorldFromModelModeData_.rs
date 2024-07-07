@@ -53,7 +53,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(2746189699u32)
+            _serde::__private::Signature::new(0xa3af8783)
         }
     }
     impl _serde::Serialize for hkbWorldFromModelModeData {
@@ -63,7 +63,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(2746189699u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0xa3af8783)));
             let mut serializer = __serializer
                 .serialize_struct("hkbWorldFromModelModeData", class_meta)?;
             serializer.serialize_field("poseMatchingBone0", &self.m_poseMatchingBone0)?;

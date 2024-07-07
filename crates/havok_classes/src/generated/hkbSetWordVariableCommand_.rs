@@ -67,7 +67,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(4088291274u32)
+            _serde::__private::Signature::new(0xf3ae5fca)
         }
     }
     impl _serde::Serialize for hkbSetWordVariableCommand {
@@ -77,7 +77,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(4088291274u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0xf3ae5fca)));
             let mut serializer = __serializer
                 .serialize_struct("hkbSetWordVariableCommand", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

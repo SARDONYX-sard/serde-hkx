@@ -55,7 +55,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(3562553814u32)
+            _serde::__private::Signature::new(0xd45841d6)
         }
     }
     impl<'a> _serde::Serialize for hkxTextureInplace<'a> {
@@ -65,7 +65,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(3562553814u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0xd45841d6)));
             let mut serializer = __serializer
                 .serialize_struct("hkxTextureInplace", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

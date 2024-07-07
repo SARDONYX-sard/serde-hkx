@@ -55,7 +55,7 @@ const _: () = {
         }
         #[inline]
         fn signature(&self) -> _serde::__private::Signature {
-            _serde::__private::Signature::new(2165604101u32)
+            _serde::__private::Signature::new(0x81147f05)
         }
     }
     impl _serde::Serialize for hkpEntitySpuCollisionCallback {
@@ -65,7 +65,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
-                .map(|name| (name, _serde::__private::Signature::new(2165604101u32)));
+                .map(|name| (name, _serde::__private::Signature::new(0x81147f05)));
             let mut serializer = __serializer
                 .serialize_struct("hkpEntitySpuCollisionCallback", class_meta)?;
             serializer.skip_field("util", &self.m_util)?;
