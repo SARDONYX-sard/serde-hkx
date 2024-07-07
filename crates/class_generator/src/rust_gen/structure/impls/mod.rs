@@ -12,3 +12,12 @@ pub(super) fn n_time_parent_ident(n: usize) -> proc_macro2::TokenStream {
         #(.#ident)*
     }
 }
+
+/// Cast str to literal.
+///
+/// # Purpose
+/// Number string to hex number.
+pub(super) fn str2lit(s: &str) -> syn::Lit {
+    use core::str::FromStr as _;
+    syn::Lit::new(proc_macro2::Literal::from_str(s).unwrap())
+}

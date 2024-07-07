@@ -1,15 +1,17 @@
+use crate::rust_gen::structure::{
+    impls::{n_time_parent_ident, str2lit},
+    to_rust_token::to_rust_field_ident,
+};
 use crate::{
     cpp_info::{Class, Member, TypeKind},
-    get_inherited_class,
-    rust_gen::structure::{impls::n_time_parent_ident, to_rust_token::to_rust_field_ident},
-    ClassMap,
+    get_inherited_class, ClassMap,
 };
 use proc_macro2::TokenStream;
 use quote::quote;
 
 pub fn impl_serialize(class: &Class, class_map: &ClassMap) -> TokenStream {
     let name = class.name.as_ref();
-    let signature = class.signature.get();
+    let hex_signature = str2lit(&class.signature.to_string());
     let class_name = syn::Ident::new(name, proc_macro2::Span::call_site());
     let fields = impl_serialize_fields(class, class_map);
     let lifetime = match class.has_string {
@@ -29,7 +31,7 @@ pub fn impl_serialize(class: &Class, class_map: &ClassMap) -> TokenStream {
 
                 #[inline]
                 fn signature(&self) -> _serde::__private::Signature {
-                    _serde::__private::Signature::new(#signature)
+                    _serde::__private::Signature::new(#hex_signature)
                 }
             }
 
@@ -37,7 +39,7 @@ pub fn impl_serialize(class: &Class, class_map: &ClassMap) -> TokenStream {
                 fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
                     where S: _serde::ser::Serializer
                 {
-                    let class_meta = self.__ptr.map(|name| (name, _serde::__private::Signature::new(#signature)));
+                    let class_meta = self.__ptr.map(|name| (name, _serde::__private::Signature::new(#hex_signature)));
                     let mut serializer = __serializer.serialize_struct(#name, class_meta)?;
                     #(#fields)*
                     serializer.end()
