@@ -6,7 +6,7 @@ use crate::common::mocks::mock_requires::*;
 
 pub fn new_defaultmale<'a>() -> IndexMap<usize, Classes<'a>> {
     let hkb_project_string_data = HkbProjectStringData {
-        _name: Some(9.into()),
+        __ptr: Some(9.into()),
         animation_filenames: vec![],
         behavior_filenames: vec![],
         character_filenames: vec!["Characters\\DefaultMale.hkx".into()],
@@ -20,7 +20,7 @@ pub fn new_defaultmale<'a>() -> IndexMap<usize, Classes<'a>> {
     };
 
     let hkb_project_data = HkbProjectData {
-        _name: Some(10.into()),
+        _ptr: Some(10.into()),
         world_up_ws: Vector4::new(0.0, 0.0, 1.0, 0.0),
         string_data: Pointer::new(9),
         default_event_mode: EventMode::EventModeIgnoreFromGenerator,
@@ -28,9 +28,9 @@ pub fn new_defaultmale<'a>() -> IndexMap<usize, Classes<'a>> {
     };
 
     let hk_root_level_container = HkRootLevelContainer {
-        _name: Some(8.into()),
+        _ptr: Some(8.into()),
         named_variants: vec![HkRootLevelContainerNamedVariant {
-            _name: None,
+            __ptr: None,
             name: "hkbProjectData".into(),
             class_name: "hkbProjectData".into(),
             variant: Pointer::new(10),

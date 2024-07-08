@@ -2,7 +2,7 @@ use super::*;
 
 #[derive(Debug, Clone, Default, PartialEq)]
 pub struct HkRootLevelContainer<'a> {
-    pub _name: Option<Pointer>,
+    pub _ptr: Option<Pointer>,
 
     /// # C++ Class Fields Info
     /// -   name:`"namedVariants"`
@@ -24,7 +24,7 @@ impl HavokClass for HkRootLevelContainer<'_> {
 
 impl Serialize for HkRootLevelContainer<'_> {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        let class_meta = self._name.map(|name| (name, self.signature()));
+        let class_meta = self._ptr.map(|name| (name, self.signature()));
         let mut serializer = serializer.serialize_struct("hkRootLevelContainer", class_meta)?;
 
         // For XML & binary

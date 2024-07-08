@@ -536,7 +536,7 @@ mod tests {
     #[quick_tracing::try_init]
     fn test_serialize_types_all() -> Result<()> {
         let all_types_class = AllTypesTestClass {
-            _name: Some(Pointer::new(11)),
+            __ptr: Some(Pointer::new(11)),
         };
         let mut classes = indexmap::IndexMap::new();
         classes.insert(11, Classes::AllTypesTestClass(all_types_class));

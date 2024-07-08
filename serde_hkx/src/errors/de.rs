@@ -11,6 +11,10 @@ pub enum Error {
         msg: String,
     },
 
+    /// This field should have a default value since serialization is skipped.
+    #[snafu(display("This field should have a default value since serialization is skipped."))]
+    SkipField,
+
     #[snafu(display("Unique index of class for this `global_fix.dst`{virtual_src} is missing"))]
     NotFoundClassIndex { virtual_src: u32 },
 

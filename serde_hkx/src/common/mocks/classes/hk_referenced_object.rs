@@ -128,12 +128,12 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
+                    let parent = __A::next_value(&mut __map)?; // hkBaseObject to vtable of ptr size
                     let mut __field0: _serde::__private::Option<u16> = _serde::__private::None;
                     let mut __field1: _serde::__private::Option<i16> = _serde::__private::None;
 
-                    __A::pad(&mut __map, 4, 8); // hkBaseObject to vtable of ptr size
                     while let _serde::__private::Some(__key) =
-                        match _serde::de::MapAccess::next_key::<__Field>(&mut __map) {
+                        match __A::next_key::<__Field>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,
                             _serde::__private::Err(__err) => {
                                 return _serde::__private::Err(__err);
@@ -149,8 +149,11 @@ const _: () = {
                                         ),
                                     );
                                 }
+                                //
+                                // As we need pad this line.
+                                //
                                 __field0 = _serde::__private::Some(
-                                    match _serde::de::MapAccess::next_value::<u16>(&mut __map) {
+                                    match __A::skip_next_value::<u16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -166,12 +169,12 @@ const _: () = {
                                         ),
                                     );
                                 }
+                                //
+                                // As we need pad this line.
+                                //
                                 __field1 = _serde::__private::Some(
                                     match _serde::de::MapAccess::next_value::<i16>(&mut __map) {
-                                        _serde::__private::Ok(__val) => {
-                                            __A::pad(&mut __map, 4, 8);
-                                            __val
-                                        }
+                                        _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
                                         }
@@ -181,6 +184,7 @@ const _: () = {
                             _ => {}
                         }
                     }
+                    __A::pad(&mut __map, 4, 8); // For tailing alignment.
 
                     let __field0 = match __field0 {
                         _serde::__private::Some(__field0) => __field0,
@@ -199,7 +203,7 @@ const _: () = {
                         }
                     };
                     _serde::__private::Ok(HkReferencedObject {
-                        parent: HkBaseObject { _name: None },
+                        parent,
                         __ptr_name_attr: __map.class_ptr(),
                         mem_size_and_flags: __field0,
                         reference_count: __field1,

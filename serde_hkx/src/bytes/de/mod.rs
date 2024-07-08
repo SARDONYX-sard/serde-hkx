@@ -72,10 +72,12 @@ pub struct BytesDeserializer<'de> {
     ///
     /// Incremented each time deserialize_struct is called.
     class_index: usize,
-    /// Field index currently being processed
-    field_index: Option<usize>,
-    /// Field length currently being processed
-    field_length: Option<usize>,
+    /// Whether to advance the pointer, which is the name attribute for XML
+    ///
+    /// (It is actually map.rs that advances it, this is to prevent unintentional rewriting of variables in the processing of structs within structs)
+    in_struct: bool,
+    /// It is actually map.rs that advances it, this is to prevent unintentional rewriting of variables in the processing of structs within structs
+    field_index: usize,
 }
 
 impl<'de> BytesDeserializer<'de> {
@@ -128,14 +130,18 @@ where
         header.section_count
     ));
 
-    // 3. Parse classnames section.
-    deserializer.current_position = deserializer.classnames_header.absolute_data_start as usize; // move to classnames section start
-    deserializer.classnames = tri!(deserializer.parse(classnames_section(
-        deserializer.endian,
-        deserializer.current_position
-    )));
+    let classnames_abs = deserializer.classnames_header.absolute_data_start as usize;
+    let data_abs = deserializer.data_header.absolute_data_start as usize;
 
-    // 4. class field parse.
+    // 3. Parse `__classnames__` section.
+    deserializer.classnames = tri!(deserializer.parse_range(
+        classnames_section(deserializer.endian, 0),
+        // FIXME: built on the assumption that data_section comes after classnames, but can't deal with the case when it doesn't.
+        classnames_abs..data_abs, // classnames section range
+    ));
+
+    // 4. Parse `__data__` section.
+    deserializer.current_position = data_abs; // move to data section start
     let t = tri!(T::deserialize(&mut deserializer));
     if deserializer.input[deserializer.current_position..].is_empty() {
         Ok(t)
@@ -172,6 +178,27 @@ impl<'de> BytesDeserializer<'de> {
         Ok(res)
     }
 
+    /// Parse by argument parser.
+    ///
+    /// If an error occurs, it is converted to [`ReadableError`] and returned.
+    fn parse_range<O>(
+        &mut self,
+        mut parser: impl Parser<BytesStream<'de>, O, winnow::error::ContextError>,
+        range: Range<usize>,
+    ) -> Result<O> {
+        let (_, res) =
+            parser
+                .parse_peek(&self.input[range])
+                .map_err(|err| Error::ReadableError {
+                    source: ReadableError::from_context(
+                        err,
+                        &hexdump::RhexdumpString::new().hexdump_bytes(self.input),
+                        self.current_position + HEXDUMP_OFFSET,
+                    ),
+                })?;
+        Ok(res)
+    }
+
     /// Jump current position(`local_fixup.src`) to dst, then parse, and back to current position.
     fn parse_local_fixup<O>(
         &mut self,
@@ -195,26 +222,18 @@ impl<'de> BytesDeserializer<'de> {
     ///
     /// # Why is this necessary?
     /// Because Visitor errors that occur within each `Deserialize` implementation cannot indicate the error location in XML.
-    #[cold]
     fn to_readable_err<T>(&self, result: Result<T>) -> Result<T> {
         match result {
             Ok(value) => Ok(value),
             Err(err) => match err {
                 Error::ReadableError { .. } => Err(err),
-                Error::Message { msg } => Err(Error::ReadableError {
-                    source: ReadableError::from_display(
-                        msg,
-                        &hexdump::RhexdumpString::new().hexdump_bytes(self.input),
-                        self.current_position + HEXDUMP_OFFSET,
-                    ),
-                }),
-                _ => Err(Error::ReadableError {
-                    source: ReadableError::from_display(
-                        err,
-                        &hexdump::RhexdumpString::new().hexdump_bytes(self.input),
-                        self.current_position + HEXDUMP_OFFSET,
-                    ),
-                }),
+                _ => {
+                    let input = &hexdump::RhexdumpString::new().hexdump_bytes(self.input);
+                    let err_pos = self.current_position + HEXDUMP_OFFSET;
+                    Err(Error::ReadableError {
+                        source: ReadableError::from_display(err, input, err_pos),
+                    })
+                }
             },
         }
     }
@@ -339,21 +358,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        if let (Some(index), Some(length)) = (self.field_index, self.field_index) {
-            let res = visitor.visit_uint64(index as u64);
-            tracing::debug!(index);
-            self.field_index = Some(index + 1);
-            if length < index {
-                Err(Error::OverFlowIndex {
-                    expected: length,
-                    actual: index,
-                })
-            } else {
-                res
-            }
-        } else {
-            Err(Error::NotFoundIndex)
-        }
+        visitor.visit_uint64(self.field_index as u64)
     }
 
     #[inline]
@@ -585,7 +590,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         V: Visitor<'de>,
     {
         let current_position = self.current_position();
-        match self.data_fixups.global_fixups.get(&current_position) {
+        let res = match self.data_fixups.global_fixups.get(&current_position) {
             Some((_section_index, virtual_src)) => match self.class_index_map.get(virtual_src) {
                 Some(index) => visitor.visit_pointer(Pointer::new(*index)),
                 None => Err(Error::NotFoundClassIndex {
@@ -595,7 +600,10 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
             None => Err(Error::NotFoundDataGlobalFixupsValue {
                 key: current_position,
             }),
-        }
+        };
+
+        self.current_position += if self.is_x86 { 8 } else { 16 };
+        res
     }
 
     #[inline]
@@ -640,6 +648,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         self.to_readable_err(result)
     }
 
+    #[inline]
     fn deserialize_struct<V>(
         self,
         _name: &'static str,
@@ -649,21 +658,9 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        self.class_index += 1;
-        self.field_index = Some(0);
-        self.field_length = Some(fields.len());
-
-        dbg!(self.current_position());
-        self.class_index_map
-            .insert(self.current_position(), self.class_index);
-
-        let value = tri!(visitor.visit_struct(MapDeserializer::new(
-            self,
-            Some(Pointer::new(self.class_index)),
-        )));
-        self.field_index = None;
-        self.field_length = None;
-
+        self.in_struct = true;
+        let value = tri!(visitor.visit_struct(MapDeserializer::new(self, fields)));
+        self.in_struct = false;
         Ok(value)
     }
 
@@ -673,13 +670,8 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        // TODO: get from global fixups
         let res = visitor.visit_variant(Variant::new(Pointer::new(0), Pointer::new(0)));
-        if self.is_x86 {
-            self.current_position += 8;
-        } else {
-            self.current_position += 16;
-        };
+        self.current_position += if self.is_x86 { 8 } else { 16 };
         res
     }
 
@@ -698,9 +690,10 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        match self.is_x86 {
-            true => self.deserialize_uint32(visitor),
-            false => self.deserialize_uint64(visitor),
+        if self.is_x86 {
+            self.deserialize_uint32(visitor)
+        } else {
+            self.deserialize_uint64(visitor)
         }
     }
 
@@ -826,7 +819,7 @@ mod tests {
             ],
             crate::common::mocks::classes::HkReferencedObject {
                 __ptr_name_attr: Some(Pointer::new(1)),
-                parent: crate::common::mocks::classes::HkBaseObject { _name: None },
+                parent: crate::common::mocks::classes::HkBaseObject { __ptr: None },
                 mem_size_and_flags: 2,
                 reference_count: 0,
             },

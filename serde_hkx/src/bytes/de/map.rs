@@ -9,14 +9,21 @@ use havok_types::Pointer;
 pub struct MapDeserializer<'a, 'de: 'a> {
     /// Deserializer
     de: &'a mut BytesDeserializer<'de>,
-    /// To check fields length
-    ptr_name: Option<Pointer>,
+
+    /// Field index currently being processed
+    field_index: usize,
+    /// Field length currently being processed
+    fields: &'static [&'static str],
 }
 
 impl<'a, 'de> MapDeserializer<'a, 'de> {
     /// Create a new map deserializer
-    pub fn new(de: &'a mut BytesDeserializer<'de>, ptr_name: Option<Pointer>) -> Self {
-        Self { de, ptr_name }
+    pub fn new(de: &'a mut BytesDeserializer<'de>, fields: &'static [&'static str]) -> Self {
+        Self {
+            de,
+            field_index: 0,
+            fields,
+        }
     }
 }
 
@@ -24,23 +31,36 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
     type Error = Error;
 
     #[inline]
-    fn class_ptr(&self) -> Option<Pointer> {
-        self.ptr_name
+    fn class_ptr(&mut self) -> Option<Pointer> {
+        if self.de.in_struct {
+            None
+        } else {
+            self.de.class_index += 1;
+            self.de
+                .class_index_map
+                .insert(self.de.current_position(), self.de.class_index);
+            Some(Pointer::new(self.de.class_index))
+        }
     }
 
     #[inline]
     fn pad(&mut self, x86_pad: usize, x64_pad: usize) -> Result<(), Self::Error> {
-        let pad = match self.de.is_x86 {
-            true => x86_pad,
-            false => x64_pad,
-        };
+        let pad = if self.de.is_x86 { x86_pad } else { x64_pad };
 
-        if self.de.input.len() >= pad {
+        if pad <= self.de.input.len() {
             self.de.current_position += pad;
             Ok(())
         } else {
             Err(Error::Eof)
         }
+    }
+
+    #[inline]
+    fn skip_next_key_seed<K>(&mut self, seed: K) -> Result<Option<K::Value>, Self::Error>
+    where
+        K: DeserializeSeed<'de>,
+    {
+        self.next_key_seed(seed)
     }
 
     // Parse
@@ -49,28 +69,34 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
         K: DeserializeSeed<'de>,
     {
         // Check if there are no more elements.
-        if self.de.field_length == self.de.field_index {
+        if self.fields.len() == self.field_index {
             return Ok(None);
         }
 
-        // Now call `deserialize_key` with `impl Deserialize` and increment `self.de.field_index`.
-        seed.deserialize(&mut *self.de).map(Some)
+        let res = seed.deserialize(&mut *self.de).map(Some); // Expected to call `deserialize_key` with `impl Deserializer`
+        self.field_index += 1;
+        self.de.field_index = self.field_index;
+        res
     }
 
-    // Parse e.g. `<hkparam name="worldUpWS">`
+    #[inline]
     fn next_array_key_seed<K>(&mut self, seed: K) -> Result<Option<K::Value>, Self::Error>
     where
         K: DeserializeSeed<'de>,
     {
-        // Check if there are no more elements.
-        if self.de.field_length == self.de.field_index {
-            return Ok(None);
-        }
-        // Now call `deserialize_key` with `impl Deserialize` and increment `self.de.field_index`.
-        seed.deserialize(&mut *self.de).map(Some)
+        self.next_key_seed(seed)
+    }
+
+    #[inline]
+    fn skip_next_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
+    where
+        V: DeserializeSeed<'de>,
+    {
+        self.next_value_seed(seed)
     }
 
     // Parse e.g. `(0.000000 0.000000 1.000000 0.000000)</hkparam>`
+    #[inline]
     fn next_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
     where
         V: DeserializeSeed<'de>,

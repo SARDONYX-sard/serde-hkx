@@ -13,10 +13,9 @@ use super::*;
 /// -   version: 1
 #[derive(Debug, Clone, Default, PartialEq)]
 pub struct HkbProjectStringData<'a> {
+    pub __ptr: Option<Pointer>,
+
     pub parent: HkReferencedObject,
-
-    pub _name: Option<Pointer>,
-
     // C++ Parent class(`hkBaseObject` => parent: `None`) has no fields
     //
     /// # C++ Class Fields Info
@@ -87,7 +86,7 @@ impl HavokClass for HkbProjectStringData<'_> {
 
 impl Serialize for HkbProjectStringData<'_> {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        let class_meta = self._name.map(|name| (name, self.signature()));
+        let class_meta = self.__ptr.map(|name| (name, self.signature()));
         let mut serializer = serializer.serialize_struct("hkbProjectStringData", class_meta)?;
 
         // flattened parent's fields

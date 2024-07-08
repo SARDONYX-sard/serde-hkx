@@ -3,10 +3,9 @@ use crate::common::mocks::enums::EventMode;
 
 #[derive(Debug, Clone, Default, PartialEq)]
 pub struct HkbProjectData {
+    pub _ptr: Option<Pointer>,
+
     pub parent: HkReferencedObject,
-
-    pub _name: Option<Pointer>,
-
     // C++ Parent class(`hkBaseObject` => parent: `None`) has no fields
     //
     /// # C++ Class Fields Info
@@ -41,7 +40,7 @@ impl HavokClass for HkbProjectData {
 
 impl Serialize for HkbProjectData {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        let class_meta = self._name.map(|name| (name, self.signature()));
+        let class_meta = self._ptr.map(|name| (name, self.signature()));
         let mut serializer = serializer.serialize_struct("hkbProjectData", class_meta)?;
 
         // flattened parent's fields

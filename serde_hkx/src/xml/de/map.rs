@@ -49,8 +49,16 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
     type Error = Error;
 
     #[inline]
-    fn class_ptr(&self) -> Option<Pointer> {
+    fn class_ptr(&mut self) -> Option<Pointer> {
         self.ptr_name
+    }
+
+    #[inline]
+    fn skip_next_key_seed<K>(&mut self, _seed: K) -> Result<Option<K::Value>, Self::Error>
+    where
+        K: DeserializeSeed<'de>,
+    {
+        Ok(None)
     }
 
     // Parse e.g. `<hkparam name="worldUpWS">`
@@ -91,6 +99,14 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
         self.index += 1;
 
         key
+    }
+
+    #[inline]
+    fn skip_next_value_seed<V>(&mut self, _seed: V) -> Result<V::Value, Self::Error>
+    where
+        V: DeserializeSeed<'de>,
+    {
+        Err(Error::SkipField)
     }
 
     // Parse e.g. `(0.000000 0.000000 1.000000 0.000000)</hkparam>`

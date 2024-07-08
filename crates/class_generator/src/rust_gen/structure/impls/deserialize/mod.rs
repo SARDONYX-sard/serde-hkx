@@ -1,9 +1,13 @@
+mod enum_fields;
+mod visit_struct;
+
 use crate::{
     cpp_info::{Class, Member, TypeKind},
-    get_inherited_class,
+    get_inherited_class, get_inherited_members,
     rust_gen::structure::{impls::n_time_parent_ident, to_rust_token::to_rust_field_ident},
     ClassMap,
 };
+use enum_fields::gen_enum_fields;
 use proc_macro2::TokenStream;
 use quote::quote;
 
@@ -13,11 +17,12 @@ use quote::quote;
 pub fn impl_deserialize(class: &Class, class_map: &ClassMap) -> TokenStream {
     let name = class.name.as_ref();
     let class_name = syn::Ident::new(name, proc_macro2::Span::call_site());
-    let fields = impl_deserialize_fields(class, class_map);
     let lifetime = match class.has_string {
         true => quote! { <'a> },
         false => quote! {},
     };
+
+    let block = impl_deserialize_fields(class, class_map);
 
     quote::quote! {
         #[doc(hidden)]
@@ -31,27 +36,25 @@ pub fn impl_deserialize(class: &Class, class_map: &ClassMap) -> TokenStream {
                 where
                     __D: _serde::Deserializer<'de>,
                 {
-
-                    #(#fields)*
+                    #block
                 }
             };
         }
     }
 }
 
-fn impl_deserialize_fields(class: &Class, class_map: &ClassMap) -> Vec<TokenStream> {
-    let mut serialize_calls = Vec::new();
+fn impl_deserialize_fields(class: &Class, class_map: &ClassMap) -> TokenStream {
     // The ptr type must serialize the data pointed to by ptr after serializing all fields. This is an array for that purpose.
     let mut ptr_after_write_fields = Vec::new();
     let mut x86_current_offset = 0;
     let mut x64_current_offset = 0;
 
     let all_class = get_inherited_class(&class.name, class_map);
-    let mut parent_depth = all_class.len();
 
+    let mut parent_depth = all_class.len();
     for class in all_class {
         parent_depth -= 1;
-        let (meta_fields, ptr_fields) = impl_serialize_self_fields(
+        let ptr_fields = impl_deserialize_fields_inner(
             &class.members,
             class.size_x86,
             class.size_x86_64,
@@ -59,22 +62,24 @@ fn impl_deserialize_fields(class: &Class, class_map: &ClassMap) -> Vec<TokenStre
             &mut x64_current_offset,
             parent_depth,
         );
-        serialize_calls.extend(meta_fields);
         ptr_after_write_fields.extend(ptr_fields);
     }
 
-    serialize_calls.extend(ptr_after_write_fields);
-    serialize_calls
+    let members = get_inherited_members(&class.name, class_map);
+    let enum_fields = gen_enum_fields(&members);
+    quote! {
+        #enum_fields
+    }
 }
 
-fn impl_serialize_self_fields(
+fn impl_deserialize_fields_inner(
     members: &[Member],
     x86_size: u32,
     x64_size: u32,
     x86_current_offset: &mut u32,
     x64_current_offset: &mut u32,
     parent_depth: usize,
-) -> (Vec<TokenStream>, Vec<TokenStream>) {
+) -> Vec<TokenStream> {
     let mut serialize_calls = Vec::new();
     // The ptr type must serialize the data pointed to by ptr after serializing all fields. This is an array for that purpose.
     let mut ptr_after_write_fields = Vec::new();
@@ -185,5 +190,5 @@ fn impl_serialize_self_fields(
         *x64_current_offset = x64_size;
     };
 
-    (serialize_calls, ptr_after_write_fields)
+    ptr_after_write_fields
 }

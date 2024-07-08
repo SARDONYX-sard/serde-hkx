@@ -8,10 +8,9 @@ use super::*;
 /// -   version: 0
 #[derive(Debug, Clone, Default, PartialEq)]
 pub struct HkpShapeInfo<'a> {
+    pub __ptr: Option<Pointer>,
+
     pub parent: HkReferencedObject,
-
-    pub _name: Option<Pointer>,
-
     /// # C++ Class Fields Info
     /// -   name:`"shape"`
     /// -   type: `struct hkpShape*`
@@ -62,7 +61,7 @@ impl HavokClass for HkpShapeInfo<'_> {
 
 impl Serialize for HkpShapeInfo<'_> {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        let class_meta = self._name.map(|name| (name, self.signature()));
+        let class_meta = self.__ptr.map(|name| (name, self.signature()));
         let mut serializer = serializer.serialize_struct("hkpShapeInfo", class_meta)?;
 
         // Serialize fields of parent (flatten)

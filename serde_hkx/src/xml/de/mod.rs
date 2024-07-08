@@ -192,6 +192,8 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
+        // deserializer [0, 1]; 1: struct InnerStruct { 0, 1: InnerInner }
+        // TODO: skip by dummy(self.current_de_field & self.fields, self.skip_fields)
         visitor.visit_key(tri!(self.parse(attr_string())))
     }
 
@@ -566,7 +568,7 @@ mod tests {
 </hkobject>"##,
             crate::common::mocks::classes::HkReferencedObject {
                 __ptr_name_attr: Some(Pointer::new(1000)),
-                parent: crate::common::mocks::classes::HkBaseObject { _name: None },
+                parent: crate::common::mocks::classes::HkBaseObject { __ptr: None },
                 mem_size_and_flags: 2,
                 reference_count: 0,
             },
@@ -643,6 +645,24 @@ mod tests {
     }
 
     #[test]
+    fn should_skip_class() {
+        parse_assert(
+            r##"
+<hkobject name="#01000" class="hkReferencedObject" signature="0xea7f1d08">
+    <!-- memSizeAndFlags SERIALIZE_IGNORED -->
+    <!-- referenceCount SERIALIZE_IGNORED -->
+</hkobject>
+            "##,
+            crate::common::mocks::classes::HkReferencedObject {
+                __ptr_name_attr: Some(Pointer::new(1000)),
+                parent: crate::common::mocks::classes::HkBaseObject { __ptr: None },
+                mem_size_and_flags: 0,
+                reference_count: 0,
+            },
+        );
+    }
+
+    #[test]
     #[quick_tracing::init]
     fn test_deserialize_class_fixed_array() {
         // let xml = &include_str!("../../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
@@ -681,31 +701,31 @@ mod tests {
             [
                 crate::common::mocks::classes::HkReferencedObject {
                     __ptr_name_attr: Some(Pointer::new(1000)),
-                    parent: crate::common::mocks::classes::HkBaseObject { _name: None },
+                    parent: crate::common::mocks::classes::HkBaseObject { __ptr: None },
                     mem_size_and_flags: 2,
                     reference_count: 0,
                 },
                 crate::common::mocks::classes::HkReferencedObject {
                     __ptr_name_attr: Some(Pointer::new(1000)),
-                    parent: crate::common::mocks::classes::HkBaseObject { _name: None },
+                    parent: crate::common::mocks::classes::HkBaseObject { __ptr: None },
                     mem_size_and_flags: 2,
                     reference_count: 0,
                 },
                 crate::common::mocks::classes::HkReferencedObject {
                     __ptr_name_attr: Some(Pointer::new(1000)),
-                    parent: crate::common::mocks::classes::HkBaseObject { _name: None },
+                    parent: crate::common::mocks::classes::HkBaseObject { __ptr: None },
                     mem_size_and_flags: 2,
                     reference_count: 0,
                 },
                 crate::common::mocks::classes::HkReferencedObject {
                     __ptr_name_attr: Some(Pointer::new(1000)),
-                    parent: crate::common::mocks::classes::HkBaseObject { _name: None },
+                    parent: crate::common::mocks::classes::HkBaseObject { __ptr: None },
                     mem_size_and_flags: 2,
                     reference_count: 0,
                 },
                 crate::common::mocks::classes::HkReferencedObject {
                     __ptr_name_attr: Some(Pointer::new(1000)),
-                    parent: crate::common::mocks::classes::HkBaseObject { _name: None },
+                    parent: crate::common::mocks::classes::HkBaseObject { __ptr: None },
                     mem_size_and_flags: 2,
                     reference_count: 0,
                 },
@@ -738,7 +758,7 @@ mod tests {
                 crate::common::mocks::classes::Classes::HkReferencedObject(
                     crate::common::mocks::classes::HkReferencedObject {
                         __ptr_name_attr: Some(Pointer::new(1000)),
-                        parent: crate::common::mocks::classes::HkBaseObject { _name: None },
+                        parent: crate::common::mocks::classes::HkBaseObject { __ptr: None },
                         mem_size_and_flags: 2,
                         reference_count: 0,
                     },
@@ -746,7 +766,7 @@ mod tests {
                 crate::common::mocks::classes::Classes::HkReferencedObject(
                     crate::common::mocks::classes::HkReferencedObject {
                         __ptr_name_attr: Some(Pointer::new(100)),
-                        parent: crate::common::mocks::classes::HkBaseObject { _name: None },
+                        parent: crate::common::mocks::classes::HkBaseObject { __ptr: None },
                         mem_size_and_flags: 4,
                         reference_count: 0,
                     },

@@ -1570,7 +1570,7 @@ pub trait MapAccess<'de> {
     type Error: Error;
 
     /// Get this class pointer name (e.g. `Pointer::new(1`)
-    fn class_ptr(&self) -> Option<Pointer>;
+    fn class_ptr(&mut self) -> Option<Pointer>;
 
     /// - Skip reading the current position of binary data by pad minutes.
     /// - The XML deserializer does nothing.
@@ -1582,6 +1582,15 @@ pub trait MapAccess<'de> {
         let _ = x64_pad;
         Ok(())
     }
+
+    /// This returns `Ok(Some(key))` for the next key in the map, or `Ok(None)`
+    /// if there are no more remaining entries.
+    ///
+    /// `Deserialize` implementations should typically use
+    /// `MapAccess::next_key` or `MapAccess::next_entry` instead.
+    fn skip_next_key_seed<K>(&mut self, seed: K) -> Result<Option<K::Value>, Self::Error>
+    where
+        K: DeserializeSeed<'de>;
 
     /// This returns `Ok(Some(key))` for the next key in the map, or `Ok(None)`
     /// if there are no more remaining entries.
@@ -1604,6 +1613,18 @@ pub trait MapAccess<'de> {
     fn next_array_key_seed<K>(&mut self, seed: K) -> Result<Option<K::Value>, Self::Error>
     where
         K: DeserializeSeed<'de>;
+
+    /// Processing of `SERIALIZE_IGNORED` fields.
+    /// - XML: need to do nothing and get the default value.
+    /// - bytes: most likely contains 0, but you need to get it because the data exists on the binary data.
+    ///
+    /// # Panics
+    ///
+    /// Calling `next_value` before `next_key` is incorrect and is allowed to
+    /// panic or return bogus results.
+    fn skip_next_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
+    where
+        V: DeserializeSeed<'de>;
 
     /// This returns a `Ok(value)` for the next value in the map.
     ///
@@ -1652,6 +1673,19 @@ pub trait MapAccess<'de> {
     /// This method exists as a convenience for `Deserialize` implementations.
     /// `MapAccess` implementations should not override the default behavior.
     #[inline]
+    fn skip_next_key<K>(&mut self) -> Result<Option<K>, Self::Error>
+    where
+        K: Deserialize<'de>,
+    {
+        self.next_key_seed(PhantomData)
+    }
+
+    /// This returns `Ok(Some(key))` for the next key in the map, or `Ok(None)`
+    /// if there are no more remaining entries.
+    ///
+    /// This method exists as a convenience for `Deserialize` implementations.
+    /// `MapAccess` implementations should not override the default behavior.
+    #[inline]
     fn next_key<K>(&mut self) -> Result<Option<K>, Self::Error>
     where
         K: Deserialize<'de>,
@@ -1671,6 +1705,22 @@ pub trait MapAccess<'de> {
         K: Deserialize<'de>,
     {
         self.next_array_key_seed(PhantomData)
+    }
+
+    /// Processing of `SERIALIZE_IGNORED` fields.
+    /// - XML: need to do nothing and get the default value.
+    /// - bytes: most likely contains 0, but you need to get it because the data exists on the binary data.
+    ///
+    /// # Panics
+    ///
+    /// Calling `next_value` before `next_key` is incorrect and is allowed to
+    /// panic or return bogus results.
+    #[inline]
+    fn skip_next_value<V>(&mut self) -> Result<V, Self::Error>
+    where
+        V: Deserialize<'de>,
+    {
+        self.next_value_seed(PhantomData)
     }
 
     /// This returns a `Ok(value)` for the next value in the map.
@@ -1718,8 +1768,16 @@ where
     type Error = A::Error;
 
     #[inline]
-    fn class_ptr(&self) -> Option<Pointer> {
+    fn class_ptr(&mut self) -> Option<Pointer> {
         (**self).class_ptr()
+    }
+
+    #[inline]
+    fn skip_next_key_seed<K>(&mut self, seed: K) -> Result<Option<K::Value>, Self::Error>
+    where
+        K: DeserializeSeed<'de>,
+    {
+        (**self).skip_next_key_seed(seed)
     }
 
     #[inline]
@@ -1736,6 +1794,14 @@ where
         K: DeserializeSeed<'de>,
     {
         (**self).next_key_seed(seed)
+    }
+
+    #[inline]
+    fn skip_next_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
+    where
+        V: DeserializeSeed<'de>,
+    {
+        (*self).skip_next_value_seed(seed)
     }
 
     #[inline]
@@ -1769,6 +1835,14 @@ where
     }
 
     #[inline]
+    fn skip_next_key<K>(&mut self) -> Result<Option<K>, Self::Error>
+    where
+        K: Deserialize<'de>,
+    {
+        (**self).skip_next_key()
+    }
+
+    #[inline]
     fn next_key<K>(&mut self) -> Result<Option<K>, Self::Error>
     where
         K: Deserialize<'de>,
@@ -1782,6 +1856,14 @@ where
         K: Deserialize<'de>,
     {
         (**self).next_array_key()
+    }
+
+    #[inline]
+    fn skip_next_value<V>(&mut self) -> Result<V, Self::Error>
+    where
+        V: Deserialize<'de>,
+    {
+        (**self).skip_next_value()
     }
 
     #[inline]

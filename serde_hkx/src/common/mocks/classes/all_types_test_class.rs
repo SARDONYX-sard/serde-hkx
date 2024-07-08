@@ -4,7 +4,7 @@ use crate::common::mocks::{enums::EventMode, flags::FlagValues};
 #[derive(Debug, Clone, Default, PartialEq)]
 
 pub struct AllTypesTestClass {
-    pub _name: Option<Pointer>,
+    pub __ptr: Option<Pointer>,
 }
 
 impl HavokClass for AllTypesTestClass {
@@ -21,7 +21,7 @@ impl HavokClass for AllTypesTestClass {
 
 impl Serialize for AllTypesTestClass {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        let class_meta = self._name.map(|name| (name, self.signature()));
+        let class_meta = self.__ptr.map(|name| (name, self.signature()));
         let mut serializer = serializer.serialize_struct("AllTypesTestClass", class_meta)?;
 
         // Serialize fields of parent (flatten)
