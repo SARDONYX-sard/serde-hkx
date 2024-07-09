@@ -1,8 +1,8 @@
 use indexmap::IndexMap;
 
-use crate::common::mocks::classes::*;
-use crate::common::mocks::enums::EventMode;
-use crate::common::mocks::mock_requires::*;
+use crate::mocks::classes::*;
+use crate::mocks::enums::EventMode;
+use crate::mocks::mock_requires::*;
 
 pub fn new_defaultmale<'a>() -> IndexMap<usize, Classes<'a>> {
     let hkb_project_string_data = HkbProjectStringData {

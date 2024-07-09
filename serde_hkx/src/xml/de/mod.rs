@@ -6,23 +6,24 @@ mod seq;
 
 use crate::{lib::*, tri};
 
+use self::class_index_map::ClassIndexMapDeserializer;
+use self::enum_access::EnumDeserializer;
 use self::map::MapDeserializer;
-use self::parser::tag::{class_start_tag, end_tag};
-use self::parser::type_kind::{
-    boolean, matrix3, matrix4, pointer, qstransform, quaternion, real, rotation, string,
-    string_in_array, transform, vector4,
+use self::parser::{
+    comment_multispace0,
+    tag::{attr_string, end_tag},
+    type_kind::{
+        boolean, matrix3, matrix4, pointer, qstransform, quaternion, real, rotation, string,
+        string_in_array, transform, vector4,
+    },
 };
 use self::seq::SeqDeserializer;
 use crate::errors::{
     de::{Error, Result},
     readable::ReadableError,
 };
-use class_index_map::ClassIndexMapDeserializer;
-use enum_access::EnumDeserializer;
 use havok_serde::de::{self, Deserialize, ReadEnumSize, Visitor};
 use havok_types::*;
-use parser::comment_multispace0;
-use parser::tag::{attr_string, start_tag};
 use winnow::ascii::{dec_int, dec_uint};
 use winnow::Parser;
 
@@ -42,16 +43,6 @@ pub struct XmlDeserializer<'de> {
     /// - stringptr in field: `<hkparam name="" numelements="1"><hkcstring>StringPtr</hkcstring></hkparam>`
     /// - stringptr in array field: `<hkparam name="">StringPtr</hkparam>`
     in_array: bool,
-
-    ///  In `Struct` deserialization?
-    ///
-    /// # Why need this flag?
-    /// This flag is necessary because XML handles deserialization of a field in a struct differently
-    /// than it handles deserialization of a struct in a field in a struct.
-    ///
-    /// - struct in field: `<hkobject name="#0050" class="" signature=""></hkobject>`
-    /// - root struct: `<hkobject></hkobject>`
-    in_struct: bool,
 }
 
 impl<'de> XmlDeserializer<'de> {
@@ -62,7 +53,6 @@ impl<'de> XmlDeserializer<'de> {
             input,
             original: input,
             in_array: false,
-            in_struct: false,
         }
     }
 }
@@ -187,13 +177,12 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         visitor.visit_stringptr(StringPtr::from_str(s))
     }
 
+    // To parse field in struct (e.g. `<hkparam name="key"></hkparam>`)
     #[inline]
     fn deserialize_key<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        // deserializer [0, 1]; 1: struct InnerStruct { 0, 1: InnerInner }
-        // TODO: skip by dummy(self.current_de_field & self.fields, self.skip_fields)
         visitor.visit_key(tri!(self.parse(attr_string())))
     }
 
@@ -405,33 +394,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let value = if self.in_struct {
-            // When a struct is present in the field of struct, the name and signature attributes are not present.
-            tri!(self.parse(start_tag("hkobject")));
-            tri!(visitor.visit_struct(MapDeserializer::new(self, None, fields)))
-        } else {
-            let (ptr_name, class_name, signature) = tri!(self.parse(class_start_tag()));
-            #[cfg(feature = "tracing")]
-            {
-                tracing::debug!(
-                    "ptr_name={ptr_name}, class_name={class_name}, Signature={signature}"
-                );
-            }
-
-            if name != class_name {
-                return Err(Error::MismatchClassName {
-                    actual: name,
-                    expected: class_name.to_string(),
-                });
-            };
-
-            self.in_struct = true;
-            let value =
-                tri!(visitor.visit_struct(MapDeserializer::new(self, Some(ptr_name), fields)));
-            self.in_struct = false;
-            value
-        };
-
+        let value = tri!(visitor.visit_struct(MapDeserializer::new(self, name, fields)));
         tri!(self.parse(end_tag("hkobject")));
         Ok(value)
     }
@@ -491,9 +454,8 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
 
 #[cfg(test)]
 mod tests {
-    use crate::common::mocks::{enums::EventMode, flags::FlagValues};
-
     use super::*;
+    use crate::mocks::{classes::*, enums::EventMode, flags::FlagValues};
     use pretty_assertions::assert_eq;
     // use crate::common::mocks::{classes::*, enums::EventMode};
     // use havok_types::*;
@@ -550,28 +512,6 @@ mod tests {
     <hkcstring></hkcstring>
         "#,
             vec!["Hello".into(), "World".into(), "".into()],
-        );
-    }
-
-    #[test]
-    #[quick_tracing::init]
-    fn test_deserialize_class() {
-        parse_assert(
-            r##"
-<hkobject name="#01000" class="hkReferencedObject" signature="0xea7f1d08">
-        <hkparam name="memSizeAndFlags">2</hkparam>
-        <!-- comment1 -->
-        <!-- comment2 -->
-        <hkparam name="referenceCount">0</hkparam>
-        <!-- comment3 -->
-        <!-- comment4 -->
-</hkobject>"##,
-            crate::common::mocks::classes::HkReferencedObject {
-                __ptr_name_attr: Some(Pointer::new(1000)),
-                parent: crate::common::mocks::classes::HkBaseObject { __ptr: None },
-                mem_size_and_flags: 2,
-                reference_count: 0,
-            },
         );
     }
 
@@ -645,6 +585,7 @@ mod tests {
     }
 
     #[test]
+    #[quick_tracing::init]
     fn should_skip_class() {
         parse_assert(
             r##"
@@ -653,9 +594,9 @@ mod tests {
     <!-- referenceCount SERIALIZE_IGNORED -->
 </hkobject>
             "##,
-            crate::common::mocks::classes::HkReferencedObject {
-                __ptr_name_attr: Some(Pointer::new(1000)),
-                parent: crate::common::mocks::classes::HkBaseObject { __ptr: None },
+            HkReferencedObject {
+                __ptr: Some(Pointer::new(1000)),
+                parent: HkBaseObject { __ptr: None },
                 mem_size_and_flags: 0,
                 reference_count: 0,
             },
@@ -699,33 +640,33 @@ mod tests {
 </hkobject>
 "##,
             [
-                crate::common::mocks::classes::HkReferencedObject {
-                    __ptr_name_attr: Some(Pointer::new(1000)),
-                    parent: crate::common::mocks::classes::HkBaseObject { __ptr: None },
+                HkReferencedObject {
+                    __ptr: Some(Pointer::new(1000)),
+                    parent: HkBaseObject { __ptr: None },
                     mem_size_and_flags: 2,
                     reference_count: 0,
                 },
-                crate::common::mocks::classes::HkReferencedObject {
-                    __ptr_name_attr: Some(Pointer::new(1000)),
-                    parent: crate::common::mocks::classes::HkBaseObject { __ptr: None },
+                HkReferencedObject {
+                    __ptr: Some(Pointer::new(1000)),
+                    parent: HkBaseObject { __ptr: None },
                     mem_size_and_flags: 2,
                     reference_count: 0,
                 },
-                crate::common::mocks::classes::HkReferencedObject {
-                    __ptr_name_attr: Some(Pointer::new(1000)),
-                    parent: crate::common::mocks::classes::HkBaseObject { __ptr: None },
+                HkReferencedObject {
+                    __ptr: Some(Pointer::new(1000)),
+                    parent: HkBaseObject { __ptr: None },
                     mem_size_and_flags: 2,
                     reference_count: 0,
                 },
-                crate::common::mocks::classes::HkReferencedObject {
-                    __ptr_name_attr: Some(Pointer::new(1000)),
-                    parent: crate::common::mocks::classes::HkBaseObject { __ptr: None },
+                HkReferencedObject {
+                    __ptr: Some(Pointer::new(1000)),
+                    parent: HkBaseObject { __ptr: None },
                     mem_size_and_flags: 2,
                     reference_count: 0,
                 },
-                crate::common::mocks::classes::HkReferencedObject {
-                    __ptr_name_attr: Some(Pointer::new(1000)),
-                    parent: crate::common::mocks::classes::HkBaseObject { __ptr: None },
+                HkReferencedObject {
+                    __ptr: Some(Pointer::new(1000)),
+                    parent: HkBaseObject { __ptr: None },
                     mem_size_and_flags: 2,
                     reference_count: 0,
                 },
@@ -755,22 +696,18 @@ mod tests {
 </hkobject>
 "##,
             vec![
-                crate::common::mocks::classes::Classes::HkReferencedObject(
-                    crate::common::mocks::classes::HkReferencedObject {
-                        __ptr_name_attr: Some(Pointer::new(1000)),
-                        parent: crate::common::mocks::classes::HkBaseObject { __ptr: None },
-                        mem_size_and_flags: 2,
-                        reference_count: 0,
-                    },
-                ),
-                crate::common::mocks::classes::Classes::HkReferencedObject(
-                    crate::common::mocks::classes::HkReferencedObject {
-                        __ptr_name_attr: Some(Pointer::new(100)),
-                        parent: crate::common::mocks::classes::HkBaseObject { __ptr: None },
-                        mem_size_and_flags: 4,
-                        reference_count: 0,
-                    },
-                ),
+                Classes::HkReferencedObject(HkReferencedObject {
+                    __ptr: Some(Pointer::new(1000)),
+                    parent: HkBaseObject { __ptr: None },
+                    mem_size_and_flags: 2,
+                    reference_count: 0,
+                }),
+                Classes::HkReferencedObject(HkReferencedObject {
+                    __ptr: Some(Pointer::new(100)),
+                    parent: HkBaseObject { __ptr: None },
+                    mem_size_and_flags: 4,
+                    reference_count: 0,
+                }),
             ],
         );
     }

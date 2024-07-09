@@ -1,5 +1,5 @@
 use super::*;
-use crate::common::mocks::{enums::EventMode, flags::FlagValues};
+use crate::mocks::{enums::EventMode, flags::FlagValues};
 
 #[derive(Debug, Clone, Default, PartialEq)]
 

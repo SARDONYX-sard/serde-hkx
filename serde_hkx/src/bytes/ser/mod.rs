@@ -3,8 +3,8 @@ mod trait_impls;
 
 use crate::{lib::*, tri};
 
+use crate::bytes::ser::trait_impls::Align as _;
 use crate::bytes::serde::{hkx_header::HkxHeader, section_header::SectionHeader};
-use crate::common::trait_impls::Align as _;
 use crate::errors::ser::{
     Error, InvalidEndianSnafu, MissingClassInClassnamesSectionSnafu, MissingGlobalFixupClassSnafu,
     MissingLocalFixupsSrcSnafu, Result, SubAbsOverflowSnafu, UnsupportedPtrSizeSnafu,
@@ -821,7 +821,7 @@ mod tests {
     use super::*;
     use crate::{
         bytes::serde::hkx_header::HkxHeader,
-        common::mocks::{classes::*, constructors::new_defaultmale},
+        mocks::{classes::*, constructors::new_defaultmale},
     };
 
     #[test]

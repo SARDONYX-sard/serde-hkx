@@ -6,7 +6,7 @@ use std::{
     io::{self, Cursor, Write as _},
 };
 
-use crate::common::trait_impls::Align as _;
+use super::Align as _;
 
 /// Trait that defines a set of dedicated methods for writing Havok Class data.
 pub trait ClassNamesWriter {

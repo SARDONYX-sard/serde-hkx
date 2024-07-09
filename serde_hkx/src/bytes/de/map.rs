@@ -55,14 +55,6 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
         }
     }
 
-    #[inline]
-    fn skip_next_key_seed<K>(&mut self, seed: K) -> Result<Option<K::Value>, Self::Error>
-    where
-        K: DeserializeSeed<'de>,
-    {
-        self.next_key_seed(seed)
-    }
-
     // Parse
     fn next_key_seed<K>(&mut self, seed: K) -> Result<Option<K::Value>, Self::Error>
     where
@@ -85,14 +77,6 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
         K: DeserializeSeed<'de>,
     {
         self.next_key_seed(seed)
-    }
-
-    #[inline]
-    fn skip_next_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
-    where
-        V: DeserializeSeed<'de>,
-    {
-        self.next_value_seed(seed)
     }
 
     // Parse e.g. `(0.000000 0.000000 1.000000 0.000000)</hkparam>`

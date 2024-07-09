@@ -11,7 +11,7 @@ pub struct HkReferencedObject {
     ///
     /// # Note
     /// The case of [`Option::None`] assumes that the class is embedded directly in a field within the class.
-    pub __ptr_name_attr: Option<Pointer>,
+    pub __ptr: Option<Pointer>,
 
     /// # C++ Parent class(`hkReferencedObject` => parent: `hkBaseObject`) field Info
     /// -   name:`"memSizeAndFlags"`
@@ -39,7 +39,7 @@ impl HavokClass for HkReferencedObject {
 
 impl Serialize for HkReferencedObject {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        let class_meta = self.__ptr_name_attr.map(|name| (name, self.signature()));
+        let class_meta = self.__ptr.map(|name| (name, self.signature()));
         let mut serializer = serializer.serialize_struct("hkReferencedObject", class_meta)?;
 
         serializer.pad_field([0u8; 4].as_slice(), [0u8; 8].as_slice())?; // hkBaseObject ptr size
@@ -121,7 +121,7 @@ const _: () = {
                 }
 
                 #[inline]
-                fn visit_struct<__A>(
+                fn visit_struct_for_bytes<__A>(
                     self,
                     mut __map: __A,
                 ) -> _serde::__private::Result<Self::Value, __A::Error>
@@ -153,7 +153,7 @@ const _: () = {
                                 // As we need pad this line.
                                 //
                                 __field0 = _serde::__private::Some(
-                                    match __A::skip_next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<u16>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -204,9 +204,26 @@ const _: () = {
                     };
                     _serde::__private::Ok(HkReferencedObject {
                         parent,
-                        __ptr_name_attr: __map.class_ptr(),
+                        __ptr: __map.class_ptr(),
                         mem_size_and_flags: __field0,
                         reference_count: __field1,
+                    })
+                }
+
+                #[inline]
+                fn visit_struct<__A>(
+                    self,
+                    mut __map: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::MapAccess<'de>,
+                {
+                    let parent = HkBaseObject { __ptr: None };
+                    _serde::__private::Ok(HkReferencedObject {
+                        parent,
+                        __ptr: __map.class_ptr(),
+                        mem_size_and_flags: 0,
+                        reference_count: 0,
                     })
                 }
             }

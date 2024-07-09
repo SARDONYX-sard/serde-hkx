@@ -659,7 +659,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         V: Visitor<'de>,
     {
         self.in_struct = true;
-        let value = tri!(visitor.visit_struct(MapDeserializer::new(self, fields)));
+        let value = tri!(visitor.visit_struct_for_bytes(MapDeserializer::new(self, fields)));
         self.in_struct = false;
         Ok(value)
     }
@@ -737,7 +737,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::common::mocks::{enums::EventMode, flags::FlagValues};
+    use crate::mocks::{classes::*, enums::EventMode, flags::FlagValues};
     use pretty_assertions::assert_eq;
 
     fn parse_assert<'a, T>(s: BytesStream<'a>, expected: T)
@@ -817,9 +817,9 @@ mod tests {
                 0, 0, // reference_count
                 0, 0, 0, 0, 0, 0, 0, 0, // 8bytes align for struct
             ],
-            crate::common::mocks::classes::HkReferencedObject {
-                __ptr_name_attr: Some(Pointer::new(1)),
-                parent: crate::common::mocks::classes::HkBaseObject { __ptr: None },
+            HkReferencedObject {
+                __ptr: Some(Pointer::new(1)),
+                parent: HkBaseObject { __ptr: None },
                 mem_size_and_flags: 2,
                 reference_count: 0,
             },

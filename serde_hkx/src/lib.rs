@@ -1,7 +1,9 @@
 pub mod bytes;
-pub mod common;
 pub mod errors;
 pub mod xml;
+
+#[cfg(test)]
+pub mod mocks;
 
 /// A facade around all the types we need from the `std`, `core`, and `alloc`
 /// crates. This avoids elaborate import wrangling having to happen in every

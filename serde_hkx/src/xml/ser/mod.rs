@@ -530,7 +530,7 @@ impl<'a> SerializeFlags for &'a mut XmlSerializer {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::common::mocks::{classes::*, constructors::new_defaultmale};
+    use crate::mocks::{classes::*, constructors::new_defaultmale};
 
     #[test]
     #[quick_tracing::try_init]

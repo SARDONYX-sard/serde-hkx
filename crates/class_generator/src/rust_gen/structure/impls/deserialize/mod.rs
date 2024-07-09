@@ -1,5 +1,6 @@
 mod enum_fields;
 mod visit_struct;
+mod visit_struct_for_bytes;
 
 use crate::{
     cpp_info::{Class, Member, TypeKind},

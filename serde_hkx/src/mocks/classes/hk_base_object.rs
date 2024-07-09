@@ -49,7 +49,7 @@ const _: () = {
                 }
 
                 #[inline]
-                fn visit_struct<__A>(
+                fn visit_struct_for_bytes<__A>(
                     self,
                     mut __map: __A,
                 ) -> _serde::__private::Result<Self::Value, __A::Error>
@@ -57,6 +57,19 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     __A::pad(&mut __map, 4, 8); // hkBaseObject to vtable of ptr size
+                    _serde::__private::Ok(HkBaseObject {
+                        __ptr: __A::class_ptr(&mut __map),
+                    })
+                }
+
+                #[inline]
+                fn visit_struct<__A>(
+                    self,
+                    mut __map: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::MapAccess<'de>,
+                {
                     _serde::__private::Ok(HkBaseObject {
                         __ptr: __A::class_ptr(&mut __map),
                     })

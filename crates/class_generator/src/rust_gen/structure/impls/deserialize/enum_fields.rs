@@ -3,43 +3,24 @@ use proc_macro2::TokenStream;
 use quote::quote;
 
 pub fn gen_enum_fields(members: &[&Member]) -> TokenStream {
-    let enum_variants = members
-        .iter()
-        .enumerate()
-        .map(|(index, _member)| {
-            let field_ident = quote::format_ident!("__field{index}");
-            quote! {
-                #field_ident
-            }
-        })
-        .collect::<Vec<_>>();
+    let mut enum_variants = Vec::new();
+    let mut visit_uint64_matchers = Vec::new();
+    let mut visit_key_matchers = Vec::new();
 
-    let visit_uint64_matchers = members
-        .iter()
-        .enumerate()
-        .map(|(index, _)| {
-            let field_ident = quote::format_ident!("__field{index}");
+    for (index, member) in members.iter().enumerate() {
+        let field_ident = quote::format_ident!("__field{index}");
 
-            // e.g. 0 => Ok(__Field::__field0),
-            quote! {
-                index => Ok(__Field::#field_ident),
-            }
-        })
-        .collect::<Vec<_>>();
+        enum_variants.push(quote! { #field_ident });
 
-    let visit_key_matchers = members
-        .iter()
-        .enumerate()
-        .map(|(index, member)| {
-            let member_name = &member.name;
-            let field_ident = quote::format_ident!("__field{index}");
+        // e.g. 0 => Ok(__Field::__field0),
+        visit_uint64_matchers.push(quote! { index => Ok(__Field::#field_ident) });
 
+        if !&member.flags.has_skip_serializing() {
             // e.g. "referenceCount" => Ok(__Field::__field1),
-            quote! {
-                #member_name => Ok(__Field::#field_ident),
-            }
-        })
-        .collect::<Vec<_>>();
+            let member_name = &member.name;
+            visit_key_matchers.push(quote! { #member_name => Ok(__Field::#field_ident) });
+        };
+    }
 
     quote! {
             #[allow(non_camel_case_types)]
@@ -55,7 +36,7 @@ pub fn gen_enum_fields(members: &[&Member]) -> TokenStream {
                     core::fmt::Formatter::write_str(__formatter, "field identifier")
                 }
 
-                /// Index for binary
+                /// Intended for use in binary.
                 fn visit_uint64<E>(self, __value: u64) -> Result<Self::Value, E>
                 where
                     E: havok_serde::de::Error,
@@ -66,6 +47,7 @@ pub fn gen_enum_fields(members: &[&Member]) -> TokenStream {
                     }
                 }
 
+                /// Intended for use in XML.
                 fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
