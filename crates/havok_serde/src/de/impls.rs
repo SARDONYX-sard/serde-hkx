@@ -54,6 +54,7 @@ macro_rules! impl_deserialize {
     };
 }
 
+impl_deserialize!((), visit_void, deserialize_void);
 impl_deserialize!(char, visit_char, deserialize_char);
 impl_deserialize!(bool, visit_bool, deserialize_bool);
 
@@ -308,8 +309,8 @@ macro_rules! seq_vec_impl {
 }
 
 seq_vec_impl!(
-  bool, char, u8, u16, u32, u64, i8, i16, i32, i64, f32, Pointer
-  => next_primitive_element, next_primitive_element_seed
+    (), bool, char, u8, u16, u32, u64, i8, i16, i32, i64, f32, Pointer
+    => next_primitive_element, next_primitive_element_seed
 );
 seq_vec_impl!(Vector4, Quaternion, Matrix3, Rotation, QsTransform, Matrix4, Transform => next_math_element, next_math_element_seed);
 
@@ -502,7 +503,7 @@ macro_rules! array_impls {
     }
 }
 
-array_impls!(bool, char, u8, u16, u32, u64, i8, i16, i32, i64, f32, Pointer => next_primitive_element, next_primitive_element_seed);
+array_impls!((), bool, char, u8, u16, u32, u64, i8, i16, i32, i64, f32, Pointer => next_primitive_element, next_primitive_element_seed);
 array_impls!(Vector4, Quaternion, Matrix3, Rotation, QsTransform, Matrix4, Transform => next_math_element, next_math_element_seed);
 
 impl<'de, T, const N: usize> Visitor<'de> for ArrayVisitor<[T; N]>
