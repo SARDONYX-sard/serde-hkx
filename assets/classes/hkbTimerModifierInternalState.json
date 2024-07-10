@@ -5,15 +5,20 @@
   "size_x86": 12,
   "size_x86_64": 24,
   "parent": "hkReferencedObject",
+  "parent_has_string": false,
   "vtable": true,
+  "has_string": false,
   "members": [
     {
       "name": "secondsElapsed",
-      "offset_x86": 8,
-      "offset_x86_64": 16,
+      "has_string": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0

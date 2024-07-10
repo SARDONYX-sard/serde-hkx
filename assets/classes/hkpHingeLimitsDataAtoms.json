@@ -4,10 +4,14 @@
   "signature": "0x555876ff",
   "size_x86": 144,
   "size_x86_64": 144,
+  "parent_has_string": false,
   "vtable": false,
+  "has_string": false,
   "enums": [
     {
       "name": "Axis",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
       "flags": "00000000",
       "enum_item": [
         {
@@ -28,36 +32,45 @@
   "members": [
     {
       "name": "rotations",
-      "offset_x86": 0,
-      "offset_x86_64": 0,
       "class_ref": "hkpSetLocalRotationsConstraintAtom",
+      "has_string": false,
       "ctype": "struct hkpSetLocalRotationsConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 112,
+      "type_size_x86_64": 112,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0
     },
     {
       "name": "angLimit",
-      "offset_x86": 112,
-      "offset_x86_64": 112,
       "class_ref": "hkpAngLimitConstraintAtom",
+      "has_string": false,
       "ctype": "struct hkpAngLimitConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 112,
+      "offset_x86_64": 112,
+      "type_size_x86": 16,
+      "type_size_x86_64": 16,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0
     },
     {
       "name": "2dAng",
-      "offset_x86": 128,
-      "offset_x86_64": 128,
       "class_ref": "hkp2dAngConstraintAtom",
+      "has_string": false,
       "ctype": "struct hkp2dAngConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 128,
+      "offset_x86_64": 128,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0

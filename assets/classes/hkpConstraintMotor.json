@@ -5,10 +5,14 @@
   "size_x86": 12,
   "size_x86_64": 24,
   "parent": "hkReferencedObject",
+  "parent_has_string": false,
   "vtable": true,
+  "has_string": false,
   "enums": [
     {
       "name": "MotorType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
       "flags": "00000000",
       "enum_item": [
         {
@@ -41,12 +45,15 @@
   "members": [
     {
       "name": "type",
-      "offset_x86": 8,
-      "offset_x86_64": 16,
       "enum_ref": "MotorType",
+      "has_string": false,
       "ctype": "enum MotorType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0

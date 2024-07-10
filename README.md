@@ -9,13 +9,12 @@ The only way to find out if it is possible or not is to try it out.
 - [x] Try to implement Serializer to design.
   - [x] XML
   - [x] Bytes
-- [ ] Try to implement Deserializer to design.
+- [x] Try to implement Deserializer to design.
 
-  - [ ] XML <- Current working
-  - [ ] Bytes
+  - [x] XML
+  - [x] Bytes
 
-- [ ] Try to implement procedural macro(`derive(Serialize, Deserialize)`).
-- [ ] Generate Classes.
+- [x] Generate Classes (Task: struct). <- Current working
 
 ### Implementations
 

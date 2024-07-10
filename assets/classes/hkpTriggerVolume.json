@@ -5,10 +5,14 @@
   "size_x86": 52,
   "size_x86_64": 88,
   "parent": "hkReferencedObject",
+  "parent_has_string": false,
   "vtable": true,
+  "has_string": false,
   "enums": [
     {
       "name": "EventType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
       "flags": "00000000",
       "enum_item": [
         {
@@ -31,6 +35,8 @@
     },
     {
       "name": "Operation",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT32",
       "flags": "00000000",
       "enum_item": [
         {
@@ -55,47 +61,59 @@
   "members": [
     {
       "name": "overlappingBodies",
-      "offset_x86": 20,
-      "offset_x86_64": 40,
       "class_ref": "hkpRigidBody",
+      "has_string": false,
       "ctype": "hkArray<hkpRigidBody*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
+      "offset_x86": 20,
+      "offset_x86_64": 40,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0
     },
     {
       "name": "eventQueue",
-      "offset_x86": 32,
-      "offset_x86_64": 56,
       "class_ref": "hkpTriggerVolumeEventInfo",
+      "has_string": false,
       "ctype": "hkArray<struct hkpTriggerVolumeEventInfo>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 32,
+      "offset_x86_64": 56,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0
     },
     {
       "name": "triggerBody",
-      "offset_x86": 44,
-      "offset_x86_64": 72,
       "class_ref": "hkpRigidBody",
+      "has_string": false,
       "ctype": "struct hkpRigidBody*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 44,
+      "offset_x86_64": 72,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0
     },
     {
       "name": "sequenceNumber",
-      "offset_x86": 48,
-      "offset_x86_64": 80,
+      "has_string": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 48,
+      "offset_x86_64": 80,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0

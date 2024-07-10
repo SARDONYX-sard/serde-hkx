@@ -5,16 +5,21 @@
   "size_x86": 56,
   "size_x86_64": 96,
   "parent": "hkbModifier",
+  "parent_has_string": true,
   "vtable": true,
+  "has_string": true,
   "members": [
     {
       "name": "modifiers",
-      "offset_x86": 44,
-      "offset_x86_64": 80,
       "class_ref": "hkbModifier",
+      "has_string": false,
       "ctype": "hkArray<hkbModifier*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
+      "offset_x86": 44,
+      "offset_x86_64": 80,
+      "type_size_x86": 12,
+      "type_size_x86_64": 16,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0

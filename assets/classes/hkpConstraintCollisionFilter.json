@@ -5,6 +5,8 @@
   "size_x86": 68,
   "size_x86_64": 104,
   "parent": "hkpPairCollisionFilter",
+  "parent_has_string": false,
   "vtable": true,
+  "has_string": false,
   "members": []
 }

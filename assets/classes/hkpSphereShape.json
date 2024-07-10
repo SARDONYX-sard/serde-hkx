@@ -5,15 +5,20 @@
   "size_x86": 32,
   "size_x86_64": 56,
   "parent": "hkpConvexShape",
+  "parent_has_string": false,
   "vtable": true,
+  "has_string": false,
   "members": [
     {
       "name": "pad16",
-      "offset_x86": 20,
-      "offset_x86_64": 40,
+      "has_string": false,
       "ctype": "hkUint32[3]",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 20,
+      "offset_x86_64": 40,
+      "type_size_x86": 12,
+      "type_size_x86_64": 12,
       "arrsize": 3,
       "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
       "default": 0

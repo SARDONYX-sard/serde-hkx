@@ -4,10 +4,14 @@
   "signature": "0x9e746ba2",
   "size_x86": 6,
   "size_x86_64": 6,
+  "parent_has_string": false,
   "vtable": false,
+  "has_string": false,
   "enums": [
     {
       "name": "VariableType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
       "flags": "00000000",
       "enum_item": [
         {
@@ -56,24 +60,30 @@
   "members": [
     {
       "name": "role",
-      "offset_x86": 0,
-      "offset_x86_64": 0,
       "class_ref": "hkbRoleAttribute",
+      "has_string": false,
       "ctype": "struct hkbRoleAttribute",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0
     },
     {
       "name": "type",
-      "offset_x86": 4,
-      "offset_x86_64": 4,
       "enum_ref": "VariableType",
+      "has_string": false,
       "ctype": "enum VariableType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
+      "offset_x86": 4,
+      "offset_x86_64": 4,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0

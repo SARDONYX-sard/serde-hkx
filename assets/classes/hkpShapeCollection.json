@@ -5,10 +5,14 @@
   "size_x86": 24,
   "size_x86_64": 48,
   "parent": "hkpShape",
+  "parent_has_string": false,
   "vtable": true,
+  "has_string": false,
   "enums": [
     {
       "name": "CollectionType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
       "flags": "00000000",
       "enum_item": [
         {
@@ -49,23 +53,29 @@
   "members": [
     {
       "name": "disableWelding",
-      "offset_x86": 20,
-      "offset_x86_64": 40,
+      "has_string": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 20,
+      "offset_x86_64": 40,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0
     },
     {
       "name": "collectionType",
-      "offset_x86": 21,
-      "offset_x86_64": 41,
       "enum_ref": "CollectionType",
+      "has_string": false,
       "ctype": "enum CollectionType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
+      "offset_x86": 21,
+      "offset_x86_64": 41,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 3

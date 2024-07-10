@@ -5,6 +5,8 @@
   "size_x86": 12,
   "size_x86_64": 24,
   "parent": "hkpConstraintData",
+  "parent_has_string": false,
   "vtable": true,
+  "has_string": false,
   "members": []
 }

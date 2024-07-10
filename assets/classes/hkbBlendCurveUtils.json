@@ -4,10 +4,14 @@
   "signature": "0x23041af0",
   "size_x86": 1,
   "size_x86_64": 1,
+  "parent_has_string": false,
   "vtable": false,
+  "has_string": false,
   "enums": [
     {
       "name": "BlendCurve",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
       "flags": "00000000",
       "enum_item": [
         {

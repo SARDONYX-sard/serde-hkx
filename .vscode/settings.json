@@ -8,5 +8,6 @@
       "fileMatch": ["assets/classes/*.json"],
       "url": "./assets/havok_class_schema.json"
     }
-  ]
+  ],
+  "rust-analyzer.check.command": "clippy"
 }

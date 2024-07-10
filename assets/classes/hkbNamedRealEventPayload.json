@@ -5,15 +5,20 @@
   "size_x86": 16,
   "size_x86_64": 32,
   "parent": "hkbNamedEventPayload",
+  "parent_has_string": true,
   "vtable": true,
+  "has_string": true,
   "members": [
     {
       "name": "data",
-      "offset_x86": 12,
-      "offset_x86_64": 24,
+      "has_string": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 12,
+      "offset_x86_64": 24,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0

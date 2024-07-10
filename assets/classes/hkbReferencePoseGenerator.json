@@ -5,15 +5,20 @@
   "size_x86": 44,
   "size_x86_64": 80,
   "parent": "hkbGenerator",
+  "parent_has_string": true,
   "vtable": true,
+  "has_string": true,
   "members": [
     {
       "name": "skeleton",
-      "offset_x86": 40,
-      "offset_x86_64": 72,
+      "has_string": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 40,
+      "offset_x86_64": 72,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
       "arrsize": 0,
       "flags": "FLAGS_NONE|SERIALIZE_IGNORED",
       "default": 0

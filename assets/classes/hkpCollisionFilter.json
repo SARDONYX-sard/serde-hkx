@@ -5,10 +5,14 @@
   "size_x86": 48,
   "size_x86_64": 72,
   "parent": "hkReferencedObject",
+  "parent_has_string": false,
   "vtable": true,
+  "has_string": false,
   "enums": [
     {
       "name": "hkpFilterType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT32",
       "flags": "00000000",
       "enum_item": [
         {
@@ -45,34 +49,43 @@
   "members": [
     {
       "name": "prepad",
-      "offset_x86": 24,
-      "offset_x86_64": 48,
+      "has_string": false,
       "ctype": "hkUint32[2]",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 24,
+      "offset_x86_64": 48,
+      "type_size_x86": 8,
+      "type_size_x86_64": 8,
       "arrsize": 2,
       "flags": "FLAGS_NONE",
       "default": 0
     },
     {
       "name": "type",
-      "offset_x86": 32,
-      "offset_x86_64": 56,
       "enum_ref": "hkpFilterType",
+      "has_string": false,
       "ctype": "enum hkpFilterType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT32",
+      "offset_x86": 32,
+      "offset_x86_64": 56,
+      "type_size_x86": 4,
+      "type_size_x86_64": 4,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0
     },
     {
       "name": "postpad",
-      "offset_x86": 36,
-      "offset_x86_64": 60,
+      "has_string": false,
       "ctype": "hkUint32[3]",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 36,
+      "offset_x86_64": 60,
+      "type_size_x86": 12,
+      "type_size_x86_64": 12,
       "arrsize": 3,
       "flags": "FLAGS_NONE",
       "default": 0

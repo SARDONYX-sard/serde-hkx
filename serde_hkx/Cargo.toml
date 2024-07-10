@@ -1,0 +1,53 @@
+[package]
+name = "serde_hkx"
+authors.workspace = true
+version.workspace = true
+license.workspace = true
+description.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+edition.workspace = true
+
+
+[dependencies]
+annotate-snippets = "0.11.4"                                              # Error reporting display
+byteorder = "1.5.0"
+educe = "0.6.0"
+havok_serde = { path = "../crates/havok_serde", features = ["indexmap"] }
+havok_types = { path = "../crates/havok_types" }
+havok_types_derive = { path = "../crates/havok_types_derive" }            # To impl `Default`&`FromStr` for Bitflags
+indexmap = "2.2.6"
+rhexdump = "0.2.0"                                                        # hexdump display for binary error repoting
+snafu = "0.8.2"                                                           # Define all error patterns(with backtrace)
+static_assertions = "1.1.0"
+tracing = { version = "0.1.40", optional = true }
+winnow = { version = "0.6.8", features = ["simd"] }                       # Parser conbinator
+
+[dev-dependencies]
+num-derive = "0.4"                                           # enum to number(mock)
+num-traits = "0.2"                                           # enum to number(mock)
+bitflags = "2.4"                                             # To generate flags type(mock)
+pretty_assertions = "1.4"                                    # Color diff assertion
+quick_tracing = { version = "0.1.5", features = ["derive"] }
+zerocopy = { version = "0.7.34" }                            # To(As)Bytes
+
+[features]
+default = ["std", "tracing"]
+
+# Provide derive(Serialize, Deserialize) macros.
+# derive = ["havok_serde_derive"]
+
+# Provide impls for common standard library types like Vec<T> and HashMap<K, V>.
+# Requires a dependency on the Rust standard library.
+std = []
+
+# Provide impls for types in the Rust core allocation and collections library
+# including Vec<T>, and Cow<T>. This is a subset of std but may
+# be enabled without depending on all of std.
+alloc = []
+
+# Use tracing logging.(We may need `tracing-subscriber` crate too.)
+tracing = ["dep:tracing"]
+
+# Derive `serde`
+serde = ["havok_types/serde"]

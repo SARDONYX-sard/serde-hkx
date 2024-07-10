@@ -4,10 +4,14 @@
   "signature": "0xb2b41feb",
   "size_x86": 1,
   "size_x86_64": 1,
+  "parent_has_string": false,
   "vtable": false,
+  "has_string": false,
   "enums": [
     {
       "name": "WeldingType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_UINT8",
       "flags": "00000000",
       "enum_item": [
         {
@@ -30,6 +34,8 @@
     },
     {
       "name": "SectorType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
       "flags": "00000000",
       "enum_item": [
         {
@@ -56,6 +62,8 @@
     },
     {
       "name": "NumAngles",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_VOID",
       "flags": "00000000",
       "enum_item": [
         {

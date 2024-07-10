@@ -5,16 +5,21 @@
   "size_x86": 256,
   "size_x86_64": 272,
   "parent": "hkpConstraintData",
+  "parent_has_string": false,
   "vtable": true,
+  "has_string": false,
   "members": [
     {
       "name": "atoms",
-      "offset_x86": 16,
-      "offset_x86_64": 32,
       "class_ref": "hkpLimitedHingeConstraintDataAtoms",
+      "has_string": false,
       "ctype": "struct hkpLimitedHingeConstraintDataAtoms",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 16,
+      "offset_x86_64": 32,
+      "type_size_x86": 240,
+      "type_size_x86_64": 240,
       "arrsize": 0,
       "flags": "FLAGS_NONE|ALIGN_16",
       "default": 0

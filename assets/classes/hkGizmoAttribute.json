@@ -4,10 +4,14 @@
   "signature": "0x23aadfb6",
   "size_x86": 12,
   "size_x86_64": 24,
+  "parent_has_string": false,
   "vtable": false,
+  "has_string": true,
   "enums": [
     {
       "name": "GizmoType",
+      "vtype": "TYPE_ENUM",
+      "vsubtype": "TYPE_INT8",
       "flags": "00000000",
       "enum_item": [
         {
@@ -32,34 +36,43 @@
   "members": [
     {
       "name": "visible",
-      "offset_x86": 0,
-      "offset_x86_64": 0,
+      "has_string": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0
     },
     {
       "name": "label",
-      "offset_x86": 4,
-      "offset_x86_64": 8,
+      "has_string": true,
       "ctype": "char*",
       "vtype": "TYPE_CSTRING",
       "vsubtype": "TYPE_VOID",
+      "offset_x86": 4,
+      "offset_x86_64": 8,
+      "type_size_x86": 4,
+      "type_size_x86_64": 8,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0
     },
     {
       "name": "type",
-      "offset_x86": 8,
-      "offset_x86_64": 16,
       "enum_ref": "GizmoType",
+      "has_string": false,
       "ctype": "enum GizmoType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
+      "offset_x86": 8,
+      "offset_x86_64": 16,
+      "type_size_x86": 1,
+      "type_size_x86_64": 1,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0

@@ -5,6 +5,8 @@
   "size_x86": 288,
   "size_x86_64": 320,
   "parent": "hkpKeyframedRigidMotion",
+  "parent_has_string": false,
   "vtable": true,
+  "has_string": false,
   "members": []
 }

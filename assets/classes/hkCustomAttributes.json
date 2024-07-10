@@ -4,16 +4,21 @@
   "signature": "0xbff19005",
   "size_x86": 8,
   "size_x86_64": 16,
+  "parent_has_string": false,
   "vtable": false,
+  "has_string": true,
   "members": [
     {
       "name": "attributes",
-      "offset_x86": 0,
-      "offset_x86_64": 0,
       "class_ref": "hkCustomAttributesAttribute",
+      "has_string": true,
       "ctype": "hkSimpleArray<struct hkCustomAttributesAttribute>",
       "vtype": "TYPE_SIMPLEARRAY",
       "vsubtype": "TYPE_STRUCT",
+      "offset_x86": 0,
+      "offset_x86_64": 0,
+      "type_size_x86": 8,
+      "type_size_x86_64": 12,
       "arrsize": 0,
       "flags": "FLAGS_NONE",
       "default": 0
