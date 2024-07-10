@@ -167,26 +167,7 @@ const _: () = {
                     core::fmt::Formatter::write_str(__formatter, "field identifier")
                 }
 
-                /// Index for binary
-                fn visit_uint64<E>(self, __value: u64) -> Result<Self::Value, E>
-                where
-                    E: havok_serde::de::Error,
-                {
-                    match __value {
-                        0 => Ok(__Field::__field0),
-                        1 => Ok(__Field::__field1),
-                        2 => Ok(__Field::__field2),
-                        3 => Ok(__Field::__field3),
-                        4 => Ok(__Field::__field4),
-                        5 => Ok(__Field::__field5),
-                        6 => Ok(__Field::__field6),
-                        7 => Ok(__Field::__field7),
-                        8 => Ok(__Field::__field8),
-                        9 => Ok(__Field::__field9),
-                        _ => Ok(__Field::__ignore),
-                    }
-                }
-
+                /// For XML
                 fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
@@ -195,6 +176,12 @@ const _: () = {
                         "animationFilenames" => Ok(__Field::__field2),
                         "behaviorFilenames" => Ok(__Field::__field3),
                         "characterFilenames" => Ok(__Field::__field4),
+                        "eventNames" => Ok(__Field::__field5),
+                        "animationPath" => Ok(__Field::__field6),
+                        "behaviorPath" => Ok(__Field::__field7),
+                        "characterPath" => Ok(__Field::__field8),
+                        "fullPathToSource" => Ok(__Field::__field9),
+                        // rootPath is serialized ignored
                         _ => Ok(__Field::__ignore),
                     }
                 }
@@ -230,22 +217,15 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let parent = __A::next_value(&mut __map)?; // hkBaseObject to vtable of ptr size
-                    let mut __field2: _serde::__private::Option<Vec<StringPtr<'de>>> =
+                    let mut animation_filenames: _serde::__private::Option<Vec<StringPtr<'de>>> =
                         _serde::__private::None;
-                    let mut __field3: _serde::__private::Option<Vec<StringPtr<'de>>> =
+                    let mut behavior_filenames: _serde::__private::Option<Vec<StringPtr<'de>>> =
                         _serde::__private::None;
 
-                    while let _serde::__private::Some(__key) =
-                        match __A::next_key::<__Field>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        }
-                    {
-                        match __key {
-                            __Field::__field2 => {
-                                if _serde::__private::Option::is_some(&__field2) {
+                    for i in 2..9 {
+                        match i {
+                            2 => {
+                                if _serde::__private::Option::is_some(&animation_filenames) {
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
                                             "animationFilenames",
@@ -255,7 +235,7 @@ const _: () = {
                                 //
                                 // As we need pad this line.
                                 //
-                                __field2 =
+                                animation_filenames =
                                     _serde::__private::Some(match __A::next_value(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -263,8 +243,8 @@ const _: () = {
                                         }
                                     });
                             }
-                            __Field::__field3 => {
-                                if _serde::__private::Option::is_some(&__field3) {
+                            3 => {
+                                if _serde::__private::Option::is_some(&behavior_filenames) {
                                     return _serde::__private::Err(
                                         <__A::Error as _serde::de::Error>::duplicate_field(
                                             "behaviorFilenames",
@@ -274,7 +254,7 @@ const _: () = {
                                 //
                                 // As we need pad this line.
                                 //
-                                __field3 = _serde::__private::Some(
+                                behavior_filenames = _serde::__private::Some(
                                     match _serde::de::MapAccess::next_value(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -288,7 +268,7 @@ const _: () = {
                     }
                     __A::pad(&mut __map, 4, 8); // For tailing alignment.
 
-                    let __field2 = match __field2 {
+                    let animation_filenames = match animation_filenames {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             return _serde::__private::Err(
@@ -298,7 +278,7 @@ const _: () = {
                             )
                         }
                     };
-                    let __field3 = match __field3 {
+                    let behavior_filenames = match behavior_filenames {
                         _serde::__private::Some(__field) => __field,
                         _serde::__private::None => {
                             return _serde::__private::Err(
@@ -312,8 +292,8 @@ const _: () = {
                     _serde::__private::Ok(HkbProjectStringData {
                         __ptr: todo!(),
                         parent,
-                        animation_filenames: __field2,
-                        behavior_filenames: __field3,
+                        animation_filenames,
+                        behavior_filenames,
                         character_filenames: todo!(),
                         event_names: todo!(),
                         animation_path: todo!(),
@@ -332,17 +312,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let parent_parent = HkBaseObject { __ptr: None };
-                    let parent = HkReferencedObject {
-                        parent: parent_parent,
-                        __ptr: None,
-                        mem_size_and_flags: 0,
-                        reference_count: 0,
-                    };
-
                     _serde::__private::Ok(HkbProjectStringData {
-                        __ptr: todo!(),
-                        parent,
+                        __ptr: __map.class_ptr(),
+                        parent: __hkReferencedObjectVisitor::visit_as_parent(__map)?,
                         animation_filenames: todo!(),
                         behavior_filenames: todo!(),
                         character_filenames: todo!(),

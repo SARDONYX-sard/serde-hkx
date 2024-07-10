@@ -1,68 +1,92 @@
+use crate::{
+    cpp_info::{Class, Member},
+    rust_gen::structure::{
+        impls::deserialize::to_visitor_ident,
+        to_rust_token::{member_to_rust_type, to_rust_field_ident},
+    },
+};
 use proc_macro2::TokenStream;
-use quote::quote;
+use quote::{format_ident, quote};
 
-fn visit_struct_matcher(index: usize, member_name: &str, member_ty: TokenStream) -> TokenStream {
-    // It is a variant to determine which fields are to be deserialized by enum.
-    let n_field_ident = quote::format_ident!("__field{index}");
+/// Generate `visit_struct` (for XML)
+///
+/// # Note
+/// - `members`: current class members.
+pub fn gen(class: &Class) -> TokenStream {
+    let mut first_recv_fields = Vec::new(); // after call `next_value`
+    let mut visit_fields_matcher = Vec::new(); // 　The process of removing the Option and inserting the value into the field at the end.
+    let mut last_recv_fields = Vec::new();
+    let mut field_idents = Vec::new();
 
-    quote! {
-        __Field::#n_field_ident => {
-            if _serde::__private::Option::is_some(&#n_field_ident) {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::duplicate_field(
-                        #member_name,
-                    ),
+    let mut has_skip_once = false; // All fields whose serialize is skipped are made to use `Default::default`.
+
+    for member in &class.members {
+        let Member { name, flags, .. } = member;
+
+        if flags.has_skip_serializing() {
+            has_skip_once = true;
+            continue;
+        }
+
+        let field_ident = to_rust_field_ident(name); // e.g. `m_fieldName`
+        let rust_type = member_to_rust_type(member, &class.name); // e.g. `u64`
+
+        field_idents.push(field_ident.clone());
+
+        first_recv_fields.push(quote! {
+            let mut #field_ident: _serde::__private::Option<#rust_type> = _serde::__private::None;
+        });
+
+        visit_fields_matcher.push(quote! {
+            __Field::#field_ident => {
+                if _serde::__private::Option::is_some(&#field_ident) {
+                    return _serde::__private::Err(
+                        <__A::Error as _serde::de::Error>::duplicate_field(#name),
+                    );
+                }
+                #field_ident = _serde::__private::Some(
+                    match __A::next_value::<#rust_type>(&mut __map) {
+                        _serde::__private::Ok(__val) => __val,
+                        _serde::__private::Err(__err) => {
+                            return _serde::__private::Err(__err);
+                        }
+                    },
                 );
             }
-            #n_field_ident = _serde::__private::Some(
-                match _serde::de::MapAccess::next_value::<#member_ty>(&mut __map) {
-                    _serde::__private::Ok(__val) => __val,
-                    _serde::__private::Err(__err) => {
-                        return _serde::__private::Err(__err);
-                    }
-                },
-            );
-        }
-    }
-}
+        });
 
-fn set_field_in_visit_struct(index: usize, member_name: &str) -> TokenStream {
-    let n_field_ident = quote::format_ident!("__field{index}");
+        last_recv_fields.push(quote! {
+            let #field_ident = match #field_ident {
+                _serde::__private::Some(__field) => __field,
+                _serde::__private::None => {
+                    return _serde::__private::Err(
+                        <__A::Error as _serde::de::Error>::missing_field(
+                            #name,
+                        ),
+                    )
+                }
+            };
+        });
+    }
+
+    let default = if has_skip_once {
+        quote! { ..Default::default() }
+    } else {
+        quote! {}
+    };
+
+    let (deserialize_parent, parent_field) = if let Some(parent_name) = &class.parent {
+        let parent_visitor_name = to_visitor_ident(parent_name);
+        (
+            quote! { let parent = #parent_visitor_name::visit_as_parent(__map)?; },
+            quote! { parent, },
+        )
+    } else {
+        (quote! {}, quote! {})
+    };
+    let class_name = format_ident!("{}", class.name);
 
     quote! {
-        let #n_field_ident = match #n_field_ident {
-            _serde::__private::Some(#n_field_ident) => #n_field_ident,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(#member_name),
-                )
-            }
-        };
-    }
-}
-
-fn gen_visit_struct(
-    class_name: &str,
-    setter_declares: Vec<TokenStream>,
-    set_fields: Vec<TokenStream>,
-    visit_struct_matchers: Vec<TokenStream>,
-) -> TokenStream {
-    let class_name_ident = syn::Ident::new(class_name, proc_macro2::Span::call_site());
-    let expecting_msg = format!("struct {class_name}");
-
-    quote! {
-        struct __Visitor<'de> {
-            marker: core::marker::PhantomData<#class_name>,
-            lifetime: core::marker::PhantomData<&'de ()>,
-        }
-
-        impl<'de> _serde::de::Visitor<'de> for __Visitor<'de> {
-            type Value = #class_name_ident;
-            fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
-                core::fmt::Formatter::write_str(__formatter, #expecting_msg)
-            }
-
-            #[inline]
             fn visit_struct<__A>(
                 self,
                 mut __map: __A,
@@ -70,46 +94,29 @@ fn gen_visit_struct(
             where
                 __A: _serde::de::MapAccess<'de>,
             {
-                let mut __field0: _serde::__private::Option<u16> = _serde::__private::None;
-                let mut __field1: _serde::__private::Option<i16> = _serde::__private::None;
-
-                __A::pad(&mut __map, 4, 8); // before 1st field.
+                #deserialize_parent
+                #(#first_recv_fields)*
                 while let _serde::__private::Some(__key) =
-                    match _serde::de::MapAccess::next_key::<__Field>(&mut __map) {
+                    match __A::next_key::<__Field>(&mut __map) {
                         _serde::__private::Ok(__val) => __val,
                         _serde::__private::Err(__err) => {
                             return _serde::__private::Err(__err);
                         }
                     }
                 {
-                    match __key {
-                        #(#visit_struct_matchers)*
+                    match i {
+                        #(#visit_fields_matcher)*
                         _ => {}
                     }
                 }
+                #(#last_recv_fields)*
 
-                #(#set_fields)*
-
-                _serde::__private::Ok(HkReferencedObject {
-                        parent: HkBaseObject { _name: None },
-                        __ptr_name_attr: __map.class_ptr(),
-                        mem_size_and_flags: __field0,
-                        reference_count: __field1,
-                    },
-                )
+                _serde::__private::Ok(#class_name {
+                    __ptr: __A::class_ptr(__map),
+                    #parent_field
+                    #(#field_idents,)*
+                    #default
+                })
             }
-        }
-
-        const FIELDS: &[&str] = &["memSizeAndFlags", "referenceCount"];
-        _serde::Deserializer::deserialize_struct(
-            deserializer,
-            #class_name,
-            FIELDS,
-            __Visitor {
-                marker: _serde::__private::PhantomData::<#class_name_ident>,
-                lifetime: _serde::__private::PhantomData,
-            },
-        )
-
     }
 }

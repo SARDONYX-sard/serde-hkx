@@ -28,6 +28,7 @@
     "hksection",
     "hkxcmd",
     "HOMOGENEOUSARRAY",
+    "idents",
     "impls",
     "indexmap",
     "Inplace",

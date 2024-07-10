@@ -48,7 +48,7 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
     where
         T: DeserializeSeed<'de>,
     {
-        self.next_stringptr_element_seed(seed)
+        self.next_primitive_element_seed(seed)
     }
 
     #[inline]

@@ -1,20 +1,16 @@
-use crate::cpp_info::Member;
+use crate::{cpp_info::Member, rust_gen::structure::to_rust_token::to_rust_field_ident};
 use proc_macro2::TokenStream;
 use quote::quote;
 
-pub fn gen_enum_fields(members: &[&Member]) -> TokenStream {
+/// Implement deserialization to parse key(`<hkparam name="key">`) for XML and convert it to each variant of enum.
+pub fn gen_enum_fields(members: &[Member]) -> TokenStream {
     let mut enum_variants = Vec::new();
-    let mut visit_uint64_matchers = Vec::new();
     let mut visit_key_matchers = Vec::new();
 
-    for (index, member) in members.iter().enumerate() {
-        let field_ident = quote::format_ident!("__field{index}");
+    for member in members {
+        let field_ident = to_rust_field_ident(&member.name);
 
         enum_variants.push(quote! { #field_ident });
-
-        // e.g. 0 => Ok(__Field::__field0),
-        visit_uint64_matchers.push(quote! { index => Ok(__Field::#field_ident) });
-
         if !&member.flags.has_skip_serializing() {
             // e.g. "referenceCount" => Ok(__Field::__field1),
             let member_name = &member.name;
@@ -34,17 +30,6 @@ pub fn gen_enum_fields(members: &[&Member]) -> TokenStream {
 
                 fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
                     core::fmt::Formatter::write_str(__formatter, "field identifier")
-                }
-
-                /// Intended for use in binary.
-                fn visit_uint64<E>(self, __value: u64) -> Result<Self::Value, E>
-                where
-                    E: havok_serde::de::Error,
-                {
-                    match __value {
-                        #(#visit_uint64_matchers,)*
-                        _ => Ok(__Field::__ignore),
-                    }
                 }
 
                 /// Intended for use in XML.

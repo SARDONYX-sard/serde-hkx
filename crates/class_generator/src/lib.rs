@@ -87,35 +87,6 @@ pub fn get_inherited_class<'a>(class_name: &str, classes_map: &'a ClassMap) -> V
     inherited_class
 }
 
-/// Enumerate C++ class information by recursively tracing from the current class.
-/// - current class name -> Myself and all parent classes.
-/// - parent class name -> All parent classes.
-///
-/// # Returns
-/// Vec sorted by deepest parent members.
-pub fn get_inherited_members<'a>(
-    class_name: &str,
-    classes_map: &'a ClassMap,
-) -> Vec<&'a cpp_info::Member<'a>> {
-    // Cache variables
-    let mut current_class_name = class_name;
-    let mut inherited_class = Vec::new();
-
-    // Get all parents
-    while let Some(class) = classes_map.get(current_class_name) {
-        inherited_class.extend(&class.members);
-
-        if let Some(parent_name) = &class.parent {
-            current_class_name = parent_name;
-        } else {
-            break; // No more parent to process
-        }
-    }
-
-    inherited_class.reverse(); // This is because binary reads must be read from the most root parent class.
-    inherited_class
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
