@@ -167,6 +167,914 @@ const _: () = {
         }
     }
 };
+use havok_serde as _serde;
+#[allow(non_camel_case_types)]
+enum __Field {
+    m_bodyA,
+    m_bodyB,
+    m_bodyAId,
+    m_bodyBId,
+    m_useEntityIds,
+    m_agentType,
+    m_atom,
+    m_propertiesStream,
+    m_contactPoints,
+    m_cpIdMgr,
+    m_nnEntryData,
+    m_trackInfo,
+    m_endianCheckBuffer,
+    m_version,
+    __ignore,
+}
+struct __FieldVisitor;
+impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+    type Value = __Field;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "field identifier")
+    }
+    /// Intended for use in XML.
+    #[allow(clippy::match_single_binding)]
+    #[allow(clippy::reversed_empty_ranges)]
+    #[allow(clippy::single_match)]
+    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
+    where
+        __E: _serde::de::Error,
+    {
+        match __value {
+            "bodyA" => Ok(__Field::m_bodyA),
+            "bodyB" => Ok(__Field::m_bodyB),
+            "bodyAId" => Ok(__Field::m_bodyAId),
+            "bodyBId" => Ok(__Field::m_bodyBId),
+            "useEntityIds" => Ok(__Field::m_useEntityIds),
+            "agentType" => Ok(__Field::m_agentType),
+            "atom" => Ok(__Field::m_atom),
+            "propertiesStream" => Ok(__Field::m_propertiesStream),
+            "contactPoints" => Ok(__Field::m_contactPoints),
+            "cpIdMgr" => Ok(__Field::m_cpIdMgr),
+            "nnEntryData" => Ok(__Field::m_nnEntryData),
+            "trackInfo" => Ok(__Field::m_trackInfo),
+            "endianCheckBuffer" => Ok(__Field::m_endianCheckBuffer),
+            "version" => Ok(__Field::m_version),
+            _ => Ok(__Field::__ignore),
+        }
+    }
+}
+impl<'de> _serde::Deserialize<'de> for __Field {
+    #[inline]
+    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
+    where
+        __D: _serde::Deserializer<'de>,
+    {
+        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+    }
+}
+pub(super) struct __hkpSerializedAgentNnEntryVisitor<'de> {
+    marker: core::marker::PhantomData<hkpSerializedAgentNnEntry>,
+    lifetime: core::marker::PhantomData<&'de ()>,
+}
+impl<'de> __hkpSerializedAgentNnEntryVisitor<'de> {
+    /// # Purpose of this method
+    /// To reproduce C++ field inheritance, we will have the field internal implementation
+    /// of deserialization partially exposed and reused.
+    #[inline]
+    pub(super) fn visit_as_parent<__A>(
+        __map: &mut __A,
+    ) -> _serde::__private::Result<hkpSerializedAgentNnEntry, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        _serde::de::Visitor::visit_struct(
+            Self {
+                marker: _serde::__private::PhantomData::<hkpSerializedAgentNnEntry>,
+                lifetime: _serde::__private::PhantomData,
+            },
+            __map,
+        )
+    }
+}
+#[allow(clippy::match_single_binding)]
+#[allow(clippy::reversed_empty_ranges)]
+#[allow(clippy::single_match)]
+impl<'de> _serde::de::Visitor<'de> for __hkpSerializedAgentNnEntryVisitor<'de> {
+    type Value = hkpSerializedAgentNnEntry;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "struct hkpSerializedAgentNnEntry")
+    }
+    fn visit_struct_for_bytes<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __A::next_value(&mut __map)?;
+        let mut m_bodyA: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_bodyB: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_bodyAId: _serde::__private::Option<u64> = _serde::__private::None;
+        let mut m_bodyBId: _serde::__private::Option<u64> = _serde::__private::None;
+        let mut m_useEntityIds: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_agentType: _serde::__private::Option<SerializedAgentType> = _serde::__private::None;
+        let mut m_atom: _serde::__private::Option<hkpSimpleContactConstraintAtom> = _serde::__private::None;
+        let mut m_propertiesStream: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+        let mut m_contactPoints: _serde::__private::Option<Vec<hkContactPoint>> = _serde::__private::None;
+        let mut m_cpIdMgr: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+        let mut m_nnEntryData: _serde::__private::Option<[u8; 160usize]> = _serde::__private::None;
+        let mut m_trackInfo: _serde::__private::Option<hkpSerializedTrack1nInfo> = _serde::__private::None;
+        let mut m_endianCheckBuffer: _serde::__private::Option<[u8; 4usize]> = _serde::__private::None;
+        let mut m_version: _serde::__private::Option<u32> = _serde::__private::None;
+        for i in 0..14usize {
+            match i {
+                0usize => {
+                    if _serde::__private::Option::is_some(&m_bodyA) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("bodyA"),
+                        );
+                    }
+                    m_bodyA = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                1usize => {
+                    if _serde::__private::Option::is_some(&m_bodyB) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("bodyB"),
+                        );
+                    }
+                    m_bodyB = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                2usize => {
+                    if _serde::__private::Option::is_some(&m_bodyAId) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("bodyAId"),
+                        );
+                    }
+                    m_bodyAId = _serde::__private::Some(
+                        match __A::next_value::<u64>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                3usize => {
+                    if _serde::__private::Option::is_some(&m_bodyBId) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("bodyBId"),
+                        );
+                    }
+                    m_bodyBId = _serde::__private::Some(
+                        match __A::next_value::<u64>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                4usize => {
+                    if _serde::__private::Option::is_some(&m_useEntityIds) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "useEntityIds",
+                            ),
+                        );
+                    }
+                    m_useEntityIds = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                5usize => {
+                    if _serde::__private::Option::is_some(&m_agentType) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "agentType",
+                            ),
+                        );
+                    }
+                    m_agentType = _serde::__private::Some(
+                        match __A::next_value::<SerializedAgentType>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                6usize => {
+                    if _serde::__private::Option::is_some(&m_atom) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("atom"),
+                        );
+                    }
+                    __A::pad(&mut __map, 6usize, 14usize)?;
+                    m_atom = _serde::__private::Some(
+                        match __A::next_value::<
+                            hkpSimpleContactConstraintAtom,
+                        >(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                7usize => {
+                    if _serde::__private::Option::is_some(&m_propertiesStream) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "propertiesStream",
+                            ),
+                        );
+                    }
+                    m_propertiesStream = _serde::__private::Some(
+                        match __A::next_value::<Vec<u8>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                8usize => {
+                    if _serde::__private::Option::is_some(&m_contactPoints) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "contactPoints",
+                            ),
+                        );
+                    }
+                    m_contactPoints = _serde::__private::Some(
+                        match __A::next_value::<Vec<hkContactPoint>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                9usize => {
+                    if _serde::__private::Option::is_some(&m_cpIdMgr) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("cpIdMgr"),
+                        );
+                    }
+                    m_cpIdMgr = _serde::__private::Some(
+                        match __A::next_value::<Vec<u8>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                10usize => {
+                    if _serde::__private::Option::is_some(&m_nnEntryData) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "nnEntryData",
+                            ),
+                        );
+                    }
+                    m_nnEntryData = _serde::__private::Some(
+                        match __A::next_value::<[u8; 160usize]>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                11usize => {
+                    if _serde::__private::Option::is_some(&m_trackInfo) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "trackInfo",
+                            ),
+                        );
+                    }
+                    m_trackInfo = _serde::__private::Some(
+                        match __A::next_value::<hkpSerializedTrack1nInfo>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                12usize => {
+                    if _serde::__private::Option::is_some(&m_endianCheckBuffer) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "endianCheckBuffer",
+                            ),
+                        );
+                    }
+                    m_endianCheckBuffer = _serde::__private::Some(
+                        match __A::next_value::<[u8; 4usize]>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                13usize => {
+                    if _serde::__private::Option::is_some(&m_version) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("version"),
+                        );
+                    }
+                    m_version = _serde::__private::Some(
+                        match __A::next_value::<u32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        __A::pad(&mut __map, 12usize, 8usize)?;
+        let m_bodyA = match m_bodyA {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bodyA"),
+                );
+            }
+        };
+        let m_bodyB = match m_bodyB {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bodyB"),
+                );
+            }
+        };
+        let m_bodyAId = match m_bodyAId {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bodyAId"),
+                );
+            }
+        };
+        let m_bodyBId = match m_bodyBId {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bodyBId"),
+                );
+            }
+        };
+        let m_useEntityIds = match m_useEntityIds {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("useEntityIds"),
+                );
+            }
+        };
+        let m_agentType = match m_agentType {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("agentType"),
+                );
+            }
+        };
+        let m_atom = match m_atom {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("atom"),
+                );
+            }
+        };
+        let m_propertiesStream = match m_propertiesStream {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("propertiesStream"),
+                );
+            }
+        };
+        let m_contactPoints = match m_contactPoints {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("contactPoints"),
+                );
+            }
+        };
+        let m_cpIdMgr = match m_cpIdMgr {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("cpIdMgr"),
+                );
+            }
+        };
+        let m_nnEntryData = match m_nnEntryData {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("nnEntryData"),
+                );
+            }
+        };
+        let m_trackInfo = match m_trackInfo {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("trackInfo"),
+                );
+            }
+        };
+        let m_endianCheckBuffer = match m_endianCheckBuffer {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("endianCheckBuffer"),
+                );
+            }
+        };
+        let m_version = match m_version {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("version"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkpSerializedAgentNnEntry {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_bodyA,
+            m_bodyB,
+            m_bodyAId,
+            m_bodyBId,
+            m_useEntityIds,
+            m_agentType,
+            m_atom,
+            m_propertiesStream,
+            m_contactPoints,
+            m_cpIdMgr,
+            m_nnEntryData,
+            m_trackInfo,
+            m_endianCheckBuffer,
+            m_version,
+        })
+    }
+    fn visit_struct<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __hkReferencedObjectVisitor::visit_as_parent(&mut __map)?;
+        let mut m_bodyA: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_bodyB: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_bodyAId: _serde::__private::Option<u64> = _serde::__private::None;
+        let mut m_bodyBId: _serde::__private::Option<u64> = _serde::__private::None;
+        let mut m_useEntityIds: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_agentType: _serde::__private::Option<SerializedAgentType> = _serde::__private::None;
+        let mut m_atom: _serde::__private::Option<hkpSimpleContactConstraintAtom> = _serde::__private::None;
+        let mut m_propertiesStream: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+        let mut m_contactPoints: _serde::__private::Option<Vec<hkContactPoint>> = _serde::__private::None;
+        let mut m_cpIdMgr: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+        let mut m_nnEntryData: _serde::__private::Option<[u8; 160usize]> = _serde::__private::None;
+        let mut m_trackInfo: _serde::__private::Option<hkpSerializedTrack1nInfo> = _serde::__private::None;
+        let mut m_endianCheckBuffer: _serde::__private::Option<[u8; 4usize]> = _serde::__private::None;
+        let mut m_version: _serde::__private::Option<u32> = _serde::__private::None;
+        while let _serde::__private::Some(__key) = match __A::next_key::<
+            __Field,
+        >(&mut __map) {
+            _serde::__private::Ok(__val) => __val,
+            _serde::__private::Err(__err) => {
+                return _serde::__private::Err(__err);
+            }
+        } {
+            match __key {
+                __Field::m_bodyA => {
+                    if _serde::__private::Option::is_some(&m_bodyA) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("bodyA"),
+                        );
+                    }
+                    m_bodyA = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_bodyB => {
+                    if _serde::__private::Option::is_some(&m_bodyB) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("bodyB"),
+                        );
+                    }
+                    m_bodyB = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_bodyAId => {
+                    if _serde::__private::Option::is_some(&m_bodyAId) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("bodyAId"),
+                        );
+                    }
+                    m_bodyAId = _serde::__private::Some(
+                        match __A::next_value::<u64>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_bodyBId => {
+                    if _serde::__private::Option::is_some(&m_bodyBId) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("bodyBId"),
+                        );
+                    }
+                    m_bodyBId = _serde::__private::Some(
+                        match __A::next_value::<u64>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_useEntityIds => {
+                    if _serde::__private::Option::is_some(&m_useEntityIds) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "useEntityIds",
+                            ),
+                        );
+                    }
+                    m_useEntityIds = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_agentType => {
+                    if _serde::__private::Option::is_some(&m_agentType) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "agentType",
+                            ),
+                        );
+                    }
+                    m_agentType = _serde::__private::Some(
+                        match __A::next_value::<SerializedAgentType>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_atom => {
+                    if _serde::__private::Option::is_some(&m_atom) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("atom"),
+                        );
+                    }
+                    m_atom = _serde::__private::Some(
+                        match __A::next_value::<
+                            hkpSimpleContactConstraintAtom,
+                        >(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_propertiesStream => {
+                    if _serde::__private::Option::is_some(&m_propertiesStream) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "propertiesStream",
+                            ),
+                        );
+                    }
+                    m_propertiesStream = _serde::__private::Some(
+                        match __A::next_value::<Vec<u8>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_contactPoints => {
+                    if _serde::__private::Option::is_some(&m_contactPoints) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "contactPoints",
+                            ),
+                        );
+                    }
+                    m_contactPoints = _serde::__private::Some(
+                        match __A::next_value::<Vec<hkContactPoint>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_cpIdMgr => {
+                    if _serde::__private::Option::is_some(&m_cpIdMgr) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("cpIdMgr"),
+                        );
+                    }
+                    m_cpIdMgr = _serde::__private::Some(
+                        match __A::next_value::<Vec<u8>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_nnEntryData => {
+                    if _serde::__private::Option::is_some(&m_nnEntryData) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "nnEntryData",
+                            ),
+                        );
+                    }
+                    m_nnEntryData = _serde::__private::Some(
+                        match __A::next_value::<[u8; 160usize]>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_trackInfo => {
+                    if _serde::__private::Option::is_some(&m_trackInfo) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "trackInfo",
+                            ),
+                        );
+                    }
+                    m_trackInfo = _serde::__private::Some(
+                        match __A::next_value::<hkpSerializedTrack1nInfo>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_endianCheckBuffer => {
+                    if _serde::__private::Option::is_some(&m_endianCheckBuffer) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "endianCheckBuffer",
+                            ),
+                        );
+                    }
+                    m_endianCheckBuffer = _serde::__private::Some(
+                        match __A::next_value::<[u8; 4usize]>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_version => {
+                    if _serde::__private::Option::is_some(&m_version) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("version"),
+                        );
+                    }
+                    m_version = _serde::__private::Some(
+                        match __A::next_value::<u32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_bodyA = match m_bodyA {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bodyA"),
+                );
+            }
+        };
+        let m_bodyB = match m_bodyB {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bodyB"),
+                );
+            }
+        };
+        let m_bodyAId = match m_bodyAId {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bodyAId"),
+                );
+            }
+        };
+        let m_bodyBId = match m_bodyBId {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bodyBId"),
+                );
+            }
+        };
+        let m_useEntityIds = match m_useEntityIds {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("useEntityIds"),
+                );
+            }
+        };
+        let m_agentType = match m_agentType {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("agentType"),
+                );
+            }
+        };
+        let m_atom = match m_atom {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("atom"),
+                );
+            }
+        };
+        let m_propertiesStream = match m_propertiesStream {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("propertiesStream"),
+                );
+            }
+        };
+        let m_contactPoints = match m_contactPoints {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("contactPoints"),
+                );
+            }
+        };
+        let m_cpIdMgr = match m_cpIdMgr {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("cpIdMgr"),
+                );
+            }
+        };
+        let m_nnEntryData = match m_nnEntryData {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("nnEntryData"),
+                );
+            }
+        };
+        let m_trackInfo = match m_trackInfo {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("trackInfo"),
+                );
+            }
+        };
+        let m_endianCheckBuffer = match m_endianCheckBuffer {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("endianCheckBuffer"),
+                );
+            }
+        };
+        let m_version = match m_version {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("version"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkpSerializedAgentNnEntry {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_bodyA,
+            m_bodyB,
+            m_bodyAId,
+            m_bodyBId,
+            m_useEntityIds,
+            m_agentType,
+            m_atom,
+            m_propertiesStream,
+            m_contactPoints,
+            m_cpIdMgr,
+            m_nnEntryData,
+            m_trackInfo,
+            m_endianCheckBuffer,
+            m_version,
+        })
+    }
+}
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for hkpSerializedAgentNnEntry {
+        fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            const FIELDS: &[&str] = &[
+                "bodyA",
+                "bodyB",
+                "bodyAId",
+                "bodyBId",
+                "useEntityIds",
+                "agentType",
+                "atom",
+                "propertiesStream",
+                "contactPoints",
+                "cpIdMgr",
+                "nnEntryData",
+                "trackInfo",
+                "endianCheckBuffer",
+                "version",
+            ];
+            _serde::Deserializer::deserialize_struct(
+                deserializer,
+                "hkpSerializedAgentNnEntry",
+                FIELDS,
+                __hkpSerializedAgentNnEntryVisitor {
+                    marker: _serde::__private::PhantomData::<hkpSerializedAgentNnEntry>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]

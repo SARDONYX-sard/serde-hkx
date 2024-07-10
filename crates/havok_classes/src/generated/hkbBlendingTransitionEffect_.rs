@@ -211,6 +211,646 @@ const _: () = {
         }
     }
 };
+use havok_serde as _serde;
+#[allow(non_camel_case_types)]
+enum __Field {
+    m_duration,
+    m_toGeneratorStartTimeFraction,
+    m_flags,
+    m_endMode,
+    m_blendCurve,
+    m_fromGenerator,
+    m_toGenerator,
+    m_characterPoseAtBeginningOfTransition,
+    m_timeRemaining,
+    m_timeInTransition,
+    m_applySelfTransition,
+    m_initializeCharacterPose,
+    __ignore,
+}
+struct __FieldVisitor;
+impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+    type Value = __Field;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "field identifier")
+    }
+    /// Intended for use in XML.
+    #[allow(clippy::match_single_binding)]
+    #[allow(clippy::reversed_empty_ranges)]
+    #[allow(clippy::single_match)]
+    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
+    where
+        __E: _serde::de::Error,
+    {
+        match __value {
+            "duration" => Ok(__Field::m_duration),
+            "toGeneratorStartTimeFraction" => Ok(__Field::m_toGeneratorStartTimeFraction),
+            "flags" => Ok(__Field::m_flags),
+            "endMode" => Ok(__Field::m_endMode),
+            "blendCurve" => Ok(__Field::m_blendCurve),
+            _ => Ok(__Field::__ignore),
+        }
+    }
+}
+impl<'de> _serde::Deserialize<'de> for __Field {
+    #[inline]
+    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
+    where
+        __D: _serde::Deserializer<'de>,
+    {
+        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+    }
+}
+pub(super) struct __hkbBlendingTransitionEffectVisitor<'de> {
+    marker: core::marker::PhantomData<hkbBlendingTransitionEffect<'de>>,
+    lifetime: core::marker::PhantomData<&'de ()>,
+}
+impl<'de> __hkbBlendingTransitionEffectVisitor<'de> {
+    /// # Purpose of this method
+    /// To reproduce C++ field inheritance, we will have the field internal implementation
+    /// of deserialization partially exposed and reused.
+    #[inline]
+    pub(super) fn visit_as_parent<__A>(
+        __map: &mut __A,
+    ) -> _serde::__private::Result<hkbBlendingTransitionEffect<'de>, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        _serde::de::Visitor::visit_struct(
+            Self {
+                marker: _serde::__private::PhantomData::<
+                    hkbBlendingTransitionEffect<'de>,
+                >,
+                lifetime: _serde::__private::PhantomData,
+            },
+            __map,
+        )
+    }
+}
+#[allow(clippy::match_single_binding)]
+#[allow(clippy::reversed_empty_ranges)]
+#[allow(clippy::single_match)]
+impl<'de> _serde::de::Visitor<'de> for __hkbBlendingTransitionEffectVisitor<'de> {
+    type Value = hkbBlendingTransitionEffect<'de>;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(
+            __formatter,
+            "struct hkbBlendingTransitionEffect",
+        )
+    }
+    fn visit_struct_for_bytes<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __A::next_value(&mut __map)?;
+        let mut m_duration: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_toGeneratorStartTimeFraction: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_flags: _serde::__private::Option<FlagBits> = _serde::__private::None;
+        let mut m_endMode: _serde::__private::Option<EndMode> = _serde::__private::None;
+        let mut m_blendCurve: _serde::__private::Option<BlendCurve> = _serde::__private::None;
+        let mut m_fromGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_toGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_characterPoseAtBeginningOfTransition: _serde::__private::Option<
+            Vec<()>,
+        > = _serde::__private::None;
+        let mut m_timeRemaining: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_timeInTransition: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_applySelfTransition: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_initializeCharacterPose: _serde::__private::Option<bool> = _serde::__private::None;
+        for i in 0..12usize {
+            match i {
+                0usize => {
+                    if _serde::__private::Option::is_some(&m_duration) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "duration",
+                            ),
+                        );
+                    }
+                    m_duration = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                1usize => {
+                    if _serde::__private::Option::is_some(
+                        &m_toGeneratorStartTimeFraction,
+                    ) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "toGeneratorStartTimeFraction",
+                            ),
+                        );
+                    }
+                    m_toGeneratorStartTimeFraction = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                2usize => {
+                    if _serde::__private::Option::is_some(&m_flags) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("flags"),
+                        );
+                    }
+                    m_flags = _serde::__private::Some(
+                        match __A::next_value::<FlagBits>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                3usize => {
+                    if _serde::__private::Option::is_some(&m_endMode) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("endMode"),
+                        );
+                    }
+                    m_endMode = _serde::__private::Some(
+                        match __A::next_value::<EndMode>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                4usize => {
+                    if _serde::__private::Option::is_some(&m_blendCurve) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "blendCurve",
+                            ),
+                        );
+                    }
+                    m_blendCurve = _serde::__private::Some(
+                        match __A::next_value::<BlendCurve>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                5usize => {
+                    if _serde::__private::Option::is_some(&m_fromGenerator) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "fromGenerator",
+                            ),
+                        );
+                    }
+                    __A::pad(&mut __map, 0usize, 4usize)?;
+                    m_fromGenerator = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                6usize => {
+                    if _serde::__private::Option::is_some(&m_toGenerator) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "toGenerator",
+                            ),
+                        );
+                    }
+                    m_toGenerator = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                7usize => {
+                    if _serde::__private::Option::is_some(
+                        &m_characterPoseAtBeginningOfTransition,
+                    ) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "characterPoseAtBeginningOfTransition",
+                            ),
+                        );
+                    }
+                    m_characterPoseAtBeginningOfTransition = _serde::__private::Some(
+                        match __A::next_value::<Vec<()>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                8usize => {
+                    if _serde::__private::Option::is_some(&m_timeRemaining) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "timeRemaining",
+                            ),
+                        );
+                    }
+                    m_timeRemaining = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                9usize => {
+                    if _serde::__private::Option::is_some(&m_timeInTransition) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "timeInTransition",
+                            ),
+                        );
+                    }
+                    m_timeInTransition = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                10usize => {
+                    if _serde::__private::Option::is_some(&m_applySelfTransition) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "applySelfTransition",
+                            ),
+                        );
+                    }
+                    m_applySelfTransition = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                11usize => {
+                    if _serde::__private::Option::is_some(&m_initializeCharacterPose) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "initializeCharacterPose",
+                            ),
+                        );
+                    }
+                    m_initializeCharacterPose = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        __A::pad(&mut __map, 2usize, 6usize)?;
+        let m_duration = match m_duration {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("duration"),
+                );
+            }
+        };
+        let m_toGeneratorStartTimeFraction = match m_toGeneratorStartTimeFraction {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "toGeneratorStartTimeFraction",
+                    ),
+                );
+            }
+        };
+        let m_flags = match m_flags {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("flags"),
+                );
+            }
+        };
+        let m_endMode = match m_endMode {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("endMode"),
+                );
+            }
+        };
+        let m_blendCurve = match m_blendCurve {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("blendCurve"),
+                );
+            }
+        };
+        let m_fromGenerator = match m_fromGenerator {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("fromGenerator"),
+                );
+            }
+        };
+        let m_toGenerator = match m_toGenerator {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("toGenerator"),
+                );
+            }
+        };
+        let m_characterPoseAtBeginningOfTransition = match m_characterPoseAtBeginningOfTransition {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "characterPoseAtBeginningOfTransition",
+                    ),
+                );
+            }
+        };
+        let m_timeRemaining = match m_timeRemaining {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("timeRemaining"),
+                );
+            }
+        };
+        let m_timeInTransition = match m_timeInTransition {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("timeInTransition"),
+                );
+            }
+        };
+        let m_applySelfTransition = match m_applySelfTransition {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "applySelfTransition",
+                    ),
+                );
+            }
+        };
+        let m_initializeCharacterPose = match m_initializeCharacterPose {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "initializeCharacterPose",
+                    ),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbBlendingTransitionEffect {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_duration,
+            m_toGeneratorStartTimeFraction,
+            m_flags,
+            m_endMode,
+            m_blendCurve,
+            m_fromGenerator,
+            m_toGenerator,
+            m_characterPoseAtBeginningOfTransition,
+            m_timeRemaining,
+            m_timeInTransition,
+            m_applySelfTransition,
+            m_initializeCharacterPose,
+        })
+    }
+    fn visit_struct<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __hkbTransitionEffectVisitor::visit_as_parent(&mut __map)?;
+        let mut m_duration: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_toGeneratorStartTimeFraction: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_flags: _serde::__private::Option<FlagBits> = _serde::__private::None;
+        let mut m_endMode: _serde::__private::Option<EndMode> = _serde::__private::None;
+        let mut m_blendCurve: _serde::__private::Option<BlendCurve> = _serde::__private::None;
+        while let _serde::__private::Some(__key) = match __A::next_key::<
+            __Field,
+        >(&mut __map) {
+            _serde::__private::Ok(__val) => __val,
+            _serde::__private::Err(__err) => {
+                return _serde::__private::Err(__err);
+            }
+        } {
+            match __key {
+                __Field::m_duration => {
+                    if _serde::__private::Option::is_some(&m_duration) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "duration",
+                            ),
+                        );
+                    }
+                    m_duration = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_toGeneratorStartTimeFraction => {
+                    if _serde::__private::Option::is_some(
+                        &m_toGeneratorStartTimeFraction,
+                    ) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "toGeneratorStartTimeFraction",
+                            ),
+                        );
+                    }
+                    m_toGeneratorStartTimeFraction = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_flags => {
+                    if _serde::__private::Option::is_some(&m_flags) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("flags"),
+                        );
+                    }
+                    m_flags = _serde::__private::Some(
+                        match __A::next_value::<FlagBits>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_endMode => {
+                    if _serde::__private::Option::is_some(&m_endMode) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("endMode"),
+                        );
+                    }
+                    m_endMode = _serde::__private::Some(
+                        match __A::next_value::<EndMode>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_blendCurve => {
+                    if _serde::__private::Option::is_some(&m_blendCurve) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "blendCurve",
+                            ),
+                        );
+                    }
+                    m_blendCurve = _serde::__private::Some(
+                        match __A::next_value::<BlendCurve>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_duration = match m_duration {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("duration"),
+                );
+            }
+        };
+        let m_toGeneratorStartTimeFraction = match m_toGeneratorStartTimeFraction {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "toGeneratorStartTimeFraction",
+                    ),
+                );
+            }
+        };
+        let m_flags = match m_flags {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("flags"),
+                );
+            }
+        };
+        let m_endMode = match m_endMode {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("endMode"),
+                );
+            }
+        };
+        let m_blendCurve = match m_blendCurve {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("blendCurve"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbBlendingTransitionEffect {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_duration,
+            m_toGeneratorStartTimeFraction,
+            m_flags,
+            m_endMode,
+            m_blendCurve,
+            ..Default::default()
+        })
+    }
+}
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for hkbBlendingTransitionEffect<'de> {
+        fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            const FIELDS: &[&str] = &[
+                "duration",
+                "toGeneratorStartTimeFraction",
+                "flags",
+                "endMode",
+                "blendCurve",
+                "fromGenerator",
+                "toGenerator",
+                "characterPoseAtBeginningOfTransition",
+                "timeRemaining",
+                "timeInTransition",
+                "applySelfTransition",
+                "initializeCharacterPose",
+            ];
+            _serde::Deserializer::deserialize_struct(
+                deserializer,
+                "hkbBlendingTransitionEffect",
+                FIELDS,
+                __hkbBlendingTransitionEffectVisitor {
+                    marker: _serde::__private::PhantomData::<
+                        hkbBlendingTransitionEffect,
+                    >,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};
 #[havok_types_derive::impl_flags_methods]
 bitflags::bitflags! {
     #[doc = r" Bit flags that represented `enum hkFlags<Enum, SizeType>`(C++)."] #[doc =

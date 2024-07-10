@@ -185,6 +185,719 @@ const _: () = {
         }
     }
 };
+use havok_serde as _serde;
+#[allow(non_camel_case_types)]
+enum __Field {
+    m_controlData,
+    m_initialVelocity,
+    m_initialVelocityCoordinates,
+    m_motionMode,
+    m_forceDownwardMomentum,
+    m_applyGravity,
+    m_setInitialVelocity,
+    m_isTouchingGround,
+    m_gravity,
+    m_timestep,
+    m_isInitialVelocityAdded,
+    __ignore,
+}
+struct __FieldVisitor;
+impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+    type Value = __Field;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "field identifier")
+    }
+    /// Intended for use in XML.
+    #[allow(clippy::match_single_binding)]
+    #[allow(clippy::reversed_empty_ranges)]
+    #[allow(clippy::single_match)]
+    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
+    where
+        __E: _serde::de::Error,
+    {
+        match __value {
+            "controlData" => Ok(__Field::m_controlData),
+            "initialVelocity" => Ok(__Field::m_initialVelocity),
+            "initialVelocityCoordinates" => Ok(__Field::m_initialVelocityCoordinates),
+            "motionMode" => Ok(__Field::m_motionMode),
+            "forceDownwardMomentum" => Ok(__Field::m_forceDownwardMomentum),
+            "applyGravity" => Ok(__Field::m_applyGravity),
+            "setInitialVelocity" => Ok(__Field::m_setInitialVelocity),
+            "isTouchingGround" => Ok(__Field::m_isTouchingGround),
+            _ => Ok(__Field::__ignore),
+        }
+    }
+}
+impl<'de> _serde::Deserialize<'de> for __Field {
+    #[inline]
+    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
+    where
+        __D: _serde::Deserializer<'de>,
+    {
+        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+    }
+}
+pub(super) struct __hkbCharacterControllerModifierVisitor<'de> {
+    marker: core::marker::PhantomData<hkbCharacterControllerModifier<'de>>,
+    lifetime: core::marker::PhantomData<&'de ()>,
+}
+impl<'de> __hkbCharacterControllerModifierVisitor<'de> {
+    /// # Purpose of this method
+    /// To reproduce C++ field inheritance, we will have the field internal implementation
+    /// of deserialization partially exposed and reused.
+    #[inline]
+    pub(super) fn visit_as_parent<__A>(
+        __map: &mut __A,
+    ) -> _serde::__private::Result<hkbCharacterControllerModifier<'de>, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        _serde::de::Visitor::visit_struct(
+            Self {
+                marker: _serde::__private::PhantomData::<
+                    hkbCharacterControllerModifier<'de>,
+                >,
+                lifetime: _serde::__private::PhantomData,
+            },
+            __map,
+        )
+    }
+}
+#[allow(clippy::match_single_binding)]
+#[allow(clippy::reversed_empty_ranges)]
+#[allow(clippy::single_match)]
+impl<'de> _serde::de::Visitor<'de> for __hkbCharacterControllerModifierVisitor<'de> {
+    type Value = hkbCharacterControllerModifier<'de>;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(
+            __formatter,
+            "struct hkbCharacterControllerModifier",
+        )
+    }
+    fn visit_struct_for_bytes<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __A::next_value(&mut __map)?;
+        let mut m_controlData: _serde::__private::Option<
+            hkbCharacterControllerControlData,
+        > = _serde::__private::None;
+        let mut m_initialVelocity: _serde::__private::Option<Vector4> = _serde::__private::None;
+        let mut m_initialVelocityCoordinates: _serde::__private::Option<
+            InitialVelocityCoordinates,
+        > = _serde::__private::None;
+        let mut m_motionMode: _serde::__private::Option<MotionMode> = _serde::__private::None;
+        let mut m_forceDownwardMomentum: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_applyGravity: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_setInitialVelocity: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_isTouchingGround: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_gravity: _serde::__private::Option<Vector4> = _serde::__private::None;
+        let mut m_timestep: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_isInitialVelocityAdded: _serde::__private::Option<bool> = _serde::__private::None;
+        for i in 0..11usize {
+            match i {
+                0usize => {
+                    if _serde::__private::Option::is_some(&m_controlData) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "controlData",
+                            ),
+                        );
+                    }
+                    m_controlData = _serde::__private::Some(
+                        match __A::next_value::<
+                            hkbCharacterControllerControlData,
+                        >(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                1usize => {
+                    if _serde::__private::Option::is_some(&m_initialVelocity) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "initialVelocity",
+                            ),
+                        );
+                    }
+                    m_initialVelocity = _serde::__private::Some(
+                        match __A::next_value::<Vector4>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                2usize => {
+                    if _serde::__private::Option::is_some(
+                        &m_initialVelocityCoordinates,
+                    ) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "initialVelocityCoordinates",
+                            ),
+                        );
+                    }
+                    m_initialVelocityCoordinates = _serde::__private::Some(
+                        match __A::next_value::<InitialVelocityCoordinates>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                3usize => {
+                    if _serde::__private::Option::is_some(&m_motionMode) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "motionMode",
+                            ),
+                        );
+                    }
+                    m_motionMode = _serde::__private::Some(
+                        match __A::next_value::<MotionMode>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                4usize => {
+                    if _serde::__private::Option::is_some(&m_forceDownwardMomentum) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "forceDownwardMomentum",
+                            ),
+                        );
+                    }
+                    m_forceDownwardMomentum = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                5usize => {
+                    if _serde::__private::Option::is_some(&m_applyGravity) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "applyGravity",
+                            ),
+                        );
+                    }
+                    m_applyGravity = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                6usize => {
+                    if _serde::__private::Option::is_some(&m_setInitialVelocity) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "setInitialVelocity",
+                            ),
+                        );
+                    }
+                    m_setInitialVelocity = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                7usize => {
+                    if _serde::__private::Option::is_some(&m_isTouchingGround) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "isTouchingGround",
+                            ),
+                        );
+                    }
+                    m_isTouchingGround = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                8usize => {
+                    if _serde::__private::Option::is_some(&m_gravity) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("gravity"),
+                        );
+                    }
+                    __A::pad(&mut __map, 10usize, 10usize)?;
+                    m_gravity = _serde::__private::Some(
+                        match __A::next_value::<Vector4>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                9usize => {
+                    if _serde::__private::Option::is_some(&m_timestep) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "timestep",
+                            ),
+                        );
+                    }
+                    m_timestep = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                10usize => {
+                    if _serde::__private::Option::is_some(&m_isInitialVelocityAdded) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "isInitialVelocityAdded",
+                            ),
+                        );
+                    }
+                    m_isInitialVelocityAdded = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        __A::pad(&mut __map, 11usize, 11usize)?;
+        let m_controlData = match m_controlData {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("controlData"),
+                );
+            }
+        };
+        let m_initialVelocity = match m_initialVelocity {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("initialVelocity"),
+                );
+            }
+        };
+        let m_initialVelocityCoordinates = match m_initialVelocityCoordinates {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "initialVelocityCoordinates",
+                    ),
+                );
+            }
+        };
+        let m_motionMode = match m_motionMode {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("motionMode"),
+                );
+            }
+        };
+        let m_forceDownwardMomentum = match m_forceDownwardMomentum {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "forceDownwardMomentum",
+                    ),
+                );
+            }
+        };
+        let m_applyGravity = match m_applyGravity {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("applyGravity"),
+                );
+            }
+        };
+        let m_setInitialVelocity = match m_setInitialVelocity {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "setInitialVelocity",
+                    ),
+                );
+            }
+        };
+        let m_isTouchingGround = match m_isTouchingGround {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("isTouchingGround"),
+                );
+            }
+        };
+        let m_gravity = match m_gravity {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("gravity"),
+                );
+            }
+        };
+        let m_timestep = match m_timestep {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("timestep"),
+                );
+            }
+        };
+        let m_isInitialVelocityAdded = match m_isInitialVelocityAdded {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "isInitialVelocityAdded",
+                    ),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbCharacterControllerModifier {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_controlData,
+            m_initialVelocity,
+            m_initialVelocityCoordinates,
+            m_motionMode,
+            m_forceDownwardMomentum,
+            m_applyGravity,
+            m_setInitialVelocity,
+            m_isTouchingGround,
+            m_gravity,
+            m_timestep,
+            m_isInitialVelocityAdded,
+        })
+    }
+    fn visit_struct<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __hkbModifierVisitor::visit_as_parent(&mut __map)?;
+        let mut m_controlData: _serde::__private::Option<
+            hkbCharacterControllerControlData,
+        > = _serde::__private::None;
+        let mut m_initialVelocity: _serde::__private::Option<Vector4> = _serde::__private::None;
+        let mut m_initialVelocityCoordinates: _serde::__private::Option<
+            InitialVelocityCoordinates,
+        > = _serde::__private::None;
+        let mut m_motionMode: _serde::__private::Option<MotionMode> = _serde::__private::None;
+        let mut m_forceDownwardMomentum: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_applyGravity: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_setInitialVelocity: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_isTouchingGround: _serde::__private::Option<bool> = _serde::__private::None;
+        while let _serde::__private::Some(__key) = match __A::next_key::<
+            __Field,
+        >(&mut __map) {
+            _serde::__private::Ok(__val) => __val,
+            _serde::__private::Err(__err) => {
+                return _serde::__private::Err(__err);
+            }
+        } {
+            match __key {
+                __Field::m_controlData => {
+                    if _serde::__private::Option::is_some(&m_controlData) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "controlData",
+                            ),
+                        );
+                    }
+                    m_controlData = _serde::__private::Some(
+                        match __A::next_value::<
+                            hkbCharacterControllerControlData,
+                        >(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_initialVelocity => {
+                    if _serde::__private::Option::is_some(&m_initialVelocity) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "initialVelocity",
+                            ),
+                        );
+                    }
+                    m_initialVelocity = _serde::__private::Some(
+                        match __A::next_value::<Vector4>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_initialVelocityCoordinates => {
+                    if _serde::__private::Option::is_some(
+                        &m_initialVelocityCoordinates,
+                    ) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "initialVelocityCoordinates",
+                            ),
+                        );
+                    }
+                    m_initialVelocityCoordinates = _serde::__private::Some(
+                        match __A::next_value::<InitialVelocityCoordinates>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_motionMode => {
+                    if _serde::__private::Option::is_some(&m_motionMode) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "motionMode",
+                            ),
+                        );
+                    }
+                    m_motionMode = _serde::__private::Some(
+                        match __A::next_value::<MotionMode>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_forceDownwardMomentum => {
+                    if _serde::__private::Option::is_some(&m_forceDownwardMomentum) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "forceDownwardMomentum",
+                            ),
+                        );
+                    }
+                    m_forceDownwardMomentum = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_applyGravity => {
+                    if _serde::__private::Option::is_some(&m_applyGravity) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "applyGravity",
+                            ),
+                        );
+                    }
+                    m_applyGravity = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_setInitialVelocity => {
+                    if _serde::__private::Option::is_some(&m_setInitialVelocity) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "setInitialVelocity",
+                            ),
+                        );
+                    }
+                    m_setInitialVelocity = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_isTouchingGround => {
+                    if _serde::__private::Option::is_some(&m_isTouchingGround) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "isTouchingGround",
+                            ),
+                        );
+                    }
+                    m_isTouchingGround = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_controlData = match m_controlData {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("controlData"),
+                );
+            }
+        };
+        let m_initialVelocity = match m_initialVelocity {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("initialVelocity"),
+                );
+            }
+        };
+        let m_initialVelocityCoordinates = match m_initialVelocityCoordinates {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "initialVelocityCoordinates",
+                    ),
+                );
+            }
+        };
+        let m_motionMode = match m_motionMode {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("motionMode"),
+                );
+            }
+        };
+        let m_forceDownwardMomentum = match m_forceDownwardMomentum {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "forceDownwardMomentum",
+                    ),
+                );
+            }
+        };
+        let m_applyGravity = match m_applyGravity {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("applyGravity"),
+                );
+            }
+        };
+        let m_setInitialVelocity = match m_setInitialVelocity {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "setInitialVelocity",
+                    ),
+                );
+            }
+        };
+        let m_isTouchingGround = match m_isTouchingGround {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("isTouchingGround"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbCharacterControllerModifier {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_controlData,
+            m_initialVelocity,
+            m_initialVelocityCoordinates,
+            m_motionMode,
+            m_forceDownwardMomentum,
+            m_applyGravity,
+            m_setInitialVelocity,
+            m_isTouchingGround,
+            ..Default::default()
+        })
+    }
+}
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for hkbCharacterControllerModifier<'de> {
+        fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            const FIELDS: &[&str] = &[
+                "controlData",
+                "initialVelocity",
+                "initialVelocityCoordinates",
+                "motionMode",
+                "forceDownwardMomentum",
+                "applyGravity",
+                "setInitialVelocity",
+                "isTouchingGround",
+                "gravity",
+                "timestep",
+                "isInitialVelocityAdded",
+            ];
+            _serde::Deserializer::deserialize_struct(
+                deserializer,
+                "hkbCharacterControllerModifier",
+                FIELDS,
+                __hkbCharacterControllerModifierVisitor {
+                    marker: _serde::__private::PhantomData::<
+                        hkbCharacterControllerModifier,
+                    >,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]

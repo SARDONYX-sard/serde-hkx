@@ -241,6 +241,1390 @@ const _: () = {
         }
     }
 };
+use havok_serde as _serde;
+#[allow(non_camel_case_types)]
+enum __Field {
+    m_bitsPerIndex,
+    m_bitsPerWIndex,
+    m_wIndexMask,
+    m_indexMask,
+    m_radius,
+    m_weldingType,
+    m_materialType,
+    m_materials,
+    m_materials16,
+    m_materials8,
+    m_transforms,
+    m_bigVertices,
+    m_bigTriangles,
+    m_chunks,
+    m_convexPieces,
+    m_error,
+    m_bounds,
+    m_defaultCollisionFilterInfo,
+    m_meshMaterials,
+    m_materialStriding,
+    m_numMaterials,
+    m_namedMaterials,
+    __ignore,
+}
+struct __FieldVisitor;
+impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+    type Value = __Field;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "field identifier")
+    }
+    /// Intended for use in XML.
+    #[allow(clippy::match_single_binding)]
+    #[allow(clippy::reversed_empty_ranges)]
+    #[allow(clippy::single_match)]
+    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
+    where
+        __E: _serde::de::Error,
+    {
+        match __value {
+            "bitsPerIndex" => Ok(__Field::m_bitsPerIndex),
+            "bitsPerWIndex" => Ok(__Field::m_bitsPerWIndex),
+            "wIndexMask" => Ok(__Field::m_wIndexMask),
+            "indexMask" => Ok(__Field::m_indexMask),
+            "radius" => Ok(__Field::m_radius),
+            "weldingType" => Ok(__Field::m_weldingType),
+            "materialType" => Ok(__Field::m_materialType),
+            "materials" => Ok(__Field::m_materials),
+            "materials16" => Ok(__Field::m_materials16),
+            "materials8" => Ok(__Field::m_materials8),
+            "transforms" => Ok(__Field::m_transforms),
+            "bigVertices" => Ok(__Field::m_bigVertices),
+            "bigTriangles" => Ok(__Field::m_bigTriangles),
+            "chunks" => Ok(__Field::m_chunks),
+            "convexPieces" => Ok(__Field::m_convexPieces),
+            "error" => Ok(__Field::m_error),
+            "bounds" => Ok(__Field::m_bounds),
+            "defaultCollisionFilterInfo" => Ok(__Field::m_defaultCollisionFilterInfo),
+            "materialStriding" => Ok(__Field::m_materialStriding),
+            "numMaterials" => Ok(__Field::m_numMaterials),
+            "namedMaterials" => Ok(__Field::m_namedMaterials),
+            _ => Ok(__Field::__ignore),
+        }
+    }
+}
+impl<'de> _serde::Deserialize<'de> for __Field {
+    #[inline]
+    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
+    where
+        __D: _serde::Deserializer<'de>,
+    {
+        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+    }
+}
+pub(super) struct __hkpCompressedMeshShapeVisitor<'de> {
+    marker: core::marker::PhantomData<hkpCompressedMeshShape<'de>>,
+    lifetime: core::marker::PhantomData<&'de ()>,
+}
+impl<'de> __hkpCompressedMeshShapeVisitor<'de> {
+    /// # Purpose of this method
+    /// To reproduce C++ field inheritance, we will have the field internal implementation
+    /// of deserialization partially exposed and reused.
+    #[inline]
+    pub(super) fn visit_as_parent<__A>(
+        __map: &mut __A,
+    ) -> _serde::__private::Result<hkpCompressedMeshShape<'de>, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        _serde::de::Visitor::visit_struct(
+            Self {
+                marker: _serde::__private::PhantomData::<hkpCompressedMeshShape<'de>>,
+                lifetime: _serde::__private::PhantomData,
+            },
+            __map,
+        )
+    }
+}
+#[allow(clippy::match_single_binding)]
+#[allow(clippy::reversed_empty_ranges)]
+#[allow(clippy::single_match)]
+impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
+    type Value = hkpCompressedMeshShape<'de>;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "struct hkpCompressedMeshShape")
+    }
+    fn visit_struct_for_bytes<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __A::next_value(&mut __map)?;
+        let mut m_bitsPerIndex: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_bitsPerWIndex: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_wIndexMask: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_indexMask: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_radius: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_weldingType: _serde::__private::Option<WeldingType> = _serde::__private::None;
+        let mut m_materialType: _serde::__private::Option<MaterialType> = _serde::__private::None;
+        let mut m_materials: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
+        let mut m_materials16: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
+        let mut m_materials8: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+        let mut m_transforms: _serde::__private::Option<Vec<QsTransform>> = _serde::__private::None;
+        let mut m_bigVertices: _serde::__private::Option<Vec<Vector4>> = _serde::__private::None;
+        let mut m_bigTriangles: _serde::__private::Option<
+            Vec<hkpCompressedMeshShapeBigTriangle>,
+        > = _serde::__private::None;
+        let mut m_chunks: _serde::__private::Option<Vec<hkpCompressedMeshShapeChunk>> = _serde::__private::None;
+        let mut m_convexPieces: _serde::__private::Option<
+            Vec<hkpCompressedMeshShapeConvexPiece>,
+        > = _serde::__private::None;
+        let mut m_error: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_bounds: _serde::__private::Option<hkAabb> = _serde::__private::None;
+        let mut m_defaultCollisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
+        let mut m_meshMaterials: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_materialStriding: _serde::__private::Option<u16> = _serde::__private::None;
+        let mut m_numMaterials: _serde::__private::Option<u16> = _serde::__private::None;
+        let mut m_namedMaterials: _serde::__private::Option<
+            Vec<hkpNamedMeshMaterial<'de>>,
+        > = _serde::__private::None;
+        for i in 0..22usize {
+            match i {
+                0usize => {
+                    if _serde::__private::Option::is_some(&m_bitsPerIndex) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bitsPerIndex",
+                            ),
+                        );
+                    }
+                    m_bitsPerIndex = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                1usize => {
+                    if _serde::__private::Option::is_some(&m_bitsPerWIndex) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bitsPerWIndex",
+                            ),
+                        );
+                    }
+                    m_bitsPerWIndex = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                2usize => {
+                    if _serde::__private::Option::is_some(&m_wIndexMask) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "wIndexMask",
+                            ),
+                        );
+                    }
+                    m_wIndexMask = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                3usize => {
+                    if _serde::__private::Option::is_some(&m_indexMask) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "indexMask",
+                            ),
+                        );
+                    }
+                    m_indexMask = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                4usize => {
+                    if _serde::__private::Option::is_some(&m_radius) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("radius"),
+                        );
+                    }
+                    m_radius = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                5usize => {
+                    if _serde::__private::Option::is_some(&m_weldingType) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "weldingType",
+                            ),
+                        );
+                    }
+                    m_weldingType = _serde::__private::Some(
+                        match __A::next_value::<WeldingType>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                6usize => {
+                    if _serde::__private::Option::is_some(&m_materialType) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "materialType",
+                            ),
+                        );
+                    }
+                    m_materialType = _serde::__private::Some(
+                        match __A::next_value::<MaterialType>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                7usize => {
+                    if _serde::__private::Option::is_some(&m_materials) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "materials",
+                            ),
+                        );
+                    }
+                    __A::pad(&mut __map, 2usize, 2usize)?;
+                    m_materials = _serde::__private::Some(
+                        match __A::next_value::<Vec<u32>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                8usize => {
+                    if _serde::__private::Option::is_some(&m_materials16) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "materials16",
+                            ),
+                        );
+                    }
+                    m_materials16 = _serde::__private::Some(
+                        match __A::next_value::<Vec<u16>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                9usize => {
+                    if _serde::__private::Option::is_some(&m_materials8) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "materials8",
+                            ),
+                        );
+                    }
+                    m_materials8 = _serde::__private::Some(
+                        match __A::next_value::<Vec<u8>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                10usize => {
+                    if _serde::__private::Option::is_some(&m_transforms) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "transforms",
+                            ),
+                        );
+                    }
+                    m_transforms = _serde::__private::Some(
+                        match __A::next_value::<Vec<QsTransform>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                11usize => {
+                    if _serde::__private::Option::is_some(&m_bigVertices) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bigVertices",
+                            ),
+                        );
+                    }
+                    m_bigVertices = _serde::__private::Some(
+                        match __A::next_value::<Vec<Vector4>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                12usize => {
+                    if _serde::__private::Option::is_some(&m_bigTriangles) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bigTriangles",
+                            ),
+                        );
+                    }
+                    m_bigTriangles = _serde::__private::Some(
+                        match __A::next_value::<
+                            Vec<hkpCompressedMeshShapeBigTriangle>,
+                        >(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                13usize => {
+                    if _serde::__private::Option::is_some(&m_chunks) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("chunks"),
+                        );
+                    }
+                    m_chunks = _serde::__private::Some(
+                        match __A::next_value::<
+                            Vec<hkpCompressedMeshShapeChunk>,
+                        >(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                14usize => {
+                    if _serde::__private::Option::is_some(&m_convexPieces) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "convexPieces",
+                            ),
+                        );
+                    }
+                    m_convexPieces = _serde::__private::Some(
+                        match __A::next_value::<
+                            Vec<hkpCompressedMeshShapeConvexPiece>,
+                        >(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                15usize => {
+                    if _serde::__private::Option::is_some(&m_error) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("error"),
+                        );
+                    }
+                    m_error = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                16usize => {
+                    if _serde::__private::Option::is_some(&m_bounds) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("bounds"),
+                        );
+                    }
+                    __A::pad(&mut __map, 12usize, 4usize)?;
+                    m_bounds = _serde::__private::Some(
+                        match __A::next_value::<hkAabb>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                17usize => {
+                    if _serde::__private::Option::is_some(
+                        &m_defaultCollisionFilterInfo,
+                    ) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "defaultCollisionFilterInfo",
+                            ),
+                        );
+                    }
+                    m_defaultCollisionFilterInfo = _serde::__private::Some(
+                        match __A::next_value::<u32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                18usize => {
+                    if _serde::__private::Option::is_some(&m_meshMaterials) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "meshMaterials",
+                            ),
+                        );
+                    }
+                    __A::pad(&mut __map, 0usize, 4usize)?;
+                    m_meshMaterials = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                19usize => {
+                    if _serde::__private::Option::is_some(&m_materialStriding) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "materialStriding",
+                            ),
+                        );
+                    }
+                    m_materialStriding = _serde::__private::Some(
+                        match __A::next_value::<u16>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                20usize => {
+                    if _serde::__private::Option::is_some(&m_numMaterials) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "numMaterials",
+                            ),
+                        );
+                    }
+                    m_numMaterials = _serde::__private::Some(
+                        match __A::next_value::<u16>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                21usize => {
+                    if _serde::__private::Option::is_some(&m_namedMaterials) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "namedMaterials",
+                            ),
+                        );
+                    }
+                    __A::pad(&mut __map, 0usize, 4usize)?;
+                    m_namedMaterials = _serde::__private::Some(
+                        match __A::next_value::<
+                            Vec<hkpNamedMeshMaterial<'de>>,
+                        >(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        __A::pad(&mut __map, 8usize, 24usize)?;
+        let m_bitsPerIndex = match m_bitsPerIndex {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bitsPerIndex"),
+                );
+            }
+        };
+        let m_bitsPerWIndex = match m_bitsPerWIndex {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bitsPerWIndex"),
+                );
+            }
+        };
+        let m_wIndexMask = match m_wIndexMask {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("wIndexMask"),
+                );
+            }
+        };
+        let m_indexMask = match m_indexMask {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("indexMask"),
+                );
+            }
+        };
+        let m_radius = match m_radius {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("radius"),
+                );
+            }
+        };
+        let m_weldingType = match m_weldingType {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("weldingType"),
+                );
+            }
+        };
+        let m_materialType = match m_materialType {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("materialType"),
+                );
+            }
+        };
+        let m_materials = match m_materials {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("materials"),
+                );
+            }
+        };
+        let m_materials16 = match m_materials16 {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("materials16"),
+                );
+            }
+        };
+        let m_materials8 = match m_materials8 {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("materials8"),
+                );
+            }
+        };
+        let m_transforms = match m_transforms {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("transforms"),
+                );
+            }
+        };
+        let m_bigVertices = match m_bigVertices {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bigVertices"),
+                );
+            }
+        };
+        let m_bigTriangles = match m_bigTriangles {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bigTriangles"),
+                );
+            }
+        };
+        let m_chunks = match m_chunks {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("chunks"),
+                );
+            }
+        };
+        let m_convexPieces = match m_convexPieces {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("convexPieces"),
+                );
+            }
+        };
+        let m_error = match m_error {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("error"),
+                );
+            }
+        };
+        let m_bounds = match m_bounds {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bounds"),
+                );
+            }
+        };
+        let m_defaultCollisionFilterInfo = match m_defaultCollisionFilterInfo {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "defaultCollisionFilterInfo",
+                    ),
+                );
+            }
+        };
+        let m_meshMaterials = match m_meshMaterials {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("meshMaterials"),
+                );
+            }
+        };
+        let m_materialStriding = match m_materialStriding {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("materialStriding"),
+                );
+            }
+        };
+        let m_numMaterials = match m_numMaterials {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("numMaterials"),
+                );
+            }
+        };
+        let m_namedMaterials = match m_namedMaterials {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("namedMaterials"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkpCompressedMeshShape {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_bitsPerIndex,
+            m_bitsPerWIndex,
+            m_wIndexMask,
+            m_indexMask,
+            m_radius,
+            m_weldingType,
+            m_materialType,
+            m_materials,
+            m_materials16,
+            m_materials8,
+            m_transforms,
+            m_bigVertices,
+            m_bigTriangles,
+            m_chunks,
+            m_convexPieces,
+            m_error,
+            m_bounds,
+            m_defaultCollisionFilterInfo,
+            m_meshMaterials,
+            m_materialStriding,
+            m_numMaterials,
+            m_namedMaterials,
+        })
+    }
+    fn visit_struct<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __hkpShapeCollectionVisitor::visit_as_parent(&mut __map)?;
+        let mut m_bitsPerIndex: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_bitsPerWIndex: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_wIndexMask: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_indexMask: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_radius: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_weldingType: _serde::__private::Option<WeldingType> = _serde::__private::None;
+        let mut m_materialType: _serde::__private::Option<MaterialType> = _serde::__private::None;
+        let mut m_materials: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
+        let mut m_materials16: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
+        let mut m_materials8: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+        let mut m_transforms: _serde::__private::Option<Vec<QsTransform>> = _serde::__private::None;
+        let mut m_bigVertices: _serde::__private::Option<Vec<Vector4>> = _serde::__private::None;
+        let mut m_bigTriangles: _serde::__private::Option<
+            Vec<hkpCompressedMeshShapeBigTriangle>,
+        > = _serde::__private::None;
+        let mut m_chunks: _serde::__private::Option<Vec<hkpCompressedMeshShapeChunk>> = _serde::__private::None;
+        let mut m_convexPieces: _serde::__private::Option<
+            Vec<hkpCompressedMeshShapeConvexPiece>,
+        > = _serde::__private::None;
+        let mut m_error: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_bounds: _serde::__private::Option<hkAabb> = _serde::__private::None;
+        let mut m_defaultCollisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
+        let mut m_materialStriding: _serde::__private::Option<u16> = _serde::__private::None;
+        let mut m_numMaterials: _serde::__private::Option<u16> = _serde::__private::None;
+        let mut m_namedMaterials: _serde::__private::Option<
+            Vec<hkpNamedMeshMaterial<'de>>,
+        > = _serde::__private::None;
+        while let _serde::__private::Some(__key) = match __A::next_key::<
+            __Field,
+        >(&mut __map) {
+            _serde::__private::Ok(__val) => __val,
+            _serde::__private::Err(__err) => {
+                return _serde::__private::Err(__err);
+            }
+        } {
+            match __key {
+                __Field::m_bitsPerIndex => {
+                    if _serde::__private::Option::is_some(&m_bitsPerIndex) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bitsPerIndex",
+                            ),
+                        );
+                    }
+                    m_bitsPerIndex = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_bitsPerWIndex => {
+                    if _serde::__private::Option::is_some(&m_bitsPerWIndex) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bitsPerWIndex",
+                            ),
+                        );
+                    }
+                    m_bitsPerWIndex = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_wIndexMask => {
+                    if _serde::__private::Option::is_some(&m_wIndexMask) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "wIndexMask",
+                            ),
+                        );
+                    }
+                    m_wIndexMask = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_indexMask => {
+                    if _serde::__private::Option::is_some(&m_indexMask) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "indexMask",
+                            ),
+                        );
+                    }
+                    m_indexMask = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_radius => {
+                    if _serde::__private::Option::is_some(&m_radius) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("radius"),
+                        );
+                    }
+                    m_radius = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_weldingType => {
+                    if _serde::__private::Option::is_some(&m_weldingType) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "weldingType",
+                            ),
+                        );
+                    }
+                    m_weldingType = _serde::__private::Some(
+                        match __A::next_value::<WeldingType>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_materialType => {
+                    if _serde::__private::Option::is_some(&m_materialType) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "materialType",
+                            ),
+                        );
+                    }
+                    m_materialType = _serde::__private::Some(
+                        match __A::next_value::<MaterialType>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_materials => {
+                    if _serde::__private::Option::is_some(&m_materials) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "materials",
+                            ),
+                        );
+                    }
+                    m_materials = _serde::__private::Some(
+                        match __A::next_value::<Vec<u32>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_materials16 => {
+                    if _serde::__private::Option::is_some(&m_materials16) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "materials16",
+                            ),
+                        );
+                    }
+                    m_materials16 = _serde::__private::Some(
+                        match __A::next_value::<Vec<u16>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_materials8 => {
+                    if _serde::__private::Option::is_some(&m_materials8) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "materials8",
+                            ),
+                        );
+                    }
+                    m_materials8 = _serde::__private::Some(
+                        match __A::next_value::<Vec<u8>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_transforms => {
+                    if _serde::__private::Option::is_some(&m_transforms) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "transforms",
+                            ),
+                        );
+                    }
+                    m_transforms = _serde::__private::Some(
+                        match __A::next_value::<Vec<QsTransform>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_bigVertices => {
+                    if _serde::__private::Option::is_some(&m_bigVertices) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bigVertices",
+                            ),
+                        );
+                    }
+                    m_bigVertices = _serde::__private::Some(
+                        match __A::next_value::<Vec<Vector4>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_bigTriangles => {
+                    if _serde::__private::Option::is_some(&m_bigTriangles) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bigTriangles",
+                            ),
+                        );
+                    }
+                    m_bigTriangles = _serde::__private::Some(
+                        match __A::next_value::<
+                            Vec<hkpCompressedMeshShapeBigTriangle>,
+                        >(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_chunks => {
+                    if _serde::__private::Option::is_some(&m_chunks) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("chunks"),
+                        );
+                    }
+                    m_chunks = _serde::__private::Some(
+                        match __A::next_value::<
+                            Vec<hkpCompressedMeshShapeChunk>,
+                        >(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_convexPieces => {
+                    if _serde::__private::Option::is_some(&m_convexPieces) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "convexPieces",
+                            ),
+                        );
+                    }
+                    m_convexPieces = _serde::__private::Some(
+                        match __A::next_value::<
+                            Vec<hkpCompressedMeshShapeConvexPiece>,
+                        >(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_error => {
+                    if _serde::__private::Option::is_some(&m_error) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("error"),
+                        );
+                    }
+                    m_error = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_bounds => {
+                    if _serde::__private::Option::is_some(&m_bounds) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("bounds"),
+                        );
+                    }
+                    m_bounds = _serde::__private::Some(
+                        match __A::next_value::<hkAabb>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_defaultCollisionFilterInfo => {
+                    if _serde::__private::Option::is_some(
+                        &m_defaultCollisionFilterInfo,
+                    ) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "defaultCollisionFilterInfo",
+                            ),
+                        );
+                    }
+                    m_defaultCollisionFilterInfo = _serde::__private::Some(
+                        match __A::next_value::<u32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_materialStriding => {
+                    if _serde::__private::Option::is_some(&m_materialStriding) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "materialStriding",
+                            ),
+                        );
+                    }
+                    m_materialStriding = _serde::__private::Some(
+                        match __A::next_value::<u16>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_numMaterials => {
+                    if _serde::__private::Option::is_some(&m_numMaterials) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "numMaterials",
+                            ),
+                        );
+                    }
+                    m_numMaterials = _serde::__private::Some(
+                        match __A::next_value::<u16>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_namedMaterials => {
+                    if _serde::__private::Option::is_some(&m_namedMaterials) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "namedMaterials",
+                            ),
+                        );
+                    }
+                    m_namedMaterials = _serde::__private::Some(
+                        match __A::next_value::<
+                            Vec<hkpNamedMeshMaterial<'de>>,
+                        >(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_bitsPerIndex = match m_bitsPerIndex {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bitsPerIndex"),
+                );
+            }
+        };
+        let m_bitsPerWIndex = match m_bitsPerWIndex {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bitsPerWIndex"),
+                );
+            }
+        };
+        let m_wIndexMask = match m_wIndexMask {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("wIndexMask"),
+                );
+            }
+        };
+        let m_indexMask = match m_indexMask {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("indexMask"),
+                );
+            }
+        };
+        let m_radius = match m_radius {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("radius"),
+                );
+            }
+        };
+        let m_weldingType = match m_weldingType {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("weldingType"),
+                );
+            }
+        };
+        let m_materialType = match m_materialType {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("materialType"),
+                );
+            }
+        };
+        let m_materials = match m_materials {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("materials"),
+                );
+            }
+        };
+        let m_materials16 = match m_materials16 {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("materials16"),
+                );
+            }
+        };
+        let m_materials8 = match m_materials8 {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("materials8"),
+                );
+            }
+        };
+        let m_transforms = match m_transforms {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("transforms"),
+                );
+            }
+        };
+        let m_bigVertices = match m_bigVertices {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bigVertices"),
+                );
+            }
+        };
+        let m_bigTriangles = match m_bigTriangles {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bigTriangles"),
+                );
+            }
+        };
+        let m_chunks = match m_chunks {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("chunks"),
+                );
+            }
+        };
+        let m_convexPieces = match m_convexPieces {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("convexPieces"),
+                );
+            }
+        };
+        let m_error = match m_error {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("error"),
+                );
+            }
+        };
+        let m_bounds = match m_bounds {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bounds"),
+                );
+            }
+        };
+        let m_defaultCollisionFilterInfo = match m_defaultCollisionFilterInfo {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "defaultCollisionFilterInfo",
+                    ),
+                );
+            }
+        };
+        let m_materialStriding = match m_materialStriding {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("materialStriding"),
+                );
+            }
+        };
+        let m_numMaterials = match m_numMaterials {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("numMaterials"),
+                );
+            }
+        };
+        let m_namedMaterials = match m_namedMaterials {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("namedMaterials"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkpCompressedMeshShape {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_bitsPerIndex,
+            m_bitsPerWIndex,
+            m_wIndexMask,
+            m_indexMask,
+            m_radius,
+            m_weldingType,
+            m_materialType,
+            m_materials,
+            m_materials16,
+            m_materials8,
+            m_transforms,
+            m_bigVertices,
+            m_bigTriangles,
+            m_chunks,
+            m_convexPieces,
+            m_error,
+            m_bounds,
+            m_defaultCollisionFilterInfo,
+            m_materialStriding,
+            m_numMaterials,
+            m_namedMaterials,
+            ..Default::default()
+        })
+    }
+}
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for hkpCompressedMeshShape<'de> {
+        fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            const FIELDS: &[&str] = &[
+                "bitsPerIndex",
+                "bitsPerWIndex",
+                "wIndexMask",
+                "indexMask",
+                "radius",
+                "weldingType",
+                "materialType",
+                "materials",
+                "materials16",
+                "materials8",
+                "transforms",
+                "bigVertices",
+                "bigTriangles",
+                "chunks",
+                "convexPieces",
+                "error",
+                "bounds",
+                "defaultCollisionFilterInfo",
+                "meshMaterials",
+                "materialStriding",
+                "numMaterials",
+                "namedMaterials",
+            ];
+            _serde::Deserializer::deserialize_struct(
+                deserializer,
+                "hkpCompressedMeshShape",
+                FIELDS,
+                __hkpCompressedMeshShapeVisitor {
+                    marker: _serde::__private::PhantomData::<hkpCompressedMeshShape>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};
 ///- size(C++): `TYPE_UINT8`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]

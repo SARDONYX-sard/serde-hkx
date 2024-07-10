@@ -165,3 +165,571 @@ const _: () = {
         }
     }
 };
+use havok_serde as _serde;
+#[allow(non_camel_case_types)]
+enum __Field {
+    m_groundNormal,
+    m_duration,
+    m_alignWithGroundDuration,
+    m_rootBoneIndex,
+    m_otherBoneIndex,
+    m_anotherBoneIndex,
+    m_timeSinceBegin,
+    m_timeStep,
+    m_initNextModify,
+    __ignore,
+}
+struct __FieldVisitor;
+impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+    type Value = __Field;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "field identifier")
+    }
+    /// Intended for use in XML.
+    #[allow(clippy::match_single_binding)]
+    #[allow(clippy::reversed_empty_ranges)]
+    #[allow(clippy::single_match)]
+    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
+    where
+        __E: _serde::de::Error,
+    {
+        match __value {
+            "groundNormal" => Ok(__Field::m_groundNormal),
+            "duration" => Ok(__Field::m_duration),
+            "alignWithGroundDuration" => Ok(__Field::m_alignWithGroundDuration),
+            "rootBoneIndex" => Ok(__Field::m_rootBoneIndex),
+            "otherBoneIndex" => Ok(__Field::m_otherBoneIndex),
+            "anotherBoneIndex" => Ok(__Field::m_anotherBoneIndex),
+            _ => Ok(__Field::__ignore),
+        }
+    }
+}
+impl<'de> _serde::Deserialize<'de> for __Field {
+    #[inline]
+    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
+    where
+        __D: _serde::Deserializer<'de>,
+    {
+        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+    }
+}
+pub(super) struct __hkbGetUpModifierVisitor<'de> {
+    marker: core::marker::PhantomData<hkbGetUpModifier<'de>>,
+    lifetime: core::marker::PhantomData<&'de ()>,
+}
+impl<'de> __hkbGetUpModifierVisitor<'de> {
+    /// # Purpose of this method
+    /// To reproduce C++ field inheritance, we will have the field internal implementation
+    /// of deserialization partially exposed and reused.
+    #[inline]
+    pub(super) fn visit_as_parent<__A>(
+        __map: &mut __A,
+    ) -> _serde::__private::Result<hkbGetUpModifier<'de>, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        _serde::de::Visitor::visit_struct(
+            Self {
+                marker: _serde::__private::PhantomData::<hkbGetUpModifier<'de>>,
+                lifetime: _serde::__private::PhantomData,
+            },
+            __map,
+        )
+    }
+}
+#[allow(clippy::match_single_binding)]
+#[allow(clippy::reversed_empty_ranges)]
+#[allow(clippy::single_match)]
+impl<'de> _serde::de::Visitor<'de> for __hkbGetUpModifierVisitor<'de> {
+    type Value = hkbGetUpModifier<'de>;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "struct hkbGetUpModifier")
+    }
+    fn visit_struct_for_bytes<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __A::next_value(&mut __map)?;
+        let mut m_groundNormal: _serde::__private::Option<Vector4> = _serde::__private::None;
+        let mut m_duration: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_alignWithGroundDuration: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_rootBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+        let mut m_otherBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+        let mut m_anotherBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+        let mut m_timeSinceBegin: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_timeStep: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_initNextModify: _serde::__private::Option<bool> = _serde::__private::None;
+        for i in 0..9usize {
+            match i {
+                0usize => {
+                    if _serde::__private::Option::is_some(&m_groundNormal) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "groundNormal",
+                            ),
+                        );
+                    }
+                    m_groundNormal = _serde::__private::Some(
+                        match __A::next_value::<Vector4>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                1usize => {
+                    if _serde::__private::Option::is_some(&m_duration) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "duration",
+                            ),
+                        );
+                    }
+                    m_duration = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                2usize => {
+                    if _serde::__private::Option::is_some(&m_alignWithGroundDuration) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "alignWithGroundDuration",
+                            ),
+                        );
+                    }
+                    m_alignWithGroundDuration = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                3usize => {
+                    if _serde::__private::Option::is_some(&m_rootBoneIndex) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "rootBoneIndex",
+                            ),
+                        );
+                    }
+                    m_rootBoneIndex = _serde::__private::Some(
+                        match __A::next_value::<i16>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                4usize => {
+                    if _serde::__private::Option::is_some(&m_otherBoneIndex) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "otherBoneIndex",
+                            ),
+                        );
+                    }
+                    m_otherBoneIndex = _serde::__private::Some(
+                        match __A::next_value::<i16>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                5usize => {
+                    if _serde::__private::Option::is_some(&m_anotherBoneIndex) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "anotherBoneIndex",
+                            ),
+                        );
+                    }
+                    m_anotherBoneIndex = _serde::__private::Some(
+                        match __A::next_value::<i16>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                6usize => {
+                    if _serde::__private::Option::is_some(&m_timeSinceBegin) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "timeSinceBegin",
+                            ),
+                        );
+                    }
+                    __A::pad(&mut __map, 2usize, 2usize)?;
+                    m_timeSinceBegin = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                7usize => {
+                    if _serde::__private::Option::is_some(&m_timeStep) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "timeStep",
+                            ),
+                        );
+                    }
+                    m_timeStep = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                8usize => {
+                    if _serde::__private::Option::is_some(&m_initNextModify) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "initNextModify",
+                            ),
+                        );
+                    }
+                    m_initNextModify = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        __A::pad(&mut __map, 7usize, 7usize)?;
+        let m_groundNormal = match m_groundNormal {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("groundNormal"),
+                );
+            }
+        };
+        let m_duration = match m_duration {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("duration"),
+                );
+            }
+        };
+        let m_alignWithGroundDuration = match m_alignWithGroundDuration {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "alignWithGroundDuration",
+                    ),
+                );
+            }
+        };
+        let m_rootBoneIndex = match m_rootBoneIndex {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("rootBoneIndex"),
+                );
+            }
+        };
+        let m_otherBoneIndex = match m_otherBoneIndex {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("otherBoneIndex"),
+                );
+            }
+        };
+        let m_anotherBoneIndex = match m_anotherBoneIndex {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("anotherBoneIndex"),
+                );
+            }
+        };
+        let m_timeSinceBegin = match m_timeSinceBegin {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("timeSinceBegin"),
+                );
+            }
+        };
+        let m_timeStep = match m_timeStep {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("timeStep"),
+                );
+            }
+        };
+        let m_initNextModify = match m_initNextModify {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("initNextModify"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbGetUpModifier {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_groundNormal,
+            m_duration,
+            m_alignWithGroundDuration,
+            m_rootBoneIndex,
+            m_otherBoneIndex,
+            m_anotherBoneIndex,
+            m_timeSinceBegin,
+            m_timeStep,
+            m_initNextModify,
+        })
+    }
+    fn visit_struct<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __hkbModifierVisitor::visit_as_parent(&mut __map)?;
+        let mut m_groundNormal: _serde::__private::Option<Vector4> = _serde::__private::None;
+        let mut m_duration: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_alignWithGroundDuration: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_rootBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+        let mut m_otherBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+        let mut m_anotherBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+        while let _serde::__private::Some(__key) = match __A::next_key::<
+            __Field,
+        >(&mut __map) {
+            _serde::__private::Ok(__val) => __val,
+            _serde::__private::Err(__err) => {
+                return _serde::__private::Err(__err);
+            }
+        } {
+            match __key {
+                __Field::m_groundNormal => {
+                    if _serde::__private::Option::is_some(&m_groundNormal) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "groundNormal",
+                            ),
+                        );
+                    }
+                    m_groundNormal = _serde::__private::Some(
+                        match __A::next_value::<Vector4>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_duration => {
+                    if _serde::__private::Option::is_some(&m_duration) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "duration",
+                            ),
+                        );
+                    }
+                    m_duration = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_alignWithGroundDuration => {
+                    if _serde::__private::Option::is_some(&m_alignWithGroundDuration) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "alignWithGroundDuration",
+                            ),
+                        );
+                    }
+                    m_alignWithGroundDuration = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_rootBoneIndex => {
+                    if _serde::__private::Option::is_some(&m_rootBoneIndex) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "rootBoneIndex",
+                            ),
+                        );
+                    }
+                    m_rootBoneIndex = _serde::__private::Some(
+                        match __A::next_value::<i16>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_otherBoneIndex => {
+                    if _serde::__private::Option::is_some(&m_otherBoneIndex) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "otherBoneIndex",
+                            ),
+                        );
+                    }
+                    m_otherBoneIndex = _serde::__private::Some(
+                        match __A::next_value::<i16>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_anotherBoneIndex => {
+                    if _serde::__private::Option::is_some(&m_anotherBoneIndex) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "anotherBoneIndex",
+                            ),
+                        );
+                    }
+                    m_anotherBoneIndex = _serde::__private::Some(
+                        match __A::next_value::<i16>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_groundNormal = match m_groundNormal {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("groundNormal"),
+                );
+            }
+        };
+        let m_duration = match m_duration {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("duration"),
+                );
+            }
+        };
+        let m_alignWithGroundDuration = match m_alignWithGroundDuration {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "alignWithGroundDuration",
+                    ),
+                );
+            }
+        };
+        let m_rootBoneIndex = match m_rootBoneIndex {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("rootBoneIndex"),
+                );
+            }
+        };
+        let m_otherBoneIndex = match m_otherBoneIndex {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("otherBoneIndex"),
+                );
+            }
+        };
+        let m_anotherBoneIndex = match m_anotherBoneIndex {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("anotherBoneIndex"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbGetUpModifier {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_groundNormal,
+            m_duration,
+            m_alignWithGroundDuration,
+            m_rootBoneIndex,
+            m_otherBoneIndex,
+            m_anotherBoneIndex,
+            ..Default::default()
+        })
+    }
+}
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for hkbGetUpModifier<'de> {
+        fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            const FIELDS: &[&str] = &[
+                "groundNormal",
+                "duration",
+                "alignWithGroundDuration",
+                "rootBoneIndex",
+                "otherBoneIndex",
+                "anotherBoneIndex",
+                "timeSinceBegin",
+                "timeStep",
+                "initNextModify",
+            ];
+            _serde::Deserializer::deserialize_struct(
+                deserializer,
+                "hkbGetUpModifier",
+                FIELDS,
+                __hkbGetUpModifierVisitor {
+                    marker: _serde::__private::PhantomData::<hkbGetUpModifier>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};

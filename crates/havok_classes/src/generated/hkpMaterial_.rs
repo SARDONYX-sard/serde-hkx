@@ -79,6 +79,367 @@ const _: () = {
         }
     }
 };
+use havok_serde as _serde;
+#[allow(non_camel_case_types)]
+enum __Field {
+    m_responseType,
+    m_rollingFrictionMultiplier,
+    m_friction,
+    m_restitution,
+    __ignore,
+}
+struct __FieldVisitor;
+impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+    type Value = __Field;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "field identifier")
+    }
+    /// Intended for use in XML.
+    #[allow(clippy::match_single_binding)]
+    #[allow(clippy::reversed_empty_ranges)]
+    #[allow(clippy::single_match)]
+    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
+    where
+        __E: _serde::de::Error,
+    {
+        match __value {
+            "responseType" => Ok(__Field::m_responseType),
+            "rollingFrictionMultiplier" => Ok(__Field::m_rollingFrictionMultiplier),
+            "friction" => Ok(__Field::m_friction),
+            "restitution" => Ok(__Field::m_restitution),
+            _ => Ok(__Field::__ignore),
+        }
+    }
+}
+impl<'de> _serde::Deserialize<'de> for __Field {
+    #[inline]
+    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
+    where
+        __D: _serde::Deserializer<'de>,
+    {
+        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+    }
+}
+pub(super) struct __hkpMaterialVisitor<'de> {
+    marker: core::marker::PhantomData<hkpMaterial>,
+    lifetime: core::marker::PhantomData<&'de ()>,
+}
+impl<'de> __hkpMaterialVisitor<'de> {
+    /// # Purpose of this method
+    /// To reproduce C++ field inheritance, we will have the field internal implementation
+    /// of deserialization partially exposed and reused.
+    #[inline]
+    pub(super) fn visit_as_parent<__A>(
+        __map: &mut __A,
+    ) -> _serde::__private::Result<hkpMaterial, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        _serde::de::Visitor::visit_struct(
+            Self {
+                marker: _serde::__private::PhantomData::<hkpMaterial>,
+                lifetime: _serde::__private::PhantomData,
+            },
+            __map,
+        )
+    }
+}
+#[allow(clippy::match_single_binding)]
+#[allow(clippy::reversed_empty_ranges)]
+#[allow(clippy::single_match)]
+impl<'de> _serde::de::Visitor<'de> for __hkpMaterialVisitor<'de> {
+    type Value = hkpMaterial;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "struct hkpMaterial")
+    }
+    fn visit_struct_for_bytes<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let mut m_responseType: _serde::__private::Option<ResponseType> = _serde::__private::None;
+        let mut m_rollingFrictionMultiplier: _serde::__private::Option<f16> = _serde::__private::None;
+        let mut m_friction: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_restitution: _serde::__private::Option<f32> = _serde::__private::None;
+        for i in 0..4usize {
+            match i {
+                0usize => {
+                    if _serde::__private::Option::is_some(&m_responseType) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "responseType",
+                            ),
+                        );
+                    }
+                    m_responseType = _serde::__private::Some(
+                        match __A::next_value::<ResponseType>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                1usize => {
+                    if _serde::__private::Option::is_some(&m_rollingFrictionMultiplier) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "rollingFrictionMultiplier",
+                            ),
+                        );
+                    }
+                    __A::pad(&mut __map, 1usize, 1usize)?;
+                    m_rollingFrictionMultiplier = _serde::__private::Some(
+                        match __A::next_value::<f16>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                2usize => {
+                    if _serde::__private::Option::is_some(&m_friction) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "friction",
+                            ),
+                        );
+                    }
+                    m_friction = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                3usize => {
+                    if _serde::__private::Option::is_some(&m_restitution) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "restitution",
+                            ),
+                        );
+                    }
+                    m_restitution = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_responseType = match m_responseType {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("responseType"),
+                );
+            }
+        };
+        let m_rollingFrictionMultiplier = match m_rollingFrictionMultiplier {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "rollingFrictionMultiplier",
+                    ),
+                );
+            }
+        };
+        let m_friction = match m_friction {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("friction"),
+                );
+            }
+        };
+        let m_restitution = match m_restitution {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("restitution"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkpMaterial {
+            __ptr: __A::class_ptr(&mut __map),
+            m_responseType,
+            m_rollingFrictionMultiplier,
+            m_friction,
+            m_restitution,
+        })
+    }
+    fn visit_struct<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let mut m_responseType: _serde::__private::Option<ResponseType> = _serde::__private::None;
+        let mut m_rollingFrictionMultiplier: _serde::__private::Option<f16> = _serde::__private::None;
+        let mut m_friction: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_restitution: _serde::__private::Option<f32> = _serde::__private::None;
+        while let _serde::__private::Some(__key) = match __A::next_key::<
+            __Field,
+        >(&mut __map) {
+            _serde::__private::Ok(__val) => __val,
+            _serde::__private::Err(__err) => {
+                return _serde::__private::Err(__err);
+            }
+        } {
+            match __key {
+                __Field::m_responseType => {
+                    if _serde::__private::Option::is_some(&m_responseType) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "responseType",
+                            ),
+                        );
+                    }
+                    m_responseType = _serde::__private::Some(
+                        match __A::next_value::<ResponseType>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_rollingFrictionMultiplier => {
+                    if _serde::__private::Option::is_some(&m_rollingFrictionMultiplier) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "rollingFrictionMultiplier",
+                            ),
+                        );
+                    }
+                    m_rollingFrictionMultiplier = _serde::__private::Some(
+                        match __A::next_value::<f16>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_friction => {
+                    if _serde::__private::Option::is_some(&m_friction) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "friction",
+                            ),
+                        );
+                    }
+                    m_friction = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_restitution => {
+                    if _serde::__private::Option::is_some(&m_restitution) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "restitution",
+                            ),
+                        );
+                    }
+                    m_restitution = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_responseType = match m_responseType {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("responseType"),
+                );
+            }
+        };
+        let m_rollingFrictionMultiplier = match m_rollingFrictionMultiplier {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "rollingFrictionMultiplier",
+                    ),
+                );
+            }
+        };
+        let m_friction = match m_friction {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("friction"),
+                );
+            }
+        };
+        let m_restitution = match m_restitution {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("restitution"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkpMaterial {
+            __ptr: __A::class_ptr(&mut __map),
+            m_responseType,
+            m_rollingFrictionMultiplier,
+            m_friction,
+            m_restitution,
+        })
+    }
+}
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for hkpMaterial {
+        fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            const FIELDS: &[&str] = &[
+                "responseType",
+                "rollingFrictionMultiplier",
+                "friction",
+                "restitution",
+            ];
+            _serde::Deserializer::deserialize_struct(
+                deserializer,
+                "hkpMaterial",
+                FIELDS,
+                __hkpMaterialVisitor {
+                    marker: _serde::__private::PhantomData::<hkpMaterial>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]

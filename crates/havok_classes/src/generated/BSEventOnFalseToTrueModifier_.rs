@@ -195,3 +195,753 @@ const _: () = {
         }
     }
 };
+use havok_serde as _serde;
+#[allow(non_camel_case_types)]
+enum __Field {
+    m_bEnableEvent1,
+    m_bVariableToTest1,
+    m_EventToSend1,
+    m_bEnableEvent2,
+    m_bVariableToTest2,
+    m_EventToSend2,
+    m_bEnableEvent3,
+    m_bVariableToTest3,
+    m_EventToSend3,
+    m_bSlot1ActivatedLastFrame,
+    m_bSlot2ActivatedLastFrame,
+    m_bSlot3ActivatedLastFrame,
+    __ignore,
+}
+struct __FieldVisitor;
+impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+    type Value = __Field;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "field identifier")
+    }
+    /// Intended for use in XML.
+    #[allow(clippy::match_single_binding)]
+    #[allow(clippy::reversed_empty_ranges)]
+    #[allow(clippy::single_match)]
+    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
+    where
+        __E: _serde::de::Error,
+    {
+        match __value {
+            "bEnableEvent1" => Ok(__Field::m_bEnableEvent1),
+            "bVariableToTest1" => Ok(__Field::m_bVariableToTest1),
+            "EventToSend1" => Ok(__Field::m_EventToSend1),
+            "bEnableEvent2" => Ok(__Field::m_bEnableEvent2),
+            "bVariableToTest2" => Ok(__Field::m_bVariableToTest2),
+            "EventToSend2" => Ok(__Field::m_EventToSend2),
+            "bEnableEvent3" => Ok(__Field::m_bEnableEvent3),
+            "bVariableToTest3" => Ok(__Field::m_bVariableToTest3),
+            "EventToSend3" => Ok(__Field::m_EventToSend3),
+            _ => Ok(__Field::__ignore),
+        }
+    }
+}
+impl<'de> _serde::Deserialize<'de> for __Field {
+    #[inline]
+    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
+    where
+        __D: _serde::Deserializer<'de>,
+    {
+        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+    }
+}
+pub(super) struct __BSEventOnFalseToTrueModifierVisitor<'de> {
+    marker: core::marker::PhantomData<BSEventOnFalseToTrueModifier<'de>>,
+    lifetime: core::marker::PhantomData<&'de ()>,
+}
+impl<'de> __BSEventOnFalseToTrueModifierVisitor<'de> {
+    /// # Purpose of this method
+    /// To reproduce C++ field inheritance, we will have the field internal implementation
+    /// of deserialization partially exposed and reused.
+    #[inline]
+    pub(super) fn visit_as_parent<__A>(
+        __map: &mut __A,
+    ) -> _serde::__private::Result<BSEventOnFalseToTrueModifier<'de>, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        _serde::de::Visitor::visit_struct(
+            Self {
+                marker: _serde::__private::PhantomData::<
+                    BSEventOnFalseToTrueModifier<'de>,
+                >,
+                lifetime: _serde::__private::PhantomData,
+            },
+            __map,
+        )
+    }
+}
+#[allow(clippy::match_single_binding)]
+#[allow(clippy::reversed_empty_ranges)]
+#[allow(clippy::single_match)]
+impl<'de> _serde::de::Visitor<'de> for __BSEventOnFalseToTrueModifierVisitor<'de> {
+    type Value = BSEventOnFalseToTrueModifier<'de>;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(
+            __formatter,
+            "struct BSEventOnFalseToTrueModifier",
+        )
+    }
+    fn visit_struct_for_bytes<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __A::next_value(&mut __map)?;
+        let mut m_bEnableEvent1: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_bVariableToTest1: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_EventToSend1: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
+        let mut m_bEnableEvent2: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_bVariableToTest2: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_EventToSend2: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
+        let mut m_bEnableEvent3: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_bVariableToTest3: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_EventToSend3: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
+        let mut m_bSlot1ActivatedLastFrame: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_bSlot2ActivatedLastFrame: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_bSlot3ActivatedLastFrame: _serde::__private::Option<bool> = _serde::__private::None;
+        for i in 0..12usize {
+            match i {
+                0usize => {
+                    if _serde::__private::Option::is_some(&m_bEnableEvent1) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bEnableEvent1",
+                            ),
+                        );
+                    }
+                    m_bEnableEvent1 = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                1usize => {
+                    if _serde::__private::Option::is_some(&m_bVariableToTest1) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bVariableToTest1",
+                            ),
+                        );
+                    }
+                    m_bVariableToTest1 = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                2usize => {
+                    if _serde::__private::Option::is_some(&m_EventToSend1) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "EventToSend1",
+                            ),
+                        );
+                    }
+                    __A::pad(&mut __map, 2usize, 6usize)?;
+                    m_EventToSend1 = _serde::__private::Some(
+                        match __A::next_value::<hkbEventProperty>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                3usize => {
+                    if _serde::__private::Option::is_some(&m_bEnableEvent2) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bEnableEvent2",
+                            ),
+                        );
+                    }
+                    m_bEnableEvent2 = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                4usize => {
+                    if _serde::__private::Option::is_some(&m_bVariableToTest2) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bVariableToTest2",
+                            ),
+                        );
+                    }
+                    m_bVariableToTest2 = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                5usize => {
+                    if _serde::__private::Option::is_some(&m_EventToSend2) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "EventToSend2",
+                            ),
+                        );
+                    }
+                    __A::pad(&mut __map, 2usize, 6usize)?;
+                    m_EventToSend2 = _serde::__private::Some(
+                        match __A::next_value::<hkbEventProperty>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                6usize => {
+                    if _serde::__private::Option::is_some(&m_bEnableEvent3) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bEnableEvent3",
+                            ),
+                        );
+                    }
+                    m_bEnableEvent3 = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                7usize => {
+                    if _serde::__private::Option::is_some(&m_bVariableToTest3) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bVariableToTest3",
+                            ),
+                        );
+                    }
+                    m_bVariableToTest3 = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                8usize => {
+                    if _serde::__private::Option::is_some(&m_EventToSend3) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "EventToSend3",
+                            ),
+                        );
+                    }
+                    __A::pad(&mut __map, 2usize, 6usize)?;
+                    m_EventToSend3 = _serde::__private::Some(
+                        match __A::next_value::<hkbEventProperty>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                9usize => {
+                    if _serde::__private::Option::is_some(&m_bSlot1ActivatedLastFrame) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bSlot1ActivatedLastFrame",
+                            ),
+                        );
+                    }
+                    m_bSlot1ActivatedLastFrame = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                10usize => {
+                    if _serde::__private::Option::is_some(&m_bSlot2ActivatedLastFrame) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bSlot2ActivatedLastFrame",
+                            ),
+                        );
+                    }
+                    m_bSlot2ActivatedLastFrame = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                11usize => {
+                    if _serde::__private::Option::is_some(&m_bSlot3ActivatedLastFrame) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bSlot3ActivatedLastFrame",
+                            ),
+                        );
+                    }
+                    m_bSlot3ActivatedLastFrame = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        __A::pad(&mut __map, 1usize, 5usize)?;
+        let m_bEnableEvent1 = match m_bEnableEvent1 {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bEnableEvent1"),
+                );
+            }
+        };
+        let m_bVariableToTest1 = match m_bVariableToTest1 {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bVariableToTest1"),
+                );
+            }
+        };
+        let m_EventToSend1 = match m_EventToSend1 {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("EventToSend1"),
+                );
+            }
+        };
+        let m_bEnableEvent2 = match m_bEnableEvent2 {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bEnableEvent2"),
+                );
+            }
+        };
+        let m_bVariableToTest2 = match m_bVariableToTest2 {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bVariableToTest2"),
+                );
+            }
+        };
+        let m_EventToSend2 = match m_EventToSend2 {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("EventToSend2"),
+                );
+            }
+        };
+        let m_bEnableEvent3 = match m_bEnableEvent3 {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bEnableEvent3"),
+                );
+            }
+        };
+        let m_bVariableToTest3 = match m_bVariableToTest3 {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bVariableToTest3"),
+                );
+            }
+        };
+        let m_EventToSend3 = match m_EventToSend3 {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("EventToSend3"),
+                );
+            }
+        };
+        let m_bSlot1ActivatedLastFrame = match m_bSlot1ActivatedLastFrame {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "bSlot1ActivatedLastFrame",
+                    ),
+                );
+            }
+        };
+        let m_bSlot2ActivatedLastFrame = match m_bSlot2ActivatedLastFrame {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "bSlot2ActivatedLastFrame",
+                    ),
+                );
+            }
+        };
+        let m_bSlot3ActivatedLastFrame = match m_bSlot3ActivatedLastFrame {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "bSlot3ActivatedLastFrame",
+                    ),
+                );
+            }
+        };
+        _serde::__private::Ok(BSEventOnFalseToTrueModifier {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_bEnableEvent1,
+            m_bVariableToTest1,
+            m_EventToSend1,
+            m_bEnableEvent2,
+            m_bVariableToTest2,
+            m_EventToSend2,
+            m_bEnableEvent3,
+            m_bVariableToTest3,
+            m_EventToSend3,
+            m_bSlot1ActivatedLastFrame,
+            m_bSlot2ActivatedLastFrame,
+            m_bSlot3ActivatedLastFrame,
+        })
+    }
+    fn visit_struct<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __hkbModifierVisitor::visit_as_parent(&mut __map)?;
+        let mut m_bEnableEvent1: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_bVariableToTest1: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_EventToSend1: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
+        let mut m_bEnableEvent2: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_bVariableToTest2: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_EventToSend2: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
+        let mut m_bEnableEvent3: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_bVariableToTest3: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_EventToSend3: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
+        while let _serde::__private::Some(__key) = match __A::next_key::<
+            __Field,
+        >(&mut __map) {
+            _serde::__private::Ok(__val) => __val,
+            _serde::__private::Err(__err) => {
+                return _serde::__private::Err(__err);
+            }
+        } {
+            match __key {
+                __Field::m_bEnableEvent1 => {
+                    if _serde::__private::Option::is_some(&m_bEnableEvent1) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bEnableEvent1",
+                            ),
+                        );
+                    }
+                    m_bEnableEvent1 = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_bVariableToTest1 => {
+                    if _serde::__private::Option::is_some(&m_bVariableToTest1) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bVariableToTest1",
+                            ),
+                        );
+                    }
+                    m_bVariableToTest1 = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_EventToSend1 => {
+                    if _serde::__private::Option::is_some(&m_EventToSend1) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "EventToSend1",
+                            ),
+                        );
+                    }
+                    m_EventToSend1 = _serde::__private::Some(
+                        match __A::next_value::<hkbEventProperty>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_bEnableEvent2 => {
+                    if _serde::__private::Option::is_some(&m_bEnableEvent2) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bEnableEvent2",
+                            ),
+                        );
+                    }
+                    m_bEnableEvent2 = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_bVariableToTest2 => {
+                    if _serde::__private::Option::is_some(&m_bVariableToTest2) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bVariableToTest2",
+                            ),
+                        );
+                    }
+                    m_bVariableToTest2 = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_EventToSend2 => {
+                    if _serde::__private::Option::is_some(&m_EventToSend2) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "EventToSend2",
+                            ),
+                        );
+                    }
+                    m_EventToSend2 = _serde::__private::Some(
+                        match __A::next_value::<hkbEventProperty>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_bEnableEvent3 => {
+                    if _serde::__private::Option::is_some(&m_bEnableEvent3) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bEnableEvent3",
+                            ),
+                        );
+                    }
+                    m_bEnableEvent3 = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_bVariableToTest3 => {
+                    if _serde::__private::Option::is_some(&m_bVariableToTest3) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bVariableToTest3",
+                            ),
+                        );
+                    }
+                    m_bVariableToTest3 = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_EventToSend3 => {
+                    if _serde::__private::Option::is_some(&m_EventToSend3) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "EventToSend3",
+                            ),
+                        );
+                    }
+                    m_EventToSend3 = _serde::__private::Some(
+                        match __A::next_value::<hkbEventProperty>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_bEnableEvent1 = match m_bEnableEvent1 {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bEnableEvent1"),
+                );
+            }
+        };
+        let m_bVariableToTest1 = match m_bVariableToTest1 {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bVariableToTest1"),
+                );
+            }
+        };
+        let m_EventToSend1 = match m_EventToSend1 {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("EventToSend1"),
+                );
+            }
+        };
+        let m_bEnableEvent2 = match m_bEnableEvent2 {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bEnableEvent2"),
+                );
+            }
+        };
+        let m_bVariableToTest2 = match m_bVariableToTest2 {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bVariableToTest2"),
+                );
+            }
+        };
+        let m_EventToSend2 = match m_EventToSend2 {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("EventToSend2"),
+                );
+            }
+        };
+        let m_bEnableEvent3 = match m_bEnableEvent3 {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bEnableEvent3"),
+                );
+            }
+        };
+        let m_bVariableToTest3 = match m_bVariableToTest3 {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bVariableToTest3"),
+                );
+            }
+        };
+        let m_EventToSend3 = match m_EventToSend3 {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("EventToSend3"),
+                );
+            }
+        };
+        _serde::__private::Ok(BSEventOnFalseToTrueModifier {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_bEnableEvent1,
+            m_bVariableToTest1,
+            m_EventToSend1,
+            m_bEnableEvent2,
+            m_bVariableToTest2,
+            m_EventToSend2,
+            m_bEnableEvent3,
+            m_bVariableToTest3,
+            m_EventToSend3,
+            ..Default::default()
+        })
+    }
+}
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for BSEventOnFalseToTrueModifier<'de> {
+        fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            const FIELDS: &[&str] = &[
+                "bEnableEvent1",
+                "bVariableToTest1",
+                "EventToSend1",
+                "bEnableEvent2",
+                "bVariableToTest2",
+                "EventToSend2",
+                "bEnableEvent3",
+                "bVariableToTest3",
+                "EventToSend3",
+                "bSlot1ActivatedLastFrame",
+                "bSlot2ActivatedLastFrame",
+                "bSlot3ActivatedLastFrame",
+            ];
+            _serde::Deserializer::deserialize_struct(
+                deserializer,
+                "BSEventOnFalseToTrueModifier",
+                FIELDS,
+                __BSEventOnFalseToTrueModifierVisitor {
+                    marker: _serde::__private::PhantomData::<
+                        BSEventOnFalseToTrueModifier,
+                    >,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};

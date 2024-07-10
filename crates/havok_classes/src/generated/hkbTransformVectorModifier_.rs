@@ -150,3 +150,590 @@ const _: () = {
         }
     }
 };
+use havok_serde as _serde;
+#[allow(non_camel_case_types)]
+enum __Field {
+    m_rotation,
+    m_translation,
+    m_vectorIn,
+    m_vectorOut,
+    m_rotateOnly,
+    m_inverse,
+    m_computeOnActivate,
+    m_computeOnModify,
+    __ignore,
+}
+struct __FieldVisitor;
+impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+    type Value = __Field;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "field identifier")
+    }
+    /// Intended for use in XML.
+    #[allow(clippy::match_single_binding)]
+    #[allow(clippy::reversed_empty_ranges)]
+    #[allow(clippy::single_match)]
+    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
+    where
+        __E: _serde::de::Error,
+    {
+        match __value {
+            "rotation" => Ok(__Field::m_rotation),
+            "translation" => Ok(__Field::m_translation),
+            "vectorIn" => Ok(__Field::m_vectorIn),
+            "vectorOut" => Ok(__Field::m_vectorOut),
+            "rotateOnly" => Ok(__Field::m_rotateOnly),
+            "inverse" => Ok(__Field::m_inverse),
+            "computeOnActivate" => Ok(__Field::m_computeOnActivate),
+            "computeOnModify" => Ok(__Field::m_computeOnModify),
+            _ => Ok(__Field::__ignore),
+        }
+    }
+}
+impl<'de> _serde::Deserialize<'de> for __Field {
+    #[inline]
+    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
+    where
+        __D: _serde::Deserializer<'de>,
+    {
+        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+    }
+}
+pub(super) struct __hkbTransformVectorModifierVisitor<'de> {
+    marker: core::marker::PhantomData<hkbTransformVectorModifier<'de>>,
+    lifetime: core::marker::PhantomData<&'de ()>,
+}
+impl<'de> __hkbTransformVectorModifierVisitor<'de> {
+    /// # Purpose of this method
+    /// To reproduce C++ field inheritance, we will have the field internal implementation
+    /// of deserialization partially exposed and reused.
+    #[inline]
+    pub(super) fn visit_as_parent<__A>(
+        __map: &mut __A,
+    ) -> _serde::__private::Result<hkbTransformVectorModifier<'de>, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        _serde::de::Visitor::visit_struct(
+            Self {
+                marker: _serde::__private::PhantomData::<
+                    hkbTransformVectorModifier<'de>,
+                >,
+                lifetime: _serde::__private::PhantomData,
+            },
+            __map,
+        )
+    }
+}
+#[allow(clippy::match_single_binding)]
+#[allow(clippy::reversed_empty_ranges)]
+#[allow(clippy::single_match)]
+impl<'de> _serde::de::Visitor<'de> for __hkbTransformVectorModifierVisitor<'de> {
+    type Value = hkbTransformVectorModifier<'de>;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "struct hkbTransformVectorModifier")
+    }
+    fn visit_struct_for_bytes<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __A::next_value(&mut __map)?;
+        let mut m_rotation: _serde::__private::Option<Quaternion> = _serde::__private::None;
+        let mut m_translation: _serde::__private::Option<Vector4> = _serde::__private::None;
+        let mut m_vectorIn: _serde::__private::Option<Vector4> = _serde::__private::None;
+        let mut m_vectorOut: _serde::__private::Option<Vector4> = _serde::__private::None;
+        let mut m_rotateOnly: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_inverse: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_computeOnActivate: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_computeOnModify: _serde::__private::Option<bool> = _serde::__private::None;
+        for i in 0..8usize {
+            match i {
+                0usize => {
+                    if _serde::__private::Option::is_some(&m_rotation) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "rotation",
+                            ),
+                        );
+                    }
+                    m_rotation = _serde::__private::Some(
+                        match __A::next_value::<Quaternion>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                1usize => {
+                    if _serde::__private::Option::is_some(&m_translation) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "translation",
+                            ),
+                        );
+                    }
+                    m_translation = _serde::__private::Some(
+                        match __A::next_value::<Vector4>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                2usize => {
+                    if _serde::__private::Option::is_some(&m_vectorIn) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "vectorIn",
+                            ),
+                        );
+                    }
+                    m_vectorIn = _serde::__private::Some(
+                        match __A::next_value::<Vector4>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                3usize => {
+                    if _serde::__private::Option::is_some(&m_vectorOut) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "vectorOut",
+                            ),
+                        );
+                    }
+                    m_vectorOut = _serde::__private::Some(
+                        match __A::next_value::<Vector4>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                4usize => {
+                    if _serde::__private::Option::is_some(&m_rotateOnly) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "rotateOnly",
+                            ),
+                        );
+                    }
+                    m_rotateOnly = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                5usize => {
+                    if _serde::__private::Option::is_some(&m_inverse) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("inverse"),
+                        );
+                    }
+                    m_inverse = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                6usize => {
+                    if _serde::__private::Option::is_some(&m_computeOnActivate) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "computeOnActivate",
+                            ),
+                        );
+                    }
+                    m_computeOnActivate = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                7usize => {
+                    if _serde::__private::Option::is_some(&m_computeOnModify) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "computeOnModify",
+                            ),
+                        );
+                    }
+                    m_computeOnModify = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        __A::pad(&mut __map, 12usize, 12usize)?;
+        let m_rotation = match m_rotation {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("rotation"),
+                );
+            }
+        };
+        let m_translation = match m_translation {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("translation"),
+                );
+            }
+        };
+        let m_vectorIn = match m_vectorIn {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("vectorIn"),
+                );
+            }
+        };
+        let m_vectorOut = match m_vectorOut {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("vectorOut"),
+                );
+            }
+        };
+        let m_rotateOnly = match m_rotateOnly {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("rotateOnly"),
+                );
+            }
+        };
+        let m_inverse = match m_inverse {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("inverse"),
+                );
+            }
+        };
+        let m_computeOnActivate = match m_computeOnActivate {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("computeOnActivate"),
+                );
+            }
+        };
+        let m_computeOnModify = match m_computeOnModify {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("computeOnModify"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbTransformVectorModifier {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_rotation,
+            m_translation,
+            m_vectorIn,
+            m_vectorOut,
+            m_rotateOnly,
+            m_inverse,
+            m_computeOnActivate,
+            m_computeOnModify,
+        })
+    }
+    fn visit_struct<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __hkbModifierVisitor::visit_as_parent(&mut __map)?;
+        let mut m_rotation: _serde::__private::Option<Quaternion> = _serde::__private::None;
+        let mut m_translation: _serde::__private::Option<Vector4> = _serde::__private::None;
+        let mut m_vectorIn: _serde::__private::Option<Vector4> = _serde::__private::None;
+        let mut m_vectorOut: _serde::__private::Option<Vector4> = _serde::__private::None;
+        let mut m_rotateOnly: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_inverse: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_computeOnActivate: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_computeOnModify: _serde::__private::Option<bool> = _serde::__private::None;
+        while let _serde::__private::Some(__key) = match __A::next_key::<
+            __Field,
+        >(&mut __map) {
+            _serde::__private::Ok(__val) => __val,
+            _serde::__private::Err(__err) => {
+                return _serde::__private::Err(__err);
+            }
+        } {
+            match __key {
+                __Field::m_rotation => {
+                    if _serde::__private::Option::is_some(&m_rotation) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "rotation",
+                            ),
+                        );
+                    }
+                    m_rotation = _serde::__private::Some(
+                        match __A::next_value::<Quaternion>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_translation => {
+                    if _serde::__private::Option::is_some(&m_translation) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "translation",
+                            ),
+                        );
+                    }
+                    m_translation = _serde::__private::Some(
+                        match __A::next_value::<Vector4>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_vectorIn => {
+                    if _serde::__private::Option::is_some(&m_vectorIn) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "vectorIn",
+                            ),
+                        );
+                    }
+                    m_vectorIn = _serde::__private::Some(
+                        match __A::next_value::<Vector4>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_vectorOut => {
+                    if _serde::__private::Option::is_some(&m_vectorOut) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "vectorOut",
+                            ),
+                        );
+                    }
+                    m_vectorOut = _serde::__private::Some(
+                        match __A::next_value::<Vector4>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_rotateOnly => {
+                    if _serde::__private::Option::is_some(&m_rotateOnly) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "rotateOnly",
+                            ),
+                        );
+                    }
+                    m_rotateOnly = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_inverse => {
+                    if _serde::__private::Option::is_some(&m_inverse) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("inverse"),
+                        );
+                    }
+                    m_inverse = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_computeOnActivate => {
+                    if _serde::__private::Option::is_some(&m_computeOnActivate) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "computeOnActivate",
+                            ),
+                        );
+                    }
+                    m_computeOnActivate = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_computeOnModify => {
+                    if _serde::__private::Option::is_some(&m_computeOnModify) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "computeOnModify",
+                            ),
+                        );
+                    }
+                    m_computeOnModify = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_rotation = match m_rotation {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("rotation"),
+                );
+            }
+        };
+        let m_translation = match m_translation {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("translation"),
+                );
+            }
+        };
+        let m_vectorIn = match m_vectorIn {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("vectorIn"),
+                );
+            }
+        };
+        let m_vectorOut = match m_vectorOut {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("vectorOut"),
+                );
+            }
+        };
+        let m_rotateOnly = match m_rotateOnly {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("rotateOnly"),
+                );
+            }
+        };
+        let m_inverse = match m_inverse {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("inverse"),
+                );
+            }
+        };
+        let m_computeOnActivate = match m_computeOnActivate {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("computeOnActivate"),
+                );
+            }
+        };
+        let m_computeOnModify = match m_computeOnModify {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("computeOnModify"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbTransformVectorModifier {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_rotation,
+            m_translation,
+            m_vectorIn,
+            m_vectorOut,
+            m_rotateOnly,
+            m_inverse,
+            m_computeOnActivate,
+            m_computeOnModify,
+        })
+    }
+}
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for hkbTransformVectorModifier<'de> {
+        fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            const FIELDS: &[&str] = &[
+                "rotation",
+                "translation",
+                "vectorIn",
+                "vectorOut",
+                "rotateOnly",
+                "inverse",
+                "computeOnActivate",
+                "computeOnModify",
+            ];
+            _serde::Deserializer::deserialize_struct(
+                deserializer,
+                "hkbTransformVectorModifier",
+                FIELDS,
+                __hkbTransformVectorModifierVisitor {
+                    marker: _serde::__private::PhantomData::<hkbTransformVectorModifier>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};

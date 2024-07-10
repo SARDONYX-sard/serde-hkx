@@ -248,3 +248,1208 @@ const _: () = {
         }
     }
 };
+use havok_serde as _serde;
+#[allow(non_camel_case_types)]
+enum __Field {
+    m_deformableSkinIds,
+    m_rigidSkinIds,
+    m_externalEventIds,
+    m_auxiliaryInfo,
+    m_activeEventIds,
+    m_activeVariableIds,
+    m_characterId,
+    m_instanceName,
+    m_templateName,
+    m_fullPathToProject,
+    m_behaviorData,
+    m_behaviorInternalState,
+    m_nodeIdToInternalStateMap,
+    m_visible,
+    m_elapsedSimulationTime,
+    m_skeleton,
+    m_worldFromModel,
+    m_poseModelSpace,
+    m_rigidAttachmentTransforms,
+    __ignore,
+}
+struct __FieldVisitor;
+impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+    type Value = __Field;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "field identifier")
+    }
+    /// Intended for use in XML.
+    #[allow(clippy::match_single_binding)]
+    #[allow(clippy::reversed_empty_ranges)]
+    #[allow(clippy::single_match)]
+    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
+    where
+        __E: _serde::de::Error,
+    {
+        match __value {
+            "deformableSkinIds" => Ok(__Field::m_deformableSkinIds),
+            "rigidSkinIds" => Ok(__Field::m_rigidSkinIds),
+            "externalEventIds" => Ok(__Field::m_externalEventIds),
+            "auxiliaryInfo" => Ok(__Field::m_auxiliaryInfo),
+            "activeEventIds" => Ok(__Field::m_activeEventIds),
+            "activeVariableIds" => Ok(__Field::m_activeVariableIds),
+            "characterId" => Ok(__Field::m_characterId),
+            "instanceName" => Ok(__Field::m_instanceName),
+            "templateName" => Ok(__Field::m_templateName),
+            "fullPathToProject" => Ok(__Field::m_fullPathToProject),
+            "behaviorData" => Ok(__Field::m_behaviorData),
+            "behaviorInternalState" => Ok(__Field::m_behaviorInternalState),
+            "visible" => Ok(__Field::m_visible),
+            "elapsedSimulationTime" => Ok(__Field::m_elapsedSimulationTime),
+            "skeleton" => Ok(__Field::m_skeleton),
+            "worldFromModel" => Ok(__Field::m_worldFromModel),
+            "poseModelSpace" => Ok(__Field::m_poseModelSpace),
+            "rigidAttachmentTransforms" => Ok(__Field::m_rigidAttachmentTransforms),
+            _ => Ok(__Field::__ignore),
+        }
+    }
+}
+impl<'de> _serde::Deserialize<'de> for __Field {
+    #[inline]
+    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
+    where
+        __D: _serde::Deserializer<'de>,
+    {
+        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+    }
+}
+pub(super) struct __hkbClientCharacterStateVisitor<'de> {
+    marker: core::marker::PhantomData<hkbClientCharacterState<'de>>,
+    lifetime: core::marker::PhantomData<&'de ()>,
+}
+impl<'de> __hkbClientCharacterStateVisitor<'de> {
+    /// # Purpose of this method
+    /// To reproduce C++ field inheritance, we will have the field internal implementation
+    /// of deserialization partially exposed and reused.
+    #[inline]
+    pub(super) fn visit_as_parent<__A>(
+        __map: &mut __A,
+    ) -> _serde::__private::Result<hkbClientCharacterState<'de>, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        _serde::de::Visitor::visit_struct(
+            Self {
+                marker: _serde::__private::PhantomData::<hkbClientCharacterState<'de>>,
+                lifetime: _serde::__private::PhantomData,
+            },
+            __map,
+        )
+    }
+}
+#[allow(clippy::match_single_binding)]
+#[allow(clippy::reversed_empty_ranges)]
+#[allow(clippy::single_match)]
+impl<'de> _serde::de::Visitor<'de> for __hkbClientCharacterStateVisitor<'de> {
+    type Value = hkbClientCharacterState<'de>;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "struct hkbClientCharacterState")
+    }
+    fn visit_struct_for_bytes<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __A::next_value(&mut __map)?;
+        let mut m_deformableSkinIds: _serde::__private::Option<Vec<u64>> = _serde::__private::None;
+        let mut m_rigidSkinIds: _serde::__private::Option<Vec<u64>> = _serde::__private::None;
+        let mut m_externalEventIds: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
+        let mut m_auxiliaryInfo: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+        let mut m_activeEventIds: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
+        let mut m_activeVariableIds: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
+        let mut m_characterId: _serde::__private::Option<u64> = _serde::__private::None;
+        let mut m_instanceName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+        let mut m_templateName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+        let mut m_fullPathToProject: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+        let mut m_behaviorData: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_behaviorInternalState: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_nodeIdToInternalStateMap: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_visible: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_elapsedSimulationTime: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_skeleton: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_worldFromModel: _serde::__private::Option<QsTransform> = _serde::__private::None;
+        let mut m_poseModelSpace: _serde::__private::Option<Vec<QsTransform>> = _serde::__private::None;
+        let mut m_rigidAttachmentTransforms: _serde::__private::Option<
+            Vec<QsTransform>,
+        > = _serde::__private::None;
+        for i in 0..19usize {
+            match i {
+                0usize => {
+                    if _serde::__private::Option::is_some(&m_deformableSkinIds) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "deformableSkinIds",
+                            ),
+                        );
+                    }
+                    m_deformableSkinIds = _serde::__private::Some(
+                        match __A::next_value::<Vec<u64>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                1usize => {
+                    if _serde::__private::Option::is_some(&m_rigidSkinIds) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "rigidSkinIds",
+                            ),
+                        );
+                    }
+                    m_rigidSkinIds = _serde::__private::Some(
+                        match __A::next_value::<Vec<u64>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                2usize => {
+                    if _serde::__private::Option::is_some(&m_externalEventIds) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "externalEventIds",
+                            ),
+                        );
+                    }
+                    m_externalEventIds = _serde::__private::Some(
+                        match __A::next_value::<Vec<i16>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                3usize => {
+                    if _serde::__private::Option::is_some(&m_auxiliaryInfo) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "auxiliaryInfo",
+                            ),
+                        );
+                    }
+                    m_auxiliaryInfo = _serde::__private::Some(
+                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                4usize => {
+                    if _serde::__private::Option::is_some(&m_activeEventIds) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "activeEventIds",
+                            ),
+                        );
+                    }
+                    m_activeEventIds = _serde::__private::Some(
+                        match __A::next_value::<Vec<i16>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                5usize => {
+                    if _serde::__private::Option::is_some(&m_activeVariableIds) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "activeVariableIds",
+                            ),
+                        );
+                    }
+                    m_activeVariableIds = _serde::__private::Some(
+                        match __A::next_value::<Vec<i16>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                6usize => {
+                    if _serde::__private::Option::is_some(&m_characterId) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "characterId",
+                            ),
+                        );
+                    }
+                    m_characterId = _serde::__private::Some(
+                        match __A::next_value::<u64>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                7usize => {
+                    if _serde::__private::Option::is_some(&m_instanceName) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "instanceName",
+                            ),
+                        );
+                    }
+                    m_instanceName = _serde::__private::Some(
+                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                8usize => {
+                    if _serde::__private::Option::is_some(&m_templateName) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "templateName",
+                            ),
+                        );
+                    }
+                    m_templateName = _serde::__private::Some(
+                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                9usize => {
+                    if _serde::__private::Option::is_some(&m_fullPathToProject) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "fullPathToProject",
+                            ),
+                        );
+                    }
+                    m_fullPathToProject = _serde::__private::Some(
+                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                10usize => {
+                    if _serde::__private::Option::is_some(&m_behaviorData) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "behaviorData",
+                            ),
+                        );
+                    }
+                    m_behaviorData = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                11usize => {
+                    if _serde::__private::Option::is_some(&m_behaviorInternalState) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "behaviorInternalState",
+                            ),
+                        );
+                    }
+                    m_behaviorInternalState = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                12usize => {
+                    if _serde::__private::Option::is_some(&m_nodeIdToInternalStateMap) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "nodeIdToInternalStateMap",
+                            ),
+                        );
+                    }
+                    m_nodeIdToInternalStateMap = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                13usize => {
+                    if _serde::__private::Option::is_some(&m_visible) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("visible"),
+                        );
+                    }
+                    m_visible = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                14usize => {
+                    if _serde::__private::Option::is_some(&m_elapsedSimulationTime) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "elapsedSimulationTime",
+                            ),
+                        );
+                    }
+                    __A::pad(&mut __map, 3usize, 3usize)?;
+                    m_elapsedSimulationTime = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                15usize => {
+                    if _serde::__private::Option::is_some(&m_skeleton) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "skeleton",
+                            ),
+                        );
+                    }
+                    m_skeleton = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                16usize => {
+                    if _serde::__private::Option::is_some(&m_worldFromModel) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "worldFromModel",
+                            ),
+                        );
+                    }
+                    __A::pad(&mut __map, 4usize, 8usize)?;
+                    m_worldFromModel = _serde::__private::Some(
+                        match __A::next_value::<QsTransform>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                17usize => {
+                    if _serde::__private::Option::is_some(&m_poseModelSpace) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "poseModelSpace",
+                            ),
+                        );
+                    }
+                    m_poseModelSpace = _serde::__private::Some(
+                        match __A::next_value::<Vec<QsTransform>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                18usize => {
+                    if _serde::__private::Option::is_some(&m_rigidAttachmentTransforms) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "rigidAttachmentTransforms",
+                            ),
+                        );
+                    }
+                    m_rigidAttachmentTransforms = _serde::__private::Some(
+                        match __A::next_value::<Vec<QsTransform>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        __A::pad(&mut __map, 8usize, 0usize)?;
+        let m_deformableSkinIds = match m_deformableSkinIds {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("deformableSkinIds"),
+                );
+            }
+        };
+        let m_rigidSkinIds = match m_rigidSkinIds {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("rigidSkinIds"),
+                );
+            }
+        };
+        let m_externalEventIds = match m_externalEventIds {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("externalEventIds"),
+                );
+            }
+        };
+        let m_auxiliaryInfo = match m_auxiliaryInfo {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("auxiliaryInfo"),
+                );
+            }
+        };
+        let m_activeEventIds = match m_activeEventIds {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("activeEventIds"),
+                );
+            }
+        };
+        let m_activeVariableIds = match m_activeVariableIds {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("activeVariableIds"),
+                );
+            }
+        };
+        let m_characterId = match m_characterId {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("characterId"),
+                );
+            }
+        };
+        let m_instanceName = match m_instanceName {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("instanceName"),
+                );
+            }
+        };
+        let m_templateName = match m_templateName {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("templateName"),
+                );
+            }
+        };
+        let m_fullPathToProject = match m_fullPathToProject {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("fullPathToProject"),
+                );
+            }
+        };
+        let m_behaviorData = match m_behaviorData {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("behaviorData"),
+                );
+            }
+        };
+        let m_behaviorInternalState = match m_behaviorInternalState {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "behaviorInternalState",
+                    ),
+                );
+            }
+        };
+        let m_nodeIdToInternalStateMap = match m_nodeIdToInternalStateMap {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "nodeIdToInternalStateMap",
+                    ),
+                );
+            }
+        };
+        let m_visible = match m_visible {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("visible"),
+                );
+            }
+        };
+        let m_elapsedSimulationTime = match m_elapsedSimulationTime {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "elapsedSimulationTime",
+                    ),
+                );
+            }
+        };
+        let m_skeleton = match m_skeleton {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("skeleton"),
+                );
+            }
+        };
+        let m_worldFromModel = match m_worldFromModel {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("worldFromModel"),
+                );
+            }
+        };
+        let m_poseModelSpace = match m_poseModelSpace {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("poseModelSpace"),
+                );
+            }
+        };
+        let m_rigidAttachmentTransforms = match m_rigidAttachmentTransforms {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "rigidAttachmentTransforms",
+                    ),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbClientCharacterState {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_deformableSkinIds,
+            m_rigidSkinIds,
+            m_externalEventIds,
+            m_auxiliaryInfo,
+            m_activeEventIds,
+            m_activeVariableIds,
+            m_characterId,
+            m_instanceName,
+            m_templateName,
+            m_fullPathToProject,
+            m_behaviorData,
+            m_behaviorInternalState,
+            m_nodeIdToInternalStateMap,
+            m_visible,
+            m_elapsedSimulationTime,
+            m_skeleton,
+            m_worldFromModel,
+            m_poseModelSpace,
+            m_rigidAttachmentTransforms,
+        })
+    }
+    fn visit_struct<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __hkReferencedObjectVisitor::visit_as_parent(&mut __map)?;
+        let mut m_deformableSkinIds: _serde::__private::Option<Vec<u64>> = _serde::__private::None;
+        let mut m_rigidSkinIds: _serde::__private::Option<Vec<u64>> = _serde::__private::None;
+        let mut m_externalEventIds: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
+        let mut m_auxiliaryInfo: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+        let mut m_activeEventIds: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
+        let mut m_activeVariableIds: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
+        let mut m_characterId: _serde::__private::Option<u64> = _serde::__private::None;
+        let mut m_instanceName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+        let mut m_templateName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+        let mut m_fullPathToProject: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+        let mut m_behaviorData: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_behaviorInternalState: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_visible: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_elapsedSimulationTime: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_skeleton: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_worldFromModel: _serde::__private::Option<QsTransform> = _serde::__private::None;
+        let mut m_poseModelSpace: _serde::__private::Option<Vec<QsTransform>> = _serde::__private::None;
+        let mut m_rigidAttachmentTransforms: _serde::__private::Option<
+            Vec<QsTransform>,
+        > = _serde::__private::None;
+        while let _serde::__private::Some(__key) = match __A::next_key::<
+            __Field,
+        >(&mut __map) {
+            _serde::__private::Ok(__val) => __val,
+            _serde::__private::Err(__err) => {
+                return _serde::__private::Err(__err);
+            }
+        } {
+            match __key {
+                __Field::m_deformableSkinIds => {
+                    if _serde::__private::Option::is_some(&m_deformableSkinIds) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "deformableSkinIds",
+                            ),
+                        );
+                    }
+                    m_deformableSkinIds = _serde::__private::Some(
+                        match __A::next_value::<Vec<u64>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_rigidSkinIds => {
+                    if _serde::__private::Option::is_some(&m_rigidSkinIds) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "rigidSkinIds",
+                            ),
+                        );
+                    }
+                    m_rigidSkinIds = _serde::__private::Some(
+                        match __A::next_value::<Vec<u64>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_externalEventIds => {
+                    if _serde::__private::Option::is_some(&m_externalEventIds) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "externalEventIds",
+                            ),
+                        );
+                    }
+                    m_externalEventIds = _serde::__private::Some(
+                        match __A::next_value::<Vec<i16>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_auxiliaryInfo => {
+                    if _serde::__private::Option::is_some(&m_auxiliaryInfo) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "auxiliaryInfo",
+                            ),
+                        );
+                    }
+                    m_auxiliaryInfo = _serde::__private::Some(
+                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_activeEventIds => {
+                    if _serde::__private::Option::is_some(&m_activeEventIds) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "activeEventIds",
+                            ),
+                        );
+                    }
+                    m_activeEventIds = _serde::__private::Some(
+                        match __A::next_value::<Vec<i16>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_activeVariableIds => {
+                    if _serde::__private::Option::is_some(&m_activeVariableIds) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "activeVariableIds",
+                            ),
+                        );
+                    }
+                    m_activeVariableIds = _serde::__private::Some(
+                        match __A::next_value::<Vec<i16>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_characterId => {
+                    if _serde::__private::Option::is_some(&m_characterId) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "characterId",
+                            ),
+                        );
+                    }
+                    m_characterId = _serde::__private::Some(
+                        match __A::next_value::<u64>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_instanceName => {
+                    if _serde::__private::Option::is_some(&m_instanceName) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "instanceName",
+                            ),
+                        );
+                    }
+                    m_instanceName = _serde::__private::Some(
+                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_templateName => {
+                    if _serde::__private::Option::is_some(&m_templateName) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "templateName",
+                            ),
+                        );
+                    }
+                    m_templateName = _serde::__private::Some(
+                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_fullPathToProject => {
+                    if _serde::__private::Option::is_some(&m_fullPathToProject) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "fullPathToProject",
+                            ),
+                        );
+                    }
+                    m_fullPathToProject = _serde::__private::Some(
+                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_behaviorData => {
+                    if _serde::__private::Option::is_some(&m_behaviorData) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "behaviorData",
+                            ),
+                        );
+                    }
+                    m_behaviorData = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_behaviorInternalState => {
+                    if _serde::__private::Option::is_some(&m_behaviorInternalState) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "behaviorInternalState",
+                            ),
+                        );
+                    }
+                    m_behaviorInternalState = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_visible => {
+                    if _serde::__private::Option::is_some(&m_visible) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("visible"),
+                        );
+                    }
+                    m_visible = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_elapsedSimulationTime => {
+                    if _serde::__private::Option::is_some(&m_elapsedSimulationTime) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "elapsedSimulationTime",
+                            ),
+                        );
+                    }
+                    m_elapsedSimulationTime = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_skeleton => {
+                    if _serde::__private::Option::is_some(&m_skeleton) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "skeleton",
+                            ),
+                        );
+                    }
+                    m_skeleton = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_worldFromModel => {
+                    if _serde::__private::Option::is_some(&m_worldFromModel) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "worldFromModel",
+                            ),
+                        );
+                    }
+                    m_worldFromModel = _serde::__private::Some(
+                        match __A::next_value::<QsTransform>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_poseModelSpace => {
+                    if _serde::__private::Option::is_some(&m_poseModelSpace) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "poseModelSpace",
+                            ),
+                        );
+                    }
+                    m_poseModelSpace = _serde::__private::Some(
+                        match __A::next_value::<Vec<QsTransform>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_rigidAttachmentTransforms => {
+                    if _serde::__private::Option::is_some(&m_rigidAttachmentTransforms) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "rigidAttachmentTransforms",
+                            ),
+                        );
+                    }
+                    m_rigidAttachmentTransforms = _serde::__private::Some(
+                        match __A::next_value::<Vec<QsTransform>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_deformableSkinIds = match m_deformableSkinIds {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("deformableSkinIds"),
+                );
+            }
+        };
+        let m_rigidSkinIds = match m_rigidSkinIds {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("rigidSkinIds"),
+                );
+            }
+        };
+        let m_externalEventIds = match m_externalEventIds {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("externalEventIds"),
+                );
+            }
+        };
+        let m_auxiliaryInfo = match m_auxiliaryInfo {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("auxiliaryInfo"),
+                );
+            }
+        };
+        let m_activeEventIds = match m_activeEventIds {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("activeEventIds"),
+                );
+            }
+        };
+        let m_activeVariableIds = match m_activeVariableIds {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("activeVariableIds"),
+                );
+            }
+        };
+        let m_characterId = match m_characterId {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("characterId"),
+                );
+            }
+        };
+        let m_instanceName = match m_instanceName {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("instanceName"),
+                );
+            }
+        };
+        let m_templateName = match m_templateName {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("templateName"),
+                );
+            }
+        };
+        let m_fullPathToProject = match m_fullPathToProject {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("fullPathToProject"),
+                );
+            }
+        };
+        let m_behaviorData = match m_behaviorData {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("behaviorData"),
+                );
+            }
+        };
+        let m_behaviorInternalState = match m_behaviorInternalState {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "behaviorInternalState",
+                    ),
+                );
+            }
+        };
+        let m_visible = match m_visible {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("visible"),
+                );
+            }
+        };
+        let m_elapsedSimulationTime = match m_elapsedSimulationTime {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "elapsedSimulationTime",
+                    ),
+                );
+            }
+        };
+        let m_skeleton = match m_skeleton {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("skeleton"),
+                );
+            }
+        };
+        let m_worldFromModel = match m_worldFromModel {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("worldFromModel"),
+                );
+            }
+        };
+        let m_poseModelSpace = match m_poseModelSpace {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("poseModelSpace"),
+                );
+            }
+        };
+        let m_rigidAttachmentTransforms = match m_rigidAttachmentTransforms {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "rigidAttachmentTransforms",
+                    ),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbClientCharacterState {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_deformableSkinIds,
+            m_rigidSkinIds,
+            m_externalEventIds,
+            m_auxiliaryInfo,
+            m_activeEventIds,
+            m_activeVariableIds,
+            m_characterId,
+            m_instanceName,
+            m_templateName,
+            m_fullPathToProject,
+            m_behaviorData,
+            m_behaviorInternalState,
+            m_visible,
+            m_elapsedSimulationTime,
+            m_skeleton,
+            m_worldFromModel,
+            m_poseModelSpace,
+            m_rigidAttachmentTransforms,
+            ..Default::default()
+        })
+    }
+}
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for hkbClientCharacterState<'de> {
+        fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            const FIELDS: &[&str] = &[
+                "deformableSkinIds",
+                "rigidSkinIds",
+                "externalEventIds",
+                "auxiliaryInfo",
+                "activeEventIds",
+                "activeVariableIds",
+                "characterId",
+                "instanceName",
+                "templateName",
+                "fullPathToProject",
+                "behaviorData",
+                "behaviorInternalState",
+                "nodeIdToInternalStateMap",
+                "visible",
+                "elapsedSimulationTime",
+                "skeleton",
+                "worldFromModel",
+                "poseModelSpace",
+                "rigidAttachmentTransforms",
+            ];
+            _serde::Deserializer::deserialize_struct(
+                deserializer,
+                "hkbClientCharacterState",
+                FIELDS,
+                __hkbClientCharacterStateVisitor {
+                    marker: _serde::__private::PhantomData::<hkbClientCharacterState>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};

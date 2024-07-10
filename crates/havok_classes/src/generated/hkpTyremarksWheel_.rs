@@ -75,3 +75,302 @@ const _: () = {
         }
     }
 };
+use havok_serde as _serde;
+#[allow(non_camel_case_types)]
+enum __Field {
+    m_currentPosition,
+    m_numPoints,
+    m_tyremarkPoints,
+    __ignore,
+}
+struct __FieldVisitor;
+impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+    type Value = __Field;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "field identifier")
+    }
+    /// Intended for use in XML.
+    #[allow(clippy::match_single_binding)]
+    #[allow(clippy::reversed_empty_ranges)]
+    #[allow(clippy::single_match)]
+    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
+    where
+        __E: _serde::de::Error,
+    {
+        match __value {
+            "currentPosition" => Ok(__Field::m_currentPosition),
+            "numPoints" => Ok(__Field::m_numPoints),
+            "tyremarkPoints" => Ok(__Field::m_tyremarkPoints),
+            _ => Ok(__Field::__ignore),
+        }
+    }
+}
+impl<'de> _serde::Deserialize<'de> for __Field {
+    #[inline]
+    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
+    where
+        __D: _serde::Deserializer<'de>,
+    {
+        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+    }
+}
+pub(super) struct __hkpTyremarksWheelVisitor<'de> {
+    marker: core::marker::PhantomData<hkpTyremarksWheel>,
+    lifetime: core::marker::PhantomData<&'de ()>,
+}
+impl<'de> __hkpTyremarksWheelVisitor<'de> {
+    /// # Purpose of this method
+    /// To reproduce C++ field inheritance, we will have the field internal implementation
+    /// of deserialization partially exposed and reused.
+    #[inline]
+    pub(super) fn visit_as_parent<__A>(
+        __map: &mut __A,
+    ) -> _serde::__private::Result<hkpTyremarksWheel, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        _serde::de::Visitor::visit_struct(
+            Self {
+                marker: _serde::__private::PhantomData::<hkpTyremarksWheel>,
+                lifetime: _serde::__private::PhantomData,
+            },
+            __map,
+        )
+    }
+}
+#[allow(clippy::match_single_binding)]
+#[allow(clippy::reversed_empty_ranges)]
+#[allow(clippy::single_match)]
+impl<'de> _serde::de::Visitor<'de> for __hkpTyremarksWheelVisitor<'de> {
+    type Value = hkpTyremarksWheel;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "struct hkpTyremarksWheel")
+    }
+    fn visit_struct_for_bytes<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __A::next_value(&mut __map)?;
+        let mut m_currentPosition: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_numPoints: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_tyremarkPoints: _serde::__private::Option<Vec<hkpTyremarkPoint>> = _serde::__private::None;
+        for i in 0..3usize {
+            match i {
+                0usize => {
+                    if _serde::__private::Option::is_some(&m_currentPosition) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "currentPosition",
+                            ),
+                        );
+                    }
+                    m_currentPosition = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                1usize => {
+                    if _serde::__private::Option::is_some(&m_numPoints) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "numPoints",
+                            ),
+                        );
+                    }
+                    m_numPoints = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                2usize => {
+                    if _serde::__private::Option::is_some(&m_tyremarkPoints) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "tyremarkPoints",
+                            ),
+                        );
+                    }
+                    m_tyremarkPoints = _serde::__private::Some(
+                        match __A::next_value::<Vec<hkpTyremarkPoint>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_currentPosition = match m_currentPosition {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("currentPosition"),
+                );
+            }
+        };
+        let m_numPoints = match m_numPoints {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("numPoints"),
+                );
+            }
+        };
+        let m_tyremarkPoints = match m_tyremarkPoints {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("tyremarkPoints"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkpTyremarksWheel {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_currentPosition,
+            m_numPoints,
+            m_tyremarkPoints,
+        })
+    }
+    fn visit_struct<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __hkReferencedObjectVisitor::visit_as_parent(&mut __map)?;
+        let mut m_currentPosition: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_numPoints: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_tyremarkPoints: _serde::__private::Option<Vec<hkpTyremarkPoint>> = _serde::__private::None;
+        while let _serde::__private::Some(__key) = match __A::next_key::<
+            __Field,
+        >(&mut __map) {
+            _serde::__private::Ok(__val) => __val,
+            _serde::__private::Err(__err) => {
+                return _serde::__private::Err(__err);
+            }
+        } {
+            match __key {
+                __Field::m_currentPosition => {
+                    if _serde::__private::Option::is_some(&m_currentPosition) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "currentPosition",
+                            ),
+                        );
+                    }
+                    m_currentPosition = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_numPoints => {
+                    if _serde::__private::Option::is_some(&m_numPoints) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "numPoints",
+                            ),
+                        );
+                    }
+                    m_numPoints = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_tyremarkPoints => {
+                    if _serde::__private::Option::is_some(&m_tyremarkPoints) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "tyremarkPoints",
+                            ),
+                        );
+                    }
+                    m_tyremarkPoints = _serde::__private::Some(
+                        match __A::next_value::<Vec<hkpTyremarkPoint>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_currentPosition = match m_currentPosition {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("currentPosition"),
+                );
+            }
+        };
+        let m_numPoints = match m_numPoints {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("numPoints"),
+                );
+            }
+        };
+        let m_tyremarkPoints = match m_tyremarkPoints {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("tyremarkPoints"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkpTyremarksWheel {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_currentPosition,
+            m_numPoints,
+            m_tyremarkPoints,
+        })
+    }
+}
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for hkpTyremarksWheel {
+        fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            const FIELDS: &[&str] = &["currentPosition", "numPoints", "tyremarkPoints"];
+            _serde::Deserializer::deserialize_struct(
+                deserializer,
+                "hkpTyremarksWheel",
+                FIELDS,
+                __hkpTyremarksWheelVisitor {
+                    marker: _serde::__private::PhantomData::<hkpTyremarksWheel>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};

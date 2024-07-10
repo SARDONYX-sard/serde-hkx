@@ -322,6 +322,1241 @@ const _: () = {
         }
     }
 };
+use havok_serde as _serde;
+#[allow(non_camel_case_types)]
+enum __Field {
+    m_animationName,
+    m_triggers,
+    m_cropStartAmountLocalTime,
+    m_cropEndAmountLocalTime,
+    m_startTime,
+    m_playbackSpeed,
+    m_enforcedDuration,
+    m_userControlledTimeFraction,
+    m_animationBindingIndex,
+    m_mode,
+    m_flags,
+    m_animDatas,
+    m_animationControl,
+    m_originalTriggers,
+    m_mapperData,
+    m_binding,
+    m_mirroredAnimation,
+    m_extractedMotion,
+    m_echos,
+    m_localTime,
+    m_time,
+    m_previousUserControlledTimeFraction,
+    m_bufferSize,
+    m_echoBufferSize,
+    m_atEnd,
+    m_ignoreStartTime,
+    m_pingPongBackward,
+    __ignore,
+}
+struct __FieldVisitor;
+impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+    type Value = __Field;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "field identifier")
+    }
+    /// Intended for use in XML.
+    #[allow(clippy::match_single_binding)]
+    #[allow(clippy::reversed_empty_ranges)]
+    #[allow(clippy::single_match)]
+    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
+    where
+        __E: _serde::de::Error,
+    {
+        match __value {
+            "animationName" => Ok(__Field::m_animationName),
+            "triggers" => Ok(__Field::m_triggers),
+            "cropStartAmountLocalTime" => Ok(__Field::m_cropStartAmountLocalTime),
+            "cropEndAmountLocalTime" => Ok(__Field::m_cropEndAmountLocalTime),
+            "startTime" => Ok(__Field::m_startTime),
+            "playbackSpeed" => Ok(__Field::m_playbackSpeed),
+            "enforcedDuration" => Ok(__Field::m_enforcedDuration),
+            "userControlledTimeFraction" => Ok(__Field::m_userControlledTimeFraction),
+            "animationBindingIndex" => Ok(__Field::m_animationBindingIndex),
+            "mode" => Ok(__Field::m_mode),
+            "flags" => Ok(__Field::m_flags),
+            _ => Ok(__Field::__ignore),
+        }
+    }
+}
+impl<'de> _serde::Deserialize<'de> for __Field {
+    #[inline]
+    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
+    where
+        __D: _serde::Deserializer<'de>,
+    {
+        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+    }
+}
+pub(super) struct __hkbClipGeneratorVisitor<'de> {
+    marker: core::marker::PhantomData<hkbClipGenerator<'de>>,
+    lifetime: core::marker::PhantomData<&'de ()>,
+}
+impl<'de> __hkbClipGeneratorVisitor<'de> {
+    /// # Purpose of this method
+    /// To reproduce C++ field inheritance, we will have the field internal implementation
+    /// of deserialization partially exposed and reused.
+    #[inline]
+    pub(super) fn visit_as_parent<__A>(
+        __map: &mut __A,
+    ) -> _serde::__private::Result<hkbClipGenerator<'de>, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        _serde::de::Visitor::visit_struct(
+            Self {
+                marker: _serde::__private::PhantomData::<hkbClipGenerator<'de>>,
+                lifetime: _serde::__private::PhantomData,
+            },
+            __map,
+        )
+    }
+}
+#[allow(clippy::match_single_binding)]
+#[allow(clippy::reversed_empty_ranges)]
+#[allow(clippy::single_match)]
+impl<'de> _serde::de::Visitor<'de> for __hkbClipGeneratorVisitor<'de> {
+    type Value = hkbClipGenerator<'de>;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "struct hkbClipGenerator")
+    }
+    fn visit_struct_for_bytes<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __A::next_value(&mut __map)?;
+        let mut m_animationName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+        let mut m_triggers: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_cropStartAmountLocalTime: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_cropEndAmountLocalTime: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_startTime: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_playbackSpeed: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_enforcedDuration: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_userControlledTimeFraction: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_animationBindingIndex: _serde::__private::Option<i16> = _serde::__private::None;
+        let mut m_mode: _serde::__private::Option<PlaybackMode> = _serde::__private::None;
+        let mut m_flags: _serde::__private::Option<i8> = _serde::__private::None;
+        let mut m_animDatas: _serde::__private::Option<Vec<()>> = _serde::__private::None;
+        let mut m_animationControl: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_originalTriggers: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_mapperData: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_binding: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_mirroredAnimation: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_extractedMotion: _serde::__private::Option<QsTransform> = _serde::__private::None;
+        let mut m_echos: _serde::__private::Option<Vec<()>> = _serde::__private::None;
+        let mut m_localTime: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_time: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_previousUserControlledTimeFraction: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_bufferSize: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_echoBufferSize: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_atEnd: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_ignoreStartTime: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_pingPongBackward: _serde::__private::Option<bool> = _serde::__private::None;
+        for i in 0..27usize {
+            match i {
+                0usize => {
+                    if _serde::__private::Option::is_some(&m_animationName) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "animationName",
+                            ),
+                        );
+                    }
+                    m_animationName = _serde::__private::Some(
+                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                1usize => {
+                    if _serde::__private::Option::is_some(&m_triggers) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "triggers",
+                            ),
+                        );
+                    }
+                    m_triggers = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                2usize => {
+                    if _serde::__private::Option::is_some(&m_cropStartAmountLocalTime) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "cropStartAmountLocalTime",
+                            ),
+                        );
+                    }
+                    m_cropStartAmountLocalTime = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                3usize => {
+                    if _serde::__private::Option::is_some(&m_cropEndAmountLocalTime) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "cropEndAmountLocalTime",
+                            ),
+                        );
+                    }
+                    m_cropEndAmountLocalTime = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                4usize => {
+                    if _serde::__private::Option::is_some(&m_startTime) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "startTime",
+                            ),
+                        );
+                    }
+                    m_startTime = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                5usize => {
+                    if _serde::__private::Option::is_some(&m_playbackSpeed) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "playbackSpeed",
+                            ),
+                        );
+                    }
+                    m_playbackSpeed = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                6usize => {
+                    if _serde::__private::Option::is_some(&m_enforcedDuration) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "enforcedDuration",
+                            ),
+                        );
+                    }
+                    m_enforcedDuration = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                7usize => {
+                    if _serde::__private::Option::is_some(
+                        &m_userControlledTimeFraction,
+                    ) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "userControlledTimeFraction",
+                            ),
+                        );
+                    }
+                    m_userControlledTimeFraction = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                8usize => {
+                    if _serde::__private::Option::is_some(&m_animationBindingIndex) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "animationBindingIndex",
+                            ),
+                        );
+                    }
+                    m_animationBindingIndex = _serde::__private::Some(
+                        match __A::next_value::<i16>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                9usize => {
+                    if _serde::__private::Option::is_some(&m_mode) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("mode"),
+                        );
+                    }
+                    m_mode = _serde::__private::Some(
+                        match __A::next_value::<PlaybackMode>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                10usize => {
+                    if _serde::__private::Option::is_some(&m_flags) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("flags"),
+                        );
+                    }
+                    m_flags = _serde::__private::Some(
+                        match __A::next_value::<i8>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                11usize => {
+                    if _serde::__private::Option::is_some(&m_animDatas) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "animDatas",
+                            ),
+                        );
+                    }
+                    __A::pad(&mut __map, 0usize, 4usize)?;
+                    m_animDatas = _serde::__private::Some(
+                        match __A::next_value::<Vec<()>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                12usize => {
+                    if _serde::__private::Option::is_some(&m_animationControl) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "animationControl",
+                            ),
+                        );
+                    }
+                    m_animationControl = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                13usize => {
+                    if _serde::__private::Option::is_some(&m_originalTriggers) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "originalTriggers",
+                            ),
+                        );
+                    }
+                    m_originalTriggers = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                14usize => {
+                    if _serde::__private::Option::is_some(&m_mapperData) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "mapperData",
+                            ),
+                        );
+                    }
+                    m_mapperData = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                15usize => {
+                    if _serde::__private::Option::is_some(&m_binding) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("binding"),
+                        );
+                    }
+                    m_binding = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                16usize => {
+                    if _serde::__private::Option::is_some(&m_mirroredAnimation) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "mirroredAnimation",
+                            ),
+                        );
+                    }
+                    m_mirroredAnimation = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                17usize => {
+                    if _serde::__private::Option::is_some(&m_extractedMotion) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "extractedMotion",
+                            ),
+                        );
+                    }
+                    __A::pad(&mut __map, 4usize, 0usize)?;
+                    m_extractedMotion = _serde::__private::Some(
+                        match __A::next_value::<QsTransform>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                18usize => {
+                    if _serde::__private::Option::is_some(&m_echos) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("echos"),
+                        );
+                    }
+                    m_echos = _serde::__private::Some(
+                        match __A::next_value::<Vec<()>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                19usize => {
+                    if _serde::__private::Option::is_some(&m_localTime) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "localTime",
+                            ),
+                        );
+                    }
+                    m_localTime = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                20usize => {
+                    if _serde::__private::Option::is_some(&m_time) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("time"),
+                        );
+                    }
+                    m_time = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                21usize => {
+                    if _serde::__private::Option::is_some(
+                        &m_previousUserControlledTimeFraction,
+                    ) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "previousUserControlledTimeFraction",
+                            ),
+                        );
+                    }
+                    m_previousUserControlledTimeFraction = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                22usize => {
+                    if _serde::__private::Option::is_some(&m_bufferSize) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bufferSize",
+                            ),
+                        );
+                    }
+                    m_bufferSize = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                23usize => {
+                    if _serde::__private::Option::is_some(&m_echoBufferSize) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "echoBufferSize",
+                            ),
+                        );
+                    }
+                    m_echoBufferSize = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                24usize => {
+                    if _serde::__private::Option::is_some(&m_atEnd) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("atEnd"),
+                        );
+                    }
+                    m_atEnd = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                25usize => {
+                    if _serde::__private::Option::is_some(&m_ignoreStartTime) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "ignoreStartTime",
+                            ),
+                        );
+                    }
+                    m_ignoreStartTime = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                26usize => {
+                    if _serde::__private::Option::is_some(&m_pingPongBackward) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "pingPongBackward",
+                            ),
+                        );
+                    }
+                    m_pingPongBackward = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        __A::pad(&mut __map, 13usize, 9usize)?;
+        let m_animationName = match m_animationName {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("animationName"),
+                );
+            }
+        };
+        let m_triggers = match m_triggers {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("triggers"),
+                );
+            }
+        };
+        let m_cropStartAmountLocalTime = match m_cropStartAmountLocalTime {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "cropStartAmountLocalTime",
+                    ),
+                );
+            }
+        };
+        let m_cropEndAmountLocalTime = match m_cropEndAmountLocalTime {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "cropEndAmountLocalTime",
+                    ),
+                );
+            }
+        };
+        let m_startTime = match m_startTime {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("startTime"),
+                );
+            }
+        };
+        let m_playbackSpeed = match m_playbackSpeed {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("playbackSpeed"),
+                );
+            }
+        };
+        let m_enforcedDuration = match m_enforcedDuration {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("enforcedDuration"),
+                );
+            }
+        };
+        let m_userControlledTimeFraction = match m_userControlledTimeFraction {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "userControlledTimeFraction",
+                    ),
+                );
+            }
+        };
+        let m_animationBindingIndex = match m_animationBindingIndex {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "animationBindingIndex",
+                    ),
+                );
+            }
+        };
+        let m_mode = match m_mode {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("mode"),
+                );
+            }
+        };
+        let m_flags = match m_flags {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("flags"),
+                );
+            }
+        };
+        let m_animDatas = match m_animDatas {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("animDatas"),
+                );
+            }
+        };
+        let m_animationControl = match m_animationControl {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("animationControl"),
+                );
+            }
+        };
+        let m_originalTriggers = match m_originalTriggers {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("originalTriggers"),
+                );
+            }
+        };
+        let m_mapperData = match m_mapperData {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("mapperData"),
+                );
+            }
+        };
+        let m_binding = match m_binding {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("binding"),
+                );
+            }
+        };
+        let m_mirroredAnimation = match m_mirroredAnimation {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("mirroredAnimation"),
+                );
+            }
+        };
+        let m_extractedMotion = match m_extractedMotion {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("extractedMotion"),
+                );
+            }
+        };
+        let m_echos = match m_echos {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("echos"),
+                );
+            }
+        };
+        let m_localTime = match m_localTime {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("localTime"),
+                );
+            }
+        };
+        let m_time = match m_time {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("time"),
+                );
+            }
+        };
+        let m_previousUserControlledTimeFraction = match m_previousUserControlledTimeFraction {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "previousUserControlledTimeFraction",
+                    ),
+                );
+            }
+        };
+        let m_bufferSize = match m_bufferSize {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bufferSize"),
+                );
+            }
+        };
+        let m_echoBufferSize = match m_echoBufferSize {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("echoBufferSize"),
+                );
+            }
+        };
+        let m_atEnd = match m_atEnd {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("atEnd"),
+                );
+            }
+        };
+        let m_ignoreStartTime = match m_ignoreStartTime {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("ignoreStartTime"),
+                );
+            }
+        };
+        let m_pingPongBackward = match m_pingPongBackward {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("pingPongBackward"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbClipGenerator {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_animationName,
+            m_triggers,
+            m_cropStartAmountLocalTime,
+            m_cropEndAmountLocalTime,
+            m_startTime,
+            m_playbackSpeed,
+            m_enforcedDuration,
+            m_userControlledTimeFraction,
+            m_animationBindingIndex,
+            m_mode,
+            m_flags,
+            m_animDatas,
+            m_animationControl,
+            m_originalTriggers,
+            m_mapperData,
+            m_binding,
+            m_mirroredAnimation,
+            m_extractedMotion,
+            m_echos,
+            m_localTime,
+            m_time,
+            m_previousUserControlledTimeFraction,
+            m_bufferSize,
+            m_echoBufferSize,
+            m_atEnd,
+            m_ignoreStartTime,
+            m_pingPongBackward,
+        })
+    }
+    fn visit_struct<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __hkbGeneratorVisitor::visit_as_parent(&mut __map)?;
+        let mut m_animationName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+        let mut m_triggers: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_cropStartAmountLocalTime: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_cropEndAmountLocalTime: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_startTime: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_playbackSpeed: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_enforcedDuration: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_userControlledTimeFraction: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_animationBindingIndex: _serde::__private::Option<i16> = _serde::__private::None;
+        let mut m_mode: _serde::__private::Option<PlaybackMode> = _serde::__private::None;
+        let mut m_flags: _serde::__private::Option<i8> = _serde::__private::None;
+        while let _serde::__private::Some(__key) = match __A::next_key::<
+            __Field,
+        >(&mut __map) {
+            _serde::__private::Ok(__val) => __val,
+            _serde::__private::Err(__err) => {
+                return _serde::__private::Err(__err);
+            }
+        } {
+            match __key {
+                __Field::m_animationName => {
+                    if _serde::__private::Option::is_some(&m_animationName) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "animationName",
+                            ),
+                        );
+                    }
+                    m_animationName = _serde::__private::Some(
+                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_triggers => {
+                    if _serde::__private::Option::is_some(&m_triggers) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "triggers",
+                            ),
+                        );
+                    }
+                    m_triggers = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_cropStartAmountLocalTime => {
+                    if _serde::__private::Option::is_some(&m_cropStartAmountLocalTime) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "cropStartAmountLocalTime",
+                            ),
+                        );
+                    }
+                    m_cropStartAmountLocalTime = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_cropEndAmountLocalTime => {
+                    if _serde::__private::Option::is_some(&m_cropEndAmountLocalTime) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "cropEndAmountLocalTime",
+                            ),
+                        );
+                    }
+                    m_cropEndAmountLocalTime = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_startTime => {
+                    if _serde::__private::Option::is_some(&m_startTime) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "startTime",
+                            ),
+                        );
+                    }
+                    m_startTime = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_playbackSpeed => {
+                    if _serde::__private::Option::is_some(&m_playbackSpeed) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "playbackSpeed",
+                            ),
+                        );
+                    }
+                    m_playbackSpeed = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_enforcedDuration => {
+                    if _serde::__private::Option::is_some(&m_enforcedDuration) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "enforcedDuration",
+                            ),
+                        );
+                    }
+                    m_enforcedDuration = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_userControlledTimeFraction => {
+                    if _serde::__private::Option::is_some(
+                        &m_userControlledTimeFraction,
+                    ) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "userControlledTimeFraction",
+                            ),
+                        );
+                    }
+                    m_userControlledTimeFraction = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_animationBindingIndex => {
+                    if _serde::__private::Option::is_some(&m_animationBindingIndex) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "animationBindingIndex",
+                            ),
+                        );
+                    }
+                    m_animationBindingIndex = _serde::__private::Some(
+                        match __A::next_value::<i16>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_mode => {
+                    if _serde::__private::Option::is_some(&m_mode) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("mode"),
+                        );
+                    }
+                    m_mode = _serde::__private::Some(
+                        match __A::next_value::<PlaybackMode>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_flags => {
+                    if _serde::__private::Option::is_some(&m_flags) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("flags"),
+                        );
+                    }
+                    m_flags = _serde::__private::Some(
+                        match __A::next_value::<i8>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_animationName = match m_animationName {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("animationName"),
+                );
+            }
+        };
+        let m_triggers = match m_triggers {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("triggers"),
+                );
+            }
+        };
+        let m_cropStartAmountLocalTime = match m_cropStartAmountLocalTime {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "cropStartAmountLocalTime",
+                    ),
+                );
+            }
+        };
+        let m_cropEndAmountLocalTime = match m_cropEndAmountLocalTime {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "cropEndAmountLocalTime",
+                    ),
+                );
+            }
+        };
+        let m_startTime = match m_startTime {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("startTime"),
+                );
+            }
+        };
+        let m_playbackSpeed = match m_playbackSpeed {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("playbackSpeed"),
+                );
+            }
+        };
+        let m_enforcedDuration = match m_enforcedDuration {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("enforcedDuration"),
+                );
+            }
+        };
+        let m_userControlledTimeFraction = match m_userControlledTimeFraction {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "userControlledTimeFraction",
+                    ),
+                );
+            }
+        };
+        let m_animationBindingIndex = match m_animationBindingIndex {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "animationBindingIndex",
+                    ),
+                );
+            }
+        };
+        let m_mode = match m_mode {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("mode"),
+                );
+            }
+        };
+        let m_flags = match m_flags {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("flags"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbClipGenerator {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_animationName,
+            m_triggers,
+            m_cropStartAmountLocalTime,
+            m_cropEndAmountLocalTime,
+            m_startTime,
+            m_playbackSpeed,
+            m_enforcedDuration,
+            m_userControlledTimeFraction,
+            m_animationBindingIndex,
+            m_mode,
+            m_flags,
+            ..Default::default()
+        })
+    }
+}
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for hkbClipGenerator<'de> {
+        fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            const FIELDS: &[&str] = &[
+                "animationName",
+                "triggers",
+                "cropStartAmountLocalTime",
+                "cropEndAmountLocalTime",
+                "startTime",
+                "playbackSpeed",
+                "enforcedDuration",
+                "userControlledTimeFraction",
+                "animationBindingIndex",
+                "mode",
+                "flags",
+                "animDatas",
+                "animationControl",
+                "originalTriggers",
+                "mapperData",
+                "binding",
+                "mirroredAnimation",
+                "extractedMotion",
+                "echos",
+                "localTime",
+                "time",
+                "previousUserControlledTimeFraction",
+                "bufferSize",
+                "echoBufferSize",
+                "atEnd",
+                "ignoreStartTime",
+                "pingPongBackward",
+            ];
+            _serde::Deserializer::deserialize_struct(
+                deserializer,
+                "hkbClipGenerator",
+                FIELDS,
+                __hkbClipGeneratorVisitor {
+                    marker: _serde::__private::PhantomData::<hkbClipGenerator>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]

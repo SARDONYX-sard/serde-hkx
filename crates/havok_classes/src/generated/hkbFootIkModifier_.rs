@@ -278,6 +278,1294 @@ const _: () = {
         }
     }
 };
+use havok_serde as _serde;
+#[allow(non_camel_case_types)]
+enum __Field {
+    m_gains,
+    m_legs,
+    m_raycastDistanceUp,
+    m_raycastDistanceDown,
+    m_originalGroundHeightMS,
+    m_errorOut,
+    m_errorOutTranslation,
+    m_alignWithGroundRotation,
+    m_verticalOffset,
+    m_collisionFilterInfo,
+    m_forwardAlignFraction,
+    m_sidewaysAlignFraction,
+    m_sidewaysSampleWidth,
+    m_useTrackData,
+    m_lockFeetWhenPlanted,
+    m_useCharacterUpVector,
+    m_alignMode,
+    m_internalLegData,
+    m_prevIsFootIkEnabled,
+    m_isSetUp,
+    m_isGroundPositionValid,
+    m_timeStep,
+    __ignore,
+}
+struct __FieldVisitor;
+impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+    type Value = __Field;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "field identifier")
+    }
+    /// Intended for use in XML.
+    #[allow(clippy::match_single_binding)]
+    #[allow(clippy::reversed_empty_ranges)]
+    #[allow(clippy::single_match)]
+    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
+    where
+        __E: _serde::de::Error,
+    {
+        match __value {
+            "gains" => Ok(__Field::m_gains),
+            "legs" => Ok(__Field::m_legs),
+            "raycastDistanceUp" => Ok(__Field::m_raycastDistanceUp),
+            "raycastDistanceDown" => Ok(__Field::m_raycastDistanceDown),
+            "originalGroundHeightMS" => Ok(__Field::m_originalGroundHeightMS),
+            "errorOut" => Ok(__Field::m_errorOut),
+            "errorOutTranslation" => Ok(__Field::m_errorOutTranslation),
+            "alignWithGroundRotation" => Ok(__Field::m_alignWithGroundRotation),
+            "verticalOffset" => Ok(__Field::m_verticalOffset),
+            "collisionFilterInfo" => Ok(__Field::m_collisionFilterInfo),
+            "forwardAlignFraction" => Ok(__Field::m_forwardAlignFraction),
+            "sidewaysAlignFraction" => Ok(__Field::m_sidewaysAlignFraction),
+            "sidewaysSampleWidth" => Ok(__Field::m_sidewaysSampleWidth),
+            "useTrackData" => Ok(__Field::m_useTrackData),
+            "lockFeetWhenPlanted" => Ok(__Field::m_lockFeetWhenPlanted),
+            "useCharacterUpVector" => Ok(__Field::m_useCharacterUpVector),
+            "alignMode" => Ok(__Field::m_alignMode),
+            _ => Ok(__Field::__ignore),
+        }
+    }
+}
+impl<'de> _serde::Deserialize<'de> for __Field {
+    #[inline]
+    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
+    where
+        __D: _serde::Deserializer<'de>,
+    {
+        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+    }
+}
+pub(super) struct __hkbFootIkModifierVisitor<'de> {
+    marker: core::marker::PhantomData<hkbFootIkModifier<'de>>,
+    lifetime: core::marker::PhantomData<&'de ()>,
+}
+impl<'de> __hkbFootIkModifierVisitor<'de> {
+    /// # Purpose of this method
+    /// To reproduce C++ field inheritance, we will have the field internal implementation
+    /// of deserialization partially exposed and reused.
+    #[inline]
+    pub(super) fn visit_as_parent<__A>(
+        __map: &mut __A,
+    ) -> _serde::__private::Result<hkbFootIkModifier<'de>, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        _serde::de::Visitor::visit_struct(
+            Self {
+                marker: _serde::__private::PhantomData::<hkbFootIkModifier<'de>>,
+                lifetime: _serde::__private::PhantomData,
+            },
+            __map,
+        )
+    }
+}
+#[allow(clippy::match_single_binding)]
+#[allow(clippy::reversed_empty_ranges)]
+#[allow(clippy::single_match)]
+impl<'de> _serde::de::Visitor<'de> for __hkbFootIkModifierVisitor<'de> {
+    type Value = hkbFootIkModifier<'de>;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "struct hkbFootIkModifier")
+    }
+    fn visit_struct_for_bytes<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __A::next_value(&mut __map)?;
+        let mut m_gains: _serde::__private::Option<hkbFootIkGains> = _serde::__private::None;
+        let mut m_legs: _serde::__private::Option<Vec<hkbFootIkModifierLeg>> = _serde::__private::None;
+        let mut m_raycastDistanceUp: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_raycastDistanceDown: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_originalGroundHeightMS: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_errorOut: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_errorOutTranslation: _serde::__private::Option<Vector4> = _serde::__private::None;
+        let mut m_alignWithGroundRotation: _serde::__private::Option<Quaternion> = _serde::__private::None;
+        let mut m_verticalOffset: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
+        let mut m_forwardAlignFraction: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_sidewaysAlignFraction: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_sidewaysSampleWidth: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_useTrackData: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_lockFeetWhenPlanted: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_useCharacterUpVector: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_alignMode: _serde::__private::Option<AlignMode> = _serde::__private::None;
+        let mut m_internalLegData: _serde::__private::Option<
+            Vec<hkbFootIkModifierInternalLegData>,
+        > = _serde::__private::None;
+        let mut m_prevIsFootIkEnabled: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_isSetUp: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_isGroundPositionValid: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_timeStep: _serde::__private::Option<f32> = _serde::__private::None;
+        for i in 0..22usize {
+            match i {
+                0usize => {
+                    if _serde::__private::Option::is_some(&m_gains) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("gains"),
+                        );
+                    }
+                    m_gains = _serde::__private::Some(
+                        match __A::next_value::<hkbFootIkGains>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                1usize => {
+                    if _serde::__private::Option::is_some(&m_legs) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("legs"),
+                        );
+                    }
+                    m_legs = _serde::__private::Some(
+                        match __A::next_value::<Vec<hkbFootIkModifierLeg>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                2usize => {
+                    if _serde::__private::Option::is_some(&m_raycastDistanceUp) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "raycastDistanceUp",
+                            ),
+                        );
+                    }
+                    m_raycastDistanceUp = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                3usize => {
+                    if _serde::__private::Option::is_some(&m_raycastDistanceDown) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "raycastDistanceDown",
+                            ),
+                        );
+                    }
+                    m_raycastDistanceDown = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                4usize => {
+                    if _serde::__private::Option::is_some(&m_originalGroundHeightMS) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "originalGroundHeightMS",
+                            ),
+                        );
+                    }
+                    m_originalGroundHeightMS = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                5usize => {
+                    if _serde::__private::Option::is_some(&m_errorOut) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "errorOut",
+                            ),
+                        );
+                    }
+                    m_errorOut = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                6usize => {
+                    if _serde::__private::Option::is_some(&m_errorOutTranslation) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "errorOutTranslation",
+                            ),
+                        );
+                    }
+                    __A::pad(&mut __map, 8usize, 0usize)?;
+                    m_errorOutTranslation = _serde::__private::Some(
+                        match __A::next_value::<Vector4>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                7usize => {
+                    if _serde::__private::Option::is_some(&m_alignWithGroundRotation) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "alignWithGroundRotation",
+                            ),
+                        );
+                    }
+                    m_alignWithGroundRotation = _serde::__private::Some(
+                        match __A::next_value::<Quaternion>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                8usize => {
+                    if _serde::__private::Option::is_some(&m_verticalOffset) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "verticalOffset",
+                            ),
+                        );
+                    }
+                    m_verticalOffset = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                9usize => {
+                    if _serde::__private::Option::is_some(&m_collisionFilterInfo) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "collisionFilterInfo",
+                            ),
+                        );
+                    }
+                    m_collisionFilterInfo = _serde::__private::Some(
+                        match __A::next_value::<u32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                10usize => {
+                    if _serde::__private::Option::is_some(&m_forwardAlignFraction) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "forwardAlignFraction",
+                            ),
+                        );
+                    }
+                    m_forwardAlignFraction = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                11usize => {
+                    if _serde::__private::Option::is_some(&m_sidewaysAlignFraction) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "sidewaysAlignFraction",
+                            ),
+                        );
+                    }
+                    m_sidewaysAlignFraction = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                12usize => {
+                    if _serde::__private::Option::is_some(&m_sidewaysSampleWidth) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "sidewaysSampleWidth",
+                            ),
+                        );
+                    }
+                    m_sidewaysSampleWidth = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                13usize => {
+                    if _serde::__private::Option::is_some(&m_useTrackData) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "useTrackData",
+                            ),
+                        );
+                    }
+                    m_useTrackData = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                14usize => {
+                    if _serde::__private::Option::is_some(&m_lockFeetWhenPlanted) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "lockFeetWhenPlanted",
+                            ),
+                        );
+                    }
+                    m_lockFeetWhenPlanted = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                15usize => {
+                    if _serde::__private::Option::is_some(&m_useCharacterUpVector) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "useCharacterUpVector",
+                            ),
+                        );
+                    }
+                    m_useCharacterUpVector = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                16usize => {
+                    if _serde::__private::Option::is_some(&m_alignMode) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "alignMode",
+                            ),
+                        );
+                    }
+                    m_alignMode = _serde::__private::Some(
+                        match __A::next_value::<AlignMode>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                17usize => {
+                    if _serde::__private::Option::is_some(&m_internalLegData) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "internalLegData",
+                            ),
+                        );
+                    }
+                    m_internalLegData = _serde::__private::Some(
+                        match __A::next_value::<
+                            Vec<hkbFootIkModifierInternalLegData>,
+                        >(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                18usize => {
+                    if _serde::__private::Option::is_some(&m_prevIsFootIkEnabled) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "prevIsFootIkEnabled",
+                            ),
+                        );
+                    }
+                    m_prevIsFootIkEnabled = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                19usize => {
+                    if _serde::__private::Option::is_some(&m_isSetUp) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("isSetUp"),
+                        );
+                    }
+                    m_isSetUp = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                20usize => {
+                    if _serde::__private::Option::is_some(&m_isGroundPositionValid) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "isGroundPositionValid",
+                            ),
+                        );
+                    }
+                    m_isGroundPositionValid = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                21usize => {
+                    if _serde::__private::Option::is_some(&m_timeStep) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "timeStep",
+                            ),
+                        );
+                    }
+                    __A::pad(&mut __map, 2usize, 2usize)?;
+                    m_timeStep = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        __A::pad(&mut __map, 0usize, 12usize)?;
+        let m_gains = match m_gains {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("gains"),
+                );
+            }
+        };
+        let m_legs = match m_legs {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("legs"),
+                );
+            }
+        };
+        let m_raycastDistanceUp = match m_raycastDistanceUp {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("raycastDistanceUp"),
+                );
+            }
+        };
+        let m_raycastDistanceDown = match m_raycastDistanceDown {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "raycastDistanceDown",
+                    ),
+                );
+            }
+        };
+        let m_originalGroundHeightMS = match m_originalGroundHeightMS {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "originalGroundHeightMS",
+                    ),
+                );
+            }
+        };
+        let m_errorOut = match m_errorOut {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("errorOut"),
+                );
+            }
+        };
+        let m_errorOutTranslation = match m_errorOutTranslation {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "errorOutTranslation",
+                    ),
+                );
+            }
+        };
+        let m_alignWithGroundRotation = match m_alignWithGroundRotation {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "alignWithGroundRotation",
+                    ),
+                );
+            }
+        };
+        let m_verticalOffset = match m_verticalOffset {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("verticalOffset"),
+                );
+            }
+        };
+        let m_collisionFilterInfo = match m_collisionFilterInfo {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "collisionFilterInfo",
+                    ),
+                );
+            }
+        };
+        let m_forwardAlignFraction = match m_forwardAlignFraction {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "forwardAlignFraction",
+                    ),
+                );
+            }
+        };
+        let m_sidewaysAlignFraction = match m_sidewaysAlignFraction {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "sidewaysAlignFraction",
+                    ),
+                );
+            }
+        };
+        let m_sidewaysSampleWidth = match m_sidewaysSampleWidth {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "sidewaysSampleWidth",
+                    ),
+                );
+            }
+        };
+        let m_useTrackData = match m_useTrackData {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("useTrackData"),
+                );
+            }
+        };
+        let m_lockFeetWhenPlanted = match m_lockFeetWhenPlanted {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "lockFeetWhenPlanted",
+                    ),
+                );
+            }
+        };
+        let m_useCharacterUpVector = match m_useCharacterUpVector {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "useCharacterUpVector",
+                    ),
+                );
+            }
+        };
+        let m_alignMode = match m_alignMode {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("alignMode"),
+                );
+            }
+        };
+        let m_internalLegData = match m_internalLegData {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("internalLegData"),
+                );
+            }
+        };
+        let m_prevIsFootIkEnabled = match m_prevIsFootIkEnabled {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "prevIsFootIkEnabled",
+                    ),
+                );
+            }
+        };
+        let m_isSetUp = match m_isSetUp {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("isSetUp"),
+                );
+            }
+        };
+        let m_isGroundPositionValid = match m_isGroundPositionValid {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "isGroundPositionValid",
+                    ),
+                );
+            }
+        };
+        let m_timeStep = match m_timeStep {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("timeStep"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbFootIkModifier {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_gains,
+            m_legs,
+            m_raycastDistanceUp,
+            m_raycastDistanceDown,
+            m_originalGroundHeightMS,
+            m_errorOut,
+            m_errorOutTranslation,
+            m_alignWithGroundRotation,
+            m_verticalOffset,
+            m_collisionFilterInfo,
+            m_forwardAlignFraction,
+            m_sidewaysAlignFraction,
+            m_sidewaysSampleWidth,
+            m_useTrackData,
+            m_lockFeetWhenPlanted,
+            m_useCharacterUpVector,
+            m_alignMode,
+            m_internalLegData,
+            m_prevIsFootIkEnabled,
+            m_isSetUp,
+            m_isGroundPositionValid,
+            m_timeStep,
+        })
+    }
+    fn visit_struct<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __hkbModifierVisitor::visit_as_parent(&mut __map)?;
+        let mut m_gains: _serde::__private::Option<hkbFootIkGains> = _serde::__private::None;
+        let mut m_legs: _serde::__private::Option<Vec<hkbFootIkModifierLeg>> = _serde::__private::None;
+        let mut m_raycastDistanceUp: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_raycastDistanceDown: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_originalGroundHeightMS: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_errorOut: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_errorOutTranslation: _serde::__private::Option<Vector4> = _serde::__private::None;
+        let mut m_alignWithGroundRotation: _serde::__private::Option<Quaternion> = _serde::__private::None;
+        let mut m_verticalOffset: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
+        let mut m_forwardAlignFraction: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_sidewaysAlignFraction: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_sidewaysSampleWidth: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_useTrackData: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_lockFeetWhenPlanted: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_useCharacterUpVector: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_alignMode: _serde::__private::Option<AlignMode> = _serde::__private::None;
+        while let _serde::__private::Some(__key) = match __A::next_key::<
+            __Field,
+        >(&mut __map) {
+            _serde::__private::Ok(__val) => __val,
+            _serde::__private::Err(__err) => {
+                return _serde::__private::Err(__err);
+            }
+        } {
+            match __key {
+                __Field::m_gains => {
+                    if _serde::__private::Option::is_some(&m_gains) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("gains"),
+                        );
+                    }
+                    m_gains = _serde::__private::Some(
+                        match __A::next_value::<hkbFootIkGains>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_legs => {
+                    if _serde::__private::Option::is_some(&m_legs) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("legs"),
+                        );
+                    }
+                    m_legs = _serde::__private::Some(
+                        match __A::next_value::<Vec<hkbFootIkModifierLeg>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_raycastDistanceUp => {
+                    if _serde::__private::Option::is_some(&m_raycastDistanceUp) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "raycastDistanceUp",
+                            ),
+                        );
+                    }
+                    m_raycastDistanceUp = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_raycastDistanceDown => {
+                    if _serde::__private::Option::is_some(&m_raycastDistanceDown) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "raycastDistanceDown",
+                            ),
+                        );
+                    }
+                    m_raycastDistanceDown = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_originalGroundHeightMS => {
+                    if _serde::__private::Option::is_some(&m_originalGroundHeightMS) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "originalGroundHeightMS",
+                            ),
+                        );
+                    }
+                    m_originalGroundHeightMS = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_errorOut => {
+                    if _serde::__private::Option::is_some(&m_errorOut) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "errorOut",
+                            ),
+                        );
+                    }
+                    m_errorOut = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_errorOutTranslation => {
+                    if _serde::__private::Option::is_some(&m_errorOutTranslation) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "errorOutTranslation",
+                            ),
+                        );
+                    }
+                    m_errorOutTranslation = _serde::__private::Some(
+                        match __A::next_value::<Vector4>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_alignWithGroundRotation => {
+                    if _serde::__private::Option::is_some(&m_alignWithGroundRotation) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "alignWithGroundRotation",
+                            ),
+                        );
+                    }
+                    m_alignWithGroundRotation = _serde::__private::Some(
+                        match __A::next_value::<Quaternion>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_verticalOffset => {
+                    if _serde::__private::Option::is_some(&m_verticalOffset) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "verticalOffset",
+                            ),
+                        );
+                    }
+                    m_verticalOffset = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_collisionFilterInfo => {
+                    if _serde::__private::Option::is_some(&m_collisionFilterInfo) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "collisionFilterInfo",
+                            ),
+                        );
+                    }
+                    m_collisionFilterInfo = _serde::__private::Some(
+                        match __A::next_value::<u32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_forwardAlignFraction => {
+                    if _serde::__private::Option::is_some(&m_forwardAlignFraction) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "forwardAlignFraction",
+                            ),
+                        );
+                    }
+                    m_forwardAlignFraction = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_sidewaysAlignFraction => {
+                    if _serde::__private::Option::is_some(&m_sidewaysAlignFraction) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "sidewaysAlignFraction",
+                            ),
+                        );
+                    }
+                    m_sidewaysAlignFraction = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_sidewaysSampleWidth => {
+                    if _serde::__private::Option::is_some(&m_sidewaysSampleWidth) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "sidewaysSampleWidth",
+                            ),
+                        );
+                    }
+                    m_sidewaysSampleWidth = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_useTrackData => {
+                    if _serde::__private::Option::is_some(&m_useTrackData) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "useTrackData",
+                            ),
+                        );
+                    }
+                    m_useTrackData = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_lockFeetWhenPlanted => {
+                    if _serde::__private::Option::is_some(&m_lockFeetWhenPlanted) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "lockFeetWhenPlanted",
+                            ),
+                        );
+                    }
+                    m_lockFeetWhenPlanted = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_useCharacterUpVector => {
+                    if _serde::__private::Option::is_some(&m_useCharacterUpVector) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "useCharacterUpVector",
+                            ),
+                        );
+                    }
+                    m_useCharacterUpVector = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_alignMode => {
+                    if _serde::__private::Option::is_some(&m_alignMode) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "alignMode",
+                            ),
+                        );
+                    }
+                    m_alignMode = _serde::__private::Some(
+                        match __A::next_value::<AlignMode>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_gains = match m_gains {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("gains"),
+                );
+            }
+        };
+        let m_legs = match m_legs {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("legs"),
+                );
+            }
+        };
+        let m_raycastDistanceUp = match m_raycastDistanceUp {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("raycastDistanceUp"),
+                );
+            }
+        };
+        let m_raycastDistanceDown = match m_raycastDistanceDown {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "raycastDistanceDown",
+                    ),
+                );
+            }
+        };
+        let m_originalGroundHeightMS = match m_originalGroundHeightMS {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "originalGroundHeightMS",
+                    ),
+                );
+            }
+        };
+        let m_errorOut = match m_errorOut {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("errorOut"),
+                );
+            }
+        };
+        let m_errorOutTranslation = match m_errorOutTranslation {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "errorOutTranslation",
+                    ),
+                );
+            }
+        };
+        let m_alignWithGroundRotation = match m_alignWithGroundRotation {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "alignWithGroundRotation",
+                    ),
+                );
+            }
+        };
+        let m_verticalOffset = match m_verticalOffset {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("verticalOffset"),
+                );
+            }
+        };
+        let m_collisionFilterInfo = match m_collisionFilterInfo {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "collisionFilterInfo",
+                    ),
+                );
+            }
+        };
+        let m_forwardAlignFraction = match m_forwardAlignFraction {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "forwardAlignFraction",
+                    ),
+                );
+            }
+        };
+        let m_sidewaysAlignFraction = match m_sidewaysAlignFraction {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "sidewaysAlignFraction",
+                    ),
+                );
+            }
+        };
+        let m_sidewaysSampleWidth = match m_sidewaysSampleWidth {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "sidewaysSampleWidth",
+                    ),
+                );
+            }
+        };
+        let m_useTrackData = match m_useTrackData {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("useTrackData"),
+                );
+            }
+        };
+        let m_lockFeetWhenPlanted = match m_lockFeetWhenPlanted {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "lockFeetWhenPlanted",
+                    ),
+                );
+            }
+        };
+        let m_useCharacterUpVector = match m_useCharacterUpVector {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "useCharacterUpVector",
+                    ),
+                );
+            }
+        };
+        let m_alignMode = match m_alignMode {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("alignMode"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbFootIkModifier {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_gains,
+            m_legs,
+            m_raycastDistanceUp,
+            m_raycastDistanceDown,
+            m_originalGroundHeightMS,
+            m_errorOut,
+            m_errorOutTranslation,
+            m_alignWithGroundRotation,
+            m_verticalOffset,
+            m_collisionFilterInfo,
+            m_forwardAlignFraction,
+            m_sidewaysAlignFraction,
+            m_sidewaysSampleWidth,
+            m_useTrackData,
+            m_lockFeetWhenPlanted,
+            m_useCharacterUpVector,
+            m_alignMode,
+            ..Default::default()
+        })
+    }
+}
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for hkbFootIkModifier<'de> {
+        fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            const FIELDS: &[&str] = &[
+                "gains",
+                "legs",
+                "raycastDistanceUp",
+                "raycastDistanceDown",
+                "originalGroundHeightMS",
+                "errorOut",
+                "errorOutTranslation",
+                "alignWithGroundRotation",
+                "verticalOffset",
+                "collisionFilterInfo",
+                "forwardAlignFraction",
+                "sidewaysAlignFraction",
+                "sidewaysSampleWidth",
+                "useTrackData",
+                "lockFeetWhenPlanted",
+                "useCharacterUpVector",
+                "alignMode",
+                "internalLegData",
+                "prevIsFootIkEnabled",
+                "isSetUp",
+                "isGroundPositionValid",
+                "timeStep",
+            ];
+            _serde::Deserializer::deserialize_struct(
+                deserializer,
+                "hkbFootIkModifier",
+                FIELDS,
+                __hkbFootIkModifierVisitor {
+                    marker: _serde::__private::PhantomData::<hkbFootIkModifier>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]

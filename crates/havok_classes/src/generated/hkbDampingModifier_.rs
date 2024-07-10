@@ -188,3 +188,875 @@ const _: () = {
         }
     }
 };
+use havok_serde as _serde;
+#[allow(non_camel_case_types)]
+enum __Field {
+    m_kP,
+    m_kI,
+    m_kD,
+    m_enableScalarDamping,
+    m_enableVectorDamping,
+    m_rawValue,
+    m_dampedValue,
+    m_rawVector,
+    m_dampedVector,
+    m_vecErrorSum,
+    m_vecPreviousError,
+    m_errorSum,
+    m_previousError,
+    __ignore,
+}
+struct __FieldVisitor;
+impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+    type Value = __Field;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "field identifier")
+    }
+    /// Intended for use in XML.
+    #[allow(clippy::match_single_binding)]
+    #[allow(clippy::reversed_empty_ranges)]
+    #[allow(clippy::single_match)]
+    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
+    where
+        __E: _serde::de::Error,
+    {
+        match __value {
+            "kP" => Ok(__Field::m_kP),
+            "kI" => Ok(__Field::m_kI),
+            "kD" => Ok(__Field::m_kD),
+            "enableScalarDamping" => Ok(__Field::m_enableScalarDamping),
+            "enableVectorDamping" => Ok(__Field::m_enableVectorDamping),
+            "rawValue" => Ok(__Field::m_rawValue),
+            "dampedValue" => Ok(__Field::m_dampedValue),
+            "rawVector" => Ok(__Field::m_rawVector),
+            "dampedVector" => Ok(__Field::m_dampedVector),
+            "vecErrorSum" => Ok(__Field::m_vecErrorSum),
+            "vecPreviousError" => Ok(__Field::m_vecPreviousError),
+            "errorSum" => Ok(__Field::m_errorSum),
+            "previousError" => Ok(__Field::m_previousError),
+            _ => Ok(__Field::__ignore),
+        }
+    }
+}
+impl<'de> _serde::Deserialize<'de> for __Field {
+    #[inline]
+    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
+    where
+        __D: _serde::Deserializer<'de>,
+    {
+        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+    }
+}
+pub(super) struct __hkbDampingModifierVisitor<'de> {
+    marker: core::marker::PhantomData<hkbDampingModifier<'de>>,
+    lifetime: core::marker::PhantomData<&'de ()>,
+}
+impl<'de> __hkbDampingModifierVisitor<'de> {
+    /// # Purpose of this method
+    /// To reproduce C++ field inheritance, we will have the field internal implementation
+    /// of deserialization partially exposed and reused.
+    #[inline]
+    pub(super) fn visit_as_parent<__A>(
+        __map: &mut __A,
+    ) -> _serde::__private::Result<hkbDampingModifier<'de>, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        _serde::de::Visitor::visit_struct(
+            Self {
+                marker: _serde::__private::PhantomData::<hkbDampingModifier<'de>>,
+                lifetime: _serde::__private::PhantomData,
+            },
+            __map,
+        )
+    }
+}
+#[allow(clippy::match_single_binding)]
+#[allow(clippy::reversed_empty_ranges)]
+#[allow(clippy::single_match)]
+impl<'de> _serde::de::Visitor<'de> for __hkbDampingModifierVisitor<'de> {
+    type Value = hkbDampingModifier<'de>;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "struct hkbDampingModifier")
+    }
+    fn visit_struct_for_bytes<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __A::next_value(&mut __map)?;
+        let mut m_kP: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_kI: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_kD: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_enableScalarDamping: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_enableVectorDamping: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_rawValue: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_dampedValue: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_rawVector: _serde::__private::Option<Vector4> = _serde::__private::None;
+        let mut m_dampedVector: _serde::__private::Option<Vector4> = _serde::__private::None;
+        let mut m_vecErrorSum: _serde::__private::Option<Vector4> = _serde::__private::None;
+        let mut m_vecPreviousError: _serde::__private::Option<Vector4> = _serde::__private::None;
+        let mut m_errorSum: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_previousError: _serde::__private::Option<f32> = _serde::__private::None;
+        for i in 0..13usize {
+            match i {
+                0usize => {
+                    if _serde::__private::Option::is_some(&m_kP) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("kP"),
+                        );
+                    }
+                    m_kP = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                1usize => {
+                    if _serde::__private::Option::is_some(&m_kI) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("kI"),
+                        );
+                    }
+                    m_kI = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                2usize => {
+                    if _serde::__private::Option::is_some(&m_kD) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("kD"),
+                        );
+                    }
+                    m_kD = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                3usize => {
+                    if _serde::__private::Option::is_some(&m_enableScalarDamping) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "enableScalarDamping",
+                            ),
+                        );
+                    }
+                    m_enableScalarDamping = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                4usize => {
+                    if _serde::__private::Option::is_some(&m_enableVectorDamping) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "enableVectorDamping",
+                            ),
+                        );
+                    }
+                    m_enableVectorDamping = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                5usize => {
+                    if _serde::__private::Option::is_some(&m_rawValue) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "rawValue",
+                            ),
+                        );
+                    }
+                    __A::pad(&mut __map, 2usize, 2usize)?;
+                    m_rawValue = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                6usize => {
+                    if _serde::__private::Option::is_some(&m_dampedValue) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "dampedValue",
+                            ),
+                        );
+                    }
+                    m_dampedValue = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                7usize => {
+                    if _serde::__private::Option::is_some(&m_rawVector) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "rawVector",
+                            ),
+                        );
+                    }
+                    __A::pad(&mut __map, 12usize, 8usize)?;
+                    m_rawVector = _serde::__private::Some(
+                        match __A::next_value::<Vector4>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                8usize => {
+                    if _serde::__private::Option::is_some(&m_dampedVector) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "dampedVector",
+                            ),
+                        );
+                    }
+                    m_dampedVector = _serde::__private::Some(
+                        match __A::next_value::<Vector4>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                9usize => {
+                    if _serde::__private::Option::is_some(&m_vecErrorSum) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "vecErrorSum",
+                            ),
+                        );
+                    }
+                    m_vecErrorSum = _serde::__private::Some(
+                        match __A::next_value::<Vector4>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                10usize => {
+                    if _serde::__private::Option::is_some(&m_vecPreviousError) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "vecPreviousError",
+                            ),
+                        );
+                    }
+                    m_vecPreviousError = _serde::__private::Some(
+                        match __A::next_value::<Vector4>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                11usize => {
+                    if _serde::__private::Option::is_some(&m_errorSum) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "errorSum",
+                            ),
+                        );
+                    }
+                    m_errorSum = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                12usize => {
+                    if _serde::__private::Option::is_some(&m_previousError) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "previousError",
+                            ),
+                        );
+                    }
+                    m_previousError = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        __A::pad(&mut __map, 8usize, 8usize)?;
+        let m_kP = match m_kP {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("kP"),
+                );
+            }
+        };
+        let m_kI = match m_kI {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("kI"),
+                );
+            }
+        };
+        let m_kD = match m_kD {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("kD"),
+                );
+            }
+        };
+        let m_enableScalarDamping = match m_enableScalarDamping {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "enableScalarDamping",
+                    ),
+                );
+            }
+        };
+        let m_enableVectorDamping = match m_enableVectorDamping {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "enableVectorDamping",
+                    ),
+                );
+            }
+        };
+        let m_rawValue = match m_rawValue {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("rawValue"),
+                );
+            }
+        };
+        let m_dampedValue = match m_dampedValue {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("dampedValue"),
+                );
+            }
+        };
+        let m_rawVector = match m_rawVector {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("rawVector"),
+                );
+            }
+        };
+        let m_dampedVector = match m_dampedVector {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("dampedVector"),
+                );
+            }
+        };
+        let m_vecErrorSum = match m_vecErrorSum {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("vecErrorSum"),
+                );
+            }
+        };
+        let m_vecPreviousError = match m_vecPreviousError {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("vecPreviousError"),
+                );
+            }
+        };
+        let m_errorSum = match m_errorSum {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("errorSum"),
+                );
+            }
+        };
+        let m_previousError = match m_previousError {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("previousError"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbDampingModifier {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_kP,
+            m_kI,
+            m_kD,
+            m_enableScalarDamping,
+            m_enableVectorDamping,
+            m_rawValue,
+            m_dampedValue,
+            m_rawVector,
+            m_dampedVector,
+            m_vecErrorSum,
+            m_vecPreviousError,
+            m_errorSum,
+            m_previousError,
+        })
+    }
+    fn visit_struct<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __hkbModifierVisitor::visit_as_parent(&mut __map)?;
+        let mut m_kP: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_kI: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_kD: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_enableScalarDamping: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_enableVectorDamping: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_rawValue: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_dampedValue: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_rawVector: _serde::__private::Option<Vector4> = _serde::__private::None;
+        let mut m_dampedVector: _serde::__private::Option<Vector4> = _serde::__private::None;
+        let mut m_vecErrorSum: _serde::__private::Option<Vector4> = _serde::__private::None;
+        let mut m_vecPreviousError: _serde::__private::Option<Vector4> = _serde::__private::None;
+        let mut m_errorSum: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_previousError: _serde::__private::Option<f32> = _serde::__private::None;
+        while let _serde::__private::Some(__key) = match __A::next_key::<
+            __Field,
+        >(&mut __map) {
+            _serde::__private::Ok(__val) => __val,
+            _serde::__private::Err(__err) => {
+                return _serde::__private::Err(__err);
+            }
+        } {
+            match __key {
+                __Field::m_kP => {
+                    if _serde::__private::Option::is_some(&m_kP) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("kP"),
+                        );
+                    }
+                    m_kP = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_kI => {
+                    if _serde::__private::Option::is_some(&m_kI) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("kI"),
+                        );
+                    }
+                    m_kI = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_kD => {
+                    if _serde::__private::Option::is_some(&m_kD) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("kD"),
+                        );
+                    }
+                    m_kD = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_enableScalarDamping => {
+                    if _serde::__private::Option::is_some(&m_enableScalarDamping) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "enableScalarDamping",
+                            ),
+                        );
+                    }
+                    m_enableScalarDamping = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_enableVectorDamping => {
+                    if _serde::__private::Option::is_some(&m_enableVectorDamping) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "enableVectorDamping",
+                            ),
+                        );
+                    }
+                    m_enableVectorDamping = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_rawValue => {
+                    if _serde::__private::Option::is_some(&m_rawValue) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "rawValue",
+                            ),
+                        );
+                    }
+                    m_rawValue = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_dampedValue => {
+                    if _serde::__private::Option::is_some(&m_dampedValue) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "dampedValue",
+                            ),
+                        );
+                    }
+                    m_dampedValue = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_rawVector => {
+                    if _serde::__private::Option::is_some(&m_rawVector) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "rawVector",
+                            ),
+                        );
+                    }
+                    m_rawVector = _serde::__private::Some(
+                        match __A::next_value::<Vector4>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_dampedVector => {
+                    if _serde::__private::Option::is_some(&m_dampedVector) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "dampedVector",
+                            ),
+                        );
+                    }
+                    m_dampedVector = _serde::__private::Some(
+                        match __A::next_value::<Vector4>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_vecErrorSum => {
+                    if _serde::__private::Option::is_some(&m_vecErrorSum) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "vecErrorSum",
+                            ),
+                        );
+                    }
+                    m_vecErrorSum = _serde::__private::Some(
+                        match __A::next_value::<Vector4>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_vecPreviousError => {
+                    if _serde::__private::Option::is_some(&m_vecPreviousError) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "vecPreviousError",
+                            ),
+                        );
+                    }
+                    m_vecPreviousError = _serde::__private::Some(
+                        match __A::next_value::<Vector4>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_errorSum => {
+                    if _serde::__private::Option::is_some(&m_errorSum) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "errorSum",
+                            ),
+                        );
+                    }
+                    m_errorSum = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_previousError => {
+                    if _serde::__private::Option::is_some(&m_previousError) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "previousError",
+                            ),
+                        );
+                    }
+                    m_previousError = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_kP = match m_kP {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("kP"),
+                );
+            }
+        };
+        let m_kI = match m_kI {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("kI"),
+                );
+            }
+        };
+        let m_kD = match m_kD {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("kD"),
+                );
+            }
+        };
+        let m_enableScalarDamping = match m_enableScalarDamping {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "enableScalarDamping",
+                    ),
+                );
+            }
+        };
+        let m_enableVectorDamping = match m_enableVectorDamping {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "enableVectorDamping",
+                    ),
+                );
+            }
+        };
+        let m_rawValue = match m_rawValue {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("rawValue"),
+                );
+            }
+        };
+        let m_dampedValue = match m_dampedValue {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("dampedValue"),
+                );
+            }
+        };
+        let m_rawVector = match m_rawVector {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("rawVector"),
+                );
+            }
+        };
+        let m_dampedVector = match m_dampedVector {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("dampedVector"),
+                );
+            }
+        };
+        let m_vecErrorSum = match m_vecErrorSum {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("vecErrorSum"),
+                );
+            }
+        };
+        let m_vecPreviousError = match m_vecPreviousError {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("vecPreviousError"),
+                );
+            }
+        };
+        let m_errorSum = match m_errorSum {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("errorSum"),
+                );
+            }
+        };
+        let m_previousError = match m_previousError {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("previousError"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbDampingModifier {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_kP,
+            m_kI,
+            m_kD,
+            m_enableScalarDamping,
+            m_enableVectorDamping,
+            m_rawValue,
+            m_dampedValue,
+            m_rawVector,
+            m_dampedVector,
+            m_vecErrorSum,
+            m_vecPreviousError,
+            m_errorSum,
+            m_previousError,
+        })
+    }
+}
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for hkbDampingModifier<'de> {
+        fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            const FIELDS: &[&str] = &[
+                "kP",
+                "kI",
+                "kD",
+                "enableScalarDamping",
+                "enableVectorDamping",
+                "rawValue",
+                "dampedValue",
+                "rawVector",
+                "dampedVector",
+                "vecErrorSum",
+                "vecPreviousError",
+                "errorSum",
+                "previousError",
+            ];
+            _serde::Deserializer::deserialize_struct(
+                deserializer,
+                "hkbDampingModifier",
+                FIELDS,
+                __hkbDampingModifierVisitor {
+                    marker: _serde::__private::PhantomData::<hkbDampingModifier>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};

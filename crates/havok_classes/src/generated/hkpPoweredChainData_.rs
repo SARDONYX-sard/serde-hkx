@@ -126,3 +126,641 @@ const _: () = {
         }
     }
 };
+use havok_serde as _serde;
+#[allow(non_camel_case_types)]
+enum __Field {
+    m_atoms,
+    m_infos,
+    m_tau,
+    m_damping,
+    m_cfmLinAdd,
+    m_cfmLinMul,
+    m_cfmAngAdd,
+    m_cfmAngMul,
+    m_maxErrorDistance,
+    __ignore,
+}
+struct __FieldVisitor;
+impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+    type Value = __Field;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "field identifier")
+    }
+    /// Intended for use in XML.
+    #[allow(clippy::match_single_binding)]
+    #[allow(clippy::reversed_empty_ranges)]
+    #[allow(clippy::single_match)]
+    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
+    where
+        __E: _serde::de::Error,
+    {
+        match __value {
+            "atoms" => Ok(__Field::m_atoms),
+            "infos" => Ok(__Field::m_infos),
+            "tau" => Ok(__Field::m_tau),
+            "damping" => Ok(__Field::m_damping),
+            "cfmLinAdd" => Ok(__Field::m_cfmLinAdd),
+            "cfmLinMul" => Ok(__Field::m_cfmLinMul),
+            "cfmAngAdd" => Ok(__Field::m_cfmAngAdd),
+            "cfmAngMul" => Ok(__Field::m_cfmAngMul),
+            "maxErrorDistance" => Ok(__Field::m_maxErrorDistance),
+            _ => Ok(__Field::__ignore),
+        }
+    }
+}
+impl<'de> _serde::Deserialize<'de> for __Field {
+    #[inline]
+    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
+    where
+        __D: _serde::Deserializer<'de>,
+    {
+        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+    }
+}
+pub(super) struct __hkpPoweredChainDataVisitor<'de> {
+    marker: core::marker::PhantomData<hkpPoweredChainData>,
+    lifetime: core::marker::PhantomData<&'de ()>,
+}
+impl<'de> __hkpPoweredChainDataVisitor<'de> {
+    /// # Purpose of this method
+    /// To reproduce C++ field inheritance, we will have the field internal implementation
+    /// of deserialization partially exposed and reused.
+    #[inline]
+    pub(super) fn visit_as_parent<__A>(
+        __map: &mut __A,
+    ) -> _serde::__private::Result<hkpPoweredChainData, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        _serde::de::Visitor::visit_struct(
+            Self {
+                marker: _serde::__private::PhantomData::<hkpPoweredChainData>,
+                lifetime: _serde::__private::PhantomData,
+            },
+            __map,
+        )
+    }
+}
+#[allow(clippy::match_single_binding)]
+#[allow(clippy::reversed_empty_ranges)]
+#[allow(clippy::single_match)]
+impl<'de> _serde::de::Visitor<'de> for __hkpPoweredChainDataVisitor<'de> {
+    type Value = hkpPoweredChainData;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "struct hkpPoweredChainData")
+    }
+    fn visit_struct_for_bytes<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __A::next_value(&mut __map)?;
+        let mut m_atoms: _serde::__private::Option<hkpBridgeAtoms> = _serde::__private::None;
+        let mut m_infos: _serde::__private::Option<
+            Vec<hkpPoweredChainDataConstraintInfo>,
+        > = _serde::__private::None;
+        let mut m_tau: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_damping: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_cfmLinAdd: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_cfmLinMul: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_cfmAngAdd: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_cfmAngMul: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_maxErrorDistance: _serde::__private::Option<f32> = _serde::__private::None;
+        for i in 0..9usize {
+            match i {
+                0usize => {
+                    if _serde::__private::Option::is_some(&m_atoms) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("atoms"),
+                        );
+                    }
+                    m_atoms = _serde::__private::Some(
+                        match __A::next_value::<hkpBridgeAtoms>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                1usize => {
+                    if _serde::__private::Option::is_some(&m_infos) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("infos"),
+                        );
+                    }
+                    m_infos = _serde::__private::Some(
+                        match __A::next_value::<
+                            Vec<hkpPoweredChainDataConstraintInfo>,
+                        >(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                2usize => {
+                    if _serde::__private::Option::is_some(&m_tau) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("tau"),
+                        );
+                    }
+                    m_tau = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                3usize => {
+                    if _serde::__private::Option::is_some(&m_damping) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("damping"),
+                        );
+                    }
+                    m_damping = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                4usize => {
+                    if _serde::__private::Option::is_some(&m_cfmLinAdd) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "cfmLinAdd",
+                            ),
+                        );
+                    }
+                    m_cfmLinAdd = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                5usize => {
+                    if _serde::__private::Option::is_some(&m_cfmLinMul) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "cfmLinMul",
+                            ),
+                        );
+                    }
+                    m_cfmLinMul = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                6usize => {
+                    if _serde::__private::Option::is_some(&m_cfmAngAdd) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "cfmAngAdd",
+                            ),
+                        );
+                    }
+                    m_cfmAngAdd = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                7usize => {
+                    if _serde::__private::Option::is_some(&m_cfmAngMul) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "cfmAngMul",
+                            ),
+                        );
+                    }
+                    m_cfmAngMul = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                8usize => {
+                    if _serde::__private::Option::is_some(&m_maxErrorDistance) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "maxErrorDistance",
+                            ),
+                        );
+                    }
+                    m_maxErrorDistance = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        __A::pad(&mut __map, 0usize, 4usize)?;
+        let m_atoms = match m_atoms {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("atoms"),
+                );
+            }
+        };
+        let m_infos = match m_infos {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("infos"),
+                );
+            }
+        };
+        let m_tau = match m_tau {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("tau"),
+                );
+            }
+        };
+        let m_damping = match m_damping {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("damping"),
+                );
+            }
+        };
+        let m_cfmLinAdd = match m_cfmLinAdd {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("cfmLinAdd"),
+                );
+            }
+        };
+        let m_cfmLinMul = match m_cfmLinMul {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("cfmLinMul"),
+                );
+            }
+        };
+        let m_cfmAngAdd = match m_cfmAngAdd {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("cfmAngAdd"),
+                );
+            }
+        };
+        let m_cfmAngMul = match m_cfmAngMul {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("cfmAngMul"),
+                );
+            }
+        };
+        let m_maxErrorDistance = match m_maxErrorDistance {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("maxErrorDistance"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkpPoweredChainData {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_atoms,
+            m_infos,
+            m_tau,
+            m_damping,
+            m_cfmLinAdd,
+            m_cfmLinMul,
+            m_cfmAngAdd,
+            m_cfmAngMul,
+            m_maxErrorDistance,
+        })
+    }
+    fn visit_struct<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __hkpConstraintChainDataVisitor::visit_as_parent(&mut __map)?;
+        let mut m_atoms: _serde::__private::Option<hkpBridgeAtoms> = _serde::__private::None;
+        let mut m_infos: _serde::__private::Option<
+            Vec<hkpPoweredChainDataConstraintInfo>,
+        > = _serde::__private::None;
+        let mut m_tau: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_damping: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_cfmLinAdd: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_cfmLinMul: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_cfmAngAdd: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_cfmAngMul: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_maxErrorDistance: _serde::__private::Option<f32> = _serde::__private::None;
+        while let _serde::__private::Some(__key) = match __A::next_key::<
+            __Field,
+        >(&mut __map) {
+            _serde::__private::Ok(__val) => __val,
+            _serde::__private::Err(__err) => {
+                return _serde::__private::Err(__err);
+            }
+        } {
+            match __key {
+                __Field::m_atoms => {
+                    if _serde::__private::Option::is_some(&m_atoms) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("atoms"),
+                        );
+                    }
+                    m_atoms = _serde::__private::Some(
+                        match __A::next_value::<hkpBridgeAtoms>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_infos => {
+                    if _serde::__private::Option::is_some(&m_infos) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("infos"),
+                        );
+                    }
+                    m_infos = _serde::__private::Some(
+                        match __A::next_value::<
+                            Vec<hkpPoweredChainDataConstraintInfo>,
+                        >(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_tau => {
+                    if _serde::__private::Option::is_some(&m_tau) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("tau"),
+                        );
+                    }
+                    m_tau = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_damping => {
+                    if _serde::__private::Option::is_some(&m_damping) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("damping"),
+                        );
+                    }
+                    m_damping = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_cfmLinAdd => {
+                    if _serde::__private::Option::is_some(&m_cfmLinAdd) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "cfmLinAdd",
+                            ),
+                        );
+                    }
+                    m_cfmLinAdd = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_cfmLinMul => {
+                    if _serde::__private::Option::is_some(&m_cfmLinMul) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "cfmLinMul",
+                            ),
+                        );
+                    }
+                    m_cfmLinMul = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_cfmAngAdd => {
+                    if _serde::__private::Option::is_some(&m_cfmAngAdd) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "cfmAngAdd",
+                            ),
+                        );
+                    }
+                    m_cfmAngAdd = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_cfmAngMul => {
+                    if _serde::__private::Option::is_some(&m_cfmAngMul) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "cfmAngMul",
+                            ),
+                        );
+                    }
+                    m_cfmAngMul = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_maxErrorDistance => {
+                    if _serde::__private::Option::is_some(&m_maxErrorDistance) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "maxErrorDistance",
+                            ),
+                        );
+                    }
+                    m_maxErrorDistance = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_atoms = match m_atoms {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("atoms"),
+                );
+            }
+        };
+        let m_infos = match m_infos {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("infos"),
+                );
+            }
+        };
+        let m_tau = match m_tau {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("tau"),
+                );
+            }
+        };
+        let m_damping = match m_damping {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("damping"),
+                );
+            }
+        };
+        let m_cfmLinAdd = match m_cfmLinAdd {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("cfmLinAdd"),
+                );
+            }
+        };
+        let m_cfmLinMul = match m_cfmLinMul {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("cfmLinMul"),
+                );
+            }
+        };
+        let m_cfmAngAdd = match m_cfmAngAdd {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("cfmAngAdd"),
+                );
+            }
+        };
+        let m_cfmAngMul = match m_cfmAngMul {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("cfmAngMul"),
+                );
+            }
+        };
+        let m_maxErrorDistance = match m_maxErrorDistance {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("maxErrorDistance"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkpPoweredChainData {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_atoms,
+            m_infos,
+            m_tau,
+            m_damping,
+            m_cfmLinAdd,
+            m_cfmLinMul,
+            m_cfmAngAdd,
+            m_cfmAngMul,
+            m_maxErrorDistance,
+        })
+    }
+}
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for hkpPoweredChainData {
+        fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            const FIELDS: &[&str] = &[
+                "atoms",
+                "infos",
+                "tau",
+                "damping",
+                "cfmLinAdd",
+                "cfmLinMul",
+                "cfmAngAdd",
+                "cfmAngMul",
+                "maxErrorDistance",
+            ];
+            _serde::Deserializer::deserialize_struct(
+                deserializer,
+                "hkpPoweredChainData",
+                FIELDS,
+                __hkpPoweredChainDataVisitor {
+                    marker: _serde::__private::PhantomData::<hkpPoweredChainData>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};

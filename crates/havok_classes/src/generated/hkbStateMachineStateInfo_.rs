@@ -138,3 +138,637 @@ const _: () = {
         }
     }
 };
+use havok_serde as _serde;
+#[allow(non_camel_case_types)]
+enum __Field {
+    m_listeners,
+    m_enterNotifyEvents,
+    m_exitNotifyEvents,
+    m_transitions,
+    m_generator,
+    m_name,
+    m_stateId,
+    m_probability,
+    m_enable,
+    __ignore,
+}
+struct __FieldVisitor;
+impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+    type Value = __Field;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "field identifier")
+    }
+    /// Intended for use in XML.
+    #[allow(clippy::match_single_binding)]
+    #[allow(clippy::reversed_empty_ranges)]
+    #[allow(clippy::single_match)]
+    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
+    where
+        __E: _serde::de::Error,
+    {
+        match __value {
+            "listeners" => Ok(__Field::m_listeners),
+            "enterNotifyEvents" => Ok(__Field::m_enterNotifyEvents),
+            "exitNotifyEvents" => Ok(__Field::m_exitNotifyEvents),
+            "transitions" => Ok(__Field::m_transitions),
+            "generator" => Ok(__Field::m_generator),
+            "name" => Ok(__Field::m_name),
+            "stateId" => Ok(__Field::m_stateId),
+            "probability" => Ok(__Field::m_probability),
+            "enable" => Ok(__Field::m_enable),
+            _ => Ok(__Field::__ignore),
+        }
+    }
+}
+impl<'de> _serde::Deserialize<'de> for __Field {
+    #[inline]
+    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
+    where
+        __D: _serde::Deserializer<'de>,
+    {
+        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+    }
+}
+pub(super) struct __hkbStateMachineStateInfoVisitor<'de> {
+    marker: core::marker::PhantomData<hkbStateMachineStateInfo<'de>>,
+    lifetime: core::marker::PhantomData<&'de ()>,
+}
+impl<'de> __hkbStateMachineStateInfoVisitor<'de> {
+    /// # Purpose of this method
+    /// To reproduce C++ field inheritance, we will have the field internal implementation
+    /// of deserialization partially exposed and reused.
+    #[inline]
+    pub(super) fn visit_as_parent<__A>(
+        __map: &mut __A,
+    ) -> _serde::__private::Result<hkbStateMachineStateInfo<'de>, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        _serde::de::Visitor::visit_struct(
+            Self {
+                marker: _serde::__private::PhantomData::<hkbStateMachineStateInfo<'de>>,
+                lifetime: _serde::__private::PhantomData,
+            },
+            __map,
+        )
+    }
+}
+#[allow(clippy::match_single_binding)]
+#[allow(clippy::reversed_empty_ranges)]
+#[allow(clippy::single_match)]
+impl<'de> _serde::de::Visitor<'de> for __hkbStateMachineStateInfoVisitor<'de> {
+    type Value = hkbStateMachineStateInfo<'de>;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "struct hkbStateMachineStateInfo")
+    }
+    fn visit_struct_for_bytes<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __A::next_value(&mut __map)?;
+        let mut m_listeners: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+        let mut m_enterNotifyEvents: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_exitNotifyEvents: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_transitions: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_generator: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+        let mut m_stateId: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_probability: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
+        for i in 0..9usize {
+            match i {
+                0usize => {
+                    if _serde::__private::Option::is_some(&m_listeners) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "listeners",
+                            ),
+                        );
+                    }
+                    m_listeners = _serde::__private::Some(
+                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                1usize => {
+                    if _serde::__private::Option::is_some(&m_enterNotifyEvents) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "enterNotifyEvents",
+                            ),
+                        );
+                    }
+                    m_enterNotifyEvents = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                2usize => {
+                    if _serde::__private::Option::is_some(&m_exitNotifyEvents) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "exitNotifyEvents",
+                            ),
+                        );
+                    }
+                    m_exitNotifyEvents = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                3usize => {
+                    if _serde::__private::Option::is_some(&m_transitions) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "transitions",
+                            ),
+                        );
+                    }
+                    m_transitions = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                4usize => {
+                    if _serde::__private::Option::is_some(&m_generator) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "generator",
+                            ),
+                        );
+                    }
+                    m_generator = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                5usize => {
+                    if _serde::__private::Option::is_some(&m_name) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                        );
+                    }
+                    m_name = _serde::__private::Some(
+                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                6usize => {
+                    if _serde::__private::Option::is_some(&m_stateId) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("stateId"),
+                        );
+                    }
+                    m_stateId = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                7usize => {
+                    if _serde::__private::Option::is_some(&m_probability) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "probability",
+                            ),
+                        );
+                    }
+                    m_probability = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                8usize => {
+                    if _serde::__private::Option::is_some(&m_enable) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("enable"),
+                        );
+                    }
+                    m_enable = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        __A::pad(&mut __map, 3usize, 7usize)?;
+        let m_listeners = match m_listeners {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("listeners"),
+                );
+            }
+        };
+        let m_enterNotifyEvents = match m_enterNotifyEvents {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("enterNotifyEvents"),
+                );
+            }
+        };
+        let m_exitNotifyEvents = match m_exitNotifyEvents {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("exitNotifyEvents"),
+                );
+            }
+        };
+        let m_transitions = match m_transitions {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("transitions"),
+                );
+            }
+        };
+        let m_generator = match m_generator {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("generator"),
+                );
+            }
+        };
+        let m_name = match m_name {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("name"),
+                );
+            }
+        };
+        let m_stateId = match m_stateId {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("stateId"),
+                );
+            }
+        };
+        let m_probability = match m_probability {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("probability"),
+                );
+            }
+        };
+        let m_enable = match m_enable {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("enable"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbStateMachineStateInfo {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_listeners,
+            m_enterNotifyEvents,
+            m_exitNotifyEvents,
+            m_transitions,
+            m_generator,
+            m_name,
+            m_stateId,
+            m_probability,
+            m_enable,
+        })
+    }
+    fn visit_struct<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __hkbBindableVisitor::visit_as_parent(&mut __map)?;
+        let mut m_listeners: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+        let mut m_enterNotifyEvents: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_exitNotifyEvents: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_transitions: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_generator: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+        let mut m_stateId: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_probability: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
+        while let _serde::__private::Some(__key) = match __A::next_key::<
+            __Field,
+        >(&mut __map) {
+            _serde::__private::Ok(__val) => __val,
+            _serde::__private::Err(__err) => {
+                return _serde::__private::Err(__err);
+            }
+        } {
+            match __key {
+                __Field::m_listeners => {
+                    if _serde::__private::Option::is_some(&m_listeners) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "listeners",
+                            ),
+                        );
+                    }
+                    m_listeners = _serde::__private::Some(
+                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_enterNotifyEvents => {
+                    if _serde::__private::Option::is_some(&m_enterNotifyEvents) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "enterNotifyEvents",
+                            ),
+                        );
+                    }
+                    m_enterNotifyEvents = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_exitNotifyEvents => {
+                    if _serde::__private::Option::is_some(&m_exitNotifyEvents) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "exitNotifyEvents",
+                            ),
+                        );
+                    }
+                    m_exitNotifyEvents = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_transitions => {
+                    if _serde::__private::Option::is_some(&m_transitions) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "transitions",
+                            ),
+                        );
+                    }
+                    m_transitions = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_generator => {
+                    if _serde::__private::Option::is_some(&m_generator) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "generator",
+                            ),
+                        );
+                    }
+                    m_generator = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_name => {
+                    if _serde::__private::Option::is_some(&m_name) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                        );
+                    }
+                    m_name = _serde::__private::Some(
+                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_stateId => {
+                    if _serde::__private::Option::is_some(&m_stateId) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("stateId"),
+                        );
+                    }
+                    m_stateId = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_probability => {
+                    if _serde::__private::Option::is_some(&m_probability) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "probability",
+                            ),
+                        );
+                    }
+                    m_probability = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_enable => {
+                    if _serde::__private::Option::is_some(&m_enable) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("enable"),
+                        );
+                    }
+                    m_enable = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_listeners = match m_listeners {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("listeners"),
+                );
+            }
+        };
+        let m_enterNotifyEvents = match m_enterNotifyEvents {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("enterNotifyEvents"),
+                );
+            }
+        };
+        let m_exitNotifyEvents = match m_exitNotifyEvents {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("exitNotifyEvents"),
+                );
+            }
+        };
+        let m_transitions = match m_transitions {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("transitions"),
+                );
+            }
+        };
+        let m_generator = match m_generator {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("generator"),
+                );
+            }
+        };
+        let m_name = match m_name {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("name"),
+                );
+            }
+        };
+        let m_stateId = match m_stateId {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("stateId"),
+                );
+            }
+        };
+        let m_probability = match m_probability {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("probability"),
+                );
+            }
+        };
+        let m_enable = match m_enable {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("enable"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbStateMachineStateInfo {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_listeners,
+            m_enterNotifyEvents,
+            m_exitNotifyEvents,
+            m_transitions,
+            m_generator,
+            m_name,
+            m_stateId,
+            m_probability,
+            m_enable,
+        })
+    }
+}
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for hkbStateMachineStateInfo<'de> {
+        fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            const FIELDS: &[&str] = &[
+                "listeners",
+                "enterNotifyEvents",
+                "exitNotifyEvents",
+                "transitions",
+                "generator",
+                "name",
+                "stateId",
+                "probability",
+                "enable",
+            ];
+            _serde::Deserializer::deserialize_struct(
+                deserializer,
+                "hkbStateMachineStateInfo",
+                FIELDS,
+                __hkbStateMachineStateInfoVisitor {
+                    marker: _serde::__private::PhantomData::<hkbStateMachineStateInfo>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};

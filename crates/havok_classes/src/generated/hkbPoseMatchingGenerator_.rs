@@ -299,6 +299,1022 @@ const _: () = {
         }
     }
 };
+use havok_serde as _serde;
+#[allow(non_camel_case_types)]
+enum __Field {
+    m_worldFromModelRotation,
+    m_blendSpeed,
+    m_minSpeedToSwitch,
+    m_minSwitchTimeNoError,
+    m_minSwitchTimeFullError,
+    m_startPlayingEventId,
+    m_startMatchingEventId,
+    m_rootBoneIndex,
+    m_otherBoneIndex,
+    m_anotherBoneIndex,
+    m_pelvisIndex,
+    m_mode,
+    m_currentMatch,
+    m_bestMatch,
+    m_timeSinceBetterMatch,
+    m_error,
+    m_resetCurrentMatchLocalTime,
+    m_poseMatchingUtility,
+    __ignore,
+}
+struct __FieldVisitor;
+impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+    type Value = __Field;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "field identifier")
+    }
+    /// Intended for use in XML.
+    #[allow(clippy::match_single_binding)]
+    #[allow(clippy::reversed_empty_ranges)]
+    #[allow(clippy::single_match)]
+    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
+    where
+        __E: _serde::de::Error,
+    {
+        match __value {
+            "worldFromModelRotation" => Ok(__Field::m_worldFromModelRotation),
+            "blendSpeed" => Ok(__Field::m_blendSpeed),
+            "minSpeedToSwitch" => Ok(__Field::m_minSpeedToSwitch),
+            "minSwitchTimeNoError" => Ok(__Field::m_minSwitchTimeNoError),
+            "minSwitchTimeFullError" => Ok(__Field::m_minSwitchTimeFullError),
+            "startPlayingEventId" => Ok(__Field::m_startPlayingEventId),
+            "startMatchingEventId" => Ok(__Field::m_startMatchingEventId),
+            "rootBoneIndex" => Ok(__Field::m_rootBoneIndex),
+            "otherBoneIndex" => Ok(__Field::m_otherBoneIndex),
+            "anotherBoneIndex" => Ok(__Field::m_anotherBoneIndex),
+            "pelvisIndex" => Ok(__Field::m_pelvisIndex),
+            "mode" => Ok(__Field::m_mode),
+            _ => Ok(__Field::__ignore),
+        }
+    }
+}
+impl<'de> _serde::Deserialize<'de> for __Field {
+    #[inline]
+    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
+    where
+        __D: _serde::Deserializer<'de>,
+    {
+        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+    }
+}
+pub(super) struct __hkbPoseMatchingGeneratorVisitor<'de> {
+    marker: core::marker::PhantomData<hkbPoseMatchingGenerator<'de>>,
+    lifetime: core::marker::PhantomData<&'de ()>,
+}
+impl<'de> __hkbPoseMatchingGeneratorVisitor<'de> {
+    /// # Purpose of this method
+    /// To reproduce C++ field inheritance, we will have the field internal implementation
+    /// of deserialization partially exposed and reused.
+    #[inline]
+    pub(super) fn visit_as_parent<__A>(
+        __map: &mut __A,
+    ) -> _serde::__private::Result<hkbPoseMatchingGenerator<'de>, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        _serde::de::Visitor::visit_struct(
+            Self {
+                marker: _serde::__private::PhantomData::<hkbPoseMatchingGenerator<'de>>,
+                lifetime: _serde::__private::PhantomData,
+            },
+            __map,
+        )
+    }
+}
+#[allow(clippy::match_single_binding)]
+#[allow(clippy::reversed_empty_ranges)]
+#[allow(clippy::single_match)]
+impl<'de> _serde::de::Visitor<'de> for __hkbPoseMatchingGeneratorVisitor<'de> {
+    type Value = hkbPoseMatchingGenerator<'de>;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "struct hkbPoseMatchingGenerator")
+    }
+    fn visit_struct_for_bytes<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __A::next_value(&mut __map)?;
+        let mut m_worldFromModelRotation: _serde::__private::Option<Quaternion> = _serde::__private::None;
+        let mut m_blendSpeed: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_minSpeedToSwitch: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_minSwitchTimeNoError: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_minSwitchTimeFullError: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_startPlayingEventId: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_startMatchingEventId: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_rootBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+        let mut m_otherBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+        let mut m_anotherBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+        let mut m_pelvisIndex: _serde::__private::Option<i16> = _serde::__private::None;
+        let mut m_mode: _serde::__private::Option<Mode> = _serde::__private::None;
+        let mut m_currentMatch: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_bestMatch: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_timeSinceBetterMatch: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_error: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_resetCurrentMatchLocalTime: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_poseMatchingUtility: _serde::__private::Option<Pointer> = _serde::__private::None;
+        for i in 0..18usize {
+            match i {
+                0usize => {
+                    if _serde::__private::Option::is_some(&m_worldFromModelRotation) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "worldFromModelRotation",
+                            ),
+                        );
+                    }
+                    m_worldFromModelRotation = _serde::__private::Some(
+                        match __A::next_value::<Quaternion>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                1usize => {
+                    if _serde::__private::Option::is_some(&m_blendSpeed) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "blendSpeed",
+                            ),
+                        );
+                    }
+                    m_blendSpeed = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                2usize => {
+                    if _serde::__private::Option::is_some(&m_minSpeedToSwitch) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "minSpeedToSwitch",
+                            ),
+                        );
+                    }
+                    m_minSpeedToSwitch = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                3usize => {
+                    if _serde::__private::Option::is_some(&m_minSwitchTimeNoError) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "minSwitchTimeNoError",
+                            ),
+                        );
+                    }
+                    m_minSwitchTimeNoError = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                4usize => {
+                    if _serde::__private::Option::is_some(&m_minSwitchTimeFullError) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "minSwitchTimeFullError",
+                            ),
+                        );
+                    }
+                    m_minSwitchTimeFullError = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                5usize => {
+                    if _serde::__private::Option::is_some(&m_startPlayingEventId) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "startPlayingEventId",
+                            ),
+                        );
+                    }
+                    m_startPlayingEventId = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                6usize => {
+                    if _serde::__private::Option::is_some(&m_startMatchingEventId) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "startMatchingEventId",
+                            ),
+                        );
+                    }
+                    m_startMatchingEventId = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                7usize => {
+                    if _serde::__private::Option::is_some(&m_rootBoneIndex) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "rootBoneIndex",
+                            ),
+                        );
+                    }
+                    m_rootBoneIndex = _serde::__private::Some(
+                        match __A::next_value::<i16>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                8usize => {
+                    if _serde::__private::Option::is_some(&m_otherBoneIndex) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "otherBoneIndex",
+                            ),
+                        );
+                    }
+                    m_otherBoneIndex = _serde::__private::Some(
+                        match __A::next_value::<i16>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                9usize => {
+                    if _serde::__private::Option::is_some(&m_anotherBoneIndex) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "anotherBoneIndex",
+                            ),
+                        );
+                    }
+                    m_anotherBoneIndex = _serde::__private::Some(
+                        match __A::next_value::<i16>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                10usize => {
+                    if _serde::__private::Option::is_some(&m_pelvisIndex) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "pelvisIndex",
+                            ),
+                        );
+                    }
+                    m_pelvisIndex = _serde::__private::Some(
+                        match __A::next_value::<i16>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                11usize => {
+                    if _serde::__private::Option::is_some(&m_mode) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("mode"),
+                        );
+                    }
+                    m_mode = _serde::__private::Some(
+                        match __A::next_value::<Mode>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                12usize => {
+                    if _serde::__private::Option::is_some(&m_currentMatch) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "currentMatch",
+                            ),
+                        );
+                    }
+                    __A::pad(&mut __map, 3usize, 3usize)?;
+                    m_currentMatch = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                13usize => {
+                    if _serde::__private::Option::is_some(&m_bestMatch) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bestMatch",
+                            ),
+                        );
+                    }
+                    m_bestMatch = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                14usize => {
+                    if _serde::__private::Option::is_some(&m_timeSinceBetterMatch) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "timeSinceBetterMatch",
+                            ),
+                        );
+                    }
+                    m_timeSinceBetterMatch = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                15usize => {
+                    if _serde::__private::Option::is_some(&m_error) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("error"),
+                        );
+                    }
+                    m_error = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                16usize => {
+                    if _serde::__private::Option::is_some(
+                        &m_resetCurrentMatchLocalTime,
+                    ) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "resetCurrentMatchLocalTime",
+                            ),
+                        );
+                    }
+                    m_resetCurrentMatchLocalTime = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                17usize => {
+                    if _serde::__private::Option::is_some(&m_poseMatchingUtility) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "poseMatchingUtility",
+                            ),
+                        );
+                    }
+                    __A::pad(&mut __map, 3usize, 3usize)?;
+                    m_poseMatchingUtility = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        __A::pad(&mut __map, 4usize, 0usize)?;
+        let m_worldFromModelRotation = match m_worldFromModelRotation {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "worldFromModelRotation",
+                    ),
+                );
+            }
+        };
+        let m_blendSpeed = match m_blendSpeed {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("blendSpeed"),
+                );
+            }
+        };
+        let m_minSpeedToSwitch = match m_minSpeedToSwitch {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("minSpeedToSwitch"),
+                );
+            }
+        };
+        let m_minSwitchTimeNoError = match m_minSwitchTimeNoError {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "minSwitchTimeNoError",
+                    ),
+                );
+            }
+        };
+        let m_minSwitchTimeFullError = match m_minSwitchTimeFullError {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "minSwitchTimeFullError",
+                    ),
+                );
+            }
+        };
+        let m_startPlayingEventId = match m_startPlayingEventId {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "startPlayingEventId",
+                    ),
+                );
+            }
+        };
+        let m_startMatchingEventId = match m_startMatchingEventId {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "startMatchingEventId",
+                    ),
+                );
+            }
+        };
+        let m_rootBoneIndex = match m_rootBoneIndex {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("rootBoneIndex"),
+                );
+            }
+        };
+        let m_otherBoneIndex = match m_otherBoneIndex {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("otherBoneIndex"),
+                );
+            }
+        };
+        let m_anotherBoneIndex = match m_anotherBoneIndex {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("anotherBoneIndex"),
+                );
+            }
+        };
+        let m_pelvisIndex = match m_pelvisIndex {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("pelvisIndex"),
+                );
+            }
+        };
+        let m_mode = match m_mode {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("mode"),
+                );
+            }
+        };
+        let m_currentMatch = match m_currentMatch {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("currentMatch"),
+                );
+            }
+        };
+        let m_bestMatch = match m_bestMatch {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bestMatch"),
+                );
+            }
+        };
+        let m_timeSinceBetterMatch = match m_timeSinceBetterMatch {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "timeSinceBetterMatch",
+                    ),
+                );
+            }
+        };
+        let m_error = match m_error {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("error"),
+                );
+            }
+        };
+        let m_resetCurrentMatchLocalTime = match m_resetCurrentMatchLocalTime {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "resetCurrentMatchLocalTime",
+                    ),
+                );
+            }
+        };
+        let m_poseMatchingUtility = match m_poseMatchingUtility {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "poseMatchingUtility",
+                    ),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbPoseMatchingGenerator {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_worldFromModelRotation,
+            m_blendSpeed,
+            m_minSpeedToSwitch,
+            m_minSwitchTimeNoError,
+            m_minSwitchTimeFullError,
+            m_startPlayingEventId,
+            m_startMatchingEventId,
+            m_rootBoneIndex,
+            m_otherBoneIndex,
+            m_anotherBoneIndex,
+            m_pelvisIndex,
+            m_mode,
+            m_currentMatch,
+            m_bestMatch,
+            m_timeSinceBetterMatch,
+            m_error,
+            m_resetCurrentMatchLocalTime,
+            m_poseMatchingUtility,
+        })
+    }
+    fn visit_struct<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __hkbBlenderGeneratorVisitor::visit_as_parent(&mut __map)?;
+        let mut m_worldFromModelRotation: _serde::__private::Option<Quaternion> = _serde::__private::None;
+        let mut m_blendSpeed: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_minSpeedToSwitch: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_minSwitchTimeNoError: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_minSwitchTimeFullError: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_startPlayingEventId: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_startMatchingEventId: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_rootBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+        let mut m_otherBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+        let mut m_anotherBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+        let mut m_pelvisIndex: _serde::__private::Option<i16> = _serde::__private::None;
+        let mut m_mode: _serde::__private::Option<Mode> = _serde::__private::None;
+        while let _serde::__private::Some(__key) = match __A::next_key::<
+            __Field,
+        >(&mut __map) {
+            _serde::__private::Ok(__val) => __val,
+            _serde::__private::Err(__err) => {
+                return _serde::__private::Err(__err);
+            }
+        } {
+            match __key {
+                __Field::m_worldFromModelRotation => {
+                    if _serde::__private::Option::is_some(&m_worldFromModelRotation) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "worldFromModelRotation",
+                            ),
+                        );
+                    }
+                    m_worldFromModelRotation = _serde::__private::Some(
+                        match __A::next_value::<Quaternion>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_blendSpeed => {
+                    if _serde::__private::Option::is_some(&m_blendSpeed) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "blendSpeed",
+                            ),
+                        );
+                    }
+                    m_blendSpeed = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_minSpeedToSwitch => {
+                    if _serde::__private::Option::is_some(&m_minSpeedToSwitch) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "minSpeedToSwitch",
+                            ),
+                        );
+                    }
+                    m_minSpeedToSwitch = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_minSwitchTimeNoError => {
+                    if _serde::__private::Option::is_some(&m_minSwitchTimeNoError) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "minSwitchTimeNoError",
+                            ),
+                        );
+                    }
+                    m_minSwitchTimeNoError = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_minSwitchTimeFullError => {
+                    if _serde::__private::Option::is_some(&m_minSwitchTimeFullError) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "minSwitchTimeFullError",
+                            ),
+                        );
+                    }
+                    m_minSwitchTimeFullError = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_startPlayingEventId => {
+                    if _serde::__private::Option::is_some(&m_startPlayingEventId) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "startPlayingEventId",
+                            ),
+                        );
+                    }
+                    m_startPlayingEventId = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_startMatchingEventId => {
+                    if _serde::__private::Option::is_some(&m_startMatchingEventId) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "startMatchingEventId",
+                            ),
+                        );
+                    }
+                    m_startMatchingEventId = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_rootBoneIndex => {
+                    if _serde::__private::Option::is_some(&m_rootBoneIndex) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "rootBoneIndex",
+                            ),
+                        );
+                    }
+                    m_rootBoneIndex = _serde::__private::Some(
+                        match __A::next_value::<i16>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_otherBoneIndex => {
+                    if _serde::__private::Option::is_some(&m_otherBoneIndex) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "otherBoneIndex",
+                            ),
+                        );
+                    }
+                    m_otherBoneIndex = _serde::__private::Some(
+                        match __A::next_value::<i16>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_anotherBoneIndex => {
+                    if _serde::__private::Option::is_some(&m_anotherBoneIndex) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "anotherBoneIndex",
+                            ),
+                        );
+                    }
+                    m_anotherBoneIndex = _serde::__private::Some(
+                        match __A::next_value::<i16>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_pelvisIndex => {
+                    if _serde::__private::Option::is_some(&m_pelvisIndex) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "pelvisIndex",
+                            ),
+                        );
+                    }
+                    m_pelvisIndex = _serde::__private::Some(
+                        match __A::next_value::<i16>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_mode => {
+                    if _serde::__private::Option::is_some(&m_mode) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("mode"),
+                        );
+                    }
+                    m_mode = _serde::__private::Some(
+                        match __A::next_value::<Mode>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_worldFromModelRotation = match m_worldFromModelRotation {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "worldFromModelRotation",
+                    ),
+                );
+            }
+        };
+        let m_blendSpeed = match m_blendSpeed {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("blendSpeed"),
+                );
+            }
+        };
+        let m_minSpeedToSwitch = match m_minSpeedToSwitch {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("minSpeedToSwitch"),
+                );
+            }
+        };
+        let m_minSwitchTimeNoError = match m_minSwitchTimeNoError {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "minSwitchTimeNoError",
+                    ),
+                );
+            }
+        };
+        let m_minSwitchTimeFullError = match m_minSwitchTimeFullError {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "minSwitchTimeFullError",
+                    ),
+                );
+            }
+        };
+        let m_startPlayingEventId = match m_startPlayingEventId {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "startPlayingEventId",
+                    ),
+                );
+            }
+        };
+        let m_startMatchingEventId = match m_startMatchingEventId {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "startMatchingEventId",
+                    ),
+                );
+            }
+        };
+        let m_rootBoneIndex = match m_rootBoneIndex {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("rootBoneIndex"),
+                );
+            }
+        };
+        let m_otherBoneIndex = match m_otherBoneIndex {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("otherBoneIndex"),
+                );
+            }
+        };
+        let m_anotherBoneIndex = match m_anotherBoneIndex {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("anotherBoneIndex"),
+                );
+            }
+        };
+        let m_pelvisIndex = match m_pelvisIndex {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("pelvisIndex"),
+                );
+            }
+        };
+        let m_mode = match m_mode {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("mode"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbPoseMatchingGenerator {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_worldFromModelRotation,
+            m_blendSpeed,
+            m_minSpeedToSwitch,
+            m_minSwitchTimeNoError,
+            m_minSwitchTimeFullError,
+            m_startPlayingEventId,
+            m_startMatchingEventId,
+            m_rootBoneIndex,
+            m_otherBoneIndex,
+            m_anotherBoneIndex,
+            m_pelvisIndex,
+            m_mode,
+            ..Default::default()
+        })
+    }
+}
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for hkbPoseMatchingGenerator<'de> {
+        fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            const FIELDS: &[&str] = &[
+                "worldFromModelRotation",
+                "blendSpeed",
+                "minSpeedToSwitch",
+                "minSwitchTimeNoError",
+                "minSwitchTimeFullError",
+                "startPlayingEventId",
+                "startMatchingEventId",
+                "rootBoneIndex",
+                "otherBoneIndex",
+                "anotherBoneIndex",
+                "pelvisIndex",
+                "mode",
+                "currentMatch",
+                "bestMatch",
+                "timeSinceBetterMatch",
+                "error",
+                "resetCurrentMatchLocalTime",
+                "poseMatchingUtility",
+            ];
+            _serde::Deserializer::deserialize_struct(
+                deserializer,
+                "hkbPoseMatchingGenerator",
+                FIELDS,
+                __hkbPoseMatchingGeneratorVisitor {
+                    marker: _serde::__private::PhantomData::<hkbPoseMatchingGenerator>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};
 ///- size(C++): `TYPE_INT8`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]

@@ -93,3 +93,437 @@ const _: () = {
         }
     }
 };
+use havok_serde as _serde;
+#[allow(non_camel_case_types)]
+enum __Field {
+    m_currentMatch,
+    m_bestMatch,
+    m_timeSinceBetterMatch,
+    m_error,
+    m_resetCurrentMatchLocalTime,
+    __ignore,
+}
+struct __FieldVisitor;
+impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+    type Value = __Field;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "field identifier")
+    }
+    /// Intended for use in XML.
+    #[allow(clippy::match_single_binding)]
+    #[allow(clippy::reversed_empty_ranges)]
+    #[allow(clippy::single_match)]
+    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
+    where
+        __E: _serde::de::Error,
+    {
+        match __value {
+            "currentMatch" => Ok(__Field::m_currentMatch),
+            "bestMatch" => Ok(__Field::m_bestMatch),
+            "timeSinceBetterMatch" => Ok(__Field::m_timeSinceBetterMatch),
+            "error" => Ok(__Field::m_error),
+            "resetCurrentMatchLocalTime" => Ok(__Field::m_resetCurrentMatchLocalTime),
+            _ => Ok(__Field::__ignore),
+        }
+    }
+}
+impl<'de> _serde::Deserialize<'de> for __Field {
+    #[inline]
+    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
+    where
+        __D: _serde::Deserializer<'de>,
+    {
+        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+    }
+}
+pub(super) struct __hkbPoseMatchingGeneratorInternalStateVisitor<'de> {
+    marker: core::marker::PhantomData<hkbPoseMatchingGeneratorInternalState>,
+    lifetime: core::marker::PhantomData<&'de ()>,
+}
+impl<'de> __hkbPoseMatchingGeneratorInternalStateVisitor<'de> {
+    /// # Purpose of this method
+    /// To reproduce C++ field inheritance, we will have the field internal implementation
+    /// of deserialization partially exposed and reused.
+    #[inline]
+    pub(super) fn visit_as_parent<__A>(
+        __map: &mut __A,
+    ) -> _serde::__private::Result<hkbPoseMatchingGeneratorInternalState, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        _serde::de::Visitor::visit_struct(
+            Self {
+                marker: _serde::__private::PhantomData::<
+                    hkbPoseMatchingGeneratorInternalState,
+                >,
+                lifetime: _serde::__private::PhantomData,
+            },
+            __map,
+        )
+    }
+}
+#[allow(clippy::match_single_binding)]
+#[allow(clippy::reversed_empty_ranges)]
+#[allow(clippy::single_match)]
+impl<'de> _serde::de::Visitor<'de>
+for __hkbPoseMatchingGeneratorInternalStateVisitor<'de> {
+    type Value = hkbPoseMatchingGeneratorInternalState;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(
+            __formatter,
+            "struct hkbPoseMatchingGeneratorInternalState",
+        )
+    }
+    fn visit_struct_for_bytes<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __A::next_value(&mut __map)?;
+        let mut m_currentMatch: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_bestMatch: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_timeSinceBetterMatch: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_error: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_resetCurrentMatchLocalTime: _serde::__private::Option<bool> = _serde::__private::None;
+        for i in 0..5usize {
+            match i {
+                0usize => {
+                    if _serde::__private::Option::is_some(&m_currentMatch) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "currentMatch",
+                            ),
+                        );
+                    }
+                    m_currentMatch = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                1usize => {
+                    if _serde::__private::Option::is_some(&m_bestMatch) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bestMatch",
+                            ),
+                        );
+                    }
+                    m_bestMatch = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                2usize => {
+                    if _serde::__private::Option::is_some(&m_timeSinceBetterMatch) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "timeSinceBetterMatch",
+                            ),
+                        );
+                    }
+                    m_timeSinceBetterMatch = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                3usize => {
+                    if _serde::__private::Option::is_some(&m_error) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("error"),
+                        );
+                    }
+                    m_error = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                4usize => {
+                    if _serde::__private::Option::is_some(
+                        &m_resetCurrentMatchLocalTime,
+                    ) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "resetCurrentMatchLocalTime",
+                            ),
+                        );
+                    }
+                    m_resetCurrentMatchLocalTime = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        __A::pad(&mut __map, 3usize, 7usize)?;
+        let m_currentMatch = match m_currentMatch {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("currentMatch"),
+                );
+            }
+        };
+        let m_bestMatch = match m_bestMatch {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bestMatch"),
+                );
+            }
+        };
+        let m_timeSinceBetterMatch = match m_timeSinceBetterMatch {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "timeSinceBetterMatch",
+                    ),
+                );
+            }
+        };
+        let m_error = match m_error {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("error"),
+                );
+            }
+        };
+        let m_resetCurrentMatchLocalTime = match m_resetCurrentMatchLocalTime {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "resetCurrentMatchLocalTime",
+                    ),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbPoseMatchingGeneratorInternalState {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_currentMatch,
+            m_bestMatch,
+            m_timeSinceBetterMatch,
+            m_error,
+            m_resetCurrentMatchLocalTime,
+        })
+    }
+    fn visit_struct<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __hkReferencedObjectVisitor::visit_as_parent(&mut __map)?;
+        let mut m_currentMatch: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_bestMatch: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_timeSinceBetterMatch: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_error: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_resetCurrentMatchLocalTime: _serde::__private::Option<bool> = _serde::__private::None;
+        while let _serde::__private::Some(__key) = match __A::next_key::<
+            __Field,
+        >(&mut __map) {
+            _serde::__private::Ok(__val) => __val,
+            _serde::__private::Err(__err) => {
+                return _serde::__private::Err(__err);
+            }
+        } {
+            match __key {
+                __Field::m_currentMatch => {
+                    if _serde::__private::Option::is_some(&m_currentMatch) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "currentMatch",
+                            ),
+                        );
+                    }
+                    m_currentMatch = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_bestMatch => {
+                    if _serde::__private::Option::is_some(&m_bestMatch) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "bestMatch",
+                            ),
+                        );
+                    }
+                    m_bestMatch = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_timeSinceBetterMatch => {
+                    if _serde::__private::Option::is_some(&m_timeSinceBetterMatch) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "timeSinceBetterMatch",
+                            ),
+                        );
+                    }
+                    m_timeSinceBetterMatch = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_error => {
+                    if _serde::__private::Option::is_some(&m_error) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("error"),
+                        );
+                    }
+                    m_error = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_resetCurrentMatchLocalTime => {
+                    if _serde::__private::Option::is_some(
+                        &m_resetCurrentMatchLocalTime,
+                    ) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "resetCurrentMatchLocalTime",
+                            ),
+                        );
+                    }
+                    m_resetCurrentMatchLocalTime = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_currentMatch = match m_currentMatch {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("currentMatch"),
+                );
+            }
+        };
+        let m_bestMatch = match m_bestMatch {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("bestMatch"),
+                );
+            }
+        };
+        let m_timeSinceBetterMatch = match m_timeSinceBetterMatch {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "timeSinceBetterMatch",
+                    ),
+                );
+            }
+        };
+        let m_error = match m_error {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("error"),
+                );
+            }
+        };
+        let m_resetCurrentMatchLocalTime = match m_resetCurrentMatchLocalTime {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "resetCurrentMatchLocalTime",
+                    ),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbPoseMatchingGeneratorInternalState {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_currentMatch,
+            m_bestMatch,
+            m_timeSinceBetterMatch,
+            m_error,
+            m_resetCurrentMatchLocalTime,
+        })
+    }
+}
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for hkbPoseMatchingGeneratorInternalState {
+        fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            const FIELDS: &[&str] = &[
+                "currentMatch",
+                "bestMatch",
+                "timeSinceBetterMatch",
+                "error",
+                "resetCurrentMatchLocalTime",
+            ];
+            _serde::Deserializer::deserialize_struct(
+                deserializer,
+                "hkbPoseMatchingGeneratorInternalState",
+                FIELDS,
+                __hkbPoseMatchingGeneratorInternalStateVisitor {
+                    marker: _serde::__private::PhantomData::<
+                        hkbPoseMatchingGeneratorInternalState,
+                    >,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};

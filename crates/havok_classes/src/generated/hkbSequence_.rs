@@ -252,3 +252,782 @@ const _: () = {
         }
     }
 };
+use havok_serde as _serde;
+#[allow(non_camel_case_types)]
+enum __Field {
+    m_eventSequencedData,
+    m_realVariableSequencedData,
+    m_boolVariableSequencedData,
+    m_intVariableSequencedData,
+    m_enableEventId,
+    m_disableEventId,
+    m_stringData,
+    m_variableIdMap,
+    m_eventIdMap,
+    m_nextSampleEvents,
+    m_nextSampleReals,
+    m_nextSampleBools,
+    m_nextSampleInts,
+    m_time,
+    m_isEnabled,
+    __ignore,
+}
+struct __FieldVisitor;
+impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+    type Value = __Field;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "field identifier")
+    }
+    /// Intended for use in XML.
+    #[allow(clippy::match_single_binding)]
+    #[allow(clippy::reversed_empty_ranges)]
+    #[allow(clippy::single_match)]
+    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
+    where
+        __E: _serde::de::Error,
+    {
+        match __value {
+            "eventSequencedData" => Ok(__Field::m_eventSequencedData),
+            "realVariableSequencedData" => Ok(__Field::m_realVariableSequencedData),
+            "boolVariableSequencedData" => Ok(__Field::m_boolVariableSequencedData),
+            "intVariableSequencedData" => Ok(__Field::m_intVariableSequencedData),
+            "enableEventId" => Ok(__Field::m_enableEventId),
+            "disableEventId" => Ok(__Field::m_disableEventId),
+            "stringData" => Ok(__Field::m_stringData),
+            _ => Ok(__Field::__ignore),
+        }
+    }
+}
+impl<'de> _serde::Deserialize<'de> for __Field {
+    #[inline]
+    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
+    where
+        __D: _serde::Deserializer<'de>,
+    {
+        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+    }
+}
+pub(super) struct __hkbSequenceVisitor<'de> {
+    marker: core::marker::PhantomData<hkbSequence<'de>>,
+    lifetime: core::marker::PhantomData<&'de ()>,
+}
+impl<'de> __hkbSequenceVisitor<'de> {
+    /// # Purpose of this method
+    /// To reproduce C++ field inheritance, we will have the field internal implementation
+    /// of deserialization partially exposed and reused.
+    #[inline]
+    pub(super) fn visit_as_parent<__A>(
+        __map: &mut __A,
+    ) -> _serde::__private::Result<hkbSequence<'de>, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        _serde::de::Visitor::visit_struct(
+            Self {
+                marker: _serde::__private::PhantomData::<hkbSequence<'de>>,
+                lifetime: _serde::__private::PhantomData,
+            },
+            __map,
+        )
+    }
+}
+#[allow(clippy::match_single_binding)]
+#[allow(clippy::reversed_empty_ranges)]
+#[allow(clippy::single_match)]
+impl<'de> _serde::de::Visitor<'de> for __hkbSequenceVisitor<'de> {
+    type Value = hkbSequence<'de>;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "struct hkbSequence")
+    }
+    fn visit_struct_for_bytes<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __A::next_value(&mut __map)?;
+        let mut m_eventSequencedData: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+        let mut m_realVariableSequencedData: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+        let mut m_boolVariableSequencedData: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+        let mut m_intVariableSequencedData: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+        let mut m_enableEventId: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_disableEventId: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_stringData: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_variableIdMap: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_eventIdMap: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_nextSampleEvents: _serde::__private::Option<Vec<()>> = _serde::__private::None;
+        let mut m_nextSampleReals: _serde::__private::Option<Vec<()>> = _serde::__private::None;
+        let mut m_nextSampleBools: _serde::__private::Option<Vec<()>> = _serde::__private::None;
+        let mut m_nextSampleInts: _serde::__private::Option<Vec<()>> = _serde::__private::None;
+        let mut m_time: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_isEnabled: _serde::__private::Option<bool> = _serde::__private::None;
+        for i in 0..15usize {
+            match i {
+                0usize => {
+                    if _serde::__private::Option::is_some(&m_eventSequencedData) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "eventSequencedData",
+                            ),
+                        );
+                    }
+                    m_eventSequencedData = _serde::__private::Some(
+                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                1usize => {
+                    if _serde::__private::Option::is_some(&m_realVariableSequencedData) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "realVariableSequencedData",
+                            ),
+                        );
+                    }
+                    m_realVariableSequencedData = _serde::__private::Some(
+                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                2usize => {
+                    if _serde::__private::Option::is_some(&m_boolVariableSequencedData) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "boolVariableSequencedData",
+                            ),
+                        );
+                    }
+                    m_boolVariableSequencedData = _serde::__private::Some(
+                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                3usize => {
+                    if _serde::__private::Option::is_some(&m_intVariableSequencedData) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "intVariableSequencedData",
+                            ),
+                        );
+                    }
+                    m_intVariableSequencedData = _serde::__private::Some(
+                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                4usize => {
+                    if _serde::__private::Option::is_some(&m_enableEventId) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "enableEventId",
+                            ),
+                        );
+                    }
+                    m_enableEventId = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                5usize => {
+                    if _serde::__private::Option::is_some(&m_disableEventId) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "disableEventId",
+                            ),
+                        );
+                    }
+                    m_disableEventId = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                6usize => {
+                    if _serde::__private::Option::is_some(&m_stringData) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "stringData",
+                            ),
+                        );
+                    }
+                    m_stringData = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                7usize => {
+                    if _serde::__private::Option::is_some(&m_variableIdMap) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "variableIdMap",
+                            ),
+                        );
+                    }
+                    m_variableIdMap = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                8usize => {
+                    if _serde::__private::Option::is_some(&m_eventIdMap) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "eventIdMap",
+                            ),
+                        );
+                    }
+                    m_eventIdMap = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                9usize => {
+                    if _serde::__private::Option::is_some(&m_nextSampleEvents) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "nextSampleEvents",
+                            ),
+                        );
+                    }
+                    m_nextSampleEvents = _serde::__private::Some(
+                        match __A::next_value::<Vec<()>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                10usize => {
+                    if _serde::__private::Option::is_some(&m_nextSampleReals) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "nextSampleReals",
+                            ),
+                        );
+                    }
+                    m_nextSampleReals = _serde::__private::Some(
+                        match __A::next_value::<Vec<()>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                11usize => {
+                    if _serde::__private::Option::is_some(&m_nextSampleBools) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "nextSampleBools",
+                            ),
+                        );
+                    }
+                    m_nextSampleBools = _serde::__private::Some(
+                        match __A::next_value::<Vec<()>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                12usize => {
+                    if _serde::__private::Option::is_some(&m_nextSampleInts) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "nextSampleInts",
+                            ),
+                        );
+                    }
+                    m_nextSampleInts = _serde::__private::Some(
+                        match __A::next_value::<Vec<()>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                13usize => {
+                    if _serde::__private::Option::is_some(&m_time) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("time"),
+                        );
+                    }
+                    m_time = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                14usize => {
+                    if _serde::__private::Option::is_some(&m_isEnabled) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "isEnabled",
+                            ),
+                        );
+                    }
+                    m_isEnabled = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        __A::pad(&mut __map, 3usize, 3usize)?;
+        let m_eventSequencedData = match m_eventSequencedData {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "eventSequencedData",
+                    ),
+                );
+            }
+        };
+        let m_realVariableSequencedData = match m_realVariableSequencedData {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "realVariableSequencedData",
+                    ),
+                );
+            }
+        };
+        let m_boolVariableSequencedData = match m_boolVariableSequencedData {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "boolVariableSequencedData",
+                    ),
+                );
+            }
+        };
+        let m_intVariableSequencedData = match m_intVariableSequencedData {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "intVariableSequencedData",
+                    ),
+                );
+            }
+        };
+        let m_enableEventId = match m_enableEventId {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("enableEventId"),
+                );
+            }
+        };
+        let m_disableEventId = match m_disableEventId {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("disableEventId"),
+                );
+            }
+        };
+        let m_stringData = match m_stringData {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("stringData"),
+                );
+            }
+        };
+        let m_variableIdMap = match m_variableIdMap {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("variableIdMap"),
+                );
+            }
+        };
+        let m_eventIdMap = match m_eventIdMap {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("eventIdMap"),
+                );
+            }
+        };
+        let m_nextSampleEvents = match m_nextSampleEvents {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("nextSampleEvents"),
+                );
+            }
+        };
+        let m_nextSampleReals = match m_nextSampleReals {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("nextSampleReals"),
+                );
+            }
+        };
+        let m_nextSampleBools = match m_nextSampleBools {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("nextSampleBools"),
+                );
+            }
+        };
+        let m_nextSampleInts = match m_nextSampleInts {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("nextSampleInts"),
+                );
+            }
+        };
+        let m_time = match m_time {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("time"),
+                );
+            }
+        };
+        let m_isEnabled = match m_isEnabled {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("isEnabled"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbSequence {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_eventSequencedData,
+            m_realVariableSequencedData,
+            m_boolVariableSequencedData,
+            m_intVariableSequencedData,
+            m_enableEventId,
+            m_disableEventId,
+            m_stringData,
+            m_variableIdMap,
+            m_eventIdMap,
+            m_nextSampleEvents,
+            m_nextSampleReals,
+            m_nextSampleBools,
+            m_nextSampleInts,
+            m_time,
+            m_isEnabled,
+        })
+    }
+    fn visit_struct<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __hkbModifierVisitor::visit_as_parent(&mut __map)?;
+        let mut m_eventSequencedData: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+        let mut m_realVariableSequencedData: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+        let mut m_boolVariableSequencedData: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+        let mut m_intVariableSequencedData: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+        let mut m_enableEventId: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_disableEventId: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_stringData: _serde::__private::Option<Pointer> = _serde::__private::None;
+        while let _serde::__private::Some(__key) = match __A::next_key::<
+            __Field,
+        >(&mut __map) {
+            _serde::__private::Ok(__val) => __val,
+            _serde::__private::Err(__err) => {
+                return _serde::__private::Err(__err);
+            }
+        } {
+            match __key {
+                __Field::m_eventSequencedData => {
+                    if _serde::__private::Option::is_some(&m_eventSequencedData) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "eventSequencedData",
+                            ),
+                        );
+                    }
+                    m_eventSequencedData = _serde::__private::Some(
+                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_realVariableSequencedData => {
+                    if _serde::__private::Option::is_some(&m_realVariableSequencedData) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "realVariableSequencedData",
+                            ),
+                        );
+                    }
+                    m_realVariableSequencedData = _serde::__private::Some(
+                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_boolVariableSequencedData => {
+                    if _serde::__private::Option::is_some(&m_boolVariableSequencedData) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "boolVariableSequencedData",
+                            ),
+                        );
+                    }
+                    m_boolVariableSequencedData = _serde::__private::Some(
+                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_intVariableSequencedData => {
+                    if _serde::__private::Option::is_some(&m_intVariableSequencedData) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "intVariableSequencedData",
+                            ),
+                        );
+                    }
+                    m_intVariableSequencedData = _serde::__private::Some(
+                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_enableEventId => {
+                    if _serde::__private::Option::is_some(&m_enableEventId) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "enableEventId",
+                            ),
+                        );
+                    }
+                    m_enableEventId = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_disableEventId => {
+                    if _serde::__private::Option::is_some(&m_disableEventId) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "disableEventId",
+                            ),
+                        );
+                    }
+                    m_disableEventId = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_stringData => {
+                    if _serde::__private::Option::is_some(&m_stringData) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "stringData",
+                            ),
+                        );
+                    }
+                    m_stringData = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_eventSequencedData = match m_eventSequencedData {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "eventSequencedData",
+                    ),
+                );
+            }
+        };
+        let m_realVariableSequencedData = match m_realVariableSequencedData {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "realVariableSequencedData",
+                    ),
+                );
+            }
+        };
+        let m_boolVariableSequencedData = match m_boolVariableSequencedData {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "boolVariableSequencedData",
+                    ),
+                );
+            }
+        };
+        let m_intVariableSequencedData = match m_intVariableSequencedData {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "intVariableSequencedData",
+                    ),
+                );
+            }
+        };
+        let m_enableEventId = match m_enableEventId {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("enableEventId"),
+                );
+            }
+        };
+        let m_disableEventId = match m_disableEventId {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("disableEventId"),
+                );
+            }
+        };
+        let m_stringData = match m_stringData {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("stringData"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbSequence {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_eventSequencedData,
+            m_realVariableSequencedData,
+            m_boolVariableSequencedData,
+            m_intVariableSequencedData,
+            m_enableEventId,
+            m_disableEventId,
+            m_stringData,
+            ..Default::default()
+        })
+    }
+}
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for hkbSequence<'de> {
+        fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            const FIELDS: &[&str] = &[
+                "eventSequencedData",
+                "realVariableSequencedData",
+                "boolVariableSequencedData",
+                "intVariableSequencedData",
+                "enableEventId",
+                "disableEventId",
+                "stringData",
+                "variableIdMap",
+                "eventIdMap",
+                "nextSampleEvents",
+                "nextSampleReals",
+                "nextSampleBools",
+                "nextSampleInts",
+                "time",
+                "isEnabled",
+            ];
+            _serde::Deserializer::deserialize_struct(
+                deserializer,
+                "hkbSequence",
+                FIELDS,
+                __hkbSequenceVisitor {
+                    marker: _serde::__private::PhantomData::<hkbSequence>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};

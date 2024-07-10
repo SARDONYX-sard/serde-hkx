@@ -122,3 +122,364 @@ const _: () = {
         }
     }
 };
+use havok_serde as _serde;
+#[allow(non_camel_case_types)]
+enum __Field {
+    m_targetPosition,
+    m_distance,
+    m_distanceTrigger,
+    m_triggerEvent,
+    __ignore,
+}
+struct __FieldVisitor;
+impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+    type Value = __Field;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "field identifier")
+    }
+    /// Intended for use in XML.
+    #[allow(clippy::match_single_binding)]
+    #[allow(clippy::reversed_empty_ranges)]
+    #[allow(clippy::single_match)]
+    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
+    where
+        __E: _serde::de::Error,
+    {
+        match __value {
+            "targetPosition" => Ok(__Field::m_targetPosition),
+            "distance" => Ok(__Field::m_distance),
+            "distanceTrigger" => Ok(__Field::m_distanceTrigger),
+            "triggerEvent" => Ok(__Field::m_triggerEvent),
+            _ => Ok(__Field::__ignore),
+        }
+    }
+}
+impl<'de> _serde::Deserialize<'de> for __Field {
+    #[inline]
+    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
+    where
+        __D: _serde::Deserializer<'de>,
+    {
+        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+    }
+}
+pub(super) struct __BSDistTriggerModifierVisitor<'de> {
+    marker: core::marker::PhantomData<BSDistTriggerModifier<'de>>,
+    lifetime: core::marker::PhantomData<&'de ()>,
+}
+impl<'de> __BSDistTriggerModifierVisitor<'de> {
+    /// # Purpose of this method
+    /// To reproduce C++ field inheritance, we will have the field internal implementation
+    /// of deserialization partially exposed and reused.
+    #[inline]
+    pub(super) fn visit_as_parent<__A>(
+        __map: &mut __A,
+    ) -> _serde::__private::Result<BSDistTriggerModifier<'de>, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        _serde::de::Visitor::visit_struct(
+            Self {
+                marker: _serde::__private::PhantomData::<BSDistTriggerModifier<'de>>,
+                lifetime: _serde::__private::PhantomData,
+            },
+            __map,
+        )
+    }
+}
+#[allow(clippy::match_single_binding)]
+#[allow(clippy::reversed_empty_ranges)]
+#[allow(clippy::single_match)]
+impl<'de> _serde::de::Visitor<'de> for __BSDistTriggerModifierVisitor<'de> {
+    type Value = BSDistTriggerModifier<'de>;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "struct BSDistTriggerModifier")
+    }
+    fn visit_struct_for_bytes<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __A::next_value(&mut __map)?;
+        let mut m_targetPosition: _serde::__private::Option<Vector4> = _serde::__private::None;
+        let mut m_distance: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_distanceTrigger: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_triggerEvent: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
+        for i in 0..4usize {
+            match i {
+                0usize => {
+                    if _serde::__private::Option::is_some(&m_targetPosition) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "targetPosition",
+                            ),
+                        );
+                    }
+                    m_targetPosition = _serde::__private::Some(
+                        match __A::next_value::<Vector4>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                1usize => {
+                    if _serde::__private::Option::is_some(&m_distance) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "distance",
+                            ),
+                        );
+                    }
+                    m_distance = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                2usize => {
+                    if _serde::__private::Option::is_some(&m_distanceTrigger) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "distanceTrigger",
+                            ),
+                        );
+                    }
+                    m_distanceTrigger = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                3usize => {
+                    if _serde::__private::Option::is_some(&m_triggerEvent) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "triggerEvent",
+                            ),
+                        );
+                    }
+                    m_triggerEvent = _serde::__private::Some(
+                        match __A::next_value::<hkbEventProperty>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        __A::pad(&mut __map, 0usize, 8usize)?;
+        let m_targetPosition = match m_targetPosition {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("targetPosition"),
+                );
+            }
+        };
+        let m_distance = match m_distance {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("distance"),
+                );
+            }
+        };
+        let m_distanceTrigger = match m_distanceTrigger {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("distanceTrigger"),
+                );
+            }
+        };
+        let m_triggerEvent = match m_triggerEvent {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("triggerEvent"),
+                );
+            }
+        };
+        _serde::__private::Ok(BSDistTriggerModifier {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_targetPosition,
+            m_distance,
+            m_distanceTrigger,
+            m_triggerEvent,
+        })
+    }
+    fn visit_struct<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __hkbModifierVisitor::visit_as_parent(&mut __map)?;
+        let mut m_targetPosition: _serde::__private::Option<Vector4> = _serde::__private::None;
+        let mut m_distance: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_distanceTrigger: _serde::__private::Option<f32> = _serde::__private::None;
+        let mut m_triggerEvent: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
+        while let _serde::__private::Some(__key) = match __A::next_key::<
+            __Field,
+        >(&mut __map) {
+            _serde::__private::Ok(__val) => __val,
+            _serde::__private::Err(__err) => {
+                return _serde::__private::Err(__err);
+            }
+        } {
+            match __key {
+                __Field::m_targetPosition => {
+                    if _serde::__private::Option::is_some(&m_targetPosition) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "targetPosition",
+                            ),
+                        );
+                    }
+                    m_targetPosition = _serde::__private::Some(
+                        match __A::next_value::<Vector4>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_distance => {
+                    if _serde::__private::Option::is_some(&m_distance) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "distance",
+                            ),
+                        );
+                    }
+                    m_distance = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_distanceTrigger => {
+                    if _serde::__private::Option::is_some(&m_distanceTrigger) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "distanceTrigger",
+                            ),
+                        );
+                    }
+                    m_distanceTrigger = _serde::__private::Some(
+                        match __A::next_value::<f32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_triggerEvent => {
+                    if _serde::__private::Option::is_some(&m_triggerEvent) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "triggerEvent",
+                            ),
+                        );
+                    }
+                    m_triggerEvent = _serde::__private::Some(
+                        match __A::next_value::<hkbEventProperty>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_targetPosition = match m_targetPosition {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("targetPosition"),
+                );
+            }
+        };
+        let m_distance = match m_distance {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("distance"),
+                );
+            }
+        };
+        let m_distanceTrigger = match m_distanceTrigger {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("distanceTrigger"),
+                );
+            }
+        };
+        let m_triggerEvent = match m_triggerEvent {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("triggerEvent"),
+                );
+            }
+        };
+        _serde::__private::Ok(BSDistTriggerModifier {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_targetPosition,
+            m_distance,
+            m_distanceTrigger,
+            m_triggerEvent,
+        })
+    }
+}
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for BSDistTriggerModifier<'de> {
+        fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            const FIELDS: &[&str] = &[
+                "targetPosition",
+                "distance",
+                "distanceTrigger",
+                "triggerEvent",
+            ];
+            _serde::Deserializer::deserialize_struct(
+                deserializer,
+                "BSDistTriggerModifier",
+                FIELDS,
+                __BSDistTriggerModifierVisitor {
+                    marker: _serde::__private::PhantomData::<BSDistTriggerModifier>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};

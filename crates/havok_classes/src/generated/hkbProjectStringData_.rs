@@ -159,3 +159,629 @@ const _: () = {
         }
     }
 };
+use havok_serde as _serde;
+#[allow(non_camel_case_types)]
+enum __Field {
+    m_animationFilenames,
+    m_behaviorFilenames,
+    m_characterFilenames,
+    m_eventNames,
+    m_animationPath,
+    m_behaviorPath,
+    m_characterPath,
+    m_fullPathToSource,
+    m_rootPath,
+    __ignore,
+}
+struct __FieldVisitor;
+impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+    type Value = __Field;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "field identifier")
+    }
+    /// Intended for use in XML.
+    #[allow(clippy::match_single_binding)]
+    #[allow(clippy::reversed_empty_ranges)]
+    #[allow(clippy::single_match)]
+    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
+    where
+        __E: _serde::de::Error,
+    {
+        match __value {
+            "animationFilenames" => Ok(__Field::m_animationFilenames),
+            "behaviorFilenames" => Ok(__Field::m_behaviorFilenames),
+            "characterFilenames" => Ok(__Field::m_characterFilenames),
+            "eventNames" => Ok(__Field::m_eventNames),
+            "animationPath" => Ok(__Field::m_animationPath),
+            "behaviorPath" => Ok(__Field::m_behaviorPath),
+            "characterPath" => Ok(__Field::m_characterPath),
+            "fullPathToSource" => Ok(__Field::m_fullPathToSource),
+            _ => Ok(__Field::__ignore),
+        }
+    }
+}
+impl<'de> _serde::Deserialize<'de> for __Field {
+    #[inline]
+    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
+    where
+        __D: _serde::Deserializer<'de>,
+    {
+        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+    }
+}
+pub(super) struct __hkbProjectStringDataVisitor<'de> {
+    marker: core::marker::PhantomData<hkbProjectStringData<'de>>,
+    lifetime: core::marker::PhantomData<&'de ()>,
+}
+impl<'de> __hkbProjectStringDataVisitor<'de> {
+    /// # Purpose of this method
+    /// To reproduce C++ field inheritance, we will have the field internal implementation
+    /// of deserialization partially exposed and reused.
+    #[inline]
+    pub(super) fn visit_as_parent<__A>(
+        __map: &mut __A,
+    ) -> _serde::__private::Result<hkbProjectStringData<'de>, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        _serde::de::Visitor::visit_struct(
+            Self {
+                marker: _serde::__private::PhantomData::<hkbProjectStringData<'de>>,
+                lifetime: _serde::__private::PhantomData,
+            },
+            __map,
+        )
+    }
+}
+#[allow(clippy::match_single_binding)]
+#[allow(clippy::reversed_empty_ranges)]
+#[allow(clippy::single_match)]
+impl<'de> _serde::de::Visitor<'de> for __hkbProjectStringDataVisitor<'de> {
+    type Value = hkbProjectStringData<'de>;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "struct hkbProjectStringData")
+    }
+    fn visit_struct_for_bytes<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __A::next_value(&mut __map)?;
+        let mut m_animationFilenames: _serde::__private::Option<Vec<StringPtr<'de>>> = _serde::__private::None;
+        let mut m_behaviorFilenames: _serde::__private::Option<Vec<StringPtr<'de>>> = _serde::__private::None;
+        let mut m_characterFilenames: _serde::__private::Option<Vec<StringPtr<'de>>> = _serde::__private::None;
+        let mut m_eventNames: _serde::__private::Option<Vec<StringPtr<'de>>> = _serde::__private::None;
+        let mut m_animationPath: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+        let mut m_behaviorPath: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+        let mut m_characterPath: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+        let mut m_fullPathToSource: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+        let mut m_rootPath: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+        for i in 0..9usize {
+            match i {
+                0usize => {
+                    if _serde::__private::Option::is_some(&m_animationFilenames) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "animationFilenames",
+                            ),
+                        );
+                    }
+                    m_animationFilenames = _serde::__private::Some(
+                        match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                1usize => {
+                    if _serde::__private::Option::is_some(&m_behaviorFilenames) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "behaviorFilenames",
+                            ),
+                        );
+                    }
+                    m_behaviorFilenames = _serde::__private::Some(
+                        match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                2usize => {
+                    if _serde::__private::Option::is_some(&m_characterFilenames) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "characterFilenames",
+                            ),
+                        );
+                    }
+                    m_characterFilenames = _serde::__private::Some(
+                        match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                3usize => {
+                    if _serde::__private::Option::is_some(&m_eventNames) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "eventNames",
+                            ),
+                        );
+                    }
+                    m_eventNames = _serde::__private::Some(
+                        match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                4usize => {
+                    if _serde::__private::Option::is_some(&m_animationPath) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "animationPath",
+                            ),
+                        );
+                    }
+                    m_animationPath = _serde::__private::Some(
+                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                5usize => {
+                    if _serde::__private::Option::is_some(&m_behaviorPath) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "behaviorPath",
+                            ),
+                        );
+                    }
+                    m_behaviorPath = _serde::__private::Some(
+                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                6usize => {
+                    if _serde::__private::Option::is_some(&m_characterPath) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "characterPath",
+                            ),
+                        );
+                    }
+                    m_characterPath = _serde::__private::Some(
+                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                7usize => {
+                    if _serde::__private::Option::is_some(&m_fullPathToSource) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "fullPathToSource",
+                            ),
+                        );
+                    }
+                    m_fullPathToSource = _serde::__private::Some(
+                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                8usize => {
+                    if _serde::__private::Option::is_some(&m_rootPath) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "rootPath",
+                            ),
+                        );
+                    }
+                    m_rootPath = _serde::__private::Some(
+                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_animationFilenames = match m_animationFilenames {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "animationFilenames",
+                    ),
+                );
+            }
+        };
+        let m_behaviorFilenames = match m_behaviorFilenames {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("behaviorFilenames"),
+                );
+            }
+        };
+        let m_characterFilenames = match m_characterFilenames {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "characterFilenames",
+                    ),
+                );
+            }
+        };
+        let m_eventNames = match m_eventNames {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("eventNames"),
+                );
+            }
+        };
+        let m_animationPath = match m_animationPath {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("animationPath"),
+                );
+            }
+        };
+        let m_behaviorPath = match m_behaviorPath {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("behaviorPath"),
+                );
+            }
+        };
+        let m_characterPath = match m_characterPath {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("characterPath"),
+                );
+            }
+        };
+        let m_fullPathToSource = match m_fullPathToSource {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("fullPathToSource"),
+                );
+            }
+        };
+        let m_rootPath = match m_rootPath {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("rootPath"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbProjectStringData {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_animationFilenames,
+            m_behaviorFilenames,
+            m_characterFilenames,
+            m_eventNames,
+            m_animationPath,
+            m_behaviorPath,
+            m_characterPath,
+            m_fullPathToSource,
+            m_rootPath,
+        })
+    }
+    fn visit_struct<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __hkReferencedObjectVisitor::visit_as_parent(&mut __map)?;
+        let mut m_animationFilenames: _serde::__private::Option<Vec<StringPtr<'de>>> = _serde::__private::None;
+        let mut m_behaviorFilenames: _serde::__private::Option<Vec<StringPtr<'de>>> = _serde::__private::None;
+        let mut m_characterFilenames: _serde::__private::Option<Vec<StringPtr<'de>>> = _serde::__private::None;
+        let mut m_eventNames: _serde::__private::Option<Vec<StringPtr<'de>>> = _serde::__private::None;
+        let mut m_animationPath: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+        let mut m_behaviorPath: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+        let mut m_characterPath: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+        let mut m_fullPathToSource: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+        while let _serde::__private::Some(__key) = match __A::next_key::<
+            __Field,
+        >(&mut __map) {
+            _serde::__private::Ok(__val) => __val,
+            _serde::__private::Err(__err) => {
+                return _serde::__private::Err(__err);
+            }
+        } {
+            match __key {
+                __Field::m_animationFilenames => {
+                    if _serde::__private::Option::is_some(&m_animationFilenames) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "animationFilenames",
+                            ),
+                        );
+                    }
+                    m_animationFilenames = _serde::__private::Some(
+                        match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_behaviorFilenames => {
+                    if _serde::__private::Option::is_some(&m_behaviorFilenames) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "behaviorFilenames",
+                            ),
+                        );
+                    }
+                    m_behaviorFilenames = _serde::__private::Some(
+                        match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_characterFilenames => {
+                    if _serde::__private::Option::is_some(&m_characterFilenames) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "characterFilenames",
+                            ),
+                        );
+                    }
+                    m_characterFilenames = _serde::__private::Some(
+                        match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_eventNames => {
+                    if _serde::__private::Option::is_some(&m_eventNames) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "eventNames",
+                            ),
+                        );
+                    }
+                    m_eventNames = _serde::__private::Some(
+                        match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_animationPath => {
+                    if _serde::__private::Option::is_some(&m_animationPath) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "animationPath",
+                            ),
+                        );
+                    }
+                    m_animationPath = _serde::__private::Some(
+                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_behaviorPath => {
+                    if _serde::__private::Option::is_some(&m_behaviorPath) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "behaviorPath",
+                            ),
+                        );
+                    }
+                    m_behaviorPath = _serde::__private::Some(
+                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_characterPath => {
+                    if _serde::__private::Option::is_some(&m_characterPath) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "characterPath",
+                            ),
+                        );
+                    }
+                    m_characterPath = _serde::__private::Some(
+                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_fullPathToSource => {
+                    if _serde::__private::Option::is_some(&m_fullPathToSource) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "fullPathToSource",
+                            ),
+                        );
+                    }
+                    m_fullPathToSource = _serde::__private::Some(
+                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_animationFilenames = match m_animationFilenames {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "animationFilenames",
+                    ),
+                );
+            }
+        };
+        let m_behaviorFilenames = match m_behaviorFilenames {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("behaviorFilenames"),
+                );
+            }
+        };
+        let m_characterFilenames = match m_characterFilenames {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "characterFilenames",
+                    ),
+                );
+            }
+        };
+        let m_eventNames = match m_eventNames {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("eventNames"),
+                );
+            }
+        };
+        let m_animationPath = match m_animationPath {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("animationPath"),
+                );
+            }
+        };
+        let m_behaviorPath = match m_behaviorPath {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("behaviorPath"),
+                );
+            }
+        };
+        let m_characterPath = match m_characterPath {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("characterPath"),
+                );
+            }
+        };
+        let m_fullPathToSource = match m_fullPathToSource {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("fullPathToSource"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbProjectStringData {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_animationFilenames,
+            m_behaviorFilenames,
+            m_characterFilenames,
+            m_eventNames,
+            m_animationPath,
+            m_behaviorPath,
+            m_characterPath,
+            m_fullPathToSource,
+            ..Default::default()
+        })
+    }
+}
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for hkbProjectStringData<'de> {
+        fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            const FIELDS: &[&str] = &[
+                "animationFilenames",
+                "behaviorFilenames",
+                "characterFilenames",
+                "eventNames",
+                "animationPath",
+                "behaviorPath",
+                "characterPath",
+                "fullPathToSource",
+                "rootPath",
+            ];
+            _serde::Deserializer::deserialize_struct(
+                deserializer,
+                "hkbProjectStringData",
+                FIELDS,
+                __hkbProjectStringDataVisitor {
+                    marker: _serde::__private::PhantomData::<hkbProjectStringData>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};

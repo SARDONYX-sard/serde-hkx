@@ -145,6 +145,717 @@ const _: () = {
         }
     }
 };
+use havok_serde as _serde;
+#[allow(non_camel_case_types)]
+enum __Field {
+    m_owner,
+    m_data,
+    m_constraintModifiers,
+    m_entities,
+    m_priority,
+    m_wantRuntime,
+    m_destructionRemapInfo,
+    m_listeners,
+    m_name,
+    m_userData,
+    m_internal,
+    m_uid,
+    __ignore,
+}
+struct __FieldVisitor;
+impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+    type Value = __Field;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "field identifier")
+    }
+    /// Intended for use in XML.
+    #[allow(clippy::match_single_binding)]
+    #[allow(clippy::reversed_empty_ranges)]
+    #[allow(clippy::single_match)]
+    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
+    where
+        __E: _serde::de::Error,
+    {
+        match __value {
+            "data" => Ok(__Field::m_data),
+            "constraintModifiers" => Ok(__Field::m_constraintModifiers),
+            "entities" => Ok(__Field::m_entities),
+            "priority" => Ok(__Field::m_priority),
+            "wantRuntime" => Ok(__Field::m_wantRuntime),
+            "destructionRemapInfo" => Ok(__Field::m_destructionRemapInfo),
+            "name" => Ok(__Field::m_name),
+            "userData" => Ok(__Field::m_userData),
+            _ => Ok(__Field::__ignore),
+        }
+    }
+}
+impl<'de> _serde::Deserialize<'de> for __Field {
+    #[inline]
+    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
+    where
+        __D: _serde::Deserializer<'de>,
+    {
+        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+    }
+}
+pub(super) struct __hkpConstraintInstanceVisitor<'de> {
+    marker: core::marker::PhantomData<hkpConstraintInstance<'de>>,
+    lifetime: core::marker::PhantomData<&'de ()>,
+}
+impl<'de> __hkpConstraintInstanceVisitor<'de> {
+    /// # Purpose of this method
+    /// To reproduce C++ field inheritance, we will have the field internal implementation
+    /// of deserialization partially exposed and reused.
+    #[inline]
+    pub(super) fn visit_as_parent<__A>(
+        __map: &mut __A,
+    ) -> _serde::__private::Result<hkpConstraintInstance<'de>, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        _serde::de::Visitor::visit_struct(
+            Self {
+                marker: _serde::__private::PhantomData::<hkpConstraintInstance<'de>>,
+                lifetime: _serde::__private::PhantomData,
+            },
+            __map,
+        )
+    }
+}
+#[allow(clippy::match_single_binding)]
+#[allow(clippy::reversed_empty_ranges)]
+#[allow(clippy::single_match)]
+impl<'de> _serde::de::Visitor<'de> for __hkpConstraintInstanceVisitor<'de> {
+    type Value = hkpConstraintInstance<'de>;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "struct hkpConstraintInstance")
+    }
+    fn visit_struct_for_bytes<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __A::next_value(&mut __map)?;
+        let mut m_owner: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_data: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_constraintModifiers: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_entities: _serde::__private::Option<[Pointer; 2usize]> = _serde::__private::None;
+        let mut m_priority: _serde::__private::Option<ConstraintPriority> = _serde::__private::None;
+        let mut m_wantRuntime: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_destructionRemapInfo: _serde::__private::Option<
+            OnDestructionRemapInfo,
+        > = _serde::__private::None;
+        let mut m_listeners: _serde::__private::Option<
+            hkpConstraintInstanceSmallArraySerializeOverrideType,
+        > = _serde::__private::None;
+        let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+        let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
+        let mut m_internal: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_uid: _serde::__private::Option<u32> = _serde::__private::None;
+        for i in 0..12usize {
+            match i {
+                0usize => {
+                    if _serde::__private::Option::is_some(&m_owner) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("owner"),
+                        );
+                    }
+                    m_owner = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                1usize => {
+                    if _serde::__private::Option::is_some(&m_data) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("data"),
+                        );
+                    }
+                    m_data = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                2usize => {
+                    if _serde::__private::Option::is_some(&m_constraintModifiers) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "constraintModifiers",
+                            ),
+                        );
+                    }
+                    m_constraintModifiers = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                3usize => {
+                    if _serde::__private::Option::is_some(&m_entities) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "entities",
+                            ),
+                        );
+                    }
+                    m_entities = _serde::__private::Some(
+                        match __A::next_value::<[Pointer; 2usize]>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                4usize => {
+                    if _serde::__private::Option::is_some(&m_priority) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "priority",
+                            ),
+                        );
+                    }
+                    m_priority = _serde::__private::Some(
+                        match __A::next_value::<ConstraintPriority>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                5usize => {
+                    if _serde::__private::Option::is_some(&m_wantRuntime) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "wantRuntime",
+                            ),
+                        );
+                    }
+                    m_wantRuntime = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                6usize => {
+                    if _serde::__private::Option::is_some(&m_destructionRemapInfo) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "destructionRemapInfo",
+                            ),
+                        );
+                    }
+                    m_destructionRemapInfo = _serde::__private::Some(
+                        match __A::next_value::<OnDestructionRemapInfo>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                7usize => {
+                    if _serde::__private::Option::is_some(&m_listeners) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "listeners",
+                            ),
+                        );
+                    }
+                    __A::pad(&mut __map, 1usize, 5usize)?;
+                    m_listeners = _serde::__private::Some(
+                        match __A::next_value::<
+                            hkpConstraintInstanceSmallArraySerializeOverrideType,
+                        >(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                8usize => {
+                    if _serde::__private::Option::is_some(&m_name) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                        );
+                    }
+                    m_name = _serde::__private::Some(
+                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                9usize => {
+                    if _serde::__private::Option::is_some(&m_userData) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "userData",
+                            ),
+                        );
+                    }
+                    m_userData = _serde::__private::Some(
+                        match __A::next_value::<u64>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                10usize => {
+                    if _serde::__private::Option::is_some(&m_internal) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "internal",
+                            ),
+                        );
+                    }
+                    m_internal = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                11usize => {
+                    if _serde::__private::Option::is_some(&m_uid) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("uid"),
+                        );
+                    }
+                    m_uid = _serde::__private::Some(
+                        match __A::next_value::<u32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        __A::pad(&mut __map, 0usize, 4usize)?;
+        let m_owner = match m_owner {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("owner"),
+                );
+            }
+        };
+        let m_data = match m_data {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("data"),
+                );
+            }
+        };
+        let m_constraintModifiers = match m_constraintModifiers {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "constraintModifiers",
+                    ),
+                );
+            }
+        };
+        let m_entities = match m_entities {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("entities"),
+                );
+            }
+        };
+        let m_priority = match m_priority {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("priority"),
+                );
+            }
+        };
+        let m_wantRuntime = match m_wantRuntime {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("wantRuntime"),
+                );
+            }
+        };
+        let m_destructionRemapInfo = match m_destructionRemapInfo {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "destructionRemapInfo",
+                    ),
+                );
+            }
+        };
+        let m_listeners = match m_listeners {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("listeners"),
+                );
+            }
+        };
+        let m_name = match m_name {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("name"),
+                );
+            }
+        };
+        let m_userData = match m_userData {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("userData"),
+                );
+            }
+        };
+        let m_internal = match m_internal {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("internal"),
+                );
+            }
+        };
+        let m_uid = match m_uid {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("uid"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkpConstraintInstance {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_owner,
+            m_data,
+            m_constraintModifiers,
+            m_entities,
+            m_priority,
+            m_wantRuntime,
+            m_destructionRemapInfo,
+            m_listeners,
+            m_name,
+            m_userData,
+            m_internal,
+            m_uid,
+        })
+    }
+    fn visit_struct<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let parent = __hkReferencedObjectVisitor::visit_as_parent(&mut __map)?;
+        let mut m_data: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_constraintModifiers: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_entities: _serde::__private::Option<[Pointer; 2usize]> = _serde::__private::None;
+        let mut m_priority: _serde::__private::Option<ConstraintPriority> = _serde::__private::None;
+        let mut m_wantRuntime: _serde::__private::Option<bool> = _serde::__private::None;
+        let mut m_destructionRemapInfo: _serde::__private::Option<
+            OnDestructionRemapInfo,
+        > = _serde::__private::None;
+        let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+        let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
+        while let _serde::__private::Some(__key) = match __A::next_key::<
+            __Field,
+        >(&mut __map) {
+            _serde::__private::Ok(__val) => __val,
+            _serde::__private::Err(__err) => {
+                return _serde::__private::Err(__err);
+            }
+        } {
+            match __key {
+                __Field::m_data => {
+                    if _serde::__private::Option::is_some(&m_data) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("data"),
+                        );
+                    }
+                    m_data = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_constraintModifiers => {
+                    if _serde::__private::Option::is_some(&m_constraintModifiers) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "constraintModifiers",
+                            ),
+                        );
+                    }
+                    m_constraintModifiers = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_entities => {
+                    if _serde::__private::Option::is_some(&m_entities) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "entities",
+                            ),
+                        );
+                    }
+                    m_entities = _serde::__private::Some(
+                        match __A::next_value::<[Pointer; 2usize]>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_priority => {
+                    if _serde::__private::Option::is_some(&m_priority) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "priority",
+                            ),
+                        );
+                    }
+                    m_priority = _serde::__private::Some(
+                        match __A::next_value::<ConstraintPriority>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_wantRuntime => {
+                    if _serde::__private::Option::is_some(&m_wantRuntime) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "wantRuntime",
+                            ),
+                        );
+                    }
+                    m_wantRuntime = _serde::__private::Some(
+                        match __A::next_value::<bool>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_destructionRemapInfo => {
+                    if _serde::__private::Option::is_some(&m_destructionRemapInfo) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "destructionRemapInfo",
+                            ),
+                        );
+                    }
+                    m_destructionRemapInfo = _serde::__private::Some(
+                        match __A::next_value::<OnDestructionRemapInfo>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_name => {
+                    if _serde::__private::Option::is_some(&m_name) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                        );
+                    }
+                    m_name = _serde::__private::Some(
+                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_userData => {
+                    if _serde::__private::Option::is_some(&m_userData) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "userData",
+                            ),
+                        );
+                    }
+                    m_userData = _serde::__private::Some(
+                        match __A::next_value::<u64>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_data = match m_data {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("data"),
+                );
+            }
+        };
+        let m_constraintModifiers = match m_constraintModifiers {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "constraintModifiers",
+                    ),
+                );
+            }
+        };
+        let m_entities = match m_entities {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("entities"),
+                );
+            }
+        };
+        let m_priority = match m_priority {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("priority"),
+                );
+            }
+        };
+        let m_wantRuntime = match m_wantRuntime {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("wantRuntime"),
+                );
+            }
+        };
+        let m_destructionRemapInfo = match m_destructionRemapInfo {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field(
+                        "destructionRemapInfo",
+                    ),
+                );
+            }
+        };
+        let m_name = match m_name {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("name"),
+                );
+            }
+        };
+        let m_userData = match m_userData {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("userData"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkpConstraintInstance {
+            __ptr: __A::class_ptr(&mut __map),
+            parent,
+            m_data,
+            m_constraintModifiers,
+            m_entities,
+            m_priority,
+            m_wantRuntime,
+            m_destructionRemapInfo,
+            m_name,
+            m_userData,
+            ..Default::default()
+        })
+    }
+}
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for hkpConstraintInstance<'de> {
+        fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            const FIELDS: &[&str] = &[
+                "owner",
+                "data",
+                "constraintModifiers",
+                "entities",
+                "priority",
+                "wantRuntime",
+                "destructionRemapInfo",
+                "listeners",
+                "name",
+                "userData",
+                "internal",
+                "uid",
+            ];
+            _serde::Deserializer::deserialize_struct(
+                deserializer,
+                "hkpConstraintInstance",
+                FIELDS,
+                __hkpConstraintInstanceVisitor {
+                    marker: _serde::__private::PhantomData::<hkpConstraintInstance>,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};
 ///- size(C++): `TYPE_UINT8`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]

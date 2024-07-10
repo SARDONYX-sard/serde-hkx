@@ -117,6 +117,718 @@ const _: () = {
         }
     }
 };
+use havok_serde as _serde;
+#[allow(non_camel_case_types)]
+enum __Field {
+    m_triggerInterval,
+    m_initiateInterval,
+    m_transition,
+    m_condition,
+    m_eventId,
+    m_toStateId,
+    m_fromNestedStateId,
+    m_toNestedStateId,
+    m_priority,
+    m_flags,
+    __ignore,
+}
+struct __FieldVisitor;
+impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+    type Value = __Field;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(__formatter, "field identifier")
+    }
+    /// Intended for use in XML.
+    #[allow(clippy::match_single_binding)]
+    #[allow(clippy::reversed_empty_ranges)]
+    #[allow(clippy::single_match)]
+    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
+    where
+        __E: _serde::de::Error,
+    {
+        match __value {
+            "triggerInterval" => Ok(__Field::m_triggerInterval),
+            "initiateInterval" => Ok(__Field::m_initiateInterval),
+            "transition" => Ok(__Field::m_transition),
+            "condition" => Ok(__Field::m_condition),
+            "eventId" => Ok(__Field::m_eventId),
+            "toStateId" => Ok(__Field::m_toStateId),
+            "fromNestedStateId" => Ok(__Field::m_fromNestedStateId),
+            "toNestedStateId" => Ok(__Field::m_toNestedStateId),
+            "priority" => Ok(__Field::m_priority),
+            "flags" => Ok(__Field::m_flags),
+            _ => Ok(__Field::__ignore),
+        }
+    }
+}
+impl<'de> _serde::Deserialize<'de> for __Field {
+    #[inline]
+    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
+    where
+        __D: _serde::Deserializer<'de>,
+    {
+        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+    }
+}
+pub(super) struct __hkbStateMachineTransitionInfoVisitor<'de> {
+    marker: core::marker::PhantomData<hkbStateMachineTransitionInfo>,
+    lifetime: core::marker::PhantomData<&'de ()>,
+}
+impl<'de> __hkbStateMachineTransitionInfoVisitor<'de> {
+    /// # Purpose of this method
+    /// To reproduce C++ field inheritance, we will have the field internal implementation
+    /// of deserialization partially exposed and reused.
+    #[inline]
+    pub(super) fn visit_as_parent<__A>(
+        __map: &mut __A,
+    ) -> _serde::__private::Result<hkbStateMachineTransitionInfo, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        _serde::de::Visitor::visit_struct(
+            Self {
+                marker: _serde::__private::PhantomData::<hkbStateMachineTransitionInfo>,
+                lifetime: _serde::__private::PhantomData,
+            },
+            __map,
+        )
+    }
+}
+#[allow(clippy::match_single_binding)]
+#[allow(clippy::reversed_empty_ranges)]
+#[allow(clippy::single_match)]
+impl<'de> _serde::de::Visitor<'de> for __hkbStateMachineTransitionInfoVisitor<'de> {
+    type Value = hkbStateMachineTransitionInfo;
+    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+        core::fmt::Formatter::write_str(
+            __formatter,
+            "struct hkbStateMachineTransitionInfo",
+        )
+    }
+    fn visit_struct_for_bytes<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let mut m_triggerInterval: _serde::__private::Option<
+            hkbStateMachineTimeInterval,
+        > = _serde::__private::None;
+        let mut m_initiateInterval: _serde::__private::Option<
+            hkbStateMachineTimeInterval,
+        > = _serde::__private::None;
+        let mut m_transition: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_condition: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_eventId: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_toStateId: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_fromNestedStateId: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_toNestedStateId: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_priority: _serde::__private::Option<i16> = _serde::__private::None;
+        let mut m_flags: _serde::__private::Option<TransitionFlags> = _serde::__private::None;
+        for i in 0..10usize {
+            match i {
+                0usize => {
+                    if _serde::__private::Option::is_some(&m_triggerInterval) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "triggerInterval",
+                            ),
+                        );
+                    }
+                    m_triggerInterval = _serde::__private::Some(
+                        match __A::next_value::<
+                            hkbStateMachineTimeInterval,
+                        >(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                1usize => {
+                    if _serde::__private::Option::is_some(&m_initiateInterval) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "initiateInterval",
+                            ),
+                        );
+                    }
+                    m_initiateInterval = _serde::__private::Some(
+                        match __A::next_value::<
+                            hkbStateMachineTimeInterval,
+                        >(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                2usize => {
+                    if _serde::__private::Option::is_some(&m_transition) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "transition",
+                            ),
+                        );
+                    }
+                    m_transition = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                3usize => {
+                    if _serde::__private::Option::is_some(&m_condition) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "condition",
+                            ),
+                        );
+                    }
+                    m_condition = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                4usize => {
+                    if _serde::__private::Option::is_some(&m_eventId) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("eventId"),
+                        );
+                    }
+                    m_eventId = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                5usize => {
+                    if _serde::__private::Option::is_some(&m_toStateId) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "toStateId",
+                            ),
+                        );
+                    }
+                    m_toStateId = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                6usize => {
+                    if _serde::__private::Option::is_some(&m_fromNestedStateId) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "fromNestedStateId",
+                            ),
+                        );
+                    }
+                    m_fromNestedStateId = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                7usize => {
+                    if _serde::__private::Option::is_some(&m_toNestedStateId) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "toNestedStateId",
+                            ),
+                        );
+                    }
+                    m_toNestedStateId = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                8usize => {
+                    if _serde::__private::Option::is_some(&m_priority) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "priority",
+                            ),
+                        );
+                    }
+                    m_priority = _serde::__private::Some(
+                        match __A::next_value::<i16>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                9usize => {
+                    if _serde::__private::Option::is_some(&m_flags) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("flags"),
+                        );
+                    }
+                    m_flags = _serde::__private::Some(
+                        match __A::next_value::<TransitionFlags>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        __A::pad(&mut __map, 0usize, 4usize)?;
+        let m_triggerInterval = match m_triggerInterval {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("triggerInterval"),
+                );
+            }
+        };
+        let m_initiateInterval = match m_initiateInterval {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("initiateInterval"),
+                );
+            }
+        };
+        let m_transition = match m_transition {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("transition"),
+                );
+            }
+        };
+        let m_condition = match m_condition {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("condition"),
+                );
+            }
+        };
+        let m_eventId = match m_eventId {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("eventId"),
+                );
+            }
+        };
+        let m_toStateId = match m_toStateId {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("toStateId"),
+                );
+            }
+        };
+        let m_fromNestedStateId = match m_fromNestedStateId {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("fromNestedStateId"),
+                );
+            }
+        };
+        let m_toNestedStateId = match m_toNestedStateId {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("toNestedStateId"),
+                );
+            }
+        };
+        let m_priority = match m_priority {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("priority"),
+                );
+            }
+        };
+        let m_flags = match m_flags {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("flags"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbStateMachineTransitionInfo {
+            __ptr: __A::class_ptr(&mut __map),
+            m_triggerInterval,
+            m_initiateInterval,
+            m_transition,
+            m_condition,
+            m_eventId,
+            m_toStateId,
+            m_fromNestedStateId,
+            m_toNestedStateId,
+            m_priority,
+            m_flags,
+        })
+    }
+    fn visit_struct<__A>(
+        self,
+        mut __map: __A,
+    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    where
+        __A: _serde::de::MapAccess<'de>,
+    {
+        let mut m_triggerInterval: _serde::__private::Option<
+            hkbStateMachineTimeInterval,
+        > = _serde::__private::None;
+        let mut m_initiateInterval: _serde::__private::Option<
+            hkbStateMachineTimeInterval,
+        > = _serde::__private::None;
+        let mut m_transition: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_condition: _serde::__private::Option<Pointer> = _serde::__private::None;
+        let mut m_eventId: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_toStateId: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_fromNestedStateId: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_toNestedStateId: _serde::__private::Option<i32> = _serde::__private::None;
+        let mut m_priority: _serde::__private::Option<i16> = _serde::__private::None;
+        let mut m_flags: _serde::__private::Option<TransitionFlags> = _serde::__private::None;
+        while let _serde::__private::Some(__key) = match __A::next_key::<
+            __Field,
+        >(&mut __map) {
+            _serde::__private::Ok(__val) => __val,
+            _serde::__private::Err(__err) => {
+                return _serde::__private::Err(__err);
+            }
+        } {
+            match __key {
+                __Field::m_triggerInterval => {
+                    if _serde::__private::Option::is_some(&m_triggerInterval) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "triggerInterval",
+                            ),
+                        );
+                    }
+                    m_triggerInterval = _serde::__private::Some(
+                        match __A::next_value::<
+                            hkbStateMachineTimeInterval,
+                        >(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_initiateInterval => {
+                    if _serde::__private::Option::is_some(&m_initiateInterval) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "initiateInterval",
+                            ),
+                        );
+                    }
+                    m_initiateInterval = _serde::__private::Some(
+                        match __A::next_value::<
+                            hkbStateMachineTimeInterval,
+                        >(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_transition => {
+                    if _serde::__private::Option::is_some(&m_transition) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "transition",
+                            ),
+                        );
+                    }
+                    m_transition = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_condition => {
+                    if _serde::__private::Option::is_some(&m_condition) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "condition",
+                            ),
+                        );
+                    }
+                    m_condition = _serde::__private::Some(
+                        match __A::next_value::<Pointer>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_eventId => {
+                    if _serde::__private::Option::is_some(&m_eventId) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("eventId"),
+                        );
+                    }
+                    m_eventId = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_toStateId => {
+                    if _serde::__private::Option::is_some(&m_toStateId) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "toStateId",
+                            ),
+                        );
+                    }
+                    m_toStateId = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_fromNestedStateId => {
+                    if _serde::__private::Option::is_some(&m_fromNestedStateId) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "fromNestedStateId",
+                            ),
+                        );
+                    }
+                    m_fromNestedStateId = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_toNestedStateId => {
+                    if _serde::__private::Option::is_some(&m_toNestedStateId) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "toNestedStateId",
+                            ),
+                        );
+                    }
+                    m_toNestedStateId = _serde::__private::Some(
+                        match __A::next_value::<i32>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_priority => {
+                    if _serde::__private::Option::is_some(&m_priority) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field(
+                                "priority",
+                            ),
+                        );
+                    }
+                    m_priority = _serde::__private::Some(
+                        match __A::next_value::<i16>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                __Field::m_flags => {
+                    if _serde::__private::Option::is_some(&m_flags) {
+                        return _serde::__private::Err(
+                            <__A::Error as _serde::de::Error>::duplicate_field("flags"),
+                        );
+                    }
+                    m_flags = _serde::__private::Some(
+                        match __A::next_value::<TransitionFlags>(&mut __map) {
+                            _serde::__private::Ok(__val) => __val,
+                            _serde::__private::Err(__err) => {
+                                return _serde::__private::Err(__err);
+                            }
+                        },
+                    );
+                }
+                _ => {}
+            }
+        }
+        let m_triggerInterval = match m_triggerInterval {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("triggerInterval"),
+                );
+            }
+        };
+        let m_initiateInterval = match m_initiateInterval {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("initiateInterval"),
+                );
+            }
+        };
+        let m_transition = match m_transition {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("transition"),
+                );
+            }
+        };
+        let m_condition = match m_condition {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("condition"),
+                );
+            }
+        };
+        let m_eventId = match m_eventId {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("eventId"),
+                );
+            }
+        };
+        let m_toStateId = match m_toStateId {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("toStateId"),
+                );
+            }
+        };
+        let m_fromNestedStateId = match m_fromNestedStateId {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("fromNestedStateId"),
+                );
+            }
+        };
+        let m_toNestedStateId = match m_toNestedStateId {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("toNestedStateId"),
+                );
+            }
+        };
+        let m_priority = match m_priority {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("priority"),
+                );
+            }
+        };
+        let m_flags = match m_flags {
+            _serde::__private::Some(__field) => __field,
+            _serde::__private::None => {
+                return _serde::__private::Err(
+                    <__A::Error as _serde::de::Error>::missing_field("flags"),
+                );
+            }
+        };
+        _serde::__private::Ok(hkbStateMachineTransitionInfo {
+            __ptr: __A::class_ptr(&mut __map),
+            m_triggerInterval,
+            m_initiateInterval,
+            m_transition,
+            m_condition,
+            m_eventId,
+            m_toStateId,
+            m_fromNestedStateId,
+            m_toNestedStateId,
+            m_priority,
+            m_flags,
+        })
+    }
+}
+#[doc(hidden)]
+#[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
+const _: () = {
+    #[automatically_derived]
+    impl<'de> _serde::Deserialize<'de> for hkbStateMachineTransitionInfo {
+        fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
+        where
+            __D: _serde::Deserializer<'de>,
+        {
+            const FIELDS: &[&str] = &[
+                "triggerInterval",
+                "initiateInterval",
+                "transition",
+                "condition",
+                "eventId",
+                "toStateId",
+                "fromNestedStateId",
+                "toNestedStateId",
+                "priority",
+                "flags",
+            ];
+            _serde::Deserializer::deserialize_struct(
+                deserializer,
+                "hkbStateMachineTransitionInfo",
+                FIELDS,
+                __hkbStateMachineTransitionInfoVisitor {
+                    marker: _serde::__private::PhantomData::<
+                        hkbStateMachineTransitionInfo,
+                    >,
+                    lifetime: _serde::__private::PhantomData,
+                },
+            )
+        }
+    }
+};
 #[havok_types_derive::impl_flags_methods]
 bitflags::bitflags! {
     #[doc = r" Bit flags that represented `enum hkFlags<Enum, SizeType>`(C++)."] #[doc =
