@@ -34,21 +34,15 @@ pub fn generate_havok_class<P: AsRef<Path>>(classes_json_dir: P, out_dir: P) -> 
     }
 
     for (class_name, class) in &class_map {
-        let class_name = format!("{class_name}_");
-        let output_file = class_out_dir.join(format!("{class_name}.rs"));
+        let file_name = format!("{class_name}_");
+        let output_file = class_out_dir.join(format!("{file_name}.rs"));
         let output_file = output_file.to_string_lossy();
         tracing::debug!(?output_file);
 
         let rust_code = prettyplease::unparse(&rust_gen::from_cpp_class(class, &class_map));
         std::fs::write(output_file.as_ref(), rust_code)?;
 
-        class_index.push({
-            let mod_name = quote::format_ident!("{class_name}");
-            quote::quote! {
-                pub mod #mod_name;
-                pub use #mod_name::*;
-            }
-        });
+        class_index.push((class_name, class.has_string));
     }
 
     std::fs::write(
