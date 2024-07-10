@@ -1,6 +1,8 @@
 use crate::{
     cpp_info::{Class, Member},
-    rust_gen::structure::to_rust_token::{member_to_rust_type, to_rust_field_ident},
+    rust_gen::structure::{
+        impls::deserialize::member_to_de_rust_type, to_rust_token::to_rust_field_ident,
+    },
 };
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
@@ -32,17 +34,16 @@ pub fn gen(class: &Class) -> TokenStream {
         } = member;
 
         // Align
-        let pad_x86 = (*offset_x86 - x86_current_offset) as usize;
-        let pad_x64 = (*offset_x86_64 - x64_current_offset) as usize;
-
-        let pad_code = if pad_x86 != 0 || pad_x64 != 0 {
-            tracing::debug!(?name, pad_x86, x86_current_offset);
-            tracing::debug!(?name, pad_x64, x64_current_offset);
+        let x86_pad = (*offset_x86 - x86_current_offset) as usize;
+        let x64_pad = (*offset_x86_64 - x64_current_offset) as usize;
+        let pad_code = if x86_pad != 0 || x64_pad != 0 {
+            tracing::debug!(?name, x86_pad, x86_current_offset);
+            tracing::debug!(?name, x64_pad, x64_current_offset);
             x86_current_offset = *offset_x86;
             x64_current_offset = *offset_x86_64;
 
             quote! {
-                __A.pad(#pad_x86, #pad_x64)?;
+                __A::pad(&mut __map, #x86_pad, #x64_pad)?;
             }
         } else {
             quote! {}
@@ -51,7 +52,7 @@ pub fn gen(class: &Class) -> TokenStream {
         x64_current_offset += type_size_x86_64;
 
         let field_ident = to_rust_field_ident(&member.name);
-        let rust_type = member_to_rust_type(member, &class.name);
+        let rust_type = member_to_de_rust_type(member, &class.name);
 
         first_recv_fields.push(quote! {
             let mut #field_ident: _serde::__private::Option<#rust_type> = _serde::__private::None;
@@ -100,7 +101,7 @@ pub fn gen(class: &Class) -> TokenStream {
         x64_current_offset,
     );
 
-    let parent_variable = if class.parent.is_some() {
+    let deserialize_parent = if class.parent.is_some() {
         quote! { let parent = __A::next_value(&mut __map)?; }
     } else {
         quote! {}
@@ -119,7 +120,7 @@ pub fn gen(class: &Class) -> TokenStream {
             where
                 __A: _serde::de::MapAccess<'de>,
             {
-                #parent_variable
+                #deserialize_parent
                 #(#first_recv_fields)*
 
                 for i in 0..#member_len {
@@ -133,7 +134,7 @@ pub fn gen(class: &Class) -> TokenStream {
                 #(#last_recv_fields)*
 
                 _serde::__private::Ok(#class_name {
-                    __ptr: __A::class_ptr(__map),
+                    __ptr: __A::class_ptr(&mut __map),
                     #(#field_idents,)*
                 })
             }
@@ -165,7 +166,7 @@ fn gen_tailing_align_method(
         // x64_current_offset = x64_size;
 
         quote! {
-            __A.pad(#x86_pad, #x64_pad)?;
+            __A::pad(&mut __map, #x86_pad, #x64_pad)?;
         }
     } else {
         quote! {}

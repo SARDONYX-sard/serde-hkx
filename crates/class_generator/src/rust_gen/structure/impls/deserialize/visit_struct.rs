@@ -1,8 +1,8 @@
 use crate::{
     cpp_info::{Class, Member},
     rust_gen::structure::{
-        impls::deserialize::to_visitor_ident,
-        to_rust_token::{member_to_rust_type, to_rust_field_ident},
+        impls::deserialize::{member_to_de_rust_type, to_visitor_ident},
+        to_rust_token::to_rust_field_ident,
     },
 };
 use proc_macro2::TokenStream;
@@ -29,7 +29,7 @@ pub fn gen(class: &Class) -> TokenStream {
         }
 
         let field_ident = to_rust_field_ident(name); // e.g. `m_fieldName`
-        let rust_type = member_to_rust_type(member, &class.name); // e.g. `u64`
+        let rust_type = member_to_de_rust_type(member, &class.name); // e.g. `u64`
 
         field_idents.push(field_ident.clone());
 
@@ -60,9 +60,7 @@ pub fn gen(class: &Class) -> TokenStream {
                 _serde::__private::Some(__field) => __field,
                 _serde::__private::None => {
                     return _serde::__private::Err(
-                        <__A::Error as _serde::de::Error>::missing_field(
-                            #name,
-                        ),
+                        <__A::Error as _serde::de::Error>::missing_field(#name),
                     )
                 }
             };
@@ -78,14 +76,14 @@ pub fn gen(class: &Class) -> TokenStream {
     let (deserialize_parent, parent_field) = if let Some(parent_name) = &class.parent {
         let parent_visitor_name = to_visitor_ident(parent_name);
         (
-            quote! { let parent = #parent_visitor_name::visit_as_parent(__map)?; },
+            quote! { let parent = #parent_visitor_name::visit_as_parent(&mut __map)?; },
             quote! { parent, },
         )
     } else {
         (quote! {}, quote! {})
     };
-    let class_name = format_ident!("{}", class.name);
 
+    let class_name = format_ident!("{}", class.name);
     quote! {
             fn visit_struct<__A>(
                 self,
@@ -104,7 +102,7 @@ pub fn gen(class: &Class) -> TokenStream {
                         }
                     }
                 {
-                    match i {
+                    match __key {
                         #(#visit_fields_matcher)*
                         _ => {}
                     }
@@ -112,7 +110,7 @@ pub fn gen(class: &Class) -> TokenStream {
                 #(#last_recv_fields)*
 
                 _serde::__private::Ok(#class_name {
-                    __ptr: __A::class_ptr(__map),
+                    __ptr: __A::class_ptr(&mut __map),
                     #parent_field
                     #(#field_idents,)*
                     #default

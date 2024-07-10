@@ -24,6 +24,7 @@ pub fn gen_enum_fields(members: &[Member]) -> TokenStream {
                 #(#enum_variants,)*
                 __ignore,
             }
+
             struct __FieldVisitor;
             impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
                 type Value = __Field;
@@ -33,6 +34,9 @@ pub fn gen_enum_fields(members: &[Member]) -> TokenStream {
                 }
 
                 /// Intended for use in XML.
+                #[allow(clippy::match_single_binding)]
+                #[allow(clippy::reversed_empty_ranges)]
+                #[allow(clippy::single_match)]
                 fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
