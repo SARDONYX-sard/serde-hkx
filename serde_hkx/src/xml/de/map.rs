@@ -54,11 +54,7 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
 
     #[inline]
     fn class_ptr(&mut self) -> Option<Pointer> {
-        if self.de.in_struct {
-            None
-        } else {
-            self.ptr_name
-        }
+        self.ptr_name.take()
     }
 
     // Parse e.g. `<hkparam name="worldUpWS">`, `<hkparam name="boneWeights" numelements="90">`

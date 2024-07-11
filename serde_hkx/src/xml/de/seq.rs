@@ -86,7 +86,6 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
                 .parse_peek(alt((end_tag("hkparam"), end_tag("hksection"))))
                 .is_ok()
         {
-            tracing::debug!(self.de.input);
             return Ok(None);
         };
         self.first = false;
