@@ -7,6 +7,7 @@ use crate::tri;
 use crate::xml::de::parser::{comment_multispace0, comment_multispace1};
 
 use havok_serde::de::{DeserializeSeed, SeqAccess};
+use winnow::combinator::alt;
 use winnow::error::{StrContext, StrContextValue};
 use winnow::Parser;
 
@@ -79,7 +80,12 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
     {
         // Check if there are no more elements.
         // NOTE: If there is no empty confirmation in this location, the test or partial parsing will result in an infinite loop.
-        if self.de.input.is_empty() || self.de.parse_peek(end_tag("hkobject")).is_ok() {
+        if self.de.input.is_empty()
+            || self
+                .de
+                .parse_peek(alt((end_tag("hkparam"), end_tag("hksection"))))
+                .is_ok()
+        {
             tracing::debug!(self.de.input);
             return Ok(None);
         };

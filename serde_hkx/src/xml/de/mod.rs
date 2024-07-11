@@ -86,6 +86,9 @@ where
     tri!(deserializer.parse(winnow::token::take_until(0.., "<hkobject")));
     let t = tri!(T::deserialize(&mut deserializer));
 
+    tri!(deserializer.parse(end_tag("hksection")));
+    tri!(deserializer.parse(end_tag("hkpackfile")));
+
     if deserializer.input.is_empty() {
         Ok(t)
     } else {
@@ -685,6 +688,6 @@ mod tests {
             Ok(res) => res,
             Err(err) => panic!("{err}"),
         };
-        std::fs::write("./res.txt", format!("{res:?}")).unwrap();
+        dbg!(res);
     }
 }
