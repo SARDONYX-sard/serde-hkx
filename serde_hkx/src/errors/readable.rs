@@ -38,7 +38,7 @@ impl ReadableError {
                 for (index, ctx) in ctx_err.context().enumerate() {
                     match ctx {
                         StrContext::Label(label) => {
-                            if index > 0 {
+                            if index > 1 {
                                 labels += " <- ";
                             };
                             labels += label;

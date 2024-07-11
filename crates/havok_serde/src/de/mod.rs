@@ -1609,19 +1609,6 @@ pub trait MapAccess<'de> {
     where
         K: DeserializeSeed<'de>;
 
-    /// # For Array
-    /// In XML, key parsing is different as in `<hkparam name="" numelements="3">`,
-    /// so the API that exists to support this.
-    ///
-    /// This returns `Ok(Some(key))` for the next key in the map, or `Ok(None)`
-    /// if there are no more remaining entries.
-    ///
-    /// `Deserialize` implementations should typically use
-    /// `MapAccess::next_key` or `MapAccess::next_entry` instead.
-    fn next_array_key_seed<K>(&mut self, seed: K) -> Result<Option<K::Value>, Self::Error>
-    where
-        K: DeserializeSeed<'de>;
-
     /// This returns a `Ok(value)` for the next value in the map.
     ///
     /// `Deserialize` implementations should typically use
@@ -1674,20 +1661,6 @@ pub trait MapAccess<'de> {
         K: Deserialize<'de>,
     {
         self.next_key_seed(PhantomData)
-    }
-
-    /// # For Array
-    /// This returns `Ok(Some(key))` for the next key in the map, or `Ok(None)`
-    /// if there are no more remaining entries.
-    ///
-    /// This method exists as a convenience for `Deserialize` implementations.
-    /// `MapAccess` implementations should not override the default behavior.
-    #[inline]
-    fn next_array_key<K>(&mut self) -> Result<Option<K>, Self::Error>
-    where
-        K: Deserialize<'de>,
-    {
-        self.next_array_key_seed(PhantomData)
     }
 
     /// This returns a `Ok(value)` for the next value in the map.
@@ -1743,14 +1716,6 @@ where
     }
 
     #[inline]
-    fn next_array_key_seed<K>(&mut self, seed: K) -> Result<Option<K::Value>, Self::Error>
-    where
-        K: DeserializeSeed<'de>,
-    {
-        (**self).next_key_seed(seed)
-    }
-
-    #[inline]
     fn next_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
     where
         V: DeserializeSeed<'de>,
@@ -1786,14 +1751,6 @@ where
         K: Deserialize<'de>,
     {
         (**self).next_key()
-    }
-
-    #[inline]
-    fn next_array_key<K>(&mut self) -> Result<Option<K>, Self::Error>
-    where
-        K: Deserialize<'de>,
-    {
-        (**self).next_array_key()
     }
 
     #[inline]

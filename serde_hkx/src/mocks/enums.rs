@@ -1,4 +1,4 @@
-use super::mock_requires::*;
+use super::class_requires::*;
 
 #[derive(
     Debug,

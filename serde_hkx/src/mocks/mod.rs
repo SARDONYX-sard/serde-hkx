@@ -4,7 +4,7 @@ pub mod enums;
 pub mod flags;
 
 /// Reduce the burden of individual imports by importing a set of types needed to create a havok class structure here.
-mod mock_requires {
+mod class_requires {
     pub use crate::lib::*;
     pub use havok_serde::{
         de::{self, Deserialize, Deserializer, MapAccess, Visitor},

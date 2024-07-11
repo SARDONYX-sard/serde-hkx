@@ -78,7 +78,7 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
         T: DeserializeSeed<'de>,
     {
         // Check if there are no more elements.
-        if self.de.input.is_empty() || self.de.parse_peek(end_tag("hkobject")).is_ok() {
+        if self.de.parse_peek(end_tag("hkobject")).is_ok() {
             return Ok(None);
         };
         self.first = false;
@@ -91,7 +91,7 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
         T: DeserializeSeed<'de>,
     {
         // Check if there are no more elements.
-        if self.de.input.is_empty() || self.de.parse_peek(end_tag("hkparam")).is_ok() {
+        if self.de.parse_peek(end_tag("hkparam")).is_ok() {
             return Ok(None);
         };
         self.first = false;
@@ -130,7 +130,7 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
         T: DeserializeSeed<'de>,
     {
         // Check if there are no more elements.
-        if self.de.input.is_empty() || self.de.parse_peek(end_tag("hkparam")).is_ok() {
+        if self.de.parse_peek(end_tag("hkparam")).is_ok() {
             return Ok(None);
         };
         self.first = false;

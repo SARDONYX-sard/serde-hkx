@@ -24,9 +24,10 @@ tracing = { version = "0.1.40", optional = true }
 winnow = { version = "0.6.8", features = ["simd"] }                       # Parser conbinator
 
 [dev-dependencies]
+bitflags = "2.4"                                             # To generate flags type(mock)
+havok_classes = { path = "../crates/havok_classes" }
 num-derive = "0.4"                                           # enum to number(mock)
 num-traits = "0.2"                                           # enum to number(mock)
-bitflags = "2.4"                                             # To generate flags type(mock)
 pretty_assertions = "1.4"                                    # Color diff assertion
 quick_tracing = { version = "0.1.5", features = ["derive"] }
 zerocopy = { version = "0.7.34" }                            # To(As)Bytes

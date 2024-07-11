@@ -1,4 +1,4 @@
-use super::mock_requires::*;
+use super::class_requires::*;
 
 #[havok_types_derive::impl_flags_methods]
 bitflags::bitflags! {

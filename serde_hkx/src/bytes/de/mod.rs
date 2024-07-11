@@ -817,11 +817,11 @@ mod tests {
                 0, 0, // reference_count
                 0, 0, 0, 0, 0, 0, 0, 0, // 8bytes align for struct
             ],
-            HkReferencedObject {
+            hkReferencedObject {
                 __ptr: Some(Pointer::new(1)),
-                parent: HkBaseObject { __ptr: None },
-                mem_size_and_flags: 2,
-                reference_count: 0,
+                parent: hkBaseObject { __ptr: None },
+                m_memSizeAndFlags: 2,
+                m_referenceCount: 0,
             },
         );
     }

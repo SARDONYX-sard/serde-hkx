@@ -59,7 +59,7 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
         self.ptr_name
     }
 
-    // Parse e.g. `<hkparam name="worldUpWS">`
+    // Parse e.g. `<hkparam name="worldUpWS">`, `<hkparam name="boneWeights" numelements="90">`
     fn next_key_seed<K>(&mut self, seed: K) -> Result<Option<K::Value>, Self::Error>
     where
         K: DeserializeSeed<'de>,
@@ -70,30 +70,10 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
         }
 
         tri!(self.de.parse(field_start_open_tag())); // Parse `<hkparam name=`
-        let key = seed.deserialize(&mut *self.de).map(Some); // Deserialize a map key.
-        tri!(self.de.parse(field_start_close_tag())); // Parse `>`
+        let key = seed.deserialize(&mut *self.de).map(Some); // Parse `"string"`
+        tri!(self.de.parse(field_start_close_tag())); // Parse `>` or ` numelements="3">`
         self.index += 1;
 
-        key
-    }
-
-    // Parse e.g. `<hkparam name="boneWeights" numelements="90">`
-    fn next_array_key_seed<K>(&mut self, seed: K) -> Result<Option<K::Value>, Self::Error>
-    where
-        K: DeserializeSeed<'de>,
-    {
-        // Check if there are no more elements.
-        if self.de.parse_peek(end_tag("hkobject")).is_ok() && self.fields.len() == self.index {
-            return Ok(None);
-        }
-
-        tri!(self.de.parse(field_start_open_tag())); // Parse `<hkparam name=`
-        let key = seed.deserialize(&mut *self.de).map(Some);
-        let _len = tri!(self.de.parse(array_field_start_close_tag())); // Parse ` numelements="3">`
-        #[cfg(feature = "tracing")]
-        tracing::debug!(_len);
-
-        self.index += 1;
         key
     }
 
@@ -104,6 +84,7 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
     {
         let value = tri!(seed.deserialize(&mut *self.de));
         tri!(self.de.parse(end_tag("hkparam")));
+        dbg!("Ok");
         Ok(value)
     }
 }

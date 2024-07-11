@@ -828,6 +828,7 @@ dependencies = [
  "bitflags",
  "byteorder",
  "educe",
+ "havok_classes",
  "havok_serde",
  "havok_types",
  "havok_types_derive",

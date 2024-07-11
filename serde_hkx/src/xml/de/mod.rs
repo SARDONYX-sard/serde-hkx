@@ -85,6 +85,23 @@ where
     }
 }
 
+pub fn from_file_str<'a, T>(s: &'a str) -> Result<T>
+where
+    T: Deserialize<'a>,
+{
+    let mut deserializer = XmlDeserializer::from_str(s);
+    tri!(deserializer.parse(winnow::token::take_until(0.., "<hkobject")));
+    let t = tri!(T::deserialize(&mut deserializer));
+
+    if deserializer.input.is_empty() {
+        Ok(t)
+    } else {
+        Err(Error::TrailingCharacters {
+            remain: deserializer.input.to_string(),
+        })
+    }
+}
+
 /// Deserializes any value and returns the rest of the string together.
 ///
 /// # Returns
@@ -195,7 +212,12 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_key(tri!(self.parse(attr_string())))
+        let key = tri!(self.parse(attr_string()));
+
+        #[cfg(feature = "tracing")]
+        tracing::debug!(key);
+
+        visitor.visit_key(key)
     }
 
     #[inline]
@@ -486,10 +508,8 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::mocks::{classes::*, enums::EventMode, flags::FlagValues};
+    // use crate::mocks::{classes::*, enums::EventMode, flags::FlagValues};
     use pretty_assertions::assert_eq;
-    // use crate::common::mocks::{classes::*, enums::EventMode};
-    // use havok_types::*;
 
     fn parse_assert<'a, T>(s: &'a str, expected: T)
     where
@@ -520,6 +540,9 @@ mod tests {
     #[test]
     #[quick_tracing::init]
     fn test_deserialize_primitive() {
+        use havok_classes::hkClassMember_::FlagValues;
+        use havok_classes::EventMode;
+
         parse_peek_assert(
             "ALIGN_8|ALiGN_16|SERIALIZE_IGNORED</hkparam>",
             (
@@ -530,7 +553,7 @@ mod tests {
 
         parse_peek_assert(
             "EVENT_MODE_DEFAULT</hkparam>",
-            ("</hkparam>", EventMode::EventModeDefault),
+            ("</hkparam>", EventMode::EVENT_MODE_DEFAULT),
         );
     }
 
@@ -618,6 +641,7 @@ mod tests {
     #[test]
     #[quick_tracing::init]
     fn should_skip_class() {
+        use havok_classes::{hkBaseObject, hkReferencedObject};
         parse_assert(
             r##"
 <hkobject name="#01000" class="hkReferencedObject" signature="0xea7f1d08">
@@ -625,121 +649,27 @@ mod tests {
     <!-- referenceCount SERIALIZE_IGNORED -->
 </hkobject>
             "##,
-            HkReferencedObject {
+            hkReferencedObject {
                 __ptr: Some(Pointer::new(1000)),
-                parent: HkBaseObject { __ptr: None },
-                mem_size_and_flags: 0,
-                reference_count: 0,
+                parent: hkBaseObject { __ptr: None },
+                m_memSizeAndFlags: 0,
+                m_referenceCount: 0,
             },
         );
     }
 
     #[test]
     #[quick_tracing::init]
-    fn test_deserialize_class_fixed_array() {
-        // let xml = &include_str!("../../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
-
-        parse_assert(
-            r##"
-<hkobject name="#01000" class="hkReferencedObject" signature="0xea7f1d08">
-        <hkparam name="memSizeAndFlags">2</hkparam>
-        <!-- comment1 -->
-        <!-- comment2 -->
-        <hkparam name="referenceCount">0</hkparam>
-        <!-- comment3 -->
-        <!-- comment4 -->
-</hkobject>
-
-<hkobject name="#01000" class="hkReferencedObject" signature="0xea7f1d08">
-        <hkparam name="memSizeAndFlags">2</hkparam>
-        <hkparam name="referenceCount">0</hkparam>
-</hkobject>
-
-<hkobject name="#01000" class="hkReferencedObject" signature="0xea7f1d08">
-        <hkparam name="memSizeAndFlags">2</hkparam>
-        <hkparam name="referenceCount">0</hkparam>
-</hkobject>
-
-<hkobject name="#01000" class="hkReferencedObject" signature="0xea7f1d08">
-        <hkparam name="memSizeAndFlags">2</hkparam>
-        <hkparam name="referenceCount">0</hkparam>
-</hkobject>
-
-<hkobject name="#01000" class="hkReferencedObject" signature="0xea7f1d08">
-        <hkparam name="memSizeAndFlags">2</hkparam>
-        <hkparam name="referenceCount">0</hkparam>
-</hkobject>
-"##,
-            [
-                HkReferencedObject {
-                    __ptr: Some(Pointer::new(1000)),
-                    parent: HkBaseObject { __ptr: None },
-                    mem_size_and_flags: 2,
-                    reference_count: 0,
-                },
-                HkReferencedObject {
-                    __ptr: Some(Pointer::new(1000)),
-                    parent: HkBaseObject { __ptr: None },
-                    mem_size_and_flags: 2,
-                    reference_count: 0,
-                },
-                HkReferencedObject {
-                    __ptr: Some(Pointer::new(1000)),
-                    parent: HkBaseObject { __ptr: None },
-                    mem_size_and_flags: 2,
-                    reference_count: 0,
-                },
-                HkReferencedObject {
-                    __ptr: Some(Pointer::new(1000)),
-                    parent: HkBaseObject { __ptr: None },
-                    mem_size_and_flags: 2,
-                    reference_count: 0,
-                },
-                HkReferencedObject {
-                    __ptr: Some(Pointer::new(1000)),
-                    parent: HkBaseObject { __ptr: None },
-                    mem_size_and_flags: 2,
-                    reference_count: 0,
-                },
-            ],
-        );
-    }
-
-    #[test]
-    #[quick_tracing::init]
     fn test_deserialize_class_indexes() {
-        // let xml = &include_str!("../../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
+        use havok_classes::Classes;
 
-        parse_assert(
-            r##"
-<hkobject name="#01000" class="hkReferencedObject" signature="0xea7f1d08">
-        <hkparam name="memSizeAndFlags">2</hkparam>
-        <!-- comment1 -->
-        <!-- comment2 -->
-        <hkparam name="referenceCount">0</hkparam>
-        <!-- comment3 -->
-        <!-- comment4 -->
-</hkobject>
+        let xml =
+            &include_str!("../../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
 
-<hkobject name="#0100" class="hkReferencedObject" signature="0xea7f1d08">
-        <hkparam name="memSizeAndFlags">4</hkparam>
-        <hkparam name="referenceCount">0</hkparam>
-</hkobject>
-"##,
-            vec![
-                Classes::HkReferencedObject(HkReferencedObject {
-                    __ptr: Some(Pointer::new(1000)),
-                    parent: HkBaseObject { __ptr: None },
-                    mem_size_and_flags: 2,
-                    reference_count: 0,
-                }),
-                Classes::HkReferencedObject(HkReferencedObject {
-                    __ptr: Some(Pointer::new(100)),
-                    parent: HkBaseObject { __ptr: None },
-                    mem_size_and_flags: 4,
-                    reference_count: 0,
-                }),
-            ],
-        );
+        let res = match from_file_str::<Vec<Classes>>(xml) {
+            Ok(res) => res,
+            Err(err) => panic!("{err}"),
+        };
+        std::fs::write("./res.txt", format!("{res:?}")).unwrap();
     }
 }

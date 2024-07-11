@@ -1,23 +1,24 @@
-#![allow(unused)]
+#![allow(non_camel_case_types, non_snake_case, unused)]
 
 mod all_types_test_class;
-mod hk_base_object;
-mod hk_referenced_object;
-mod hk_root_container;
-mod hk_root_level_container_named_variant;
-mod hkb_project_data;
-mod hkb_project_string_data;
-mod hkp_shape_info;
+mod hkBaseObject_;
+mod hkReferencedObject_;
+mod hkRootLevelContainerNamedVariant_;
+mod hkRootLevelContainer_;
+mod hkbProjectData_;
+mod hkbProjectStringData_;
 
-use super::mock_requires::*;
+pub(super) use super::class_requires;
+use super::class_requires::*;
 pub use all_types_test_class::*;
-pub use hk_base_object::*;
-pub use hk_referenced_object::*;
-pub use hk_root_container::*;
-pub use hk_root_level_container_named_variant::*;
-pub use hkb_project_data::*;
-pub use hkb_project_string_data::*;
-pub use hkp_shape_info::*;
+pub use hkBaseObject_::*;
+pub use hkReferencedObject_::*;
+pub use hkRootLevelContainerNamedVariant_::*;
+pub use hkRootLevelContainer_::*;
+pub use hkbProjectData_::*;
+pub use hkbProjectStringData_::*;
+
+pub use super::enums::EventMode;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum Classes<'a> {
@@ -28,22 +29,13 @@ pub enum Classes<'a> {
     PhantomData,
 
     AllTypesTestClass(AllTypesTestClass),
-    HkBaseObject(HkBaseObject),
-    HkReferencedObject(HkReferencedObject),
-    HkRootLevelContainer(HkRootLevelContainer<'a>),
-    HkRootLevelContainerNamedVariant(HkRootLevelContainerNamedVariant<'a>),
-    HkbProjectData(HkbProjectData),
-    HkbProjectStringData(HkbProjectStringData<'a>),
-    HkpShapeInfo(HkpShapeInfo<'a>),
+    HkBaseObject(hkBaseObject),
+    HkReferencedObject(hkReferencedObject),
+    HkRootLevelContainer(hkRootLevelContainer<'a>),
+    HkRootLevelContainerNamedVariant(hkRootLevelContainerNamedVariant<'a>),
+    HkbProjectData(hkbProjectData),
+    HkbProjectStringData(hkbProjectStringData<'a>),
 }
-
-// impl core::str::FromStr for Classes<'a> {
-//     type Err ="";
-
-//     fn from_str(s: &str) -> Result<Self, Self::Err> {
-//         match
-//     }
-// }
 
 impl HavokClass for Classes<'_> {
     fn name(&self) -> &'static str {
@@ -57,7 +49,6 @@ impl HavokClass for Classes<'_> {
             Classes::HkReferencedObject(class) => class.name(),
             Classes::HkRootLevelContainer(class) => class.name(),
             Classes::HkRootLevelContainerNamedVariant(class) => class.name(),
-            Classes::HkpShapeInfo(class) => class.name(),
         }
     }
 
@@ -72,7 +63,6 @@ impl HavokClass for Classes<'_> {
             Classes::HkReferencedObject(class) => class.signature(),
             Classes::HkRootLevelContainer(class) => class.signature(),
             Classes::HkRootLevelContainerNamedVariant(class) => class.signature(),
-            Classes::HkpShapeInfo(class) => class.signature(),
         }
     }
 }
@@ -89,7 +79,6 @@ impl<'a> Serialize for Classes<'a> {
             Classes::HkReferencedObject(class) => class.serialize(serializer),
             Classes::HkRootLevelContainer(class) => class.serialize(serializer),
             Classes::HkRootLevelContainerNamedVariant(class) => class.serialize(serializer),
-            Classes::HkpShapeInfo(class) => class.serialize(serializer),
         }
     }
 }

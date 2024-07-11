@@ -33,8 +33,8 @@
 //! - `hkClassMember`
 //! - `hkResourceBase`
 
-pub mod generated;
-use generated::*;
+mod generated;
+pub use generated::*;
 
 #[cfg(test)]
 mod tests {

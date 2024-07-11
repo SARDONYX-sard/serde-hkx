@@ -78,7 +78,7 @@ pub fn class_start_tag<'a>() -> impl Parser<&'a str, (Pointer, &'a str, Signatur
     )
     .context(StrContext::Label("Class start tag"))
     .context(StrContext::Expected(StrContextValue::Description(
-        r##"Class start(e.g. `<hkobject name="#0010" class="hkbProjectData" signature="0x13a39ba7">`)"##,
+        r##"e.g. `<hkobject name="#0010" class="hkbProjectData" signature="0x13a39ba7">`"##,
     )))
 }
 
@@ -92,19 +92,25 @@ pub fn field_start_open_tag<'a>() -> impl Parser<&'a str, (), ContextError> {
     )
     .context(StrContext::Label("class field start opening tag"))
     .context(StrContext::Expected(StrContextValue::Description(
-        "Class field start open tag(e.g. `<hkparam name=>`)",
+        "e.g. `<hkparam name=`",
     )))
 }
 
-#[inline]
 /// Parses the field of class start closing tag `>`
 pub fn field_start_close_tag<'a>() -> impl Parser<&'a str, (), ContextError> {
     seq!(
+        _: winnow::combinator::opt(
+            seq!(
+                _: delimited_with_multispace0("numelements"),
+                _: delimited_with_multispace0("="),
+                _: number_in_string::<u64>(), // e.g. "8"
+            )
+        ),
         _: delimited_multispace0_comment(">")
     )
     .context(StrContext::Label("class field start closing tag"))
     .context(StrContext::Expected(StrContextValue::Description(
-        "Class field start close tag(e.g. `>`)",
+        "e.g. `>`",
     )))
 }
 

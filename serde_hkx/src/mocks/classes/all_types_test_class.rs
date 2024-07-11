@@ -67,22 +67,6 @@ impl Serialize for AllTypesTestClass {
             vec![Transform::default(), Transform::default()],
         )?;
 
-        let hkp_shape_info = HkpShapeInfo {
-            shape: Pointer::new(50),
-            is_hierarchical_compound: true,
-            hkd_shapes_collected: false,
-            child_shape_names: vec!["child".into(), "Hi".into()],
-            child_transforms: vec![
-                Transform::default(),
-                Transform::default(),
-                Transform::default(),
-            ],
-            ..Default::default()
-        };
-        serializer.serialize_array_meta_field(
-            "class_array",
-            &vec![hkp_shape_info.clone(), hkp_shape_info],
-        )?;
         serializer.serialize_array_meta_field(
             "stringptr_fixed_array",
             [StringPtr::from_str("hello"), "world".into()].as_slice(),
