@@ -14,7 +14,9 @@ The only way to find out if it is possible or not is to try it out.
   - [x] XML
   - [x] Bytes
 
-- [x] Generate Classes (Task: struct). <- Current working
+- [x] Generate Classes
+
+- [ ] Modify the code based on the test data. <- Working in progress
 
 ### Implementations
 
