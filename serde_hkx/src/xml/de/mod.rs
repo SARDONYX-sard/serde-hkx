@@ -24,6 +24,7 @@ use crate::errors::{
 };
 use havok_serde::de::{self, Deserialize, ReadEnumSize, Visitor};
 use havok_types::*;
+use parser::tag::{class_start_tag, start_tag};
 use winnow::ascii::{dec_int, dec_uint};
 use winnow::Parser;
 
@@ -43,6 +44,16 @@ pub struct XmlDeserializer<'de> {
     /// - stringptr in field: `<hkparam name="" numelements="1"><hkcstring>StringPtr</hkcstring></hkparam>`
     /// - stringptr in array field: `<hkparam name="">StringPtr</hkparam>`
     in_array: bool,
+
+    ///  In `Struct` deserialization?
+    ///
+    /// # Why need this flag?
+    /// This flag is necessary because XML handles deserialization of a field in a struct differently
+    /// than it handles deserialization of a struct in a field in a struct.
+    ///
+    /// - root struct: `<hkobject name="#0050" class="" signature=""></hkobject>`
+    /// - struct in field: `<hkobject></hkobject>`
+    in_struct: bool,
 }
 
 impl<'de> XmlDeserializer<'de> {
@@ -53,6 +64,7 @@ impl<'de> XmlDeserializer<'de> {
             input,
             original: input,
             in_array: false,
+            in_struct: false,
         }
     }
 }
@@ -394,8 +406,27 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let value = tri!(visitor.visit_struct(MapDeserializer::new(self, name, fields)));
+        let value = if self.in_struct {
+            // When a struct is present in the field of struct, the name and signature attributes are not present.
+            tri!(self.parse(start_tag("hkobject")));
+            tri!(visitor.visit_struct(MapDeserializer::new(self, None, fields)))
+        } else {
+            let (ptr_name, class_name, signature) = tri!(self.parse(class_start_tag()));
+            #[cfg(feature = "tracing")]
+            tracing::debug!("ptr_name={ptr_name}, class_name={class_name}, Signature={signature}");
+
+            if name != class_name {
+                return Err(Error::MismatchClassName {
+                    actual: name,
+                    expected: class_name.to_string(),
+                });
+            };
+            self.in_struct = true;
+            tri!(visitor.visit_struct(MapDeserializer::new(self, Some(ptr_name), fields)))
+        };
+
         tri!(self.parse(end_tag("hkobject")));
+        self.in_struct = false;
         Ok(value)
     }
 
