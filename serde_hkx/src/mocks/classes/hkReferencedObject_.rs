@@ -56,8 +56,7 @@ const _: () = {
             let class_meta = self
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x3b1c1113)));
-            let mut serializer = __serializer
-                .serialize_struct("hkReferencedObject", class_meta)?;
+            let mut serializer = __serializer.serialize_struct("hkReferencedObject", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.m_referenceCount)?;
@@ -68,6 +67,7 @@ const _: () = {
 };
 use havok_serde as _serde;
 #[allow(non_camel_case_types)]
+#[derive(Debug)]
 enum __Field {
     m_memSizeAndFlags,
     m_referenceCount,
@@ -148,36 +148,30 @@ impl<'de> _serde::de::Visitor<'de> for __hkReferencedObjectVisitor<'de> {
                 0usize => {
                     if _serde::__private::Option::is_some(&m_memSizeAndFlags) {
                         return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "memSizeAndFlags",
-                            ),
+                            <__A::Error as _serde::de::Error>::duplicate_field("memSizeAndFlags"),
                         );
                     }
-                    m_memSizeAndFlags = _serde::__private::Some(
-                        match __A::next_value::<u16>(&mut __map) {
+                    m_memSizeAndFlags =
+                        _serde::__private::Some(match __A::next_value::<u16>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,
                             _serde::__private::Err(__err) => {
                                 return _serde::__private::Err(__err);
                             }
-                        },
-                    );
+                        });
                 }
                 1usize => {
                     if _serde::__private::Option::is_some(&m_referenceCount) {
                         return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "referenceCount",
-                            ),
+                            <__A::Error as _serde::de::Error>::duplicate_field("referenceCount"),
                         );
                     }
-                    m_referenceCount = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
+                    m_referenceCount =
+                        _serde::__private::Some(match __A::next_value::<i16>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,
                             _serde::__private::Err(__err) => {
                                 return _serde::__private::Err(__err);
                             }
-                        },
-                    );
+                        });
                 }
                 _ => {}
             }
@@ -186,17 +180,17 @@ impl<'de> _serde::de::Visitor<'de> for __hkReferencedObjectVisitor<'de> {
         let m_memSizeAndFlags = match m_memSizeAndFlags {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("memSizeAndFlags"),
-                );
+                return _serde::__private::Err(<__A::Error as _serde::de::Error>::missing_field(
+                    "memSizeAndFlags",
+                ));
             }
         };
         let m_referenceCount = match m_referenceCount {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("referenceCount"),
-                );
+                return _serde::__private::Err(<__A::Error as _serde::de::Error>::missing_field(
+                    "referenceCount",
+                ));
             }
         };
         _serde::__private::Ok(hkReferencedObject {
@@ -206,26 +200,20 @@ impl<'de> _serde::de::Visitor<'de> for __hkReferencedObjectVisitor<'de> {
             m_referenceCount,
         })
     }
-    fn visit_struct<__A>(
-        self,
-        mut __map: __A,
-    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    fn visit_struct<__A>(self, mut __map: __A) -> _serde::__private::Result<Self::Value, __A::Error>
     where
         __A: _serde::de::MapAccess<'de>,
     {
         let parent = __hkBaseObjectVisitor::visit_as_parent(&mut __map)?;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                _ => {}
-            }
+
+        for _ in 0..0usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<__Field>(&mut __map)? {
+                match __key {
+                    _ => {}
+                };
+            };
         }
+
         _serde::__private::Ok(hkReferencedObject {
             __ptr: __A::class_ptr(&mut __map),
             parent,

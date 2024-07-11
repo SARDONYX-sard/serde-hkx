@@ -602,7 +602,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
             }),
         };
 
-        self.current_position += if self.is_x86 { 8 } else { 16 };
+        self.current_position += if self.is_x86 { 4 } else { 8 };
         res
     }
 

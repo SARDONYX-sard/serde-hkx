@@ -83,6 +83,7 @@ pub fn gen(class: &Class) -> TokenStream {
         (quote! {}, quote! {})
     };
 
+    let no_skip_len = first_recv_fields.len();
     let class_name = format_ident!("{}", class.name);
     quote! {
             fn visit_struct<__A>(
@@ -94,18 +95,13 @@ pub fn gen(class: &Class) -> TokenStream {
             {
                 #deserialize_parent
                 #(#first_recv_fields)*
-                while let _serde::__private::Some(__key) =
-                    match __A::next_key::<__Field>(&mut __map) {
-                        _serde::__private::Ok(__val) => __val,
-                        _serde::__private::Err(__err) => {
-                            return _serde::__private::Err(__err);
+                for _ in 0..#no_skip_len {
+                    if let _serde::__private::Some(__key) = __A::next_key::<__Field>(&mut __map)? {
+                        match __key {
+                            #(#visit_fields_matcher)*
+                            _ => {}
                         }
-                    }
-                {
-                    match __key {
-                        #(#visit_fields_matcher)*
-                        _ => {}
-                    }
+                    };
                 }
                 #(#last_recv_fields)*
 

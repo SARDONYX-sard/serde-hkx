@@ -14,7 +14,7 @@ use self::parser::{
     tag::{attr_string, end_tag},
     type_kind::{
         boolean, matrix3, matrix4, pointer, qstransform, quaternion, real, rotation, string,
-        string_in_array, transform, vector4,
+        transform, vector4,
     },
 };
 use self::seq::SeqDeserializer;
@@ -39,12 +39,6 @@ pub struct XmlDeserializer<'de> {
     /// This is readonly for error report. Not move position.
     original: &'de str,
 
-    /// # Why need this flag?
-    /// Flag to deal with cases where the XML notation differs between within an `Array` and without, as in `StringPtr`.
-    /// - stringptr in field: `<hkparam name="" numelements="1"><hkcstring>StringPtr</hkcstring></hkparam>`
-    /// - stringptr in array field: `<hkparam name="">StringPtr</hkparam>`
-    in_array: bool,
-
     ///  In `Struct` deserialization?
     ///
     /// # Why need this flag?
@@ -63,7 +57,6 @@ impl<'de> XmlDeserializer<'de> {
         XmlDeserializer {
             input,
             original: input,
-            in_array: false,
             in_struct: false,
         }
     }
@@ -385,10 +378,8 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        self.in_array = true;
         tri!(self.parse(comment_multispace0()));
         let value = visitor.visit_array(SeqDeserializer::new(self));
-        self.in_array = false;
 
         // NOTE: If to_readable_err is used here, for some reason the stack overflows
         // and falls into an infinite loop.
@@ -497,10 +488,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let s = match self.in_array {
-            true => tri!(self.parse(string_in_array())), // take until `</hkcstring>`
-            false => tri!(self.parse(string())),         // take until `</hkparam>`
-        };
+        let s = tri!(self.parse(string())); // take until `</`
         visitor.visit_stringptr(StringPtr::from_str(s))
     }
 }
@@ -558,6 +546,7 @@ mod tests {
     }
 
     #[test]
+    #[quick_tracing::init]
     fn test_deserialize_string() {
         parse_assert::<Vec<StringPtr>>(
             r#"
@@ -660,8 +649,34 @@ mod tests {
 
     #[test]
     #[quick_tracing::init]
-    fn test_deserialize_class_indexes() {
+    fn test_deserialize_class() {
+        use havok_classes::hkRootLevelContainer;
+        // use crate::mocks::Classes;
+
+        let xml = r###"
+		<hkobject name="#0008" class="hkRootLevelContainer" signature="0x2772c11e">
+			<hkparam name="namedVariants" numelements="1">
+				<hkobject>
+					<hkparam name="name">hkbProjectData</hkparam>
+					<hkparam name="className">hkbProjectData</hkparam>
+					<hkparam name="variant">#0010</hkparam>
+				</hkobject>
+			</hkparam>
+		</hkobject>
+"###;
+
+        let res = match from_str::<hkRootLevelContainer>(xml) {
+            Ok(res) => res,
+            Err(err) => panic!("{err}"),
+        };
+        dbg!(res);
+    }
+
+    #[test]
+    #[quick_tracing::init]
+    fn test_deserialize_class_index() {
         use havok_classes::Classes;
+        // use crate::mocks::Classes;
 
         let xml =
             &include_str!("../../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");

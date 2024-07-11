@@ -38,8 +38,8 @@ pub fn new_defaultmale<'a>() -> IndexMap<usize, Classes<'a>> {
     };
 
     let mut classes = indexmap::IndexMap::new();
-    classes.insert(8, Classes::HkRootLevelContainer(hk_root_level_container));
-    classes.insert(9, Classes::HkbProjectStringData(hkb_project_string_data));
-    classes.insert(10, Classes::HkbProjectData(hkb_project_data));
+    classes.insert(8, Classes::hkRootLevelContainer(hk_root_level_container));
+    classes.insert(9, Classes::hkbProjectStringData(hkb_project_string_data));
+    classes.insert(10, Classes::hkbProjectData(hkb_project_data));
     classes
 }

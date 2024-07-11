@@ -2,6 +2,7 @@
 // https://doc.rust-lang.org/stable/rustc/lints/listing/warn-by-default.html?highlight=abi#ambiguous-glob-reexports
 #![allow(ambiguous_glob_reexports)]
 #![allow(
+    clippy::collapsible_match,
     clippy::enum_variant_names,
     clippy::match_overlapping_arm,
     clippy::redundant_static_lifetimes

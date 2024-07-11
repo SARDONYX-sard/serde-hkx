@@ -26,10 +26,10 @@ pub fn impl_deserialize(class: &Class) -> TokenStream {
         quote! {}
     };
 
-    let member_names = members
-        .iter()
-        .map(|member| &member.name)
-        .collect::<Vec<_>>();
+    let mut member_names = Vec::new();
+    for member in members {
+        member_names.push(&member.name);
+    }
 
     quote! {
         use havok_serde as _serde;

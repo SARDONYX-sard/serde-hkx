@@ -78,7 +78,9 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
         T: DeserializeSeed<'de>,
     {
         // Check if there are no more elements.
-        if self.de.parse_peek(end_tag("hkobject")).is_ok() {
+        // NOTE: If there is no empty confirmation in this location, the test or partial parsing will result in an infinite loop.
+        if self.de.input.is_empty() || self.de.parse_peek(end_tag("hkobject")).is_ok() {
+            tracing::debug!(self.de.input);
             return Ok(None);
         };
         self.first = false;
@@ -91,7 +93,8 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
         T: DeserializeSeed<'de>,
     {
         // Check if there are no more elements.
-        if self.de.parse_peek(end_tag("hkparam")).is_ok() {
+        // NOTE: If there is no empty confirmation in this location, the test or partial parsing will result in an infinite loop.
+        if self.de.input.is_empty() || self.de.parse_peek(end_tag("hkparam")).is_ok() {
             return Ok(None);
         };
         self.first = false;
@@ -130,7 +133,8 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
         T: DeserializeSeed<'de>,
     {
         // Check if there are no more elements.
-        if self.de.parse_peek(end_tag("hkparam")).is_ok() {
+        // NOTE: If there is no empty confirmation in this location, the test or partial parsing will result in an infinite loop.
+        if self.de.input.is_empty() || self.de.parse_peek(end_tag("hkparam")).is_ok() {
             return Ok(None);
         };
         self.first = false;

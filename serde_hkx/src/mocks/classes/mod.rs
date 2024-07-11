@@ -29,12 +29,12 @@ pub enum Classes<'a> {
     PhantomData,
 
     AllTypesTestClass(AllTypesTestClass),
-    HkBaseObject(hkBaseObject),
-    HkReferencedObject(hkReferencedObject),
-    HkRootLevelContainer(hkRootLevelContainer<'a>),
+    hkBaseObject(hkBaseObject),
+    hkReferencedObject(hkReferencedObject),
+    hkRootLevelContainer(hkRootLevelContainer<'a>),
     HkRootLevelContainerNamedVariant(hkRootLevelContainerNamedVariant<'a>),
-    HkbProjectData(hkbProjectData),
-    HkbProjectStringData(hkbProjectStringData<'a>),
+    hkbProjectData(hkbProjectData),
+    hkbProjectStringData(hkbProjectStringData<'a>),
 }
 
 impl HavokClass for Classes<'_> {
@@ -43,11 +43,11 @@ impl HavokClass for Classes<'_> {
             Classes::PhantomData => panic!("The dummy class is used only for sorting, so being called name is not a good use of the API."),
 
             Classes::AllTypesTestClass(class) => class.name(),
-            Classes::HkBaseObject(class) => class.name(),
-            Classes::HkbProjectData(class) => class.name(),
-            Classes::HkbProjectStringData(class) => class.name(),
-            Classes::HkReferencedObject(class) => class.name(),
-            Classes::HkRootLevelContainer(class) => class.name(),
+            Classes::hkBaseObject(class) => class.name(),
+            Classes::hkbProjectData(class) => class.name(),
+            Classes::hkbProjectStringData(class) => class.name(),
+            Classes::hkReferencedObject(class) => class.name(),
+            Classes::hkRootLevelContainer(class) => class.name(),
             Classes::HkRootLevelContainerNamedVariant(class) => class.name(),
         }
     }
@@ -57,11 +57,11 @@ impl HavokClass for Classes<'_> {
             Classes::PhantomData => panic!("The dummy class is used only for sorting, so being called signature is not a good use of the API."),
 
             Classes::AllTypesTestClass(class) => class.signature(),
-            Classes::HkBaseObject(class) => class.signature(),
-            Classes::HkbProjectData(class) => class.signature(),
-            Classes::HkbProjectStringData(class) => class.signature(),
-            Classes::HkReferencedObject(class) => class.signature(),
-            Classes::HkRootLevelContainer(class) => class.signature(),
+            Classes::hkBaseObject(class) => class.signature(),
+            Classes::hkbProjectData(class) => class.signature(),
+            Classes::hkbProjectStringData(class) => class.signature(),
+            Classes::hkReferencedObject(class) => class.signature(),
+            Classes::hkRootLevelContainer(class) => class.signature(),
             Classes::HkRootLevelContainerNamedVariant(class) => class.signature(),
         }
     }
@@ -73,11 +73,11 @@ impl<'a> Serialize for Classes<'a> {
             Classes::PhantomData => panic!("The dummy class is used only for sorting, so being called serialize is not a good use of the API."),
 
             Classes::AllTypesTestClass(class) => class.serialize(serializer),
-            Classes::HkBaseObject(class) => class.serialize(serializer),
-            Classes::HkbProjectData(class) => class.serialize(serializer),
-            Classes::HkbProjectStringData(class) => class.serialize(serializer),
-            Classes::HkReferencedObject(class) => class.serialize(serializer),
-            Classes::HkRootLevelContainer(class) => class.serialize(serializer),
+            Classes::hkBaseObject(class) => class.serialize(serializer),
+            Classes::hkbProjectData(class) => class.serialize(serializer),
+            Classes::hkbProjectStringData(class) => class.serialize(serializer),
+            Classes::hkReferencedObject(class) => class.serialize(serializer),
+            Classes::hkRootLevelContainer(class) => class.serialize(serializer),
             Classes::HkRootLevelContainerNamedVariant(class) => class.serialize(serializer),
         }
     }
@@ -106,15 +106,14 @@ impl<'a, 'de: 'a> Deserialize<'de> for Classes<'a> {
                 let class_name = map.next_key()?;
                 match class_name {
                     // "AllTypesTestClass" => Ok(Classes::AllTypesTestClass(map.next_value()?)),
-                    // "HkBaseObject" => Ok(Classes::HkBaseObject(map.next_value()?)),
-                    // "HkbProjectData" => Ok(Classes::HkbProjectData(map.next_value()?)),
-                    // "HkbProjectStringData" => Ok(Classes::HkbProjectStringData(map.next_value()?)),
-                    "hkReferencedObject" => Ok(Classes::HkReferencedObject(map.next_value()?)),
-                    // "HkRootLevelContainer" => Ok(Classes::HkRootLevelContainer(map.next_value()?)),
-                    // "HkRootLevelContainerNamedVariant" => {
-                    //     Ok(Classes::HkRootLevelContainerNamedVariant(map.next_value()?))
-                    // }
-                    // "HkpShapeInfo" => Ok(Classes::HkpShapeInfo(map.next_value()?)),
+                    "hkBaseObject" => Ok(Classes::hkBaseObject(map.next_value()?)),
+                    "hkbProjectData" => Ok(Classes::hkbProjectData(map.next_value()?)),
+                    "hkbProjectStringData" => Ok(Classes::hkbProjectStringData(map.next_value()?)),
+                    "hkReferencedObject" => Ok(Classes::hkReferencedObject(map.next_value()?)),
+                    "hkRootLevelContainer" => Ok(Classes::hkRootLevelContainer(map.next_value()?)),
+                    "hkRootLevelContainerNamedVariant" => {
+                        Ok(Classes::HkRootLevelContainerNamedVariant(map.next_value()?))
+                    }
                     _ => Err(de::Error::unknown_field(
                         class_name,
                         &[

@@ -90,7 +90,7 @@ pub fn field_start_open_tag<'a>() -> impl Parser<&'a str, (), ContextError> {
         _: delimited_with_multispace0("name"),
         _: delimited_with_multispace0("="),
     )
-    .context(StrContext::Label("class field start opening tag"))
+    .context(StrContext::Label("field of class: start opening tag"))
     .context(StrContext::Expected(StrContextValue::Description(
         "e.g. `<hkparam name=`",
     )))
@@ -108,7 +108,7 @@ pub fn field_start_close_tag<'a>() -> impl Parser<&'a str, (), ContextError> {
         ),
         _: delimited_multispace0_comment(">")
     )
-    .context(StrContext::Label("class field start closing tag"))
+    .context(StrContext::Label("field of class: start closing tag"))
     .context(StrContext::Expected(StrContextValue::Description(
         "e.g. `>`",
     )))

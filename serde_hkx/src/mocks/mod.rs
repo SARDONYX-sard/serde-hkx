@@ -3,6 +3,8 @@ pub mod constructors;
 pub mod enums;
 pub mod flags;
 
+pub use classes::*;
+
 /// Reduce the burden of individual imports by importing a set of types needed to create a havok class structure here.
 mod class_requires {
     pub use crate::lib::*;

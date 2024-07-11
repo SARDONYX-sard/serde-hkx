@@ -2,7 +2,6 @@
 use crate::{lib::*, tri};
 
 use super::delimited_with_multispace0;
-use super::tag::end_tag;
 
 use havok_types::*;
 use winnow::ascii::{digit1, multispace0};
@@ -153,43 +152,16 @@ pub fn pointer<'a>() -> impl Parser<&'a str, Pointer, ContextError> {
     }
 }
 
-/// Parses a string literal until `</hkparam>`, e.g., `example` in (`example</hkparam>`).
+/// Parses a string literal until `</`, e.g., `example` in (`example</`).
 /// - The corresponding type kind: `CString`, `StringPtr`
-///
-/// # Attention during unit testing
-/// This will get any string until the end tag `</hkparam>` exists, so testing with [`Parser::parse`] will fail
-/// because it leaves an unparsed region of the string. (This is because `parse` is intended for use with the root analyzer.)
-///
-/// Therefore, use the [`Parser::parse_next`] method for testing.
 pub fn string<'a>() -> impl Parser<&'a str, &'a str, ContextError> {
-    move |input: &mut &'a str| {
-        let s = take_until(0.., '<')
-            .context(StrContext::Label("end of string tag(`</hkparam>`)"))
-            .context(StrContext::Expected(StrContextValue::Description(
-                "e.g. Hello</hkparam>",
-            )))
-            .parse_next(input)?;
-
-        let _ = tri!(end_tag("hkparam").parse_peek(input));
-        Ok(s)
-    }
-}
-
-/// Parses a string in `Array` e.g. `Hello` in `<hkcstring>Hello</hkcstring>`
-/// - The corresponding type kind: `Array<CString>`, `Array<StringPtr>`
-pub fn string_in_array<'a>() -> impl Parser<&'a str, &'a str, ContextError> {
-    move |input: &mut &'a str| {
-        let s = take_until(0.., '<')
-            .context(StrContext::Label(
-                "string in Array marker tag(`</hkcstring>`)",
-            ))
-            .context(StrContext::Expected(StrContextValue::Description(
-                "e.g. Hello</hkcstring>",
-            )))
-            .parse_next(input)?;
-        let _ = tri!(end_tag("hkcstring").parse_peek(input));
-        Ok(s)
-    }
+    take_until(0.., "</")
+        .context(StrContext::Label(
+            "end of string tag(`</hkparam>`, `</hkcstring>` in Array)",
+        ))
+        .context(StrContext::Expected(StrContextValue::Description(
+            "e.g. Hello</hkparam>",
+        )))
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -262,14 +234,5 @@ mod tests {
 
         let invalid_input = "example</not_hkparam>";
         assert!(string().parse_peek(invalid_input).is_err());
-    }
-
-    #[test]
-    fn test_string_in_array() {
-        let input = "Hello</hkcstring>";
-        assert_eq!(string_in_array().parse(input), Ok("Hello"));
-
-        let invalid_input = "Hello<hkcstring>";
-        assert!(string_in_array().parse(invalid_input).is_err());
     }
 }

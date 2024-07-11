@@ -40,8 +40,7 @@ const _: () = {
             let class_meta = self
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0xe0708a00)));
-            let mut serializer = __serializer
-                .serialize_struct("hkBaseObject", class_meta)?;
+            let mut serializer = __serializer.serialize_struct("hkBaseObject", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.end()
         }
@@ -129,25 +128,18 @@ impl<'de> _serde::de::Visitor<'de> for __hkBaseObjectVisitor<'de> {
             __ptr: __A::class_ptr(&mut __map),
         })
     }
-    fn visit_struct<__A>(
-        self,
-        mut __map: __A,
-    ) -> _serde::__private::Result<Self::Value, __A::Error>
+    fn visit_struct<__A>(self, mut __map: __A) -> _serde::__private::Result<Self::Value, __A::Error>
     where
         __A: _serde::de::MapAccess<'de>,
     {
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                _ => {}
-            }
+        for _ in 0..0usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<__Field>(&mut __map)? {
+                match __key {
+                    _ => {}
+                };
+            };
         }
+
         _serde::__private::Ok(hkBaseObject {
             __ptr: __A::class_ptr(&mut __map),
         })
