@@ -293,84 +293,81 @@ impl<'de> _serde::de::Visitor<'de> for __hkxMeshSectionVisitor<'de> {
         let mut m_indexBuffers: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
         let mut m_material: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_userChannels: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_vertexBuffer => {
-                    if _serde::__private::Option::is_some(&m_vertexBuffer) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "vertexBuffer",
-                            ),
+        for _ in 0..4usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_vertexBuffer => {
+                        if _serde::__private::Option::is_some(&m_vertexBuffer) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "vertexBuffer",
+                                ),
+                            );
+                        }
+                        m_vertexBuffer = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_vertexBuffer = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_indexBuffers => {
-                    if _serde::__private::Option::is_some(&m_indexBuffers) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "indexBuffers",
-                            ),
+                    __Field::m_indexBuffers => {
+                        if _serde::__private::Option::is_some(&m_indexBuffers) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "indexBuffers",
+                                ),
+                            );
+                        }
+                        m_indexBuffers = _serde::__private::Some(
+                            match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_indexBuffers = _serde::__private::Some(
-                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_material => {
-                    if _serde::__private::Option::is_some(&m_material) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "material",
-                            ),
+                    __Field::m_material => {
+                        if _serde::__private::Option::is_some(&m_material) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "material",
+                                ),
+                            );
+                        }
+                        m_material = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_material = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_userChannels => {
-                    if _serde::__private::Option::is_some(&m_userChannels) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "userChannels",
-                            ),
+                    __Field::m_userChannels => {
+                        if _serde::__private::Option::is_some(&m_userChannels) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "userChannels",
+                                ),
+                            );
+                        }
+                        m_userChannels = _serde::__private::Some(
+                            match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_userChannels = _serde::__private::Some(
-                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_vertexBuffer = match m_vertexBuffer {

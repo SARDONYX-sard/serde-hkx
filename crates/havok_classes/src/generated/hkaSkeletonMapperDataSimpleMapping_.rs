@@ -248,63 +248,60 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSkeletonMapperDataSimpleMappingVisit
         let mut m_boneA: _serde::__private::Option<i16> = _serde::__private::None;
         let mut m_boneB: _serde::__private::Option<i16> = _serde::__private::None;
         let mut m_aFromBTransform: _serde::__private::Option<QsTransform> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_boneA => {
-                    if _serde::__private::Option::is_some(&m_boneA) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("boneA"),
+        for _ in 0..3usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_boneA => {
+                        if _serde::__private::Option::is_some(&m_boneA) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("boneA"),
+                            );
+                        }
+                        m_boneA = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_boneA = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_boneB => {
-                    if _serde::__private::Option::is_some(&m_boneB) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("boneB"),
+                    __Field::m_boneB => {
+                        if _serde::__private::Option::is_some(&m_boneB) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("boneB"),
+                            );
+                        }
+                        m_boneB = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_boneB = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_aFromBTransform => {
-                    if _serde::__private::Option::is_some(&m_aFromBTransform) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "aFromBTransform",
-                            ),
+                    __Field::m_aFromBTransform => {
+                        if _serde::__private::Option::is_some(&m_aFromBTransform) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "aFromBTransform",
+                                ),
+                            );
+                        }
+                        m_aFromBTransform = _serde::__private::Some(
+                            match __A::next_value::<QsTransform>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_aFromBTransform = _serde::__private::Some(
-                        match __A::next_value::<QsTransform>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_boneA = match m_boneA {

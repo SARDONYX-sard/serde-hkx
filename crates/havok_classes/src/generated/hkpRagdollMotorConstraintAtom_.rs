@@ -340,101 +340,98 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRagdollMotorConstraintAtomVisitor<'d
         let mut m_previousTargetAnglesOffset: _serde::__private::Option<i16> = _serde::__private::None;
         let mut m_target_bRca: _serde::__private::Option<Matrix3> = _serde::__private::None;
         let mut m_motors: _serde::__private::Option<[Pointer; 3usize]> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_isEnabled => {
-                    if _serde::__private::Option::is_some(&m_isEnabled) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "isEnabled",
-                            ),
+        for _ in 0..5usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_isEnabled => {
+                        if _serde::__private::Option::is_some(&m_isEnabled) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "isEnabled",
+                                ),
+                            );
+                        }
+                        m_isEnabled = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_isEnabled = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_initializedOffset => {
-                    if _serde::__private::Option::is_some(&m_initializedOffset) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "initializedOffset",
-                            ),
+                    __Field::m_initializedOffset => {
+                        if _serde::__private::Option::is_some(&m_initializedOffset) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "initializedOffset",
+                                ),
+                            );
+                        }
+                        m_initializedOffset = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_initializedOffset = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_previousTargetAnglesOffset => {
-                    if _serde::__private::Option::is_some(
-                        &m_previousTargetAnglesOffset,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "previousTargetAnglesOffset",
-                            ),
+                    __Field::m_previousTargetAnglesOffset => {
+                        if _serde::__private::Option::is_some(
+                            &m_previousTargetAnglesOffset,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "previousTargetAnglesOffset",
+                                ),
+                            );
+                        }
+                        m_previousTargetAnglesOffset = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_previousTargetAnglesOffset = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_target_bRca => {
-                    if _serde::__private::Option::is_some(&m_target_bRca) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "target_bRca",
-                            ),
+                    __Field::m_target_bRca => {
+                        if _serde::__private::Option::is_some(&m_target_bRca) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "target_bRca",
+                                ),
+                            );
+                        }
+                        m_target_bRca = _serde::__private::Some(
+                            match __A::next_value::<Matrix3>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_target_bRca = _serde::__private::Some(
-                        match __A::next_value::<Matrix3>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_motors => {
-                    if _serde::__private::Option::is_some(&m_motors) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("motors"),
+                    __Field::m_motors => {
+                        if _serde::__private::Option::is_some(&m_motors) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("motors"),
+                            );
+                        }
+                        m_motors = _serde::__private::Some(
+                            match __A::next_value::<[Pointer; 3usize]>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_motors = _serde::__private::Some(
-                        match __A::next_value::<[Pointer; 3usize]>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_isEnabled = match m_isEnabled {

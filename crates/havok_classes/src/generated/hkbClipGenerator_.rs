@@ -1196,201 +1196,202 @@ impl<'de> _serde::de::Visitor<'de> for __hkbClipGeneratorVisitor<'de> {
         let mut m_animationBindingIndex: _serde::__private::Option<i16> = _serde::__private::None;
         let mut m_mode: _serde::__private::Option<PlaybackMode> = _serde::__private::None;
         let mut m_flags: _serde::__private::Option<i8> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_animationName => {
-                    if _serde::__private::Option::is_some(&m_animationName) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "animationName",
-                            ),
+        for _ in 0..11usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_animationName => {
+                        if _serde::__private::Option::is_some(&m_animationName) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "animationName",
+                                ),
+                            );
+                        }
+                        m_animationName = _serde::__private::Some(
+                            match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_animationName = _serde::__private::Some(
-                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_triggers => {
-                    if _serde::__private::Option::is_some(&m_triggers) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "triggers",
-                            ),
+                    __Field::m_triggers => {
+                        if _serde::__private::Option::is_some(&m_triggers) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "triggers",
+                                ),
+                            );
+                        }
+                        m_triggers = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_triggers = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_cropStartAmountLocalTime => {
-                    if _serde::__private::Option::is_some(&m_cropStartAmountLocalTime) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "cropStartAmountLocalTime",
-                            ),
+                    __Field::m_cropStartAmountLocalTime => {
+                        if _serde::__private::Option::is_some(
+                            &m_cropStartAmountLocalTime,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "cropStartAmountLocalTime",
+                                ),
+                            );
+                        }
+                        m_cropStartAmountLocalTime = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_cropStartAmountLocalTime = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_cropEndAmountLocalTime => {
-                    if _serde::__private::Option::is_some(&m_cropEndAmountLocalTime) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "cropEndAmountLocalTime",
-                            ),
+                    __Field::m_cropEndAmountLocalTime => {
+                        if _serde::__private::Option::is_some(
+                            &m_cropEndAmountLocalTime,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "cropEndAmountLocalTime",
+                                ),
+                            );
+                        }
+                        m_cropEndAmountLocalTime = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_cropEndAmountLocalTime = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_startTime => {
-                    if _serde::__private::Option::is_some(&m_startTime) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "startTime",
-                            ),
+                    __Field::m_startTime => {
+                        if _serde::__private::Option::is_some(&m_startTime) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "startTime",
+                                ),
+                            );
+                        }
+                        m_startTime = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_startTime = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_playbackSpeed => {
-                    if _serde::__private::Option::is_some(&m_playbackSpeed) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "playbackSpeed",
-                            ),
+                    __Field::m_playbackSpeed => {
+                        if _serde::__private::Option::is_some(&m_playbackSpeed) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "playbackSpeed",
+                                ),
+                            );
+                        }
+                        m_playbackSpeed = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_playbackSpeed = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_enforcedDuration => {
-                    if _serde::__private::Option::is_some(&m_enforcedDuration) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "enforcedDuration",
-                            ),
+                    __Field::m_enforcedDuration => {
+                        if _serde::__private::Option::is_some(&m_enforcedDuration) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "enforcedDuration",
+                                ),
+                            );
+                        }
+                        m_enforcedDuration = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_enforcedDuration = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_userControlledTimeFraction => {
-                    if _serde::__private::Option::is_some(
-                        &m_userControlledTimeFraction,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "userControlledTimeFraction",
-                            ),
+                    __Field::m_userControlledTimeFraction => {
+                        if _serde::__private::Option::is_some(
+                            &m_userControlledTimeFraction,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "userControlledTimeFraction",
+                                ),
+                            );
+                        }
+                        m_userControlledTimeFraction = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_userControlledTimeFraction = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_animationBindingIndex => {
-                    if _serde::__private::Option::is_some(&m_animationBindingIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "animationBindingIndex",
-                            ),
+                    __Field::m_animationBindingIndex => {
+                        if _serde::__private::Option::is_some(&m_animationBindingIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "animationBindingIndex",
+                                ),
+                            );
+                        }
+                        m_animationBindingIndex = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_animationBindingIndex = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_mode => {
-                    if _serde::__private::Option::is_some(&m_mode) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("mode"),
+                    __Field::m_mode => {
+                        if _serde::__private::Option::is_some(&m_mode) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("mode"),
+                            );
+                        }
+                        m_mode = _serde::__private::Some(
+                            match __A::next_value::<PlaybackMode>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_mode = _serde::__private::Some(
-                        match __A::next_value::<PlaybackMode>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_flags => {
-                    if _serde::__private::Option::is_some(&m_flags) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("flags"),
+                    __Field::m_flags => {
+                        if _serde::__private::Option::is_some(&m_flags) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("flags"),
+                            );
+                        }
+                        m_flags = _serde::__private::Some(
+                            match __A::next_value::<i8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_flags = _serde::__private::Some(
-                        match __A::next_value::<i8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_animationName = match m_animationName {

@@ -322,97 +322,94 @@ impl<'de> _serde::de::Visitor<'de> for __hkxVertexDescriptionElementDeclVisitor<
         let mut m_usage: _serde::__private::Option<DataUsage> = _serde::__private::None;
         let mut m_byteStride: _serde::__private::Option<u32> = _serde::__private::None;
         let mut m_numElements: _serde::__private::Option<u8> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_byteOffset => {
-                    if _serde::__private::Option::is_some(&m_byteOffset) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "byteOffset",
-                            ),
+        for _ in 0..5usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_byteOffset => {
+                        if _serde::__private::Option::is_some(&m_byteOffset) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "byteOffset",
+                                ),
+                            );
+                        }
+                        m_byteOffset = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_byteOffset = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_type => {
-                    if _serde::__private::Option::is_some(&m_type) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("type"),
+                    __Field::m_type => {
+                        if _serde::__private::Option::is_some(&m_type) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("type"),
+                            );
+                        }
+                        m_type = _serde::__private::Some(
+                            match __A::next_value::<DataType>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_type = _serde::__private::Some(
-                        match __A::next_value::<DataType>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_usage => {
-                    if _serde::__private::Option::is_some(&m_usage) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("usage"),
+                    __Field::m_usage => {
+                        if _serde::__private::Option::is_some(&m_usage) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("usage"),
+                            );
+                        }
+                        m_usage = _serde::__private::Some(
+                            match __A::next_value::<DataUsage>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_usage = _serde::__private::Some(
-                        match __A::next_value::<DataUsage>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_byteStride => {
-                    if _serde::__private::Option::is_some(&m_byteStride) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "byteStride",
-                            ),
+                    __Field::m_byteStride => {
+                        if _serde::__private::Option::is_some(&m_byteStride) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "byteStride",
+                                ),
+                            );
+                        }
+                        m_byteStride = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_byteStride = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numElements => {
-                    if _serde::__private::Option::is_some(&m_numElements) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numElements",
-                            ),
+                    __Field::m_numElements => {
+                        if _serde::__private::Option::is_some(&m_numElements) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numElements",
+                                ),
+                            );
+                        }
+                        m_numElements = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numElements = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_byteOffset = match m_byteOffset {

@@ -481,103 +481,104 @@ impl<'de> _serde::de::Visitor<'de> for __BSEventEveryNEventsModifierVisitor<'de>
         let mut m_numberOfEventsBeforeSend: _serde::__private::Option<i8> = _serde::__private::None;
         let mut m_minimumNumberOfEventsBeforeSend: _serde::__private::Option<i8> = _serde::__private::None;
         let mut m_randomizeNumberOfEvents: _serde::__private::Option<bool> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_eventToCheckFor => {
-                    if _serde::__private::Option::is_some(&m_eventToCheckFor) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "eventToCheckFor",
-                            ),
+        for _ in 0..5usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_eventToCheckFor => {
+                        if _serde::__private::Option::is_some(&m_eventToCheckFor) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "eventToCheckFor",
+                                ),
+                            );
+                        }
+                        m_eventToCheckFor = _serde::__private::Some(
+                            match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_eventToCheckFor = _serde::__private::Some(
-                        match __A::next_value::<hkbEventProperty>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_eventToSend => {
-                    if _serde::__private::Option::is_some(&m_eventToSend) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "eventToSend",
-                            ),
+                    __Field::m_eventToSend => {
+                        if _serde::__private::Option::is_some(&m_eventToSend) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "eventToSend",
+                                ),
+                            );
+                        }
+                        m_eventToSend = _serde::__private::Some(
+                            match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_eventToSend = _serde::__private::Some(
-                        match __A::next_value::<hkbEventProperty>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numberOfEventsBeforeSend => {
-                    if _serde::__private::Option::is_some(&m_numberOfEventsBeforeSend) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numberOfEventsBeforeSend",
-                            ),
+                    __Field::m_numberOfEventsBeforeSend => {
+                        if _serde::__private::Option::is_some(
+                            &m_numberOfEventsBeforeSend,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numberOfEventsBeforeSend",
+                                ),
+                            );
+                        }
+                        m_numberOfEventsBeforeSend = _serde::__private::Some(
+                            match __A::next_value::<i8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numberOfEventsBeforeSend = _serde::__private::Some(
-                        match __A::next_value::<i8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_minimumNumberOfEventsBeforeSend => {
-                    if _serde::__private::Option::is_some(
-                        &m_minimumNumberOfEventsBeforeSend,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "minimumNumberOfEventsBeforeSend",
-                            ),
+                    __Field::m_minimumNumberOfEventsBeforeSend => {
+                        if _serde::__private::Option::is_some(
+                            &m_minimumNumberOfEventsBeforeSend,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "minimumNumberOfEventsBeforeSend",
+                                ),
+                            );
+                        }
+                        m_minimumNumberOfEventsBeforeSend = _serde::__private::Some(
+                            match __A::next_value::<i8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_minimumNumberOfEventsBeforeSend = _serde::__private::Some(
-                        match __A::next_value::<i8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_randomizeNumberOfEvents => {
-                    if _serde::__private::Option::is_some(&m_randomizeNumberOfEvents) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "randomizeNumberOfEvents",
-                            ),
+                    __Field::m_randomizeNumberOfEvents => {
+                        if _serde::__private::Option::is_some(
+                            &m_randomizeNumberOfEvents,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "randomizeNumberOfEvents",
+                                ),
+                            );
+                        }
+                        m_randomizeNumberOfEvents = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_randomizeNumberOfEvents = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_eventToCheckFor = match m_eventToCheckFor {

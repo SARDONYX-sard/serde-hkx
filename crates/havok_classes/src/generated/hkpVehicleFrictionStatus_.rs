@@ -177,33 +177,30 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleFrictionStatusVisitor<'de> {
         let mut m_axis: _serde::__private::Option<
             [hkpVehicleFrictionStatusAxisStatus; 2usize],
         > = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_axis => {
-                    if _serde::__private::Option::is_some(&m_axis) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("axis"),
+        for _ in 0..1usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_axis => {
+                        if _serde::__private::Option::is_some(&m_axis) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("axis"),
+                            );
+                        }
+                        m_axis = _serde::__private::Some(
+                            match __A::next_value::<
+                                [hkpVehicleFrictionStatusAxisStatus; 2usize],
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_axis = _serde::__private::Some(
-                        match __A::next_value::<
-                            [hkpVehicleFrictionStatusAxisStatus; 2usize],
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_axis = match m_axis {

@@ -711,254 +711,257 @@ impl<'de> _serde::de::Visitor<'de> for __hkaDeltaCompressedAnimationVisitor<'de>
         let mut m_totalBlockSize: _serde::__private::Option<u32> = _serde::__private::None;
         let mut m_lastBlockSize: _serde::__private::Option<u32> = _serde::__private::None;
         let mut m_dataBuffer: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_numberOfPoses => {
-                    if _serde::__private::Option::is_some(&m_numberOfPoses) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numberOfPoses",
-                            ),
+        for _ in 0..14usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_numberOfPoses => {
+                        if _serde::__private::Option::is_some(&m_numberOfPoses) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numberOfPoses",
+                                ),
+                            );
+                        }
+                        m_numberOfPoses = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numberOfPoses = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_blockSize => {
-                    if _serde::__private::Option::is_some(&m_blockSize) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "blockSize",
-                            ),
+                    __Field::m_blockSize => {
+                        if _serde::__private::Option::is_some(&m_blockSize) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "blockSize",
+                                ),
+                            );
+                        }
+                        m_blockSize = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_blockSize = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_qFormat => {
-                    if _serde::__private::Option::is_some(&m_qFormat) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("qFormat"),
+                    __Field::m_qFormat => {
+                        if _serde::__private::Option::is_some(&m_qFormat) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "qFormat",
+                                ),
+                            );
+                        }
+                        m_qFormat = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkaDeltaCompressedAnimationQuantizationFormat,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_qFormat = _serde::__private::Some(
-                        match __A::next_value::<
-                            hkaDeltaCompressedAnimationQuantizationFormat,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_quantizedDataIdx => {
-                    if _serde::__private::Option::is_some(&m_quantizedDataIdx) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "quantizedDataIdx",
-                            ),
+                    __Field::m_quantizedDataIdx => {
+                        if _serde::__private::Option::is_some(&m_quantizedDataIdx) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "quantizedDataIdx",
+                                ),
+                            );
+                        }
+                        m_quantizedDataIdx = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_quantizedDataIdx = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_quantizedDataSize => {
-                    if _serde::__private::Option::is_some(&m_quantizedDataSize) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "quantizedDataSize",
-                            ),
+                    __Field::m_quantizedDataSize => {
+                        if _serde::__private::Option::is_some(&m_quantizedDataSize) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "quantizedDataSize",
+                                ),
+                            );
+                        }
+                        m_quantizedDataSize = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_quantizedDataSize = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_staticMaskIdx => {
-                    if _serde::__private::Option::is_some(&m_staticMaskIdx) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "staticMaskIdx",
-                            ),
+                    __Field::m_staticMaskIdx => {
+                        if _serde::__private::Option::is_some(&m_staticMaskIdx) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "staticMaskIdx",
+                                ),
+                            );
+                        }
+                        m_staticMaskIdx = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_staticMaskIdx = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_staticMaskSize => {
-                    if _serde::__private::Option::is_some(&m_staticMaskSize) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "staticMaskSize",
-                            ),
+                    __Field::m_staticMaskSize => {
+                        if _serde::__private::Option::is_some(&m_staticMaskSize) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "staticMaskSize",
+                                ),
+                            );
+                        }
+                        m_staticMaskSize = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_staticMaskSize = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_staticDOFsIdx => {
-                    if _serde::__private::Option::is_some(&m_staticDOFsIdx) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "staticDOFsIdx",
-                            ),
+                    __Field::m_staticDOFsIdx => {
+                        if _serde::__private::Option::is_some(&m_staticDOFsIdx) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "staticDOFsIdx",
+                                ),
+                            );
+                        }
+                        m_staticDOFsIdx = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_staticDOFsIdx = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_staticDOFsSize => {
-                    if _serde::__private::Option::is_some(&m_staticDOFsSize) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "staticDOFsSize",
-                            ),
+                    __Field::m_staticDOFsSize => {
+                        if _serde::__private::Option::is_some(&m_staticDOFsSize) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "staticDOFsSize",
+                                ),
+                            );
+                        }
+                        m_staticDOFsSize = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_staticDOFsSize = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numStaticTransformDOFs => {
-                    if _serde::__private::Option::is_some(&m_numStaticTransformDOFs) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numStaticTransformDOFs",
-                            ),
+                    __Field::m_numStaticTransformDOFs => {
+                        if _serde::__private::Option::is_some(
+                            &m_numStaticTransformDOFs,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numStaticTransformDOFs",
+                                ),
+                            );
+                        }
+                        m_numStaticTransformDOFs = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numStaticTransformDOFs = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numDynamicTransformDOFs => {
-                    if _serde::__private::Option::is_some(&m_numDynamicTransformDOFs) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numDynamicTransformDOFs",
-                            ),
+                    __Field::m_numDynamicTransformDOFs => {
+                        if _serde::__private::Option::is_some(
+                            &m_numDynamicTransformDOFs,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numDynamicTransformDOFs",
+                                ),
+                            );
+                        }
+                        m_numDynamicTransformDOFs = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numDynamicTransformDOFs = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_totalBlockSize => {
-                    if _serde::__private::Option::is_some(&m_totalBlockSize) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "totalBlockSize",
-                            ),
+                    __Field::m_totalBlockSize => {
+                        if _serde::__private::Option::is_some(&m_totalBlockSize) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "totalBlockSize",
+                                ),
+                            );
+                        }
+                        m_totalBlockSize = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_totalBlockSize = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_lastBlockSize => {
-                    if _serde::__private::Option::is_some(&m_lastBlockSize) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "lastBlockSize",
-                            ),
+                    __Field::m_lastBlockSize => {
+                        if _serde::__private::Option::is_some(&m_lastBlockSize) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "lastBlockSize",
+                                ),
+                            );
+                        }
+                        m_lastBlockSize = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_lastBlockSize = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_dataBuffer => {
-                    if _serde::__private::Option::is_some(&m_dataBuffer) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "dataBuffer",
-                            ),
+                    __Field::m_dataBuffer => {
+                        if _serde::__private::Option::is_some(&m_dataBuffer) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "dataBuffer",
+                                ),
+                            );
+                        }
+                        m_dataBuffer = _serde::__private::Some(
+                            match __A::next_value::<Vec<u8>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_dataBuffer = _serde::__private::Some(
-                        match __A::next_value::<Vec<u8>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_numberOfPoses = match m_numberOfPoses {

@@ -497,169 +497,166 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimulationVisitor<'de> {
         let mut m_simulateUntilTime: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_frameMarkerPsiSnap: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_previousStepResult: _serde::__private::Option<u32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_determinismCheckFrameCounter => {
-                    if _serde::__private::Option::is_some(
-                        &m_determinismCheckFrameCounter,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "determinismCheckFrameCounter",
-                            ),
+        for _ in 0..9usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_determinismCheckFrameCounter => {
+                        if _serde::__private::Option::is_some(
+                            &m_determinismCheckFrameCounter,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "determinismCheckFrameCounter",
+                                ),
+                            );
+                        }
+                        m_determinismCheckFrameCounter = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_determinismCheckFrameCounter = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_world => {
-                    if _serde::__private::Option::is_some(&m_world) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("world"),
+                    __Field::m_world => {
+                        if _serde::__private::Option::is_some(&m_world) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("world"),
+                            );
+                        }
+                        m_world = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_world = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_lastProcessingStep => {
-                    if _serde::__private::Option::is_some(&m_lastProcessingStep) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "lastProcessingStep",
-                            ),
+                    __Field::m_lastProcessingStep => {
+                        if _serde::__private::Option::is_some(&m_lastProcessingStep) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "lastProcessingStep",
+                                ),
+                            );
+                        }
+                        m_lastProcessingStep = _serde::__private::Some(
+                            match __A::next_value::<LastProcessingStep>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_lastProcessingStep = _serde::__private::Some(
-                        match __A::next_value::<LastProcessingStep>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_currentTime => {
-                    if _serde::__private::Option::is_some(&m_currentTime) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "currentTime",
-                            ),
+                    __Field::m_currentTime => {
+                        if _serde::__private::Option::is_some(&m_currentTime) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "currentTime",
+                                ),
+                            );
+                        }
+                        m_currentTime = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_currentTime = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_currentPsiTime => {
-                    if _serde::__private::Option::is_some(&m_currentPsiTime) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "currentPsiTime",
-                            ),
+                    __Field::m_currentPsiTime => {
+                        if _serde::__private::Option::is_some(&m_currentPsiTime) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "currentPsiTime",
+                                ),
+                            );
+                        }
+                        m_currentPsiTime = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_currentPsiTime = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_physicsDeltaTime => {
-                    if _serde::__private::Option::is_some(&m_physicsDeltaTime) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "physicsDeltaTime",
-                            ),
+                    __Field::m_physicsDeltaTime => {
+                        if _serde::__private::Option::is_some(&m_physicsDeltaTime) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "physicsDeltaTime",
+                                ),
+                            );
+                        }
+                        m_physicsDeltaTime = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_physicsDeltaTime = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_simulateUntilTime => {
-                    if _serde::__private::Option::is_some(&m_simulateUntilTime) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "simulateUntilTime",
-                            ),
+                    __Field::m_simulateUntilTime => {
+                        if _serde::__private::Option::is_some(&m_simulateUntilTime) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "simulateUntilTime",
+                                ),
+                            );
+                        }
+                        m_simulateUntilTime = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_simulateUntilTime = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_frameMarkerPsiSnap => {
-                    if _serde::__private::Option::is_some(&m_frameMarkerPsiSnap) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "frameMarkerPsiSnap",
-                            ),
+                    __Field::m_frameMarkerPsiSnap => {
+                        if _serde::__private::Option::is_some(&m_frameMarkerPsiSnap) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "frameMarkerPsiSnap",
+                                ),
+                            );
+                        }
+                        m_frameMarkerPsiSnap = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_frameMarkerPsiSnap = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_previousStepResult => {
-                    if _serde::__private::Option::is_some(&m_previousStepResult) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "previousStepResult",
-                            ),
+                    __Field::m_previousStepResult => {
+                        if _serde::__private::Option::is_some(&m_previousStepResult) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "previousStepResult",
+                                ),
+                            );
+                        }
+                        m_previousStepResult = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_previousStepResult = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_determinismCheckFrameCounter = match m_determinismCheckFrameCounter {

@@ -224,50 +224,47 @@ impl<'de> _serde::de::Visitor<'de> for __hkbDelayedModifierInternalStateVisitor<
         let parent = __hkReferencedObjectVisitor::visit_as_parent(&mut __map)?;
         let mut m_secondsElapsed: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_isActive: _serde::__private::Option<bool> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_secondsElapsed => {
-                    if _serde::__private::Option::is_some(&m_secondsElapsed) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "secondsElapsed",
-                            ),
+        for _ in 0..2usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_secondsElapsed => {
+                        if _serde::__private::Option::is_some(&m_secondsElapsed) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "secondsElapsed",
+                                ),
+                            );
+                        }
+                        m_secondsElapsed = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_secondsElapsed = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_isActive => {
-                    if _serde::__private::Option::is_some(&m_isActive) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "isActive",
-                            ),
+                    __Field::m_isActive => {
+                        if _serde::__private::Option::is_some(&m_isActive) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "isActive",
+                                ),
+                            );
+                        }
+                        m_isActive = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_isActive = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_secondsElapsed = match m_secondsElapsed {

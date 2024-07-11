@@ -302,84 +302,83 @@ for __hkbCharacterDataCharacterControllerInfoVisitor<'de> {
         let mut m_capsuleRadius: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
         let mut m_characterControllerCinfo: _serde::__private::Option<Pointer> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_capsuleHeight => {
-                    if _serde::__private::Option::is_some(&m_capsuleHeight) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "capsuleHeight",
-                            ),
+        for _ in 0..4usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_capsuleHeight => {
+                        if _serde::__private::Option::is_some(&m_capsuleHeight) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "capsuleHeight",
+                                ),
+                            );
+                        }
+                        m_capsuleHeight = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_capsuleHeight = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_capsuleRadius => {
-                    if _serde::__private::Option::is_some(&m_capsuleRadius) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "capsuleRadius",
-                            ),
+                    __Field::m_capsuleRadius => {
+                        if _serde::__private::Option::is_some(&m_capsuleRadius) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "capsuleRadius",
+                                ),
+                            );
+                        }
+                        m_capsuleRadius = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_capsuleRadius = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_collisionFilterInfo => {
-                    if _serde::__private::Option::is_some(&m_collisionFilterInfo) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "collisionFilterInfo",
-                            ),
+                    __Field::m_collisionFilterInfo => {
+                        if _serde::__private::Option::is_some(&m_collisionFilterInfo) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "collisionFilterInfo",
+                                ),
+                            );
+                        }
+                        m_collisionFilterInfo = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_collisionFilterInfo = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_characterControllerCinfo => {
-                    if _serde::__private::Option::is_some(&m_characterControllerCinfo) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "characterControllerCinfo",
-                            ),
+                    __Field::m_characterControllerCinfo => {
+                        if _serde::__private::Option::is_some(
+                            &m_characterControllerCinfo,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "characterControllerCinfo",
+                                ),
+                            );
+                        }
+                        m_characterControllerCinfo = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_characterControllerCinfo = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_capsuleHeight = match m_capsuleHeight {

@@ -524,182 +524,181 @@ impl<'de> _serde::de::Visitor<'de> for __hkbClipGeneratorInternalStateVisitor<'d
         let mut m_atEnd: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_ignoreStartTime: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_pingPongBackward: _serde::__private::Option<bool> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_extractedMotion => {
-                    if _serde::__private::Option::is_some(&m_extractedMotion) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "extractedMotion",
-                            ),
+        for _ in 0..10usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_extractedMotion => {
+                        if _serde::__private::Option::is_some(&m_extractedMotion) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "extractedMotion",
+                                ),
+                            );
+                        }
+                        m_extractedMotion = _serde::__private::Some(
+                            match __A::next_value::<QsTransform>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_extractedMotion = _serde::__private::Some(
-                        match __A::next_value::<QsTransform>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_echos => {
-                    if _serde::__private::Option::is_some(&m_echos) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("echos"),
+                    __Field::m_echos => {
+                        if _serde::__private::Option::is_some(&m_echos) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("echos"),
+                            );
+                        }
+                        m_echos = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<hkbClipGeneratorEcho>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_echos = _serde::__private::Some(
-                        match __A::next_value::<Vec<hkbClipGeneratorEcho>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_localTime => {
-                    if _serde::__private::Option::is_some(&m_localTime) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "localTime",
-                            ),
+                    __Field::m_localTime => {
+                        if _serde::__private::Option::is_some(&m_localTime) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "localTime",
+                                ),
+                            );
+                        }
+                        m_localTime = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_localTime = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_time => {
-                    if _serde::__private::Option::is_some(&m_time) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("time"),
+                    __Field::m_time => {
+                        if _serde::__private::Option::is_some(&m_time) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("time"),
+                            );
+                        }
+                        m_time = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_time = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_previousUserControlledTimeFraction => {
-                    if _serde::__private::Option::is_some(
-                        &m_previousUserControlledTimeFraction,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "previousUserControlledTimeFraction",
-                            ),
+                    __Field::m_previousUserControlledTimeFraction => {
+                        if _serde::__private::Option::is_some(
+                            &m_previousUserControlledTimeFraction,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "previousUserControlledTimeFraction",
+                                ),
+                            );
+                        }
+                        m_previousUserControlledTimeFraction = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_previousUserControlledTimeFraction = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_bufferSize => {
-                    if _serde::__private::Option::is_some(&m_bufferSize) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "bufferSize",
-                            ),
+                    __Field::m_bufferSize => {
+                        if _serde::__private::Option::is_some(&m_bufferSize) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "bufferSize",
+                                ),
+                            );
+                        }
+                        m_bufferSize = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_bufferSize = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_echoBufferSize => {
-                    if _serde::__private::Option::is_some(&m_echoBufferSize) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "echoBufferSize",
-                            ),
+                    __Field::m_echoBufferSize => {
+                        if _serde::__private::Option::is_some(&m_echoBufferSize) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "echoBufferSize",
+                                ),
+                            );
+                        }
+                        m_echoBufferSize = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_echoBufferSize = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_atEnd => {
-                    if _serde::__private::Option::is_some(&m_atEnd) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("atEnd"),
+                    __Field::m_atEnd => {
+                        if _serde::__private::Option::is_some(&m_atEnd) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("atEnd"),
+                            );
+                        }
+                        m_atEnd = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_atEnd = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_ignoreStartTime => {
-                    if _serde::__private::Option::is_some(&m_ignoreStartTime) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "ignoreStartTime",
-                            ),
+                    __Field::m_ignoreStartTime => {
+                        if _serde::__private::Option::is_some(&m_ignoreStartTime) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "ignoreStartTime",
+                                ),
+                            );
+                        }
+                        m_ignoreStartTime = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_ignoreStartTime = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_pingPongBackward => {
-                    if _serde::__private::Option::is_some(&m_pingPongBackward) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "pingPongBackward",
-                            ),
+                    __Field::m_pingPongBackward => {
+                        if _serde::__private::Option::is_some(&m_pingPongBackward) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "pingPongBackward",
+                                ),
+                            );
+                        }
+                        m_pingPongBackward = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_pingPongBackward = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_extractedMotion = match m_extractedMotion {

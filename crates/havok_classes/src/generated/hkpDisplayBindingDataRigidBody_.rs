@@ -271,69 +271,66 @@ impl<'de> _serde::de::Visitor<'de> for __hkpDisplayBindingDataRigidBodyVisitor<'
         let mut m_rigidBodyFromDisplayObjectTransform: _serde::__private::Option<
             Matrix4,
         > = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_rigidBody => {
-                    if _serde::__private::Option::is_some(&m_rigidBody) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "rigidBody",
-                            ),
+        for _ in 0..3usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_rigidBody => {
+                        if _serde::__private::Option::is_some(&m_rigidBody) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "rigidBody",
+                                ),
+                            );
+                        }
+                        m_rigidBody = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_rigidBody = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_displayObjectPtr => {
-                    if _serde::__private::Option::is_some(&m_displayObjectPtr) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "displayObjectPtr",
-                            ),
+                    __Field::m_displayObjectPtr => {
+                        if _serde::__private::Option::is_some(&m_displayObjectPtr) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "displayObjectPtr",
+                                ),
+                            );
+                        }
+                        m_displayObjectPtr = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_displayObjectPtr = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_rigidBodyFromDisplayObjectTransform => {
-                    if _serde::__private::Option::is_some(
-                        &m_rigidBodyFromDisplayObjectTransform,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "rigidBodyFromDisplayObjectTransform",
-                            ),
+                    __Field::m_rigidBodyFromDisplayObjectTransform => {
+                        if _serde::__private::Option::is_some(
+                            &m_rigidBodyFromDisplayObjectTransform,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "rigidBodyFromDisplayObjectTransform",
+                                ),
+                            );
+                        }
+                        m_rigidBodyFromDisplayObjectTransform = _serde::__private::Some(
+                            match __A::next_value::<Matrix4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_rigidBodyFromDisplayObjectTransform = _serde::__private::Some(
-                        match __A::next_value::<Matrix4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_rigidBody = match m_rigidBody {

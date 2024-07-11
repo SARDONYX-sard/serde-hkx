@@ -369,103 +369,104 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleLinearCastWheelCollideVisitor
         > = _serde::__private::None;
         let mut m_maxExtraPenetration: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_startPointTolerance: _serde::__private::Option<f32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_wheelCollisionFilterInfo => {
-                    if _serde::__private::Option::is_some(&m_wheelCollisionFilterInfo) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "wheelCollisionFilterInfo",
-                            ),
+        for _ in 0..5usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_wheelCollisionFilterInfo => {
+                        if _serde::__private::Option::is_some(
+                            &m_wheelCollisionFilterInfo,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "wheelCollisionFilterInfo",
+                                ),
+                            );
+                        }
+                        m_wheelCollisionFilterInfo = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_wheelCollisionFilterInfo = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_wheelStates => {
-                    if _serde::__private::Option::is_some(&m_wheelStates) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "wheelStates",
-                            ),
+                    __Field::m_wheelStates => {
+                        if _serde::__private::Option::is_some(&m_wheelStates) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "wheelStates",
+                                ),
+                            );
+                        }
+                        m_wheelStates = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<hkpVehicleLinearCastWheelCollideWheelState>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_wheelStates = _serde::__private::Some(
-                        match __A::next_value::<
-                            Vec<hkpVehicleLinearCastWheelCollideWheelState>,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_rejectChassisListener => {
-                    if _serde::__private::Option::is_some(&m_rejectChassisListener) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "rejectChassisListener",
-                            ),
+                    __Field::m_rejectChassisListener => {
+                        if _serde::__private::Option::is_some(&m_rejectChassisListener) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "rejectChassisListener",
+                                ),
+                            );
+                        }
+                        m_rejectChassisListener = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpRejectChassisListener,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_rejectChassisListener = _serde::__private::Some(
-                        match __A::next_value::<hkpRejectChassisListener>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_maxExtraPenetration => {
-                    if _serde::__private::Option::is_some(&m_maxExtraPenetration) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "maxExtraPenetration",
-                            ),
+                    __Field::m_maxExtraPenetration => {
+                        if _serde::__private::Option::is_some(&m_maxExtraPenetration) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "maxExtraPenetration",
+                                ),
+                            );
+                        }
+                        m_maxExtraPenetration = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_maxExtraPenetration = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_startPointTolerance => {
-                    if _serde::__private::Option::is_some(&m_startPointTolerance) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "startPointTolerance",
-                            ),
+                    __Field::m_startPointTolerance => {
+                        if _serde::__private::Option::is_some(&m_startPointTolerance) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "startPointTolerance",
+                                ),
+                            );
+                        }
+                        m_startPointTolerance = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_startPointTolerance = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_wheelCollisionFilterInfo = match m_wheelCollisionFilterInfo {

@@ -364,103 +364,100 @@ impl<'de> _serde::de::Visitor<'de> for __hkpConvexListShapeVisitor<'de> {
         let mut m_aabbCenter: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_useCachedAabb: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_childShapes: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_minDistanceToUseConvexHullForGetClosestPoints => {
-                    if _serde::__private::Option::is_some(
-                        &m_minDistanceToUseConvexHullForGetClosestPoints,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "minDistanceToUseConvexHullForGetClosestPoints",
-                            ),
+        for _ in 0..5usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_minDistanceToUseConvexHullForGetClosestPoints => {
+                        if _serde::__private::Option::is_some(
+                            &m_minDistanceToUseConvexHullForGetClosestPoints,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "minDistanceToUseConvexHullForGetClosestPoints",
+                                ),
+                            );
+                        }
+                        m_minDistanceToUseConvexHullForGetClosestPoints = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_minDistanceToUseConvexHullForGetClosestPoints = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_aabbHalfExtents => {
-                    if _serde::__private::Option::is_some(&m_aabbHalfExtents) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "aabbHalfExtents",
-                            ),
+                    __Field::m_aabbHalfExtents => {
+                        if _serde::__private::Option::is_some(&m_aabbHalfExtents) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "aabbHalfExtents",
+                                ),
+                            );
+                        }
+                        m_aabbHalfExtents = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_aabbHalfExtents = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_aabbCenter => {
-                    if _serde::__private::Option::is_some(&m_aabbCenter) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "aabbCenter",
-                            ),
+                    __Field::m_aabbCenter => {
+                        if _serde::__private::Option::is_some(&m_aabbCenter) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "aabbCenter",
+                                ),
+                            );
+                        }
+                        m_aabbCenter = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_aabbCenter = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_useCachedAabb => {
-                    if _serde::__private::Option::is_some(&m_useCachedAabb) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "useCachedAabb",
-                            ),
+                    __Field::m_useCachedAabb => {
+                        if _serde::__private::Option::is_some(&m_useCachedAabb) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "useCachedAabb",
+                                ),
+                            );
+                        }
+                        m_useCachedAabb = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_useCachedAabb = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_childShapes => {
-                    if _serde::__private::Option::is_some(&m_childShapes) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "childShapes",
-                            ),
+                    __Field::m_childShapes => {
+                        if _serde::__private::Option::is_some(&m_childShapes) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "childShapes",
+                                ),
+                            );
+                        }
+                        m_childShapes = _serde::__private::Some(
+                            match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_childShapes = _serde::__private::Some(
-                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_minDistanceToUseConvexHullForGetClosestPoints = match m_minDistanceToUseConvexHullForGetClosestPoints {

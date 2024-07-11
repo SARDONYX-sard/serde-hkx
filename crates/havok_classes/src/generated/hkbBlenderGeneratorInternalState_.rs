@@ -471,154 +471,153 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBlenderGeneratorInternalStateVisitor
         let mut m_endIntervalIndex: _serde::__private::Option<i16> = _serde::__private::None;
         let mut m_initSync: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_doSubtractiveBlend: _serde::__private::Option<bool> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_childrenInternalStates => {
-                    if _serde::__private::Option::is_some(&m_childrenInternalStates) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "childrenInternalStates",
-                            ),
+        for _ in 0..8usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_childrenInternalStates => {
+                        if _serde::__private::Option::is_some(
+                            &m_childrenInternalStates,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "childrenInternalStates",
+                                ),
+                            );
+                        }
+                        m_childrenInternalStates = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<hkbBlenderGeneratorChildInternalState>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_childrenInternalStates = _serde::__private::Some(
-                        match __A::next_value::<
-                            Vec<hkbBlenderGeneratorChildInternalState>,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_sortedChildren => {
-                    if _serde::__private::Option::is_some(&m_sortedChildren) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "sortedChildren",
-                            ),
+                    __Field::m_sortedChildren => {
+                        if _serde::__private::Option::is_some(&m_sortedChildren) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "sortedChildren",
+                                ),
+                            );
+                        }
+                        m_sortedChildren = _serde::__private::Some(
+                            match __A::next_value::<Vec<i16>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_sortedChildren = _serde::__private::Some(
-                        match __A::next_value::<Vec<i16>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_endIntervalWeight => {
-                    if _serde::__private::Option::is_some(&m_endIntervalWeight) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "endIntervalWeight",
-                            ),
+                    __Field::m_endIntervalWeight => {
+                        if _serde::__private::Option::is_some(&m_endIntervalWeight) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "endIntervalWeight",
+                                ),
+                            );
+                        }
+                        m_endIntervalWeight = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_endIntervalWeight = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numActiveChildren => {
-                    if _serde::__private::Option::is_some(&m_numActiveChildren) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numActiveChildren",
-                            ),
+                    __Field::m_numActiveChildren => {
+                        if _serde::__private::Option::is_some(&m_numActiveChildren) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numActiveChildren",
+                                ),
+                            );
+                        }
+                        m_numActiveChildren = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numActiveChildren = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_beginIntervalIndex => {
-                    if _serde::__private::Option::is_some(&m_beginIntervalIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "beginIntervalIndex",
-                            ),
+                    __Field::m_beginIntervalIndex => {
+                        if _serde::__private::Option::is_some(&m_beginIntervalIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "beginIntervalIndex",
+                                ),
+                            );
+                        }
+                        m_beginIntervalIndex = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_beginIntervalIndex = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_endIntervalIndex => {
-                    if _serde::__private::Option::is_some(&m_endIntervalIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "endIntervalIndex",
-                            ),
+                    __Field::m_endIntervalIndex => {
+                        if _serde::__private::Option::is_some(&m_endIntervalIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "endIntervalIndex",
+                                ),
+                            );
+                        }
+                        m_endIntervalIndex = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_endIntervalIndex = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_initSync => {
-                    if _serde::__private::Option::is_some(&m_initSync) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "initSync",
-                            ),
+                    __Field::m_initSync => {
+                        if _serde::__private::Option::is_some(&m_initSync) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "initSync",
+                                ),
+                            );
+                        }
+                        m_initSync = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_initSync = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_doSubtractiveBlend => {
-                    if _serde::__private::Option::is_some(&m_doSubtractiveBlend) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "doSubtractiveBlend",
-                            ),
+                    __Field::m_doSubtractiveBlend => {
+                        if _serde::__private::Option::is_some(&m_doSubtractiveBlend) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "doSubtractiveBlend",
+                                ),
+                            );
+                        }
+                        m_doSubtractiveBlend = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_doSubtractiveBlend = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_childrenInternalStates = match m_childrenInternalStates {

@@ -216,52 +216,49 @@ impl<'de> _serde::de::Visitor<'de> for __hkVertexFormatVisitor<'de> {
             [hkVertexFormatElement; 32usize],
         > = _serde::__private::None;
         let mut m_numElements: _serde::__private::Option<i32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_elements => {
-                    if _serde::__private::Option::is_some(&m_elements) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "elements",
-                            ),
+        for _ in 0..2usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_elements => {
+                        if _serde::__private::Option::is_some(&m_elements) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "elements",
+                                ),
+                            );
+                        }
+                        m_elements = _serde::__private::Some(
+                            match __A::next_value::<
+                                [hkVertexFormatElement; 32usize],
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_elements = _serde::__private::Some(
-                        match __A::next_value::<
-                            [hkVertexFormatElement; 32usize],
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numElements => {
-                    if _serde::__private::Option::is_some(&m_numElements) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numElements",
-                            ),
+                    __Field::m_numElements => {
+                        if _serde::__private::Option::is_some(&m_numElements) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numElements",
+                                ),
+                            );
+                        }
+                        m_numElements = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numElements = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_elements = match m_elements {

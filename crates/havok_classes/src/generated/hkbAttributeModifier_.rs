@@ -227,35 +227,32 @@ impl<'de> _serde::de::Visitor<'de> for __hkbAttributeModifierVisitor<'de> {
         let mut m_assignments: _serde::__private::Option<
             Vec<hkbAttributeModifierAssignment>,
         > = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_assignments => {
-                    if _serde::__private::Option::is_some(&m_assignments) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "assignments",
-                            ),
+        for _ in 0..1usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_assignments => {
+                        if _serde::__private::Option::is_some(&m_assignments) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "assignments",
+                                ),
+                            );
+                        }
+                        m_assignments = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<hkbAttributeModifierAssignment>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_assignments = _serde::__private::Some(
-                        match __A::next_value::<
-                            Vec<hkbAttributeModifierAssignment>,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_assignments = match m_assignments {

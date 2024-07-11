@@ -400,131 +400,132 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPrismaticConstraintDataAtomsVisitor<
         let mut m_lin0: _serde::__private::Option<hkpLinConstraintAtom> = _serde::__private::None;
         let mut m_lin1: _serde::__private::Option<hkpLinConstraintAtom> = _serde::__private::None;
         let mut m_linLimit: _serde::__private::Option<hkpLinLimitConstraintAtom> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_transforms => {
-                    if _serde::__private::Option::is_some(&m_transforms) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "transforms",
-                            ),
+        for _ in 0..7usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_transforms => {
+                        if _serde::__private::Option::is_some(&m_transforms) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "transforms",
+                                ),
+                            );
+                        }
+                        m_transforms = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpSetLocalTransformsConstraintAtom,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_transforms = _serde::__private::Some(
-                        match __A::next_value::<
-                            hkpSetLocalTransformsConstraintAtom,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_motor => {
-                    if _serde::__private::Option::is_some(&m_motor) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("motor"),
+                    __Field::m_motor => {
+                        if _serde::__private::Option::is_some(&m_motor) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("motor"),
+                            );
+                        }
+                        m_motor = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpLinMotorConstraintAtom,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_motor = _serde::__private::Some(
-                        match __A::next_value::<hkpLinMotorConstraintAtom>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_friction => {
-                    if _serde::__private::Option::is_some(&m_friction) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "friction",
-                            ),
+                    __Field::m_friction => {
+                        if _serde::__private::Option::is_some(&m_friction) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "friction",
+                                ),
+                            );
+                        }
+                        m_friction = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpLinFrictionConstraintAtom,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_friction = _serde::__private::Some(
-                        match __A::next_value::<
-                            hkpLinFrictionConstraintAtom,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_ang => {
-                    if _serde::__private::Option::is_some(&m_ang) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("ang"),
+                    __Field::m_ang => {
+                        if _serde::__private::Option::is_some(&m_ang) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("ang"),
+                            );
+                        }
+                        m_ang = _serde::__private::Some(
+                            match __A::next_value::<hkpAngConstraintAtom>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_ang = _serde::__private::Some(
-                        match __A::next_value::<hkpAngConstraintAtom>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_lin0 => {
-                    if _serde::__private::Option::is_some(&m_lin0) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("lin0"),
+                    __Field::m_lin0 => {
+                        if _serde::__private::Option::is_some(&m_lin0) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("lin0"),
+                            );
+                        }
+                        m_lin0 = _serde::__private::Some(
+                            match __A::next_value::<hkpLinConstraintAtom>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_lin0 = _serde::__private::Some(
-                        match __A::next_value::<hkpLinConstraintAtom>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_lin1 => {
-                    if _serde::__private::Option::is_some(&m_lin1) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("lin1"),
+                    __Field::m_lin1 => {
+                        if _serde::__private::Option::is_some(&m_lin1) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("lin1"),
+                            );
+                        }
+                        m_lin1 = _serde::__private::Some(
+                            match __A::next_value::<hkpLinConstraintAtom>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_lin1 = _serde::__private::Some(
-                        match __A::next_value::<hkpLinConstraintAtom>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_linLimit => {
-                    if _serde::__private::Option::is_some(&m_linLimit) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "linLimit",
-                            ),
+                    __Field::m_linLimit => {
+                        if _serde::__private::Option::is_some(&m_linLimit) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "linLimit",
+                                ),
+                            );
+                        }
+                        m_linLimit = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpLinLimitConstraintAtom,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_linLimit = _serde::__private::Some(
-                        match __A::next_value::<hkpLinLimitConstraintAtom>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_transforms = match m_transforms {

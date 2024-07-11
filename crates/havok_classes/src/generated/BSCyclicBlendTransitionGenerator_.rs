@@ -540,118 +540,117 @@ impl<'de> _serde::de::Visitor<'de> for __BSCyclicBlendTransitionGeneratorVisitor
         let mut m_fBlendParameter: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_fTransitionDuration: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_eBlendCurve: _serde::__private::Option<BlendCurve> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_pBlenderGenerator => {
-                    if _serde::__private::Option::is_some(&m_pBlenderGenerator) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "pBlenderGenerator",
-                            ),
+        for _ in 0..6usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_pBlenderGenerator => {
+                        if _serde::__private::Option::is_some(&m_pBlenderGenerator) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "pBlenderGenerator",
+                                ),
+                            );
+                        }
+                        m_pBlenderGenerator = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_pBlenderGenerator = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_EventToFreezeBlendValue => {
-                    if _serde::__private::Option::is_some(&m_EventToFreezeBlendValue) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "EventToFreezeBlendValue",
-                            ),
+                    __Field::m_EventToFreezeBlendValue => {
+                        if _serde::__private::Option::is_some(
+                            &m_EventToFreezeBlendValue,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "EventToFreezeBlendValue",
+                                ),
+                            );
+                        }
+                        m_EventToFreezeBlendValue = _serde::__private::Some(
+                            match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_EventToFreezeBlendValue = _serde::__private::Some(
-                        match __A::next_value::<hkbEventProperty>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_EventToCrossBlend => {
-                    if _serde::__private::Option::is_some(&m_EventToCrossBlend) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "EventToCrossBlend",
-                            ),
+                    __Field::m_EventToCrossBlend => {
+                        if _serde::__private::Option::is_some(&m_EventToCrossBlend) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "EventToCrossBlend",
+                                ),
+                            );
+                        }
+                        m_EventToCrossBlend = _serde::__private::Some(
+                            match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_EventToCrossBlend = _serde::__private::Some(
-                        match __A::next_value::<hkbEventProperty>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_fBlendParameter => {
-                    if _serde::__private::Option::is_some(&m_fBlendParameter) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "fBlendParameter",
-                            ),
+                    __Field::m_fBlendParameter => {
+                        if _serde::__private::Option::is_some(&m_fBlendParameter) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "fBlendParameter",
+                                ),
+                            );
+                        }
+                        m_fBlendParameter = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_fBlendParameter = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_fTransitionDuration => {
-                    if _serde::__private::Option::is_some(&m_fTransitionDuration) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "fTransitionDuration",
-                            ),
+                    __Field::m_fTransitionDuration => {
+                        if _serde::__private::Option::is_some(&m_fTransitionDuration) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "fTransitionDuration",
+                                ),
+                            );
+                        }
+                        m_fTransitionDuration = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_fTransitionDuration = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_eBlendCurve => {
-                    if _serde::__private::Option::is_some(&m_eBlendCurve) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "eBlendCurve",
-                            ),
+                    __Field::m_eBlendCurve => {
+                        if _serde::__private::Option::is_some(&m_eBlendCurve) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "eBlendCurve",
+                                ),
+                            );
+                        }
+                        m_eBlendCurve = _serde::__private::Some(
+                            match __A::next_value::<BlendCurve>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_eBlendCurve = _serde::__private::Some(
-                        match __A::next_value::<BlendCurve>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_pBlenderGenerator = match m_pBlenderGenerator {

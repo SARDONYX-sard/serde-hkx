@@ -405,131 +405,128 @@ impl<'de> _serde::de::Visitor<'de> for __hkMemoryMeshTextureVisitor<'de> {
         let mut m_filterMode: _serde::__private::Option<FilterMode> = _serde::__private::None;
         let mut m_usageHint: _serde::__private::Option<TextureUsageType> = _serde::__private::None;
         let mut m_textureCoordChannel: _serde::__private::Option<i32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_filename => {
-                    if _serde::__private::Option::is_some(&m_filename) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "filename",
-                            ),
+        for _ in 0..7usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_filename => {
+                        if _serde::__private::Option::is_some(&m_filename) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "filename",
+                                ),
+                            );
+                        }
+                        m_filename = _serde::__private::Some(
+                            match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_filename = _serde::__private::Some(
-                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_data => {
-                    if _serde::__private::Option::is_some(&m_data) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("data"),
+                    __Field::m_data => {
+                        if _serde::__private::Option::is_some(&m_data) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("data"),
+                            );
+                        }
+                        m_data = _serde::__private::Some(
+                            match __A::next_value::<Vec<u8>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_data = _serde::__private::Some(
-                        match __A::next_value::<Vec<u8>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_format => {
-                    if _serde::__private::Option::is_some(&m_format) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("format"),
+                    __Field::m_format => {
+                        if _serde::__private::Option::is_some(&m_format) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("format"),
+                            );
+                        }
+                        m_format = _serde::__private::Some(
+                            match __A::next_value::<Format>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_format = _serde::__private::Some(
-                        match __A::next_value::<Format>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_hasMipMaps => {
-                    if _serde::__private::Option::is_some(&m_hasMipMaps) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "hasMipMaps",
-                            ),
+                    __Field::m_hasMipMaps => {
+                        if _serde::__private::Option::is_some(&m_hasMipMaps) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "hasMipMaps",
+                                ),
+                            );
+                        }
+                        m_hasMipMaps = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_hasMipMaps = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_filterMode => {
-                    if _serde::__private::Option::is_some(&m_filterMode) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "filterMode",
-                            ),
+                    __Field::m_filterMode => {
+                        if _serde::__private::Option::is_some(&m_filterMode) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "filterMode",
+                                ),
+                            );
+                        }
+                        m_filterMode = _serde::__private::Some(
+                            match __A::next_value::<FilterMode>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_filterMode = _serde::__private::Some(
-                        match __A::next_value::<FilterMode>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_usageHint => {
-                    if _serde::__private::Option::is_some(&m_usageHint) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "usageHint",
-                            ),
+                    __Field::m_usageHint => {
+                        if _serde::__private::Option::is_some(&m_usageHint) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "usageHint",
+                                ),
+                            );
+                        }
+                        m_usageHint = _serde::__private::Some(
+                            match __A::next_value::<TextureUsageType>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_usageHint = _serde::__private::Some(
-                        match __A::next_value::<TextureUsageType>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_textureCoordChannel => {
-                    if _serde::__private::Option::is_some(&m_textureCoordChannel) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "textureCoordChannel",
-                            ),
+                    __Field::m_textureCoordChannel => {
+                        if _serde::__private::Option::is_some(&m_textureCoordChannel) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "textureCoordChannel",
+                                ),
+                            );
+                        }
+                        m_textureCoordChannel = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_textureCoordChannel = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_filename = match m_filename {

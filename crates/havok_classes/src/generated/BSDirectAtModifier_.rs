@@ -1095,333 +1095,332 @@ impl<'de> _serde::de::Visitor<'de> for __BSDirectAtModifierVisitor<'de> {
         let mut m_active: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_currentHeadingOffset: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_currentPitchOffset: _serde::__private::Option<f32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_directAtTarget => {
-                    if _serde::__private::Option::is_some(&m_directAtTarget) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "directAtTarget",
-                            ),
+        for _ in 0..19usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_directAtTarget => {
+                        if _serde::__private::Option::is_some(&m_directAtTarget) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "directAtTarget",
+                                ),
+                            );
+                        }
+                        m_directAtTarget = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_directAtTarget = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_sourceBoneIndex => {
-                    if _serde::__private::Option::is_some(&m_sourceBoneIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "sourceBoneIndex",
-                            ),
+                    __Field::m_sourceBoneIndex => {
+                        if _serde::__private::Option::is_some(&m_sourceBoneIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "sourceBoneIndex",
+                                ),
+                            );
+                        }
+                        m_sourceBoneIndex = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_sourceBoneIndex = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_startBoneIndex => {
-                    if _serde::__private::Option::is_some(&m_startBoneIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "startBoneIndex",
-                            ),
+                    __Field::m_startBoneIndex => {
+                        if _serde::__private::Option::is_some(&m_startBoneIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "startBoneIndex",
+                                ),
+                            );
+                        }
+                        m_startBoneIndex = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_startBoneIndex = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_endBoneIndex => {
-                    if _serde::__private::Option::is_some(&m_endBoneIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "endBoneIndex",
-                            ),
+                    __Field::m_endBoneIndex => {
+                        if _serde::__private::Option::is_some(&m_endBoneIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "endBoneIndex",
+                                ),
+                            );
+                        }
+                        m_endBoneIndex = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_endBoneIndex = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_limitHeadingDegrees => {
-                    if _serde::__private::Option::is_some(&m_limitHeadingDegrees) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "limitHeadingDegrees",
-                            ),
+                    __Field::m_limitHeadingDegrees => {
+                        if _serde::__private::Option::is_some(&m_limitHeadingDegrees) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "limitHeadingDegrees",
+                                ),
+                            );
+                        }
+                        m_limitHeadingDegrees = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_limitHeadingDegrees = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_limitPitchDegrees => {
-                    if _serde::__private::Option::is_some(&m_limitPitchDegrees) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "limitPitchDegrees",
-                            ),
+                    __Field::m_limitPitchDegrees => {
+                        if _serde::__private::Option::is_some(&m_limitPitchDegrees) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "limitPitchDegrees",
+                                ),
+                            );
+                        }
+                        m_limitPitchDegrees = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_limitPitchDegrees = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_offsetHeadingDegrees => {
-                    if _serde::__private::Option::is_some(&m_offsetHeadingDegrees) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "offsetHeadingDegrees",
-                            ),
+                    __Field::m_offsetHeadingDegrees => {
+                        if _serde::__private::Option::is_some(&m_offsetHeadingDegrees) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "offsetHeadingDegrees",
+                                ),
+                            );
+                        }
+                        m_offsetHeadingDegrees = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_offsetHeadingDegrees = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_offsetPitchDegrees => {
-                    if _serde::__private::Option::is_some(&m_offsetPitchDegrees) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "offsetPitchDegrees",
-                            ),
+                    __Field::m_offsetPitchDegrees => {
+                        if _serde::__private::Option::is_some(&m_offsetPitchDegrees) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "offsetPitchDegrees",
+                                ),
+                            );
+                        }
+                        m_offsetPitchDegrees = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_offsetPitchDegrees = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_onGain => {
-                    if _serde::__private::Option::is_some(&m_onGain) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("onGain"),
+                    __Field::m_onGain => {
+                        if _serde::__private::Option::is_some(&m_onGain) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("onGain"),
+                            );
+                        }
+                        m_onGain = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_onGain = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_offGain => {
-                    if _serde::__private::Option::is_some(&m_offGain) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("offGain"),
+                    __Field::m_offGain => {
+                        if _serde::__private::Option::is_some(&m_offGain) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "offGain",
+                                ),
+                            );
+                        }
+                        m_offGain = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_offGain = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_targetLocation => {
-                    if _serde::__private::Option::is_some(&m_targetLocation) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "targetLocation",
-                            ),
+                    __Field::m_targetLocation => {
+                        if _serde::__private::Option::is_some(&m_targetLocation) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "targetLocation",
+                                ),
+                            );
+                        }
+                        m_targetLocation = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_targetLocation = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_userInfo => {
-                    if _serde::__private::Option::is_some(&m_userInfo) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "userInfo",
-                            ),
+                    __Field::m_userInfo => {
+                        if _serde::__private::Option::is_some(&m_userInfo) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "userInfo",
+                                ),
+                            );
+                        }
+                        m_userInfo = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_userInfo = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_directAtCamera => {
-                    if _serde::__private::Option::is_some(&m_directAtCamera) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "directAtCamera",
-                            ),
+                    __Field::m_directAtCamera => {
+                        if _serde::__private::Option::is_some(&m_directAtCamera) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "directAtCamera",
+                                ),
+                            );
+                        }
+                        m_directAtCamera = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_directAtCamera = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_directAtCameraX => {
-                    if _serde::__private::Option::is_some(&m_directAtCameraX) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "directAtCameraX",
-                            ),
+                    __Field::m_directAtCameraX => {
+                        if _serde::__private::Option::is_some(&m_directAtCameraX) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "directAtCameraX",
+                                ),
+                            );
+                        }
+                        m_directAtCameraX = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_directAtCameraX = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_directAtCameraY => {
-                    if _serde::__private::Option::is_some(&m_directAtCameraY) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "directAtCameraY",
-                            ),
+                    __Field::m_directAtCameraY => {
+                        if _serde::__private::Option::is_some(&m_directAtCameraY) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "directAtCameraY",
+                                ),
+                            );
+                        }
+                        m_directAtCameraY = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_directAtCameraY = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_directAtCameraZ => {
-                    if _serde::__private::Option::is_some(&m_directAtCameraZ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "directAtCameraZ",
-                            ),
+                    __Field::m_directAtCameraZ => {
+                        if _serde::__private::Option::is_some(&m_directAtCameraZ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "directAtCameraZ",
+                                ),
+                            );
+                        }
+                        m_directAtCameraZ = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_directAtCameraZ = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_active => {
-                    if _serde::__private::Option::is_some(&m_active) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("active"),
+                    __Field::m_active => {
+                        if _serde::__private::Option::is_some(&m_active) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("active"),
+                            );
+                        }
+                        m_active = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_active = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_currentHeadingOffset => {
-                    if _serde::__private::Option::is_some(&m_currentHeadingOffset) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "currentHeadingOffset",
-                            ),
+                    __Field::m_currentHeadingOffset => {
+                        if _serde::__private::Option::is_some(&m_currentHeadingOffset) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "currentHeadingOffset",
+                                ),
+                            );
+                        }
+                        m_currentHeadingOffset = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_currentHeadingOffset = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_currentPitchOffset => {
-                    if _serde::__private::Option::is_some(&m_currentPitchOffset) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "currentPitchOffset",
-                            ),
+                    __Field::m_currentPitchOffset => {
+                        if _serde::__private::Option::is_some(&m_currentPitchOffset) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "currentPitchOffset",
+                                ),
+                            );
+                        }
+                        m_currentPitchOffset = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_currentPitchOffset = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_directAtTarget = match m_directAtTarget {

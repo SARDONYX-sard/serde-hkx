@@ -349,84 +349,85 @@ impl<'de> _serde::de::Visitor<'de> for __hkbPoweredRagdollControlsModifierVisito
             hkbWorldFromModelModeData,
         > = _serde::__private::None;
         let mut m_boneWeights: _serde::__private::Option<Pointer> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_controlData => {
-                    if _serde::__private::Option::is_some(&m_controlData) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "controlData",
-                            ),
+        for _ in 0..4usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_controlData => {
+                        if _serde::__private::Option::is_some(&m_controlData) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "controlData",
+                                ),
+                            );
+                        }
+                        m_controlData = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkbPoweredRagdollControlData,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_controlData = _serde::__private::Some(
-                        match __A::next_value::<
-                            hkbPoweredRagdollControlData,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_bones => {
-                    if _serde::__private::Option::is_some(&m_bones) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("bones"),
+                    __Field::m_bones => {
+                        if _serde::__private::Option::is_some(&m_bones) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("bones"),
+                            );
+                        }
+                        m_bones = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_bones = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_worldFromModelModeData => {
-                    if _serde::__private::Option::is_some(&m_worldFromModelModeData) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "worldFromModelModeData",
-                            ),
+                    __Field::m_worldFromModelModeData => {
+                        if _serde::__private::Option::is_some(
+                            &m_worldFromModelModeData,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "worldFromModelModeData",
+                                ),
+                            );
+                        }
+                        m_worldFromModelModeData = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkbWorldFromModelModeData,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_worldFromModelModeData = _serde::__private::Some(
-                        match __A::next_value::<hkbWorldFromModelModeData>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_boneWeights => {
-                    if _serde::__private::Option::is_some(&m_boneWeights) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "boneWeights",
-                            ),
+                    __Field::m_boneWeights => {
+                        if _serde::__private::Option::is_some(&m_boneWeights) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "boneWeights",
+                                ),
+                            );
+                        }
+                        m_boneWeights = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_boneWeights = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_controlData = match m_controlData {

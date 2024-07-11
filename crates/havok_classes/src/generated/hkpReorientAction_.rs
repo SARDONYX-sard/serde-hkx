@@ -305,80 +305,79 @@ impl<'de> _serde::de::Visitor<'de> for __hkpReorientActionVisitor<'de> {
         let mut m_upAxis: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_strength: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_damping: _serde::__private::Option<f32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_rotationAxis => {
-                    if _serde::__private::Option::is_some(&m_rotationAxis) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "rotationAxis",
-                            ),
+        for _ in 0..4usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_rotationAxis => {
+                        if _serde::__private::Option::is_some(&m_rotationAxis) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "rotationAxis",
+                                ),
+                            );
+                        }
+                        m_rotationAxis = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_rotationAxis = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_upAxis => {
-                    if _serde::__private::Option::is_some(&m_upAxis) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("upAxis"),
+                    __Field::m_upAxis => {
+                        if _serde::__private::Option::is_some(&m_upAxis) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("upAxis"),
+                            );
+                        }
+                        m_upAxis = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_upAxis = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_strength => {
-                    if _serde::__private::Option::is_some(&m_strength) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "strength",
-                            ),
+                    __Field::m_strength => {
+                        if _serde::__private::Option::is_some(&m_strength) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "strength",
+                                ),
+                            );
+                        }
+                        m_strength = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_strength = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_damping => {
-                    if _serde::__private::Option::is_some(&m_damping) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("damping"),
+                    __Field::m_damping => {
+                        if _serde::__private::Option::is_some(&m_damping) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "damping",
+                                ),
+                            );
+                        }
+                        m_damping = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_damping = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_rotationAxis = match m_rotationAxis {

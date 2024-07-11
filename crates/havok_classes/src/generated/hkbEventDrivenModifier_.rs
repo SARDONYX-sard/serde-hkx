@@ -344,67 +344,64 @@ impl<'de> _serde::de::Visitor<'de> for __hkbEventDrivenModifierVisitor<'de> {
         let mut m_activateEventId: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_deactivateEventId: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_activeByDefault: _serde::__private::Option<bool> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_activateEventId => {
-                    if _serde::__private::Option::is_some(&m_activateEventId) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "activateEventId",
-                            ),
+        for _ in 0..3usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_activateEventId => {
+                        if _serde::__private::Option::is_some(&m_activateEventId) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "activateEventId",
+                                ),
+                            );
+                        }
+                        m_activateEventId = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_activateEventId = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_deactivateEventId => {
-                    if _serde::__private::Option::is_some(&m_deactivateEventId) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "deactivateEventId",
-                            ),
+                    __Field::m_deactivateEventId => {
+                        if _serde::__private::Option::is_some(&m_deactivateEventId) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "deactivateEventId",
+                                ),
+                            );
+                        }
+                        m_deactivateEventId = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_deactivateEventId = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_activeByDefault => {
-                    if _serde::__private::Option::is_some(&m_activeByDefault) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "activeByDefault",
-                            ),
+                    __Field::m_activeByDefault => {
+                        if _serde::__private::Option::is_some(&m_activeByDefault) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "activeByDefault",
+                                ),
+                            );
+                        }
+                        m_activeByDefault = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_activeByDefault = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_activateEventId = match m_activateEventId {

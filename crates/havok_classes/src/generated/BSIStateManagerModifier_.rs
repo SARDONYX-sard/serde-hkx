@@ -306,52 +306,49 @@ impl<'de> _serde::de::Visitor<'de> for __BSIStateManagerModifierVisitor<'de> {
         let mut m_stateData: _serde::__private::Option<
             Vec<BSIStateManagerModifierBSiStateData>,
         > = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_iStateVar => {
-                    if _serde::__private::Option::is_some(&m_iStateVar) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "iStateVar",
-                            ),
+        for _ in 0..2usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_iStateVar => {
+                        if _serde::__private::Option::is_some(&m_iStateVar) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "iStateVar",
+                                ),
+                            );
+                        }
+                        m_iStateVar = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_iStateVar = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_stateData => {
-                    if _serde::__private::Option::is_some(&m_stateData) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "stateData",
-                            ),
+                    __Field::m_stateData => {
+                        if _serde::__private::Option::is_some(&m_stateData) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "stateData",
+                                ),
+                            );
+                        }
+                        m_stateData = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<BSIStateManagerModifierBSiStateData>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_stateData = _serde::__private::Some(
-                        match __A::next_value::<
-                            Vec<BSIStateManagerModifierBSiStateData>,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_iStateVar = match m_iStateVar {

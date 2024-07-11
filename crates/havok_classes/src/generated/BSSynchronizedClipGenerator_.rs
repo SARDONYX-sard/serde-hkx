@@ -920,171 +920,170 @@ impl<'de> _serde::de::Visitor<'de> for __BSSynchronizedClipGeneratorVisitor<'de>
         let mut m_bReorientSupportChar: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_bApplyMotionFromRoot: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_sAnimationBindingIndex: _serde::__private::Option<i16> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_pClipGenerator => {
-                    if _serde::__private::Option::is_some(&m_pClipGenerator) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "pClipGenerator",
-                            ),
+        for _ in 0..9usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_pClipGenerator => {
+                        if _serde::__private::Option::is_some(&m_pClipGenerator) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "pClipGenerator",
+                                ),
+                            );
+                        }
+                        m_pClipGenerator = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_pClipGenerator = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_SyncAnimPrefix => {
-                    if _serde::__private::Option::is_some(&m_SyncAnimPrefix) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "SyncAnimPrefix",
-                            ),
+                    __Field::m_SyncAnimPrefix => {
+                        if _serde::__private::Option::is_some(&m_SyncAnimPrefix) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "SyncAnimPrefix",
+                                ),
+                            );
+                        }
+                        m_SyncAnimPrefix = _serde::__private::Some(
+                            match __A::next_value::<CString<'de>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_SyncAnimPrefix = _serde::__private::Some(
-                        match __A::next_value::<CString<'de>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_bSyncClipIgnoreMarkPlacement => {
-                    if _serde::__private::Option::is_some(
-                        &m_bSyncClipIgnoreMarkPlacement,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "bSyncClipIgnoreMarkPlacement",
-                            ),
+                    __Field::m_bSyncClipIgnoreMarkPlacement => {
+                        if _serde::__private::Option::is_some(
+                            &m_bSyncClipIgnoreMarkPlacement,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "bSyncClipIgnoreMarkPlacement",
+                                ),
+                            );
+                        }
+                        m_bSyncClipIgnoreMarkPlacement = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_bSyncClipIgnoreMarkPlacement = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_fGetToMarkTime => {
-                    if _serde::__private::Option::is_some(&m_fGetToMarkTime) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "fGetToMarkTime",
-                            ),
+                    __Field::m_fGetToMarkTime => {
+                        if _serde::__private::Option::is_some(&m_fGetToMarkTime) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "fGetToMarkTime",
+                                ),
+                            );
+                        }
+                        m_fGetToMarkTime = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_fGetToMarkTime = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_fMarkErrorThreshold => {
-                    if _serde::__private::Option::is_some(&m_fMarkErrorThreshold) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "fMarkErrorThreshold",
-                            ),
+                    __Field::m_fMarkErrorThreshold => {
+                        if _serde::__private::Option::is_some(&m_fMarkErrorThreshold) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "fMarkErrorThreshold",
+                                ),
+                            );
+                        }
+                        m_fMarkErrorThreshold = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_fMarkErrorThreshold = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_bLeadCharacter => {
-                    if _serde::__private::Option::is_some(&m_bLeadCharacter) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "bLeadCharacter",
-                            ),
+                    __Field::m_bLeadCharacter => {
+                        if _serde::__private::Option::is_some(&m_bLeadCharacter) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "bLeadCharacter",
+                                ),
+                            );
+                        }
+                        m_bLeadCharacter = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_bLeadCharacter = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_bReorientSupportChar => {
-                    if _serde::__private::Option::is_some(&m_bReorientSupportChar) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "bReorientSupportChar",
-                            ),
+                    __Field::m_bReorientSupportChar => {
+                        if _serde::__private::Option::is_some(&m_bReorientSupportChar) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "bReorientSupportChar",
+                                ),
+                            );
+                        }
+                        m_bReorientSupportChar = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_bReorientSupportChar = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_bApplyMotionFromRoot => {
-                    if _serde::__private::Option::is_some(&m_bApplyMotionFromRoot) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "bApplyMotionFromRoot",
-                            ),
+                    __Field::m_bApplyMotionFromRoot => {
+                        if _serde::__private::Option::is_some(&m_bApplyMotionFromRoot) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "bApplyMotionFromRoot",
+                                ),
+                            );
+                        }
+                        m_bApplyMotionFromRoot = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_bApplyMotionFromRoot = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_sAnimationBindingIndex => {
-                    if _serde::__private::Option::is_some(&m_sAnimationBindingIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "sAnimationBindingIndex",
-                            ),
+                    __Field::m_sAnimationBindingIndex => {
+                        if _serde::__private::Option::is_some(
+                            &m_sAnimationBindingIndex,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "sAnimationBindingIndex",
+                                ),
+                            );
+                        }
+                        m_sAnimationBindingIndex = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_sAnimationBindingIndex = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_pClipGenerator = match m_pClipGenerator {

@@ -310,82 +310,83 @@ for __hkbCharacterControllerModifierInternalStateVisitor<'de> {
         let mut m_timestep: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_isInitialVelocityAdded: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_isTouchingGround: _serde::__private::Option<bool> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_gravity => {
-                    if _serde::__private::Option::is_some(&m_gravity) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("gravity"),
+        for _ in 0..4usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_gravity => {
+                        if _serde::__private::Option::is_some(&m_gravity) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "gravity",
+                                ),
+                            );
+                        }
+                        m_gravity = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_gravity = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_timestep => {
-                    if _serde::__private::Option::is_some(&m_timestep) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "timestep",
-                            ),
+                    __Field::m_timestep => {
+                        if _serde::__private::Option::is_some(&m_timestep) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "timestep",
+                                ),
+                            );
+                        }
+                        m_timestep = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_timestep = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_isInitialVelocityAdded => {
-                    if _serde::__private::Option::is_some(&m_isInitialVelocityAdded) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "isInitialVelocityAdded",
-                            ),
+                    __Field::m_isInitialVelocityAdded => {
+                        if _serde::__private::Option::is_some(
+                            &m_isInitialVelocityAdded,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "isInitialVelocityAdded",
+                                ),
+                            );
+                        }
+                        m_isInitialVelocityAdded = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_isInitialVelocityAdded = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_isTouchingGround => {
-                    if _serde::__private::Option::is_some(&m_isTouchingGround) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "isTouchingGround",
-                            ),
+                    __Field::m_isTouchingGround => {
+                        if _serde::__private::Option::is_some(&m_isTouchingGround) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "isTouchingGround",
+                                ),
+                            );
+                        }
+                        m_isTouchingGround = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_isTouchingGround = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_gravity = match m_gravity {

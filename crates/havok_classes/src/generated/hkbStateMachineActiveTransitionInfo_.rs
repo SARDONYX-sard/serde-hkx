@@ -446,126 +446,127 @@ for __hkbStateMachineActiveTransitionInfoVisitor<'de> {
         let mut m_fromStateId: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_toStateId: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_isReturnToPreviousState: _serde::__private::Option<bool> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_transitionEffectInternalStateInfo => {
-                    if _serde::__private::Option::is_some(
-                        &m_transitionEffectInternalStateInfo,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "transitionEffectInternalStateInfo",
-                            ),
+        for _ in 0..6usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_transitionEffectInternalStateInfo => {
+                        if _serde::__private::Option::is_some(
+                            &m_transitionEffectInternalStateInfo,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "transitionEffectInternalStateInfo",
+                                ),
+                            );
+                        }
+                        m_transitionEffectInternalStateInfo = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_transitionEffectInternalStateInfo = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_transitionInfoReference => {
-                    if _serde::__private::Option::is_some(&m_transitionInfoReference) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "transitionInfoReference",
-                            ),
+                    __Field::m_transitionInfoReference => {
+                        if _serde::__private::Option::is_some(
+                            &m_transitionInfoReference,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "transitionInfoReference",
+                                ),
+                            );
+                        }
+                        m_transitionInfoReference = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkbStateMachineTransitionInfoReference,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_transitionInfoReference = _serde::__private::Some(
-                        match __A::next_value::<
-                            hkbStateMachineTransitionInfoReference,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_transitionInfoReferenceForTE => {
-                    if _serde::__private::Option::is_some(
-                        &m_transitionInfoReferenceForTE,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "transitionInfoReferenceForTE",
-                            ),
+                    __Field::m_transitionInfoReferenceForTE => {
+                        if _serde::__private::Option::is_some(
+                            &m_transitionInfoReferenceForTE,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "transitionInfoReferenceForTE",
+                                ),
+                            );
+                        }
+                        m_transitionInfoReferenceForTE = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkbStateMachineTransitionInfoReference,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_transitionInfoReferenceForTE = _serde::__private::Some(
-                        match __A::next_value::<
-                            hkbStateMachineTransitionInfoReference,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_fromStateId => {
-                    if _serde::__private::Option::is_some(&m_fromStateId) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "fromStateId",
-                            ),
+                    __Field::m_fromStateId => {
+                        if _serde::__private::Option::is_some(&m_fromStateId) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "fromStateId",
+                                ),
+                            );
+                        }
+                        m_fromStateId = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_fromStateId = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_toStateId => {
-                    if _serde::__private::Option::is_some(&m_toStateId) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "toStateId",
-                            ),
+                    __Field::m_toStateId => {
+                        if _serde::__private::Option::is_some(&m_toStateId) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "toStateId",
+                                ),
+                            );
+                        }
+                        m_toStateId = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_toStateId = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_isReturnToPreviousState => {
-                    if _serde::__private::Option::is_some(&m_isReturnToPreviousState) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "isReturnToPreviousState",
-                            ),
+                    __Field::m_isReturnToPreviousState => {
+                        if _serde::__private::Option::is_some(
+                            &m_isReturnToPreviousState,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "isReturnToPreviousState",
+                                ),
+                            );
+                        }
+                        m_isReturnToPreviousState = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_isReturnToPreviousState = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_transitionEffectInternalStateInfo = match m_transitionEffectInternalStateInfo {

@@ -546,203 +546,200 @@ impl<'de> _serde::de::Visitor<'de> for __hkxVertexBufferVertexDataVisitor<'de> {
         let mut m_uint32Stride: _serde::__private::Option<u32> = _serde::__private::None;
         let mut m_uint16Stride: _serde::__private::Option<u32> = _serde::__private::None;
         let mut m_uint8Stride: _serde::__private::Option<u32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_vectorData => {
-                    if _serde::__private::Option::is_some(&m_vectorData) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "vectorData",
-                            ),
+        for _ in 0..11usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_vectorData => {
+                        if _serde::__private::Option::is_some(&m_vectorData) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "vectorData",
+                                ),
+                            );
+                        }
+                        m_vectorData = _serde::__private::Some(
+                            match __A::next_value::<Vec<Vector4>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_vectorData = _serde::__private::Some(
-                        match __A::next_value::<Vec<Vector4>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_floatData => {
-                    if _serde::__private::Option::is_some(&m_floatData) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "floatData",
-                            ),
+                    __Field::m_floatData => {
+                        if _serde::__private::Option::is_some(&m_floatData) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "floatData",
+                                ),
+                            );
+                        }
+                        m_floatData = _serde::__private::Some(
+                            match __A::next_value::<Vec<f32>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_floatData = _serde::__private::Some(
-                        match __A::next_value::<Vec<f32>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_uint32Data => {
-                    if _serde::__private::Option::is_some(&m_uint32Data) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "uint32Data",
-                            ),
+                    __Field::m_uint32Data => {
+                        if _serde::__private::Option::is_some(&m_uint32Data) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "uint32Data",
+                                ),
+                            );
+                        }
+                        m_uint32Data = _serde::__private::Some(
+                            match __A::next_value::<Vec<u32>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_uint32Data = _serde::__private::Some(
-                        match __A::next_value::<Vec<u32>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_uint16Data => {
-                    if _serde::__private::Option::is_some(&m_uint16Data) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "uint16Data",
-                            ),
+                    __Field::m_uint16Data => {
+                        if _serde::__private::Option::is_some(&m_uint16Data) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "uint16Data",
+                                ),
+                            );
+                        }
+                        m_uint16Data = _serde::__private::Some(
+                            match __A::next_value::<Vec<u16>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_uint16Data = _serde::__private::Some(
-                        match __A::next_value::<Vec<u16>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_uint8Data => {
-                    if _serde::__private::Option::is_some(&m_uint8Data) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "uint8Data",
-                            ),
+                    __Field::m_uint8Data => {
+                        if _serde::__private::Option::is_some(&m_uint8Data) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "uint8Data",
+                                ),
+                            );
+                        }
+                        m_uint8Data = _serde::__private::Some(
+                            match __A::next_value::<Vec<u8>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_uint8Data = _serde::__private::Some(
-                        match __A::next_value::<Vec<u8>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numVerts => {
-                    if _serde::__private::Option::is_some(&m_numVerts) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numVerts",
-                            ),
+                    __Field::m_numVerts => {
+                        if _serde::__private::Option::is_some(&m_numVerts) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numVerts",
+                                ),
+                            );
+                        }
+                        m_numVerts = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numVerts = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_vectorStride => {
-                    if _serde::__private::Option::is_some(&m_vectorStride) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "vectorStride",
-                            ),
+                    __Field::m_vectorStride => {
+                        if _serde::__private::Option::is_some(&m_vectorStride) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "vectorStride",
+                                ),
+                            );
+                        }
+                        m_vectorStride = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_vectorStride = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_floatStride => {
-                    if _serde::__private::Option::is_some(&m_floatStride) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "floatStride",
-                            ),
+                    __Field::m_floatStride => {
+                        if _serde::__private::Option::is_some(&m_floatStride) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "floatStride",
+                                ),
+                            );
+                        }
+                        m_floatStride = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_floatStride = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_uint32Stride => {
-                    if _serde::__private::Option::is_some(&m_uint32Stride) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "uint32Stride",
-                            ),
+                    __Field::m_uint32Stride => {
+                        if _serde::__private::Option::is_some(&m_uint32Stride) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "uint32Stride",
+                                ),
+                            );
+                        }
+                        m_uint32Stride = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_uint32Stride = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_uint16Stride => {
-                    if _serde::__private::Option::is_some(&m_uint16Stride) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "uint16Stride",
-                            ),
+                    __Field::m_uint16Stride => {
+                        if _serde::__private::Option::is_some(&m_uint16Stride) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "uint16Stride",
+                                ),
+                            );
+                        }
+                        m_uint16Stride = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_uint16Stride = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_uint8Stride => {
-                    if _serde::__private::Option::is_some(&m_uint8Stride) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "uint8Stride",
-                            ),
+                    __Field::m_uint8Stride => {
+                        if _serde::__private::Option::is_some(&m_uint8Stride) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "uint8Stride",
+                                ),
+                            );
+                        }
+                        m_uint8Stride = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_uint8Stride = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_vectorData = match m_vectorData {

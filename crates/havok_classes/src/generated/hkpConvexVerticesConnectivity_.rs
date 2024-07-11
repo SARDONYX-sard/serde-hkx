@@ -233,50 +233,47 @@ impl<'de> _serde::de::Visitor<'de> for __hkpConvexVerticesConnectivityVisitor<'d
         let parent = __hkReferencedObjectVisitor::visit_as_parent(&mut __map)?;
         let mut m_vertexIndices: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
         let mut m_numVerticesPerFace: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_vertexIndices => {
-                    if _serde::__private::Option::is_some(&m_vertexIndices) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "vertexIndices",
-                            ),
+        for _ in 0..2usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_vertexIndices => {
+                        if _serde::__private::Option::is_some(&m_vertexIndices) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "vertexIndices",
+                                ),
+                            );
+                        }
+                        m_vertexIndices = _serde::__private::Some(
+                            match __A::next_value::<Vec<u16>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_vertexIndices = _serde::__private::Some(
-                        match __A::next_value::<Vec<u16>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numVerticesPerFace => {
-                    if _serde::__private::Option::is_some(&m_numVerticesPerFace) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numVerticesPerFace",
-                            ),
+                    __Field::m_numVerticesPerFace => {
+                        if _serde::__private::Option::is_some(&m_numVerticesPerFace) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numVerticesPerFace",
+                                ),
+                            );
+                        }
+                        m_numVerticesPerFace = _serde::__private::Some(
+                            match __A::next_value::<Vec<u8>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numVerticesPerFace = _serde::__private::Some(
-                        match __A::next_value::<Vec<u8>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_vertexIndices = match m_vertexIndices {

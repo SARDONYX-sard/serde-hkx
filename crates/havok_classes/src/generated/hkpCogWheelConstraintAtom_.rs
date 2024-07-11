@@ -382,120 +382,119 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCogWheelConstraintAtomVisitor<'de> {
         let mut m_memOffsetToInitialAngleOffset: _serde::__private::Option<i8> = _serde::__private::None;
         let mut m_memOffsetToPrevAngle: _serde::__private::Option<i8> = _serde::__private::None;
         let mut m_memOffsetToRevolutionCounter: _serde::__private::Option<i8> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_cogWheelRadiusA => {
-                    if _serde::__private::Option::is_some(&m_cogWheelRadiusA) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "cogWheelRadiusA",
-                            ),
+        for _ in 0..6usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_cogWheelRadiusA => {
+                        if _serde::__private::Option::is_some(&m_cogWheelRadiusA) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "cogWheelRadiusA",
+                                ),
+                            );
+                        }
+                        m_cogWheelRadiusA = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_cogWheelRadiusA = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_cogWheelRadiusB => {
-                    if _serde::__private::Option::is_some(&m_cogWheelRadiusB) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "cogWheelRadiusB",
-                            ),
+                    __Field::m_cogWheelRadiusB => {
+                        if _serde::__private::Option::is_some(&m_cogWheelRadiusB) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "cogWheelRadiusB",
+                                ),
+                            );
+                        }
+                        m_cogWheelRadiusB = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_cogWheelRadiusB = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_isScrew => {
-                    if _serde::__private::Option::is_some(&m_isScrew) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("isScrew"),
+                    __Field::m_isScrew => {
+                        if _serde::__private::Option::is_some(&m_isScrew) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "isScrew",
+                                ),
+                            );
+                        }
+                        m_isScrew = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_isScrew = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_memOffsetToInitialAngleOffset => {
-                    if _serde::__private::Option::is_some(
-                        &m_memOffsetToInitialAngleOffset,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "memOffsetToInitialAngleOffset",
-                            ),
+                    __Field::m_memOffsetToInitialAngleOffset => {
+                        if _serde::__private::Option::is_some(
+                            &m_memOffsetToInitialAngleOffset,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "memOffsetToInitialAngleOffset",
+                                ),
+                            );
+                        }
+                        m_memOffsetToInitialAngleOffset = _serde::__private::Some(
+                            match __A::next_value::<i8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_memOffsetToInitialAngleOffset = _serde::__private::Some(
-                        match __A::next_value::<i8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_memOffsetToPrevAngle => {
-                    if _serde::__private::Option::is_some(&m_memOffsetToPrevAngle) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "memOffsetToPrevAngle",
-                            ),
+                    __Field::m_memOffsetToPrevAngle => {
+                        if _serde::__private::Option::is_some(&m_memOffsetToPrevAngle) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "memOffsetToPrevAngle",
+                                ),
+                            );
+                        }
+                        m_memOffsetToPrevAngle = _serde::__private::Some(
+                            match __A::next_value::<i8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_memOffsetToPrevAngle = _serde::__private::Some(
-                        match __A::next_value::<i8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_memOffsetToRevolutionCounter => {
-                    if _serde::__private::Option::is_some(
-                        &m_memOffsetToRevolutionCounter,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "memOffsetToRevolutionCounter",
-                            ),
+                    __Field::m_memOffsetToRevolutionCounter => {
+                        if _serde::__private::Option::is_some(
+                            &m_memOffsetToRevolutionCounter,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "memOffsetToRevolutionCounter",
+                                ),
+                            );
+                        }
+                        m_memOffsetToRevolutionCounter = _serde::__private::Some(
+                            match __A::next_value::<i8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_memOffsetToRevolutionCounter = _serde::__private::Some(
-                        match __A::next_value::<i8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_cogWheelRadiusA = match m_cogWheelRadiusA {

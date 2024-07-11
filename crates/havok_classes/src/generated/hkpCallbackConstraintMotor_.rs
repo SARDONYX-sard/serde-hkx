@@ -343,84 +343,81 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCallbackConstraintMotorVisitor<'de> 
         let mut m_userData0: _serde::__private::Option<u64> = _serde::__private::None;
         let mut m_userData1: _serde::__private::Option<u64> = _serde::__private::None;
         let mut m_userData2: _serde::__private::Option<u64> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_callbackType => {
-                    if _serde::__private::Option::is_some(&m_callbackType) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "callbackType",
-                            ),
+        for _ in 0..4usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_callbackType => {
+                        if _serde::__private::Option::is_some(&m_callbackType) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "callbackType",
+                                ),
+                            );
+                        }
+                        m_callbackType = _serde::__private::Some(
+                            match __A::next_value::<CallbackType>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_callbackType = _serde::__private::Some(
-                        match __A::next_value::<CallbackType>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_userData0 => {
-                    if _serde::__private::Option::is_some(&m_userData0) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "userData0",
-                            ),
+                    __Field::m_userData0 => {
+                        if _serde::__private::Option::is_some(&m_userData0) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "userData0",
+                                ),
+                            );
+                        }
+                        m_userData0 = _serde::__private::Some(
+                            match __A::next_value::<u64>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_userData0 = _serde::__private::Some(
-                        match __A::next_value::<u64>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_userData1 => {
-                    if _serde::__private::Option::is_some(&m_userData1) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "userData1",
-                            ),
+                    __Field::m_userData1 => {
+                        if _serde::__private::Option::is_some(&m_userData1) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "userData1",
+                                ),
+                            );
+                        }
+                        m_userData1 = _serde::__private::Some(
+                            match __A::next_value::<u64>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_userData1 = _serde::__private::Some(
-                        match __A::next_value::<u64>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_userData2 => {
-                    if _serde::__private::Option::is_some(&m_userData2) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "userData2",
-                            ),
+                    __Field::m_userData2 => {
+                        if _serde::__private::Option::is_some(&m_userData2) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "userData2",
+                                ),
+                            );
+                        }
+                        m_userData2 = _serde::__private::Some(
+                            match __A::next_value::<u64>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_userData2 = _serde::__private::Some(
-                        match __A::next_value::<u64>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_callbackType = match m_callbackType {

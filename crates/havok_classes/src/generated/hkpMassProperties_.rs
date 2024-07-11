@@ -280,80 +280,77 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMassPropertiesVisitor<'de> {
         let mut m_mass: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_centerOfMass: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_inertiaTensor: _serde::__private::Option<Matrix3> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_volume => {
-                    if _serde::__private::Option::is_some(&m_volume) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("volume"),
+        for _ in 0..4usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_volume => {
+                        if _serde::__private::Option::is_some(&m_volume) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("volume"),
+                            );
+                        }
+                        m_volume = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_volume = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_mass => {
-                    if _serde::__private::Option::is_some(&m_mass) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("mass"),
+                    __Field::m_mass => {
+                        if _serde::__private::Option::is_some(&m_mass) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("mass"),
+                            );
+                        }
+                        m_mass = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_mass = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_centerOfMass => {
-                    if _serde::__private::Option::is_some(&m_centerOfMass) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "centerOfMass",
-                            ),
+                    __Field::m_centerOfMass => {
+                        if _serde::__private::Option::is_some(&m_centerOfMass) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "centerOfMass",
+                                ),
+                            );
+                        }
+                        m_centerOfMass = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_centerOfMass = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_inertiaTensor => {
-                    if _serde::__private::Option::is_some(&m_inertiaTensor) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "inertiaTensor",
-                            ),
+                    __Field::m_inertiaTensor => {
+                        if _serde::__private::Option::is_some(&m_inertiaTensor) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "inertiaTensor",
+                                ),
+                            );
+                        }
+                        m_inertiaTensor = _serde::__private::Some(
+                            match __A::next_value::<Matrix3>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_inertiaTensor = _serde::__private::Some(
-                        match __A::next_value::<Matrix3>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_volume = match m_volume {

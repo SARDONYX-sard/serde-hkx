@@ -668,242 +668,249 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSerializedAgentNnEntryVisitor<'de> {
         let mut m_trackInfo: _serde::__private::Option<hkpSerializedTrack1nInfo> = _serde::__private::None;
         let mut m_endianCheckBuffer: _serde::__private::Option<[u8; 4usize]> = _serde::__private::None;
         let mut m_version: _serde::__private::Option<u32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_bodyA => {
-                    if _serde::__private::Option::is_some(&m_bodyA) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("bodyA"),
+        for _ in 0..14usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_bodyA => {
+                        if _serde::__private::Option::is_some(&m_bodyA) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("bodyA"),
+                            );
+                        }
+                        m_bodyA = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_bodyA = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_bodyB => {
-                    if _serde::__private::Option::is_some(&m_bodyB) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("bodyB"),
+                    __Field::m_bodyB => {
+                        if _serde::__private::Option::is_some(&m_bodyB) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("bodyB"),
+                            );
+                        }
+                        m_bodyB = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_bodyB = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_bodyAId => {
-                    if _serde::__private::Option::is_some(&m_bodyAId) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("bodyAId"),
+                    __Field::m_bodyAId => {
+                        if _serde::__private::Option::is_some(&m_bodyAId) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "bodyAId",
+                                ),
+                            );
+                        }
+                        m_bodyAId = _serde::__private::Some(
+                            match __A::next_value::<u64>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_bodyAId = _serde::__private::Some(
-                        match __A::next_value::<u64>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_bodyBId => {
-                    if _serde::__private::Option::is_some(&m_bodyBId) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("bodyBId"),
+                    __Field::m_bodyBId => {
+                        if _serde::__private::Option::is_some(&m_bodyBId) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "bodyBId",
+                                ),
+                            );
+                        }
+                        m_bodyBId = _serde::__private::Some(
+                            match __A::next_value::<u64>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_bodyBId = _serde::__private::Some(
-                        match __A::next_value::<u64>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_useEntityIds => {
-                    if _serde::__private::Option::is_some(&m_useEntityIds) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "useEntityIds",
-                            ),
+                    __Field::m_useEntityIds => {
+                        if _serde::__private::Option::is_some(&m_useEntityIds) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "useEntityIds",
+                                ),
+                            );
+                        }
+                        m_useEntityIds = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_useEntityIds = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_agentType => {
-                    if _serde::__private::Option::is_some(&m_agentType) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "agentType",
-                            ),
+                    __Field::m_agentType => {
+                        if _serde::__private::Option::is_some(&m_agentType) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "agentType",
+                                ),
+                            );
+                        }
+                        m_agentType = _serde::__private::Some(
+                            match __A::next_value::<SerializedAgentType>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_agentType = _serde::__private::Some(
-                        match __A::next_value::<SerializedAgentType>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_atom => {
-                    if _serde::__private::Option::is_some(&m_atom) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("atom"),
+                    __Field::m_atom => {
+                        if _serde::__private::Option::is_some(&m_atom) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("atom"),
+                            );
+                        }
+                        m_atom = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpSimpleContactConstraintAtom,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_atom = _serde::__private::Some(
-                        match __A::next_value::<
-                            hkpSimpleContactConstraintAtom,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_propertiesStream => {
-                    if _serde::__private::Option::is_some(&m_propertiesStream) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "propertiesStream",
-                            ),
+                    __Field::m_propertiesStream => {
+                        if _serde::__private::Option::is_some(&m_propertiesStream) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "propertiesStream",
+                                ),
+                            );
+                        }
+                        m_propertiesStream = _serde::__private::Some(
+                            match __A::next_value::<Vec<u8>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_propertiesStream = _serde::__private::Some(
-                        match __A::next_value::<Vec<u8>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_contactPoints => {
-                    if _serde::__private::Option::is_some(&m_contactPoints) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "contactPoints",
-                            ),
+                    __Field::m_contactPoints => {
+                        if _serde::__private::Option::is_some(&m_contactPoints) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "contactPoints",
+                                ),
+                            );
+                        }
+                        m_contactPoints = _serde::__private::Some(
+                            match __A::next_value::<Vec<hkContactPoint>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_contactPoints = _serde::__private::Some(
-                        match __A::next_value::<Vec<hkContactPoint>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_cpIdMgr => {
-                    if _serde::__private::Option::is_some(&m_cpIdMgr) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("cpIdMgr"),
+                    __Field::m_cpIdMgr => {
+                        if _serde::__private::Option::is_some(&m_cpIdMgr) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "cpIdMgr",
+                                ),
+                            );
+                        }
+                        m_cpIdMgr = _serde::__private::Some(
+                            match __A::next_value::<Vec<u8>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_cpIdMgr = _serde::__private::Some(
-                        match __A::next_value::<Vec<u8>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_nnEntryData => {
-                    if _serde::__private::Option::is_some(&m_nnEntryData) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "nnEntryData",
-                            ),
+                    __Field::m_nnEntryData => {
+                        if _serde::__private::Option::is_some(&m_nnEntryData) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "nnEntryData",
+                                ),
+                            );
+                        }
+                        m_nnEntryData = _serde::__private::Some(
+                            match __A::next_value::<[u8; 160usize]>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_nnEntryData = _serde::__private::Some(
-                        match __A::next_value::<[u8; 160usize]>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_trackInfo => {
-                    if _serde::__private::Option::is_some(&m_trackInfo) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "trackInfo",
-                            ),
+                    __Field::m_trackInfo => {
+                        if _serde::__private::Option::is_some(&m_trackInfo) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "trackInfo",
+                                ),
+                            );
+                        }
+                        m_trackInfo = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpSerializedTrack1nInfo,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_trackInfo = _serde::__private::Some(
-                        match __A::next_value::<hkpSerializedTrack1nInfo>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_endianCheckBuffer => {
-                    if _serde::__private::Option::is_some(&m_endianCheckBuffer) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "endianCheckBuffer",
-                            ),
+                    __Field::m_endianCheckBuffer => {
+                        if _serde::__private::Option::is_some(&m_endianCheckBuffer) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "endianCheckBuffer",
+                                ),
+                            );
+                        }
+                        m_endianCheckBuffer = _serde::__private::Some(
+                            match __A::next_value::<[u8; 4usize]>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_endianCheckBuffer = _serde::__private::Some(
-                        match __A::next_value::<[u8; 4usize]>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_version => {
-                    if _serde::__private::Option::is_some(&m_version) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("version"),
+                    __Field::m_version => {
+                        if _serde::__private::Option::is_some(&m_version) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "version",
+                                ),
+                            );
+                        }
+                        m_version = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_version = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_bodyA = match m_bodyA {

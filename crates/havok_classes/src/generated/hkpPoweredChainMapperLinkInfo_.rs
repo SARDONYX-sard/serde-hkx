@@ -248,67 +248,64 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPoweredChainMapperLinkInfoVisitor<'d
         let mut m_firstTargetIdx: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_numTargets: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_limitConstraint: _serde::__private::Option<Pointer> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_firstTargetIdx => {
-                    if _serde::__private::Option::is_some(&m_firstTargetIdx) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "firstTargetIdx",
-                            ),
+        for _ in 0..3usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_firstTargetIdx => {
+                        if _serde::__private::Option::is_some(&m_firstTargetIdx) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "firstTargetIdx",
+                                ),
+                            );
+                        }
+                        m_firstTargetIdx = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_firstTargetIdx = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numTargets => {
-                    if _serde::__private::Option::is_some(&m_numTargets) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numTargets",
-                            ),
+                    __Field::m_numTargets => {
+                        if _serde::__private::Option::is_some(&m_numTargets) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numTargets",
+                                ),
+                            );
+                        }
+                        m_numTargets = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numTargets = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_limitConstraint => {
-                    if _serde::__private::Option::is_some(&m_limitConstraint) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "limitConstraint",
-                            ),
+                    __Field::m_limitConstraint => {
+                        if _serde::__private::Option::is_some(&m_limitConstraint) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "limitConstraint",
+                                ),
+                            );
+                        }
+                        m_limitConstraint = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_limitConstraint = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_firstTargetIdx = match m_firstTargetIdx {

@@ -367,105 +367,102 @@ impl<'de> _serde::de::Visitor<'de> for __hkaAnimationBindingVisitor<'de> {
         let mut m_transformTrackToBoneIndices: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
         let mut m_floatTrackToFloatSlotIndices: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
         let mut m_blendHint: _serde::__private::Option<BlendHint> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_originalSkeletonName => {
-                    if _serde::__private::Option::is_some(&m_originalSkeletonName) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "originalSkeletonName",
-                            ),
+        for _ in 0..5usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_originalSkeletonName => {
+                        if _serde::__private::Option::is_some(&m_originalSkeletonName) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "originalSkeletonName",
+                                ),
+                            );
+                        }
+                        m_originalSkeletonName = _serde::__private::Some(
+                            match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_originalSkeletonName = _serde::__private::Some(
-                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_animation => {
-                    if _serde::__private::Option::is_some(&m_animation) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "animation",
-                            ),
+                    __Field::m_animation => {
+                        if _serde::__private::Option::is_some(&m_animation) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "animation",
+                                ),
+                            );
+                        }
+                        m_animation = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_animation = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_transformTrackToBoneIndices => {
-                    if _serde::__private::Option::is_some(
-                        &m_transformTrackToBoneIndices,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "transformTrackToBoneIndices",
-                            ),
+                    __Field::m_transformTrackToBoneIndices => {
+                        if _serde::__private::Option::is_some(
+                            &m_transformTrackToBoneIndices,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "transformTrackToBoneIndices",
+                                ),
+                            );
+                        }
+                        m_transformTrackToBoneIndices = _serde::__private::Some(
+                            match __A::next_value::<Vec<i16>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_transformTrackToBoneIndices = _serde::__private::Some(
-                        match __A::next_value::<Vec<i16>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_floatTrackToFloatSlotIndices => {
-                    if _serde::__private::Option::is_some(
-                        &m_floatTrackToFloatSlotIndices,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "floatTrackToFloatSlotIndices",
-                            ),
+                    __Field::m_floatTrackToFloatSlotIndices => {
+                        if _serde::__private::Option::is_some(
+                            &m_floatTrackToFloatSlotIndices,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "floatTrackToFloatSlotIndices",
+                                ),
+                            );
+                        }
+                        m_floatTrackToFloatSlotIndices = _serde::__private::Some(
+                            match __A::next_value::<Vec<i16>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_floatTrackToFloatSlotIndices = _serde::__private::Some(
-                        match __A::next_value::<Vec<i16>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_blendHint => {
-                    if _serde::__private::Option::is_some(&m_blendHint) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "blendHint",
-                            ),
+                    __Field::m_blendHint => {
+                        if _serde::__private::Option::is_some(&m_blendHint) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "blendHint",
+                                ),
+                            );
+                        }
+                        m_blendHint = _serde::__private::Some(
+                            match __A::next_value::<BlendHint>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_blendHint = _serde::__private::Some(
-                        match __A::next_value::<BlendHint>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_originalSkeletonName = match m_originalSkeletonName {

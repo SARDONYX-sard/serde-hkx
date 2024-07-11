@@ -499,152 +499,151 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorGraphDataVisitor<'de> {
         > = _serde::__private::None;
         let mut m_variableInitialValues: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_stringData: _serde::__private::Option<Pointer> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_attributeDefaults => {
-                    if _serde::__private::Option::is_some(&m_attributeDefaults) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "attributeDefaults",
-                            ),
+        for _ in 0..8usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_attributeDefaults => {
+                        if _serde::__private::Option::is_some(&m_attributeDefaults) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "attributeDefaults",
+                                ),
+                            );
+                        }
+                        m_attributeDefaults = _serde::__private::Some(
+                            match __A::next_value::<Vec<f32>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_attributeDefaults = _serde::__private::Some(
-                        match __A::next_value::<Vec<f32>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_variableInfos => {
-                    if _serde::__private::Option::is_some(&m_variableInfos) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "variableInfos",
-                            ),
+                    __Field::m_variableInfos => {
+                        if _serde::__private::Option::is_some(&m_variableInfos) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "variableInfos",
+                                ),
+                            );
+                        }
+                        m_variableInfos = _serde::__private::Some(
+                            match __A::next_value::<Vec<hkbVariableInfo>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_variableInfos = _serde::__private::Some(
-                        match __A::next_value::<Vec<hkbVariableInfo>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_characterPropertyInfos => {
-                    if _serde::__private::Option::is_some(&m_characterPropertyInfos) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "characterPropertyInfos",
-                            ),
+                    __Field::m_characterPropertyInfos => {
+                        if _serde::__private::Option::is_some(
+                            &m_characterPropertyInfos,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "characterPropertyInfos",
+                                ),
+                            );
+                        }
+                        m_characterPropertyInfos = _serde::__private::Some(
+                            match __A::next_value::<Vec<hkbVariableInfo>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_characterPropertyInfos = _serde::__private::Some(
-                        match __A::next_value::<Vec<hkbVariableInfo>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_eventInfos => {
-                    if _serde::__private::Option::is_some(&m_eventInfos) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "eventInfos",
-                            ),
+                    __Field::m_eventInfos => {
+                        if _serde::__private::Option::is_some(&m_eventInfos) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "eventInfos",
+                                ),
+                            );
+                        }
+                        m_eventInfos = _serde::__private::Some(
+                            match __A::next_value::<Vec<hkbEventInfo>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_eventInfos = _serde::__private::Some(
-                        match __A::next_value::<Vec<hkbEventInfo>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_wordMinVariableValues => {
-                    if _serde::__private::Option::is_some(&m_wordMinVariableValues) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "wordMinVariableValues",
-                            ),
+                    __Field::m_wordMinVariableValues => {
+                        if _serde::__private::Option::is_some(&m_wordMinVariableValues) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "wordMinVariableValues",
+                                ),
+                            );
+                        }
+                        m_wordMinVariableValues = _serde::__private::Some(
+                            match __A::next_value::<Vec<hkbVariableValue>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_wordMinVariableValues = _serde::__private::Some(
-                        match __A::next_value::<Vec<hkbVariableValue>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_wordMaxVariableValues => {
-                    if _serde::__private::Option::is_some(&m_wordMaxVariableValues) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "wordMaxVariableValues",
-                            ),
+                    __Field::m_wordMaxVariableValues => {
+                        if _serde::__private::Option::is_some(&m_wordMaxVariableValues) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "wordMaxVariableValues",
+                                ),
+                            );
+                        }
+                        m_wordMaxVariableValues = _serde::__private::Some(
+                            match __A::next_value::<Vec<hkbVariableValue>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_wordMaxVariableValues = _serde::__private::Some(
-                        match __A::next_value::<Vec<hkbVariableValue>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_variableInitialValues => {
-                    if _serde::__private::Option::is_some(&m_variableInitialValues) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "variableInitialValues",
-                            ),
+                    __Field::m_variableInitialValues => {
+                        if _serde::__private::Option::is_some(&m_variableInitialValues) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "variableInitialValues",
+                                ),
+                            );
+                        }
+                        m_variableInitialValues = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_variableInitialValues = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_stringData => {
-                    if _serde::__private::Option::is_some(&m_stringData) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "stringData",
-                            ),
+                    __Field::m_stringData => {
+                        if _serde::__private::Option::is_some(&m_stringData) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "stringData",
+                                ),
+                            );
+                        }
+                        m_stringData = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_stringData = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_attributeDefaults = match m_attributeDefaults {

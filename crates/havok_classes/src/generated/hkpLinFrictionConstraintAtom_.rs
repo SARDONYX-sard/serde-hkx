@@ -254,67 +254,64 @@ impl<'de> _serde::de::Visitor<'de> for __hkpLinFrictionConstraintAtomVisitor<'de
         let mut m_isEnabled: _serde::__private::Option<u8> = _serde::__private::None;
         let mut m_frictionAxis: _serde::__private::Option<u8> = _serde::__private::None;
         let mut m_maxFrictionForce: _serde::__private::Option<f32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_isEnabled => {
-                    if _serde::__private::Option::is_some(&m_isEnabled) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "isEnabled",
-                            ),
+        for _ in 0..3usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_isEnabled => {
+                        if _serde::__private::Option::is_some(&m_isEnabled) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "isEnabled",
+                                ),
+                            );
+                        }
+                        m_isEnabled = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_isEnabled = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_frictionAxis => {
-                    if _serde::__private::Option::is_some(&m_frictionAxis) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "frictionAxis",
-                            ),
+                    __Field::m_frictionAxis => {
+                        if _serde::__private::Option::is_some(&m_frictionAxis) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "frictionAxis",
+                                ),
+                            );
+                        }
+                        m_frictionAxis = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_frictionAxis = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_maxFrictionForce => {
-                    if _serde::__private::Option::is_some(&m_maxFrictionForce) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "maxFrictionForce",
-                            ),
+                    __Field::m_maxFrictionForce => {
+                        if _serde::__private::Option::is_some(&m_maxFrictionForce) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "maxFrictionForce",
+                                ),
+                            );
+                        }
+                        m_maxFrictionForce = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_maxFrictionForce = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_isEnabled = match m_isEnabled {

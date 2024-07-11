@@ -170,31 +170,28 @@ impl<'de> _serde::de::Visitor<'de> for __hkbFootIkControlDataVisitor<'de> {
         __A: _serde::de::MapAccess<'de>,
     {
         let mut m_gains: _serde::__private::Option<hkbFootIkGains> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_gains => {
-                    if _serde::__private::Option::is_some(&m_gains) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("gains"),
+        for _ in 0..1usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_gains => {
+                        if _serde::__private::Option::is_some(&m_gains) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("gains"),
+                            );
+                        }
+                        m_gains = _serde::__private::Some(
+                            match __A::next_value::<hkbFootIkGains>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_gains = _serde::__private::Some(
-                        match __A::next_value::<hkbFootIkGains>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_gains = match m_gains {

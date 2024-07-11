@@ -399,135 +399,132 @@ for __hkMultipleVertexBufferLockedElementVisitor<'de> {
         let mut m_lockFlags: _serde::__private::Option<u8> = _serde::__private::None;
         let mut m_outputBufferIndex: _serde::__private::Option<u8> = _serde::__private::None;
         let mut m_emulatedIndex: _serde::__private::Option<i8> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_vertexBufferIndex => {
-                    if _serde::__private::Option::is_some(&m_vertexBufferIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "vertexBufferIndex",
-                            ),
+        for _ in 0..7usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_vertexBufferIndex => {
+                        if _serde::__private::Option::is_some(&m_vertexBufferIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "vertexBufferIndex",
+                                ),
+                            );
+                        }
+                        m_vertexBufferIndex = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_vertexBufferIndex = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_elementIndex => {
-                    if _serde::__private::Option::is_some(&m_elementIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "elementIndex",
-                            ),
+                    __Field::m_elementIndex => {
+                        if _serde::__private::Option::is_some(&m_elementIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "elementIndex",
+                                ),
+                            );
+                        }
+                        m_elementIndex = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_elementIndex = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_lockedBufferIndex => {
-                    if _serde::__private::Option::is_some(&m_lockedBufferIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "lockedBufferIndex",
-                            ),
+                    __Field::m_lockedBufferIndex => {
+                        if _serde::__private::Option::is_some(&m_lockedBufferIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "lockedBufferIndex",
+                                ),
+                            );
+                        }
+                        m_lockedBufferIndex = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_lockedBufferIndex = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_vertexFormatIndex => {
-                    if _serde::__private::Option::is_some(&m_vertexFormatIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "vertexFormatIndex",
-                            ),
+                    __Field::m_vertexFormatIndex => {
+                        if _serde::__private::Option::is_some(&m_vertexFormatIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "vertexFormatIndex",
+                                ),
+                            );
+                        }
+                        m_vertexFormatIndex = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_vertexFormatIndex = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_lockFlags => {
-                    if _serde::__private::Option::is_some(&m_lockFlags) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "lockFlags",
-                            ),
+                    __Field::m_lockFlags => {
+                        if _serde::__private::Option::is_some(&m_lockFlags) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "lockFlags",
+                                ),
+                            );
+                        }
+                        m_lockFlags = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_lockFlags = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_outputBufferIndex => {
-                    if _serde::__private::Option::is_some(&m_outputBufferIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "outputBufferIndex",
-                            ),
+                    __Field::m_outputBufferIndex => {
+                        if _serde::__private::Option::is_some(&m_outputBufferIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "outputBufferIndex",
+                                ),
+                            );
+                        }
+                        m_outputBufferIndex = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_outputBufferIndex = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_emulatedIndex => {
-                    if _serde::__private::Option::is_some(&m_emulatedIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "emulatedIndex",
-                            ),
+                    __Field::m_emulatedIndex => {
+                        if _serde::__private::Option::is_some(&m_emulatedIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "emulatedIndex",
+                                ),
+                            );
+                        }
+                        m_emulatedIndex = _serde::__private::Some(
+                            match __A::next_value::<i8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_emulatedIndex = _serde::__private::Some(
-                        match __A::next_value::<i8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_vertexBufferIndex = match m_vertexBufferIndex {

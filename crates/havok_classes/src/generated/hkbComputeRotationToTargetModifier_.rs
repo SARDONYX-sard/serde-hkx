@@ -456,135 +456,132 @@ impl<'de> _serde::de::Visitor<'de> for __hkbComputeRotationToTargetModifierVisit
         let mut m_localAxisOfRotation: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_localFacingDirection: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_resultIsDelta: _serde::__private::Option<bool> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_rotationOut => {
-                    if _serde::__private::Option::is_some(&m_rotationOut) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "rotationOut",
-                            ),
+        for _ in 0..7usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_rotationOut => {
+                        if _serde::__private::Option::is_some(&m_rotationOut) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "rotationOut",
+                                ),
+                            );
+                        }
+                        m_rotationOut = _serde::__private::Some(
+                            match __A::next_value::<Quaternion>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_rotationOut = _serde::__private::Some(
-                        match __A::next_value::<Quaternion>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_targetPosition => {
-                    if _serde::__private::Option::is_some(&m_targetPosition) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "targetPosition",
-                            ),
+                    __Field::m_targetPosition => {
+                        if _serde::__private::Option::is_some(&m_targetPosition) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "targetPosition",
+                                ),
+                            );
+                        }
+                        m_targetPosition = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_targetPosition = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_currentPosition => {
-                    if _serde::__private::Option::is_some(&m_currentPosition) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "currentPosition",
-                            ),
+                    __Field::m_currentPosition => {
+                        if _serde::__private::Option::is_some(&m_currentPosition) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "currentPosition",
+                                ),
+                            );
+                        }
+                        m_currentPosition = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_currentPosition = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_currentRotation => {
-                    if _serde::__private::Option::is_some(&m_currentRotation) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "currentRotation",
-                            ),
+                    __Field::m_currentRotation => {
+                        if _serde::__private::Option::is_some(&m_currentRotation) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "currentRotation",
+                                ),
+                            );
+                        }
+                        m_currentRotation = _serde::__private::Some(
+                            match __A::next_value::<Quaternion>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_currentRotation = _serde::__private::Some(
-                        match __A::next_value::<Quaternion>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_localAxisOfRotation => {
-                    if _serde::__private::Option::is_some(&m_localAxisOfRotation) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "localAxisOfRotation",
-                            ),
+                    __Field::m_localAxisOfRotation => {
+                        if _serde::__private::Option::is_some(&m_localAxisOfRotation) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "localAxisOfRotation",
+                                ),
+                            );
+                        }
+                        m_localAxisOfRotation = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_localAxisOfRotation = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_localFacingDirection => {
-                    if _serde::__private::Option::is_some(&m_localFacingDirection) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "localFacingDirection",
-                            ),
+                    __Field::m_localFacingDirection => {
+                        if _serde::__private::Option::is_some(&m_localFacingDirection) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "localFacingDirection",
+                                ),
+                            );
+                        }
+                        m_localFacingDirection = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_localFacingDirection = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_resultIsDelta => {
-                    if _serde::__private::Option::is_some(&m_resultIsDelta) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "resultIsDelta",
-                            ),
+                    __Field::m_resultIsDelta => {
+                        if _serde::__private::Option::is_some(&m_resultIsDelta) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "resultIsDelta",
+                                ),
+                            );
+                        }
+                        m_resultIsDelta = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_resultIsDelta = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_rotationOut = match m_rotationOut {

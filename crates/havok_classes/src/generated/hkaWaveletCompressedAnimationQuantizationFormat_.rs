@@ -368,116 +368,113 @@ for __hkaWaveletCompressedAnimationQuantizationFormatVisitor<'de> {
         let mut m_offsetIdx: _serde::__private::Option<u32> = _serde::__private::None;
         let mut m_scaleIdx: _serde::__private::Option<u32> = _serde::__private::None;
         let mut m_bitWidthIdx: _serde::__private::Option<u32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_maxBitWidth => {
-                    if _serde::__private::Option::is_some(&m_maxBitWidth) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "maxBitWidth",
-                            ),
+        for _ in 0..6usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_maxBitWidth => {
+                        if _serde::__private::Option::is_some(&m_maxBitWidth) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "maxBitWidth",
+                                ),
+                            );
+                        }
+                        m_maxBitWidth = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_maxBitWidth = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_preserved => {
-                    if _serde::__private::Option::is_some(&m_preserved) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "preserved",
-                            ),
+                    __Field::m_preserved => {
+                        if _serde::__private::Option::is_some(&m_preserved) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "preserved",
+                                ),
+                            );
+                        }
+                        m_preserved = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_preserved = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numD => {
-                    if _serde::__private::Option::is_some(&m_numD) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("numD"),
+                    __Field::m_numD => {
+                        if _serde::__private::Option::is_some(&m_numD) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("numD"),
+                            );
+                        }
+                        m_numD = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numD = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_offsetIdx => {
-                    if _serde::__private::Option::is_some(&m_offsetIdx) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "offsetIdx",
-                            ),
+                    __Field::m_offsetIdx => {
+                        if _serde::__private::Option::is_some(&m_offsetIdx) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "offsetIdx",
+                                ),
+                            );
+                        }
+                        m_offsetIdx = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_offsetIdx = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_scaleIdx => {
-                    if _serde::__private::Option::is_some(&m_scaleIdx) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "scaleIdx",
-                            ),
+                    __Field::m_scaleIdx => {
+                        if _serde::__private::Option::is_some(&m_scaleIdx) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "scaleIdx",
+                                ),
+                            );
+                        }
+                        m_scaleIdx = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_scaleIdx = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_bitWidthIdx => {
-                    if _serde::__private::Option::is_some(&m_bitWidthIdx) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "bitWidthIdx",
-                            ),
+                    __Field::m_bitWidthIdx => {
+                        if _serde::__private::Option::is_some(&m_bitWidthIdx) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "bitWidthIdx",
+                                ),
+                            );
+                        }
+                        m_bitWidthIdx = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_bitWidthIdx = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_maxBitWidth = match m_maxBitWidth {

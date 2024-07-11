@@ -422,135 +422,134 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDefaultTransmissionVisitor<'d
         let mut m_reverseGearRatio: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_gearsRatio: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
         let mut m_wheelsTorqueRatio: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_downshiftRPM => {
-                    if _serde::__private::Option::is_some(&m_downshiftRPM) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "downshiftRPM",
-                            ),
+        for _ in 0..7usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_downshiftRPM => {
+                        if _serde::__private::Option::is_some(&m_downshiftRPM) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "downshiftRPM",
+                                ),
+                            );
+                        }
+                        m_downshiftRPM = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_downshiftRPM = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_upshiftRPM => {
-                    if _serde::__private::Option::is_some(&m_upshiftRPM) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "upshiftRPM",
-                            ),
+                    __Field::m_upshiftRPM => {
+                        if _serde::__private::Option::is_some(&m_upshiftRPM) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "upshiftRPM",
+                                ),
+                            );
+                        }
+                        m_upshiftRPM = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_upshiftRPM = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_primaryTransmissionRatio => {
-                    if _serde::__private::Option::is_some(&m_primaryTransmissionRatio) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "primaryTransmissionRatio",
-                            ),
+                    __Field::m_primaryTransmissionRatio => {
+                        if _serde::__private::Option::is_some(
+                            &m_primaryTransmissionRatio,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "primaryTransmissionRatio",
+                                ),
+                            );
+                        }
+                        m_primaryTransmissionRatio = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_primaryTransmissionRatio = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_clutchDelayTime => {
-                    if _serde::__private::Option::is_some(&m_clutchDelayTime) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "clutchDelayTime",
-                            ),
+                    __Field::m_clutchDelayTime => {
+                        if _serde::__private::Option::is_some(&m_clutchDelayTime) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "clutchDelayTime",
+                                ),
+                            );
+                        }
+                        m_clutchDelayTime = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_clutchDelayTime = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_reverseGearRatio => {
-                    if _serde::__private::Option::is_some(&m_reverseGearRatio) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "reverseGearRatio",
-                            ),
+                    __Field::m_reverseGearRatio => {
+                        if _serde::__private::Option::is_some(&m_reverseGearRatio) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "reverseGearRatio",
+                                ),
+                            );
+                        }
+                        m_reverseGearRatio = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_reverseGearRatio = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_gearsRatio => {
-                    if _serde::__private::Option::is_some(&m_gearsRatio) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "gearsRatio",
-                            ),
+                    __Field::m_gearsRatio => {
+                        if _serde::__private::Option::is_some(&m_gearsRatio) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "gearsRatio",
+                                ),
+                            );
+                        }
+                        m_gearsRatio = _serde::__private::Some(
+                            match __A::next_value::<Vec<f32>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_gearsRatio = _serde::__private::Some(
-                        match __A::next_value::<Vec<f32>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_wheelsTorqueRatio => {
-                    if _serde::__private::Option::is_some(&m_wheelsTorqueRatio) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "wheelsTorqueRatio",
-                            ),
+                    __Field::m_wheelsTorqueRatio => {
+                        if _serde::__private::Option::is_some(&m_wheelsTorqueRatio) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "wheelsTorqueRatio",
+                                ),
+                            );
+                        }
+                        m_wheelsTorqueRatio = _serde::__private::Some(
+                            match __A::next_value::<Vec<f32>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_wheelsTorqueRatio = _serde::__private::Some(
-                        match __A::next_value::<Vec<f32>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_downshiftRPM = match m_downshiftRPM {

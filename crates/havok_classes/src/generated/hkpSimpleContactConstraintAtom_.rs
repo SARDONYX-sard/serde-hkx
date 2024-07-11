@@ -469,154 +469,153 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimpleContactConstraintAtomVisitor<'
         let mut m_contactPointPropertiesStriding: _serde::__private::Option<u8> = _serde::__private::None;
         let mut m_maxNumContactPoints: _serde::__private::Option<u16> = _serde::__private::None;
         let mut m_info: _serde::__private::Option<hkpSimpleContactConstraintDataInfo> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_sizeOfAllAtoms => {
-                    if _serde::__private::Option::is_some(&m_sizeOfAllAtoms) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "sizeOfAllAtoms",
-                            ),
+        for _ in 0..8usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_sizeOfAllAtoms => {
+                        if _serde::__private::Option::is_some(&m_sizeOfAllAtoms) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "sizeOfAllAtoms",
+                                ),
+                            );
+                        }
+                        m_sizeOfAllAtoms = _serde::__private::Some(
+                            match __A::next_value::<u16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_sizeOfAllAtoms = _serde::__private::Some(
-                        match __A::next_value::<u16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numContactPoints => {
-                    if _serde::__private::Option::is_some(&m_numContactPoints) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numContactPoints",
-                            ),
+                    __Field::m_numContactPoints => {
+                        if _serde::__private::Option::is_some(&m_numContactPoints) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numContactPoints",
+                                ),
+                            );
+                        }
+                        m_numContactPoints = _serde::__private::Some(
+                            match __A::next_value::<u16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numContactPoints = _serde::__private::Some(
-                        match __A::next_value::<u16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numReservedContactPoints => {
-                    if _serde::__private::Option::is_some(&m_numReservedContactPoints) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numReservedContactPoints",
-                            ),
+                    __Field::m_numReservedContactPoints => {
+                        if _serde::__private::Option::is_some(
+                            &m_numReservedContactPoints,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numReservedContactPoints",
+                                ),
+                            );
+                        }
+                        m_numReservedContactPoints = _serde::__private::Some(
+                            match __A::next_value::<u16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numReservedContactPoints = _serde::__private::Some(
-                        match __A::next_value::<u16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numUserDatasForBodyA => {
-                    if _serde::__private::Option::is_some(&m_numUserDatasForBodyA) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numUserDatasForBodyA",
-                            ),
+                    __Field::m_numUserDatasForBodyA => {
+                        if _serde::__private::Option::is_some(&m_numUserDatasForBodyA) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numUserDatasForBodyA",
+                                ),
+                            );
+                        }
+                        m_numUserDatasForBodyA = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numUserDatasForBodyA = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numUserDatasForBodyB => {
-                    if _serde::__private::Option::is_some(&m_numUserDatasForBodyB) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numUserDatasForBodyB",
-                            ),
+                    __Field::m_numUserDatasForBodyB => {
+                        if _serde::__private::Option::is_some(&m_numUserDatasForBodyB) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numUserDatasForBodyB",
+                                ),
+                            );
+                        }
+                        m_numUserDatasForBodyB = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numUserDatasForBodyB = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_contactPointPropertiesStriding => {
-                    if _serde::__private::Option::is_some(
-                        &m_contactPointPropertiesStriding,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "contactPointPropertiesStriding",
-                            ),
+                    __Field::m_contactPointPropertiesStriding => {
+                        if _serde::__private::Option::is_some(
+                            &m_contactPointPropertiesStriding,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "contactPointPropertiesStriding",
+                                ),
+                            );
+                        }
+                        m_contactPointPropertiesStriding = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_contactPointPropertiesStriding = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_maxNumContactPoints => {
-                    if _serde::__private::Option::is_some(&m_maxNumContactPoints) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "maxNumContactPoints",
-                            ),
+                    __Field::m_maxNumContactPoints => {
+                        if _serde::__private::Option::is_some(&m_maxNumContactPoints) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "maxNumContactPoints",
+                                ),
+                            );
+                        }
+                        m_maxNumContactPoints = _serde::__private::Some(
+                            match __A::next_value::<u16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_maxNumContactPoints = _serde::__private::Some(
-                        match __A::next_value::<u16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_info => {
-                    if _serde::__private::Option::is_some(&m_info) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("info"),
+                    __Field::m_info => {
+                        if _serde::__private::Option::is_some(&m_info) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("info"),
+                            );
+                        }
+                        m_info = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpSimpleContactConstraintDataInfo,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_info = _serde::__private::Some(
-                        match __A::next_value::<
-                            hkpSimpleContactConstraintDataInfo,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_sizeOfAllAtoms = match m_sizeOfAllAtoms {

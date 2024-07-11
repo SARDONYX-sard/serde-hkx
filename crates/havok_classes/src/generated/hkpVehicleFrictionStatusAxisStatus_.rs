@@ -491,167 +491,168 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleFrictionStatusAxisStatusVisit
         let mut m_forwardRhs: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_relativeSideForce: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_relativeForwardForce: _serde::__private::Option<f32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_forward_slip_velocity => {
-                    if _serde::__private::Option::is_some(&m_forward_slip_velocity) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "forward_slip_velocity",
-                            ),
+        for _ in 0..9usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_forward_slip_velocity => {
+                        if _serde::__private::Option::is_some(&m_forward_slip_velocity) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "forward_slip_velocity",
+                                ),
+                            );
+                        }
+                        m_forward_slip_velocity = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_forward_slip_velocity = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_side_slip_velocity => {
-                    if _serde::__private::Option::is_some(&m_side_slip_velocity) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "side_slip_velocity",
-                            ),
+                    __Field::m_side_slip_velocity => {
+                        if _serde::__private::Option::is_some(&m_side_slip_velocity) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "side_slip_velocity",
+                                ),
+                            );
+                        }
+                        m_side_slip_velocity = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_side_slip_velocity = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_skid_energy_density => {
-                    if _serde::__private::Option::is_some(&m_skid_energy_density) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "skid_energy_density",
-                            ),
+                    __Field::m_skid_energy_density => {
+                        if _serde::__private::Option::is_some(&m_skid_energy_density) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "skid_energy_density",
+                                ),
+                            );
+                        }
+                        m_skid_energy_density = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_skid_energy_density = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_side_force => {
-                    if _serde::__private::Option::is_some(&m_side_force) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "side_force",
-                            ),
+                    __Field::m_side_force => {
+                        if _serde::__private::Option::is_some(&m_side_force) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "side_force",
+                                ),
+                            );
+                        }
+                        m_side_force = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_side_force = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_delayed_forward_impulse => {
-                    if _serde::__private::Option::is_some(&m_delayed_forward_impulse) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "delayed_forward_impulse",
-                            ),
+                    __Field::m_delayed_forward_impulse => {
+                        if _serde::__private::Option::is_some(
+                            &m_delayed_forward_impulse,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "delayed_forward_impulse",
+                                ),
+                            );
+                        }
+                        m_delayed_forward_impulse = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_delayed_forward_impulse = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_sideRhs => {
-                    if _serde::__private::Option::is_some(&m_sideRhs) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("sideRhs"),
+                    __Field::m_sideRhs => {
+                        if _serde::__private::Option::is_some(&m_sideRhs) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "sideRhs",
+                                ),
+                            );
+                        }
+                        m_sideRhs = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_sideRhs = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_forwardRhs => {
-                    if _serde::__private::Option::is_some(&m_forwardRhs) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "forwardRhs",
-                            ),
+                    __Field::m_forwardRhs => {
+                        if _serde::__private::Option::is_some(&m_forwardRhs) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "forwardRhs",
+                                ),
+                            );
+                        }
+                        m_forwardRhs = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_forwardRhs = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_relativeSideForce => {
-                    if _serde::__private::Option::is_some(&m_relativeSideForce) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "relativeSideForce",
-                            ),
+                    __Field::m_relativeSideForce => {
+                        if _serde::__private::Option::is_some(&m_relativeSideForce) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "relativeSideForce",
+                                ),
+                            );
+                        }
+                        m_relativeSideForce = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_relativeSideForce = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_relativeForwardForce => {
-                    if _serde::__private::Option::is_some(&m_relativeForwardForce) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "relativeForwardForce",
-                            ),
+                    __Field::m_relativeForwardForce => {
+                        if _serde::__private::Option::is_some(&m_relativeForwardForce) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "relativeForwardForce",
+                                ),
+                            );
+                        }
+                        m_relativeForwardForce = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_relativeForwardForce = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_forward_slip_velocity = match m_forward_slip_velocity {

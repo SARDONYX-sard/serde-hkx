@@ -610,222 +610,223 @@ impl<'de> _serde::de::Visitor<'de> for __hkbFootIkGainsVisitor<'de> {
         let mut m_hipOrientationGain: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_maxKneeAngleDifference: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_ankleOrientationGain: _serde::__private::Option<f32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_onOffGain => {
-                    if _serde::__private::Option::is_some(&m_onOffGain) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "onOffGain",
-                            ),
+        for _ in 0..12usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_onOffGain => {
+                        if _serde::__private::Option::is_some(&m_onOffGain) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "onOffGain",
+                                ),
+                            );
+                        }
+                        m_onOffGain = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_onOffGain = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_groundAscendingGain => {
-                    if _serde::__private::Option::is_some(&m_groundAscendingGain) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "groundAscendingGain",
-                            ),
+                    __Field::m_groundAscendingGain => {
+                        if _serde::__private::Option::is_some(&m_groundAscendingGain) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "groundAscendingGain",
+                                ),
+                            );
+                        }
+                        m_groundAscendingGain = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_groundAscendingGain = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_groundDescendingGain => {
-                    if _serde::__private::Option::is_some(&m_groundDescendingGain) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "groundDescendingGain",
-                            ),
+                    __Field::m_groundDescendingGain => {
+                        if _serde::__private::Option::is_some(&m_groundDescendingGain) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "groundDescendingGain",
+                                ),
+                            );
+                        }
+                        m_groundDescendingGain = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_groundDescendingGain = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_footPlantedGain => {
-                    if _serde::__private::Option::is_some(&m_footPlantedGain) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "footPlantedGain",
-                            ),
+                    __Field::m_footPlantedGain => {
+                        if _serde::__private::Option::is_some(&m_footPlantedGain) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "footPlantedGain",
+                                ),
+                            );
+                        }
+                        m_footPlantedGain = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_footPlantedGain = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_footRaisedGain => {
-                    if _serde::__private::Option::is_some(&m_footRaisedGain) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "footRaisedGain",
-                            ),
+                    __Field::m_footRaisedGain => {
+                        if _serde::__private::Option::is_some(&m_footRaisedGain) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "footRaisedGain",
+                                ),
+                            );
+                        }
+                        m_footRaisedGain = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_footRaisedGain = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_footUnlockGain => {
-                    if _serde::__private::Option::is_some(&m_footUnlockGain) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "footUnlockGain",
-                            ),
+                    __Field::m_footUnlockGain => {
+                        if _serde::__private::Option::is_some(&m_footUnlockGain) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "footUnlockGain",
+                                ),
+                            );
+                        }
+                        m_footUnlockGain = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_footUnlockGain = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_worldFromModelFeedbackGain => {
-                    if _serde::__private::Option::is_some(
-                        &m_worldFromModelFeedbackGain,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "worldFromModelFeedbackGain",
-                            ),
+                    __Field::m_worldFromModelFeedbackGain => {
+                        if _serde::__private::Option::is_some(
+                            &m_worldFromModelFeedbackGain,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "worldFromModelFeedbackGain",
+                                ),
+                            );
+                        }
+                        m_worldFromModelFeedbackGain = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_worldFromModelFeedbackGain = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_errorUpDownBias => {
-                    if _serde::__private::Option::is_some(&m_errorUpDownBias) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "errorUpDownBias",
-                            ),
+                    __Field::m_errorUpDownBias => {
+                        if _serde::__private::Option::is_some(&m_errorUpDownBias) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "errorUpDownBias",
+                                ),
+                            );
+                        }
+                        m_errorUpDownBias = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_errorUpDownBias = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_alignWorldFromModelGain => {
-                    if _serde::__private::Option::is_some(&m_alignWorldFromModelGain) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "alignWorldFromModelGain",
-                            ),
+                    __Field::m_alignWorldFromModelGain => {
+                        if _serde::__private::Option::is_some(
+                            &m_alignWorldFromModelGain,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "alignWorldFromModelGain",
+                                ),
+                            );
+                        }
+                        m_alignWorldFromModelGain = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_alignWorldFromModelGain = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_hipOrientationGain => {
-                    if _serde::__private::Option::is_some(&m_hipOrientationGain) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "hipOrientationGain",
-                            ),
+                    __Field::m_hipOrientationGain => {
+                        if _serde::__private::Option::is_some(&m_hipOrientationGain) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "hipOrientationGain",
+                                ),
+                            );
+                        }
+                        m_hipOrientationGain = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_hipOrientationGain = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_maxKneeAngleDifference => {
-                    if _serde::__private::Option::is_some(&m_maxKneeAngleDifference) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "maxKneeAngleDifference",
-                            ),
+                    __Field::m_maxKneeAngleDifference => {
+                        if _serde::__private::Option::is_some(
+                            &m_maxKneeAngleDifference,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "maxKneeAngleDifference",
+                                ),
+                            );
+                        }
+                        m_maxKneeAngleDifference = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_maxKneeAngleDifference = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_ankleOrientationGain => {
-                    if _serde::__private::Option::is_some(&m_ankleOrientationGain) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "ankleOrientationGain",
-                            ),
+                    __Field::m_ankleOrientationGain => {
+                        if _serde::__private::Option::is_some(&m_ankleOrientationGain) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "ankleOrientationGain",
+                                ),
+                            );
+                        }
+                        m_ankleOrientationGain = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_ankleOrientationGain = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_onOffGain = match m_onOffGain {

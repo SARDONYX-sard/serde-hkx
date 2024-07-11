@@ -651,152 +651,157 @@ impl<'de> _serde::de::Visitor<'de> for __hkbAttachmentModifierVisitor<'de> {
         let mut m_attacherHandle: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_attacheeHandle: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_attacheeLayer: _serde::__private::Option<i32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_sendToAttacherOnAttach => {
-                    if _serde::__private::Option::is_some(&m_sendToAttacherOnAttach) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "sendToAttacherOnAttach",
-                            ),
+        for _ in 0..8usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_sendToAttacherOnAttach => {
+                        if _serde::__private::Option::is_some(
+                            &m_sendToAttacherOnAttach,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "sendToAttacherOnAttach",
+                                ),
+                            );
+                        }
+                        m_sendToAttacherOnAttach = _serde::__private::Some(
+                            match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_sendToAttacherOnAttach = _serde::__private::Some(
-                        match __A::next_value::<hkbEventProperty>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_sendToAttacheeOnAttach => {
-                    if _serde::__private::Option::is_some(&m_sendToAttacheeOnAttach) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "sendToAttacheeOnAttach",
-                            ),
+                    __Field::m_sendToAttacheeOnAttach => {
+                        if _serde::__private::Option::is_some(
+                            &m_sendToAttacheeOnAttach,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "sendToAttacheeOnAttach",
+                                ),
+                            );
+                        }
+                        m_sendToAttacheeOnAttach = _serde::__private::Some(
+                            match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_sendToAttacheeOnAttach = _serde::__private::Some(
-                        match __A::next_value::<hkbEventProperty>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_sendToAttacherOnDetach => {
-                    if _serde::__private::Option::is_some(&m_sendToAttacherOnDetach) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "sendToAttacherOnDetach",
-                            ),
+                    __Field::m_sendToAttacherOnDetach => {
+                        if _serde::__private::Option::is_some(
+                            &m_sendToAttacherOnDetach,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "sendToAttacherOnDetach",
+                                ),
+                            );
+                        }
+                        m_sendToAttacherOnDetach = _serde::__private::Some(
+                            match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_sendToAttacherOnDetach = _serde::__private::Some(
-                        match __A::next_value::<hkbEventProperty>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_sendToAttacheeOnDetach => {
-                    if _serde::__private::Option::is_some(&m_sendToAttacheeOnDetach) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "sendToAttacheeOnDetach",
-                            ),
+                    __Field::m_sendToAttacheeOnDetach => {
+                        if _serde::__private::Option::is_some(
+                            &m_sendToAttacheeOnDetach,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "sendToAttacheeOnDetach",
+                                ),
+                            );
+                        }
+                        m_sendToAttacheeOnDetach = _serde::__private::Some(
+                            match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_sendToAttacheeOnDetach = _serde::__private::Some(
-                        match __A::next_value::<hkbEventProperty>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_attachmentSetup => {
-                    if _serde::__private::Option::is_some(&m_attachmentSetup) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "attachmentSetup",
-                            ),
+                    __Field::m_attachmentSetup => {
+                        if _serde::__private::Option::is_some(&m_attachmentSetup) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "attachmentSetup",
+                                ),
+                            );
+                        }
+                        m_attachmentSetup = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_attachmentSetup = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_attacherHandle => {
-                    if _serde::__private::Option::is_some(&m_attacherHandle) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "attacherHandle",
-                            ),
+                    __Field::m_attacherHandle => {
+                        if _serde::__private::Option::is_some(&m_attacherHandle) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "attacherHandle",
+                                ),
+                            );
+                        }
+                        m_attacherHandle = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_attacherHandle = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_attacheeHandle => {
-                    if _serde::__private::Option::is_some(&m_attacheeHandle) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "attacheeHandle",
-                            ),
+                    __Field::m_attacheeHandle => {
+                        if _serde::__private::Option::is_some(&m_attacheeHandle) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "attacheeHandle",
+                                ),
+                            );
+                        }
+                        m_attacheeHandle = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_attacheeHandle = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_attacheeLayer => {
-                    if _serde::__private::Option::is_some(&m_attacheeLayer) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "attacheeLayer",
-                            ),
+                    __Field::m_attacheeLayer => {
+                        if _serde::__private::Option::is_some(&m_attacheeLayer) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "attacheeLayer",
+                                ),
+                            );
+                        }
+                        m_attacheeLayer = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_attacheeLayer = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_sendToAttacherOnAttach = match m_sendToAttacherOnAttach {

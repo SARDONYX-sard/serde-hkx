@@ -190,33 +190,32 @@ impl<'de> _serde::de::Visitor<'de> for __hkpOverwritePivotConstraintAtomVisitor<
     {
         let parent = __hkpConstraintAtomVisitor::visit_as_parent(&mut __map)?;
         let mut m_copyToPivotBFromPivotA: _serde::__private::Option<u8> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_copyToPivotBFromPivotA => {
-                    if _serde::__private::Option::is_some(&m_copyToPivotBFromPivotA) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "copyToPivotBFromPivotA",
-                            ),
+        for _ in 0..1usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_copyToPivotBFromPivotA => {
+                        if _serde::__private::Option::is_some(
+                            &m_copyToPivotBFromPivotA,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "copyToPivotBFromPivotA",
+                                ),
+                            );
+                        }
+                        m_copyToPivotBFromPivotA = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_copyToPivotBFromPivotA = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_copyToPivotBFromPivotA = match m_copyToPivotBFromPivotA {

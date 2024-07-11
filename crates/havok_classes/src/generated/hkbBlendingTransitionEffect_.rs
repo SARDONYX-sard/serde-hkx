@@ -665,99 +665,98 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBlendingTransitionEffectVisitor<'de>
         let mut m_flags: _serde::__private::Option<FlagBits> = _serde::__private::None;
         let mut m_endMode: _serde::__private::Option<EndMode> = _serde::__private::None;
         let mut m_blendCurve: _serde::__private::Option<BlendCurve> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_duration => {
-                    if _serde::__private::Option::is_some(&m_duration) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "duration",
-                            ),
+        for _ in 0..5usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_duration => {
+                        if _serde::__private::Option::is_some(&m_duration) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "duration",
+                                ),
+                            );
+                        }
+                        m_duration = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_duration = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_toGeneratorStartTimeFraction => {
-                    if _serde::__private::Option::is_some(
-                        &m_toGeneratorStartTimeFraction,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "toGeneratorStartTimeFraction",
-                            ),
+                    __Field::m_toGeneratorStartTimeFraction => {
+                        if _serde::__private::Option::is_some(
+                            &m_toGeneratorStartTimeFraction,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "toGeneratorStartTimeFraction",
+                                ),
+                            );
+                        }
+                        m_toGeneratorStartTimeFraction = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_toGeneratorStartTimeFraction = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_flags => {
-                    if _serde::__private::Option::is_some(&m_flags) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("flags"),
+                    __Field::m_flags => {
+                        if _serde::__private::Option::is_some(&m_flags) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("flags"),
+                            );
+                        }
+                        m_flags = _serde::__private::Some(
+                            match __A::next_value::<FlagBits>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_flags = _serde::__private::Some(
-                        match __A::next_value::<FlagBits>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_endMode => {
-                    if _serde::__private::Option::is_some(&m_endMode) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("endMode"),
+                    __Field::m_endMode => {
+                        if _serde::__private::Option::is_some(&m_endMode) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "endMode",
+                                ),
+                            );
+                        }
+                        m_endMode = _serde::__private::Some(
+                            match __A::next_value::<EndMode>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_endMode = _serde::__private::Some(
-                        match __A::next_value::<EndMode>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_blendCurve => {
-                    if _serde::__private::Option::is_some(&m_blendCurve) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "blendCurve",
-                            ),
+                    __Field::m_blendCurve => {
+                        if _serde::__private::Option::is_some(&m_blendCurve) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "blendCurve",
+                                ),
+                            );
+                        }
+                        m_blendCurve = _serde::__private::Some(
+                            match __A::next_value::<BlendCurve>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_blendCurve = _serde::__private::Some(
-                        match __A::next_value::<BlendCurve>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_duration = match m_duration {

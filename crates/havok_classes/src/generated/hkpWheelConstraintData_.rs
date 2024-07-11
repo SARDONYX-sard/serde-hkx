@@ -265,67 +265,66 @@ impl<'de> _serde::de::Visitor<'de> for __hkpWheelConstraintDataVisitor<'de> {
         let mut m_atoms: _serde::__private::Option<hkpWheelConstraintDataAtoms> = _serde::__private::None;
         let mut m_initialAxleInB: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_initialSteeringAxisInB: _serde::__private::Option<Vector4> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_atoms => {
-                    if _serde::__private::Option::is_some(&m_atoms) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("atoms"),
+        for _ in 0..3usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_atoms => {
+                        if _serde::__private::Option::is_some(&m_atoms) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("atoms"),
+                            );
+                        }
+                        m_atoms = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpWheelConstraintDataAtoms,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_atoms = _serde::__private::Some(
-                        match __A::next_value::<
-                            hkpWheelConstraintDataAtoms,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_initialAxleInB => {
-                    if _serde::__private::Option::is_some(&m_initialAxleInB) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "initialAxleInB",
-                            ),
+                    __Field::m_initialAxleInB => {
+                        if _serde::__private::Option::is_some(&m_initialAxleInB) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "initialAxleInB",
+                                ),
+                            );
+                        }
+                        m_initialAxleInB = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_initialAxleInB = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_initialSteeringAxisInB => {
-                    if _serde::__private::Option::is_some(&m_initialSteeringAxisInB) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "initialSteeringAxisInB",
-                            ),
+                    __Field::m_initialSteeringAxisInB => {
+                        if _serde::__private::Option::is_some(
+                            &m_initialSteeringAxisInB,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "initialSteeringAxisInB",
+                                ),
+                            );
+                        }
+                        m_initialSteeringAxisInB = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_initialSteeringAxisInB = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_atoms = match m_atoms {

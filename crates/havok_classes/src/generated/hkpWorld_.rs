@@ -3850,751 +3850,758 @@ impl<'de> _serde::de::Visitor<'de> for __hkpWorldVisitor<'de> {
         let mut m_sizeOfToiEventQueue: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_broadPhaseQuerySize: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_broadPhaseUpdateSize: _serde::__private::Option<i32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_simulation => {
-                    if _serde::__private::Option::is_some(&m_simulation) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "simulation",
-                            ),
+        for _ in 0..41usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_simulation => {
+                        if _serde::__private::Option::is_some(&m_simulation) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "simulation",
+                                ),
+                            );
+                        }
+                        m_simulation = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_simulation = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_gravity => {
-                    if _serde::__private::Option::is_some(&m_gravity) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("gravity"),
+                    __Field::m_gravity => {
+                        if _serde::__private::Option::is_some(&m_gravity) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "gravity",
+                                ),
+                            );
+                        }
+                        m_gravity = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_gravity = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_fixedRigidBody => {
-                    if _serde::__private::Option::is_some(&m_fixedRigidBody) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "fixedRigidBody",
-                            ),
+                    __Field::m_fixedRigidBody => {
+                        if _serde::__private::Option::is_some(&m_fixedRigidBody) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "fixedRigidBody",
+                                ),
+                            );
+                        }
+                        m_fixedRigidBody = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_fixedRigidBody = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_autoUpdateTree => {
-                    if _serde::__private::Option::is_some(&m_autoUpdateTree) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "autoUpdateTree",
-                            ),
+                    __Field::m_autoUpdateTree => {
+                        if _serde::__private::Option::is_some(&m_autoUpdateTree) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "autoUpdateTree",
+                                ),
+                            );
+                        }
+                        m_autoUpdateTree = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_autoUpdateTree = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_pendingOperationsCount => {
-                    if _serde::__private::Option::is_some(&m_pendingOperationsCount) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "pendingOperationsCount",
-                            ),
+                    __Field::m_pendingOperationsCount => {
+                        if _serde::__private::Option::is_some(
+                            &m_pendingOperationsCount,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "pendingOperationsCount",
+                                ),
+                            );
+                        }
+                        m_pendingOperationsCount = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_pendingOperationsCount = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_criticalOperationsLockCount => {
-                    if _serde::__private::Option::is_some(
-                        &m_criticalOperationsLockCount,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "criticalOperationsLockCount",
-                            ),
+                    __Field::m_criticalOperationsLockCount => {
+                        if _serde::__private::Option::is_some(
+                            &m_criticalOperationsLockCount,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "criticalOperationsLockCount",
+                                ),
+                            );
+                        }
+                        m_criticalOperationsLockCount = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_criticalOperationsLockCount = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_criticalOperationsLockCountForPhantoms => {
-                    if _serde::__private::Option::is_some(
-                        &m_criticalOperationsLockCountForPhantoms,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "criticalOperationsLockCountForPhantoms",
-                            ),
+                    __Field::m_criticalOperationsLockCountForPhantoms => {
+                        if _serde::__private::Option::is_some(
+                            &m_criticalOperationsLockCountForPhantoms,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "criticalOperationsLockCountForPhantoms",
+                                ),
+                            );
+                        }
+                        m_criticalOperationsLockCountForPhantoms = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_criticalOperationsLockCountForPhantoms = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_blockExecutingPendingOperations => {
-                    if _serde::__private::Option::is_some(
-                        &m_blockExecutingPendingOperations,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "blockExecutingPendingOperations",
-                            ),
+                    __Field::m_blockExecutingPendingOperations => {
+                        if _serde::__private::Option::is_some(
+                            &m_blockExecutingPendingOperations,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "blockExecutingPendingOperations",
+                                ),
+                            );
+                        }
+                        m_blockExecutingPendingOperations = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_blockExecutingPendingOperations = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_criticalOperationsAllowed => {
-                    if _serde::__private::Option::is_some(&m_criticalOperationsAllowed) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "criticalOperationsAllowed",
-                            ),
+                    __Field::m_criticalOperationsAllowed => {
+                        if _serde::__private::Option::is_some(
+                            &m_criticalOperationsAllowed,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "criticalOperationsAllowed",
+                                ),
+                            );
+                        }
+                        m_criticalOperationsAllowed = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_criticalOperationsAllowed = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_pendingOperationQueueCount => {
-                    if _serde::__private::Option::is_some(
-                        &m_pendingOperationQueueCount,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "pendingOperationQueueCount",
-                            ),
+                    __Field::m_pendingOperationQueueCount => {
+                        if _serde::__private::Option::is_some(
+                            &m_pendingOperationQueueCount,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "pendingOperationQueueCount",
+                                ),
+                            );
+                        }
+                        m_pendingOperationQueueCount = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_pendingOperationQueueCount = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_processActionsInSingleThread => {
-                    if _serde::__private::Option::is_some(
-                        &m_processActionsInSingleThread,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "processActionsInSingleThread",
-                            ),
+                    __Field::m_processActionsInSingleThread => {
+                        if _serde::__private::Option::is_some(
+                            &m_processActionsInSingleThread,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "processActionsInSingleThread",
+                                ),
+                            );
+                        }
+                        m_processActionsInSingleThread = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_processActionsInSingleThread = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob => {
-                    if _serde::__private::Option::is_some(
-                        &m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "allowIntegrationOfIslandsWithoutConstraintsInASeparateJob",
-                            ),
+                    __Field::m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob => {
+                        if _serde::__private::Option::is_some(
+                            &m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "allowIntegrationOfIslandsWithoutConstraintsInASeparateJob",
+                                ),
+                            );
+                        }
+                        m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_minDesiredIslandSize => {
-                    if _serde::__private::Option::is_some(&m_minDesiredIslandSize) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "minDesiredIslandSize",
-                            ),
+                    __Field::m_minDesiredIslandSize => {
+                        if _serde::__private::Option::is_some(&m_minDesiredIslandSize) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "minDesiredIslandSize",
+                                ),
+                            );
+                        }
+                        m_minDesiredIslandSize = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_minDesiredIslandSize = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_isLocked => {
-                    if _serde::__private::Option::is_some(&m_isLocked) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "isLocked",
-                            ),
+                    __Field::m_isLocked => {
+                        if _serde::__private::Option::is_some(&m_isLocked) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "isLocked",
+                                ),
+                            );
+                        }
+                        m_isLocked = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_isLocked = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_wantSimulationIslands => {
-                    if _serde::__private::Option::is_some(&m_wantSimulationIslands) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "wantSimulationIslands",
-                            ),
+                    __Field::m_wantSimulationIslands => {
+                        if _serde::__private::Option::is_some(&m_wantSimulationIslands) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "wantSimulationIslands",
+                                ),
+                            );
+                        }
+                        m_wantSimulationIslands = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_wantSimulationIslands = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_snapCollisionToConvexEdgeThreshold => {
-                    if _serde::__private::Option::is_some(
-                        &m_snapCollisionToConvexEdgeThreshold,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "snapCollisionToConvexEdgeThreshold",
-                            ),
+                    __Field::m_snapCollisionToConvexEdgeThreshold => {
+                        if _serde::__private::Option::is_some(
+                            &m_snapCollisionToConvexEdgeThreshold,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "snapCollisionToConvexEdgeThreshold",
+                                ),
+                            );
+                        }
+                        m_snapCollisionToConvexEdgeThreshold = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_snapCollisionToConvexEdgeThreshold = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_snapCollisionToConcaveEdgeThreshold => {
-                    if _serde::__private::Option::is_some(
-                        &m_snapCollisionToConcaveEdgeThreshold,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "snapCollisionToConcaveEdgeThreshold",
-                            ),
+                    __Field::m_snapCollisionToConcaveEdgeThreshold => {
+                        if _serde::__private::Option::is_some(
+                            &m_snapCollisionToConcaveEdgeThreshold,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "snapCollisionToConcaveEdgeThreshold",
+                                ),
+                            );
+                        }
+                        m_snapCollisionToConcaveEdgeThreshold = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_snapCollisionToConcaveEdgeThreshold = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_enableToiWeldRejection => {
-                    if _serde::__private::Option::is_some(&m_enableToiWeldRejection) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "enableToiWeldRejection",
-                            ),
+                    __Field::m_enableToiWeldRejection => {
+                        if _serde::__private::Option::is_some(
+                            &m_enableToiWeldRejection,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "enableToiWeldRejection",
+                                ),
+                            );
+                        }
+                        m_enableToiWeldRejection = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_enableToiWeldRejection = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_wantDeactivation => {
-                    if _serde::__private::Option::is_some(&m_wantDeactivation) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "wantDeactivation",
-                            ),
+                    __Field::m_wantDeactivation => {
+                        if _serde::__private::Option::is_some(&m_wantDeactivation) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "wantDeactivation",
+                                ),
+                            );
+                        }
+                        m_wantDeactivation = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_wantDeactivation = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_shouldActivateOnRigidBodyTransformChange => {
-                    if _serde::__private::Option::is_some(
-                        &m_shouldActivateOnRigidBodyTransformChange,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "shouldActivateOnRigidBodyTransformChange",
-                            ),
+                    __Field::m_shouldActivateOnRigidBodyTransformChange => {
+                        if _serde::__private::Option::is_some(
+                            &m_shouldActivateOnRigidBodyTransformChange,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "shouldActivateOnRigidBodyTransformChange",
+                                ),
+                            );
+                        }
+                        m_shouldActivateOnRigidBodyTransformChange = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_shouldActivateOnRigidBodyTransformChange = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_deactivationReferenceDistance => {
-                    if _serde::__private::Option::is_some(
-                        &m_deactivationReferenceDistance,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "deactivationReferenceDistance",
-                            ),
+                    __Field::m_deactivationReferenceDistance => {
+                        if _serde::__private::Option::is_some(
+                            &m_deactivationReferenceDistance,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "deactivationReferenceDistance",
+                                ),
+                            );
+                        }
+                        m_deactivationReferenceDistance = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_deactivationReferenceDistance = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_toiCollisionResponseRotateNormal => {
-                    if _serde::__private::Option::is_some(
-                        &m_toiCollisionResponseRotateNormal,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "toiCollisionResponseRotateNormal",
-                            ),
+                    __Field::m_toiCollisionResponseRotateNormal => {
+                        if _serde::__private::Option::is_some(
+                            &m_toiCollisionResponseRotateNormal,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "toiCollisionResponseRotateNormal",
+                                ),
+                            );
+                        }
+                        m_toiCollisionResponseRotateNormal = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_toiCollisionResponseRotateNormal = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_maxSectorsPerMidphaseCollideTask => {
-                    if _serde::__private::Option::is_some(
-                        &m_maxSectorsPerMidphaseCollideTask,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "maxSectorsPerMidphaseCollideTask",
-                            ),
+                    __Field::m_maxSectorsPerMidphaseCollideTask => {
+                        if _serde::__private::Option::is_some(
+                            &m_maxSectorsPerMidphaseCollideTask,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "maxSectorsPerMidphaseCollideTask",
+                                ),
+                            );
+                        }
+                        m_maxSectorsPerMidphaseCollideTask = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_maxSectorsPerMidphaseCollideTask = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_maxSectorsPerNarrowphaseCollideTask => {
-                    if _serde::__private::Option::is_some(
-                        &m_maxSectorsPerNarrowphaseCollideTask,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "maxSectorsPerNarrowphaseCollideTask",
-                            ),
+                    __Field::m_maxSectorsPerNarrowphaseCollideTask => {
+                        if _serde::__private::Option::is_some(
+                            &m_maxSectorsPerNarrowphaseCollideTask,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "maxSectorsPerNarrowphaseCollideTask",
+                                ),
+                            );
+                        }
+                        m_maxSectorsPerNarrowphaseCollideTask = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_maxSectorsPerNarrowphaseCollideTask = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_processToisMultithreaded => {
-                    if _serde::__private::Option::is_some(&m_processToisMultithreaded) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "processToisMultithreaded",
-                            ),
+                    __Field::m_processToisMultithreaded => {
+                        if _serde::__private::Option::is_some(
+                            &m_processToisMultithreaded,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "processToisMultithreaded",
+                                ),
+                            );
+                        }
+                        m_processToisMultithreaded = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_processToisMultithreaded = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_maxEntriesPerToiMidphaseCollideTask => {
-                    if _serde::__private::Option::is_some(
-                        &m_maxEntriesPerToiMidphaseCollideTask,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "maxEntriesPerToiMidphaseCollideTask",
-                            ),
+                    __Field::m_maxEntriesPerToiMidphaseCollideTask => {
+                        if _serde::__private::Option::is_some(
+                            &m_maxEntriesPerToiMidphaseCollideTask,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "maxEntriesPerToiMidphaseCollideTask",
+                                ),
+                            );
+                        }
+                        m_maxEntriesPerToiMidphaseCollideTask = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_maxEntriesPerToiMidphaseCollideTask = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_maxEntriesPerToiNarrowphaseCollideTask => {
-                    if _serde::__private::Option::is_some(
-                        &m_maxEntriesPerToiNarrowphaseCollideTask,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "maxEntriesPerToiNarrowphaseCollideTask",
-                            ),
+                    __Field::m_maxEntriesPerToiNarrowphaseCollideTask => {
+                        if _serde::__private::Option::is_some(
+                            &m_maxEntriesPerToiNarrowphaseCollideTask,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "maxEntriesPerToiNarrowphaseCollideTask",
+                                ),
+                            );
+                        }
+                        m_maxEntriesPerToiNarrowphaseCollideTask = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_maxEntriesPerToiNarrowphaseCollideTask = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_maxNumToiCollisionPairsSinglethreaded => {
-                    if _serde::__private::Option::is_some(
-                        &m_maxNumToiCollisionPairsSinglethreaded,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "maxNumToiCollisionPairsSinglethreaded",
-                            ),
+                    __Field::m_maxNumToiCollisionPairsSinglethreaded => {
+                        if _serde::__private::Option::is_some(
+                            &m_maxNumToiCollisionPairsSinglethreaded,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "maxNumToiCollisionPairsSinglethreaded",
+                                ),
+                            );
+                        }
+                        m_maxNumToiCollisionPairsSinglethreaded = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_maxNumToiCollisionPairsSinglethreaded = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numToisTillAllowedPenetrationSimplifiedToi => {
-                    if _serde::__private::Option::is_some(
-                        &m_numToisTillAllowedPenetrationSimplifiedToi,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numToisTillAllowedPenetrationSimplifiedToi",
-                            ),
+                    __Field::m_numToisTillAllowedPenetrationSimplifiedToi => {
+                        if _serde::__private::Option::is_some(
+                            &m_numToisTillAllowedPenetrationSimplifiedToi,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numToisTillAllowedPenetrationSimplifiedToi",
+                                ),
+                            );
+                        }
+                        m_numToisTillAllowedPenetrationSimplifiedToi = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numToisTillAllowedPenetrationSimplifiedToi = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numToisTillAllowedPenetrationToi => {
-                    if _serde::__private::Option::is_some(
-                        &m_numToisTillAllowedPenetrationToi,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numToisTillAllowedPenetrationToi",
-                            ),
+                    __Field::m_numToisTillAllowedPenetrationToi => {
+                        if _serde::__private::Option::is_some(
+                            &m_numToisTillAllowedPenetrationToi,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numToisTillAllowedPenetrationToi",
+                                ),
+                            );
+                        }
+                        m_numToisTillAllowedPenetrationToi = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numToisTillAllowedPenetrationToi = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numToisTillAllowedPenetrationToiHigher => {
-                    if _serde::__private::Option::is_some(
-                        &m_numToisTillAllowedPenetrationToiHigher,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numToisTillAllowedPenetrationToiHigher",
-                            ),
+                    __Field::m_numToisTillAllowedPenetrationToiHigher => {
+                        if _serde::__private::Option::is_some(
+                            &m_numToisTillAllowedPenetrationToiHigher,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numToisTillAllowedPenetrationToiHigher",
+                                ),
+                            );
+                        }
+                        m_numToisTillAllowedPenetrationToiHigher = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numToisTillAllowedPenetrationToiHigher = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numToisTillAllowedPenetrationToiForced => {
-                    if _serde::__private::Option::is_some(
-                        &m_numToisTillAllowedPenetrationToiForced,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numToisTillAllowedPenetrationToiForced",
-                            ),
+                    __Field::m_numToisTillAllowedPenetrationToiForced => {
+                        if _serde::__private::Option::is_some(
+                            &m_numToisTillAllowedPenetrationToiForced,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numToisTillAllowedPenetrationToiForced",
+                                ),
+                            );
+                        }
+                        m_numToisTillAllowedPenetrationToiForced = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numToisTillAllowedPenetrationToiForced = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_lastEntityUid => {
-                    if _serde::__private::Option::is_some(&m_lastEntityUid) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "lastEntityUid",
-                            ),
+                    __Field::m_lastEntityUid => {
+                        if _serde::__private::Option::is_some(&m_lastEntityUid) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "lastEntityUid",
+                                ),
+                            );
+                        }
+                        m_lastEntityUid = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_lastEntityUid = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_lastIslandUid => {
-                    if _serde::__private::Option::is_some(&m_lastIslandUid) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "lastIslandUid",
-                            ),
+                    __Field::m_lastIslandUid => {
+                        if _serde::__private::Option::is_some(&m_lastIslandUid) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "lastIslandUid",
+                                ),
+                            );
+                        }
+                        m_lastIslandUid = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_lastIslandUid = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_lastConstraintUid => {
-                    if _serde::__private::Option::is_some(&m_lastConstraintUid) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "lastConstraintUid",
-                            ),
+                    __Field::m_lastConstraintUid => {
+                        if _serde::__private::Option::is_some(&m_lastConstraintUid) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "lastConstraintUid",
+                                ),
+                            );
+                        }
+                        m_lastConstraintUid = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_lastConstraintUid = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_phantoms => {
-                    if _serde::__private::Option::is_some(&m_phantoms) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "phantoms",
-                            ),
+                    __Field::m_phantoms => {
+                        if _serde::__private::Option::is_some(&m_phantoms) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "phantoms",
+                                ),
+                            );
+                        }
+                        m_phantoms = _serde::__private::Some(
+                            match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_phantoms = _serde::__private::Some(
-                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_broadPhaseExtents => {
-                    if _serde::__private::Option::is_some(&m_broadPhaseExtents) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "broadPhaseExtents",
-                            ),
+                    __Field::m_broadPhaseExtents => {
+                        if _serde::__private::Option::is_some(&m_broadPhaseExtents) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "broadPhaseExtents",
+                                ),
+                            );
+                        }
+                        m_broadPhaseExtents = _serde::__private::Some(
+                            match __A::next_value::<[Vector4; 2usize]>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_broadPhaseExtents = _serde::__private::Some(
-                        match __A::next_value::<[Vector4; 2usize]>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_broadPhaseNumMarkers => {
-                    if _serde::__private::Option::is_some(&m_broadPhaseNumMarkers) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "broadPhaseNumMarkers",
-                            ),
+                    __Field::m_broadPhaseNumMarkers => {
+                        if _serde::__private::Option::is_some(&m_broadPhaseNumMarkers) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "broadPhaseNumMarkers",
+                                ),
+                            );
+                        }
+                        m_broadPhaseNumMarkers = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_broadPhaseNumMarkers = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_sizeOfToiEventQueue => {
-                    if _serde::__private::Option::is_some(&m_sizeOfToiEventQueue) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "sizeOfToiEventQueue",
-                            ),
+                    __Field::m_sizeOfToiEventQueue => {
+                        if _serde::__private::Option::is_some(&m_sizeOfToiEventQueue) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "sizeOfToiEventQueue",
+                                ),
+                            );
+                        }
+                        m_sizeOfToiEventQueue = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_sizeOfToiEventQueue = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_broadPhaseQuerySize => {
-                    if _serde::__private::Option::is_some(&m_broadPhaseQuerySize) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "broadPhaseQuerySize",
-                            ),
+                    __Field::m_broadPhaseQuerySize => {
+                        if _serde::__private::Option::is_some(&m_broadPhaseQuerySize) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "broadPhaseQuerySize",
+                                ),
+                            );
+                        }
+                        m_broadPhaseQuerySize = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_broadPhaseQuerySize = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_broadPhaseUpdateSize => {
-                    if _serde::__private::Option::is_some(&m_broadPhaseUpdateSize) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "broadPhaseUpdateSize",
-                            ),
+                    __Field::m_broadPhaseUpdateSize => {
+                        if _serde::__private::Option::is_some(&m_broadPhaseUpdateSize) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "broadPhaseUpdateSize",
+                                ),
+                            );
+                        }
+                        m_broadPhaseUpdateSize = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_broadPhaseUpdateSize = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_simulation = match m_simulation {

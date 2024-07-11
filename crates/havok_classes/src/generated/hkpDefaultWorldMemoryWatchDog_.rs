@@ -195,33 +195,32 @@ impl<'de> _serde::de::Visitor<'de> for __hkpDefaultWorldMemoryWatchDogVisitor<'d
             &mut __map,
         )?;
         let mut m_freeHeapMemoryRequested: _serde::__private::Option<i32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_freeHeapMemoryRequested => {
-                    if _serde::__private::Option::is_some(&m_freeHeapMemoryRequested) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "freeHeapMemoryRequested",
-                            ),
+        for _ in 0..1usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_freeHeapMemoryRequested => {
+                        if _serde::__private::Option::is_some(
+                            &m_freeHeapMemoryRequested,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "freeHeapMemoryRequested",
+                                ),
+                            );
+                        }
+                        m_freeHeapMemoryRequested = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_freeHeapMemoryRequested = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_freeHeapMemoryRequested = match m_freeHeapMemoryRequested {

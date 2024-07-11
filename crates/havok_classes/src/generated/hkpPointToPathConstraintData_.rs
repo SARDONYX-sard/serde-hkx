@@ -343,97 +343,96 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPointToPathConstraintDataVisitor<'de
             OrientationConstraintType,
         > = _serde::__private::None;
         let mut m_transform_OS_KS: _serde::__private::Option<[Transform; 2usize]> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_atoms => {
-                    if _serde::__private::Option::is_some(&m_atoms) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("atoms"),
+        for _ in 0..5usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_atoms => {
+                        if _serde::__private::Option::is_some(&m_atoms) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("atoms"),
+                            );
+                        }
+                        m_atoms = _serde::__private::Some(
+                            match __A::next_value::<hkpBridgeAtoms>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_atoms = _serde::__private::Some(
-                        match __A::next_value::<hkpBridgeAtoms>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_path => {
-                    if _serde::__private::Option::is_some(&m_path) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("path"),
+                    __Field::m_path => {
+                        if _serde::__private::Option::is_some(&m_path) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("path"),
+                            );
+                        }
+                        m_path = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_path = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_maxFrictionForce => {
-                    if _serde::__private::Option::is_some(&m_maxFrictionForce) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "maxFrictionForce",
-                            ),
+                    __Field::m_maxFrictionForce => {
+                        if _serde::__private::Option::is_some(&m_maxFrictionForce) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "maxFrictionForce",
+                                ),
+                            );
+                        }
+                        m_maxFrictionForce = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_maxFrictionForce = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_angularConstrainedDOF => {
-                    if _serde::__private::Option::is_some(&m_angularConstrainedDOF) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "angularConstrainedDOF",
-                            ),
+                    __Field::m_angularConstrainedDOF => {
+                        if _serde::__private::Option::is_some(&m_angularConstrainedDOF) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "angularConstrainedDOF",
+                                ),
+                            );
+                        }
+                        m_angularConstrainedDOF = _serde::__private::Some(
+                            match __A::next_value::<
+                                OrientationConstraintType,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_angularConstrainedDOF = _serde::__private::Some(
-                        match __A::next_value::<OrientationConstraintType>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_transform_OS_KS => {
-                    if _serde::__private::Option::is_some(&m_transform_OS_KS) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "transform_OS_KS",
-                            ),
+                    __Field::m_transform_OS_KS => {
+                        if _serde::__private::Option::is_some(&m_transform_OS_KS) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "transform_OS_KS",
+                                ),
+                            );
+                        }
+                        m_transform_OS_KS = _serde::__private::Some(
+                            match __A::next_value::<[Transform; 2usize]>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_transform_OS_KS = _serde::__private::Some(
-                        match __A::next_value::<[Transform; 2usize]>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_atoms = match m_atoms {

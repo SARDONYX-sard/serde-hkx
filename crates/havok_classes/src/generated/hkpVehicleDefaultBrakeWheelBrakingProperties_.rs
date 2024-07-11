@@ -268,67 +268,66 @@ for __hkpVehicleDefaultBrakeWheelBrakingPropertiesVisitor<'de> {
         let mut m_maxBreakingTorque: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_minPedalInputToBlock: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_isConnectedToHandbrake: _serde::__private::Option<bool> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_maxBreakingTorque => {
-                    if _serde::__private::Option::is_some(&m_maxBreakingTorque) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "maxBreakingTorque",
-                            ),
+        for _ in 0..3usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_maxBreakingTorque => {
+                        if _serde::__private::Option::is_some(&m_maxBreakingTorque) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "maxBreakingTorque",
+                                ),
+                            );
+                        }
+                        m_maxBreakingTorque = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_maxBreakingTorque = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_minPedalInputToBlock => {
-                    if _serde::__private::Option::is_some(&m_minPedalInputToBlock) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "minPedalInputToBlock",
-                            ),
+                    __Field::m_minPedalInputToBlock => {
+                        if _serde::__private::Option::is_some(&m_minPedalInputToBlock) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "minPedalInputToBlock",
+                                ),
+                            );
+                        }
+                        m_minPedalInputToBlock = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_minPedalInputToBlock = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_isConnectedToHandbrake => {
-                    if _serde::__private::Option::is_some(&m_isConnectedToHandbrake) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "isConnectedToHandbrake",
-                            ),
+                    __Field::m_isConnectedToHandbrake => {
+                        if _serde::__private::Option::is_some(
+                            &m_isConnectedToHandbrake,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "isConnectedToHandbrake",
+                                ),
+                            );
+                        }
+                        m_isConnectedToHandbrake = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_isConnectedToHandbrake = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_maxBreakingTorque = match m_maxBreakingTorque {

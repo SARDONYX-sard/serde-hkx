@@ -935,218 +935,219 @@ impl<'de> _serde::de::Visitor<'de> for __hkbPoseMatchingGeneratorVisitor<'de> {
         let mut m_anotherBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
         let mut m_pelvisIndex: _serde::__private::Option<i16> = _serde::__private::None;
         let mut m_mode: _serde::__private::Option<Mode> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_worldFromModelRotation => {
-                    if _serde::__private::Option::is_some(&m_worldFromModelRotation) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "worldFromModelRotation",
-                            ),
+        for _ in 0..12usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_worldFromModelRotation => {
+                        if _serde::__private::Option::is_some(
+                            &m_worldFromModelRotation,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "worldFromModelRotation",
+                                ),
+                            );
+                        }
+                        m_worldFromModelRotation = _serde::__private::Some(
+                            match __A::next_value::<Quaternion>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_worldFromModelRotation = _serde::__private::Some(
-                        match __A::next_value::<Quaternion>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_blendSpeed => {
-                    if _serde::__private::Option::is_some(&m_blendSpeed) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "blendSpeed",
-                            ),
+                    __Field::m_blendSpeed => {
+                        if _serde::__private::Option::is_some(&m_blendSpeed) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "blendSpeed",
+                                ),
+                            );
+                        }
+                        m_blendSpeed = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_blendSpeed = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_minSpeedToSwitch => {
-                    if _serde::__private::Option::is_some(&m_minSpeedToSwitch) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "minSpeedToSwitch",
-                            ),
+                    __Field::m_minSpeedToSwitch => {
+                        if _serde::__private::Option::is_some(&m_minSpeedToSwitch) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "minSpeedToSwitch",
+                                ),
+                            );
+                        }
+                        m_minSpeedToSwitch = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_minSpeedToSwitch = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_minSwitchTimeNoError => {
-                    if _serde::__private::Option::is_some(&m_minSwitchTimeNoError) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "minSwitchTimeNoError",
-                            ),
+                    __Field::m_minSwitchTimeNoError => {
+                        if _serde::__private::Option::is_some(&m_minSwitchTimeNoError) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "minSwitchTimeNoError",
+                                ),
+                            );
+                        }
+                        m_minSwitchTimeNoError = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_minSwitchTimeNoError = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_minSwitchTimeFullError => {
-                    if _serde::__private::Option::is_some(&m_minSwitchTimeFullError) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "minSwitchTimeFullError",
-                            ),
+                    __Field::m_minSwitchTimeFullError => {
+                        if _serde::__private::Option::is_some(
+                            &m_minSwitchTimeFullError,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "minSwitchTimeFullError",
+                                ),
+                            );
+                        }
+                        m_minSwitchTimeFullError = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_minSwitchTimeFullError = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_startPlayingEventId => {
-                    if _serde::__private::Option::is_some(&m_startPlayingEventId) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "startPlayingEventId",
-                            ),
+                    __Field::m_startPlayingEventId => {
+                        if _serde::__private::Option::is_some(&m_startPlayingEventId) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "startPlayingEventId",
+                                ),
+                            );
+                        }
+                        m_startPlayingEventId = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_startPlayingEventId = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_startMatchingEventId => {
-                    if _serde::__private::Option::is_some(&m_startMatchingEventId) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "startMatchingEventId",
-                            ),
+                    __Field::m_startMatchingEventId => {
+                        if _serde::__private::Option::is_some(&m_startMatchingEventId) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "startMatchingEventId",
+                                ),
+                            );
+                        }
+                        m_startMatchingEventId = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_startMatchingEventId = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_rootBoneIndex => {
-                    if _serde::__private::Option::is_some(&m_rootBoneIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "rootBoneIndex",
-                            ),
+                    __Field::m_rootBoneIndex => {
+                        if _serde::__private::Option::is_some(&m_rootBoneIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "rootBoneIndex",
+                                ),
+                            );
+                        }
+                        m_rootBoneIndex = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_rootBoneIndex = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_otherBoneIndex => {
-                    if _serde::__private::Option::is_some(&m_otherBoneIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "otherBoneIndex",
-                            ),
+                    __Field::m_otherBoneIndex => {
+                        if _serde::__private::Option::is_some(&m_otherBoneIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "otherBoneIndex",
+                                ),
+                            );
+                        }
+                        m_otherBoneIndex = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_otherBoneIndex = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_anotherBoneIndex => {
-                    if _serde::__private::Option::is_some(&m_anotherBoneIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "anotherBoneIndex",
-                            ),
+                    __Field::m_anotherBoneIndex => {
+                        if _serde::__private::Option::is_some(&m_anotherBoneIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "anotherBoneIndex",
+                                ),
+                            );
+                        }
+                        m_anotherBoneIndex = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_anotherBoneIndex = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_pelvisIndex => {
-                    if _serde::__private::Option::is_some(&m_pelvisIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "pelvisIndex",
-                            ),
+                    __Field::m_pelvisIndex => {
+                        if _serde::__private::Option::is_some(&m_pelvisIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "pelvisIndex",
+                                ),
+                            );
+                        }
+                        m_pelvisIndex = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_pelvisIndex = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_mode => {
-                    if _serde::__private::Option::is_some(&m_mode) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("mode"),
+                    __Field::m_mode => {
+                        if _serde::__private::Option::is_some(&m_mode) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("mode"),
+                            );
+                        }
+                        m_mode = _serde::__private::Some(
+                            match __A::next_value::<Mode>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_mode = _serde::__private::Some(
-                        match __A::next_value::<Mode>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_worldFromModelRotation = match m_worldFromModelRotation {

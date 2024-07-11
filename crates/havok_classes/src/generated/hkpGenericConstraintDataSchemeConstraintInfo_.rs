@@ -297,84 +297,81 @@ for __hkpGenericConstraintDataSchemeConstraintInfoVisitor<'de> {
         let mut m_sizeOfSchemas: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_numSolverResults: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_numSolverElemTemps: _serde::__private::Option<i32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_maxSizeOfSchema => {
-                    if _serde::__private::Option::is_some(&m_maxSizeOfSchema) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "maxSizeOfSchema",
-                            ),
+        for _ in 0..4usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_maxSizeOfSchema => {
+                        if _serde::__private::Option::is_some(&m_maxSizeOfSchema) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "maxSizeOfSchema",
+                                ),
+                            );
+                        }
+                        m_maxSizeOfSchema = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_maxSizeOfSchema = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_sizeOfSchemas => {
-                    if _serde::__private::Option::is_some(&m_sizeOfSchemas) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "sizeOfSchemas",
-                            ),
+                    __Field::m_sizeOfSchemas => {
+                        if _serde::__private::Option::is_some(&m_sizeOfSchemas) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "sizeOfSchemas",
+                                ),
+                            );
+                        }
+                        m_sizeOfSchemas = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_sizeOfSchemas = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numSolverResults => {
-                    if _serde::__private::Option::is_some(&m_numSolverResults) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numSolverResults",
-                            ),
+                    __Field::m_numSolverResults => {
+                        if _serde::__private::Option::is_some(&m_numSolverResults) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numSolverResults",
+                                ),
+                            );
+                        }
+                        m_numSolverResults = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numSolverResults = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numSolverElemTemps => {
-                    if _serde::__private::Option::is_some(&m_numSolverElemTemps) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numSolverElemTemps",
-                            ),
+                    __Field::m_numSolverElemTemps => {
+                        if _serde::__private::Option::is_some(&m_numSolverElemTemps) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numSolverElemTemps",
+                                ),
+                            );
+                        }
+                        m_numSolverElemTemps = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numSolverElemTemps = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_maxSizeOfSchema = match m_maxSizeOfSchema {

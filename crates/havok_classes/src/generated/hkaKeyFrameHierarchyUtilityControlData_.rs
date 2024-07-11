@@ -622,222 +622,225 @@ for __hkaKeyFrameHierarchyUtilityControlDataVisitor<'de> {
         let mut m_snapMaxAngularVelocity: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_snapMaxLinearDistance: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_snapMaxAngularDistance: _serde::__private::Option<f32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_hierarchyGain => {
-                    if _serde::__private::Option::is_some(&m_hierarchyGain) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "hierarchyGain",
-                            ),
+        for _ in 0..12usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_hierarchyGain => {
+                        if _serde::__private::Option::is_some(&m_hierarchyGain) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "hierarchyGain",
+                                ),
+                            );
+                        }
+                        m_hierarchyGain = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_hierarchyGain = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_velocityDamping => {
-                    if _serde::__private::Option::is_some(&m_velocityDamping) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "velocityDamping",
-                            ),
+                    __Field::m_velocityDamping => {
+                        if _serde::__private::Option::is_some(&m_velocityDamping) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "velocityDamping",
+                                ),
+                            );
+                        }
+                        m_velocityDamping = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_velocityDamping = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_accelerationGain => {
-                    if _serde::__private::Option::is_some(&m_accelerationGain) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "accelerationGain",
-                            ),
+                    __Field::m_accelerationGain => {
+                        if _serde::__private::Option::is_some(&m_accelerationGain) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "accelerationGain",
+                                ),
+                            );
+                        }
+                        m_accelerationGain = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_accelerationGain = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_velocityGain => {
-                    if _serde::__private::Option::is_some(&m_velocityGain) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "velocityGain",
-                            ),
+                    __Field::m_velocityGain => {
+                        if _serde::__private::Option::is_some(&m_velocityGain) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "velocityGain",
+                                ),
+                            );
+                        }
+                        m_velocityGain = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_velocityGain = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_positionGain => {
-                    if _serde::__private::Option::is_some(&m_positionGain) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "positionGain",
-                            ),
+                    __Field::m_positionGain => {
+                        if _serde::__private::Option::is_some(&m_positionGain) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "positionGain",
+                                ),
+                            );
+                        }
+                        m_positionGain = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_positionGain = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_positionMaxLinearVelocity => {
-                    if _serde::__private::Option::is_some(&m_positionMaxLinearVelocity) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "positionMaxLinearVelocity",
-                            ),
+                    __Field::m_positionMaxLinearVelocity => {
+                        if _serde::__private::Option::is_some(
+                            &m_positionMaxLinearVelocity,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "positionMaxLinearVelocity",
+                                ),
+                            );
+                        }
+                        m_positionMaxLinearVelocity = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_positionMaxLinearVelocity = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_positionMaxAngularVelocity => {
-                    if _serde::__private::Option::is_some(
-                        &m_positionMaxAngularVelocity,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "positionMaxAngularVelocity",
-                            ),
+                    __Field::m_positionMaxAngularVelocity => {
+                        if _serde::__private::Option::is_some(
+                            &m_positionMaxAngularVelocity,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "positionMaxAngularVelocity",
+                                ),
+                            );
+                        }
+                        m_positionMaxAngularVelocity = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_positionMaxAngularVelocity = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_snapGain => {
-                    if _serde::__private::Option::is_some(&m_snapGain) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "snapGain",
-                            ),
+                    __Field::m_snapGain => {
+                        if _serde::__private::Option::is_some(&m_snapGain) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "snapGain",
+                                ),
+                            );
+                        }
+                        m_snapGain = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_snapGain = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_snapMaxLinearVelocity => {
-                    if _serde::__private::Option::is_some(&m_snapMaxLinearVelocity) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "snapMaxLinearVelocity",
-                            ),
+                    __Field::m_snapMaxLinearVelocity => {
+                        if _serde::__private::Option::is_some(&m_snapMaxLinearVelocity) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "snapMaxLinearVelocity",
+                                ),
+                            );
+                        }
+                        m_snapMaxLinearVelocity = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_snapMaxLinearVelocity = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_snapMaxAngularVelocity => {
-                    if _serde::__private::Option::is_some(&m_snapMaxAngularVelocity) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "snapMaxAngularVelocity",
-                            ),
+                    __Field::m_snapMaxAngularVelocity => {
+                        if _serde::__private::Option::is_some(
+                            &m_snapMaxAngularVelocity,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "snapMaxAngularVelocity",
+                                ),
+                            );
+                        }
+                        m_snapMaxAngularVelocity = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_snapMaxAngularVelocity = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_snapMaxLinearDistance => {
-                    if _serde::__private::Option::is_some(&m_snapMaxLinearDistance) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "snapMaxLinearDistance",
-                            ),
+                    __Field::m_snapMaxLinearDistance => {
+                        if _serde::__private::Option::is_some(&m_snapMaxLinearDistance) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "snapMaxLinearDistance",
+                                ),
+                            );
+                        }
+                        m_snapMaxLinearDistance = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_snapMaxLinearDistance = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_snapMaxAngularDistance => {
-                    if _serde::__private::Option::is_some(&m_snapMaxAngularDistance) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "snapMaxAngularDistance",
-                            ),
+                    __Field::m_snapMaxAngularDistance => {
+                        if _serde::__private::Option::is_some(
+                            &m_snapMaxAngularDistance,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "snapMaxAngularDistance",
+                                ),
+                            );
+                        }
+                        m_snapMaxAngularDistance = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_snapMaxAngularDistance = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_hierarchyGain = match m_hierarchyGain {

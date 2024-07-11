@@ -334,67 +334,64 @@ impl<'de> _serde::de::Visitor<'de> for __hkbRotateCharacterModifierVisitor<'de> 
         let mut m_degreesPerSecond: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_speedMultiplier: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_axisOfRotation: _serde::__private::Option<Vector4> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_degreesPerSecond => {
-                    if _serde::__private::Option::is_some(&m_degreesPerSecond) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "degreesPerSecond",
-                            ),
+        for _ in 0..3usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_degreesPerSecond => {
+                        if _serde::__private::Option::is_some(&m_degreesPerSecond) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "degreesPerSecond",
+                                ),
+                            );
+                        }
+                        m_degreesPerSecond = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_degreesPerSecond = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_speedMultiplier => {
-                    if _serde::__private::Option::is_some(&m_speedMultiplier) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "speedMultiplier",
-                            ),
+                    __Field::m_speedMultiplier => {
+                        if _serde::__private::Option::is_some(&m_speedMultiplier) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "speedMultiplier",
+                                ),
+                            );
+                        }
+                        m_speedMultiplier = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_speedMultiplier = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_axisOfRotation => {
-                    if _serde::__private::Option::is_some(&m_axisOfRotation) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "axisOfRotation",
-                            ),
+                    __Field::m_axisOfRotation => {
+                        if _serde::__private::Option::is_some(&m_axisOfRotation) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "axisOfRotation",
+                                ),
+                            );
+                        }
+                        m_axisOfRotation = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_axisOfRotation = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_degreesPerSecond = match m_degreesPerSecond {

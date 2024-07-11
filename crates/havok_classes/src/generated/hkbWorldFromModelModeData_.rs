@@ -282,82 +282,79 @@ impl<'de> _serde::de::Visitor<'de> for __hkbWorldFromModelModeDataVisitor<'de> {
         let mut m_poseMatchingBone1: _serde::__private::Option<i16> = _serde::__private::None;
         let mut m_poseMatchingBone2: _serde::__private::Option<i16> = _serde::__private::None;
         let mut m_mode: _serde::__private::Option<WorldFromModelMode> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_poseMatchingBone0 => {
-                    if _serde::__private::Option::is_some(&m_poseMatchingBone0) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "poseMatchingBone0",
-                            ),
+        for _ in 0..4usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_poseMatchingBone0 => {
+                        if _serde::__private::Option::is_some(&m_poseMatchingBone0) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "poseMatchingBone0",
+                                ),
+                            );
+                        }
+                        m_poseMatchingBone0 = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_poseMatchingBone0 = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_poseMatchingBone1 => {
-                    if _serde::__private::Option::is_some(&m_poseMatchingBone1) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "poseMatchingBone1",
-                            ),
+                    __Field::m_poseMatchingBone1 => {
+                        if _serde::__private::Option::is_some(&m_poseMatchingBone1) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "poseMatchingBone1",
+                                ),
+                            );
+                        }
+                        m_poseMatchingBone1 = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_poseMatchingBone1 = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_poseMatchingBone2 => {
-                    if _serde::__private::Option::is_some(&m_poseMatchingBone2) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "poseMatchingBone2",
-                            ),
+                    __Field::m_poseMatchingBone2 => {
+                        if _serde::__private::Option::is_some(&m_poseMatchingBone2) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "poseMatchingBone2",
+                                ),
+                            );
+                        }
+                        m_poseMatchingBone2 = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_poseMatchingBone2 = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_mode => {
-                    if _serde::__private::Option::is_some(&m_mode) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("mode"),
+                    __Field::m_mode => {
+                        if _serde::__private::Option::is_some(&m_mode) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("mode"),
+                            );
+                        }
+                        m_mode = _serde::__private::Some(
+                            match __A::next_value::<WorldFromModelMode>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_mode = _serde::__private::Some(
-                        match __A::next_value::<WorldFromModelMode>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_poseMatchingBone0 = match m_poseMatchingBone0 {

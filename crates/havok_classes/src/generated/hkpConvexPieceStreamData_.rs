@@ -284,69 +284,66 @@ impl<'de> _serde::de::Visitor<'de> for __hkpConvexPieceStreamDataVisitor<'de> {
         let mut m_convexPieceStream: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
         let mut m_convexPieceOffsets: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
         let mut m_convexPieceSingleTriangles: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_convexPieceStream => {
-                    if _serde::__private::Option::is_some(&m_convexPieceStream) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "convexPieceStream",
-                            ),
+        for _ in 0..3usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_convexPieceStream => {
+                        if _serde::__private::Option::is_some(&m_convexPieceStream) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "convexPieceStream",
+                                ),
+                            );
+                        }
+                        m_convexPieceStream = _serde::__private::Some(
+                            match __A::next_value::<Vec<u32>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_convexPieceStream = _serde::__private::Some(
-                        match __A::next_value::<Vec<u32>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_convexPieceOffsets => {
-                    if _serde::__private::Option::is_some(&m_convexPieceOffsets) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "convexPieceOffsets",
-                            ),
+                    __Field::m_convexPieceOffsets => {
+                        if _serde::__private::Option::is_some(&m_convexPieceOffsets) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "convexPieceOffsets",
+                                ),
+                            );
+                        }
+                        m_convexPieceOffsets = _serde::__private::Some(
+                            match __A::next_value::<Vec<u32>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_convexPieceOffsets = _serde::__private::Some(
-                        match __A::next_value::<Vec<u32>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_convexPieceSingleTriangles => {
-                    if _serde::__private::Option::is_some(
-                        &m_convexPieceSingleTriangles,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "convexPieceSingleTriangles",
-                            ),
+                    __Field::m_convexPieceSingleTriangles => {
+                        if _serde::__private::Option::is_some(
+                            &m_convexPieceSingleTriangles,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "convexPieceSingleTriangles",
+                                ),
+                            );
+                        }
+                        m_convexPieceSingleTriangles = _serde::__private::Some(
+                            match __A::next_value::<Vec<u32>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_convexPieceSingleTriangles = _serde::__private::Some(
-                        match __A::next_value::<Vec<u32>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_convexPieceStream = match m_convexPieceStream {

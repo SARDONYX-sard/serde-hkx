@@ -221,33 +221,30 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkControlsModifierVisitor<'de> {
     {
         let parent = __hkbModifierVisitor::visit_as_parent(&mut __map)?;
         let mut m_hands: _serde::__private::Option<Vec<hkbHandIkControlsModifierHand>> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_hands => {
-                    if _serde::__private::Option::is_some(&m_hands) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("hands"),
+        for _ in 0..1usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_hands => {
+                        if _serde::__private::Option::is_some(&m_hands) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("hands"),
+                            );
+                        }
+                        m_hands = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<hkbHandIkControlsModifierHand>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_hands = _serde::__private::Some(
-                        match __A::next_value::<
-                            Vec<hkbHandIkControlsModifierHand>,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_hands = match m_hands {

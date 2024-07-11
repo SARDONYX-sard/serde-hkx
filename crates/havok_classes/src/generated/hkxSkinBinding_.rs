@@ -293,82 +293,79 @@ impl<'de> _serde::de::Visitor<'de> for __hkxSkinBindingVisitor<'de> {
         let mut m_nodeNames: _serde::__private::Option<Vec<StringPtr<'de>>> = _serde::__private::None;
         let mut m_bindPose: _serde::__private::Option<Vec<Matrix4>> = _serde::__private::None;
         let mut m_initSkinTransform: _serde::__private::Option<Matrix4> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_mesh => {
-                    if _serde::__private::Option::is_some(&m_mesh) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("mesh"),
+        for _ in 0..4usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_mesh => {
+                        if _serde::__private::Option::is_some(&m_mesh) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("mesh"),
+                            );
+                        }
+                        m_mesh = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_mesh = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_nodeNames => {
-                    if _serde::__private::Option::is_some(&m_nodeNames) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "nodeNames",
-                            ),
+                    __Field::m_nodeNames => {
+                        if _serde::__private::Option::is_some(&m_nodeNames) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "nodeNames",
+                                ),
+                            );
+                        }
+                        m_nodeNames = _serde::__private::Some(
+                            match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_nodeNames = _serde::__private::Some(
-                        match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_bindPose => {
-                    if _serde::__private::Option::is_some(&m_bindPose) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "bindPose",
-                            ),
+                    __Field::m_bindPose => {
+                        if _serde::__private::Option::is_some(&m_bindPose) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "bindPose",
+                                ),
+                            );
+                        }
+                        m_bindPose = _serde::__private::Some(
+                            match __A::next_value::<Vec<Matrix4>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_bindPose = _serde::__private::Some(
-                        match __A::next_value::<Vec<Matrix4>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_initSkinTransform => {
-                    if _serde::__private::Option::is_some(&m_initSkinTransform) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "initSkinTransform",
-                            ),
+                    __Field::m_initSkinTransform => {
+                        if _serde::__private::Option::is_some(&m_initSkinTransform) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "initSkinTransform",
+                                ),
+                            );
+                        }
+                        m_initSkinTransform = _serde::__private::Some(
+                            match __A::next_value::<Matrix4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_initSkinTransform = _serde::__private::Some(
-                        match __A::next_value::<Matrix4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_mesh = match m_mesh {

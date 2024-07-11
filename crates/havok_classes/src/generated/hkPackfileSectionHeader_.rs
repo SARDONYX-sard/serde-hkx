@@ -473,169 +473,166 @@ impl<'de> _serde::de::Visitor<'de> for __hkPackfileSectionHeaderVisitor<'de> {
         let mut m_exportsOffset: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_importsOffset: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_endOffset: _serde::__private::Option<i32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_sectionTag => {
-                    if _serde::__private::Option::is_some(&m_sectionTag) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "sectionTag",
-                            ),
+        for _ in 0..9usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_sectionTag => {
+                        if _serde::__private::Option::is_some(&m_sectionTag) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "sectionTag",
+                                ),
+                            );
+                        }
+                        m_sectionTag = _serde::__private::Some(
+                            match __A::next_value::<[char; 19usize]>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_sectionTag = _serde::__private::Some(
-                        match __A::next_value::<[char; 19usize]>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_nullByte => {
-                    if _serde::__private::Option::is_some(&m_nullByte) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "nullByte",
-                            ),
+                    __Field::m_nullByte => {
+                        if _serde::__private::Option::is_some(&m_nullByte) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "nullByte",
+                                ),
+                            );
+                        }
+                        m_nullByte = _serde::__private::Some(
+                            match __A::next_value::<char>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_nullByte = _serde::__private::Some(
-                        match __A::next_value::<char>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_absoluteDataStart => {
-                    if _serde::__private::Option::is_some(&m_absoluteDataStart) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "absoluteDataStart",
-                            ),
+                    __Field::m_absoluteDataStart => {
+                        if _serde::__private::Option::is_some(&m_absoluteDataStart) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "absoluteDataStart",
+                                ),
+                            );
+                        }
+                        m_absoluteDataStart = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_absoluteDataStart = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_localFixupsOffset => {
-                    if _serde::__private::Option::is_some(&m_localFixupsOffset) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "localFixupsOffset",
-                            ),
+                    __Field::m_localFixupsOffset => {
+                        if _serde::__private::Option::is_some(&m_localFixupsOffset) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "localFixupsOffset",
+                                ),
+                            );
+                        }
+                        m_localFixupsOffset = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_localFixupsOffset = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_globalFixupsOffset => {
-                    if _serde::__private::Option::is_some(&m_globalFixupsOffset) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "globalFixupsOffset",
-                            ),
+                    __Field::m_globalFixupsOffset => {
+                        if _serde::__private::Option::is_some(&m_globalFixupsOffset) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "globalFixupsOffset",
+                                ),
+                            );
+                        }
+                        m_globalFixupsOffset = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_globalFixupsOffset = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_virtualFixupsOffset => {
-                    if _serde::__private::Option::is_some(&m_virtualFixupsOffset) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "virtualFixupsOffset",
-                            ),
+                    __Field::m_virtualFixupsOffset => {
+                        if _serde::__private::Option::is_some(&m_virtualFixupsOffset) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "virtualFixupsOffset",
+                                ),
+                            );
+                        }
+                        m_virtualFixupsOffset = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_virtualFixupsOffset = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_exportsOffset => {
-                    if _serde::__private::Option::is_some(&m_exportsOffset) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "exportsOffset",
-                            ),
+                    __Field::m_exportsOffset => {
+                        if _serde::__private::Option::is_some(&m_exportsOffset) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "exportsOffset",
+                                ),
+                            );
+                        }
+                        m_exportsOffset = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_exportsOffset = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_importsOffset => {
-                    if _serde::__private::Option::is_some(&m_importsOffset) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "importsOffset",
-                            ),
+                    __Field::m_importsOffset => {
+                        if _serde::__private::Option::is_some(&m_importsOffset) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "importsOffset",
+                                ),
+                            );
+                        }
+                        m_importsOffset = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_importsOffset = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_endOffset => {
-                    if _serde::__private::Option::is_some(&m_endOffset) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "endOffset",
-                            ),
+                    __Field::m_endOffset => {
+                        if _serde::__private::Option::is_some(&m_endOffset) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "endOffset",
+                                ),
+                            );
+                        }
+                        m_endOffset = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_endOffset = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_sectionTag = match m_sectionTag {

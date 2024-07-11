@@ -243,65 +243,64 @@ impl<'de> _serde::de::Visitor<'de> for __hkxMaterialTextureStageVisitor<'de> {
         let mut m_texture: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_usageHint: _serde::__private::Option<TextureType> = _serde::__private::None;
         let mut m_tcoordChannel: _serde::__private::Option<i32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_texture => {
-                    if _serde::__private::Option::is_some(&m_texture) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("texture"),
+        for _ in 0..3usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_texture => {
+                        if _serde::__private::Option::is_some(&m_texture) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "texture",
+                                ),
+                            );
+                        }
+                        m_texture = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_texture = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_usageHint => {
-                    if _serde::__private::Option::is_some(&m_usageHint) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "usageHint",
-                            ),
+                    __Field::m_usageHint => {
+                        if _serde::__private::Option::is_some(&m_usageHint) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "usageHint",
+                                ),
+                            );
+                        }
+                        m_usageHint = _serde::__private::Some(
+                            match __A::next_value::<TextureType>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_usageHint = _serde::__private::Some(
-                        match __A::next_value::<TextureType>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_tcoordChannel => {
-                    if _serde::__private::Option::is_some(&m_tcoordChannel) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "tcoordChannel",
-                            ),
+                    __Field::m_tcoordChannel => {
+                        if _serde::__private::Option::is_some(&m_tcoordChannel) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "tcoordChannel",
+                                ),
+                            );
+                        }
+                        m_tcoordChannel = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_tcoordChannel = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_texture = match m_texture {

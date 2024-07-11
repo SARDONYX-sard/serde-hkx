@@ -282,67 +282,64 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVelocityConstraintMotorVisitor<'de> 
         let mut m_useVelocityTargetFromConstraintTargets: _serde::__private::Option<
             bool,
         > = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_tau => {
-                    if _serde::__private::Option::is_some(&m_tau) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("tau"),
+        for _ in 0..3usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_tau => {
+                        if _serde::__private::Option::is_some(&m_tau) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("tau"),
+                            );
+                        }
+                        m_tau = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_tau = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_velocityTarget => {
-                    if _serde::__private::Option::is_some(&m_velocityTarget) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "velocityTarget",
-                            ),
+                    __Field::m_velocityTarget => {
+                        if _serde::__private::Option::is_some(&m_velocityTarget) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "velocityTarget",
+                                ),
+                            );
+                        }
+                        m_velocityTarget = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_velocityTarget = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_useVelocityTargetFromConstraintTargets => {
-                    if _serde::__private::Option::is_some(
-                        &m_useVelocityTargetFromConstraintTargets,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "useVelocityTargetFromConstraintTargets",
-                            ),
+                    __Field::m_useVelocityTargetFromConstraintTargets => {
+                        if _serde::__private::Option::is_some(
+                            &m_useVelocityTargetFromConstraintTargets,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "useVelocityTargetFromConstraintTargets",
+                                ),
+                            );
+                        }
+                        m_useVelocityTargetFromConstraintTargets = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_useVelocityTargetFromConstraintTargets = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_tau = match m_tau {

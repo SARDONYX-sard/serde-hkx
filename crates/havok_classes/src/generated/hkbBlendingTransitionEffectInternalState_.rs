@@ -367,103 +367,102 @@ for __hkbBlendingTransitionEffectInternalStateVisitor<'de> {
         let mut m_timeInTransition: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_applySelfTransition: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_initializeCharacterPose: _serde::__private::Option<bool> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_characterPoseAtBeginningOfTransition => {
-                    if _serde::__private::Option::is_some(
-                        &m_characterPoseAtBeginningOfTransition,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "characterPoseAtBeginningOfTransition",
-                            ),
+        for _ in 0..5usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_characterPoseAtBeginningOfTransition => {
+                        if _serde::__private::Option::is_some(
+                            &m_characterPoseAtBeginningOfTransition,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "characterPoseAtBeginningOfTransition",
+                                ),
+                            );
+                        }
+                        m_characterPoseAtBeginningOfTransition = _serde::__private::Some(
+                            match __A::next_value::<Vec<QsTransform>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_characterPoseAtBeginningOfTransition = _serde::__private::Some(
-                        match __A::next_value::<Vec<QsTransform>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_timeRemaining => {
-                    if _serde::__private::Option::is_some(&m_timeRemaining) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "timeRemaining",
-                            ),
+                    __Field::m_timeRemaining => {
+                        if _serde::__private::Option::is_some(&m_timeRemaining) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "timeRemaining",
+                                ),
+                            );
+                        }
+                        m_timeRemaining = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_timeRemaining = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_timeInTransition => {
-                    if _serde::__private::Option::is_some(&m_timeInTransition) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "timeInTransition",
-                            ),
+                    __Field::m_timeInTransition => {
+                        if _serde::__private::Option::is_some(&m_timeInTransition) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "timeInTransition",
+                                ),
+                            );
+                        }
+                        m_timeInTransition = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_timeInTransition = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_applySelfTransition => {
-                    if _serde::__private::Option::is_some(&m_applySelfTransition) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "applySelfTransition",
-                            ),
+                    __Field::m_applySelfTransition => {
+                        if _serde::__private::Option::is_some(&m_applySelfTransition) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "applySelfTransition",
+                                ),
+                            );
+                        }
+                        m_applySelfTransition = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_applySelfTransition = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_initializeCharacterPose => {
-                    if _serde::__private::Option::is_some(&m_initializeCharacterPose) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "initializeCharacterPose",
-                            ),
+                    __Field::m_initializeCharacterPose => {
+                        if _serde::__private::Option::is_some(
+                            &m_initializeCharacterPose,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "initializeCharacterPose",
+                                ),
+                            );
+                        }
+                        m_initializeCharacterPose = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_initializeCharacterPose = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_characterPoseAtBeginningOfTransition = match m_characterPoseAtBeginningOfTransition {

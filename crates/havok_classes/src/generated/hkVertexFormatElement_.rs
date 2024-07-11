@@ -350,112 +350,109 @@ impl<'de> _serde::de::Visitor<'de> for __hkVertexFormatElementVisitor<'de> {
         let mut m_subUsage: _serde::__private::Option<u8> = _serde::__private::None;
         let mut m_flags: _serde::__private::Option<HintFlags> = _serde::__private::None;
         let mut m_pad: _serde::__private::Option<[u8; 3usize]> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_dataType => {
-                    if _serde::__private::Option::is_some(&m_dataType) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "dataType",
-                            ),
+        for _ in 0..6usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_dataType => {
+                        if _serde::__private::Option::is_some(&m_dataType) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "dataType",
+                                ),
+                            );
+                        }
+                        m_dataType = _serde::__private::Some(
+                            match __A::next_value::<ComponentType>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_dataType = _serde::__private::Some(
-                        match __A::next_value::<ComponentType>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numValues => {
-                    if _serde::__private::Option::is_some(&m_numValues) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numValues",
-                            ),
+                    __Field::m_numValues => {
+                        if _serde::__private::Option::is_some(&m_numValues) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numValues",
+                                ),
+                            );
+                        }
+                        m_numValues = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numValues = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_usage => {
-                    if _serde::__private::Option::is_some(&m_usage) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("usage"),
+                    __Field::m_usage => {
+                        if _serde::__private::Option::is_some(&m_usage) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("usage"),
+                            );
+                        }
+                        m_usage = _serde::__private::Some(
+                            match __A::next_value::<ComponentUsage>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_usage = _serde::__private::Some(
-                        match __A::next_value::<ComponentUsage>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_subUsage => {
-                    if _serde::__private::Option::is_some(&m_subUsage) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "subUsage",
-                            ),
+                    __Field::m_subUsage => {
+                        if _serde::__private::Option::is_some(&m_subUsage) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "subUsage",
+                                ),
+                            );
+                        }
+                        m_subUsage = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_subUsage = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_flags => {
-                    if _serde::__private::Option::is_some(&m_flags) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("flags"),
+                    __Field::m_flags => {
+                        if _serde::__private::Option::is_some(&m_flags) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("flags"),
+                            );
+                        }
+                        m_flags = _serde::__private::Some(
+                            match __A::next_value::<HintFlags>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_flags = _serde::__private::Some(
-                        match __A::next_value::<HintFlags>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_pad => {
-                    if _serde::__private::Option::is_some(&m_pad) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("pad"),
+                    __Field::m_pad => {
+                        if _serde::__private::Option::is_some(&m_pad) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("pad"),
+                            );
+                        }
+                        m_pad = _serde::__private::Some(
+                            match __A::next_value::<[u8; 3usize]>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_pad = _serde::__private::Some(
-                        match __A::next_value::<[u8; 3usize]>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_dataType = match m_dataType {

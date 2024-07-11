@@ -241,52 +241,51 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDefaultBrakeVisitor<'de> {
             Vec<hkpVehicleDefaultBrakeWheelBrakingProperties>,
         > = _serde::__private::None;
         let mut m_wheelsMinTimeToBlock: _serde::__private::Option<f32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_wheelBrakingProperties => {
-                    if _serde::__private::Option::is_some(&m_wheelBrakingProperties) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "wheelBrakingProperties",
-                            ),
+        for _ in 0..2usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_wheelBrakingProperties => {
+                        if _serde::__private::Option::is_some(
+                            &m_wheelBrakingProperties,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "wheelBrakingProperties",
+                                ),
+                            );
+                        }
+                        m_wheelBrakingProperties = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<hkpVehicleDefaultBrakeWheelBrakingProperties>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_wheelBrakingProperties = _serde::__private::Some(
-                        match __A::next_value::<
-                            Vec<hkpVehicleDefaultBrakeWheelBrakingProperties>,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_wheelsMinTimeToBlock => {
-                    if _serde::__private::Option::is_some(&m_wheelsMinTimeToBlock) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "wheelsMinTimeToBlock",
-                            ),
+                    __Field::m_wheelsMinTimeToBlock => {
+                        if _serde::__private::Option::is_some(&m_wheelsMinTimeToBlock) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "wheelsMinTimeToBlock",
+                                ),
+                            );
+                        }
+                        m_wheelsMinTimeToBlock = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_wheelsMinTimeToBlock = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_wheelBrakingProperties = match m_wheelBrakingProperties {

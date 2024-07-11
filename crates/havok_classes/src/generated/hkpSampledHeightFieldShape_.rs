@@ -499,165 +499,166 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSampledHeightFieldShapeVisitor<'de> 
         let mut m_floatToIntScale: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_floatToIntOffsetFloorCorrected: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_extents: _serde::__private::Option<Vector4> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_xRes => {
-                    if _serde::__private::Option::is_some(&m_xRes) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("xRes"),
+        for _ in 0..9usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_xRes => {
+                        if _serde::__private::Option::is_some(&m_xRes) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("xRes"),
+                            );
+                        }
+                        m_xRes = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_xRes = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_zRes => {
-                    if _serde::__private::Option::is_some(&m_zRes) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("zRes"),
+                    __Field::m_zRes => {
+                        if _serde::__private::Option::is_some(&m_zRes) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("zRes"),
+                            );
+                        }
+                        m_zRes = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_zRes = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_heightCenter => {
-                    if _serde::__private::Option::is_some(&m_heightCenter) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "heightCenter",
-                            ),
+                    __Field::m_heightCenter => {
+                        if _serde::__private::Option::is_some(&m_heightCenter) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "heightCenter",
+                                ),
+                            );
+                        }
+                        m_heightCenter = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_heightCenter = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_useProjectionBasedHeight => {
-                    if _serde::__private::Option::is_some(&m_useProjectionBasedHeight) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "useProjectionBasedHeight",
-                            ),
+                    __Field::m_useProjectionBasedHeight => {
+                        if _serde::__private::Option::is_some(
+                            &m_useProjectionBasedHeight,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "useProjectionBasedHeight",
+                                ),
+                            );
+                        }
+                        m_useProjectionBasedHeight = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_useProjectionBasedHeight = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_heightfieldType => {
-                    if _serde::__private::Option::is_some(&m_heightfieldType) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "heightfieldType",
-                            ),
+                    __Field::m_heightfieldType => {
+                        if _serde::__private::Option::is_some(&m_heightfieldType) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "heightfieldType",
+                                ),
+                            );
+                        }
+                        m_heightfieldType = _serde::__private::Some(
+                            match __A::next_value::<HeightFieldType>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_heightfieldType = _serde::__private::Some(
-                        match __A::next_value::<HeightFieldType>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_intToFloatScale => {
-                    if _serde::__private::Option::is_some(&m_intToFloatScale) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "intToFloatScale",
-                            ),
+                    __Field::m_intToFloatScale => {
+                        if _serde::__private::Option::is_some(&m_intToFloatScale) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "intToFloatScale",
+                                ),
+                            );
+                        }
+                        m_intToFloatScale = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_intToFloatScale = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_floatToIntScale => {
-                    if _serde::__private::Option::is_some(&m_floatToIntScale) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "floatToIntScale",
-                            ),
+                    __Field::m_floatToIntScale => {
+                        if _serde::__private::Option::is_some(&m_floatToIntScale) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "floatToIntScale",
+                                ),
+                            );
+                        }
+                        m_floatToIntScale = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_floatToIntScale = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_floatToIntOffsetFloorCorrected => {
-                    if _serde::__private::Option::is_some(
-                        &m_floatToIntOffsetFloorCorrected,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "floatToIntOffsetFloorCorrected",
-                            ),
+                    __Field::m_floatToIntOffsetFloorCorrected => {
+                        if _serde::__private::Option::is_some(
+                            &m_floatToIntOffsetFloorCorrected,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "floatToIntOffsetFloorCorrected",
+                                ),
+                            );
+                        }
+                        m_floatToIntOffsetFloorCorrected = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_floatToIntOffsetFloorCorrected = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_extents => {
-                    if _serde::__private::Option::is_some(&m_extents) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("extents"),
+                    __Field::m_extents => {
+                        if _serde::__private::Option::is_some(&m_extents) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "extents",
+                                ),
+                            );
+                        }
+                        m_extents = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_extents = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_xRes = match m_xRes {

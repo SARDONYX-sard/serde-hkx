@@ -422,135 +422,132 @@ impl<'de> _serde::de::Visitor<'de> for __hkTrackerSerializableScanSnapshotVisito
         let mut m_traceText: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
         let mut m_traceAddrs: _serde::__private::Option<Vec<u64>> = _serde::__private::None;
         let mut m_traceParents: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_allocations => {
-                    if _serde::__private::Option::is_some(&m_allocations) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "allocations",
-                            ),
+        for _ in 0..7usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_allocations => {
+                        if _serde::__private::Option::is_some(&m_allocations) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "allocations",
+                                ),
+                            );
+                        }
+                        m_allocations = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<hkTrackerSerializableScanSnapshotAllocation>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_allocations = _serde::__private::Some(
-                        match __A::next_value::<
-                            Vec<hkTrackerSerializableScanSnapshotAllocation>,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_blocks => {
-                    if _serde::__private::Option::is_some(&m_blocks) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("blocks"),
+                    __Field::m_blocks => {
+                        if _serde::__private::Option::is_some(&m_blocks) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("blocks"),
+                            );
+                        }
+                        m_blocks = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<hkTrackerSerializableScanSnapshotBlock>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_blocks = _serde::__private::Some(
-                        match __A::next_value::<
-                            Vec<hkTrackerSerializableScanSnapshotBlock>,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_refs => {
-                    if _serde::__private::Option::is_some(&m_refs) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("refs"),
+                    __Field::m_refs => {
+                        if _serde::__private::Option::is_some(&m_refs) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("refs"),
+                            );
+                        }
+                        m_refs = _serde::__private::Some(
+                            match __A::next_value::<Vec<i32>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_refs = _serde::__private::Some(
-                        match __A::next_value::<Vec<i32>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_typeNames => {
-                    if _serde::__private::Option::is_some(&m_typeNames) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "typeNames",
-                            ),
+                    __Field::m_typeNames => {
+                        if _serde::__private::Option::is_some(&m_typeNames) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "typeNames",
+                                ),
+                            );
+                        }
+                        m_typeNames = _serde::__private::Some(
+                            match __A::next_value::<Vec<u8>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_typeNames = _serde::__private::Some(
-                        match __A::next_value::<Vec<u8>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_traceText => {
-                    if _serde::__private::Option::is_some(&m_traceText) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "traceText",
-                            ),
+                    __Field::m_traceText => {
+                        if _serde::__private::Option::is_some(&m_traceText) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "traceText",
+                                ),
+                            );
+                        }
+                        m_traceText = _serde::__private::Some(
+                            match __A::next_value::<Vec<u8>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_traceText = _serde::__private::Some(
-                        match __A::next_value::<Vec<u8>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_traceAddrs => {
-                    if _serde::__private::Option::is_some(&m_traceAddrs) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "traceAddrs",
-                            ),
+                    __Field::m_traceAddrs => {
+                        if _serde::__private::Option::is_some(&m_traceAddrs) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "traceAddrs",
+                                ),
+                            );
+                        }
+                        m_traceAddrs = _serde::__private::Some(
+                            match __A::next_value::<Vec<u64>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_traceAddrs = _serde::__private::Some(
-                        match __A::next_value::<Vec<u64>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_traceParents => {
-                    if _serde::__private::Option::is_some(&m_traceParents) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "traceParents",
-                            ),
+                    __Field::m_traceParents => {
+                        if _serde::__private::Option::is_some(&m_traceParents) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "traceParents",
+                                ),
+                            );
+                        }
+                        m_traceParents = _serde::__private::Some(
+                            match __A::next_value::<Vec<i32>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_traceParents = _serde::__private::Some(
-                        match __A::next_value::<Vec<i32>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_allocations = match m_allocations {

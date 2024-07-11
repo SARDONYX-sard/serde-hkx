@@ -215,46 +215,43 @@ impl<'de> _serde::de::Visitor<'de> for __hkxSparselyAnimatedIntVisitor<'de> {
         let parent = __hkReferencedObjectVisitor::visit_as_parent(&mut __map)?;
         let mut m_ints: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
         let mut m_times: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_ints => {
-                    if _serde::__private::Option::is_some(&m_ints) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("ints"),
+        for _ in 0..2usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_ints => {
+                        if _serde::__private::Option::is_some(&m_ints) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("ints"),
+                            );
+                        }
+                        m_ints = _serde::__private::Some(
+                            match __A::next_value::<Vec<i32>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_ints = _serde::__private::Some(
-                        match __A::next_value::<Vec<i32>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_times => {
-                    if _serde::__private::Option::is_some(&m_times) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("times"),
+                    __Field::m_times => {
+                        if _serde::__private::Option::is_some(&m_times) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("times"),
+                            );
+                        }
+                        m_times = _serde::__private::Some(
+                            match __A::next_value::<Vec<f32>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_times = _serde::__private::Some(
-                        match __A::next_value::<Vec<f32>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_ints = match m_ints {

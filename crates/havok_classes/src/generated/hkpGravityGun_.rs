@@ -488,137 +488,136 @@ impl<'de> _serde::de::Visitor<'de> for __hkpGravityGunVisitor<'de> {
         let mut m_throwVelocity: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_capturedObjectPosition: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_capturedObjectsOffset: _serde::__private::Option<Vector4> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_maxNumObjectsPicked => {
-                    if _serde::__private::Option::is_some(&m_maxNumObjectsPicked) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "maxNumObjectsPicked",
-                            ),
+        for _ in 0..7usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_maxNumObjectsPicked => {
+                        if _serde::__private::Option::is_some(&m_maxNumObjectsPicked) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "maxNumObjectsPicked",
+                                ),
+                            );
+                        }
+                        m_maxNumObjectsPicked = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_maxNumObjectsPicked = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_maxMassOfObjectPicked => {
-                    if _serde::__private::Option::is_some(&m_maxMassOfObjectPicked) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "maxMassOfObjectPicked",
-                            ),
+                    __Field::m_maxMassOfObjectPicked => {
+                        if _serde::__private::Option::is_some(&m_maxMassOfObjectPicked) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "maxMassOfObjectPicked",
+                                ),
+                            );
+                        }
+                        m_maxMassOfObjectPicked = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_maxMassOfObjectPicked = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_maxDistOfObjectPicked => {
-                    if _serde::__private::Option::is_some(&m_maxDistOfObjectPicked) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "maxDistOfObjectPicked",
-                            ),
+                    __Field::m_maxDistOfObjectPicked => {
+                        if _serde::__private::Option::is_some(&m_maxDistOfObjectPicked) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "maxDistOfObjectPicked",
+                                ),
+                            );
+                        }
+                        m_maxDistOfObjectPicked = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_maxDistOfObjectPicked = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_impulseAppliedWhenObjectNotPicked => {
-                    if _serde::__private::Option::is_some(
-                        &m_impulseAppliedWhenObjectNotPicked,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "impulseAppliedWhenObjectNotPicked",
-                            ),
+                    __Field::m_impulseAppliedWhenObjectNotPicked => {
+                        if _serde::__private::Option::is_some(
+                            &m_impulseAppliedWhenObjectNotPicked,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "impulseAppliedWhenObjectNotPicked",
+                                ),
+                            );
+                        }
+                        m_impulseAppliedWhenObjectNotPicked = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_impulseAppliedWhenObjectNotPicked = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_throwVelocity => {
-                    if _serde::__private::Option::is_some(&m_throwVelocity) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "throwVelocity",
-                            ),
+                    __Field::m_throwVelocity => {
+                        if _serde::__private::Option::is_some(&m_throwVelocity) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "throwVelocity",
+                                ),
+                            );
+                        }
+                        m_throwVelocity = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_throwVelocity = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_capturedObjectPosition => {
-                    if _serde::__private::Option::is_some(&m_capturedObjectPosition) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "capturedObjectPosition",
-                            ),
+                    __Field::m_capturedObjectPosition => {
+                        if _serde::__private::Option::is_some(
+                            &m_capturedObjectPosition,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "capturedObjectPosition",
+                                ),
+                            );
+                        }
+                        m_capturedObjectPosition = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_capturedObjectPosition = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_capturedObjectsOffset => {
-                    if _serde::__private::Option::is_some(&m_capturedObjectsOffset) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "capturedObjectsOffset",
-                            ),
+                    __Field::m_capturedObjectsOffset => {
+                        if _serde::__private::Option::is_some(&m_capturedObjectsOffset) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "capturedObjectsOffset",
+                                ),
+                            );
+                        }
+                        m_capturedObjectsOffset = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_capturedObjectsOffset = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_maxNumObjectsPicked = match m_maxNumObjectsPicked {

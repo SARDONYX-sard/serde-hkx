@@ -290,80 +290,77 @@ impl<'de> _serde::de::Visitor<'de> for __hkpModifierConstraintAtomVisitor<'de> {
         let mut m_childSize: _serde::__private::Option<u16> = _serde::__private::None;
         let mut m_child: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_pad: _serde::__private::Option<[u32; 2usize]> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_modifierAtomSize => {
-                    if _serde::__private::Option::is_some(&m_modifierAtomSize) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "modifierAtomSize",
-                            ),
+        for _ in 0..4usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_modifierAtomSize => {
+                        if _serde::__private::Option::is_some(&m_modifierAtomSize) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "modifierAtomSize",
+                                ),
+                            );
+                        }
+                        m_modifierAtomSize = _serde::__private::Some(
+                            match __A::next_value::<u16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_modifierAtomSize = _serde::__private::Some(
-                        match __A::next_value::<u16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_childSize => {
-                    if _serde::__private::Option::is_some(&m_childSize) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "childSize",
-                            ),
+                    __Field::m_childSize => {
+                        if _serde::__private::Option::is_some(&m_childSize) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "childSize",
+                                ),
+                            );
+                        }
+                        m_childSize = _serde::__private::Some(
+                            match __A::next_value::<u16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_childSize = _serde::__private::Some(
-                        match __A::next_value::<u16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_child => {
-                    if _serde::__private::Option::is_some(&m_child) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("child"),
+                    __Field::m_child => {
+                        if _serde::__private::Option::is_some(&m_child) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("child"),
+                            );
+                        }
+                        m_child = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_child = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_pad => {
-                    if _serde::__private::Option::is_some(&m_pad) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("pad"),
+                    __Field::m_pad => {
+                        if _serde::__private::Option::is_some(&m_pad) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("pad"),
+                            );
+                        }
+                        m_pad = _serde::__private::Some(
+                            match __A::next_value::<[u32; 2usize]>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_pad = _serde::__private::Some(
-                        match __A::next_value::<[u32; 2usize]>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_modifierAtomSize = match m_modifierAtomSize {

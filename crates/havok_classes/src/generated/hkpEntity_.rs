@@ -1017,218 +1017,217 @@ impl<'de> _serde::de::Visitor<'de> for __hkpEntityVisitor<'de> {
         let mut m_motion: _serde::__private::Option<hkpMaxSizeMotion> = _serde::__private::None;
         let mut m_localFrame: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_npData: _serde::__private::Option<u32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_material => {
-                    if _serde::__private::Option::is_some(&m_material) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "material",
-                            ),
+        for _ in 0..12usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_material => {
+                        if _serde::__private::Option::is_some(&m_material) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "material",
+                                ),
+                            );
+                        }
+                        m_material = _serde::__private::Some(
+                            match __A::next_value::<hkpMaterial>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_material = _serde::__private::Some(
-                        match __A::next_value::<hkpMaterial>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_damageMultiplier => {
-                    if _serde::__private::Option::is_some(&m_damageMultiplier) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "damageMultiplier",
-                            ),
+                    __Field::m_damageMultiplier => {
+                        if _serde::__private::Option::is_some(&m_damageMultiplier) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "damageMultiplier",
+                                ),
+                            );
+                        }
+                        m_damageMultiplier = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_damageMultiplier = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_storageIndex => {
-                    if _serde::__private::Option::is_some(&m_storageIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "storageIndex",
-                            ),
+                    __Field::m_storageIndex => {
+                        if _serde::__private::Option::is_some(&m_storageIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "storageIndex",
+                                ),
+                            );
+                        }
+                        m_storageIndex = _serde::__private::Some(
+                            match __A::next_value::<u16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_storageIndex = _serde::__private::Some(
-                        match __A::next_value::<u16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_contactPointCallbackDelay => {
-                    if _serde::__private::Option::is_some(&m_contactPointCallbackDelay) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "contactPointCallbackDelay",
-                            ),
+                    __Field::m_contactPointCallbackDelay => {
+                        if _serde::__private::Option::is_some(
+                            &m_contactPointCallbackDelay,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "contactPointCallbackDelay",
+                                ),
+                            );
+                        }
+                        m_contactPointCallbackDelay = _serde::__private::Some(
+                            match __A::next_value::<u16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_contactPointCallbackDelay = _serde::__private::Some(
-                        match __A::next_value::<u16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_autoRemoveLevel => {
-                    if _serde::__private::Option::is_some(&m_autoRemoveLevel) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "autoRemoveLevel",
-                            ),
+                    __Field::m_autoRemoveLevel => {
+                        if _serde::__private::Option::is_some(&m_autoRemoveLevel) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "autoRemoveLevel",
+                                ),
+                            );
+                        }
+                        m_autoRemoveLevel = _serde::__private::Some(
+                            match __A::next_value::<i8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_autoRemoveLevel = _serde::__private::Some(
-                        match __A::next_value::<i8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numShapeKeysInContactPointProperties => {
-                    if _serde::__private::Option::is_some(
-                        &m_numShapeKeysInContactPointProperties,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numShapeKeysInContactPointProperties",
-                            ),
+                    __Field::m_numShapeKeysInContactPointProperties => {
+                        if _serde::__private::Option::is_some(
+                            &m_numShapeKeysInContactPointProperties,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numShapeKeysInContactPointProperties",
+                                ),
+                            );
+                        }
+                        m_numShapeKeysInContactPointProperties = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numShapeKeysInContactPointProperties = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_responseModifierFlags => {
-                    if _serde::__private::Option::is_some(&m_responseModifierFlags) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "responseModifierFlags",
-                            ),
+                    __Field::m_responseModifierFlags => {
+                        if _serde::__private::Option::is_some(&m_responseModifierFlags) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "responseModifierFlags",
+                                ),
+                            );
+                        }
+                        m_responseModifierFlags = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_responseModifierFlags = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_uid => {
-                    if _serde::__private::Option::is_some(&m_uid) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("uid"),
+                    __Field::m_uid => {
+                        if _serde::__private::Option::is_some(&m_uid) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("uid"),
+                            );
+                        }
+                        m_uid = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_uid = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_spuCollisionCallback => {
-                    if _serde::__private::Option::is_some(&m_spuCollisionCallback) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "spuCollisionCallback",
-                            ),
+                    __Field::m_spuCollisionCallback => {
+                        if _serde::__private::Option::is_some(&m_spuCollisionCallback) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "spuCollisionCallback",
+                                ),
+                            );
+                        }
+                        m_spuCollisionCallback = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpEntitySpuCollisionCallback,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_spuCollisionCallback = _serde::__private::Some(
-                        match __A::next_value::<
-                            hkpEntitySpuCollisionCallback,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_motion => {
-                    if _serde::__private::Option::is_some(&m_motion) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("motion"),
+                    __Field::m_motion => {
+                        if _serde::__private::Option::is_some(&m_motion) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("motion"),
+                            );
+                        }
+                        m_motion = _serde::__private::Some(
+                            match __A::next_value::<hkpMaxSizeMotion>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_motion = _serde::__private::Some(
-                        match __A::next_value::<hkpMaxSizeMotion>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_localFrame => {
-                    if _serde::__private::Option::is_some(&m_localFrame) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "localFrame",
-                            ),
+                    __Field::m_localFrame => {
+                        if _serde::__private::Option::is_some(&m_localFrame) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "localFrame",
+                                ),
+                            );
+                        }
+                        m_localFrame = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_localFrame = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_npData => {
-                    if _serde::__private::Option::is_some(&m_npData) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("npData"),
+                    __Field::m_npData => {
+                        if _serde::__private::Option::is_some(&m_npData) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("npData"),
+                            );
+                        }
+                        m_npData = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_npData = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_material = match m_material {

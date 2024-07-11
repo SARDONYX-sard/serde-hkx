@@ -533,180 +533,183 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDefaultEngineVisitor<'de> {
         let mut m_resistanceFactorAtOptRPM: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_resistanceFactorAtMaxRPM: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_clutchSlipRPM: _serde::__private::Option<f32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_minRPM => {
-                    if _serde::__private::Option::is_some(&m_minRPM) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("minRPM"),
+        for _ in 0..10usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_minRPM => {
+                        if _serde::__private::Option::is_some(&m_minRPM) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("minRPM"),
+                            );
+                        }
+                        m_minRPM = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_minRPM = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_optRPM => {
-                    if _serde::__private::Option::is_some(&m_optRPM) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("optRPM"),
+                    __Field::m_optRPM => {
+                        if _serde::__private::Option::is_some(&m_optRPM) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("optRPM"),
+                            );
+                        }
+                        m_optRPM = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_optRPM = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_maxRPM => {
-                    if _serde::__private::Option::is_some(&m_maxRPM) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("maxRPM"),
+                    __Field::m_maxRPM => {
+                        if _serde::__private::Option::is_some(&m_maxRPM) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("maxRPM"),
+                            );
+                        }
+                        m_maxRPM = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_maxRPM = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_maxTorque => {
-                    if _serde::__private::Option::is_some(&m_maxTorque) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "maxTorque",
-                            ),
+                    __Field::m_maxTorque => {
+                        if _serde::__private::Option::is_some(&m_maxTorque) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "maxTorque",
+                                ),
+                            );
+                        }
+                        m_maxTorque = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_maxTorque = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_torqueFactorAtMinRPM => {
-                    if _serde::__private::Option::is_some(&m_torqueFactorAtMinRPM) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "torqueFactorAtMinRPM",
-                            ),
+                    __Field::m_torqueFactorAtMinRPM => {
+                        if _serde::__private::Option::is_some(&m_torqueFactorAtMinRPM) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "torqueFactorAtMinRPM",
+                                ),
+                            );
+                        }
+                        m_torqueFactorAtMinRPM = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_torqueFactorAtMinRPM = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_torqueFactorAtMaxRPM => {
-                    if _serde::__private::Option::is_some(&m_torqueFactorAtMaxRPM) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "torqueFactorAtMaxRPM",
-                            ),
+                    __Field::m_torqueFactorAtMaxRPM => {
+                        if _serde::__private::Option::is_some(&m_torqueFactorAtMaxRPM) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "torqueFactorAtMaxRPM",
+                                ),
+                            );
+                        }
+                        m_torqueFactorAtMaxRPM = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_torqueFactorAtMaxRPM = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_resistanceFactorAtMinRPM => {
-                    if _serde::__private::Option::is_some(&m_resistanceFactorAtMinRPM) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "resistanceFactorAtMinRPM",
-                            ),
+                    __Field::m_resistanceFactorAtMinRPM => {
+                        if _serde::__private::Option::is_some(
+                            &m_resistanceFactorAtMinRPM,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "resistanceFactorAtMinRPM",
+                                ),
+                            );
+                        }
+                        m_resistanceFactorAtMinRPM = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_resistanceFactorAtMinRPM = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_resistanceFactorAtOptRPM => {
-                    if _serde::__private::Option::is_some(&m_resistanceFactorAtOptRPM) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "resistanceFactorAtOptRPM",
-                            ),
+                    __Field::m_resistanceFactorAtOptRPM => {
+                        if _serde::__private::Option::is_some(
+                            &m_resistanceFactorAtOptRPM,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "resistanceFactorAtOptRPM",
+                                ),
+                            );
+                        }
+                        m_resistanceFactorAtOptRPM = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_resistanceFactorAtOptRPM = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_resistanceFactorAtMaxRPM => {
-                    if _serde::__private::Option::is_some(&m_resistanceFactorAtMaxRPM) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "resistanceFactorAtMaxRPM",
-                            ),
+                    __Field::m_resistanceFactorAtMaxRPM => {
+                        if _serde::__private::Option::is_some(
+                            &m_resistanceFactorAtMaxRPM,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "resistanceFactorAtMaxRPM",
+                                ),
+                            );
+                        }
+                        m_resistanceFactorAtMaxRPM = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_resistanceFactorAtMaxRPM = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_clutchSlipRPM => {
-                    if _serde::__private::Option::is_some(&m_clutchSlipRPM) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "clutchSlipRPM",
-                            ),
+                    __Field::m_clutchSlipRPM => {
+                        if _serde::__private::Option::is_some(&m_clutchSlipRPM) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "clutchSlipRPM",
+                                ),
+                            );
+                        }
+                        m_clutchSlipRPM = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_clutchSlipRPM = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_minRPM = match m_minRPM {

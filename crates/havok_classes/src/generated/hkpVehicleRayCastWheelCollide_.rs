@@ -278,65 +278,70 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleRayCastWheelCollideVisitor<'d
         let mut m_rejectRayChassisListener: _serde::__private::Option<
             hkpRejectChassisListener,
         > = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_wheelCollisionFilterInfo => {
-                    if _serde::__private::Option::is_some(&m_wheelCollisionFilterInfo) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "wheelCollisionFilterInfo",
-                            ),
+        for _ in 0..3usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_wheelCollisionFilterInfo => {
+                        if _serde::__private::Option::is_some(
+                            &m_wheelCollisionFilterInfo,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "wheelCollisionFilterInfo",
+                                ),
+                            );
+                        }
+                        m_wheelCollisionFilterInfo = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_wheelCollisionFilterInfo = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_phantom => {
-                    if _serde::__private::Option::is_some(&m_phantom) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("phantom"),
+                    __Field::m_phantom => {
+                        if _serde::__private::Option::is_some(&m_phantom) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "phantom",
+                                ),
+                            );
+                        }
+                        m_phantom = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_phantom = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_rejectRayChassisListener => {
-                    if _serde::__private::Option::is_some(&m_rejectRayChassisListener) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "rejectRayChassisListener",
-                            ),
+                    __Field::m_rejectRayChassisListener => {
+                        if _serde::__private::Option::is_some(
+                            &m_rejectRayChassisListener,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "rejectRayChassisListener",
+                                ),
+                            );
+                        }
+                        m_rejectRayChassisListener = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpRejectChassisListener,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_rejectRayChassisListener = _serde::__private::Some(
-                        match __A::next_value::<hkpRejectChassisListener>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_wheelCollisionFilterInfo = match m_wheelCollisionFilterInfo {

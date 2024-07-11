@@ -588,209 +588,206 @@ impl<'de> _serde::de::Visitor<'de> for __hkMultipleVertexBufferVisitor<'de> {
         let mut m_writeLock: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_isSharable: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_constructionComplete: _serde::__private::Option<bool> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_vertexFormat => {
-                    if _serde::__private::Option::is_some(&m_vertexFormat) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "vertexFormat",
-                            ),
+        for _ in 0..11usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_vertexFormat => {
+                        if _serde::__private::Option::is_some(&m_vertexFormat) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "vertexFormat",
+                                ),
+                            );
+                        }
+                        m_vertexFormat = _serde::__private::Some(
+                            match __A::next_value::<hkVertexFormat>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_vertexFormat = _serde::__private::Some(
-                        match __A::next_value::<hkVertexFormat>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_lockedElements => {
-                    if _serde::__private::Option::is_some(&m_lockedElements) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "lockedElements",
-                            ),
+                    __Field::m_lockedElements => {
+                        if _serde::__private::Option::is_some(&m_lockedElements) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "lockedElements",
+                                ),
+                            );
+                        }
+                        m_lockedElements = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<hkMultipleVertexBufferLockedElement>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_lockedElements = _serde::__private::Some(
-                        match __A::next_value::<
-                            Vec<hkMultipleVertexBufferLockedElement>,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_lockedBuffer => {
-                    if _serde::__private::Option::is_some(&m_lockedBuffer) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "lockedBuffer",
-                            ),
+                    __Field::m_lockedBuffer => {
+                        if _serde::__private::Option::is_some(&m_lockedBuffer) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "lockedBuffer",
+                                ),
+                            );
+                        }
+                        m_lockedBuffer = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_lockedBuffer = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_elementInfos => {
-                    if _serde::__private::Option::is_some(&m_elementInfos) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "elementInfos",
-                            ),
+                    __Field::m_elementInfos => {
+                        if _serde::__private::Option::is_some(&m_elementInfos) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "elementInfos",
+                                ),
+                            );
+                        }
+                        m_elementInfos = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<hkMultipleVertexBufferElementInfo>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_elementInfos = _serde::__private::Some(
-                        match __A::next_value::<
-                            Vec<hkMultipleVertexBufferElementInfo>,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_vertexBufferInfos => {
-                    if _serde::__private::Option::is_some(&m_vertexBufferInfos) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "vertexBufferInfos",
-                            ),
+                    __Field::m_vertexBufferInfos => {
+                        if _serde::__private::Option::is_some(&m_vertexBufferInfos) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "vertexBufferInfos",
+                                ),
+                            );
+                        }
+                        m_vertexBufferInfos = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<hkMultipleVertexBufferVertexBufferInfo>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_vertexBufferInfos = _serde::__private::Some(
-                        match __A::next_value::<
-                            Vec<hkMultipleVertexBufferVertexBufferInfo>,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numVertices => {
-                    if _serde::__private::Option::is_some(&m_numVertices) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numVertices",
-                            ),
+                    __Field::m_numVertices => {
+                        if _serde::__private::Option::is_some(&m_numVertices) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numVertices",
+                                ),
+                            );
+                        }
+                        m_numVertices = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numVertices = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_isLocked => {
-                    if _serde::__private::Option::is_some(&m_isLocked) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "isLocked",
-                            ),
+                    __Field::m_isLocked => {
+                        if _serde::__private::Option::is_some(&m_isLocked) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "isLocked",
+                                ),
+                            );
+                        }
+                        m_isLocked = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_isLocked = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_updateCount => {
-                    if _serde::__private::Option::is_some(&m_updateCount) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "updateCount",
-                            ),
+                    __Field::m_updateCount => {
+                        if _serde::__private::Option::is_some(&m_updateCount) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "updateCount",
+                                ),
+                            );
+                        }
+                        m_updateCount = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_updateCount = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_writeLock => {
-                    if _serde::__private::Option::is_some(&m_writeLock) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "writeLock",
-                            ),
+                    __Field::m_writeLock => {
+                        if _serde::__private::Option::is_some(&m_writeLock) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "writeLock",
+                                ),
+                            );
+                        }
+                        m_writeLock = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_writeLock = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_isSharable => {
-                    if _serde::__private::Option::is_some(&m_isSharable) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "isSharable",
-                            ),
+                    __Field::m_isSharable => {
+                        if _serde::__private::Option::is_some(&m_isSharable) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "isSharable",
+                                ),
+                            );
+                        }
+                        m_isSharable = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_isSharable = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_constructionComplete => {
-                    if _serde::__private::Option::is_some(&m_constructionComplete) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "constructionComplete",
-                            ),
+                    __Field::m_constructionComplete => {
+                        if _serde::__private::Option::is_some(&m_constructionComplete) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "constructionComplete",
+                                ),
+                            );
+                        }
+                        m_constructionComplete = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_constructionComplete = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_vertexFormat = match m_vertexFormat {

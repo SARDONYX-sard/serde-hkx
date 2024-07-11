@@ -343,50 +343,47 @@ impl<'de> _serde::de::Visitor<'de> for __hkbDelayedModifierVisitor<'de> {
         let parent = __hkbModifierWrapperVisitor::visit_as_parent(&mut __map)?;
         let mut m_delaySeconds: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_durationSeconds: _serde::__private::Option<f32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_delaySeconds => {
-                    if _serde::__private::Option::is_some(&m_delaySeconds) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "delaySeconds",
-                            ),
+        for _ in 0..2usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_delaySeconds => {
+                        if _serde::__private::Option::is_some(&m_delaySeconds) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "delaySeconds",
+                                ),
+                            );
+                        }
+                        m_delaySeconds = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_delaySeconds = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_durationSeconds => {
-                    if _serde::__private::Option::is_some(&m_durationSeconds) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "durationSeconds",
-                            ),
+                    __Field::m_durationSeconds => {
+                        if _serde::__private::Option::is_some(&m_durationSeconds) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "durationSeconds",
+                                ),
+                            );
+                        }
+                        m_durationSeconds = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_durationSeconds = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_delaySeconds = match m_delaySeconds {

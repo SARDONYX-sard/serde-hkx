@@ -806,84 +806,83 @@ impl<'de> _serde::de::Visitor<'de> for __hkbGeneratorTransitionEffectVisitor<'de
         let mut m_blendInDuration: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_blendOutDuration: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_syncToGeneratorStartTime: _serde::__private::Option<bool> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_transitionGenerator => {
-                    if _serde::__private::Option::is_some(&m_transitionGenerator) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "transitionGenerator",
-                            ),
+        for _ in 0..4usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_transitionGenerator => {
+                        if _serde::__private::Option::is_some(&m_transitionGenerator) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "transitionGenerator",
+                                ),
+                            );
+                        }
+                        m_transitionGenerator = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_transitionGenerator = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_blendInDuration => {
-                    if _serde::__private::Option::is_some(&m_blendInDuration) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "blendInDuration",
-                            ),
+                    __Field::m_blendInDuration => {
+                        if _serde::__private::Option::is_some(&m_blendInDuration) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "blendInDuration",
+                                ),
+                            );
+                        }
+                        m_blendInDuration = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_blendInDuration = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_blendOutDuration => {
-                    if _serde::__private::Option::is_some(&m_blendOutDuration) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "blendOutDuration",
-                            ),
+                    __Field::m_blendOutDuration => {
+                        if _serde::__private::Option::is_some(&m_blendOutDuration) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "blendOutDuration",
+                                ),
+                            );
+                        }
+                        m_blendOutDuration = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_blendOutDuration = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_syncToGeneratorStartTime => {
-                    if _serde::__private::Option::is_some(&m_syncToGeneratorStartTime) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "syncToGeneratorStartTime",
-                            ),
+                    __Field::m_syncToGeneratorStartTime => {
+                        if _serde::__private::Option::is_some(
+                            &m_syncToGeneratorStartTime,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "syncToGeneratorStartTime",
+                                ),
+                            );
+                        }
+                        m_syncToGeneratorStartTime = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_syncToGeneratorStartTime = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_transitionGenerator = match m_transitionGenerator {

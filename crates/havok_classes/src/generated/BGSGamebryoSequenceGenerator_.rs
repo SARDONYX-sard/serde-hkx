@@ -445,67 +445,64 @@ impl<'de> _serde::de::Visitor<'de> for __BGSGamebryoSequenceGeneratorVisitor<'de
         let mut m_pSequence: _serde::__private::Option<CString<'de>> = _serde::__private::None;
         let mut m_eBlendModeFunction: _serde::__private::Option<BlendModeFunction> = _serde::__private::None;
         let mut m_fPercent: _serde::__private::Option<f32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_pSequence => {
-                    if _serde::__private::Option::is_some(&m_pSequence) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "pSequence",
-                            ),
+        for _ in 0..3usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_pSequence => {
+                        if _serde::__private::Option::is_some(&m_pSequence) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "pSequence",
+                                ),
+                            );
+                        }
+                        m_pSequence = _serde::__private::Some(
+                            match __A::next_value::<CString<'de>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_pSequence = _serde::__private::Some(
-                        match __A::next_value::<CString<'de>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_eBlendModeFunction => {
-                    if _serde::__private::Option::is_some(&m_eBlendModeFunction) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "eBlendModeFunction",
-                            ),
+                    __Field::m_eBlendModeFunction => {
+                        if _serde::__private::Option::is_some(&m_eBlendModeFunction) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "eBlendModeFunction",
+                                ),
+                            );
+                        }
+                        m_eBlendModeFunction = _serde::__private::Some(
+                            match __A::next_value::<BlendModeFunction>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_eBlendModeFunction = _serde::__private::Some(
-                        match __A::next_value::<BlendModeFunction>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_fPercent => {
-                    if _serde::__private::Option::is_some(&m_fPercent) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "fPercent",
-                            ),
+                    __Field::m_fPercent => {
+                        if _serde::__private::Option::is_some(&m_fPercent) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "fPercent",
+                                ),
+                            );
+                        }
+                        m_fPercent = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_fPercent = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_pSequence = match m_pSequence {

@@ -251,67 +251,66 @@ impl<'de> _serde::de::Visitor<'de> for __hkpHingeLimitsDataAtomsVisitor<'de> {
         > = _serde::__private::None;
         let mut m_angLimit: _serde::__private::Option<hkpAngLimitConstraintAtom> = _serde::__private::None;
         let mut m_2dAng: _serde::__private::Option<hkp2dAngConstraintAtom> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_rotations => {
-                    if _serde::__private::Option::is_some(&m_rotations) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "rotations",
-                            ),
+        for _ in 0..3usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_rotations => {
+                        if _serde::__private::Option::is_some(&m_rotations) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "rotations",
+                                ),
+                            );
+                        }
+                        m_rotations = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpSetLocalRotationsConstraintAtom,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_rotations = _serde::__private::Some(
-                        match __A::next_value::<
-                            hkpSetLocalRotationsConstraintAtom,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_angLimit => {
-                    if _serde::__private::Option::is_some(&m_angLimit) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "angLimit",
-                            ),
+                    __Field::m_angLimit => {
+                        if _serde::__private::Option::is_some(&m_angLimit) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "angLimit",
+                                ),
+                            );
+                        }
+                        m_angLimit = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpAngLimitConstraintAtom,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_angLimit = _serde::__private::Some(
-                        match __A::next_value::<hkpAngLimitConstraintAtom>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_2dAng => {
-                    if _serde::__private::Option::is_some(&m_2dAng) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("2dAng"),
+                    __Field::m_2dAng => {
+                        if _serde::__private::Option::is_some(&m_2dAng) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("2dAng"),
+                            );
+                        }
+                        m_2dAng = _serde::__private::Some(
+                            match __A::next_value::<hkp2dAngConstraintAtom>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_2dAng = _serde::__private::Some(
-                        match __A::next_value::<hkp2dAngConstraintAtom>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_rotations = match m_rotations {

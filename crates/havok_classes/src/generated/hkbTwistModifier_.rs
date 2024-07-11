@@ -535,135 +535,136 @@ impl<'de> _serde::de::Visitor<'de> for __hkbTwistModifierVisitor<'de> {
             RotationAxisCoordinates,
         > = _serde::__private::None;
         let mut m_isAdditive: _serde::__private::Option<bool> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_axisOfRotation => {
-                    if _serde::__private::Option::is_some(&m_axisOfRotation) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "axisOfRotation",
-                            ),
+        for _ in 0..7usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_axisOfRotation => {
+                        if _serde::__private::Option::is_some(&m_axisOfRotation) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "axisOfRotation",
+                                ),
+                            );
+                        }
+                        m_axisOfRotation = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_axisOfRotation = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_twistAngle => {
-                    if _serde::__private::Option::is_some(&m_twistAngle) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "twistAngle",
-                            ),
+                    __Field::m_twistAngle => {
+                        if _serde::__private::Option::is_some(&m_twistAngle) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "twistAngle",
+                                ),
+                            );
+                        }
+                        m_twistAngle = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_twistAngle = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_startBoneIndex => {
-                    if _serde::__private::Option::is_some(&m_startBoneIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "startBoneIndex",
-                            ),
+                    __Field::m_startBoneIndex => {
+                        if _serde::__private::Option::is_some(&m_startBoneIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "startBoneIndex",
+                                ),
+                            );
+                        }
+                        m_startBoneIndex = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_startBoneIndex = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_endBoneIndex => {
-                    if _serde::__private::Option::is_some(&m_endBoneIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "endBoneIndex",
-                            ),
+                    __Field::m_endBoneIndex => {
+                        if _serde::__private::Option::is_some(&m_endBoneIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "endBoneIndex",
+                                ),
+                            );
+                        }
+                        m_endBoneIndex = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_endBoneIndex = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_setAngleMethod => {
-                    if _serde::__private::Option::is_some(&m_setAngleMethod) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "setAngleMethod",
-                            ),
+                    __Field::m_setAngleMethod => {
+                        if _serde::__private::Option::is_some(&m_setAngleMethod) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "setAngleMethod",
+                                ),
+                            );
+                        }
+                        m_setAngleMethod = _serde::__private::Some(
+                            match __A::next_value::<SetAngleMethod>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_setAngleMethod = _serde::__private::Some(
-                        match __A::next_value::<SetAngleMethod>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_rotationAxisCoordinates => {
-                    if _serde::__private::Option::is_some(&m_rotationAxisCoordinates) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "rotationAxisCoordinates",
-                            ),
+                    __Field::m_rotationAxisCoordinates => {
+                        if _serde::__private::Option::is_some(
+                            &m_rotationAxisCoordinates,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "rotationAxisCoordinates",
+                                ),
+                            );
+                        }
+                        m_rotationAxisCoordinates = _serde::__private::Some(
+                            match __A::next_value::<
+                                RotationAxisCoordinates,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_rotationAxisCoordinates = _serde::__private::Some(
-                        match __A::next_value::<RotationAxisCoordinates>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_isAdditive => {
-                    if _serde::__private::Option::is_some(&m_isAdditive) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "isAdditive",
-                            ),
+                    __Field::m_isAdditive => {
+                        if _serde::__private::Option::is_some(&m_isAdditive) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "isAdditive",
+                                ),
+                            );
+                        }
+                        m_isAdditive = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_isAdditive = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_axisOfRotation = match m_axisOfRotation {

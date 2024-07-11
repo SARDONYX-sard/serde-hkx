@@ -254,63 +254,60 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMoppCodeVisitor<'de> {
         let mut m_info: _serde::__private::Option<hkpMoppCodeCodeInfo> = _serde::__private::None;
         let mut m_data: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
         let mut m_buildType: _serde::__private::Option<BuildType> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_info => {
-                    if _serde::__private::Option::is_some(&m_info) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("info"),
+        for _ in 0..3usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_info => {
+                        if _serde::__private::Option::is_some(&m_info) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("info"),
+                            );
+                        }
+                        m_info = _serde::__private::Some(
+                            match __A::next_value::<hkpMoppCodeCodeInfo>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_info = _serde::__private::Some(
-                        match __A::next_value::<hkpMoppCodeCodeInfo>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_data => {
-                    if _serde::__private::Option::is_some(&m_data) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("data"),
+                    __Field::m_data => {
+                        if _serde::__private::Option::is_some(&m_data) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("data"),
+                            );
+                        }
+                        m_data = _serde::__private::Some(
+                            match __A::next_value::<Vec<u8>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_data = _serde::__private::Some(
-                        match __A::next_value::<Vec<u8>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_buildType => {
-                    if _serde::__private::Option::is_some(&m_buildType) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "buildType",
-                            ),
+                    __Field::m_buildType => {
+                        if _serde::__private::Option::is_some(&m_buildType) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "buildType",
+                                ),
+                            );
+                        }
+                        m_buildType = _serde::__private::Some(
+                            match __A::next_value::<BuildType>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_buildType = _serde::__private::Some(
-                        match __A::next_value::<BuildType>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_info = match m_info {

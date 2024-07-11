@@ -222,50 +222,47 @@ impl<'de> _serde::de::Visitor<'de> for __hkxVertexFloatDataChannelVisitor<'de> {
         let parent = __hkReferencedObjectVisitor::visit_as_parent(&mut __map)?;
         let mut m_perVertexFloats: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
         let mut m_dimensions: _serde::__private::Option<VertexFloatDimensions> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_perVertexFloats => {
-                    if _serde::__private::Option::is_some(&m_perVertexFloats) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "perVertexFloats",
-                            ),
+        for _ in 0..2usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_perVertexFloats => {
+                        if _serde::__private::Option::is_some(&m_perVertexFloats) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "perVertexFloats",
+                                ),
+                            );
+                        }
+                        m_perVertexFloats = _serde::__private::Some(
+                            match __A::next_value::<Vec<f32>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_perVertexFloats = _serde::__private::Some(
-                        match __A::next_value::<Vec<f32>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_dimensions => {
-                    if _serde::__private::Option::is_some(&m_dimensions) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "dimensions",
-                            ),
+                    __Field::m_dimensions => {
+                        if _serde::__private::Option::is_some(&m_dimensions) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "dimensions",
+                                ),
+                            );
+                        }
+                        m_dimensions = _serde::__private::Some(
+                            match __A::next_value::<VertexFloatDimensions>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_dimensions = _serde::__private::Some(
-                        match __A::next_value::<VertexFloatDimensions>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_perVertexFloats = match m_perVertexFloats {

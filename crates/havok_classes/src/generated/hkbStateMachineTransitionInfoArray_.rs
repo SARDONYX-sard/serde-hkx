@@ -192,35 +192,32 @@ impl<'de> _serde::de::Visitor<'de> for __hkbStateMachineTransitionInfoArrayVisit
         let mut m_transitions: _serde::__private::Option<
             Vec<hkbStateMachineTransitionInfo>,
         > = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_transitions => {
-                    if _serde::__private::Option::is_some(&m_transitions) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "transitions",
-                            ),
+        for _ in 0..1usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_transitions => {
+                        if _serde::__private::Option::is_some(&m_transitions) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "transitions",
+                                ),
+                            );
+                        }
+                        m_transitions = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<hkbStateMachineTransitionInfo>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_transitions = _serde::__private::Some(
-                        match __A::next_value::<
-                            Vec<hkbStateMachineTransitionInfo>,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_transitions = match m_transitions {

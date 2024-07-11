@@ -210,50 +210,49 @@ impl<'de> _serde::de::Visitor<'de> for __hkGeometryVisitor<'de> {
     {
         let mut m_vertices: _serde::__private::Option<Vec<Vector4>> = _serde::__private::None;
         let mut m_triangles: _serde::__private::Option<Vec<hkGeometryTriangle>> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_vertices => {
-                    if _serde::__private::Option::is_some(&m_vertices) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "vertices",
-                            ),
+        for _ in 0..2usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_vertices => {
+                        if _serde::__private::Option::is_some(&m_vertices) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "vertices",
+                                ),
+                            );
+                        }
+                        m_vertices = _serde::__private::Some(
+                            match __A::next_value::<Vec<Vector4>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_vertices = _serde::__private::Some(
-                        match __A::next_value::<Vec<Vector4>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_triangles => {
-                    if _serde::__private::Option::is_some(&m_triangles) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "triangles",
-                            ),
+                    __Field::m_triangles => {
+                        if _serde::__private::Option::is_some(&m_triangles) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "triangles",
+                                ),
+                            );
+                        }
+                        m_triangles = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<hkGeometryTriangle>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_triangles = _serde::__private::Some(
-                        match __A::next_value::<Vec<hkGeometryTriangle>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_vertices = match m_vertices {

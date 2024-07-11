@@ -310,80 +310,79 @@ impl<'de> _serde::de::Visitor<'de> for __hkaDefaultAnimatedReferenceFrameVisitor
         let mut m_forward: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_duration: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_referenceFrameSamples: _serde::__private::Option<Vec<Vector4>> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_up => {
-                    if _serde::__private::Option::is_some(&m_up) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("up"),
+        for _ in 0..4usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_up => {
+                        if _serde::__private::Option::is_some(&m_up) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("up"),
+                            );
+                        }
+                        m_up = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_up = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_forward => {
-                    if _serde::__private::Option::is_some(&m_forward) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("forward"),
+                    __Field::m_forward => {
+                        if _serde::__private::Option::is_some(&m_forward) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "forward",
+                                ),
+                            );
+                        }
+                        m_forward = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_forward = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_duration => {
-                    if _serde::__private::Option::is_some(&m_duration) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "duration",
-                            ),
+                    __Field::m_duration => {
+                        if _serde::__private::Option::is_some(&m_duration) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "duration",
+                                ),
+                            );
+                        }
+                        m_duration = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_duration = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_referenceFrameSamples => {
-                    if _serde::__private::Option::is_some(&m_referenceFrameSamples) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "referenceFrameSamples",
-                            ),
+                    __Field::m_referenceFrameSamples => {
+                        if _serde::__private::Option::is_some(&m_referenceFrameSamples) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "referenceFrameSamples",
+                                ),
+                            );
+                        }
+                        m_referenceFrameSamples = _serde::__private::Some(
+                            match __A::next_value::<Vec<Vector4>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_referenceFrameSamples = _serde::__private::Some(
-                        match __A::next_value::<Vec<Vector4>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_up = match m_up {

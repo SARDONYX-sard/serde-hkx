@@ -316,88 +316,87 @@ for __hkbStateMachineDelayedTransitionInfoVisitor<'de> {
             bool,
         > = _serde::__private::None;
         let mut m_wasInAbutRangeLastFrame: _serde::__private::Option<bool> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_delayedTransition => {
-                    if _serde::__private::Option::is_some(&m_delayedTransition) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "delayedTransition",
-                            ),
+        for _ in 0..4usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_delayedTransition => {
+                        if _serde::__private::Option::is_some(&m_delayedTransition) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "delayedTransition",
+                                ),
+                            );
+                        }
+                        m_delayedTransition = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkbStateMachineProspectiveTransitionInfo,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_delayedTransition = _serde::__private::Some(
-                        match __A::next_value::<
-                            hkbStateMachineProspectiveTransitionInfo,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_timeDelayed => {
-                    if _serde::__private::Option::is_some(&m_timeDelayed) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "timeDelayed",
-                            ),
+                    __Field::m_timeDelayed => {
+                        if _serde::__private::Option::is_some(&m_timeDelayed) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "timeDelayed",
+                                ),
+                            );
+                        }
+                        m_timeDelayed = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_timeDelayed = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_isDelayedTransitionReturnToPreviousState => {
-                    if _serde::__private::Option::is_some(
-                        &m_isDelayedTransitionReturnToPreviousState,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "isDelayedTransitionReturnToPreviousState",
-                            ),
+                    __Field::m_isDelayedTransitionReturnToPreviousState => {
+                        if _serde::__private::Option::is_some(
+                            &m_isDelayedTransitionReturnToPreviousState,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "isDelayedTransitionReturnToPreviousState",
+                                ),
+                            );
+                        }
+                        m_isDelayedTransitionReturnToPreviousState = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_isDelayedTransitionReturnToPreviousState = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_wasInAbutRangeLastFrame => {
-                    if _serde::__private::Option::is_some(&m_wasInAbutRangeLastFrame) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "wasInAbutRangeLastFrame",
-                            ),
+                    __Field::m_wasInAbutRangeLastFrame => {
+                        if _serde::__private::Option::is_some(
+                            &m_wasInAbutRangeLastFrame,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "wasInAbutRangeLastFrame",
+                                ),
+                            );
+                        }
+                        m_wasInAbutRangeLastFrame = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_wasInAbutRangeLastFrame = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_delayedTransition = match m_delayedTransition {

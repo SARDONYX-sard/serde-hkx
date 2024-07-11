@@ -297,84 +297,81 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPulleyConstraintAtomVisitor<'de> {
         let mut m_fixedPivotBinWorld: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_ropeLength: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_leverageOnBodyB: _serde::__private::Option<f32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_fixedPivotAinWorld => {
-                    if _serde::__private::Option::is_some(&m_fixedPivotAinWorld) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "fixedPivotAinWorld",
-                            ),
+        for _ in 0..4usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_fixedPivotAinWorld => {
+                        if _serde::__private::Option::is_some(&m_fixedPivotAinWorld) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "fixedPivotAinWorld",
+                                ),
+                            );
+                        }
+                        m_fixedPivotAinWorld = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_fixedPivotAinWorld = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_fixedPivotBinWorld => {
-                    if _serde::__private::Option::is_some(&m_fixedPivotBinWorld) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "fixedPivotBinWorld",
-                            ),
+                    __Field::m_fixedPivotBinWorld => {
+                        if _serde::__private::Option::is_some(&m_fixedPivotBinWorld) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "fixedPivotBinWorld",
+                                ),
+                            );
+                        }
+                        m_fixedPivotBinWorld = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_fixedPivotBinWorld = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_ropeLength => {
-                    if _serde::__private::Option::is_some(&m_ropeLength) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "ropeLength",
-                            ),
+                    __Field::m_ropeLength => {
+                        if _serde::__private::Option::is_some(&m_ropeLength) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "ropeLength",
+                                ),
+                            );
+                        }
+                        m_ropeLength = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_ropeLength = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_leverageOnBodyB => {
-                    if _serde::__private::Option::is_some(&m_leverageOnBodyB) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "leverageOnBodyB",
-                            ),
+                    __Field::m_leverageOnBodyB => {
+                        if _serde::__private::Option::is_some(&m_leverageOnBodyB) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "leverageOnBodyB",
+                                ),
+                            );
+                        }
+                        m_leverageOnBodyB = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_leverageOnBodyB = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_fixedPivotAinWorld = match m_fixedPivotAinWorld {

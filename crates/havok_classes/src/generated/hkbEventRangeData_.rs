@@ -247,65 +247,62 @@ impl<'de> _serde::de::Visitor<'de> for __hkbEventRangeDataVisitor<'de> {
         let mut m_upperBound: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_event: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
         let mut m_eventMode: _serde::__private::Option<EventRangeMode> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_upperBound => {
-                    if _serde::__private::Option::is_some(&m_upperBound) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "upperBound",
-                            ),
+        for _ in 0..3usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_upperBound => {
+                        if _serde::__private::Option::is_some(&m_upperBound) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "upperBound",
+                                ),
+                            );
+                        }
+                        m_upperBound = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_upperBound = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_event => {
-                    if _serde::__private::Option::is_some(&m_event) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("event"),
+                    __Field::m_event => {
+                        if _serde::__private::Option::is_some(&m_event) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("event"),
+                            );
+                        }
+                        m_event = _serde::__private::Some(
+                            match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_event = _serde::__private::Some(
-                        match __A::next_value::<hkbEventProperty>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_eventMode => {
-                    if _serde::__private::Option::is_some(&m_eventMode) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "eventMode",
-                            ),
+                    __Field::m_eventMode => {
+                        if _serde::__private::Option::is_some(&m_eventMode) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "eventMode",
+                                ),
+                            );
+                        }
+                        m_eventMode = _serde::__private::Some(
+                            match __A::next_value::<EventRangeMode>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_eventMode = _serde::__private::Some(
-                        match __A::next_value::<EventRangeMode>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_upperBound = match m_upperBound {

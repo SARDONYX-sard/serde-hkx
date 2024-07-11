@@ -268,67 +268,64 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCompiledExpressionSetVisitor<'de> {
         let mut m_rpn: _serde::__private::Option<Vec<hkbCompiledExpressionSetToken>> = _serde::__private::None;
         let mut m_expressionToRpnIndex: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
         let mut m_numExpressions: _serde::__private::Option<i8> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_rpn => {
-                    if _serde::__private::Option::is_some(&m_rpn) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("rpn"),
+        for _ in 0..3usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_rpn => {
+                        if _serde::__private::Option::is_some(&m_rpn) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("rpn"),
+                            );
+                        }
+                        m_rpn = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<hkbCompiledExpressionSetToken>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_rpn = _serde::__private::Some(
-                        match __A::next_value::<
-                            Vec<hkbCompiledExpressionSetToken>,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_expressionToRpnIndex => {
-                    if _serde::__private::Option::is_some(&m_expressionToRpnIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "expressionToRpnIndex",
-                            ),
+                    __Field::m_expressionToRpnIndex => {
+                        if _serde::__private::Option::is_some(&m_expressionToRpnIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "expressionToRpnIndex",
+                                ),
+                            );
+                        }
+                        m_expressionToRpnIndex = _serde::__private::Some(
+                            match __A::next_value::<Vec<i32>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_expressionToRpnIndex = _serde::__private::Some(
-                        match __A::next_value::<Vec<i32>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numExpressions => {
-                    if _serde::__private::Option::is_some(&m_numExpressions) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numExpressions",
-                            ),
+                    __Field::m_numExpressions => {
+                        if _serde::__private::Option::is_some(&m_numExpressions) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numExpressions",
+                                ),
+                            );
+                        }
+                        m_numExpressions = _serde::__private::Some(
+                            match __A::next_value::<i8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numExpressions = _serde::__private::Some(
-                        match __A::next_value::<i8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_rpn = match m_rpn {

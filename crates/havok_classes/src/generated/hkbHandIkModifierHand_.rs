@@ -683,254 +683,253 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkModifierHandVisitor<'de> {
         let mut m_enforceEndPosition: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_enforceEndRotation: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_localFrameName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_elbowAxisLS => {
-                    if _serde::__private::Option::is_some(&m_elbowAxisLS) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "elbowAxisLS",
-                            ),
+        for _ in 0..14usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_elbowAxisLS => {
+                        if _serde::__private::Option::is_some(&m_elbowAxisLS) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "elbowAxisLS",
+                                ),
+                            );
+                        }
+                        m_elbowAxisLS = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_elbowAxisLS = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_backHandNormalLS => {
-                    if _serde::__private::Option::is_some(&m_backHandNormalLS) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "backHandNormalLS",
-                            ),
+                    __Field::m_backHandNormalLS => {
+                        if _serde::__private::Option::is_some(&m_backHandNormalLS) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "backHandNormalLS",
+                                ),
+                            );
+                        }
+                        m_backHandNormalLS = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_backHandNormalLS = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_handOffsetLS => {
-                    if _serde::__private::Option::is_some(&m_handOffsetLS) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "handOffsetLS",
-                            ),
+                    __Field::m_handOffsetLS => {
+                        if _serde::__private::Option::is_some(&m_handOffsetLS) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "handOffsetLS",
+                                ),
+                            );
+                        }
+                        m_handOffsetLS = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_handOffsetLS = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_handOrienationOffsetLS => {
-                    if _serde::__private::Option::is_some(&m_handOrienationOffsetLS) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "handOrienationOffsetLS",
-                            ),
+                    __Field::m_handOrienationOffsetLS => {
+                        if _serde::__private::Option::is_some(
+                            &m_handOrienationOffsetLS,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "handOrienationOffsetLS",
+                                ),
+                            );
+                        }
+                        m_handOrienationOffsetLS = _serde::__private::Some(
+                            match __A::next_value::<Quaternion>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_handOrienationOffsetLS = _serde::__private::Some(
-                        match __A::next_value::<Quaternion>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_maxElbowAngleDegrees => {
-                    if _serde::__private::Option::is_some(&m_maxElbowAngleDegrees) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "maxElbowAngleDegrees",
-                            ),
+                    __Field::m_maxElbowAngleDegrees => {
+                        if _serde::__private::Option::is_some(&m_maxElbowAngleDegrees) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "maxElbowAngleDegrees",
+                                ),
+                            );
+                        }
+                        m_maxElbowAngleDegrees = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_maxElbowAngleDegrees = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_minElbowAngleDegrees => {
-                    if _serde::__private::Option::is_some(&m_minElbowAngleDegrees) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "minElbowAngleDegrees",
-                            ),
+                    __Field::m_minElbowAngleDegrees => {
+                        if _serde::__private::Option::is_some(&m_minElbowAngleDegrees) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "minElbowAngleDegrees",
+                                ),
+                            );
+                        }
+                        m_minElbowAngleDegrees = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_minElbowAngleDegrees = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_shoulderIndex => {
-                    if _serde::__private::Option::is_some(&m_shoulderIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "shoulderIndex",
-                            ),
+                    __Field::m_shoulderIndex => {
+                        if _serde::__private::Option::is_some(&m_shoulderIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "shoulderIndex",
+                                ),
+                            );
+                        }
+                        m_shoulderIndex = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_shoulderIndex = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_shoulderSiblingIndex => {
-                    if _serde::__private::Option::is_some(&m_shoulderSiblingIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "shoulderSiblingIndex",
-                            ),
+                    __Field::m_shoulderSiblingIndex => {
+                        if _serde::__private::Option::is_some(&m_shoulderSiblingIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "shoulderSiblingIndex",
+                                ),
+                            );
+                        }
+                        m_shoulderSiblingIndex = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_shoulderSiblingIndex = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_elbowIndex => {
-                    if _serde::__private::Option::is_some(&m_elbowIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "elbowIndex",
-                            ),
+                    __Field::m_elbowIndex => {
+                        if _serde::__private::Option::is_some(&m_elbowIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "elbowIndex",
+                                ),
+                            );
+                        }
+                        m_elbowIndex = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_elbowIndex = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_elbowSiblingIndex => {
-                    if _serde::__private::Option::is_some(&m_elbowSiblingIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "elbowSiblingIndex",
-                            ),
+                    __Field::m_elbowSiblingIndex => {
+                        if _serde::__private::Option::is_some(&m_elbowSiblingIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "elbowSiblingIndex",
+                                ),
+                            );
+                        }
+                        m_elbowSiblingIndex = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_elbowSiblingIndex = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_wristIndex => {
-                    if _serde::__private::Option::is_some(&m_wristIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "wristIndex",
-                            ),
+                    __Field::m_wristIndex => {
+                        if _serde::__private::Option::is_some(&m_wristIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "wristIndex",
+                                ),
+                            );
+                        }
+                        m_wristIndex = _serde::__private::Some(
+                            match __A::next_value::<i16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_wristIndex = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_enforceEndPosition => {
-                    if _serde::__private::Option::is_some(&m_enforceEndPosition) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "enforceEndPosition",
-                            ),
+                    __Field::m_enforceEndPosition => {
+                        if _serde::__private::Option::is_some(&m_enforceEndPosition) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "enforceEndPosition",
+                                ),
+                            );
+                        }
+                        m_enforceEndPosition = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_enforceEndPosition = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_enforceEndRotation => {
-                    if _serde::__private::Option::is_some(&m_enforceEndRotation) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "enforceEndRotation",
-                            ),
+                    __Field::m_enforceEndRotation => {
+                        if _serde::__private::Option::is_some(&m_enforceEndRotation) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "enforceEndRotation",
+                                ),
+                            );
+                        }
+                        m_enforceEndRotation = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_enforceEndRotation = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_localFrameName => {
-                    if _serde::__private::Option::is_some(&m_localFrameName) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "localFrameName",
-                            ),
+                    __Field::m_localFrameName => {
+                        if _serde::__private::Option::is_some(&m_localFrameName) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "localFrameName",
+                                ),
+                            );
+                        }
+                        m_localFrameName = _serde::__private::Some(
+                            match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_localFrameName = _serde::__private::Some(
-                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_elbowAxisLS = match m_elbowAxisLS {

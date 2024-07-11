@@ -472,105 +472,102 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterSetupVisitor<'de> {
         let mut m_ragdollToAnimationSkeletonMapper: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_animationToRagdollSkeletonMapper: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_data: _serde::__private::Option<Pointer> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_retargetingSkeletonMappers => {
-                    if _serde::__private::Option::is_some(
-                        &m_retargetingSkeletonMappers,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "retargetingSkeletonMappers",
-                            ),
+        for _ in 0..5usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_retargetingSkeletonMappers => {
+                        if _serde::__private::Option::is_some(
+                            &m_retargetingSkeletonMappers,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "retargetingSkeletonMappers",
+                                ),
+                            );
+                        }
+                        m_retargetingSkeletonMappers = _serde::__private::Some(
+                            match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_retargetingSkeletonMappers = _serde::__private::Some(
-                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_animationSkeleton => {
-                    if _serde::__private::Option::is_some(&m_animationSkeleton) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "animationSkeleton",
-                            ),
+                    __Field::m_animationSkeleton => {
+                        if _serde::__private::Option::is_some(&m_animationSkeleton) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "animationSkeleton",
+                                ),
+                            );
+                        }
+                        m_animationSkeleton = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_animationSkeleton = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_ragdollToAnimationSkeletonMapper => {
-                    if _serde::__private::Option::is_some(
-                        &m_ragdollToAnimationSkeletonMapper,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "ragdollToAnimationSkeletonMapper",
-                            ),
+                    __Field::m_ragdollToAnimationSkeletonMapper => {
+                        if _serde::__private::Option::is_some(
+                            &m_ragdollToAnimationSkeletonMapper,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "ragdollToAnimationSkeletonMapper",
+                                ),
+                            );
+                        }
+                        m_ragdollToAnimationSkeletonMapper = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_ragdollToAnimationSkeletonMapper = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_animationToRagdollSkeletonMapper => {
-                    if _serde::__private::Option::is_some(
-                        &m_animationToRagdollSkeletonMapper,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "animationToRagdollSkeletonMapper",
-                            ),
+                    __Field::m_animationToRagdollSkeletonMapper => {
+                        if _serde::__private::Option::is_some(
+                            &m_animationToRagdollSkeletonMapper,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "animationToRagdollSkeletonMapper",
+                                ),
+                            );
+                        }
+                        m_animationToRagdollSkeletonMapper = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_animationToRagdollSkeletonMapper = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_data => {
-                    if _serde::__private::Option::is_some(&m_data) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("data"),
+                    __Field::m_data => {
+                        if _serde::__private::Option::is_some(&m_data) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("data"),
+                            );
+                        }
+                        m_data = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_data = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_retargetingSkeletonMappers = match m_retargetingSkeletonMappers {

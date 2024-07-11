@@ -307,86 +307,83 @@ impl<'de> _serde::de::Visitor<'de> for __hkpTriggerVolumeVisitor<'de> {
         > = _serde::__private::None;
         let mut m_triggerBody: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_sequenceNumber: _serde::__private::Option<u32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_overlappingBodies => {
-                    if _serde::__private::Option::is_some(&m_overlappingBodies) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "overlappingBodies",
-                            ),
+        for _ in 0..4usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_overlappingBodies => {
+                        if _serde::__private::Option::is_some(&m_overlappingBodies) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "overlappingBodies",
+                                ),
+                            );
+                        }
+                        m_overlappingBodies = _serde::__private::Some(
+                            match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_overlappingBodies = _serde::__private::Some(
-                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_eventQueue => {
-                    if _serde::__private::Option::is_some(&m_eventQueue) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "eventQueue",
-                            ),
+                    __Field::m_eventQueue => {
+                        if _serde::__private::Option::is_some(&m_eventQueue) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "eventQueue",
+                                ),
+                            );
+                        }
+                        m_eventQueue = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<hkpTriggerVolumeEventInfo>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_eventQueue = _serde::__private::Some(
-                        match __A::next_value::<
-                            Vec<hkpTriggerVolumeEventInfo>,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_triggerBody => {
-                    if _serde::__private::Option::is_some(&m_triggerBody) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "triggerBody",
-                            ),
+                    __Field::m_triggerBody => {
+                        if _serde::__private::Option::is_some(&m_triggerBody) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "triggerBody",
+                                ),
+                            );
+                        }
+                        m_triggerBody = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_triggerBody = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_sequenceNumber => {
-                    if _serde::__private::Option::is_some(&m_sequenceNumber) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "sequenceNumber",
-                            ),
+                    __Field::m_sequenceNumber => {
+                        if _serde::__private::Option::is_some(&m_sequenceNumber) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "sequenceNumber",
+                                ),
+                            );
+                        }
+                        m_sequenceNumber = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_sequenceNumber = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_overlappingBodies = match m_overlappingBodies {

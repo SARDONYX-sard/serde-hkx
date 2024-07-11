@@ -267,52 +267,49 @@ impl<'de> _serde::de::Visitor<'de> for __hkbKeyframeBonesModifierVisitor<'de> {
             Vec<hkbKeyframeBonesModifierKeyframeInfo>,
         > = _serde::__private::None;
         let mut m_keyframedBonesList: _serde::__private::Option<Pointer> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_keyframeInfo => {
-                    if _serde::__private::Option::is_some(&m_keyframeInfo) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "keyframeInfo",
-                            ),
+        for _ in 0..2usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_keyframeInfo => {
+                        if _serde::__private::Option::is_some(&m_keyframeInfo) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "keyframeInfo",
+                                ),
+                            );
+                        }
+                        m_keyframeInfo = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<hkbKeyframeBonesModifierKeyframeInfo>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_keyframeInfo = _serde::__private::Some(
-                        match __A::next_value::<
-                            Vec<hkbKeyframeBonesModifierKeyframeInfo>,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_keyframedBonesList => {
-                    if _serde::__private::Option::is_some(&m_keyframedBonesList) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "keyframedBonesList",
-                            ),
+                    __Field::m_keyframedBonesList => {
+                        if _serde::__private::Option::is_some(&m_keyframedBonesList) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "keyframedBonesList",
+                                ),
+                            );
+                        }
+                        m_keyframedBonesList = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_keyframedBonesList = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_keyframeInfo = match m_keyframeInfo {

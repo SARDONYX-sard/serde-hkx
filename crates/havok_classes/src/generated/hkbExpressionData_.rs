@@ -369,84 +369,83 @@ impl<'de> _serde::de::Visitor<'de> for __hkbExpressionDataVisitor<'de> {
         let mut m_assignmentVariableIndex: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_assignmentEventIndex: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_eventMode: _serde::__private::Option<ExpressionEventMode> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_expression => {
-                    if _serde::__private::Option::is_some(&m_expression) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "expression",
-                            ),
+        for _ in 0..4usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_expression => {
+                        if _serde::__private::Option::is_some(&m_expression) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "expression",
+                                ),
+                            );
+                        }
+                        m_expression = _serde::__private::Some(
+                            match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_expression = _serde::__private::Some(
-                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_assignmentVariableIndex => {
-                    if _serde::__private::Option::is_some(&m_assignmentVariableIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "assignmentVariableIndex",
-                            ),
+                    __Field::m_assignmentVariableIndex => {
+                        if _serde::__private::Option::is_some(
+                            &m_assignmentVariableIndex,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "assignmentVariableIndex",
+                                ),
+                            );
+                        }
+                        m_assignmentVariableIndex = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_assignmentVariableIndex = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_assignmentEventIndex => {
-                    if _serde::__private::Option::is_some(&m_assignmentEventIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "assignmentEventIndex",
-                            ),
+                    __Field::m_assignmentEventIndex => {
+                        if _serde::__private::Option::is_some(&m_assignmentEventIndex) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "assignmentEventIndex",
+                                ),
+                            );
+                        }
+                        m_assignmentEventIndex = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_assignmentEventIndex = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_eventMode => {
-                    if _serde::__private::Option::is_some(&m_eventMode) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "eventMode",
-                            ),
+                    __Field::m_eventMode => {
+                        if _serde::__private::Option::is_some(&m_eventMode) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "eventMode",
+                                ),
+                            );
+                        }
+                        m_eventMode = _serde::__private::Some(
+                            match __A::next_value::<ExpressionEventMode>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_eventMode = _serde::__private::Some(
-                        match __A::next_value::<ExpressionEventMode>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_expression = match m_expression {

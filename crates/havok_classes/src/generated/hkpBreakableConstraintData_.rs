@@ -417,133 +417,132 @@ impl<'de> _serde::de::Visitor<'de> for __hkpBreakableConstraintDataVisitor<'de> 
         let mut m_solverResultLimit: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_removeWhenBroken: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_revertBackVelocityOnBreak: _serde::__private::Option<bool> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_atoms => {
-                    if _serde::__private::Option::is_some(&m_atoms) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("atoms"),
+        for _ in 0..7usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_atoms => {
+                        if _serde::__private::Option::is_some(&m_atoms) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("atoms"),
+                            );
+                        }
+                        m_atoms = _serde::__private::Some(
+                            match __A::next_value::<hkpBridgeAtoms>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_atoms = _serde::__private::Some(
-                        match __A::next_value::<hkpBridgeAtoms>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_constraintData => {
-                    if _serde::__private::Option::is_some(&m_constraintData) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "constraintData",
-                            ),
+                    __Field::m_constraintData => {
+                        if _serde::__private::Option::is_some(&m_constraintData) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "constraintData",
+                                ),
+                            );
+                        }
+                        m_constraintData = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_constraintData = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_childRuntimeSize => {
-                    if _serde::__private::Option::is_some(&m_childRuntimeSize) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "childRuntimeSize",
-                            ),
+                    __Field::m_childRuntimeSize => {
+                        if _serde::__private::Option::is_some(&m_childRuntimeSize) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "childRuntimeSize",
+                                ),
+                            );
+                        }
+                        m_childRuntimeSize = _serde::__private::Some(
+                            match __A::next_value::<u16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_childRuntimeSize = _serde::__private::Some(
-                        match __A::next_value::<u16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_childNumSolverResults => {
-                    if _serde::__private::Option::is_some(&m_childNumSolverResults) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "childNumSolverResults",
-                            ),
+                    __Field::m_childNumSolverResults => {
+                        if _serde::__private::Option::is_some(&m_childNumSolverResults) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "childNumSolverResults",
+                                ),
+                            );
+                        }
+                        m_childNumSolverResults = _serde::__private::Some(
+                            match __A::next_value::<u16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_childNumSolverResults = _serde::__private::Some(
-                        match __A::next_value::<u16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_solverResultLimit => {
-                    if _serde::__private::Option::is_some(&m_solverResultLimit) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "solverResultLimit",
-                            ),
+                    __Field::m_solverResultLimit => {
+                        if _serde::__private::Option::is_some(&m_solverResultLimit) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "solverResultLimit",
+                                ),
+                            );
+                        }
+                        m_solverResultLimit = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_solverResultLimit = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_removeWhenBroken => {
-                    if _serde::__private::Option::is_some(&m_removeWhenBroken) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "removeWhenBroken",
-                            ),
+                    __Field::m_removeWhenBroken => {
+                        if _serde::__private::Option::is_some(&m_removeWhenBroken) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "removeWhenBroken",
+                                ),
+                            );
+                        }
+                        m_removeWhenBroken = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_removeWhenBroken = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_revertBackVelocityOnBreak => {
-                    if _serde::__private::Option::is_some(&m_revertBackVelocityOnBreak) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "revertBackVelocityOnBreak",
-                            ),
+                    __Field::m_revertBackVelocityOnBreak => {
+                        if _serde::__private::Option::is_some(
+                            &m_revertBackVelocityOnBreak,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "revertBackVelocityOnBreak",
+                                ),
+                            );
+                        }
+                        m_revertBackVelocityOnBreak = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_revertBackVelocityOnBreak = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_atoms = match m_atoms {

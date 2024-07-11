@@ -344,84 +344,83 @@ impl<'de> _serde::de::Visitor<'de> for __hkbFootIkControlsModifierVisitor<'de> {
         let mut m_legs: _serde::__private::Option<Vec<hkbFootIkControlsModifierLeg>> = _serde::__private::None;
         let mut m_errorOutTranslation: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_alignWithGroundRotation: _serde::__private::Option<Quaternion> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_controlData => {
-                    if _serde::__private::Option::is_some(&m_controlData) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "controlData",
-                            ),
+        for _ in 0..4usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_controlData => {
+                        if _serde::__private::Option::is_some(&m_controlData) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "controlData",
+                                ),
+                            );
+                        }
+                        m_controlData = _serde::__private::Some(
+                            match __A::next_value::<hkbFootIkControlData>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_controlData = _serde::__private::Some(
-                        match __A::next_value::<hkbFootIkControlData>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_legs => {
-                    if _serde::__private::Option::is_some(&m_legs) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("legs"),
+                    __Field::m_legs => {
+                        if _serde::__private::Option::is_some(&m_legs) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("legs"),
+                            );
+                        }
+                        m_legs = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<hkbFootIkControlsModifierLeg>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_legs = _serde::__private::Some(
-                        match __A::next_value::<
-                            Vec<hkbFootIkControlsModifierLeg>,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_errorOutTranslation => {
-                    if _serde::__private::Option::is_some(&m_errorOutTranslation) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "errorOutTranslation",
-                            ),
+                    __Field::m_errorOutTranslation => {
+                        if _serde::__private::Option::is_some(&m_errorOutTranslation) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "errorOutTranslation",
+                                ),
+                            );
+                        }
+                        m_errorOutTranslation = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_errorOutTranslation = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_alignWithGroundRotation => {
-                    if _serde::__private::Option::is_some(&m_alignWithGroundRotation) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "alignWithGroundRotation",
-                            ),
+                    __Field::m_alignWithGroundRotation => {
+                        if _serde::__private::Option::is_some(
+                            &m_alignWithGroundRotation,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "alignWithGroundRotation",
+                                ),
+                            );
+                        }
+                        m_alignWithGroundRotation = _serde::__private::Some(
+                            match __A::next_value::<Quaternion>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_alignWithGroundRotation = _serde::__private::Some(
-                        match __A::next_value::<Quaternion>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_controlData = match m_controlData {

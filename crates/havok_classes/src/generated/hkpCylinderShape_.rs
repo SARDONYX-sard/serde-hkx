@@ -391,116 +391,117 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCylinderShapeVisitor<'de> {
         let mut m_vertexB: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_perpendicular1: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_perpendicular2: _serde::__private::Option<Vector4> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_cylRadius => {
-                    if _serde::__private::Option::is_some(&m_cylRadius) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "cylRadius",
-                            ),
+        for _ in 0..6usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_cylRadius => {
+                        if _serde::__private::Option::is_some(&m_cylRadius) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "cylRadius",
+                                ),
+                            );
+                        }
+                        m_cylRadius = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_cylRadius = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_cylBaseRadiusFactorForHeightFieldCollisions => {
-                    if _serde::__private::Option::is_some(
-                        &m_cylBaseRadiusFactorForHeightFieldCollisions,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "cylBaseRadiusFactorForHeightFieldCollisions",
-                            ),
+                    __Field::m_cylBaseRadiusFactorForHeightFieldCollisions => {
+                        if _serde::__private::Option::is_some(
+                            &m_cylBaseRadiusFactorForHeightFieldCollisions,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "cylBaseRadiusFactorForHeightFieldCollisions",
+                                ),
+                            );
+                        }
+                        m_cylBaseRadiusFactorForHeightFieldCollisions = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_cylBaseRadiusFactorForHeightFieldCollisions = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_vertexA => {
-                    if _serde::__private::Option::is_some(&m_vertexA) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("vertexA"),
+                    __Field::m_vertexA => {
+                        if _serde::__private::Option::is_some(&m_vertexA) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "vertexA",
+                                ),
+                            );
+                        }
+                        m_vertexA = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_vertexA = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_vertexB => {
-                    if _serde::__private::Option::is_some(&m_vertexB) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("vertexB"),
+                    __Field::m_vertexB => {
+                        if _serde::__private::Option::is_some(&m_vertexB) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "vertexB",
+                                ),
+                            );
+                        }
+                        m_vertexB = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_vertexB = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_perpendicular1 => {
-                    if _serde::__private::Option::is_some(&m_perpendicular1) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "perpendicular1",
-                            ),
+                    __Field::m_perpendicular1 => {
+                        if _serde::__private::Option::is_some(&m_perpendicular1) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "perpendicular1",
+                                ),
+                            );
+                        }
+                        m_perpendicular1 = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_perpendicular1 = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_perpendicular2 => {
-                    if _serde::__private::Option::is_some(&m_perpendicular2) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "perpendicular2",
-                            ),
+                    __Field::m_perpendicular2 => {
+                        if _serde::__private::Option::is_some(&m_perpendicular2) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "perpendicular2",
+                                ),
+                            );
+                        }
+                        m_perpendicular2 = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_perpendicular2 = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_cylRadius = match m_cylRadius {

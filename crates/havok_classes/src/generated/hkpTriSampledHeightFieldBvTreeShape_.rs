@@ -315,65 +315,66 @@ for __hkpTriSampledHeightFieldBvTreeShapeVisitor<'de> {
         let mut m_childContainer: _serde::__private::Option<hkpSingleShapeContainer> = _serde::__private::None;
         let mut m_wantAabbRejectionTest: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_padding: _serde::__private::Option<[u8; 12usize]> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_childContainer => {
-                    if _serde::__private::Option::is_some(&m_childContainer) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "childContainer",
-                            ),
+        for _ in 0..3usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_childContainer => {
+                        if _serde::__private::Option::is_some(&m_childContainer) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "childContainer",
+                                ),
+                            );
+                        }
+                        m_childContainer = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpSingleShapeContainer,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_childContainer = _serde::__private::Some(
-                        match __A::next_value::<hkpSingleShapeContainer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_wantAabbRejectionTest => {
-                    if _serde::__private::Option::is_some(&m_wantAabbRejectionTest) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "wantAabbRejectionTest",
-                            ),
+                    __Field::m_wantAabbRejectionTest => {
+                        if _serde::__private::Option::is_some(&m_wantAabbRejectionTest) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "wantAabbRejectionTest",
+                                ),
+                            );
+                        }
+                        m_wantAabbRejectionTest = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_wantAabbRejectionTest = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_padding => {
-                    if _serde::__private::Option::is_some(&m_padding) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("padding"),
+                    __Field::m_padding => {
+                        if _serde::__private::Option::is_some(&m_padding) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "padding",
+                                ),
+                            );
+                        }
+                        m_padding = _serde::__private::Some(
+                            match __A::next_value::<[u8; 12usize]>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_padding = _serde::__private::Some(
-                        match __A::next_value::<[u8; 12usize]>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_childContainer = match m_childContainer {

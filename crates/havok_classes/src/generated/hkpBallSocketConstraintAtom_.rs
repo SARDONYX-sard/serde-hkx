@@ -346,105 +346,102 @@ impl<'de> _serde::de::Visitor<'de> for __hkpBallSocketConstraintAtomVisitor<'de>
         let mut m_velocityStabilizationFactor: _serde::__private::Option<u8> = _serde::__private::None;
         let mut m_maxImpulse: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_inertiaStabilizationFactor: _serde::__private::Option<f32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_solvingMethod => {
-                    if _serde::__private::Option::is_some(&m_solvingMethod) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "solvingMethod",
-                            ),
+        for _ in 0..5usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_solvingMethod => {
+                        if _serde::__private::Option::is_some(&m_solvingMethod) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "solvingMethod",
+                                ),
+                            );
+                        }
+                        m_solvingMethod = _serde::__private::Some(
+                            match __A::next_value::<SolvingMethod>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_solvingMethod = _serde::__private::Some(
-                        match __A::next_value::<SolvingMethod>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_bodiesToNotify => {
-                    if _serde::__private::Option::is_some(&m_bodiesToNotify) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "bodiesToNotify",
-                            ),
+                    __Field::m_bodiesToNotify => {
+                        if _serde::__private::Option::is_some(&m_bodiesToNotify) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "bodiesToNotify",
+                                ),
+                            );
+                        }
+                        m_bodiesToNotify = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_bodiesToNotify = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_velocityStabilizationFactor => {
-                    if _serde::__private::Option::is_some(
-                        &m_velocityStabilizationFactor,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "velocityStabilizationFactor",
-                            ),
+                    __Field::m_velocityStabilizationFactor => {
+                        if _serde::__private::Option::is_some(
+                            &m_velocityStabilizationFactor,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "velocityStabilizationFactor",
+                                ),
+                            );
+                        }
+                        m_velocityStabilizationFactor = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_velocityStabilizationFactor = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_maxImpulse => {
-                    if _serde::__private::Option::is_some(&m_maxImpulse) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "maxImpulse",
-                            ),
+                    __Field::m_maxImpulse => {
+                        if _serde::__private::Option::is_some(&m_maxImpulse) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "maxImpulse",
+                                ),
+                            );
+                        }
+                        m_maxImpulse = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_maxImpulse = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_inertiaStabilizationFactor => {
-                    if _serde::__private::Option::is_some(
-                        &m_inertiaStabilizationFactor,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "inertiaStabilizationFactor",
-                            ),
+                    __Field::m_inertiaStabilizationFactor => {
+                        if _serde::__private::Option::is_some(
+                            &m_inertiaStabilizationFactor,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "inertiaStabilizationFactor",
+                                ),
+                            );
+                        }
+                        m_inertiaStabilizationFactor = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_inertiaStabilizationFactor = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_solvingMethod = match m_solvingMethod {

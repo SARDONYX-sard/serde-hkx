@@ -542,182 +542,183 @@ for __hkpVehicleFrictionDescriptionAxisDescriptionVisitor<'de> {
         let mut m_wheelRadiusInv: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_wheelDownForceFactor: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_wheelDownForceSumFactor: _serde::__private::Option<f32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_frictionCircleYtab => {
-                    if _serde::__private::Option::is_some(&m_frictionCircleYtab) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "frictionCircleYtab",
-                            ),
+        for _ in 0..10usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_frictionCircleYtab => {
+                        if _serde::__private::Option::is_some(&m_frictionCircleYtab) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "frictionCircleYtab",
+                                ),
+                            );
+                        }
+                        m_frictionCircleYtab = _serde::__private::Some(
+                            match __A::next_value::<[f32; 16usize]>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_frictionCircleYtab = _serde::__private::Some(
-                        match __A::next_value::<[f32; 16usize]>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_xStep => {
-                    if _serde::__private::Option::is_some(&m_xStep) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("xStep"),
+                    __Field::m_xStep => {
+                        if _serde::__private::Option::is_some(&m_xStep) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("xStep"),
+                            );
+                        }
+                        m_xStep = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_xStep = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_xStart => {
-                    if _serde::__private::Option::is_some(&m_xStart) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("xStart"),
+                    __Field::m_xStart => {
+                        if _serde::__private::Option::is_some(&m_xStart) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("xStart"),
+                            );
+                        }
+                        m_xStart = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_xStart = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_wheelSurfaceInertia => {
-                    if _serde::__private::Option::is_some(&m_wheelSurfaceInertia) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "wheelSurfaceInertia",
-                            ),
+                    __Field::m_wheelSurfaceInertia => {
+                        if _serde::__private::Option::is_some(&m_wheelSurfaceInertia) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "wheelSurfaceInertia",
+                                ),
+                            );
+                        }
+                        m_wheelSurfaceInertia = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_wheelSurfaceInertia = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_wheelSurfaceInertiaInv => {
-                    if _serde::__private::Option::is_some(&m_wheelSurfaceInertiaInv) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "wheelSurfaceInertiaInv",
-                            ),
+                    __Field::m_wheelSurfaceInertiaInv => {
+                        if _serde::__private::Option::is_some(
+                            &m_wheelSurfaceInertiaInv,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "wheelSurfaceInertiaInv",
+                                ),
+                            );
+                        }
+                        m_wheelSurfaceInertiaInv = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_wheelSurfaceInertiaInv = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_wheelChassisMassRatio => {
-                    if _serde::__private::Option::is_some(&m_wheelChassisMassRatio) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "wheelChassisMassRatio",
-                            ),
+                    __Field::m_wheelChassisMassRatio => {
+                        if _serde::__private::Option::is_some(&m_wheelChassisMassRatio) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "wheelChassisMassRatio",
+                                ),
+                            );
+                        }
+                        m_wheelChassisMassRatio = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_wheelChassisMassRatio = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_wheelRadius => {
-                    if _serde::__private::Option::is_some(&m_wheelRadius) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "wheelRadius",
-                            ),
+                    __Field::m_wheelRadius => {
+                        if _serde::__private::Option::is_some(&m_wheelRadius) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "wheelRadius",
+                                ),
+                            );
+                        }
+                        m_wheelRadius = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_wheelRadius = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_wheelRadiusInv => {
-                    if _serde::__private::Option::is_some(&m_wheelRadiusInv) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "wheelRadiusInv",
-                            ),
+                    __Field::m_wheelRadiusInv => {
+                        if _serde::__private::Option::is_some(&m_wheelRadiusInv) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "wheelRadiusInv",
+                                ),
+                            );
+                        }
+                        m_wheelRadiusInv = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_wheelRadiusInv = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_wheelDownForceFactor => {
-                    if _serde::__private::Option::is_some(&m_wheelDownForceFactor) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "wheelDownForceFactor",
-                            ),
+                    __Field::m_wheelDownForceFactor => {
+                        if _serde::__private::Option::is_some(&m_wheelDownForceFactor) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "wheelDownForceFactor",
+                                ),
+                            );
+                        }
+                        m_wheelDownForceFactor = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_wheelDownForceFactor = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_wheelDownForceSumFactor => {
-                    if _serde::__private::Option::is_some(&m_wheelDownForceSumFactor) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "wheelDownForceSumFactor",
-                            ),
+                    __Field::m_wheelDownForceSumFactor => {
+                        if _serde::__private::Option::is_some(
+                            &m_wheelDownForceSumFactor,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "wheelDownForceSumFactor",
+                                ),
+                            );
+                        }
+                        m_wheelDownForceSumFactor = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_wheelDownForceSumFactor = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_frictionCircleYtab = match m_frictionCircleYtab {

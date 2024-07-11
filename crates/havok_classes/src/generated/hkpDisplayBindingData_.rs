@@ -234,50 +234,47 @@ impl<'de> _serde::de::Visitor<'de> for __hkpDisplayBindingDataVisitor<'de> {
         let parent = __hkReferencedObjectVisitor::visit_as_parent(&mut __map)?;
         let mut m_rigidBodyBindings: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
         let mut m_physicsSystemBindings: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_rigidBodyBindings => {
-                    if _serde::__private::Option::is_some(&m_rigidBodyBindings) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "rigidBodyBindings",
-                            ),
+        for _ in 0..2usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_rigidBodyBindings => {
+                        if _serde::__private::Option::is_some(&m_rigidBodyBindings) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "rigidBodyBindings",
+                                ),
+                            );
+                        }
+                        m_rigidBodyBindings = _serde::__private::Some(
+                            match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_rigidBodyBindings = _serde::__private::Some(
-                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_physicsSystemBindings => {
-                    if _serde::__private::Option::is_some(&m_physicsSystemBindings) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "physicsSystemBindings",
-                            ),
+                    __Field::m_physicsSystemBindings => {
+                        if _serde::__private::Option::is_some(&m_physicsSystemBindings) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "physicsSystemBindings",
+                                ),
+                            );
+                        }
+                        m_physicsSystemBindings = _serde::__private::Some(
+                            match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_physicsSystemBindings = _serde::__private::Some(
-                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_rigidBodyBindings = match m_rigidBodyBindings {

@@ -214,48 +214,45 @@ impl<'de> _serde::de::Visitor<'de> for __hkMonitorStreamColorTableColorPairVisit
     {
         let mut m_colorName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
         let mut m_color: _serde::__private::Option<ExtendedColors> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_colorName => {
-                    if _serde::__private::Option::is_some(&m_colorName) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "colorName",
-                            ),
+        for _ in 0..2usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_colorName => {
+                        if _serde::__private::Option::is_some(&m_colorName) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "colorName",
+                                ),
+                            );
+                        }
+                        m_colorName = _serde::__private::Some(
+                            match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_colorName = _serde::__private::Some(
-                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_color => {
-                    if _serde::__private::Option::is_some(&m_color) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("color"),
+                    __Field::m_color => {
+                        if _serde::__private::Option::is_some(&m_color) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("color"),
+                            );
+                        }
+                        m_color = _serde::__private::Some(
+                            match __A::next_value::<ExtendedColors>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_color = _serde::__private::Some(
-                        match __A::next_value::<ExtendedColors>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_colorName = match m_colorName {

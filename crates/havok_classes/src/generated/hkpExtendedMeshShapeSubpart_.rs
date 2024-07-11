@@ -448,99 +448,100 @@ impl<'de> _serde::de::Visitor<'de> for __hkpExtendedMeshShapeSubpartVisitor<'de>
         let mut m_materialIndexStriding: _serde::__private::Option<u16> = _serde::__private::None;
         let mut m_numMaterials: _serde::__private::Option<u16> = _serde::__private::None;
         let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_type => {
-                    if _serde::__private::Option::is_some(&m_type) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("type"),
+        for _ in 0..5usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_type => {
+                        if _serde::__private::Option::is_some(&m_type) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("type"),
+                            );
+                        }
+                        m_type = _serde::__private::Some(
+                            match __A::next_value::<SubpartType>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_type = _serde::__private::Some(
-                        match __A::next_value::<SubpartType>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_materialIndexStridingType => {
-                    if _serde::__private::Option::is_some(&m_materialIndexStridingType) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "materialIndexStridingType",
-                            ),
+                    __Field::m_materialIndexStridingType => {
+                        if _serde::__private::Option::is_some(
+                            &m_materialIndexStridingType,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "materialIndexStridingType",
+                                ),
+                            );
+                        }
+                        m_materialIndexStridingType = _serde::__private::Some(
+                            match __A::next_value::<
+                                MaterialIndexStridingType,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_materialIndexStridingType = _serde::__private::Some(
-                        match __A::next_value::<MaterialIndexStridingType>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_materialIndexStriding => {
-                    if _serde::__private::Option::is_some(&m_materialIndexStriding) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "materialIndexStriding",
-                            ),
+                    __Field::m_materialIndexStriding => {
+                        if _serde::__private::Option::is_some(&m_materialIndexStriding) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "materialIndexStriding",
+                                ),
+                            );
+                        }
+                        m_materialIndexStriding = _serde::__private::Some(
+                            match __A::next_value::<u16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_materialIndexStriding = _serde::__private::Some(
-                        match __A::next_value::<u16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numMaterials => {
-                    if _serde::__private::Option::is_some(&m_numMaterials) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numMaterials",
-                            ),
+                    __Field::m_numMaterials => {
+                        if _serde::__private::Option::is_some(&m_numMaterials) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numMaterials",
+                                ),
+                            );
+                        }
+                        m_numMaterials = _serde::__private::Some(
+                            match __A::next_value::<u16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numMaterials = _serde::__private::Some(
-                        match __A::next_value::<u16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_userData => {
-                    if _serde::__private::Option::is_some(&m_userData) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "userData",
-                            ),
+                    __Field::m_userData => {
+                        if _serde::__private::Option::is_some(&m_userData) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "userData",
+                                ),
+                            );
+                        }
+                        m_userData = _serde::__private::Some(
+                            match __A::next_value::<u64>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_userData = _serde::__private::Some(
-                        match __A::next_value::<u64>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_type = match m_type {

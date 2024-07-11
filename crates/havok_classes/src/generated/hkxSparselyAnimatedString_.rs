@@ -215,46 +215,45 @@ impl<'de> _serde::de::Visitor<'de> for __hkxSparselyAnimatedStringVisitor<'de> {
         let parent = __hkReferencedObjectVisitor::visit_as_parent(&mut __map)?;
         let mut m_strings: _serde::__private::Option<Vec<StringPtr<'de>>> = _serde::__private::None;
         let mut m_times: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_strings => {
-                    if _serde::__private::Option::is_some(&m_strings) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("strings"),
+        for _ in 0..2usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_strings => {
+                        if _serde::__private::Option::is_some(&m_strings) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "strings",
+                                ),
+                            );
+                        }
+                        m_strings = _serde::__private::Some(
+                            match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_strings = _serde::__private::Some(
-                        match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_times => {
-                    if _serde::__private::Option::is_some(&m_times) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("times"),
+                    __Field::m_times => {
+                        if _serde::__private::Option::is_some(&m_times) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("times"),
+                            );
+                        }
+                        m_times = _serde::__private::Some(
+                            match __A::next_value::<Vec<f32>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_times = _serde::__private::Some(
-                        match __A::next_value::<Vec<f32>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_strings = match m_strings {

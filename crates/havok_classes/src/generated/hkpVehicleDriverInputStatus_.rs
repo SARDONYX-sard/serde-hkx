@@ -147,16 +147,13 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDriverInputStatusVisitor<'de>
         __A: _serde::de::MapAccess<'de>,
     {
         let parent = __hkReferencedObjectVisitor::visit_as_parent(&mut __map)?;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                _ => {}
+        for _ in 0..0usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    _ => {}
+                }
             }
         }
         _serde::__private::Ok(hkpVehicleDriverInputStatus {

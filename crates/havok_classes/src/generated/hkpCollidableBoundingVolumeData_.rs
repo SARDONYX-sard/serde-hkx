@@ -506,112 +506,111 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCollidableBoundingVolumeDataVisitor<
         let mut m_max: _serde::__private::Option<[u32; 3usize]> = _serde::__private::None;
         let mut m_expansionMax: _serde::__private::Option<[u8; 3usize]> = _serde::__private::None;
         let mut m_padding: _serde::__private::Option<u8> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_min => {
-                    if _serde::__private::Option::is_some(&m_min) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("min"),
+        for _ in 0..6usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_min => {
+                        if _serde::__private::Option::is_some(&m_min) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("min"),
+                            );
+                        }
+                        m_min = _serde::__private::Some(
+                            match __A::next_value::<[u32; 3usize]>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_min = _serde::__private::Some(
-                        match __A::next_value::<[u32; 3usize]>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_expansionMin => {
-                    if _serde::__private::Option::is_some(&m_expansionMin) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "expansionMin",
-                            ),
+                    __Field::m_expansionMin => {
+                        if _serde::__private::Option::is_some(&m_expansionMin) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "expansionMin",
+                                ),
+                            );
+                        }
+                        m_expansionMin = _serde::__private::Some(
+                            match __A::next_value::<[u8; 3usize]>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_expansionMin = _serde::__private::Some(
-                        match __A::next_value::<[u8; 3usize]>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_expansionShift => {
-                    if _serde::__private::Option::is_some(&m_expansionShift) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "expansionShift",
-                            ),
+                    __Field::m_expansionShift => {
+                        if _serde::__private::Option::is_some(&m_expansionShift) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "expansionShift",
+                                ),
+                            );
+                        }
+                        m_expansionShift = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_expansionShift = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_max => {
-                    if _serde::__private::Option::is_some(&m_max) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("max"),
+                    __Field::m_max => {
+                        if _serde::__private::Option::is_some(&m_max) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("max"),
+                            );
+                        }
+                        m_max = _serde::__private::Some(
+                            match __A::next_value::<[u32; 3usize]>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_max = _serde::__private::Some(
-                        match __A::next_value::<[u32; 3usize]>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_expansionMax => {
-                    if _serde::__private::Option::is_some(&m_expansionMax) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "expansionMax",
-                            ),
+                    __Field::m_expansionMax => {
+                        if _serde::__private::Option::is_some(&m_expansionMax) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "expansionMax",
+                                ),
+                            );
+                        }
+                        m_expansionMax = _serde::__private::Some(
+                            match __A::next_value::<[u8; 3usize]>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_expansionMax = _serde::__private::Some(
-                        match __A::next_value::<[u8; 3usize]>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_padding => {
-                    if _serde::__private::Option::is_some(&m_padding) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("padding"),
+                    __Field::m_padding => {
+                        if _serde::__private::Option::is_some(&m_padding) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "padding",
+                                ),
+                            );
+                        }
+                        m_padding = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_padding = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_min = match m_min {

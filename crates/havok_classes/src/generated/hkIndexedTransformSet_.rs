@@ -386,120 +386,117 @@ impl<'de> _serde::de::Visitor<'de> for __hkIndexedTransformSetVisitor<'de> {
             Vec<hkMeshBoneIndexMapping>,
         > = _serde::__private::None;
         let mut m_allMatricesAreAffine: _serde::__private::Option<bool> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_matrices => {
-                    if _serde::__private::Option::is_some(&m_matrices) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "matrices",
-                            ),
+        for _ in 0..6usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_matrices => {
+                        if _serde::__private::Option::is_some(&m_matrices) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "matrices",
+                                ),
+                            );
+                        }
+                        m_matrices = _serde::__private::Some(
+                            match __A::next_value::<Vec<Matrix4>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_matrices = _serde::__private::Some(
-                        match __A::next_value::<Vec<Matrix4>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_inverseMatrices => {
-                    if _serde::__private::Option::is_some(&m_inverseMatrices) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "inverseMatrices",
-                            ),
+                    __Field::m_inverseMatrices => {
+                        if _serde::__private::Option::is_some(&m_inverseMatrices) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "inverseMatrices",
+                                ),
+                            );
+                        }
+                        m_inverseMatrices = _serde::__private::Some(
+                            match __A::next_value::<Vec<Matrix4>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_inverseMatrices = _serde::__private::Some(
-                        match __A::next_value::<Vec<Matrix4>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_matricesOrder => {
-                    if _serde::__private::Option::is_some(&m_matricesOrder) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "matricesOrder",
-                            ),
+                    __Field::m_matricesOrder => {
+                        if _serde::__private::Option::is_some(&m_matricesOrder) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "matricesOrder",
+                                ),
+                            );
+                        }
+                        m_matricesOrder = _serde::__private::Some(
+                            match __A::next_value::<Vec<i16>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_matricesOrder = _serde::__private::Some(
-                        match __A::next_value::<Vec<i16>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_matricesNames => {
-                    if _serde::__private::Option::is_some(&m_matricesNames) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "matricesNames",
-                            ),
+                    __Field::m_matricesNames => {
+                        if _serde::__private::Option::is_some(&m_matricesNames) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "matricesNames",
+                                ),
+                            );
+                        }
+                        m_matricesNames = _serde::__private::Some(
+                            match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_matricesNames = _serde::__private::Some(
-                        match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_indexMappings => {
-                    if _serde::__private::Option::is_some(&m_indexMappings) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "indexMappings",
-                            ),
+                    __Field::m_indexMappings => {
+                        if _serde::__private::Option::is_some(&m_indexMappings) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "indexMappings",
+                                ),
+                            );
+                        }
+                        m_indexMappings = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<hkMeshBoneIndexMapping>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_indexMappings = _serde::__private::Some(
-                        match __A::next_value::<
-                            Vec<hkMeshBoneIndexMapping>,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_allMatricesAreAffine => {
-                    if _serde::__private::Option::is_some(&m_allMatricesAreAffine) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "allMatricesAreAffine",
-                            ),
+                    __Field::m_allMatricesAreAffine => {
+                        if _serde::__private::Option::is_some(&m_allMatricesAreAffine) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "allMatricesAreAffine",
+                                ),
+                            );
+                        }
+                        m_allMatricesAreAffine = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_allMatricesAreAffine = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_matrices = match m_matrices {

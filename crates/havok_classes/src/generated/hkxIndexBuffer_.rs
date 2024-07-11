@@ -330,99 +330,96 @@ impl<'de> _serde::de::Visitor<'de> for __hkxIndexBufferVisitor<'de> {
         let mut m_indices32: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
         let mut m_vertexBaseOffset: _serde::__private::Option<u32> = _serde::__private::None;
         let mut m_length: _serde::__private::Option<u32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_indexType => {
-                    if _serde::__private::Option::is_some(&m_indexType) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "indexType",
-                            ),
+        for _ in 0..5usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_indexType => {
+                        if _serde::__private::Option::is_some(&m_indexType) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "indexType",
+                                ),
+                            );
+                        }
+                        m_indexType = _serde::__private::Some(
+                            match __A::next_value::<IndexType>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_indexType = _serde::__private::Some(
-                        match __A::next_value::<IndexType>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_indices16 => {
-                    if _serde::__private::Option::is_some(&m_indices16) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "indices16",
-                            ),
+                    __Field::m_indices16 => {
+                        if _serde::__private::Option::is_some(&m_indices16) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "indices16",
+                                ),
+                            );
+                        }
+                        m_indices16 = _serde::__private::Some(
+                            match __A::next_value::<Vec<u16>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_indices16 = _serde::__private::Some(
-                        match __A::next_value::<Vec<u16>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_indices32 => {
-                    if _serde::__private::Option::is_some(&m_indices32) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "indices32",
-                            ),
+                    __Field::m_indices32 => {
+                        if _serde::__private::Option::is_some(&m_indices32) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "indices32",
+                                ),
+                            );
+                        }
+                        m_indices32 = _serde::__private::Some(
+                            match __A::next_value::<Vec<u32>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_indices32 = _serde::__private::Some(
-                        match __A::next_value::<Vec<u32>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_vertexBaseOffset => {
-                    if _serde::__private::Option::is_some(&m_vertexBaseOffset) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "vertexBaseOffset",
-                            ),
+                    __Field::m_vertexBaseOffset => {
+                        if _serde::__private::Option::is_some(&m_vertexBaseOffset) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "vertexBaseOffset",
+                                ),
+                            );
+                        }
+                        m_vertexBaseOffset = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_vertexBaseOffset = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_length => {
-                    if _serde::__private::Option::is_some(&m_length) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("length"),
+                    __Field::m_length => {
+                        if _serde::__private::Option::is_some(&m_length) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("length"),
+                            );
+                        }
+                        m_length = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_length = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_indexType = match m_indexType {

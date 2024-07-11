@@ -404,133 +404,134 @@ impl<'de> _serde::de::Visitor<'de> for __hkpWheelConstraintDataAtomsVisitor<'de>
             hkpSetLocalRotationsConstraintAtom,
         > = _serde::__private::None;
         let mut m_2dAng: _serde::__private::Option<hkp2dAngConstraintAtom> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_suspensionBase => {
-                    if _serde::__private::Option::is_some(&m_suspensionBase) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "suspensionBase",
-                            ),
+        for _ in 0..7usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_suspensionBase => {
+                        if _serde::__private::Option::is_some(&m_suspensionBase) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "suspensionBase",
+                                ),
+                            );
+                        }
+                        m_suspensionBase = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpSetLocalTransformsConstraintAtom,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_suspensionBase = _serde::__private::Some(
-                        match __A::next_value::<
-                            hkpSetLocalTransformsConstraintAtom,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_lin0Limit => {
-                    if _serde::__private::Option::is_some(&m_lin0Limit) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "lin0Limit",
-                            ),
+                    __Field::m_lin0Limit => {
+                        if _serde::__private::Option::is_some(&m_lin0Limit) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "lin0Limit",
+                                ),
+                            );
+                        }
+                        m_lin0Limit = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpLinLimitConstraintAtom,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_lin0Limit = _serde::__private::Some(
-                        match __A::next_value::<hkpLinLimitConstraintAtom>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_lin0Soft => {
-                    if _serde::__private::Option::is_some(&m_lin0Soft) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "lin0Soft",
-                            ),
+                    __Field::m_lin0Soft => {
+                        if _serde::__private::Option::is_some(&m_lin0Soft) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "lin0Soft",
+                                ),
+                            );
+                        }
+                        m_lin0Soft = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpLinSoftConstraintAtom,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_lin0Soft = _serde::__private::Some(
-                        match __A::next_value::<hkpLinSoftConstraintAtom>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_lin1 => {
-                    if _serde::__private::Option::is_some(&m_lin1) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("lin1"),
+                    __Field::m_lin1 => {
+                        if _serde::__private::Option::is_some(&m_lin1) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("lin1"),
+                            );
+                        }
+                        m_lin1 = _serde::__private::Some(
+                            match __A::next_value::<hkpLinConstraintAtom>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_lin1 = _serde::__private::Some(
-                        match __A::next_value::<hkpLinConstraintAtom>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_lin2 => {
-                    if _serde::__private::Option::is_some(&m_lin2) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("lin2"),
+                    __Field::m_lin2 => {
+                        if _serde::__private::Option::is_some(&m_lin2) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("lin2"),
+                            );
+                        }
+                        m_lin2 = _serde::__private::Some(
+                            match __A::next_value::<hkpLinConstraintAtom>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_lin2 = _serde::__private::Some(
-                        match __A::next_value::<hkpLinConstraintAtom>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_steeringBase => {
-                    if _serde::__private::Option::is_some(&m_steeringBase) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "steeringBase",
-                            ),
+                    __Field::m_steeringBase => {
+                        if _serde::__private::Option::is_some(&m_steeringBase) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "steeringBase",
+                                ),
+                            );
+                        }
+                        m_steeringBase = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpSetLocalRotationsConstraintAtom,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_steeringBase = _serde::__private::Some(
-                        match __A::next_value::<
-                            hkpSetLocalRotationsConstraintAtom,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_2dAng => {
-                    if _serde::__private::Option::is_some(&m_2dAng) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("2dAng"),
+                    __Field::m_2dAng => {
+                        if _serde::__private::Option::is_some(&m_2dAng) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("2dAng"),
+                            );
+                        }
+                        m_2dAng = _serde::__private::Some(
+                            match __A::next_value::<hkp2dAngConstraintAtom>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_2dAng = _serde::__private::Some(
-                        match __A::next_value::<hkp2dAngConstraintAtom>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_suspensionBase = match m_suspensionBase {

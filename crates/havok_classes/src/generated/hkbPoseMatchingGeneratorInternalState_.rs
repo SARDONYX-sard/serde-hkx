@@ -345,101 +345,98 @@ for __hkbPoseMatchingGeneratorInternalStateVisitor<'de> {
         let mut m_timeSinceBetterMatch: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_error: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_resetCurrentMatchLocalTime: _serde::__private::Option<bool> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_currentMatch => {
-                    if _serde::__private::Option::is_some(&m_currentMatch) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "currentMatch",
-                            ),
+        for _ in 0..5usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_currentMatch => {
+                        if _serde::__private::Option::is_some(&m_currentMatch) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "currentMatch",
+                                ),
+                            );
+                        }
+                        m_currentMatch = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_currentMatch = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_bestMatch => {
-                    if _serde::__private::Option::is_some(&m_bestMatch) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "bestMatch",
-                            ),
+                    __Field::m_bestMatch => {
+                        if _serde::__private::Option::is_some(&m_bestMatch) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "bestMatch",
+                                ),
+                            );
+                        }
+                        m_bestMatch = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_bestMatch = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_timeSinceBetterMatch => {
-                    if _serde::__private::Option::is_some(&m_timeSinceBetterMatch) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "timeSinceBetterMatch",
-                            ),
+                    __Field::m_timeSinceBetterMatch => {
+                        if _serde::__private::Option::is_some(&m_timeSinceBetterMatch) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "timeSinceBetterMatch",
+                                ),
+                            );
+                        }
+                        m_timeSinceBetterMatch = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_timeSinceBetterMatch = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_error => {
-                    if _serde::__private::Option::is_some(&m_error) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("error"),
+                    __Field::m_error => {
+                        if _serde::__private::Option::is_some(&m_error) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("error"),
+                            );
+                        }
+                        m_error = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_error = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_resetCurrentMatchLocalTime => {
-                    if _serde::__private::Option::is_some(
-                        &m_resetCurrentMatchLocalTime,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "resetCurrentMatchLocalTime",
-                            ),
+                    __Field::m_resetCurrentMatchLocalTime => {
+                        if _serde::__private::Option::is_some(
+                            &m_resetCurrentMatchLocalTime,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "resetCurrentMatchLocalTime",
+                                ),
+                            );
+                        }
+                        m_resetCurrentMatchLocalTime = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_resetCurrentMatchLocalTime = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_currentMatch = match m_currentMatch {

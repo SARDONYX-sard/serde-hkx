@@ -348,101 +348,98 @@ impl<'de> _serde::de::Visitor<'de> for __hkpLinearParametricCurveVisitor<'de> {
         > = _serde::__private::None;
         let mut m_points: _serde::__private::Option<Vec<Vector4>> = _serde::__private::None;
         let mut m_distance: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_smoothingFactor => {
-                    if _serde::__private::Option::is_some(&m_smoothingFactor) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "smoothingFactor",
-                            ),
+        for _ in 0..5usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_smoothingFactor => {
+                        if _serde::__private::Option::is_some(&m_smoothingFactor) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "smoothingFactor",
+                                ),
+                            );
+                        }
+                        m_smoothingFactor = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_smoothingFactor = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_closedLoop => {
-                    if _serde::__private::Option::is_some(&m_closedLoop) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "closedLoop",
-                            ),
+                    __Field::m_closedLoop => {
+                        if _serde::__private::Option::is_some(&m_closedLoop) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "closedLoop",
+                                ),
+                            );
+                        }
+                        m_closedLoop = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_closedLoop = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_dirNotParallelToTangentAlongWholePath => {
-                    if _serde::__private::Option::is_some(
-                        &m_dirNotParallelToTangentAlongWholePath,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "dirNotParallelToTangentAlongWholePath",
-                            ),
+                    __Field::m_dirNotParallelToTangentAlongWholePath => {
+                        if _serde::__private::Option::is_some(
+                            &m_dirNotParallelToTangentAlongWholePath,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "dirNotParallelToTangentAlongWholePath",
+                                ),
+                            );
+                        }
+                        m_dirNotParallelToTangentAlongWholePath = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_dirNotParallelToTangentAlongWholePath = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_points => {
-                    if _serde::__private::Option::is_some(&m_points) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("points"),
+                    __Field::m_points => {
+                        if _serde::__private::Option::is_some(&m_points) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("points"),
+                            );
+                        }
+                        m_points = _serde::__private::Some(
+                            match __A::next_value::<Vec<Vector4>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_points = _serde::__private::Some(
-                        match __A::next_value::<Vec<Vector4>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_distance => {
-                    if _serde::__private::Option::is_some(&m_distance) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "distance",
-                            ),
+                    __Field::m_distance => {
+                        if _serde::__private::Option::is_some(&m_distance) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "distance",
+                                ),
+                            );
+                        }
+                        m_distance = _serde::__private::Some(
+                            match __A::next_value::<Vec<f32>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_distance = _serde::__private::Some(
-                        match __A::next_value::<Vec<f32>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_smoothingFactor = match m_smoothingFactor {

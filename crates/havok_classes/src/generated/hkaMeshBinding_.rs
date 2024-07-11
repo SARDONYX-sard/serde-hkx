@@ -355,101 +355,100 @@ impl<'de> _serde::de::Visitor<'de> for __hkaMeshBindingVisitor<'de> {
         let mut m_boneFromSkinMeshTransforms: _serde::__private::Option<
             Vec<Transform>,
         > = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_mesh => {
-                    if _serde::__private::Option::is_some(&m_mesh) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("mesh"),
+        for _ in 0..5usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_mesh => {
+                        if _serde::__private::Option::is_some(&m_mesh) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("mesh"),
+                            );
+                        }
+                        m_mesh = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_mesh = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_originalSkeletonName => {
-                    if _serde::__private::Option::is_some(&m_originalSkeletonName) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "originalSkeletonName",
-                            ),
+                    __Field::m_originalSkeletonName => {
+                        if _serde::__private::Option::is_some(&m_originalSkeletonName) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "originalSkeletonName",
+                                ),
+                            );
+                        }
+                        m_originalSkeletonName = _serde::__private::Some(
+                            match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_originalSkeletonName = _serde::__private::Some(
-                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_skeleton => {
-                    if _serde::__private::Option::is_some(&m_skeleton) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "skeleton",
-                            ),
+                    __Field::m_skeleton => {
+                        if _serde::__private::Option::is_some(&m_skeleton) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "skeleton",
+                                ),
+                            );
+                        }
+                        m_skeleton = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_skeleton = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_mappings => {
-                    if _serde::__private::Option::is_some(&m_mappings) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "mappings",
-                            ),
+                    __Field::m_mappings => {
+                        if _serde::__private::Option::is_some(&m_mappings) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "mappings",
+                                ),
+                            );
+                        }
+                        m_mappings = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<hkaMeshBindingMapping>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_mappings = _serde::__private::Some(
-                        match __A::next_value::<Vec<hkaMeshBindingMapping>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_boneFromSkinMeshTransforms => {
-                    if _serde::__private::Option::is_some(
-                        &m_boneFromSkinMeshTransforms,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "boneFromSkinMeshTransforms",
-                            ),
+                    __Field::m_boneFromSkinMeshTransforms => {
+                        if _serde::__private::Option::is_some(
+                            &m_boneFromSkinMeshTransforms,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "boneFromSkinMeshTransforms",
+                                ),
+                            );
+                        }
+                        m_boneFromSkinMeshTransforms = _serde::__private::Some(
+                            match __A::next_value::<Vec<Transform>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_boneFromSkinMeshTransforms = _serde::__private::Some(
-                        match __A::next_value::<Vec<Transform>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_mesh = match m_mesh {

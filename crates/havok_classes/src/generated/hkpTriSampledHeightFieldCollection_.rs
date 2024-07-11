@@ -346,82 +346,79 @@ impl<'de> _serde::de::Visitor<'de> for __hkpTriSampledHeightFieldCollectionVisit
         let mut m_radius: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_weldingInfo: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
         let mut m_triangleExtrusion: _serde::__private::Option<Vector4> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_heightfield => {
-                    if _serde::__private::Option::is_some(&m_heightfield) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "heightfield",
-                            ),
+        for _ in 0..4usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_heightfield => {
+                        if _serde::__private::Option::is_some(&m_heightfield) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "heightfield",
+                                ),
+                            );
+                        }
+                        m_heightfield = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_heightfield = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_radius => {
-                    if _serde::__private::Option::is_some(&m_radius) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("radius"),
+                    __Field::m_radius => {
+                        if _serde::__private::Option::is_some(&m_radius) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("radius"),
+                            );
+                        }
+                        m_radius = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_radius = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_weldingInfo => {
-                    if _serde::__private::Option::is_some(&m_weldingInfo) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "weldingInfo",
-                            ),
+                    __Field::m_weldingInfo => {
+                        if _serde::__private::Option::is_some(&m_weldingInfo) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "weldingInfo",
+                                ),
+                            );
+                        }
+                        m_weldingInfo = _serde::__private::Some(
+                            match __A::next_value::<Vec<u16>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_weldingInfo = _serde::__private::Some(
-                        match __A::next_value::<Vec<u16>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_triangleExtrusion => {
-                    if _serde::__private::Option::is_some(&m_triangleExtrusion) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "triangleExtrusion",
-                            ),
+                    __Field::m_triangleExtrusion => {
+                        if _serde::__private::Option::is_some(&m_triangleExtrusion) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "triangleExtrusion",
+                                ),
+                            );
+                        }
+                        m_triangleExtrusion = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_triangleExtrusion = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_heightfield = match m_heightfield {

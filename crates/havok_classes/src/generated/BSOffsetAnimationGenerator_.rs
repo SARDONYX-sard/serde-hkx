@@ -599,101 +599,98 @@ impl<'de> _serde::de::Visitor<'de> for __BSOffsetAnimationGeneratorVisitor<'de> 
         let mut m_fOffsetVariable: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_fOffsetRangeStart: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_fOffsetRangeEnd: _serde::__private::Option<f32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_pDefaultGenerator => {
-                    if _serde::__private::Option::is_some(&m_pDefaultGenerator) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "pDefaultGenerator",
-                            ),
+        for _ in 0..5usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_pDefaultGenerator => {
+                        if _serde::__private::Option::is_some(&m_pDefaultGenerator) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "pDefaultGenerator",
+                                ),
+                            );
+                        }
+                        m_pDefaultGenerator = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_pDefaultGenerator = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_pOffsetClipGenerator => {
-                    if _serde::__private::Option::is_some(&m_pOffsetClipGenerator) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "pOffsetClipGenerator",
-                            ),
+                    __Field::m_pOffsetClipGenerator => {
+                        if _serde::__private::Option::is_some(&m_pOffsetClipGenerator) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "pOffsetClipGenerator",
+                                ),
+                            );
+                        }
+                        m_pOffsetClipGenerator = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_pOffsetClipGenerator = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_fOffsetVariable => {
-                    if _serde::__private::Option::is_some(&m_fOffsetVariable) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "fOffsetVariable",
-                            ),
+                    __Field::m_fOffsetVariable => {
+                        if _serde::__private::Option::is_some(&m_fOffsetVariable) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "fOffsetVariable",
+                                ),
+                            );
+                        }
+                        m_fOffsetVariable = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_fOffsetVariable = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_fOffsetRangeStart => {
-                    if _serde::__private::Option::is_some(&m_fOffsetRangeStart) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "fOffsetRangeStart",
-                            ),
+                    __Field::m_fOffsetRangeStart => {
+                        if _serde::__private::Option::is_some(&m_fOffsetRangeStart) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "fOffsetRangeStart",
+                                ),
+                            );
+                        }
+                        m_fOffsetRangeStart = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_fOffsetRangeStart = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_fOffsetRangeEnd => {
-                    if _serde::__private::Option::is_some(&m_fOffsetRangeEnd) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "fOffsetRangeEnd",
-                            ),
+                    __Field::m_fOffsetRangeEnd => {
+                        if _serde::__private::Option::is_some(&m_fOffsetRangeEnd) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "fOffsetRangeEnd",
+                                ),
+                            );
+                        }
+                        m_fOffsetRangeEnd = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_fOffsetRangeEnd = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_pDefaultGenerator = match m_pDefaultGenerator {

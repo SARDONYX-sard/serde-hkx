@@ -304,84 +304,81 @@ impl<'de> _serde::de::Visitor<'de> for __hkaRagdollInstanceVisitor<'de> {
         let mut m_constraints: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
         let mut m_boneToRigidBodyMap: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
         let mut m_skeleton: _serde::__private::Option<Pointer> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_rigidBodies => {
-                    if _serde::__private::Option::is_some(&m_rigidBodies) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "rigidBodies",
-                            ),
+        for _ in 0..4usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_rigidBodies => {
+                        if _serde::__private::Option::is_some(&m_rigidBodies) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "rigidBodies",
+                                ),
+                            );
+                        }
+                        m_rigidBodies = _serde::__private::Some(
+                            match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_rigidBodies = _serde::__private::Some(
-                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_constraints => {
-                    if _serde::__private::Option::is_some(&m_constraints) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "constraints",
-                            ),
+                    __Field::m_constraints => {
+                        if _serde::__private::Option::is_some(&m_constraints) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "constraints",
+                                ),
+                            );
+                        }
+                        m_constraints = _serde::__private::Some(
+                            match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_constraints = _serde::__private::Some(
-                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_boneToRigidBodyMap => {
-                    if _serde::__private::Option::is_some(&m_boneToRigidBodyMap) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "boneToRigidBodyMap",
-                            ),
+                    __Field::m_boneToRigidBodyMap => {
+                        if _serde::__private::Option::is_some(&m_boneToRigidBodyMap) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "boneToRigidBodyMap",
+                                ),
+                            );
+                        }
+                        m_boneToRigidBodyMap = _serde::__private::Some(
+                            match __A::next_value::<Vec<i32>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_boneToRigidBodyMap = _serde::__private::Some(
-                        match __A::next_value::<Vec<i32>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_skeleton => {
-                    if _serde::__private::Option::is_some(&m_skeleton) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "skeleton",
-                            ),
+                    __Field::m_skeleton => {
+                        if _serde::__private::Option::is_some(&m_skeleton) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "skeleton",
+                                ),
+                            );
+                        }
+                        m_skeleton = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_skeleton = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_rigidBodies = match m_rigidBodies {

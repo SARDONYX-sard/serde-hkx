@@ -216,46 +216,45 @@ impl<'de> _serde::de::Visitor<'de> for __hkxAnimatedVectorVisitor<'de> {
         let parent = __hkReferencedObjectVisitor::visit_as_parent(&mut __map)?;
         let mut m_vectors: _serde::__private::Option<Vec<Vector4>> = _serde::__private::None;
         let mut m_hint: _serde::__private::Option<Hint> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_vectors => {
-                    if _serde::__private::Option::is_some(&m_vectors) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("vectors"),
+        for _ in 0..2usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_vectors => {
+                        if _serde::__private::Option::is_some(&m_vectors) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "vectors",
+                                ),
+                            );
+                        }
+                        m_vectors = _serde::__private::Some(
+                            match __A::next_value::<Vec<Vector4>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_vectors = _serde::__private::Some(
-                        match __A::next_value::<Vec<Vector4>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_hint => {
-                    if _serde::__private::Option::is_some(&m_hint) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("hint"),
+                    __Field::m_hint => {
+                        if _serde::__private::Option::is_some(&m_hint) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("hint"),
+                            );
+                        }
+                        m_hint = _serde::__private::Some(
+                            match __A::next_value::<Hint>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_hint = _serde::__private::Some(
-                        match __A::next_value::<Hint>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_vectors = match m_vectors {

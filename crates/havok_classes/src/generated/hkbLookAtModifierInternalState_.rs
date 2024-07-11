@@ -269,67 +269,66 @@ impl<'de> _serde::de::Visitor<'de> for __hkbLookAtModifierInternalStateVisitor<'
         let mut m_lookAtLastTargetWS: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_lookAtWeight: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_isTargetInsideLimitCone: _serde::__private::Option<bool> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_lookAtLastTargetWS => {
-                    if _serde::__private::Option::is_some(&m_lookAtLastTargetWS) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "lookAtLastTargetWS",
-                            ),
+        for _ in 0..3usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_lookAtLastTargetWS => {
+                        if _serde::__private::Option::is_some(&m_lookAtLastTargetWS) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "lookAtLastTargetWS",
+                                ),
+                            );
+                        }
+                        m_lookAtLastTargetWS = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_lookAtLastTargetWS = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_lookAtWeight => {
-                    if _serde::__private::Option::is_some(&m_lookAtWeight) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "lookAtWeight",
-                            ),
+                    __Field::m_lookAtWeight => {
+                        if _serde::__private::Option::is_some(&m_lookAtWeight) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "lookAtWeight",
+                                ),
+                            );
+                        }
+                        m_lookAtWeight = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_lookAtWeight = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_isTargetInsideLimitCone => {
-                    if _serde::__private::Option::is_some(&m_isTargetInsideLimitCone) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "isTargetInsideLimitCone",
-                            ),
+                    __Field::m_isTargetInsideLimitCone => {
+                        if _serde::__private::Option::is_some(
+                            &m_isTargetInsideLimitCone,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "isTargetInsideLimitCone",
+                                ),
+                            );
+                        }
+                        m_isTargetInsideLimitCone = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_isTargetInsideLimitCone = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_lookAtLastTargetWS = match m_lookAtLastTargetWS {

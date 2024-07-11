@@ -629,222 +629,221 @@ for __hkaSplineCompressedAnimationTrackCompressionParamsVisitor<'de> {
         > = _serde::__private::None;
         let mut m_scaleQuantizationType: _serde::__private::Option<ScalarQuantization> = _serde::__private::None;
         let mut m_floatQuantizationType: _serde::__private::Option<ScalarQuantization> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_rotationTolerance => {
-                    if _serde::__private::Option::is_some(&m_rotationTolerance) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "rotationTolerance",
-                            ),
+        for _ in 0..12usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_rotationTolerance => {
+                        if _serde::__private::Option::is_some(&m_rotationTolerance) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "rotationTolerance",
+                                ),
+                            );
+                        }
+                        m_rotationTolerance = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_rotationTolerance = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_translationTolerance => {
-                    if _serde::__private::Option::is_some(&m_translationTolerance) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "translationTolerance",
-                            ),
+                    __Field::m_translationTolerance => {
+                        if _serde::__private::Option::is_some(&m_translationTolerance) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "translationTolerance",
+                                ),
+                            );
+                        }
+                        m_translationTolerance = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_translationTolerance = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_scaleTolerance => {
-                    if _serde::__private::Option::is_some(&m_scaleTolerance) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "scaleTolerance",
-                            ),
+                    __Field::m_scaleTolerance => {
+                        if _serde::__private::Option::is_some(&m_scaleTolerance) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "scaleTolerance",
+                                ),
+                            );
+                        }
+                        m_scaleTolerance = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_scaleTolerance = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_floatingTolerance => {
-                    if _serde::__private::Option::is_some(&m_floatingTolerance) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "floatingTolerance",
-                            ),
+                    __Field::m_floatingTolerance => {
+                        if _serde::__private::Option::is_some(&m_floatingTolerance) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "floatingTolerance",
+                                ),
+                            );
+                        }
+                        m_floatingTolerance = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_floatingTolerance = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_rotationDegree => {
-                    if _serde::__private::Option::is_some(&m_rotationDegree) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "rotationDegree",
-                            ),
+                    __Field::m_rotationDegree => {
+                        if _serde::__private::Option::is_some(&m_rotationDegree) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "rotationDegree",
+                                ),
+                            );
+                        }
+                        m_rotationDegree = _serde::__private::Some(
+                            match __A::next_value::<u16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_rotationDegree = _serde::__private::Some(
-                        match __A::next_value::<u16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_translationDegree => {
-                    if _serde::__private::Option::is_some(&m_translationDegree) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "translationDegree",
-                            ),
+                    __Field::m_translationDegree => {
+                        if _serde::__private::Option::is_some(&m_translationDegree) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "translationDegree",
+                                ),
+                            );
+                        }
+                        m_translationDegree = _serde::__private::Some(
+                            match __A::next_value::<u16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_translationDegree = _serde::__private::Some(
-                        match __A::next_value::<u16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_scaleDegree => {
-                    if _serde::__private::Option::is_some(&m_scaleDegree) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "scaleDegree",
-                            ),
+                    __Field::m_scaleDegree => {
+                        if _serde::__private::Option::is_some(&m_scaleDegree) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "scaleDegree",
+                                ),
+                            );
+                        }
+                        m_scaleDegree = _serde::__private::Some(
+                            match __A::next_value::<u16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_scaleDegree = _serde::__private::Some(
-                        match __A::next_value::<u16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_floatingDegree => {
-                    if _serde::__private::Option::is_some(&m_floatingDegree) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "floatingDegree",
-                            ),
+                    __Field::m_floatingDegree => {
+                        if _serde::__private::Option::is_some(&m_floatingDegree) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "floatingDegree",
+                                ),
+                            );
+                        }
+                        m_floatingDegree = _serde::__private::Some(
+                            match __A::next_value::<u16>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_floatingDegree = _serde::__private::Some(
-                        match __A::next_value::<u16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_rotationQuantizationType => {
-                    if _serde::__private::Option::is_some(&m_rotationQuantizationType) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "rotationQuantizationType",
-                            ),
+                    __Field::m_rotationQuantizationType => {
+                        if _serde::__private::Option::is_some(
+                            &m_rotationQuantizationType,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "rotationQuantizationType",
+                                ),
+                            );
+                        }
+                        m_rotationQuantizationType = _serde::__private::Some(
+                            match __A::next_value::<RotationQuantization>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_rotationQuantizationType = _serde::__private::Some(
-                        match __A::next_value::<RotationQuantization>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_translationQuantizationType => {
-                    if _serde::__private::Option::is_some(
-                        &m_translationQuantizationType,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "translationQuantizationType",
-                            ),
+                    __Field::m_translationQuantizationType => {
+                        if _serde::__private::Option::is_some(
+                            &m_translationQuantizationType,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "translationQuantizationType",
+                                ),
+                            );
+                        }
+                        m_translationQuantizationType = _serde::__private::Some(
+                            match __A::next_value::<ScalarQuantization>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_translationQuantizationType = _serde::__private::Some(
-                        match __A::next_value::<ScalarQuantization>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_scaleQuantizationType => {
-                    if _serde::__private::Option::is_some(&m_scaleQuantizationType) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "scaleQuantizationType",
-                            ),
+                    __Field::m_scaleQuantizationType => {
+                        if _serde::__private::Option::is_some(&m_scaleQuantizationType) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "scaleQuantizationType",
+                                ),
+                            );
+                        }
+                        m_scaleQuantizationType = _serde::__private::Some(
+                            match __A::next_value::<ScalarQuantization>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_scaleQuantizationType = _serde::__private::Some(
-                        match __A::next_value::<ScalarQuantization>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_floatQuantizationType => {
-                    if _serde::__private::Option::is_some(&m_floatQuantizationType) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "floatQuantizationType",
-                            ),
+                    __Field::m_floatQuantizationType => {
+                        if _serde::__private::Option::is_some(&m_floatQuantizationType) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "floatQuantizationType",
+                                ),
+                            );
+                        }
+                        m_floatQuantizationType = _serde::__private::Some(
+                            match __A::next_value::<ScalarQuantization>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_floatQuantizationType = _serde::__private::Some(
-                        match __A::next_value::<ScalarQuantization>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_rotationTolerance = match m_rotationTolerance {

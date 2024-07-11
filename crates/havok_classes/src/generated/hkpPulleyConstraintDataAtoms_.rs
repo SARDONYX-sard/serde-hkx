@@ -215,50 +215,49 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPulleyConstraintDataAtomsVisitor<'de
             hkpSetLocalTranslationsConstraintAtom,
         > = _serde::__private::None;
         let mut m_pulley: _serde::__private::Option<hkpPulleyConstraintAtom> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_translations => {
-                    if _serde::__private::Option::is_some(&m_translations) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "translations",
-                            ),
+        for _ in 0..2usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_translations => {
+                        if _serde::__private::Option::is_some(&m_translations) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "translations",
+                                ),
+                            );
+                        }
+                        m_translations = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpSetLocalTranslationsConstraintAtom,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_translations = _serde::__private::Some(
-                        match __A::next_value::<
-                            hkpSetLocalTranslationsConstraintAtom,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_pulley => {
-                    if _serde::__private::Option::is_some(&m_pulley) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("pulley"),
+                    __Field::m_pulley => {
+                        if _serde::__private::Option::is_some(&m_pulley) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("pulley"),
+                            );
+                        }
+                        m_pulley = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpPulleyConstraintAtom,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_pulley = _serde::__private::Some(
-                        match __A::next_value::<hkpPulleyConstraintAtom>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_translations = match m_translations {

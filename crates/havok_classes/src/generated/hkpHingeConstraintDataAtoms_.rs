@@ -300,86 +300,85 @@ impl<'de> _serde::de::Visitor<'de> for __hkpHingeConstraintDataAtomsVisitor<'de>
         > = _serde::__private::None;
         let mut m_2dAng: _serde::__private::Option<hkp2dAngConstraintAtom> = _serde::__private::None;
         let mut m_ballSocket: _serde::__private::Option<hkpBallSocketConstraintAtom> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_transforms => {
-                    if _serde::__private::Option::is_some(&m_transforms) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "transforms",
-                            ),
+        for _ in 0..4usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_transforms => {
+                        if _serde::__private::Option::is_some(&m_transforms) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "transforms",
+                                ),
+                            );
+                        }
+                        m_transforms = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpSetLocalTransformsConstraintAtom,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_transforms = _serde::__private::Some(
-                        match __A::next_value::<
-                            hkpSetLocalTransformsConstraintAtom,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_setupStabilization => {
-                    if _serde::__private::Option::is_some(&m_setupStabilization) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "setupStabilization",
-                            ),
+                    __Field::m_setupStabilization => {
+                        if _serde::__private::Option::is_some(&m_setupStabilization) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "setupStabilization",
+                                ),
+                            );
+                        }
+                        m_setupStabilization = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpSetupStabilizationAtom,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_setupStabilization = _serde::__private::Some(
-                        match __A::next_value::<hkpSetupStabilizationAtom>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_2dAng => {
-                    if _serde::__private::Option::is_some(&m_2dAng) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("2dAng"),
+                    __Field::m_2dAng => {
+                        if _serde::__private::Option::is_some(&m_2dAng) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("2dAng"),
+                            );
+                        }
+                        m_2dAng = _serde::__private::Some(
+                            match __A::next_value::<hkp2dAngConstraintAtom>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_2dAng = _serde::__private::Some(
-                        match __A::next_value::<hkp2dAngConstraintAtom>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_ballSocket => {
-                    if _serde::__private::Option::is_some(&m_ballSocket) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "ballSocket",
-                            ),
+                    __Field::m_ballSocket => {
+                        if _serde::__private::Option::is_some(&m_ballSocket) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "ballSocket",
+                                ),
+                            );
+                        }
+                        m_ballSocket = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpBallSocketConstraintAtom,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_ballSocket = _serde::__private::Some(
-                        match __A::next_value::<
-                            hkpBallSocketConstraintAtom,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_transforms = match m_transforms {

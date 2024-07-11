@@ -460,156 +460,155 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSkeletonMapperDataVisitor<'de> {
         let mut m_extractedMotionMapping: _serde::__private::Option<QsTransform> = _serde::__private::None;
         let mut m_keepUnmappedLocal: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_mappingType: _serde::__private::Option<MappingType> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_skeletonA => {
-                    if _serde::__private::Option::is_some(&m_skeletonA) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "skeletonA",
-                            ),
+        for _ in 0..8usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_skeletonA => {
+                        if _serde::__private::Option::is_some(&m_skeletonA) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "skeletonA",
+                                ),
+                            );
+                        }
+                        m_skeletonA = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_skeletonA = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_skeletonB => {
-                    if _serde::__private::Option::is_some(&m_skeletonB) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "skeletonB",
-                            ),
+                    __Field::m_skeletonB => {
+                        if _serde::__private::Option::is_some(&m_skeletonB) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "skeletonB",
+                                ),
+                            );
+                        }
+                        m_skeletonB = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_skeletonB = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_simpleMappings => {
-                    if _serde::__private::Option::is_some(&m_simpleMappings) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "simpleMappings",
-                            ),
+                    __Field::m_simpleMappings => {
+                        if _serde::__private::Option::is_some(&m_simpleMappings) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "simpleMappings",
+                                ),
+                            );
+                        }
+                        m_simpleMappings = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<hkaSkeletonMapperDataSimpleMapping>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_simpleMappings = _serde::__private::Some(
-                        match __A::next_value::<
-                            Vec<hkaSkeletonMapperDataSimpleMapping>,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_chainMappings => {
-                    if _serde::__private::Option::is_some(&m_chainMappings) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "chainMappings",
-                            ),
+                    __Field::m_chainMappings => {
+                        if _serde::__private::Option::is_some(&m_chainMappings) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "chainMappings",
+                                ),
+                            );
+                        }
+                        m_chainMappings = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<hkaSkeletonMapperDataChainMapping>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_chainMappings = _serde::__private::Some(
-                        match __A::next_value::<
-                            Vec<hkaSkeletonMapperDataChainMapping>,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_unmappedBones => {
-                    if _serde::__private::Option::is_some(&m_unmappedBones) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "unmappedBones",
-                            ),
+                    __Field::m_unmappedBones => {
+                        if _serde::__private::Option::is_some(&m_unmappedBones) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "unmappedBones",
+                                ),
+                            );
+                        }
+                        m_unmappedBones = _serde::__private::Some(
+                            match __A::next_value::<Vec<i16>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_unmappedBones = _serde::__private::Some(
-                        match __A::next_value::<Vec<i16>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_extractedMotionMapping => {
-                    if _serde::__private::Option::is_some(&m_extractedMotionMapping) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "extractedMotionMapping",
-                            ),
+                    __Field::m_extractedMotionMapping => {
+                        if _serde::__private::Option::is_some(
+                            &m_extractedMotionMapping,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "extractedMotionMapping",
+                                ),
+                            );
+                        }
+                        m_extractedMotionMapping = _serde::__private::Some(
+                            match __A::next_value::<QsTransform>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_extractedMotionMapping = _serde::__private::Some(
-                        match __A::next_value::<QsTransform>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_keepUnmappedLocal => {
-                    if _serde::__private::Option::is_some(&m_keepUnmappedLocal) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "keepUnmappedLocal",
-                            ),
+                    __Field::m_keepUnmappedLocal => {
+                        if _serde::__private::Option::is_some(&m_keepUnmappedLocal) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "keepUnmappedLocal",
+                                ),
+                            );
+                        }
+                        m_keepUnmappedLocal = _serde::__private::Some(
+                            match __A::next_value::<bool>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_keepUnmappedLocal = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_mappingType => {
-                    if _serde::__private::Option::is_some(&m_mappingType) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "mappingType",
-                            ),
+                    __Field::m_mappingType => {
+                        if _serde::__private::Option::is_some(&m_mappingType) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "mappingType",
+                                ),
+                            );
+                        }
+                        m_mappingType = _serde::__private::Some(
+                            match __A::next_value::<MappingType>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_mappingType = _serde::__private::Some(
-                        match __A::next_value::<MappingType>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_skeletonA = match m_skeletonA {

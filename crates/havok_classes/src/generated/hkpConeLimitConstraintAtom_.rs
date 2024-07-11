@@ -453,152 +453,153 @@ impl<'de> _serde::de::Visitor<'de> for __hkpConeLimitConstraintAtomVisitor<'de> 
         let mut m_minAngle: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_maxAngle: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_angularLimitsTauFactor: _serde::__private::Option<f32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_isEnabled => {
-                    if _serde::__private::Option::is_some(&m_isEnabled) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "isEnabled",
-                            ),
+        for _ in 0..8usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_isEnabled => {
+                        if _serde::__private::Option::is_some(&m_isEnabled) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "isEnabled",
+                                ),
+                            );
+                        }
+                        m_isEnabled = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_isEnabled = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_twistAxisInA => {
-                    if _serde::__private::Option::is_some(&m_twistAxisInA) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "twistAxisInA",
-                            ),
+                    __Field::m_twistAxisInA => {
+                        if _serde::__private::Option::is_some(&m_twistAxisInA) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "twistAxisInA",
+                                ),
+                            );
+                        }
+                        m_twistAxisInA = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_twistAxisInA = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_refAxisInB => {
-                    if _serde::__private::Option::is_some(&m_refAxisInB) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "refAxisInB",
-                            ),
+                    __Field::m_refAxisInB => {
+                        if _serde::__private::Option::is_some(&m_refAxisInB) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "refAxisInB",
+                                ),
+                            );
+                        }
+                        m_refAxisInB = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_refAxisInB = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_angleMeasurementMode => {
-                    if _serde::__private::Option::is_some(&m_angleMeasurementMode) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "angleMeasurementMode",
-                            ),
+                    __Field::m_angleMeasurementMode => {
+                        if _serde::__private::Option::is_some(&m_angleMeasurementMode) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "angleMeasurementMode",
+                                ),
+                            );
+                        }
+                        m_angleMeasurementMode = _serde::__private::Some(
+                            match __A::next_value::<MeasurementMode>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_angleMeasurementMode = _serde::__private::Some(
-                        match __A::next_value::<MeasurementMode>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_memOffsetToAngleOffset => {
-                    if _serde::__private::Option::is_some(&m_memOffsetToAngleOffset) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "memOffsetToAngleOffset",
-                            ),
+                    __Field::m_memOffsetToAngleOffset => {
+                        if _serde::__private::Option::is_some(
+                            &m_memOffsetToAngleOffset,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "memOffsetToAngleOffset",
+                                ),
+                            );
+                        }
+                        m_memOffsetToAngleOffset = _serde::__private::Some(
+                            match __A::next_value::<u8>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_memOffsetToAngleOffset = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_minAngle => {
-                    if _serde::__private::Option::is_some(&m_minAngle) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "minAngle",
-                            ),
+                    __Field::m_minAngle => {
+                        if _serde::__private::Option::is_some(&m_minAngle) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "minAngle",
+                                ),
+                            );
+                        }
+                        m_minAngle = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_minAngle = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_maxAngle => {
-                    if _serde::__private::Option::is_some(&m_maxAngle) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "maxAngle",
-                            ),
+                    __Field::m_maxAngle => {
+                        if _serde::__private::Option::is_some(&m_maxAngle) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "maxAngle",
+                                ),
+                            );
+                        }
+                        m_maxAngle = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_maxAngle = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_angularLimitsTauFactor => {
-                    if _serde::__private::Option::is_some(&m_angularLimitsTauFactor) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "angularLimitsTauFactor",
-                            ),
+                    __Field::m_angularLimitsTauFactor => {
+                        if _serde::__private::Option::is_some(
+                            &m_angularLimitsTauFactor,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "angularLimitsTauFactor",
+                                ),
+                            );
+                        }
+                        m_angularLimitsTauFactor = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_angularLimitsTauFactor = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_isEnabled = match m_isEnabled {

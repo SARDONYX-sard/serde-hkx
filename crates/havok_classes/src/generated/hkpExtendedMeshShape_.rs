@@ -692,211 +692,212 @@ impl<'de> _serde::de::Visitor<'de> for __hkpExtendedMeshShapeVisitor<'de> {
         let mut m_defaultCollisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
         let mut m_cachedNumChildShapes: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_triangleRadius: _serde::__private::Option<f32> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_embeddedTrianglesSubpart => {
-                    if _serde::__private::Option::is_some(&m_embeddedTrianglesSubpart) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "embeddedTrianglesSubpart",
-                            ),
+        for _ in 0..11usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_embeddedTrianglesSubpart => {
+                        if _serde::__private::Option::is_some(
+                            &m_embeddedTrianglesSubpart,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "embeddedTrianglesSubpart",
+                                ),
+                            );
+                        }
+                        m_embeddedTrianglesSubpart = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpExtendedMeshShapeTrianglesSubpart,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_embeddedTrianglesSubpart = _serde::__private::Some(
-                        match __A::next_value::<
-                            hkpExtendedMeshShapeTrianglesSubpart,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_aabbHalfExtents => {
-                    if _serde::__private::Option::is_some(&m_aabbHalfExtents) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "aabbHalfExtents",
-                            ),
+                    __Field::m_aabbHalfExtents => {
+                        if _serde::__private::Option::is_some(&m_aabbHalfExtents) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "aabbHalfExtents",
+                                ),
+                            );
+                        }
+                        m_aabbHalfExtents = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_aabbHalfExtents = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_aabbCenter => {
-                    if _serde::__private::Option::is_some(&m_aabbCenter) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "aabbCenter",
-                            ),
+                    __Field::m_aabbCenter => {
+                        if _serde::__private::Option::is_some(&m_aabbCenter) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "aabbCenter",
+                                ),
+                            );
+                        }
+                        m_aabbCenter = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_aabbCenter = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numBitsForSubpartIndex => {
-                    if _serde::__private::Option::is_some(&m_numBitsForSubpartIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numBitsForSubpartIndex",
-                            ),
+                    __Field::m_numBitsForSubpartIndex => {
+                        if _serde::__private::Option::is_some(
+                            &m_numBitsForSubpartIndex,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numBitsForSubpartIndex",
+                                ),
+                            );
+                        }
+                        m_numBitsForSubpartIndex = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numBitsForSubpartIndex = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_trianglesSubparts => {
-                    if _serde::__private::Option::is_some(&m_trianglesSubparts) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "trianglesSubparts",
-                            ),
+                    __Field::m_trianglesSubparts => {
+                        if _serde::__private::Option::is_some(&m_trianglesSubparts) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "trianglesSubparts",
+                                ),
+                            );
+                        }
+                        m_trianglesSubparts = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<hkpExtendedMeshShapeTrianglesSubpart>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_trianglesSubparts = _serde::__private::Some(
-                        match __A::next_value::<
-                            Vec<hkpExtendedMeshShapeTrianglesSubpart>,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_shapesSubparts => {
-                    if _serde::__private::Option::is_some(&m_shapesSubparts) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "shapesSubparts",
-                            ),
+                    __Field::m_shapesSubparts => {
+                        if _serde::__private::Option::is_some(&m_shapesSubparts) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "shapesSubparts",
+                                ),
+                            );
+                        }
+                        m_shapesSubparts = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<hkpExtendedMeshShapeShapesSubpart>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_shapesSubparts = _serde::__private::Some(
-                        match __A::next_value::<
-                            Vec<hkpExtendedMeshShapeShapesSubpart>,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_weldingInfo => {
-                    if _serde::__private::Option::is_some(&m_weldingInfo) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "weldingInfo",
-                            ),
+                    __Field::m_weldingInfo => {
+                        if _serde::__private::Option::is_some(&m_weldingInfo) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "weldingInfo",
+                                ),
+                            );
+                        }
+                        m_weldingInfo = _serde::__private::Some(
+                            match __A::next_value::<Vec<u16>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_weldingInfo = _serde::__private::Some(
-                        match __A::next_value::<Vec<u16>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_weldingType => {
-                    if _serde::__private::Option::is_some(&m_weldingType) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "weldingType",
-                            ),
+                    __Field::m_weldingType => {
+                        if _serde::__private::Option::is_some(&m_weldingType) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "weldingType",
+                                ),
+                            );
+                        }
+                        m_weldingType = _serde::__private::Some(
+                            match __A::next_value::<WeldingType>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_weldingType = _serde::__private::Some(
-                        match __A::next_value::<WeldingType>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_defaultCollisionFilterInfo => {
-                    if _serde::__private::Option::is_some(
-                        &m_defaultCollisionFilterInfo,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "defaultCollisionFilterInfo",
-                            ),
+                    __Field::m_defaultCollisionFilterInfo => {
+                        if _serde::__private::Option::is_some(
+                            &m_defaultCollisionFilterInfo,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "defaultCollisionFilterInfo",
+                                ),
+                            );
+                        }
+                        m_defaultCollisionFilterInfo = _serde::__private::Some(
+                            match __A::next_value::<u32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_defaultCollisionFilterInfo = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_cachedNumChildShapes => {
-                    if _serde::__private::Option::is_some(&m_cachedNumChildShapes) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "cachedNumChildShapes",
-                            ),
+                    __Field::m_cachedNumChildShapes => {
+                        if _serde::__private::Option::is_some(&m_cachedNumChildShapes) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "cachedNumChildShapes",
+                                ),
+                            );
+                        }
+                        m_cachedNumChildShapes = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_cachedNumChildShapes = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_triangleRadius => {
-                    if _serde::__private::Option::is_some(&m_triangleRadius) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "triangleRadius",
-                            ),
+                    __Field::m_triangleRadius => {
+                        if _serde::__private::Option::is_some(&m_triangleRadius) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "triangleRadius",
+                                ),
+                            );
+                        }
+                        m_triangleRadius = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_triangleRadius = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_embeddedTrianglesSubpart = match m_embeddedTrianglesSubpart {

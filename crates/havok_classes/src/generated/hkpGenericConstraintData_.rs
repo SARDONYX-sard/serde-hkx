@@ -218,48 +218,45 @@ impl<'de> _serde::de::Visitor<'de> for __hkpGenericConstraintDataVisitor<'de> {
         let parent = __hkpConstraintDataVisitor::visit_as_parent(&mut __map)?;
         let mut m_atoms: _serde::__private::Option<hkpBridgeAtoms> = _serde::__private::None;
         let mut m_scheme: _serde::__private::Option<hkpGenericConstraintDataScheme> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_atoms => {
-                    if _serde::__private::Option::is_some(&m_atoms) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("atoms"),
+        for _ in 0..2usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_atoms => {
+                        if _serde::__private::Option::is_some(&m_atoms) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("atoms"),
+                            );
+                        }
+                        m_atoms = _serde::__private::Some(
+                            match __A::next_value::<hkpBridgeAtoms>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_atoms = _serde::__private::Some(
-                        match __A::next_value::<hkpBridgeAtoms>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_scheme => {
-                    if _serde::__private::Option::is_some(&m_scheme) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("scheme"),
+                    __Field::m_scheme => {
+                        if _serde::__private::Option::is_some(&m_scheme) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("scheme"),
+                            );
+                        }
+                        m_scheme = _serde::__private::Some(
+                            match __A::next_value::<
+                                hkpGenericConstraintDataScheme,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_scheme = _serde::__private::Some(
-                        match __A::next_value::<
-                            hkpGenericConstraintDataScheme,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_atoms = match m_atoms {

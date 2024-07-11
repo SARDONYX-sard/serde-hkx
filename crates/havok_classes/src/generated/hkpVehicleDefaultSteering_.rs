@@ -264,67 +264,66 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDefaultSteeringVisitor<'de> {
         let mut m_maxSteeringAngle: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_maxSpeedFullSteeringAngle: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_doesWheelSteer: _serde::__private::Option<Vec<bool>> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_maxSteeringAngle => {
-                    if _serde::__private::Option::is_some(&m_maxSteeringAngle) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "maxSteeringAngle",
-                            ),
+        for _ in 0..3usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_maxSteeringAngle => {
+                        if _serde::__private::Option::is_some(&m_maxSteeringAngle) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "maxSteeringAngle",
+                                ),
+                            );
+                        }
+                        m_maxSteeringAngle = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_maxSteeringAngle = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_maxSpeedFullSteeringAngle => {
-                    if _serde::__private::Option::is_some(&m_maxSpeedFullSteeringAngle) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "maxSpeedFullSteeringAngle",
-                            ),
+                    __Field::m_maxSpeedFullSteeringAngle => {
+                        if _serde::__private::Option::is_some(
+                            &m_maxSpeedFullSteeringAngle,
+                        ) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "maxSpeedFullSteeringAngle",
+                                ),
+                            );
+                        }
+                        m_maxSpeedFullSteeringAngle = _serde::__private::Some(
+                            match __A::next_value::<f32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_maxSpeedFullSteeringAngle = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_doesWheelSteer => {
-                    if _serde::__private::Option::is_some(&m_doesWheelSteer) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "doesWheelSteer",
-                            ),
+                    __Field::m_doesWheelSteer => {
+                        if _serde::__private::Option::is_some(&m_doesWheelSteer) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "doesWheelSteer",
+                                ),
+                            );
+                        }
+                        m_doesWheelSteer = _serde::__private::Some(
+                            match __A::next_value::<Vec<bool>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_doesWheelSteer = _serde::__private::Some(
-                        match __A::next_value::<Vec<bool>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_maxSteeringAngle = match m_maxSteeringAngle {

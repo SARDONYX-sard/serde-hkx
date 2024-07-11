@@ -467,120 +467,117 @@ impl<'de> _serde::de::Visitor<'de> for __hkpConvexVerticesShapeVisitor<'de> {
         let mut m_numVertices: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_planeEquations: _serde::__private::Option<Vec<Vector4>> = _serde::__private::None;
         let mut m_connectivity: _serde::__private::Option<Pointer> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_aabbHalfExtents => {
-                    if _serde::__private::Option::is_some(&m_aabbHalfExtents) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "aabbHalfExtents",
-                            ),
+        for _ in 0..6usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_aabbHalfExtents => {
+                        if _serde::__private::Option::is_some(&m_aabbHalfExtents) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "aabbHalfExtents",
+                                ),
+                            );
+                        }
+                        m_aabbHalfExtents = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_aabbHalfExtents = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_aabbCenter => {
-                    if _serde::__private::Option::is_some(&m_aabbCenter) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "aabbCenter",
-                            ),
+                    __Field::m_aabbCenter => {
+                        if _serde::__private::Option::is_some(&m_aabbCenter) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "aabbCenter",
+                                ),
+                            );
+                        }
+                        m_aabbCenter = _serde::__private::Some(
+                            match __A::next_value::<Vector4>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_aabbCenter = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_rotatedVertices => {
-                    if _serde::__private::Option::is_some(&m_rotatedVertices) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "rotatedVertices",
-                            ),
+                    __Field::m_rotatedVertices => {
+                        if _serde::__private::Option::is_some(&m_rotatedVertices) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "rotatedVertices",
+                                ),
+                            );
+                        }
+                        m_rotatedVertices = _serde::__private::Some(
+                            match __A::next_value::<
+                                Vec<hkpConvexVerticesShapeFourVectors>,
+                            >(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_rotatedVertices = _serde::__private::Some(
-                        match __A::next_value::<
-                            Vec<hkpConvexVerticesShapeFourVectors>,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_numVertices => {
-                    if _serde::__private::Option::is_some(&m_numVertices) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numVertices",
-                            ),
+                    __Field::m_numVertices => {
+                        if _serde::__private::Option::is_some(&m_numVertices) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "numVertices",
+                                ),
+                            );
+                        }
+                        m_numVertices = _serde::__private::Some(
+                            match __A::next_value::<i32>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_numVertices = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_planeEquations => {
-                    if _serde::__private::Option::is_some(&m_planeEquations) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "planeEquations",
-                            ),
+                    __Field::m_planeEquations => {
+                        if _serde::__private::Option::is_some(&m_planeEquations) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "planeEquations",
+                                ),
+                            );
+                        }
+                        m_planeEquations = _serde::__private::Some(
+                            match __A::next_value::<Vec<Vector4>>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_planeEquations = _serde::__private::Some(
-                        match __A::next_value::<Vec<Vector4>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_connectivity => {
-                    if _serde::__private::Option::is_some(&m_connectivity) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "connectivity",
-                            ),
+                    __Field::m_connectivity => {
+                        if _serde::__private::Option::is_some(&m_connectivity) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "connectivity",
+                                ),
+                            );
+                        }
+                        m_connectivity = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_connectivity = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_aabbHalfExtents = match m_aabbHalfExtents {

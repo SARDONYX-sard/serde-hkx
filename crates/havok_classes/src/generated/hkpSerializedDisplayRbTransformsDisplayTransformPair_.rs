@@ -222,48 +222,45 @@ for __hkpSerializedDisplayRbTransformsDisplayTransformPairVisitor<'de> {
     {
         let mut m_rb: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_localToDisplay: _serde::__private::Option<Transform> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_rb => {
-                    if _serde::__private::Option::is_some(&m_rb) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("rb"),
+        for _ in 0..2usize {
+            if let _serde::__private::Some(__key) = __A::next_key::<
+                __Field,
+            >(&mut __map)? {
+                match __key {
+                    __Field::m_rb => {
+                        if _serde::__private::Option::is_some(&m_rb) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field("rb"),
+                            );
+                        }
+                        m_rb = _serde::__private::Some(
+                            match __A::next_value::<Pointer>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_rb = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_localToDisplay => {
-                    if _serde::__private::Option::is_some(&m_localToDisplay) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "localToDisplay",
-                            ),
+                    __Field::m_localToDisplay => {
+                        if _serde::__private::Option::is_some(&m_localToDisplay) {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::duplicate_field(
+                                    "localToDisplay",
+                                ),
+                            );
+                        }
+                        m_localToDisplay = _serde::__private::Some(
+                            match __A::next_value::<Transform>(&mut __map) {
+                                _serde::__private::Ok(__val) => __val,
+                                _serde::__private::Err(__err) => {
+                                    return _serde::__private::Err(__err);
+                                }
+                            },
                         );
                     }
-                    m_localToDisplay = _serde::__private::Some(
-                        match __A::next_value::<Transform>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
+                    _ => {}
                 }
-                _ => {}
             }
         }
         let m_rb = match m_rb {
