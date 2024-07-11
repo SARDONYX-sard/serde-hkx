@@ -210,6 +210,7 @@ for __hkbEventSequencedDataSequencedEventVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_event: _serde::__private::Option<hkbEvent> = _serde::__private::None;
         let mut m_time: _serde::__private::Option<f32> = _serde::__private::None;
         for _ in 0..2usize {
@@ -268,7 +269,7 @@ for __hkbEventSequencedDataSequencedEventVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbEventSequencedDataSequencedEvent {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_event,
             m_time,
         })

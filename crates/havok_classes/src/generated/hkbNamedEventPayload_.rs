@@ -179,6 +179,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbNamedEventPayloadVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkbEventPayloadVisitor::visit_as_parent(&mut __map)?;
         let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
         for _ in 0..1usize {
@@ -214,7 +215,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbNamedEventPayloadVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbNamedEventPayload {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_name,
         })

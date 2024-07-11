@@ -218,6 +218,7 @@ for __hkpSetLocalTransformsConstraintAtomVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkpConstraintAtomVisitor::visit_as_parent(&mut __map)?;
         let mut m_transformA: _serde::__private::Option<Transform> = _serde::__private::None;
         let mut m_transformB: _serde::__private::Option<Transform> = _serde::__private::None;
@@ -281,7 +282,7 @@ for __hkpSetLocalTransformsConstraintAtomVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpSetLocalTransformsConstraintAtom {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_transformA,
             m_transformB,

@@ -177,6 +177,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpStiffSpringConstraintAtomVisitor<'de
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkpConstraintAtomVisitor::visit_as_parent(&mut __map)?;
         let mut m_length: _serde::__private::Option<f32> = _serde::__private::None;
         for _ in 0..1usize {
@@ -212,7 +213,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpStiffSpringConstraintAtomVisitor<'de
             }
         };
         _serde::__private::Ok(hkpStiffSpringConstraintAtom {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_length,
         })

@@ -286,6 +286,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpTypedBroadPhaseHandleVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkpBroadPhaseHandleVisitor::visit_as_parent(&mut __map)?;
         let mut m_type: _serde::__private::Option<i8> = _serde::__private::None;
         let mut m_objectQualityType: _serde::__private::Option<i8> = _serde::__private::None;
@@ -375,7 +376,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpTypedBroadPhaseHandleVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpTypedBroadPhaseHandle {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_type,
             m_objectQualityType,

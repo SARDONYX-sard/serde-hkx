@@ -286,6 +286,7 @@ for __hkpVehicleLinearCastWheelCollideWheelStateVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_phantom: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_shape: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_transform: _serde::__private::Option<Transform> = _serde::__private::None;
@@ -396,7 +397,7 @@ for __hkpVehicleLinearCastWheelCollideWheelStateVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpVehicleLinearCastWheelCollideWheelState {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_phantom,
             m_shape,
             m_transform,

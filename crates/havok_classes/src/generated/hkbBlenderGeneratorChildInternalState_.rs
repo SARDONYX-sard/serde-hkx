@@ -212,6 +212,7 @@ for __hkbBlenderGeneratorChildInternalStateVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_isActive: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_syncNextFrame: _serde::__private::Option<bool> = _serde::__private::None;
         for _ in 0..2usize {
@@ -274,7 +275,7 @@ for __hkbBlenderGeneratorChildInternalStateVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbBlenderGeneratorChildInternalState {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_isActive,
             m_syncNextFrame,
         })

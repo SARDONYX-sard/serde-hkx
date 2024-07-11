@@ -254,6 +254,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterSkinInfoVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkReferencedObjectVisitor::visit_as_parent(&mut __map)?;
         let mut m_characterId: _serde::__private::Option<u64> = _serde::__private::None;
         let mut m_deformableSkins: _serde::__private::Option<Vec<u64>> = _serde::__private::None;
@@ -343,7 +344,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterSkinInfoVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbCharacterSkinInfo {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_characterId,
             m_deformableSkins,

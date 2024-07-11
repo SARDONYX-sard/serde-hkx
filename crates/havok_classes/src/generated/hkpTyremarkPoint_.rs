@@ -206,6 +206,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpTyremarkPointVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_pointLeft: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_pointRight: _serde::__private::Option<Vector4> = _serde::__private::None;
         for _ in 0..2usize {
@@ -268,7 +269,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpTyremarkPointVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpTyremarkPoint {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_pointLeft,
             m_pointRight,
         })

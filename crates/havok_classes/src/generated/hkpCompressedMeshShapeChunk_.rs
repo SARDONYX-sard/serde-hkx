@@ -427,6 +427,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeChunkVisitor<'de>
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_offset: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_vertices: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
         let mut m_indices: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
@@ -643,7 +644,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeChunkVisitor<'de>
             }
         };
         _serde::__private::Ok(hkpCompressedMeshShapeChunk {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_offset,
             m_vertices,
             m_indices,

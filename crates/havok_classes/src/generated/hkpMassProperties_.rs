@@ -276,6 +276,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMassPropertiesVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_volume: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_mass: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_centerOfMass: _serde::__private::Option<Vector4> = _serde::__private::None;
@@ -386,7 +387,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMassPropertiesVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpMassProperties {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_volume,
             m_mass,
             m_centerOfMass,

@@ -208,6 +208,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkGeometryVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_vertices: _serde::__private::Option<Vec<Vector4>> = _serde::__private::None;
         let mut m_triangles: _serde::__private::Option<Vec<hkGeometryTriangle>> = _serde::__private::None;
         for _ in 0..2usize {
@@ -272,7 +273,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkGeometryVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkGeometry {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_vertices,
             m_triangles,
         })

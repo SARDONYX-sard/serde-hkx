@@ -200,6 +200,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpThinBoxMotionVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkpBoxMotionVisitor::visit_as_parent(&mut __map)?;
         for _ in 0..0usize {
             if let _serde::__private::Some(__key) = __A::next_key::<
@@ -210,10 +211,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpThinBoxMotionVisitor<'de> {
                 }
             }
         }
-        _serde::__private::Ok(hkpThinBoxMotion {
-            __ptr: __A::class_ptr(&mut __map),
-            parent,
-        })
+        _serde::__private::Ok(hkpThinBoxMotion { __ptr, parent })
     }
 }
 #[doc(hidden)]

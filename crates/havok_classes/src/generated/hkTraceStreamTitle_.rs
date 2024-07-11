@@ -168,6 +168,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkTraceStreamTitleVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_value: _serde::__private::Option<[char; 32usize]> = _serde::__private::None;
         for _ in 0..1usize {
             if let _serde::__private::Some(__key) = __A::next_key::<
@@ -202,7 +203,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkTraceStreamTitleVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkTraceStreamTitle {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_value,
         })
     }

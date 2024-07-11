@@ -204,6 +204,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbVariableInfoVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_role: _serde::__private::Option<hkbRoleAttribute> = _serde::__private::None;
         let mut m_type: _serde::__private::Option<VariableType> = _serde::__private::None;
         for _ in 0..2usize {
@@ -262,7 +263,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbVariableInfoVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbVariableInfo {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_role,
             m_type,
         })

@@ -168,6 +168,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbVariableValueVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_value: _serde::__private::Option<i32> = _serde::__private::None;
         for _ in 0..1usize {
             if let _serde::__private::Some(__key) = __A::next_key::<
@@ -201,10 +202,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbVariableValueVisitor<'de> {
                 );
             }
         };
-        _serde::__private::Ok(hkbVariableValue {
-            __ptr: __A::class_ptr(&mut __map),
-            m_value,
-        })
+        _serde::__private::Ok(hkbVariableValue { __ptr, m_value })
     }
 }
 #[doc(hidden)]

@@ -173,6 +173,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkxVertexDescriptionVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_decls: _serde::__private::Option<
             Vec<hkxVertexDescriptionElementDecl>,
         > = _serde::__private::None;
@@ -211,7 +212,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkxVertexDescriptionVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkxVertexDescription {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_decls,
         })
     }

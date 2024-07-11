@@ -236,6 +236,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDefaultBrakeVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkpVehicleBrakeVisitor::visit_as_parent(&mut __map)?;
         let mut m_wheelBrakingProperties: _serde::__private::Option<
             Vec<hkpVehicleDefaultBrakeWheelBrakingProperties>,
@@ -309,7 +310,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDefaultBrakeVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpVehicleDefaultBrake {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_wheelBrakingProperties,
             m_wheelsMinTimeToBlock,

@@ -224,6 +224,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbRigidBodyRagdollControlDataVisitor<'
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_keyFrameHierarchyControlData: _serde::__private::Option<
             hkaKeyFrameHierarchyUtilityControlData,
         > = _serde::__private::None;
@@ -294,7 +295,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbRigidBodyRagdollControlDataVisitor<'
             }
         };
         _serde::__private::Ok(hkbRigidBodyRagdollControlData {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_keyFrameHierarchyControlData,
             m_durationToBlend,
         })

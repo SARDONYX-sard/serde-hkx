@@ -282,6 +282,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpListShapeChildInfoVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_shape: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
         for _ in 0..2usize {
@@ -344,7 +345,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpListShapeChildInfoVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpListShapeChildInfo {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_shape,
             m_collisionFilterInfo,
             ..Default::default()

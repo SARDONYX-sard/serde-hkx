@@ -788,6 +788,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleInstanceWheelInfoVisitor<'de>
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_contactPoint: _serde::__private::Option<hkContactPoint> = _serde::__private::None;
         let mut m_contactFriction: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_contactShapeKey: _serde::__private::Option<[u32; 8usize]> = _serde::__private::None;
@@ -1230,7 +1231,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleInstanceWheelInfoVisitor<'de>
             }
         };
         _serde::__private::Ok(hkpVehicleInstanceWheelInfo {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_contactPoint,
             m_contactFriction,
             m_contactShapeKey,

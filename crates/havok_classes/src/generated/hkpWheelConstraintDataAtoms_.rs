@@ -393,6 +393,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpWheelConstraintDataAtomsVisitor<'de>
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_suspensionBase: _serde::__private::Option<
             hkpSetLocalTransformsConstraintAtom,
         > = _serde::__private::None;
@@ -591,7 +592,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpWheelConstraintDataAtomsVisitor<'de>
             }
         };
         _serde::__private::Ok(hkpWheelConstraintDataAtoms {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_suspensionBase,
             m_lin0Limit,
             m_lin0Soft,

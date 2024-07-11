@@ -575,6 +575,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkControlDataVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_targetPosition: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_targetRotation: _serde::__private::Option<Quaternion> = _serde::__private::None;
         let mut m_targetNormal: _serde::__private::Option<Vector4> = _serde::__private::None;
@@ -899,7 +900,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkControlDataVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbHandIkControlData {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_targetPosition,
             m_targetRotation,
             m_targetNormal,

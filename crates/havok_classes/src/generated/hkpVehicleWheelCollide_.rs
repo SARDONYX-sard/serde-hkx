@@ -214,6 +214,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleWheelCollideVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkReferencedObjectVisitor::visit_as_parent(&mut __map)?;
         let mut m_alreadyUsed: _serde::__private::Option<bool> = _serde::__private::None;
         for _ in 0..1usize {
@@ -251,7 +252,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleWheelCollideVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpVehicleWheelCollide {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_alreadyUsed,
             ..Default::default()

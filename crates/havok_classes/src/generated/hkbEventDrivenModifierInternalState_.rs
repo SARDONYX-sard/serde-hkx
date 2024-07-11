@@ -186,6 +186,7 @@ for __hkbEventDrivenModifierInternalStateVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkReferencedObjectVisitor::visit_as_parent(&mut __map)?;
         let mut m_isActive: _serde::__private::Option<bool> = _serde::__private::None;
         for _ in 0..1usize {
@@ -223,7 +224,7 @@ for __hkbEventDrivenModifierInternalStateVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbEventDrivenModifierInternalState {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_isActive,
         })

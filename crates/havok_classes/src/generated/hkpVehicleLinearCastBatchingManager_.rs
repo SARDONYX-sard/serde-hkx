@@ -169,6 +169,7 @@ for __hkpVehicleLinearCastBatchingManagerVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkpVehicleCastBatchingManagerVisitor::visit_as_parent(
             &mut __map,
         )?;
@@ -182,7 +183,7 @@ for __hkpVehicleLinearCastBatchingManagerVisitor<'de> {
             }
         }
         _serde::__private::Ok(hkpVehicleLinearCastBatchingManager {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
         })
     }

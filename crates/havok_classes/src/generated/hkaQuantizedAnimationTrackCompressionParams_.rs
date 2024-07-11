@@ -293,6 +293,7 @@ for __hkaQuantizedAnimationTrackCompressionParamsVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_rotationTolerance: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_translationTolerance: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_scaleTolerance: _serde::__private::Option<f32> = _serde::__private::None;
@@ -409,7 +410,7 @@ for __hkaQuantizedAnimationTrackCompressionParamsVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkaQuantizedAnimationTrackCompressionParams {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_rotationTolerance,
             m_translationTolerance,
             m_scaleTolerance,

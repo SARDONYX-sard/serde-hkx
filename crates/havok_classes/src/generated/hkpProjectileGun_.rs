@@ -367,6 +367,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpProjectileGunVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkpFirstPersonGunVisitor::visit_as_parent(&mut __map)?;
         let mut m_maxProjectiles: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_reloadTime: _serde::__private::Option<f32> = _serde::__private::None;
@@ -430,7 +431,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpProjectileGunVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpProjectileGun {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_maxProjectiles,
             m_reloadTime,

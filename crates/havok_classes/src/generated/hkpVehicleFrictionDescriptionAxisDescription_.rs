@@ -532,6 +532,7 @@ for __hkpVehicleFrictionDescriptionAxisDescriptionVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_frictionCircleYtab: _serde::__private::Option<[f32; 16usize]> = _serde::__private::None;
         let mut m_xStep: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_xStart: _serde::__private::Option<f32> = _serde::__private::None;
@@ -814,7 +815,7 @@ for __hkpVehicleFrictionDescriptionAxisDescriptionVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpVehicleFrictionDescriptionAxisDescription {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_frictionCircleYtab,
             m_xStep,
             m_xStart,

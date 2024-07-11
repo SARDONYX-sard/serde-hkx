@@ -222,6 +222,7 @@ for __hkpRackAndPinionConstraintDataAtomsVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_transforms: _serde::__private::Option<
             hkpSetLocalTransformsConstraintAtom,
         > = _serde::__private::None;
@@ -292,7 +293,7 @@ for __hkpRackAndPinionConstraintDataAtomsVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpRackAndPinionConstraintDataAtoms {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_transforms,
             m_rackAndPinion,
         })

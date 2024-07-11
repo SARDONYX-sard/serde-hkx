@@ -382,6 +382,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCylinderShapeVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkpConvexShapeVisitor::visit_as_parent(&mut __map)?;
         let mut m_cylRadius: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_cylBaseRadiusFactorForHeightFieldCollisions: _serde::__private::Option<
@@ -555,7 +556,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCylinderShapeVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpCylinderShape {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_cylRadius,
             m_cylBaseRadiusFactorForHeightFieldCollisions,

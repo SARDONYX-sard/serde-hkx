@@ -215,6 +215,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpStiffSpringConstraintDataAtomsVisito
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_pivots: _serde::__private::Option<
             hkpSetLocalTranslationsConstraintAtom,
         > = _serde::__private::None;
@@ -279,7 +280,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpStiffSpringConstraintDataAtomsVisito
             }
         };
         _serde::__private::Ok(hkpStiffSpringConstraintDataAtoms {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_pivots,
             m_spring,
         })

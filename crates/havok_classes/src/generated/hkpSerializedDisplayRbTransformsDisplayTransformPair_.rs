@@ -220,6 +220,7 @@ for __hkpSerializedDisplayRbTransformsDisplayTransformPairVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_rb: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_localToDisplay: _serde::__private::Option<Transform> = _serde::__private::None;
         for _ in 0..2usize {
@@ -280,7 +281,7 @@ for __hkpSerializedDisplayRbTransformsDisplayTransformPairVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpSerializedDisplayRbTransformsDisplayTransformPair {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_rb,
             m_localToDisplay,
         })

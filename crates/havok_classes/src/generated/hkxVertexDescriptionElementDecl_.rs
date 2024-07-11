@@ -317,6 +317,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkxVertexDescriptionElementDeclVisitor<
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_byteOffset: _serde::__private::Option<u32> = _serde::__private::None;
         let mut m_type: _serde::__private::Option<DataType> = _serde::__private::None;
         let mut m_usage: _serde::__private::Option<DataUsage> = _serde::__private::None;
@@ -453,7 +454,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkxVertexDescriptionElementDeclVisitor<
             }
         };
         _serde::__private::Ok(hkxVertexDescriptionElementDecl {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_byteOffset,
             m_type,
             m_usage,

@@ -445,6 +445,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkClassMemberVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_name: _serde::__private::Option<CString<'de>> = _serde::__private::None;
         let mut m_class: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_enum: _serde::__private::Option<Pointer> = _serde::__private::None;
@@ -651,7 +652,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkClassMemberVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkClassMember {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_name,
             m_class,
             m_enum,

@@ -242,6 +242,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpConstraintChainInstanceVisitor<'de> 
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkpConstraintInstanceVisitor::visit_as_parent(&mut __map)?;
         let mut m_chainedEntities: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
         let mut m_action: _serde::__private::Option<Pointer> = _serde::__private::None;
@@ -303,7 +304,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpConstraintChainInstanceVisitor<'de> 
             }
         };
         _serde::__private::Ok(hkpConstraintChainInstance {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_chainedEntities,
             m_action,

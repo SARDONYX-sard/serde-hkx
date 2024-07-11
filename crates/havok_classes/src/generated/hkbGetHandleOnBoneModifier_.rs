@@ -339,6 +339,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbGetHandleOnBoneModifierVisitor<'de> 
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkbModifierVisitor::visit_as_parent(&mut __map)?;
         let mut m_handleOut: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_localFrameName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
@@ -456,7 +457,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbGetHandleOnBoneModifierVisitor<'de> 
             }
         };
         _serde::__private::Ok(hkbGetHandleOnBoneModifier {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_handleOut,
             m_localFrameName,

@@ -253,6 +253,7 @@ for __hkpStorageExtendedMeshShapeMaterialVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkpMeshMaterialVisitor::visit_as_parent(&mut __map)?;
         let mut m_restitution: _serde::__private::Option<f16> = _serde::__private::None;
         let mut m_friction: _serde::__private::Option<f16> = _serde::__private::None;
@@ -342,7 +343,7 @@ for __hkpStorageExtendedMeshShapeMaterialVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpStorageExtendedMeshShapeMaterial {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_restitution,
             m_friction,

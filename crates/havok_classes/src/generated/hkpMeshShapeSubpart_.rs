@@ -702,6 +702,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMeshShapeSubpartVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_vertexStriding: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_numVertices: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_stridingType: _serde::__private::Option<MeshShapeIndexStridingType> = _serde::__private::None;
@@ -1014,7 +1015,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMeshShapeSubpartVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpMeshShapeSubpart {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_vertexStriding,
             m_numVertices,
             m_stridingType,

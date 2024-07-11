@@ -229,6 +229,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSpringDamperConstraintMotorVisitor<'
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkpLimitedForceConstraintMotorVisitor::visit_as_parent(
             &mut __map,
         )?;
@@ -294,7 +295,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSpringDamperConstraintMotorVisitor<'
             }
         };
         _serde::__private::Ok(hkpSpringDamperConstraintMotor {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_springConstant,
             m_springDamping,

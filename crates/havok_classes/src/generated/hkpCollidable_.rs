@@ -378,6 +378,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCollidableVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkpCdBodyVisitor::visit_as_parent(&mut __map)?;
         let mut m_forceCollideOntoPpu: _serde::__private::Option<u8> = _serde::__private::None;
         let mut m_broadPhaseHandle: _serde::__private::Option<
@@ -477,7 +478,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCollidableVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpCollidable {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_forceCollideOntoPpu,
             m_broadPhaseHandle,

@@ -541,6 +541,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbVariableBindingSetBindingVisitor<'de
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_memberPath: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
         let mut m_variableIndex: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_bitIndex: _serde::__private::Option<i8> = _serde::__private::None;
@@ -655,7 +656,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbVariableBindingSetBindingVisitor<'de
             }
         };
         _serde::__private::Ok(hkbVariableBindingSetBinding {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_memberPath,
             m_variableIndex,
             m_bitIndex,

@@ -183,6 +183,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbEventSequencedDataVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkbSequencedDataVisitor::visit_as_parent(&mut __map)?;
         let mut m_events: _serde::__private::Option<
             Vec<hkbEventSequencedDataSequencedEvent>,
@@ -222,7 +223,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbEventSequencedDataVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbEventSequencedData {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_events,
         })

@@ -503,6 +503,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbStateMachineTransitionInfoVisitor<'d
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_triggerInterval: _serde::__private::Option<
             hkbStateMachineTimeInterval,
         > = _serde::__private::None;
@@ -779,7 +780,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbStateMachineTransitionInfoVisitor<'d
             }
         };
         _serde::__private::Ok(hkbStateMachineTransitionInfo {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_triggerInterval,
             m_initiateInterval,
             m_transition,

@@ -257,6 +257,7 @@ for __hkpBallAndSocketConstraintDataAtomsVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_pivots: _serde::__private::Option<
             hkpSetLocalTranslationsConstraintAtom,
         > = _serde::__private::None;
@@ -355,7 +356,7 @@ for __hkpBallAndSocketConstraintDataAtomsVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpBallAndSocketConstraintDataAtoms {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_pivots,
             m_setupStabilization,
             m_ballSocket,

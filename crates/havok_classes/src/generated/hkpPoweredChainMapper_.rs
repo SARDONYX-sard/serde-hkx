@@ -251,6 +251,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPoweredChainMapperVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkReferencedObjectVisitor::visit_as_parent(&mut __map)?;
         let mut m_links: _serde::__private::Option<Vec<hkpPoweredChainMapperLinkInfo>> = _serde::__private::None;
         let mut m_targets: _serde::__private::Option<Vec<hkpPoweredChainMapperTarget>> = _serde::__private::None;
@@ -340,7 +341,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPoweredChainMapperVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpPoweredChainMapper {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_links,
             m_targets,

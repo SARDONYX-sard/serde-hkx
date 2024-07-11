@@ -319,6 +319,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpGenericConstraintDataSchemeVisitor<'
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_data: _serde::__private::Option<Vec<Vector4>> = _serde::__private::None;
         let mut m_commands: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
         let mut m_motors: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
@@ -403,7 +404,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpGenericConstraintDataSchemeVisitor<'
             }
         };
         _serde::__private::Ok(hkpGenericConstraintDataScheme {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_data,
             m_commands,
             m_motors,

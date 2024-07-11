@@ -330,6 +330,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbPoweredRagdollControlDataVisitor<'de
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_maxForce: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_tau: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_damping: _serde::__private::Option<f32> = _serde::__private::None;
@@ -476,7 +477,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbPoweredRagdollControlDataVisitor<'de
             }
         };
         _serde::__private::Ok(hkbPoweredRagdollControlData {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_maxForce,
             m_tau,
             m_damping,

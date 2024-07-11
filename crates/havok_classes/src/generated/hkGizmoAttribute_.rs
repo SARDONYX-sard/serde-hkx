@@ -241,6 +241,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkGizmoAttributeVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_visible: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_label: _serde::__private::Option<CString<'de>> = _serde::__private::None;
         let mut m_type: _serde::__private::Option<GizmoType> = _serde::__private::None;
@@ -325,7 +326,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkGizmoAttributeVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkGizmoAttribute {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_visible,
             m_label,
             m_type,

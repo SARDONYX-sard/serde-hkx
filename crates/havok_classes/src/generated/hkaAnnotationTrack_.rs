@@ -212,6 +212,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkaAnnotationTrackVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_trackName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
         let mut m_annotations: _serde::__private::Option<
             Vec<hkaAnnotationTrackAnnotation<'de>>,
@@ -278,7 +279,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkaAnnotationTrackVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkaAnnotationTrack {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_trackName,
             m_annotations,
         })

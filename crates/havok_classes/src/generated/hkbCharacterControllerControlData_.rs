@@ -337,6 +337,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterControllerControlDataVisito
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_desiredVelocity: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_verticalGain: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_horizontalCatchUpGain: _serde::__private::Option<f32> = _serde::__private::None;
@@ -485,7 +486,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterControllerControlDataVisito
             }
         };
         _serde::__private::Ok(hkbCharacterControllerControlData {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_desiredVelocity,
             m_verticalGain,
             m_horizontalCatchUpGain,

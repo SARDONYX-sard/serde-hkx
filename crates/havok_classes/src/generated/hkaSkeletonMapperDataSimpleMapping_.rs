@@ -245,6 +245,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSkeletonMapperDataSimpleMappingVisit
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_boneA: _serde::__private::Option<i16> = _serde::__private::None;
         let mut m_boneB: _serde::__private::Option<i16> = _serde::__private::None;
         let mut m_aFromBTransform: _serde::__private::Option<QsTransform> = _serde::__private::None;
@@ -329,7 +330,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSkeletonMapperDataSimpleMappingVisit
             }
         };
         _serde::__private::Ok(hkaSkeletonMapperDataSimpleMapping {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_boneA,
             m_boneB,
             m_aFromBTransform,

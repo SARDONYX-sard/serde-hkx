@@ -598,6 +598,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbFootIkGainsVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_onOffGain: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_groundAscendingGain: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_groundDescendingGain: _serde::__private::Option<f32> = _serde::__private::None;
@@ -940,7 +941,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbFootIkGainsVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbFootIkGains {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_onOffGain,
             m_groundAscendingGain,
             m_groundDescendingGain,

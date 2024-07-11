@@ -278,6 +278,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkMultiThreadCheckVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         for _ in 0..0usize {
             if let _serde::__private::Some(__key) = __A::next_key::<
                 __Field,
@@ -288,7 +289,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkMultiThreadCheckVisitor<'de> {
             }
         }
         _serde::__private::Ok(hkMultiThreadCheck {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             ..Default::default()
         })
     }

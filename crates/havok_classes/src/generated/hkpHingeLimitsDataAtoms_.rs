@@ -246,6 +246,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpHingeLimitsDataAtomsVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_rotations: _serde::__private::Option<
             hkpSetLocalRotationsConstraintAtom,
         > = _serde::__private::None;
@@ -338,7 +339,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpHingeLimitsDataAtomsVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpHingeLimitsDataAtoms {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_rotations,
             m_angLimit,
             m_2dAng,

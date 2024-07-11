@@ -326,6 +326,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkMemoryMeshBodyVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkMeshBodyVisitor::visit_as_parent(&mut __map)?;
         let mut m_transform: _serde::__private::Option<Matrix4> = _serde::__private::None;
         let mut m_transformSet: _serde::__private::Option<Pointer> = _serde::__private::None;
@@ -463,7 +464,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkMemoryMeshBodyVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkMemoryMeshBody {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_transform,
             m_transformSet,

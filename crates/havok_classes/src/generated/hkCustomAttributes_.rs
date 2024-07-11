@@ -176,6 +176,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkCustomAttributesVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_attributes: _serde::__private::Option<
             Vec<hkCustomAttributesAttribute<'de>>,
         > = _serde::__private::None;
@@ -216,7 +217,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkCustomAttributesVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkCustomAttributes {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_attributes,
         })
     }

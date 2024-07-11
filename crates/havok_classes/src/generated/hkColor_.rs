@@ -135,6 +135,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkColorVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         for _ in 0..0usize {
             if let _serde::__private::Some(__key) = __A::next_key::<
                 __Field,
@@ -144,9 +145,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkColorVisitor<'de> {
                 }
             }
         }
-        _serde::__private::Ok(hkColor {
-            __ptr: __A::class_ptr(&mut __map),
-        })
+        _serde::__private::Ok(hkColor { __ptr })
     }
 }
 #[doc(hidden)]

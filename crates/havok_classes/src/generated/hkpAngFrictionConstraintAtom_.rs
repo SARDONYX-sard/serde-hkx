@@ -288,6 +288,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpAngFrictionConstraintAtomVisitor<'de
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkpConstraintAtomVisitor::visit_as_parent(&mut __map)?;
         let mut m_isEnabled: _serde::__private::Option<u8> = _serde::__private::None;
         let mut m_firstFrictionAxis: _serde::__private::Option<u8> = _serde::__private::None;
@@ -403,7 +404,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpAngFrictionConstraintAtomVisitor<'de
             }
         };
         _serde::__private::Ok(hkpAngFrictionConstraintAtom {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_isEnabled,
             m_firstFrictionAxis,

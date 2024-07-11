@@ -265,6 +265,7 @@ for __hkpVehicleDefaultBrakeWheelBrakingPropertiesVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_maxBreakingTorque: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_minPedalInputToBlock: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_isConnectedToHandbrake: _serde::__private::Option<bool> = _serde::__private::None;
@@ -359,7 +360,7 @@ for __hkpVehicleDefaultBrakeWheelBrakingPropertiesVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpVehicleDefaultBrakeWheelBrakingProperties {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_maxBreakingTorque,
             m_minPedalInputToBlock,
             m_isConnectedToHandbrake,

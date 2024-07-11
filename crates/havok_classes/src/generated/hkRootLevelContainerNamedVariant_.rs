@@ -245,6 +245,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkRootLevelContainerNamedVariantVisitor
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
         let mut m_className: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
         let mut m_variant: _serde::__private::Option<Pointer> = _serde::__private::None;
@@ -331,7 +332,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkRootLevelContainerNamedVariantVisitor
             }
         };
         _serde::__private::Ok(hkRootLevelContainerNamedVariant {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_name,
             m_className,
             m_variant,

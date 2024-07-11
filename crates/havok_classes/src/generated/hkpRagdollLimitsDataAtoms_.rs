@@ -286,6 +286,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRagdollLimitsDataAtomsVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_rotations: _serde::__private::Option<
             hkpSetLocalRotationsConstraintAtom,
         > = _serde::__private::None;
@@ -410,7 +411,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRagdollLimitsDataAtomsVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpRagdollLimitsDataAtoms {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_rotations,
             m_twistLimit,
             m_coneLimit,

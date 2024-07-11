@@ -441,6 +441,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpExtendedMeshShapeSubpartVisitor<'de>
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_type: _serde::__private::Option<SubpartType> = _serde::__private::None;
         let mut m_materialIndexStridingType: _serde::__private::Option<
             MaterialIndexStridingType,
@@ -589,7 +590,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpExtendedMeshShapeSubpartVisitor<'de>
             }
         };
         _serde::__private::Ok(hkpExtendedMeshShapeSubpart {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_type,
             m_materialIndexStridingType,
             m_materialIndexStriding,

@@ -319,6 +319,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbFootIkControlsModifierLegVisitor<'de
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_groundPosition: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_ungroundedEvent: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
         let mut m_verticalError: _serde::__private::Option<f32> = _serde::__private::None;
@@ -459,7 +460,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbFootIkControlsModifierLegVisitor<'de
             }
         };
         _serde::__private::Ok(hkbFootIkControlsModifierLeg {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_groundPosition,
             m_ungroundedEvent,
             m_verticalError,

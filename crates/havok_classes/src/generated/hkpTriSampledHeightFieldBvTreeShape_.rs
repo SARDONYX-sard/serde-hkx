@@ -311,6 +311,7 @@ for __hkpTriSampledHeightFieldBvTreeShapeVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkpBvTreeShapeVisitor::visit_as_parent(&mut __map)?;
         let mut m_childContainer: _serde::__private::Option<hkpSingleShapeContainer> = _serde::__private::None;
         let mut m_wantAabbRejectionTest: _serde::__private::Option<bool> = _serde::__private::None;
@@ -404,7 +405,7 @@ for __hkpTriSampledHeightFieldBvTreeShapeVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpTriSampledHeightFieldBvTreeShape {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_childContainer,
             m_wantAabbRejectionTest,

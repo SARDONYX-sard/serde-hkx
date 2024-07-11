@@ -223,6 +223,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbAttributeModifierVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkbModifierVisitor::visit_as_parent(&mut __map)?;
         let mut m_assignments: _serde::__private::Option<
             Vec<hkbAttributeModifierAssignment>,
@@ -264,7 +265,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbAttributeModifierVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbAttributeModifier {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_assignments,
         })

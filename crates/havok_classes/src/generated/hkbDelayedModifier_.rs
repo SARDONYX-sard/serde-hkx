@@ -340,6 +340,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbDelayedModifierVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkbModifierWrapperVisitor::visit_as_parent(&mut __map)?;
         let mut m_delaySeconds: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_durationSeconds: _serde::__private::Option<f32> = _serde::__private::None;
@@ -403,7 +404,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbDelayedModifierVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbDelayedModifier {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_delaySeconds,
             m_durationSeconds,

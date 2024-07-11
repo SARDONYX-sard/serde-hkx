@@ -460,6 +460,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkMonitorStreamFrameInfoVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_heading: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
         let mut m_indexOfTimer0: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_indexOfTimer1: _serde::__private::Option<i32> = _serde::__private::None;
@@ -706,7 +707,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkMonitorStreamFrameInfoVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkMonitorStreamFrameInfo {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_heading,
             m_indexOfTimer0,
             m_indexOfTimer1,

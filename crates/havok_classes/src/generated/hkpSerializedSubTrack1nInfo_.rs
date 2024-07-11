@@ -218,6 +218,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSerializedSubTrack1nInfoVisitor<'de>
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkpSerializedTrack1nInfoVisitor::visit_as_parent(&mut __map)?;
         let mut m_sectorIndex: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_offsetInSector: _serde::__private::Option<i32> = _serde::__private::None;
@@ -281,7 +282,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSerializedSubTrack1nInfoVisitor<'de>
             }
         };
         _serde::__private::Ok(hkpSerializedSubTrack1nInfo {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_sectorIndex,
             m_offsetInSector,

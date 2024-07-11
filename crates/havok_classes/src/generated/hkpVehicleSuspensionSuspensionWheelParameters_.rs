@@ -266,6 +266,7 @@ for __hkpVehicleSuspensionSuspensionWheelParametersVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_hardpointChassisSpace: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_directionChassisSpace: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_length: _serde::__private::Option<f32> = _serde::__private::None;
@@ -356,7 +357,7 @@ for __hkpVehicleSuspensionSuspensionWheelParametersVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpVehicleSuspensionSuspensionWheelParameters {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_hardpointChassisSpace,
             m_directionChassisSpace,
             m_length,

@@ -344,6 +344,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkVertexFormatElementVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_dataType: _serde::__private::Option<ComponentType> = _serde::__private::None;
         let mut m_numValues: _serde::__private::Option<u8> = _serde::__private::None;
         let mut m_usage: _serde::__private::Option<ComponentUsage> = _serde::__private::None;
@@ -504,7 +505,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkVertexFormatElementVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkVertexFormatElement {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_dataType,
             m_numValues,
             m_usage,

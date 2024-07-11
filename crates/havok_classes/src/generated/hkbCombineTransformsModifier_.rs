@@ -520,6 +520,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCombineTransformsModifierVisitor<'de
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkbModifierVisitor::visit_as_parent(&mut __map)?;
         let mut m_translationOut: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_rotationOut: _serde::__private::Option<Quaternion> = _serde::__private::None;
@@ -769,7 +770,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCombineTransformsModifierVisitor<'de
             }
         };
         _serde::__private::Ok(hkbCombineTransformsModifier {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_translationOut,
             m_rotationOut,

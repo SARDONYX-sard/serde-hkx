@@ -356,6 +356,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimpleContactConstraintDataInfoVisit
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_flags: _serde::__private::Option<u16> = _serde::__private::None;
         let mut m_index: _serde::__private::Option<u16> = _serde::__private::None;
         let mut m_internalData0: _serde::__private::Option<f32> = _serde::__private::None;
@@ -520,7 +521,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimpleContactConstraintDataInfoVisit
             }
         };
         _serde::__private::Ok(hkpSimpleContactConstraintDataInfo {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_flags,
             m_index,
             m_internalData0,

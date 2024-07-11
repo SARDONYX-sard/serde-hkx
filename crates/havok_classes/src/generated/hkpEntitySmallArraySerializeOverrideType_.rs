@@ -249,6 +249,7 @@ for __hkpEntitySmallArraySerializeOverrideTypeVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_size: _serde::__private::Option<u16> = _serde::__private::None;
         let mut m_capacityAndFlags: _serde::__private::Option<u16> = _serde::__private::None;
         for _ in 0..2usize {
@@ -309,7 +310,7 @@ for __hkpEntitySmallArraySerializeOverrideTypeVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpEntitySmallArraySerializeOverrideType {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_size,
             m_capacityAndFlags,
             ..Default::default()

@@ -245,6 +245,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkControlsModifierHandVisitor<'d
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_controlData: _serde::__private::Option<hkbHandIkControlData> = _serde::__private::None;
         let mut m_handIndex: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
@@ -331,7 +332,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkControlsModifierHandVisitor<'d
             }
         };
         _serde::__private::Ok(hkbHandIkControlsModifierHand {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_controlData,
             m_handIndex,
             m_enable,

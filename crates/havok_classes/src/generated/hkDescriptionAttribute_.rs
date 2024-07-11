@@ -169,6 +169,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkDescriptionAttributeVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_string: _serde::__private::Option<CString<'de>> = _serde::__private::None;
         for _ in 0..1usize {
             if let _serde::__private::Some(__key) = __A::next_key::<
@@ -203,7 +204,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkDescriptionAttributeVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkDescriptionAttribute {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_string,
         })
     }

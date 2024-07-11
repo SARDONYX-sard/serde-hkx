@@ -263,6 +263,7 @@ for __hkpVehicleDefaultSuspensionWheelSpringSuspensionParametersVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_strength: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_dampingCompression: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_dampingRelaxation: _serde::__private::Option<f32> = _serde::__private::None;
@@ -353,7 +354,7 @@ for __hkpVehicleDefaultSuspensionWheelSpringSuspensionParametersVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpVehicleDefaultSuspensionWheelSpringSuspensionParameters {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_strength,
             m_dampingCompression,
             m_dampingRelaxation,

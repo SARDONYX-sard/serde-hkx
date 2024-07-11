@@ -308,6 +308,7 @@ for __hkbStateMachineDelayedTransitionInfoVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_delayedTransition: _serde::__private::Option<
             hkbStateMachineProspectiveTransitionInfo,
         > = _serde::__private::None;
@@ -436,7 +437,7 @@ for __hkbStateMachineDelayedTransitionInfoVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbStateMachineDelayedTransitionInfo {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_delayedTransition,
             m_timeDelayed,
             m_isDelayedTransitionReturnToPreviousState,

@@ -912,6 +912,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbLookAtModifierVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkbModifierVisitor::visit_as_parent(&mut __map)?;
         let mut m_targetWS: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_headForwardLS: _serde::__private::Option<Vector4> = _serde::__private::None;
@@ -1393,7 +1394,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbLookAtModifierVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbLookAtModifier {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_targetWS,
             m_headForwardLS,

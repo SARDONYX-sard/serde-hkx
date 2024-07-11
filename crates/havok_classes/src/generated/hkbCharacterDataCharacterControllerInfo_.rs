@@ -298,6 +298,7 @@ for __hkbCharacterDataCharacterControllerInfoVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_capsuleHeight: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_capsuleRadius: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
@@ -418,7 +419,7 @@ for __hkbCharacterDataCharacterControllerInfoVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbCharacterDataCharacterControllerInfo {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_capsuleHeight,
             m_capsuleRadius,
             m_collisionFilterInfo,

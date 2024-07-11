@@ -209,6 +209,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbAttributeModifierAssignmentVisitor<'
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_attributeIndex: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_attributeValue: _serde::__private::Option<f32> = _serde::__private::None;
         for _ in 0..2usize {
@@ -271,7 +272,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbAttributeModifierAssignmentVisitor<'
             }
         };
         _serde::__private::Ok(hkbAttributeModifierAssignment {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_attributeIndex,
             m_attributeValue,
         })

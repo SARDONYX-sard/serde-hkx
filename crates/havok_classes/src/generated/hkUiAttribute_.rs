@@ -433,6 +433,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkUiAttributeVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_visible: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_hideInModeler: _serde::__private::Option<HideInModeler> = _serde::__private::None;
         let mut m_label: _serde::__private::Option<CString<'de>> = _serde::__private::None;
@@ -649,7 +650,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkUiAttributeVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkUiAttribute {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_visible,
             m_hideInModeler,
             m_label,

@@ -610,6 +610,7 @@ for __hkaKeyFrameHierarchyUtilityControlDataVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_hierarchyGain: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_velocityDamping: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_accelerationGain: _serde::__private::Option<f32> = _serde::__private::None;
@@ -952,7 +953,7 @@ for __hkaKeyFrameHierarchyUtilityControlDataVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkaKeyFrameHierarchyUtilityControlData {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_hierarchyGain,
             m_velocityDamping,
             m_accelerationGain,

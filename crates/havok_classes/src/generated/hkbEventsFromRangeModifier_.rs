@@ -339,6 +339,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbEventsFromRangeModifierVisitor<'de> 
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkbModifierVisitor::visit_as_parent(&mut __map)?;
         let mut m_inputValue: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_lowerBound: _serde::__private::Option<f32> = _serde::__private::None;
@@ -428,7 +429,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbEventsFromRangeModifierVisitor<'de> 
             }
         };
         _serde::__private::Ok(hkbEventsFromRangeModifier {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_inputValue,
             m_lowerBound,

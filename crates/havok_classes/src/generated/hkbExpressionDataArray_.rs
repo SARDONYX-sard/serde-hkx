@@ -185,6 +185,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbExpressionDataArrayVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkReferencedObjectVisitor::visit_as_parent(&mut __map)?;
         let mut m_expressionsData: _serde::__private::Option<
             Vec<hkbExpressionData<'de>>,
@@ -226,7 +227,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbExpressionDataArrayVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbExpressionDataArray {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_expressionsData,
         })

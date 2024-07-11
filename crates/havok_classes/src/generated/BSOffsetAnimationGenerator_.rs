@@ -593,6 +593,7 @@ impl<'de> _serde::de::Visitor<'de> for __BSOffsetAnimationGeneratorVisitor<'de> 
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkbGeneratorVisitor::visit_as_parent(&mut __map)?;
         let mut m_pDefaultGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_pOffsetClipGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
@@ -736,7 +737,7 @@ impl<'de> _serde::de::Visitor<'de> for __BSOffsetAnimationGeneratorVisitor<'de> 
             }
         };
         _serde::__private::Ok(BSOffsetAnimationGenerator {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_pDefaultGenerator,
             m_pOffsetClipGenerator,

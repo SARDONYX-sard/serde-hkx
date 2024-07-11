@@ -669,6 +669,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkDriverInfoHandVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_elbowAxisLS: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_backHandNormalLS: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_handOffsetLS: _serde::__private::Option<Vector4> = _serde::__private::None;
@@ -1057,7 +1058,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkDriverInfoHandVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbHandIkDriverInfoHand {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_elbowAxisLS,
             m_backHandNormalLS,
             m_handOffsetLS,

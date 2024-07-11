@@ -221,6 +221,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpLimitedForceConstraintMotorVisitor<'
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkpConstraintMotorVisitor::visit_as_parent(&mut __map)?;
         let mut m_minForce: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_maxForce: _serde::__private::Option<f32> = _serde::__private::None;
@@ -284,7 +285,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpLimitedForceConstraintMotorVisitor<'
             }
         };
         _serde::__private::Ok(hkpLimitedForceConstraintMotor {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_minForce,
             m_maxForce,

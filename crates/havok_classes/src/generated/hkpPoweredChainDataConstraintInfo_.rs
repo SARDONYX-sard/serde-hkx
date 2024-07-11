@@ -351,6 +351,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPoweredChainDataConstraintInfoVisito
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_pivotInA: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_pivotInB: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_aTc: _serde::__private::Option<Quaternion> = _serde::__private::None;
@@ -511,7 +512,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPoweredChainDataConstraintInfoVisito
             }
         };
         _serde::__private::Ok(hkpPoweredChainDataConstraintInfo {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_pivotInA,
             m_pivotInB,
             m_aTc,

@@ -221,6 +221,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpStorageMeshShapeVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __hkpMeshShapeVisitor::visit_as_parent(&mut __map)?;
         let mut m_storage: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
         for _ in 0..1usize {
@@ -258,7 +259,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpStorageMeshShapeVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpStorageMeshShape {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_storage,
         })
