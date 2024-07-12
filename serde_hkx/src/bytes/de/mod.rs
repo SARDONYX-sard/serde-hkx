@@ -815,7 +815,7 @@ mod tests {
                 0, 0, 0, 0, 0, 0, 0, 0, // hkBaseObject
                 2, 0, // mem_size_and_flags
                 0, 0, // reference_count
-                0, 0, 0, 0, 0, 0, 0, 0, // 8bytes align for struct
+                0, 0, 0, 0, // 8bytes align for struct
             ],
             hkReferencedObject {
                 __ptr: Some(Pointer::new(1)),
