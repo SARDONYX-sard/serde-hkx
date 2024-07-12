@@ -7,7 +7,7 @@ use byteorder::{ByteOrder, WriteBytesExt};
 use std::io::{self, Cursor, Write as _};
 use winnow::{
     binary::{self, Endianness},
-    error::{ContextError, StrContext},
+    error::{ContextError, StrContext, StrContextValue::*},
     seq,
     token::take,
     Parser,
@@ -88,15 +88,24 @@ impl SectionHeader {
             {
                 seq! {
                     Self {
-                        section_tag: take(19usize).try_map(TryFrom::try_from),
-                        section_tag_separator: 0xff,
-                        absolute_data_start: binary::u32(endian),
-                        local_fixups_offset: binary::u32(endian),
-                        global_fixups_offset: binary::u32(endian),
-                        virtual_fixups_offset: binary::u32(endian),
-                        exports_offset: binary::u32(endian),
-                        imports_offset: binary::u32(endian),
-                        end_offset: binary::u32(endian),
+                        section_tag: take(19usize).try_map(TryFrom::try_from).context(StrContext::Label("section_tag"))
+                            .context(StrContext::Expected(StringLiteral("[u8; 19]"))),
+                        section_tag_separator: 0xff.context(StrContext::Label("section_tag_separator"))
+                            .context(StrContext::Expected(StringLiteral("0xFF"))),
+                        absolute_data_start: binary::u32(endian).context(StrContext::Label("absolute_data_start"))
+                            .context(StrContext::Expected(StringLiteral("u32"))),
+                        local_fixups_offset: binary::u32(endian).context(StrContext::Label("local_fixups_offset"))
+                            .context(StrContext::Expected(StringLiteral("u32"))),
+                        global_fixups_offset: binary::u32(endian).context(StrContext::Label("global_fixups_offset"))
+                            .context(StrContext::Expected(StringLiteral("u32"))),
+                        virtual_fixups_offset: binary::u32(endian).context(StrContext::Label("virtual_fixups_offset"))
+                            .context(StrContext::Expected(StringLiteral("u32"))),
+                        exports_offset: binary::u32(endian).context(StrContext::Label("exports_offset"))
+                            .context(StrContext::Expected(StringLiteral("u32"))),
+                        imports_offset: binary::u32(endian).context(StrContext::Label("imports_offset"))
+                            .context(StrContext::Expected(StringLiteral("u32"))),
+                        end_offset: binary::u32(endian).context(StrContext::Label("end_offset"))
+                            .context(StrContext::Expected(StringLiteral("u32"))),
                     }
                 }
             }

@@ -35,12 +35,10 @@ impl ReadableError {
                 let mut labels = String::new();
                 let mut msg = "expected ".to_string();
 
-                for (index, ctx) in ctx_err.context().enumerate() {
+                for ctx in ctx_err.context() {
                     match ctx {
                         StrContext::Label(label) => {
-                            if index > 1 {
-                                labels += " <- ";
-                            };
+                            labels += " <- ";
                             labels += label;
                         }
                         StrContext::Expected(expected) => {

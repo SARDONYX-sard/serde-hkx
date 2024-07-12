@@ -60,8 +60,6 @@ pub struct BytesDeserializer<'de> {
 
     /// `__classnames__` header
     classnames_header: SectionHeader,
-    /// classnames section fixups
-    classnames_fixups: Fixups,
 
     /// `__data__` header
     data_header: SectionHeader,
@@ -120,20 +118,21 @@ where
 
     // 1. Deserialize root file header.
     let header = tri!(deserializer.parse(HkxHeader::from_bytes()));
+    deserializer.current_position += 64;
+
     deserializer.is_x86 = header.pointer_size == 4;
     deserializer.endian = header.endian();
 
     // 2. Deserialize the fixups in the classnames and data sections.
-    tri!(deserializer.set_fixups(
+    tri!(deserializer.set_section_header_and_fixups(
         header.contents_class_name_section_index,
         header.contents_section_index,
         header.section_count
     ));
 
+    // 3. Parse `__classnames__` section.
     let classnames_abs = deserializer.classnames_header.absolute_data_start as usize;
     let data_abs = deserializer.data_header.absolute_data_start as usize;
-
-    // 3. Parse `__classnames__` section.
     deserializer.classnames = tri!(deserializer.parse_range(
         classnames_section(deserializer.endian, 0),
         // FIXME: built on the assumption that data_section comes after classnames, but can't deal with the case when it doesn't.
@@ -152,8 +151,41 @@ where
     }
 }
 
-/// 00000000: 48 65
-const HEXDUMP_OFFSET: usize = 10;
+/// Calculates the position in the hexdump output where the byte at the given
+/// binary error position will appear.
+///
+/// # Example
+///
+/// ```
+/// let pos = 23;
+/// let result = to_hexdump_pos(pos);
+/// println!("The hexdump position for error at byte {} is: {}", pos, result);
+/// ```
+///
+/// The hexdump format for reference:
+/// ```
+/// 00000000: 4865 6c6c 6f20 576f 726c 6421 0a                  Hello World!
+/// ```
+/// In this format:
+/// - The first 8 characters are the offset (`00000000`).
+/// - The next 2 characters are a colon and a space (`: `).
+/// - The next 48 characters are the hexadecimal representation of the 16 bytes of data (`4865 6c6c 6f20 576f 726c 6421 0a`).
+/// - The last 16 characters are the ASCII representation of the 16 bytes of data (`Hello World!`).
+///
+/// Each line represents 16 bytes of the binary data.
+const fn to_hexdump_pos(bytes_pos: usize) -> usize {
+    const HEXDUMP_OFFSET: usize = 10;
+    const BYTES_PER_LINE: usize = 16;
+    const HEX_GROUP_SIZE: usize = 3;
+    const ASCII_OFFSET: usize = 18;
+
+    let line_number = bytes_pos / BYTES_PER_LINE;
+    let line_offset = bytes_pos % BYTES_PER_LINE;
+
+    HEXDUMP_OFFSET
+        + (line_offset * HEX_GROUP_SIZE)
+        + line_number * (HEXDUMP_OFFSET + (BYTES_PER_LINE * HEX_GROUP_SIZE) + ASCII_OFFSET)
+}
 
 // SERDE IS NOT A PARSING LIBRARY. This impl block defines a few basic parsing
 // functions from scratch. More complicated formats may wish to use a dedicated
@@ -172,7 +204,7 @@ impl<'de> BytesDeserializer<'de> {
                 source: ReadableError::from_context(
                     err,
                     &hexdump::RhexdumpString::new().hexdump_bytes(self.input),
-                    self.current_position + HEXDUMP_OFFSET,
+                    to_hexdump_pos(self.current_position),
                 ),
             })?;
         Ok(res)
@@ -193,28 +225,9 @@ impl<'de> BytesDeserializer<'de> {
                     source: ReadableError::from_context(
                         err,
                         &hexdump::RhexdumpString::new().hexdump_bytes(self.input),
-                        self.current_position + HEXDUMP_OFFSET,
+                        to_hexdump_pos(self.current_position),
                     ),
                 })?;
-        Ok(res)
-    }
-
-    /// Jump current position(`local_fixup.src`) to dst, then parse, and back to current position.
-    fn parse_local_fixup<O>(
-        &mut self,
-        parser: impl Parser<BytesStream<'de>, O, winnow::error::ContextError>,
-    ) -> Result<O> {
-        let local_src = self.current_position();
-
-        self.current_position = *tri!(self
-            .data_fixups
-            .local_fixups
-            .get(&local_src)
-            .ok_or(Error::NotFoundDataLocalFixupsValue { key: local_src }))
-            as usize;
-
-        let res = tri!(self.parse(parser));
-        self.current_position = local_src as usize;
         Ok(res)
     }
 
@@ -229,7 +242,7 @@ impl<'de> BytesDeserializer<'de> {
                 Error::ReadableError { .. } => Err(err),
                 _ => {
                     let input = &hexdump::RhexdumpString::new().hexdump_bytes(self.input);
-                    let err_pos = self.current_position + HEXDUMP_OFFSET;
+                    let err_pos = to_hexdump_pos(self.current_position);
                     Err(Error::ReadableError {
                         source: ReadableError::from_display(err, input, err_pos),
                     })
@@ -241,51 +254,85 @@ impl<'de> BytesDeserializer<'de> {
     /// Deserialize the fixups in the `classnames` and `data` sections, relying on the information in the root header.
     ///
     /// And, sets fixups to deserializer.
-    fn set_fixups(
+    fn set_section_header_and_fixups(
         &mut self,
         classnames_section_index: i32,
         data_section_index: i32,
         section_len: i32,
     ) -> Result<()> {
-        let backup_pos = self.current_position;
         for i in 0..section_len {
             match i {
                 i if classnames_section_index == i => {
-                    let header = tri!(self.parse(SectionHeader::from_bytes(self.endian)));
-                    let fixups_start_pos = header.absolute_data_start + header.local_fixups_offset;
+                    self.classnames_header =
+                        tri!(self.parse(SectionHeader::from_bytes(self.endian)));
+                    #[cfg(feature = "tracing")]
+                    tracing::debug!("classnames_header: {}", self.classnames_header);
 
-                    self.current_position = fixups_start_pos as usize;
-                    self.classnames_fixups =
-                        tri!(self.parse(Fixups::from_section_heder(&header, self.endian)));
-                    self.classnames_header = header;
+                    // NOTE: no fixups
+                    // The `classnames` section always has no fixups but its place is filled with abs data.
                 }
 
                 i if data_section_index == i => {
-                    let header = tri!(self.parse(SectionHeader::from_bytes(self.endian)));
-                    let fixups_start = header.absolute_data_start + header.local_fixups_offset;
+                    // 1/4: After parsing the headers, the fixups are parsed, but the position must be returned for the next header read.
+                    let backup_pos = self.current_position;
 
+                    // 2/4: read header
+                    let header = tri!(self.parse(SectionHeader::from_bytes(self.endian)));
+
+                    // 3/4: read fixups
+                    let fixups_start = header.absolute_data_start + header.local_fixups_offset;
                     self.current_position = fixups_start as usize;
                     self.data_fixups =
-                        tri!(self.parse(Fixups::from_section_heder(&header, self.endian)));
-                    self.data_header = header;
+                        tri!(self.parse(Fixups::from_section_header(&header, self.endian)));
+
+                    #[cfg(feature = "tracing")]
+                    tracing::debug!(
+                        "data_header: {header},\ndata_fixups: {:#?}",
+                        self.data_fixups
+                    );
+                    self.data_header = header; // Let them be substituted here to avoid ownership issues.
+
+                    // 4/4: back to header position
+                    self.current_position = backup_pos;
                 }
                 _ => {} // Skip unused __types__ section
-            }
+            };
+            self.current_position += 48; // advance section header size(48bytes)
         }
-        self.current_position = backup_pos;
         Ok(())
     }
 
-    /// Skip until align N.
-    #[allow(unused)]
-    fn skip_align(&mut self, n: usize) -> Result<()> {
-        let alignment = (n - (self.current_position % n)) % n;
-        if alignment > 0 && alignment <= self.input.len() {
-            self.input = &self.input[alignment..];
-            Ok(())
-        } else {
-            Err(Error::Eof)
-        }
+    /// Extract the absolute position of the data position pointed to by ptr
+    ///
+    /// Take the relative position of the `__data__` section at the current position as a key
+    /// and extract the corresponding value from the `local_fixups`.
+    fn get_local_fixup_dst(&self) -> Result<usize> {
+        let local_src = self.relative_position();
+        #[cfg(feature = "tracing")]
+        tracing::debug!(local_src);
+
+        let local_dst = *tri!(self
+            .data_fixups
+            .local_fixups
+            .get(&local_src)
+            .ok_or(Error::NotFoundDataLocalFixupsValue { key: local_src }));
+
+        // Change to abs
+        Ok((local_dst + self.data_header.absolute_data_start) as usize)
+    }
+
+    /// Jump current position(`local_fixup.src`) to dst, then parse, and back to current position.
+    fn parse_local_fixup<O>(
+        &mut self,
+        parser: impl Parser<BytesStream<'de>, O, winnow::error::ContextError>,
+    ) -> Result<O> {
+        let backup_position = self.current_position();
+
+        self.current_position = tri!(self.to_readable_err(self.get_local_fixup_dst()));
+        let res = tri!(self.parse(parser));
+
+        self.current_position = backup_position as usize;
+        Ok(res)
     }
 
     /// Skip ptr size
@@ -294,28 +341,24 @@ impl<'de> BytesDeserializer<'de> {
     /// Error if the value of ptr to skip is not 0.
     #[inline]
     fn skip_ptr_size(&mut self) -> Result<()> {
-        match self.is_x86 {
-            true => {
-                tri!(
-                    self.parse(binary::u32(self.endian).verify(|uint| *uint == 0).context(
-                        StrContext::Expected(StrContextValue::Description(
-                            "Skip x86 ptr size(0 fill 4bytes)"
-                        ))
+        if self.is_x86 {
+            tri!(
+                self.parse(binary::u32(self.endian).verify(|uint| *uint == 0).context(
+                    StrContext::Expected(StrContextValue::Description(
+                        "Skip x86 ptr size(0 fill 4bytes)"
                     ))
-                );
-                self.current_position += 4;
-            }
-            false => {
-                tri!(self.parse(
-                    binary::u64(self.endian)
-                        .verify(|ulong| *ulong == 0)
-                        .context(StrContext::Expected(StrContextValue::Description(
-                            "Skip x64 ptr size(0 fill 8bytes)"
-                        )))
-                ));
-
-                self.current_position += 8;
-            }
+                ))
+            );
+            self.current_position += 4;
+        } else {
+            tri!(self.parse(
+                binary::u64(self.endian)
+                    .verify(|ulong| *ulong == 0)
+                    .context(StrContext::Expected(StrContextValue::Description(
+                        "Skip x64 ptr size(0 fill 8bytes)"
+                    )))
+            ));
+            self.current_position += 8;
         };
         Ok(())
     }
@@ -328,6 +371,18 @@ impl<'de> BytesDeserializer<'de> {
     #[inline]
     const fn current_position(&self) -> u32 {
         self.current_position as u32
+    }
+
+    /// Returns the relative position of the start of data_section as 0.
+
+    /// # Intent
+    /// Use this API when key of fixups requires relative position.
+    #[inline]
+    fn relative_position(&self) -> u32 {
+        #[cfg(feature = "tracing")]
+        tracing::debug!(self.current_position);
+
+        self.current_position() - self.data_header.absolute_data_start
     }
 }
 
@@ -589,8 +644,8 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let current_position = self.current_position();
-        let res = match self.data_fixups.global_fixups.get(&current_position) {
+        let relative_position = self.relative_position();
+        let res = match self.data_fixups.global_fixups.get(&relative_position) {
             Some((_section_index, virtual_src)) => match self.class_index_map.get(virtual_src) {
                 Some(index) => visitor.visit_pointer(Pointer::new(*index)),
                 None => Err(Error::NotFoundClassIndex {
@@ -598,7 +653,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
                 }),
             },
             None => Err(Error::NotFoundDataGlobalFixupsValue {
-                key: current_position,
+                key: relative_position,
             }),
         };
 
@@ -611,14 +666,10 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let local_src = self.current_position();
-        self.current_position = *tri!(self
-            .data_fixups
-            .local_fixups
-            .get(&local_src)
-            .ok_or(Error::NotFoundDataLocalFixupsValue { key: local_src }))
-            as usize;
+        // The specification requires that the ptr data position be extracted before parsing meta information such as `ptr_size`.
+        let pointed_data_position = tri!(self.to_readable_err(self.get_local_fixup_dst()));
 
+        // Parse `hkArray` meta
         tri!(self.skip_ptr_size());
         let size = tri!(
             self.parse(binary::i32(self.endian).context(StrContext::Expected(
@@ -629,8 +680,11 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
             StrContext::Expected(StrContextValue::Description("capacity&flags(i32)"))
         )));
 
+        let backup_position = self.current_position();
+        self.current_position = pointed_data_position;
         let res = visitor.visit_array(SeqDeserializer::new(self, size));
-        self.current_position = local_src as usize;
+
+        self.current_position = backup_position as usize;
         res
     }
 
@@ -824,5 +878,20 @@ mod tests {
                 m_referenceCount: 0,
             },
         );
+    }
+
+    #[test]
+    #[quick_tracing::init(test = "deserialize_classes_from_bytes")]
+    fn test_deserialize_class_index() {
+        use havok_classes::Classes;
+        // use crate::mocks::Classes;
+
+        let bytes = include_bytes!("../../../../docs/handson_hex_dump/defaultmale/defaultmale.hkx");
+
+        let res = match from_bytes_file::<Vec<Classes>>(bytes) {
+            Ok(res) => res,
+            Err(err) => panic!("{err}"),
+        };
+        dbg!(res);
     }
 }

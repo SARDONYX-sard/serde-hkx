@@ -109,7 +109,7 @@ impl HkxHeader {
     /// Return Big-endian or little-endian
     ///
     /// # Note
-    /// Little when endian is not 0 or 1.
+    /// Endian must be `0(big)` or `1(little)`.
     /// - If you used the `from_bytes` constructor, it is not a problem because the endian check is already done.
     pub const fn endian(&self) -> Endianness {
         match self.endian {
@@ -146,22 +146,40 @@ impl HkxHeader {
                 Self {
                     magic0: verify_magic0,
                     magic1: verify_magic1,
-                    user_tag: binary::i32(endianness),
-                    file_version: binary::i32(endianness),
-                    pointer_size: binary::u8,
-                    endian: binary::u8,
-                    padding_option: binary::u8,
-                    base_class: binary::u8,
-                    section_count: binary::i32(endianness),
-                    contents_section_index: binary::i32(endianness),
-                    contents_section_offset: binary::i32(endianness),
-                    contents_class_name_section_index: binary::i32(endianness),
-                    contents_class_name_section_offset: binary::i32(endianness),
-                    contents_version_string: take(15usize).try_map(TryFrom::try_from),
-                    contents_version_string_separator: 0xff.context(StrContext::Expected(StringLiteral("0xFF"))),
-                    flags: binary::i32(endianness),
-                    max_predicate: binary::i16(endianness),
-                    section_offset: binary::i16(endianness),
+                    user_tag: binary::i32(endianness).context(StrContext::Label("user_tag"))
+                        .context(StrContext::Expected(Description("i32"))),
+                    file_version: binary::i32(endianness).context(StrContext::Label("file_version"))
+                        .context(StrContext::Expected(Description("i32"))),
+                    pointer_size: binary::u8.context(StrContext::Label("pointer_size"))
+                        .context(StrContext::Expected(StringLiteral("4u8")))
+                        .context(StrContext::Expected(StringLiteral("8u8"))),
+                    endian: binary::u8.context(StrContext::Label("endian: u8"))
+                        .context(StrContext::Expected(Description("(0u8: big)")))
+                        .context(StrContext::Expected(Description("(1u8: little)"))),
+                    padding_option: binary::u8.context(StrContext::Label("padding_option"))
+                        .context(StrContext::Expected(Description("u8"))),
+                    base_class: binary::u8.context(StrContext::Label("base_class"))
+                        .context(StrContext::Expected(Description("u8"))),
+                    section_count: binary::i32(endianness).context(StrContext::Label("section_count"))
+                        .context(StrContext::Expected(Description("i32"))),
+                    contents_section_index: binary::i32(endianness).context(StrContext::Label("contents_section_index"))
+                        .context(StrContext::Expected(Description("i32"))),
+                    contents_section_offset: binary::i32(endianness).context(StrContext::Label("contents_section_offset"))
+                        .context(StrContext::Expected(Description("i32"))),
+                    contents_class_name_section_index: binary::i32(endianness).context(StrContext::Label("contents_class_name_section_index"))
+                        .context(StrContext::Expected(Description("i32"))),
+                    contents_class_name_section_offset: binary::i32(endianness).context(StrContext::Label("contents_class_name_section_offset"))
+                        .context(StrContext::Expected(Description("i32"))),
+                    contents_version_string: take(15usize).try_map(TryFrom::try_from).context(StrContext::Label("contents_version_string"))
+                        .context(StrContext::Expected(Description("[u8; 15]"))),
+                    contents_version_string_separator: 0xff.context(StrContext::Label("contents_version_string_separator"))
+                        .context(StrContext::Expected(StringLiteral("0xFF"))),
+                    flags: binary::i32(endianness).context(StrContext::Label("flags"))
+                        .context(StrContext::Expected(Description("i32"))),
+                    max_predicate: binary::i16(endianness).context(StrContext::Label("max_predicate"))
+                        .context(StrContext::Expected(Description("i16"))),
+                    section_offset: binary::i16(endianness).context(StrContext::Label("section_offset"))
+                        .context(StrContext::Expected(Description("i16"))),
                 }
             }.context(StrContext::Label("Hkx Root Header"))
             .parse_next(bytes)

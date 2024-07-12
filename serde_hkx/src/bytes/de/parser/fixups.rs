@@ -74,7 +74,7 @@ impl Fixups {
         }
     }
 
-    pub fn from_section_heder<'a>(
+    pub fn from_section_header<'a>(
         header: &SectionHeader,
         endian: Endianness,
     ) -> impl Parser<&'a [u8], Self, ContextError> {
@@ -87,25 +87,22 @@ impl Fixups {
         } = *header;
 
         let local_range = global_fixups_offset - local_fixups_offset;
-        let local_fixups_len = local_range / LOCAL_FIXUP_ONE_SIZE;
-
         let global_range = virtual_fixups_offset - global_fixups_offset;
-        let global_fixups_len = global_range / GLOBAL_FIXUP_ONE_SIZE;
-
         let virtual_range = exports_offset - virtual_fixups_offset;
-        let virtual_fixups_len = virtual_range / VIRTUAL_FIXUP_ONE_SIZE;
-
         let needs_len = local_range + global_range + virtual_range;
 
         move |bytes: &mut &'a [u8]| {
-            if needs_len as usize <= bytes.len() {
+            if needs_len as usize > bytes.len() {
                 panic!("need {needs_len}. but got {}", bytes.len());
             };
 
+            #[cfg(feature = "tracing")]
+            tracing::trace!(local_range, global_range, virtual_range);
+
             Ok(Self {
-                local_fixups: tri!(read_local_fixups(bytes, endian, local_fixups_len)),
-                global_fixups: tri!(read_fixups(bytes, endian, global_fixups_len)),
-                virtual_fixups: tri!(read_fixups(bytes, endian, virtual_fixups_len)),
+                local_fixups: tri!(read_local_fixups(bytes, endian, local_range)),
+                global_fixups: tri!(read_fixups(bytes, endian, global_range)),
+                virtual_fixups: tri!(read_fixups(bytes, endian, virtual_range)),
             })
         }
     }
@@ -211,8 +208,10 @@ mod tests {
         ];
 
         let mut bytes = FIXUPS;
-        read_local_fixups(&mut bytes, Endianness::Little, 5 * 16).unwrap();
-        read_fixups(&mut bytes, Endianness::Little, 2 * 16).unwrap();
-        read_fixups(&mut bytes, Endianness::Little, 3 * 16).unwrap();
+        let local = read_local_fixups(&mut bytes, Endianness::Little, 5 * 16).unwrap();
+        let global = read_fixups(&mut bytes, Endianness::Little, 2 * 16).unwrap();
+        let virtual_fixups = read_fixups(&mut bytes, Endianness::Little, 3 * 16).unwrap();
+
+        dbg!(local, global, virtual_fixups);
     }
 }
