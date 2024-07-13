@@ -1775,7 +1775,7 @@ pub trait ClassIndexAccess<'de> {
     type Error: Error;
 
     /// next class name.
-    fn next_key(&self) -> Result<&'de str, Self::Error>;
+    fn next_key(&mut self) -> Result<&'de str, Self::Error>;
 
     /// deserialize class method.
     fn next_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
@@ -1799,7 +1799,7 @@ where
     type Error = A::Error;
 
     #[inline]
-    fn next_key(&self) -> Result<&'de str, Self::Error> {
+    fn next_key(&mut self) -> Result<&'de str, Self::Error> {
         (**self).next_key()
     }
 
