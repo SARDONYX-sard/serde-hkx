@@ -79,6 +79,7 @@ impl<'de> BytesDeserializer<'de> {
     pub fn from_bytes(input: &'de [u8]) -> Self {
         Self {
             input,
+            class_index: 1,
             ..Default::default()
         }
     }
@@ -693,6 +694,17 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
 
         self.current_position = backup_position as usize;
         res
+    }
+
+    #[inline]
+    fn deserialize_class_index_seq<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    where
+        V: Visitor<'de>,
+    {
+        visitor.visit_array(SeqDeserializer::new(
+            self,
+            self.data_fixups.virtual_fixups.len() as i32,
+        ))
     }
 
     #[inline]
