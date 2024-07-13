@@ -697,17 +697,6 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     }
 
     #[inline]
-    fn deserialize_class_index_seq<V>(self, visitor: V) -> Result<V::Value, Self::Error>
-    where
-        V: Visitor<'de>,
-    {
-        visitor.visit_array(SeqDeserializer::new(
-            self,
-            self.data_fixups.virtual_fixups.len() as i32,
-        ))
-    }
-
-    #[inline]
     fn deserialize_enum<V>(
         self,
         _name: &'static str,
