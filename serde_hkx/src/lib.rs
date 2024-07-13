@@ -47,5 +47,7 @@ macro_rules! tri {
 }
 pub(crate) use tri;
 
+pub use bytes::de::{from_bytes, from_bytes_file};
 pub use bytes::ser::to_bytes;
+pub use xml::de::{from_str, from_str_file};
 pub use xml::ser::to_string;

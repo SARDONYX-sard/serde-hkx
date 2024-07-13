@@ -23,7 +23,6 @@ use havok_serde::de::{self, Deserialize, ReadEnumSize, Visitor};
 use havok_types::*;
 use parser::classnames::ClassNames;
 use rhexdump::hexdump;
-use std::collections::HashMap;
 use winnow::binary::Endianness;
 use winnow::error::{StrContext, StrContextValue};
 use winnow::{binary, Parser};
@@ -54,10 +53,6 @@ pub struct BytesDeserializer<'de> {
     /// - value: class name
     classnames: ClassNames<'de>,
 
-    /// - key: virtual_src
-    /// - value: unique class index(e.g. XML name attribute `#0050`)
-    class_index_map: HashMap<u32, usize>,
-
     /// `__classnames__` header
     classnames_header: SectionHeader,
 
@@ -70,6 +65,7 @@ pub struct BytesDeserializer<'de> {
     ///
     /// Incremented each time deserialize_struct is called.
     class_index: usize,
+
     /// Whether to advance the pointer, which is the name attribute for XML
     ///
     /// (It is actually map.rs that advances it, this is to prevent unintentional rewriting of variables in the processing of structs within structs)
@@ -103,9 +99,7 @@ where
     if deserializer.input[deserializer.current_position..].is_empty() {
         Ok(t)
     } else {
-        Err(Error::TrailingBytes {
-            remain: deserializer.input[deserializer.current_position..].to_owned(),
-        })
+        deserializer.to_readable_err(Err(Error::TrailingBytes))
     }
 }
 
@@ -117,7 +111,7 @@ where
     let mut deserializer = BytesDeserializer::from_bytes(bytes);
 
     // 1. Deserialize root file header.
-    let header = tri!(deserializer.parse(HkxHeader::from_bytes()));
+    let header = tri!(deserializer.parse_peek(HkxHeader::from_bytes()));
     deserializer.current_position += 64;
 
     deserializer.is_x86 = header.pointer_size == 4;
@@ -145,9 +139,7 @@ where
     if deserializer.input[deserializer.current_position..].is_empty() {
         Ok(t)
     } else {
-        Err(Error::TrailingBytes {
-            remain: deserializer.input.to_owned(),
-        })
+        deserializer.to_readable_err(Err(Error::TrailingBytes))
     }
 }
 
@@ -194,7 +186,7 @@ impl<'de> BytesDeserializer<'de> {
     /// Parse by argument parser.
     ///
     /// If an error occurs, it is converted to [`ReadableError`] and returned.
-    fn parse<O>(
+    fn parse_peek<O>(
         &mut self,
         mut parser: impl Parser<BytesStream<'de>, O, winnow::error::ContextError>,
     ) -> Result<O> {
@@ -264,7 +256,7 @@ impl<'de> BytesDeserializer<'de> {
             match i {
                 i if classnames_section_index == i => {
                     self.classnames_header =
-                        tri!(self.parse(SectionHeader::from_bytes(self.endian)));
+                        tri!(self.parse_peek(SectionHeader::from_bytes(self.endian)));
                     #[cfg(feature = "tracing")]
                     tracing::debug!("classnames_header: {}", self.classnames_header);
 
@@ -277,13 +269,13 @@ impl<'de> BytesDeserializer<'de> {
                     let backup_pos = self.current_position;
 
                     // 2/4: read header
-                    let header = tri!(self.parse(SectionHeader::from_bytes(self.endian)));
+                    let header = tri!(self.parse_peek(SectionHeader::from_bytes(self.endian)));
 
                     // 3/4: read fixups
                     let fixups_start = header.absolute_data_start + header.local_fixups_offset;
                     self.current_position = fixups_start as usize;
                     self.data_fixups =
-                        tri!(self.parse(Fixups::from_section_header(&header, self.endian)));
+                        tri!(self.parse_peek(Fixups::from_section_header(&header, self.endian)));
 
                     #[cfg(feature = "tracing")]
                     tracing::debug!(
@@ -302,20 +294,44 @@ impl<'de> BytesDeserializer<'de> {
         Ok(())
     }
 
+    fn get_class_index_ptr(&mut self) -> Result<Pointer> {
+        let relative_position = self.relative_position();
+
+        match self.data_fixups.global_fixups.get(&relative_position) {
+            Some((_section_index, virtual_src)) => {
+                if let Some(index) = self.data_fixups.virtual_fixups.get_index_of(virtual_src) {
+                    #[cfg(feature = "tracing")]
+                    tracing::debug!(relative_position, index);
+
+                    self.current_position += if self.is_x86 { 4 } else { 8 };
+                    Ok(Pointer::new(index))
+                } else {
+                    Err(Error::NotFoundClassIndex {
+                        global_dst: *virtual_src,
+                    })
+                }
+            }
+            None => Err(Error::NotFoundDataGlobalFixupsValue {
+                key: relative_position,
+            }),
+        }
+    }
+
     /// Extract the absolute position of the data position pointed to by ptr
     ///
     /// Take the relative position of the `__data__` section at the current position as a key
     /// and extract the corresponding value from the `local_fixups`.
     fn get_local_fixup_dst(&self) -> Result<usize> {
         let local_src = self.relative_position();
-        #[cfg(feature = "tracing")]
-        tracing::debug!(local_src);
 
         let local_dst = *tri!(self
             .data_fixups
             .local_fixups
             .get(&local_src)
             .ok_or(Error::NotFoundDataLocalFixupsValue { key: local_src }));
+
+        #[cfg(feature = "tracing")]
+        tracing::debug!(local_src, local_dst, self.data_header.absolute_data_start);
 
         // Change to abs
         Ok((local_dst + self.data_header.absolute_data_start) as usize)
@@ -329,7 +345,7 @@ impl<'de> BytesDeserializer<'de> {
         let backup_position = self.current_position();
 
         self.current_position = tri!(self.to_readable_err(self.get_local_fixup_dst()));
-        let res = tri!(self.parse(parser));
+        let res = tri!(self.parse_peek(parser));
 
         self.current_position = backup_position as usize;
         Ok(res)
@@ -343,7 +359,7 @@ impl<'de> BytesDeserializer<'de> {
     fn skip_ptr_size(&mut self) -> Result<()> {
         if self.is_x86 {
             tri!(
-                self.parse(binary::u32(self.endian).verify(|uint| *uint == 0).context(
+                self.parse_peek(binary::u32(self.endian).verify(|uint| *uint == 0).context(
                     StrContext::Expected(StrContextValue::Description(
                         "Skip x86 ptr size(0 fill 4bytes)"
                     ))
@@ -351,7 +367,7 @@ impl<'de> BytesDeserializer<'de> {
             );
             self.current_position += 4;
         } else {
-            tri!(self.parse(
+            tri!(self.parse_peek(
                 binary::u64(self.endian)
                     .verify(|ulong| *ulong == 0)
                     .context(StrContext::Expected(StrContextValue::Description(
@@ -378,10 +394,7 @@ impl<'de> BytesDeserializer<'de> {
     /// # Intent
     /// Use this API when key of fixups requires relative position.
     #[inline]
-    fn relative_position(&self) -> u32 {
-        #[cfg(feature = "tracing")]
-        tracing::debug!(self.current_position);
-
+    const fn relative_position(&self) -> u32 {
         self.current_position() - self.data_header.absolute_data_start
     }
 }
@@ -437,7 +450,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let res = visitor.visit_bool(tri!(self.parse(boolean())));
+        let res = visitor.visit_bool(tri!(self.parse_peek(boolean())));
         self.current_position += 1;
         res
     }
@@ -447,7 +460,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let res = visitor.visit_char(tri!(self.parse(
+        let res = visitor.visit_char(tri!(self.parse_peek(
             binary::le_u8.context(StrContext::Expected(StrContextValue::Description("char")))
         )) as char);
         self.current_position += 1;
@@ -459,7 +472,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let res = visitor.visit_int8(tri!(self.parse(
+        let res = visitor.visit_int8(tri!(self.parse_peek(
             binary::le_i8.context(StrContext::Expected(StrContextValue::Description("i8")))
         )));
         self.current_position += 1;
@@ -471,7 +484,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let res = visitor.visit_uint8(tri!(self.parse(
+        let res = visitor.visit_uint8(tri!(self.parse_peek(
             binary::le_u8.context(StrContext::Expected(StrContextValue::Description("u8")))
         )));
         self.current_position += 1;
@@ -483,7 +496,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let res = visitor.visit_int16(tri!(self.parse(
+        let res = visitor.visit_int16(tri!(self.parse_peek(
             binary::i16(self.endian)
                 .context(StrContext::Expected(StrContextValue::Description("i16")))
         )));
@@ -496,7 +509,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let res = visitor.visit_uint16(tri!(self.parse(
+        let res = visitor.visit_uint16(tri!(self.parse_peek(
             binary::u16(self.endian)
                 .context(StrContext::Expected(StrContextValue::Description("u16")))
         )));
@@ -509,7 +522,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let res = visitor.visit_int32(tri!(self.parse(
+        let res = visitor.visit_int32(tri!(self.parse_peek(
             binary::i32(self.endian)
                 .context(StrContext::Expected(StrContextValue::Description("i32")))
         )));
@@ -522,7 +535,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let res = visitor.visit_uint32(tri!(self.parse(
+        let res = visitor.visit_uint32(tri!(self.parse_peek(
             binary::u32(self.endian)
                 .context(StrContext::Expected(StrContextValue::Description("u32")))
         )));
@@ -535,7 +548,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let res = visitor.visit_int64(tri!(self.parse(
+        let res = visitor.visit_int64(tri!(self.parse_peek(
             binary::i64(self.endian)
                 .context(StrContext::Expected(StrContextValue::Description("i64")))
         )));
@@ -548,7 +561,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let res = visitor.visit_uint64(tri!(self.parse(
+        let res = visitor.visit_uint64(tri!(self.parse_peek(
             binary::u64(self.endian)
                 .context(StrContext::Expected(StrContextValue::Description("u64")))
         )));
@@ -563,7 +576,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     {
         let res =
             visitor
-                .visit_real(tri!(self.parse(real(self.endian).context(
+                .visit_real(tri!(self.parse_peek(real(self.endian).context(
                     StrContext::Expected(StrContextValue::Description("f32"))
                 ))));
         self.current_position += 4;
@@ -575,7 +588,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let res = visitor.visit_vector4(tri!(self.parse(vector4(self.endian))));
+        let res = visitor.visit_vector4(tri!(self.parse_peek(vector4(self.endian))));
         self.current_position += 16;
         res
     }
@@ -585,7 +598,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let res = visitor.visit_quaternion(tri!(self.parse(quaternion(self.endian))));
+        let res = visitor.visit_quaternion(tri!(self.parse_peek(quaternion(self.endian))));
         self.current_position += 16;
         res
     }
@@ -595,7 +608,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let res = visitor.visit_matrix3(tri!(self.parse(matrix3(self.endian))));
+        let res = visitor.visit_matrix3(tri!(self.parse_peek(matrix3(self.endian))));
         self.current_position += 48;
         res
     }
@@ -605,7 +618,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let res = visitor.visit_rotation(tri!(self.parse(rotation(self.endian))));
+        let res = visitor.visit_rotation(tri!(self.parse_peek(rotation(self.endian))));
         self.current_position += 48;
         res
     }
@@ -615,7 +628,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let res = visitor.visit_qstransform(tri!(self.parse(qstransform(self.endian))));
+        let res = visitor.visit_qstransform(tri!(self.parse_peek(qstransform(self.endian))));
         self.current_position += 48;
         res
     }
@@ -625,7 +638,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let res = visitor.visit_matrix4(tri!(self.parse(matrix4(self.endian))));
+        let res = visitor.visit_matrix4(tri!(self.parse_peek(matrix4(self.endian))));
         self.current_position += 64;
         res
     }
@@ -635,30 +648,17 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let res = visitor.visit_transform(tri!(self.parse(transform(self.endian))));
+        let res = visitor.visit_transform(tri!(self.parse_peek(transform(self.endian))));
         self.current_position += 64;
         res
     }
 
+    #[inline]
     fn deserialize_pointer<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        let relative_position = self.relative_position();
-        let res = match self.data_fixups.global_fixups.get(&relative_position) {
-            Some((_section_index, virtual_src)) => match self.class_index_map.get(virtual_src) {
-                Some(index) => visitor.visit_pointer(Pointer::new(*index)),
-                None => Err(Error::NotFoundClassIndex {
-                    virtual_src: *virtual_src,
-                }),
-            },
-            None => Err(Error::NotFoundDataGlobalFixupsValue {
-                key: relative_position,
-            }),
-        };
-
-        self.current_position += if self.is_x86 { 4 } else { 8 };
-        res
+        visitor.visit_pointer(tri!(self.get_class_index_ptr()))
     }
 
     #[inline]
@@ -672,15 +672,17 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         // Parse `hkArray` meta
         tri!(self.skip_ptr_size());
         let size = tri!(
-            self.parse(binary::i32(self.endian).context(StrContext::Expected(
+            self.parse_peek(binary::i32(self.endian).context(StrContext::Expected(
                 StrContextValue::Description("size(i32)")
             )))
         );
-        let _cap_and_flags = tri!(self.parse(binary::i32(self.endian).context(
+        self.current_position += 4;
+        let _cap_and_flags = tri!(self.parse_peek(binary::i32(self.endian).context(
             StrContext::Expected(StrContextValue::Description("capacity&flags(i32)"))
         )));
-
+        self.current_position += 4;
         let backup_position = self.current_position();
+
         self.current_position = pointed_data_position;
         let res = visitor.visit_array(SeqDeserializer::new(self, size));
 
@@ -773,7 +775,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let res = visitor.visit_half(tri!(self.parse(parser::type_kind::half(self.endian))));
+        let res = visitor.visit_half(tri!(self.parse_peek(parser::type_kind::half(self.endian))));
         self.current_position += 2;
         res
     }

@@ -35,10 +35,6 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
         if self.de.in_struct {
             None
         } else {
-            self.de.class_index += 1;
-            self.de
-                .class_index_map
-                .insert(self.de.current_position(), self.de.class_index);
             Some(Pointer::new(self.de.class_index))
         }
     }

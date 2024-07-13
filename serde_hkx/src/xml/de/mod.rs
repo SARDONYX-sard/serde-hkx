@@ -78,7 +78,7 @@ where
     }
 }
 
-pub fn from_file_str<'a, T>(s: &'a str) -> Result<T>
+pub fn from_str_file<'a, T>(s: &'a str) -> Result<T>
 where
     T: Deserialize<'a>,
 {
@@ -684,7 +684,7 @@ mod tests {
         let xml =
             &include_str!("../../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
 
-        let res = match from_file_str::<Vec<Classes>>(xml) {
+        let res = match from_str_file::<Vec<Classes>>(xml) {
             Ok(res) => res,
             Err(err) => panic!("{err}"),
         };

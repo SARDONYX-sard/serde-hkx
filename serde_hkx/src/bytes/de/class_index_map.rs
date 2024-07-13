@@ -32,22 +32,29 @@ impl<'a, 'de> ClassIndexAccess<'de> for BytesClassIndexMapDeserializer<'a, 'de> 
     type Error = Error;
 
     // Call constructor by class name
-    fn next_key(&self) -> Result<&'de str, Self::Error> {
+    fn next_key(&mut self) -> Result<&'de str, Self::Error> {
         let mut class_name = None;
         let mut start_offset = 0;
 
-        // TODO: create new class name(virtual_fixup.src, class_name)
-        for (_section_index, name_start_offset) in self.de.data_fixups.virtual_fixups.values() {
+        if let Some((virtual_src, (_section_index, name_start_offset))) = &self
+            .de
+            .data_fixups
+            .virtual_fixups
+            .get_index(self.de.class_index)
+        {
             if let Some(name) = self.de.classnames.get(name_start_offset) {
+                #[cfg(feature = "tracing")]
+                tracing::debug!(name);
+
                 class_name = Some(*name);
                 start_offset = *name_start_offset;
-                break;
+                self.de.class_index += 1;
+
+                self.de.current_position =
+                    (*virtual_src + self.de.data_header.absolute_data_start) as usize;
             };
         }
-
-        class_name.ok_or(Error::Message {
-            msg: format!("Couldn't find class by this name_offset: {start_offset}"),
-        })
+        class_name.ok_or(Error::NotFoundClass { start_offset })
     }
 
     #[inline]

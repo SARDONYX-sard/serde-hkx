@@ -1,6 +1,7 @@
 /// Fixups reader
 use crate::bytes::serde::section_header::SectionHeader;
 use crate::tri;
+use indexmap::IndexMap;
 use std::collections::HashMap;
 use winnow::{
     binary::{self, Endianness},
@@ -10,8 +11,9 @@ use winnow::{
 };
 
 pub type LocalFixups = HashMap<u32, u32>;
-pub type GLobalFixups = HashMap<u32, (u32, u32)>;
-pub type VirtualFixups = HashMap<u32, (u32, u32)>;
+pub type GLobalFixups = IndexMap<u32, (u32, u32)>;
+/// NOTE: The order in which C++ constructors are called is fixed. Therefore, we need a Map that holds the Index.
+pub type VirtualFixups = IndexMap<u32, (u32, u32)>;
 
 /// Has fixup maps & section content bytes ref data.
 ///
@@ -116,7 +118,7 @@ fn read_local_fixups(
     bytes: &mut &[u8],
     endian: Endianness,
     len: u32,
-) -> winnow::PResult<HashMap<u32, u32>> {
+) -> winnow::PResult<LocalFixups> {
     let mut local_map = HashMap::new();
     for _ in 0..len {
         if let Ok(local_src) = binary::u32::<&[u8], ContextError>(endian)
@@ -147,12 +149,8 @@ fn read_local_fixups(
 ///
 /// # Note
 /// And take align mark(0xff) bytes.
-fn read_fixups(
-    bytes: &mut &[u8],
-    endian: Endianness,
-    len: u32,
-) -> winnow::PResult<HashMap<u32, (u32, u32)>> {
-    let mut fixups = HashMap::new();
+fn read_fixups(bytes: &mut &[u8], endian: Endianness, len: u32) -> winnow::PResult<VirtualFixups> {
+    let mut fixups = IndexMap::new();
     for _ in 0..len {
         if let Ok(src) = binary::u32::<&[u8], ContextError>(endian)
             .verify(|src| *src != FIXUP_VALUE_FOR_ALIGN)

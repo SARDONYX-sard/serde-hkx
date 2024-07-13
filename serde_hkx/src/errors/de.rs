@@ -11,20 +11,11 @@ pub enum Error {
         msg: String,
     },
 
-    /// This field should have a default value since serialization is skipped.
-    #[snafu(display("This field should have a default value since serialization is skipped."))]
-    SkipField,
-
-    #[snafu(display("Unique index of class for this `global_fix.dst`{virtual_src} is missing"))]
-    NotFoundClassIndex { virtual_src: u32 },
-
-    /// Classnames section fixups were not found in the binary data.
-    #[snafu(display("Classnames section fixups were not found in the binary data."))]
-    NotFoundClassNamesFixups,
-
-    /// Data section fixups were not found in the binary data.
-    #[snafu(display("Data section fixups were not found in the binary data."))]
-    NotFoundDataFixups,
+    /// Unique index of class for this `global_fix.dst`{virtual_src} is missing.
+    #[snafu(display(
+        "Unique index of class for this `global_fix.dst`(virtual_src): {global_dst} is missing."
+    ))]
+    NotFoundClassIndex { global_dst: u32 },
 
     /// The data position pointed to by the pointer of the read position ({key}) is not found in local_fixups.
     #[snafu(display("The data position pointed to by the pointer of the read position ({key}) is not found in local_fixups."))]
@@ -35,20 +26,12 @@ pub enum Error {
     NotFoundDataGlobalFixupsValue { key: u32 },
 
     /// The data position pointed to by the pointer of the read position ({key}) is not found in virtual_fixups.
-    #[snafu(display("The data position pointed to by the pointer of the read position ({key}) is not found in virtual_fixups."))]
-    NotFoundDataVirtualFixupsValue { key: u32 },
-
-    /// The number of key calls ({actual}) must not be more than the length of the field ({expected}).
-    #[snafu(display("The number of key calls ({actual}) must not be more than the length of the field ({expected})."))]
-    OverFlowIndex { actual: usize, expected: usize },
+    #[snafu(display("Couldn't find class by this name_offset: {start_offset}."))]
+    NotFoundClass { start_offset: u32 },
 
     /// Incomplete parsing binary.
-    #[snafu(display("Index to hold processing deserialization status of struct is not found."))]
-    NotFoundIndex,
-
-    /// Incomplete parsing binary.
-    #[snafu(display("Incomplete parsing binary. Remain: {remain:?}"))]
-    TrailingBytes { remain: Vec<u8> },
+    #[snafu(display("Incomplete parsing binary."))]
+    TrailingBytes,
 
     /// Still need to parse the syntax but the string provided is not enough.
     #[snafu(display("Still need to parse the syntax but the string provided is not enough."))]
@@ -69,13 +52,6 @@ pub enum Error {
     #[snafu(transparent)]
     ReadableError {
         source: super::readable::ReadableError,
-    },
-
-    /// Contain null bytes in a string error
-    #[snafu(transparent)]
-    FromBytesWithNulError {
-        /// Contain null bytes in a string error
-        source: std::ffi::FromBytesWithNulError,
     },
 }
 

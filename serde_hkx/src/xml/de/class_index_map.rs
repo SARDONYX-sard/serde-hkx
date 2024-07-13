@@ -31,7 +31,7 @@ impl<'a, 'de> ClassIndexMapDeserializer<'a, 'de> {
 impl<'a, 'de> ClassIndexAccess<'de> for ClassIndexMapDeserializer<'a, 'de> {
     type Error = Error;
 
-    fn next_key(&self) -> Result<&'de str, Self::Error> {
+    fn next_key(&mut self) -> Result<&'de str, Self::Error> {
         let (_ptr, class_name, _signature) = tri!(self.de.parse_peek(class_start_tag()));
         Ok(class_name)
     }
