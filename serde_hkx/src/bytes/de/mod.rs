@@ -135,12 +135,8 @@ where
 
     // 4. Parse `__data__` section.
     deserializer.current_position = data_abs; // move to data section start
-    let t = tri!(T::deserialize(&mut deserializer));
-    if deserializer.input[deserializer.current_position..].is_empty() {
-        Ok(t)
-    } else {
-        deserializer.to_readable_err(Err(Error::TrailingBytes))
-    }
+
+    T::deserialize(&mut deserializer)
 }
 
 /// Calculates the position in the hexdump output where the byte at the given
@@ -430,11 +426,20 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     }
 
     #[inline]
-    fn deserialize_class_index<V>(self, visitor: V) -> std::result::Result<V::Value, Self::Error>
+    fn deserialize_class_index<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_class_index(BytesClassIndexMapDeserializer::new(self))
+        let res = visitor.visit_class_index(BytesClassIndexMapDeserializer::new(self));
+
+        let actual = self.class_index;
+        let expected = self.data_fixups.virtual_fixups.len();
+
+        if expected == actual {
+            res
+        } else {
+            self.to_readable_err(Err(Error::LackOfConstructors { actual, expected }))
+        }
     }
 
     #[inline]

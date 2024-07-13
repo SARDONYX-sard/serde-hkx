@@ -17,6 +17,9 @@ pub enum Error {
     ))]
     NotFoundClassIndex { global_dst: u32 },
 
+    #[snafu(display("The number of required constructors in C++ is insufficient. actual: {actual}, expected: {expected}"))]
+    LackOfConstructors { actual: usize, expected: usize },
+
     /// The data position pointed to by the pointer of the read position ({key}) is not found in local_fixups.
     #[snafu(display("The data position pointed to by the pointer of the read position ({key}) is not found in local_fixups."))]
     NotFoundDataLocalFixupsValue { key: u32 },
