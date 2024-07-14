@@ -150,6 +150,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpConvexVerticesShapeFourVectorsVisito
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_x: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_y: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_z: _serde::__private::Option<Vector4> = _serde::__private::None;
@@ -228,7 +229,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpConvexVerticesShapeFourVectorsVisito
             }
         };
         _serde::__private::Ok(hkpConvexVerticesShapeFourVectors {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_x,
             m_y,
             m_z,

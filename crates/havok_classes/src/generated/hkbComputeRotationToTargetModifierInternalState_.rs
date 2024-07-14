@@ -146,6 +146,7 @@ for __hkbComputeRotationToTargetModifierInternalStateVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_rotationOut: _serde::__private::Option<Quaternion> = _serde::__private::None;
         for i in 0..1usize {
@@ -179,7 +180,7 @@ for __hkbComputeRotationToTargetModifierInternalStateVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbComputeRotationToTargetModifierInternalState {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_rotationOut,
         })

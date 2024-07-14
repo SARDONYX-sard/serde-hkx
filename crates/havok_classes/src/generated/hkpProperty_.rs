@@ -145,6 +145,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPropertyVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_key: _serde::__private::Option<u32> = _serde::__private::None;
         let mut m_alignmentPadding: _serde::__private::Option<u32> = _serde::__private::None;
         let mut m_value: _serde::__private::Option<hkpPropertyValue> = _serde::__private::None;
@@ -225,7 +226,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPropertyVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpProperty {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_key,
             m_alignmentPadding,
             m_value,

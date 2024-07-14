@@ -127,6 +127,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkPackedVector3Visitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_values: _serde::__private::Option<[i16; 4usize]> = _serde::__private::None;
         for i in 0..1usize {
             match i {
@@ -156,10 +157,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkPackedVector3Visitor<'de> {
                 );
             }
         };
-        _serde::__private::Ok(hkPackedVector3 {
-            __ptr: __A::class_ptr(&mut __map),
-            m_values,
-        })
+        _serde::__private::Ok(hkPackedVector3 { __ptr, m_values })
     }
     fn visit_struct<__A>(
         self,

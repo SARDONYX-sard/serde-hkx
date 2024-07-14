@@ -180,6 +180,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSkeletonMapperDataChainMappingVisito
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_startBoneA: _serde::__private::Option<i16> = _serde::__private::None;
         let mut m_endBoneA: _serde::__private::Option<i16> = _serde::__private::None;
         let mut m_startBoneB: _serde::__private::Option<i16> = _serde::__private::None;
@@ -347,7 +348,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSkeletonMapperDataChainMappingVisito
             }
         };
         _serde::__private::Ok(hkaSkeletonMapperDataChainMapping {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_startBoneA,
             m_endBoneA,
             m_startBoneB,

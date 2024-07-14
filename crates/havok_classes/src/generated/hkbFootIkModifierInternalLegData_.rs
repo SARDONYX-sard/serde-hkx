@@ -142,6 +142,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbFootIkModifierInternalLegDataVisitor
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_groundPosition: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_footIkSolver: _serde::__private::Option<Pointer> = _serde::__private::None;
         for i in 0..2usize {
@@ -201,7 +202,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbFootIkModifierInternalLegDataVisitor
             }
         };
         _serde::__private::Ok(hkbFootIkModifierInternalLegData {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_groundPosition,
             m_footIkSolver,
         })

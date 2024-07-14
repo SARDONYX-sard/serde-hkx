@@ -203,6 +203,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkMemoryMeshVertexBufferVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_format: _serde::__private::Option<hkVertexFormat> = _serde::__private::None;
         let mut m_elementOffsets: _serde::__private::Option<[i32; 32usize]> = _serde::__private::None;
@@ -415,7 +416,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkMemoryMeshVertexBufferVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkMemoryMeshVertexBuffer {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_format,
             m_elementOffsets,

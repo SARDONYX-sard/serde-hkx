@@ -206,6 +206,7 @@ for __hkbStateMachineActiveTransitionInfoVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_transitionEffect: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_transitionEffectInternalStateInfo: _serde::__private::Option<
             Pointer,
@@ -417,7 +418,7 @@ for __hkbStateMachineActiveTransitionInfoVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbStateMachineActiveTransitionInfo {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_transitionEffect,
             m_transitionEffectInternalStateInfo,
             m_transitionInfoReference,

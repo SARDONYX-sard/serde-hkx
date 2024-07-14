@@ -136,6 +136,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkContactPointVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_position: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_separatingNormal: _serde::__private::Option<Vector4> = _serde::__private::None;
         for i in 0..2usize {
@@ -194,7 +195,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkContactPointVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkContactPoint {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_position,
             m_separatingNormal,
         })

@@ -127,6 +127,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpConstraintChainDataVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         for i in 0..0usize {
             match i {
@@ -135,7 +136,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpConstraintChainDataVisitor<'de> {
         }
         __A::pad(&mut __map, 12usize, 24usize)?;
         _serde::__private::Ok(hkpConstraintChainData {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
         })
     }

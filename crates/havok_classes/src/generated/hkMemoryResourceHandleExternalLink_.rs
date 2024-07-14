@@ -143,6 +143,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkMemoryResourceHandleExternalLinkVisit
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_memberName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
         let mut m_externalId: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
         for i in 0..2usize {
@@ -201,7 +202,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkMemoryResourceHandleExternalLinkVisit
             }
         };
         _serde::__private::Ok(hkMemoryResourceHandleExternalLink {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_memberName,
             m_externalId,
         })

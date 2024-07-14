@@ -164,6 +164,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorInfoIdToNamePairVisitor<'de>
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_behaviorName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
         let mut m_nodeName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
         let mut m_toolType: _serde::__private::Option<ToolNodeType> = _serde::__private::None;
@@ -274,7 +275,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorInfoIdToNamePairVisitor<'de>
             }
         };
         _serde::__private::Ok(hkbBehaviorInfoIdToNamePair {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_behaviorName,
             m_nodeName,
             m_toolType,

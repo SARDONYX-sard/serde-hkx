@@ -161,6 +161,7 @@ for __hkbKeyframeBonesModifierKeyframeInfoVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_keyframedPosition: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_keyframedRotation: _serde::__private::Option<Quaternion> = _serde::__private::None;
         let mut m_boneIndex: _serde::__private::Option<i16> = _serde::__private::None;
@@ -270,7 +271,7 @@ for __hkbKeyframeBonesModifierKeyframeInfoVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbKeyframeBonesModifierKeyframeInfo {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_keyframedPosition,
             m_keyframedRotation,
             m_boneIndex,

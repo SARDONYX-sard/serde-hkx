@@ -143,6 +143,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkMonitorStreamColorTableColorPairVisit
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_colorName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
         let mut m_color: _serde::__private::Option<ExtendedColors> = _serde::__private::None;
         for i in 0..2usize {
@@ -200,7 +201,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkMonitorStreamColorTableColorPairVisit
             }
         };
         _serde::__private::Ok(hkMonitorStreamColorTableColorPair {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_colorName,
             m_color,
         })

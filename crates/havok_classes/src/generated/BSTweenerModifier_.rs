@@ -249,6 +249,7 @@ impl<'de> _serde::de::Visitor<'de> for __BSTweenerModifierVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_tweenPosition: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_tweenRotation: _serde::__private::Option<bool> = _serde::__private::None;
@@ -492,7 +493,7 @@ impl<'de> _serde::de::Visitor<'de> for __BSTweenerModifierVisitor<'de> {
             }
         };
         _serde::__private::Ok(BSTweenerModifier {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_tweenPosition,
             m_tweenRotation,

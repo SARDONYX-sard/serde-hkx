@@ -127,6 +127,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpBridgeAtomsVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_bridgeAtom: _serde::__private::Option<hkpBridgeConstraintAtom> = _serde::__private::None;
         for i in 0..1usize {
             match i {
@@ -159,7 +160,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpBridgeAtomsVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpBridgeAtoms {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_bridgeAtom,
         })
     }

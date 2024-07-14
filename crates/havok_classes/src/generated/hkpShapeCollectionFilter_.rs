@@ -119,15 +119,14 @@ impl<'de> _serde::de::Visitor<'de> for __hkpShapeCollectionFilterVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         for i in 0..0usize {
             match i {
                 _ => {}
             }
         }
         __A::pad(&mut __map, 4usize, 8usize)?;
-        _serde::__private::Ok(hkpShapeCollectionFilter {
-            __ptr: __A::class_ptr(&mut __map),
-        })
+        _serde::__private::Ok(hkpShapeCollectionFilter { __ptr })
     }
     fn visit_struct<__A>(
         self,

@@ -159,6 +159,7 @@ for __hkpPairCollisionFilterMapPairFilterKeyOverrideTypeVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_elem: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_numElems: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_hashMod: _serde::__private::Option<i32> = _serde::__private::None;
@@ -239,7 +240,7 @@ for __hkpPairCollisionFilterMapPairFilterKeyOverrideTypeVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpPairCollisionFilterMapPairFilterKeyOverrideType {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_elem,
             m_numElems,
             m_hashMod,

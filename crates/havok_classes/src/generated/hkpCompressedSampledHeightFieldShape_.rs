@@ -202,6 +202,7 @@ for __hkpCompressedSampledHeightFieldShapeVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_storage: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
         let mut m_triangleFlip: _serde::__private::Option<bool> = _serde::__private::None;
@@ -309,7 +310,7 @@ for __hkpCompressedSampledHeightFieldShapeVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpCompressedSampledHeightFieldShape {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_storage,
             m_triangleFlip,

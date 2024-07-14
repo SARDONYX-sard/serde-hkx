@@ -137,6 +137,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbMessageLogVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_messages: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_maxMessages: _serde::__private::Option<i32> = _serde::__private::None;
         for i in 0..2usize {
@@ -196,7 +197,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbMessageLogVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbMessageLog {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_messages,
             m_maxMessages,
         })

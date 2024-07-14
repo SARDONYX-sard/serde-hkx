@@ -163,6 +163,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkSweptTransformVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_centerOfMass0: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_centerOfMass1: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_rotation0: _serde::__private::Option<Quaternion> = _serde::__private::None;
@@ -299,7 +300,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkSweptTransformVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkSweptTransform {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_centerOfMass0,
             m_centerOfMass1,
             m_rotation0,

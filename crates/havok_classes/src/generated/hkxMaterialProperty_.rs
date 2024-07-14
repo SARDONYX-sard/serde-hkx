@@ -136,6 +136,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkxMaterialPropertyVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_key: _serde::__private::Option<u32> = _serde::__private::None;
         let mut m_value: _serde::__private::Option<u32> = _serde::__private::None;
         for i in 0..2usize {
@@ -190,7 +191,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkxMaterialPropertyVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkxMaterialProperty {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_key,
             m_value,
         })

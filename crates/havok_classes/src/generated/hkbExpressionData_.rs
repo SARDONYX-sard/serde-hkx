@@ -180,6 +180,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbExpressionDataVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_expression: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
         let mut m_assignmentVariableIndex: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_assignmentEventIndex: _serde::__private::Option<i32> = _serde::__private::None;
@@ -349,7 +350,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbExpressionDataVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbExpressionData {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_expression,
             m_assignmentVariableIndex,
             m_assignmentEventIndex,

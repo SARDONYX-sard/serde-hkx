@@ -183,6 +183,7 @@ impl<'de> _serde::de::Visitor<'de> for __BSLookAtModifierBoneDataVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_index: _serde::__private::Option<i16> = _serde::__private::None;
         let mut m_fwdAxisLS: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_limitAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
@@ -365,7 +366,7 @@ impl<'de> _serde::de::Visitor<'de> for __BSLookAtModifierBoneDataVisitor<'de> {
             }
         };
         _serde::__private::Ok(BSLookAtModifierBoneData {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_index,
             m_fwdAxisLS,
             m_limitAngleDegrees,

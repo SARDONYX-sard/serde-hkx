@@ -140,6 +140,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpOverwritePivotConstraintAtomVisitor<
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_copyToPivotBFromPivotA: _serde::__private::Option<u8> = _serde::__private::None;
         for i in 0..1usize {
@@ -176,7 +177,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpOverwritePivotConstraintAtomVisitor<
             }
         };
         _serde::__private::Ok(hkpOverwritePivotConstraintAtom {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_copyToPivotBFromPivotA,
         })

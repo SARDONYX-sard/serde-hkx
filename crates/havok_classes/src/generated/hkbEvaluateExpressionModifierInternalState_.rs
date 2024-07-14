@@ -156,6 +156,7 @@ for __hkbEvaluateExpressionModifierInternalStateVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_internalExpressionsData: _serde::__private::Option<
             Vec<hkbEvaluateExpressionModifierInternalExpressionData>,
@@ -195,7 +196,7 @@ for __hkbEvaluateExpressionModifierInternalStateVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbEvaluateExpressionModifierInternalState {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_internalExpressionsData,
         })

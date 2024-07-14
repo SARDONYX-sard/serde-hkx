@@ -137,6 +137,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkaBoneVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
         let mut m_lockTranslation: _serde::__private::Option<bool> = _serde::__private::None;
         for i in 0..2usize {
@@ -194,7 +195,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkaBoneVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkaBone {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_name,
             m_lockTranslation,
         })

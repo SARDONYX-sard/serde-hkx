@@ -142,6 +142,7 @@ for __hkbStateMachineNestedStateMachineDataVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_nestedStateMachine: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_eventIdMap: _serde::__private::Option<Pointer> = _serde::__private::None;
         for i in 0..2usize {
@@ -202,7 +203,7 @@ for __hkbStateMachineNestedStateMachineDataVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbStateMachineNestedStateMachineData {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_nestedStateMachine,
             m_eventIdMap,
         })

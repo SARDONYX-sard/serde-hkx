@@ -271,6 +271,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbComputeDirectionModifierVisitor<'de>
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_pointIn: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_pointOut: _serde::__private::Option<Vector4> = _serde::__private::None;
@@ -565,7 +566,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbComputeDirectionModifierVisitor<'de>
             }
         };
         _serde::__private::Ok(hkbComputeDirectionModifier {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_pointIn,
             m_pointOut,

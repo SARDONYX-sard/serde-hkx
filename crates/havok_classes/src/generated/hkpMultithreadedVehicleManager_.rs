@@ -139,6 +139,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMultithreadedVehicleManagerVisitor<'
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         for i in 0..0usize {
             match i {
@@ -147,7 +148,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMultithreadedVehicleManagerVisitor<'
         }
         __A::pad(&mut __map, 20usize, 32usize)?;
         _serde::__private::Ok(hkpMultithreadedVehicleManager {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
         })
     }

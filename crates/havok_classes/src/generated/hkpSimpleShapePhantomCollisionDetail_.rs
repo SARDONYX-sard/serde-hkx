@@ -133,6 +133,7 @@ for __hkpSimpleShapePhantomCollisionDetailVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_collidable: _serde::__private::Option<Pointer> = _serde::__private::None;
         for i in 0..1usize {
             match i {
@@ -165,7 +166,7 @@ for __hkpSimpleShapePhantomCollisionDetailVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpSimpleShapePhantomCollisionDetail {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_collidable,
         })
     }

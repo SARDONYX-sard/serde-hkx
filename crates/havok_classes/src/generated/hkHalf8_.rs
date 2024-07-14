@@ -127,6 +127,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkHalf8Visitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_quad: _serde::__private::Option<[f16; 8usize]> = _serde::__private::None;
         for i in 0..1usize {
             match i {
@@ -156,10 +157,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkHalf8Visitor<'de> {
                 );
             }
         };
-        _serde::__private::Ok(hkHalf8 {
-            __ptr: __A::class_ptr(&mut __map),
-            m_quad,
-        })
+        _serde::__private::Ok(hkHalf8 { __ptr, m_quad })
     }
     fn visit_struct<__A>(
         self,

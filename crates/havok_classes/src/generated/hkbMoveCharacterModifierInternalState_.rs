@@ -141,6 +141,7 @@ for __hkbMoveCharacterModifierInternalStateVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_timeSinceLastModify: _serde::__private::Option<f32> = _serde::__private::None;
         for i in 0..1usize {
@@ -177,7 +178,7 @@ for __hkbMoveCharacterModifierInternalStateVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbMoveCharacterModifierInternalState {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_timeSinceLastModify,
         })

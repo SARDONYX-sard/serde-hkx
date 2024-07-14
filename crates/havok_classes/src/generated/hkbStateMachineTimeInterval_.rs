@@ -157,6 +157,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbStateMachineTimeIntervalVisitor<'de>
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_enterEventId: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_exitEventId: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_enterTime: _serde::__private::Option<f32> = _serde::__private::None;
@@ -267,7 +268,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbStateMachineTimeIntervalVisitor<'de>
             }
         };
         _serde::__private::Ok(hkbStateMachineTimeInterval {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_enterEventId,
             m_exitEventId,
             m_enterTime,

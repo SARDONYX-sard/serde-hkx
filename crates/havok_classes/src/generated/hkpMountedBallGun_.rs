@@ -168,6 +168,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMountedBallGunVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_position: _serde::__private::Option<Vector4> = _serde::__private::None;
         for i in 0..1usize {
@@ -201,7 +202,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMountedBallGunVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpMountedBallGun {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_position,
         })

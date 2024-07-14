@@ -147,6 +147,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbEventRangeDataVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_upperBound: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_event: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
         let mut m_eventMode: _serde::__private::Option<EventRangeMode> = _serde::__private::None;
@@ -231,7 +232,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbEventRangeDataVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbEventRangeData {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_upperBound,
             m_event,
             m_eventMode,

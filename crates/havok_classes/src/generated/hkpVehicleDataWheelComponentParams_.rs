@@ -222,6 +222,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDataWheelComponentParamsVisit
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_radius: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_mass: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_width: _serde::__private::Option<f32> = _serde::__private::None;
@@ -487,7 +488,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDataWheelComponentParamsVisit
             }
         };
         _serde::__private::Ok(hkpVehicleDataWheelComponentParams {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_radius,
             m_mass,
             m_width,

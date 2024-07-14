@@ -185,6 +185,7 @@ for __hkaWaveletCompressedAnimationQuantizationFormatVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_maxBitWidth: _serde::__private::Option<u8> = _serde::__private::None;
         let mut m_preserved: _serde::__private::Option<u8> = _serde::__private::None;
         let mut m_numD: _serde::__private::Option<u32> = _serde::__private::None;
@@ -346,7 +347,7 @@ for __hkaWaveletCompressedAnimationQuantizationFormatVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkaWaveletCompressedAnimationQuantizationFormat {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_maxBitWidth,
             m_preserved,
             m_numD,

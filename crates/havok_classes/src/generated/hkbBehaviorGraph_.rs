@@ -478,6 +478,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorGraphVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_variableMode: _serde::__private::Option<VariableMode> = _serde::__private::None;
         let mut m_uniqueIdPool: _serde::__private::Option<Vec<()>> = _serde::__private::None;
@@ -1299,7 +1300,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorGraphVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbBehaviorGraph {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_variableMode,
             m_uniqueIdPool,

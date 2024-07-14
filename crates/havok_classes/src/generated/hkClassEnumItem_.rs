@@ -138,6 +138,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkClassEnumItemVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_value: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_name: _serde::__private::Option<CString<'de>> = _serde::__private::None;
         for i in 0..2usize {
@@ -193,7 +194,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkClassEnumItemVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkClassEnumItem {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_value,
             m_name,
         })

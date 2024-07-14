@@ -149,6 +149,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDefaultSuspensionVisitor<'de>
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_wheelSpringParams: _serde::__private::Option<
             Vec<hkpVehicleDefaultSuspensionWheelSpringSuspensionParameters>,
@@ -188,7 +189,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDefaultSuspensionVisitor<'de>
             }
         };
         _serde::__private::Ok(hkpVehicleDefaultSuspension {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_wheelSpringParams,
         })

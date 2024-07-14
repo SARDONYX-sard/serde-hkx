@@ -205,6 +205,7 @@ for __hkbComputeRotationFromAxisAngleModifierVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_rotationOut: _serde::__private::Option<Quaternion> = _serde::__private::None;
         let mut m_axis: _serde::__private::Option<Vector4> = _serde::__private::None;
@@ -289,7 +290,7 @@ for __hkbComputeRotationFromAxisAngleModifierVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbComputeRotationFromAxisAngleModifier {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_rotationOut,
             m_axis,

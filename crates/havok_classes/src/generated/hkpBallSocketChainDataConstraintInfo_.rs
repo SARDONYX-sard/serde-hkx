@@ -142,6 +142,7 @@ for __hkpBallSocketChainDataConstraintInfoVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_pivotInA: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_pivotInB: _serde::__private::Option<Vector4> = _serde::__private::None;
         for i in 0..2usize {
@@ -200,7 +201,7 @@ for __hkpBallSocketChainDataConstraintInfoVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpBallSocketChainDataConstraintInfo {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_pivotInA,
             m_pivotInB,
         })

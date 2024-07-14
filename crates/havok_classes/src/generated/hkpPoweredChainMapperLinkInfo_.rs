@@ -148,6 +148,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPoweredChainMapperLinkInfoVisitor<'d
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_firstTargetIdx: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_numTargets: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_limitConstraint: _serde::__private::Option<Pointer> = _serde::__private::None;
@@ -232,7 +233,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPoweredChainMapperLinkInfoVisitor<'d
             }
         };
         _serde::__private::Ok(hkpPoweredChainMapperLinkInfo {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_firstTargetIdx,
             m_numTargets,
             m_limitConstraint,

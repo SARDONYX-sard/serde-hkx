@@ -161,6 +161,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbLookAtModifierInternalStateVisitor<'
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_lookAtLastTargetWS: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_lookAtWeight: _serde::__private::Option<f32> = _serde::__private::None;
@@ -251,7 +252,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbLookAtModifierInternalStateVisitor<'
             }
         };
         _serde::__private::Ok(hkbLookAtModifierInternalState {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_lookAtLastTargetWS,
             m_lookAtWeight,

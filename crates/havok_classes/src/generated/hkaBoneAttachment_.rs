@@ -182,6 +182,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkaBoneAttachmentVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_originalSkeletonName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
         let mut m_boneFromAttachment: _serde::__private::Option<Matrix4> = _serde::__private::None;
@@ -323,7 +324,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkaBoneAttachmentVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkaBoneAttachment {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_originalSkeletonName,
             m_boneFromAttachment,

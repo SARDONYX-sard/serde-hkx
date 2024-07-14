@@ -151,6 +151,7 @@ for __hkbStateMachineTransitionInfoReferenceVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_fromStateIndex: _serde::__private::Option<i16> = _serde::__private::None;
         let mut m_transitionIndex: _serde::__private::Option<i16> = _serde::__private::None;
         let mut m_stateMachineId: _serde::__private::Option<i16> = _serde::__private::None;
@@ -235,7 +236,7 @@ for __hkbStateMachineTransitionInfoReferenceVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbStateMachineTransitionInfoReference {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_fromStateIndex,
             m_transitionIndex,
             m_stateMachineId,

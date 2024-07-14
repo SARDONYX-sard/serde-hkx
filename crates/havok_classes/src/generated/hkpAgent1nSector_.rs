@@ -165,6 +165,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpAgent1nSectorVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_bytesAllocated: _serde::__private::Option<u32> = _serde::__private::None;
         let mut m_pad0: _serde::__private::Option<u32> = _serde::__private::None;
         let mut m_pad1: _serde::__private::Option<u32> = _serde::__private::None;
@@ -293,7 +294,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpAgent1nSectorVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpAgent1nSector {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_bytesAllocated,
             m_pad0,
             m_pad1,

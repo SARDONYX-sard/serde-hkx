@@ -133,6 +133,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkxEnumVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_items: _serde::__private::Option<Vec<hkxEnumItem<'de>>> = _serde::__private::None;
         for i in 0..1usize {
@@ -163,11 +164,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkxEnumVisitor<'de> {
                 );
             }
         };
-        _serde::__private::Ok(hkxEnum {
-            __ptr: __A::class_ptr(&mut __map),
-            parent,
-            m_items,
-        })
+        _serde::__private::Ok(hkxEnum { __ptr, parent, m_items })
     }
     fn visit_struct<__A>(
         self,

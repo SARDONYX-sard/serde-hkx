@@ -139,6 +139,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPulleyConstraintDataAtomsVisitor<'de
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_translations: _serde::__private::Option<
             hkpSetLocalTranslationsConstraintAtom,
         > = _serde::__private::None;
@@ -199,7 +200,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPulleyConstraintDataAtomsVisitor<'de
             }
         };
         _serde::__private::Ok(hkpPulleyConstraintDataAtoms {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_translations,
             m_pulley,
         })

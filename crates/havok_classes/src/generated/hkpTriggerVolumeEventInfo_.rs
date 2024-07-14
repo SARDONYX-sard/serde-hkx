@@ -146,6 +146,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpTriggerVolumeEventInfoVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_sortValue: _serde::__private::Option<u64> = _serde::__private::None;
         let mut m_body: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_operation: _serde::__private::Option<Operation> = _serde::__private::None;
@@ -229,7 +230,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpTriggerVolumeEventInfoVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpTriggerVolumeEventInfo {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_sortValue,
             m_body,
             m_operation,

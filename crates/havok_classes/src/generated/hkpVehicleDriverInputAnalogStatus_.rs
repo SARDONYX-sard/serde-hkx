@@ -173,6 +173,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDriverInputAnalogStatusVisito
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_positionX: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_positionY: _serde::__private::Option<f32> = _serde::__private::None;
@@ -289,7 +290,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDriverInputAnalogStatusVisito
             }
         };
         _serde::__private::Ok(hkpVehicleDriverInputAnalogStatus {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_positionX,
             m_positionY,

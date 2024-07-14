@@ -166,6 +166,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkMemoryMeshShapeVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_sections: _serde::__private::Option<Vec<hkMeshSectionCinfo>> = _serde::__private::None;
         let mut m_indices16: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
@@ -275,7 +276,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkMemoryMeshShapeVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkMemoryMeshShape {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_sections,
             m_indices16,

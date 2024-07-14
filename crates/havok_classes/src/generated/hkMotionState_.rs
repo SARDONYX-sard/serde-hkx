@@ -210,6 +210,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkMotionStateVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_transform: _serde::__private::Option<Transform> = _serde::__private::None;
         let mut m_sweptTransform: _serde::__private::Option<hkSweptTransform> = _serde::__private::None;
         let mut m_deltaAngle: _serde::__private::Option<Vector4> = _serde::__private::None;
@@ -479,7 +480,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkMotionStateVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkMotionState {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_transform,
             m_sweptTransform,
             m_deltaAngle,

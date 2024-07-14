@@ -136,6 +136,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkAabbHalfVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_data: _serde::__private::Option<[u16; 6usize]> = _serde::__private::None;
         let mut m_extras: _serde::__private::Option<[u16; 2usize]> = _serde::__private::None;
         for i in 0..2usize {
@@ -190,7 +191,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkAabbHalfVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkAabbHalf {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_data,
             m_extras,
         })

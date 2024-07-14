@@ -227,6 +227,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSampledHeightFieldShapeVisitor<'de> 
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_xRes: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_zRes: _serde::__private::Option<i32> = _serde::__private::None;
@@ -469,7 +470,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSampledHeightFieldShapeVisitor<'de> 
             }
         };
         _serde::__private::Ok(hkpSampledHeightFieldShape {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_xRes,
             m_zRes,

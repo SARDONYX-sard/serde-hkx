@@ -128,6 +128,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbFootIkControlDataVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_gains: _serde::__private::Option<hkbFootIkGains> = _serde::__private::None;
         for i in 0..1usize {
             match i {
@@ -158,7 +159,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbFootIkControlDataVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbFootIkControlData {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_gains,
         })
     }

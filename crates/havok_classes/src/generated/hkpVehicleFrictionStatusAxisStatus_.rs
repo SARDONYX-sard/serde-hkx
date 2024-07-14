@@ -215,6 +215,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleFrictionStatusAxisStatusVisit
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_forward_slip_velocity: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_side_slip_velocity: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_skid_energy_density: _serde::__private::Option<f32> = _serde::__private::None;
@@ -463,7 +464,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleFrictionStatusAxisStatusVisit
             }
         };
         _serde::__private::Ok(hkpVehicleFrictionStatusAxisStatus {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_forward_slip_velocity,
             m_side_slip_velocity,
             m_skid_energy_density,

@@ -138,6 +138,7 @@ for __hkpViscousSurfaceModifierConstraintAtomVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         for i in 0..0usize {
             match i {
@@ -146,7 +147,7 @@ for __hkpViscousSurfaceModifierConstraintAtomVisitor<'de> {
         }
         __A::pad(&mut __map, 32usize, 48usize)?;
         _serde::__private::Ok(hkpViscousSurfaceModifierConstraintAtom {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
         })
     }

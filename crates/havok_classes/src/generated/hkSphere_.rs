@@ -126,6 +126,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkSphereVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_pos: _serde::__private::Option<Vector4> = _serde::__private::None;
         for i in 0..1usize {
             match i {
@@ -155,10 +156,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkSphereVisitor<'de> {
                 );
             }
         };
-        _serde::__private::Ok(hkSphere {
-            __ptr: __A::class_ptr(&mut __map),
-            m_pos,
-        })
+        _serde::__private::Ok(hkSphere { __ptr, m_pos })
     }
     fn visit_struct<__A>(
         self,

@@ -149,6 +149,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleFrictionDescriptionVisitor<'d
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_wheelDistance: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_chassisMassInv: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_axleDescr: _serde::__private::Option<
@@ -238,7 +239,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleFrictionDescriptionVisitor<'d
             }
         };
         _serde::__private::Ok(hkpVehicleFrictionDescription {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_wheelDistance,
             m_chassisMassInv,
             m_axleDescr,

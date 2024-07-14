@@ -238,6 +238,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkMultipleVertexBufferVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_vertexFormat: _serde::__private::Option<hkVertexFormat> = _serde::__private::None;
         let mut m_lockedElements: _serde::__private::Option<
@@ -548,7 +549,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkMultipleVertexBufferVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkMultipleVertexBuffer {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_vertexFormat,
             m_lockedElements,

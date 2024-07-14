@@ -218,6 +218,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpConvexVerticesShapeVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_aabbHalfExtents: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_aabbCenter: _serde::__private::Option<Vector4> = _serde::__private::None;
@@ -439,7 +440,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpConvexVerticesShapeVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpConvexVerticesShape {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_aabbHalfExtents,
             m_aabbCenter,

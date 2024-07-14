@@ -244,6 +244,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkPackfileHeaderVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_magic: _serde::__private::Option<[i32; 2usize]> = _serde::__private::None;
         let mut m_userTag: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_fileVersion: _serde::__private::Option<i32> = _serde::__private::None;
@@ -566,7 +567,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkPackfileHeaderVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkPackfileHeader {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_magic,
             m_userTag,
             m_fileVersion,

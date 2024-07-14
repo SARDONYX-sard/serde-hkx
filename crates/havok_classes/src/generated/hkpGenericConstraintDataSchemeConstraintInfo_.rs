@@ -167,6 +167,7 @@ for __hkpGenericConstraintDataSchemeConstraintInfoVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_maxSizeOfSchema: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_sizeOfSchemas: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_numSolverResults: _serde::__private::Option<i32> = _serde::__private::None;
@@ -279,7 +280,7 @@ for __hkpGenericConstraintDataSchemeConstraintInfoVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpGenericConstraintDataSchemeConstraintInfo {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_maxSizeOfSchema,
             m_sizeOfSchemas,
             m_numSolverResults,

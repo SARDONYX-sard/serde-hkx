@@ -210,6 +210,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpAabbPhantomVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_aabb: _serde::__private::Option<hkAabb> = _serde::__private::None;
         let mut m_overlappingCollidables: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
@@ -296,7 +297,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpAabbPhantomVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpAabbPhantom {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_aabb,
             m_overlappingCollidables,

@@ -191,6 +191,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbGeneratorSyncInfoVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_syncPoints: _serde::__private::Option<
             [hkbGeneratorSyncInfoSyncPoint; 8usize],
         > = _serde::__private::None;
@@ -410,7 +411,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbGeneratorSyncInfoVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkbGeneratorSyncInfo {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_syncPoints,
             m_baseFrequency,
             m_localTime,

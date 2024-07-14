@@ -210,6 +210,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbExtractRagdollPoseModifierVisitor<'d
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_poseMatchingBone0: _serde::__private::Option<i16> = _serde::__private::None;
         let mut m_poseMatchingBone1: _serde::__private::Option<i16> = _serde::__private::None;
@@ -326,7 +327,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbExtractRagdollPoseModifierVisitor<'d
             }
         };
         _serde::__private::Ok(hkbExtractRagdollPoseModifier {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_poseMatchingBone0,
             m_poseMatchingBone1,

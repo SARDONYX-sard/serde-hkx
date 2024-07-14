@@ -223,6 +223,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpStorageExtendedMeshShapeVisitor<'de>
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_meshstorage: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
         let mut m_shapestorage: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
@@ -283,7 +284,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpStorageExtendedMeshShapeVisitor<'de>
             }
         };
         _serde::__private::Ok(hkpStorageExtendedMeshShape {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_meshstorage,
             m_shapestorage,

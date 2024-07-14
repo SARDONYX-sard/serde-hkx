@@ -234,6 +234,7 @@ impl<'de> _serde::de::Visitor<'de> for __BGSGamebryoSequenceGeneratorVisitor<'de
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_pSequence: _serde::__private::Option<CString<'de>> = _serde::__private::None;
         let mut m_eBlendModeFunction: _serde::__private::Option<BlendModeFunction> = _serde::__private::None;
@@ -423,7 +424,7 @@ impl<'de> _serde::de::Visitor<'de> for __BGSGamebryoSequenceGeneratorVisitor<'de
             }
         };
         _serde::__private::Ok(BGSGamebryoSequenceGenerator {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_pSequence,
             m_eBlendModeFunction,

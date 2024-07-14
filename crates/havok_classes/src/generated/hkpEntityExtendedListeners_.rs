@@ -136,6 +136,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpEntityExtendedListenersVisitor<'de> 
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_activationListeners: _serde::__private::Option<
             hkpEntitySmallArraySerializeOverrideType,
         > = _serde::__private::None;
@@ -204,7 +205,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpEntityExtendedListenersVisitor<'de> 
             }
         };
         _serde::__private::Ok(hkpEntityExtendedListeners {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_activationListeners,
             m_entityListeners,
         })

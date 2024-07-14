@@ -342,6 +342,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDataVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_gravity: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_numWheels: _serde::__private::Option<i8> = _serde::__private::None;
@@ -879,7 +880,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDataVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpVehicleData {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_gravity,
             m_numWheels,

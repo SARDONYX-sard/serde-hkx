@@ -149,6 +149,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCompiledExpressionSetTokenVisitor<'d
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_data: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_type: _serde::__private::Option<TokenType> = _serde::__private::None;
         let mut m_operator: _serde::__private::Option<Operator> = _serde::__private::None;
@@ -230,7 +231,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCompiledExpressionSetTokenVisitor<'d
             }
         };
         _serde::__private::Ok(hkbCompiledExpressionSetToken {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_data,
             m_type,
             m_operator,

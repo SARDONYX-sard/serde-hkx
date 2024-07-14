@@ -122,6 +122,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkaKeyFrameHierarchyUtilityVisitor<'de>
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         for i in 0..0usize {
             match i {
                 _ => {}
@@ -129,7 +130,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkaKeyFrameHierarchyUtilityVisitor<'de>
         }
         __A::pad(&mut __map, 1usize, 1usize)?;
         _serde::__private::Ok(hkaKeyFrameHierarchyUtility {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
         })
     }
     fn visit_struct<__A>(

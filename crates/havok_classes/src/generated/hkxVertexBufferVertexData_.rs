@@ -222,6 +222,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkxVertexBufferVertexDataVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_vectorData: _serde::__private::Option<Vec<Vector4>> = _serde::__private::None;
         let mut m_floatData: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
         let mut m_uint32Data: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
@@ -514,7 +515,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkxVertexBufferVertexDataVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkxVertexBufferVertexData {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_vectorData,
             m_floatData,
             m_uint32Data,

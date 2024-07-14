@@ -142,6 +142,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBoolVariableSequencedDataSampleVisit
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_time: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_value: _serde::__private::Option<bool> = _serde::__private::None;
         for i in 0..2usize {
@@ -197,7 +198,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBoolVariableSequencedDataSampleVisit
             }
         };
         _serde::__private::Ok(hkbBoolVariableSequencedDataSample {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_time,
             m_value,
         })

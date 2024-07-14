@@ -215,6 +215,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCollidableBoundingVolumeDataVisitor<
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_min: _serde::__private::Option<[u32; 3usize]> = _serde::__private::None;
         let mut m_expansionMin: _serde::__private::Option<[u8; 3usize]> = _serde::__private::None;
         let mut m_expansionShift: _serde::__private::Option<u8> = _serde::__private::None;
@@ -480,7 +481,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCollidableBoundingVolumeDataVisitor<
             }
         };
         _serde::__private::Ok(hkpCollidableBoundingVolumeData {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             m_min,
             m_expansionMin,
             m_expansionShift,

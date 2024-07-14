@@ -149,6 +149,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSetupStabilizationAtomVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_enabled: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_maxAngle: _serde::__private::Option<f32> = _serde::__private::None;
@@ -231,7 +232,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSetupStabilizationAtomVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpSetupStabilizationAtom {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_enabled,
             m_maxAngle,

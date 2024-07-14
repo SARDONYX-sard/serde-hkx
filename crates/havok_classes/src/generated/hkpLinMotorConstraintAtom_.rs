@@ -180,6 +180,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpLinMotorConstraintAtomVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_isEnabled: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_motorAxis: _serde::__private::Option<u8> = _serde::__private::None;
@@ -346,7 +347,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpLinMotorConstraintAtomVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkpLinMotorConstraintAtom {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_isEnabled,
             m_motorAxis,

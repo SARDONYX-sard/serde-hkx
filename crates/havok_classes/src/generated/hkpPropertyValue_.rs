@@ -127,6 +127,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPropertyValueVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_data: _serde::__private::Option<u64> = _serde::__private::None;
         for i in 0..1usize {
             match i {
@@ -156,10 +157,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPropertyValueVisitor<'de> {
                 );
             }
         };
-        _serde::__private::Ok(hkpPropertyValue {
-            __ptr: __A::class_ptr(&mut __map),
-            m_data,
-        })
+        _serde::__private::Ok(hkpPropertyValue { __ptr, m_data })
     }
     fn visit_struct<__A>(
         self,

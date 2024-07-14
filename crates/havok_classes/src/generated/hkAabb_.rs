@@ -135,6 +135,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkAabbVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let mut m_min: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_max: _serde::__private::Option<Vector4> = _serde::__private::None;
         for i in 0..2usize {
@@ -188,11 +189,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkAabbVisitor<'de> {
                 );
             }
         };
-        _serde::__private::Ok(hkAabb {
-            __ptr: __A::class_ptr(&mut __map),
-            m_min,
-            m_max,
-        })
+        _serde::__private::Ok(hkAabb { __ptr, m_min, m_max })
     }
     fn visit_struct<__A>(
         self,

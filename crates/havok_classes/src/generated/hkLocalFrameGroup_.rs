@@ -134,6 +134,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkLocalFrameGroupVisitor<'de> {
     where
         __A: _serde::de::MapAccess<'de>,
     {
+        let __ptr = __A::class_ptr(&mut __map);
         let parent = __A::next_value(&mut __map)?;
         let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
         for i in 0..1usize {
@@ -165,7 +166,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkLocalFrameGroupVisitor<'de> {
             }
         };
         _serde::__private::Ok(hkLocalFrameGroup {
-            __ptr: __A::class_ptr(&mut __map),
+            __ptr,
             parent,
             m_name,
         })
