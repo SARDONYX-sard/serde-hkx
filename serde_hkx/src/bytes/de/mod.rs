@@ -322,6 +322,12 @@ impl<'de> BytesDeserializer<'de> {
     fn get_local_fixup_dst(&self) -> Result<usize> {
         let local_src = self.relative_position();
 
+        #[cfg(feature = "tracing")]
+        {
+            let local_abs = self.current_position;
+            tracing::debug!("local_src: {local_src}, abs + local_src: {local_abs:x}");
+        }
+
         let local_dst = *tri!(self
             .data_fixups
             .local_fixups
@@ -329,7 +335,7 @@ impl<'de> BytesDeserializer<'de> {
             .ok_or(Error::NotFoundDataLocalFixupsValue { key: local_src }));
 
         #[cfg(feature = "tracing")]
-        tracing::debug!(local_src, local_dst, self.data_header.absolute_data_start);
+        tracing::debug!(local_dst);
 
         // Change to abs
         Ok((local_dst + self.data_header.absolute_data_start) as usize)
