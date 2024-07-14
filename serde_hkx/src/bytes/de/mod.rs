@@ -325,7 +325,7 @@ impl<'de> BytesDeserializer<'de> {
         #[cfg(feature = "tracing")]
         {
             let local_abs = self.current_position;
-            tracing::debug!("local_src: {local_src}, abs + local_src: {local_abs:x}");
+            tracing::debug!("local_src: {local_src}, abs + local_src: {local_abs:#x}");
         }
 
         let local_dst = *tri!(self
