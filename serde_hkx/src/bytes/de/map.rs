@@ -9,20 +9,32 @@ use havok_types::Pointer;
 pub struct MapDeserializer<'a, 'de: 'a> {
     /// Deserializer
     de: &'a mut BytesDeserializer<'de>,
+    ptr_name: Option<Pointer>,
 
+    #[allow(unused)]
     /// Field index currently being processed
     field_index: usize,
+    #[allow(unused)]
+    /// Field index currently being processed
     /// Field length currently being processed
     fields: &'static [&'static str],
+
+    fields_ptr: usize,
 }
 
 impl<'a, 'de> MapDeserializer<'a, 'de> {
     /// Create a new map deserializer
-    pub fn new(de: &'a mut BytesDeserializer<'de>, fields: &'static [&'static str]) -> Self {
+    pub fn new(
+        de: &'a mut BytesDeserializer<'de>,
+        ptr_name: Option<Pointer>,
+        fields: &'static [&'static str],
+    ) -> Self {
         Self {
             de,
             field_index: 0,
             fields,
+            ptr_name,
+            fields_ptr: fields.as_ptr() as usize,
         }
     }
 }
@@ -32,11 +44,7 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
 
     #[inline]
     fn class_ptr(&mut self) -> Option<Pointer> {
-        if self.de.in_struct {
-            None
-        } else {
-            Some(Pointer::new(self.de.class_index))
-        }
+        self.ptr_name.take()
     }
 
     #[inline]
@@ -51,28 +59,42 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
         }
     }
 
-    // Parse
-    fn next_key_seed<K>(&mut self, seed: K) -> Result<Option<K::Value>, Self::Error>
+    // NOTE: This method is never used with bytes because the number of times is controlled by the for loop.
+    #[cold]
+    fn next_key_seed<K>(&mut self, _seed: K) -> Result<Option<K::Value>, Self::Error>
     where
         K: DeserializeSeed<'de>,
     {
-        // Check if there are no more elements.
-        if self.fields.len() == self.field_index {
-            return Ok(None);
-        }
-
-        let res = seed.deserialize(&mut *self.de).map(Some); // Expected to call `deserialize_key` with `impl Deserializer`
-        self.field_index += 1;
-        self.de.field_index = self.field_index;
-        res
+        unimplemented!("Use only `next_value` for Deserialize Bytes.")
     }
 
-    // Parse e.g. `(0.000000 0.000000 1.000000 0.000000)</hkparam>`
+    // Parse field
     #[inline]
     fn next_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
     where
         V: DeserializeSeed<'de>,
     {
+        #[cfg(feature = "tracing")]
+        {
+            if self.fields_ptr != self.fields.as_ptr() as usize {
+                self.field_index = 0;
+            };
+
+            if let Some(field_name) = self.fields.get(self.field_index) {
+                tracing::trace!(
+                    "current deserialize field: {field_name} of {:?}",
+                    self.fields
+                )
+            } else {
+                tracing::warn!(
+                    "invalid field index: {} of {}",
+                    self.field_index,
+                    self.fields.len()
+                )
+            };
+            self.field_index += 1;
+        }
+
         Ok(tri!(seed.deserialize(&mut *self.de)))
     }
 }

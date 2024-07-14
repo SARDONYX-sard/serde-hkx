@@ -2,6 +2,7 @@
 use super::BytesDeserializer;
 use crate::errors::de::{Error, Result};
 use havok_serde::de::{DeserializeSeed, SeqAccess};
+use havok_types::Pointer;
 
 /// A structure for deserializing each element in an `Array`.
 ///
@@ -12,15 +13,15 @@ pub struct SeqDeserializer<'a, 'de: 'a> {
     de: &'a mut BytesDeserializer<'de>,
 
     /// Array length
-    size: i32,
+    size: usize,
 
     /// Array length
-    index: i32,
+    index: usize,
 }
 
 impl<'a, 'de> SeqDeserializer<'a, 'de> {
     /// Create a new seq deserializer
-    pub fn new(de: &'a mut BytesDeserializer<'de>, size: i32) -> Self {
+    pub fn new(de: &'a mut BytesDeserializer<'de>, size: usize) -> Self {
         Self { de, size, index: 0 }
     }
 }
@@ -30,15 +31,24 @@ impl<'a, 'de> SeqDeserializer<'a, 'de> {
 impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
     type Error = Error;
 
+    fn class_ptr(&mut self) -> Result<Option<Pointer>, Self::Error> {
+        todo!()
+    }
+
     fn next_primitive_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>>
     where
         T: DeserializeSeed<'de>,
     {
         // Check if there are no more elements.
-        if self.de.input[self.de.current_position..].is_empty() || self.index == self.size {
+        if self.size == 0 || self.index == self.size {
+            #[cfg(feature = "tracing")]
+            tracing::debug!("seq end. index: {}, size: {}", self.index, self.size);
             return Ok(None);
-        };
+        }
+
         self.index += 1;
+        #[cfg(feature = "tracing")]
+        tracing::debug!(self.index);
 
         seed.deserialize(&mut *self.de).map(Some)
     }

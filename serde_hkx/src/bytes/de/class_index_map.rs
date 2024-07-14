@@ -3,21 +3,10 @@ use super::BytesDeserializer;
 use crate::errors::de::Error;
 use havok_serde::de::{ClassIndexAccess, DeserializeSeed};
 
-/// A structure for deserializing each element in an `Struct`.
-///
-/// # Expected XML
-/// ```xml
-/// <hkobject name="#0010" class="hkbProjectData" signature="0x13a39ba7"> <!-- <-Parsed by `deserialize_struct` -->
-///   <!-- memSizeAndFlags SERIALIZE_IGNORED -->
-///   <!-- referenceCount SERIALIZE_IGNORED -->
-///   <hkparam name="worldUpWS">(0.000000 0.000000 1.000000 0.000000)</hkparam>
-///   <hkparam name="stringData">#0009</hkparam>
-///   <hkparam name="defaultEventMode">EVENT_MODE_IGNORE_FROM_GENERATOR</hkparam>
-/// </hkobject>
-/// ```
+/// Order in which they are called.: `SeqAccess::next_class_element` -> `next_key` -> `next_value`
 #[derive(Debug)]
 pub struct BytesClassIndexMapDeserializer<'a, 'de: 'a> {
-    /// Deserializer
+    /// Root Deserializer
     de: &'a mut BytesDeserializer<'de>,
 }
 
@@ -33,7 +22,6 @@ impl<'a, 'de> ClassIndexAccess<'de> for BytesClassIndexMapDeserializer<'a, 'de> 
 
     // Call constructor by class name
     fn next_key(&mut self) -> Result<&'de str, Self::Error> {
-        let mut class_name = None;
         let mut start_offset = 0;
 
         if let Some((virtual_src, (_section_index, name_start_offset))) = &self
@@ -42,19 +30,24 @@ impl<'a, 'de> ClassIndexAccess<'de> for BytesClassIndexMapDeserializer<'a, 'de> 
             .virtual_fixups
             .get_index(self.de.class_index)
         {
+            // NOTE: First increment class_index(XML: `#0000`) to 1 based index notation.
+            self.de.class_index += 1;
+            start_offset = *name_start_offset;
+
             if let Some(name) = self.de.classnames.get(name_start_offset) {
-                #[cfg(feature = "tracing")]
-                tracing::debug!(name);
-
-                class_name = Some(*name);
-                start_offset = *name_start_offset;
-                self.de.class_index += 1;
-
                 self.de.current_position =
                     (*virtual_src + self.de.data_header.absolute_data_start) as usize;
+
+                #[cfg(feature = "tracing")]
+                tracing::debug!(name, self.de.class_index);
+                return Ok(*name);
             };
-        }
-        class_name.ok_or(Error::NotFoundClass { start_offset })
+        };
+
+        Err(Error::NotFoundClass {
+            index: self.de.class_index,
+            start_offset,
+        })
     }
 
     #[inline]

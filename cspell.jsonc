@@ -15,6 +15,7 @@
     "defaultmale",
     "deserializations",
     "deserializers",
+    "docsrs",
     "elif",
     "endl",
     "FUNCTIONPOINTER",

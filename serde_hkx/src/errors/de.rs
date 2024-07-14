@@ -28,9 +28,9 @@ pub enum Error {
     #[snafu(display("The data position pointed to by the pointer of the read position ({key}) is not found in global_fixups."))]
     NotFoundDataGlobalFixupsValue { key: u32 },
 
-    /// The data position pointed to by the pointer of the read position ({key}) is not found in virtual_fixups.
-    #[snafu(display("Couldn't find class by this name_offset: {start_offset}."))]
-    NotFoundClass { start_offset: u32 },
+    /// Could not find the {index}th corresponding class: {start_offset}
+    #[snafu(display("Could not find the {index}th corresponding class: {start_offset}"))]
+    NotFoundClass { index: usize, start_offset: u32 },
 
     /// Incomplete parsing binary.
     #[snafu(display("Incomplete parsing binary."))]

@@ -120,6 +120,7 @@ pub fn gen(class: &Class) -> TokenStream {
             where
                 __A: _serde::de::MapAccess<'de>,
             {
+                let __ptr = __A::class_ptr(&mut __map); // First make the `__ptr` of the inheritance source `Option::None` by taking `__ptr` here
                 #deserialize_parent
                 #(#first_recv_fields)*
 
@@ -134,7 +135,7 @@ pub fn gen(class: &Class) -> TokenStream {
                 #(#last_recv_fields)*
 
                 _serde::__private::Ok(#class_name {
-                    __ptr: __A::class_ptr(&mut __map),
+                    __ptr,
                     #(#field_idents,)*
                 })
             }

@@ -390,6 +390,14 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     }
 
     #[inline]
+    fn deserialize_class_index_seq<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    where
+        V: Visitor<'de>,
+    {
+        self.deserialize_array(visitor)
+    }
+
+    #[inline]
     fn deserialize_enum<V>(
         self,
         _name: &'static str,
@@ -422,10 +430,10 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let value = if self.in_struct {
+        let ptr_name = if self.in_struct {
             // When a struct is present in the field of struct, the name and signature attributes are not present.
             tri!(self.parse(start_tag("hkobject")));
-            tri!(visitor.visit_struct(MapDeserializer::new(self, None, fields)))
+            None
         } else {
             let (ptr_name, class_name, signature) = tri!(self.parse(class_start_tag()));
             #[cfg(feature = "tracing")]
@@ -438,9 +446,10 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
                 });
             };
             self.in_struct = true;
-            tri!(visitor.visit_struct(MapDeserializer::new(self, Some(ptr_name), fields)))
+            Some(ptr_name)
         };
 
+        let value = tri!(visitor.visit_struct(MapDeserializer::new(self, ptr_name, fields)));
         tri!(self.parse(end_tag("hkobject")));
         self.in_struct = false;
         Ok(value)

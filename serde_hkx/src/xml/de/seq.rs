@@ -7,6 +7,7 @@ use crate::tri;
 use crate::xml::de::parser::{comment_multispace0, comment_multispace1};
 
 use havok_serde::de::{DeserializeSeed, SeqAccess};
+use havok_types::Pointer;
 use winnow::combinator::alt;
 use winnow::error::{StrContext, StrContextValue};
 use winnow::Parser;
@@ -35,6 +36,10 @@ impl<'a, 'de> SeqDeserializer<'a, 'de> {
 // through elements of the sequence.
 impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
     type Error = Error;
+
+    fn class_ptr(&mut self) -> Result<Option<Pointer>, Self::Error> {
+        todo!()
+    }
 
     /// # Expected XML Examples
     ///

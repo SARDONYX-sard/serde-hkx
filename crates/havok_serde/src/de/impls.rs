@@ -588,3 +588,98 @@ where
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+
+#[cfg(all(feature = "indexmap", feature = "std"))]
+const _: () = {
+    use indexmap::IndexMap;
+
+    impl<'de, T> Deserialize<'de> for IndexMap<usize, T>
+    where
+        T: Deserialize<'de> + crate::HavokClass,
+    {
+        fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+        where
+            D: Deserializer<'de>,
+        {
+            struct MapVisitor<T>(PhantomData<T>);
+
+            impl<'de, T> Visitor<'de> for MapVisitor<T>
+            where
+                T: Deserialize<'de> + crate::HavokClass,
+            {
+                type Value = IndexMap<usize, T>;
+
+                fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+                    formatter.write_str("a sequence")
+                }
+
+                fn visit_array<A>(self, mut seq: A) -> Result<Self::Value, A::Error>
+                where
+                    A: SeqAccess<'de>,
+                {
+                    let capacity = size_hint::cautious::<T>(seq.size_hint());
+                    let mut values: Self::Value = IndexMap::with_capacity(capacity);
+
+                    let mut index = 0;
+                    while let Some(value) = tri!(seq.next_class_element()) {
+                        values.insert(index, value);
+                        index += 1;
+                    }
+                    Ok(values)
+                }
+            }
+
+            let visitor = MapVisitor(PhantomData);
+            deserializer.deserialize_class_index_seq(visitor)
+        }
+
+        fn deserialize_in_place<D>(deserializer: D, place: &mut Self) -> Result<(), D::Error>
+        where
+            D: Deserializer<'de>,
+        {
+            struct MapInPlaceVisitor<'a, T>(&'a mut IndexMap<usize, T>);
+
+            impl<'a, 'de: 'a, T> Visitor<'de> for MapInPlaceVisitor<'a, T>
+            where
+                T: Deserialize<'de> + crate::HavokClass,
+            {
+                type Value = ();
+
+                fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+                    formatter.write_str("a sequence")
+                }
+
+                fn visit_array<A>(self, mut seq: A) -> Result<Self::Value, A::Error>
+                where
+                    A: SeqAccess<'de>,
+                {
+                    let hint = size_hint::cautious::<T>(seq.size_hint());
+                    if let Some(additional) = hint.checked_sub(self.0.len()) {
+                        self.0.reserve(additional);
+                    }
+
+                    for i in 0..self.0.len() {
+                        let next = {
+                            let next_place = InPlaceSeed(&mut self.0[i]);
+                            tri!(seq.next_class_element_seed(next_place))
+                        };
+                        if next.is_none() {
+                            self.0.truncate(i);
+                            return Ok(());
+                        }
+                    }
+
+                    let mut index = 1; // 1 based index
+                    while let Some(value) = tri!(seq.next_class_element()) {
+                        self.0.insert(index, value);
+                        index += 1;
+                    }
+
+                    Ok(())
+                }
+            }
+
+            deserializer.deserialize_class_index_seq(MapInPlaceVisitor(place))
+        }
+    }
+};

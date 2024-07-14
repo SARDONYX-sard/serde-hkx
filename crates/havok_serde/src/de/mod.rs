@@ -899,6 +899,11 @@ pub trait Deserializer<'de>: Sized {
     where
         V: Visitor<'de>;
 
+    /// Deserialize a Class Index Array value.
+    fn deserialize_class_index_seq<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    where
+        V: Visitor<'de>;
+
     /// Deserialize an `enum` value.
     ///
     /// Hint that the `Deserialize` type is expecting an enum value with a
@@ -1393,6 +1398,9 @@ pub trait SeqAccess<'de> {
     /// deserialization.
     type Error: Error;
 
+    /// Get class index attribute
+    fn class_ptr(&mut self) -> Result<Option<Pointer>, Self::Error>;
+
     /// This returns `Ok(Some(value))` for the next value in the sequence, or
     /// `Ok(None)` if there are no more remaining items.
     ///
@@ -1512,6 +1520,11 @@ where
     type Error = A::Error;
 
     #[inline]
+    fn class_ptr(&mut self) -> Result<Option<Pointer>, Self::Error> {
+        (**self).class_ptr()
+    }
+
+    #[inline]
     fn next_primitive_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
     where
         T: DeserializeSeed<'de>,
@@ -1519,6 +1532,7 @@ where
         (**self).next_primitive_element_seed(seed)
     }
 
+    #[inline]
     fn next_class_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
     where
         T: DeserializeSeed<'de>,
@@ -1526,6 +1540,7 @@ where
         (**self).next_class_element_seed(seed)
     }
 
+    #[inline]
     fn next_math_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
     where
         T: DeserializeSeed<'de>,

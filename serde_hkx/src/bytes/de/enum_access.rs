@@ -5,10 +5,9 @@ use havok_serde::de::{DeserializeSeed, EnumAccess, VariantAccess};
 
 /// A enum for deserializing each variant in an `enum`.
 ///
-/// # Expected XML
-/// - Note that `</hkparam>` confirms the presence but does not consume.
-/// ```xml
-/// EVENT_MODE_IGNORE_FROM_GENERATOR</hkparam>
+/// # Expected bytes
+/// ```log
+/// 08
 /// ```
 #[derive(Debug)]
 pub struct EnumDeserializer<'a, 'de: 'a> {

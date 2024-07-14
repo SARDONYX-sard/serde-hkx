@@ -158,6 +158,46 @@ pub fn string<'a>() -> impl Parser<BytesStream<'a>, &'a str, ContextError> {
         )))
 }
 
+/// Parses ptr size(verify 0), size(`int` -> `usize`), and capacity(`int`).
+///
+/// # Returns
+/// (size, capacityAndFlags)
+pub fn array_meta<'a>(
+    is_x86: bool,
+    endian: Endianness,
+) -> impl Parser<BytesStream<'a>, (usize, i32), ContextError> {
+    move |bytes: &mut BytesStream<'a>| {
+        if is_x86 {
+            tri!(binary::u32(endian)
+                .verify(|uint| *uint == 0)
+                .map(|uint| uint as u64)
+                .context(StrContext::Expected(StrContextValue::Description(
+                    "Skip x86 ptr size(0 fill 4bytes)",
+                )))
+                .parse_next(bytes))
+        } else {
+            tri!(binary::u64(endian)
+                .verify(|ulong| *ulong == 0)
+                .context(StrContext::Expected(StrContextValue::Description(
+                    "Skip x64 ptr size(0 fill 8bytes)",
+                )))
+                .parse_next(bytes))
+        };
+
+        seq! {
+            binary::i32(endian)
+            .map(|size| size as usize)
+            .context(StrContext::Expected(
+                StrContextValue::Description("size(i32)")
+            )),
+            binary::i32(endian).context(
+                StrContext::Expected(StrContextValue::Description("capacity&flags(i32)"))
+            )
+        }
+        .parse_next(bytes)
+    }
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #[cfg(test)]

@@ -22,6 +22,7 @@ use class_index_map::BytesClassIndexMapDeserializer;
 use havok_serde::de::{self, Deserialize, ReadEnumSize, Visitor};
 use havok_types::*;
 use parser::classnames::ClassNames;
+use parser::type_kind::array_meta;
 use rhexdump::hexdump;
 use winnow::binary::Endianness;
 use winnow::error::{StrContext, StrContextValue};
@@ -70,8 +71,6 @@ pub struct BytesDeserializer<'de> {
     ///
     /// (It is actually map.rs that advances it, this is to prevent unintentional rewriting of variables in the processing of structs within structs)
     in_struct: bool,
-    /// It is actually map.rs that advances it, this is to prevent unintentional rewriting of variables in the processing of structs within structs
-    field_index: usize,
 }
 
 impl<'de> BytesDeserializer<'de> {
@@ -79,7 +78,7 @@ impl<'de> BytesDeserializer<'de> {
     pub fn from_bytes(input: &'de [u8]) -> Self {
         Self {
             input,
-            class_index: 1,
+            class_index: 0,
             ..Default::default()
         }
     }
@@ -87,7 +86,7 @@ impl<'de> BytesDeserializer<'de> {
 
 /// Parse binary data as the type specified in the partial generics.
 ///
-/// e.g. one class, 3 booleans, [u32; 10],
+/// e.g. one class, 3 booleans, `[u32; 10]`,
 ///
 /// # Note
 /// If pointer types are included, it is impossible to deserialize correctly because fixups information is required.
@@ -128,15 +127,14 @@ where
     // 3. Parse `__classnames__` section.
     let classnames_abs = deserializer.classnames_header.absolute_data_start as usize;
     let data_abs = deserializer.data_header.absolute_data_start as usize;
+    let classnames_section_range = classnames_abs..data_abs; // FIXME: assumption that `classnames_abs` < `data_abs`
     deserializer.classnames = tri!(deserializer.parse_range(
         classnames_section(deserializer.endian, 0),
-        // FIXME: built on the assumption that data_section comes after classnames, but can't deal with the case when it doesn't.
-        classnames_abs..data_abs, // classnames section range
+        classnames_section_range,
     ));
 
     // 4. Parse `__data__` section.
     deserializer.current_position = data_abs; // move to data section start
-
     T::deserialize(&mut deserializer)
 }
 
@@ -292,24 +290,27 @@ impl<'de> BytesDeserializer<'de> {
     }
 
     fn get_class_index_ptr(&mut self) -> Result<Pointer> {
-        let relative_position = self.relative_position();
+        let global_fixup_src = self.relative_position();
 
-        match self.data_fixups.global_fixups.get(&relative_position) {
-            Some((_section_index, virtual_src)) => {
-                if let Some(index) = self.data_fixups.virtual_fixups.get_index_of(virtual_src) {
+        match self.data_fixups.global_fixups.get(&global_fixup_src) {
+            Some((_section_index, global_dst)) => {
+                if let Some(class_index) = self.data_fixups.virtual_fixups.get_index_of(global_dst)
+                {
                     #[cfg(feature = "tracing")]
-                    tracing::debug!(relative_position, index);
+                    tracing::debug!(
+                        "global_fixup_src: {global_fixup_src}, class_index(from global_dst): {class_index}"
+                    );
 
                     self.current_position += if self.is_x86 { 4 } else { 8 };
-                    Ok(Pointer::new(index))
+                    Ok(Pointer::new(class_index + 1))
                 } else {
                     Err(Error::NotFoundClassIndex {
-                        global_dst: *virtual_src,
+                        global_dst: *global_dst,
                     })
                 }
             }
             None => Err(Error::NotFoundDataGlobalFixupsValue {
-                key: relative_position,
+                key: global_fixup_src,
             }),
         }
     }
@@ -338,14 +339,17 @@ impl<'de> BytesDeserializer<'de> {
     fn parse_local_fixup<O>(
         &mut self,
         parser: impl Parser<BytesStream<'de>, O, winnow::error::ContextError>,
-    ) -> Result<O> {
+    ) -> Result<Option<O>> {
         let backup_position = self.current_position();
+        self.current_position = match self.get_local_fixup_dst().ok() {
+            Some(dst) => dst,
+            None => return Ok(None),
+        };
 
-        self.current_position = tri!(self.to_readable_err(self.get_local_fixup_dst()));
         let res = tri!(self.parse_peek(parser));
 
         self.current_position = backup_position as usize;
-        Ok(res)
+        Ok(Some(res))
     }
 
     /// Skip ptr size
@@ -414,33 +418,22 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         self.deserialize_flags(size, visitor)
     }
 
-    /// This is used to determine which field in struct to deserialize.
-    ///
-    /// When deserializing structs in order, this is called by the `Deserialize` implementation on the each struct side,
-    /// so this calls `visit_u64` on the each struct side.
-    #[inline]
+    // NOTE: This method is never used with bytes because the number of times is controlled by the for loop.
+    #[cold]
     fn deserialize_key<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_uint64(self.field_index as u64)
+        visitor.visit_void(())
     }
 
+    // Deserialize one class.
     #[inline]
     fn deserialize_class_index<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        let res = visitor.visit_class_index(BytesClassIndexMapDeserializer::new(self));
-
-        let actual = self.class_index;
-        let expected = self.data_fixups.virtual_fixups.len();
-
-        if expected == actual {
-            res
-        } else {
-            self.to_readable_err(Err(Error::LackOfConstructors { actual, expected }))
-        }
+        visitor.visit_class_index(BytesClassIndexMapDeserializer::new(self))
     }
 
     #[inline]
@@ -672,28 +665,37 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        // The specification requires that the ptr data position be extracted before parsing meta information such as `ptr_size`.
-        let pointed_data_position = tri!(self.to_readable_err(self.get_local_fixup_dst()));
+        // If size is 0, local_fixups does not exist, so check size first.
+        // NOTE: This is a look-ahead, assuming the position does not move with this method.
+        let (size, _cap_and_flags) = tri!(self.parse_peek(array_meta(self.is_x86, self.endian)));
+        #[cfg(feature = "tracing")]
+        tracing::debug!("in_struct array_size: {size}");
 
-        // Parse `hkArray` meta
-        tri!(self.skip_ptr_size());
-        let size = tri!(
-            self.parse_peek(binary::i32(self.endian).context(StrContext::Expected(
-                StrContextValue::Description("size(i32)")
-            )))
-        );
-        self.current_position += 4;
-        let _cap_and_flags = tri!(self.parse_peek(binary::i32(self.endian).context(
-            StrContext::Expected(StrContextValue::Description("capacity&flags(i32)"))
-        )));
-        self.current_position += 4;
-        let backup_position = self.current_position();
+        if size == 0 {
+            self.current_position += if self.is_x86 { 12 } else { 16 };
+            visitor.visit_array(SeqDeserializer::new(self, 0))
+        } else {
+            // The specification requires that the ptr data position be extracted before parsing meta information such as `ptr_size`.
+            let pointed_data_position = tri!(self.to_readable_err(self.get_local_fixup_dst()));
+            self.current_position += if self.is_x86 { 12 } else { 16 }; // NOTE: If we move position before asking for local_fixup, we will not get key correctly.
+            let backup_position = self.current_position;
 
-        self.current_position = pointed_data_position;
-        let res = visitor.visit_array(SeqDeserializer::new(self, size));
+            self.current_position = pointed_data_position;
+            let res = visitor.visit_array(SeqDeserializer::new(self, size));
+            self.current_position = backup_position;
+            res
+        }
+    }
 
-        self.current_position = backup_position as usize;
-        res
+    fn deserialize_class_index_seq<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    where
+        V: Visitor<'de>,
+    {
+        let size = self.data_fixups.virtual_fixups.len();
+
+        #[cfg(feature = "tracing")]
+        tracing::debug!("class_map_size: {size}");
+        visitor.visit_array(SeqDeserializer::new(self, size))
     }
 
     #[inline]
@@ -720,8 +722,14 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        self.in_struct = true;
-        let value = tri!(visitor.visit_struct_for_bytes(MapDeserializer::new(self, fields)));
+        let ptr_name = if self.in_struct {
+            None
+        } else {
+            self.in_struct = true;
+            Some(Pointer::new(self.class_index))
+        };
+        let value =
+            tri!(visitor.visit_struct_for_bytes(MapDeserializer::new(self, ptr_name, fields)));
         self.in_struct = false;
         Ok(value)
     }
@@ -741,10 +749,12 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let s = tri!(self.parse_local_fixup(string()));
+        let s = match tri!(self.parse_local_fixup(string())) {
+            Some(s) => CString::from_str(s),
+            None => CString::from_option(None),
+        };
         tri!(self.skip_ptr_size());
-
-        visitor.visit_cstring(CString::from_str(s))
+        visitor.visit_cstring(s)
     }
 
     #[inline]
@@ -790,9 +800,12 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let s = tri!(self.parse_local_fixup(string()));
+        let s = match tri!(self.parse_local_fixup(string())) {
+            Some(s) => StringPtr::from_str(s),
+            None => StringPtr::from_option(None),
+        };
         tri!(self.skip_ptr_size());
-        visitor.visit_stringptr(StringPtr::from_str(s))
+        visitor.visit_stringptr(s)
     }
 }
 
@@ -896,7 +909,7 @@ mod tests {
 
         let bytes = include_bytes!("../../../../docs/handson_hex_dump/defaultmale/defaultmale.hkx");
 
-        let res = match from_bytes_file::<Vec<Classes>>(bytes) {
+        let res = match from_bytes_file::<indexmap::IndexMap<usize, Classes>>(bytes) {
             Ok(res) => res,
             Err(err) => panic!("{err}"),
         };
