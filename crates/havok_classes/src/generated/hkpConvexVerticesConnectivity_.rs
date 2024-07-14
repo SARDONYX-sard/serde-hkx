@@ -157,7 +157,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpConvexVerticesConnectivityVisitor<'d
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_vertexIndices: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
         let mut m_numVerticesPerFace: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
         for i in 0..2usize {

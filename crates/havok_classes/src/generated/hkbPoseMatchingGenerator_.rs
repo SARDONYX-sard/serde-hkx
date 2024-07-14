@@ -402,7 +402,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbPoseMatchingGeneratorVisitor<'de> {
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_worldFromModelRotation: _serde::__private::Option<Quaternion> = _serde::__private::None;
         let mut m_blendSpeed: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_minSpeedToSwitch: _serde::__private::Option<f32> = _serde::__private::None;

@@ -211,7 +211,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpAabbPhantomVisitor<'de> {
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_aabb: _serde::__private::Option<hkAabb> = _serde::__private::None;
         let mut m_overlappingCollidables: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
         let mut m_orderDirty: _serde::__private::Option<bool> = _serde::__private::None;

@@ -153,7 +153,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterControlCommandVisitor<'de> 
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_characterId: _serde::__private::Option<u64> = _serde::__private::None;
         let mut m_command: _serde::__private::Option<CharacterControlCommand> = _serde::__private::None;
         let mut m_padding: _serde::__private::Option<i32> = _serde::__private::None;

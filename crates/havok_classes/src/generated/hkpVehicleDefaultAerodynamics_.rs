@@ -176,7 +176,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDefaultAerodynamicsVisitor<'d
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_airDensity: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_frontalArea: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_dragCoefficient: _serde::__private::Option<f32> = _serde::__private::None;

@@ -201,7 +201,7 @@ impl<'de> _serde::de::Visitor<'de> for __BSSpeedSamplerModifierVisitor<'de> {
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_state: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_direction: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_goalSpeed: _serde::__private::Option<f32> = _serde::__private::None;

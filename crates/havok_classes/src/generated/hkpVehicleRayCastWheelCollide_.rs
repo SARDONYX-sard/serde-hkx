@@ -169,7 +169,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleRayCastWheelCollideVisitor<'d
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_wheelCollisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
         let mut m_phantom: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_rejectRayChassisListener: _serde::__private::Option<

@@ -156,7 +156,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMalleableConstraintDataVisitor<'de> 
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_constraintData: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_atoms: _serde::__private::Option<hkpBridgeAtoms> = _serde::__private::None;
         let mut m_strength: _serde::__private::Option<f32> = _serde::__private::None;

@@ -224,7 +224,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkxMaterialVisitor<'de> {
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
         let mut m_stages: _serde::__private::Option<Vec<hkxMaterialTextureStage>> = _serde::__private::None;
         let mut m_diffuseColor: _serde::__private::Option<Vector4> = _serde::__private::None;

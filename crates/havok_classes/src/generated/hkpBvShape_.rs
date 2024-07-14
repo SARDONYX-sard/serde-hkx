@@ -149,7 +149,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpBvShapeVisitor<'de> {
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_boundingVolumeShape: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_childShape: _serde::__private::Option<hkpSingleShapeContainer> = _serde::__private::None;
         for i in 0..2usize {

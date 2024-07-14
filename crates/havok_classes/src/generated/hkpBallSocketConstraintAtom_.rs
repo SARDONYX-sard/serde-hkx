@@ -179,7 +179,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpBallSocketConstraintAtomVisitor<'de>
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_solvingMethod: _serde::__private::Option<SolvingMethod> = _serde::__private::None;
         let mut m_bodiesToNotify: _serde::__private::Option<u8> = _serde::__private::None;
         let mut m_velocityStabilizationFactor: _serde::__private::Option<u8> = _serde::__private::None;

@@ -144,7 +144,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleWheelCollideVisitor<'de> {
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_alreadyUsed: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_type: _serde::__private::Option<u8> = _serde::__private::None;
         for i in 0..2usize {

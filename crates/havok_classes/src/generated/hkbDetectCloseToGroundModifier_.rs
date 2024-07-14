@@ -238,7 +238,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbDetectCloseToGroundModifierVisitor<'
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_closeToGroundEvent: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
         let mut m_closeToGroundHeight: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_raycastDistanceDown: _serde::__private::Option<f32> = _serde::__private::None;

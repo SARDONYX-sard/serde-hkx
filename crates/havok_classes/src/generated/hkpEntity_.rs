@@ -365,7 +365,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpEntityVisitor<'de> {
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_material: _serde::__private::Option<hkpMaterial> = _serde::__private::None;
         let mut m_limitContactImpulseUtilAndFlag: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_damageMultiplier: _serde::__private::Option<f32> = _serde::__private::None;

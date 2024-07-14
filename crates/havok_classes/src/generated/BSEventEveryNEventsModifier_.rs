@@ -253,7 +253,7 @@ impl<'de> _serde::de::Visitor<'de> for __BSEventEveryNEventsModifierVisitor<'de>
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_eventToCheckFor: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
         let mut m_eventToSend: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
         let mut m_numberOfEventsBeforeSend: _serde::__private::Option<i8> = _serde::__private::None;

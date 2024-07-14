@@ -152,7 +152,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpLinFrictionConstraintAtomVisitor<'de
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_isEnabled: _serde::__private::Option<u8> = _serde::__private::None;
         let mut m_frictionAxis: _serde::__private::Option<u8> = _serde::__private::None;
         let mut m_maxFrictionForce: _serde::__private::Option<f32> = _serde::__private::None;

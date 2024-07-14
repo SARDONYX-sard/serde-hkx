@@ -173,7 +173,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbSetNodePropertyCommandVisitor<'de> {
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_characterId: _serde::__private::Option<u64> = _serde::__private::None;
         let mut m_nodeName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
         let mut m_propertyName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;

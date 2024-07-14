@@ -164,7 +164,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpGroupFilterVisitor<'de> {
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_nextFreeSystemGroup: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_collisionLookupTable: _serde::__private::Option<[u32; 32usize]> = _serde::__private::None;
         let mut m_pad256: _serde::__private::Option<[Vector4; 4usize]> = _serde::__private::None;

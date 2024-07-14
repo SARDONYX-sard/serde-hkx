@@ -194,7 +194,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbSequenceInternalStateVisitor<'de> {
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_nextSampleEvents: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
         let mut m_nextSampleReals: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
         let mut m_nextSampleBools: _serde::__private::Option<Vec<i32>> = _serde::__private::None;

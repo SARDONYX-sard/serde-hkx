@@ -153,7 +153,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCollisionFilterVisitor<'de> {
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_prepad: _serde::__private::Option<[u32; 2usize]> = _serde::__private::None;
         let mut m_type: _serde::__private::Option<hkpFilterType> = _serde::__private::None;
         let mut m_postpad: _serde::__private::Option<[u32; 3usize]> = _serde::__private::None;

@@ -182,7 +182,7 @@ for __hkbPoseMatchingGeneratorInternalStateVisitor<'de> {
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_currentMatch: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_bestMatch: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_timeSinceBetterMatch: _serde::__private::Option<f32> = _serde::__private::None;

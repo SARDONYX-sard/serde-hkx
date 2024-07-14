@@ -212,7 +212,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbPoweredRagdollControlsModifierVisito
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_controlData: _serde::__private::Option<hkbPoweredRagdollControlData> = _serde::__private::None;
         let mut m_bones: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_worldFromModelModeData: _serde::__private::Option<

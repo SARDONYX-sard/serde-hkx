@@ -211,7 +211,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbGetHandleOnBoneModifierVisitor<'de> 
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_handleOut: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_localFrameName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
         let mut m_ragdollBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;

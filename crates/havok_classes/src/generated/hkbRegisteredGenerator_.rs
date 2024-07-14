@@ -173,7 +173,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbRegisteredGeneratorVisitor<'de> {
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_generator: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_relativePosition: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_relativeDirection: _serde::__private::Option<Vector4> = _serde::__private::None;

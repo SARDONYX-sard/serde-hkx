@@ -263,7 +263,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkaFootstepAnalysisInfoVisitor<'de> {
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_name: _serde::__private::Option<Vec<char>> = _serde::__private::None;
         let mut m_nameStrike: _serde::__private::Option<Vec<char>> = _serde::__private::None;
         let mut m_nameLift: _serde::__private::Option<Vec<char>> = _serde::__private::None;

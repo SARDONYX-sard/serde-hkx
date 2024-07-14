@@ -191,7 +191,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbTransitionEffectVisitor<'de> {
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_selfTransitionMode: _serde::__private::Option<SelfTransitionMode> = _serde::__private::None;
         let mut m_eventMode: _serde::__private::Option<EventMode> = _serde::__private::None;
         let mut m_defaultEventMode: _serde::__private::Option<i8> = _serde::__private::None;

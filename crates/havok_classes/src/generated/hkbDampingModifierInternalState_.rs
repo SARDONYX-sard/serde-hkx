@@ -186,7 +186,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbDampingModifierInternalStateVisitor<
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_dampedVector: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_vecErrorSum: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_vecPreviousError: _serde::__private::Option<Vector4> = _serde::__private::None;

@@ -154,7 +154,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpConvexTransformShapeVisitor<'de> {
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_transform: _serde::__private::Option<Transform> = _serde::__private::None;
         for i in 0..1usize {
             match i {

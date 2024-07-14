@@ -358,7 +358,7 @@ impl<'de> _serde::de::Visitor<'de> for __BSLookAtModifierVisitor<'de> {
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_lookAtTarget: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_bones: _serde::__private::Option<Vec<BSLookAtModifierBoneData>> = _serde::__private::None;
         let mut m_eyeBones: _serde::__private::Option<Vec<BSLookAtModifierBoneData>> = _serde::__private::None;

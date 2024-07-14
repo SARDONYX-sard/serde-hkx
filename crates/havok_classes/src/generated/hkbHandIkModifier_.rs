@@ -197,7 +197,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkModifierVisitor<'de> {
         __A: _serde::de::MapAccess<'de>,
     {
         let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::next_value(&mut __map)?;
+        let parent = __A::parent_value(&mut __map)?;
         let mut m_hands: _serde::__private::Option<Vec<hkbHandIkModifierHand<'de>>> = _serde::__private::None;
         let mut m_fadeInOutCurve: _serde::__private::Option<BlendCurve> = _serde::__private::None;
         let mut m_internalHandData: _serde::__private::Option<Vec<()>> = _serde::__private::None;
