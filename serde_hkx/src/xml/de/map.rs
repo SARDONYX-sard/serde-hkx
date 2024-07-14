@@ -84,4 +84,13 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
         tri!(self.de.parse(end_tag("hkparam")));
         Ok(value)
     }
+
+    // NOTE: This method is not used in `havok_classes` in XML because it is for bytes
+    #[cold]
+    fn parent_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
+    where
+        V: DeserializeSeed<'de>,
+    {
+        self.next_value_seed(seed)
+    }
 }

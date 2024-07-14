@@ -1,6 +1,6 @@
 //! Deserializing each field element in an `Struct`
 use super::BytesDeserializer;
-use crate::{errors::de::Error, tri};
+use crate::errors::de::Error;
 use havok_serde::de::{DeserializeSeed, MapAccess};
 use havok_types::Pointer;
 
@@ -69,7 +69,7 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
     }
 
     // Parse field
-    #[inline]
+    #[cfg_attr(not(feature = "tracing"), inline)]
     fn next_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
     where
         V: DeserializeSeed<'de>,
@@ -82,7 +82,8 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
 
             if let Some(field_name) = self.fields.get(self.field_index) {
                 tracing::trace!(
-                    "current deserialize field: {field_name} of {:?}",
+                    "deserialize {}th field: {field_name} of {:?}",
+                    self.field_index,
                     self.fields
                 )
             } else {
@@ -95,6 +96,18 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
             self.field_index += 1;
         }
 
-        Ok(tri!(seed.deserialize(&mut *self.de)))
+        seed.deserialize(&mut *self.de)
+    }
+
+    // Do the same thing as `next_value`, but separate them so that the current field name
+    // to be deserialized is logged correctly.
+    //
+    // This is the method separation for this purpose. (For now).
+    #[inline]
+    fn parent_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
+    where
+        V: DeserializeSeed<'de>,
+    {
+        seed.deserialize(&mut *self.de)
     }
 }

@@ -102,7 +102,7 @@ pub fn gen(class: &Class) -> TokenStream {
     );
 
     let deserialize_parent = if class.parent.is_some() {
-        quote! { let parent = __A::next_value(&mut __map)?; }
+        quote! { let parent = __A::parent_value(&mut __map)?; }
     } else {
         quote! {}
     };

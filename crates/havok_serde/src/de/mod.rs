@@ -1628,12 +1628,17 @@ pub trait MapAccess<'de> {
     ///
     /// `Deserialize` implementations should typically use
     /// `MapAccess::next_value` instead.
-    ///
-    /// # Panics
-    ///
-    /// Calling `next_value_seed` before `next_key_seed` is incorrect and is
-    /// allowed to panic or return bogus results.
     fn next_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
+    where
+        V: DeserializeSeed<'de>;
+
+    /// Deserialize C++ inherited parent fields(for bytes method)
+    ///
+    /// This returns a `Ok(value)` for the next value in the map.
+    ///
+    /// `Deserialize` implementations should typically use
+    /// `MapAccess::next_value` instead.
+    fn parent_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
     where
         V: DeserializeSeed<'de>;
 
@@ -1690,6 +1695,19 @@ pub trait MapAccess<'de> {
         self.next_value_seed(PhantomData)
     }
 
+    /// Deserialize C++ inherited parent fields(for bytes method)
+    ///
+    /// This returns a `Ok(value)` for the next value in the map.
+    ///
+    /// This method exists as a convenience for `Deserialize` implementations.
+    /// `MapAccess` implementations should not override the default behavior.
+    fn parent_value<V>(&mut self) -> Result<V, Self::Error>
+    where
+        V: Deserialize<'de>,
+    {
+        self.parent_value_seed(PhantomData)
+    }
+
     /// This returns `Ok(Some((key, value)))` for the next (key-value) pair in
     /// the map, or `Ok(None)` if there are no more remaining items.
     ///
@@ -1739,6 +1757,14 @@ where
     }
 
     #[inline]
+    fn parent_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
+    where
+        V: DeserializeSeed<'de>,
+    {
+        (**self).parent_value_seed(seed)
+    }
+
+    #[inline]
     fn next_entry_seed<K, V>(
         &mut self,
         kseed: K,
@@ -1774,6 +1800,14 @@ where
         V: Deserialize<'de>,
     {
         (**self).next_value()
+    }
+
+    #[inline]
+    fn parent_value<V>(&mut self) -> Result<V, Self::Error>
+    where
+        V: Deserialize<'de>,
+    {
+        (**self).parent_value()
     }
 
     #[inline]
