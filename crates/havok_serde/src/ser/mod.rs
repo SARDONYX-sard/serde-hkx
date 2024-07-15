@@ -32,13 +32,6 @@ macro_rules! declare_error_trait {
         /// Trait used by `Serialize` implementations to generically construct
         /// errors belonging to the `Serializer` against which they are
         /// currently running.
-        ///
-        /// # Example implementation
-        ///
-        /// The [example data format] presented on the website shows an error
-        /// type appropriate for a basic JSON data format.
-        ///
-        /// [example data format]: https://serde.rs/data-format.html
         pub trait Error: Sized $(+ $($super_trait)::+)* {
             /// Used when a [`Serialize`] implementation encounters any error
             /// while serializing a type.
@@ -48,30 +41,6 @@ macro_rules! declare_error_trait {
             ///
             /// For example, a filesystem [`Path`] may refuse to serialize
             /// itself if it contains invalid UTF-8 data.
-            ///
-            /// ```edition2021
-            /// # struct Path;
-            /// #
-            /// # impl Path {
-            /// #     fn to_str(&self) -> Option<&str> {
-            /// #         unimplemented!()
-            /// #     }
-            /// # }
-            /// #
-            /// use serde::ser::{self, Serialize, Serializer};
-            ///
-            /// impl Serialize for Path {
-            ///     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-            ///     where
-            ///         S: Serializer,
-            ///     {
-            ///         match self.to_str() {
-            ///             Some(s) => serializer.serialize_str(s),
-            ///             None => Err(ser::Error::custom("path contains invalid UTF-8 characters")),
-            ///         }
-            ///     }
-            /// }
-            /// ```
             ///
             /// [`Path`]: https://doc.rust-lang.org/std/path/struct.Path.html
             /// [`Serialize`]: ../trait.Serialize.html
@@ -110,30 +79,6 @@ declare_error_trait!(Error: Sized + Debug + Display);
 /// - `Zero`, `FunctionPointer`, `InplaceArray`, `HomogeneousArray`, `RelArray`, `Max`
 pub trait Serialize {
     /// Serialize this value into the given Serde serializer.
-    ///
-    /// ```edition2021
-    /// use havok_serde::ser::{Serialize, SerializeStruct, Serializer};
-    ///
-    /// struct Person {
-    ///     name: String,
-    ///     age: u8,
-    ///     phones: Vec<String>,
-    /// }
-    ///
-    /// // This is what #[derive(Serialize)] would generate.
-    /// impl Serialize for Person {
-    ///     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-    ///     where
-    ///         S: Serializer,
-    ///     {
-    ///         let mut s = serializer.serialize_struct("hkDummyClass", Some(50.into(), 0x12345678.into()))?;
-    ///         s.serialize_field("name", &self.name)?;
-    ///         s.serialize_field("age", &self.age)?;
-    ///         s.serialize_field("phones", &self.phones)?;
-    ///         s.end()
-    ///     }
-    /// }
-    /// ```
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error>;
 }
 
@@ -331,33 +276,6 @@ pub trait SerializeSeq {
 }
 
 /// Returned from `Serializer::serialize_struct`.
-///
-/// # Example use
-///
-/// ```edition2021
-/// use havok_serde::ser::{Serialize, SerializeStruct, Serializer};
-///
-/// struct Rgb {
-///     r: u8,
-///     g: u8,
-///     b: u8,
-/// }
-///
-/// impl Serialize for Rgb {
-///     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-///     where
-///         S: Serializer,
-///     {
-///         let mut rgb = serializer.serialize_struct("Rgb", Some((50.into(), 0x12345678.into())))?;
-///         rgb.serialize_field("r", &self.r)?;
-///         rgb.serialize_field("g", &self.g)?;
-///         rgb.serialize_field("b", &self.b)?;
-///         rgb.end()
-///     }
-/// }
-/// ```
-///
-/// # Example implementation
 ///
 /// The [example data format] presented on the website demonstrates an
 /// implementation of `SerializeStruct` for a basic JSON data format.

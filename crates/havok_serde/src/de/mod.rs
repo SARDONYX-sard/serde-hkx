@@ -56,32 +56,6 @@ macro_rules! declare_error_trait {
             /// Raised when there is general error when deserializing a type.
             ///
             /// The message should not be capitalized and should not end with a period.
-            ///
-            /// ```edition2021
-            /// # use std::str::FromStr;
-            /// #
-            /// # struct IpAddr;
-            /// #
-            /// # impl FromStr for IpAddr {
-            /// #     type Err = String;
-            /// #
-            /// #     fn from_str(_: &str) -> Result<Self, String> {
-            /// #         unimplemented!()
-            /// #     }
-            /// # }
-            /// #
-            /// use serde::de::{self, Deserialize, Deserializer};
-            ///
-            /// impl<'de> Deserialize<'de> for IpAddr {
-            ///     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-            ///     where
-            ///         D: Deserializer<'de>,
-            ///     {
-            ///         let s = String::deserialize(deserializer)?;
-            ///         s.parse().map_err(de::Error::custom)
-            ///     }
-            /// }
-            /// ```
             fn custom<T>(msg: T) -> Self
             where
                 T: Display;
@@ -201,29 +175,6 @@ declare_error_trait!(Error: Sized + Debug + Display);
 ///
 /// This is used as an argument to the `invalid_type`, `invalid_value`, and
 /// `invalid_length` methods of the `Error` trait to build error messages.
-///
-/// ```edition2021
-/// # use std::fmt;
-/// #
-/// # use serde::de::{self, Unexpected, Visitor};
-/// #
-/// # struct Example;
-/// #
-/// # impl<'de> Visitor<'de> for Example {
-/// #     type Value = ();
-/// #
-/// #     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
-/// #         write!(formatter, "definitely not a boolean")
-/// #     }
-/// #
-/// fn visit_bool<E><V>(self, visitor: V) -> Result<Self::Value, E>
-/// where
-///     E: de::Error,
-/// {
-///     Err(de::Error::invalid_type(Unexpected::Bool(v), &self))
-/// }
-/// # }
-/// ```
 #[derive(Clone, PartialEq, Debug)]
 pub enum Unexpected<'a> {
     /// No type information.
@@ -386,7 +337,7 @@ impl<'a> fmt::Display for Unexpected<'a> {
 /// (`&self`) is an implementation of this trait.
 ///
 /// ```edition2021
-/// # use serde::de::{self, Unexpected, Visitor};
+/// # use havok_serde::de::{self, Unexpected, Visitor};
 /// # use std::fmt;
 /// #
 /// # struct Example;
@@ -410,7 +361,7 @@ impl<'a> fmt::Display for Unexpected<'a> {
 /// Outside of a `Visitor`, `&"..."` can be used.
 ///
 /// ```edition2021
-/// # use serde::de::{self, Unexpected};
+/// # use havok_serde::de::{self, Unexpected};
 /// #
 /// # fn example<E>() -> Result<(), E>
 /// # where
@@ -532,22 +483,6 @@ pub trait Deserialize<'de>: Sized {
 /// from the input string, but a `from_reader` function may only deserialize
 /// owned data.
 ///
-/// ```edition2021
-/// # use serde::de::{Deserialize, DeserializeOwned};
-/// # use std::io::{Read, Result};
-/// #
-/// # trait Ignore {
-/// fn from_str<'a, T>(s: &'a str) -> Result<T>
-/// where
-///     T: Deserialize<'a>;
-///
-/// fn from_reader<R, T>(rdr: R) -> Result<T>
-/// where
-///     R: Read,
-///     T: DeserializeOwned;
-/// # }
-/// ```
-///
 /// # Lifetime
 ///
 /// The relationship between `Deserialize` and `DeserializeOwned` in trait
@@ -569,34 +504,6 @@ impl<T> DeserializeOwned for T where T: for<'de> Deserialize<'de> {}
 /// buffer. Using `DeserializeSeed` instead makes this possible as in the
 /// example code below.
 ///
-/// The canonical API for stateless deserialization looks like this:
-///
-/// ```edition2021
-/// # use serde::Deserialize;
-/// #
-/// # enum Error {}
-/// #
-/// fn func<'de, T: Deserialize<'de>>() -> Result<T, Error>
-/// # {
-/// #     unimplemented!()
-/// # }
-/// ```
-///
-/// Adjusting an API like this to support stateful deserialization is a matter
-/// of accepting a seed as input:
-///
-/// ```edition2021
-/// # use serde::de::DeserializeSeed;
-/// #
-/// # enum Error {}
-/// #
-/// fn func_seed<'de, T: DeserializeSeed<'de>>(seed: T) -> Result<T::Value, Error>
-/// # {
-/// #     let _ = seed;
-/// #     unimplemented!()
-/// # }
-/// ```
-///
 /// In practice the majority of deserialization is stateless. An API expecting a
 /// seed can be appeased by passing `std::marker::PhantomData` as a seed in the
 /// case of stateless deserialization.
@@ -608,119 +515,6 @@ impl<T> DeserializeOwned for T where T: for<'de> Deserialize<'de> {}
 /// deserializer lifetimes] for a more detailed explanation of these lifetimes.
 ///
 /// [Understanding deserializer lifetimes]: https://serde.rs/lifetimes.html
-///
-/// # Example
-///
-/// Suppose we have JSON that looks like `[[1, 2], [3, 4, 5], [6]]` and we need
-/// to deserialize it into a flat representation like `vec![1, 2, 3, 4, 5, 6]`.
-/// Allocating a brand new `Vec<T>` for each subarray would be slow. Instead we
-/// would like to allocate a single `Vec<T>` and then deserialize each subarray
-/// into it. This requires stateful deserialization using the `DeserializeSeed`
-/// trait.
-///
-/// ```edition2021
-/// use serde::de::{Deserialize, DeserializeSeed, Deserializer, SeqAccess, Visitor};
-/// use std::fmt;
-/// use std::marker::PhantomData;
-///
-/// // A DeserializeSeed implementation that uses stateful deserialization to
-/// // append array elements onto the end of an existing vector. The preexisting
-/// // state ("seed") in this case is the Vec<T>. The `deserialize` method of
-/// // `ExtendVec` will be traversing the inner arrays of the JSON input and
-/// // appending each integer into the existing Vec.
-/// struct ExtendVec<'a, T: 'a>(&'a mut Vec<T>);
-///
-/// impl<'de, 'a, T> DeserializeSeed<'de> for ExtendVec<'a, T>
-/// where
-///     T: Deserialize<'de>,
-/// {
-///     // The return type of the `deserialize` method. This implementation
-///     // appends onto an existing vector but does not create any new data
-///     // structure, so the return type is ().
-///     type Value = ();
-///
-///     fn deserialize<D>(self, deserializer: D) -> Result<Self::Value, D::Error>
-///     where
-///         D: Deserializer<'de>,
-///     {
-///         // Visitor implementation that will walk an inner array of the JSON
-///         // input.
-///         struct ExtendVecVisitor<'a, T: 'a>(&'a mut Vec<T>);
-///
-///         impl<'de, 'a, T> Visitor<'de> for ExtendVecVisitor<'a, T>
-///         where
-///             T: Deserialize<'de>,
-///         {
-///             type Value = ();
-///
-///             fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
-///                 write!(formatter, "an array of integers")
-///             }
-///
-///             fn visit_seq<A>(self, mut seq: A) -> Result<(), A::Error>
-///             where
-///                 A: SeqAccess<'de>,
-///             {
-///                 // Decrease the number of reallocations if there are many elements
-///                 if let Some(size_hint) = seq.size_hint() {
-///                     self.0.reserve(size_hint);
-///                 }
-///
-///                 // Visit each element in the inner array and push it onto
-///                 // the existing vector.
-///                 while let Some(elem) = seq.next_element()? {
-///                     self.0.push(elem);
-///                 }
-///                 Ok(())
-///             }
-///         }
-///
-///         deserializer.deserialize_seq(ExtendVecVisitor(self.0))
-///     }
-/// }
-///
-/// // Visitor implementation that will walk the outer array of the JSON input.
-/// struct FlattenedVecVisitor<T>(PhantomData<T>);
-///
-/// impl<'de, T> Visitor<'de> for FlattenedVecVisitor<T>
-/// where
-///     T: Deserialize<'de>,
-/// {
-///     // This Visitor constructs a single Vec<T> to hold the flattened
-///     // contents of the inner arrays.
-///     type Value = Vec<T>;
-///
-///     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
-///         write!(formatter, "an array of arrays")
-///     }
-///
-///     fn visit_seq<A>(self, mut seq: A) -> Result<Vec<T>, A::Error>
-///     where
-///         A: SeqAccess<'de>,
-///     {
-///         // Create a single Vec to hold the flattened contents.
-///         let mut vec = Vec::new();
-///
-///         // Each iteration through this loop is one inner array.
-///         while let Some(()) = seq.next_element_seed(ExtendVec(&mut vec))? {
-///             // Nothing to do; inner array has been appended into `vec`.
-///         }
-///
-///         // Return the finished vec.
-///         Ok(vec)
-///     }
-/// }
-///
-/// # fn example<'de, D>(deserializer: D) -> Result<(), D::Error>
-/// # where
-/// #     D: Deserializer<'de>,
-/// # {
-/// let visitor = FlattenedVecVisitor(PhantomData);
-/// let flattened: Vec<u64> = deserializer.deserialize_seq(visitor)?;
-/// #     Ok(())
-/// # }
-/// ```
-
 pub trait DeserializeSeed<'de>: Sized {
     /// The type produced by using this seed.
     type Value;
@@ -986,38 +780,6 @@ pub trait Deserializer<'de>: Sized {
 /// deserializer lifetimes] for a more detailed explanation of these lifetimes.
 ///
 /// [Understanding deserializer lifetimes]: https://serde.rs/lifetimes.html
-///
-/// # Example
-///
-/// ```edition2021
-/// # use serde::de::{self, Unexpected, Visitor};
-/// # use std::fmt;
-/// #
-/// /// A visitor that deserializes a long string - a string containing at least
-/// /// some minimum number of bytes.
-/// struct LongString {
-///     min: usize,
-/// }
-///
-/// impl<'de> Visitor<'de> for LongString {
-///     type Value = String;
-///
-///     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
-///         write!(formatter, "a string containing at least {} bytes", self.min)
-///     }
-///
-///     fn visit_str<E>(self, s: &str) -> Result<Self::Value, E>
-///     where
-///         E: de::Error,
-///     {
-///         if s.len() >= self.min {
-///             Ok(s.to_owned())
-///         } else {
-///             Err(de::Error::invalid_value(Unexpected::Str(s), &self))
-///         }
-///     }
-/// }
-/// ```
 pub trait Visitor<'de>: Sized {
     /// The value produced by this visitor.
     type Value;
@@ -1036,7 +798,7 @@ pub trait Visitor<'de>: Sized {
     /// #     max: usize,
     /// # }
     /// #
-    /// # impl<'de> serde::de::Visitor<'de> for S {
+    /// # impl<'de> havok_serde::de::Visitor<'de> for S {
     /// #     type Value = ();
     /// #
     /// fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
