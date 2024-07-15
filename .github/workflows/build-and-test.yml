@@ -1,0 +1,35 @@
+name: Cargo Lint & Test
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: "*"
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          prefix-key: cargo-${{ matrix.platform }}
+
+      - name: Format Check
+        run: cargo fmt --all -- --check
+      - name: Lint Check
+        run: cargo clippy --workspace -- -D warnings
+
+      - name: Test
+        run: cargo test --workspace
+
+      - name: Run build
+        run: cargo build
