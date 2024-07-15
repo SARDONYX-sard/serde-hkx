@@ -144,16 +144,8 @@ where
 /// Calculates the position in the hexdump output where the byte at the given
 /// binary error position will appear.
 ///
-/// # Example
-///
-/// ```
-/// let pos = 23;
-/// let result = to_hexdump_pos(pos);
-/// println!("The hexdump position for error at byte {} is: {}", pos, result);
-/// ```
-///
 /// The hexdump format for reference:
-/// ```
+/// ```txt
 /// 00000000: 4865 6c6c 6f20 576f 726c 6421 0a                  Hello World!
 /// ```
 /// In this format:
