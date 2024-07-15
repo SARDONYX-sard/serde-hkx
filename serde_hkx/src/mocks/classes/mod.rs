@@ -1,9 +1,16 @@
+#[rustfmt::skip]
 mod all_types_test_class;
+#[rustfmt::skip]
 mod hkBaseObject_;
+#[rustfmt::skip]
 mod hkReferencedObject_;
+#[rustfmt::skip]
 mod hkRootLevelContainerNamedVariant_;
+#[rustfmt::skip]
 mod hkRootLevelContainer_;
+#[rustfmt::skip]
 mod hkbProjectData_;
+#[rustfmt::skip]
 mod hkbProjectStringData_;
 
 pub(super) use super::class_requires;

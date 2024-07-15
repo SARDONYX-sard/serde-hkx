@@ -33,7 +33,7 @@
 //! `enum Type`(`TYPE_ENUM`)
 //! - `hkClassMember`
 //! - `hkResourceBase`
-
+#[rustfmt::skip]
 mod generated;
 pub use generated::*;
 
