@@ -30,6 +30,7 @@ impl<'a, 'de> SeqDeserializer<'a, 'de> {
 impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
     type Error = Error;
 
+    // If we don't call `next_class_element` afterwards, we won't get the index of the correct class.
     #[inline]
     fn class_ptr(&self) -> Result<usize, Self::Error> {
         if self.de.class_index == 0 {

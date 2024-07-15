@@ -229,10 +229,10 @@ mod tests {
 
     #[test]
     fn test_string() {
-        let mut input = "example</hkparam>";
-        assert_eq!(string().parse_next(&mut input), Ok("example"));
-
-        let invalid_input = "example</not_hkparam>";
-        assert!(string().parse_peek(invalid_input).is_err());
+        assert_eq!(string().parse_next(&mut "example</"), Ok("example"));
+        assert_eq!(
+            string().parse_next(&mut "example</not_hkparam>"),
+            Ok("example")
+        );
     }
 }

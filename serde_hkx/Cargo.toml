@@ -30,22 +30,12 @@ num-derive = "0.4"                                           # enum to number(mo
 num-traits = "0.2"                                           # enum to number(mock)
 pretty_assertions = "1.4"                                    # Color diff assertion
 quick_tracing = { version = "0.1.5", features = ["derive"] }
+tracing = { version = "0.1.40" }
 zerocopy = { version = "0.7.34" }                            # To(As)Bytes
 
 [features]
-default = ["std", "tracing"]
-
-# Provide derive(Serialize, Deserialize) macros.
-# derive = ["havok_serde_derive"]
-
-# Provide impls for common standard library types like Vec<T> and HashMap<K, V>.
-# Requires a dependency on the Rust standard library.
-std = []
-
-# Provide impls for types in the Rust core allocation and collections library
-# including Vec<T>, and Cow<T>. This is a subset of std but may
-# be enabled without depending on all of std.
-alloc = []
+default = []
+# default = ["tracing"]
 
 # Use tracing logging.(We may need `tracing-subscriber` crate too.)
 tracing = ["dep:tracing"]

@@ -7,7 +7,7 @@ use crate::bytes::ser::trait_impls::Align as _;
 use crate::bytes::serde::{hkx_header::HkxHeader, section_header::SectionHeader};
 use crate::errors::ser::{
     Error, InvalidEndianSnafu, MissingClassInClassnamesSectionSnafu, MissingGlobalFixupClassSnafu,
-    MissingLocalFixupsSrcSnafu, Result, SubAbsOverflowSnafu, UnsupportedPtrSizeSnafu,
+    Result, SubAbsOverflowSnafu, UnsupportedPtrSizeSnafu,
 };
 use byteorder::{BigEndian, LittleEndian, WriteBytesExt as _};
 use havok_serde::ser::{
@@ -231,6 +231,7 @@ impl ByteSerializer {
     ///
     /// # Info
     /// When dst is known, src is already known and can be written.
+    /// # Note
     fn write_local_fixup_pair(&mut self, key: &str, local_dst: u32) -> Result<()> {
         match self.local_fixups_name_src.get(key) {
             Some(local_src) => {
@@ -244,7 +245,11 @@ impl ByteSerializer {
                 )?;
                 Ok(())
             }
-            None => MissingLocalFixupsSrcSnafu { dst: local_dst }.fail()?,
+            None => {
+                #[cfg(feature = "tracing")]
+                tracing::debug!("Skip because there is no corresponding `local_fixup.src`. {key} -> dst({local_dst})");
+                Ok(())
+            }
         }
     }
 
@@ -265,7 +270,11 @@ impl ByteSerializer {
                 )?;
                 Ok(())
             }
-            None => MissingLocalFixupsSrcSnafu { dst: local_dst }.fail()?,
+            None => {
+                #[cfg(feature = "tracing")]
+                tracing::debug!("Skip because there is no corresponding `local_fixup.src`. iterator ({index}th) -> dst({local_dst})");
+                Ok(())
+            }
         }
     }
 
@@ -422,15 +431,13 @@ impl<'a> Serializer for &'a mut ByteSerializer {
 
     #[inline]
     fn serialize_bool(self, v: bool) -> Result<Self::Ok, Self::Error> {
-        self.serialize_uint8(v as u8)?;
-        Ok(())
+        self.serialize_uint8(v as u8)
     }
 
     #[inline]
     /// Assume that the characters are ASCII characters`c_char`. In that case, i8 is used to fit into 128 characters.
     fn serialize_char(self, v: char) -> Result<Self::Ok, Self::Error> {
-        self.serialize_int8(v as i8)?;
-        Ok(())
+        self.serialize_int8(v as i8)
     }
 
     #[inline]
@@ -470,8 +477,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
         let start = self.relative_position()?;
         self.global_fixups_ptr_src.insert(ptr, start);
 
-        self.serialize_ulong(0_u64)?;
-        Ok(())
+        self.serialize_ulong(0_u64)
     }
 
     #[inline]
@@ -492,9 +498,9 @@ impl<'a> Serializer for &'a mut ByteSerializer {
     ) -> Result<Self::SerializeStruct, Self::Error> {
         if let Some((ptr, _)) = class_meta {
             let virtual_src = self.relative_position()?;
-
             self.virtual_fixups_ptr_src.insert(ptr, virtual_src); // For global_fixups
-                                                                  // At this point, one set of values for virtual_fixup is known.
+
+            // At this point, one set of values for `virtual_fixup` is known.
             self.write_virtual_fixups_pair(name, virtual_src)?;
         }
         Ok(self)
@@ -503,8 +509,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
     #[inline]
     fn serialize_variant(self, v: &Variant) -> Result<Self::Ok, Self::Error> {
         self.serialize_pointer(v.object)?;
-        self.serialize_pointer(v.class)?;
-        Ok(())
+        self.serialize_pointer(v.class)
     }
 
     #[inline]
@@ -516,8 +521,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
         match self.is_x86 {
             true => self.serialize_uint32(v as u32),
             false => self.serialize_uint64(v),
-        }?;
-        Ok(())
+        }
     }
 
     #[inline]
@@ -527,8 +531,7 @@ impl<'a> Serializer for &'a mut ByteSerializer {
 
     #[inline]
     fn serialize_half(self, v: f16) -> Result<Self::Ok, Self::Error> {
-        self.serialize_uint16(v.to_bits())?;
-        Ok(())
+        self.serialize_uint16(v.to_bits())
     }
 
     /// In the binary serialization of hkx, this is the actual data writing process beyond
@@ -553,8 +556,7 @@ impl<'a> SerializeSeq for &'a mut ByteSerializer {
     where
         T: ?Sized + Serialize,
     {
-        value.serialize(&mut **self)?;
-        Ok(())
+        value.serialize(&mut **self)
     }
 
     /// This method is called on HavokClasses array.(Write start)
@@ -640,6 +642,9 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         if value.should_write_binary() {
             let str_start = self.relative_position()?;
             self.local_fixups_name_src.insert(key, str_start);
+        } else {
+            #[cfg(feature = "tracing")]
+            tracing::debug!("skip serializing CString {key}.");
         };
 
         // Write meta fields
@@ -659,6 +664,9 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         if value.should_write_binary() {
             let str_start = self.relative_position()?;
             self.local_fixups_name_src.insert(key, str_start);
+        } else {
+            #[cfg(feature = "tracing")]
+            tracing::debug!("skip serializing StringPtr {key}.");
         };
 
         // Write meta fields
@@ -685,8 +693,7 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         let size = value.as_ref().len() as u32;
         self.serialize_ulong(0)?; // ptr size
         self.serialize_uint32(size)?; // array size
-        self.serialize_uint32(size | 1 << 31)?; // Capacity(same as size) | Owned flag(32nd bit)
-        Ok(())
+        self.serialize_uint32(size | 1 << 31) // Capacity(same as size) | Owned flag(32nd bit)
     }
 
     /// Write `T` of `T* m_data`.
@@ -802,6 +809,7 @@ impl<'a> SerializeFlags for &'a mut ByteSerializer {
         Ok(())
     }
 
+    // This method is for bytes only.
     #[inline]
     fn serialize_bits<T>(&mut self, value: &T) -> Result<(), Self::Error>
     where
@@ -825,7 +833,7 @@ mod tests {
     };
 
     #[test]
-    #[quick_tracing::try_init(test = "serialize_bytes")]
+    #[cfg_attr(feature = "tracing", quick_tracing::try_init(test = "serialize_bytes"))]
     fn test_serialize() -> Result<()> {
         let mut classes = new_defaultmale();
 

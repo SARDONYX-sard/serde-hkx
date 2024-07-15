@@ -15,11 +15,8 @@ pub struct MapDeserializer<'a, 'de: 'a> {
     /// Field index currently being processed
     field_index: usize,
     #[allow(unused)]
-    /// Field index currently being processed
     /// Field length currently being processed
     fields: &'static [&'static str],
-
-    fields_ptr: usize,
 }
 
 impl<'a, 'de> MapDeserializer<'a, 'de> {
@@ -34,7 +31,6 @@ impl<'a, 'de> MapDeserializer<'a, 'de> {
             field_index: 0,
             fields,
             ptr_name,
-            fields_ptr: fields.as_ptr() as usize,
         }
     }
 }
@@ -76,10 +72,6 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
     {
         #[cfg(feature = "tracing")]
         {
-            if self.fields_ptr != self.fields.as_ptr() as usize {
-                self.field_index = 0;
-            };
-
             if let Some(field_name) = self.fields.get(self.field_index) {
                 tracing::trace!(
                     "deserialize {}th field: {field_name} of {:?}",

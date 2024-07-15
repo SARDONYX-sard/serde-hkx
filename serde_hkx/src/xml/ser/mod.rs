@@ -533,7 +533,7 @@ mod tests {
     use crate::mocks::{classes::*, constructors::new_defaultmale};
 
     #[test]
-    #[quick_tracing::try_init]
+    #[cfg_attr(feature = "tracing", quick_tracing::try_init)]
     fn test_serialize_types_all() -> Result<()> {
         let all_types_class = AllTypesTestClass {
             __ptr: Some(Pointer::new(11)),

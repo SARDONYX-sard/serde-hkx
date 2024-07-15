@@ -696,6 +696,17 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         }
     }
 
+    // Fixed size array(stack array) is written directly without metadata
+    #[inline]
+    fn deserialize_fixed_array<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    where
+        V: Visitor<'de>,
+    {
+        // The fixed size array is controlled by a for loop, so the number of times is not controlled on the deserializer side.
+        // Therefore, a dummy is plugged in.
+        visitor.visit_array(SeqDeserializer::new(self, usize::MAX))
+    }
+
     fn deserialize_class_index_seq<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -838,7 +849,6 @@ mod tests {
     }
 
     #[test]
-    #[quick_tracing::init]
     fn test_deserialize_primitive() {
         parse_assert(&[128, 0], FlagValues::ALIGN_8);
         parse_assert(&[0], EventMode::EventModeDefault);
@@ -861,33 +871,34 @@ mod tests {
     }
 
     #[test]
-    fn test_deserialize_math_vec() {
+    fn test_deserialize_math_array() {
+        let expected = [
+            Vector4 {
+                x: -0.0,
+                y: 0.0,
+                z: -0.0,
+                w: 1.0,
+            },
+            Vector4 {
+                x: 0.0,
+                y: 0.0,
+                z: -0.0,
+                w: 1.0,
+            },
+            Vector4 {
+                x: -0.0,
+                y: 0.0,
+                z: -0.0,
+                w: 1.0,
+            },
+        ];
         parse_assert(
             zerocopy::AsBytes::as_bytes(&[
                 -0.0f32, 0.0, -0.0, 1.0, // 1 vec4
                 0.0, 0.0, -0.0, 1.0, // 2 vec4
                 -0.0, 0.0, -0.0, 1.0, // 3 vec4
             ]),
-            [
-                Vector4 {
-                    x: -0.0,
-                    y: 0.0,
-                    z: -0.0,
-                    w: 1.0,
-                },
-                Vector4 {
-                    x: 0.0,
-                    y: 0.0,
-                    z: -0.0,
-                    w: 1.0,
-                },
-                Vector4 {
-                    x: -0.0,
-                    y: 0.0,
-                    z: -0.0,
-                    w: 1.0,
-                },
-            ],
+            expected,
         );
     }
 
@@ -902,7 +913,7 @@ mod tests {
                 0, 0, 0, 0, // 8bytes align for struct
             ],
             hkReferencedObject {
-                __ptr: Some(Pointer::new(1)),
+                __ptr: Some(Pointer::new(0)), // In single class partial mode, ptr is not allocated.
                 parent: hkBaseObject { __ptr: None },
                 m_memSizeAndFlags: 2,
                 m_referenceCount: 0,
@@ -911,7 +922,10 @@ mod tests {
     }
 
     #[test]
-    #[quick_tracing::init(test = "deserialize_classes_from_bytes")]
+    #[cfg_attr(
+        feature = "tracing",
+        quick_tracing::init(test = "deserialize_classes_from_bytes")
+    )]
     fn test_deserialize_class_index() {
         use havok_classes::Classes;
         // use crate::mocks::Classes;

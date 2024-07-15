@@ -31,7 +31,7 @@ pub fn classnames_section<'a>(
         let mut class_map = HashMap::new();
         let mut offset = base_offset; // Necessary to determine the starting position of class_name.
 
-        while let Ok(signature) = binary::u32::<&[u8], ContextError>(endian)
+        while let Ok(_signature) = binary::u32::<&[u8], ContextError>(endian)
             .verify(|src| *src != FIXUP_VALUE_FOR_ALIGN)
             .context(StrContext::Expected(Description("local_fixup.src(u32)")))
             .parse_next(bytes)
@@ -48,7 +48,7 @@ pub fn classnames_section<'a>(
             offset += 5; // signature(4bytes) + separator(1byte)
             #[cfg(feature = "tracing")]
             tracing::trace!(
-                "signature: {signature:#x}, class_name: {class_name}, offset: {offset}"
+                "signature: {_signature:#x}, class_name: {class_name}, offset: {offset}"
             );
             class_map.insert(offset as u32, class_name);
 

@@ -899,6 +899,14 @@ pub trait Deserializer<'de>: Sized {
     where
         V: Visitor<'de>;
 
+    /// Deserialize an fixed array(e.g. `[bool; 3]`) value.
+    ///
+    /// # Intention to separate methods
+    /// The methods for fixed size array(stack array) and `hkArray` binary data are separated because they have different metadata.
+    fn deserialize_fixed_array<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    where
+        V: Visitor<'de>;
+
     /// Deserialize a Class Index Array value.
     fn deserialize_class_index_seq<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where

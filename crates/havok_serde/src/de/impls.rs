@@ -489,14 +489,14 @@ macro_rules! array_impls {
                 where
                     D: Deserializer<'de>,
                 {
-                    deserializer.deserialize_array(ArrayVisitor::<[$ty; N]>::new())
+                    deserializer.deserialize_fixed_array(ArrayVisitor::<[$ty; N]>::new())
                 }
 
                 fn deserialize_in_place<D>(deserializer: D, place: &mut Self) -> Result<(), D::Error>
                 where
                     D: Deserializer<'de>,
                 {
-                    deserializer.deserialize_array(ArrayInPlaceVisitor(place))
+                    deserializer.deserialize_fixed_array(ArrayInPlaceVisitor(place))
                 }
             }
         )+
@@ -576,14 +576,14 @@ where
     where
         D: Deserializer<'de>,
     {
-        deserializer.deserialize_array(ArrayVisitor::<[T; N]>::new())
+        deserializer.deserialize_fixed_array(ArrayVisitor::<[T; N]>::new())
     }
 
     fn deserialize_in_place<D>(deserializer: D, place: &mut Self) -> Result<(), D::Error>
     where
         D: Deserializer<'de>,
     {
-        deserializer.deserialize_array(ArrayInPlaceVisitor(place))
+        deserializer.deserialize_fixed_array(ArrayInPlaceVisitor(place))
     }
 }
 

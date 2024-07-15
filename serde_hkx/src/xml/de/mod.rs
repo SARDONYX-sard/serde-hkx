@@ -171,16 +171,13 @@ impl<'de> XmlDeserializer<'de> {
             Ok(value) => Ok(value),
             Err(err) => match err {
                 Error::ReadableError { .. } => Err(err),
-                _ => {
-                    tracing::debug!("{err}");
-                    Err(Error::ReadableError {
-                        source: ReadableError::from_display(
-                            err,
-                            self.original,
-                            self.original.len() - self.input.len(),
-                        ),
-                    })
-                }
+                _ => Err(Error::ReadableError {
+                    source: ReadableError::from_display(
+                        err,
+                        self.original,
+                        self.original.len() - self.input.len(),
+                    ),
+                }),
             },
         }
     }
@@ -398,6 +395,14 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     }
 
     #[inline]
+    fn deserialize_fixed_array<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    where
+        V: Visitor<'de>,
+    {
+        self.deserialize_array(visitor)
+    }
+
+    #[inline]
     fn deserialize_class_index_seq<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
@@ -443,9 +448,9 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
             tri!(self.parse(start_tag("hkobject")));
             None
         } else {
-            let (ptr_name, class_name, signature) = tri!(self.parse(class_start_tag()));
+            let (ptr_name, class_name, _signature) = tri!(self.parse(class_start_tag()));
             #[cfg(feature = "tracing")]
-            tracing::debug!("ptr_name={ptr_name}, class_name={class_name}, Signature={signature}");
+            tracing::debug!("ptr_name={ptr_name}, class_name={class_name}, Signature={_signature}");
 
             if name != class_name {
                 return Err(Error::MismatchClassName {
@@ -547,7 +552,6 @@ mod tests {
     }
 
     #[test]
-    #[quick_tracing::init]
     fn test_deserialize_primitive() {
         use havok_classes::hkClassMember_::FlagValues;
         use havok_classes::EventMode;
@@ -567,7 +571,6 @@ mod tests {
     }
 
     #[test]
-    #[quick_tracing::init]
     fn test_deserialize_string() {
         parse_assert::<Vec<StringPtr>>(
             r#"
@@ -580,7 +583,6 @@ mod tests {
     }
 
     #[test]
-    #[quick_tracing::init]
     fn test_deserialize_primitive_vec() {
         parse_assert(
             r#"
@@ -643,13 +645,11 @@ mod tests {
     }
 
     #[test]
-    #[quick_tracing::init]
     fn test_deserialize_primitive_array() {
         parse_assert::<[char; 0]>("", []);
     }
 
     #[test]
-    #[quick_tracing::init]
     fn should_skip_class() {
         use havok_classes::{hkBaseObject, hkReferencedObject};
         parse_assert(
@@ -669,7 +669,6 @@ mod tests {
     }
 
     #[test]
-    #[quick_tracing::init]
     fn test_deserialize_class() {
         use havok_classes::hkRootLevelContainer;
         // use crate::mocks::Classes;
@@ -694,7 +693,10 @@ mod tests {
     }
 
     #[test]
-    #[quick_tracing::init(test = "deserialize_classes_from_xml")]
+    #[cfg_attr(
+        feature = "tracing",
+        quick_tracing::init(test = "deserialize_classes_from_xml")
+    )]
     fn should_deserialize_classes_from_xml() {
         use havok_classes::Classes;
         // use crate::mocks::Classes;

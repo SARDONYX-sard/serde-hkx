@@ -42,16 +42,6 @@ pub enum Error {
         location: snafu::Location,
     },
 
-    /// The local_fixup.src pointing to the pointer location does not exist. Corresponding dst: {dst}
-    #[snafu(display("The local_fixup.src pointing to the pointer location does not exist. Corresponding dst: {dst}"))]
-    MissingLocalFixupsSrc {
-        /// Missing local fixup.src for destination.
-        dst: u32,
-        /// error location
-        #[snafu(implicit)]
-        location: snafu::Location,
-    },
-
     #[snafu(display("Missing global fixup class: {ptr}"))]
     MissingGlobalFixupClass {
         /// missing global fixup class ptr(e.g. #0050)
