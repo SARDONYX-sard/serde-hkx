@@ -916,12 +916,24 @@ mod tests {
         use havok_classes::Classes;
         // use crate::mocks::Classes;
 
-        let bytes = include_bytes!("../../../../docs/handson_hex_dump/defaultmale/defaultmale.hkx");
+        fn from_file<'a, T>(bytes: &'a [u8]) -> Result<T>
+        where
+            T: Deserialize<'a>,
+        {
+            match from_bytes_file::<T>(bytes) {
+                Ok(res) => Ok(res),
+                Err(err) => {
+                    tracing::error!("{err}");
+                    panic!("{err}")
+                }
+            }
+        }
 
-        let res = match from_bytes_file::<indexmap::IndexMap<usize, Classes>>(bytes) {
-            Ok(res) => res,
-            Err(err) => panic!("{err}"),
-        };
-        dbg!(res);
+        let bytes = include_bytes!("../../../../docs/handson_hex_dump/defaultmale/defaultmale.hkx");
+        tracing::debug!("{:#?}", from_file::<Vec<Classes>>(bytes).unwrap());
+        tracing::debug!(
+            "{:#?}",
+            from_file::<indexmap::IndexMap<usize, Classes>>(bytes).unwrap()
+        );
     }
 }
