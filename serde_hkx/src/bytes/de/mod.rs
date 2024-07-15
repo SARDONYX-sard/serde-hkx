@@ -6,23 +6,26 @@ mod seq;
 
 use crate::{lib::*, tri};
 
+use self::class_index_map::BytesClassIndexMapDeserializer;
 use self::enum_access::EnumDeserializer;
 use self::map::MapDeserializer;
-use self::parser::type_kind::{
-    boolean, matrix3, matrix4, qstransform, quaternion, real, rotation, string, transform, vector4,
+use self::parser::{
+    classnames::{classnames_section, ClassNames},
+    fixups::Fixups,
+    type_kind::{
+        array_meta, boolean, matrix3, matrix4, qstransform, quaternion, real, rotation, string,
+        transform, vector4,
+    },
+    BytesStream,
 };
-use self::parser::{classnames::classnames_section, fixups::Fixups, BytesStream};
 use self::seq::SeqDeserializer;
 use super::serde::{hkx_header::HkxHeader, section_header::SectionHeader};
 use crate::errors::{
     de::{Error, Result},
     readable::ReadableError,
 };
-use class_index_map::BytesClassIndexMapDeserializer;
 use havok_serde::de::{self, Deserialize, ReadEnumSize, Visitor};
 use havok_types::*;
-use parser::classnames::ClassNames;
-use parser::type_kind::array_meta;
 use rhexdump::hexdump;
 use winnow::binary::Endianness;
 use winnow::error::{StrContext, StrContextValue};

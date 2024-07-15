@@ -39,6 +39,13 @@ pub struct XmlDeserializer<'de> {
     /// This is readonly for error report. Not move position.
     original: &'de str,
 
+    /// Unique Class index & XML name attribute(e.g. `#0050`).
+    ///
+    /// Incremented each time deserialize_struct is called.
+    ///
+    /// And this is present in `SeqAccess::class_ptr` to refer to class_ptr as a key in [`HashMap`].
+    class_index: Option<usize>,
+
     ///  In `Struct` deserialization?
     ///
     /// # Why need this flag?
@@ -57,6 +64,7 @@ impl<'de> XmlDeserializer<'de> {
         XmlDeserializer {
             input,
             original: input,
+            class_index: None,
             in_struct: false,
         }
     }
@@ -445,6 +453,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
                     expected: class_name.to_string(),
                 });
             };
+            self.class_index = Some(ptr_name.get()); // For `HashMap`'s seq key.
             self.in_struct = true;
             Some(ptr_name)
         };
@@ -685,18 +694,30 @@ mod tests {
     }
 
     #[test]
-    #[quick_tracing::init]
-    fn test_deserialize_class_index() {
+    #[quick_tracing::init(test = "deserialize_classes_from_xml")]
+    fn should_deserialize_classes_from_xml() {
         use havok_classes::Classes;
         // use crate::mocks::Classes;
 
+        fn from_file<'a, T>(xml: &'a str) -> Result<T>
+        where
+            T: Deserialize<'a>,
+        {
+            match from_str_file::<T>(xml) {
+                Ok(res) => Ok(res),
+                Err(err) => {
+                    tracing::error!("{err}");
+                    panic!("{err}")
+                }
+            }
+        }
+
         let xml =
             &include_str!("../../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
-
-        let res = match from_str_file::<Vec<Classes>>(xml) {
-            Ok(res) => res,
-            Err(err) => panic!("{err}"),
-        };
-        dbg!(res);
+        tracing::debug!("{:#?}", from_file::<Vec<Classes>>(xml).unwrap());
+        tracing::debug!(
+            "{:#?}",
+            from_file::<indexmap::IndexMap<usize, Classes>>(xml).unwrap()
+        );
     }
 }

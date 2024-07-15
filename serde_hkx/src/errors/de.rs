@@ -32,6 +32,10 @@ pub enum Error {
     #[snafu(display("Could not find the {index}th corresponding class: {start_offset}"))]
     NotFoundClass { index: usize, start_offset: u32 },
 
+    /// Class Ptr is None
+    #[snafu(display("Class Ptr is None"))]
+    NotFoundClassPtr,
+
     /// Incomplete parsing binary.
     #[snafu(display("Incomplete parsing binary."))]
     TrailingBytes,

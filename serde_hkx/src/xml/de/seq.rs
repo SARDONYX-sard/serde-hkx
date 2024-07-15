@@ -1,13 +1,14 @@
 //! Deserializing each element in an `Array`
-use super::parser::tag::{end_tag, start_tag};
+use super::parser::{
+    comment_multispace0, comment_multispace1,
+    tag::{end_tag, start_tag},
+};
 use super::XmlDeserializer;
 
 use crate::errors::de::{Error, Result};
 use crate::tri;
-use crate::xml::de::parser::{comment_multispace0, comment_multispace1};
 
 use havok_serde::de::{DeserializeSeed, SeqAccess};
-use havok_types::Pointer;
 use winnow::combinator::alt;
 use winnow::error::{StrContext, StrContextValue};
 use winnow::Parser;
@@ -37,8 +38,9 @@ impl<'a, 'de> SeqDeserializer<'a, 'de> {
 impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
     type Error = Error;
 
-    fn class_ptr(&mut self) -> Result<Option<Pointer>, Self::Error> {
-        todo!()
+    #[inline]
+    fn class_ptr(&self) -> Result<usize> {
+        self.de.class_index.ok_or(Error::NotFoundClassPtr)
     }
 
     /// # Expected XML Examples

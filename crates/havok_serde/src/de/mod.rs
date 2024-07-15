@@ -1398,8 +1398,8 @@ pub trait SeqAccess<'de> {
     /// deserialization.
     type Error: Error;
 
-    /// Get class index attribute
-    fn class_ptr(&mut self) -> Result<Option<Pointer>, Self::Error>;
+    /// Get current class index attribute(XML: e.g. `#0050`) for key of [`HashMap`]
+    fn class_ptr(&self) -> Result<usize, Self::Error>;
 
     /// This returns `Ok(Some(value))` for the next value in the sequence, or
     /// `Ok(None)` if there are no more remaining items.
@@ -1520,7 +1520,7 @@ where
     type Error = A::Error;
 
     #[inline]
-    fn class_ptr(&mut self) -> Result<Option<Pointer>, Self::Error> {
+    fn class_ptr(&self) -> Result<usize, Self::Error> {
         (**self).class_ptr()
     }
 
