@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `BSIsActiveModifier`
-/// -         version: `1`
-/// -       signature: `0xb0fde45a`
-/// -          size:  56(x86)/ 96(x86_64)
-/// -          vtable: true
-///
+/// - name: `BSIsActiveModifier`
+/// - version: `1`
+/// - signature: `0xb0fde45a`
+/// - size: ` 56`(x86)/` 96`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,64 +21,54 @@ pub struct BSIsActiveModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `bIsActive0`(ctype: `hkBool`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `bIsActive0`(ctype: `hkBool`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_bIsActive0: bool,
     /// # C++ Info
-    /// -          name: `bInvertActive0`(ctype: `hkBool`)
-    /// -        offset:  45(x86)/ 81(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `bInvertActive0`(ctype: `hkBool`)
+    /// - offset: ` 45`(x86)/` 81`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_bInvertActive0: bool,
     /// # C++ Info
-    /// -          name: `bIsActive1`(ctype: `hkBool`)
-    /// -        offset:  46(x86)/ 82(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `bIsActive1`(ctype: `hkBool`)
+    /// - offset: ` 46`(x86)/` 82`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_bIsActive1: bool,
     /// # C++ Info
-    /// -          name: `bInvertActive1`(ctype: `hkBool`)
-    /// -        offset:  47(x86)/ 83(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `bInvertActive1`(ctype: `hkBool`)
+    /// - offset: ` 47`(x86)/` 83`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_bInvertActive1: bool,
     /// # C++ Info
-    /// -          name: `bIsActive2`(ctype: `hkBool`)
-    /// -        offset:  48(x86)/ 84(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `bIsActive2`(ctype: `hkBool`)
+    /// - offset: ` 48`(x86)/` 84`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_bIsActive2: bool,
     /// # C++ Info
-    /// -          name: `bInvertActive2`(ctype: `hkBool`)
-    /// -        offset:  49(x86)/ 85(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `bInvertActive2`(ctype: `hkBool`)
+    /// - offset: ` 49`(x86)/` 85`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_bInvertActive2: bool,
     /// # C++ Info
-    /// -          name: `bIsActive3`(ctype: `hkBool`)
-    /// -        offset:  50(x86)/ 86(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `bIsActive3`(ctype: `hkBool`)
+    /// - offset: ` 50`(x86)/` 86`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_bIsActive3: bool,
     /// # C++ Info
-    /// -          name: `bInvertActive3`(ctype: `hkBool`)
-    /// -        offset:  51(x86)/ 87(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `bInvertActive3`(ctype: `hkBool`)
+    /// - offset: ` 51`(x86)/` 87`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_bInvertActive3: bool,
     /// # C++ Info
-    /// -          name: `bIsActive4`(ctype: `hkBool`)
-    /// -        offset:  52(x86)/ 88(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `bIsActive4`(ctype: `hkBool`)
+    /// - offset: ` 52`(x86)/` 88`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_bIsActive4: bool,
     /// # C++ Info
-    /// -          name: `bInvertActive4`(ctype: `hkBool`)
-    /// -        offset:  53(x86)/ 89(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `bInvertActive4`(ctype: `hkBool`)
+    /// - offset: ` 53`(x86)/` 89`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_bInvertActive4: bool,
 }
 const _: () = {

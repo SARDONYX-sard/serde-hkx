@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpSimpleMeshShape`
-/// -         version: `0`
-/// -       signature: `0x16b3c811`
-/// -          size:  68(x86)/104(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpSimpleMeshShape`
+/// - version: `0`
+/// - signature: `0x16b3c811`
+/// - size: ` 68`(x86)/`104`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,34 +21,29 @@ pub struct hkpSimpleMeshShape {
     /// Alternative to C++ class inheritance.
     pub parent: hkpShapeCollection,
     /// # C++ Info
-    /// -          name: `vertices`(ctype: `hkArray<hkVector4>`)
-    /// -        offset:  24(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `vertices`(ctype: `hkArray<hkVector4>`)
+    /// - offset: ` 24`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_vertices: Vec<Vector4>,
     /// # C++ Info
-    /// -          name: `triangles`(ctype: `hkArray<struct hkpSimpleMeshShapeTriangle>`)
-    /// -        offset:  36(x86)/ 64(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `triangles`(ctype: `hkArray<struct hkpSimpleMeshShapeTriangle>`)
+    /// - offset: ` 36`(x86)/` 64`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_triangles: Vec<hkpSimpleMeshShapeTriangle>,
     /// # C++ Info
-    /// -          name: `materialIndices`(ctype: `hkArray<hkUint8>`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `materialIndices`(ctype: `hkArray<hkUint8>`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_materialIndices: Vec<u8>,
     /// # C++ Info
-    /// -          name: `radius`(ctype: `hkReal`)
-    /// -        offset:  60(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `radius`(ctype: `hkReal`)
+    /// - offset: ` 60`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_radius: f32,
     /// # C++ Info
-    /// -          name: `weldingType`(ctype: `enum WeldingType`)
-    /// -        offset:  64(x86)/100(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `weldingType`(ctype: `enum WeldingType`)
+    /// - offset: ` 64`(x86)/`100`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_weldingType: WeldingType,
 }
 const _: () = {

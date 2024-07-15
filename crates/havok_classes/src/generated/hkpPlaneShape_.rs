@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpPlaneShape`
-/// -         version: `0`
-/// -       signature: `0xc36bbd30`
-/// -          size:  64(x86)/ 80(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpPlaneShape`
+/// - version: `0`
+/// - signature: `0xc36bbd30`
+/// - size: ` 64`(x86)/` 80`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkpPlaneShape {
     /// Alternative to C++ class inheritance.
     pub parent: hkpHeightFieldShape,
     /// # C++ Info
-    /// -          name: `plane`(ctype: `hkVector4`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `plane`(ctype: `hkVector4`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_plane: Vector4,
     /// # C++ Info
-    /// -          name: `aabbCenter`(ctype: `hkVector4`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `aabbCenter`(ctype: `hkVector4`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_aabbCenter: Vector4,
     /// # C++ Info
-    /// -          name: `aabbHalfExtents`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 64(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `aabbHalfExtents`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 64`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_aabbHalfExtents: Vector4,
 }
 const _: () = {

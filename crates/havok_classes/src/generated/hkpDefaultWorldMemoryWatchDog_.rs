@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpDefaultWorldMemoryWatchDog`
-/// -         version: `1`
-/// -       signature: `0x77d6b19f`
-/// -          size:  12(x86)/ 24(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpDefaultWorldMemoryWatchDog`
+/// - version: `1`
+/// - signature: `0x77d6b19f`
+/// - size: ` 12`(x86)/` 24`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkpDefaultWorldMemoryWatchDog {
     /// Alternative to C++ class inheritance.
     pub parent: hkWorldMemoryAvailableWatchDog,
     /// # C++ Info
-    /// -          name: `freeHeapMemoryRequested`(ctype: `hkInt32`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `freeHeapMemoryRequested`(ctype: `hkInt32`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_freeHeapMemoryRequested: i32,
 }
 const _: () = {

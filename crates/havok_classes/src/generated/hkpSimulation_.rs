@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpSimulation`
-/// -         version: `0`
-/// -       signature: `0x97aba922`
-/// -          size:  44(x86)/ 64(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpSimulation`
+/// - version: `0`
+/// - signature: `0x97aba922`
+/// - size: ` 44`(x86)/` 64`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,58 +21,49 @@ pub struct hkpSimulation {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `determinismCheckFrameCounter`(ctype: `hkUint32`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `determinismCheckFrameCounter`(ctype: `hkUint32`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_determinismCheckFrameCounter: u32,
     /// # C++ Info
-    /// -          name: `world`(ctype: `struct hkpWorld*`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `world`(ctype: `struct hkpWorld*`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_world: Pointer,
     /// # C++ Info
-    /// -          name: `lastProcessingStep`(ctype: `enum LastProcessingStep`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `lastProcessingStep`(ctype: `enum LastProcessingStep`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_lastProcessingStep: LastProcessingStep,
     /// # C++ Info
-    /// -          name: `currentTime`(ctype: `hkReal`)
-    /// -        offset:  20(x86)/ 36(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `currentTime`(ctype: `hkReal`)
+    /// - offset: ` 20`(x86)/` 36`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_currentTime: f32,
     /// # C++ Info
-    /// -          name: `currentPsiTime`(ctype: `hkReal`)
-    /// -        offset:  24(x86)/ 40(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `currentPsiTime`(ctype: `hkReal`)
+    /// - offset: ` 24`(x86)/` 40`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_currentPsiTime: f32,
     /// # C++ Info
-    /// -          name: `physicsDeltaTime`(ctype: `hkReal`)
-    /// -        offset:  28(x86)/ 44(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `physicsDeltaTime`(ctype: `hkReal`)
+    /// - offset: ` 28`(x86)/` 44`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_physicsDeltaTime: f32,
     /// # C++ Info
-    /// -          name: `simulateUntilTime`(ctype: `hkReal`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `simulateUntilTime`(ctype: `hkReal`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_simulateUntilTime: f32,
     /// # C++ Info
-    /// -          name: `frameMarkerPsiSnap`(ctype: `hkReal`)
-    /// -        offset:  36(x86)/ 52(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `frameMarkerPsiSnap`(ctype: `hkReal`)
+    /// - offset: ` 36`(x86)/` 52`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_frameMarkerPsiSnap: f32,
     /// # C++ Info
-    /// -          name: `previousStepResult`(ctype: `hkUint32`)
-    /// -        offset:  40(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `previousStepResult`(ctype: `hkUint32`)
+    /// - offset: ` 40`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_previousStepResult: u32,
 }
 const _: () = {

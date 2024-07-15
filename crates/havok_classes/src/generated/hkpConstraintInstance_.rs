@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpConstraintInstance`
-/// -         version: `1`
-/// -       signature: `0x34eba5f`
-/// -          size:  56(x86)/112(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpConstraintInstance`
+/// - version: `1`
+/// - signature: `0x34eba5f`
+/// - size: ` 56`(x86)/`112`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,80 +21,68 @@ pub struct hkpConstraintInstance<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `owner`(ctype: `void*`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `owner`(ctype: `void*`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_owner: Pointer,
     /// # C++ Info
-    /// -          name: `data`(ctype: `struct hkpConstraintData*`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `data`(ctype: `struct hkpConstraintData*`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_data: Pointer,
     /// # C++ Info
-    /// -          name: `constraintModifiers`(ctype: `struct hkpModifierConstraintAtom*`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `constraintModifiers`(ctype: `struct hkpModifierConstraintAtom*`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_constraintModifiers: Pointer,
     /// # C++ Info
-    /// -          name: `entities`(ctype: `struct hkpEntity*`)
-    /// -        offset:  20(x86)/ 40(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    ///
+    /// - name: `entities`(ctype: `struct hkpEntity*`)
+    /// - offset: ` 20`(x86)/` 40`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
     pub m_entities: [Pointer; 2usize],
     /// # C++ Info
-    /// -          name: `priority`(ctype: `enum ConstraintPriority`)
-    /// -        offset:  28(x86)/ 56(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `priority`(ctype: `enum ConstraintPriority`)
+    /// - offset: ` 28`(x86)/` 56`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_priority: ConstraintPriority,
     /// # C++ Info
-    /// -          name: `wantRuntime`(ctype: `hkBool`)
-    /// -        offset:  29(x86)/ 57(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `wantRuntime`(ctype: `hkBool`)
+    /// - offset: ` 29`(x86)/` 57`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_wantRuntime: bool,
     /// # C++ Info
-    /// -          name: `destructionRemapInfo`(ctype: `enum OnDestructionRemapInfo`)
-    /// -        offset:  30(x86)/ 58(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `destructionRemapInfo`(ctype: `enum OnDestructionRemapInfo`)
+    /// - offset: ` 30`(x86)/` 58`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_destructionRemapInfo: OnDestructionRemapInfo,
     /// # C++ Info
-    /// -          name: `listeners`(ctype: `struct hkpConstraintInstanceSmallArraySerializeOverrideType`)
-    /// -        offset:  32(x86)/ 64(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `listeners`(ctype: `struct hkpConstraintInstanceSmallArraySerializeOverrideType`)
+    /// - offset: ` 32`(x86)/` 64`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_listeners: hkpConstraintInstanceSmallArraySerializeOverrideType,
     /// # C++ Info
-    /// -          name: `name`(ctype: `hkStringPtr`)
-    /// -        offset:  40(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `name`(ctype: `hkStringPtr`)
+    /// - offset: ` 40`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_name: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `userData`(ctype: `hkUlong`)
-    /// -        offset:  44(x86)/ 88(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `userData`(ctype: `hkUlong`)
+    /// - offset: ` 44`(x86)/` 88`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_userData: u64,
     /// # C++ Info
-    /// -          name: `internal`(ctype: `void*`)
-    /// -        offset:  48(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `internal`(ctype: `void*`)
+    /// - offset: ` 48`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_internal: Pointer,
     /// # C++ Info
-    /// -          name: `uid`(ctype: `hkUint32`)
-    /// -        offset:  52(x86)/104(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `uid`(ctype: `hkUint32`)
+    /// - offset: ` 52`(x86)/`104`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_uid: u32,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpVehicleDefaultBrake`
-/// -         version: `0`
-/// -       signature: `0x4b4f8816`
-/// -          size:  24(x86)/ 40(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpVehicleDefaultBrake`
+/// - version: `0`
+/// - signature: `0x4b4f8816`
+/// - size: ` 24`(x86)/` 40`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkpVehicleDefaultBrake {
     /// Alternative to C++ class inheritance.
     pub parent: hkpVehicleBrake,
     /// # C++ Info
-    /// -          name: `wheelBrakingProperties`(ctype: `hkArray<struct hkpVehicleDefaultBrakeWheelBrakingProperties>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `wheelBrakingProperties`(ctype: `hkArray<struct hkpVehicleDefaultBrakeWheelBrakingProperties>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_wheelBrakingProperties: Vec<hkpVehicleDefaultBrakeWheelBrakingProperties>,
     /// # C++ Info
-    /// -          name: `wheelsMinTimeToBlock`(ctype: `hkReal`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `wheelsMinTimeToBlock`(ctype: `hkReal`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_wheelsMinTimeToBlock: f32,
 }
 const _: () = {

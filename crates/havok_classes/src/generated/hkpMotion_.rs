@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpMotion`
-/// -         version: `3`
-/// -       signature: `0x98aadb4f`
-/// -          size: 288(x86)/320(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpMotion`
+/// - version: `3`
+/// - signature: `0x98aadb4f`
+/// - size: `288`(x86)/`320`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,76 +21,64 @@ pub struct hkpMotion {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `type`(ctype: `enum MotionType`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `type`(ctype: `enum MotionType`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_type: MotionType,
     /// # C++ Info
-    /// -          name: `deactivationIntegrateCounter`(ctype: `hkUint8`)
-    /// -        offset:   9(x86)/ 17(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `deactivationIntegrateCounter`(ctype: `hkUint8`)
+    /// - offset: `  9`(x86)/` 17`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_deactivationIntegrateCounter: u8,
     /// # C++ Info
-    /// -          name: `deactivationNumInactiveFrames`(ctype: `hkUint16[2]`)
-    /// -        offset:  10(x86)/ 18(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `deactivationNumInactiveFrames`(ctype: `hkUint16[2]`)
+    /// - offset: ` 10`(x86)/` 18`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_deactivationNumInactiveFrames: [u16; 2usize],
     /// # C++ Info
-    /// -          name: `motionState`(ctype: `struct hkMotionState`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size: 176(x86)/176(x86_64)
-    ///
+    /// - name: `motionState`(ctype: `struct hkMotionState`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: `176`(x86)/`176`(x86_64)
     pub m_motionState: hkMotionState,
     /// # C++ Info
-    /// -          name: `inertiaAndMassInv`(ctype: `hkVector4`)
-    /// -        offset: 192(x86)/208(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `inertiaAndMassInv`(ctype: `hkVector4`)
+    /// - offset: `192`(x86)/`208`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_inertiaAndMassInv: Vector4,
     /// # C++ Info
-    /// -          name: `linearVelocity`(ctype: `hkVector4`)
-    /// -        offset: 208(x86)/224(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `linearVelocity`(ctype: `hkVector4`)
+    /// - offset: `208`(x86)/`224`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_linearVelocity: Vector4,
     /// # C++ Info
-    /// -          name: `angularVelocity`(ctype: `hkVector4`)
-    /// -        offset: 224(x86)/240(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `angularVelocity`(ctype: `hkVector4`)
+    /// - offset: `224`(x86)/`240`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_angularVelocity: Vector4,
     /// # C++ Info
-    /// -          name: `deactivationRefPosition`(ctype: `hkVector4[2]`)
-    /// -        offset: 240(x86)/256(x86_64)
-    /// -     type_size:  32(x86)/ 32(x86_64)
-    ///
+    /// - name: `deactivationRefPosition`(ctype: `hkVector4[2]`)
+    /// - offset: `240`(x86)/`256`(x86_64)
+    /// - type_size: ` 32`(x86)/` 32`(x86_64)
     pub m_deactivationRefPosition: [Vector4; 2usize],
     /// # C++ Info
-    /// -          name: `deactivationRefOrientation`(ctype: `hkUint32[2]`)
-    /// -        offset: 272(x86)/288(x86_64)
-    /// -     type_size:   8(x86)/  8(x86_64)
-    ///
+    /// - name: `deactivationRefOrientation`(ctype: `hkUint32[2]`)
+    /// - offset: `272`(x86)/`288`(x86_64)
+    /// - type_size: `  8`(x86)/`  8`(x86_64)
     pub m_deactivationRefOrientation: [u32; 2usize],
     /// # C++ Info
-    /// -          name: `savedMotion`(ctype: `struct hkpMaxSizeMotion*`)
-    /// -        offset: 280(x86)/296(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `savedMotion`(ctype: `struct hkpMaxSizeMotion*`)
+    /// - offset: `280`(x86)/`296`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_savedMotion: Pointer,
     /// # C++ Info
-    /// -          name: `savedQualityTypeIndex`(ctype: `hkUint16`)
-    /// -        offset: 284(x86)/304(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `savedQualityTypeIndex`(ctype: `hkUint16`)
+    /// - offset: `284`(x86)/`304`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_savedQualityTypeIndex: u16,
     /// # C++ Info
-    /// -          name: `gravityFactor`(ctype: `hkHalf`)
-    /// -        offset: 286(x86)/306(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `gravityFactor`(ctype: `hkHalf`)
+    /// - offset: `286`(x86)/`306`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_gravityFactor: f16,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkaQuantizedAnimationTrackCompressionParams`
-/// -         version: `0`
-/// -       signature: `0xf7d64649`
-/// -          size:  16(x86)/ 16(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkaQuantizedAnimationTrackCompressionParams`
+/// - version: `0`
+/// - signature: `0xf7d64649`
+/// - size: ` 16`(x86)/` 16`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,28 +19,24 @@ pub struct hkaQuantizedAnimationTrackCompressionParams {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `rotationTolerance`(ctype: `hkReal`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `rotationTolerance`(ctype: `hkReal`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_rotationTolerance: f32,
     /// # C++ Info
-    /// -          name: `translationTolerance`(ctype: `hkReal`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `translationTolerance`(ctype: `hkReal`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_translationTolerance: f32,
     /// # C++ Info
-    /// -          name: `scaleTolerance`(ctype: `hkReal`)
-    /// -        offset:   8(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `scaleTolerance`(ctype: `hkReal`)
+    /// - offset: `  8`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_scaleTolerance: f32,
     /// # C++ Info
-    /// -          name: `floatingTolerance`(ctype: `hkReal`)
-    /// -        offset:  12(x86)/ 12(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `floatingTolerance`(ctype: `hkReal`)
+    /// - offset: ` 12`(x86)/` 12`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_floatingTolerance: f32,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpCollisionFilter`
-/// -         version: `0`
-/// -       signature: `0x60960336`
-/// -          size:  48(x86)/ 72(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpCollisionFilter`
+/// - version: `0`
+/// - signature: `0x60960336`
+/// - size: ` 48`(x86)/` 72`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkpCollisionFilter {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `prepad`(ctype: `hkUint32[2]`)
-    /// -        offset:  24(x86)/ 48(x86_64)
-    /// -     type_size:   8(x86)/  8(x86_64)
-    ///
+    /// - name: `prepad`(ctype: `hkUint32[2]`)
+    /// - offset: ` 24`(x86)/` 48`(x86_64)
+    /// - type_size: `  8`(x86)/`  8`(x86_64)
     pub m_prepad: [u32; 2usize],
     /// # C++ Info
-    /// -          name: `type`(ctype: `enum hkpFilterType`)
-    /// -        offset:  32(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `type`(ctype: `enum hkpFilterType`)
+    /// - offset: ` 32`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_type: hkpFilterType,
     /// # C++ Info
-    /// -          name: `postpad`(ctype: `hkUint32[3]`)
-    /// -        offset:  36(x86)/ 60(x86_64)
-    /// -     type_size:  12(x86)/ 12(x86_64)
-    ///
+    /// - name: `postpad`(ctype: `hkUint32[3]`)
+    /// - offset: ` 36`(x86)/` 60`(x86_64)
+    /// - type_size: ` 12`(x86)/` 12`(x86_64)
     pub m_postpad: [u32; 3usize],
 }
 const _: () = {

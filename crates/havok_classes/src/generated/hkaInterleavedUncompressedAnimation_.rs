@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkaInterleavedUncompressedAnimation`
-/// -         version: `0`
-/// -       signature: `0x930af031`
-/// -          size:  64(x86)/ 88(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkaInterleavedUncompressedAnimation`
+/// - version: `0`
+/// - signature: `0x930af031`
+/// - size: ` 64`(x86)/` 88`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkaInterleavedUncompressedAnimation<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkaAnimation<'a>,
     /// # C++ Info
-    /// -          name: `transforms`(ctype: `hkArray<hkQsTransform>`)
-    /// -        offset:  40(x86)/ 56(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `transforms`(ctype: `hkArray<hkQsTransform>`)
+    /// - offset: ` 40`(x86)/` 56`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_transforms: Vec<QsTransform>,
     /// # C++ Info
-    /// -          name: `floats`(ctype: `hkArray<hkReal>`)
-    /// -        offset:  52(x86)/ 72(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `floats`(ctype: `hkArray<hkReal>`)
+    /// - offset: ` 52`(x86)/` 72`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_floats: Vec<f32>,
 }
 const _: () = {

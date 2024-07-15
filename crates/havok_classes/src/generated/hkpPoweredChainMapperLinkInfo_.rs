@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpPoweredChainMapperLinkInfo`
-/// -         version: `0`
-/// -       signature: `0xcf071a1b`
-/// -          size:  12(x86)/ 16(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpPoweredChainMapperLinkInfo`
+/// - version: `0`
+/// - signature: `0xcf071a1b`
+/// - size: ` 12`(x86)/` 16`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,22 +19,19 @@ pub struct hkpPoweredChainMapperLinkInfo {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `firstTargetIdx`(ctype: `hkInt32`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `firstTargetIdx`(ctype: `hkInt32`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_firstTargetIdx: i32,
     /// # C++ Info
-    /// -          name: `numTargets`(ctype: `hkInt32`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `numTargets`(ctype: `hkInt32`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_numTargets: i32,
     /// # C++ Info
-    /// -          name: `limitConstraint`(ctype: `struct hkpConstraintInstance*`)
-    /// -        offset:   8(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `limitConstraint`(ctype: `struct hkpConstraintInstance*`)
+    /// - offset: `  8`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_limitConstraint: Pointer,
 }
 const _: () = {

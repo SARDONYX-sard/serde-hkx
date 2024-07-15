@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpFastMeshShape`
-/// -         version: `0`
-/// -       signature: `0x3d3da311`
-/// -          size:  96(x86)/128(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpFastMeshShape`
+/// - version: `0`
+/// - signature: `0x3d3da311`
+/// - size: ` 96`(x86)/`128`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbContext`
-/// -         version: `1`
-/// -       signature: `0xe0c4d4a7`
-/// -          size:  40(x86)/ 80(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkbContext`
+/// - version: `1`
+/// - signature: `0xe0c4d4a7`
+/// - size: ` 40`(x86)/` 80`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,73 +19,63 @@ pub struct hkbContext {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `character`(ctype: `void*`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `character`(ctype: `void*`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_character: Pointer,
     /// # C++ Info
-    /// -          name: `behavior`(ctype: `void*`)
-    /// -        offset:   4(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `behavior`(ctype: `void*`)
+    /// - offset: `  4`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_behavior: Pointer,
     /// # C++ Info
-    /// -          name: `nodeToIndexMap`(ctype: `void*`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `nodeToIndexMap`(ctype: `void*`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_nodeToIndexMap: Pointer,
     /// # C++ Info
-    /// -          name: `eventQueue`(ctype: `void*`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `eventQueue`(ctype: `void*`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_eventQueue: Pointer,
     /// # C++ Info
-    /// -          name: `sharedEventQueue`(ctype: `void*`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `sharedEventQueue`(ctype: `void*`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_sharedEventQueue: Pointer,
     /// # C++ Info
-    /// -          name: `generatorOutputListener`(ctype: `struct hkbGeneratorOutputListener*`)
-    /// -        offset:  20(x86)/ 40(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `generatorOutputListener`(ctype: `struct hkbGeneratorOutputListener*`)
+    /// - offset: ` 20`(x86)/` 40`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_generatorOutputListener: Pointer,
     /// # C++ Info
-    /// -          name: `eventTriggeredTransition`(ctype: `hkBool`)
-    /// -        offset:  24(x86)/ 48(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `eventTriggeredTransition`(ctype: `hkBool`)
+    /// - offset: ` 24`(x86)/` 48`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_eventTriggeredTransition: bool,
     /// # C++ Info
-    /// -          name: `world`(ctype: `void*`)
-    /// -        offset:  28(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `world`(ctype: `void*`)
+    /// - offset: ` 28`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_world: Pointer,
     /// # C++ Info
-    /// -          name: `attachmentManager`(ctype: `void*`)
-    /// -        offset:  32(x86)/ 64(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `attachmentManager`(ctype: `void*`)
+    /// - offset: ` 32`(x86)/` 64`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_attachmentManager: Pointer,
     /// # C++ Info
-    /// -          name: `animationCache`(ctype: `void*`)
-    /// -        offset:  36(x86)/ 72(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `animationCache`(ctype: `void*`)
+    /// - offset: ` 36`(x86)/` 72`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_animationCache: Pointer,
 }
 const _: () = {

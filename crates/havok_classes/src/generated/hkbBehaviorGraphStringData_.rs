@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbBehaviorGraphStringData`
-/// -         version: `1`
-/// -       signature: `0xc713064e`
-/// -          size:  56(x86)/ 80(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbBehaviorGraphStringData`
+/// - version: `1`
+/// - signature: `0xc713064e`
+/// - size: ` 56`(x86)/` 80`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,28 +21,24 @@ pub struct hkbBehaviorGraphStringData<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `eventNames`(ctype: `hkArray<hkStringPtr>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `eventNames`(ctype: `hkArray<hkStringPtr>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_eventNames: Vec<StringPtr<'a>>,
     /// # C++ Info
-    /// -          name: `attributeNames`(ctype: `hkArray<hkStringPtr>`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `attributeNames`(ctype: `hkArray<hkStringPtr>`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_attributeNames: Vec<StringPtr<'a>>,
     /// # C++ Info
-    /// -          name: `variableNames`(ctype: `hkArray<hkStringPtr>`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `variableNames`(ctype: `hkArray<hkStringPtr>`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_variableNames: Vec<StringPtr<'a>>,
     /// # C++ Info
-    /// -          name: `characterPropertyNames`(ctype: `hkArray<hkStringPtr>`)
-    /// -        offset:  44(x86)/ 64(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `characterPropertyNames`(ctype: `hkArray<hkStringPtr>`)
+    /// - offset: ` 44`(x86)/` 64`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_characterPropertyNames: Vec<StringPtr<'a>>,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpGenericConstraintData`
-/// -         version: `0`
-/// -       signature: `0xfa824640`
-/// -          size:  88(x86)/128(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpGenericConstraintData`
+/// - version: `0`
+/// - signature: `0xfa824640`
+/// - size: ` 88`(x86)/`128`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkpGenericConstraintData {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConstraintData,
     /// # C++ Info
-    /// -          name: `atoms`(ctype: `struct hkpBridgeAtoms`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:  12(x86)/ 24(x86_64)
-    ///
+    /// - name: `atoms`(ctype: `struct hkpBridgeAtoms`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: ` 12`(x86)/` 24`(x86_64)
     pub m_atoms: hkpBridgeAtoms,
     /// # C++ Info
-    /// -          name: `scheme`(ctype: `struct hkpGenericConstraintDataScheme`)
-    /// -        offset:  24(x86)/ 48(x86_64)
-    /// -     type_size:  64(x86)/ 80(x86_64)
-    ///
+    /// - name: `scheme`(ctype: `struct hkpGenericConstraintDataScheme`)
+    /// - offset: ` 24`(x86)/` 48`(x86_64)
+    /// - type_size: ` 64`(x86)/` 80`(x86_64)
     pub m_scheme: hkpGenericConstraintDataScheme,
 }
 const _: () = {

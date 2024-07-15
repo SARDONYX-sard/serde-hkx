@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkGeometryTriangle`
-/// -         version: `0`
-/// -       signature: `0x9687513b`
-/// -          size:  16(x86)/ 16(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkGeometryTriangle`
+/// - version: `0`
+/// - signature: `0x9687513b`
+/// - size: ` 16`(x86)/` 16`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,28 +19,24 @@ pub struct hkGeometryTriangle {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `a`(ctype: `hkInt32`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `a`(ctype: `hkInt32`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_a: i32,
     /// # C++ Info
-    /// -          name: `b`(ctype: `hkInt32`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `b`(ctype: `hkInt32`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_b: i32,
     /// # C++ Info
-    /// -          name: `c`(ctype: `hkInt32`)
-    /// -        offset:   8(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `c`(ctype: `hkInt32`)
+    /// - offset: `  8`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_c: i32,
     /// # C++ Info
-    /// -          name: `material`(ctype: `hkInt32`)
-    /// -        offset:  12(x86)/ 12(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `material`(ctype: `hkInt32`)
+    /// - offset: ` 12`(x86)/` 12`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_material: i32,
 }
 const _: () = {

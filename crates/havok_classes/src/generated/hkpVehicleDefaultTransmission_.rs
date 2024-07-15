@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpVehicleDefaultTransmission`
-/// -         version: `0`
-/// -       signature: `0x235d5d6b`
-/// -          size:  52(x86)/ 72(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpVehicleDefaultTransmission`
+/// - version: `0`
+/// - signature: `0x235d5d6b`
+/// - size: ` 52`(x86)/` 72`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,46 +21,39 @@ pub struct hkpVehicleDefaultTransmission {
     /// Alternative to C++ class inheritance.
     pub parent: hkpVehicleTransmission,
     /// # C++ Info
-    /// -          name: `downshiftRPM`(ctype: `hkReal`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `downshiftRPM`(ctype: `hkReal`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_downshiftRPM: f32,
     /// # C++ Info
-    /// -          name: `upshiftRPM`(ctype: `hkReal`)
-    /// -        offset:  12(x86)/ 20(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `upshiftRPM`(ctype: `hkReal`)
+    /// - offset: ` 12`(x86)/` 20`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_upshiftRPM: f32,
     /// # C++ Info
-    /// -          name: `primaryTransmissionRatio`(ctype: `hkReal`)
-    /// -        offset:  16(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `primaryTransmissionRatio`(ctype: `hkReal`)
+    /// - offset: ` 16`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_primaryTransmissionRatio: f32,
     /// # C++ Info
-    /// -          name: `clutchDelayTime`(ctype: `hkReal`)
-    /// -        offset:  20(x86)/ 28(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `clutchDelayTime`(ctype: `hkReal`)
+    /// - offset: ` 20`(x86)/` 28`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_clutchDelayTime: f32,
     /// # C++ Info
-    /// -          name: `reverseGearRatio`(ctype: `hkReal`)
-    /// -        offset:  24(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `reverseGearRatio`(ctype: `hkReal`)
+    /// - offset: ` 24`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_reverseGearRatio: f32,
     /// # C++ Info
-    /// -          name: `gearsRatio`(ctype: `hkArray<hkReal>`)
-    /// -        offset:  28(x86)/ 40(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `gearsRatio`(ctype: `hkArray<hkReal>`)
+    /// - offset: ` 28`(x86)/` 40`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_gearsRatio: Vec<f32>,
     /// # C++ Info
-    /// -          name: `wheelsTorqueRatio`(ctype: `hkArray<hkReal>`)
-    /// -        offset:  40(x86)/ 56(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `wheelsTorqueRatio`(ctype: `hkArray<hkReal>`)
+    /// - offset: ` 40`(x86)/` 56`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_wheelsTorqueRatio: Vec<f32>,
 }
 const _: () = {

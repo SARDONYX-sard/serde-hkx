@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpDashpotAction`
-/// -         version: `0`
-/// -       signature: `0x50746c6e`
-/// -          size:  96(x86)/128(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpDashpotAction`
+/// - version: `0`
+/// - signature: `0x50746c6e`
+/// - size: ` 96`(x86)/`128`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,28 +21,24 @@ pub struct hkpDashpotAction<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkpBinaryAction<'a>,
     /// # C++ Info
-    /// -          name: `point`(ctype: `hkVector4[2]`)
-    /// -        offset:  32(x86)/ 64(x86_64)
-    /// -     type_size:  32(x86)/ 32(x86_64)
-    ///
+    /// - name: `point`(ctype: `hkVector4[2]`)
+    /// - offset: ` 32`(x86)/` 64`(x86_64)
+    /// - type_size: ` 32`(x86)/` 32`(x86_64)
     pub m_point: [Vector4; 2usize],
     /// # C++ Info
-    /// -          name: `strength`(ctype: `hkReal`)
-    /// -        offset:  64(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `strength`(ctype: `hkReal`)
+    /// - offset: ` 64`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_strength: f32,
     /// # C++ Info
-    /// -          name: `damping`(ctype: `hkReal`)
-    /// -        offset:  68(x86)/100(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `damping`(ctype: `hkReal`)
+    /// - offset: ` 68`(x86)/`100`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_damping: f32,
     /// # C++ Info
-    /// -          name: `impulse`(ctype: `hkVector4`)
-    /// -        offset:  80(x86)/112(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `impulse`(ctype: `hkVector4`)
+    /// - offset: ` 80`(x86)/`112`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_impulse: Vector4,
 }
 const _: () = {

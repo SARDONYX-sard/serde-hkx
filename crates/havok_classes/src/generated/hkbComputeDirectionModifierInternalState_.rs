@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbComputeDirectionModifierInternalState`
-/// -         version: `0`
-/// -       signature: `0x6ac054d7`
-/// -          size:  48(x86)/ 48(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbComputeDirectionModifierInternalState`
+/// - version: `0`
+/// - signature: `0x6ac054d7`
+/// - size: ` 48`(x86)/` 48`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,28 +21,24 @@ pub struct hkbComputeDirectionModifierInternalState {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `pointOut`(ctype: `hkVector4`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `pointOut`(ctype: `hkVector4`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_pointOut: Vector4,
     /// # C++ Info
-    /// -          name: `groundAngleOut`(ctype: `hkReal`)
-    /// -        offset:  32(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `groundAngleOut`(ctype: `hkReal`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_groundAngleOut: f32,
     /// # C++ Info
-    /// -          name: `upAngleOut`(ctype: `hkReal`)
-    /// -        offset:  36(x86)/ 36(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `upAngleOut`(ctype: `hkReal`)
+    /// - offset: ` 36`(x86)/` 36`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_upAngleOut: f32,
     /// # C++ Info
-    /// -          name: `computedOutput`(ctype: `hkBool`)
-    /// -        offset:  40(x86)/ 40(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `computedOutput`(ctype: `hkBool`)
+    /// - offset: ` 40`(x86)/` 40`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_computedOutput: bool,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbAttributeModifier`
-/// -         version: `0`
-/// -       signature: `0x1245d97d`
-/// -          size:  56(x86)/ 96(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbAttributeModifier`
+/// - version: `0`
+/// - signature: `0x1245d97d`
+/// - size: ` 56`(x86)/` 96`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkbAttributeModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `assignments`(ctype: `hkArray<struct hkbAttributeModifierAssignment>`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `assignments`(ctype: `hkArray<struct hkbAttributeModifierAssignment>`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_assignments: Vec<hkbAttributeModifierAssignment>,
 }
 const _: () = {

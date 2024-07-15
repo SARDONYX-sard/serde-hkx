@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpGenericConstraintDataScheme`
-/// -         version: `0`
-/// -       signature: `0x11fd6f6c`
-/// -          size:  64(x86)/ 80(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpGenericConstraintDataScheme`
+/// - version: `0`
+/// - signature: `0x11fd6f6c`
+/// - size: ` 64`(x86)/` 80`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,36 +19,31 @@ pub struct hkpGenericConstraintDataScheme {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `info`(ctype: `struct hkpGenericConstraintDataSchemeConstraintInfo`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `info`(ctype: `struct hkpGenericConstraintDataSchemeConstraintInfo`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_info: hkpGenericConstraintDataSchemeConstraintInfo,
     /// # C++ Info
-    /// -          name: `data`(ctype: `hkArray<hkVector4>`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `data`(ctype: `hkArray<hkVector4>`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_data: Vec<Vector4>,
     /// # C++ Info
-    /// -          name: `commands`(ctype: `hkArray<hkInt32>`)
-    /// -        offset:  28(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `commands`(ctype: `hkArray<hkInt32>`)
+    /// - offset: ` 28`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_commands: Vec<i32>,
     /// # C++ Info
-    /// -          name: `modifiers`(ctype: `hkArray<void*>`)
-    /// -        offset:  40(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `modifiers`(ctype: `hkArray<void*>`)
+    /// - offset: ` 40`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_modifiers: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `motors`(ctype: `hkArray<hkpConstraintMotor*>`)
-    /// -        offset:  52(x86)/ 64(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `motors`(ctype: `hkArray<hkpConstraintMotor*>`)
+    /// - offset: ` 52`(x86)/` 64`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_motors: Vec<Pointer>,
 }
 const _: () = {

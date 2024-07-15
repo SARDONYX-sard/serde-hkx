@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpSpringAction`
-/// -         version: `0`
-/// -       signature: `0x88fc09fa`
-/// -          size:  96(x86)/128(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpSpringAction`
+/// - version: `0`
+/// - signature: `0x88fc09fa`
+/// - size: ` 96`(x86)/`128`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,52 +21,44 @@ pub struct hkpSpringAction<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkpBinaryAction<'a>,
     /// # C++ Info
-    /// -          name: `lastForce`(ctype: `hkVector4`)
-    /// -        offset:  32(x86)/ 64(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `lastForce`(ctype: `hkVector4`)
+    /// - offset: ` 32`(x86)/` 64`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_lastForce: Vector4,
     /// # C++ Info
-    /// -          name: `positionAinA`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `positionAinA`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_positionAinA: Vector4,
     /// # C++ Info
-    /// -          name: `positionBinB`(ctype: `hkVector4`)
-    /// -        offset:  64(x86)/ 96(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `positionBinB`(ctype: `hkVector4`)
+    /// - offset: ` 64`(x86)/` 96`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_positionBinB: Vector4,
     /// # C++ Info
-    /// -          name: `restLength`(ctype: `hkReal`)
-    /// -        offset:  80(x86)/112(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `restLength`(ctype: `hkReal`)
+    /// - offset: ` 80`(x86)/`112`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_restLength: f32,
     /// # C++ Info
-    /// -          name: `strength`(ctype: `hkReal`)
-    /// -        offset:  84(x86)/116(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `strength`(ctype: `hkReal`)
+    /// - offset: ` 84`(x86)/`116`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_strength: f32,
     /// # C++ Info
-    /// -          name: `damping`(ctype: `hkReal`)
-    /// -        offset:  88(x86)/120(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `damping`(ctype: `hkReal`)
+    /// - offset: ` 88`(x86)/`120`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_damping: f32,
     /// # C++ Info
-    /// -          name: `onCompression`(ctype: `hkBool`)
-    /// -        offset:  92(x86)/124(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `onCompression`(ctype: `hkBool`)
+    /// - offset: ` 92`(x86)/`124`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_onCompression: bool,
     /// # C++ Info
-    /// -          name: `onExtension`(ctype: `hkBool`)
-    /// -        offset:  93(x86)/125(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `onExtension`(ctype: `hkBool`)
+    /// - offset: ` 93`(x86)/`125`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_onExtension: bool,
 }
 const _: () = {

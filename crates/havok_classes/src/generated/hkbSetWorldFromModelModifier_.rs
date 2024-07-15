@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbSetWorldFromModelModifier`
-/// -         version: `0`
-/// -       signature: `0xafcfa211`
-/// -          size:  96(x86)/128(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbSetWorldFromModelModifier`
+/// - version: `0`
+/// - signature: `0xafcfa211`
+/// - size: ` 96`(x86)/`128`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,28 +21,24 @@ pub struct hkbSetWorldFromModelModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `translation`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `translation`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_translation: Vector4,
     /// # C++ Info
-    /// -          name: `rotation`(ctype: `hkQuaternion`)
-    /// -        offset:  64(x86)/ 96(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `rotation`(ctype: `hkQuaternion`)
+    /// - offset: ` 64`(x86)/` 96`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_rotation: Quaternion,
     /// # C++ Info
-    /// -          name: `setTranslation`(ctype: `hkBool`)
-    /// -        offset:  80(x86)/112(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `setTranslation`(ctype: `hkBool`)
+    /// - offset: ` 80`(x86)/`112`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_setTranslation: bool,
     /// # C++ Info
-    /// -          name: `setRotation`(ctype: `hkBool`)
-    /// -        offset:  81(x86)/113(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `setRotation`(ctype: `hkBool`)
+    /// - offset: ` 81`(x86)/`113`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_setRotation: bool,
 }
 const _: () = {

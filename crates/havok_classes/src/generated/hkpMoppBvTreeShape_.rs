@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpMoppBvTreeShape`
-/// -         version: `0`
-/// -       signature: `0x90b29d39`
-/// -          size:  64(x86)/112(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpMoppBvTreeShape`
+/// - version: `0`
+/// - signature: `0x90b29d39`
+/// - size: ` 64`(x86)/`112`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,17 +21,15 @@ pub struct hkpMoppBvTreeShape {
     /// Alternative to C++ class inheritance.
     pub parent: hkMoppBvTreeShapeBase,
     /// # C++ Info
-    /// -          name: `child`(ctype: `struct hkpSingleShapeContainer`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    ///
+    /// - name: `child`(ctype: `struct hkpSingleShapeContainer`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
     pub m_child: hkpSingleShapeContainer,
     /// # C++ Info
-    /// -          name: `childSize`(ctype: `hkInt32`)
-    /// -        offset:  56(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `childSize`(ctype: `hkInt32`)
+    /// - offset: ` 56`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_childSize: i32,
 }
 const _: () = {

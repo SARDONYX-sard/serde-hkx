@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbComputeRotationFromAxisAngleModifier`
-/// -         version: `0`
-/// -       signature: `0x9b3f6936`
-/// -          size:  96(x86)/128(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbComputeRotationFromAxisAngleModifier`
+/// - version: `0`
+/// - signature: `0x9b3f6936`
+/// - size: ` 96`(x86)/`128`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkbComputeRotationFromAxisAngleModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `rotationOut`(ctype: `hkQuaternion`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `rotationOut`(ctype: `hkQuaternion`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_rotationOut: Quaternion,
     /// # C++ Info
-    /// -          name: `axis`(ctype: `hkVector4`)
-    /// -        offset:  64(x86)/ 96(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `axis`(ctype: `hkVector4`)
+    /// - offset: ` 64`(x86)/` 96`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_axis: Vector4,
     /// # C++ Info
-    /// -          name: `angleDegrees`(ctype: `hkReal`)
-    /// -        offset:  80(x86)/112(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `angleDegrees`(ctype: `hkReal`)
+    /// - offset: ` 80`(x86)/`112`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_angleDegrees: f32,
 }
 const _: () = {

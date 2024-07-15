@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpTriangleShape`
-/// -         version: `0`
-/// -       signature: `0x95ad1a25`
-/// -          size:  96(x86)/112(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpTriangleShape`
+/// - version: `0`
+/// - signature: `0x95ad1a25`
+/// - size: ` 96`(x86)/`112`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,46 +21,39 @@ pub struct hkpTriangleShape {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConvexShape,
     /// # C++ Info
-    /// -          name: `weldingInfo`(ctype: `hkUint16`)
-    /// -        offset:  20(x86)/ 40(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `weldingInfo`(ctype: `hkUint16`)
+    /// - offset: ` 20`(x86)/` 40`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_weldingInfo: u16,
     /// # C++ Info
-    /// -          name: `weldingType`(ctype: `enum WeldingType`)
-    /// -        offset:  22(x86)/ 42(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `weldingType`(ctype: `enum WeldingType`)
+    /// - offset: ` 22`(x86)/` 42`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_weldingType: WeldingType,
     /// # C++ Info
-    /// -          name: `isExtruded`(ctype: `hkUint8`)
-    /// -        offset:  23(x86)/ 43(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `isExtruded`(ctype: `hkUint8`)
+    /// - offset: ` 23`(x86)/` 43`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_isExtruded: u8,
     /// # C++ Info
-    /// -          name: `vertexA`(ctype: `hkVector4`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `vertexA`(ctype: `hkVector4`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_vertexA: Vector4,
     /// # C++ Info
-    /// -          name: `vertexB`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 64(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `vertexB`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 64`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_vertexB: Vector4,
     /// # C++ Info
-    /// -          name: `vertexC`(ctype: `hkVector4`)
-    /// -        offset:  64(x86)/ 80(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `vertexC`(ctype: `hkVector4`)
+    /// - offset: ` 64`(x86)/` 80`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_vertexC: Vector4,
     /// # C++ Info
-    /// -          name: `extrusion`(ctype: `hkVector4`)
-    /// -        offset:  80(x86)/ 96(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `extrusion`(ctype: `hkVector4`)
+    /// - offset: ` 80`(x86)/` 96`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_extrusion: Vector4,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbAuxiliaryNodeInfo`
-/// -         version: `1`
-/// -       signature: `0xca0888ca`
-/// -          size:  28(x86)/ 48(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbAuxiliaryNodeInfo`
+/// - version: `1`
+/// - signature: `0xca0888ca`
+/// - size: ` 28`(x86)/` 48`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,28 +21,24 @@ pub struct hkbAuxiliaryNodeInfo<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `type`(ctype: `enum NodeType`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `type`(ctype: `enum NodeType`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_type: NodeType,
     /// # C++ Info
-    /// -          name: `depth`(ctype: `hkUint8`)
-    /// -        offset:   9(x86)/ 17(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `depth`(ctype: `hkUint8`)
+    /// - offset: `  9`(x86)/` 17`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_depth: u8,
     /// # C++ Info
-    /// -          name: `referenceBehaviorName`(ctype: `hkStringPtr`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `referenceBehaviorName`(ctype: `hkStringPtr`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_referenceBehaviorName: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `selfTransitionNames`(ctype: `hkArray<hkStringPtr>`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `selfTransitionNames`(ctype: `hkArray<hkStringPtr>`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_selfTransitionNames: Vec<StringPtr<'a>>,
 }
 const _: () = {

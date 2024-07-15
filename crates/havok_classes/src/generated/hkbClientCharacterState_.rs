@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbClientCharacterState`
-/// -         version: `1`
-/// -       signature: `0xa2624c97`
-/// -          size: 208(x86)/272(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbClientCharacterState`
+/// - version: `1`
+/// - signature: `0xa2624c97`
+/// - size: `208`(x86)/`272`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,119 +21,100 @@ pub struct hkbClientCharacterState<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `deformableSkinIds`(ctype: `hkArray<hkUint64>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `deformableSkinIds`(ctype: `hkArray<hkUint64>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_deformableSkinIds: Vec<u64>,
     /// # C++ Info
-    /// -          name: `rigidSkinIds`(ctype: `hkArray<hkUint64>`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `rigidSkinIds`(ctype: `hkArray<hkUint64>`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_rigidSkinIds: Vec<u64>,
     /// # C++ Info
-    /// -          name: `externalEventIds`(ctype: `hkArray<hkInt16>`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `externalEventIds`(ctype: `hkArray<hkInt16>`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_externalEventIds: Vec<i16>,
     /// # C++ Info
-    /// -          name: `auxiliaryInfo`(ctype: `hkArray<hkbAuxiliaryNodeInfo*>`)
-    /// -        offset:  44(x86)/ 64(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `auxiliaryInfo`(ctype: `hkArray<hkbAuxiliaryNodeInfo*>`)
+    /// - offset: ` 44`(x86)/` 64`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_auxiliaryInfo: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `activeEventIds`(ctype: `hkArray<hkInt16>`)
-    /// -        offset:  56(x86)/ 80(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `activeEventIds`(ctype: `hkArray<hkInt16>`)
+    /// - offset: ` 56`(x86)/` 80`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_activeEventIds: Vec<i16>,
     /// # C++ Info
-    /// -          name: `activeVariableIds`(ctype: `hkArray<hkInt16>`)
-    /// -        offset:  68(x86)/ 96(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `activeVariableIds`(ctype: `hkArray<hkInt16>`)
+    /// - offset: ` 68`(x86)/` 96`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_activeVariableIds: Vec<i16>,
     /// # C++ Info
-    /// -          name: `characterId`(ctype: `hkUint64`)
-    /// -        offset:  80(x86)/112(x86_64)
-    /// -     type_size:   8(x86)/  8(x86_64)
-    ///
+    /// - name: `characterId`(ctype: `hkUint64`)
+    /// - offset: ` 80`(x86)/`112`(x86_64)
+    /// - type_size: `  8`(x86)/`  8`(x86_64)
     pub m_characterId: u64,
     /// # C++ Info
-    /// -          name: `instanceName`(ctype: `hkStringPtr`)
-    /// -        offset:  88(x86)/120(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `instanceName`(ctype: `hkStringPtr`)
+    /// - offset: ` 88`(x86)/`120`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_instanceName: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `templateName`(ctype: `hkStringPtr`)
-    /// -        offset:  92(x86)/128(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `templateName`(ctype: `hkStringPtr`)
+    /// - offset: ` 92`(x86)/`128`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_templateName: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `fullPathToProject`(ctype: `hkStringPtr`)
-    /// -        offset:  96(x86)/136(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `fullPathToProject`(ctype: `hkStringPtr`)
+    /// - offset: ` 96`(x86)/`136`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_fullPathToProject: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `behaviorData`(ctype: `struct hkbBehaviorGraphData*`)
-    /// -        offset: 100(x86)/144(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `behaviorData`(ctype: `struct hkbBehaviorGraphData*`)
+    /// - offset: `100`(x86)/`144`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_behaviorData: Pointer,
     /// # C++ Info
-    /// -          name: `behaviorInternalState`(ctype: `struct hkbBehaviorGraphInternalState*`)
-    /// -        offset: 104(x86)/152(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `behaviorInternalState`(ctype: `struct hkbBehaviorGraphInternalState*`)
+    /// - offset: `104`(x86)/`152`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_behaviorInternalState: Pointer,
     /// # C++ Info
-    /// -          name: `nodeIdToInternalStateMap`(ctype: `void*`)
-    /// -        offset: 108(x86)/160(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `nodeIdToInternalStateMap`(ctype: `void*`)
+    /// - offset: `108`(x86)/`160`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_nodeIdToInternalStateMap: Pointer,
     /// # C++ Info
-    /// -          name: `visible`(ctype: `hkBool`)
-    /// -        offset: 112(x86)/168(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `visible`(ctype: `hkBool`)
+    /// - offset: `112`(x86)/`168`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_visible: bool,
     /// # C++ Info
-    /// -          name: `elapsedSimulationTime`(ctype: `hkReal`)
-    /// -        offset: 116(x86)/172(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `elapsedSimulationTime`(ctype: `hkReal`)
+    /// - offset: `116`(x86)/`172`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_elapsedSimulationTime: f32,
     /// # C++ Info
-    /// -          name: `skeleton`(ctype: `struct hkaSkeleton*`)
-    /// -        offset: 120(x86)/176(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `skeleton`(ctype: `struct hkaSkeleton*`)
+    /// - offset: `120`(x86)/`176`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_skeleton: Pointer,
     /// # C++ Info
-    /// -          name: `worldFromModel`(ctype: `hkQsTransform`)
-    /// -        offset: 128(x86)/192(x86_64)
-    /// -     type_size:  48(x86)/ 48(x86_64)
-    ///
+    /// - name: `worldFromModel`(ctype: `hkQsTransform`)
+    /// - offset: `128`(x86)/`192`(x86_64)
+    /// - type_size: ` 48`(x86)/` 48`(x86_64)
     pub m_worldFromModel: QsTransform,
     /// # C++ Info
-    /// -          name: `poseModelSpace`(ctype: `hkArray<hkQsTransform>`)
-    /// -        offset: 176(x86)/240(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `poseModelSpace`(ctype: `hkArray<hkQsTransform>`)
+    /// - offset: `176`(x86)/`240`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_poseModelSpace: Vec<QsTransform>,
     /// # C++ Info
-    /// -          name: `rigidAttachmentTransforms`(ctype: `hkArray<hkQsTransform>`)
-    /// -        offset: 188(x86)/256(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `rigidAttachmentTransforms`(ctype: `hkArray<hkQsTransform>`)
+    /// - offset: `188`(x86)/`256`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_rigidAttachmentTransforms: Vec<QsTransform>,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkMemoryTrackerAttribute`
-/// -         version: `0`
-/// -       signature: `0x7bd5c66f`
-/// -          size:   1(x86)/  1(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkMemoryTrackerAttribute`
+/// - version: `0`
+/// - signature: `0x7bd5c66f`
+/// - size: `  1`(x86)/`  1`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]

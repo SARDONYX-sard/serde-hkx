@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkxTextureFile`
-/// -         version: `1`
-/// -       signature: `0x1e289259`
-/// -          size:  20(x86)/ 40(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkxTextureFile`
+/// - version: `1`
+/// - signature: `0x1e289259`
+/// - size: ` 20`(x86)/` 40`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkxTextureFile<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `filename`(ctype: `hkStringPtr`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `filename`(ctype: `hkStringPtr`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_filename: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `name`(ctype: `hkStringPtr`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `name`(ctype: `hkStringPtr`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_name: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `originalFilename`(ctype: `hkStringPtr`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `originalFilename`(ctype: `hkStringPtr`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_originalFilename: StringPtr<'a>,
 }
 const _: () = {

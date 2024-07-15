@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkxTriangleSelectionChannel`
-/// -         version: `1`
-/// -       signature: `0xa02cfca9`
-/// -          size:  20(x86)/ 32(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkxTriangleSelectionChannel`
+/// - version: `1`
+/// - signature: `0xa02cfca9`
+/// - size: ` 20`(x86)/` 32`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkxTriangleSelectionChannel {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `selectedTriangles`(ctype: `hkArray<hkInt32>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `selectedTriangles`(ctype: `hkArray<hkInt32>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_selectedTriangles: Vec<i32>,
 }
 const _: () = {

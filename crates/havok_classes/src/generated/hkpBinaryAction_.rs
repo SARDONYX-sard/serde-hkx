@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpBinaryAction`
-/// -         version: `0`
-/// -       signature: `0xc00f3403`
-/// -          size:  32(x86)/ 64(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpBinaryAction`
+/// - version: `0`
+/// - signature: `0xc00f3403`
+/// - size: ` 32`(x86)/` 64`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkpBinaryAction<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkpAction<'a>,
     /// # C++ Info
-    /// -          name: `entityA`(ctype: `struct hkpEntity*`)
-    /// -        offset:  24(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `entityA`(ctype: `struct hkpEntity*`)
+    /// - offset: ` 24`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_entityA: Pointer,
     /// # C++ Info
-    /// -          name: `entityB`(ctype: `struct hkpEntity*`)
-    /// -        offset:  28(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `entityB`(ctype: `struct hkpEntity*`)
+    /// - offset: ` 28`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_entityB: Pointer,
 }
 const _: () = {

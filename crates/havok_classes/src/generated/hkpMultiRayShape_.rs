@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpMultiRayShape`
-/// -         version: `0`
-/// -       signature: `0xea2e7ec9`
-/// -          size:  32(x86)/ 56(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpMultiRayShape`
+/// - version: `0`
+/// - signature: `0xea2e7ec9`
+/// - size: ` 32`(x86)/` 56`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkpMultiRayShape {
     /// Alternative to C++ class inheritance.
     pub parent: hkpShape,
     /// # C++ Info
-    /// -          name: `rays`(ctype: `hkArray<struct hkpMultiRayShapeRay>`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `rays`(ctype: `hkArray<struct hkpMultiRayShapeRay>`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_rays: Vec<hkpMultiRayShapeRay>,
     /// # C++ Info
-    /// -          name: `rayPenetrationDistance`(ctype: `hkReal`)
-    /// -        offset:  28(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `rayPenetrationDistance`(ctype: `hkReal`)
+    /// - offset: ` 28`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_rayPenetrationDistance: f32,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbPoseMatchingGenerator`
-/// -         version: `2`
-/// -       signature: `0x29e271b4`
-/// -          size: 208(x86)/240(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbPoseMatchingGenerator`
+/// - version: `2`
+/// - signature: `0x29e271b4`
+/// - size: `208`(x86)/`240`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,118 +21,100 @@ pub struct hkbPoseMatchingGenerator<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbBlenderGenerator<'a>,
     /// # C++ Info
-    /// -          name: `worldFromModelRotation`(ctype: `hkQuaternion`)
-    /// -        offset: 128(x86)/160(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `worldFromModelRotation`(ctype: `hkQuaternion`)
+    /// - offset: `128`(x86)/`160`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_worldFromModelRotation: Quaternion,
     /// # C++ Info
-    /// -          name: `blendSpeed`(ctype: `hkReal`)
-    /// -        offset: 144(x86)/176(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `blendSpeed`(ctype: `hkReal`)
+    /// - offset: `144`(x86)/`176`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_blendSpeed: f32,
     /// # C++ Info
-    /// -          name: `minSpeedToSwitch`(ctype: `hkReal`)
-    /// -        offset: 148(x86)/180(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `minSpeedToSwitch`(ctype: `hkReal`)
+    /// - offset: `148`(x86)/`180`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_minSpeedToSwitch: f32,
     /// # C++ Info
-    /// -          name: `minSwitchTimeNoError`(ctype: `hkReal`)
-    /// -        offset: 152(x86)/184(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `minSwitchTimeNoError`(ctype: `hkReal`)
+    /// - offset: `152`(x86)/`184`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_minSwitchTimeNoError: f32,
     /// # C++ Info
-    /// -          name: `minSwitchTimeFullError`(ctype: `hkReal`)
-    /// -        offset: 156(x86)/188(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `minSwitchTimeFullError`(ctype: `hkReal`)
+    /// - offset: `156`(x86)/`188`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_minSwitchTimeFullError: f32,
     /// # C++ Info
-    /// -          name: `startPlayingEventId`(ctype: `hkInt32`)
-    /// -        offset: 160(x86)/192(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `startPlayingEventId`(ctype: `hkInt32`)
+    /// - offset: `160`(x86)/`192`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_startPlayingEventId: i32,
     /// # C++ Info
-    /// -          name: `startMatchingEventId`(ctype: `hkInt32`)
-    /// -        offset: 164(x86)/196(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `startMatchingEventId`(ctype: `hkInt32`)
+    /// - offset: `164`(x86)/`196`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_startMatchingEventId: i32,
     /// # C++ Info
-    /// -          name: `rootBoneIndex`(ctype: `hkInt16`)
-    /// -        offset: 168(x86)/200(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `rootBoneIndex`(ctype: `hkInt16`)
+    /// - offset: `168`(x86)/`200`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_rootBoneIndex: i16,
     /// # C++ Info
-    /// -          name: `otherBoneIndex`(ctype: `hkInt16`)
-    /// -        offset: 170(x86)/202(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `otherBoneIndex`(ctype: `hkInt16`)
+    /// - offset: `170`(x86)/`202`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_otherBoneIndex: i16,
     /// # C++ Info
-    /// -          name: `anotherBoneIndex`(ctype: `hkInt16`)
-    /// -        offset: 172(x86)/204(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `anotherBoneIndex`(ctype: `hkInt16`)
+    /// - offset: `172`(x86)/`204`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_anotherBoneIndex: i16,
     /// # C++ Info
-    /// -          name: `pelvisIndex`(ctype: `hkInt16`)
-    /// -        offset: 174(x86)/206(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `pelvisIndex`(ctype: `hkInt16`)
+    /// - offset: `174`(x86)/`206`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_pelvisIndex: i16,
     /// # C++ Info
-    /// -          name: `mode`(ctype: `enum Mode`)
-    /// -        offset: 176(x86)/208(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `mode`(ctype: `enum Mode`)
+    /// - offset: `176`(x86)/`208`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_mode: Mode,
     /// # C++ Info
-    /// -          name: `currentMatch`(ctype: `hkInt32`)
-    /// -        offset: 180(x86)/212(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `currentMatch`(ctype: `hkInt32`)
+    /// - offset: `180`(x86)/`212`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_currentMatch: i32,
     /// # C++ Info
-    /// -          name: `bestMatch`(ctype: `hkInt32`)
-    /// -        offset: 184(x86)/216(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `bestMatch`(ctype: `hkInt32`)
+    /// - offset: `184`(x86)/`216`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_bestMatch: i32,
     /// # C++ Info
-    /// -          name: `timeSinceBetterMatch`(ctype: `hkReal`)
-    /// -        offset: 188(x86)/220(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `timeSinceBetterMatch`(ctype: `hkReal`)
+    /// - offset: `188`(x86)/`220`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_timeSinceBetterMatch: f32,
     /// # C++ Info
-    /// -          name: `error`(ctype: `hkReal`)
-    /// -        offset: 192(x86)/224(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `error`(ctype: `hkReal`)
+    /// - offset: `192`(x86)/`224`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_error: f32,
     /// # C++ Info
-    /// -          name: `resetCurrentMatchLocalTime`(ctype: `hkBool`)
-    /// -        offset: 196(x86)/228(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `resetCurrentMatchLocalTime`(ctype: `hkBool`)
+    /// - offset: `196`(x86)/`228`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_resetCurrentMatchLocalTime: bool,
     /// # C++ Info
-    /// -          name: `poseMatchingUtility`(ctype: `void*`)
-    /// -        offset: 200(x86)/232(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `poseMatchingUtility`(ctype: `void*`)
+    /// - offset: `200`(x86)/`232`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_poseMatchingUtility: Pointer,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `BSTweenerModifier`
-/// -         version: `1`
-/// -       signature: `0xd2d9a04`
-/// -          size: 176(x86)/208(x86_64)
-/// -          vtable: true
-///
+/// - name: `BSTweenerModifier`
+/// - version: `1`
+/// - signature: `0xd2d9a04`
+/// - size: `176`(x86)/`208`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,61 +21,52 @@ pub struct BSTweenerModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `tweenPosition`(ctype: `hkBool`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `tweenPosition`(ctype: `hkBool`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_tweenPosition: bool,
     /// # C++ Info
-    /// -          name: `tweenRotation`(ctype: `hkBool`)
-    /// -        offset:  45(x86)/ 81(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `tweenRotation`(ctype: `hkBool`)
+    /// - offset: ` 45`(x86)/` 81`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_tweenRotation: bool,
     /// # C++ Info
-    /// -          name: `useTweenDuration`(ctype: `hkBool`)
-    /// -        offset:  46(x86)/ 82(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `useTweenDuration`(ctype: `hkBool`)
+    /// - offset: ` 46`(x86)/` 82`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_useTweenDuration: bool,
     /// # C++ Info
-    /// -          name: `tweenDuration`(ctype: `hkReal`)
-    /// -        offset:  48(x86)/ 84(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `tweenDuration`(ctype: `hkReal`)
+    /// - offset: ` 48`(x86)/` 84`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_tweenDuration: f32,
     /// # C++ Info
-    /// -          name: `targetPosition`(ctype: `hkVector4`)
-    /// -        offset:  64(x86)/ 96(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `targetPosition`(ctype: `hkVector4`)
+    /// - offset: ` 64`(x86)/` 96`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_targetPosition: Vector4,
     /// # C++ Info
-    /// -          name: `targetRotation`(ctype: `hkQuaternion`)
-    /// -        offset:  80(x86)/112(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `targetRotation`(ctype: `hkQuaternion`)
+    /// - offset: ` 80`(x86)/`112`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_targetRotation: Quaternion,
     /// # C++ Info
-    /// -          name: `duration`(ctype: `hkReal`)
-    /// -        offset:  96(x86)/128(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `duration`(ctype: `hkReal`)
+    /// - offset: ` 96`(x86)/`128`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_duration: f32,
     /// # C++ Info
-    /// -          name: `startTransform`(ctype: `hkQsTransform`)
-    /// -        offset: 112(x86)/144(x86_64)
-    /// -     type_size:  48(x86)/ 48(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `startTransform`(ctype: `hkQsTransform`)
+    /// - offset: `112`(x86)/`144`(x86_64)
+    /// - type_size: ` 48`(x86)/` 48`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_startTransform: QsTransform,
     /// # C++ Info
-    /// -          name: `time`(ctype: `hkReal`)
-    /// -        offset: 160(x86)/192(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `time`(ctype: `hkReal`)
+    /// - offset: `160`(x86)/`192`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_time: f32,
 }
 const _: () = {

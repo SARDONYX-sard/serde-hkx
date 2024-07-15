@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpAgent1nSector`
-/// -         version: `0`
-/// -       signature: `0x626e55a`
-/// -          size: 512(x86)/512(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpAgent1nSector`
+/// - version: `0`
+/// - signature: `0x626e55a`
+/// - size: `512`(x86)/`512`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,34 +19,29 @@ pub struct hkpAgent1nSector {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `bytesAllocated`(ctype: `hkUint32`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `bytesAllocated`(ctype: `hkUint32`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_bytesAllocated: u32,
     /// # C++ Info
-    /// -          name: `pad0`(ctype: `hkUint32`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `pad0`(ctype: `hkUint32`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_pad0: u32,
     /// # C++ Info
-    /// -          name: `pad1`(ctype: `hkUint32`)
-    /// -        offset:   8(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `pad1`(ctype: `hkUint32`)
+    /// - offset: `  8`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_pad1: u32,
     /// # C++ Info
-    /// -          name: `pad2`(ctype: `hkUint32`)
-    /// -        offset:  12(x86)/ 12(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `pad2`(ctype: `hkUint32`)
+    /// - offset: ` 12`(x86)/` 12`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_pad2: u32,
     /// # C++ Info
-    /// -          name: `data`(ctype: `hkUint8[496]`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size: 496(x86)/496(x86_64)
-    ///
+    /// - name: `data`(ctype: `hkUint8[496]`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: `496`(x86)/`496`(x86_64)
     #[cfg_attr(feature = "serde", serde_as(as = "[_; 496]"))]
     #[educe(Default = [0;496usize])]
     pub m_data: [u8; 496usize],

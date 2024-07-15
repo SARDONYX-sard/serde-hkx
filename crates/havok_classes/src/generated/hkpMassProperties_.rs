@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpMassProperties`
-/// -         version: `0`
-/// -       signature: `0x68a56834`
-/// -          size:  80(x86)/ 80(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpMassProperties`
+/// - version: `0`
+/// - signature: `0x68a56834`
+/// - size: ` 80`(x86)/` 80`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,28 +19,24 @@ pub struct hkpMassProperties {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `volume`(ctype: `hkReal`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `volume`(ctype: `hkReal`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_volume: f32,
     /// # C++ Info
-    /// -          name: `mass`(ctype: `hkReal`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `mass`(ctype: `hkReal`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_mass: f32,
     /// # C++ Info
-    /// -          name: `centerOfMass`(ctype: `hkVector4`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `centerOfMass`(ctype: `hkVector4`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_centerOfMass: Vector4,
     /// # C++ Info
-    /// -          name: `inertiaTensor`(ctype: `hkMatrix3`)
-    /// -        offset:  32(x86)/ 32(x86_64)
-    /// -     type_size:  48(x86)/ 48(x86_64)
-    ///
+    /// - name: `inertiaTensor`(ctype: `hkMatrix3`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: ` 48`(x86)/` 48`(x86_64)
     pub m_inertiaTensor: Matrix3,
 }
 const _: () = {

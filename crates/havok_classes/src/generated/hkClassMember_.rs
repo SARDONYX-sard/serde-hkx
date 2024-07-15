@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkClassMember`
-/// -         version: `0`
-/// -       signature: `0x5c7ea4c2`
-/// -          size:  24(x86)/ 40(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkClassMember`
+/// - version: `0`
+/// - signature: `0x5c7ea4c2`
+/// - size: ` 24`(x86)/` 40`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,59 +19,50 @@ pub struct hkClassMember<'a> {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `name`(ctype: `char*`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `name`(ctype: `char*`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_name: CString<'a>,
     /// # C++ Info
-    /// -          name: `class`(ctype: `struct hkClass*`)
-    /// -        offset:   4(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `class`(ctype: `struct hkClass*`)
+    /// - offset: `  4`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_class: Pointer,
     /// # C++ Info
-    /// -          name: `enum`(ctype: `struct hkClassEnum*`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `enum`(ctype: `struct hkClassEnum*`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_enum: Pointer,
     /// # C++ Info
-    /// -          name: `type`(ctype: `enum Type`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `type`(ctype: `enum Type`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_type: Type,
     /// # C++ Info
-    /// -          name: `subtype`(ctype: `enum Type`)
-    /// -        offset:  13(x86)/ 25(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `subtype`(ctype: `enum Type`)
+    /// - offset: ` 13`(x86)/` 25`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_subtype: Type,
     /// # C++ Info
-    /// -          name: `cArraySize`(ctype: `hkInt16`)
-    /// -        offset:  14(x86)/ 26(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `cArraySize`(ctype: `hkInt16`)
+    /// - offset: ` 14`(x86)/` 26`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_cArraySize: i16,
     /// # C++ Info
-    /// -          name: `flags`(ctype: `flags FlagValues`)
-    /// -        offset:  16(x86)/ 28(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `flags`(ctype: `flags FlagValues`)
+    /// - offset: ` 16`(x86)/` 28`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_flags: FlagValues,
     /// # C++ Info
-    /// -          name: `offset`(ctype: `hkUint16`)
-    /// -        offset:  18(x86)/ 30(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `offset`(ctype: `hkUint16`)
+    /// - offset: ` 18`(x86)/` 30`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_offset: u16,
     /// # C++ Info
-    /// -          name: `attributes`(ctype: `struct hkCustomAttributes*`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `attributes`(ctype: `struct hkCustomAttributes*`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_attributes: Pointer,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkxMaterialTextureStage`
-/// -         version: `0`
-/// -       signature: `0xfa6facb2`
-/// -          size:  12(x86)/ 16(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkxMaterialTextureStage`
+/// - version: `0`
+/// - signature: `0xfa6facb2`
+/// - size: ` 12`(x86)/` 16`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,22 +19,19 @@ pub struct hkxMaterialTextureStage {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `texture`(ctype: `struct hkReferencedObject*`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `texture`(ctype: `struct hkReferencedObject*`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_texture: Pointer,
     /// # C++ Info
-    /// -          name: `usageHint`(ctype: `enum TextureType`)
-    /// -        offset:   4(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `usageHint`(ctype: `enum TextureType`)
+    /// - offset: `  4`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_usageHint: TextureType,
     /// # C++ Info
-    /// -          name: `tcoordChannel`(ctype: `hkInt32`)
-    /// -        offset:   8(x86)/ 12(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `tcoordChannel`(ctype: `hkInt32`)
+    /// - offset: `  8`(x86)/` 12`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_tcoordChannel: i32,
 }
 const _: () = {

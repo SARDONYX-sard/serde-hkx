@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `BSInterpValueModifier`
-/// -         version: `0`
-/// -       signature: `0x29adc802`
-/// -          size:  64(x86)/104(x86_64)
-/// -          vtable: true
-///
+/// - name: `BSInterpValueModifier`
+/// - version: `0`
+/// - signature: `0x29adc802`
+/// - size: ` 64`(x86)/`104`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,35 +21,30 @@ pub struct BSInterpValueModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `source`(ctype: `hkReal`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `source`(ctype: `hkReal`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_source: f32,
     /// # C++ Info
-    /// -          name: `target`(ctype: `hkReal`)
-    /// -        offset:  48(x86)/ 84(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `target`(ctype: `hkReal`)
+    /// - offset: ` 48`(x86)/` 84`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_target: f32,
     /// # C++ Info
-    /// -          name: `result`(ctype: `hkReal`)
-    /// -        offset:  52(x86)/ 88(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `result`(ctype: `hkReal`)
+    /// - offset: ` 52`(x86)/` 88`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_result: f32,
     /// # C++ Info
-    /// -          name: `gain`(ctype: `hkReal`)
-    /// -        offset:  56(x86)/ 92(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `gain`(ctype: `hkReal`)
+    /// - offset: ` 56`(x86)/` 92`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_gain: f32,
     /// # C++ Info
-    /// -          name: `timeStep`(ctype: `hkReal`)
-    /// -        offset:  60(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `timeStep`(ctype: `hkReal`)
+    /// - offset: ` 60`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_timeStep: f32,
 }
 const _: () = {

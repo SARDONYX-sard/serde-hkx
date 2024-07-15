@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpConvexVerticesConnectivity`
-/// -         version: `0`
-/// -       signature: `0x63d38e9c`
-/// -          size:  32(x86)/ 48(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpConvexVerticesConnectivity`
+/// - version: `0`
+/// - signature: `0x63d38e9c`
+/// - size: ` 32`(x86)/` 48`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkpConvexVerticesConnectivity {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `vertexIndices`(ctype: `hkArray<hkUint16>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `vertexIndices`(ctype: `hkArray<hkUint16>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_vertexIndices: Vec<u16>,
     /// # C++ Info
-    /// -          name: `numVerticesPerFace`(ctype: `hkArray<hkUint8>`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `numVerticesPerFace`(ctype: `hkArray<hkUint8>`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_numVerticesPerFace: Vec<u8>,
 }
 const _: () = {

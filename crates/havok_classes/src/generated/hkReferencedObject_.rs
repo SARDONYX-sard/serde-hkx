@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkReferencedObject`
-/// -         version: `0`
-/// -       signature: `0x3b1c1113`
-/// -          size:   8(x86)/ 16(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkReferencedObject`
+/// - version: `0`
+/// - signature: `0x3b1c1113`
+/// - size: `  8`(x86)/` 16`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,18 +21,16 @@ pub struct hkReferencedObject {
     /// Alternative to C++ class inheritance.
     pub parent: hkBaseObject,
     /// # C++ Info
-    /// -          name: `memSizeAndFlags`(ctype: `hkUint16`)
-    /// -        offset:   4(x86)/  8(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `memSizeAndFlags`(ctype: `hkUint16`)
+    /// - offset: `  4`(x86)/`  8`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_memSizeAndFlags: u16,
     /// # C++ Info
-    /// -          name: `referenceCount`(ctype: `hkInt16`)
-    /// -        offset:   6(x86)/ 10(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `referenceCount`(ctype: `hkInt16`)
+    /// - offset: `  6`(x86)/` 10`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_referenceCount: i16,
 }
 const _: () = {

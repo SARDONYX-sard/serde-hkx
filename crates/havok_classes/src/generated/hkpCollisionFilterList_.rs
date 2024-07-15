@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpCollisionFilterList`
-/// -         version: `0`
-/// -       signature: `0x2603bf04`
-/// -          size:  60(x86)/ 88(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpCollisionFilterList`
+/// - version: `0`
+/// - signature: `0x2603bf04`
+/// - size: ` 60`(x86)/` 88`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkpCollisionFilterList {
     /// Alternative to C++ class inheritance.
     pub parent: hkpCollisionFilter,
     /// # C++ Info
-    /// -          name: `collisionFilters`(ctype: `hkArray<hkpCollisionFilter*>`)
-    /// -        offset:  48(x86)/ 72(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `collisionFilters`(ctype: `hkArray<hkpCollisionFilter*>`)
+    /// - offset: ` 48`(x86)/` 72`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_collisionFilters: Vec<Pointer>,
 }
 const _: () = {

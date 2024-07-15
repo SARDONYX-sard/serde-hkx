@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkxMaterialShader`
-/// -         version: `1`
-/// -       signature: `0x28515eff`
-/// -          size:  40(x86)/ 72(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkxMaterialShader`
+/// - version: `1`
+/// - signature: `0x28515eff`
+/// - size: ` 40`(x86)/` 72`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,40 +21,34 @@ pub struct hkxMaterialShader<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `name`(ctype: `hkStringPtr`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `name`(ctype: `hkStringPtr`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_name: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `type`(ctype: `enum ShaderType`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `type`(ctype: `enum ShaderType`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_type: ShaderType,
     /// # C++ Info
-    /// -          name: `vertexEntryName`(ctype: `hkStringPtr`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `vertexEntryName`(ctype: `hkStringPtr`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_vertexEntryName: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `geomEntryName`(ctype: `hkStringPtr`)
-    /// -        offset:  20(x86)/ 40(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `geomEntryName`(ctype: `hkStringPtr`)
+    /// - offset: ` 20`(x86)/` 40`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_geomEntryName: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `pixelEntryName`(ctype: `hkStringPtr`)
-    /// -        offset:  24(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `pixelEntryName`(ctype: `hkStringPtr`)
+    /// - offset: ` 24`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_pixelEntryName: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `data`(ctype: `hkArray<hkUint8>`)
-    /// -        offset:  28(x86)/ 56(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `data`(ctype: `hkArray<hkUint8>`)
+    /// - offset: ` 28`(x86)/` 56`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_data: Vec<u8>,
 }
 const _: () = {

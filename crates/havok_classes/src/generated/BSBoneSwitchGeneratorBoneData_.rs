@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `BSBoneSwitchGeneratorBoneData`
-/// -         version: `1`
-/// -       signature: `0xc1215be6`
-/// -          size:  48(x86)/ 64(x86_64)
-/// -          vtable: true
-///
+/// - name: `BSBoneSwitchGeneratorBoneData`
+/// - version: `1`
+/// - signature: `0xc1215be6`
+/// - size: ` 48`(x86)/` 64`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,17 +21,15 @@ pub struct BSBoneSwitchGeneratorBoneData {
     /// Alternative to C++ class inheritance.
     pub parent: hkbBindable,
     /// # C++ Info
-    /// -          name: `pGenerator`(ctype: `struct hkbGenerator*`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `ALIGN_16`
-    ///
+    /// - name: `pGenerator`(ctype: `struct hkbGenerator*`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `ALIGN_16`
     pub m_pGenerator: Pointer,
     /// # C++ Info
-    /// -          name: `spBoneWeight`(ctype: `struct hkbBoneWeightArray*`)
-    /// -        offset:  36(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `spBoneWeight`(ctype: `struct hkbBoneWeightArray*`)
+    /// - offset: ` 36`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_spBoneWeight: Pointer,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpTypedBroadPhaseHandle`
-/// -         version: `0`
-/// -       signature: `0xf4b0f799`
-/// -          size:  12(x86)/ 12(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpTypedBroadPhaseHandle`
+/// - version: `0`
+/// - signature: `0xf4b0f799`
+/// - size: ` 12`(x86)/` 12`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,29 +21,25 @@ pub struct hkpTypedBroadPhaseHandle {
     /// Alternative to C++ class inheritance.
     pub parent: hkpBroadPhaseHandle,
     /// # C++ Info
-    /// -          name: `type`(ctype: `hkInt8`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `type`(ctype: `hkInt8`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_type: i8,
     /// # C++ Info
-    /// -          name: `ownerOffset`(ctype: `hkInt8`)
-    /// -        offset:   5(x86)/  5(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `ownerOffset`(ctype: `hkInt8`)
+    /// - offset: `  5`(x86)/`  5`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_ownerOffset: i8,
     /// # C++ Info
-    /// -          name: `objectQualityType`(ctype: `hkInt8`)
-    /// -        offset:   6(x86)/  6(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `objectQualityType`(ctype: `hkInt8`)
+    /// - offset: `  6`(x86)/`  6`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_objectQualityType: i8,
     /// # C++ Info
-    /// -          name: `collisionFilterInfo`(ctype: `hkUint32`)
-    /// -        offset:   8(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `collisionFilterInfo`(ctype: `hkUint32`)
+    /// - offset: `  8`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_collisionFilterInfo: u32,
 }
 const _: () = {

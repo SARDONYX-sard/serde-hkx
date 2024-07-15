@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbNodeInternalStateInfo`
-/// -         version: `0`
-/// -       signature: `0x7db9971d`
-/// -          size: 100(x86)/120(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbNodeInternalStateInfo`
+/// - version: `0`
+/// - signature: `0x7db9971d`
+/// - size: `100`(x86)/`120`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,34 +21,29 @@ pub struct hkbNodeInternalStateInfo<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `syncInfo`(ctype: `struct hkbGeneratorSyncInfo`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  80(x86)/ 80(x86_64)
-    ///
+    /// - name: `syncInfo`(ctype: `struct hkbGeneratorSyncInfo`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 80`(x86)/` 80`(x86_64)
     pub m_syncInfo: hkbGeneratorSyncInfo,
     /// # C++ Info
-    /// -          name: `name`(ctype: `hkStringPtr`)
-    /// -        offset:  88(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `name`(ctype: `hkStringPtr`)
+    /// - offset: ` 88`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_name: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `internalState`(ctype: `struct hkReferencedObject*`)
-    /// -        offset:  92(x86)/104(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `internalState`(ctype: `struct hkReferencedObject*`)
+    /// - offset: ` 92`(x86)/`104`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_internalState: Pointer,
     /// # C++ Info
-    /// -          name: `nodeId`(ctype: `hkInt16`)
-    /// -        offset:  96(x86)/112(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `nodeId`(ctype: `hkInt16`)
+    /// - offset: ` 96`(x86)/`112`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_nodeId: i16,
     /// # C++ Info
-    /// -          name: `hasActivateBeenCalled`(ctype: `hkBool`)
-    /// -        offset:  98(x86)/114(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `hasActivateBeenCalled`(ctype: `hkBool`)
+    /// - offset: ` 98`(x86)/`114`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_hasActivateBeenCalled: bool,
 }
 const _: () = {

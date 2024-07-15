@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkaSkeletonMapper`
-/// -         version: `0`
-/// -       signature: `0x12df42a5`
-/// -          size: 128(x86)/144(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkaSkeletonMapper`
+/// - version: `0`
+/// - signature: `0x12df42a5`
+/// - size: `128`(x86)/`144`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkaSkeletonMapper {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `mapping`(ctype: `struct hkaSkeletonMapperData`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size: 112(x86)/128(x86_64)
-    ///
+    /// - name: `mapping`(ctype: `struct hkaSkeletonMapperData`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: `112`(x86)/`128`(x86_64)
     pub m_mapping: hkaSkeletonMapperData,
 }
 const _: () = {

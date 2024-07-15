@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpRagdollConstraintData`
-/// -         version: `0`
-/// -       signature: `0x8fb5dd29`
-/// -          size: 352(x86)/384(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpRagdollConstraintData`
+/// - version: `0`
+/// - signature: `0x8fb5dd29`
+/// - size: `352`(x86)/`384`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,11 +21,10 @@ pub struct hkpRagdollConstraintData {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConstraintData,
     /// # C++ Info
-    /// -          name: `atoms`(ctype: `struct hkpRagdollConstraintDataAtoms`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size: 336(x86)/352(x86_64)
-    /// -         flags: `ALIGN_16`
-    ///
+    /// - name: `atoms`(ctype: `struct hkpRagdollConstraintDataAtoms`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: `336`(x86)/`352`(x86_64)
+    /// - flags: `ALIGN_16`
     pub m_atoms: hkpRagdollConstraintDataAtoms,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkMemoryResourceHandle`
-/// -         version: `2`
-/// -       signature: `0xbffac086`
-/// -          size:  28(x86)/ 48(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkMemoryResourceHandle`
+/// - version: `2`
+/// - signature: `0xbffac086`
+/// - size: ` 28`(x86)/` 48`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkMemoryResourceHandle<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkResourceHandle,
     /// # C++ Info
-    /// -          name: `variant`(ctype: `struct hkReferencedObject*`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `variant`(ctype: `struct hkReferencedObject*`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_variant: Pointer,
     /// # C++ Info
-    /// -          name: `name`(ctype: `hkStringPtr`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `name`(ctype: `hkStringPtr`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_name: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `references`(ctype: `hkArray<struct hkMemoryResourceHandleExternalLink>`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `references`(ctype: `hkArray<struct hkMemoryResourceHandleExternalLink>`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_references: Vec<hkMemoryResourceHandleExternalLink<'a>>,
 }
 const _: () = {

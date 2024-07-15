@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpPointToPathConstraintData`
-/// -         version: `0`
-/// -       signature: `0x8e7cb5da`
-/// -          size: 176(x86)/192(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpPointToPathConstraintData`
+/// - version: `0`
+/// - signature: `0x8e7cb5da`
+/// - size: `176`(x86)/`192`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,34 +21,29 @@ pub struct hkpPointToPathConstraintData {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConstraintData,
     /// # C++ Info
-    /// -          name: `atoms`(ctype: `struct hkpBridgeAtoms`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:  12(x86)/ 24(x86_64)
-    ///
+    /// - name: `atoms`(ctype: `struct hkpBridgeAtoms`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: ` 12`(x86)/` 24`(x86_64)
     pub m_atoms: hkpBridgeAtoms,
     /// # C++ Info
-    /// -          name: `path`(ctype: `struct hkpParametricCurve*`)
-    /// -        offset:  24(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `path`(ctype: `struct hkpParametricCurve*`)
+    /// - offset: ` 24`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_path: Pointer,
     /// # C++ Info
-    /// -          name: `maxFrictionForce`(ctype: `hkReal`)
-    /// -        offset:  28(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxFrictionForce`(ctype: `hkReal`)
+    /// - offset: ` 28`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxFrictionForce: f32,
     /// # C++ Info
-    /// -          name: `angularConstrainedDOF`(ctype: `enum OrientationConstraintType`)
-    /// -        offset:  32(x86)/ 60(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `angularConstrainedDOF`(ctype: `enum OrientationConstraintType`)
+    /// - offset: ` 32`(x86)/` 60`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_angularConstrainedDOF: OrientationConstraintType,
     /// # C++ Info
-    /// -          name: `transform_OS_KS`(ctype: `hkTransform[2]`)
-    /// -        offset:  48(x86)/ 64(x86_64)
-    /// -     type_size: 128(x86)/128(x86_64)
-    ///
+    /// - name: `transform_OS_KS`(ctype: `hkTransform[2]`)
+    /// - offset: ` 48`(x86)/` 64`(x86_64)
+    /// - type_size: `128`(x86)/`128`(x86_64)
     pub m_transform_OS_KS: [Transform; 2usize],
 }
 const _: () = {

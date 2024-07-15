@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbTimerModifierInternalState`
-/// -         version: `0`
-/// -       signature: `0x83ec2d42`
-/// -          size:  12(x86)/ 24(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbTimerModifierInternalState`
+/// - version: `0`
+/// - signature: `0x83ec2d42`
+/// - size: ` 12`(x86)/` 24`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkbTimerModifierInternalState {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `secondsElapsed`(ctype: `hkReal`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `secondsElapsed`(ctype: `hkReal`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_secondsElapsed: f32,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkxVertexFloatDataChannel`
-/// -         version: `1`
-/// -       signature: `0xbeeb397c`
-/// -          size:  24(x86)/ 40(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkxVertexFloatDataChannel`
+/// - version: `1`
+/// - signature: `0xbeeb397c`
+/// - size: ` 24`(x86)/` 40`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkxVertexFloatDataChannel {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `perVertexFloats`(ctype: `hkArray<hkReal>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `perVertexFloats`(ctype: `hkArray<hkReal>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_perVertexFloats: Vec<f32>,
     /// # C++ Info
-    /// -          name: `dimensions`(ctype: `enum VertexFloatDimensions`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `dimensions`(ctype: `enum VertexFloatDimensions`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_dimensions: VertexFloatDimensions,
 }
 const _: () = {

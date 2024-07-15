@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkaSkeleton`
-/// -         version: `3`
-/// -       signature: `0x366e8220`
-/// -          size:  84(x86)/120(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkaSkeleton`
+/// - version: `3`
+/// - signature: `0x366e8220`
+/// - size: ` 84`(x86)/`120`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,46 +21,39 @@ pub struct hkaSkeleton<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `name`(ctype: `hkStringPtr`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `name`(ctype: `hkStringPtr`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_name: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `parentIndices`(ctype: `hkArray<hkInt16>`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `parentIndices`(ctype: `hkArray<hkInt16>`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_parentIndices: Vec<i16>,
     /// # C++ Info
-    /// -          name: `bones`(ctype: `hkArray<struct hkaBone>`)
-    /// -        offset:  24(x86)/ 40(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `bones`(ctype: `hkArray<struct hkaBone>`)
+    /// - offset: ` 24`(x86)/` 40`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_bones: Vec<hkaBone<'a>>,
     /// # C++ Info
-    /// -          name: `referencePose`(ctype: `hkArray<hkQsTransform>`)
-    /// -        offset:  36(x86)/ 56(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `referencePose`(ctype: `hkArray<hkQsTransform>`)
+    /// - offset: ` 36`(x86)/` 56`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_referencePose: Vec<QsTransform>,
     /// # C++ Info
-    /// -          name: `referenceFloats`(ctype: `hkArray<hkReal>`)
-    /// -        offset:  48(x86)/ 72(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `referenceFloats`(ctype: `hkArray<hkReal>`)
+    /// - offset: ` 48`(x86)/` 72`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_referenceFloats: Vec<f32>,
     /// # C++ Info
-    /// -          name: `floatSlots`(ctype: `hkArray<hkStringPtr>`)
-    /// -        offset:  60(x86)/ 88(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `floatSlots`(ctype: `hkArray<hkStringPtr>`)
+    /// - offset: ` 60`(x86)/` 88`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_floatSlots: Vec<StringPtr<'a>>,
     /// # C++ Info
-    /// -          name: `localFrames`(ctype: `hkArray<struct hkaSkeletonLocalFrameOnBone>`)
-    /// -        offset:  72(x86)/104(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `localFrames`(ctype: `hkArray<struct hkaSkeletonLocalFrameOnBone>`)
+    /// - offset: ` 72`(x86)/`104`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_localFrames: Vec<hkaSkeletonLocalFrameOnBone>,
 }
 const _: () = {

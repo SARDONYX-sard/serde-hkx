@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpLimitedForceConstraintMotor`
-/// -         version: `0`
-/// -       signature: `0x3377b0b0`
-/// -          size:  20(x86)/ 32(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpLimitedForceConstraintMotor`
+/// - version: `0`
+/// - signature: `0x3377b0b0`
+/// - size: ` 20`(x86)/` 32`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkpLimitedForceConstraintMotor {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConstraintMotor,
     /// # C++ Info
-    /// -          name: `minForce`(ctype: `hkReal`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `minForce`(ctype: `hkReal`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_minForce: f32,
     /// # C++ Info
-    /// -          name: `maxForce`(ctype: `hkReal`)
-    /// -        offset:  16(x86)/ 28(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxForce`(ctype: `hkReal`)
+    /// - offset: ` 16`(x86)/` 28`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxForce: f32,
 }
 const _: () = {

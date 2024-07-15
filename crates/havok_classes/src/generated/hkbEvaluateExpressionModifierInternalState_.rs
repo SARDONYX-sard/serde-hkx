@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbEvaluateExpressionModifierInternalState`
-/// -         version: `0`
-/// -       signature: `0xb414d58e`
-/// -          size:  20(x86)/ 32(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbEvaluateExpressionModifierInternalState`
+/// - version: `0`
+/// - signature: `0xb414d58e`
+/// - size: ` 20`(x86)/` 32`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkbEvaluateExpressionModifierInternalState {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `internalExpressionsData`(ctype: `hkArray<struct hkbEvaluateExpressionModifierInternalExpressionData>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `internalExpressionsData`(ctype: `hkArray<struct hkbEvaluateExpressionModifierInternalExpressionData>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_internalExpressionsData: Vec<
         hkbEvaluateExpressionModifierInternalExpressionData,
     >,

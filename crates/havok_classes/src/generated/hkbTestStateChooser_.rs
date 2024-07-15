@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbTestStateChooser`
-/// -         version: `0`
-/// -       signature: `0xc0fcc436`
-/// -          size:  20(x86)/ 32(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbTestStateChooser`
+/// - version: `0`
+/// - signature: `0xc0fcc436`
+/// - size: ` 20`(x86)/` 32`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkbTestStateChooser<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbStateChooser,
     /// # C++ Info
-    /// -          name: `int`(ctype: `hkInt32`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `int`(ctype: `hkInt32`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_int: i32,
     /// # C++ Info
-    /// -          name: `real`(ctype: `hkReal`)
-    /// -        offset:  12(x86)/ 20(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `real`(ctype: `hkReal`)
+    /// - offset: ` 12`(x86)/` 20`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_real: f32,
     /// # C++ Info
-    /// -          name: `string`(ctype: `hkStringPtr`)
-    /// -        offset:  16(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `string`(ctype: `hkStringPtr`)
+    /// - offset: ` 16`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_string: StringPtr<'a>,
 }
 const _: () = {

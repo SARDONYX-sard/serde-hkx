@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpVehicleDefaultAnalogDriverInput`
-/// -         version: `0`
-/// -       signature: `0x123a5d50`
-/// -          size:  24(x86)/ 32(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpVehicleDefaultAnalogDriverInput`
+/// - version: `0`
+/// - signature: `0x123a5d50`
+/// - size: ` 24`(x86)/` 32`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,28 +21,24 @@ pub struct hkpVehicleDefaultAnalogDriverInput {
     /// Alternative to C++ class inheritance.
     pub parent: hkpVehicleDriverInput,
     /// # C++ Info
-    /// -          name: `slopeChangePointX`(ctype: `hkReal`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `slopeChangePointX`(ctype: `hkReal`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_slopeChangePointX: f32,
     /// # C++ Info
-    /// -          name: `initialSlope`(ctype: `hkReal`)
-    /// -        offset:  12(x86)/ 20(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `initialSlope`(ctype: `hkReal`)
+    /// - offset: ` 12`(x86)/` 20`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_initialSlope: f32,
     /// # C++ Info
-    /// -          name: `deadZone`(ctype: `hkReal`)
-    /// -        offset:  16(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `deadZone`(ctype: `hkReal`)
+    /// - offset: ` 16`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_deadZone: f32,
     /// # C++ Info
-    /// -          name: `autoReverse`(ctype: `hkBool`)
-    /// -        offset:  20(x86)/ 28(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `autoReverse`(ctype: `hkBool`)
+    /// - offset: ` 20`(x86)/` 28`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_autoReverse: bool,
 }
 const _: () = {

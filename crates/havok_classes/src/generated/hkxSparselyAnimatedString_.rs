@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkxSparselyAnimatedString`
-/// -         version: `2`
-/// -       signature: `0x185da6fd`
-/// -          size:  32(x86)/ 48(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkxSparselyAnimatedString`
+/// - version: `2`
+/// - signature: `0x185da6fd`
+/// - size: ` 32`(x86)/` 48`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkxSparselyAnimatedString<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `strings`(ctype: `hkArray<hkStringPtr>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `strings`(ctype: `hkArray<hkStringPtr>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_strings: Vec<StringPtr<'a>>,
     /// # C++ Info
-    /// -          name: `times`(ctype: `hkArray<hkReal>`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `times`(ctype: `hkArray<hkReal>`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_times: Vec<f32>,
 }
 const _: () = {

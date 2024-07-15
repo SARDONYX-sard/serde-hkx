@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkBitField`
-/// -         version: `0`
-/// -       signature: `0xda41bd9b`
-/// -          size:  16(x86)/ 24(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkBitField`
+/// - version: `0`
+/// - signature: `0xda41bd9b`
+/// - size: ` 16`(x86)/` 24`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,16 +19,14 @@ pub struct hkBitField {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `words`(ctype: `hkArray<hkUint32>`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `words`(ctype: `hkArray<hkUint32>`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_words: Vec<u32>,
     /// # C++ Info
-    /// -          name: `numBits`(ctype: `hkInt32`)
-    /// -        offset:  12(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `numBits`(ctype: `hkInt32`)
+    /// - offset: ` 12`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_numBits: i32,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbStateMachineTransitionInfoReference`
-/// -         version: `1`
-/// -       signature: `0x9810c2d0`
-/// -          size:   6(x86)/  6(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkbStateMachineTransitionInfoReference`
+/// - version: `1`
+/// - signature: `0x9810c2d0`
+/// - size: `  6`(x86)/`  6`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,22 +19,19 @@ pub struct hkbStateMachineTransitionInfoReference {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `fromStateIndex`(ctype: `hkInt16`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `fromStateIndex`(ctype: `hkInt16`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_fromStateIndex: i16,
     /// # C++ Info
-    /// -          name: `transitionIndex`(ctype: `hkInt16`)
-    /// -        offset:   2(x86)/  2(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `transitionIndex`(ctype: `hkInt16`)
+    /// - offset: `  2`(x86)/`  2`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_transitionIndex: i16,
     /// # C++ Info
-    /// -          name: `stateMachineId`(ctype: `hkInt16`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `stateMachineId`(ctype: `hkInt16`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_stateMachineId: i16,
 }
 const _: () = {

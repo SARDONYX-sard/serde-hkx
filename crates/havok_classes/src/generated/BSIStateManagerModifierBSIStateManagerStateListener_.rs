@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `BSIStateManagerModifierBSIStateManagerStateListener`
-/// -         version: `0`
-/// -       signature: `0x99463586`
-/// -          size:  12(x86)/ 24(x86_64)
-/// -          vtable: true
-///
+/// - name: `BSIStateManagerModifierBSIStateManagerStateListener`
+/// - version: `0`
+/// - signature: `0x99463586`
+/// - size: ` 12`(x86)/` 24`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,11 +21,10 @@ pub struct BSIStateManagerModifierBSIStateManagerStateListener {
     /// Alternative to C++ class inheritance.
     pub parent: hkbStateListener,
     /// # C++ Info
-    /// -          name: `pStateManager`(ctype: `void*`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `pStateManager`(ctype: `void*`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_pStateManager: Pointer,
 }
 const _: () = {

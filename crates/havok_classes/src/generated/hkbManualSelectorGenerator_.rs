@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbManualSelectorGenerator`
-/// -         version: `0`
-/// -       signature: `0xd932fab8`
-/// -          size:  56(x86)/ 96(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbManualSelectorGenerator`
+/// - version: `0`
+/// - signature: `0xd932fab8`
+/// - size: ` 56`(x86)/` 96`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkbManualSelectorGenerator<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
-    /// -          name: `generators`(ctype: `hkArray<hkbGenerator*>`)
-    /// -        offset:  40(x86)/ 72(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `generators`(ctype: `hkArray<hkbGenerator*>`)
+    /// - offset: ` 40`(x86)/` 72`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_generators: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `selectedGeneratorIndex`(ctype: `hkInt8`)
-    /// -        offset:  52(x86)/ 88(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `selectedGeneratorIndex`(ctype: `hkInt8`)
+    /// - offset: ` 52`(x86)/` 88`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_selectedGeneratorIndex: i8,
     /// # C++ Info
-    /// -          name: `currentGeneratorIndex`(ctype: `hkInt8`)
-    /// -        offset:  53(x86)/ 89(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `currentGeneratorIndex`(ctype: `hkInt8`)
+    /// - offset: ` 53`(x86)/` 89`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_currentGeneratorIndex: i8,
 }
 const _: () = {

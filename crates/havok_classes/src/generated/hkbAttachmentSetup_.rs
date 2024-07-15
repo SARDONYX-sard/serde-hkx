@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbAttachmentSetup`
-/// -         version: `1`
-/// -       signature: `0x774632b`
-/// -          size:  40(x86)/ 48(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbAttachmentSetup`
+/// - version: `1`
+/// - signature: `0x774632b`
+/// - size: ` 40`(x86)/` 48`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,52 +21,44 @@ pub struct hkbAttachmentSetup {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `blendInTime`(ctype: `hkReal`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `blendInTime`(ctype: `hkReal`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_blendInTime: f32,
     /// # C++ Info
-    /// -          name: `moveAttacherFraction`(ctype: `hkReal`)
-    /// -        offset:  12(x86)/ 20(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `moveAttacherFraction`(ctype: `hkReal`)
+    /// - offset: ` 12`(x86)/` 20`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_moveAttacherFraction: f32,
     /// # C++ Info
-    /// -          name: `gain`(ctype: `hkReal`)
-    /// -        offset:  16(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `gain`(ctype: `hkReal`)
+    /// - offset: ` 16`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_gain: f32,
     /// # C++ Info
-    /// -          name: `extrapolationTimeStep`(ctype: `hkReal`)
-    /// -        offset:  20(x86)/ 28(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `extrapolationTimeStep`(ctype: `hkReal`)
+    /// - offset: ` 20`(x86)/` 28`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_extrapolationTimeStep: f32,
     /// # C++ Info
-    /// -          name: `fixUpGain`(ctype: `hkReal`)
-    /// -        offset:  24(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `fixUpGain`(ctype: `hkReal`)
+    /// - offset: ` 24`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_fixUpGain: f32,
     /// # C++ Info
-    /// -          name: `maxLinearDistance`(ctype: `hkReal`)
-    /// -        offset:  28(x86)/ 36(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxLinearDistance`(ctype: `hkReal`)
+    /// - offset: ` 28`(x86)/` 36`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxLinearDistance: f32,
     /// # C++ Info
-    /// -          name: `maxAngularDistance`(ctype: `hkReal`)
-    /// -        offset:  32(x86)/ 40(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxAngularDistance`(ctype: `hkReal`)
+    /// - offset: ` 32`(x86)/` 40`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxAngularDistance: f32,
     /// # C++ Info
-    /// -          name: `attachmentType`(ctype: `enum AttachmentType`)
-    /// -        offset:  36(x86)/ 44(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `attachmentType`(ctype: `enum AttachmentType`)
+    /// - offset: ` 36`(x86)/` 44`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_attachmentType: AttachmentType,
 }
 const _: () = {

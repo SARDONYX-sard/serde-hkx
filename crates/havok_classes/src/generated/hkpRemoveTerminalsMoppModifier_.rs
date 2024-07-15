@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpRemoveTerminalsMoppModifier`
-/// -         version: `0`
-/// -       signature: `0x91367f03`
-/// -          size:  28(x86)/ 48(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpRemoveTerminalsMoppModifier`
+/// - version: `0`
+/// - signature: `0x91367f03`
+/// - size: ` 28`(x86)/` 48`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,17 +21,15 @@ pub struct hkpRemoveTerminalsMoppModifier {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `removeInfo`(ctype: `hkArray<hkUint32>`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `removeInfo`(ctype: `hkArray<hkUint32>`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_removeInfo: Vec<u32>,
     /// # C++ Info
-    /// -          name: `tempShapesToRemove`(ctype: `void*`)
-    /// -        offset:  24(x86)/ 40(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `tempShapesToRemove`(ctype: `void*`)
+    /// - offset: ` 24`(x86)/` 40`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_tempShapesToRemove: Pointer,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkMemoryResourceContainer`
-/// -         version: `1`
-/// -       signature: `0x4762f92a`
-/// -          size:  40(x86)/ 64(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkMemoryResourceContainer`
+/// - version: `1`
+/// - signature: `0x4762f92a`
+/// - size: ` 40`(x86)/` 64`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,29 +21,25 @@ pub struct hkMemoryResourceContainer<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkResourceContainer,
     /// # C++ Info
-    /// -          name: `name`(ctype: `hkStringPtr`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `name`(ctype: `hkStringPtr`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_name: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `parent`(ctype: `struct hkMemoryResourceContainer*`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `parent`(ctype: `struct hkMemoryResourceContainer*`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_parent: Pointer,
     /// # C++ Info
-    /// -          name: `resourceHandles`(ctype: `hkArray<hkMemoryResourceHandle*>`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `resourceHandles`(ctype: `hkArray<hkMemoryResourceHandle*>`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_resourceHandles: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `children`(ctype: `hkArray<hkMemoryResourceContainer*>`)
-    /// -        offset:  28(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `children`(ctype: `hkArray<hkMemoryResourceContainer*>`)
+    /// - offset: ` 28`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_children: Vec<Pointer>,
 }
 const _: () = {

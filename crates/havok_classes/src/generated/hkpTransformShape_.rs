@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpTransformShape`
-/// -         version: `0`
-/// -       signature: `0x787ef513`
-/// -          size: 112(x86)/144(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpTransformShape`
+/// - version: `0`
+/// - signature: `0x787ef513`
+/// - size: `112`(x86)/`144`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,29 +21,25 @@ pub struct hkpTransformShape {
     /// Alternative to C++ class inheritance.
     pub parent: hkpShape,
     /// # C++ Info
-    /// -          name: `childShape`(ctype: `struct hkpSingleShapeContainer`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    ///
+    /// - name: `childShape`(ctype: `struct hkpSingleShapeContainer`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
     pub m_childShape: hkpSingleShapeContainer,
     /// # C++ Info
-    /// -          name: `childShapeSize`(ctype: `hkInt32`)
-    /// -        offset:  24(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `childShapeSize`(ctype: `hkInt32`)
+    /// - offset: ` 24`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_childShapeSize: i32,
     /// # C++ Info
-    /// -          name: `rotation`(ctype: `hkQuaternion`)
-    /// -        offset:  32(x86)/ 64(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `rotation`(ctype: `hkQuaternion`)
+    /// - offset: ` 32`(x86)/` 64`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_rotation: Quaternion,
     /// # C++ Info
-    /// -          name: `transform`(ctype: `hkTransform`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  64(x86)/ 64(x86_64)
-    ///
+    /// - name: `transform`(ctype: `hkTransform`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 64`(x86)/` 64`(x86_64)
     pub m_transform: Transform,
 }
 const _: () = {

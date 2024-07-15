@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpPrismaticConstraintDataAtoms`
-/// -         version: `0`
-/// -       signature: `0x7f516137`
-/// -          size: 192(x86)/208(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpPrismaticConstraintDataAtoms`
+/// - version: `0`
+/// - signature: `0x7f516137`
+/// - size: `192`(x86)/`208`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,46 +19,39 @@ pub struct hkpPrismaticConstraintDataAtoms {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `transforms`(ctype: `struct hkpSetLocalTransformsConstraintAtom`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size: 144(x86)/144(x86_64)
-    ///
+    /// - name: `transforms`(ctype: `struct hkpSetLocalTransformsConstraintAtom`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `144`(x86)/`144`(x86_64)
     pub m_transforms: hkpSetLocalTransformsConstraintAtom,
     /// # C++ Info
-    /// -          name: `motor`(ctype: `struct hkpLinMotorConstraintAtom`)
-    /// -        offset: 144(x86)/144(x86_64)
-    /// -     type_size:  16(x86)/ 24(x86_64)
-    ///
+    /// - name: `motor`(ctype: `struct hkpLinMotorConstraintAtom`)
+    /// - offset: `144`(x86)/`144`(x86_64)
+    /// - type_size: ` 16`(x86)/` 24`(x86_64)
     pub m_motor: hkpLinMotorConstraintAtom,
     /// # C++ Info
-    /// -          name: `friction`(ctype: `struct hkpLinFrictionConstraintAtom`)
-    /// -        offset: 160(x86)/168(x86_64)
-    /// -     type_size:   8(x86)/  8(x86_64)
-    ///
+    /// - name: `friction`(ctype: `struct hkpLinFrictionConstraintAtom`)
+    /// - offset: `160`(x86)/`168`(x86_64)
+    /// - type_size: `  8`(x86)/`  8`(x86_64)
     pub m_friction: hkpLinFrictionConstraintAtom,
     /// # C++ Info
-    /// -          name: `ang`(ctype: `struct hkpAngConstraintAtom`)
-    /// -        offset: 168(x86)/176(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `ang`(ctype: `struct hkpAngConstraintAtom`)
+    /// - offset: `168`(x86)/`176`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_ang: hkpAngConstraintAtom,
     /// # C++ Info
-    /// -          name: `lin0`(ctype: `struct hkpLinConstraintAtom`)
-    /// -        offset: 172(x86)/180(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `lin0`(ctype: `struct hkpLinConstraintAtom`)
+    /// - offset: `172`(x86)/`180`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_lin0: hkpLinConstraintAtom,
     /// # C++ Info
-    /// -          name: `lin1`(ctype: `struct hkpLinConstraintAtom`)
-    /// -        offset: 176(x86)/184(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `lin1`(ctype: `struct hkpLinConstraintAtom`)
+    /// - offset: `176`(x86)/`184`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_lin1: hkpLinConstraintAtom,
     /// # C++ Info
-    /// -          name: `linLimit`(ctype: `struct hkpLinLimitConstraintAtom`)
-    /// -        offset: 180(x86)/188(x86_64)
-    /// -     type_size:  12(x86)/ 12(x86_64)
-    ///
+    /// - name: `linLimit`(ctype: `struct hkpLinLimitConstraintAtom`)
+    /// - offset: `180`(x86)/`188`(x86_64)
+    /// - type_size: ` 12`(x86)/` 12`(x86_64)
     pub m_linLimit: hkpLinLimitConstraintAtom,
 }
 const _: () = {

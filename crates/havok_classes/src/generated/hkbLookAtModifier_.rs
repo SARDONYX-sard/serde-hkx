@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbLookAtModifier`
-/// -         version: `3`
-/// -       signature: `0x3d28e066`
-/// -          size: 208(x86)/240(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbLookAtModifier`
+/// - version: `3`
+/// - signature: `0x3d28e066`
+/// - size: `208`(x86)/`240`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,126 +21,106 @@ pub struct hkbLookAtModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `targetWS`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `targetWS`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_targetWS: Vector4,
     /// # C++ Info
-    /// -          name: `headForwardLS`(ctype: `hkVector4`)
-    /// -        offset:  64(x86)/ 96(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `headForwardLS`(ctype: `hkVector4`)
+    /// - offset: ` 64`(x86)/` 96`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_headForwardLS: Vector4,
     /// # C++ Info
-    /// -          name: `neckForwardLS`(ctype: `hkVector4`)
-    /// -        offset:  80(x86)/112(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `neckForwardLS`(ctype: `hkVector4`)
+    /// - offset: ` 80`(x86)/`112`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_neckForwardLS: Vector4,
     /// # C++ Info
-    /// -          name: `neckRightLS`(ctype: `hkVector4`)
-    /// -        offset:  96(x86)/128(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `neckRightLS`(ctype: `hkVector4`)
+    /// - offset: ` 96`(x86)/`128`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_neckRightLS: Vector4,
     /// # C++ Info
-    /// -          name: `eyePositionHS`(ctype: `hkVector4`)
-    /// -        offset: 112(x86)/144(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `eyePositionHS`(ctype: `hkVector4`)
+    /// - offset: `112`(x86)/`144`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_eyePositionHS: Vector4,
     /// # C++ Info
-    /// -          name: `newTargetGain`(ctype: `hkReal`)
-    /// -        offset: 128(x86)/160(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `newTargetGain`(ctype: `hkReal`)
+    /// - offset: `128`(x86)/`160`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_newTargetGain: f32,
     /// # C++ Info
-    /// -          name: `onGain`(ctype: `hkReal`)
-    /// -        offset: 132(x86)/164(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `onGain`(ctype: `hkReal`)
+    /// - offset: `132`(x86)/`164`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_onGain: f32,
     /// # C++ Info
-    /// -          name: `offGain`(ctype: `hkReal`)
-    /// -        offset: 136(x86)/168(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `offGain`(ctype: `hkReal`)
+    /// - offset: `136`(x86)/`168`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_offGain: f32,
     /// # C++ Info
-    /// -          name: `limitAngleDegrees`(ctype: `hkReal`)
-    /// -        offset: 140(x86)/172(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `limitAngleDegrees`(ctype: `hkReal`)
+    /// - offset: `140`(x86)/`172`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_limitAngleDegrees: f32,
     /// # C++ Info
-    /// -          name: `limitAngleLeft`(ctype: `hkReal`)
-    /// -        offset: 144(x86)/176(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `limitAngleLeft`(ctype: `hkReal`)
+    /// - offset: `144`(x86)/`176`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_limitAngleLeft: f32,
     /// # C++ Info
-    /// -          name: `limitAngleRight`(ctype: `hkReal`)
-    /// -        offset: 148(x86)/180(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `limitAngleRight`(ctype: `hkReal`)
+    /// - offset: `148`(x86)/`180`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_limitAngleRight: f32,
     /// # C++ Info
-    /// -          name: `limitAngleUp`(ctype: `hkReal`)
-    /// -        offset: 152(x86)/184(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `limitAngleUp`(ctype: `hkReal`)
+    /// - offset: `152`(x86)/`184`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_limitAngleUp: f32,
     /// # C++ Info
-    /// -          name: `limitAngleDown`(ctype: `hkReal`)
-    /// -        offset: 156(x86)/188(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `limitAngleDown`(ctype: `hkReal`)
+    /// - offset: `156`(x86)/`188`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_limitAngleDown: f32,
     /// # C++ Info
-    /// -          name: `headIndex`(ctype: `hkInt16`)
-    /// -        offset: 160(x86)/192(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `headIndex`(ctype: `hkInt16`)
+    /// - offset: `160`(x86)/`192`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_headIndex: i16,
     /// # C++ Info
-    /// -          name: `neckIndex`(ctype: `hkInt16`)
-    /// -        offset: 162(x86)/194(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `neckIndex`(ctype: `hkInt16`)
+    /// - offset: `162`(x86)/`194`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_neckIndex: i16,
     /// # C++ Info
-    /// -          name: `isOn`(ctype: `hkBool`)
-    /// -        offset: 164(x86)/196(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `isOn`(ctype: `hkBool`)
+    /// - offset: `164`(x86)/`196`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_isOn: bool,
     /// # C++ Info
-    /// -          name: `individualLimitsOn`(ctype: `hkBool`)
-    /// -        offset: 165(x86)/197(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `individualLimitsOn`(ctype: `hkBool`)
+    /// - offset: `165`(x86)/`197`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_individualLimitsOn: bool,
     /// # C++ Info
-    /// -          name: `isTargetInsideLimitCone`(ctype: `hkBool`)
-    /// -        offset: 166(x86)/198(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `isTargetInsideLimitCone`(ctype: `hkBool`)
+    /// - offset: `166`(x86)/`198`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_isTargetInsideLimitCone: bool,
     /// # C++ Info
-    /// -          name: `lookAtLastTargetWS`(ctype: `hkVector4`)
-    /// -        offset: 176(x86)/208(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `lookAtLastTargetWS`(ctype: `hkVector4`)
+    /// - offset: `176`(x86)/`208`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_lookAtLastTargetWS: Vector4,
     /// # C++ Info
-    /// -          name: `lookAtWeight`(ctype: `hkReal`)
-    /// -        offset: 192(x86)/224(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `lookAtWeight`(ctype: `hkReal`)
+    /// - offset: `192`(x86)/`224`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_lookAtWeight: f32,
 }
 const _: () = {

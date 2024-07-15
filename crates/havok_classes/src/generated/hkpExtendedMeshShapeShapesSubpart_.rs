@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpExtendedMeshShapeShapesSubpart`
-/// -         version: `1`
-/// -       signature: `0xf204b155`
-/// -          size:  64(x86)/ 96(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpExtendedMeshShapeShapesSubpart`
+/// - version: `1`
+/// - signature: `0xf204b155`
+/// - size: ` 64`(x86)/` 96`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkpExtendedMeshShapeShapesSubpart {
     /// Alternative to C++ class inheritance.
     pub parent: hkpExtendedMeshShapeSubpart,
     /// # C++ Info
-    /// -          name: `childShapes`(ctype: `hkArray<hkpConvexShape*>`)
-    /// -        offset:  20(x86)/ 40(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `childShapes`(ctype: `hkArray<hkpConvexShape*>`)
+    /// - offset: ` 20`(x86)/` 40`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_childShapes: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `rotation`(ctype: `hkQuaternion`)
-    /// -        offset:  32(x86)/ 64(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `rotation`(ctype: `hkQuaternion`)
+    /// - offset: ` 32`(x86)/` 64`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_rotation: Quaternion,
     /// # C++ Info
-    /// -          name: `translation`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `translation`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_translation: Vector4,
 }
 const _: () = {

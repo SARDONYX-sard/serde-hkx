@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpConvexShape`
-/// -         version: `0`
-/// -       signature: `0xf8f74f85`
-/// -          size:  20(x86)/ 40(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpConvexShape`
+/// - version: `0`
+/// - signature: `0xf8f74f85`
+/// - size: ` 20`(x86)/` 40`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkpConvexShape {
     /// Alternative to C++ class inheritance.
     pub parent: hkpSphereRepShape,
     /// # C++ Info
-    /// -          name: `radius`(ctype: `hkReal`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `radius`(ctype: `hkReal`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_radius: f32,
 }
 const _: () = {

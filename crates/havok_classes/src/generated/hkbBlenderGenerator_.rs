@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbBlenderGenerator`
-/// -         version: `1`
-/// -       signature: `0x22df7147`
-/// -          size: 116(x86)/160(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbBlenderGenerator`
+/// - version: `1`
+/// - signature: `0x22df7147`
+/// - size: `116`(x86)/`160`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,108 +21,92 @@ pub struct hkbBlenderGenerator<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
-    /// -          name: `referencePoseWeightThreshold`(ctype: `hkReal`)
-    /// -        offset:  40(x86)/ 72(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `referencePoseWeightThreshold`(ctype: `hkReal`)
+    /// - offset: ` 40`(x86)/` 72`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_referencePoseWeightThreshold: f32,
     /// # C++ Info
-    /// -          name: `blendParameter`(ctype: `hkReal`)
-    /// -        offset:  44(x86)/ 76(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `blendParameter`(ctype: `hkReal`)
+    /// - offset: ` 44`(x86)/` 76`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_blendParameter: f32,
     /// # C++ Info
-    /// -          name: `minCyclicBlendParameter`(ctype: `hkReal`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `minCyclicBlendParameter`(ctype: `hkReal`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_minCyclicBlendParameter: f32,
     /// # C++ Info
-    /// -          name: `maxCyclicBlendParameter`(ctype: `hkReal`)
-    /// -        offset:  52(x86)/ 84(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxCyclicBlendParameter`(ctype: `hkReal`)
+    /// - offset: ` 52`(x86)/` 84`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxCyclicBlendParameter: f32,
     /// # C++ Info
-    /// -          name: `indexOfSyncMasterChild`(ctype: `hkInt16`)
-    /// -        offset:  56(x86)/ 88(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `indexOfSyncMasterChild`(ctype: `hkInt16`)
+    /// - offset: ` 56`(x86)/` 88`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_indexOfSyncMasterChild: i16,
     /// # C++ Info
-    /// -          name: `flags`(ctype: `hkInt16`)
-    /// -        offset:  58(x86)/ 90(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `flags`(ctype: `hkInt16`)
+    /// - offset: ` 58`(x86)/` 90`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_flags: i16,
     /// # C++ Info
-    /// -          name: `subtractLastChild`(ctype: `hkBool`)
-    /// -        offset:  60(x86)/ 92(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `subtractLastChild`(ctype: `hkBool`)
+    /// - offset: ` 60`(x86)/` 92`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_subtractLastChild: bool,
     /// # C++ Info
-    /// -          name: `children`(ctype: `hkArray<hkbBlenderGeneratorChild*>`)
-    /// -        offset:  64(x86)/ 96(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `children`(ctype: `hkArray<hkbBlenderGeneratorChild*>`)
+    /// - offset: ` 64`(x86)/` 96`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_children: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `childrenInternalStates`(ctype: `hkArray<void>`)
-    /// -        offset:  76(x86)/112(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `childrenInternalStates`(ctype: `hkArray<void>`)
+    /// - offset: ` 76`(x86)/`112`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_childrenInternalStates: Vec<()>,
     /// # C++ Info
-    /// -          name: `sortedChildren`(ctype: `hkArray<void>`)
-    /// -        offset:  88(x86)/128(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `sortedChildren`(ctype: `hkArray<void>`)
+    /// - offset: ` 88`(x86)/`128`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_sortedChildren: Vec<()>,
     /// # C++ Info
-    /// -          name: `endIntervalWeight`(ctype: `hkReal`)
-    /// -        offset: 100(x86)/144(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `endIntervalWeight`(ctype: `hkReal`)
+    /// - offset: `100`(x86)/`144`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_endIntervalWeight: f32,
     /// # C++ Info
-    /// -          name: `numActiveChildren`(ctype: `hkInt32`)
-    /// -        offset: 104(x86)/148(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `numActiveChildren`(ctype: `hkInt32`)
+    /// - offset: `104`(x86)/`148`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_numActiveChildren: i32,
     /// # C++ Info
-    /// -          name: `beginIntervalIndex`(ctype: `hkInt16`)
-    /// -        offset: 108(x86)/152(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `beginIntervalIndex`(ctype: `hkInt16`)
+    /// - offset: `108`(x86)/`152`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_beginIntervalIndex: i16,
     /// # C++ Info
-    /// -          name: `endIntervalIndex`(ctype: `hkInt16`)
-    /// -        offset: 110(x86)/154(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `endIntervalIndex`(ctype: `hkInt16`)
+    /// - offset: `110`(x86)/`154`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_endIntervalIndex: i16,
     /// # C++ Info
-    /// -          name: `initSync`(ctype: `hkBool`)
-    /// -        offset: 112(x86)/156(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `initSync`(ctype: `hkBool`)
+    /// - offset: `112`(x86)/`156`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_initSync: bool,
     /// # C++ Info
-    /// -          name: `doSubtractiveBlend`(ctype: `hkBool`)
-    /// -        offset: 113(x86)/157(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `doSubtractiveBlend`(ctype: `hkBool`)
+    /// - offset: `113`(x86)/`157`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_doSubtractiveBlend: bool,
 }
 const _: () = {

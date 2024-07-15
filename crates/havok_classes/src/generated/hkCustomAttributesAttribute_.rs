@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkCustomAttributesAttribute`
-/// -         version: `0`
-/// -       signature: `0x1388d601`
-/// -          size:  12(x86)/ 24(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkCustomAttributesAttribute`
+/// - version: `0`
+/// - signature: `0x1388d601`
+/// - size: ` 12`(x86)/` 24`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,16 +19,14 @@ pub struct hkCustomAttributesAttribute<'a> {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `name`(ctype: `char*`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `name`(ctype: `char*`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_name: CString<'a>,
     /// # C++ Info
-    /// -          name: `value`(ctype: `hkVariant`)
-    /// -        offset:   4(x86)/  8(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    ///
+    /// - name: `value`(ctype: `hkVariant`)
+    /// - offset: `  4`(x86)/`  8`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
     pub m_value: Variant,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbExtractRagdollPoseModifier`
-/// -         version: `1`
-/// -       signature: `0x804dcbab`
-/// -          size:  52(x86)/ 88(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbExtractRagdollPoseModifier`
+/// - version: `1`
+/// - signature: `0x804dcbab`
+/// - size: ` 52`(x86)/` 88`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,28 +21,24 @@ pub struct hkbExtractRagdollPoseModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `poseMatchingBone0`(ctype: `hkInt16`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `poseMatchingBone0`(ctype: `hkInt16`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_poseMatchingBone0: i16,
     /// # C++ Info
-    /// -          name: `poseMatchingBone1`(ctype: `hkInt16`)
-    /// -        offset:  46(x86)/ 82(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `poseMatchingBone1`(ctype: `hkInt16`)
+    /// - offset: ` 46`(x86)/` 82`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_poseMatchingBone1: i16,
     /// # C++ Info
-    /// -          name: `poseMatchingBone2`(ctype: `hkInt16`)
-    /// -        offset:  48(x86)/ 84(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `poseMatchingBone2`(ctype: `hkInt16`)
+    /// - offset: ` 48`(x86)/` 84`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_poseMatchingBone2: i16,
     /// # C++ Info
-    /// -          name: `enableComputeWorldFromModel`(ctype: `hkBool`)
-    /// -        offset:  50(x86)/ 86(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `enableComputeWorldFromModel`(ctype: `hkBool`)
+    /// - offset: ` 50`(x86)/` 86`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_enableComputeWorldFromModel: bool,
 }
 const _: () = {

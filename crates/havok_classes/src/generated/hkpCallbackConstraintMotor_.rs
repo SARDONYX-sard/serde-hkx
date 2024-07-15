@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpCallbackConstraintMotor`
-/// -         version: `0`
-/// -       signature: `0xafcd79ad`
-/// -          size:  40(x86)/ 72(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpCallbackConstraintMotor`
+/// - version: `0`
+/// - signature: `0xafcd79ad`
+/// - size: ` 40`(x86)/` 72`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,35 +21,30 @@ pub struct hkpCallbackConstraintMotor {
     /// Alternative to C++ class inheritance.
     pub parent: hkpLimitedForceConstraintMotor,
     /// # C++ Info
-    /// -          name: `callbackFunc`(ctype: `void*`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `callbackFunc`(ctype: `void*`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_callbackFunc: Pointer,
     /// # C++ Info
-    /// -          name: `callbackType`(ctype: `enum CallbackType`)
-    /// -        offset:  24(x86)/ 40(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `callbackType`(ctype: `enum CallbackType`)
+    /// - offset: ` 24`(x86)/` 40`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_callbackType: CallbackType,
     /// # C++ Info
-    /// -          name: `userData0`(ctype: `hkUlong`)
-    /// -        offset:  28(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `userData0`(ctype: `hkUlong`)
+    /// - offset: ` 28`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_userData0: u64,
     /// # C++ Info
-    /// -          name: `userData1`(ctype: `hkUlong`)
-    /// -        offset:  32(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `userData1`(ctype: `hkUlong`)
+    /// - offset: ` 32`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_userData1: u64,
     /// # C++ Info
-    /// -          name: `userData2`(ctype: `hkUlong`)
-    /// -        offset:  36(x86)/ 64(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `userData2`(ctype: `hkUlong`)
+    /// - offset: ` 36`(x86)/` 64`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_userData2: u64,
 }
 const _: () = {

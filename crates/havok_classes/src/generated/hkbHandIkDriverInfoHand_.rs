@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbHandIkDriverInfoHand`
-/// -         version: `1`
-/// -       signature: `0x14dfe1dd`
-/// -          size:  96(x86)/ 96(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkbHandIkDriverInfoHand`
+/// - version: `1`
+/// - signature: `0x14dfe1dd`
+/// - size: ` 96`(x86)/` 96`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,88 +19,74 @@ pub struct hkbHandIkDriverInfoHand<'a> {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `elbowAxisLS`(ctype: `hkVector4`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `elbowAxisLS`(ctype: `hkVector4`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_elbowAxisLS: Vector4,
     /// # C++ Info
-    /// -          name: `backHandNormalLS`(ctype: `hkVector4`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `backHandNormalLS`(ctype: `hkVector4`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_backHandNormalLS: Vector4,
     /// # C++ Info
-    /// -          name: `handOffsetLS`(ctype: `hkVector4`)
-    /// -        offset:  32(x86)/ 32(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `handOffsetLS`(ctype: `hkVector4`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_handOffsetLS: Vector4,
     /// # C++ Info
-    /// -          name: `handOrienationOffsetLS`(ctype: `hkQuaternion`)
-    /// -        offset:  48(x86)/ 48(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `handOrienationOffsetLS`(ctype: `hkQuaternion`)
+    /// - offset: ` 48`(x86)/` 48`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_handOrienationOffsetLS: Quaternion,
     /// # C++ Info
-    /// -          name: `maxElbowAngleDegrees`(ctype: `hkReal`)
-    /// -        offset:  64(x86)/ 64(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxElbowAngleDegrees`(ctype: `hkReal`)
+    /// - offset: ` 64`(x86)/` 64`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxElbowAngleDegrees: f32,
     /// # C++ Info
-    /// -          name: `minElbowAngleDegrees`(ctype: `hkReal`)
-    /// -        offset:  68(x86)/ 68(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `minElbowAngleDegrees`(ctype: `hkReal`)
+    /// - offset: ` 68`(x86)/` 68`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_minElbowAngleDegrees: f32,
     /// # C++ Info
-    /// -          name: `shoulderIndex`(ctype: `hkInt16`)
-    /// -        offset:  72(x86)/ 72(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `shoulderIndex`(ctype: `hkInt16`)
+    /// - offset: ` 72`(x86)/` 72`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_shoulderIndex: i16,
     /// # C++ Info
-    /// -          name: `shoulderSiblingIndex`(ctype: `hkInt16`)
-    /// -        offset:  74(x86)/ 74(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `shoulderSiblingIndex`(ctype: `hkInt16`)
+    /// - offset: ` 74`(x86)/` 74`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_shoulderSiblingIndex: i16,
     /// # C++ Info
-    /// -          name: `elbowIndex`(ctype: `hkInt16`)
-    /// -        offset:  76(x86)/ 76(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `elbowIndex`(ctype: `hkInt16`)
+    /// - offset: ` 76`(x86)/` 76`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_elbowIndex: i16,
     /// # C++ Info
-    /// -          name: `elbowSiblingIndex`(ctype: `hkInt16`)
-    /// -        offset:  78(x86)/ 78(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `elbowSiblingIndex`(ctype: `hkInt16`)
+    /// - offset: ` 78`(x86)/` 78`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_elbowSiblingIndex: i16,
     /// # C++ Info
-    /// -          name: `wristIndex`(ctype: `hkInt16`)
-    /// -        offset:  80(x86)/ 80(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `wristIndex`(ctype: `hkInt16`)
+    /// - offset: ` 80`(x86)/` 80`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_wristIndex: i16,
     /// # C++ Info
-    /// -          name: `enforceEndPosition`(ctype: `hkBool`)
-    /// -        offset:  82(x86)/ 82(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `enforceEndPosition`(ctype: `hkBool`)
+    /// - offset: ` 82`(x86)/` 82`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_enforceEndPosition: bool,
     /// # C++ Info
-    /// -          name: `enforceEndRotation`(ctype: `hkBool`)
-    /// -        offset:  83(x86)/ 83(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `enforceEndRotation`(ctype: `hkBool`)
+    /// - offset: ` 83`(x86)/` 83`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_enforceEndRotation: bool,
     /// # C++ Info
-    /// -          name: `localFrameName`(ctype: `hkStringPtr`)
-    /// -        offset:  84(x86)/ 88(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `localFrameName`(ctype: `hkStringPtr`)
+    /// - offset: ` 84`(x86)/` 88`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_localFrameName: StringPtr<'a>,
 }
 const _: () = {

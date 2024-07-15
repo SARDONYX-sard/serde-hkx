@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpBridgeConstraintAtom`
-/// -         version: `0`
-/// -       signature: `0x87a4f31b`
-/// -          size:  12(x86)/ 24(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpBridgeConstraintAtom`
+/// - version: `0`
+/// - signature: `0x87a4f31b`
+/// - size: ` 12`(x86)/` 24`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,18 +21,16 @@ pub struct hkpBridgeConstraintAtom {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConstraintAtom,
     /// # C++ Info
-    /// -          name: `buildJacobianFunc`(ctype: `void*`)
-    /// -        offset:   4(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `buildJacobianFunc`(ctype: `void*`)
+    /// - offset: `  4`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_buildJacobianFunc: Pointer,
     /// # C++ Info
-    /// -          name: `constraintData`(ctype: `struct hkpConstraintData*`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `NOT_OWNED`
-    ///
+    /// - name: `constraintData`(ctype: `struct hkpConstraintData*`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `NOT_OWNED`
     pub m_constraintData: Pointer,
 }
 const _: () = {

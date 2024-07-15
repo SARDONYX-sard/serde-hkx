@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbTransformVectorModifier`
-/// -         version: `0`
-/// -       signature: `0xf93e0e24`
-/// -          size: 128(x86)/160(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbTransformVectorModifier`
+/// - version: `0`
+/// - signature: `0xf93e0e24`
+/// - size: `128`(x86)/`160`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,52 +21,44 @@ pub struct hkbTransformVectorModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `rotation`(ctype: `hkQuaternion`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `rotation`(ctype: `hkQuaternion`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_rotation: Quaternion,
     /// # C++ Info
-    /// -          name: `translation`(ctype: `hkVector4`)
-    /// -        offset:  64(x86)/ 96(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `translation`(ctype: `hkVector4`)
+    /// - offset: ` 64`(x86)/` 96`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_translation: Vector4,
     /// # C++ Info
-    /// -          name: `vectorIn`(ctype: `hkVector4`)
-    /// -        offset:  80(x86)/112(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `vectorIn`(ctype: `hkVector4`)
+    /// - offset: ` 80`(x86)/`112`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_vectorIn: Vector4,
     /// # C++ Info
-    /// -          name: `vectorOut`(ctype: `hkVector4`)
-    /// -        offset:  96(x86)/128(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `vectorOut`(ctype: `hkVector4`)
+    /// - offset: ` 96`(x86)/`128`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_vectorOut: Vector4,
     /// # C++ Info
-    /// -          name: `rotateOnly`(ctype: `hkBool`)
-    /// -        offset: 112(x86)/144(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `rotateOnly`(ctype: `hkBool`)
+    /// - offset: `112`(x86)/`144`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_rotateOnly: bool,
     /// # C++ Info
-    /// -          name: `inverse`(ctype: `hkBool`)
-    /// -        offset: 113(x86)/145(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `inverse`(ctype: `hkBool`)
+    /// - offset: `113`(x86)/`145`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_inverse: bool,
     /// # C++ Info
-    /// -          name: `computeOnActivate`(ctype: `hkBool`)
-    /// -        offset: 114(x86)/146(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `computeOnActivate`(ctype: `hkBool`)
+    /// - offset: `114`(x86)/`146`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_computeOnActivate: bool,
     /// # C++ Info
-    /// -          name: `computeOnModify`(ctype: `hkBool`)
-    /// -        offset: 115(x86)/147(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `computeOnModify`(ctype: `hkBool`)
+    /// - offset: `115`(x86)/`147`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_computeOnModify: bool,
 }
 const _: () = {

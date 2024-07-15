@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbModifierGenerator`
-/// -         version: `0`
-/// -       signature: `0x1f81fae6`
-/// -          size:  48(x86)/ 88(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbModifierGenerator`
+/// - version: `0`
+/// - signature: `0x1f81fae6`
+/// - size: ` 48`(x86)/` 88`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkbModifierGenerator<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
-    /// -          name: `modifier`(ctype: `struct hkbModifier*`)
-    /// -        offset:  40(x86)/ 72(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `modifier`(ctype: `struct hkbModifier*`)
+    /// - offset: ` 40`(x86)/` 72`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_modifier: Pointer,
     /// # C++ Info
-    /// -          name: `generator`(ctype: `struct hkbGenerator*`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `generator`(ctype: `struct hkbGenerator*`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_generator: Pointer,
 }
 const _: () = {

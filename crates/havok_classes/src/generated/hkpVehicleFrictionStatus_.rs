@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpVehicleFrictionStatus`
-/// -         version: `0`
-/// -       signature: `0x1c076a84`
-/// -          size:  72(x86)/ 72(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpVehicleFrictionStatus`
+/// - version: `0`
+/// - signature: `0x1c076a84`
+/// - size: ` 72`(x86)/` 72`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,10 +19,9 @@ pub struct hkpVehicleFrictionStatus {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `axis`(ctype: `struct hkpVehicleFrictionStatusAxisStatus[2]`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:  36(x86)/ 72(x86_64)
-    ///
+    /// - name: `axis`(ctype: `struct hkpVehicleFrictionStatusAxisStatus[2]`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: ` 36`(x86)/` 72`(x86_64)
     pub m_axis: [hkpVehicleFrictionStatusAxisStatus; 2usize],
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbLookAtModifierInternalState`
-/// -         version: `0`
-/// -       signature: `0xa14caba6`
-/// -          size:  48(x86)/ 48(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbLookAtModifierInternalState`
+/// - version: `0`
+/// - signature: `0xa14caba6`
+/// - size: ` 48`(x86)/` 48`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkbLookAtModifierInternalState {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `lookAtLastTargetWS`(ctype: `hkVector4`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `lookAtLastTargetWS`(ctype: `hkVector4`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_lookAtLastTargetWS: Vector4,
     /// # C++ Info
-    /// -          name: `lookAtWeight`(ctype: `hkReal`)
-    /// -        offset:  32(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `lookAtWeight`(ctype: `hkReal`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_lookAtWeight: f32,
     /// # C++ Info
-    /// -          name: `isTargetInsideLimitCone`(ctype: `hkBool`)
-    /// -        offset:  36(x86)/ 36(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `isTargetInsideLimitCone`(ctype: `hkBool`)
+    /// - offset: ` 36`(x86)/` 36`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_isTargetInsideLimitCone: bool,
 }
 const _: () = {

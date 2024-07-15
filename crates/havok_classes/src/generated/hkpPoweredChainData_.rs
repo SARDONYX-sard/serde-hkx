@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpPoweredChainData`
-/// -         version: `0`
-/// -       signature: `0x38aeafc3`
-/// -          size:  64(x86)/ 96(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpPoweredChainData`
+/// - version: `0`
+/// - signature: `0x38aeafc3`
+/// - size: ` 64`(x86)/` 96`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,58 +21,49 @@ pub struct hkpPoweredChainData {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConstraintChainData,
     /// # C++ Info
-    /// -          name: `atoms`(ctype: `struct hkpBridgeAtoms`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:  12(x86)/ 24(x86_64)
-    ///
+    /// - name: `atoms`(ctype: `struct hkpBridgeAtoms`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: ` 12`(x86)/` 24`(x86_64)
     pub m_atoms: hkpBridgeAtoms,
     /// # C++ Info
-    /// -          name: `infos`(ctype: `hkArray<struct hkpPoweredChainDataConstraintInfo>`)
-    /// -        offset:  24(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `infos`(ctype: `hkArray<struct hkpPoweredChainDataConstraintInfo>`)
+    /// - offset: ` 24`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_infos: Vec<hkpPoweredChainDataConstraintInfo>,
     /// # C++ Info
-    /// -          name: `tau`(ctype: `hkReal`)
-    /// -        offset:  36(x86)/ 64(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `tau`(ctype: `hkReal`)
+    /// - offset: ` 36`(x86)/` 64`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_tau: f32,
     /// # C++ Info
-    /// -          name: `damping`(ctype: `hkReal`)
-    /// -        offset:  40(x86)/ 68(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `damping`(ctype: `hkReal`)
+    /// - offset: ` 40`(x86)/` 68`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_damping: f32,
     /// # C++ Info
-    /// -          name: `cfmLinAdd`(ctype: `hkReal`)
-    /// -        offset:  44(x86)/ 72(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `cfmLinAdd`(ctype: `hkReal`)
+    /// - offset: ` 44`(x86)/` 72`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_cfmLinAdd: f32,
     /// # C++ Info
-    /// -          name: `cfmLinMul`(ctype: `hkReal`)
-    /// -        offset:  48(x86)/ 76(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `cfmLinMul`(ctype: `hkReal`)
+    /// - offset: ` 48`(x86)/` 76`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_cfmLinMul: f32,
     /// # C++ Info
-    /// -          name: `cfmAngAdd`(ctype: `hkReal`)
-    /// -        offset:  52(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `cfmAngAdd`(ctype: `hkReal`)
+    /// - offset: ` 52`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_cfmAngAdd: f32,
     /// # C++ Info
-    /// -          name: `cfmAngMul`(ctype: `hkReal`)
-    /// -        offset:  56(x86)/ 84(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `cfmAngMul`(ctype: `hkReal`)
+    /// - offset: ` 56`(x86)/` 84`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_cfmAngMul: f32,
     /// # C++ Info
-    /// -          name: `maxErrorDistance`(ctype: `hkReal`)
-    /// -        offset:  60(x86)/ 88(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxErrorDistance`(ctype: `hkReal`)
+    /// - offset: ` 60`(x86)/` 88`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxErrorDistance: f32,
 }
 const _: () = {

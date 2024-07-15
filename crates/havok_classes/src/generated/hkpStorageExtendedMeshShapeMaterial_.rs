@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpStorageExtendedMeshShapeMaterial`
-/// -         version: `1`
-/// -       signature: `0x2ca3e906`
-/// -          size:  12(x86)/ 16(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpStorageExtendedMeshShapeMaterial`
+/// - version: `1`
+/// - signature: `0x2ca3e906`
+/// - size: ` 12`(x86)/` 16`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkpStorageExtendedMeshShapeMaterial {
     /// Alternative to C++ class inheritance.
     pub parent: hkpMeshMaterial,
     /// # C++ Info
-    /// -          name: `restitution`(ctype: `hkHalf`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `restitution`(ctype: `hkHalf`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_restitution: f16,
     /// # C++ Info
-    /// -          name: `friction`(ctype: `hkHalf`)
-    /// -        offset:   6(x86)/  6(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `friction`(ctype: `hkHalf`)
+    /// - offset: `  6`(x86)/`  6`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_friction: f16,
     /// # C++ Info
-    /// -          name: `userData`(ctype: `hkUlong`)
-    /// -        offset:   8(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `userData`(ctype: `hkUlong`)
+    /// - offset: `  8`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_userData: u64,
 }
 const _: () = {

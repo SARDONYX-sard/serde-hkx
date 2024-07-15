@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkTrackerSerializableScanSnapshotAllocation`
-/// -         version: `0`
-/// -       signature: `0x9ab3a6ac`
-/// -          size:  12(x86)/ 24(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkTrackerSerializableScanSnapshotAllocation`
+/// - version: `0`
+/// - signature: `0x9ab3a6ac`
+/// - size: ` 12`(x86)/` 24`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,22 +19,19 @@ pub struct hkTrackerSerializableScanSnapshotAllocation {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `start`(ctype: `hkUlong`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `start`(ctype: `hkUlong`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_start: u64,
     /// # C++ Info
-    /// -          name: `size`(ctype: `hkUlong`)
-    /// -        offset:   4(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `size`(ctype: `hkUlong`)
+    /// - offset: `  4`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_size: u64,
     /// # C++ Info
-    /// -          name: `traceId`(ctype: `hkInt32`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `traceId`(ctype: `hkInt32`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_traceId: i32,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbStringCondition`
-/// -         version: `0`
-/// -       signature: `0x5ab50487`
-/// -          size:  12(x86)/ 24(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbStringCondition`
+/// - version: `0`
+/// - signature: `0x5ab50487`
+/// - size: ` 12`(x86)/` 24`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkbStringCondition<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbCondition,
     /// # C++ Info
-    /// -          name: `conditionString`(ctype: `hkStringPtr`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `conditionString`(ctype: `hkStringPtr`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_conditionString: StringPtr<'a>,
 }
 const _: () = {

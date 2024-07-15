@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkxVertexBufferVertexData`
-/// -         version: `0`
-/// -       signature: `0xd72b6fd0`
-/// -          size:  84(x86)/104(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkxVertexBufferVertexData`
+/// - version: `0`
+/// - signature: `0xd72b6fd0`
+/// - size: ` 84`(x86)/`104`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,70 +19,59 @@ pub struct hkxVertexBufferVertexData {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `vectorData`(ctype: `hkArray<hkVector4>`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `vectorData`(ctype: `hkArray<hkVector4>`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_vectorData: Vec<Vector4>,
     /// # C++ Info
-    /// -          name: `floatData`(ctype: `hkArray<hkReal>`)
-    /// -        offset:  12(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `floatData`(ctype: `hkArray<hkReal>`)
+    /// - offset: ` 12`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_floatData: Vec<f32>,
     /// # C++ Info
-    /// -          name: `uint32Data`(ctype: `hkArray<hkUint32>`)
-    /// -        offset:  24(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `uint32Data`(ctype: `hkArray<hkUint32>`)
+    /// - offset: ` 24`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_uint32Data: Vec<u32>,
     /// # C++ Info
-    /// -          name: `uint16Data`(ctype: `hkArray<hkUint16>`)
-    /// -        offset:  36(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `uint16Data`(ctype: `hkArray<hkUint16>`)
+    /// - offset: ` 36`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_uint16Data: Vec<u16>,
     /// # C++ Info
-    /// -          name: `uint8Data`(ctype: `hkArray<hkUint8>`)
-    /// -        offset:  48(x86)/ 64(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `uint8Data`(ctype: `hkArray<hkUint8>`)
+    /// - offset: ` 48`(x86)/` 64`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_uint8Data: Vec<u8>,
     /// # C++ Info
-    /// -          name: `numVerts`(ctype: `hkUint32`)
-    /// -        offset:  60(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `numVerts`(ctype: `hkUint32`)
+    /// - offset: ` 60`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_numVerts: u32,
     /// # C++ Info
-    /// -          name: `vectorStride`(ctype: `hkUint32`)
-    /// -        offset:  64(x86)/ 84(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `vectorStride`(ctype: `hkUint32`)
+    /// - offset: ` 64`(x86)/` 84`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_vectorStride: u32,
     /// # C++ Info
-    /// -          name: `floatStride`(ctype: `hkUint32`)
-    /// -        offset:  68(x86)/ 88(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `floatStride`(ctype: `hkUint32`)
+    /// - offset: ` 68`(x86)/` 88`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_floatStride: u32,
     /// # C++ Info
-    /// -          name: `uint32Stride`(ctype: `hkUint32`)
-    /// -        offset:  72(x86)/ 92(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `uint32Stride`(ctype: `hkUint32`)
+    /// - offset: ` 72`(x86)/` 92`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_uint32Stride: u32,
     /// # C++ Info
-    /// -          name: `uint16Stride`(ctype: `hkUint32`)
-    /// -        offset:  76(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `uint16Stride`(ctype: `hkUint32`)
+    /// - offset: ` 76`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_uint16Stride: u32,
     /// # C++ Info
-    /// -          name: `uint8Stride`(ctype: `hkUint32`)
-    /// -        offset:  80(x86)/100(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `uint8Stride`(ctype: `hkUint32`)
+    /// - offset: ` 80`(x86)/`100`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_uint8Stride: u32,
 }
 const _: () = {

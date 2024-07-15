@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpSetLocalTransformsConstraintAtom`
-/// -         version: `0`
-/// -       signature: `0x6e2a5198`
-/// -          size: 144(x86)/144(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpSetLocalTransformsConstraintAtom`
+/// - version: `0`
+/// - signature: `0x6e2a5198`
+/// - size: `144`(x86)/`144`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkpSetLocalTransformsConstraintAtom {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConstraintAtom,
     /// # C++ Info
-    /// -          name: `transformA`(ctype: `hkTransform`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  64(x86)/ 64(x86_64)
-    ///
+    /// - name: `transformA`(ctype: `hkTransform`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 64`(x86)/` 64`(x86_64)
     pub m_transformA: Transform,
     /// # C++ Info
-    /// -          name: `transformB`(ctype: `hkTransform`)
-    /// -        offset:  80(x86)/ 80(x86_64)
-    /// -     type_size:  64(x86)/ 64(x86_64)
-    ///
+    /// - name: `transformB`(ctype: `hkTransform`)
+    /// - offset: ` 80`(x86)/` 80`(x86_64)
+    /// - type_size: ` 64`(x86)/` 64`(x86_64)
     pub m_transformB: Transform,
 }
 const _: () = {

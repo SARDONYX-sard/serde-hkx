@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkaRagdollInstance`
-/// -         version: `0`
-/// -       signature: `0x154948e8`
-/// -          size:  48(x86)/ 72(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkaRagdollInstance`
+/// - version: `0`
+/// - signature: `0x154948e8`
+/// - size: ` 48`(x86)/` 72`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,28 +21,24 @@ pub struct hkaRagdollInstance {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `rigidBodies`(ctype: `hkArray<hkpRigidBody*>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `rigidBodies`(ctype: `hkArray<hkpRigidBody*>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_rigidBodies: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `constraints`(ctype: `hkArray<hkpConstraintInstance*>`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `constraints`(ctype: `hkArray<hkpConstraintInstance*>`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_constraints: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `boneToRigidBodyMap`(ctype: `hkArray<hkInt32>`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `boneToRigidBodyMap`(ctype: `hkArray<hkInt32>`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_boneToRigidBodyMap: Vec<i32>,
     /// # C++ Info
-    /// -          name: `skeleton`(ctype: `struct hkaSkeleton*`)
-    /// -        offset:  44(x86)/ 64(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `skeleton`(ctype: `struct hkaSkeleton*`)
+    /// - offset: ` 44`(x86)/` 64`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_skeleton: Pointer,
 }
 const _: () = {

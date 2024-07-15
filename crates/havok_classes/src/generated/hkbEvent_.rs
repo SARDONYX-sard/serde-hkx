@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbEvent`
-/// -         version: `1`
-/// -       signature: `0x3e0fd810`
-/// -          size:  12(x86)/ 24(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkbEvent`
+/// - version: `1`
+/// - signature: `0x3e0fd810`
+/// - size: ` 12`(x86)/` 24`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,11 +21,10 @@ pub struct hkbEvent {
     /// Alternative to C++ class inheritance.
     pub parent: hkbEventBase,
     /// # C++ Info
-    /// -          name: `sender`(ctype: `void*`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `sender`(ctype: `void*`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_sender: Pointer,
 }
 const _: () = {

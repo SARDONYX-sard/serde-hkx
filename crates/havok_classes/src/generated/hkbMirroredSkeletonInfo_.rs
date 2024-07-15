@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbMirroredSkeletonInfo`
-/// -         version: `0`
-/// -       signature: `0xc6c2da4f`
-/// -          size:  48(x86)/ 48(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbMirroredSkeletonInfo`
+/// - version: `0`
+/// - signature: `0xc6c2da4f`
+/// - size: ` 48`(x86)/` 48`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkbMirroredSkeletonInfo {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `mirrorAxis`(ctype: `hkVector4`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `mirrorAxis`(ctype: `hkVector4`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_mirrorAxis: Vector4,
     /// # C++ Info
-    /// -          name: `bonePairMap`(ctype: `hkArray<hkInt16>`)
-    /// -        offset:  32(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `bonePairMap`(ctype: `hkArray<hkInt16>`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_bonePairMap: Vec<i16>,
 }
 const _: () = {

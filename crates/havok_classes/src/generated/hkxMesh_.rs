@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkxMesh`
-/// -         version: `1`
-/// -       signature: `0xf2edcc5f`
-/// -          size:  32(x86)/ 48(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkxMesh`
+/// - version: `1`
+/// - signature: `0xf2edcc5f`
+/// - size: ` 32`(x86)/` 48`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkxMesh {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `sections`(ctype: `hkArray<hkxMeshSection*>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `sections`(ctype: `hkArray<hkxMeshSection*>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_sections: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `userChannelInfos`(ctype: `hkArray<hkxMeshUserChannelInfo*>`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `userChannelInfos`(ctype: `hkArray<hkxMeshUserChannelInfo*>`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_userChannelInfos: Vec<Pointer>,
 }
 const _: () = {

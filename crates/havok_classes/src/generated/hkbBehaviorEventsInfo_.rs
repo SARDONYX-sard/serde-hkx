@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbBehaviorEventsInfo`
-/// -         version: `1`
-/// -       signature: `0x66840004`
-/// -          size:  32(x86)/ 48(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbBehaviorEventsInfo`
+/// - version: `1`
+/// - signature: `0x66840004`
+/// - size: ` 32`(x86)/` 48`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkbBehaviorEventsInfo {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `characterId`(ctype: `hkUint64`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   8(x86)/  8(x86_64)
-    ///
+    /// - name: `characterId`(ctype: `hkUint64`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  8`(x86)/`  8`(x86_64)
     pub m_characterId: u64,
     /// # C++ Info
-    /// -          name: `externalEventIds`(ctype: `hkArray<hkInt16>`)
-    /// -        offset:  16(x86)/ 24(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `externalEventIds`(ctype: `hkArray<hkInt16>`)
+    /// - offset: ` 16`(x86)/` 24`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_externalEventIds: Vec<i16>,
     /// # C++ Info
-    /// -          name: `padding`(ctype: `hkInt32`)
-    /// -        offset:  28(x86)/ 40(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `padding`(ctype: `hkInt32`)
+    /// - offset: ` 28`(x86)/` 40`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_padding: i32,
 }
 const _: () = {

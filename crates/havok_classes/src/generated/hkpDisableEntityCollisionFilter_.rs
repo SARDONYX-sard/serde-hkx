@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpDisableEntityCollisionFilter`
-/// -         version: `0`
-/// -       signature: `0xfac3351c`
-/// -          size:  64(x86)/ 96(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpDisableEntityCollisionFilter`
+/// - version: `0`
+/// - signature: `0xfac3351c`
+/// - size: ` 64`(x86)/` 96`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkpDisableEntityCollisionFilter {
     /// Alternative to C++ class inheritance.
     pub parent: hkpCollisionFilter,
     /// # C++ Info
-    /// -          name: `disabledEntities`(ctype: `hkArray<hkpEntity*>`)
-    /// -        offset:  52(x86)/ 80(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `disabledEntities`(ctype: `hkArray<hkpEntity*>`)
+    /// - offset: ` 52`(x86)/` 80`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_disabledEntities: Vec<Pointer>,
 }
 const _: () = {

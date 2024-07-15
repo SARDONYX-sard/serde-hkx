@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbSetBehaviorCommand`
-/// -         version: `1`
-/// -       signature: `0xe18b74b9`
-/// -          size:  48(x86)/ 72(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbSetBehaviorCommand`
+/// - version: `1`
+/// - signature: `0xe18b74b9`
+/// - size: ` 48`(x86)/` 72`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,46 +21,39 @@ pub struct hkbSetBehaviorCommand {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `characterId`(ctype: `hkUint64`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   8(x86)/  8(x86_64)
-    ///
+    /// - name: `characterId`(ctype: `hkUint64`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  8`(x86)/`  8`(x86_64)
     pub m_characterId: u64,
     /// # C++ Info
-    /// -          name: `behavior`(ctype: `struct hkbBehaviorGraph*`)
-    /// -        offset:  16(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `behavior`(ctype: `struct hkbBehaviorGraph*`)
+    /// - offset: ` 16`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_behavior: Pointer,
     /// # C++ Info
-    /// -          name: `rootGenerator`(ctype: `struct hkbGenerator*`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `rootGenerator`(ctype: `struct hkbGenerator*`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_rootGenerator: Pointer,
     /// # C++ Info
-    /// -          name: `referencedBehaviors`(ctype: `hkArray<hkbBehaviorGraph*>`)
-    /// -        offset:  24(x86)/ 40(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `referencedBehaviors`(ctype: `hkArray<hkbBehaviorGraph*>`)
+    /// - offset: ` 24`(x86)/` 40`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_referencedBehaviors: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `startStateIndex`(ctype: `hkInt32`)
-    /// -        offset:  36(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `startStateIndex`(ctype: `hkInt32`)
+    /// - offset: ` 36`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_startStateIndex: i32,
     /// # C++ Info
-    /// -          name: `randomizeSimulation`(ctype: `hkBool`)
-    /// -        offset:  40(x86)/ 60(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `randomizeSimulation`(ctype: `hkBool`)
+    /// - offset: ` 40`(x86)/` 60`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_randomizeSimulation: bool,
     /// # C++ Info
-    /// -          name: `padding`(ctype: `hkInt32`)
-    /// -        offset:  44(x86)/ 64(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `padding`(ctype: `hkInt32`)
+    /// - offset: ` 44`(x86)/` 64`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_padding: i32,
 }
 const _: () = {

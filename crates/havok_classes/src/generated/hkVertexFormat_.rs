@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkVertexFormat`
-/// -         version: `0`
-/// -       signature: `0xf11e3ff7`
-/// -          size: 260(x86)/260(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkVertexFormat`
+/// - version: `0`
+/// - signature: `0xf11e3ff7`
+/// - size: `260`(x86)/`260`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,16 +19,14 @@ pub struct hkVertexFormat {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `elements`(ctype: `struct hkVertexFormatElement[32]`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   8(x86)/256(x86_64)
-    ///
+    /// - name: `elements`(ctype: `struct hkVertexFormatElement[32]`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  8`(x86)/`256`(x86_64)
     pub m_elements: [hkVertexFormatElement; 32usize],
     /// # C++ Info
-    /// -          name: `numElements`(ctype: `hkInt32`)
-    /// -        offset: 256(x86)/256(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `numElements`(ctype: `hkInt32`)
+    /// - offset: `256`(x86)/`256`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_numElements: i32,
 }
 const _: () = {

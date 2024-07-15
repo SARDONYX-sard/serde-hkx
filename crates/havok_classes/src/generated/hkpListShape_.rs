@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpListShape`
-/// -         version: `0`
-/// -       signature: `0xa1937cbd`
-/// -          size: 112(x86)/144(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpListShape`
+/// - version: `0`
+/// - signature: `0xa1937cbd`
+/// - size: `112`(x86)/`144`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,40 +21,34 @@ pub struct hkpListShape {
     /// Alternative to C++ class inheritance.
     pub parent: hkpShapeCollection,
     /// # C++ Info
-    /// -          name: `childInfo`(ctype: `hkArray<struct hkpListShapeChildInfo>`)
-    /// -        offset:  24(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `childInfo`(ctype: `hkArray<struct hkpListShapeChildInfo>`)
+    /// - offset: ` 24`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_childInfo: Vec<hkpListShapeChildInfo>,
     /// # C++ Info
-    /// -          name: `flags`(ctype: `hkUint16`)
-    /// -        offset:  36(x86)/ 64(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `flags`(ctype: `hkUint16`)
+    /// - offset: ` 36`(x86)/` 64`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_flags: u16,
     /// # C++ Info
-    /// -          name: `numDisabledChildren`(ctype: `hkUint16`)
-    /// -        offset:  38(x86)/ 66(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `numDisabledChildren`(ctype: `hkUint16`)
+    /// - offset: ` 38`(x86)/` 66`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_numDisabledChildren: u16,
     /// # C++ Info
-    /// -          name: `aabbHalfExtents`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `aabbHalfExtents`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_aabbHalfExtents: Vector4,
     /// # C++ Info
-    /// -          name: `aabbCenter`(ctype: `hkVector4`)
-    /// -        offset:  64(x86)/ 96(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `aabbCenter`(ctype: `hkVector4`)
+    /// - offset: ` 64`(x86)/` 96`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_aabbCenter: Vector4,
     /// # C++ Info
-    /// -          name: `enabledChildren`(ctype: `hkUint32[8]`)
-    /// -        offset:  80(x86)/112(x86_64)
-    /// -     type_size:  32(x86)/ 32(x86_64)
-    ///
+    /// - name: `enabledChildren`(ctype: `hkUint32[8]`)
+    /// - offset: ` 80`(x86)/`112`(x86_64)
+    /// - type_size: ` 32`(x86)/` 32`(x86_64)
     pub m_enabledChildren: [u32; 8usize],
 }
 const _: () = {

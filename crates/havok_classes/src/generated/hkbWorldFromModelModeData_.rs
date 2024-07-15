@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbWorldFromModelModeData`
-/// -         version: `0`
-/// -       signature: `0xa3af8783`
-/// -          size:   8(x86)/  8(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkbWorldFromModelModeData`
+/// - version: `0`
+/// - signature: `0xa3af8783`
+/// - size: `  8`(x86)/`  8`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,28 +19,24 @@ pub struct hkbWorldFromModelModeData {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `poseMatchingBone0`(ctype: `hkInt16`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `poseMatchingBone0`(ctype: `hkInt16`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_poseMatchingBone0: i16,
     /// # C++ Info
-    /// -          name: `poseMatchingBone1`(ctype: `hkInt16`)
-    /// -        offset:   2(x86)/  2(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `poseMatchingBone1`(ctype: `hkInt16`)
+    /// - offset: `  2`(x86)/`  2`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_poseMatchingBone1: i16,
     /// # C++ Info
-    /// -          name: `poseMatchingBone2`(ctype: `hkInt16`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `poseMatchingBone2`(ctype: `hkInt16`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_poseMatchingBone2: i16,
     /// # C++ Info
-    /// -          name: `mode`(ctype: `enum WorldFromModelMode`)
-    /// -        offset:   6(x86)/  6(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `mode`(ctype: `enum WorldFromModelMode`)
+    /// - offset: `  6`(x86)/`  6`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_mode: WorldFromModelMode,
 }
 const _: () = {

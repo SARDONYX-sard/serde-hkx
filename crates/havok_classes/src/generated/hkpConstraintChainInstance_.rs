@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpConstraintChainInstance`
-/// -         version: `0`
-/// -       signature: `0x7a490753`
-/// -          size:  72(x86)/136(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpConstraintChainInstance`
+/// - version: `0`
+/// - signature: `0x7a490753`
+/// - size: ` 72`(x86)/`136`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkpConstraintChainInstance<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConstraintInstance<'a>,
     /// # C++ Info
-    /// -          name: `chainedEntities`(ctype: `hkArray<hkpEntity*>`)
-    /// -        offset:  56(x86)/112(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `chainedEntities`(ctype: `hkArray<hkpEntity*>`)
+    /// - offset: ` 56`(x86)/`112`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_chainedEntities: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `action`(ctype: `struct hkpConstraintChainInstanceAction*`)
-    /// -        offset:  68(x86)/128(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `action`(ctype: `struct hkpConstraintChainInstanceAction*`)
+    /// - offset: ` 68`(x86)/`128`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_action: Pointer,
 }
 const _: () = {

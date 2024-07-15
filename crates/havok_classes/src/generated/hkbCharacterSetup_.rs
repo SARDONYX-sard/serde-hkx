@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbCharacterSetup`
-/// -         version: `2`
-/// -       signature: `0xe5a2a413`
-/// -          size:  48(x86)/ 88(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbCharacterSetup`
+/// - version: `2`
+/// - signature: `0xe5a2a413`
+/// - size: ` 48`(x86)/` 88`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,55 +21,47 @@ pub struct hkbCharacterSetup {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `retargetingSkeletonMappers`(ctype: `hkArray<hkaSkeletonMapper*>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `retargetingSkeletonMappers`(ctype: `hkArray<hkaSkeletonMapper*>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_retargetingSkeletonMappers: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `animationSkeleton`(ctype: `struct hkaSkeleton*`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `animationSkeleton`(ctype: `struct hkaSkeleton*`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_animationSkeleton: Pointer,
     /// # C++ Info
-    /// -          name: `ragdollToAnimationSkeletonMapper`(ctype: `struct hkaSkeletonMapper*`)
-    /// -        offset:  24(x86)/ 40(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `ragdollToAnimationSkeletonMapper`(ctype: `struct hkaSkeletonMapper*`)
+    /// - offset: ` 24`(x86)/` 40`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_ragdollToAnimationSkeletonMapper: Pointer,
     /// # C++ Info
-    /// -          name: `animationToRagdollSkeletonMapper`(ctype: `struct hkaSkeletonMapper*`)
-    /// -        offset:  28(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `animationToRagdollSkeletonMapper`(ctype: `struct hkaSkeletonMapper*`)
+    /// - offset: ` 28`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_animationToRagdollSkeletonMapper: Pointer,
     /// # C++ Info
-    /// -          name: `animationBindingSet`(ctype: `void*`)
-    /// -        offset:  32(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `animationBindingSet`(ctype: `void*`)
+    /// - offset: ` 32`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_animationBindingSet: Pointer,
     /// # C++ Info
-    /// -          name: `data`(ctype: `struct hkbCharacterData*`)
-    /// -        offset:  36(x86)/ 64(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `data`(ctype: `struct hkbCharacterData*`)
+    /// - offset: ` 36`(x86)/` 64`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_data: Pointer,
     /// # C++ Info
-    /// -          name: `mirroredSkeleton`(ctype: `void*`)
-    /// -        offset:  40(x86)/ 72(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `mirroredSkeleton`(ctype: `void*`)
+    /// - offset: ` 40`(x86)/` 72`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_mirroredSkeleton: Pointer,
     /// # C++ Info
-    /// -          name: `characterPropertyIdMap`(ctype: `void*`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `characterPropertyIdMap`(ctype: `void*`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_characterPropertyIdMap: Pointer,
 }
 const _: () = {

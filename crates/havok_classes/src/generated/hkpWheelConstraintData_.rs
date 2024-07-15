@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpWheelConstraintData`
-/// -         version: `0`
-/// -       signature: `0xb4c46671`
-/// -          size: 352(x86)/368(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpWheelConstraintData`
+/// - version: `0`
+/// - signature: `0xb4c46671`
+/// - size: `352`(x86)/`368`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,23 +21,20 @@ pub struct hkpWheelConstraintData {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConstraintData,
     /// # C++ Info
-    /// -          name: `atoms`(ctype: `struct hkpWheelConstraintDataAtoms`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size: 304(x86)/304(x86_64)
-    /// -         flags: `ALIGN_16`
-    ///
+    /// - name: `atoms`(ctype: `struct hkpWheelConstraintDataAtoms`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: `304`(x86)/`304`(x86_64)
+    /// - flags: `ALIGN_16`
     pub m_atoms: hkpWheelConstraintDataAtoms,
     /// # C++ Info
-    /// -          name: `initialAxleInB`(ctype: `hkVector4`)
-    /// -        offset: 320(x86)/336(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `initialAxleInB`(ctype: `hkVector4`)
+    /// - offset: `320`(x86)/`336`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_initialAxleInB: Vector4,
     /// # C++ Info
-    /// -          name: `initialSteeringAxisInB`(ctype: `hkVector4`)
-    /// -        offset: 336(x86)/352(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `initialSteeringAxisInB`(ctype: `hkVector4`)
+    /// - offset: `336`(x86)/`352`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_initialSteeringAxisInB: Vector4,
 }
 const _: () = {

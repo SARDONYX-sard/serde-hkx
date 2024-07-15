@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpPulleyConstraintAtom`
-/// -         version: `0`
-/// -       signature: `0x94a08848`
-/// -          size:  64(x86)/ 64(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpPulleyConstraintAtom`
+/// - version: `0`
+/// - signature: `0x94a08848`
+/// - size: ` 64`(x86)/` 64`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,28 +21,24 @@ pub struct hkpPulleyConstraintAtom {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConstraintAtom,
     /// # C++ Info
-    /// -          name: `fixedPivotAinWorld`(ctype: `hkVector4`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `fixedPivotAinWorld`(ctype: `hkVector4`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_fixedPivotAinWorld: Vector4,
     /// # C++ Info
-    /// -          name: `fixedPivotBinWorld`(ctype: `hkVector4`)
-    /// -        offset:  32(x86)/ 32(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `fixedPivotBinWorld`(ctype: `hkVector4`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_fixedPivotBinWorld: Vector4,
     /// # C++ Info
-    /// -          name: `ropeLength`(ctype: `hkReal`)
-    /// -        offset:  48(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `ropeLength`(ctype: `hkReal`)
+    /// - offset: ` 48`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_ropeLength: f32,
     /// # C++ Info
-    /// -          name: `leverageOnBodyB`(ctype: `hkReal`)
-    /// -        offset:  52(x86)/ 52(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `leverageOnBodyB`(ctype: `hkReal`)
+    /// - offset: ` 52`(x86)/` 52`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_leverageOnBodyB: f32,
 }
 const _: () = {

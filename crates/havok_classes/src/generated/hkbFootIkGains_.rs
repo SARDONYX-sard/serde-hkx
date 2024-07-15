@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbFootIkGains`
-/// -         version: `0`
-/// -       signature: `0xa681b7f0`
-/// -          size:  48(x86)/ 48(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkbFootIkGains`
+/// - version: `0`
+/// - signature: `0xa681b7f0`
+/// - size: ` 48`(x86)/` 48`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,76 +19,64 @@ pub struct hkbFootIkGains {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `onOffGain`(ctype: `hkReal`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `onOffGain`(ctype: `hkReal`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_onOffGain: f32,
     /// # C++ Info
-    /// -          name: `groundAscendingGain`(ctype: `hkReal`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `groundAscendingGain`(ctype: `hkReal`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_groundAscendingGain: f32,
     /// # C++ Info
-    /// -          name: `groundDescendingGain`(ctype: `hkReal`)
-    /// -        offset:   8(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `groundDescendingGain`(ctype: `hkReal`)
+    /// - offset: `  8`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_groundDescendingGain: f32,
     /// # C++ Info
-    /// -          name: `footPlantedGain`(ctype: `hkReal`)
-    /// -        offset:  12(x86)/ 12(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `footPlantedGain`(ctype: `hkReal`)
+    /// - offset: ` 12`(x86)/` 12`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_footPlantedGain: f32,
     /// # C++ Info
-    /// -          name: `footRaisedGain`(ctype: `hkReal`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `footRaisedGain`(ctype: `hkReal`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_footRaisedGain: f32,
     /// # C++ Info
-    /// -          name: `footUnlockGain`(ctype: `hkReal`)
-    /// -        offset:  20(x86)/ 20(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `footUnlockGain`(ctype: `hkReal`)
+    /// - offset: ` 20`(x86)/` 20`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_footUnlockGain: f32,
     /// # C++ Info
-    /// -          name: `worldFromModelFeedbackGain`(ctype: `hkReal`)
-    /// -        offset:  24(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `worldFromModelFeedbackGain`(ctype: `hkReal`)
+    /// - offset: ` 24`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_worldFromModelFeedbackGain: f32,
     /// # C++ Info
-    /// -          name: `errorUpDownBias`(ctype: `hkReal`)
-    /// -        offset:  28(x86)/ 28(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `errorUpDownBias`(ctype: `hkReal`)
+    /// - offset: ` 28`(x86)/` 28`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_errorUpDownBias: f32,
     /// # C++ Info
-    /// -          name: `alignWorldFromModelGain`(ctype: `hkReal`)
-    /// -        offset:  32(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `alignWorldFromModelGain`(ctype: `hkReal`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_alignWorldFromModelGain: f32,
     /// # C++ Info
-    /// -          name: `hipOrientationGain`(ctype: `hkReal`)
-    /// -        offset:  36(x86)/ 36(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `hipOrientationGain`(ctype: `hkReal`)
+    /// - offset: ` 36`(x86)/` 36`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_hipOrientationGain: f32,
     /// # C++ Info
-    /// -          name: `maxKneeAngleDifference`(ctype: `hkReal`)
-    /// -        offset:  40(x86)/ 40(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxKneeAngleDifference`(ctype: `hkReal`)
+    /// - offset: ` 40`(x86)/` 40`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxKneeAngleDifference: f32,
     /// # C++ Info
-    /// -          name: `ankleOrientationGain`(ctype: `hkReal`)
-    /// -        offset:  44(x86)/ 44(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `ankleOrientationGain`(ctype: `hkReal`)
+    /// - offset: ` 44`(x86)/` 44`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_ankleOrientationGain: f32,
 }
 const _: () = {

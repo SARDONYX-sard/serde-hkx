@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkTrackerSerializableScanSnapshotBlock`
-/// -         version: `0`
-/// -       signature: `0xe7f23e6d`
-/// -          size:  24(x86)/ 40(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkTrackerSerializableScanSnapshotBlock`
+/// - version: `0`
+/// - signature: `0xe7f23e6d`
+/// - size: ` 24`(x86)/` 40`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,40 +19,34 @@ pub struct hkTrackerSerializableScanSnapshotBlock {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `typeIndex`(ctype: `hkInt32`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `typeIndex`(ctype: `hkInt32`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_typeIndex: i32,
     /// # C++ Info
-    /// -          name: `start`(ctype: `hkUlong`)
-    /// -        offset:   4(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `start`(ctype: `hkUlong`)
+    /// - offset: `  4`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_start: u64,
     /// # C++ Info
-    /// -          name: `size`(ctype: `hkUlong`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `size`(ctype: `hkUlong`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_size: u64,
     /// # C++ Info
-    /// -          name: `arraySize`(ctype: `hkInt32`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `arraySize`(ctype: `hkInt32`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_arraySize: i32,
     /// # C++ Info
-    /// -          name: `startReferenceIndex`(ctype: `hkInt32`)
-    /// -        offset:  16(x86)/ 28(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `startReferenceIndex`(ctype: `hkInt32`)
+    /// - offset: ` 16`(x86)/` 28`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_startReferenceIndex: i32,
     /// # C++ Info
-    /// -          name: `numReferences`(ctype: `hkInt32`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `numReferences`(ctype: `hkInt32`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_numReferences: i32,
 }
 const _: () = {

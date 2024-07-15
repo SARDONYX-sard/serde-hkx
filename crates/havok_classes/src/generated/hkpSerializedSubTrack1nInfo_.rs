@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpSerializedSubTrack1nInfo`
-/// -         version: `0`
-/// -       signature: `0x10155a`
-/// -          size:  32(x86)/ 40(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpSerializedSubTrack1nInfo`
+/// - version: `0`
+/// - signature: `0x10155a`
+/// - size: ` 32`(x86)/` 40`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkpSerializedSubTrack1nInfo {
     /// Alternative to C++ class inheritance.
     pub parent: hkpSerializedTrack1nInfo,
     /// # C++ Info
-    /// -          name: `sectorIndex`(ctype: `hkInt32`)
-    /// -        offset:  24(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `sectorIndex`(ctype: `hkInt32`)
+    /// - offset: ` 24`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_sectorIndex: i32,
     /// # C++ Info
-    /// -          name: `offsetInSector`(ctype: `hkInt32`)
-    /// -        offset:  28(x86)/ 36(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `offsetInSector`(ctype: `hkInt32`)
+    /// - offset: ` 28`(x86)/` 36`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_offsetInSector: i32,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpVehicleInstance`
-/// -         version: `0`
-/// -       signature: `0x877bb579`
-/// -          size: 212(x86)/304(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpVehicleInstance`
+/// - version: `0`
+/// - signature: `0x877bb579`
+/// - size: `212`(x86)/`304`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,154 +21,129 @@ pub struct hkpVehicleInstance<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkpUnaryAction<'a>,
     /// # C++ Info
-    /// -          name: `data`(ctype: `struct hkpVehicleData*`)
-    /// -        offset:  28(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `data`(ctype: `struct hkpVehicleData*`)
+    /// - offset: ` 28`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_data: Pointer,
     /// # C++ Info
-    /// -          name: `driverInput`(ctype: `struct hkpVehicleDriverInput*`)
-    /// -        offset:  32(x86)/ 64(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `driverInput`(ctype: `struct hkpVehicleDriverInput*`)
+    /// - offset: ` 32`(x86)/` 64`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_driverInput: Pointer,
     /// # C++ Info
-    /// -          name: `steering`(ctype: `struct hkpVehicleSteering*`)
-    /// -        offset:  36(x86)/ 72(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `steering`(ctype: `struct hkpVehicleSteering*`)
+    /// - offset: ` 36`(x86)/` 72`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_steering: Pointer,
     /// # C++ Info
-    /// -          name: `engine`(ctype: `struct hkpVehicleEngine*`)
-    /// -        offset:  40(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `engine`(ctype: `struct hkpVehicleEngine*`)
+    /// - offset: ` 40`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_engine: Pointer,
     /// # C++ Info
-    /// -          name: `transmission`(ctype: `struct hkpVehicleTransmission*`)
-    /// -        offset:  44(x86)/ 88(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `transmission`(ctype: `struct hkpVehicleTransmission*`)
+    /// - offset: ` 44`(x86)/` 88`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_transmission: Pointer,
     /// # C++ Info
-    /// -          name: `brake`(ctype: `struct hkpVehicleBrake*`)
-    /// -        offset:  48(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `brake`(ctype: `struct hkpVehicleBrake*`)
+    /// - offset: ` 48`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_brake: Pointer,
     /// # C++ Info
-    /// -          name: `suspension`(ctype: `struct hkpVehicleSuspension*`)
-    /// -        offset:  52(x86)/104(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `suspension`(ctype: `struct hkpVehicleSuspension*`)
+    /// - offset: ` 52`(x86)/`104`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_suspension: Pointer,
     /// # C++ Info
-    /// -          name: `aerodynamics`(ctype: `struct hkpVehicleAerodynamics*`)
-    /// -        offset:  56(x86)/112(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `aerodynamics`(ctype: `struct hkpVehicleAerodynamics*`)
+    /// - offset: ` 56`(x86)/`112`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_aerodynamics: Pointer,
     /// # C++ Info
-    /// -          name: `wheelCollide`(ctype: `struct hkpVehicleWheelCollide*`)
-    /// -        offset:  60(x86)/120(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `wheelCollide`(ctype: `struct hkpVehicleWheelCollide*`)
+    /// - offset: ` 60`(x86)/`120`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_wheelCollide: Pointer,
     /// # C++ Info
-    /// -          name: `tyreMarks`(ctype: `struct hkpTyremarksInfo*`)
-    /// -        offset:  64(x86)/128(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `tyreMarks`(ctype: `struct hkpTyremarksInfo*`)
+    /// - offset: ` 64`(x86)/`128`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_tyreMarks: Pointer,
     /// # C++ Info
-    /// -          name: `velocityDamper`(ctype: `struct hkpVehicleVelocityDamper*`)
-    /// -        offset:  68(x86)/136(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `velocityDamper`(ctype: `struct hkpVehicleVelocityDamper*`)
+    /// - offset: ` 68`(x86)/`136`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_velocityDamper: Pointer,
     /// # C++ Info
-    /// -          name: `wheelsInfo`(ctype: `hkArray<struct hkpVehicleInstanceWheelInfo>`)
-    /// -        offset:  72(x86)/144(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `wheelsInfo`(ctype: `hkArray<struct hkpVehicleInstanceWheelInfo>`)
+    /// - offset: ` 72`(x86)/`144`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_wheelsInfo: Vec<hkpVehicleInstanceWheelInfo>,
     /// # C++ Info
-    /// -          name: `frictionStatus`(ctype: `struct hkpVehicleFrictionStatus`)
-    /// -        offset:  84(x86)/160(x86_64)
-    /// -     type_size:  72(x86)/ 72(x86_64)
-    ///
+    /// - name: `frictionStatus`(ctype: `struct hkpVehicleFrictionStatus`)
+    /// - offset: ` 84`(x86)/`160`(x86_64)
+    /// - type_size: ` 72`(x86)/` 72`(x86_64)
     pub m_frictionStatus: hkpVehicleFrictionStatus,
     /// # C++ Info
-    /// -          name: `deviceStatus`(ctype: `struct hkpVehicleDriverInputStatus*`)
-    /// -        offset: 156(x86)/232(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `deviceStatus`(ctype: `struct hkpVehicleDriverInputStatus*`)
+    /// - offset: `156`(x86)/`232`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_deviceStatus: Pointer,
     /// # C++ Info
-    /// -          name: `isFixed`(ctype: `hkArray<hkBool>`)
-    /// -        offset: 160(x86)/240(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `isFixed`(ctype: `hkArray<hkBool>`)
+    /// - offset: `160`(x86)/`240`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_isFixed: Vec<bool>,
     /// # C++ Info
-    /// -          name: `wheelsTimeSinceMaxPedalInput`(ctype: `hkReal`)
-    /// -        offset: 172(x86)/256(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `wheelsTimeSinceMaxPedalInput`(ctype: `hkReal`)
+    /// - offset: `172`(x86)/`256`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_wheelsTimeSinceMaxPedalInput: f32,
     /// # C++ Info
-    /// -          name: `tryingToReverse`(ctype: `hkBool`)
-    /// -        offset: 176(x86)/260(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `tryingToReverse`(ctype: `hkBool`)
+    /// - offset: `176`(x86)/`260`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_tryingToReverse: bool,
     /// # C++ Info
-    /// -          name: `torque`(ctype: `hkReal`)
-    /// -        offset: 180(x86)/264(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `torque`(ctype: `hkReal`)
+    /// - offset: `180`(x86)/`264`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_torque: f32,
     /// # C++ Info
-    /// -          name: `rpm`(ctype: `hkReal`)
-    /// -        offset: 184(x86)/268(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `rpm`(ctype: `hkReal`)
+    /// - offset: `184`(x86)/`268`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_rpm: f32,
     /// # C++ Info
-    /// -          name: `mainSteeringAngle`(ctype: `hkReal`)
-    /// -        offset: 188(x86)/272(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `mainSteeringAngle`(ctype: `hkReal`)
+    /// - offset: `188`(x86)/`272`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_mainSteeringAngle: f32,
     /// # C++ Info
-    /// -          name: `wheelsSteeringAngle`(ctype: `hkArray<hkReal>`)
-    /// -        offset: 192(x86)/280(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `wheelsSteeringAngle`(ctype: `hkArray<hkReal>`)
+    /// - offset: `192`(x86)/`280`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_wheelsSteeringAngle: Vec<f32>,
     /// # C++ Info
-    /// -          name: `isReversing`(ctype: `hkBool`)
-    /// -        offset: 204(x86)/296(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `isReversing`(ctype: `hkBool`)
+    /// - offset: `204`(x86)/`296`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_isReversing: bool,
     /// # C++ Info
-    /// -          name: `currentGear`(ctype: `hkInt8`)
-    /// -        offset: 205(x86)/297(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `currentGear`(ctype: `hkInt8`)
+    /// - offset: `205`(x86)/`297`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_currentGear: i8,
     /// # C++ Info
-    /// -          name: `delayed`(ctype: `hkBool`)
-    /// -        offset: 206(x86)/298(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `delayed`(ctype: `hkBool`)
+    /// - offset: `206`(x86)/`298`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_delayed: bool,
     /// # C++ Info
-    /// -          name: `clutchDelayCountdown`(ctype: `hkReal`)
-    /// -        offset: 208(x86)/300(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `clutchDelayCountdown`(ctype: `hkReal`)
+    /// - offset: `208`(x86)/`300`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_clutchDelayCountdown: f32,
 }
 const _: () = {

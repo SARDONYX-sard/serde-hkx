@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbPoweredRagdollControlsModifier`
-/// -         version: `5`
-/// -       signature: `0x7cb54065`
-/// -          size:  96(x86)/144(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbPoweredRagdollControlsModifier`
+/// - version: `5`
+/// - signature: `0x7cb54065`
+/// - size: ` 96`(x86)/`144`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,28 +21,24 @@ pub struct hkbPoweredRagdollControlsModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `controlData`(ctype: `struct hkbPoweredRagdollControlData`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  32(x86)/ 32(x86_64)
-    ///
+    /// - name: `controlData`(ctype: `struct hkbPoweredRagdollControlData`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 32`(x86)/` 32`(x86_64)
     pub m_controlData: hkbPoweredRagdollControlData,
     /// # C++ Info
-    /// -          name: `bones`(ctype: `struct hkbBoneIndexArray*`)
-    /// -        offset:  80(x86)/112(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `bones`(ctype: `struct hkbBoneIndexArray*`)
+    /// - offset: ` 80`(x86)/`112`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_bones: Pointer,
     /// # C++ Info
-    /// -          name: `worldFromModelModeData`(ctype: `struct hkbWorldFromModelModeData`)
-    /// -        offset:  84(x86)/120(x86_64)
-    /// -     type_size:   8(x86)/  8(x86_64)
-    ///
+    /// - name: `worldFromModelModeData`(ctype: `struct hkbWorldFromModelModeData`)
+    /// - offset: ` 84`(x86)/`120`(x86_64)
+    /// - type_size: `  8`(x86)/`  8`(x86_64)
     pub m_worldFromModelModeData: hkbWorldFromModelModeData,
     /// # C++ Info
-    /// -          name: `boneWeights`(ctype: `struct hkbBoneWeightArray*`)
-    /// -        offset:  92(x86)/128(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `boneWeights`(ctype: `struct hkbBoneWeightArray*`)
+    /// - offset: ` 92`(x86)/`128`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_boneWeights: Pointer,
 }
 const _: () = {

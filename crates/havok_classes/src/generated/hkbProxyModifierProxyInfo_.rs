@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbProxyModifierProxyInfo`
-/// -         version: `0`
-/// -       signature: `0x39de637e`
-/// -          size:  80(x86)/ 80(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkbProxyModifierProxyInfo`
+/// - version: `0`
+/// - signature: `0x39de637e`
+/// - size: ` 80`(x86)/` 80`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,88 +19,74 @@ pub struct hkbProxyModifierProxyInfo {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `dynamicFriction`(ctype: `hkReal`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `dynamicFriction`(ctype: `hkReal`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_dynamicFriction: f32,
     /// # C++ Info
-    /// -          name: `staticFriction`(ctype: `hkReal`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `staticFriction`(ctype: `hkReal`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_staticFriction: f32,
     /// # C++ Info
-    /// -          name: `keepContactTolerance`(ctype: `hkReal`)
-    /// -        offset:   8(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `keepContactTolerance`(ctype: `hkReal`)
+    /// - offset: `  8`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_keepContactTolerance: f32,
     /// # C++ Info
-    /// -          name: `up`(ctype: `hkVector4`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `up`(ctype: `hkVector4`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_up: Vector4,
     /// # C++ Info
-    /// -          name: `keepDistance`(ctype: `hkReal`)
-    /// -        offset:  32(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `keepDistance`(ctype: `hkReal`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_keepDistance: f32,
     /// # C++ Info
-    /// -          name: `contactAngleSensitivity`(ctype: `hkReal`)
-    /// -        offset:  36(x86)/ 36(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `contactAngleSensitivity`(ctype: `hkReal`)
+    /// - offset: ` 36`(x86)/` 36`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_contactAngleSensitivity: f32,
     /// # C++ Info
-    /// -          name: `userPlanes`(ctype: `hkUint32`)
-    /// -        offset:  40(x86)/ 40(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `userPlanes`(ctype: `hkUint32`)
+    /// - offset: ` 40`(x86)/` 40`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_userPlanes: u32,
     /// # C++ Info
-    /// -          name: `maxCharacterSpeedForSolver`(ctype: `hkReal`)
-    /// -        offset:  44(x86)/ 44(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxCharacterSpeedForSolver`(ctype: `hkReal`)
+    /// - offset: ` 44`(x86)/` 44`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxCharacterSpeedForSolver: f32,
     /// # C++ Info
-    /// -          name: `characterStrength`(ctype: `hkReal`)
-    /// -        offset:  48(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `characterStrength`(ctype: `hkReal`)
+    /// - offset: ` 48`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_characterStrength: f32,
     /// # C++ Info
-    /// -          name: `characterMass`(ctype: `hkReal`)
-    /// -        offset:  52(x86)/ 52(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `characterMass`(ctype: `hkReal`)
+    /// - offset: ` 52`(x86)/` 52`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_characterMass: f32,
     /// # C++ Info
-    /// -          name: `maxSlope`(ctype: `hkReal`)
-    /// -        offset:  56(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxSlope`(ctype: `hkReal`)
+    /// - offset: ` 56`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxSlope: f32,
     /// # C++ Info
-    /// -          name: `penetrationRecoverySpeed`(ctype: `hkReal`)
-    /// -        offset:  60(x86)/ 60(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `penetrationRecoverySpeed`(ctype: `hkReal`)
+    /// - offset: ` 60`(x86)/` 60`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_penetrationRecoverySpeed: f32,
     /// # C++ Info
-    /// -          name: `maxCastIterations`(ctype: `hkInt32`)
-    /// -        offset:  64(x86)/ 64(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxCastIterations`(ctype: `hkInt32`)
+    /// - offset: ` 64`(x86)/` 64`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxCastIterations: i32,
     /// # C++ Info
-    /// -          name: `refreshManifoldInCheckSupport`(ctype: `hkBool`)
-    /// -        offset:  68(x86)/ 68(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `refreshManifoldInCheckSupport`(ctype: `hkBool`)
+    /// - offset: ` 68`(x86)/` 68`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_refreshManifoldInCheckSupport: bool,
 }
 const _: () = {

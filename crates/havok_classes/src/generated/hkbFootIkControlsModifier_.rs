@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbFootIkControlsModifier`
-/// -         version: `1`
-/// -       signature: `0xe5b6f544`
-/// -          size: 144(x86)/176(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbFootIkControlsModifier`
+/// - version: `1`
+/// - signature: `0xe5b6f544`
+/// - size: `144`(x86)/`176`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,28 +21,24 @@ pub struct hkbFootIkControlsModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `controlData`(ctype: `struct hkbFootIkControlData`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  48(x86)/ 48(x86_64)
-    ///
+    /// - name: `controlData`(ctype: `struct hkbFootIkControlData`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 48`(x86)/` 48`(x86_64)
     pub m_controlData: hkbFootIkControlData,
     /// # C++ Info
-    /// -          name: `legs`(ctype: `hkArray<struct hkbFootIkControlsModifierLeg>`)
-    /// -        offset:  96(x86)/128(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `legs`(ctype: `hkArray<struct hkbFootIkControlsModifierLeg>`)
+    /// - offset: ` 96`(x86)/`128`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_legs: Vec<hkbFootIkControlsModifierLeg>,
     /// # C++ Info
-    /// -          name: `errorOutTranslation`(ctype: `hkVector4`)
-    /// -        offset: 112(x86)/144(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `errorOutTranslation`(ctype: `hkVector4`)
+    /// - offset: `112`(x86)/`144`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_errorOutTranslation: Vector4,
     /// # C++ Info
-    /// -          name: `alignWithGroundRotation`(ctype: `hkQuaternion`)
-    /// -        offset: 128(x86)/160(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `alignWithGroundRotation`(ctype: `hkQuaternion`)
+    /// - offset: `128`(x86)/`160`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_alignWithGroundRotation: Quaternion,
 }
 const _: () = {

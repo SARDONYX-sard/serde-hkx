@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbGetUpModifierInternalState`
-/// -         version: `0`
-/// -       signature: `0xd84cad4a`
-/// -          size:  20(x86)/ 32(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbGetUpModifierInternalState`
+/// - version: `0`
+/// - signature: `0xd84cad4a`
+/// - size: ` 20`(x86)/` 32`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkbGetUpModifierInternalState {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `timeSinceBegin`(ctype: `hkReal`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `timeSinceBegin`(ctype: `hkReal`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_timeSinceBegin: f32,
     /// # C++ Info
-    /// -          name: `timeStep`(ctype: `hkReal`)
-    /// -        offset:  12(x86)/ 20(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `timeStep`(ctype: `hkReal`)
+    /// - offset: ` 12`(x86)/` 20`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_timeStep: f32,
     /// # C++ Info
-    /// -          name: `initNextModify`(ctype: `hkBool`)
-    /// -        offset:  16(x86)/ 24(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `initNextModify`(ctype: `hkBool`)
+    /// - offset: ` 16`(x86)/` 24`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_initNextModify: bool,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpStorageExtendedMeshShapeShapeSubpartStorage`
-/// -         version: `2`
-/// -       signature: `0x3f7d804c`
-/// -          size:  44(x86)/ 64(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpStorageExtendedMeshShapeShapeSubpartStorage`
+/// - version: `2`
+/// - signature: `0x3f7d804c`
+/// - size: ` 44`(x86)/` 64`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkpStorageExtendedMeshShapeShapeSubpartStorage {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `materialIndices`(ctype: `hkArray<hkUint8>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `materialIndices`(ctype: `hkArray<hkUint8>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_materialIndices: Vec<u8>,
     /// # C++ Info
-    /// -          name: `materials`(ctype: `hkArray<struct hkpStorageExtendedMeshShapeMaterial>`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `materials`(ctype: `hkArray<struct hkpStorageExtendedMeshShapeMaterial>`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_materials: Vec<hkpStorageExtendedMeshShapeMaterial>,
     /// # C++ Info
-    /// -          name: `materialIndices16`(ctype: `hkArray<hkUint16>`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `materialIndices16`(ctype: `hkArray<hkUint16>`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_materialIndices16: Vec<u16>,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbFootIkModifierInternalLegData`
-/// -         version: `1`
-/// -       signature: `0xe5ca3677`
-/// -          size:  32(x86)/ 32(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkbFootIkModifierInternalLegData`
+/// - version: `1`
+/// - signature: `0xe5ca3677`
+/// - size: ` 32`(x86)/` 32`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,17 +19,15 @@ pub struct hkbFootIkModifierInternalLegData {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `groundPosition`(ctype: `hkVector4`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `groundPosition`(ctype: `hkVector4`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_groundPosition: Vector4,
     /// # C++ Info
-    /// -          name: `footIkSolver`(ctype: `void*`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `footIkSolver`(ctype: `void*`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_footIkSolver: Pointer,
 }
 const _: () = {

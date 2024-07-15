@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkLinkAttribute`
-/// -         version: `0`
-/// -       signature: `0x255d8164`
-/// -          size:   1(x86)/  1(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkLinkAttribute`
+/// - version: `0`
+/// - signature: `0x255d8164`
+/// - size: `  1`(x86)/`  1`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,10 +19,9 @@ pub struct hkLinkAttribute {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `type`(ctype: `enum Link`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `type`(ctype: `enum Link`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_type: Link,
 }
 const _: () = {

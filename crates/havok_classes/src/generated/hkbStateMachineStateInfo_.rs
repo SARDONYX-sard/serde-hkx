@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbStateMachineStateInfo`
-/// -         version: `4`
-/// -       signature: `0xed7f9d0`
-/// -          size:  72(x86)/120(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbStateMachineStateInfo`
+/// - version: `4`
+/// - signature: `0xed7f9d0`
+/// - size: ` 72`(x86)/`120`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,58 +21,49 @@ pub struct hkbStateMachineStateInfo<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbBindable,
     /// # C++ Info
-    /// -          name: `listeners`(ctype: `hkArray<hkbStateListener*>`)
-    /// -        offset:  28(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `listeners`(ctype: `hkArray<hkbStateListener*>`)
+    /// - offset: ` 28`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_listeners: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `enterNotifyEvents`(ctype: `struct hkbStateMachineEventPropertyArray*`)
-    /// -        offset:  40(x86)/ 64(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `enterNotifyEvents`(ctype: `struct hkbStateMachineEventPropertyArray*`)
+    /// - offset: ` 40`(x86)/` 64`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_enterNotifyEvents: Pointer,
     /// # C++ Info
-    /// -          name: `exitNotifyEvents`(ctype: `struct hkbStateMachineEventPropertyArray*`)
-    /// -        offset:  44(x86)/ 72(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `exitNotifyEvents`(ctype: `struct hkbStateMachineEventPropertyArray*`)
+    /// - offset: ` 44`(x86)/` 72`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_exitNotifyEvents: Pointer,
     /// # C++ Info
-    /// -          name: `transitions`(ctype: `struct hkbStateMachineTransitionInfoArray*`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `transitions`(ctype: `struct hkbStateMachineTransitionInfoArray*`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_transitions: Pointer,
     /// # C++ Info
-    /// -          name: `generator`(ctype: `struct hkbGenerator*`)
-    /// -        offset:  52(x86)/ 88(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `generator`(ctype: `struct hkbGenerator*`)
+    /// - offset: ` 52`(x86)/` 88`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_generator: Pointer,
     /// # C++ Info
-    /// -          name: `name`(ctype: `hkStringPtr`)
-    /// -        offset:  56(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `name`(ctype: `hkStringPtr`)
+    /// - offset: ` 56`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_name: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `stateId`(ctype: `hkInt32`)
-    /// -        offset:  60(x86)/104(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `stateId`(ctype: `hkInt32`)
+    /// - offset: ` 60`(x86)/`104`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_stateId: i32,
     /// # C++ Info
-    /// -          name: `probability`(ctype: `hkReal`)
-    /// -        offset:  64(x86)/108(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `probability`(ctype: `hkReal`)
+    /// - offset: ` 64`(x86)/`108`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_probability: f32,
     /// # C++ Info
-    /// -          name: `enable`(ctype: `hkBool`)
-    /// -        offset:  68(x86)/112(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `enable`(ctype: `hkBool`)
+    /// - offset: ` 68`(x86)/`112`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_enable: bool,
 }
 const _: () = {

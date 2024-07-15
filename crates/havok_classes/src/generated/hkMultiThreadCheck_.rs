@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkMultiThreadCheck`
-/// -         version: `0`
-/// -       signature: `0x11e4408b`
-/// -          size:  12(x86)/ 12(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkMultiThreadCheck`
+/// - version: `0`
+/// - signature: `0x11e4408b`
+/// - size: ` 12`(x86)/` 12`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,32 +19,28 @@ pub struct hkMultiThreadCheck {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `threadId`(ctype: `hkUint32`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `threadId`(ctype: `hkUint32`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_threadId: u32,
     /// # C++ Info
-    /// -          name: `stackTraceId`(ctype: `hkInt32`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `stackTraceId`(ctype: `hkInt32`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_stackTraceId: i32,
     /// # C++ Info
-    /// -          name: `markCount`(ctype: `hkUint16`)
-    /// -        offset:   8(x86)/  8(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `markCount`(ctype: `hkUint16`)
+    /// - offset: `  8`(x86)/`  8`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_markCount: u16,
     /// # C++ Info
-    /// -          name: `markBitStack`(ctype: `hkUint16`)
-    /// -        offset:  10(x86)/ 10(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `markBitStack`(ctype: `hkUint16`)
+    /// - offset: ` 10`(x86)/` 10`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_markBitStack: u16,
 }
 const _: () = {

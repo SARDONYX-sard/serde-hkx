@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbRegisteredGenerator`
-/// -         version: `1`
-/// -       signature: `0x58b1d082`
-/// -          size:  64(x86)/ 96(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbRegisteredGenerator`
+/// - version: `1`
+/// - signature: `0x58b1d082`
+/// - size: ` 64`(x86)/` 96`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkbRegisteredGenerator {
     /// Alternative to C++ class inheritance.
     pub parent: hkbBindable,
     /// # C++ Info
-    /// -          name: `generator`(ctype: `struct hkbGenerator*`)
-    /// -        offset:  28(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `generator`(ctype: `struct hkbGenerator*`)
+    /// - offset: ` 28`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_generator: Pointer,
     /// # C++ Info
-    /// -          name: `relativePosition`(ctype: `hkVector4`)
-    /// -        offset:  32(x86)/ 64(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `relativePosition`(ctype: `hkVector4`)
+    /// - offset: ` 32`(x86)/` 64`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_relativePosition: Vector4,
     /// # C++ Info
-    /// -          name: `relativeDirection`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `relativeDirection`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_relativeDirection: Vector4,
 }
 const _: () = {

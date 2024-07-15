@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbEventProperty`
-/// -         version: `1`
-/// -       signature: `0xdb38a15`
-/// -          size:   8(x86)/ 16(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkbEventProperty`
+/// - version: `1`
+/// - signature: `0xdb38a15`
+/// - size: `  8`(x86)/` 16`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]

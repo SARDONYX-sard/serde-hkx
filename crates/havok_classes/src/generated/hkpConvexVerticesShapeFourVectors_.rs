@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpConvexVerticesShapeFourVectors`
-/// -         version: `0`
-/// -       signature: `0x3d80c5bf`
-/// -          size:  48(x86)/ 48(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpConvexVerticesShapeFourVectors`
+/// - version: `0`
+/// - signature: `0x3d80c5bf`
+/// - size: ` 48`(x86)/` 48`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,22 +19,19 @@ pub struct hkpConvexVerticesShapeFourVectors {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `x`(ctype: `hkVector4`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `x`(ctype: `hkVector4`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_x: Vector4,
     /// # C++ Info
-    /// -          name: `y`(ctype: `hkVector4`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `y`(ctype: `hkVector4`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_y: Vector4,
     /// # C++ Info
-    /// -          name: `z`(ctype: `hkVector4`)
-    /// -        offset:  32(x86)/ 32(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `z`(ctype: `hkVector4`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_z: Vector4,
 }
 const _: () = {

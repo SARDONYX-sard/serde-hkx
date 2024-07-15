@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpConvexTranslateShape`
-/// -         version: `0`
-/// -       signature: `0x5ba0a5f7`
-/// -          size:  48(x86)/ 80(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpConvexTranslateShape`
+/// - version: `0`
+/// - signature: `0x5ba0a5f7`
+/// - size: ` 48`(x86)/` 80`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkpConvexTranslateShape {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConvexTransformShapeBase,
     /// # C++ Info
-    /// -          name: `translation`(ctype: `hkVector4`)
-    /// -        offset:  32(x86)/ 64(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `translation`(ctype: `hkVector4`)
+    /// - offset: ` 32`(x86)/` 64`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_translation: Vector4,
 }
 const _: () = {

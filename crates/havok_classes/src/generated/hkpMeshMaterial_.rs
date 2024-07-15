@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpMeshMaterial`
-/// -         version: `0`
-/// -       signature: `0x886cde0c`
-/// -          size:   4(x86)/  4(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpMeshMaterial`
+/// - version: `0`
+/// - signature: `0x886cde0c`
+/// - size: `  4`(x86)/`  4`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,10 +19,9 @@ pub struct hkpMeshMaterial {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `filterInfo`(ctype: `hkUint32`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `filterInfo`(ctype: `hkUint32`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_filterInfo: u32,
 }
 const _: () = {

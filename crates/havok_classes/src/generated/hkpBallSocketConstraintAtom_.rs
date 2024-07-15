@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpBallSocketConstraintAtom`
-/// -         version: `3`
-/// -       signature: `0xe70e4dfa`
-/// -          size:  16(x86)/ 16(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpBallSocketConstraintAtom`
+/// - version: `3`
+/// - signature: `0xe70e4dfa`
+/// - size: ` 16`(x86)/` 16`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,34 +21,29 @@ pub struct hkpBallSocketConstraintAtom {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConstraintAtom,
     /// # C++ Info
-    /// -          name: `solvingMethod`(ctype: `enum SolvingMethod`)
-    /// -        offset:   2(x86)/  2(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `solvingMethod`(ctype: `enum SolvingMethod`)
+    /// - offset: `  2`(x86)/`  2`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_solvingMethod: SolvingMethod,
     /// # C++ Info
-    /// -          name: `bodiesToNotify`(ctype: `hkUint8`)
-    /// -        offset:   3(x86)/  3(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `bodiesToNotify`(ctype: `hkUint8`)
+    /// - offset: `  3`(x86)/`  3`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_bodiesToNotify: u8,
     /// # C++ Info
-    /// -          name: `velocityStabilizationFactor`(ctype: `hkUint8`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `velocityStabilizationFactor`(ctype: `hkUint8`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_velocityStabilizationFactor: u8,
     /// # C++ Info
-    /// -          name: `maxImpulse`(ctype: `hkReal`)
-    /// -        offset:   8(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxImpulse`(ctype: `hkReal`)
+    /// - offset: `  8`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxImpulse: f32,
     /// # C++ Info
-    /// -          name: `inertiaStabilizationFactor`(ctype: `hkReal`)
-    /// -        offset:  12(x86)/ 12(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `inertiaStabilizationFactor`(ctype: `hkReal`)
+    /// - offset: ` 12`(x86)/` 12`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_inertiaStabilizationFactor: f32,
 }
 const _: () = {

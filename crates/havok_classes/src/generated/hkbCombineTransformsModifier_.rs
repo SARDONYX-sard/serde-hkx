@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbCombineTransformsModifier`
-/// -         version: `0`
-/// -       signature: `0xfd1f0b79`
-/// -          size: 160(x86)/192(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbCombineTransformsModifier`
+/// - version: `0`
+/// - signature: `0xfd1f0b79`
+/// - size: `160`(x86)/`192`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,58 +21,49 @@ pub struct hkbCombineTransformsModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `translationOut`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `translationOut`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_translationOut: Vector4,
     /// # C++ Info
-    /// -          name: `rotationOut`(ctype: `hkQuaternion`)
-    /// -        offset:  64(x86)/ 96(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `rotationOut`(ctype: `hkQuaternion`)
+    /// - offset: ` 64`(x86)/` 96`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_rotationOut: Quaternion,
     /// # C++ Info
-    /// -          name: `leftTranslation`(ctype: `hkVector4`)
-    /// -        offset:  80(x86)/112(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `leftTranslation`(ctype: `hkVector4`)
+    /// - offset: ` 80`(x86)/`112`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_leftTranslation: Vector4,
     /// # C++ Info
-    /// -          name: `leftRotation`(ctype: `hkQuaternion`)
-    /// -        offset:  96(x86)/128(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `leftRotation`(ctype: `hkQuaternion`)
+    /// - offset: ` 96`(x86)/`128`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_leftRotation: Quaternion,
     /// # C++ Info
-    /// -          name: `rightTranslation`(ctype: `hkVector4`)
-    /// -        offset: 112(x86)/144(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `rightTranslation`(ctype: `hkVector4`)
+    /// - offset: `112`(x86)/`144`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_rightTranslation: Vector4,
     /// # C++ Info
-    /// -          name: `rightRotation`(ctype: `hkQuaternion`)
-    /// -        offset: 128(x86)/160(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `rightRotation`(ctype: `hkQuaternion`)
+    /// - offset: `128`(x86)/`160`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_rightRotation: Quaternion,
     /// # C++ Info
-    /// -          name: `invertLeftTransform`(ctype: `hkBool`)
-    /// -        offset: 144(x86)/176(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `invertLeftTransform`(ctype: `hkBool`)
+    /// - offset: `144`(x86)/`176`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_invertLeftTransform: bool,
     /// # C++ Info
-    /// -          name: `invertRightTransform`(ctype: `hkBool`)
-    /// -        offset: 145(x86)/177(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `invertRightTransform`(ctype: `hkBool`)
+    /// - offset: `145`(x86)/`177`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_invertRightTransform: bool,
     /// # C++ Info
-    /// -          name: `invertResult`(ctype: `hkBool`)
-    /// -        offset: 146(x86)/178(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `invertResult`(ctype: `hkBool`)
+    /// - offset: `146`(x86)/`178`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_invertResult: bool,
 }
 const _: () = {

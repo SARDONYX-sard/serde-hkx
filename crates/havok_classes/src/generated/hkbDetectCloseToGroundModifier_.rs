@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbDetectCloseToGroundModifier`
-/// -         version: `2`
-/// -       signature: `0x981687b2`
-/// -          size:  72(x86)/120(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbDetectCloseToGroundModifier`
+/// - version: `2`
+/// - signature: `0x981687b2`
+/// - size: ` 72`(x86)/`120`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,47 +21,40 @@ pub struct hkbDetectCloseToGroundModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `closeToGroundEvent`(ctype: `struct hkbEventProperty`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    ///
+    /// - name: `closeToGroundEvent`(ctype: `struct hkbEventProperty`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
     pub m_closeToGroundEvent: hkbEventProperty,
     /// # C++ Info
-    /// -          name: `closeToGroundHeight`(ctype: `hkReal`)
-    /// -        offset:  52(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `closeToGroundHeight`(ctype: `hkReal`)
+    /// - offset: ` 52`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_closeToGroundHeight: f32,
     /// # C++ Info
-    /// -          name: `raycastDistanceDown`(ctype: `hkReal`)
-    /// -        offset:  56(x86)/100(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `raycastDistanceDown`(ctype: `hkReal`)
+    /// - offset: ` 56`(x86)/`100`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_raycastDistanceDown: f32,
     /// # C++ Info
-    /// -          name: `collisionFilterInfo`(ctype: `hkUint32`)
-    /// -        offset:  60(x86)/104(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `collisionFilterInfo`(ctype: `hkUint32`)
+    /// - offset: ` 60`(x86)/`104`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_collisionFilterInfo: u32,
     /// # C++ Info
-    /// -          name: `boneIndex`(ctype: `hkInt16`)
-    /// -        offset:  64(x86)/108(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `boneIndex`(ctype: `hkInt16`)
+    /// - offset: ` 64`(x86)/`108`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_boneIndex: i16,
     /// # C++ Info
-    /// -          name: `animBoneIndex`(ctype: `hkInt16`)
-    /// -        offset:  66(x86)/110(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `animBoneIndex`(ctype: `hkInt16`)
+    /// - offset: ` 66`(x86)/`110`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_animBoneIndex: i16,
     /// # C++ Info
-    /// -          name: `isCloseToGround`(ctype: `hkBool`)
-    /// -        offset:  68(x86)/112(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `isCloseToGround`(ctype: `hkBool`)
+    /// - offset: ` 68`(x86)/`112`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_isCloseToGround: bool,
 }
 const _: () = {

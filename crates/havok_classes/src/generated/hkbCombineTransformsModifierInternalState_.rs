@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbCombineTransformsModifierInternalState`
-/// -         version: `0`
-/// -       signature: `0xa92ed39f`
-/// -          size:  48(x86)/ 48(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbCombineTransformsModifierInternalState`
+/// - version: `0`
+/// - signature: `0xa92ed39f`
+/// - size: ` 48`(x86)/` 48`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkbCombineTransformsModifierInternalState {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `translationOut`(ctype: `hkVector4`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `translationOut`(ctype: `hkVector4`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_translationOut: Vector4,
     /// # C++ Info
-    /// -          name: `rotationOut`(ctype: `hkQuaternion`)
-    /// -        offset:  32(x86)/ 32(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `rotationOut`(ctype: `hkQuaternion`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_rotationOut: Quaternion,
 }
 const _: () = {

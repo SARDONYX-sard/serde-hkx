@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `BSTimerModifier`
-/// -         version: `0`
-/// -       signature: `0x531f3292`
-/// -          size:  64(x86)/112(x86_64)
-/// -          vtable: true
-///
+/// - name: `BSTimerModifier`
+/// - version: `0`
+/// - signature: `0x531f3292`
+/// - size: ` 64`(x86)/`112`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,29 +21,25 @@ pub struct BSTimerModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `alarmTimeSeconds`(ctype: `hkReal`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `alarmTimeSeconds`(ctype: `hkReal`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_alarmTimeSeconds: f32,
     /// # C++ Info
-    /// -          name: `alarmEvent`(ctype: `struct hkbEventProperty`)
-    /// -        offset:  48(x86)/ 88(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    ///
+    /// - name: `alarmEvent`(ctype: `struct hkbEventProperty`)
+    /// - offset: ` 48`(x86)/` 88`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
     pub m_alarmEvent: hkbEventProperty,
     /// # C++ Info
-    /// -          name: `resetAlarm`(ctype: `hkBool`)
-    /// -        offset:  56(x86)/104(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `resetAlarm`(ctype: `hkBool`)
+    /// - offset: ` 56`(x86)/`104`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_resetAlarm: bool,
     /// # C++ Info
-    /// -          name: `secondsElapsed`(ctype: `hkReal`)
-    /// -        offset:  60(x86)/108(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `secondsElapsed`(ctype: `hkReal`)
+    /// - offset: ` 60`(x86)/`108`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_secondsElapsed: f32,
 }
 const _: () = {

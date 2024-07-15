@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbEventsFromRangeModifier`
-/// -         version: `0`
-/// -       signature: `0xbc561b6e`
-/// -          size:  68(x86)/112(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbEventsFromRangeModifier`
+/// - version: `0`
+/// - signature: `0xbc561b6e`
+/// - size: ` 68`(x86)/`112`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,29 +21,25 @@ pub struct hkbEventsFromRangeModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `inputValue`(ctype: `hkReal`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `inputValue`(ctype: `hkReal`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_inputValue: f32,
     /// # C++ Info
-    /// -          name: `lowerBound`(ctype: `hkReal`)
-    /// -        offset:  48(x86)/ 84(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `lowerBound`(ctype: `hkReal`)
+    /// - offset: ` 48`(x86)/` 84`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_lowerBound: f32,
     /// # C++ Info
-    /// -          name: `eventRanges`(ctype: `struct hkbEventRangeDataArray*`)
-    /// -        offset:  52(x86)/ 88(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `eventRanges`(ctype: `struct hkbEventRangeDataArray*`)
+    /// - offset: ` 52`(x86)/` 88`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_eventRanges: Pointer,
     /// # C++ Info
-    /// -          name: `wasActiveInPreviousFrame`(ctype: `hkArray<void>`)
-    /// -        offset:  56(x86)/ 96(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `wasActiveInPreviousFrame`(ctype: `hkArray<void>`)
+    /// - offset: ` 56`(x86)/` 96`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_wasActiveInPreviousFrame: Vec<()>,
 }
 const _: () = {

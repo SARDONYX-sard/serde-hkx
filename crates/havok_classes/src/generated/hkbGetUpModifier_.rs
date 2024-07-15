@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbGetUpModifier`
-/// -         version: `2`
-/// -       signature: `0x61cb7ac0`
-/// -          size:  96(x86)/128(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbGetUpModifier`
+/// - version: `2`
+/// - signature: `0x61cb7ac0`
+/// - size: ` 96`(x86)/`128`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,61 +21,52 @@ pub struct hkbGetUpModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `groundNormal`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `groundNormal`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_groundNormal: Vector4,
     /// # C++ Info
-    /// -          name: `duration`(ctype: `hkReal`)
-    /// -        offset:  64(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `duration`(ctype: `hkReal`)
+    /// - offset: ` 64`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_duration: f32,
     /// # C++ Info
-    /// -          name: `alignWithGroundDuration`(ctype: `hkReal`)
-    /// -        offset:  68(x86)/100(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `alignWithGroundDuration`(ctype: `hkReal`)
+    /// - offset: ` 68`(x86)/`100`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_alignWithGroundDuration: f32,
     /// # C++ Info
-    /// -          name: `rootBoneIndex`(ctype: `hkInt16`)
-    /// -        offset:  72(x86)/104(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `rootBoneIndex`(ctype: `hkInt16`)
+    /// - offset: ` 72`(x86)/`104`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_rootBoneIndex: i16,
     /// # C++ Info
-    /// -          name: `otherBoneIndex`(ctype: `hkInt16`)
-    /// -        offset:  74(x86)/106(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `otherBoneIndex`(ctype: `hkInt16`)
+    /// - offset: ` 74`(x86)/`106`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_otherBoneIndex: i16,
     /// # C++ Info
-    /// -          name: `anotherBoneIndex`(ctype: `hkInt16`)
-    /// -        offset:  76(x86)/108(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `anotherBoneIndex`(ctype: `hkInt16`)
+    /// - offset: ` 76`(x86)/`108`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_anotherBoneIndex: i16,
     /// # C++ Info
-    /// -          name: `timeSinceBegin`(ctype: `hkReal`)
-    /// -        offset:  80(x86)/112(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `timeSinceBegin`(ctype: `hkReal`)
+    /// - offset: ` 80`(x86)/`112`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_timeSinceBegin: f32,
     /// # C++ Info
-    /// -          name: `timeStep`(ctype: `hkReal`)
-    /// -        offset:  84(x86)/116(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `timeStep`(ctype: `hkReal`)
+    /// - offset: ` 84`(x86)/`116`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_timeStep: f32,
     /// # C++ Info
-    /// -          name: `initNextModify`(ctype: `hkBool`)
-    /// -        offset:  88(x86)/120(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `initNextModify`(ctype: `hkBool`)
+    /// - offset: ` 88`(x86)/`120`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_initNextModify: bool,
 }
 const _: () = {

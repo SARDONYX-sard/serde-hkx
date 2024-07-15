@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbTransformVectorModifierInternalState`
-/// -         version: `0`
-/// -       signature: `0x5ca91c99`
-/// -          size:  32(x86)/ 32(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbTransformVectorModifierInternalState`
+/// - version: `0`
+/// - signature: `0x5ca91c99`
+/// - size: ` 32`(x86)/` 32`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkbTransformVectorModifierInternalState {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `vectorOut`(ctype: `hkVector4`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `vectorOut`(ctype: `hkVector4`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_vectorOut: Vector4,
 }
 const _: () = {

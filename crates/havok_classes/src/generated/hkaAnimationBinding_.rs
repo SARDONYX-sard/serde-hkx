@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkaAnimationBinding`
-/// -         version: `1`
-/// -       signature: `0x66eac971`
-/// -          size:  44(x86)/ 72(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkaAnimationBinding`
+/// - version: `1`
+/// - signature: `0x66eac971`
+/// - size: ` 44`(x86)/` 72`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,34 +21,29 @@ pub struct hkaAnimationBinding<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `originalSkeletonName`(ctype: `hkStringPtr`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `originalSkeletonName`(ctype: `hkStringPtr`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_originalSkeletonName: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `animation`(ctype: `struct hkaAnimation*`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `animation`(ctype: `struct hkaAnimation*`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_animation: Pointer,
     /// # C++ Info
-    /// -          name: `transformTrackToBoneIndices`(ctype: `hkArray<hkInt16>`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `transformTrackToBoneIndices`(ctype: `hkArray<hkInt16>`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_transformTrackToBoneIndices: Vec<i16>,
     /// # C++ Info
-    /// -          name: `floatTrackToFloatSlotIndices`(ctype: `hkArray<hkInt16>`)
-    /// -        offset:  28(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `floatTrackToFloatSlotIndices`(ctype: `hkArray<hkInt16>`)
+    /// - offset: ` 28`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_floatTrackToFloatSlotIndices: Vec<i16>,
     /// # C++ Info
-    /// -          name: `blendHint`(ctype: `enum BlendHint`)
-    /// -        offset:  40(x86)/ 64(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `blendHint`(ctype: `enum BlendHint`)
+    /// - offset: ` 40`(x86)/` 64`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_blendHint: BlendHint,
 }
 const _: () = {

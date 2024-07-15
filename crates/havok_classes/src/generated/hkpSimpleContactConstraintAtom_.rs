@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpSimpleContactConstraintAtom`
-/// -         version: `0`
-/// -       signature: `0x920df11a`
-/// -          size:  48(x86)/ 48(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpSimpleContactConstraintAtom`
+/// - version: `0`
+/// - signature: `0x920df11a`
+/// - size: ` 48`(x86)/` 48`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,53 +21,45 @@ pub struct hkpSimpleContactConstraintAtom {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConstraintAtom,
     /// # C++ Info
-    /// -          name: `sizeOfAllAtoms`(ctype: `hkUint16`)
-    /// -        offset:   2(x86)/  2(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `sizeOfAllAtoms`(ctype: `hkUint16`)
+    /// - offset: `  2`(x86)/`  2`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_sizeOfAllAtoms: u16,
     /// # C++ Info
-    /// -          name: `numContactPoints`(ctype: `hkUint16`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `numContactPoints`(ctype: `hkUint16`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_numContactPoints: u16,
     /// # C++ Info
-    /// -          name: `numReservedContactPoints`(ctype: `hkUint16`)
-    /// -        offset:   6(x86)/  6(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `numReservedContactPoints`(ctype: `hkUint16`)
+    /// - offset: `  6`(x86)/`  6`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_numReservedContactPoints: u16,
     /// # C++ Info
-    /// -          name: `numUserDatasForBodyA`(ctype: `hkUint8`)
-    /// -        offset:   8(x86)/  8(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `numUserDatasForBodyA`(ctype: `hkUint8`)
+    /// - offset: `  8`(x86)/`  8`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_numUserDatasForBodyA: u8,
     /// # C++ Info
-    /// -          name: `numUserDatasForBodyB`(ctype: `hkUint8`)
-    /// -        offset:   9(x86)/  9(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `numUserDatasForBodyB`(ctype: `hkUint8`)
+    /// - offset: `  9`(x86)/`  9`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_numUserDatasForBodyB: u8,
     /// # C++ Info
-    /// -          name: `contactPointPropertiesStriding`(ctype: `hkUint8`)
-    /// -        offset:  10(x86)/ 10(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `contactPointPropertiesStriding`(ctype: `hkUint8`)
+    /// - offset: ` 10`(x86)/` 10`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_contactPointPropertiesStriding: u8,
     /// # C++ Info
-    /// -          name: `maxNumContactPoints`(ctype: `hkUint16`)
-    /// -        offset:  12(x86)/ 12(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `maxNumContactPoints`(ctype: `hkUint16`)
+    /// - offset: ` 12`(x86)/` 12`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_maxNumContactPoints: u16,
     /// # C++ Info
-    /// -          name: `info`(ctype: `struct hkpSimpleContactConstraintDataInfo`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  32(x86)/ 32(x86_64)
-    /// -         flags: `ALIGN_16`
-    ///
+    /// - name: `info`(ctype: `struct hkpSimpleContactConstraintDataInfo`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 32`(x86)/` 32`(x86_64)
+    /// - flags: `ALIGN_16`
     pub m_info: hkpSimpleContactConstraintDataInfo,
 }
 const _: () = {

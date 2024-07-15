@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbBlendingTransitionEffectInternalState`
-/// -         version: `0`
-/// -       signature: `0xb18c70c2`
-/// -          size:  32(x86)/ 48(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbBlendingTransitionEffectInternalState`
+/// - version: `0`
+/// - signature: `0xb18c70c2`
+/// - size: ` 32`(x86)/` 48`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,34 +21,29 @@ pub struct hkbBlendingTransitionEffectInternalState {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `characterPoseAtBeginningOfTransition`(ctype: `hkArray<hkQsTransform>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `characterPoseAtBeginningOfTransition`(ctype: `hkArray<hkQsTransform>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_characterPoseAtBeginningOfTransition: Vec<QsTransform>,
     /// # C++ Info
-    /// -          name: `timeRemaining`(ctype: `hkReal`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `timeRemaining`(ctype: `hkReal`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_timeRemaining: f32,
     /// # C++ Info
-    /// -          name: `timeInTransition`(ctype: `hkReal`)
-    /// -        offset:  24(x86)/ 36(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `timeInTransition`(ctype: `hkReal`)
+    /// - offset: ` 24`(x86)/` 36`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_timeInTransition: f32,
     /// # C++ Info
-    /// -          name: `applySelfTransition`(ctype: `hkBool`)
-    /// -        offset:  28(x86)/ 40(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `applySelfTransition`(ctype: `hkBool`)
+    /// - offset: ` 28`(x86)/` 40`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_applySelfTransition: bool,
     /// # C++ Info
-    /// -          name: `initializeCharacterPose`(ctype: `hkBool`)
-    /// -        offset:  29(x86)/ 41(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `initializeCharacterPose`(ctype: `hkBool`)
+    /// - offset: ` 29`(x86)/` 41`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_initializeCharacterPose: bool,
 }
 const _: () = {

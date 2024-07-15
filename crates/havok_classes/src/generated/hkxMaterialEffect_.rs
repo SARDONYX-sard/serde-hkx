@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkxMaterialEffect`
-/// -         version: `1`
-/// -       signature: `0x1d39f925`
-/// -          size:  28(x86)/ 48(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkxMaterialEffect`
+/// - version: `1`
+/// - signature: `0x1d39f925`
+/// - size: ` 28`(x86)/` 48`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkxMaterialEffect<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `name`(ctype: `hkStringPtr`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `name`(ctype: `hkStringPtr`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_name: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `type`(ctype: `enum EffectType`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `type`(ctype: `enum EffectType`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_type: EffectType,
     /// # C++ Info
-    /// -          name: `data`(ctype: `hkArray<hkUint8>`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `data`(ctype: `hkArray<hkUint8>`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_data: Vec<u8>,
 }
 const _: () = {

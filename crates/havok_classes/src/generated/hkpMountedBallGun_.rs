@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpMountedBallGun`
-/// -         version: `0`
-/// -       signature: `0x6791ffce`
-/// -          size: 112(x86)/128(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpMountedBallGun`
+/// - version: `0`
+/// - signature: `0x6791ffce`
+/// - size: `112`(x86)/`128`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkpMountedBallGun<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkpBallGun<'a>,
     /// # C++ Info
-    /// -          name: `position`(ctype: `hkVector4`)
-    /// -        offset:  96(x86)/112(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `position`(ctype: `hkVector4`)
+    /// - offset: ` 96`(x86)/`112`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_position: Vector4,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpSerializedTrack1nInfo`
-/// -         version: `0`
-/// -       signature: `0xf12d48d9`
-/// -          size:  24(x86)/ 32(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpSerializedTrack1nInfo`
+/// - version: `0`
+/// - signature: `0xf12d48d9`
+/// - size: ` 24`(x86)/` 32`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,16 +19,14 @@ pub struct hkpSerializedTrack1nInfo {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `sectors`(ctype: `hkArray<hkpAgent1nSector*>`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `sectors`(ctype: `hkArray<hkpAgent1nSector*>`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_sectors: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `subTracks`(ctype: `hkArray<hkpSerializedSubTrack1nInfo*>`)
-    /// -        offset:  12(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `subTracks`(ctype: `hkArray<hkpSerializedSubTrack1nInfo*>`)
+    /// - offset: ` 12`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_subTracks: Vec<Pointer>,
 }
 const _: () = {

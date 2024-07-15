@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkxAnimatedMatrix`
-/// -         version: `1`
-/// -       signature: `0x5838e337`
-/// -          size:  24(x86)/ 40(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkxAnimatedMatrix`
+/// - version: `1`
+/// - signature: `0x5838e337`
+/// - size: ` 24`(x86)/` 40`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkxAnimatedMatrix {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `matrices`(ctype: `hkArray<hkMatrix4>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `matrices`(ctype: `hkArray<hkMatrix4>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_matrices: Vec<Matrix4>,
     /// # C++ Info
-    /// -          name: `hint`(ctype: `enum Hint`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `hint`(ctype: `enum Hint`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_hint: Hint,
 }
 const _: () = {

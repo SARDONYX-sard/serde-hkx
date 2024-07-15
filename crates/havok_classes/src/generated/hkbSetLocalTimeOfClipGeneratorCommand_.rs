@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbSetLocalTimeOfClipGeneratorCommand`
-/// -         version: `0`
-/// -       signature: `0xfab12b45`
-/// -          size:  24(x86)/ 32(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbSetLocalTimeOfClipGeneratorCommand`
+/// - version: `0`
+/// - signature: `0xfab12b45`
+/// - size: ` 24`(x86)/` 32`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkbSetLocalTimeOfClipGeneratorCommand {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `characterId`(ctype: `hkUint64`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   8(x86)/  8(x86_64)
-    ///
+    /// - name: `characterId`(ctype: `hkUint64`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  8`(x86)/`  8`(x86_64)
     pub m_characterId: u64,
     /// # C++ Info
-    /// -          name: `localTime`(ctype: `hkReal`)
-    /// -        offset:  16(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `localTime`(ctype: `hkReal`)
+    /// - offset: ` 16`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_localTime: f32,
     /// # C++ Info
-    /// -          name: `nodeId`(ctype: `hkInt16`)
-    /// -        offset:  20(x86)/ 28(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `nodeId`(ctype: `hkInt16`)
+    /// - offset: ` 20`(x86)/` 28`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_nodeId: i16,
 }
 const _: () = {

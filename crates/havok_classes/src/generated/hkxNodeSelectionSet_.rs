@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkxNodeSelectionSet`
-/// -         version: `0`
-/// -       signature: `0xd753fc4d`
-/// -          size:  36(x86)/ 56(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkxNodeSelectionSet`
+/// - version: `0`
+/// - signature: `0xd753fc4d`
+/// - size: ` 36`(x86)/` 56`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkxNodeSelectionSet<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkxAttributeHolder<'a>,
     /// # C++ Info
-    /// -          name: `selectedNodes`(ctype: `hkArray<hkxNode*>`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `selectedNodes`(ctype: `hkArray<hkxNode*>`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_selectedNodes: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `name`(ctype: `hkStringPtr`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `name`(ctype: `hkStringPtr`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_name: StringPtr<'a>,
 }
 const _: () = {

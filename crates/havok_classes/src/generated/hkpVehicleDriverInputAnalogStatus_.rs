@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpVehicleDriverInputAnalogStatus`
-/// -         version: `0`
-/// -       signature: `0x2b4a5803`
-/// -          size:  20(x86)/ 32(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpVehicleDriverInputAnalogStatus`
+/// - version: `0`
+/// - signature: `0x2b4a5803`
+/// - size: ` 20`(x86)/` 32`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,28 +21,24 @@ pub struct hkpVehicleDriverInputAnalogStatus {
     /// Alternative to C++ class inheritance.
     pub parent: hkpVehicleDriverInputStatus,
     /// # C++ Info
-    /// -          name: `positionX`(ctype: `hkReal`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `positionX`(ctype: `hkReal`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_positionX: f32,
     /// # C++ Info
-    /// -          name: `positionY`(ctype: `hkReal`)
-    /// -        offset:  12(x86)/ 20(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `positionY`(ctype: `hkReal`)
+    /// - offset: ` 12`(x86)/` 20`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_positionY: f32,
     /// # C++ Info
-    /// -          name: `handbrakeButtonPressed`(ctype: `hkBool`)
-    /// -        offset:  16(x86)/ 24(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `handbrakeButtonPressed`(ctype: `hkBool`)
+    /// - offset: ` 16`(x86)/` 24`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_handbrakeButtonPressed: bool,
     /// # C++ Info
-    /// -          name: `reverseButtonPressed`(ctype: `hkBool`)
-    /// -        offset:  17(x86)/ 25(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `reverseButtonPressed`(ctype: `hkBool`)
+    /// - offset: ` 17`(x86)/` 25`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_reverseButtonPressed: bool,
 }
 const _: () = {

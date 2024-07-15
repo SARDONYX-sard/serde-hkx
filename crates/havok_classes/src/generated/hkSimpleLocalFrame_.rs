@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkSimpleLocalFrame`
-/// -         version: `1`
-/// -       signature: `0xe758f63c`
-/// -          size: 112(x86)/128(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkSimpleLocalFrame`
+/// - version: `1`
+/// - signature: `0xe758f63c`
+/// - size: `112`(x86)/`128`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,35 +21,30 @@ pub struct hkSimpleLocalFrame<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkLocalFrame,
     /// # C++ Info
-    /// -          name: `transform`(ctype: `hkTransform`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  64(x86)/ 64(x86_64)
-    ///
+    /// - name: `transform`(ctype: `hkTransform`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 64`(x86)/` 64`(x86_64)
     pub m_transform: Transform,
     /// # C++ Info
-    /// -          name: `children`(ctype: `hkArray<hkLocalFrame*>`)
-    /// -        offset:  80(x86)/ 80(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `children`(ctype: `hkArray<hkLocalFrame*>`)
+    /// - offset: ` 80`(x86)/` 80`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_children: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `parentFrame`(ctype: `struct hkLocalFrame*`)
-    /// -        offset:  92(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `NOT_OWNED`
-    ///
+    /// - name: `parentFrame`(ctype: `struct hkLocalFrame*`)
+    /// - offset: ` 92`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `NOT_OWNED`
     pub m_parentFrame: Pointer,
     /// # C++ Info
-    /// -          name: `group`(ctype: `struct hkLocalFrameGroup*`)
-    /// -        offset:  96(x86)/104(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `group`(ctype: `struct hkLocalFrameGroup*`)
+    /// - offset: ` 96`(x86)/`104`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_group: Pointer,
     /// # C++ Info
-    /// -          name: `name`(ctype: `hkStringPtr`)
-    /// -        offset: 100(x86)/112(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `name`(ctype: `hkStringPtr`)
+    /// - offset: `100`(x86)/`112`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_name: StringPtr<'a>,
 }
 const _: () = {

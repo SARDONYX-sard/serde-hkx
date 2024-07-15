@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkxVertexBuffer`
-/// -         version: `1`
-/// -       signature: `0x4ab10615`
-/// -          size: 104(x86)/136(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkxVertexBuffer`
+/// - version: `1`
+/// - signature: `0x4ab10615`
+/// - size: `104`(x86)/`136`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkxVertexBuffer {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `data`(ctype: `struct hkxVertexBufferVertexData`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  84(x86)/104(x86_64)
-    ///
+    /// - name: `data`(ctype: `struct hkxVertexBufferVertexData`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 84`(x86)/`104`(x86_64)
     pub m_data: hkxVertexBufferVertexData,
     /// # C++ Info
-    /// -          name: `desc`(ctype: `struct hkxVertexDescription`)
-    /// -        offset:  92(x86)/120(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `desc`(ctype: `struct hkxVertexDescription`)
+    /// - offset: ` 92`(x86)/`120`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_desc: hkxVertexDescription,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkMemoryMeshBody`
-/// -         version: `0`
-/// -       signature: `0x94a620a8`
-/// -          size: 112(x86)/128(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkMemoryMeshBody`
+/// - version: `0`
+/// - signature: `0x94a620a8`
+/// - size: `112`(x86)/`128`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,34 +21,29 @@ pub struct hkMemoryMeshBody<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkMeshBody,
     /// # C++ Info
-    /// -          name: `transform`(ctype: `hkMatrix4`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  64(x86)/ 64(x86_64)
-    ///
+    /// - name: `transform`(ctype: `hkMatrix4`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 64`(x86)/` 64`(x86_64)
     pub m_transform: Matrix4,
     /// # C++ Info
-    /// -          name: `transformSet`(ctype: `struct hkIndexedTransformSet*`)
-    /// -        offset:  80(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `transformSet`(ctype: `struct hkIndexedTransformSet*`)
+    /// - offset: ` 80`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_transformSet: Pointer,
     /// # C++ Info
-    /// -          name: `shape`(ctype: `struct hkMeshShape*`)
-    /// -        offset:  84(x86)/ 88(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `shape`(ctype: `struct hkMeshShape*`)
+    /// - offset: ` 84`(x86)/` 88`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_shape: Pointer,
     /// # C++ Info
-    /// -          name: `vertexBuffers`(ctype: `hkArray<hkMeshVertexBuffer*>`)
-    /// -        offset:  88(x86)/ 96(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `vertexBuffers`(ctype: `hkArray<hkMeshVertexBuffer*>`)
+    /// - offset: ` 88`(x86)/` 96`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_vertexBuffers: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `name`(ctype: `hkStringPtr`)
-    /// -        offset: 100(x86)/112(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `name`(ctype: `hkStringPtr`)
+    /// - offset: `100`(x86)/`112`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_name: StringPtr<'a>,
 }
 const _: () = {

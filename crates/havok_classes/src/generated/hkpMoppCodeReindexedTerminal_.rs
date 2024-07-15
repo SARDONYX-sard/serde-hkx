@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpMoppCodeReindexedTerminal`
-/// -         version: `0`
-/// -       signature: `0x6ed8ac06`
-/// -          size:   8(x86)/  8(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpMoppCodeReindexedTerminal`
+/// - version: `0`
+/// - signature: `0x6ed8ac06`
+/// - size: `  8`(x86)/`  8`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,16 +19,14 @@ pub struct hkpMoppCodeReindexedTerminal {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `origShapeKey`(ctype: `hkUint32`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `origShapeKey`(ctype: `hkUint32`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_origShapeKey: u32,
     /// # C++ Info
-    /// -          name: `reindexedShapeKey`(ctype: `hkUint32`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `reindexedShapeKey`(ctype: `hkUint32`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_reindexedShapeKey: u32,
 }
 const _: () = {

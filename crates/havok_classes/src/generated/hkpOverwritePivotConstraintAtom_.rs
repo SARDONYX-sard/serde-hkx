@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpOverwritePivotConstraintAtom`
-/// -         version: `0`
-/// -       signature: `0x1f11b467`
-/// -          size:   4(x86)/  4(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpOverwritePivotConstraintAtom`
+/// - version: `0`
+/// - signature: `0x1f11b467`
+/// - size: `  4`(x86)/`  4`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkpOverwritePivotConstraintAtom {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConstraintAtom,
     /// # C++ Info
-    /// -          name: `copyToPivotBFromPivotA`(ctype: `hkUint8`)
-    /// -        offset:   2(x86)/  2(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `copyToPivotBFromPivotA`(ctype: `hkUint8`)
+    /// - offset: `  2`(x86)/`  2`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_copyToPivotBFromPivotA: u8,
 }
 const _: () = {

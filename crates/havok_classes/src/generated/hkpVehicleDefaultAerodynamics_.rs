@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpVehicleDefaultAerodynamics`
-/// -         version: `0`
-/// -       signature: `0x42fc5bbd`
-/// -          size:  48(x86)/ 48(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpVehicleDefaultAerodynamics`
+/// - version: `0`
+/// - signature: `0x42fc5bbd`
+/// - size: ` 48`(x86)/` 48`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,34 +21,29 @@ pub struct hkpVehicleDefaultAerodynamics {
     /// Alternative to C++ class inheritance.
     pub parent: hkpVehicleAerodynamics,
     /// # C++ Info
-    /// -          name: `airDensity`(ctype: `hkReal`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `airDensity`(ctype: `hkReal`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_airDensity: f32,
     /// # C++ Info
-    /// -          name: `frontalArea`(ctype: `hkReal`)
-    /// -        offset:  12(x86)/ 20(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `frontalArea`(ctype: `hkReal`)
+    /// - offset: ` 12`(x86)/` 20`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_frontalArea: f32,
     /// # C++ Info
-    /// -          name: `dragCoefficient`(ctype: `hkReal`)
-    /// -        offset:  16(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `dragCoefficient`(ctype: `hkReal`)
+    /// - offset: ` 16`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_dragCoefficient: f32,
     /// # C++ Info
-    /// -          name: `liftCoefficient`(ctype: `hkReal`)
-    /// -        offset:  20(x86)/ 28(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `liftCoefficient`(ctype: `hkReal`)
+    /// - offset: ` 20`(x86)/` 28`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_liftCoefficient: f32,
     /// # C++ Info
-    /// -          name: `extraGravityws`(ctype: `hkVector4`)
-    /// -        offset:  32(x86)/ 32(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `extraGravityws`(ctype: `hkVector4`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_extraGravityws: Vector4,
 }
 const _: () = {

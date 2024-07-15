@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkaSkeletonMapperDataChainMapping`
-/// -         version: `0`
-/// -       signature: `0xa528f7cf`
-/// -          size: 112(x86)/112(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkaSkeletonMapperDataChainMapping`
+/// - version: `0`
+/// - signature: `0xa528f7cf`
+/// - size: `112`(x86)/`112`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,40 +19,34 @@ pub struct hkaSkeletonMapperDataChainMapping {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `startBoneA`(ctype: `hkInt16`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `startBoneA`(ctype: `hkInt16`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_startBoneA: i16,
     /// # C++ Info
-    /// -          name: `endBoneA`(ctype: `hkInt16`)
-    /// -        offset:   2(x86)/  2(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `endBoneA`(ctype: `hkInt16`)
+    /// - offset: `  2`(x86)/`  2`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_endBoneA: i16,
     /// # C++ Info
-    /// -          name: `startBoneB`(ctype: `hkInt16`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `startBoneB`(ctype: `hkInt16`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_startBoneB: i16,
     /// # C++ Info
-    /// -          name: `endBoneB`(ctype: `hkInt16`)
-    /// -        offset:   6(x86)/  6(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `endBoneB`(ctype: `hkInt16`)
+    /// - offset: `  6`(x86)/`  6`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_endBoneB: i16,
     /// # C++ Info
-    /// -          name: `startAFromBTransform`(ctype: `hkQsTransform`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  48(x86)/ 48(x86_64)
-    ///
+    /// - name: `startAFromBTransform`(ctype: `hkQsTransform`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 48`(x86)/` 48`(x86_64)
     pub m_startAFromBTransform: QsTransform,
     /// # C++ Info
-    /// -          name: `endAFromBTransform`(ctype: `hkQsTransform`)
-    /// -        offset:  64(x86)/ 64(x86_64)
-    /// -     type_size:  48(x86)/ 48(x86_64)
-    ///
+    /// - name: `endAFromBTransform`(ctype: `hkQsTransform`)
+    /// - offset: ` 64`(x86)/` 64`(x86_64)
+    /// - type_size: ` 48`(x86)/` 48`(x86_64)
     pub m_endAFromBTransform: QsTransform,
 }
 const _: () = {

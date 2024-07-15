@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbMoveCharacterModifier`
-/// -         version: `0`
-/// -       signature: `0x8f7492a0`
-/// -          size:  80(x86)/112(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbMoveCharacterModifier`
+/// - version: `0`
+/// - signature: `0x8f7492a0`
+/// - size: ` 80`(x86)/`112`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,17 +21,15 @@ pub struct hkbMoveCharacterModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `offsetPerSecondMS`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `offsetPerSecondMS`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_offsetPerSecondMS: Vector4,
     /// # C++ Info
-    /// -          name: `timeSinceLastModify`(ctype: `hkReal`)
-    /// -        offset:  64(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `timeSinceLastModify`(ctype: `hkReal`)
+    /// - offset: ` 64`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_timeSinceLastModify: f32,
 }
 const _: () = {

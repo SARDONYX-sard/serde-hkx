@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpSimpleContactConstraintDataInfo`
-/// -         version: `1`
-/// -       signature: `0xb59d1734`
-/// -          size:  32(x86)/ 32(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpSimpleContactConstraintDataInfo`
+/// - version: `1`
+/// - signature: `0xb59d1734`
+/// - size: ` 32`(x86)/` 32`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,41 +19,35 @@ pub struct hkpSimpleContactConstraintDataInfo {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `flags`(ctype: `hkUint16`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    /// -         flags: `ALIGN_16`
-    ///
+    /// - name: `flags`(ctype: `hkUint16`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
+    /// - flags: `ALIGN_16`
     pub m_flags: u16,
     /// # C++ Info
-    /// -          name: `index`(ctype: `hkUint16`)
-    /// -        offset:   2(x86)/  2(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `index`(ctype: `hkUint16`)
+    /// - offset: `  2`(x86)/`  2`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_index: u16,
     /// # C++ Info
-    /// -          name: `internalData0`(ctype: `hkReal`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `internalData0`(ctype: `hkReal`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_internalData0: f32,
     /// # C++ Info
-    /// -          name: `rollingFrictionMultiplier`(ctype: `hkHalf`)
-    /// -        offset:   8(x86)/  8(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `rollingFrictionMultiplier`(ctype: `hkHalf`)
+    /// - offset: `  8`(x86)/`  8`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_rollingFrictionMultiplier: f16,
     /// # C++ Info
-    /// -          name: `internalData1`(ctype: `hkHalf`)
-    /// -        offset:  10(x86)/ 10(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `internalData1`(ctype: `hkHalf`)
+    /// - offset: ` 10`(x86)/` 10`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_internalData1: f16,
     /// # C++ Info
-    /// -          name: `data`(ctype: `hkUint32[5]`)
-    /// -        offset:  12(x86)/ 12(x86_64)
-    /// -     type_size:  20(x86)/ 20(x86_64)
-    ///
+    /// - name: `data`(ctype: `hkUint32[5]`)
+    /// - offset: ` 12`(x86)/` 12`(x86_64)
+    /// - type_size: ` 20`(x86)/` 20`(x86_64)
     pub m_data: [u32; 5usize],
 }
 const _: () = {

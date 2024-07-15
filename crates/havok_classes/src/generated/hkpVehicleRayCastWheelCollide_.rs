@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpVehicleRayCastWheelCollide`
-/// -         version: `1`
-/// -       signature: `0x41efd9e3`
-/// -          size:  36(x86)/ 64(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpVehicleRayCastWheelCollide`
+/// - version: `1`
+/// - signature: `0x41efd9e3`
+/// - size: ` 36`(x86)/` 64`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkpVehicleRayCastWheelCollide {
     /// Alternative to C++ class inheritance.
     pub parent: hkpVehicleWheelCollide,
     /// # C++ Info
-    /// -          name: `wheelCollisionFilterInfo`(ctype: `hkUint32`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `wheelCollisionFilterInfo`(ctype: `hkUint32`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_wheelCollisionFilterInfo: u32,
     /// # C++ Info
-    /// -          name: `phantom`(ctype: `struct hkpAabbPhantom*`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `phantom`(ctype: `struct hkpAabbPhantom*`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_phantom: Pointer,
     /// # C++ Info
-    /// -          name: `rejectRayChassisListener`(ctype: `struct hkpRejectChassisListener`)
-    /// -        offset:  20(x86)/ 40(x86_64)
-    /// -     type_size:  16(x86)/ 24(x86_64)
-    ///
+    /// - name: `rejectRayChassisListener`(ctype: `struct hkpRejectChassisListener`)
+    /// - offset: ` 20`(x86)/` 40`(x86_64)
+    /// - type_size: ` 16`(x86)/` 24`(x86_64)
     pub m_rejectRayChassisListener: hkpRejectChassisListener,
 }
 const _: () = {

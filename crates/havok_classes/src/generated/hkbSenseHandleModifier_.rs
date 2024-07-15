@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbSenseHandleModifier`
-/// -         version: `2`
-/// -       signature: `0x2a064d99`
-/// -          size: 160(x86)/224(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbSenseHandleModifier`
+/// - version: `2`
+/// - signature: `0x2a064d99`
+/// - size: `160`(x86)/`224`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,121 +21,102 @@ pub struct hkbSenseHandleModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `handle`(ctype: `struct hkbHandle`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:  24(x86)/ 48(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `handle`(ctype: `struct hkbHandle`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: ` 24`(x86)/` 48`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_handle: hkbHandle,
     /// # C++ Info
-    /// -          name: `sensorLocalOffset`(ctype: `hkVector4`)
-    /// -        offset:  80(x86)/128(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `sensorLocalOffset`(ctype: `hkVector4`)
+    /// - offset: ` 80`(x86)/`128`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_sensorLocalOffset: Vector4,
     /// # C++ Info
-    /// -          name: `ranges`(ctype: `hkArray<struct hkbSenseHandleModifierRange>`)
-    /// -        offset:  96(x86)/144(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `ranges`(ctype: `hkArray<struct hkbSenseHandleModifierRange>`)
+    /// - offset: ` 96`(x86)/`144`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_ranges: Vec<hkbSenseHandleModifierRange>,
     /// # C++ Info
-    /// -          name: `handleOut`(ctype: `struct hkbHandle*`)
-    /// -        offset: 108(x86)/160(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `handleOut`(ctype: `struct hkbHandle*`)
+    /// - offset: `108`(x86)/`160`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_handleOut: Pointer,
     /// # C++ Info
-    /// -          name: `handleIn`(ctype: `struct hkbHandle*`)
-    /// -        offset: 112(x86)/168(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `handleIn`(ctype: `struct hkbHandle*`)
+    /// - offset: `112`(x86)/`168`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_handleIn: Pointer,
     /// # C++ Info
-    /// -          name: `localFrameName`(ctype: `hkStringPtr`)
-    /// -        offset: 116(x86)/176(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `localFrameName`(ctype: `hkStringPtr`)
+    /// - offset: `116`(x86)/`176`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_localFrameName: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `sensorLocalFrameName`(ctype: `hkStringPtr`)
-    /// -        offset: 120(x86)/184(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `sensorLocalFrameName`(ctype: `hkStringPtr`)
+    /// - offset: `120`(x86)/`184`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_sensorLocalFrameName: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `minDistance`(ctype: `hkReal`)
-    /// -        offset: 124(x86)/192(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `minDistance`(ctype: `hkReal`)
+    /// - offset: `124`(x86)/`192`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_minDistance: f32,
     /// # C++ Info
-    /// -          name: `maxDistance`(ctype: `hkReal`)
-    /// -        offset: 128(x86)/196(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxDistance`(ctype: `hkReal`)
+    /// - offset: `128`(x86)/`196`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxDistance: f32,
     /// # C++ Info
-    /// -          name: `distanceOut`(ctype: `hkReal`)
-    /// -        offset: 132(x86)/200(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `distanceOut`(ctype: `hkReal`)
+    /// - offset: `132`(x86)/`200`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_distanceOut: f32,
     /// # C++ Info
-    /// -          name: `collisionFilterInfo`(ctype: `hkUint32`)
-    /// -        offset: 136(x86)/204(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `collisionFilterInfo`(ctype: `hkUint32`)
+    /// - offset: `136`(x86)/`204`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_collisionFilterInfo: u32,
     /// # C++ Info
-    /// -          name: `sensorRagdollBoneIndex`(ctype: `hkInt16`)
-    /// -        offset: 140(x86)/208(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `sensorRagdollBoneIndex`(ctype: `hkInt16`)
+    /// - offset: `140`(x86)/`208`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_sensorRagdollBoneIndex: i16,
     /// # C++ Info
-    /// -          name: `sensorAnimationBoneIndex`(ctype: `hkInt16`)
-    /// -        offset: 142(x86)/210(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `sensorAnimationBoneIndex`(ctype: `hkInt16`)
+    /// - offset: `142`(x86)/`210`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_sensorAnimationBoneIndex: i16,
     /// # C++ Info
-    /// -          name: `sensingMode`(ctype: `enum SensingMode`)
-    /// -        offset: 144(x86)/212(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `sensingMode`(ctype: `enum SensingMode`)
+    /// - offset: `144`(x86)/`212`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_sensingMode: SensingMode,
     /// # C++ Info
-    /// -          name: `extrapolateSensorPosition`(ctype: `hkBool`)
-    /// -        offset: 145(x86)/213(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `extrapolateSensorPosition`(ctype: `hkBool`)
+    /// - offset: `145`(x86)/`213`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_extrapolateSensorPosition: bool,
     /// # C++ Info
-    /// -          name: `keepFirstSensedHandle`(ctype: `hkBool`)
-    /// -        offset: 146(x86)/214(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `keepFirstSensedHandle`(ctype: `hkBool`)
+    /// - offset: `146`(x86)/`214`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_keepFirstSensedHandle: bool,
     /// # C++ Info
-    /// -          name: `foundHandleOut`(ctype: `hkBool`)
-    /// -        offset: 147(x86)/215(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `foundHandleOut`(ctype: `hkBool`)
+    /// - offset: `147`(x86)/`215`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_foundHandleOut: bool,
     /// # C++ Info
-    /// -          name: `timeSinceLastModify`(ctype: `hkReal`)
-    /// -        offset: 148(x86)/216(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `timeSinceLastModify`(ctype: `hkReal`)
+    /// - offset: `148`(x86)/`216`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_timeSinceLastModify: f32,
     /// # C++ Info
-    /// -          name: `rangeIndexForEventToSendNextUpdate`(ctype: `hkInt32`)
-    /// -        offset: 152(x86)/220(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `rangeIndexForEventToSendNextUpdate`(ctype: `hkInt32`)
+    /// - offset: `152`(x86)/`220`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_rangeIndexForEventToSendNextUpdate: i32,
 }
 const _: () = {

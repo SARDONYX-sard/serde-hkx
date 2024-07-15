@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkxLight`
-/// -         version: `1`
-/// -       signature: `0x81c86d42`
-/// -          size:  64(x86)/ 80(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkxLight`
+/// - version: `1`
+/// - signature: `0x81c86d42`
+/// - size: ` 64`(x86)/` 80`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,34 +21,29 @@ pub struct hkxLight {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `type`(ctype: `enum LightType`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `type`(ctype: `enum LightType`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_type: LightType,
     /// # C++ Info
-    /// -          name: `position`(ctype: `hkVector4`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `position`(ctype: `hkVector4`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_position: Vector4,
     /// # C++ Info
-    /// -          name: `direction`(ctype: `hkVector4`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `direction`(ctype: `hkVector4`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_direction: Vector4,
     /// # C++ Info
-    /// -          name: `color`(ctype: `hkUint32`)
-    /// -        offset:  48(x86)/ 64(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `color`(ctype: `hkUint32`)
+    /// - offset: ` 48`(x86)/` 64`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_color: u32,
     /// # C++ Info
-    /// -          name: `angle`(ctype: `hkReal`)
-    /// -        offset:  52(x86)/ 68(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `angle`(ctype: `hkReal`)
+    /// - offset: ` 52`(x86)/` 68`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_angle: f32,
 }
 const _: () = {

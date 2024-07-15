@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbBehaviorGraphInternalState`
-/// -         version: `0`
-/// -       signature: `0x8699b6eb`
-/// -          size:  24(x86)/ 40(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbBehaviorGraphInternalState`
+/// - version: `0`
+/// - signature: `0x8699b6eb`
+/// - size: ` 24`(x86)/` 40`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkbBehaviorGraphInternalState {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `nodeInternalStateInfos`(ctype: `hkArray<hkbNodeInternalStateInfo*>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `nodeInternalStateInfos`(ctype: `hkArray<hkbNodeInternalStateInfo*>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_nodeInternalStateInfos: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `variableValueSet`(ctype: `struct hkbVariableValueSet*`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `variableValueSet`(ctype: `struct hkbVariableValueSet*`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_variableValueSet: Pointer,
 }
 const _: () = {

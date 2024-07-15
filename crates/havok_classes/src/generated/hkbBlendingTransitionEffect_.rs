@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbBlendingTransitionEffect`
-/// -         version: `1`
-/// -       signature: `0xfd8584fe`
-/// -          size:  88(x86)/144(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbBlendingTransitionEffect`
+/// - version: `1`
+/// - signature: `0xfd8584fe`
+/// - size: ` 88`(x86)/`144`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,83 +21,71 @@ pub struct hkbBlendingTransitionEffect<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbTransitionEffect<'a>,
     /// # C++ Info
-    /// -          name: `duration`(ctype: `hkReal`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `duration`(ctype: `hkReal`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_duration: f32,
     /// # C++ Info
-    /// -          name: `toGeneratorStartTimeFraction`(ctype: `hkReal`)
-    /// -        offset:  48(x86)/ 84(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `toGeneratorStartTimeFraction`(ctype: `hkReal`)
+    /// - offset: ` 48`(x86)/` 84`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_toGeneratorStartTimeFraction: f32,
     /// # C++ Info
-    /// -          name: `flags`(ctype: `flags FlagBits`)
-    /// -        offset:  52(x86)/ 88(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `flags`(ctype: `flags FlagBits`)
+    /// - offset: ` 52`(x86)/` 88`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_flags: FlagBits,
     /// # C++ Info
-    /// -          name: `endMode`(ctype: `enum EndMode`)
-    /// -        offset:  54(x86)/ 90(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `endMode`(ctype: `enum EndMode`)
+    /// - offset: ` 54`(x86)/` 90`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_endMode: EndMode,
     /// # C++ Info
-    /// -          name: `blendCurve`(ctype: `enum BlendCurve`)
-    /// -        offset:  55(x86)/ 91(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `blendCurve`(ctype: `enum BlendCurve`)
+    /// - offset: ` 55`(x86)/` 91`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_blendCurve: BlendCurve,
     /// # C++ Info
-    /// -          name: `fromGenerator`(ctype: `void*`)
-    /// -        offset:  56(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `fromGenerator`(ctype: `void*`)
+    /// - offset: ` 56`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_fromGenerator: Pointer,
     /// # C++ Info
-    /// -          name: `toGenerator`(ctype: `void*`)
-    /// -        offset:  60(x86)/104(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `toGenerator`(ctype: `void*`)
+    /// - offset: ` 60`(x86)/`104`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_toGenerator: Pointer,
     /// # C++ Info
-    /// -          name: `characterPoseAtBeginningOfTransition`(ctype: `hkArray<void>`)
-    /// -        offset:  64(x86)/112(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `characterPoseAtBeginningOfTransition`(ctype: `hkArray<void>`)
+    /// - offset: ` 64`(x86)/`112`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_characterPoseAtBeginningOfTransition: Vec<()>,
     /// # C++ Info
-    /// -          name: `timeRemaining`(ctype: `hkReal`)
-    /// -        offset:  76(x86)/128(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `timeRemaining`(ctype: `hkReal`)
+    /// - offset: ` 76`(x86)/`128`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_timeRemaining: f32,
     /// # C++ Info
-    /// -          name: `timeInTransition`(ctype: `hkReal`)
-    /// -        offset:  80(x86)/132(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `timeInTransition`(ctype: `hkReal`)
+    /// - offset: ` 80`(x86)/`132`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_timeInTransition: f32,
     /// # C++ Info
-    /// -          name: `applySelfTransition`(ctype: `hkBool`)
-    /// -        offset:  84(x86)/136(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `applySelfTransition`(ctype: `hkBool`)
+    /// - offset: ` 84`(x86)/`136`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_applySelfTransition: bool,
     /// # C++ Info
-    /// -          name: `initializeCharacterPose`(ctype: `hkBool`)
-    /// -        offset:  85(x86)/137(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `initializeCharacterPose`(ctype: `hkBool`)
+    /// - offset: ` 85`(x86)/`137`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_initializeCharacterPose: bool,
 }
 const _: () = {

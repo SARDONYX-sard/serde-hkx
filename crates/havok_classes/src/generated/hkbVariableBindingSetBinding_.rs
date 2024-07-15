@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbVariableBindingSetBinding`
-/// -         version: `1`
-/// -       signature: `0x4d592f72`
-/// -          size:  32(x86)/ 40(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkbVariableBindingSetBinding`
+/// - version: `1`
+/// - signature: `0x4d592f72`
+/// - size: ` 32`(x86)/` 40`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,77 +19,66 @@ pub struct hkbVariableBindingSetBinding<'a> {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `memberPath`(ctype: `hkStringPtr`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `memberPath`(ctype: `hkStringPtr`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_memberPath: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `memberClass`(ctype: `void*`)
-    /// -        offset:   4(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `memberClass`(ctype: `void*`)
+    /// - offset: `  4`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_memberClass: Pointer,
     /// # C++ Info
-    /// -          name: `offsetInObjectPlusOne`(ctype: `hkInt32`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `offsetInObjectPlusOne`(ctype: `hkInt32`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_offsetInObjectPlusOne: i32,
     /// # C++ Info
-    /// -          name: `offsetInArrayPlusOne`(ctype: `hkInt32`)
-    /// -        offset:  12(x86)/ 20(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `offsetInArrayPlusOne`(ctype: `hkInt32`)
+    /// - offset: ` 12`(x86)/` 20`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_offsetInArrayPlusOne: i32,
     /// # C++ Info
-    /// -          name: `rootVariableIndex`(ctype: `hkInt32`)
-    /// -        offset:  16(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `rootVariableIndex`(ctype: `hkInt32`)
+    /// - offset: ` 16`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_rootVariableIndex: i32,
     /// # C++ Info
-    /// -          name: `variableIndex`(ctype: `hkInt32`)
-    /// -        offset:  20(x86)/ 28(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `variableIndex`(ctype: `hkInt32`)
+    /// - offset: ` 20`(x86)/` 28`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_variableIndex: i32,
     /// # C++ Info
-    /// -          name: `bitIndex`(ctype: `hkInt8`)
-    /// -        offset:  24(x86)/ 32(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `bitIndex`(ctype: `hkInt8`)
+    /// - offset: ` 24`(x86)/` 32`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_bitIndex: i8,
     /// # C++ Info
-    /// -          name: `bindingType`(ctype: `enum BindingType`)
-    /// -        offset:  25(x86)/ 33(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `bindingType`(ctype: `enum BindingType`)
+    /// - offset: ` 25`(x86)/` 33`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_bindingType: BindingType,
     /// # C++ Info
-    /// -          name: `memberType`(ctype: `enum unknown`)
-    /// -        offset:  26(x86)/ 34(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `memberType`(ctype: `enum unknown`)
+    /// - offset: ` 26`(x86)/` 34`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_memberType: u8,
     /// # C++ Info
-    /// -          name: `variableType`(ctype: `hkInt8`)
-    /// -        offset:  27(x86)/ 35(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `variableType`(ctype: `hkInt8`)
+    /// - offset: ` 27`(x86)/` 35`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_variableType: i8,
     /// # C++ Info
-    /// -          name: `flags`(ctype: `flags unknown`)
-    /// -        offset:  28(x86)/ 36(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `flags`(ctype: `flags unknown`)
+    /// - offset: ` 28`(x86)/` 36`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_flags: i8,
 }
 const _: () = {

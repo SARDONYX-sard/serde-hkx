@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbPoweredRagdollControlData`
-/// -         version: `3`
-/// -       signature: `0xf5ba21b`
-/// -          size:  32(x86)/ 32(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkbPoweredRagdollControlData`
+/// - version: `3`
+/// - signature: `0xf5ba21b`
+/// - size: ` 32`(x86)/` 32`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,35 +19,30 @@ pub struct hkbPoweredRagdollControlData {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `maxForce`(ctype: `hkReal`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `ALIGN_16`
-    ///
+    /// - name: `maxForce`(ctype: `hkReal`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `ALIGN_16`
     pub m_maxForce: f32,
     /// # C++ Info
-    /// -          name: `tau`(ctype: `hkReal`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `tau`(ctype: `hkReal`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_tau: f32,
     /// # C++ Info
-    /// -          name: `damping`(ctype: `hkReal`)
-    /// -        offset:   8(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `damping`(ctype: `hkReal`)
+    /// - offset: `  8`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_damping: f32,
     /// # C++ Info
-    /// -          name: `proportionalRecoveryVelocity`(ctype: `hkReal`)
-    /// -        offset:  12(x86)/ 12(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `proportionalRecoveryVelocity`(ctype: `hkReal`)
+    /// - offset: ` 12`(x86)/` 12`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_proportionalRecoveryVelocity: f32,
     /// # C++ Info
-    /// -          name: `constantRecoveryVelocity`(ctype: `hkReal`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `constantRecoveryVelocity`(ctype: `hkReal`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_constantRecoveryVelocity: f32,
 }
 const _: () = {

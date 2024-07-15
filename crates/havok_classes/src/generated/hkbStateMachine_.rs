@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbStateMachine`
-/// -         version: `4`
-/// -       signature: `0x816c1dcb`
-/// -          size: 180(x86)/264(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbStateMachine`
+/// - version: `4`
+/// - signature: `0x816c1dcb`
+/// - size: `180`(x86)/`264`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,186 +21,158 @@ pub struct hkbStateMachine<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
-    /// -          name: `eventToSendWhenStateOrTransitionChanges`(ctype: `struct hkbEvent`)
-    /// -        offset:  40(x86)/ 72(x86_64)
-    /// -     type_size:  12(x86)/ 24(x86_64)
-    ///
+    /// - name: `eventToSendWhenStateOrTransitionChanges`(ctype: `struct hkbEvent`)
+    /// - offset: ` 40`(x86)/` 72`(x86_64)
+    /// - type_size: ` 12`(x86)/` 24`(x86_64)
     pub m_eventToSendWhenStateOrTransitionChanges: hkbEvent,
     /// # C++ Info
-    /// -          name: `startStateChooser`(ctype: `struct hkbStateChooser*`)
-    /// -        offset:  52(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `startStateChooser`(ctype: `struct hkbStateChooser*`)
+    /// - offset: ` 52`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_startStateChooser: Pointer,
     /// # C++ Info
-    /// -          name: `startStateId`(ctype: `hkInt32`)
-    /// -        offset:  56(x86)/104(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `startStateId`(ctype: `hkInt32`)
+    /// - offset: ` 56`(x86)/`104`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_startStateId: i32,
     /// # C++ Info
-    /// -          name: `returnToPreviousStateEventId`(ctype: `hkInt32`)
-    /// -        offset:  60(x86)/108(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `returnToPreviousStateEventId`(ctype: `hkInt32`)
+    /// - offset: ` 60`(x86)/`108`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_returnToPreviousStateEventId: i32,
     /// # C++ Info
-    /// -          name: `randomTransitionEventId`(ctype: `hkInt32`)
-    /// -        offset:  64(x86)/112(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `randomTransitionEventId`(ctype: `hkInt32`)
+    /// - offset: ` 64`(x86)/`112`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_randomTransitionEventId: i32,
     /// # C++ Info
-    /// -          name: `transitionToNextHigherStateEventId`(ctype: `hkInt32`)
-    /// -        offset:  68(x86)/116(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `transitionToNextHigherStateEventId`(ctype: `hkInt32`)
+    /// - offset: ` 68`(x86)/`116`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_transitionToNextHigherStateEventId: i32,
     /// # C++ Info
-    /// -          name: `transitionToNextLowerStateEventId`(ctype: `hkInt32`)
-    /// -        offset:  72(x86)/120(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `transitionToNextLowerStateEventId`(ctype: `hkInt32`)
+    /// - offset: ` 72`(x86)/`120`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_transitionToNextLowerStateEventId: i32,
     /// # C++ Info
-    /// -          name: `syncVariableIndex`(ctype: `hkInt32`)
-    /// -        offset:  76(x86)/124(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `syncVariableIndex`(ctype: `hkInt32`)
+    /// - offset: ` 76`(x86)/`124`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_syncVariableIndex: i32,
     /// # C++ Info
-    /// -          name: `currentStateId`(ctype: `hkInt32`)
-    /// -        offset:  80(x86)/128(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `currentStateId`(ctype: `hkInt32`)
+    /// - offset: ` 80`(x86)/`128`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_currentStateId: i32,
     /// # C++ Info
-    /// -          name: `wrapAroundStateId`(ctype: `hkBool`)
-    /// -        offset:  84(x86)/132(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `wrapAroundStateId`(ctype: `hkBool`)
+    /// - offset: ` 84`(x86)/`132`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_wrapAroundStateId: bool,
     /// # C++ Info
-    /// -          name: `maxSimultaneousTransitions`(ctype: `hkInt8`)
-    /// -        offset:  85(x86)/133(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `maxSimultaneousTransitions`(ctype: `hkInt8`)
+    /// - offset: ` 85`(x86)/`133`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_maxSimultaneousTransitions: i8,
     /// # C++ Info
-    /// -          name: `startStateMode`(ctype: `enum StartStateMode`)
-    /// -        offset:  86(x86)/134(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `startStateMode`(ctype: `enum StartStateMode`)
+    /// - offset: ` 86`(x86)/`134`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_startStateMode: StartStateMode,
     /// # C++ Info
-    /// -          name: `selfTransitionMode`(ctype: `enum StateMachineSelfTransitionMode`)
-    /// -        offset:  87(x86)/135(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `selfTransitionMode`(ctype: `enum StateMachineSelfTransitionMode`)
+    /// - offset: ` 87`(x86)/`135`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_selfTransitionMode: StateMachineSelfTransitionMode,
     /// # C++ Info
-    /// -          name: `isActive`(ctype: `hkBool`)
-    /// -        offset:  88(x86)/136(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `isActive`(ctype: `hkBool`)
+    /// - offset: ` 88`(x86)/`136`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_isActive: bool,
     /// # C++ Info
-    /// -          name: `states`(ctype: `hkArray<hkbStateMachineStateInfo*>`)
-    /// -        offset:  92(x86)/144(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `states`(ctype: `hkArray<hkbStateMachineStateInfo*>`)
+    /// - offset: ` 92`(x86)/`144`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_states: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `wildcardTransitions`(ctype: `struct hkbStateMachineTransitionInfoArray*`)
-    /// -        offset: 104(x86)/160(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `wildcardTransitions`(ctype: `struct hkbStateMachineTransitionInfoArray*`)
+    /// - offset: `104`(x86)/`160`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_wildcardTransitions: Pointer,
     /// # C++ Info
-    /// -          name: `stateIdToIndexMap`(ctype: `void*`)
-    /// -        offset: 108(x86)/168(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `stateIdToIndexMap`(ctype: `void*`)
+    /// - offset: `108`(x86)/`168`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_stateIdToIndexMap: Pointer,
     /// # C++ Info
-    /// -          name: `activeTransitions`(ctype: `hkArray<void>`)
-    /// -        offset: 112(x86)/176(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `activeTransitions`(ctype: `hkArray<void>`)
+    /// - offset: `112`(x86)/`176`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_activeTransitions: Vec<()>,
     /// # C++ Info
-    /// -          name: `transitionFlags`(ctype: `hkArray<void>`)
-    /// -        offset: 124(x86)/192(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `transitionFlags`(ctype: `hkArray<void>`)
+    /// - offset: `124`(x86)/`192`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_transitionFlags: Vec<()>,
     /// # C++ Info
-    /// -          name: `wildcardTransitionFlags`(ctype: `hkArray<void>`)
-    /// -        offset: 136(x86)/208(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `wildcardTransitionFlags`(ctype: `hkArray<void>`)
+    /// - offset: `136`(x86)/`208`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_wildcardTransitionFlags: Vec<()>,
     /// # C++ Info
-    /// -          name: `delayedTransitions`(ctype: `hkArray<void>`)
-    /// -        offset: 148(x86)/224(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `delayedTransitions`(ctype: `hkArray<void>`)
+    /// - offset: `148`(x86)/`224`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_delayedTransitions: Vec<()>,
     /// # C++ Info
-    /// -          name: `timeInState`(ctype: `hkReal`)
-    /// -        offset: 160(x86)/240(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `timeInState`(ctype: `hkReal`)
+    /// - offset: `160`(x86)/`240`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_timeInState: f32,
     /// # C++ Info
-    /// -          name: `lastLocalTime`(ctype: `hkReal`)
-    /// -        offset: 164(x86)/244(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `lastLocalTime`(ctype: `hkReal`)
+    /// - offset: `164`(x86)/`244`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_lastLocalTime: f32,
     /// # C++ Info
-    /// -          name: `previousStateId`(ctype: `hkInt32`)
-    /// -        offset: 168(x86)/248(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `previousStateId`(ctype: `hkInt32`)
+    /// - offset: `168`(x86)/`248`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_previousStateId: i32,
     /// # C++ Info
-    /// -          name: `nextStartStateIndexOverride`(ctype: `hkInt32`)
-    /// -        offset: 172(x86)/252(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `nextStartStateIndexOverride`(ctype: `hkInt32`)
+    /// - offset: `172`(x86)/`252`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_nextStartStateIndexOverride: i32,
     /// # C++ Info
-    /// -          name: `stateOrTransitionChanged`(ctype: `hkBool`)
-    /// -        offset: 176(x86)/256(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `stateOrTransitionChanged`(ctype: `hkBool`)
+    /// - offset: `176`(x86)/`256`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_stateOrTransitionChanged: bool,
     /// # C++ Info
-    /// -          name: `echoNextUpdate`(ctype: `hkBool`)
-    /// -        offset: 177(x86)/257(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `echoNextUpdate`(ctype: `hkBool`)
+    /// - offset: `177`(x86)/`257`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_echoNextUpdate: bool,
     /// # C++ Info
-    /// -          name: `sCurrentStateIndexAndEntered`(ctype: `hkUint16`)
-    /// -        offset: 178(x86)/258(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `sCurrentStateIndexAndEntered`(ctype: `hkUint16`)
+    /// - offset: `178`(x86)/`258`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_sCurrentStateIndexAndEntered: u16,
 }
 const _: () = {

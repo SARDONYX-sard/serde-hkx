@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbGeneratorSyncInfo`
-/// -         version: `0`
-/// -       signature: `0xa3c341f8`
-/// -          size:  80(x86)/ 80(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkbGeneratorSyncInfo`
+/// - version: `0`
+/// - signature: `0xa3c341f8`
+/// - size: ` 80`(x86)/` 80`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,52 +19,44 @@ pub struct hkbGeneratorSyncInfo {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `syncPoints`(ctype: `struct hkbGeneratorSyncInfoSyncPoint[8]`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   8(x86)/ 64(x86_64)
-    ///
+    /// - name: `syncPoints`(ctype: `struct hkbGeneratorSyncInfoSyncPoint[8]`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  8`(x86)/` 64`(x86_64)
     pub m_syncPoints: [hkbGeneratorSyncInfoSyncPoint; 8usize],
     /// # C++ Info
-    /// -          name: `baseFrequency`(ctype: `hkReal`)
-    /// -        offset:  64(x86)/ 64(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `baseFrequency`(ctype: `hkReal`)
+    /// - offset: ` 64`(x86)/` 64`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_baseFrequency: f32,
     /// # C++ Info
-    /// -          name: `localTime`(ctype: `hkReal`)
-    /// -        offset:  68(x86)/ 68(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `localTime`(ctype: `hkReal`)
+    /// - offset: ` 68`(x86)/` 68`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_localTime: f32,
     /// # C++ Info
-    /// -          name: `playbackSpeed`(ctype: `hkReal`)
-    /// -        offset:  72(x86)/ 72(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `playbackSpeed`(ctype: `hkReal`)
+    /// - offset: ` 72`(x86)/` 72`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_playbackSpeed: f32,
     /// # C++ Info
-    /// -          name: `numSyncPoints`(ctype: `hkInt8`)
-    /// -        offset:  76(x86)/ 76(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `numSyncPoints`(ctype: `hkInt8`)
+    /// - offset: ` 76`(x86)/` 76`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_numSyncPoints: i8,
     /// # C++ Info
-    /// -          name: `isCyclic`(ctype: `hkBool`)
-    /// -        offset:  77(x86)/ 77(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `isCyclic`(ctype: `hkBool`)
+    /// - offset: ` 77`(x86)/` 77`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_isCyclic: bool,
     /// # C++ Info
-    /// -          name: `isMirrored`(ctype: `hkBool`)
-    /// -        offset:  78(x86)/ 78(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `isMirrored`(ctype: `hkBool`)
+    /// - offset: ` 78`(x86)/` 78`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_isMirrored: bool,
     /// # C++ Info
-    /// -          name: `isAdditive`(ctype: `hkBool`)
-    /// -        offset:  79(x86)/ 79(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `isAdditive`(ctype: `hkBool`)
+    /// - offset: ` 79`(x86)/` 79`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_isAdditive: bool,
 }
 const _: () = {

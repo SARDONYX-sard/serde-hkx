@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkTraceStreamTitle`
-/// -         version: `0`
-/// -       signature: `0x6a4ca82c`
-/// -          size:  32(x86)/ 32(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkTraceStreamTitle`
+/// - version: `0`
+/// - signature: `0x6a4ca82c`
+/// - size: ` 32`(x86)/` 32`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,10 +19,9 @@ pub struct hkTraceStreamTitle {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `value`(ctype: `hkChar[32]`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:  32(x86)/ 32(x86_64)
-    ///
+    /// - name: `value`(ctype: `hkChar[32]`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: ` 32`(x86)/` 32`(x86_64)
     pub m_value: [char; 32usize],
 }
 const _: () = {

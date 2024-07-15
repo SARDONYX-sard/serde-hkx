@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpEntitySpuCollisionCallback`
-/// -         version: `0`
-/// -       signature: `0x81147f05`
-/// -          size:   8(x86)/ 16(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpEntitySpuCollisionCallback`
+/// - version: `0`
+/// - signature: `0x81147f05`
+/// - size: `  8`(x86)/` 16`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,30 +19,26 @@ pub struct hkpEntitySpuCollisionCallback {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `util`(ctype: `void*`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `util`(ctype: `void*`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_util: Pointer,
     /// # C++ Info
-    /// -          name: `capacity`(ctype: `hkUint16`)
-    /// -        offset:   4(x86)/  8(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `capacity`(ctype: `hkUint16`)
+    /// - offset: `  4`(x86)/`  8`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_capacity: u16,
     /// # C++ Info
-    /// -          name: `eventFilter`(ctype: `hkUint8`)
-    /// -        offset:   6(x86)/ 10(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `eventFilter`(ctype: `hkUint8`)
+    /// - offset: `  6`(x86)/` 10`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_eventFilter: u8,
     /// # C++ Info
-    /// -          name: `userFilter`(ctype: `hkUint8`)
-    /// -        offset:   7(x86)/ 11(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `userFilter`(ctype: `hkUint8`)
+    /// - offset: `  7`(x86)/` 11`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_userFilter: u8,
 }
 const _: () = {

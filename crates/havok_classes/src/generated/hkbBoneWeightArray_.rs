@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbBoneWeightArray`
-/// -         version: `0`
-/// -       signature: `0xcd902b77`
-/// -          size:  40(x86)/ 64(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbBoneWeightArray`
+/// - version: `0`
+/// - signature: `0xcd902b77`
+/// - size: ` 40`(x86)/` 64`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkbBoneWeightArray {
     /// Alternative to C++ class inheritance.
     pub parent: hkbBindable,
     /// # C++ Info
-    /// -          name: `boneWeights`(ctype: `hkArray<hkReal>`)
-    /// -        offset:  28(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `boneWeights`(ctype: `hkArray<hkReal>`)
+    /// - offset: ` 28`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_boneWeights: Vec<f32>,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `BSLookAtModifier`
-/// -         version: `4`
-/// -       signature: `0xd756fc25`
-/// -          size: 160(x86)/224(x86_64)
-/// -          vtable: true
-///
+/// - name: `BSLookAtModifier`
+/// - version: `4`
+/// - signature: `0xd756fc25`
+/// - size: `160`(x86)/`224`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,121 +21,102 @@ pub struct BSLookAtModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `lookAtTarget`(ctype: `hkBool`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `lookAtTarget`(ctype: `hkBool`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_lookAtTarget: bool,
     /// # C++ Info
-    /// -          name: `bones`(ctype: `hkArray<struct BSLookAtModifierBoneData>`)
-    /// -        offset:  48(x86)/ 88(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `bones`(ctype: `hkArray<struct BSLookAtModifierBoneData>`)
+    /// - offset: ` 48`(x86)/` 88`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_bones: Vec<BSLookAtModifierBoneData>,
     /// # C++ Info
-    /// -          name: `eyeBones`(ctype: `hkArray<struct BSLookAtModifierBoneData>`)
-    /// -        offset:  60(x86)/104(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `eyeBones`(ctype: `hkArray<struct BSLookAtModifierBoneData>`)
+    /// - offset: ` 60`(x86)/`104`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_eyeBones: Vec<BSLookAtModifierBoneData>,
     /// # C++ Info
-    /// -          name: `limitAngleDegrees`(ctype: `hkReal`)
-    /// -        offset:  72(x86)/120(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `limitAngleDegrees`(ctype: `hkReal`)
+    /// - offset: ` 72`(x86)/`120`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_limitAngleDegrees: f32,
     /// # C++ Info
-    /// -          name: `limitAngleThresholdDegrees`(ctype: `hkReal`)
-    /// -        offset:  76(x86)/124(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `limitAngleThresholdDegrees`(ctype: `hkReal`)
+    /// - offset: ` 76`(x86)/`124`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_limitAngleThresholdDegrees: f32,
     /// # C++ Info
-    /// -          name: `continueLookOutsideOfLimit`(ctype: `hkBool`)
-    /// -        offset:  80(x86)/128(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `continueLookOutsideOfLimit`(ctype: `hkBool`)
+    /// - offset: ` 80`(x86)/`128`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_continueLookOutsideOfLimit: bool,
     /// # C++ Info
-    /// -          name: `onGain`(ctype: `hkReal`)
-    /// -        offset:  84(x86)/132(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `onGain`(ctype: `hkReal`)
+    /// - offset: ` 84`(x86)/`132`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_onGain: f32,
     /// # C++ Info
-    /// -          name: `offGain`(ctype: `hkReal`)
-    /// -        offset:  88(x86)/136(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `offGain`(ctype: `hkReal`)
+    /// - offset: ` 88`(x86)/`136`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_offGain: f32,
     /// # C++ Info
-    /// -          name: `useBoneGains`(ctype: `hkBool`)
-    /// -        offset:  92(x86)/140(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `useBoneGains`(ctype: `hkBool`)
+    /// - offset: ` 92`(x86)/`140`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_useBoneGains: bool,
     /// # C++ Info
-    /// -          name: `targetLocation`(ctype: `hkVector4`)
-    /// -        offset:  96(x86)/144(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `targetLocation`(ctype: `hkVector4`)
+    /// - offset: ` 96`(x86)/`144`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_targetLocation: Vector4,
     /// # C++ Info
-    /// -          name: `targetOutsideLimits`(ctype: `hkBool`)
-    /// -        offset: 112(x86)/160(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `targetOutsideLimits`(ctype: `hkBool`)
+    /// - offset: `112`(x86)/`160`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_targetOutsideLimits: bool,
     /// # C++ Info
-    /// -          name: `targetOutOfLimitEvent`(ctype: `struct hkbEventProperty`)
-    /// -        offset: 116(x86)/168(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    ///
+    /// - name: `targetOutOfLimitEvent`(ctype: `struct hkbEventProperty`)
+    /// - offset: `116`(x86)/`168`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
     pub m_targetOutOfLimitEvent: hkbEventProperty,
     /// # C++ Info
-    /// -          name: `lookAtCamera`(ctype: `hkBool`)
-    /// -        offset: 124(x86)/184(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `lookAtCamera`(ctype: `hkBool`)
+    /// - offset: `124`(x86)/`184`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_lookAtCamera: bool,
     /// # C++ Info
-    /// -          name: `lookAtCameraX`(ctype: `hkReal`)
-    /// -        offset: 128(x86)/188(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `lookAtCameraX`(ctype: `hkReal`)
+    /// - offset: `128`(x86)/`188`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_lookAtCameraX: f32,
     /// # C++ Info
-    /// -          name: `lookAtCameraY`(ctype: `hkReal`)
-    /// -        offset: 132(x86)/192(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `lookAtCameraY`(ctype: `hkReal`)
+    /// - offset: `132`(x86)/`192`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_lookAtCameraY: f32,
     /// # C++ Info
-    /// -          name: `lookAtCameraZ`(ctype: `hkReal`)
-    /// -        offset: 136(x86)/196(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `lookAtCameraZ`(ctype: `hkReal`)
+    /// - offset: `136`(x86)/`196`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_lookAtCameraZ: f32,
     /// # C++ Info
-    /// -          name: `timeStep`(ctype: `hkReal`)
-    /// -        offset: 140(x86)/200(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `timeStep`(ctype: `hkReal`)
+    /// - offset: `140`(x86)/`200`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_timeStep: f32,
     /// # C++ Info
-    /// -          name: `ballBonesValid`(ctype: `hkBool`)
-    /// -        offset: 144(x86)/204(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `ballBonesValid`(ctype: `hkBool`)
+    /// - offset: `144`(x86)/`204`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_ballBonesValid: bool,
     /// # C++ Info
-    /// -          name: `pSkeletonMemory`(ctype: `void*`)
-    /// -        offset: 148(x86)/208(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `pSkeletonMemory`(ctype: `void*`)
+    /// - offset: `148`(x86)/`208`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_pSkeletonMemory: Pointer,
 }
 const _: () = {

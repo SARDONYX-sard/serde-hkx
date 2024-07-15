@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpLinSoftConstraintAtom`
-/// -         version: `0`
-/// -       signature: `0x52b27d69`
-/// -          size:  12(x86)/ 12(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpLinSoftConstraintAtom`
+/// - version: `0`
+/// - signature: `0x52b27d69`
+/// - size: ` 12`(x86)/` 12`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkpLinSoftConstraintAtom {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConstraintAtom,
     /// # C++ Info
-    /// -          name: `axisIndex`(ctype: `hkUint8`)
-    /// -        offset:   2(x86)/  2(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `axisIndex`(ctype: `hkUint8`)
+    /// - offset: `  2`(x86)/`  2`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_axisIndex: u8,
     /// # C++ Info
-    /// -          name: `tau`(ctype: `hkReal`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `tau`(ctype: `hkReal`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_tau: f32,
     /// # C++ Info
-    /// -          name: `damping`(ctype: `hkReal`)
-    /// -        offset:   8(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `damping`(ctype: `hkReal`)
+    /// - offset: `  8`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_damping: f32,
 }
 const _: () = {

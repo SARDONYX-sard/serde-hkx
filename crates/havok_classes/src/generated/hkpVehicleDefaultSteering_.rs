@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpVehicleDefaultSteering`
-/// -         version: `0`
-/// -       signature: `0x8f0411c8`
-/// -          size:  28(x86)/ 40(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpVehicleDefaultSteering`
+/// - version: `0`
+/// - signature: `0x8f0411c8`
+/// - size: ` 28`(x86)/` 40`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkpVehicleDefaultSteering {
     /// Alternative to C++ class inheritance.
     pub parent: hkpVehicleSteering,
     /// # C++ Info
-    /// -          name: `maxSteeringAngle`(ctype: `hkReal`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxSteeringAngle`(ctype: `hkReal`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxSteeringAngle: f32,
     /// # C++ Info
-    /// -          name: `maxSpeedFullSteeringAngle`(ctype: `hkReal`)
-    /// -        offset:  12(x86)/ 20(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxSpeedFullSteeringAngle`(ctype: `hkReal`)
+    /// - offset: ` 12`(x86)/` 20`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxSpeedFullSteeringAngle: f32,
     /// # C++ Info
-    /// -          name: `doesWheelSteer`(ctype: `hkArray<hkBool>`)
-    /// -        offset:  16(x86)/ 24(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `doesWheelSteer`(ctype: `hkArray<hkBool>`)
+    /// - offset: ` 16`(x86)/` 24`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_doesWheelSteer: Vec<bool>,
 }
 const _: () = {

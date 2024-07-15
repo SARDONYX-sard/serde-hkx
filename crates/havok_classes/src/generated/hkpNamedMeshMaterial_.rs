@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpNamedMeshMaterial`
-/// -         version: `0`
-/// -       signature: `0x66b42df1`
-/// -          size:   8(x86)/ 16(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpNamedMeshMaterial`
+/// - version: `0`
+/// - signature: `0x66b42df1`
+/// - size: `  8`(x86)/` 16`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkpNamedMeshMaterial<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkpMeshMaterial,
     /// # C++ Info
-    /// -          name: `name`(ctype: `hkStringPtr`)
-    /// -        offset:   4(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `name`(ctype: `hkStringPtr`)
+    /// - offset: `  4`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_name: StringPtr<'a>,
 }
 const _: () = {

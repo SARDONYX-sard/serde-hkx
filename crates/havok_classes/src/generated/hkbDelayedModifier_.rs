@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbDelayedModifier`
-/// -         version: `0`
-/// -       signature: `0x8e101a7a`
-/// -          size:  64(x86)/104(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbDelayedModifier`
+/// - version: `0`
+/// - signature: `0x8e101a7a`
+/// - size: ` 64`(x86)/`104`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,30 +21,26 @@ pub struct hkbDelayedModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifierWrapper<'a>,
     /// # C++ Info
-    /// -          name: `delaySeconds`(ctype: `hkReal`)
-    /// -        offset:  48(x86)/ 88(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `delaySeconds`(ctype: `hkReal`)
+    /// - offset: ` 48`(x86)/` 88`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_delaySeconds: f32,
     /// # C++ Info
-    /// -          name: `durationSeconds`(ctype: `hkReal`)
-    /// -        offset:  52(x86)/ 92(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `durationSeconds`(ctype: `hkReal`)
+    /// - offset: ` 52`(x86)/` 92`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_durationSeconds: f32,
     /// # C++ Info
-    /// -          name: `secondsElapsed`(ctype: `hkReal`)
-    /// -        offset:  56(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `secondsElapsed`(ctype: `hkReal`)
+    /// - offset: ` 56`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_secondsElapsed: f32,
     /// # C++ Info
-    /// -          name: `isActive`(ctype: `hkBool`)
-    /// -        offset:  60(x86)/100(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `isActive`(ctype: `hkBool`)
+    /// - offset: ` 60`(x86)/`100`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_isActive: bool,
 }
 const _: () = {

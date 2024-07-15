@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbSequenceInternalState`
-/// -         version: `0`
-/// -       signature: `0x419b9a05`
-/// -          size:  64(x86)/ 88(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbSequenceInternalState`
+/// - version: `0`
+/// - signature: `0x419b9a05`
+/// - size: ` 64`(x86)/` 88`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,40 +21,34 @@ pub struct hkbSequenceInternalState {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `nextSampleEvents`(ctype: `hkArray<hkInt32>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `nextSampleEvents`(ctype: `hkArray<hkInt32>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_nextSampleEvents: Vec<i32>,
     /// # C++ Info
-    /// -          name: `nextSampleReals`(ctype: `hkArray<hkInt32>`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `nextSampleReals`(ctype: `hkArray<hkInt32>`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_nextSampleReals: Vec<i32>,
     /// # C++ Info
-    /// -          name: `nextSampleBools`(ctype: `hkArray<hkInt32>`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `nextSampleBools`(ctype: `hkArray<hkInt32>`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_nextSampleBools: Vec<i32>,
     /// # C++ Info
-    /// -          name: `nextSampleInts`(ctype: `hkArray<hkInt32>`)
-    /// -        offset:  44(x86)/ 64(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `nextSampleInts`(ctype: `hkArray<hkInt32>`)
+    /// - offset: ` 44`(x86)/` 64`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_nextSampleInts: Vec<i32>,
     /// # C++ Info
-    /// -          name: `time`(ctype: `hkReal`)
-    /// -        offset:  56(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `time`(ctype: `hkReal`)
+    /// - offset: ` 56`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_time: f32,
     /// # C++ Info
-    /// -          name: `isEnabled`(ctype: `hkBool`)
-    /// -        offset:  60(x86)/ 84(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `isEnabled`(ctype: `hkBool`)
+    /// - offset: ` 60`(x86)/` 84`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_isEnabled: bool,
 }
 const _: () = {

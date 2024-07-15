@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkaSkeletonMapperData`
-/// -         version: `1`
-/// -       signature: `0x95687ea0`
-/// -          size: 112(x86)/128(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkaSkeletonMapperData`
+/// - version: `1`
+/// - signature: `0x95687ea0`
+/// - size: `112`(x86)/`128`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,52 +19,44 @@ pub struct hkaSkeletonMapperData {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `skeletonA`(ctype: `struct hkaSkeleton*`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `skeletonA`(ctype: `struct hkaSkeleton*`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_skeletonA: Pointer,
     /// # C++ Info
-    /// -          name: `skeletonB`(ctype: `struct hkaSkeleton*`)
-    /// -        offset:   4(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `skeletonB`(ctype: `struct hkaSkeleton*`)
+    /// - offset: `  4`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_skeletonB: Pointer,
     /// # C++ Info
-    /// -          name: `simpleMappings`(ctype: `hkArray<struct hkaSkeletonMapperDataSimpleMapping>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `simpleMappings`(ctype: `hkArray<struct hkaSkeletonMapperDataSimpleMapping>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_simpleMappings: Vec<hkaSkeletonMapperDataSimpleMapping>,
     /// # C++ Info
-    /// -          name: `chainMappings`(ctype: `hkArray<struct hkaSkeletonMapperDataChainMapping>`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `chainMappings`(ctype: `hkArray<struct hkaSkeletonMapperDataChainMapping>`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_chainMappings: Vec<hkaSkeletonMapperDataChainMapping>,
     /// # C++ Info
-    /// -          name: `unmappedBones`(ctype: `hkArray<hkInt16>`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `unmappedBones`(ctype: `hkArray<hkInt16>`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_unmappedBones: Vec<i16>,
     /// # C++ Info
-    /// -          name: `extractedMotionMapping`(ctype: `hkQsTransform`)
-    /// -        offset:  48(x86)/ 64(x86_64)
-    /// -     type_size:  48(x86)/ 48(x86_64)
-    ///
+    /// - name: `extractedMotionMapping`(ctype: `hkQsTransform`)
+    /// - offset: ` 48`(x86)/` 64`(x86_64)
+    /// - type_size: ` 48`(x86)/` 48`(x86_64)
     pub m_extractedMotionMapping: QsTransform,
     /// # C++ Info
-    /// -          name: `keepUnmappedLocal`(ctype: `hkBool`)
-    /// -        offset:  96(x86)/112(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `keepUnmappedLocal`(ctype: `hkBool`)
+    /// - offset: ` 96`(x86)/`112`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_keepUnmappedLocal: bool,
     /// # C++ Info
-    /// -          name: `mappingType`(ctype: `enum MappingType`)
-    /// -        offset: 100(x86)/116(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `mappingType`(ctype: `enum MappingType`)
+    /// - offset: `100`(x86)/`116`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_mappingType: MappingType,
 }
 const _: () = {

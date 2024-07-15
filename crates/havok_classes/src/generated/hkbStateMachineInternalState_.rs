@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbStateMachineInternalState`
-/// -         version: `0`
-/// -       signature: `0xbd1a7502`
-/// -          size:  80(x86)/104(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbStateMachineInternalState`
+/// - version: `0`
+/// - signature: `0xbd1a7502`
+/// - size: ` 80`(x86)/`104`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,70 +21,59 @@ pub struct hkbStateMachineInternalState {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `activeTransitions`(ctype: `hkArray<struct hkbStateMachineActiveTransitionInfo>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `activeTransitions`(ctype: `hkArray<struct hkbStateMachineActiveTransitionInfo>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_activeTransitions: Vec<hkbStateMachineActiveTransitionInfo>,
     /// # C++ Info
-    /// -          name: `transitionFlags`(ctype: `hkArray<hkUint8>`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `transitionFlags`(ctype: `hkArray<hkUint8>`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_transitionFlags: Vec<u8>,
     /// # C++ Info
-    /// -          name: `wildcardTransitionFlags`(ctype: `hkArray<hkUint8>`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `wildcardTransitionFlags`(ctype: `hkArray<hkUint8>`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_wildcardTransitionFlags: Vec<u8>,
     /// # C++ Info
-    /// -          name: `delayedTransitions`(ctype: `hkArray<struct hkbStateMachineDelayedTransitionInfo>`)
-    /// -        offset:  44(x86)/ 64(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `delayedTransitions`(ctype: `hkArray<struct hkbStateMachineDelayedTransitionInfo>`)
+    /// - offset: ` 44`(x86)/` 64`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_delayedTransitions: Vec<hkbStateMachineDelayedTransitionInfo>,
     /// # C++ Info
-    /// -          name: `timeInState`(ctype: `hkReal`)
-    /// -        offset:  56(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `timeInState`(ctype: `hkReal`)
+    /// - offset: ` 56`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_timeInState: f32,
     /// # C++ Info
-    /// -          name: `lastLocalTime`(ctype: `hkReal`)
-    /// -        offset:  60(x86)/ 84(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `lastLocalTime`(ctype: `hkReal`)
+    /// - offset: ` 60`(x86)/` 84`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_lastLocalTime: f32,
     /// # C++ Info
-    /// -          name: `currentStateId`(ctype: `hkInt32`)
-    /// -        offset:  64(x86)/ 88(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `currentStateId`(ctype: `hkInt32`)
+    /// - offset: ` 64`(x86)/` 88`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_currentStateId: i32,
     /// # C++ Info
-    /// -          name: `previousStateId`(ctype: `hkInt32`)
-    /// -        offset:  68(x86)/ 92(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `previousStateId`(ctype: `hkInt32`)
+    /// - offset: ` 68`(x86)/` 92`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_previousStateId: i32,
     /// # C++ Info
-    /// -          name: `nextStartStateIndexOverride`(ctype: `hkInt32`)
-    /// -        offset:  72(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `nextStartStateIndexOverride`(ctype: `hkInt32`)
+    /// - offset: ` 72`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_nextStartStateIndexOverride: i32,
     /// # C++ Info
-    /// -          name: `stateOrTransitionChanged`(ctype: `hkBool`)
-    /// -        offset:  76(x86)/100(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `stateOrTransitionChanged`(ctype: `hkBool`)
+    /// - offset: ` 76`(x86)/`100`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_stateOrTransitionChanged: bool,
     /// # C++ Info
-    /// -          name: `echoNextUpdate`(ctype: `hkBool`)
-    /// -        offset:  77(x86)/101(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `echoNextUpdate`(ctype: `hkBool`)
+    /// - offset: ` 77`(x86)/`101`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_echoNextUpdate: bool,
 }
 const _: () = {

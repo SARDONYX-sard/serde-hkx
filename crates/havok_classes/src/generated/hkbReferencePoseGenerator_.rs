@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbReferencePoseGenerator`
-/// -         version: `0`
-/// -       signature: `0x26a5675a`
-/// -          size:  44(x86)/ 80(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbReferencePoseGenerator`
+/// - version: `0`
+/// - signature: `0x26a5675a`
+/// - size: ` 44`(x86)/` 80`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,11 +21,10 @@ pub struct hkbReferencePoseGenerator<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
-    /// -          name: `skeleton`(ctype: `void*`)
-    /// -        offset:  40(x86)/ 72(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `skeleton`(ctype: `void*`)
+    /// - offset: ` 40`(x86)/` 72`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_skeleton: Pointer,
 }
 const _: () = {

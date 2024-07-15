@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpConstraintCollisionFilter`
-/// -         version: `0`
-/// -       signature: `0xc3b577b1`
-/// -          size:  68(x86)/104(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpConstraintCollisionFilter`
+/// - version: `0`
+/// - signature: `0xc3b577b1`
+/// - size: ` 68`(x86)/`104`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]

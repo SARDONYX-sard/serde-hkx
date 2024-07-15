@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpModifierConstraintAtom`
-/// -         version: `0`
-/// -       signature: `0xb13fef1f`
-/// -          size:  32(x86)/ 48(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpModifierConstraintAtom`
+/// - version: `0`
+/// - signature: `0xb13fef1f`
+/// - size: ` 32`(x86)/` 48`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,29 +21,25 @@ pub struct hkpModifierConstraintAtom {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConstraintAtom,
     /// # C++ Info
-    /// -          name: `modifierAtomSize`(ctype: `hkUint16`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    /// -         flags: `ALIGN_16`
-    ///
+    /// - name: `modifierAtomSize`(ctype: `hkUint16`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
+    /// - flags: `ALIGN_16`
     pub m_modifierAtomSize: u16,
     /// # C++ Info
-    /// -          name: `childSize`(ctype: `hkUint16`)
-    /// -        offset:  18(x86)/ 18(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `childSize`(ctype: `hkUint16`)
+    /// - offset: ` 18`(x86)/` 18`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_childSize: u16,
     /// # C++ Info
-    /// -          name: `child`(ctype: `struct hkpConstraintAtom*`)
-    /// -        offset:  20(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `child`(ctype: `struct hkpConstraintAtom*`)
+    /// - offset: ` 20`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_child: Pointer,
     /// # C++ Info
-    /// -          name: `pad`(ctype: `hkUint32[2]`)
-    /// -        offset:  24(x86)/ 32(x86_64)
-    /// -     type_size:   8(x86)/  8(x86_64)
-    ///
+    /// - name: `pad`(ctype: `hkUint32[2]`)
+    /// - offset: ` 24`(x86)/` 32`(x86_64)
+    /// - type_size: `  8`(x86)/`  8`(x86_64)
     pub m_pad: [u32; 2usize],
 }
 const _: () = {

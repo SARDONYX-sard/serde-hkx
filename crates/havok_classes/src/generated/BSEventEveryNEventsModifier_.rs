@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `BSEventEveryNEventsModifier`
-/// -         version: `1`
-/// -       signature: `0x6030970c`
-/// -          size:  72(x86)/128(x86_64)
-/// -          vtable: true
-///
+/// - name: `BSEventEveryNEventsModifier`
+/// - version: `1`
+/// - signature: `0x6030970c`
+/// - size: ` 72`(x86)/`128`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,48 +21,41 @@ pub struct BSEventEveryNEventsModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `eventToCheckFor`(ctype: `struct hkbEventProperty`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    ///
+    /// - name: `eventToCheckFor`(ctype: `struct hkbEventProperty`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
     pub m_eventToCheckFor: hkbEventProperty,
     /// # C++ Info
-    /// -          name: `eventToSend`(ctype: `struct hkbEventProperty`)
-    /// -        offset:  52(x86)/ 96(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    ///
+    /// - name: `eventToSend`(ctype: `struct hkbEventProperty`)
+    /// - offset: ` 52`(x86)/` 96`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
     pub m_eventToSend: hkbEventProperty,
     /// # C++ Info
-    /// -          name: `numberOfEventsBeforeSend`(ctype: `hkInt8`)
-    /// -        offset:  60(x86)/112(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `numberOfEventsBeforeSend`(ctype: `hkInt8`)
+    /// - offset: ` 60`(x86)/`112`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_numberOfEventsBeforeSend: i8,
     /// # C++ Info
-    /// -          name: `minimumNumberOfEventsBeforeSend`(ctype: `hkInt8`)
-    /// -        offset:  61(x86)/113(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `minimumNumberOfEventsBeforeSend`(ctype: `hkInt8`)
+    /// - offset: ` 61`(x86)/`113`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_minimumNumberOfEventsBeforeSend: i8,
     /// # C++ Info
-    /// -          name: `randomizeNumberOfEvents`(ctype: `hkBool`)
-    /// -        offset:  62(x86)/114(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `randomizeNumberOfEvents`(ctype: `hkBool`)
+    /// - offset: ` 62`(x86)/`114`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_randomizeNumberOfEvents: bool,
     /// # C++ Info
-    /// -          name: `numberOfEventsSeen`(ctype: `hkInt32`)
-    /// -        offset:  64(x86)/116(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `numberOfEventsSeen`(ctype: `hkInt32`)
+    /// - offset: ` 64`(x86)/`116`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_numberOfEventsSeen: i32,
     /// # C++ Info
-    /// -          name: `calculatedNumberOfEventsBeforeSend`(ctype: `hkInt8`)
-    /// -        offset:  68(x86)/120(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `calculatedNumberOfEventsBeforeSend`(ctype: `hkInt8`)
+    /// - offset: ` 68`(x86)/`120`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_calculatedNumberOfEventsBeforeSend: i8,
 }
 const _: () = {

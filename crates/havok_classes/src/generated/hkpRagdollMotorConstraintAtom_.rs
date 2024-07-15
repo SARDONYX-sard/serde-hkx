@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpRagdollMotorConstraintAtom`
-/// -         version: `0`
-/// -       signature: `0x71013826`
-/// -          size:  80(x86)/ 96(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpRagdollMotorConstraintAtom`
+/// - version: `0`
+/// - signature: `0x71013826`
+/// - size: ` 80`(x86)/` 96`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,34 +21,29 @@ pub struct hkpRagdollMotorConstraintAtom {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConstraintAtom,
     /// # C++ Info
-    /// -          name: `isEnabled`(ctype: `hkBool`)
-    /// -        offset:   2(x86)/  2(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `isEnabled`(ctype: `hkBool`)
+    /// - offset: `  2`(x86)/`  2`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_isEnabled: bool,
     /// # C++ Info
-    /// -          name: `initializedOffset`(ctype: `hkInt16`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `initializedOffset`(ctype: `hkInt16`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_initializedOffset: i16,
     /// # C++ Info
-    /// -          name: `previousTargetAnglesOffset`(ctype: `hkInt16`)
-    /// -        offset:   6(x86)/  6(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `previousTargetAnglesOffset`(ctype: `hkInt16`)
+    /// - offset: `  6`(x86)/`  6`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_previousTargetAnglesOffset: i16,
     /// # C++ Info
-    /// -          name: `target_bRca`(ctype: `hkMatrix3`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  48(x86)/ 48(x86_64)
-    ///
+    /// - name: `target_bRca`(ctype: `hkMatrix3`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 48`(x86)/` 48`(x86_64)
     pub m_target_bRca: Matrix3,
     /// # C++ Info
-    /// -          name: `motors`(ctype: `struct hkpConstraintMotor*`)
-    /// -        offset:  64(x86)/ 64(x86_64)
-    /// -     type_size:  12(x86)/ 24(x86_64)
-    ///
+    /// - name: `motors`(ctype: `struct hkpConstraintMotor*`)
+    /// - offset: ` 64`(x86)/` 64`(x86_64)
+    /// - type_size: ` 12`(x86)/` 24`(x86_64)
     pub m_motors: [Pointer; 3usize],
 }
 const _: () = {

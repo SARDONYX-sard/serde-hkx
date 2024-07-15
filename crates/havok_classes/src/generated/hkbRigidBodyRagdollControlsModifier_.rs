@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbRigidBodyRagdollControlsModifier`
-/// -         version: `3`
-/// -       signature: `0xaa87d1eb`
-/// -          size: 128(x86)/160(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbRigidBodyRagdollControlsModifier`
+/// - version: `3`
+/// - signature: `0xaa87d1eb`
+/// - size: `128`(x86)/`160`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkbRigidBodyRagdollControlsModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `controlData`(ctype: `struct hkbRigidBodyRagdollControlData`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  64(x86)/ 64(x86_64)
-    ///
+    /// - name: `controlData`(ctype: `struct hkbRigidBodyRagdollControlData`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 64`(x86)/` 64`(x86_64)
     pub m_controlData: hkbRigidBodyRagdollControlData,
     /// # C++ Info
-    /// -          name: `bones`(ctype: `struct hkbBoneIndexArray*`)
-    /// -        offset: 112(x86)/144(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `bones`(ctype: `struct hkbBoneIndexArray*`)
+    /// - offset: `112`(x86)/`144`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_bones: Pointer,
 }
 const _: () = {

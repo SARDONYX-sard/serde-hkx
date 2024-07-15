@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `BSDistTriggerModifier`
-/// -         version: `1`
-/// -       signature: `0xb34d2bbd`
-/// -          size:  80(x86)/128(x86_64)
-/// -          vtable: true
-///
+/// - name: `BSDistTriggerModifier`
+/// - version: `1`
+/// - signature: `0xb34d2bbd`
+/// - size: ` 80`(x86)/`128`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,28 +21,24 @@ pub struct BSDistTriggerModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `targetPosition`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `targetPosition`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_targetPosition: Vector4,
     /// # C++ Info
-    /// -          name: `distance`(ctype: `hkReal`)
-    /// -        offset:  64(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `distance`(ctype: `hkReal`)
+    /// - offset: ` 64`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_distance: f32,
     /// # C++ Info
-    /// -          name: `distanceTrigger`(ctype: `hkReal`)
-    /// -        offset:  68(x86)/100(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `distanceTrigger`(ctype: `hkReal`)
+    /// - offset: ` 68`(x86)/`100`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_distanceTrigger: f32,
     /// # C++ Info
-    /// -          name: `triggerEvent`(ctype: `struct hkbEventProperty`)
-    /// -        offset:  72(x86)/104(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    ///
+    /// - name: `triggerEvent`(ctype: `struct hkbEventProperty`)
+    /// - offset: ` 72`(x86)/`104`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
     pub m_triggerEvent: hkbEventProperty,
 }
 const _: () = {

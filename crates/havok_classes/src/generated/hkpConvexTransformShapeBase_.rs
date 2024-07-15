@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpConvexTransformShapeBase`
-/// -         version: `0`
-/// -       signature: `0xfbd72f9`
-/// -          size:  32(x86)/ 64(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpConvexTransformShapeBase`
+/// - version: `0`
+/// - signature: `0xfbd72f9`
+/// - size: ` 32`(x86)/` 64`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,17 +21,15 @@ pub struct hkpConvexTransformShapeBase {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConvexShape,
     /// # C++ Info
-    /// -          name: `childShape`(ctype: `struct hkpSingleShapeContainer`)
-    /// -        offset:  20(x86)/ 40(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    ///
+    /// - name: `childShape`(ctype: `struct hkpSingleShapeContainer`)
+    /// - offset: ` 20`(x86)/` 40`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
     pub m_childShape: hkpSingleShapeContainer,
     /// # C++ Info
-    /// -          name: `childShapeSize`(ctype: `hkInt32`)
-    /// -        offset:  28(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `childShapeSize`(ctype: `hkInt32`)
+    /// - offset: ` 28`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_childShapeSize: i32,
 }
 const _: () = {

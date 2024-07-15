@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkxMaterial`
-/// -         version: `1`
-/// -       signature: `0x2954537a`
-/// -          size: 144(x86)/176(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkxMaterial`
+/// - version: `1`
+/// - signature: `0x2954537a`
+/// - size: `144`(x86)/`176`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,58 +21,49 @@ pub struct hkxMaterial<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkxAttributeHolder<'a>,
     /// # C++ Info
-    /// -          name: `name`(ctype: `hkStringPtr`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `name`(ctype: `hkStringPtr`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_name: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `stages`(ctype: `hkArray<struct hkxMaterialTextureStage>`)
-    /// -        offset:  24(x86)/ 40(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `stages`(ctype: `hkArray<struct hkxMaterialTextureStage>`)
+    /// - offset: ` 24`(x86)/` 40`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_stages: Vec<hkxMaterialTextureStage>,
     /// # C++ Info
-    /// -          name: `diffuseColor`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 64(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `diffuseColor`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 64`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_diffuseColor: Vector4,
     /// # C++ Info
-    /// -          name: `ambientColor`(ctype: `hkVector4`)
-    /// -        offset:  64(x86)/ 80(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `ambientColor`(ctype: `hkVector4`)
+    /// - offset: ` 64`(x86)/` 80`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_ambientColor: Vector4,
     /// # C++ Info
-    /// -          name: `specularColor`(ctype: `hkVector4`)
-    /// -        offset:  80(x86)/ 96(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `specularColor`(ctype: `hkVector4`)
+    /// - offset: ` 80`(x86)/` 96`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_specularColor: Vector4,
     /// # C++ Info
-    /// -          name: `emissiveColor`(ctype: `hkVector4`)
-    /// -        offset:  96(x86)/112(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `emissiveColor`(ctype: `hkVector4`)
+    /// - offset: ` 96`(x86)/`112`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_emissiveColor: Vector4,
     /// # C++ Info
-    /// -          name: `subMaterials`(ctype: `hkArray<hkxMaterial*>`)
-    /// -        offset: 112(x86)/128(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `subMaterials`(ctype: `hkArray<hkxMaterial*>`)
+    /// - offset: `112`(x86)/`128`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_subMaterials: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `extraData`(ctype: `struct hkReferencedObject*`)
-    /// -        offset: 124(x86)/144(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `extraData`(ctype: `struct hkReferencedObject*`)
+    /// - offset: `124`(x86)/`144`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_extraData: Pointer,
     /// # C++ Info
-    /// -          name: `properties`(ctype: `hkArray<struct hkxMaterialProperty>`)
-    /// -        offset: 128(x86)/152(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `properties`(ctype: `hkArray<struct hkxMaterialProperty>`)
+    /// - offset: `128`(x86)/`152`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_properties: Vec<hkxMaterialProperty>,
 }
 const _: () = {

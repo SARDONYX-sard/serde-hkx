@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbCharacterControllerModifierInternalState`
-/// -         version: `0`
-/// -       signature: `0xf8dfec0d`
-/// -          size:  48(x86)/ 48(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbCharacterControllerModifierInternalState`
+/// - version: `0`
+/// - signature: `0xf8dfec0d`
+/// - size: ` 48`(x86)/` 48`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,28 +21,24 @@ pub struct hkbCharacterControllerModifierInternalState {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `gravity`(ctype: `hkVector4`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `gravity`(ctype: `hkVector4`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_gravity: Vector4,
     /// # C++ Info
-    /// -          name: `timestep`(ctype: `hkReal`)
-    /// -        offset:  32(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `timestep`(ctype: `hkReal`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_timestep: f32,
     /// # C++ Info
-    /// -          name: `isInitialVelocityAdded`(ctype: `hkBool`)
-    /// -        offset:  36(x86)/ 36(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `isInitialVelocityAdded`(ctype: `hkBool`)
+    /// - offset: ` 36`(x86)/` 36`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_isInitialVelocityAdded: bool,
     /// # C++ Info
-    /// -          name: `isTouchingGround`(ctype: `hkBool`)
-    /// -        offset:  37(x86)/ 37(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `isTouchingGround`(ctype: `hkBool`)
+    /// - offset: ` 37`(x86)/` 37`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_isTouchingGround: bool,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbCompiledExpressionSet`
-/// -         version: `1`
-/// -       signature: `0x3a7d76cc`
-/// -          size:  36(x86)/ 56(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbCompiledExpressionSet`
+/// - version: `1`
+/// - signature: `0x3a7d76cc`
+/// - size: ` 36`(x86)/` 56`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkbCompiledExpressionSet {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `rpn`(ctype: `hkArray<struct hkbCompiledExpressionSetToken>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `rpn`(ctype: `hkArray<struct hkbCompiledExpressionSetToken>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_rpn: Vec<hkbCompiledExpressionSetToken>,
     /// # C++ Info
-    /// -          name: `expressionToRpnIndex`(ctype: `hkArray<hkInt32>`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `expressionToRpnIndex`(ctype: `hkArray<hkInt32>`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_expressionToRpnIndex: Vec<i32>,
     /// # C++ Info
-    /// -          name: `numExpressions`(ctype: `hkInt8`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `numExpressions`(ctype: `hkInt8`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_numExpressions: i8,
 }
 const _: () = {

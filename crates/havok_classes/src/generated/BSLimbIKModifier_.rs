@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `BSLimbIKModifier`
-/// -         version: `0`
-/// -       signature: `0x8ea971e5`
-/// -          size:  76(x86)/120(x86_64)
-/// -          vtable: true
-///
+/// - name: `BSLimbIKModifier`
+/// - version: `0`
+/// - signature: `0x8ea971e5`
+/// - size: ` 76`(x86)/`120`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,61 +21,52 @@ pub struct BSLimbIKModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `limitAngleDegrees`(ctype: `hkReal`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `limitAngleDegrees`(ctype: `hkReal`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_limitAngleDegrees: f32,
     /// # C++ Info
-    /// -          name: `currentAngle`(ctype: `hkReal`)
-    /// -        offset:  48(x86)/ 84(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `currentAngle`(ctype: `hkReal`)
+    /// - offset: ` 48`(x86)/` 84`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_currentAngle: f32,
     /// # C++ Info
-    /// -          name: `startBoneIndex`(ctype: `hkInt16`)
-    /// -        offset:  52(x86)/ 88(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `startBoneIndex`(ctype: `hkInt16`)
+    /// - offset: ` 52`(x86)/` 88`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_startBoneIndex: i16,
     /// # C++ Info
-    /// -          name: `endBoneIndex`(ctype: `hkInt16`)
-    /// -        offset:  54(x86)/ 90(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `endBoneIndex`(ctype: `hkInt16`)
+    /// - offset: ` 54`(x86)/` 90`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_endBoneIndex: i16,
     /// # C++ Info
-    /// -          name: `gain`(ctype: `hkReal`)
-    /// -        offset:  56(x86)/ 92(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `gain`(ctype: `hkReal`)
+    /// - offset: ` 56`(x86)/` 92`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_gain: f32,
     /// # C++ Info
-    /// -          name: `boneRadius`(ctype: `hkReal`)
-    /// -        offset:  60(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `boneRadius`(ctype: `hkReal`)
+    /// - offset: ` 60`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_boneRadius: f32,
     /// # C++ Info
-    /// -          name: `castOffset`(ctype: `hkReal`)
-    /// -        offset:  64(x86)/100(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `castOffset`(ctype: `hkReal`)
+    /// - offset: ` 64`(x86)/`100`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_castOffset: f32,
     /// # C++ Info
-    /// -          name: `timeStep`(ctype: `hkReal`)
-    /// -        offset:  68(x86)/104(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `timeStep`(ctype: `hkReal`)
+    /// - offset: ` 68`(x86)/`104`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_timeStep: f32,
     /// # C++ Info
-    /// -          name: `pSkeletonMemory`(ctype: `void*`)
-    /// -        offset:  72(x86)/112(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `pSkeletonMemory`(ctype: `void*`)
+    /// - offset: ` 72`(x86)/`112`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_pSkeletonMemory: Pointer,
 }
 const _: () = {

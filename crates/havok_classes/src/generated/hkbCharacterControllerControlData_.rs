@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbCharacterControllerControlData`
-/// -         version: `0`
-/// -       signature: `0x5b6c03d9`
-/// -          size:  32(x86)/ 32(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkbCharacterControllerControlData`
+/// - version: `0`
+/// - signature: `0x5b6c03d9`
+/// - size: ` 32`(x86)/` 32`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,34 +19,29 @@ pub struct hkbCharacterControllerControlData {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `desiredVelocity`(ctype: `hkVector4`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `desiredVelocity`(ctype: `hkVector4`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_desiredVelocity: Vector4,
     /// # C++ Info
-    /// -          name: `verticalGain`(ctype: `hkReal`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `verticalGain`(ctype: `hkReal`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_verticalGain: f32,
     /// # C++ Info
-    /// -          name: `horizontalCatchUpGain`(ctype: `hkReal`)
-    /// -        offset:  20(x86)/ 20(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `horizontalCatchUpGain`(ctype: `hkReal`)
+    /// - offset: ` 20`(x86)/` 20`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_horizontalCatchUpGain: f32,
     /// # C++ Info
-    /// -          name: `maxVerticalSeparation`(ctype: `hkReal`)
-    /// -        offset:  24(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxVerticalSeparation`(ctype: `hkReal`)
+    /// - offset: ` 24`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxVerticalSeparation: f32,
     /// # C++ Info
-    /// -          name: `maxHorizontalSeparation`(ctype: `hkReal`)
-    /// -        offset:  28(x86)/ 28(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxHorizontalSeparation`(ctype: `hkReal`)
+    /// - offset: ` 28`(x86)/` 28`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxHorizontalSeparation: f32,
 }
 const _: () = {

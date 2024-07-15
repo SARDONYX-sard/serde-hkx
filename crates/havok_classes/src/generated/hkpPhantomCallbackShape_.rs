@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpPhantomCallbackShape`
-/// -         version: `0`
-/// -       signature: `0xe7eca7eb`
-/// -          size:  16(x86)/ 32(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpPhantomCallbackShape`
+/// - version: `0`
+/// - signature: `0xe7eca7eb`
+/// - size: ` 16`(x86)/` 32`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]

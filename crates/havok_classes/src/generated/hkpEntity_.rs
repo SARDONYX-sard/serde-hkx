@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpEntity`
-/// -         version: `3`
-/// -       signature: `0xa03c774b`
-/// -          size: 544(x86)/720(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpEntity`
+/// - version: `3`
+/// - signature: `0xa03c774b`
+/// - size: `544`(x86)/`720`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,146 +21,124 @@ pub struct hkpEntity<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkpWorldObject<'a>,
     /// # C++ Info
-    /// -          name: `material`(ctype: `struct hkpMaterial`)
-    /// -        offset: 140(x86)/208(x86_64)
-    /// -     type_size:  12(x86)/ 12(x86_64)
-    ///
+    /// - name: `material`(ctype: `struct hkpMaterial`)
+    /// - offset: `140`(x86)/`208`(x86_64)
+    /// - type_size: ` 12`(x86)/` 12`(x86_64)
     pub m_material: hkpMaterial,
     /// # C++ Info
-    /// -          name: `limitContactImpulseUtilAndFlag`(ctype: `void*`)
-    /// -        offset: 152(x86)/224(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `limitContactImpulseUtilAndFlag`(ctype: `void*`)
+    /// - offset: `152`(x86)/`224`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_limitContactImpulseUtilAndFlag: Pointer,
     /// # C++ Info
-    /// -          name: `damageMultiplier`(ctype: `hkReal`)
-    /// -        offset: 156(x86)/232(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `damageMultiplier`(ctype: `hkReal`)
+    /// - offset: `156`(x86)/`232`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_damageMultiplier: f32,
     /// # C++ Info
-    /// -          name: `breakableBody`(ctype: `void*`)
-    /// -        offset: 160(x86)/240(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `breakableBody`(ctype: `void*`)
+    /// - offset: `160`(x86)/`240`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_breakableBody: Pointer,
     /// # C++ Info
-    /// -          name: `solverData`(ctype: `hkUint32`)
-    /// -        offset: 164(x86)/248(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `solverData`(ctype: `hkUint32`)
+    /// - offset: `164`(x86)/`248`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_solverData: u32,
     /// # C++ Info
-    /// -          name: `storageIndex`(ctype: `hkUint16`)
-    /// -        offset: 168(x86)/252(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `storageIndex`(ctype: `hkUint16`)
+    /// - offset: `168`(x86)/`252`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_storageIndex: u16,
     /// # C++ Info
-    /// -          name: `contactPointCallbackDelay`(ctype: `hkUint16`)
-    /// -        offset: 170(x86)/254(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `contactPointCallbackDelay`(ctype: `hkUint16`)
+    /// - offset: `170`(x86)/`254`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_contactPointCallbackDelay: u16,
     /// # C++ Info
-    /// -          name: `constraintsMaster`(ctype: `struct hkpEntitySmallArraySerializeOverrideType`)
-    /// -        offset: 172(x86)/256(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `constraintsMaster`(ctype: `struct hkpEntitySmallArraySerializeOverrideType`)
+    /// - offset: `172`(x86)/`256`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_constraintsMaster: hkpEntitySmallArraySerializeOverrideType,
     /// # C++ Info
-    /// -          name: `constraintsSlave`(ctype: `hkArray<hkpConstraintInstance*>`)
-    /// -        offset: 180(x86)/272(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `NOT_OWNED|SERIALIZE_IGNORED`
-    ///
+    /// - name: `constraintsSlave`(ctype: `hkArray<hkpConstraintInstance*>`)
+    /// - offset: `180`(x86)/`272`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `NOT_OWNED|SERIALIZE_IGNORED`
     pub m_constraintsSlave: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `constraintRuntime`(ctype: `hkArray<hkUint8>`)
-    /// -        offset: 192(x86)/288(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `constraintRuntime`(ctype: `hkArray<hkUint8>`)
+    /// - offset: `192`(x86)/`288`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_constraintRuntime: Vec<u8>,
     /// # C++ Info
-    /// -          name: `simulationIsland`(ctype: `void*`)
-    /// -        offset: 204(x86)/304(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `simulationIsland`(ctype: `void*`)
+    /// - offset: `204`(x86)/`304`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_simulationIsland: Pointer,
     /// # C++ Info
-    /// -          name: `autoRemoveLevel`(ctype: `hkInt8`)
-    /// -        offset: 208(x86)/312(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `autoRemoveLevel`(ctype: `hkInt8`)
+    /// - offset: `208`(x86)/`312`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_autoRemoveLevel: i8,
     /// # C++ Info
-    /// -          name: `numShapeKeysInContactPointProperties`(ctype: `hkUint8`)
-    /// -        offset: 209(x86)/313(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `numShapeKeysInContactPointProperties`(ctype: `hkUint8`)
+    /// - offset: `209`(x86)/`313`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_numShapeKeysInContactPointProperties: u8,
     /// # C++ Info
-    /// -          name: `responseModifierFlags`(ctype: `hkUint8`)
-    /// -        offset: 210(x86)/314(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `responseModifierFlags`(ctype: `hkUint8`)
+    /// - offset: `210`(x86)/`314`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_responseModifierFlags: u8,
     /// # C++ Info
-    /// -          name: `uid`(ctype: `hkUint32`)
-    /// -        offset: 212(x86)/316(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `uid`(ctype: `hkUint32`)
+    /// - offset: `212`(x86)/`316`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_uid: u32,
     /// # C++ Info
-    /// -          name: `spuCollisionCallback`(ctype: `struct hkpEntitySpuCollisionCallback`)
-    /// -        offset: 216(x86)/320(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    ///
+    /// - name: `spuCollisionCallback`(ctype: `struct hkpEntitySpuCollisionCallback`)
+    /// - offset: `216`(x86)/`320`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
     pub m_spuCollisionCallback: hkpEntitySpuCollisionCallback,
     /// # C++ Info
-    /// -          name: `motion`(ctype: `struct hkpMaxSizeMotion`)
-    /// -        offset: 224(x86)/336(x86_64)
-    /// -     type_size: 288(x86)/320(x86_64)
-    ///
+    /// - name: `motion`(ctype: `struct hkpMaxSizeMotion`)
+    /// - offset: `224`(x86)/`336`(x86_64)
+    /// - type_size: `288`(x86)/`320`(x86_64)
     pub m_motion: hkpMaxSizeMotion,
     /// # C++ Info
-    /// -          name: `contactListeners`(ctype: `struct hkpEntitySmallArraySerializeOverrideType`)
-    /// -        offset: 512(x86)/656(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `contactListeners`(ctype: `struct hkpEntitySmallArraySerializeOverrideType`)
+    /// - offset: `512`(x86)/`656`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_contactListeners: hkpEntitySmallArraySerializeOverrideType,
     /// # C++ Info
-    /// -          name: `actions`(ctype: `struct hkpEntitySmallArraySerializeOverrideType`)
-    /// -        offset: 520(x86)/672(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `actions`(ctype: `struct hkpEntitySmallArraySerializeOverrideType`)
+    /// - offset: `520`(x86)/`672`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_actions: hkpEntitySmallArraySerializeOverrideType,
     /// # C++ Info
-    /// -          name: `localFrame`(ctype: `struct hkLocalFrame*`)
-    /// -        offset: 528(x86)/688(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `localFrame`(ctype: `struct hkLocalFrame*`)
+    /// - offset: `528`(x86)/`688`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_localFrame: Pointer,
     /// # C++ Info
-    /// -          name: `extendedListeners`(ctype: `struct hkpEntityExtendedListeners*`)
-    /// -        offset: 532(x86)/696(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `extendedListeners`(ctype: `struct hkpEntityExtendedListeners*`)
+    /// - offset: `532`(x86)/`696`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_extendedListeners: Pointer,
     /// # C++ Info
-    /// -          name: `npData`(ctype: `hkUint32`)
-    /// -        offset: 536(x86)/704(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `npData`(ctype: `hkUint32`)
+    /// - offset: `536`(x86)/`704`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_npData: u32,
 }
 const _: () = {

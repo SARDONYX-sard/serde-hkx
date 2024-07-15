@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbProjectData`
-/// -         version: `2`
-/// -       signature: `0x13a39ba7`
-/// -          size:  48(x86)/ 48(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbProjectData`
+/// - version: `2`
+/// - signature: `0x13a39ba7`
+/// - size: ` 48`(x86)/` 48`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkbProjectData {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `worldUpWS`(ctype: `hkVector4`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `worldUpWS`(ctype: `hkVector4`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_worldUpWS: Vector4,
     /// # C++ Info
-    /// -          name: `stringData`(ctype: `struct hkbProjectStringData*`)
-    /// -        offset:  32(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `stringData`(ctype: `struct hkbProjectStringData*`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_stringData: Pointer,
     /// # C++ Info
-    /// -          name: `defaultEventMode`(ctype: `enum EventMode`)
-    /// -        offset:  36(x86)/ 40(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `defaultEventMode`(ctype: `enum EventMode`)
+    /// - offset: ` 36`(x86)/` 40`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_defaultEventMode: EventMode,
 }
 const _: () = {

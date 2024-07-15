@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpVehicleWheelCollide`
-/// -         version: `0`
-/// -       signature: `0x4a50fcb`
-/// -          size:  12(x86)/ 24(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpVehicleWheelCollide`
+/// - version: `0`
+/// - signature: `0x4a50fcb`
+/// - size: ` 12`(x86)/` 24`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,17 +21,15 @@ pub struct hkpVehicleWheelCollide {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `alreadyUsed`(ctype: `hkBool`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `alreadyUsed`(ctype: `hkBool`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_alreadyUsed: bool,
     /// # C++ Info
-    /// -          name: `type`(ctype: `enum unknown`)
-    /// -        offset:   9(x86)/ 17(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `type`(ctype: `enum unknown`)
+    /// - offset: `  9`(x86)/` 17`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_type: u8,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpBreakableConstraintData`
-/// -         version: `0`
-/// -       signature: `0x7d6310c8`
-/// -          size:  40(x86)/ 72(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpBreakableConstraintData`
+/// - version: `0`
+/// - signature: `0x7d6310c8`
+/// - size: ` 40`(x86)/` 72`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,46 +21,39 @@ pub struct hkpBreakableConstraintData {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConstraintData,
     /// # C++ Info
-    /// -          name: `atoms`(ctype: `struct hkpBridgeAtoms`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:  12(x86)/ 24(x86_64)
-    ///
+    /// - name: `atoms`(ctype: `struct hkpBridgeAtoms`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: ` 12`(x86)/` 24`(x86_64)
     pub m_atoms: hkpBridgeAtoms,
     /// # C++ Info
-    /// -          name: `constraintData`(ctype: `struct hkpConstraintData*`)
-    /// -        offset:  24(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `constraintData`(ctype: `struct hkpConstraintData*`)
+    /// - offset: ` 24`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_constraintData: Pointer,
     /// # C++ Info
-    /// -          name: `childRuntimeSize`(ctype: `hkUint16`)
-    /// -        offset:  28(x86)/ 56(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `childRuntimeSize`(ctype: `hkUint16`)
+    /// - offset: ` 28`(x86)/` 56`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_childRuntimeSize: u16,
     /// # C++ Info
-    /// -          name: `childNumSolverResults`(ctype: `hkUint16`)
-    /// -        offset:  30(x86)/ 58(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `childNumSolverResults`(ctype: `hkUint16`)
+    /// - offset: ` 30`(x86)/` 58`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_childNumSolverResults: u16,
     /// # C++ Info
-    /// -          name: `solverResultLimit`(ctype: `hkReal`)
-    /// -        offset:  32(x86)/ 60(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `solverResultLimit`(ctype: `hkReal`)
+    /// - offset: ` 32`(x86)/` 60`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_solverResultLimit: f32,
     /// # C++ Info
-    /// -          name: `removeWhenBroken`(ctype: `hkBool`)
-    /// -        offset:  36(x86)/ 64(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `removeWhenBroken`(ctype: `hkBool`)
+    /// - offset: ` 36`(x86)/` 64`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_removeWhenBroken: bool,
     /// # C++ Info
-    /// -          name: `revertBackVelocityOnBreak`(ctype: `hkBool`)
-    /// -        offset:  37(x86)/ 65(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `revertBackVelocityOnBreak`(ctype: `hkBool`)
+    /// - offset: ` 37`(x86)/` 65`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_revertBackVelocityOnBreak: bool,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbRaiseEventCommand`
-/// -         version: `0`
-/// -       signature: `0xa0a7bf9c`
-/// -          size:  24(x86)/ 32(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbRaiseEventCommand`
+/// - version: `0`
+/// - signature: `0xa0a7bf9c`
+/// - size: ` 24`(x86)/` 32`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkbRaiseEventCommand {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `characterId`(ctype: `hkUint64`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   8(x86)/  8(x86_64)
-    ///
+    /// - name: `characterId`(ctype: `hkUint64`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  8`(x86)/`  8`(x86_64)
     pub m_characterId: u64,
     /// # C++ Info
-    /// -          name: `global`(ctype: `hkBool`)
-    /// -        offset:  16(x86)/ 24(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `global`(ctype: `hkBool`)
+    /// - offset: ` 16`(x86)/` 24`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_global: bool,
     /// # C++ Info
-    /// -          name: `externalId`(ctype: `hkInt32`)
-    /// -        offset:  20(x86)/ 28(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `externalId`(ctype: `hkInt32`)
+    /// - offset: ` 20`(x86)/` 28`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_externalId: i32,
 }
 const _: () = {

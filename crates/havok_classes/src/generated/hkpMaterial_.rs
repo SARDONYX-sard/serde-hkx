@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpMaterial`
-/// -         version: `2`
-/// -       signature: `0x33be6570`
-/// -          size:  12(x86)/ 12(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpMaterial`
+/// - version: `2`
+/// - signature: `0x33be6570`
+/// - size: ` 12`(x86)/` 12`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,28 +19,24 @@ pub struct hkpMaterial {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `responseType`(ctype: `enum ResponseType`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `responseType`(ctype: `enum ResponseType`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_responseType: ResponseType,
     /// # C++ Info
-    /// -          name: `rollingFrictionMultiplier`(ctype: `hkHalf`)
-    /// -        offset:   2(x86)/  2(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `rollingFrictionMultiplier`(ctype: `hkHalf`)
+    /// - offset: `  2`(x86)/`  2`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_rollingFrictionMultiplier: f16,
     /// # C++ Info
-    /// -          name: `friction`(ctype: `hkReal`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `friction`(ctype: `hkReal`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_friction: f32,
     /// # C++ Info
-    /// -          name: `restitution`(ctype: `hkReal`)
-    /// -        offset:   8(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `restitution`(ctype: `hkReal`)
+    /// - offset: `  8`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_restitution: f32,
 }
 const _: () = {

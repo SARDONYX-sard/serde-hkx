@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpSoftContactModifierConstraintAtom`
-/// -         version: `0`
-/// -       signature: `0xecb34e27`
-/// -          size:  48(x86)/ 64(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpSoftContactModifierConstraintAtom`
+/// - version: `0`
+/// - signature: `0xecb34e27`
+/// - size: ` 48`(x86)/` 64`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkpSoftContactModifierConstraintAtom {
     /// Alternative to C++ class inheritance.
     pub parent: hkpModifierConstraintAtom,
     /// # C++ Info
-    /// -          name: `tau`(ctype: `hkReal`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `tau`(ctype: `hkReal`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_tau: f32,
     /// # C++ Info
-    /// -          name: `maxAcceleration`(ctype: `hkReal`)
-    /// -        offset:  36(x86)/ 52(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxAcceleration`(ctype: `hkReal`)
+    /// - offset: ` 36`(x86)/` 52`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxAcceleration: f32,
 }
 const _: () = {

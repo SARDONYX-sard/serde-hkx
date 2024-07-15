@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbHandIkControlData`
-/// -         version: `2`
-/// -       signature: `0xd72b8d17`
-/// -          size:  80(x86)/ 96(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkbHandIkControlData`
+/// - version: `2`
+/// - signature: `0xd72b8d17`
+/// - size: ` 80`(x86)/` 96`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,76 +19,64 @@ pub struct hkbHandIkControlData {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `targetPosition`(ctype: `hkVector4`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `targetPosition`(ctype: `hkVector4`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_targetPosition: Vector4,
     /// # C++ Info
-    /// -          name: `targetRotation`(ctype: `hkQuaternion`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `targetRotation`(ctype: `hkQuaternion`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_targetRotation: Quaternion,
     /// # C++ Info
-    /// -          name: `targetNormal`(ctype: `hkVector4`)
-    /// -        offset:  32(x86)/ 32(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `targetNormal`(ctype: `hkVector4`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_targetNormal: Vector4,
     /// # C++ Info
-    /// -          name: `targetHandle`(ctype: `struct hkbHandle*`)
-    /// -        offset:  48(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `targetHandle`(ctype: `struct hkbHandle*`)
+    /// - offset: ` 48`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_targetHandle: Pointer,
     /// # C++ Info
-    /// -          name: `transformOnFraction`(ctype: `hkReal`)
-    /// -        offset:  52(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `transformOnFraction`(ctype: `hkReal`)
+    /// - offset: ` 52`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_transformOnFraction: f32,
     /// # C++ Info
-    /// -          name: `normalOnFraction`(ctype: `hkReal`)
-    /// -        offset:  56(x86)/ 60(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `normalOnFraction`(ctype: `hkReal`)
+    /// - offset: ` 56`(x86)/` 60`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_normalOnFraction: f32,
     /// # C++ Info
-    /// -          name: `fadeInDuration`(ctype: `hkReal`)
-    /// -        offset:  60(x86)/ 64(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `fadeInDuration`(ctype: `hkReal`)
+    /// - offset: ` 60`(x86)/` 64`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_fadeInDuration: f32,
     /// # C++ Info
-    /// -          name: `fadeOutDuration`(ctype: `hkReal`)
-    /// -        offset:  64(x86)/ 68(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `fadeOutDuration`(ctype: `hkReal`)
+    /// - offset: ` 64`(x86)/` 68`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_fadeOutDuration: f32,
     /// # C++ Info
-    /// -          name: `extrapolationTimeStep`(ctype: `hkReal`)
-    /// -        offset:  68(x86)/ 72(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `extrapolationTimeStep`(ctype: `hkReal`)
+    /// - offset: ` 68`(x86)/` 72`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_extrapolationTimeStep: f32,
     /// # C++ Info
-    /// -          name: `handleChangeSpeed`(ctype: `hkReal`)
-    /// -        offset:  72(x86)/ 76(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `handleChangeSpeed`(ctype: `hkReal`)
+    /// - offset: ` 72`(x86)/` 76`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_handleChangeSpeed: f32,
     /// # C++ Info
-    /// -          name: `handleChangeMode`(ctype: `enum HandleChangeMode`)
-    /// -        offset:  76(x86)/ 80(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `handleChangeMode`(ctype: `enum HandleChangeMode`)
+    /// - offset: ` 76`(x86)/` 80`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_handleChangeMode: HandleChangeMode,
     /// # C++ Info
-    /// -          name: `fixUp`(ctype: `hkBool`)
-    /// -        offset:  77(x86)/ 81(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `fixUp`(ctype: `hkBool`)
+    /// - offset: ` 77`(x86)/` 81`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_fixUp: bool,
 }
 const _: () = {

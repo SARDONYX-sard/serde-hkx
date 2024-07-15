@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpConvexVerticesShape`
-/// -         version: `3`
-/// -       signature: `0x28726ad8`
-/// -          size: 112(x86)/144(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpConvexVerticesShape`
+/// - version: `3`
+/// - signature: `0x28726ad8`
+/// - size: `112`(x86)/`144`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,54 +21,46 @@ pub struct hkpConvexVerticesShape {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConvexShape,
     /// # C++ Info
-    /// -          name: `aabbHalfExtents`(ctype: `hkVector4`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `aabbHalfExtents`(ctype: `hkVector4`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_aabbHalfExtents: Vector4,
     /// # C++ Info
-    /// -          name: `aabbCenter`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 64(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `aabbCenter`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 64`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_aabbCenter: Vector4,
     /// # C++ Info
-    /// -          name: `rotatedVertices`(ctype: `hkArray<struct hkpConvexVerticesShapeFourVectors>`)
-    /// -        offset:  64(x86)/ 80(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `rotatedVertices`(ctype: `hkArray<struct hkpConvexVerticesShapeFourVectors>`)
+    /// - offset: ` 64`(x86)/` 80`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_rotatedVertices: Vec<hkpConvexVerticesShapeFourVectors>,
     /// # C++ Info
-    /// -          name: `numVertices`(ctype: `hkInt32`)
-    /// -        offset:  76(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `numVertices`(ctype: `hkInt32`)
+    /// - offset: ` 76`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_numVertices: i32,
     /// # C++ Info
-    /// -          name: `externalObject`(ctype: `void*`)
-    /// -        offset:  80(x86)/104(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `externalObject`(ctype: `void*`)
+    /// - offset: ` 80`(x86)/`104`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_externalObject: Pointer,
     /// # C++ Info
-    /// -          name: `getFaceNormals`(ctype: `void*`)
-    /// -        offset:  84(x86)/112(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `getFaceNormals`(ctype: `void*`)
+    /// - offset: ` 84`(x86)/`112`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_getFaceNormals: Pointer,
     /// # C++ Info
-    /// -          name: `planeEquations`(ctype: `hkArray<hkVector4>`)
-    /// -        offset:  88(x86)/120(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `planeEquations`(ctype: `hkArray<hkVector4>`)
+    /// - offset: ` 88`(x86)/`120`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_planeEquations: Vec<Vector4>,
     /// # C++ Info
-    /// -          name: `connectivity`(ctype: `struct hkpConvexVerticesConnectivity*`)
-    /// -        offset: 100(x86)/136(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `connectivity`(ctype: `struct hkpConvexVerticesConnectivity*`)
+    /// - offset: `100`(x86)/`136`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_connectivity: Pointer,
 }
 const _: () = {

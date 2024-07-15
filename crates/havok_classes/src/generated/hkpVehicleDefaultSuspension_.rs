@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpVehicleDefaultSuspension`
-/// -         version: `0`
-/// -       signature: `0x21735a24`
-/// -          size:  32(x86)/ 48(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpVehicleDefaultSuspension`
+/// - version: `0`
+/// - signature: `0x21735a24`
+/// - size: ` 32`(x86)/` 48`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkpVehicleDefaultSuspension {
     /// Alternative to C++ class inheritance.
     pub parent: hkpVehicleSuspension,
     /// # C++ Info
-    /// -          name: `wheelSpringParams`(ctype: `hkArray<struct hkpVehicleDefaultSuspensionWheelSpringSuspensionParameters>`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `wheelSpringParams`(ctype: `hkArray<struct hkpVehicleDefaultSuspensionWheelSpringSuspensionParameters>`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_wheelSpringParams: Vec<
         hkpVehicleDefaultSuspensionWheelSpringSuspensionParameters,
     >,

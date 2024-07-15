@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbBlenderGeneratorChild`
-/// -         version: `2`
-/// -       signature: `0xe2b384b0`
-/// -          size:  48(x86)/ 80(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbBlenderGeneratorChild`
+/// - version: `2`
+/// - signature: `0xe2b384b0`
+/// - size: ` 48`(x86)/` 80`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,29 +21,25 @@ pub struct hkbBlenderGeneratorChild {
     /// Alternative to C++ class inheritance.
     pub parent: hkbBindable,
     /// # C++ Info
-    /// -          name: `generator`(ctype: `struct hkbGenerator*`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `ALIGN_16`
-    ///
+    /// - name: `generator`(ctype: `struct hkbGenerator*`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `ALIGN_16`
     pub m_generator: Pointer,
     /// # C++ Info
-    /// -          name: `boneWeights`(ctype: `struct hkbBoneWeightArray*`)
-    /// -        offset:  36(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `boneWeights`(ctype: `struct hkbBoneWeightArray*`)
+    /// - offset: ` 36`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_boneWeights: Pointer,
     /// # C++ Info
-    /// -          name: `weight`(ctype: `hkReal`)
-    /// -        offset:  40(x86)/ 64(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `weight`(ctype: `hkReal`)
+    /// - offset: ` 40`(x86)/` 64`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_weight: f32,
     /// # C++ Info
-    /// -          name: `worldFromModelWeight`(ctype: `hkReal`)
-    /// -        offset:  44(x86)/ 68(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `worldFromModelWeight`(ctype: `hkReal`)
+    /// - offset: ` 44`(x86)/` 68`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_worldFromModelWeight: f32,
 }
 const _: () = {

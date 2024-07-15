@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpConvexPieceStreamData`
-/// -         version: `0`
-/// -       signature: `0xa5bd1d6e`
-/// -          size:  44(x86)/ 64(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpConvexPieceStreamData`
+/// - version: `0`
+/// - signature: `0xa5bd1d6e`
+/// - size: ` 44`(x86)/` 64`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkpConvexPieceStreamData {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `convexPieceStream`(ctype: `hkArray<hkUint32>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `convexPieceStream`(ctype: `hkArray<hkUint32>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_convexPieceStream: Vec<u32>,
     /// # C++ Info
-    /// -          name: `convexPieceOffsets`(ctype: `hkArray<hkUint32>`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `convexPieceOffsets`(ctype: `hkArray<hkUint32>`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_convexPieceOffsets: Vec<u32>,
     /// # C++ Info
-    /// -          name: `convexPieceSingleTriangles`(ctype: `hkArray<hkUint32>`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `convexPieceSingleTriangles`(ctype: `hkArray<hkUint32>`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_convexPieceSingleTriangles: Vec<u32>,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbEvaluateHandleModifier`
-/// -         version: `2`
-/// -       signature: `0x79757102`
-/// -          size: 176(x86)/240(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbEvaluateHandleModifier`
+/// - version: `2`
+/// - signature: `0x79757102`
+/// - size: `176`(x86)/`240`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,81 +21,69 @@ pub struct hkbEvaluateHandleModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `handle`(ctype: `struct hkbHandle*`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `handle`(ctype: `struct hkbHandle*`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_handle: Pointer,
     /// # C++ Info
-    /// -          name: `handlePositionOut`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 96(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `handlePositionOut`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 96`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_handlePositionOut: Vector4,
     /// # C++ Info
-    /// -          name: `handleRotationOut`(ctype: `hkQuaternion`)
-    /// -        offset:  64(x86)/112(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `handleRotationOut`(ctype: `hkQuaternion`)
+    /// - offset: ` 64`(x86)/`112`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_handleRotationOut: Quaternion,
     /// # C++ Info
-    /// -          name: `isValidOut`(ctype: `hkBool`)
-    /// -        offset:  80(x86)/128(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `isValidOut`(ctype: `hkBool`)
+    /// - offset: ` 80`(x86)/`128`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_isValidOut: bool,
     /// # C++ Info
-    /// -          name: `extrapolationTimeStep`(ctype: `hkReal`)
-    /// -        offset:  84(x86)/132(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `extrapolationTimeStep`(ctype: `hkReal`)
+    /// - offset: ` 84`(x86)/`132`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_extrapolationTimeStep: f32,
     /// # C++ Info
-    /// -          name: `handleChangeSpeed`(ctype: `hkReal`)
-    /// -        offset:  88(x86)/136(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `handleChangeSpeed`(ctype: `hkReal`)
+    /// - offset: ` 88`(x86)/`136`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_handleChangeSpeed: f32,
     /// # C++ Info
-    /// -          name: `handleChangeMode`(ctype: `enum HandleChangeMode`)
-    /// -        offset:  92(x86)/140(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `handleChangeMode`(ctype: `enum HandleChangeMode`)
+    /// - offset: ` 92`(x86)/`140`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_handleChangeMode: HandleChangeMode,
     /// # C++ Info
-    /// -          name: `oldHandle`(ctype: `struct hkbHandle`)
-    /// -        offset:  96(x86)/144(x86_64)
-    /// -     type_size:  24(x86)/ 48(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `oldHandle`(ctype: `struct hkbHandle`)
+    /// - offset: ` 96`(x86)/`144`(x86_64)
+    /// - type_size: ` 24`(x86)/` 48`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_oldHandle: hkbHandle,
     /// # C++ Info
-    /// -          name: `oldHandlePosition`(ctype: `hkVector4`)
-    /// -        offset: 128(x86)/192(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `oldHandlePosition`(ctype: `hkVector4`)
+    /// - offset: `128`(x86)/`192`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_oldHandlePosition: Vector4,
     /// # C++ Info
-    /// -          name: `oldHandleRotation`(ctype: `hkQuaternion`)
-    /// -        offset: 144(x86)/208(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `oldHandleRotation`(ctype: `hkQuaternion`)
+    /// - offset: `144`(x86)/`208`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_oldHandleRotation: Quaternion,
     /// # C++ Info
-    /// -          name: `timeSinceLastModify`(ctype: `hkReal`)
-    /// -        offset: 160(x86)/224(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `timeSinceLastModify`(ctype: `hkReal`)
+    /// - offset: `160`(x86)/`224`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_timeSinceLastModify: f32,
     /// # C++ Info
-    /// -          name: `smoothlyChangingHandles`(ctype: `hkBool`)
-    /// -        offset: 164(x86)/228(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `smoothlyChangingHandles`(ctype: `hkBool`)
+    /// - offset: `164`(x86)/`228`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_smoothlyChangingHandles: bool,
 }
 const _: () = {

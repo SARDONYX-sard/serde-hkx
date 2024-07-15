@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbCharacterControllerModifier`
-/// -         version: `0`
-/// -       signature: `0xf675d6fb`
-/// -          size: 144(x86)/176(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbCharacterControllerModifier`
+/// - version: `0`
+/// - signature: `0xf675d6fb`
+/// - size: `144`(x86)/`176`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,73 +21,62 @@ pub struct hkbCharacterControllerModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `controlData`(ctype: `struct hkbCharacterControllerControlData`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  32(x86)/ 32(x86_64)
-    ///
+    /// - name: `controlData`(ctype: `struct hkbCharacterControllerControlData`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 32`(x86)/` 32`(x86_64)
     pub m_controlData: hkbCharacterControllerControlData,
     /// # C++ Info
-    /// -          name: `initialVelocity`(ctype: `hkVector4`)
-    /// -        offset:  80(x86)/112(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `initialVelocity`(ctype: `hkVector4`)
+    /// - offset: ` 80`(x86)/`112`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_initialVelocity: Vector4,
     /// # C++ Info
-    /// -          name: `initialVelocityCoordinates`(ctype: `enum InitialVelocityCoordinates`)
-    /// -        offset:  96(x86)/128(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `initialVelocityCoordinates`(ctype: `enum InitialVelocityCoordinates`)
+    /// - offset: ` 96`(x86)/`128`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_initialVelocityCoordinates: InitialVelocityCoordinates,
     /// # C++ Info
-    /// -          name: `motionMode`(ctype: `enum MotionMode`)
-    /// -        offset:  97(x86)/129(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `motionMode`(ctype: `enum MotionMode`)
+    /// - offset: ` 97`(x86)/`129`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_motionMode: MotionMode,
     /// # C++ Info
-    /// -          name: `forceDownwardMomentum`(ctype: `hkBool`)
-    /// -        offset:  98(x86)/130(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `forceDownwardMomentum`(ctype: `hkBool`)
+    /// - offset: ` 98`(x86)/`130`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_forceDownwardMomentum: bool,
     /// # C++ Info
-    /// -          name: `applyGravity`(ctype: `hkBool`)
-    /// -        offset:  99(x86)/131(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `applyGravity`(ctype: `hkBool`)
+    /// - offset: ` 99`(x86)/`131`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_applyGravity: bool,
     /// # C++ Info
-    /// -          name: `setInitialVelocity`(ctype: `hkBool`)
-    /// -        offset: 100(x86)/132(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `setInitialVelocity`(ctype: `hkBool`)
+    /// - offset: `100`(x86)/`132`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_setInitialVelocity: bool,
     /// # C++ Info
-    /// -          name: `isTouchingGround`(ctype: `hkBool`)
-    /// -        offset: 101(x86)/133(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `isTouchingGround`(ctype: `hkBool`)
+    /// - offset: `101`(x86)/`133`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_isTouchingGround: bool,
     /// # C++ Info
-    /// -          name: `gravity`(ctype: `hkVector4`)
-    /// -        offset: 112(x86)/144(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `gravity`(ctype: `hkVector4`)
+    /// - offset: `112`(x86)/`144`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_gravity: Vector4,
     /// # C++ Info
-    /// -          name: `timestep`(ctype: `hkReal`)
-    /// -        offset: 128(x86)/160(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `timestep`(ctype: `hkReal`)
+    /// - offset: `128`(x86)/`160`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_timestep: f32,
     /// # C++ Info
-    /// -          name: `isInitialVelocityAdded`(ctype: `hkBool`)
-    /// -        offset: 132(x86)/164(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `isInitialVelocityAdded`(ctype: `hkBool`)
+    /// - offset: `132`(x86)/`164`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_isInitialVelocityAdded: bool,
 }
 const _: () = {

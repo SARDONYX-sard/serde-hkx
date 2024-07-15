@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbHandIkControlsModifierHand`
-/// -         version: `0`
-/// -       signature: `0x9c72e9e3`
-/// -          size:  96(x86)/112(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkbHandIkControlsModifierHand`
+/// - version: `0`
+/// - signature: `0x9c72e9e3`
+/// - size: ` 96`(x86)/`112`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,22 +19,19 @@ pub struct hkbHandIkControlsModifierHand {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `controlData`(ctype: `struct hkbHandIkControlData`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:  80(x86)/ 96(x86_64)
-    ///
+    /// - name: `controlData`(ctype: `struct hkbHandIkControlData`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: ` 80`(x86)/` 96`(x86_64)
     pub m_controlData: hkbHandIkControlData,
     /// # C++ Info
-    /// -          name: `handIndex`(ctype: `hkInt32`)
-    /// -        offset:  80(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `handIndex`(ctype: `hkInt32`)
+    /// - offset: ` 80`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_handIndex: i32,
     /// # C++ Info
-    /// -          name: `enable`(ctype: `hkBool`)
-    /// -        offset:  84(x86)/100(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `enable`(ctype: `hkBool`)
+    /// - offset: ` 84`(x86)/`100`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_enable: bool,
 }
 const _: () = {

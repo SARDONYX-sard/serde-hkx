@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpMoppCode`
-/// -         version: `0`
-/// -       signature: `0x924c2661`
-/// -          size:  48(x86)/ 64(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpMoppCode`
+/// - version: `0`
+/// - signature: `0x924c2661`
+/// - size: ` 48`(x86)/` 64`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkpMoppCode {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `info`(ctype: `struct hkpMoppCodeCodeInfo`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `info`(ctype: `struct hkpMoppCodeCodeInfo`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_info: hkpMoppCodeCodeInfo,
     /// # C++ Info
-    /// -          name: `data`(ctype: `hkArray<hkUint8>`)
-    /// -        offset:  32(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `data`(ctype: `hkArray<hkUint8>`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_data: Vec<u8>,
     /// # C++ Info
-    /// -          name: `buildType`(ctype: `enum BuildType`)
-    /// -        offset:  44(x86)/ 48(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `buildType`(ctype: `enum BuildType`)
+    /// - offset: ` 44`(x86)/` 48`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_buildType: BuildType,
 }
 const _: () = {

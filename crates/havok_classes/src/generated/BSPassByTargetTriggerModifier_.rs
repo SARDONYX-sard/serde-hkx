@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `BSPassByTargetTriggerModifier`
-/// -         version: `1`
-/// -       signature: `0x703d7b66`
-/// -          size: 112(x86)/160(x86_64)
-/// -          vtable: true
-///
+/// - name: `BSPassByTargetTriggerModifier`
+/// - version: `1`
+/// - signature: `0x703d7b66`
+/// - size: `112`(x86)/`160`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,35 +21,30 @@ pub struct BSPassByTargetTriggerModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `targetPosition`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `targetPosition`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_targetPosition: Vector4,
     /// # C++ Info
-    /// -          name: `radius`(ctype: `hkReal`)
-    /// -        offset:  64(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `radius`(ctype: `hkReal`)
+    /// - offset: ` 64`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_radius: f32,
     /// # C++ Info
-    /// -          name: `movementDirection`(ctype: `hkVector4`)
-    /// -        offset:  80(x86)/112(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `movementDirection`(ctype: `hkVector4`)
+    /// - offset: ` 80`(x86)/`112`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_movementDirection: Vector4,
     /// # C++ Info
-    /// -          name: `triggerEvent`(ctype: `struct hkbEventProperty`)
-    /// -        offset:  96(x86)/128(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    ///
+    /// - name: `triggerEvent`(ctype: `struct hkbEventProperty`)
+    /// - offset: ` 96`(x86)/`128`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
     pub m_triggerEvent: hkbEventProperty,
     /// # C++ Info
-    /// -          name: `targetPassed`(ctype: `hkBool`)
-    /// -        offset: 104(x86)/144(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `targetPassed`(ctype: `hkBool`)
+    /// - offset: `104`(x86)/`144`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_targetPassed: bool,
 }
 const _: () = {

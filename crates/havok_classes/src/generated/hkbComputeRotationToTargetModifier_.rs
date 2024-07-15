@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbComputeRotationToTargetModifier`
-/// -         version: `0`
-/// -       signature: `0x47665f1c`
-/// -          size: 160(x86)/192(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbComputeRotationToTargetModifier`
+/// - version: `0`
+/// - signature: `0x47665f1c`
+/// - size: `160`(x86)/`192`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,46 +21,39 @@ pub struct hkbComputeRotationToTargetModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `rotationOut`(ctype: `hkQuaternion`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `rotationOut`(ctype: `hkQuaternion`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_rotationOut: Quaternion,
     /// # C++ Info
-    /// -          name: `targetPosition`(ctype: `hkVector4`)
-    /// -        offset:  64(x86)/ 96(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `targetPosition`(ctype: `hkVector4`)
+    /// - offset: ` 64`(x86)/` 96`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_targetPosition: Vector4,
     /// # C++ Info
-    /// -          name: `currentPosition`(ctype: `hkVector4`)
-    /// -        offset:  80(x86)/112(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `currentPosition`(ctype: `hkVector4`)
+    /// - offset: ` 80`(x86)/`112`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_currentPosition: Vector4,
     /// # C++ Info
-    /// -          name: `currentRotation`(ctype: `hkQuaternion`)
-    /// -        offset:  96(x86)/128(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `currentRotation`(ctype: `hkQuaternion`)
+    /// - offset: ` 96`(x86)/`128`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_currentRotation: Quaternion,
     /// # C++ Info
-    /// -          name: `localAxisOfRotation`(ctype: `hkVector4`)
-    /// -        offset: 112(x86)/144(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `localAxisOfRotation`(ctype: `hkVector4`)
+    /// - offset: `112`(x86)/`144`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_localAxisOfRotation: Vector4,
     /// # C++ Info
-    /// -          name: `localFacingDirection`(ctype: `hkVector4`)
-    /// -        offset: 128(x86)/160(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `localFacingDirection`(ctype: `hkVector4`)
+    /// - offset: `128`(x86)/`160`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_localFacingDirection: Vector4,
     /// # C++ Info
-    /// -          name: `resultIsDelta`(ctype: `hkBool`)
-    /// -        offset: 144(x86)/176(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `resultIsDelta`(ctype: `hkBool`)
+    /// - offset: `144`(x86)/`176`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_resultIsDelta: bool,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpStorageSampledHeightFieldShape`
-/// -         version: `0`
-/// -       signature: `0x15ff414b`
-/// -          size: 112(x86)/144(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpStorageSampledHeightFieldShape`
+/// - version: `0`
+/// - signature: `0x15ff414b`
+/// - size: `112`(x86)/`144`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkpStorageSampledHeightFieldShape {
     /// Alternative to C++ class inheritance.
     pub parent: hkpSampledHeightFieldShape,
     /// # C++ Info
-    /// -          name: `storage`(ctype: `hkArray<hkReal>`)
-    /// -        offset:  96(x86)/112(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `storage`(ctype: `hkArray<hkReal>`)
+    /// - offset: ` 96`(x86)/`112`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_storage: Vec<f32>,
     /// # C++ Info
-    /// -          name: `triangleFlip`(ctype: `hkBool`)
-    /// -        offset: 108(x86)/128(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `triangleFlip`(ctype: `hkBool`)
+    /// - offset: `108`(x86)/`128`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_triangleFlip: bool,
 }
 const _: () = {

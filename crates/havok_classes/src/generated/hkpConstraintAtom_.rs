@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpConstraintAtom`
-/// -         version: `0`
-/// -       signature: `0x59d67ef6`
-/// -          size:   2(x86)/  2(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpConstraintAtom`
+/// - version: `0`
+/// - signature: `0x59d67ef6`
+/// - size: `  2`(x86)/`  2`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,10 +19,9 @@ pub struct hkpConstraintAtom {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `type`(ctype: `enum AtomType`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `type`(ctype: `enum AtomType`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_type: AtomType,
 }
 const _: () = {

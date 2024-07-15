@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbGetHandleOnBoneModifier`
-/// -         version: `0`
-/// -       signature: `0x50c34a17`
-/// -          size:  56(x86)/104(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbGetHandleOnBoneModifier`
+/// - version: `0`
+/// - signature: `0x50c34a17`
+/// - size: ` 56`(x86)/`104`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,28 +21,24 @@ pub struct hkbGetHandleOnBoneModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `handleOut`(ctype: `struct hkbHandle*`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `handleOut`(ctype: `struct hkbHandle*`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_handleOut: Pointer,
     /// # C++ Info
-    /// -          name: `localFrameName`(ctype: `hkStringPtr`)
-    /// -        offset:  48(x86)/ 88(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `localFrameName`(ctype: `hkStringPtr`)
+    /// - offset: ` 48`(x86)/` 88`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_localFrameName: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `ragdollBoneIndex`(ctype: `hkInt16`)
-    /// -        offset:  52(x86)/ 96(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `ragdollBoneIndex`(ctype: `hkInt16`)
+    /// - offset: ` 52`(x86)/` 96`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_ragdollBoneIndex: i16,
     /// # C++ Info
-    /// -          name: `animationBoneIndex`(ctype: `hkInt16`)
-    /// -        offset:  54(x86)/ 98(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `animationBoneIndex`(ctype: `hkInt16`)
+    /// - offset: ` 54`(x86)/` 98`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_animationBoneIndex: i16,
 }
 const _: () = {

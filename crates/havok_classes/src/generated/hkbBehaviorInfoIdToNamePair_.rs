@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbBehaviorInfoIdToNamePair`
-/// -         version: `0`
-/// -       signature: `0x35a0439a`
-/// -          size:  12(x86)/ 24(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkbBehaviorInfoIdToNamePair`
+/// - version: `0`
+/// - signature: `0x35a0439a`
+/// - size: ` 12`(x86)/` 24`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,28 +19,24 @@ pub struct hkbBehaviorInfoIdToNamePair<'a> {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `behaviorName`(ctype: `hkStringPtr`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `behaviorName`(ctype: `hkStringPtr`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_behaviorName: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `nodeName`(ctype: `hkStringPtr`)
-    /// -        offset:   4(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `nodeName`(ctype: `hkStringPtr`)
+    /// - offset: `  4`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_nodeName: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `toolType`(ctype: `enum ToolNodeType`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `toolType`(ctype: `enum ToolNodeType`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_toolType: ToolNodeType,
     /// # C++ Info
-    /// -          name: `id`(ctype: `hkInt16`)
-    /// -        offset:  10(x86)/ 18(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `id`(ctype: `hkInt16`)
+    /// - offset: ` 10`(x86)/` 18`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_id: i16,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `BSSpeedSamplerModifier`
-/// -         version: `1`
-/// -       signature: `0xd297fda9`
-/// -          size:  60(x86)/ 96(x86_64)
-/// -          vtable: true
-///
+/// - name: `BSSpeedSamplerModifier`
+/// - version: `1`
+/// - signature: `0xd297fda9`
+/// - size: ` 60`(x86)/` 96`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,28 +21,24 @@ pub struct BSSpeedSamplerModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `state`(ctype: `hkInt32`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `state`(ctype: `hkInt32`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_state: i32,
     /// # C++ Info
-    /// -          name: `direction`(ctype: `hkReal`)
-    /// -        offset:  48(x86)/ 84(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `direction`(ctype: `hkReal`)
+    /// - offset: ` 48`(x86)/` 84`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_direction: f32,
     /// # C++ Info
-    /// -          name: `goalSpeed`(ctype: `hkReal`)
-    /// -        offset:  52(x86)/ 88(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `goalSpeed`(ctype: `hkReal`)
+    /// - offset: ` 52`(x86)/` 88`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_goalSpeed: f32,
     /// # C++ Info
-    /// -          name: `speedOut`(ctype: `hkReal`)
-    /// -        offset:  56(x86)/ 92(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `speedOut`(ctype: `hkReal`)
+    /// - offset: ` 56`(x86)/` 92`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_speedOut: f32,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbBehaviorGraphInternalStateInfo`
-/// -         version: `1`
-/// -       signature: `0x645f898b`
-/// -          size:  56(x86)/ 80(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbBehaviorGraphInternalStateInfo`
+/// - version: `1`
+/// - signature: `0x645f898b`
+/// - size: ` 56`(x86)/` 80`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,34 +21,29 @@ pub struct hkbBehaviorGraphInternalStateInfo {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `characterId`(ctype: `hkUint64`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   8(x86)/  8(x86_64)
-    ///
+    /// - name: `characterId`(ctype: `hkUint64`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  8`(x86)/`  8`(x86_64)
     pub m_characterId: u64,
     /// # C++ Info
-    /// -          name: `internalState`(ctype: `struct hkbBehaviorGraphInternalState*`)
-    /// -        offset:  16(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `internalState`(ctype: `struct hkbBehaviorGraphInternalState*`)
+    /// - offset: ` 16`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_internalState: Pointer,
     /// # C++ Info
-    /// -          name: `auxiliaryNodeInfo`(ctype: `hkArray<hkbAuxiliaryNodeInfo*>`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `auxiliaryNodeInfo`(ctype: `hkArray<hkbAuxiliaryNodeInfo*>`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_auxiliaryNodeInfo: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `activeEventIds`(ctype: `hkArray<hkInt16>`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `activeEventIds`(ctype: `hkArray<hkInt16>`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_activeEventIds: Vec<i16>,
     /// # C++ Info
-    /// -          name: `activeVariableIds`(ctype: `hkArray<hkInt16>`)
-    /// -        offset:  44(x86)/ 64(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `activeVariableIds`(ctype: `hkArray<hkInt16>`)
+    /// - offset: ` 44`(x86)/` 64`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_activeVariableIds: Vec<i16>,
 }
 const _: () = {

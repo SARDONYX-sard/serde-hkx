@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpWorldObject`
-/// -         version: `0`
-/// -       signature: `0x49fb6f2e`
-/// -          size: 140(x86)/208(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpWorldObject`
+/// - version: `0`
+/// - signature: `0x49fb6f2e`
+/// - size: `140`(x86)/`208`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,48 +21,41 @@ pub struct hkpWorldObject<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `world`(ctype: `void*`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `world`(ctype: `void*`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_world: Pointer,
     /// # C++ Info
-    /// -          name: `userData`(ctype: `hkUlong`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `userData`(ctype: `hkUlong`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_userData: u64,
     /// # C++ Info
-    /// -          name: `collidable`(ctype: `struct hkpLinkedCollidable`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:  92(x86)/128(x86_64)
-    ///
+    /// - name: `collidable`(ctype: `struct hkpLinkedCollidable`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: ` 92`(x86)/`128`(x86_64)
     pub m_collidable: hkpLinkedCollidable,
     /// # C++ Info
-    /// -          name: `multiThreadCheck`(ctype: `struct hkMultiThreadCheck`)
-    /// -        offset: 108(x86)/160(x86_64)
-    /// -     type_size:  12(x86)/ 12(x86_64)
-    ///
+    /// - name: `multiThreadCheck`(ctype: `struct hkMultiThreadCheck`)
+    /// - offset: `108`(x86)/`160`(x86_64)
+    /// - type_size: ` 12`(x86)/` 12`(x86_64)
     pub m_multiThreadCheck: hkMultiThreadCheck,
     /// # C++ Info
-    /// -          name: `name`(ctype: `hkStringPtr`)
-    /// -        offset: 120(x86)/176(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `name`(ctype: `hkStringPtr`)
+    /// - offset: `120`(x86)/`176`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_name: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `properties`(ctype: `hkArray<struct hkpProperty>`)
-    /// -        offset: 124(x86)/184(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `properties`(ctype: `hkArray<struct hkpProperty>`)
+    /// - offset: `124`(x86)/`184`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_properties: Vec<hkpProperty>,
     /// # C++ Info
-    /// -          name: `treeData`(ctype: `void*`)
-    /// -        offset: 136(x86)/200(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `treeData`(ctype: `void*`)
+    /// - offset: `136`(x86)/`200`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_treeData: Pointer,
 }
 const _: () = {

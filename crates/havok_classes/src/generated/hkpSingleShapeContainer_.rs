@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpSingleShapeContainer`
-/// -         version: `0`
-/// -       signature: `0x73aa1d38`
-/// -          size:   8(x86)/ 16(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpSingleShapeContainer`
+/// - version: `0`
+/// - signature: `0x73aa1d38`
+/// - size: `  8`(x86)/` 16`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkpSingleShapeContainer {
     /// Alternative to C++ class inheritance.
     pub parent: hkpShapeContainer,
     /// # C++ Info
-    /// -          name: `childShape`(ctype: `struct hkpShape*`)
-    /// -        offset:   4(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `childShape`(ctype: `struct hkpShape*`)
+    /// - offset: `  4`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_childShape: Pointer,
 }
 const _: () = {

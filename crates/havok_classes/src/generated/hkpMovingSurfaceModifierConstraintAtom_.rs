@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpMovingSurfaceModifierConstraintAtom`
-/// -         version: `0`
-/// -       signature: `0x79ab517d`
-/// -          size:  48(x86)/ 64(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpMovingSurfaceModifierConstraintAtom`
+/// - version: `0`
+/// - signature: `0x79ab517d`
+/// - size: ` 48`(x86)/` 64`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkpMovingSurfaceModifierConstraintAtom {
     /// Alternative to C++ class inheritance.
     pub parent: hkpModifierConstraintAtom,
     /// # C++ Info
-    /// -          name: `velocity`(ctype: `hkVector4`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `velocity`(ctype: `hkVector4`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_velocity: Vector4,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkxSkinBinding`
-/// -         version: `2`
-/// -       signature: `0x5a93f338`
-/// -          size: 112(x86)/128(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkxSkinBinding`
+/// - version: `2`
+/// - signature: `0x5a93f338`
+/// - size: `112`(x86)/`128`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,28 +21,24 @@ pub struct hkxSkinBinding<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `mesh`(ctype: `struct hkxMesh*`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `mesh`(ctype: `struct hkxMesh*`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_mesh: Pointer,
     /// # C++ Info
-    /// -          name: `nodeNames`(ctype: `hkArray<hkStringPtr>`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `nodeNames`(ctype: `hkArray<hkStringPtr>`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_nodeNames: Vec<StringPtr<'a>>,
     /// # C++ Info
-    /// -          name: `bindPose`(ctype: `hkArray<hkMatrix4>`)
-    /// -        offset:  24(x86)/ 40(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `bindPose`(ctype: `hkArray<hkMatrix4>`)
+    /// - offset: ` 24`(x86)/` 40`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_bindPose: Vec<Matrix4>,
     /// # C++ Info
-    /// -          name: `initSkinTransform`(ctype: `hkMatrix4`)
-    /// -        offset:  48(x86)/ 64(x86_64)
-    /// -     type_size:  64(x86)/ 64(x86_64)
-    ///
+    /// - name: `initSkinTransform`(ctype: `hkMatrix4`)
+    /// - offset: ` 48`(x86)/` 64`(x86_64)
+    /// - type_size: ` 64`(x86)/` 64`(x86_64)
     pub m_initSkinTransform: Matrix4,
 }
 const _: () = {

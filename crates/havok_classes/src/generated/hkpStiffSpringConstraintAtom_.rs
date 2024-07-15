@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpStiffSpringConstraintAtom`
-/// -         version: `0`
-/// -       signature: `0x6c128096`
-/// -          size:   8(x86)/  8(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpStiffSpringConstraintAtom`
+/// - version: `0`
+/// - signature: `0x6c128096`
+/// - size: `  8`(x86)/`  8`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkpStiffSpringConstraintAtom {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConstraintAtom,
     /// # C++ Info
-    /// -          name: `length`(ctype: `hkReal`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `length`(ctype: `hkReal`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_length: f32,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbFootIkDriverInfo`
-/// -         version: `0`
-/// -       signature: `0xc6a09dbf`
-/// -          size:  56(x86)/ 72(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbFootIkDriverInfo`
+/// - version: `0`
+/// - signature: `0xc6a09dbf`
+/// - size: ` 56`(x86)/` 72`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,76 +21,64 @@ pub struct hkbFootIkDriverInfo {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `legs`(ctype: `hkArray<struct hkbFootIkDriverInfoLeg>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `legs`(ctype: `hkArray<struct hkbFootIkDriverInfoLeg>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_legs: Vec<hkbFootIkDriverInfoLeg>,
     /// # C++ Info
-    /// -          name: `raycastDistanceUp`(ctype: `hkReal`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `raycastDistanceUp`(ctype: `hkReal`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_raycastDistanceUp: f32,
     /// # C++ Info
-    /// -          name: `raycastDistanceDown`(ctype: `hkReal`)
-    /// -        offset:  24(x86)/ 36(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `raycastDistanceDown`(ctype: `hkReal`)
+    /// - offset: ` 24`(x86)/` 36`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_raycastDistanceDown: f32,
     /// # C++ Info
-    /// -          name: `originalGroundHeightMS`(ctype: `hkReal`)
-    /// -        offset:  28(x86)/ 40(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `originalGroundHeightMS`(ctype: `hkReal`)
+    /// - offset: ` 28`(x86)/` 40`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_originalGroundHeightMS: f32,
     /// # C++ Info
-    /// -          name: `verticalOffset`(ctype: `hkReal`)
-    /// -        offset:  32(x86)/ 44(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `verticalOffset`(ctype: `hkReal`)
+    /// - offset: ` 32`(x86)/` 44`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_verticalOffset: f32,
     /// # C++ Info
-    /// -          name: `collisionFilterInfo`(ctype: `hkUint32`)
-    /// -        offset:  36(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `collisionFilterInfo`(ctype: `hkUint32`)
+    /// - offset: ` 36`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_collisionFilterInfo: u32,
     /// # C++ Info
-    /// -          name: `forwardAlignFraction`(ctype: `hkReal`)
-    /// -        offset:  40(x86)/ 52(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `forwardAlignFraction`(ctype: `hkReal`)
+    /// - offset: ` 40`(x86)/` 52`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_forwardAlignFraction: f32,
     /// # C++ Info
-    /// -          name: `sidewaysAlignFraction`(ctype: `hkReal`)
-    /// -        offset:  44(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `sidewaysAlignFraction`(ctype: `hkReal`)
+    /// - offset: ` 44`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_sidewaysAlignFraction: f32,
     /// # C++ Info
-    /// -          name: `sidewaysSampleWidth`(ctype: `hkReal`)
-    /// -        offset:  48(x86)/ 60(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `sidewaysSampleWidth`(ctype: `hkReal`)
+    /// - offset: ` 48`(x86)/` 60`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_sidewaysSampleWidth: f32,
     /// # C++ Info
-    /// -          name: `lockFeetWhenPlanted`(ctype: `hkBool`)
-    /// -        offset:  52(x86)/ 64(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `lockFeetWhenPlanted`(ctype: `hkBool`)
+    /// - offset: ` 52`(x86)/` 64`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_lockFeetWhenPlanted: bool,
     /// # C++ Info
-    /// -          name: `useCharacterUpVector`(ctype: `hkBool`)
-    /// -        offset:  53(x86)/ 65(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `useCharacterUpVector`(ctype: `hkBool`)
+    /// - offset: ` 53`(x86)/` 65`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_useCharacterUpVector: bool,
     /// # C++ Info
-    /// -          name: `isQuadrupedNarrow`(ctype: `hkBool`)
-    /// -        offset:  54(x86)/ 66(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `isQuadrupedNarrow`(ctype: `hkBool`)
+    /// - offset: ` 54`(x86)/` 66`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_isQuadrupedNarrow: bool,
 }
 const _: () = {

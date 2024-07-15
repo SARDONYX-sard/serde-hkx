@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `BSiStateTaggingGenerator`
-/// -         version: `1`
-/// -       signature: `0xf0826fc1`
-/// -          size:  64(x86)/ 96(x86_64)
-/// -          vtable: true
-///
+/// - name: `BSiStateTaggingGenerator`
+/// - version: `1`
+/// - signature: `0xf0826fc1`
+/// - size: ` 64`(x86)/` 96`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,23 +21,20 @@ pub struct BSiStateTaggingGenerator<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
-    /// -          name: `pDefaultGenerator`(ctype: `struct hkbGenerator*`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `ALIGN_16`
-    ///
+    /// - name: `pDefaultGenerator`(ctype: `struct hkbGenerator*`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `ALIGN_16`
     pub m_pDefaultGenerator: Pointer,
     /// # C++ Info
-    /// -          name: `iStateToSetAs`(ctype: `hkInt32`)
-    /// -        offset:  52(x86)/ 88(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `iStateToSetAs`(ctype: `hkInt32`)
+    /// - offset: ` 52`(x86)/` 88`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_iStateToSetAs: i32,
     /// # C++ Info
-    /// -          name: `iPriority`(ctype: `hkInt32`)
-    /// -        offset:  56(x86)/ 92(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `iPriority`(ctype: `hkInt32`)
+    /// - offset: ` 56`(x86)/` 92`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_iPriority: i32,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbProjectStringData`
-/// -         version: `1`
-/// -       signature: `0x76ad60a`
-/// -          size:  76(x86)/120(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbProjectStringData`
+/// - version: `1`
+/// - signature: `0x76ad60a`
+/// - size: ` 76`(x86)/`120`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,59 +21,50 @@ pub struct hkbProjectStringData<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `animationFilenames`(ctype: `hkArray<hkStringPtr>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `animationFilenames`(ctype: `hkArray<hkStringPtr>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_animationFilenames: Vec<StringPtr<'a>>,
     /// # C++ Info
-    /// -          name: `behaviorFilenames`(ctype: `hkArray<hkStringPtr>`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `behaviorFilenames`(ctype: `hkArray<hkStringPtr>`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_behaviorFilenames: Vec<StringPtr<'a>>,
     /// # C++ Info
-    /// -          name: `characterFilenames`(ctype: `hkArray<hkStringPtr>`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `characterFilenames`(ctype: `hkArray<hkStringPtr>`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_characterFilenames: Vec<StringPtr<'a>>,
     /// # C++ Info
-    /// -          name: `eventNames`(ctype: `hkArray<hkStringPtr>`)
-    /// -        offset:  44(x86)/ 64(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `eventNames`(ctype: `hkArray<hkStringPtr>`)
+    /// - offset: ` 44`(x86)/` 64`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_eventNames: Vec<StringPtr<'a>>,
     /// # C++ Info
-    /// -          name: `animationPath`(ctype: `hkStringPtr`)
-    /// -        offset:  56(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `animationPath`(ctype: `hkStringPtr`)
+    /// - offset: ` 56`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_animationPath: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `behaviorPath`(ctype: `hkStringPtr`)
-    /// -        offset:  60(x86)/ 88(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `behaviorPath`(ctype: `hkStringPtr`)
+    /// - offset: ` 60`(x86)/` 88`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_behaviorPath: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `characterPath`(ctype: `hkStringPtr`)
-    /// -        offset:  64(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `characterPath`(ctype: `hkStringPtr`)
+    /// - offset: ` 64`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_characterPath: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `fullPathToSource`(ctype: `hkStringPtr`)
-    /// -        offset:  68(x86)/104(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `fullPathToSource`(ctype: `hkStringPtr`)
+    /// - offset: ` 68`(x86)/`104`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_fullPathToSource: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `rootPath`(ctype: `hkStringPtr`)
-    /// -        offset:  72(x86)/112(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `rootPath`(ctype: `hkStringPtr`)
+    /// - offset: ` 72`(x86)/`112`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_rootPath: StringPtr<'a>,
 }
 const _: () = {

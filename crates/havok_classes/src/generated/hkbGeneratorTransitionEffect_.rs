@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbGeneratorTransitionEffect`
-/// -         version: `1`
-/// -       signature: `0x5f771b12`
-/// -          size:  92(x86)/144(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbGeneratorTransitionEffect`
+/// - version: `1`
+/// - signature: `0x5f771b12`
+/// - size: ` 92`(x86)/`144`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,112 +21,96 @@ pub struct hkbGeneratorTransitionEffect<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbTransitionEffect<'a>,
     /// # C++ Info
-    /// -          name: `transitionGenerator`(ctype: `struct hkbGenerator*`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `transitionGenerator`(ctype: `struct hkbGenerator*`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_transitionGenerator: Pointer,
     /// # C++ Info
-    /// -          name: `blendInDuration`(ctype: `hkReal`)
-    /// -        offset:  48(x86)/ 88(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `blendInDuration`(ctype: `hkReal`)
+    /// - offset: ` 48`(x86)/` 88`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_blendInDuration: f32,
     /// # C++ Info
-    /// -          name: `blendOutDuration`(ctype: `hkReal`)
-    /// -        offset:  52(x86)/ 92(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `blendOutDuration`(ctype: `hkReal`)
+    /// - offset: ` 52`(x86)/` 92`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_blendOutDuration: f32,
     /// # C++ Info
-    /// -          name: `syncToGeneratorStartTime`(ctype: `hkBool`)
-    /// -        offset:  56(x86)/ 96(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `syncToGeneratorStartTime`(ctype: `hkBool`)
+    /// - offset: ` 56`(x86)/` 96`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_syncToGeneratorStartTime: bool,
     /// # C++ Info
-    /// -          name: `fromGenerator`(ctype: `void*`)
-    /// -        offset:  60(x86)/104(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `fromGenerator`(ctype: `void*`)
+    /// - offset: ` 60`(x86)/`104`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_fromGenerator: Pointer,
     /// # C++ Info
-    /// -          name: `toGenerator`(ctype: `void*`)
-    /// -        offset:  64(x86)/112(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `toGenerator`(ctype: `void*`)
+    /// - offset: ` 64`(x86)/`112`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_toGenerator: Pointer,
     /// # C++ Info
-    /// -          name: `timeInTransition`(ctype: `hkReal`)
-    /// -        offset:  68(x86)/120(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `timeInTransition`(ctype: `hkReal`)
+    /// - offset: ` 68`(x86)/`120`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_timeInTransition: f32,
     /// # C++ Info
-    /// -          name: `duration`(ctype: `hkReal`)
-    /// -        offset:  72(x86)/124(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `duration`(ctype: `hkReal`)
+    /// - offset: ` 72`(x86)/`124`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_duration: f32,
     /// # C++ Info
-    /// -          name: `effectiveBlendInDuration`(ctype: `hkReal`)
-    /// -        offset:  76(x86)/128(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `effectiveBlendInDuration`(ctype: `hkReal`)
+    /// - offset: ` 76`(x86)/`128`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_effectiveBlendInDuration: f32,
     /// # C++ Info
-    /// -          name: `effectiveBlendOutDuration`(ctype: `hkReal`)
-    /// -        offset:  80(x86)/132(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `effectiveBlendOutDuration`(ctype: `hkReal`)
+    /// - offset: ` 80`(x86)/`132`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_effectiveBlendOutDuration: f32,
     /// # C++ Info
-    /// -          name: `toGeneratorState`(ctype: `enum unknown`)
-    /// -        offset:  84(x86)/136(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `toGeneratorState`(ctype: `enum unknown`)
+    /// - offset: ` 84`(x86)/`136`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_toGeneratorState: i8,
     /// # C++ Info
-    /// -          name: `echoTransitionGenerator`(ctype: `hkBool`)
-    /// -        offset:  85(x86)/137(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `echoTransitionGenerator`(ctype: `hkBool`)
+    /// - offset: ` 85`(x86)/`137`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_echoTransitionGenerator: bool,
     /// # C++ Info
-    /// -          name: `echoToGenerator`(ctype: `hkBool`)
-    /// -        offset:  86(x86)/138(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `echoToGenerator`(ctype: `hkBool`)
+    /// - offset: ` 86`(x86)/`138`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_echoToGenerator: bool,
     /// # C++ Info
-    /// -          name: `justActivated`(ctype: `hkBool`)
-    /// -        offset:  87(x86)/139(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `justActivated`(ctype: `hkBool`)
+    /// - offset: ` 87`(x86)/`139`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_justActivated: bool,
     /// # C++ Info
-    /// -          name: `updateActiveNodes`(ctype: `hkBool`)
-    /// -        offset:  88(x86)/140(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `updateActiveNodes`(ctype: `hkBool`)
+    /// - offset: ` 88`(x86)/`140`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_updateActiveNodes: bool,
     /// # C++ Info
-    /// -          name: `stage`(ctype: `enum unknown`)
-    /// -        offset:  89(x86)/141(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `stage`(ctype: `enum unknown`)
+    /// - offset: ` 89`(x86)/`141`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_stage: i8,
 }
 const _: () = {

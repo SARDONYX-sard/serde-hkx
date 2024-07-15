@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkMeshShape`
-/// -         version: `0`
-/// -       signature: `0x9117d62e`
-/// -          size:   8(x86)/ 16(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkMeshShape`
+/// - version: `0`
+/// - signature: `0x9117d62e`
+/// - size: `  8`(x86)/` 16`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]

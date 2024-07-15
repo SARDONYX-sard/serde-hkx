@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbStateMachineProspectiveTransitionInfo`
-/// -         version: `2`
-/// -       signature: `0x3ab09a2e`
-/// -          size:  16(x86)/ 16(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkbStateMachineProspectiveTransitionInfo`
+/// - version: `2`
+/// - signature: `0x3ab09a2e`
+/// - size: ` 16`(x86)/` 16`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,22 +19,19 @@ pub struct hkbStateMachineProspectiveTransitionInfo {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `transitionInfoReference`(ctype: `struct hkbStateMachineTransitionInfoReference`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   6(x86)/  6(x86_64)
-    ///
+    /// - name: `transitionInfoReference`(ctype: `struct hkbStateMachineTransitionInfoReference`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  6`(x86)/`  6`(x86_64)
     pub m_transitionInfoReference: hkbStateMachineTransitionInfoReference,
     /// # C++ Info
-    /// -          name: `transitionInfoReferenceForTE`(ctype: `struct hkbStateMachineTransitionInfoReference`)
-    /// -        offset:   6(x86)/  6(x86_64)
-    /// -     type_size:   6(x86)/  6(x86_64)
-    ///
+    /// - name: `transitionInfoReferenceForTE`(ctype: `struct hkbStateMachineTransitionInfoReference`)
+    /// - offset: `  6`(x86)/`  6`(x86_64)
+    /// - type_size: `  6`(x86)/`  6`(x86_64)
     pub m_transitionInfoReferenceForTE: hkbStateMachineTransitionInfoReference,
     /// # C++ Info
-    /// -          name: `toStateId`(ctype: `hkInt32`)
-    /// -        offset:  12(x86)/ 12(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `toStateId`(ctype: `hkInt32`)
+    /// - offset: ` 12`(x86)/` 12`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_toStateId: i32,
 }
 const _: () = {

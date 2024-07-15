@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpHingeLimitsData`
-/// -         version: `0`
-/// -       signature: `0xbd46760a`
-/// -          size: 160(x86)/176(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpHingeLimitsData`
+/// - version: `0`
+/// - signature: `0xbd46760a`
+/// - size: `160`(x86)/`176`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,11 +21,10 @@ pub struct hkpHingeLimitsData {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConstraintData,
     /// # C++ Info
-    /// -          name: `atoms`(ctype: `struct hkpHingeLimitsDataAtoms`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size: 144(x86)/144(x86_64)
-    /// -         flags: `ALIGN_16`
-    ///
+    /// - name: `atoms`(ctype: `struct hkpHingeLimitsDataAtoms`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: `144`(x86)/`144`(x86_64)
+    /// - flags: `ALIGN_16`
     pub m_atoms: hkpHingeLimitsDataAtoms,
 }
 const _: () = {

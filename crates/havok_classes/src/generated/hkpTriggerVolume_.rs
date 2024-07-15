@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpTriggerVolume`
-/// -         version: `0`
-/// -       signature: `0xa29a8d1a`
-/// -          size:  52(x86)/ 88(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpTriggerVolume`
+/// - version: `0`
+/// - signature: `0xa29a8d1a`
+/// - size: ` 52`(x86)/` 88`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,28 +21,24 @@ pub struct hkpTriggerVolume {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `overlappingBodies`(ctype: `hkArray<hkpRigidBody*>`)
-    /// -        offset:  20(x86)/ 40(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `overlappingBodies`(ctype: `hkArray<hkpRigidBody*>`)
+    /// - offset: ` 20`(x86)/` 40`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_overlappingBodies: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `eventQueue`(ctype: `hkArray<struct hkpTriggerVolumeEventInfo>`)
-    /// -        offset:  32(x86)/ 56(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `eventQueue`(ctype: `hkArray<struct hkpTriggerVolumeEventInfo>`)
+    /// - offset: ` 32`(x86)/` 56`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_eventQueue: Vec<hkpTriggerVolumeEventInfo>,
     /// # C++ Info
-    /// -          name: `triggerBody`(ctype: `struct hkpRigidBody*`)
-    /// -        offset:  44(x86)/ 72(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `triggerBody`(ctype: `struct hkpRigidBody*`)
+    /// - offset: ` 44`(x86)/` 72`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_triggerBody: Pointer,
     /// # C++ Info
-    /// -          name: `sequenceNumber`(ctype: `hkUint32`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `sequenceNumber`(ctype: `hkUint32`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_sequenceNumber: u32,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `BSRagdollContactListenerModifier`
-/// -         version: `0`
-/// -       signature: `0x8003d8ce`
-/// -          size:  76(x86)/136(x86_64)
-/// -          vtable: true
-///
+/// - name: `BSRagdollContactListenerModifier`
+/// - version: `0`
+/// - signature: `0x8003d8ce`
+/// - size: ` 76`(x86)/`136`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,30 +21,26 @@ pub struct BSRagdollContactListenerModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `contactEvent`(ctype: `struct hkbEventProperty`)
-    /// -        offset:  48(x86)/ 88(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    ///
+    /// - name: `contactEvent`(ctype: `struct hkbEventProperty`)
+    /// - offset: ` 48`(x86)/` 88`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
     pub m_contactEvent: hkbEventProperty,
     /// # C++ Info
-    /// -          name: `bones`(ctype: `struct hkbBoneIndexArray*`)
-    /// -        offset:  56(x86)/104(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `bones`(ctype: `struct hkbBoneIndexArray*`)
+    /// - offset: ` 56`(x86)/`104`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_bones: Pointer,
     /// # C++ Info
-    /// -          name: `throwEvent`(ctype: `hkBool`)
-    /// -        offset:  60(x86)/112(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `throwEvent`(ctype: `hkBool`)
+    /// - offset: ` 60`(x86)/`112`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_throwEvent: bool,
     /// # C++ Info
-    /// -          name: `ragdollRigidBodies`(ctype: `hkArray<void*>`)
-    /// -        offset:  64(x86)/120(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `ragdollRigidBodies`(ctype: `hkArray<void*>`)
+    /// - offset: ` 64`(x86)/`120`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_ragdollRigidBodies: Vec<Pointer>,
 }
 const _: () = {

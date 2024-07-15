@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpTriSampledHeightFieldBvTreeShape`
-/// -         version: `0`
-/// -       signature: `0x58e1e585`
-/// -          size:  48(x86)/ 80(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpTriSampledHeightFieldBvTreeShape`
+/// - version: `0`
+/// - signature: `0x58e1e585`
+/// - size: ` 48`(x86)/` 80`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,29 +21,25 @@ pub struct hkpTriSampledHeightFieldBvTreeShape {
     /// Alternative to C++ class inheritance.
     pub parent: hkpBvTreeShape,
     /// # C++ Info
-    /// -          name: `childContainer`(ctype: `struct hkpSingleShapeContainer`)
-    /// -        offset:  20(x86)/ 40(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    ///
+    /// - name: `childContainer`(ctype: `struct hkpSingleShapeContainer`)
+    /// - offset: ` 20`(x86)/` 40`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
     pub m_childContainer: hkpSingleShapeContainer,
     /// # C++ Info
-    /// -          name: `childSize`(ctype: `hkInt32`)
-    /// -        offset:  28(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `childSize`(ctype: `hkInt32`)
+    /// - offset: ` 28`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_childSize: i32,
     /// # C++ Info
-    /// -          name: `wantAabbRejectionTest`(ctype: `hkBool`)
-    /// -        offset:  32(x86)/ 60(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `wantAabbRejectionTest`(ctype: `hkBool`)
+    /// - offset: ` 32`(x86)/` 60`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_wantAabbRejectionTest: bool,
     /// # C++ Info
-    /// -          name: `padding`(ctype: `hkUint8[12]`)
-    /// -        offset:  33(x86)/ 61(x86_64)
-    /// -     type_size:  12(x86)/ 12(x86_64)
-    ///
+    /// - name: `padding`(ctype: `hkUint8[12]`)
+    /// - offset: ` 33`(x86)/` 61`(x86_64)
+    /// - type_size: ` 12`(x86)/` 12`(x86_64)
     pub m_padding: [u8; 12usize],
 }
 const _: () = {

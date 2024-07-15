@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpVehicleDefaultBrakeWheelBrakingProperties`
-/// -         version: `0`
-/// -       signature: `0x1ffad971`
-/// -          size:  12(x86)/ 12(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpVehicleDefaultBrakeWheelBrakingProperties`
+/// - version: `0`
+/// - signature: `0x1ffad971`
+/// - size: ` 12`(x86)/` 12`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,22 +19,19 @@ pub struct hkpVehicleDefaultBrakeWheelBrakingProperties {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `maxBreakingTorque`(ctype: `hkReal`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxBreakingTorque`(ctype: `hkReal`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxBreakingTorque: f32,
     /// # C++ Info
-    /// -          name: `minPedalInputToBlock`(ctype: `hkReal`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `minPedalInputToBlock`(ctype: `hkReal`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_minPedalInputToBlock: f32,
     /// # C++ Info
-    /// -          name: `isConnectedToHandbrake`(ctype: `hkBool`)
-    /// -        offset:   8(x86)/  8(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `isConnectedToHandbrake`(ctype: `hkBool`)
+    /// - offset: `  8`(x86)/`  8`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_isConnectedToHandbrake: bool,
 }
 const _: () = {

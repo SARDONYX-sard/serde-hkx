@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbClipGeneratorInternalState`
-/// -         version: `0`
-/// -       signature: `0x26ce5bf3`
-/// -          size: 112(x86)/112(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbClipGeneratorInternalState`
+/// - version: `0`
+/// - signature: `0x26ce5bf3`
+/// - size: `112`(x86)/`112`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,64 +21,54 @@ pub struct hkbClipGeneratorInternalState {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `extractedMotion`(ctype: `hkQsTransform`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  48(x86)/ 48(x86_64)
-    ///
+    /// - name: `extractedMotion`(ctype: `hkQsTransform`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 48`(x86)/` 48`(x86_64)
     pub m_extractedMotion: QsTransform,
     /// # C++ Info
-    /// -          name: `echos`(ctype: `hkArray<struct hkbClipGeneratorEcho>`)
-    /// -        offset:  64(x86)/ 64(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `echos`(ctype: `hkArray<struct hkbClipGeneratorEcho>`)
+    /// - offset: ` 64`(x86)/` 64`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_echos: Vec<hkbClipGeneratorEcho>,
     /// # C++ Info
-    /// -          name: `localTime`(ctype: `hkReal`)
-    /// -        offset:  76(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `localTime`(ctype: `hkReal`)
+    /// - offset: ` 76`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_localTime: f32,
     /// # C++ Info
-    /// -          name: `time`(ctype: `hkReal`)
-    /// -        offset:  80(x86)/ 84(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `time`(ctype: `hkReal`)
+    /// - offset: ` 80`(x86)/` 84`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_time: f32,
     /// # C++ Info
-    /// -          name: `previousUserControlledTimeFraction`(ctype: `hkReal`)
-    /// -        offset:  84(x86)/ 88(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `previousUserControlledTimeFraction`(ctype: `hkReal`)
+    /// - offset: ` 84`(x86)/` 88`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_previousUserControlledTimeFraction: f32,
     /// # C++ Info
-    /// -          name: `bufferSize`(ctype: `hkInt32`)
-    /// -        offset:  88(x86)/ 92(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `bufferSize`(ctype: `hkInt32`)
+    /// - offset: ` 88`(x86)/` 92`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_bufferSize: i32,
     /// # C++ Info
-    /// -          name: `echoBufferSize`(ctype: `hkInt32`)
-    /// -        offset:  92(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `echoBufferSize`(ctype: `hkInt32`)
+    /// - offset: ` 92`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_echoBufferSize: i32,
     /// # C++ Info
-    /// -          name: `atEnd`(ctype: `hkBool`)
-    /// -        offset:  96(x86)/100(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `atEnd`(ctype: `hkBool`)
+    /// - offset: ` 96`(x86)/`100`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_atEnd: bool,
     /// # C++ Info
-    /// -          name: `ignoreStartTime`(ctype: `hkBool`)
-    /// -        offset:  97(x86)/101(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `ignoreStartTime`(ctype: `hkBool`)
+    /// - offset: ` 97`(x86)/`101`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_ignoreStartTime: bool,
     /// # C++ Info
-    /// -          name: `pingPongBackward`(ctype: `hkBool`)
-    /// -        offset:  98(x86)/102(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `pingPongBackward`(ctype: `hkBool`)
+    /// - offset: ` 98`(x86)/`102`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_pingPongBackward: bool,
 }
 const _: () = {

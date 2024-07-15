@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbModifier`
-/// -         version: `0`
-/// -       signature: `0x96ec5ced`
-/// -          size:  44(x86)/ 80(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbModifier`
+/// - version: `0`
+/// - signature: `0x96ec5ced`
+/// - size: ` 44`(x86)/` 80`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,17 +21,15 @@ pub struct hkbModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbNode<'a>,
     /// # C++ Info
-    /// -          name: `enable`(ctype: `hkBool`)
-    /// -        offset:  40(x86)/ 72(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `enable`(ctype: `hkBool`)
+    /// - offset: ` 40`(x86)/` 72`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_enable: bool,
     /// # C++ Info
-    /// -          name: `padModifier`(ctype: `hkBool[3]`)
-    /// -        offset:  41(x86)/ 73(x86_64)
-    /// -     type_size:   3(x86)/  3(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `padModifier`(ctype: `hkBool[3]`)
+    /// - offset: ` 41`(x86)/` 73`(x86_64)
+    /// - type_size: `  3`(x86)/`  3`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_padModifier: [bool; 3usize],
 }
 const _: () = {

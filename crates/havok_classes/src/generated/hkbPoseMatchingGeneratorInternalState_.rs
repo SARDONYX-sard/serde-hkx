@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbPoseMatchingGeneratorInternalState`
-/// -         version: `0`
-/// -       signature: `0x552d9dd4`
-/// -          size:  28(x86)/ 40(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbPoseMatchingGeneratorInternalState`
+/// - version: `0`
+/// - signature: `0x552d9dd4`
+/// - size: ` 28`(x86)/` 40`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,34 +21,29 @@ pub struct hkbPoseMatchingGeneratorInternalState {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `currentMatch`(ctype: `hkInt32`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `currentMatch`(ctype: `hkInt32`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_currentMatch: i32,
     /// # C++ Info
-    /// -          name: `bestMatch`(ctype: `hkInt32`)
-    /// -        offset:  12(x86)/ 20(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `bestMatch`(ctype: `hkInt32`)
+    /// - offset: ` 12`(x86)/` 20`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_bestMatch: i32,
     /// # C++ Info
-    /// -          name: `timeSinceBetterMatch`(ctype: `hkReal`)
-    /// -        offset:  16(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `timeSinceBetterMatch`(ctype: `hkReal`)
+    /// - offset: ` 16`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_timeSinceBetterMatch: f32,
     /// # C++ Info
-    /// -          name: `error`(ctype: `hkReal`)
-    /// -        offset:  20(x86)/ 28(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `error`(ctype: `hkReal`)
+    /// - offset: ` 20`(x86)/` 28`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_error: f32,
     /// # C++ Info
-    /// -          name: `resetCurrentMatchLocalTime`(ctype: `hkBool`)
-    /// -        offset:  24(x86)/ 32(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `resetCurrentMatchLocalTime`(ctype: `hkBool`)
+    /// - offset: ` 24`(x86)/` 32`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_resetCurrentMatchLocalTime: bool,
 }
 const _: () = {

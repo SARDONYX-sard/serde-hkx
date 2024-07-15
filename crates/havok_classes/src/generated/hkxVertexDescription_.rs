@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkxVertexDescription`
-/// -         version: `1`
-/// -       signature: `0x2df6313d`
-/// -          size:  12(x86)/ 16(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkxVertexDescription`
+/// - version: `1`
+/// - signature: `0x2df6313d`
+/// - size: ` 12`(x86)/` 16`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,10 +19,9 @@ pub struct hkxVertexDescription {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `decls`(ctype: `hkArray<struct hkxVertexDescriptionElementDecl>`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `decls`(ctype: `hkArray<struct hkxVertexDescriptionElementDecl>`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_decls: Vec<hkxVertexDescriptionElementDecl>,
 }
 const _: () = {

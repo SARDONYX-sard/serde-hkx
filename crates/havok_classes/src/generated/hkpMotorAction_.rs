@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpMotorAction`
-/// -         version: `0`
-/// -       signature: `0x8ff131d9`
-/// -          size:  64(x86)/ 96(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpMotorAction`
+/// - version: `0`
+/// - signature: `0x8ff131d9`
+/// - size: ` 64`(x86)/` 96`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,28 +21,24 @@ pub struct hkpMotorAction<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkpUnaryAction<'a>,
     /// # C++ Info
-    /// -          name: `axis`(ctype: `hkVector4`)
-    /// -        offset:  32(x86)/ 64(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `axis`(ctype: `hkVector4`)
+    /// - offset: ` 32`(x86)/` 64`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_axis: Vector4,
     /// # C++ Info
-    /// -          name: `spinRate`(ctype: `hkReal`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `spinRate`(ctype: `hkReal`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_spinRate: f32,
     /// # C++ Info
-    /// -          name: `gain`(ctype: `hkReal`)
-    /// -        offset:  52(x86)/ 84(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `gain`(ctype: `hkReal`)
+    /// - offset: ` 52`(x86)/` 84`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_gain: f32,
     /// # C++ Info
-    /// -          name: `active`(ctype: `hkBool`)
-    /// -        offset:  56(x86)/ 88(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `active`(ctype: `hkBool`)
+    /// - offset: ` 56`(x86)/` 88`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_active: bool,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbNode`
-/// -         version: `1`
-/// -       signature: `0x6d26f61d`
-/// -          size:  40(x86)/ 72(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbNode`
+/// - version: `1`
+/// - signature: `0x6d26f61d`
+/// - size: ` 40`(x86)/` 72`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,37 +21,32 @@ pub struct hkbNode<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbBindable,
     /// # C++ Info
-    /// -          name: `userData`(ctype: `hkUlong`)
-    /// -        offset:  28(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `userData`(ctype: `hkUlong`)
+    /// - offset: ` 28`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_userData: u64,
     /// # C++ Info
-    /// -          name: `name`(ctype: `hkStringPtr`)
-    /// -        offset:  32(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `name`(ctype: `hkStringPtr`)
+    /// - offset: ` 32`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_name: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `id`(ctype: `hkInt16`)
-    /// -        offset:  36(x86)/ 64(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `id`(ctype: `hkInt16`)
+    /// - offset: ` 36`(x86)/` 64`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_id: i16,
     /// # C++ Info
-    /// -          name: `cloneState`(ctype: `enum unknown`)
-    /// -        offset:  38(x86)/ 66(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `cloneState`(ctype: `enum unknown`)
+    /// - offset: ` 38`(x86)/` 66`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_cloneState: i8,
     /// # C++ Info
-    /// -          name: `padNode`(ctype: `hkBool[1]`)
-    /// -        offset:  39(x86)/ 67(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `padNode`(ctype: `hkBool[1]`)
+    /// - offset: ` 39`(x86)/` 67`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_padNode: [bool; 1usize],
 }
 const _: () = {

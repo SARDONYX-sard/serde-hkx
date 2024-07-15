@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpPairCollisionFilter`
-/// -         version: `0`
-/// -       signature: `0x4abc140e`
-/// -          size:  64(x86)/ 96(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpPairCollisionFilter`
+/// - version: `0`
+/// - signature: `0x4abc140e`
+/// - size: ` 64`(x86)/` 96`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,17 +21,15 @@ pub struct hkpPairCollisionFilter {
     /// Alternative to C++ class inheritance.
     pub parent: hkpCollisionFilter,
     /// # C++ Info
-    /// -          name: `disabledPairs`(ctype: `struct hkpPairCollisionFilterMapPairFilterKeyOverrideType`)
-    /// -        offset:  48(x86)/ 72(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `disabledPairs`(ctype: `struct hkpPairCollisionFilterMapPairFilterKeyOverrideType`)
+    /// - offset: ` 48`(x86)/` 72`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_disabledPairs: hkpPairCollisionFilterMapPairFilterKeyOverrideType,
     /// # C++ Info
-    /// -          name: `childFilter`(ctype: `struct hkpCollisionFilter*`)
-    /// -        offset:  60(x86)/ 88(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `childFilter`(ctype: `struct hkpCollisionFilter*`)
+    /// - offset: ` 60`(x86)/` 88`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_childFilter: Pointer,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpBallGun`
-/// -         version: `0`
-/// -       signature: `0x57b06d35`
-/// -          size:  96(x86)/112(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpBallGun`
+/// - version: `0`
+/// - signature: `0x57b06d35`
+/// - size: ` 96`(x86)/`112`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,47 +21,40 @@ pub struct hkpBallGun<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkpFirstPersonGun<'a>,
     /// # C++ Info
-    /// -          name: `bulletRadius`(ctype: `hkReal`)
-    /// -        offset:  32(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `bulletRadius`(ctype: `hkReal`)
+    /// - offset: ` 32`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_bulletRadius: f32,
     /// # C++ Info
-    /// -          name: `bulletVelocity`(ctype: `hkReal`)
-    /// -        offset:  36(x86)/ 60(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `bulletVelocity`(ctype: `hkReal`)
+    /// - offset: ` 36`(x86)/` 60`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_bulletVelocity: f32,
     /// # C++ Info
-    /// -          name: `bulletMass`(ctype: `hkReal`)
-    /// -        offset:  40(x86)/ 64(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `bulletMass`(ctype: `hkReal`)
+    /// - offset: ` 40`(x86)/` 64`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_bulletMass: f32,
     /// # C++ Info
-    /// -          name: `damageMultiplier`(ctype: `hkReal`)
-    /// -        offset:  44(x86)/ 68(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `damageMultiplier`(ctype: `hkReal`)
+    /// - offset: ` 44`(x86)/` 68`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_damageMultiplier: f32,
     /// # C++ Info
-    /// -          name: `maxBulletsInWorld`(ctype: `hkInt32`)
-    /// -        offset:  48(x86)/ 72(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxBulletsInWorld`(ctype: `hkInt32`)
+    /// - offset: ` 48`(x86)/` 72`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxBulletsInWorld: i32,
     /// # C++ Info
-    /// -          name: `bulletOffsetFromCenter`(ctype: `hkVector4`)
-    /// -        offset:  64(x86)/ 80(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `bulletOffsetFromCenter`(ctype: `hkVector4`)
+    /// - offset: ` 64`(x86)/` 80`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_bulletOffsetFromCenter: Vector4,
     /// # C++ Info
-    /// -          name: `addedBodies`(ctype: `void*`)
-    /// -        offset:  80(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `addedBodies`(ctype: `void*`)
+    /// - offset: ` 80`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_addedBodies: Pointer,
 }
 const _: () = {

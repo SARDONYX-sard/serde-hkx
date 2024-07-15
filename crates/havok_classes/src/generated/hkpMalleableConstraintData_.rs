@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpMalleableConstraintData`
-/// -         version: `0`
-/// -       signature: `0x6748b2cf`
-/// -          size:  32(x86)/ 64(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpMalleableConstraintData`
+/// - version: `0`
+/// - signature: `0x6748b2cf`
+/// - size: ` 32`(x86)/` 64`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkpMalleableConstraintData {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConstraintData,
     /// # C++ Info
-    /// -          name: `constraintData`(ctype: `struct hkpConstraintData*`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `constraintData`(ctype: `struct hkpConstraintData*`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_constraintData: Pointer,
     /// # C++ Info
-    /// -          name: `atoms`(ctype: `struct hkpBridgeAtoms`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 24(x86_64)
-    ///
+    /// - name: `atoms`(ctype: `struct hkpBridgeAtoms`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 24`(x86_64)
     pub m_atoms: hkpBridgeAtoms,
     /// # C++ Info
-    /// -          name: `strength`(ctype: `hkReal`)
-    /// -        offset:  28(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `strength`(ctype: `hkReal`)
+    /// - offset: ` 28`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_strength: f32,
 }
 const _: () = {

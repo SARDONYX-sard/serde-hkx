@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpSerializedAgentNnEntry`
-/// -         version: `0`
-/// -       signature: `0x49ec7de3`
-/// -          size: 320(x86)/368(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpSerializedAgentNnEntry`
+/// - version: `0`
+/// - signature: `0x49ec7de3`
+/// - size: `320`(x86)/`368`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,90 +21,76 @@ pub struct hkpSerializedAgentNnEntry {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `bodyA`(ctype: `struct hkpEntity*`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `bodyA`(ctype: `struct hkpEntity*`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_bodyA: Pointer,
     /// # C++ Info
-    /// -          name: `bodyB`(ctype: `struct hkpEntity*`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `bodyB`(ctype: `struct hkpEntity*`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_bodyB: Pointer,
     /// # C++ Info
-    /// -          name: `bodyAId`(ctype: `hkUlong`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `bodyAId`(ctype: `hkUlong`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_bodyAId: u64,
     /// # C++ Info
-    /// -          name: `bodyBId`(ctype: `hkUlong`)
-    /// -        offset:  20(x86)/ 40(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `bodyBId`(ctype: `hkUlong`)
+    /// - offset: ` 20`(x86)/` 40`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_bodyBId: u64,
     /// # C++ Info
-    /// -          name: `useEntityIds`(ctype: `hkBool`)
-    /// -        offset:  24(x86)/ 48(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `useEntityIds`(ctype: `hkBool`)
+    /// - offset: ` 24`(x86)/` 48`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_useEntityIds: bool,
     /// # C++ Info
-    /// -          name: `agentType`(ctype: `enum SerializedAgentType`)
-    /// -        offset:  25(x86)/ 49(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `agentType`(ctype: `enum SerializedAgentType`)
+    /// - offset: ` 25`(x86)/` 49`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_agentType: SerializedAgentType,
     /// # C++ Info
-    /// -          name: `atom`(ctype: `struct hkpSimpleContactConstraintAtom`)
-    /// -        offset:  32(x86)/ 64(x86_64)
-    /// -     type_size:  48(x86)/ 48(x86_64)
-    ///
+    /// - name: `atom`(ctype: `struct hkpSimpleContactConstraintAtom`)
+    /// - offset: ` 32`(x86)/` 64`(x86_64)
+    /// - type_size: ` 48`(x86)/` 48`(x86_64)
     pub m_atom: hkpSimpleContactConstraintAtom,
     /// # C++ Info
-    /// -          name: `propertiesStream`(ctype: `hkArray<hkUint8>`)
-    /// -        offset:  80(x86)/112(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `propertiesStream`(ctype: `hkArray<hkUint8>`)
+    /// - offset: ` 80`(x86)/`112`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_propertiesStream: Vec<u8>,
     /// # C++ Info
-    /// -          name: `contactPoints`(ctype: `hkArray<struct hkContactPoint>`)
-    /// -        offset:  92(x86)/128(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `contactPoints`(ctype: `hkArray<struct hkContactPoint>`)
+    /// - offset: ` 92`(x86)/`128`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_contactPoints: Vec<hkContactPoint>,
     /// # C++ Info
-    /// -          name: `cpIdMgr`(ctype: `hkArray<hkUint8>`)
-    /// -        offset: 104(x86)/144(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `cpIdMgr`(ctype: `hkArray<hkUint8>`)
+    /// - offset: `104`(x86)/`144`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_cpIdMgr: Vec<u8>,
     /// # C++ Info
-    /// -          name: `nnEntryData`(ctype: `hkUint8[160]`)
-    /// -        offset: 116(x86)/160(x86_64)
-    /// -     type_size: 160(x86)/160(x86_64)
-    ///
+    /// - name: `nnEntryData`(ctype: `hkUint8[160]`)
+    /// - offset: `116`(x86)/`160`(x86_64)
+    /// - type_size: `160`(x86)/`160`(x86_64)
     #[cfg_attr(feature = "serde", serde_as(as = "[_; 160]"))]
     #[educe(Default = [0;160usize])]
     pub m_nnEntryData: [u8; 160usize],
     /// # C++ Info
-    /// -          name: `trackInfo`(ctype: `struct hkpSerializedTrack1nInfo`)
-    /// -        offset: 276(x86)/320(x86_64)
-    /// -     type_size:  24(x86)/ 32(x86_64)
-    ///
+    /// - name: `trackInfo`(ctype: `struct hkpSerializedTrack1nInfo`)
+    /// - offset: `276`(x86)/`320`(x86_64)
+    /// - type_size: ` 24`(x86)/` 32`(x86_64)
     pub m_trackInfo: hkpSerializedTrack1nInfo,
     /// # C++ Info
-    /// -          name: `endianCheckBuffer`(ctype: `hkUint8[4]`)
-    /// -        offset: 300(x86)/352(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `endianCheckBuffer`(ctype: `hkUint8[4]`)
+    /// - offset: `300`(x86)/`352`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_endianCheckBuffer: [u8; 4usize],
     /// # C++ Info
-    /// -          name: `version`(ctype: `hkUint32`)
-    /// -        offset: 304(x86)/356(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `version`(ctype: `hkUint32`)
+    /// - offset: `304`(x86)/`356`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_version: u32,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpPhysicsSystem`
-/// -         version: `0`
-/// -       signature: `0xff724c17`
-/// -          size:  68(x86)/104(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpPhysicsSystem`
+/// - version: `0`
+/// - signature: `0xff724c17`
+/// - size: ` 68`(x86)/`104`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,46 +21,39 @@ pub struct hkpPhysicsSystem<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `rigidBodies`(ctype: `hkArray<hkpRigidBody*>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `rigidBodies`(ctype: `hkArray<hkpRigidBody*>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_rigidBodies: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `constraints`(ctype: `hkArray<hkpConstraintInstance*>`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `constraints`(ctype: `hkArray<hkpConstraintInstance*>`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_constraints: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `actions`(ctype: `hkArray<hkpAction*>`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `actions`(ctype: `hkArray<hkpAction*>`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_actions: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `phantoms`(ctype: `hkArray<hkpPhantom*>`)
-    /// -        offset:  44(x86)/ 64(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `phantoms`(ctype: `hkArray<hkpPhantom*>`)
+    /// - offset: ` 44`(x86)/` 64`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_phantoms: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `name`(ctype: `hkStringPtr`)
-    /// -        offset:  56(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `name`(ctype: `hkStringPtr`)
+    /// - offset: ` 56`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_name: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `userData`(ctype: `hkUlong`)
-    /// -        offset:  60(x86)/ 88(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `userData`(ctype: `hkUlong`)
+    /// - offset: ` 60`(x86)/` 88`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_userData: u64,
     /// # C++ Info
-    /// -          name: `active`(ctype: `hkBool`)
-    /// -        offset:  64(x86)/ 96(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `active`(ctype: `hkBool`)
+    /// - offset: ` 64`(x86)/` 96`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_active: bool,
 }
 const _: () = {

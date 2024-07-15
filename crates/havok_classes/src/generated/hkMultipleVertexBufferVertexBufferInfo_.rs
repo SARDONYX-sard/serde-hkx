@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkMultipleVertexBufferVertexBufferInfo`
-/// -         version: `0`
-/// -       signature: `0xdafbe0e6`
-/// -          size:  12(x86)/ 24(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkMultipleVertexBufferVertexBufferInfo`
+/// - version: `0`
+/// - signature: `0xdafbe0e6`
+/// - size: ` 12`(x86)/` 24`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,23 +19,20 @@ pub struct hkMultipleVertexBufferVertexBufferInfo {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `vertexBuffer`(ctype: `struct hkMeshVertexBuffer*`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `vertexBuffer`(ctype: `struct hkMeshVertexBuffer*`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_vertexBuffer: Pointer,
     /// # C++ Info
-    /// -          name: `lockedVertices`(ctype: `void*`)
-    /// -        offset:   4(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `lockedVertices`(ctype: `void*`)
+    /// - offset: `  4`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_lockedVertices: Pointer,
     /// # C++ Info
-    /// -          name: `isLocked`(ctype: `hkBool`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `isLocked`(ctype: `hkBool`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_isLocked: bool,
 }
 const _: () = {

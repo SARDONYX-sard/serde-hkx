@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbExpressionCondition`
-/// -         version: `1`
-/// -       signature: `0x1c3c1045`
-/// -          size:  16(x86)/ 32(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbExpressionCondition`
+/// - version: `1`
+/// - signature: `0x1c3c1045`
+/// - size: ` 16`(x86)/` 32`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,17 +21,15 @@ pub struct hkbExpressionCondition<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbCondition,
     /// # C++ Info
-    /// -          name: `expression`(ctype: `hkStringPtr`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `expression`(ctype: `hkStringPtr`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_expression: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `compiledExpressionSet`(ctype: `void*`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `compiledExpressionSet`(ctype: `void*`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_compiledExpressionSet: Pointer,
 }
 const _: () = {

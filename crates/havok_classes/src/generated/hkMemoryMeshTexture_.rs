@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkMemoryMeshTexture`
-/// -         version: `2`
-/// -       signature: `0x2db6577c`
-/// -          size:  32(x86)/ 48(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkMemoryMeshTexture`
+/// - version: `2`
+/// - signature: `0x2db6577c`
+/// - size: ` 32`(x86)/` 48`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,46 +21,39 @@ pub struct hkMemoryMeshTexture<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkMeshTexture,
     /// # C++ Info
-    /// -          name: `filename`(ctype: `hkStringPtr`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `filename`(ctype: `hkStringPtr`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_filename: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `data`(ctype: `hkArray<hkUint8>`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `data`(ctype: `hkArray<hkUint8>`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_data: Vec<u8>,
     /// # C++ Info
-    /// -          name: `format`(ctype: `enum Format`)
-    /// -        offset:  24(x86)/ 40(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `format`(ctype: `enum Format`)
+    /// - offset: ` 24`(x86)/` 40`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_format: Format,
     /// # C++ Info
-    /// -          name: `hasMipMaps`(ctype: `hkBool`)
-    /// -        offset:  25(x86)/ 41(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `hasMipMaps`(ctype: `hkBool`)
+    /// - offset: ` 25`(x86)/` 41`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_hasMipMaps: bool,
     /// # C++ Info
-    /// -          name: `filterMode`(ctype: `enum FilterMode`)
-    /// -        offset:  26(x86)/ 42(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `filterMode`(ctype: `enum FilterMode`)
+    /// - offset: ` 26`(x86)/` 42`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_filterMode: FilterMode,
     /// # C++ Info
-    /// -          name: `usageHint`(ctype: `enum TextureUsageType`)
-    /// -        offset:  27(x86)/ 43(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `usageHint`(ctype: `enum TextureUsageType`)
+    /// - offset: ` 27`(x86)/` 43`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_usageHint: TextureUsageType,
     /// # C++ Info
-    /// -          name: `textureCoordChannel`(ctype: `hkInt32`)
-    /// -        offset:  28(x86)/ 44(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `textureCoordChannel`(ctype: `hkInt32`)
+    /// - offset: ` 28`(x86)/` 44`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_textureCoordChannel: i32,
 }
 const _: () = {

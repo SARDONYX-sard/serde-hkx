@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkMoppBvTreeShapeBase`
-/// -         version: `0`
-/// -       signature: `0x7c338c66`
-/// -          size:  48(x86)/ 80(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkMoppBvTreeShapeBase`
+/// - version: `0`
+/// - signature: `0x7c338c66`
+/// - size: ` 48`(x86)/` 80`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,31 +21,27 @@ pub struct hkMoppBvTreeShapeBase {
     /// Alternative to C++ class inheritance.
     pub parent: hkpBvTreeShape,
     /// # C++ Info
-    /// -          name: `code`(ctype: `struct hkpMoppCode*`)
-    /// -        offset:  20(x86)/ 40(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `code`(ctype: `struct hkpMoppCode*`)
+    /// - offset: ` 20`(x86)/` 40`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_code: Pointer,
     /// # C++ Info
-    /// -          name: `moppData`(ctype: `void*`)
-    /// -        offset:  24(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `moppData`(ctype: `void*`)
+    /// - offset: ` 24`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_moppData: Pointer,
     /// # C++ Info
-    /// -          name: `moppDataSize`(ctype: `hkUint32`)
-    /// -        offset:  28(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `moppDataSize`(ctype: `hkUint32`)
+    /// - offset: ` 28`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_moppDataSize: u32,
     /// # C++ Info
-    /// -          name: `codeInfoCopy`(ctype: `hkVector4`)
-    /// -        offset:  32(x86)/ 64(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `codeInfoCopy`(ctype: `hkVector4`)
+    /// - offset: ` 32`(x86)/` 64`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_codeInfoCopy: Vector4,
 }
 const _: () = {

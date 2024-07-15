@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpBvShape`
-/// -         version: `0`
-/// -       signature: `0x286eb64c`
-/// -          size:  28(x86)/ 56(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpBvShape`
+/// - version: `0`
+/// - signature: `0x286eb64c`
+/// - size: ` 28`(x86)/` 56`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkpBvShape {
     /// Alternative to C++ class inheritance.
     pub parent: hkpShape,
     /// # C++ Info
-    /// -          name: `boundingVolumeShape`(ctype: `struct hkpShape*`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `boundingVolumeShape`(ctype: `struct hkpShape*`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_boundingVolumeShape: Pointer,
     /// # C++ Info
-    /// -          name: `childShape`(ctype: `struct hkpSingleShapeContainer`)
-    /// -        offset:  20(x86)/ 40(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    ///
+    /// - name: `childShape`(ctype: `struct hkpSingleShapeContainer`)
+    /// - offset: ` 20`(x86)/` 40`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
     pub m_childShape: hkpSingleShapeContainer,
 }
 const _: () = {

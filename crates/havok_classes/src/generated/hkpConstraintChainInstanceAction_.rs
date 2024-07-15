@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpConstraintChainInstanceAction`
-/// -         version: `0`
-/// -       signature: `0xc3971189`
-/// -          size:  28(x86)/ 56(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpConstraintChainInstanceAction`
+/// - version: `0`
+/// - signature: `0xc3971189`
+/// - size: ` 28`(x86)/` 56`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,11 +21,10 @@ pub struct hkpConstraintChainInstanceAction<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkpAction<'a>,
     /// # C++ Info
-    /// -          name: `constraintInstance`(ctype: `struct hkpConstraintChainInstance*`)
-    /// -        offset:  24(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `NOT_OWNED`
-    ///
+    /// - name: `constraintInstance`(ctype: `struct hkpConstraintChainInstance*`)
+    /// - offset: ` 24`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `NOT_OWNED`
     pub m_constraintInstance: Pointer,
 }
 const _: () = {

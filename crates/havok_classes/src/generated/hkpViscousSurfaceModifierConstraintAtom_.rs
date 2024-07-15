@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpViscousSurfaceModifierConstraintAtom`
-/// -         version: `0`
-/// -       signature: `0x5c6aa14d`
-/// -          size:  32(x86)/ 48(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpViscousSurfaceModifierConstraintAtom`
+/// - version: `0`
+/// - signature: `0x5c6aa14d`
+/// - size: ` 32`(x86)/` 48`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]

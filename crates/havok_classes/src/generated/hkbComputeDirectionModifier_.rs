@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbComputeDirectionModifier`
-/// -         version: `0`
-/// -       signature: `0xdf358bd3`
-/// -          size: 112(x86)/144(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbComputeDirectionModifier`
+/// - version: `0`
+/// - signature: `0xdf358bd3`
+/// - size: `112`(x86)/`144`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,70 +21,59 @@ pub struct hkbComputeDirectionModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `pointIn`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `pointIn`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_pointIn: Vector4,
     /// # C++ Info
-    /// -          name: `pointOut`(ctype: `hkVector4`)
-    /// -        offset:  64(x86)/ 96(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `pointOut`(ctype: `hkVector4`)
+    /// - offset: ` 64`(x86)/` 96`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_pointOut: Vector4,
     /// # C++ Info
-    /// -          name: `groundAngleOut`(ctype: `hkReal`)
-    /// -        offset:  80(x86)/112(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `groundAngleOut`(ctype: `hkReal`)
+    /// - offset: ` 80`(x86)/`112`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_groundAngleOut: f32,
     /// # C++ Info
-    /// -          name: `upAngleOut`(ctype: `hkReal`)
-    /// -        offset:  84(x86)/116(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `upAngleOut`(ctype: `hkReal`)
+    /// - offset: ` 84`(x86)/`116`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_upAngleOut: f32,
     /// # C++ Info
-    /// -          name: `verticalOffset`(ctype: `hkReal`)
-    /// -        offset:  88(x86)/120(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `verticalOffset`(ctype: `hkReal`)
+    /// - offset: ` 88`(x86)/`120`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_verticalOffset: f32,
     /// # C++ Info
-    /// -          name: `reverseGroundAngle`(ctype: `hkBool`)
-    /// -        offset:  92(x86)/124(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `reverseGroundAngle`(ctype: `hkBool`)
+    /// - offset: ` 92`(x86)/`124`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_reverseGroundAngle: bool,
     /// # C++ Info
-    /// -          name: `reverseUpAngle`(ctype: `hkBool`)
-    /// -        offset:  93(x86)/125(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `reverseUpAngle`(ctype: `hkBool`)
+    /// - offset: ` 93`(x86)/`125`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_reverseUpAngle: bool,
     /// # C++ Info
-    /// -          name: `projectPoint`(ctype: `hkBool`)
-    /// -        offset:  94(x86)/126(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `projectPoint`(ctype: `hkBool`)
+    /// - offset: ` 94`(x86)/`126`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_projectPoint: bool,
     /// # C++ Info
-    /// -          name: `normalizePoint`(ctype: `hkBool`)
-    /// -        offset:  95(x86)/127(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `normalizePoint`(ctype: `hkBool`)
+    /// - offset: ` 95`(x86)/`127`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_normalizePoint: bool,
     /// # C++ Info
-    /// -          name: `computeOnlyOnce`(ctype: `hkBool`)
-    /// -        offset:  96(x86)/128(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `computeOnlyOnce`(ctype: `hkBool`)
+    /// - offset: ` 96`(x86)/`128`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_computeOnlyOnce: bool,
     /// # C++ Info
-    /// -          name: `computedOutput`(ctype: `hkBool`)
-    /// -        offset:  97(x86)/129(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `computedOutput`(ctype: `hkBool`)
+    /// - offset: ` 97`(x86)/`129`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_computedOutput: bool,
 }
 const _: () = {

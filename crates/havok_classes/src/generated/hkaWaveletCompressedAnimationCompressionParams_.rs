@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkaWaveletCompressedAnimationCompressionParams`
-/// -         version: `0`
-/// -       signature: `0x27c6cafa`
-/// -          size:  36(x86)/ 36(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkaWaveletCompressedAnimationCompressionParams`
+/// - version: `0`
+/// - signature: `0x27c6cafa`
+/// - size: ` 36`(x86)/` 36`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,64 +19,54 @@ pub struct hkaWaveletCompressedAnimationCompressionParams {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `quantizationBits`(ctype: `hkUint16`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `quantizationBits`(ctype: `hkUint16`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_quantizationBits: u16,
     /// # C++ Info
-    /// -          name: `blockSize`(ctype: `hkUint16`)
-    /// -        offset:   2(x86)/  2(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `blockSize`(ctype: `hkUint16`)
+    /// - offset: `  2`(x86)/`  2`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_blockSize: u16,
     /// # C++ Info
-    /// -          name: `preserve`(ctype: `hkUint16`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `preserve`(ctype: `hkUint16`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_preserve: u16,
     /// # C++ Info
-    /// -          name: `truncProp`(ctype: `hkReal`)
-    /// -        offset:   8(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `truncProp`(ctype: `hkReal`)
+    /// - offset: `  8`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_truncProp: f32,
     /// # C++ Info
-    /// -          name: `useOldStyleTruncation`(ctype: `hkBool`)
-    /// -        offset:  12(x86)/ 12(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `useOldStyleTruncation`(ctype: `hkBool`)
+    /// - offset: ` 12`(x86)/` 12`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_useOldStyleTruncation: bool,
     /// # C++ Info
-    /// -          name: `absolutePositionTolerance`(ctype: `hkReal`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `absolutePositionTolerance`(ctype: `hkReal`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_absolutePositionTolerance: f32,
     /// # C++ Info
-    /// -          name: `relativePositionTolerance`(ctype: `hkReal`)
-    /// -        offset:  20(x86)/ 20(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `relativePositionTolerance`(ctype: `hkReal`)
+    /// - offset: ` 20`(x86)/` 20`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_relativePositionTolerance: f32,
     /// # C++ Info
-    /// -          name: `rotationTolerance`(ctype: `hkReal`)
-    /// -        offset:  24(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `rotationTolerance`(ctype: `hkReal`)
+    /// - offset: ` 24`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_rotationTolerance: f32,
     /// # C++ Info
-    /// -          name: `scaleTolerance`(ctype: `hkReal`)
-    /// -        offset:  28(x86)/ 28(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `scaleTolerance`(ctype: `hkReal`)
+    /// - offset: ` 28`(x86)/` 28`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_scaleTolerance: f32,
     /// # C++ Info
-    /// -          name: `absoluteFloatTolerance`(ctype: `hkReal`)
-    /// -        offset:  32(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `absoluteFloatTolerance`(ctype: `hkReal`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_absoluteFloatTolerance: f32,
 }
 const _: () = {

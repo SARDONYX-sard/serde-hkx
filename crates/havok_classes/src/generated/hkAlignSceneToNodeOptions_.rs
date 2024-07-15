@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkAlignSceneToNodeOptions`
-/// -         version: `2`
-/// -       signature: `0x207cb01`
-/// -          size:  24(x86)/ 40(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkAlignSceneToNodeOptions`
+/// - version: `2`
+/// - signature: `0x207cb01`
+/// - size: ` 24`(x86)/` 40`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,58 +21,49 @@ pub struct hkAlignSceneToNodeOptions<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `invert`(ctype: `hkBool`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `invert`(ctype: `hkBool`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_invert: bool,
     /// # C++ Info
-    /// -          name: `transformPositionX`(ctype: `hkBool`)
-    /// -        offset:   9(x86)/ 17(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `transformPositionX`(ctype: `hkBool`)
+    /// - offset: `  9`(x86)/` 17`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_transformPositionX: bool,
     /// # C++ Info
-    /// -          name: `transformPositionY`(ctype: `hkBool`)
-    /// -        offset:  10(x86)/ 18(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `transformPositionY`(ctype: `hkBool`)
+    /// - offset: ` 10`(x86)/` 18`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_transformPositionY: bool,
     /// # C++ Info
-    /// -          name: `transformPositionZ`(ctype: `hkBool`)
-    /// -        offset:  11(x86)/ 19(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `transformPositionZ`(ctype: `hkBool`)
+    /// - offset: ` 11`(x86)/` 19`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_transformPositionZ: bool,
     /// # C++ Info
-    /// -          name: `transformRotation`(ctype: `hkBool`)
-    /// -        offset:  12(x86)/ 20(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `transformRotation`(ctype: `hkBool`)
+    /// - offset: ` 12`(x86)/` 20`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_transformRotation: bool,
     /// # C++ Info
-    /// -          name: `transformScale`(ctype: `hkBool`)
-    /// -        offset:  13(x86)/ 21(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `transformScale`(ctype: `hkBool`)
+    /// - offset: ` 13`(x86)/` 21`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_transformScale: bool,
     /// # C++ Info
-    /// -          name: `transformSkew`(ctype: `hkBool`)
-    /// -        offset:  14(x86)/ 22(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `transformSkew`(ctype: `hkBool`)
+    /// - offset: ` 14`(x86)/` 22`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_transformSkew: bool,
     /// # C++ Info
-    /// -          name: `keyframe`(ctype: `hkInt32`)
-    /// -        offset:  16(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `keyframe`(ctype: `hkInt32`)
+    /// - offset: ` 16`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_keyframe: i32,
     /// # C++ Info
-    /// -          name: `nodeName`(ctype: `hkStringPtr`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `nodeName`(ctype: `hkStringPtr`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_nodeName: StringPtr<'a>,
 }
 const _: () = {

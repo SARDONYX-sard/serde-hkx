@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpFirstPersonGun`
-/// -         version: `0`
-/// -       signature: `0x852ab70b`
-/// -          size:  32(x86)/ 56(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpFirstPersonGun`
+/// - version: `0`
+/// - signature: `0x852ab70b`
+/// - size: ` 32`(x86)/` 56`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,30 +21,26 @@ pub struct hkpFirstPersonGun<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `type`(ctype: `enum unknown`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `type`(ctype: `enum unknown`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_type: u8,
     /// # C++ Info
-    /// -          name: `name`(ctype: `hkStringPtr`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `name`(ctype: `hkStringPtr`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_name: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `keyboardKey`(ctype: `enum KeyboardKey`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `keyboardKey`(ctype: `enum KeyboardKey`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_keyboardKey: KeyboardKey,
     /// # C++ Info
-    /// -          name: `listeners`(ctype: `hkArray<void*>`)
-    /// -        offset:  20(x86)/ 40(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `listeners`(ctype: `hkArray<void*>`)
+    /// - offset: ` 20`(x86)/` 40`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_listeners: Vec<Pointer>,
 }
 const _: () = {

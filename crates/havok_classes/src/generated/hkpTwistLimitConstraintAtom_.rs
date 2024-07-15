@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpTwistLimitConstraintAtom`
-/// -         version: `0`
-/// -       signature: `0x7c9b1052`
-/// -          size:  20(x86)/ 20(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpTwistLimitConstraintAtom`
+/// - version: `0`
+/// - signature: `0x7c9b1052`
+/// - size: ` 20`(x86)/` 20`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,40 +21,34 @@ pub struct hkpTwistLimitConstraintAtom {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConstraintAtom,
     /// # C++ Info
-    /// -          name: `isEnabled`(ctype: `hkUint8`)
-    /// -        offset:   2(x86)/  2(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `isEnabled`(ctype: `hkUint8`)
+    /// - offset: `  2`(x86)/`  2`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_isEnabled: u8,
     /// # C++ Info
-    /// -          name: `twistAxis`(ctype: `hkUint8`)
-    /// -        offset:   3(x86)/  3(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `twistAxis`(ctype: `hkUint8`)
+    /// - offset: `  3`(x86)/`  3`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_twistAxis: u8,
     /// # C++ Info
-    /// -          name: `refAxis`(ctype: `hkUint8`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `refAxis`(ctype: `hkUint8`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_refAxis: u8,
     /// # C++ Info
-    /// -          name: `minAngle`(ctype: `hkReal`)
-    /// -        offset:   8(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `minAngle`(ctype: `hkReal`)
+    /// - offset: `  8`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_minAngle: f32,
     /// # C++ Info
-    /// -          name: `maxAngle`(ctype: `hkReal`)
-    /// -        offset:  12(x86)/ 12(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxAngle`(ctype: `hkReal`)
+    /// - offset: ` 12`(x86)/` 12`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxAngle: f32,
     /// # C++ Info
-    /// -          name: `angularLimitsTauFactor`(ctype: `hkReal`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `angularLimitsTauFactor`(ctype: `hkReal`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_angularLimitsTauFactor: f32,
 }
 const _: () = {

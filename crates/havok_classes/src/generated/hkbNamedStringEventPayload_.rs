@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbNamedStringEventPayload`
-/// -         version: `0`
-/// -       signature: `0x6caa9113`
-/// -          size:  16(x86)/ 32(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbNamedStringEventPayload`
+/// - version: `0`
+/// - signature: `0x6caa9113`
+/// - size: ` 16`(x86)/` 32`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkbNamedStringEventPayload<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbNamedEventPayload<'a>,
     /// # C++ Info
-    /// -          name: `data`(ctype: `hkStringPtr`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `data`(ctype: `hkStringPtr`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_data: StringPtr<'a>,
 }
 const _: () = {

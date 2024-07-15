@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkTrackerSerializableScanSnapshot`
-/// -         version: `0`
-/// -       signature: `0x875af1d9`
-/// -          size:  92(x86)/128(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkTrackerSerializableScanSnapshot`
+/// - version: `0`
+/// - signature: `0x875af1d9`
+/// - size: ` 92`(x86)/`128`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,46 +21,39 @@ pub struct hkTrackerSerializableScanSnapshot {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `allocations`(ctype: `hkArray<struct hkTrackerSerializableScanSnapshotAllocation>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `allocations`(ctype: `hkArray<struct hkTrackerSerializableScanSnapshotAllocation>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_allocations: Vec<hkTrackerSerializableScanSnapshotAllocation>,
     /// # C++ Info
-    /// -          name: `blocks`(ctype: `hkArray<struct hkTrackerSerializableScanSnapshotBlock>`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `blocks`(ctype: `hkArray<struct hkTrackerSerializableScanSnapshotBlock>`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_blocks: Vec<hkTrackerSerializableScanSnapshotBlock>,
     /// # C++ Info
-    /// -          name: `refs`(ctype: `hkArray<hkInt32>`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `refs`(ctype: `hkArray<hkInt32>`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_refs: Vec<i32>,
     /// # C++ Info
-    /// -          name: `typeNames`(ctype: `hkArray<hkUint8>`)
-    /// -        offset:  44(x86)/ 64(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `typeNames`(ctype: `hkArray<hkUint8>`)
+    /// - offset: ` 44`(x86)/` 64`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_typeNames: Vec<u8>,
     /// # C++ Info
-    /// -          name: `traceText`(ctype: `hkArray<hkUint8>`)
-    /// -        offset:  56(x86)/ 80(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `traceText`(ctype: `hkArray<hkUint8>`)
+    /// - offset: ` 56`(x86)/` 80`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_traceText: Vec<u8>,
     /// # C++ Info
-    /// -          name: `traceAddrs`(ctype: `hkArray<hkUint64>`)
-    /// -        offset:  68(x86)/ 96(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `traceAddrs`(ctype: `hkArray<hkUint64>`)
+    /// - offset: ` 68`(x86)/` 96`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_traceAddrs: Vec<u64>,
     /// # C++ Info
-    /// -          name: `traceParents`(ctype: `hkArray<hkInt32>`)
-    /// -        offset:  80(x86)/112(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `traceParents`(ctype: `hkArray<hkInt32>`)
+    /// - offset: ` 80`(x86)/`112`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_traceParents: Vec<i32>,
 }
 const _: () = {

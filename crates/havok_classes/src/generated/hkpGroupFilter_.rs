@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpGroupFilter`
-/// -         version: `0`
-/// -       signature: `0x65ee88e4`
-/// -          size: 256(x86)/272(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpGroupFilter`
+/// - version: `0`
+/// - signature: `0x65ee88e4`
+/// - size: `256`(x86)/`272`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkpGroupFilter {
     /// Alternative to C++ class inheritance.
     pub parent: hkpCollisionFilter,
     /// # C++ Info
-    /// -          name: `nextFreeSystemGroup`(ctype: `hkInt32`)
-    /// -        offset:  48(x86)/ 72(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `nextFreeSystemGroup`(ctype: `hkInt32`)
+    /// - offset: ` 48`(x86)/` 72`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_nextFreeSystemGroup: i32,
     /// # C++ Info
-    /// -          name: `collisionLookupTable`(ctype: `hkUint32[32]`)
-    /// -        offset:  52(x86)/ 76(x86_64)
-    /// -     type_size: 128(x86)/128(x86_64)
-    ///
+    /// - name: `collisionLookupTable`(ctype: `hkUint32[32]`)
+    /// - offset: ` 52`(x86)/` 76`(x86_64)
+    /// - type_size: `128`(x86)/`128`(x86_64)
     pub m_collisionLookupTable: [u32; 32usize],
     /// # C++ Info
-    /// -          name: `pad256`(ctype: `hkVector4[4]`)
-    /// -        offset: 192(x86)/208(x86_64)
-    /// -     type_size:  64(x86)/ 64(x86_64)
-    ///
+    /// - name: `pad256`(ctype: `hkVector4[4]`)
+    /// - offset: `192`(x86)/`208`(x86_64)
+    /// - type_size: ` 64`(x86)/` 64`(x86_64)
     pub m_pad256: [Vector4; 4usize],
 }
 const _: () = {

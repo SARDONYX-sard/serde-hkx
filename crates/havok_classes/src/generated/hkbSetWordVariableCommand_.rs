@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbSetWordVariableCommand`
-/// -         version: `0`
-/// -       signature: `0xf3ae5fca`
-/// -          size:  64(x86)/ 64(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbSetWordVariableCommand`
+/// - version: `0`
+/// - signature: `0xf3ae5fca`
+/// - size: ` 64`(x86)/` 64`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,40 +21,34 @@ pub struct hkbSetWordVariableCommand {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `quadValue`(ctype: `hkVector4`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `quadValue`(ctype: `hkVector4`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_quadValue: Vector4,
     /// # C++ Info
-    /// -          name: `characterId`(ctype: `hkUint64`)
-    /// -        offset:  32(x86)/ 32(x86_64)
-    /// -     type_size:   8(x86)/  8(x86_64)
-    ///
+    /// - name: `characterId`(ctype: `hkUint64`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: `  8`(x86)/`  8`(x86_64)
     pub m_characterId: u64,
     /// # C++ Info
-    /// -          name: `variableId`(ctype: `hkInt32`)
-    /// -        offset:  40(x86)/ 40(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `variableId`(ctype: `hkInt32`)
+    /// - offset: ` 40`(x86)/` 40`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_variableId: i32,
     /// # C++ Info
-    /// -          name: `value`(ctype: `struct hkbVariableValue`)
-    /// -        offset:  44(x86)/ 44(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `value`(ctype: `struct hkbVariableValue`)
+    /// - offset: ` 44`(x86)/` 44`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_value: hkbVariableValue,
     /// # C++ Info
-    /// -          name: `type`(ctype: `enum VariableType`)
-    /// -        offset:  48(x86)/ 48(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `type`(ctype: `enum VariableType`)
+    /// - offset: ` 48`(x86)/` 48`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_type: VariableType,
     /// # C++ Info
-    /// -          name: `global`(ctype: `hkBool`)
-    /// -        offset:  49(x86)/ 49(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `global`(ctype: `hkBool`)
+    /// - offset: ` 49`(x86)/` 49`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_global: bool,
 }
 const _: () = {

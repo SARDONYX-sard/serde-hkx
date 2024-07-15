@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpMouseSpringAction`
-/// -         version: `0`
-/// -       signature: `0x6e087fd6`
-/// -          size:  96(x86)/144(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpMouseSpringAction`
+/// - version: `0`
+/// - signature: `0x6e087fd6`
+/// - size: ` 96`(x86)/`144`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,53 +21,45 @@ pub struct hkpMouseSpringAction<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkpUnaryAction<'a>,
     /// # C++ Info
-    /// -          name: `positionInRbLocal`(ctype: `hkVector4`)
-    /// -        offset:  32(x86)/ 64(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `positionInRbLocal`(ctype: `hkVector4`)
+    /// - offset: ` 32`(x86)/` 64`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_positionInRbLocal: Vector4,
     /// # C++ Info
-    /// -          name: `mousePositionInWorld`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `mousePositionInWorld`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_mousePositionInWorld: Vector4,
     /// # C++ Info
-    /// -          name: `springDamping`(ctype: `hkReal`)
-    /// -        offset:  64(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `springDamping`(ctype: `hkReal`)
+    /// - offset: ` 64`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_springDamping: f32,
     /// # C++ Info
-    /// -          name: `springElasticity`(ctype: `hkReal`)
-    /// -        offset:  68(x86)/100(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `springElasticity`(ctype: `hkReal`)
+    /// - offset: ` 68`(x86)/`100`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_springElasticity: f32,
     /// # C++ Info
-    /// -          name: `maxRelativeForce`(ctype: `hkReal`)
-    /// -        offset:  72(x86)/104(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxRelativeForce`(ctype: `hkReal`)
+    /// - offset: ` 72`(x86)/`104`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxRelativeForce: f32,
     /// # C++ Info
-    /// -          name: `objectDamping`(ctype: `hkReal`)
-    /// -        offset:  76(x86)/108(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `objectDamping`(ctype: `hkReal`)
+    /// - offset: ` 76`(x86)/`108`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_objectDamping: f32,
     /// # C++ Info
-    /// -          name: `shapeKey`(ctype: `hkUint32`)
-    /// -        offset:  80(x86)/112(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `shapeKey`(ctype: `hkUint32`)
+    /// - offset: ` 80`(x86)/`112`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_shapeKey: u32,
     /// # C++ Info
-    /// -          name: `applyCallbacks`(ctype: `hkArray<void*>`)
-    /// -        offset:  84(x86)/120(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `applyCallbacks`(ctype: `hkArray<void*>`)
+    /// - offset: ` 84`(x86)/`120`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_applyCallbacks: Vec<Pointer>,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpBvTreeShape`
-/// -         version: `0`
-/// -       signature: `0xa823d623`
-/// -          size:  20(x86)/ 40(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpBvTreeShape`
+/// - version: `0`
+/// - signature: `0xa823d623`
+/// - size: ` 20`(x86)/` 40`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkpBvTreeShape {
     /// Alternative to C++ class inheritance.
     pub parent: hkpShape,
     /// # C++ Info
-    /// -          name: `bvTreeType`(ctype: `enum BvTreeType`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `bvTreeType`(ctype: `enum BvTreeType`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_bvTreeType: BvTreeType,
 }
 const _: () = {

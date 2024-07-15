@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbFootIkModifier`
-/// -         version: `3`
-/// -       signature: `0xed8966c0`
-/// -          size: 208(x86)/256(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbFootIkModifier`
+/// - version: `3`
+/// - signature: `0xed8966c0`
+/// - size: `208`(x86)/`256`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,141 +21,119 @@ pub struct hkbFootIkModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `gains`(ctype: `struct hkbFootIkGains`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:  48(x86)/ 48(x86_64)
-    ///
+    /// - name: `gains`(ctype: `struct hkbFootIkGains`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: ` 48`(x86)/` 48`(x86_64)
     pub m_gains: hkbFootIkGains,
     /// # C++ Info
-    /// -          name: `legs`(ctype: `hkArray<struct hkbFootIkModifierLeg>`)
-    /// -        offset:  92(x86)/128(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `legs`(ctype: `hkArray<struct hkbFootIkModifierLeg>`)
+    /// - offset: ` 92`(x86)/`128`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_legs: Vec<hkbFootIkModifierLeg>,
     /// # C++ Info
-    /// -          name: `raycastDistanceUp`(ctype: `hkReal`)
-    /// -        offset: 104(x86)/144(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `raycastDistanceUp`(ctype: `hkReal`)
+    /// - offset: `104`(x86)/`144`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_raycastDistanceUp: f32,
     /// # C++ Info
-    /// -          name: `raycastDistanceDown`(ctype: `hkReal`)
-    /// -        offset: 108(x86)/148(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `raycastDistanceDown`(ctype: `hkReal`)
+    /// - offset: `108`(x86)/`148`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_raycastDistanceDown: f32,
     /// # C++ Info
-    /// -          name: `originalGroundHeightMS`(ctype: `hkReal`)
-    /// -        offset: 112(x86)/152(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `originalGroundHeightMS`(ctype: `hkReal`)
+    /// - offset: `112`(x86)/`152`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_originalGroundHeightMS: f32,
     /// # C++ Info
-    /// -          name: `errorOut`(ctype: `hkReal`)
-    /// -        offset: 116(x86)/156(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `errorOut`(ctype: `hkReal`)
+    /// - offset: `116`(x86)/`156`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_errorOut: f32,
     /// # C++ Info
-    /// -          name: `errorOutTranslation`(ctype: `hkVector4`)
-    /// -        offset: 128(x86)/160(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `errorOutTranslation`(ctype: `hkVector4`)
+    /// - offset: `128`(x86)/`160`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_errorOutTranslation: Vector4,
     /// # C++ Info
-    /// -          name: `alignWithGroundRotation`(ctype: `hkQuaternion`)
-    /// -        offset: 144(x86)/176(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `alignWithGroundRotation`(ctype: `hkQuaternion`)
+    /// - offset: `144`(x86)/`176`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_alignWithGroundRotation: Quaternion,
     /// # C++ Info
-    /// -          name: `verticalOffset`(ctype: `hkReal`)
-    /// -        offset: 160(x86)/192(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `verticalOffset`(ctype: `hkReal`)
+    /// - offset: `160`(x86)/`192`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_verticalOffset: f32,
     /// # C++ Info
-    /// -          name: `collisionFilterInfo`(ctype: `hkUint32`)
-    /// -        offset: 164(x86)/196(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `collisionFilterInfo`(ctype: `hkUint32`)
+    /// - offset: `164`(x86)/`196`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_collisionFilterInfo: u32,
     /// # C++ Info
-    /// -          name: `forwardAlignFraction`(ctype: `hkReal`)
-    /// -        offset: 168(x86)/200(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `forwardAlignFraction`(ctype: `hkReal`)
+    /// - offset: `168`(x86)/`200`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_forwardAlignFraction: f32,
     /// # C++ Info
-    /// -          name: `sidewaysAlignFraction`(ctype: `hkReal`)
-    /// -        offset: 172(x86)/204(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `sidewaysAlignFraction`(ctype: `hkReal`)
+    /// - offset: `172`(x86)/`204`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_sidewaysAlignFraction: f32,
     /// # C++ Info
-    /// -          name: `sidewaysSampleWidth`(ctype: `hkReal`)
-    /// -        offset: 176(x86)/208(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `sidewaysSampleWidth`(ctype: `hkReal`)
+    /// - offset: `176`(x86)/`208`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_sidewaysSampleWidth: f32,
     /// # C++ Info
-    /// -          name: `useTrackData`(ctype: `hkBool`)
-    /// -        offset: 180(x86)/212(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `useTrackData`(ctype: `hkBool`)
+    /// - offset: `180`(x86)/`212`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_useTrackData: bool,
     /// # C++ Info
-    /// -          name: `lockFeetWhenPlanted`(ctype: `hkBool`)
-    /// -        offset: 181(x86)/213(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `lockFeetWhenPlanted`(ctype: `hkBool`)
+    /// - offset: `181`(x86)/`213`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_lockFeetWhenPlanted: bool,
     /// # C++ Info
-    /// -          name: `useCharacterUpVector`(ctype: `hkBool`)
-    /// -        offset: 182(x86)/214(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `useCharacterUpVector`(ctype: `hkBool`)
+    /// - offset: `182`(x86)/`214`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_useCharacterUpVector: bool,
     /// # C++ Info
-    /// -          name: `alignMode`(ctype: `enum AlignMode`)
-    /// -        offset: 183(x86)/215(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `alignMode`(ctype: `enum AlignMode`)
+    /// - offset: `183`(x86)/`215`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_alignMode: AlignMode,
     /// # C++ Info
-    /// -          name: `internalLegData`(ctype: `hkArray<struct hkbFootIkModifierInternalLegData>`)
-    /// -        offset: 184(x86)/216(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `internalLegData`(ctype: `hkArray<struct hkbFootIkModifierInternalLegData>`)
+    /// - offset: `184`(x86)/`216`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_internalLegData: Vec<hkbFootIkModifierInternalLegData>,
     /// # C++ Info
-    /// -          name: `prevIsFootIkEnabled`(ctype: `hkReal`)
-    /// -        offset: 196(x86)/232(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `prevIsFootIkEnabled`(ctype: `hkReal`)
+    /// - offset: `196`(x86)/`232`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_prevIsFootIkEnabled: f32,
     /// # C++ Info
-    /// -          name: `isSetUp`(ctype: `hkBool`)
-    /// -        offset: 200(x86)/236(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `isSetUp`(ctype: `hkBool`)
+    /// - offset: `200`(x86)/`236`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_isSetUp: bool,
     /// # C++ Info
-    /// -          name: `isGroundPositionValid`(ctype: `hkBool`)
-    /// -        offset: 201(x86)/237(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `isGroundPositionValid`(ctype: `hkBool`)
+    /// - offset: `201`(x86)/`237`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_isGroundPositionValid: bool,
     /// # C++ Info
-    /// -          name: `timeStep`(ctype: `hkReal`)
-    /// -        offset: 204(x86)/240(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `timeStep`(ctype: `hkReal`)
+    /// - offset: `204`(x86)/`240`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_timeStep: f32,
 }
 const _: () = {

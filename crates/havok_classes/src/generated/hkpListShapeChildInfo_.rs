@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpListShapeChildInfo`
-/// -         version: `0`
-/// -       signature: `0x80df0f90`
-/// -          size:  16(x86)/ 32(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpListShapeChildInfo`
+/// - version: `0`
+/// - signature: `0x80df0f90`
+/// - size: ` 16`(x86)/` 32`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,31 +19,27 @@ pub struct hkpListShapeChildInfo {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `shape`(ctype: `struct hkpShape*`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `ALIGN_16`
-    ///
+    /// - name: `shape`(ctype: `struct hkpShape*`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `ALIGN_16`
     pub m_shape: Pointer,
     /// # C++ Info
-    /// -          name: `collisionFilterInfo`(ctype: `hkUint32`)
-    /// -        offset:   4(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `collisionFilterInfo`(ctype: `hkUint32`)
+    /// - offset: `  4`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_collisionFilterInfo: u32,
     /// # C++ Info
-    /// -          name: `shapeSize`(ctype: `hkInt32`)
-    /// -        offset:   8(x86)/ 12(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `shapeSize`(ctype: `hkInt32`)
+    /// - offset: `  8`(x86)/` 12`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_shapeSize: i32,
     /// # C++ Info
-    /// -          name: `numChildShapes`(ctype: `hkInt32`)
-    /// -        offset:  12(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `numChildShapes`(ctype: `hkInt32`)
+    /// - offset: ` 12`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_numChildShapes: i32,
 }
 const _: () = {

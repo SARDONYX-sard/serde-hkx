@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpCachingShapePhantom`
-/// -         version: `0`
-/// -       signature: `0xcf227f58`
-/// -          size: 368(x86)/448(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpCachingShapePhantom`
+/// - version: `0`
+/// - signature: `0xcf227f58`
+/// - size: `368`(x86)/`448`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,18 +21,16 @@ pub struct hkpCachingShapePhantom<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkpShapePhantom<'a>,
     /// # C++ Info
-    /// -          name: `collisionDetails`(ctype: `hkArray<void>`)
-    /// -        offset: 352(x86)/416(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `collisionDetails`(ctype: `hkArray<void>`)
+    /// - offset: `352`(x86)/`416`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_collisionDetails: Vec<()>,
     /// # C++ Info
-    /// -          name: `orderDirty`(ctype: `hkBool`)
-    /// -        offset: 364(x86)/432(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `orderDirty`(ctype: `hkBool`)
+    /// - offset: `364`(x86)/`432`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_orderDirty: bool,
 }
 const _: () = {

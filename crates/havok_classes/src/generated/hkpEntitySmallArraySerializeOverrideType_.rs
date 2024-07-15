@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpEntitySmallArraySerializeOverrideType`
-/// -         version: `1`
-/// -       signature: `0xee3c2aec`
-/// -          size:   8(x86)/ 16(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpEntitySmallArraySerializeOverrideType`
+/// - version: `1`
+/// - signature: `0xee3c2aec`
+/// - size: `  8`(x86)/` 16`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,23 +19,20 @@ pub struct hkpEntitySmallArraySerializeOverrideType {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `data`(ctype: `void*`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `data`(ctype: `void*`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_data: Pointer,
     /// # C++ Info
-    /// -          name: `size`(ctype: `hkUint16`)
-    /// -        offset:   4(x86)/  8(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `size`(ctype: `hkUint16`)
+    /// - offset: `  4`(x86)/`  8`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_size: u16,
     /// # C++ Info
-    /// -          name: `capacityAndFlags`(ctype: `hkUint16`)
-    /// -        offset:   6(x86)/ 10(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `capacityAndFlags`(ctype: `hkUint16`)
+    /// - offset: `  6`(x86)/` 10`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_capacityAndFlags: u16,
 }
 const _: () = {

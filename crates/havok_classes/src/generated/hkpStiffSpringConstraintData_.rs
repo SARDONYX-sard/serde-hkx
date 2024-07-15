@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpStiffSpringConstraintData`
-/// -         version: `0`
-/// -       signature: `0xb98f66f4`
-/// -          size:  80(x86)/ 96(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpStiffSpringConstraintData`
+/// - version: `0`
+/// - signature: `0xb98f66f4`
+/// - size: ` 80`(x86)/` 96`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,11 +21,10 @@ pub struct hkpStiffSpringConstraintData {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConstraintData,
     /// # C++ Info
-    /// -          name: `atoms`(ctype: `struct hkpStiffSpringConstraintDataAtoms`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:  64(x86)/ 64(x86_64)
-    /// -         flags: `ALIGN_16`
-    ///
+    /// - name: `atoms`(ctype: `struct hkpStiffSpringConstraintDataAtoms`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: ` 64`(x86)/` 64`(x86_64)
+    /// - flags: `ALIGN_16`
     pub m_atoms: hkpStiffSpringConstraintDataAtoms,
 }
 const _: () = {

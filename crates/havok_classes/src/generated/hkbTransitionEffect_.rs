@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbTransitionEffect`
-/// -         version: `0`
-/// -       signature: `0x945da157`
-/// -          size:  44(x86)/ 80(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbTransitionEffect`
+/// - version: `0`
+/// - signature: `0x945da157`
+/// - size: ` 44`(x86)/` 80`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,23 +21,20 @@ pub struct hkbTransitionEffect<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
-    /// -          name: `selfTransitionMode`(ctype: `enum SelfTransitionMode`)
-    /// -        offset:  40(x86)/ 72(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `selfTransitionMode`(ctype: `enum SelfTransitionMode`)
+    /// - offset: ` 40`(x86)/` 72`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_selfTransitionMode: SelfTransitionMode,
     /// # C++ Info
-    /// -          name: `eventMode`(ctype: `enum EventMode`)
-    /// -        offset:  41(x86)/ 73(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `eventMode`(ctype: `enum EventMode`)
+    /// - offset: ` 41`(x86)/` 73`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_eventMode: EventMode,
     /// # C++ Info
-    /// -          name: `defaultEventMode`(ctype: `enum unknown`)
-    /// -        offset:  42(x86)/ 74(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `defaultEventMode`(ctype: `enum unknown`)
+    /// - offset: ` 42`(x86)/` 74`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_defaultEventMode: i8,
 }
 const _: () = {

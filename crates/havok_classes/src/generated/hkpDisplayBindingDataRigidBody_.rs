@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpDisplayBindingDataRigidBody`
-/// -         version: `2`
-/// -       signature: `0xfe16e2a3`
-/// -          size:  80(x86)/ 96(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpDisplayBindingDataRigidBody`
+/// - version: `2`
+/// - signature: `0xfe16e2a3`
+/// - size: ` 80`(x86)/` 96`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkpDisplayBindingDataRigidBody {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `rigidBody`(ctype: `struct hkpRigidBody*`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `rigidBody`(ctype: `struct hkpRigidBody*`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_rigidBody: Pointer,
     /// # C++ Info
-    /// -          name: `displayObjectPtr`(ctype: `struct hkReferencedObject*`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `displayObjectPtr`(ctype: `struct hkReferencedObject*`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_displayObjectPtr: Pointer,
     /// # C++ Info
-    /// -          name: `rigidBodyFromDisplayObjectTransform`(ctype: `hkMatrix4`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:  64(x86)/ 64(x86_64)
-    ///
+    /// - name: `rigidBodyFromDisplayObjectTransform`(ctype: `hkMatrix4`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: ` 64`(x86)/` 64`(x86_64)
     pub m_rigidBodyFromDisplayObjectTransform: Matrix4,
 }
 const _: () = {

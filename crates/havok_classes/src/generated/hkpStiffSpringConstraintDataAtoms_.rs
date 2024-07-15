@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpStiffSpringConstraintDataAtoms`
-/// -         version: `0`
-/// -       signature: `0x207eb376`
-/// -          size:  64(x86)/ 64(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpStiffSpringConstraintDataAtoms`
+/// - version: `0`
+/// - signature: `0x207eb376`
+/// - size: ` 64`(x86)/` 64`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,16 +19,14 @@ pub struct hkpStiffSpringConstraintDataAtoms {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `pivots`(ctype: `struct hkpSetLocalTranslationsConstraintAtom`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:  48(x86)/ 48(x86_64)
-    ///
+    /// - name: `pivots`(ctype: `struct hkpSetLocalTranslationsConstraintAtom`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: ` 48`(x86)/` 48`(x86_64)
     pub m_pivots: hkpSetLocalTranslationsConstraintAtom,
     /// # C++ Info
-    /// -          name: `spring`(ctype: `struct hkpStiffSpringConstraintAtom`)
-    /// -        offset:  48(x86)/ 48(x86_64)
-    /// -     type_size:   8(x86)/  8(x86_64)
-    ///
+    /// - name: `spring`(ctype: `struct hkpStiffSpringConstraintAtom`)
+    /// - offset: ` 48`(x86)/` 48`(x86_64)
+    /// - type_size: `  8`(x86)/`  8`(x86_64)
     pub m_spring: hkpStiffSpringConstraintAtom,
 }
 const _: () = {

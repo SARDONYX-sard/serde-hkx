@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbCharacterSteppedInfo`
-/// -         version: `2`
-/// -       signature: `0x2eda84f8`
-/// -          size: 112(x86)/112(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbCharacterSteppedInfo`
+/// - version: `2`
+/// - signature: `0x2eda84f8`
+/// - size: `112`(x86)/`112`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,34 +21,29 @@ pub struct hkbCharacterSteppedInfo {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `characterId`(ctype: `hkUint64`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   8(x86)/  8(x86_64)
-    ///
+    /// - name: `characterId`(ctype: `hkUint64`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  8`(x86)/`  8`(x86_64)
     pub m_characterId: u64,
     /// # C++ Info
-    /// -          name: `deltaTime`(ctype: `hkReal`)
-    /// -        offset:  16(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `deltaTime`(ctype: `hkReal`)
+    /// - offset: ` 16`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_deltaTime: f32,
     /// # C++ Info
-    /// -          name: `worldFromModel`(ctype: `hkQsTransform`)
-    /// -        offset:  32(x86)/ 32(x86_64)
-    /// -     type_size:  48(x86)/ 48(x86_64)
-    ///
+    /// - name: `worldFromModel`(ctype: `hkQsTransform`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: ` 48`(x86)/` 48`(x86_64)
     pub m_worldFromModel: QsTransform,
     /// # C++ Info
-    /// -          name: `poseModelSpace`(ctype: `hkArray<hkQsTransform>`)
-    /// -        offset:  80(x86)/ 80(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `poseModelSpace`(ctype: `hkArray<hkQsTransform>`)
+    /// - offset: ` 80`(x86)/` 80`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_poseModelSpace: Vec<QsTransform>,
     /// # C++ Info
-    /// -          name: `rigidAttachmentTransforms`(ctype: `hkArray<hkQsTransform>`)
-    /// -        offset:  92(x86)/ 96(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `rigidAttachmentTransforms`(ctype: `hkArray<hkQsTransform>`)
+    /// - offset: ` 92`(x86)/` 96`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_rigidAttachmentTransforms: Vec<QsTransform>,
 }
 const _: () = {

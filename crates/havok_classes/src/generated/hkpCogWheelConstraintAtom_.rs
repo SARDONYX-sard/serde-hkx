@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpCogWheelConstraintAtom`
-/// -         version: `0`
-/// -       signature: `0xf2b1f399`
-/// -          size:  16(x86)/ 16(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpCogWheelConstraintAtom`
+/// - version: `0`
+/// - signature: `0xf2b1f399`
+/// - size: ` 16`(x86)/` 16`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,40 +21,34 @@ pub struct hkpCogWheelConstraintAtom {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConstraintAtom,
     /// # C++ Info
-    /// -          name: `cogWheelRadiusA`(ctype: `hkReal`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `cogWheelRadiusA`(ctype: `hkReal`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_cogWheelRadiusA: f32,
     /// # C++ Info
-    /// -          name: `cogWheelRadiusB`(ctype: `hkReal`)
-    /// -        offset:   8(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `cogWheelRadiusB`(ctype: `hkReal`)
+    /// - offset: `  8`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_cogWheelRadiusB: f32,
     /// # C++ Info
-    /// -          name: `isScrew`(ctype: `hkBool`)
-    /// -        offset:  12(x86)/ 12(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `isScrew`(ctype: `hkBool`)
+    /// - offset: ` 12`(x86)/` 12`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_isScrew: bool,
     /// # C++ Info
-    /// -          name: `memOffsetToInitialAngleOffset`(ctype: `hkInt8`)
-    /// -        offset:  13(x86)/ 13(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `memOffsetToInitialAngleOffset`(ctype: `hkInt8`)
+    /// - offset: ` 13`(x86)/` 13`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_memOffsetToInitialAngleOffset: i8,
     /// # C++ Info
-    /// -          name: `memOffsetToPrevAngle`(ctype: `hkInt8`)
-    /// -        offset:  14(x86)/ 14(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `memOffsetToPrevAngle`(ctype: `hkInt8`)
+    /// - offset: ` 14`(x86)/` 14`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_memOffsetToPrevAngle: i8,
     /// # C++ Info
-    /// -          name: `memOffsetToRevolutionCounter`(ctype: `hkInt8`)
-    /// -        offset:  15(x86)/ 15(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `memOffsetToRevolutionCounter`(ctype: `hkInt8`)
+    /// - offset: ` 15`(x86)/` 15`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_memOffsetToRevolutionCounter: i8,
 }
 const _: () = {

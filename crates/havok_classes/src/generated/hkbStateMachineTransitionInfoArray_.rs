@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbStateMachineTransitionInfoArray`
-/// -         version: `0`
-/// -       signature: `0xe397b11e`
-/// -          size:  20(x86)/ 32(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbStateMachineTransitionInfoArray`
+/// - version: `0`
+/// - signature: `0xe397b11e`
+/// - size: ` 20`(x86)/` 32`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkbStateMachineTransitionInfoArray {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `transitions`(ctype: `hkArray<struct hkbStateMachineTransitionInfo>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `transitions`(ctype: `hkArray<struct hkbStateMachineTransitionInfo>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_transitions: Vec<hkbStateMachineTransitionInfo>,
 }
 const _: () = {

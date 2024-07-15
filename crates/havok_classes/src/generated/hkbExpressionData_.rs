@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbExpressionData`
-/// -         version: `0`
-/// -       signature: `0x6740042a`
-/// -          size:  16(x86)/ 24(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkbExpressionData`
+/// - version: `0`
+/// - signature: `0x6740042a`
+/// - size: ` 16`(x86)/` 24`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,42 +19,36 @@ pub struct hkbExpressionData<'a> {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `expression`(ctype: `hkStringPtr`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `expression`(ctype: `hkStringPtr`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_expression: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `assignmentVariableIndex`(ctype: `hkInt32`)
-    /// -        offset:   4(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `assignmentVariableIndex`(ctype: `hkInt32`)
+    /// - offset: `  4`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_assignmentVariableIndex: i32,
     /// # C++ Info
-    /// -          name: `assignmentEventIndex`(ctype: `hkInt32`)
-    /// -        offset:   8(x86)/ 12(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `assignmentEventIndex`(ctype: `hkInt32`)
+    /// - offset: `  8`(x86)/` 12`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_assignmentEventIndex: i32,
     /// # C++ Info
-    /// -          name: `eventMode`(ctype: `enum ExpressionEventMode`)
-    /// -        offset:  12(x86)/ 16(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `eventMode`(ctype: `enum ExpressionEventMode`)
+    /// - offset: ` 12`(x86)/` 16`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_eventMode: ExpressionEventMode,
     /// # C++ Info
-    /// -          name: `raisedEvent`(ctype: `hkBool`)
-    /// -        offset:  13(x86)/ 17(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `raisedEvent`(ctype: `hkBool`)
+    /// - offset: ` 13`(x86)/` 17`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_raisedEvent: bool,
     /// # C++ Info
-    /// -          name: `wasTrueInPreviousFrame`(ctype: `hkBool`)
-    /// -        offset:  14(x86)/ 18(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `wasTrueInPreviousFrame`(ctype: `hkBool`)
+    /// - offset: ` 14`(x86)/` 18`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_wasTrueInPreviousFrame: bool,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpWorld`
-/// -         version: `0`
-/// -       signature: `0xaadcec37`
-/// -          size: 864(x86)/1072(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpWorld`
+/// - version: `0`
+/// - signature: `0xaadcec37`
+/// - size: `864`(x86)/`1072`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,572 +21,485 @@ pub struct hkpWorld {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `simulation`(ctype: `struct hkpSimulation*`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `simulation`(ctype: `struct hkpSimulation*`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_simulation: Pointer,
     /// # C++ Info
-    /// -          name: `gravity`(ctype: `hkVector4`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `gravity`(ctype: `hkVector4`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_gravity: Vector4,
     /// # C++ Info
-    /// -          name: `fixedIsland`(ctype: `void*`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `fixedIsland`(ctype: `void*`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_fixedIsland: Pointer,
     /// # C++ Info
-    /// -          name: `fixedRigidBody`(ctype: `struct hkpRigidBody*`)
-    /// -        offset:  36(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `fixedRigidBody`(ctype: `struct hkpRigidBody*`)
+    /// - offset: ` 36`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_fixedRigidBody: Pointer,
     /// # C++ Info
-    /// -          name: `activeSimulationIslands`(ctype: `hkArray<void*>`)
-    /// -        offset:  40(x86)/ 64(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `activeSimulationIslands`(ctype: `hkArray<void*>`)
+    /// - offset: ` 40`(x86)/` 64`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_activeSimulationIslands: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `inactiveSimulationIslands`(ctype: `hkArray<void*>`)
-    /// -        offset:  52(x86)/ 80(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `inactiveSimulationIslands`(ctype: `hkArray<void*>`)
+    /// - offset: ` 52`(x86)/` 80`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_inactiveSimulationIslands: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `dirtySimulationIslands`(ctype: `hkArray<void*>`)
-    /// -        offset:  64(x86)/ 96(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `dirtySimulationIslands`(ctype: `hkArray<void*>`)
+    /// - offset: ` 64`(x86)/` 96`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_dirtySimulationIslands: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `maintenanceMgr`(ctype: `void*`)
-    /// -        offset:  76(x86)/112(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `maintenanceMgr`(ctype: `void*`)
+    /// - offset: ` 76`(x86)/`112`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_maintenanceMgr: Pointer,
     /// # C++ Info
-    /// -          name: `memoryWatchDog`(ctype: `void*`)
-    /// -        offset:  80(x86)/120(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `memoryWatchDog`(ctype: `void*`)
+    /// - offset: ` 80`(x86)/`120`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_memoryWatchDog: Pointer,
     /// # C++ Info
-    /// -          name: `assertOnRunningOutOfSolverMemory`(ctype: `hkBool`)
-    /// -        offset:  84(x86)/128(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `assertOnRunningOutOfSolverMemory`(ctype: `hkBool`)
+    /// - offset: ` 84`(x86)/`128`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_assertOnRunningOutOfSolverMemory: bool,
     /// # C++ Info
-    /// -          name: `broadPhase`(ctype: `void*`)
-    /// -        offset:  88(x86)/136(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `broadPhase`(ctype: `void*`)
+    /// - offset: ` 88`(x86)/`136`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_broadPhase: Pointer,
     /// # C++ Info
-    /// -          name: `kdTreeManager`(ctype: `void*`)
-    /// -        offset:  92(x86)/144(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `kdTreeManager`(ctype: `void*`)
+    /// - offset: ` 92`(x86)/`144`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_kdTreeManager: Pointer,
     /// # C++ Info
-    /// -          name: `autoUpdateTree`(ctype: `hkBool`)
-    /// -        offset:  96(x86)/152(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `autoUpdateTree`(ctype: `hkBool`)
+    /// - offset: ` 96`(x86)/`152`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_autoUpdateTree: bool,
     /// # C++ Info
-    /// -          name: `broadPhaseDispatcher`(ctype: `void*`)
-    /// -        offset: 100(x86)/160(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `broadPhaseDispatcher`(ctype: `void*`)
+    /// - offset: `100`(x86)/`160`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_broadPhaseDispatcher: Pointer,
     /// # C++ Info
-    /// -          name: `phantomBroadPhaseListener`(ctype: `void*`)
-    /// -        offset: 104(x86)/168(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `phantomBroadPhaseListener`(ctype: `void*`)
+    /// - offset: `104`(x86)/`168`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_phantomBroadPhaseListener: Pointer,
     /// # C++ Info
-    /// -          name: `entityEntityBroadPhaseListener`(ctype: `void*`)
-    /// -        offset: 108(x86)/176(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `entityEntityBroadPhaseListener`(ctype: `void*`)
+    /// - offset: `108`(x86)/`176`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_entityEntityBroadPhaseListener: Pointer,
     /// # C++ Info
-    /// -          name: `broadPhaseBorderListener`(ctype: `void*`)
-    /// -        offset: 112(x86)/184(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `broadPhaseBorderListener`(ctype: `void*`)
+    /// - offset: `112`(x86)/`184`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_broadPhaseBorderListener: Pointer,
     /// # C++ Info
-    /// -          name: `multithreadedSimulationJobData`(ctype: `void*`)
-    /// -        offset: 116(x86)/192(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `multithreadedSimulationJobData`(ctype: `void*`)
+    /// - offset: `116`(x86)/`192`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_multithreadedSimulationJobData: Pointer,
     /// # C++ Info
-    /// -          name: `collisionInput`(ctype: `void*`)
-    /// -        offset: 120(x86)/200(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `collisionInput`(ctype: `void*`)
+    /// - offset: `120`(x86)/`200`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_collisionInput: Pointer,
     /// # C++ Info
-    /// -          name: `collisionFilter`(ctype: `void*`)
-    /// -        offset: 124(x86)/208(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `collisionFilter`(ctype: `void*`)
+    /// - offset: `124`(x86)/`208`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_collisionFilter: Pointer,
     /// # C++ Info
-    /// -          name: `collisionDispatcher`(ctype: `void*`)
-    /// -        offset: 128(x86)/216(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `collisionDispatcher`(ctype: `void*`)
+    /// - offset: `128`(x86)/`216`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_collisionDispatcher: Pointer,
     /// # C++ Info
-    /// -          name: `convexListFilter`(ctype: `void*`)
-    /// -        offset: 132(x86)/224(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `convexListFilter`(ctype: `void*`)
+    /// - offset: `132`(x86)/`224`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_convexListFilter: Pointer,
     /// # C++ Info
-    /// -          name: `pendingOperations`(ctype: `void*`)
-    /// -        offset: 136(x86)/232(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `pendingOperations`(ctype: `void*`)
+    /// - offset: `136`(x86)/`232`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_pendingOperations: Pointer,
     /// # C++ Info
-    /// -          name: `pendingOperationsCount`(ctype: `hkInt32`)
-    /// -        offset: 140(x86)/240(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `pendingOperationsCount`(ctype: `hkInt32`)
+    /// - offset: `140`(x86)/`240`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_pendingOperationsCount: i32,
     /// # C++ Info
-    /// -          name: `pendingBodyOperationsCount`(ctype: `hkInt32`)
-    /// -        offset: 144(x86)/244(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `pendingBodyOperationsCount`(ctype: `hkInt32`)
+    /// - offset: `144`(x86)/`244`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_pendingBodyOperationsCount: i32,
     /// # C++ Info
-    /// -          name: `criticalOperationsLockCount`(ctype: `hkInt32`)
-    /// -        offset: 148(x86)/248(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `criticalOperationsLockCount`(ctype: `hkInt32`)
+    /// - offset: `148`(x86)/`248`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_criticalOperationsLockCount: i32,
     /// # C++ Info
-    /// -          name: `criticalOperationsLockCountForPhantoms`(ctype: `hkInt32`)
-    /// -        offset: 152(x86)/252(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `criticalOperationsLockCountForPhantoms`(ctype: `hkInt32`)
+    /// - offset: `152`(x86)/`252`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_criticalOperationsLockCountForPhantoms: i32,
     /// # C++ Info
-    /// -          name: `blockExecutingPendingOperations`(ctype: `hkBool`)
-    /// -        offset: 156(x86)/256(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `blockExecutingPendingOperations`(ctype: `hkBool`)
+    /// - offset: `156`(x86)/`256`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_blockExecutingPendingOperations: bool,
     /// # C++ Info
-    /// -          name: `criticalOperationsAllowed`(ctype: `hkBool`)
-    /// -        offset: 157(x86)/257(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `criticalOperationsAllowed`(ctype: `hkBool`)
+    /// - offset: `157`(x86)/`257`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_criticalOperationsAllowed: bool,
     /// # C++ Info
-    /// -          name: `pendingOperationQueues`(ctype: `void*`)
-    /// -        offset: 160(x86)/264(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `pendingOperationQueues`(ctype: `void*`)
+    /// - offset: `160`(x86)/`264`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_pendingOperationQueues: Pointer,
     /// # C++ Info
-    /// -          name: `pendingOperationQueueCount`(ctype: `hkInt32`)
-    /// -        offset: 164(x86)/272(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `pendingOperationQueueCount`(ctype: `hkInt32`)
+    /// - offset: `164`(x86)/`272`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_pendingOperationQueueCount: i32,
     /// # C++ Info
-    /// -          name: `multiThreadCheck`(ctype: `struct hkMultiThreadCheck`)
-    /// -        offset: 168(x86)/276(x86_64)
-    /// -     type_size:  12(x86)/ 12(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `multiThreadCheck`(ctype: `struct hkMultiThreadCheck`)
+    /// - offset: `168`(x86)/`276`(x86_64)
+    /// - type_size: ` 12`(x86)/` 12`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_multiThreadCheck: hkMultiThreadCheck,
     /// # C++ Info
-    /// -          name: `processActionsInSingleThread`(ctype: `hkBool`)
-    /// -        offset: 180(x86)/288(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `processActionsInSingleThread`(ctype: `hkBool`)
+    /// - offset: `180`(x86)/`288`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_processActionsInSingleThread: bool,
     /// # C++ Info
-    /// -          name: `allowIntegrationOfIslandsWithoutConstraintsInASeparateJob`(ctype: `hkBool`)
-    /// -        offset: 181(x86)/289(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `allowIntegrationOfIslandsWithoutConstraintsInASeparateJob`(ctype: `hkBool`)
+    /// - offset: `181`(x86)/`289`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob: bool,
     /// # C++ Info
-    /// -          name: `minDesiredIslandSize`(ctype: `hkUint32`)
-    /// -        offset: 184(x86)/292(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `minDesiredIslandSize`(ctype: `hkUint32`)
+    /// - offset: `184`(x86)/`292`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_minDesiredIslandSize: u32,
     /// # C++ Info
-    /// -          name: `modifyConstraintCriticalSection`(ctype: `void*`)
-    /// -        offset: 188(x86)/296(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `modifyConstraintCriticalSection`(ctype: `void*`)
+    /// - offset: `188`(x86)/`296`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_modifyConstraintCriticalSection: Pointer,
     /// # C++ Info
-    /// -          name: `isLocked`(ctype: `hkInt32`)
-    /// -        offset: 192(x86)/304(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `isLocked`(ctype: `hkInt32`)
+    /// - offset: `192`(x86)/`304`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_isLocked: i32,
     /// # C++ Info
-    /// -          name: `islandDirtyListCriticalSection`(ctype: `void*`)
-    /// -        offset: 196(x86)/312(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `islandDirtyListCriticalSection`(ctype: `void*`)
+    /// - offset: `196`(x86)/`312`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_islandDirtyListCriticalSection: Pointer,
     /// # C++ Info
-    /// -          name: `propertyMasterLock`(ctype: `void*`)
-    /// -        offset: 200(x86)/320(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `propertyMasterLock`(ctype: `void*`)
+    /// - offset: `200`(x86)/`320`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_propertyMasterLock: Pointer,
     /// # C++ Info
-    /// -          name: `wantSimulationIslands`(ctype: `hkBool`)
-    /// -        offset: 204(x86)/328(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `wantSimulationIslands`(ctype: `hkBool`)
+    /// - offset: `204`(x86)/`328`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_wantSimulationIslands: bool,
     /// # C++ Info
-    /// -          name: `useHybridBroadphase`(ctype: `hkBool`)
-    /// -        offset: 205(x86)/329(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `useHybridBroadphase`(ctype: `hkBool`)
+    /// - offset: `205`(x86)/`329`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_useHybridBroadphase: bool,
     /// # C++ Info
-    /// -          name: `snapCollisionToConvexEdgeThreshold`(ctype: `hkReal`)
-    /// -        offset: 208(x86)/332(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `snapCollisionToConvexEdgeThreshold`(ctype: `hkReal`)
+    /// - offset: `208`(x86)/`332`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_snapCollisionToConvexEdgeThreshold: f32,
     /// # C++ Info
-    /// -          name: `snapCollisionToConcaveEdgeThreshold`(ctype: `hkReal`)
-    /// -        offset: 212(x86)/336(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `snapCollisionToConcaveEdgeThreshold`(ctype: `hkReal`)
+    /// - offset: `212`(x86)/`336`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_snapCollisionToConcaveEdgeThreshold: f32,
     /// # C++ Info
-    /// -          name: `enableToiWeldRejection`(ctype: `hkBool`)
-    /// -        offset: 216(x86)/340(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `enableToiWeldRejection`(ctype: `hkBool`)
+    /// - offset: `216`(x86)/`340`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_enableToiWeldRejection: bool,
     /// # C++ Info
-    /// -          name: `wantDeactivation`(ctype: `hkBool`)
-    /// -        offset: 217(x86)/341(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `wantDeactivation`(ctype: `hkBool`)
+    /// - offset: `217`(x86)/`341`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_wantDeactivation: bool,
     /// # C++ Info
-    /// -          name: `shouldActivateOnRigidBodyTransformChange`(ctype: `hkBool`)
-    /// -        offset: 218(x86)/342(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `shouldActivateOnRigidBodyTransformChange`(ctype: `hkBool`)
+    /// - offset: `218`(x86)/`342`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_shouldActivateOnRigidBodyTransformChange: bool,
     /// # C++ Info
-    /// -          name: `deactivationReferenceDistance`(ctype: `hkReal`)
-    /// -        offset: 220(x86)/344(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `deactivationReferenceDistance`(ctype: `hkReal`)
+    /// - offset: `220`(x86)/`344`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_deactivationReferenceDistance: f32,
     /// # C++ Info
-    /// -          name: `toiCollisionResponseRotateNormal`(ctype: `hkReal`)
-    /// -        offset: 224(x86)/348(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `toiCollisionResponseRotateNormal`(ctype: `hkReal`)
+    /// - offset: `224`(x86)/`348`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_toiCollisionResponseRotateNormal: f32,
     /// # C++ Info
-    /// -          name: `maxSectorsPerMidphaseCollideTask`(ctype: `hkInt32`)
-    /// -        offset: 228(x86)/352(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxSectorsPerMidphaseCollideTask`(ctype: `hkInt32`)
+    /// - offset: `228`(x86)/`352`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxSectorsPerMidphaseCollideTask: i32,
     /// # C++ Info
-    /// -          name: `maxSectorsPerNarrowphaseCollideTask`(ctype: `hkInt32`)
-    /// -        offset: 232(x86)/356(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxSectorsPerNarrowphaseCollideTask`(ctype: `hkInt32`)
+    /// - offset: `232`(x86)/`356`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxSectorsPerNarrowphaseCollideTask: i32,
     /// # C++ Info
-    /// -          name: `processToisMultithreaded`(ctype: `hkBool`)
-    /// -        offset: 236(x86)/360(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `processToisMultithreaded`(ctype: `hkBool`)
+    /// - offset: `236`(x86)/`360`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_processToisMultithreaded: bool,
     /// # C++ Info
-    /// -          name: `maxEntriesPerToiMidphaseCollideTask`(ctype: `hkInt32`)
-    /// -        offset: 240(x86)/364(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxEntriesPerToiMidphaseCollideTask`(ctype: `hkInt32`)
+    /// - offset: `240`(x86)/`364`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxEntriesPerToiMidphaseCollideTask: i32,
     /// # C++ Info
-    /// -          name: `maxEntriesPerToiNarrowphaseCollideTask`(ctype: `hkInt32`)
-    /// -        offset: 244(x86)/368(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxEntriesPerToiNarrowphaseCollideTask`(ctype: `hkInt32`)
+    /// - offset: `244`(x86)/`368`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxEntriesPerToiNarrowphaseCollideTask: i32,
     /// # C++ Info
-    /// -          name: `maxNumToiCollisionPairsSinglethreaded`(ctype: `hkInt32`)
-    /// -        offset: 248(x86)/372(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxNumToiCollisionPairsSinglethreaded`(ctype: `hkInt32`)
+    /// - offset: `248`(x86)/`372`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxNumToiCollisionPairsSinglethreaded: i32,
     /// # C++ Info
-    /// -          name: `simulationType`(ctype: `enum unknown`)
-    /// -        offset: 252(x86)/376(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `simulationType`(ctype: `enum unknown`)
+    /// - offset: `252`(x86)/`376`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_simulationType: i32,
     /// # C++ Info
-    /// -          name: `numToisTillAllowedPenetrationSimplifiedToi`(ctype: `hkReal`)
-    /// -        offset: 256(x86)/380(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `numToisTillAllowedPenetrationSimplifiedToi`(ctype: `hkReal`)
+    /// - offset: `256`(x86)/`380`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_numToisTillAllowedPenetrationSimplifiedToi: f32,
     /// # C++ Info
-    /// -          name: `numToisTillAllowedPenetrationToi`(ctype: `hkReal`)
-    /// -        offset: 260(x86)/384(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `numToisTillAllowedPenetrationToi`(ctype: `hkReal`)
+    /// - offset: `260`(x86)/`384`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_numToisTillAllowedPenetrationToi: f32,
     /// # C++ Info
-    /// -          name: `numToisTillAllowedPenetrationToiHigher`(ctype: `hkReal`)
-    /// -        offset: 264(x86)/388(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `numToisTillAllowedPenetrationToiHigher`(ctype: `hkReal`)
+    /// - offset: `264`(x86)/`388`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_numToisTillAllowedPenetrationToiHigher: f32,
     /// # C++ Info
-    /// -          name: `numToisTillAllowedPenetrationToiForced`(ctype: `hkReal`)
-    /// -        offset: 268(x86)/392(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `numToisTillAllowedPenetrationToiForced`(ctype: `hkReal`)
+    /// - offset: `268`(x86)/`392`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_numToisTillAllowedPenetrationToiForced: f32,
     /// # C++ Info
-    /// -          name: `lastEntityUid`(ctype: `hkUint32`)
-    /// -        offset: 272(x86)/396(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `lastEntityUid`(ctype: `hkUint32`)
+    /// - offset: `272`(x86)/`396`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_lastEntityUid: u32,
     /// # C++ Info
-    /// -          name: `lastIslandUid`(ctype: `hkUint32`)
-    /// -        offset: 276(x86)/400(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `lastIslandUid`(ctype: `hkUint32`)
+    /// - offset: `276`(x86)/`400`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_lastIslandUid: u32,
     /// # C++ Info
-    /// -          name: `lastConstraintUid`(ctype: `hkUint32`)
-    /// -        offset: 280(x86)/404(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `lastConstraintUid`(ctype: `hkUint32`)
+    /// - offset: `280`(x86)/`404`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_lastConstraintUid: u32,
     /// # C++ Info
-    /// -          name: `phantoms`(ctype: `hkArray<hkpPhantom*>`)
-    /// -        offset: 284(x86)/408(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `phantoms`(ctype: `hkArray<hkpPhantom*>`)
+    /// - offset: `284`(x86)/`408`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_phantoms: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `actionListeners`(ctype: `hkArray<void*>`)
-    /// -        offset: 296(x86)/424(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `actionListeners`(ctype: `hkArray<void*>`)
+    /// - offset: `296`(x86)/`424`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_actionListeners: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `entityListeners`(ctype: `hkArray<void*>`)
-    /// -        offset: 308(x86)/440(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `entityListeners`(ctype: `hkArray<void*>`)
+    /// - offset: `308`(x86)/`440`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_entityListeners: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `phantomListeners`(ctype: `hkArray<void*>`)
-    /// -        offset: 320(x86)/456(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `phantomListeners`(ctype: `hkArray<void*>`)
+    /// - offset: `320`(x86)/`456`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_phantomListeners: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `constraintListeners`(ctype: `hkArray<void*>`)
-    /// -        offset: 332(x86)/472(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `constraintListeners`(ctype: `hkArray<void*>`)
+    /// - offset: `332`(x86)/`472`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_constraintListeners: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `worldDeletionListeners`(ctype: `hkArray<void*>`)
-    /// -        offset: 344(x86)/488(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `worldDeletionListeners`(ctype: `hkArray<void*>`)
+    /// - offset: `344`(x86)/`488`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_worldDeletionListeners: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `islandActivationListeners`(ctype: `hkArray<void*>`)
-    /// -        offset: 356(x86)/504(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `islandActivationListeners`(ctype: `hkArray<void*>`)
+    /// - offset: `356`(x86)/`504`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_islandActivationListeners: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `worldPostSimulationListeners`(ctype: `hkArray<void*>`)
-    /// -        offset: 368(x86)/520(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `worldPostSimulationListeners`(ctype: `hkArray<void*>`)
+    /// - offset: `368`(x86)/`520`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_worldPostSimulationListeners: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `worldPostIntegrateListeners`(ctype: `hkArray<void*>`)
-    /// -        offset: 380(x86)/536(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `worldPostIntegrateListeners`(ctype: `hkArray<void*>`)
+    /// - offset: `380`(x86)/`536`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_worldPostIntegrateListeners: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `worldPostCollideListeners`(ctype: `hkArray<void*>`)
-    /// -        offset: 392(x86)/552(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `worldPostCollideListeners`(ctype: `hkArray<void*>`)
+    /// - offset: `392`(x86)/`552`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_worldPostCollideListeners: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `islandPostIntegrateListeners`(ctype: `hkArray<void*>`)
-    /// -        offset: 404(x86)/568(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `islandPostIntegrateListeners`(ctype: `hkArray<void*>`)
+    /// - offset: `404`(x86)/`568`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_islandPostIntegrateListeners: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `islandPostCollideListeners`(ctype: `hkArray<void*>`)
-    /// -        offset: 416(x86)/584(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `islandPostCollideListeners`(ctype: `hkArray<void*>`)
+    /// - offset: `416`(x86)/`584`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_islandPostCollideListeners: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `contactListeners`(ctype: `hkArray<void*>`)
-    /// -        offset: 428(x86)/600(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `contactListeners`(ctype: `hkArray<void*>`)
+    /// - offset: `428`(x86)/`600`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_contactListeners: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `contactImpulseLimitBreachedListeners`(ctype: `hkArray<void*>`)
-    /// -        offset: 440(x86)/616(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `contactImpulseLimitBreachedListeners`(ctype: `hkArray<void*>`)
+    /// - offset: `440`(x86)/`616`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_contactImpulseLimitBreachedListeners: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `worldExtensions`(ctype: `hkArray<void*>`)
-    /// -        offset: 452(x86)/632(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `worldExtensions`(ctype: `hkArray<void*>`)
+    /// - offset: `452`(x86)/`632`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_worldExtensions: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `violatedConstraintArray`(ctype: `void*`)
-    /// -        offset: 464(x86)/648(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `violatedConstraintArray`(ctype: `void*`)
+    /// - offset: `464`(x86)/`648`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_violatedConstraintArray: Pointer,
     /// # C++ Info
-    /// -          name: `broadPhaseBorder`(ctype: `void*`)
-    /// -        offset: 468(x86)/656(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `broadPhaseBorder`(ctype: `void*`)
+    /// - offset: `468`(x86)/`656`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_broadPhaseBorder: Pointer,
     /// # C++ Info
-    /// -          name: `destructionWorld`(ctype: `void*`)
-    /// -        offset: 472(x86)/664(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `destructionWorld`(ctype: `void*`)
+    /// - offset: `472`(x86)/`664`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_destructionWorld: Pointer,
     /// # C++ Info
-    /// -          name: `npWorld`(ctype: `void*`)
-    /// -        offset: 476(x86)/672(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `npWorld`(ctype: `void*`)
+    /// - offset: `476`(x86)/`672`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_npWorld: Pointer,
     /// # C++ Info
-    /// -          name: `broadPhaseExtents`(ctype: `hkVector4[2]`)
-    /// -        offset: 800(x86)/1008(x86_64)
-    /// -     type_size:  32(x86)/ 32(x86_64)
-    ///
+    /// - name: `broadPhaseExtents`(ctype: `hkVector4[2]`)
+    /// - offset: `800`(x86)/`1008`(x86_64)
+    /// - type_size: ` 32`(x86)/` 32`(x86_64)
     pub m_broadPhaseExtents: [Vector4; 2usize],
     /// # C++ Info
-    /// -          name: `broadPhaseNumMarkers`(ctype: `hkInt32`)
-    /// -        offset: 832(x86)/1040(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `broadPhaseNumMarkers`(ctype: `hkInt32`)
+    /// - offset: `832`(x86)/`1040`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_broadPhaseNumMarkers: i32,
     /// # C++ Info
-    /// -          name: `sizeOfToiEventQueue`(ctype: `hkInt32`)
-    /// -        offset: 836(x86)/1044(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `sizeOfToiEventQueue`(ctype: `hkInt32`)
+    /// - offset: `836`(x86)/`1044`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_sizeOfToiEventQueue: i32,
     /// # C++ Info
-    /// -          name: `broadPhaseQuerySize`(ctype: `hkInt32`)
-    /// -        offset: 840(x86)/1048(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `broadPhaseQuerySize`(ctype: `hkInt32`)
+    /// - offset: `840`(x86)/`1048`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_broadPhaseQuerySize: i32,
     /// # C++ Info
-    /// -          name: `broadPhaseUpdateSize`(ctype: `hkInt32`)
-    /// -        offset: 844(x86)/1052(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `broadPhaseUpdateSize`(ctype: `hkInt32`)
+    /// - offset: `844`(x86)/`1052`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_broadPhaseUpdateSize: i32,
     /// # C++ Info
-    /// -          name: `contactPointGeneration`(ctype: `enum unknown`)
-    /// -        offset: 848(x86)/1056(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `contactPointGeneration`(ctype: `enum unknown`)
+    /// - offset: `848`(x86)/`1056`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_contactPointGeneration: i8,
 }
 const _: () = {

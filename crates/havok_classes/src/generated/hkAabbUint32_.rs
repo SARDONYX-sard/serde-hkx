@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkAabbUint32`
-/// -         version: `0`
-/// -       signature: `0x11e7c11`
-/// -          size:  32(x86)/ 32(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkAabbUint32`
+/// - version: `0`
+/// - signature: `0x11e7c11`
+/// - size: ` 32`(x86)/` 32`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,41 +19,35 @@ pub struct hkAabbUint32 {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `min`(ctype: `hkUint32[3]`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:  12(x86)/ 12(x86_64)
-    /// -         flags: `ALIGN_16`
-    ///
+    /// - name: `min`(ctype: `hkUint32[3]`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: ` 12`(x86)/` 12`(x86_64)
+    /// - flags: `ALIGN_16`
     pub m_min: [u32; 3usize],
     /// # C++ Info
-    /// -          name: `expansionMin`(ctype: `hkUint8[3]`)
-    /// -        offset:  12(x86)/ 12(x86_64)
-    /// -     type_size:   3(x86)/  3(x86_64)
-    ///
+    /// - name: `expansionMin`(ctype: `hkUint8[3]`)
+    /// - offset: ` 12`(x86)/` 12`(x86_64)
+    /// - type_size: `  3`(x86)/`  3`(x86_64)
     pub m_expansionMin: [u8; 3usize],
     /// # C++ Info
-    /// -          name: `expansionShift`(ctype: `hkUint8`)
-    /// -        offset:  15(x86)/ 15(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `expansionShift`(ctype: `hkUint8`)
+    /// - offset: ` 15`(x86)/` 15`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_expansionShift: u8,
     /// # C++ Info
-    /// -          name: `max`(ctype: `hkUint32[3]`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 12(x86_64)
-    ///
+    /// - name: `max`(ctype: `hkUint32[3]`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 12`(x86_64)
     pub m_max: [u32; 3usize],
     /// # C++ Info
-    /// -          name: `expansionMax`(ctype: `hkUint8[3]`)
-    /// -        offset:  28(x86)/ 28(x86_64)
-    /// -     type_size:   3(x86)/  3(x86_64)
-    ///
+    /// - name: `expansionMax`(ctype: `hkUint8[3]`)
+    /// - offset: ` 28`(x86)/` 28`(x86_64)
+    /// - type_size: `  3`(x86)/`  3`(x86_64)
     pub m_expansionMax: [u8; 3usize],
     /// # C++ Info
-    /// -          name: `shapeKeyByte`(ctype: `hkUint8`)
-    /// -        offset:  31(x86)/ 31(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `shapeKeyByte`(ctype: `hkUint8`)
+    /// - offset: ` 31`(x86)/` 31`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_shapeKeyByte: u8,
 }
 const _: () = {

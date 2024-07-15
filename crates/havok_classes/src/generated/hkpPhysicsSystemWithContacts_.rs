@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpPhysicsSystemWithContacts`
-/// -         version: `0`
-/// -       signature: `0xd0fd4bbe`
-/// -          size:  80(x86)/120(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpPhysicsSystemWithContacts`
+/// - version: `0`
+/// - signature: `0xd0fd4bbe`
+/// - size: ` 80`(x86)/`120`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkpPhysicsSystemWithContacts<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkpPhysicsSystem<'a>,
     /// # C++ Info
-    /// -          name: `contacts`(ctype: `hkArray<hkpSerializedAgentNnEntry*>`)
-    /// -        offset:  68(x86)/104(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `contacts`(ctype: `hkArray<hkpSerializedAgentNnEntry*>`)
+    /// - offset: ` 68`(x86)/`104`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_contacts: Vec<Pointer>,
 }
 const _: () = {

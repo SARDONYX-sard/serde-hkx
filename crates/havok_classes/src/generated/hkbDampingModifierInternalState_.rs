@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbDampingModifierInternalState`
-/// -         version: `0`
-/// -       signature: `0x508d3b36`
-/// -          size:  80(x86)/ 80(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbDampingModifierInternalState`
+/// - version: `0`
+/// - signature: `0x508d3b36`
+/// - size: ` 80`(x86)/` 80`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,40 +21,34 @@ pub struct hkbDampingModifierInternalState {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `dampedVector`(ctype: `hkVector4`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `dampedVector`(ctype: `hkVector4`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_dampedVector: Vector4,
     /// # C++ Info
-    /// -          name: `vecErrorSum`(ctype: `hkVector4`)
-    /// -        offset:  32(x86)/ 32(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `vecErrorSum`(ctype: `hkVector4`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_vecErrorSum: Vector4,
     /// # C++ Info
-    /// -          name: `vecPreviousError`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 48(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `vecPreviousError`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 48`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_vecPreviousError: Vector4,
     /// # C++ Info
-    /// -          name: `dampedValue`(ctype: `hkReal`)
-    /// -        offset:  64(x86)/ 64(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `dampedValue`(ctype: `hkReal`)
+    /// - offset: ` 64`(x86)/` 64`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_dampedValue: f32,
     /// # C++ Info
-    /// -          name: `errorSum`(ctype: `hkReal`)
-    /// -        offset:  68(x86)/ 68(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `errorSum`(ctype: `hkReal`)
+    /// - offset: ` 68`(x86)/` 68`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_errorSum: f32,
     /// # C++ Info
-    /// -          name: `previousError`(ctype: `hkReal`)
-    /// -        offset:  72(x86)/ 72(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `previousError`(ctype: `hkReal`)
+    /// - offset: ` 72`(x86)/` 72`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_previousError: f32,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkaSplineCompressedAnimationAnimationCompressionParams`
-/// -         version: `0`
-/// -       signature: `0xde830789`
-/// -          size:   4(x86)/  4(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkaSplineCompressedAnimationAnimationCompressionParams`
+/// - version: `0`
+/// - signature: `0xde830789`
+/// - size: `  4`(x86)/`  4`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,16 +19,14 @@ pub struct hkaSplineCompressedAnimationAnimationCompressionParams {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `maxFramesPerBlock`(ctype: `hkUint16`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `maxFramesPerBlock`(ctype: `hkUint16`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_maxFramesPerBlock: u16,
     /// # C++ Info
-    /// -          name: `enableSampleSingleTracks`(ctype: `hkBool`)
-    /// -        offset:   2(x86)/  2(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `enableSampleSingleTracks`(ctype: `hkBool`)
+    /// - offset: `  2`(x86)/`  2`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_enableSampleSingleTracks: bool,
 }
 const _: () = {

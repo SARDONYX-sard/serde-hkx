@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkaMeshBinding`
-/// -         version: `1`
-/// -       signature: `0x81d9950b`
-/// -          size:  44(x86)/ 72(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkaMeshBinding`
+/// - version: `1`
+/// - signature: `0x81d9950b`
+/// - size: ` 44`(x86)/` 72`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,34 +21,29 @@ pub struct hkaMeshBinding<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `mesh`(ctype: `struct hkxMesh*`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `mesh`(ctype: `struct hkxMesh*`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_mesh: Pointer,
     /// # C++ Info
-    /// -          name: `originalSkeletonName`(ctype: `hkStringPtr`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `originalSkeletonName`(ctype: `hkStringPtr`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_originalSkeletonName: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `skeleton`(ctype: `struct hkaSkeleton*`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `skeleton`(ctype: `struct hkaSkeleton*`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_skeleton: Pointer,
     /// # C++ Info
-    /// -          name: `mappings`(ctype: `hkArray<struct hkaMeshBindingMapping>`)
-    /// -        offset:  20(x86)/ 40(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `mappings`(ctype: `hkArray<struct hkaMeshBindingMapping>`)
+    /// - offset: ` 20`(x86)/` 40`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_mappings: Vec<hkaMeshBindingMapping>,
     /// # C++ Info
-    /// -          name: `boneFromSkinMeshTransforms`(ctype: `hkArray<hkTransform>`)
-    /// -        offset:  32(x86)/ 56(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `boneFromSkinMeshTransforms`(ctype: `hkArray<hkTransform>`)
+    /// - offset: ` 32`(x86)/` 56`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_boneFromSkinMeshTransforms: Vec<Transform>,
 }
 const _: () = {

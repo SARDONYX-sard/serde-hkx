@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpVehicleDataWheelComponentParams`
-/// -         version: `0`
-/// -       signature: `0x82fe40e0`
-/// -          size:  40(x86)/ 40(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpVehicleDataWheelComponentParams`
+/// - version: `0`
+/// - signature: `0x82fe40e0`
+/// - size: ` 40`(x86)/` 40`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,64 +19,54 @@ pub struct hkpVehicleDataWheelComponentParams {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `radius`(ctype: `hkReal`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `radius`(ctype: `hkReal`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_radius: f32,
     /// # C++ Info
-    /// -          name: `mass`(ctype: `hkReal`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `mass`(ctype: `hkReal`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_mass: f32,
     /// # C++ Info
-    /// -          name: `width`(ctype: `hkReal`)
-    /// -        offset:   8(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `width`(ctype: `hkReal`)
+    /// - offset: `  8`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_width: f32,
     /// # C++ Info
-    /// -          name: `friction`(ctype: `hkReal`)
-    /// -        offset:  12(x86)/ 12(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `friction`(ctype: `hkReal`)
+    /// - offset: ` 12`(x86)/` 12`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_friction: f32,
     /// # C++ Info
-    /// -          name: `viscosityFriction`(ctype: `hkReal`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `viscosityFriction`(ctype: `hkReal`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_viscosityFriction: f32,
     /// # C++ Info
-    /// -          name: `maxFriction`(ctype: `hkReal`)
-    /// -        offset:  20(x86)/ 20(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxFriction`(ctype: `hkReal`)
+    /// - offset: ` 20`(x86)/` 20`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxFriction: f32,
     /// # C++ Info
-    /// -          name: `slipAngle`(ctype: `hkReal`)
-    /// -        offset:  24(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `slipAngle`(ctype: `hkReal`)
+    /// - offset: ` 24`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_slipAngle: f32,
     /// # C++ Info
-    /// -          name: `forceFeedbackMultiplier`(ctype: `hkReal`)
-    /// -        offset:  28(x86)/ 28(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `forceFeedbackMultiplier`(ctype: `hkReal`)
+    /// - offset: ` 28`(x86)/` 28`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_forceFeedbackMultiplier: f32,
     /// # C++ Info
-    /// -          name: `maxContactBodyAcceleration`(ctype: `hkReal`)
-    /// -        offset:  32(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxContactBodyAcceleration`(ctype: `hkReal`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxContactBodyAcceleration: f32,
     /// # C++ Info
-    /// -          name: `axle`(ctype: `hkInt8`)
-    /// -        offset:  36(x86)/ 36(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `axle`(ctype: `hkInt8`)
+    /// - offset: ` 36`(x86)/` 36`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_axle: i8,
 }
 const _: () = {

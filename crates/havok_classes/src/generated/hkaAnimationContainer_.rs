@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkaAnimationContainer`
-/// -         version: `1`
-/// -       signature: `0x8dc20333`
-/// -          size:  68(x86)/ 96(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkaAnimationContainer`
+/// - version: `1`
+/// - signature: `0x8dc20333`
+/// - size: ` 68`(x86)/` 96`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,34 +21,29 @@ pub struct hkaAnimationContainer {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `skeletons`(ctype: `hkArray<hkaSkeleton*>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `skeletons`(ctype: `hkArray<hkaSkeleton*>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_skeletons: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `animations`(ctype: `hkArray<hkaAnimation*>`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `animations`(ctype: `hkArray<hkaAnimation*>`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_animations: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `bindings`(ctype: `hkArray<hkaAnimationBinding*>`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `bindings`(ctype: `hkArray<hkaAnimationBinding*>`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_bindings: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `attachments`(ctype: `hkArray<hkaBoneAttachment*>`)
-    /// -        offset:  44(x86)/ 64(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `attachments`(ctype: `hkArray<hkaBoneAttachment*>`)
+    /// - offset: ` 44`(x86)/` 64`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_attachments: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `skins`(ctype: `hkArray<hkaMeshBinding*>`)
-    /// -        offset:  56(x86)/ 80(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `skins`(ctype: `hkArray<hkaMeshBinding*>`)
+    /// - offset: ` 56`(x86)/` 80`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_skins: Vec<Pointer>,
 }
 const _: () = {

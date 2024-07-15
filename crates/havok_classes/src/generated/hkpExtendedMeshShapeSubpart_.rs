@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpExtendedMeshShapeSubpart`
-/// -         version: `2`
-/// -       signature: `0xf4608207`
-/// -          size:  20(x86)/ 40(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpExtendedMeshShapeSubpart`
+/// - version: `2`
+/// - signature: `0xf4608207`
+/// - size: ` 20`(x86)/` 40`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,55 +19,47 @@ pub struct hkpExtendedMeshShapeSubpart {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `type`(ctype: `enum SubpartType`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `type`(ctype: `enum SubpartType`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_type: SubpartType,
     /// # C++ Info
-    /// -          name: `materialIndexStridingType`(ctype: `enum MaterialIndexStridingType`)
-    /// -        offset:   1(x86)/  1(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `materialIndexStridingType`(ctype: `enum MaterialIndexStridingType`)
+    /// - offset: `  1`(x86)/`  1`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_materialIndexStridingType: MaterialIndexStridingType,
     /// # C++ Info
-    /// -          name: `materialStriding`(ctype: `hkInt16`)
-    /// -        offset:   2(x86)/  2(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `materialStriding`(ctype: `hkInt16`)
+    /// - offset: `  2`(x86)/`  2`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_materialStriding: i16,
     /// # C++ Info
-    /// -          name: `materialIndexBase`(ctype: `void*`)
-    /// -        offset:   4(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `materialIndexBase`(ctype: `void*`)
+    /// - offset: `  4`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_materialIndexBase: Pointer,
     /// # C++ Info
-    /// -          name: `materialIndexStriding`(ctype: `hkUint16`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `materialIndexStriding`(ctype: `hkUint16`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_materialIndexStriding: u16,
     /// # C++ Info
-    /// -          name: `numMaterials`(ctype: `hkUint16`)
-    /// -        offset:  10(x86)/ 18(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `numMaterials`(ctype: `hkUint16`)
+    /// - offset: ` 10`(x86)/` 18`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_numMaterials: u16,
     /// # C++ Info
-    /// -          name: `materialBase`(ctype: `void*`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `materialBase`(ctype: `void*`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_materialBase: Pointer,
     /// # C++ Info
-    /// -          name: `userData`(ctype: `hkUlong`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `userData`(ctype: `hkUlong`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_userData: u64,
 }
 const _: () = {

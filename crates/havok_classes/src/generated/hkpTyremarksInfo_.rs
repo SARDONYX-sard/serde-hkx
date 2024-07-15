@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpTyremarksInfo`
-/// -         version: `0`
-/// -       signature: `0x3d0433d6`
-/// -          size:  28(x86)/ 40(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpTyremarksInfo`
+/// - version: `0`
+/// - signature: `0x3d0433d6`
+/// - size: ` 28`(x86)/` 40`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkpTyremarksInfo {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `minTyremarkEnergy`(ctype: `hkReal`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `minTyremarkEnergy`(ctype: `hkReal`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_minTyremarkEnergy: f32,
     /// # C++ Info
-    /// -          name: `maxTyremarkEnergy`(ctype: `hkReal`)
-    /// -        offset:  12(x86)/ 20(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxTyremarkEnergy`(ctype: `hkReal`)
+    /// - offset: ` 12`(x86)/` 20`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxTyremarkEnergy: f32,
     /// # C++ Info
-    /// -          name: `tyremarksWheel`(ctype: `hkArray<hkpTyremarksWheel*>`)
-    /// -        offset:  16(x86)/ 24(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `tyremarksWheel`(ctype: `hkArray<hkpTyremarksWheel*>`)
+    /// - offset: ` 16`(x86)/` 24`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_tyremarksWheel: Vec<Pointer>,
 }
 const _: () = {

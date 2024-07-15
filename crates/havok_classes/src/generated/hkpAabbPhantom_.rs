@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpAabbPhantom`
-/// -         version: `0`
-/// -       signature: `0x2c5189dd`
-/// -          size: 224(x86)/304(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpAabbPhantom`
+/// - version: `0`
+/// - signature: `0x2c5189dd`
+/// - size: `224`(x86)/`304`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,24 +21,21 @@ pub struct hkpAabbPhantom<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkpPhantom<'a>,
     /// # C++ Info
-    /// -          name: `aabb`(ctype: `struct hkAabb`)
-    /// -        offset: 176(x86)/240(x86_64)
-    /// -     type_size:  32(x86)/ 32(x86_64)
-    ///
+    /// - name: `aabb`(ctype: `struct hkAabb`)
+    /// - offset: `176`(x86)/`240`(x86_64)
+    /// - type_size: ` 32`(x86)/` 32`(x86_64)
     pub m_aabb: hkAabb,
     /// # C++ Info
-    /// -          name: `overlappingCollidables`(ctype: `hkArray<void*>`)
-    /// -        offset: 208(x86)/272(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `overlappingCollidables`(ctype: `hkArray<void*>`)
+    /// - offset: `208`(x86)/`272`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_overlappingCollidables: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `orderDirty`(ctype: `hkBool`)
-    /// -        offset: 220(x86)/288(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `orderDirty`(ctype: `hkBool`)
+    /// - offset: `220`(x86)/`288`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_orderDirty: bool,
 }
 const _: () = {

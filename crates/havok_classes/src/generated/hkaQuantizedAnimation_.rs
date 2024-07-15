@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkaQuantizedAnimation`
-/// -         version: `0`
-/// -       signature: `0x3920f053`
-/// -          size:  60(x86)/ 88(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkaQuantizedAnimation`
+/// - version: `0`
+/// - signature: `0x3920f053`
+/// - size: ` 60`(x86)/` 88`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,23 +21,20 @@ pub struct hkaQuantizedAnimation<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkaAnimation<'a>,
     /// # C++ Info
-    /// -          name: `data`(ctype: `hkArray<hkUint8>`)
-    /// -        offset:  40(x86)/ 56(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `data`(ctype: `hkArray<hkUint8>`)
+    /// - offset: ` 40`(x86)/` 56`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_data: Vec<u8>,
     /// # C++ Info
-    /// -          name: `endian`(ctype: `hkUint32`)
-    /// -        offset:  52(x86)/ 72(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `endian`(ctype: `hkUint32`)
+    /// - offset: ` 52`(x86)/` 72`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_endian: u32,
     /// # C++ Info
-    /// -          name: `skeleton`(ctype: `void*`)
-    /// -        offset:  56(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `skeleton`(ctype: `void*`)
+    /// - offset: ` 56`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_skeleton: Pointer,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkUiAttribute`
-/// -         version: `2`
-/// -       signature: `0xeb6e96e3`
-/// -          size:  20(x86)/ 40(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkUiAttribute`
+/// - version: `2`
+/// - signature: `0xeb6e96e3`
+/// - size: ` 20`(x86)/` 40`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,52 +19,44 @@ pub struct hkUiAttribute<'a> {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `visible`(ctype: `hkBool`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `visible`(ctype: `hkBool`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_visible: bool,
     /// # C++ Info
-    /// -          name: `hideInModeler`(ctype: `enum HideInModeler`)
-    /// -        offset:   1(x86)/  1(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `hideInModeler`(ctype: `enum HideInModeler`)
+    /// - offset: `  1`(x86)/`  1`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_hideInModeler: HideInModeler,
     /// # C++ Info
-    /// -          name: `label`(ctype: `char*`)
-    /// -        offset:   4(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `label`(ctype: `char*`)
+    /// - offset: `  4`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_label: CString<'a>,
     /// # C++ Info
-    /// -          name: `group`(ctype: `char*`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `group`(ctype: `char*`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_group: CString<'a>,
     /// # C++ Info
-    /// -          name: `hideBaseClassMembers`(ctype: `char*`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `hideBaseClassMembers`(ctype: `char*`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_hideBaseClassMembers: CString<'a>,
     /// # C++ Info
-    /// -          name: `endGroup`(ctype: `hkBool`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `endGroup`(ctype: `hkBool`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_endGroup: bool,
     /// # C++ Info
-    /// -          name: `endGroup2`(ctype: `hkBool`)
-    /// -        offset:  17(x86)/ 33(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `endGroup2`(ctype: `hkBool`)
+    /// - offset: ` 17`(x86)/` 33`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_endGroup2: bool,
     /// # C++ Info
-    /// -          name: `advanced`(ctype: `hkBool`)
-    /// -        offset:  18(x86)/ 34(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `advanced`(ctype: `hkBool`)
+    /// - offset: ` 18`(x86)/` 34`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_advanced: bool,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpBallSocketChainData`
-/// -         version: `0`
-/// -       signature: `0x102aae9c`
-/// -          size:  52(x86)/ 80(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpBallSocketChainData`
+/// - version: `0`
+/// - signature: `0x102aae9c`
+/// - size: ` 52`(x86)/` 80`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,40 +21,34 @@ pub struct hkpBallSocketChainData {
     /// Alternative to C++ class inheritance.
     pub parent: hkpConstraintChainData,
     /// # C++ Info
-    /// -          name: `atoms`(ctype: `struct hkpBridgeAtoms`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:  12(x86)/ 24(x86_64)
-    ///
+    /// - name: `atoms`(ctype: `struct hkpBridgeAtoms`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: ` 12`(x86)/` 24`(x86_64)
     pub m_atoms: hkpBridgeAtoms,
     /// # C++ Info
-    /// -          name: `infos`(ctype: `hkArray<struct hkpBallSocketChainDataConstraintInfo>`)
-    /// -        offset:  24(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `infos`(ctype: `hkArray<struct hkpBallSocketChainDataConstraintInfo>`)
+    /// - offset: ` 24`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_infos: Vec<hkpBallSocketChainDataConstraintInfo>,
     /// # C++ Info
-    /// -          name: `tau`(ctype: `hkReal`)
-    /// -        offset:  36(x86)/ 64(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `tau`(ctype: `hkReal`)
+    /// - offset: ` 36`(x86)/` 64`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_tau: f32,
     /// # C++ Info
-    /// -          name: `damping`(ctype: `hkReal`)
-    /// -        offset:  40(x86)/ 68(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `damping`(ctype: `hkReal`)
+    /// - offset: ` 40`(x86)/` 68`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_damping: f32,
     /// # C++ Info
-    /// -          name: `cfm`(ctype: `hkReal`)
-    /// -        offset:  44(x86)/ 72(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `cfm`(ctype: `hkReal`)
+    /// - offset: ` 44`(x86)/` 72`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_cfm: f32,
     /// # C++ Info
-    /// -          name: `maxErrorDistance`(ctype: `hkReal`)
-    /// -        offset:  48(x86)/ 76(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxErrorDistance`(ctype: `hkReal`)
+    /// - offset: ` 48`(x86)/` 76`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxErrorDistance: f32,
 }
 const _: () = {

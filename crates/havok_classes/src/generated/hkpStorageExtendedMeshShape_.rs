@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpStorageExtendedMeshShape`
-/// -         version: `0`
-/// -       signature: `0xb469efbc`
-/// -          size: 272(x86)/368(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpStorageExtendedMeshShape`
+/// - version: `0`
+/// - signature: `0xb469efbc`
+/// - size: `272`(x86)/`368`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkpStorageExtendedMeshShape {
     /// Alternative to C++ class inheritance.
     pub parent: hkpExtendedMeshShape,
     /// # C++ Info
-    /// -          name: `meshstorage`(ctype: `hkArray<hkpStorageExtendedMeshShapeMeshSubpartStorage*>`)
-    /// -        offset: 240(x86)/336(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `meshstorage`(ctype: `hkArray<hkpStorageExtendedMeshShapeMeshSubpartStorage*>`)
+    /// - offset: `240`(x86)/`336`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_meshstorage: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `shapestorage`(ctype: `hkArray<hkpStorageExtendedMeshShapeShapeSubpartStorage*>`)
-    /// -        offset: 252(x86)/352(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `shapestorage`(ctype: `hkArray<hkpStorageExtendedMeshShapeShapeSubpartStorage*>`)
+    /// - offset: `252`(x86)/`352`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_shapestorage: Vec<Pointer>,
 }
 const _: () = {

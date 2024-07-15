@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `BSCyclicBlendTransitionGenerator`
-/// -         version: `1`
-/// -       signature: `0x5119eb06`
-/// -          size: 112(x86)/176(x86_64)
-/// -          vtable: true
-///
+/// - name: `BSCyclicBlendTransitionGenerator`
+/// - version: `1`
+/// - signature: `0x5119eb06`
+/// - size: `112`(x86)/`176`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,62 +21,53 @@ pub struct BSCyclicBlendTransitionGenerator<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
-    /// -          name: `pBlenderGenerator`(ctype: `struct hkbGenerator*`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `ALIGN_16`
-    ///
+    /// - name: `pBlenderGenerator`(ctype: `struct hkbGenerator*`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `ALIGN_16`
     pub m_pBlenderGenerator: Pointer,
     /// # C++ Info
-    /// -          name: `EventToFreezeBlendValue`(ctype: `struct hkbEventProperty`)
-    /// -        offset:  52(x86)/ 88(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    ///
+    /// - name: `EventToFreezeBlendValue`(ctype: `struct hkbEventProperty`)
+    /// - offset: ` 52`(x86)/` 88`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
     pub m_EventToFreezeBlendValue: hkbEventProperty,
     /// # C++ Info
-    /// -          name: `EventToCrossBlend`(ctype: `struct hkbEventProperty`)
-    /// -        offset:  60(x86)/104(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    ///
+    /// - name: `EventToCrossBlend`(ctype: `struct hkbEventProperty`)
+    /// - offset: ` 60`(x86)/`104`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
     pub m_EventToCrossBlend: hkbEventProperty,
     /// # C++ Info
-    /// -          name: `fBlendParameter`(ctype: `hkReal`)
-    /// -        offset:  68(x86)/120(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `fBlendParameter`(ctype: `hkReal`)
+    /// - offset: ` 68`(x86)/`120`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_fBlendParameter: f32,
     /// # C++ Info
-    /// -          name: `fTransitionDuration`(ctype: `hkReal`)
-    /// -        offset:  72(x86)/124(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `fTransitionDuration`(ctype: `hkReal`)
+    /// - offset: ` 72`(x86)/`124`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_fTransitionDuration: f32,
     /// # C++ Info
-    /// -          name: `eBlendCurve`(ctype: `enum BlendCurve`)
-    /// -        offset:  76(x86)/128(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `eBlendCurve`(ctype: `enum BlendCurve`)
+    /// - offset: ` 76`(x86)/`128`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_eBlendCurve: BlendCurve,
     /// # C++ Info
-    /// -          name: `pTransitionBlenderGenerator`(ctype: `void*`)
-    /// -        offset:  80(x86)/144(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `ALIGN_16|SERIALIZE_IGNORED`
-    ///
+    /// - name: `pTransitionBlenderGenerator`(ctype: `void*`)
+    /// - offset: ` 80`(x86)/`144`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `ALIGN_16|SERIALIZE_IGNORED`
     pub m_pTransitionBlenderGenerator: Pointer,
     /// # C++ Info
-    /// -          name: `pTransitionEffect`(ctype: `void*`)
-    /// -        offset:  96(x86)/160(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `ALIGN_16|SERIALIZE_IGNORED`
-    ///
+    /// - name: `pTransitionEffect`(ctype: `void*`)
+    /// - offset: ` 96`(x86)/`160`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `ALIGN_16|SERIALIZE_IGNORED`
     pub m_pTransitionEffect: Pointer,
     /// # C++ Info
-    /// -          name: `currentMode`(ctype: `enum unknown`)
-    /// -        offset: 100(x86)/168(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `currentMode`(ctype: `enum unknown`)
+    /// - offset: `100`(x86)/`168`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_currentMode: i8,
 }
 const _: () = {

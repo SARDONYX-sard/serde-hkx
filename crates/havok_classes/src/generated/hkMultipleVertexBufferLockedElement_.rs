@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkMultipleVertexBufferLockedElement`
-/// -         version: `0`
-/// -       signature: `0xa0e22afc`
-/// -          size:   7(x86)/  7(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkMultipleVertexBufferLockedElement`
+/// - version: `0`
+/// - signature: `0xa0e22afc`
+/// - size: `  7`(x86)/`  7`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,46 +19,39 @@ pub struct hkMultipleVertexBufferLockedElement {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `vertexBufferIndex`(ctype: `hkUint8`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `vertexBufferIndex`(ctype: `hkUint8`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_vertexBufferIndex: u8,
     /// # C++ Info
-    /// -          name: `elementIndex`(ctype: `hkUint8`)
-    /// -        offset:   1(x86)/  1(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `elementIndex`(ctype: `hkUint8`)
+    /// - offset: `  1`(x86)/`  1`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_elementIndex: u8,
     /// # C++ Info
-    /// -          name: `lockedBufferIndex`(ctype: `hkUint8`)
-    /// -        offset:   2(x86)/  2(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `lockedBufferIndex`(ctype: `hkUint8`)
+    /// - offset: `  2`(x86)/`  2`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_lockedBufferIndex: u8,
     /// # C++ Info
-    /// -          name: `vertexFormatIndex`(ctype: `hkUint8`)
-    /// -        offset:   3(x86)/  3(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `vertexFormatIndex`(ctype: `hkUint8`)
+    /// - offset: `  3`(x86)/`  3`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_vertexFormatIndex: u8,
     /// # C++ Info
-    /// -          name: `lockFlags`(ctype: `hkUint8`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `lockFlags`(ctype: `hkUint8`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_lockFlags: u8,
     /// # C++ Info
-    /// -          name: `outputBufferIndex`(ctype: `hkUint8`)
-    /// -        offset:   5(x86)/  5(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `outputBufferIndex`(ctype: `hkUint8`)
+    /// - offset: `  5`(x86)/`  5`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_outputBufferIndex: u8,
     /// # C++ Info
-    /// -          name: `emulatedIndex`(ctype: `hkInt8`)
-    /// -        offset:   6(x86)/  6(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `emulatedIndex`(ctype: `hkInt8`)
+    /// - offset: `  6`(x86)/`  6`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_emulatedIndex: i8,
 }
 const _: () = {

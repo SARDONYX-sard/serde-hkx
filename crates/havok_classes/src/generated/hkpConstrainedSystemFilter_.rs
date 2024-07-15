@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpConstrainedSystemFilter`
-/// -         version: `0`
-/// -       signature: `0x20a447fe`
-/// -          size:  56(x86)/ 88(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpConstrainedSystemFilter`
+/// - version: `0`
+/// - signature: `0x20a447fe`
+/// - size: ` 56`(x86)/` 88`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkpConstrainedSystemFilter {
     /// Alternative to C++ class inheritance.
     pub parent: hkpCollisionFilter,
     /// # C++ Info
-    /// -          name: `otherFilter`(ctype: `struct hkpCollisionFilter*`)
-    /// -        offset:  52(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `otherFilter`(ctype: `struct hkpCollisionFilter*`)
+    /// - offset: ` 52`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_otherFilter: Pointer,
 }
 const _: () = {

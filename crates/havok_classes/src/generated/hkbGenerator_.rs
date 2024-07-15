@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbGenerator`
-/// -         version: `0`
-/// -       signature: `0xd68aefc`
-/// -          size:  40(x86)/ 72(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbGenerator`
+/// - version: `0`
+/// - signature: `0xd68aefc`
+/// - size: ` 40`(x86)/` 72`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]

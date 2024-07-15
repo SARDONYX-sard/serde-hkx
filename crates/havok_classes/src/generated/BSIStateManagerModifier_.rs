@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `BSIStateManagerModifier`
-/// -         version: `1`
-/// -       signature: `0x6cb24f2e`
-/// -          size:  72(x86)/128(x86_64)
-/// -          vtable: true
-///
+/// - name: `BSIStateManagerModifier`
+/// - version: `1`
+/// - signature: `0x6cb24f2e`
+/// - size: ` 72`(x86)/`128`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,23 +21,20 @@ pub struct BSIStateManagerModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `iStateVar`(ctype: `hkInt32`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `iStateVar`(ctype: `hkInt32`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_iStateVar: i32,
     /// # C++ Info
-    /// -          name: `stateData`(ctype: `hkArray<struct BSIStateManagerModifierBSiStateData>`)
-    /// -        offset:  48(x86)/ 88(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `stateData`(ctype: `hkArray<struct BSIStateManagerModifierBSiStateData>`)
+    /// - offset: ` 48`(x86)/` 88`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_stateData: Vec<BSIStateManagerModifierBSiStateData>,
     /// # C++ Info
-    /// -          name: `myStateListener`(ctype: `struct BSIStateManagerModifierBSIStateManagerStateListener`)
-    /// -        offset:  60(x86)/104(x86_64)
-    /// -     type_size:  12(x86)/ 24(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `myStateListener`(ctype: `struct BSIStateManagerModifierBSIStateManagerStateListener`)
+    /// - offset: ` 60`(x86)/`104`(x86_64)
+    /// - type_size: ` 12`(x86)/` 24`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_myStateListener: BSIStateManagerModifierBSIStateManagerStateListener,
 }
 const _: () = {

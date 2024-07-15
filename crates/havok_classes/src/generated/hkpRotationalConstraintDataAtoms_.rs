@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpRotationalConstraintDataAtoms`
-/// -         version: `0`
-/// -       signature: `0xa0c64586`
-/// -          size: 128(x86)/128(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpRotationalConstraintDataAtoms`
+/// - version: `0`
+/// - signature: `0xa0c64586`
+/// - size: `128`(x86)/`128`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,16 +19,14 @@ pub struct hkpRotationalConstraintDataAtoms {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `rotations`(ctype: `struct hkpSetLocalRotationsConstraintAtom`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size: 112(x86)/112(x86_64)
-    ///
+    /// - name: `rotations`(ctype: `struct hkpSetLocalRotationsConstraintAtom`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `112`(x86)/`112`(x86_64)
     pub m_rotations: hkpSetLocalRotationsConstraintAtom,
     /// # C++ Info
-    /// -          name: `ang`(ctype: `struct hkpAngConstraintAtom`)
-    /// -        offset: 112(x86)/112(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `ang`(ctype: `struct hkpAngConstraintAtom`)
+    /// - offset: `112`(x86)/`112`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_ang: hkpAngConstraintAtom,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkaSplineCompressedAnimation`
-/// -         version: `0`
-/// -       signature: `0x792ee0bb`
-/// -          size: 132(x86)/176(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkaSplineCompressedAnimation`
+/// - version: `0`
+/// - signature: `0x792ee0bb`
+/// - size: `132`(x86)/`176`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,82 +21,69 @@ pub struct hkaSplineCompressedAnimation<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkaAnimation<'a>,
     /// # C++ Info
-    /// -          name: `numFrames`(ctype: `hkInt32`)
-    /// -        offset:  40(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `numFrames`(ctype: `hkInt32`)
+    /// - offset: ` 40`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_numFrames: i32,
     /// # C++ Info
-    /// -          name: `numBlocks`(ctype: `hkInt32`)
-    /// -        offset:  44(x86)/ 60(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `numBlocks`(ctype: `hkInt32`)
+    /// - offset: ` 44`(x86)/` 60`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_numBlocks: i32,
     /// # C++ Info
-    /// -          name: `maxFramesPerBlock`(ctype: `hkInt32`)
-    /// -        offset:  48(x86)/ 64(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxFramesPerBlock`(ctype: `hkInt32`)
+    /// - offset: ` 48`(x86)/` 64`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxFramesPerBlock: i32,
     /// # C++ Info
-    /// -          name: `maskAndQuantizationSize`(ctype: `hkInt32`)
-    /// -        offset:  52(x86)/ 68(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maskAndQuantizationSize`(ctype: `hkInt32`)
+    /// - offset: ` 52`(x86)/` 68`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maskAndQuantizationSize: i32,
     /// # C++ Info
-    /// -          name: `blockDuration`(ctype: `hkReal`)
-    /// -        offset:  56(x86)/ 72(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `blockDuration`(ctype: `hkReal`)
+    /// - offset: ` 56`(x86)/` 72`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_blockDuration: f32,
     /// # C++ Info
-    /// -          name: `blockInverseDuration`(ctype: `hkReal`)
-    /// -        offset:  60(x86)/ 76(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `blockInverseDuration`(ctype: `hkReal`)
+    /// - offset: ` 60`(x86)/` 76`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_blockInverseDuration: f32,
     /// # C++ Info
-    /// -          name: `frameDuration`(ctype: `hkReal`)
-    /// -        offset:  64(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `frameDuration`(ctype: `hkReal`)
+    /// - offset: ` 64`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_frameDuration: f32,
     /// # C++ Info
-    /// -          name: `blockOffsets`(ctype: `hkArray<hkUint32>`)
-    /// -        offset:  68(x86)/ 88(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `blockOffsets`(ctype: `hkArray<hkUint32>`)
+    /// - offset: ` 68`(x86)/` 88`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_blockOffsets: Vec<u32>,
     /// # C++ Info
-    /// -          name: `floatBlockOffsets`(ctype: `hkArray<hkUint32>`)
-    /// -        offset:  80(x86)/104(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `floatBlockOffsets`(ctype: `hkArray<hkUint32>`)
+    /// - offset: ` 80`(x86)/`104`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_floatBlockOffsets: Vec<u32>,
     /// # C++ Info
-    /// -          name: `transformOffsets`(ctype: `hkArray<hkUint32>`)
-    /// -        offset:  92(x86)/120(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `transformOffsets`(ctype: `hkArray<hkUint32>`)
+    /// - offset: ` 92`(x86)/`120`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_transformOffsets: Vec<u32>,
     /// # C++ Info
-    /// -          name: `floatOffsets`(ctype: `hkArray<hkUint32>`)
-    /// -        offset: 104(x86)/136(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `floatOffsets`(ctype: `hkArray<hkUint32>`)
+    /// - offset: `104`(x86)/`136`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_floatOffsets: Vec<u32>,
     /// # C++ Info
-    /// -          name: `data`(ctype: `hkArray<hkUint8>`)
-    /// -        offset: 116(x86)/152(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `data`(ctype: `hkArray<hkUint8>`)
+    /// - offset: `116`(x86)/`152`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_data: Vec<u8>,
     /// # C++ Info
-    /// -          name: `endian`(ctype: `hkInt32`)
-    /// -        offset: 128(x86)/168(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `endian`(ctype: `hkInt32`)
+    /// - offset: `128`(x86)/`168`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_endian: i32,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbAttachmentModifier`
-/// -         version: `1`
-/// -       signature: `0xcc0aab32`
-/// -          size: 108(x86)/200(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbAttachmentModifier`
+/// - version: `1`
+/// - signature: `0xcc0aab32`
+/// - size: `108`(x86)/`200`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,80 +21,68 @@ pub struct hkbAttachmentModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `sendToAttacherOnAttach`(ctype: `struct hkbEventProperty`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    ///
+    /// - name: `sendToAttacherOnAttach`(ctype: `struct hkbEventProperty`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
     pub m_sendToAttacherOnAttach: hkbEventProperty,
     /// # C++ Info
-    /// -          name: `sendToAttacheeOnAttach`(ctype: `struct hkbEventProperty`)
-    /// -        offset:  52(x86)/ 96(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    ///
+    /// - name: `sendToAttacheeOnAttach`(ctype: `struct hkbEventProperty`)
+    /// - offset: ` 52`(x86)/` 96`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
     pub m_sendToAttacheeOnAttach: hkbEventProperty,
     /// # C++ Info
-    /// -          name: `sendToAttacherOnDetach`(ctype: `struct hkbEventProperty`)
-    /// -        offset:  60(x86)/112(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    ///
+    /// - name: `sendToAttacherOnDetach`(ctype: `struct hkbEventProperty`)
+    /// - offset: ` 60`(x86)/`112`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
     pub m_sendToAttacherOnDetach: hkbEventProperty,
     /// # C++ Info
-    /// -          name: `sendToAttacheeOnDetach`(ctype: `struct hkbEventProperty`)
-    /// -        offset:  68(x86)/128(x86_64)
-    /// -     type_size:   8(x86)/ 16(x86_64)
-    ///
+    /// - name: `sendToAttacheeOnDetach`(ctype: `struct hkbEventProperty`)
+    /// - offset: ` 68`(x86)/`128`(x86_64)
+    /// - type_size: `  8`(x86)/` 16`(x86_64)
     pub m_sendToAttacheeOnDetach: hkbEventProperty,
     /// # C++ Info
-    /// -          name: `attachmentSetup`(ctype: `struct hkbAttachmentSetup*`)
-    /// -        offset:  76(x86)/144(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `attachmentSetup`(ctype: `struct hkbAttachmentSetup*`)
+    /// - offset: ` 76`(x86)/`144`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_attachmentSetup: Pointer,
     /// # C++ Info
-    /// -          name: `attacherHandle`(ctype: `struct hkbHandle*`)
-    /// -        offset:  80(x86)/152(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `attacherHandle`(ctype: `struct hkbHandle*`)
+    /// - offset: ` 80`(x86)/`152`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_attacherHandle: Pointer,
     /// # C++ Info
-    /// -          name: `attacheeHandle`(ctype: `struct hkbHandle*`)
-    /// -        offset:  84(x86)/160(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `attacheeHandle`(ctype: `struct hkbHandle*`)
+    /// - offset: ` 84`(x86)/`160`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_attacheeHandle: Pointer,
     /// # C++ Info
-    /// -          name: `attacheeLayer`(ctype: `hkInt32`)
-    /// -        offset:  88(x86)/168(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `attacheeLayer`(ctype: `hkInt32`)
+    /// - offset: ` 88`(x86)/`168`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_attacheeLayer: i32,
     /// # C++ Info
-    /// -          name: `attacheeRB`(ctype: `void*`)
-    /// -        offset:  92(x86)/176(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `attacheeRB`(ctype: `void*`)
+    /// - offset: ` 92`(x86)/`176`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_attacheeRB: Pointer,
     /// # C++ Info
-    /// -          name: `oldMotionType`(ctype: `enum unknown`)
-    /// -        offset:  96(x86)/184(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `oldMotionType`(ctype: `enum unknown`)
+    /// - offset: ` 96`(x86)/`184`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_oldMotionType: u8,
     /// # C++ Info
-    /// -          name: `oldFilterInfo`(ctype: `hkInt32`)
-    /// -        offset: 100(x86)/188(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `oldFilterInfo`(ctype: `hkInt32`)
+    /// - offset: `100`(x86)/`188`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_oldFilterInfo: i32,
     /// # C++ Info
-    /// -          name: `attachment`(ctype: `void*`)
-    /// -        offset: 104(x86)/192(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `attachment`(ctype: `void*`)
+    /// - offset: `104`(x86)/`192`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_attachment: Pointer,
 }
 const _: () = {

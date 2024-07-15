@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbVariableBindingSet`
-/// -         version: `2`
-/// -       signature: `0x338ad4ff`
-/// -          size:  28(x86)/ 40(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbVariableBindingSet`
+/// - version: `2`
+/// - signature: `0x338ad4ff`
+/// - size: ` 28`(x86)/` 40`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,23 +21,20 @@ pub struct hkbVariableBindingSet<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `bindings`(ctype: `hkArray<struct hkbVariableBindingSetBinding>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `bindings`(ctype: `hkArray<struct hkbVariableBindingSetBinding>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_bindings: Vec<hkbVariableBindingSetBinding<'a>>,
     /// # C++ Info
-    /// -          name: `indexOfBindingToEnable`(ctype: `hkInt32`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `indexOfBindingToEnable`(ctype: `hkInt32`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_indexOfBindingToEnable: i32,
     /// # C++ Info
-    /// -          name: `hasOutputBinding`(ctype: `hkBool`)
-    /// -        offset:  24(x86)/ 36(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `hasOutputBinding`(ctype: `hkBool`)
+    /// - offset: ` 24`(x86)/` 36`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_hasOutputBinding: bool,
 }
 const _: () = {

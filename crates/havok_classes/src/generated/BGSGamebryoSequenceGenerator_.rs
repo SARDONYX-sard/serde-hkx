@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `BGSGamebryoSequenceGenerator`
-/// -         version: `2`
-/// -       signature: `0xc8df2d77`
-/// -          size:  72(x86)/112(x86_64)
-/// -          vtable: true
-///
+/// - name: `BGSGamebryoSequenceGenerator`
+/// - version: `2`
+/// - signature: `0xc8df2d77`
+/// - size: ` 72`(x86)/`112`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,50 +21,43 @@ pub struct BGSGamebryoSequenceGenerator<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
-    /// -          name: `pSequence`(ctype: `char*`)
-    /// -        offset:  40(x86)/ 72(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `pSequence`(ctype: `char*`)
+    /// - offset: ` 40`(x86)/` 72`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_pSequence: CString<'a>,
     /// # C++ Info
-    /// -          name: `eBlendModeFunction`(ctype: `enum BlendModeFunction`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `eBlendModeFunction`(ctype: `enum BlendModeFunction`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_eBlendModeFunction: BlendModeFunction,
     /// # C++ Info
-    /// -          name: `fPercent`(ctype: `hkReal`)
-    /// -        offset:  48(x86)/ 84(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `fPercent`(ctype: `hkReal`)
+    /// - offset: ` 48`(x86)/` 84`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_fPercent: f32,
     /// # C++ Info
-    /// -          name: `events`(ctype: `hkArray<void>`)
-    /// -        offset:  52(x86)/ 88(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `events`(ctype: `hkArray<void>`)
+    /// - offset: ` 52`(x86)/` 88`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_events: Vec<()>,
     /// # C++ Info
-    /// -          name: `fTime`(ctype: `hkReal`)
-    /// -        offset:  64(x86)/104(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `fTime`(ctype: `hkReal`)
+    /// - offset: ` 64`(x86)/`104`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_fTime: f32,
     /// # C++ Info
-    /// -          name: `bDelayedActivate`(ctype: `hkBool`)
-    /// -        offset:  68(x86)/108(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `bDelayedActivate`(ctype: `hkBool`)
+    /// - offset: ` 68`(x86)/`108`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_bDelayedActivate: bool,
     /// # C++ Info
-    /// -          name: `bLooping`(ctype: `hkBool`)
-    /// -        offset:  69(x86)/109(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `bLooping`(ctype: `hkBool`)
+    /// - offset: ` 69`(x86)/`109`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_bLooping: bool,
 }
 const _: () = {

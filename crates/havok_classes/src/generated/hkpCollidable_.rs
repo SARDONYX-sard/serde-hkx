@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpCollidable`
-/// -         version: `0`
-/// -       signature: `0x9a0e42a5`
-/// -          size:  80(x86)/112(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpCollidable`
+/// - version: `0`
+/// - signature: `0x9a0e42a5`
+/// - size: ` 80`(x86)/`112`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,43 +21,37 @@ pub struct hkpCollidable {
     /// Alternative to C++ class inheritance.
     pub parent: hkpCdBody,
     /// # C++ Info
-    /// -          name: `ownerOffset`(ctype: `hkInt8`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `ownerOffset`(ctype: `hkInt8`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_ownerOffset: i8,
     /// # C++ Info
-    /// -          name: `forceCollideOntoPpu`(ctype: `hkUint8`)
-    /// -        offset:  17(x86)/ 33(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `forceCollideOntoPpu`(ctype: `hkUint8`)
+    /// - offset: ` 17`(x86)/` 33`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_forceCollideOntoPpu: u8,
     /// # C++ Info
-    /// -          name: `shapeSizeOnSpu`(ctype: `hkUint16`)
-    /// -        offset:  18(x86)/ 34(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `shapeSizeOnSpu`(ctype: `hkUint16`)
+    /// - offset: ` 18`(x86)/` 34`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_shapeSizeOnSpu: u16,
     /// # C++ Info
-    /// -          name: `broadPhaseHandle`(ctype: `struct hkpTypedBroadPhaseHandle`)
-    /// -        offset:  20(x86)/ 36(x86_64)
-    /// -     type_size:  12(x86)/ 12(x86_64)
-    ///
+    /// - name: `broadPhaseHandle`(ctype: `struct hkpTypedBroadPhaseHandle`)
+    /// - offset: ` 20`(x86)/` 36`(x86_64)
+    /// - type_size: ` 12`(x86)/` 12`(x86_64)
     pub m_broadPhaseHandle: hkpTypedBroadPhaseHandle,
     /// # C++ Info
-    /// -          name: `boundingVolumeData`(ctype: `struct hkpCollidableBoundingVolumeData`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:  44(x86)/ 56(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `boundingVolumeData`(ctype: `struct hkpCollidableBoundingVolumeData`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: ` 44`(x86)/` 56`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_boundingVolumeData: hkpCollidableBoundingVolumeData,
     /// # C++ Info
-    /// -          name: `allowedPenetrationDepth`(ctype: `hkReal`)
-    /// -        offset:  76(x86)/104(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `allowedPenetrationDepth`(ctype: `hkReal`)
+    /// - offset: ` 76`(x86)/`104`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_allowedPenetrationDepth: f32,
 }
 const _: () = {

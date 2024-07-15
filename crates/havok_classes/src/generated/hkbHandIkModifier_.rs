@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbHandIkModifier`
-/// -         version: `0`
-/// -       signature: `0xef8bc2f7`
-/// -          size:  72(x86)/120(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbHandIkModifier`
+/// - version: `0`
+/// - signature: `0xef8bc2f7`
+/// - size: ` 72`(x86)/`120`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,23 +21,20 @@ pub struct hkbHandIkModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `hands`(ctype: `hkArray<struct hkbHandIkModifierHand>`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `hands`(ctype: `hkArray<struct hkbHandIkModifierHand>`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_hands: Vec<hkbHandIkModifierHand<'a>>,
     /// # C++ Info
-    /// -          name: `fadeInOutCurve`(ctype: `enum BlendCurve`)
-    /// -        offset:  56(x86)/ 96(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `fadeInOutCurve`(ctype: `enum BlendCurve`)
+    /// - offset: ` 56`(x86)/` 96`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_fadeInOutCurve: BlendCurve,
     /// # C++ Info
-    /// -          name: `internalHandData`(ctype: `hkArray<void>`)
-    /// -        offset:  60(x86)/104(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `internalHandData`(ctype: `hkArray<void>`)
+    /// - offset: ` 60`(x86)/`104`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_internalHandData: Vec<()>,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbCameraShakeEventPayload`
-/// -         version: `0`
-/// -       signature: `0x64136982`
-/// -          size:  16(x86)/ 24(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbCameraShakeEventPayload`
+/// - version: `0`
+/// - signature: `0x64136982`
+/// - size: ` 16`(x86)/` 24`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkbCameraShakeEventPayload {
     /// Alternative to C++ class inheritance.
     pub parent: hkbEventPayload,
     /// # C++ Info
-    /// -          name: `amplitude`(ctype: `hkReal`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `amplitude`(ctype: `hkReal`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_amplitude: f32,
     /// # C++ Info
-    /// -          name: `halfLife`(ctype: `hkReal`)
-    /// -        offset:  12(x86)/ 20(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `halfLife`(ctype: `hkReal`)
+    /// - offset: ` 12`(x86)/` 20`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_halfLife: f32,
 }
 const _: () = {

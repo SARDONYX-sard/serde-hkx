@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpSampledHeightFieldShape`
-/// -         version: `0`
-/// -       signature: `0x11213421`
-/// -          size:  96(x86)/112(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpSampledHeightFieldShape`
+/// - version: `0`
+/// - signature: `0x11213421`
+/// - size: ` 96`(x86)/`112`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,58 +21,49 @@ pub struct hkpSampledHeightFieldShape {
     /// Alternative to C++ class inheritance.
     pub parent: hkpHeightFieldShape,
     /// # C++ Info
-    /// -          name: `xRes`(ctype: `hkInt32`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `xRes`(ctype: `hkInt32`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_xRes: i32,
     /// # C++ Info
-    /// -          name: `zRes`(ctype: `hkInt32`)
-    /// -        offset:  20(x86)/ 36(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `zRes`(ctype: `hkInt32`)
+    /// - offset: ` 20`(x86)/` 36`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_zRes: i32,
     /// # C++ Info
-    /// -          name: `heightCenter`(ctype: `hkReal`)
-    /// -        offset:  24(x86)/ 40(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `heightCenter`(ctype: `hkReal`)
+    /// - offset: ` 24`(x86)/` 40`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_heightCenter: f32,
     /// # C++ Info
-    /// -          name: `useProjectionBasedHeight`(ctype: `hkBool`)
-    /// -        offset:  28(x86)/ 44(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `useProjectionBasedHeight`(ctype: `hkBool`)
+    /// - offset: ` 28`(x86)/` 44`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_useProjectionBasedHeight: bool,
     /// # C++ Info
-    /// -          name: `heightfieldType`(ctype: `enum HeightFieldType`)
-    /// -        offset:  29(x86)/ 45(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `heightfieldType`(ctype: `enum HeightFieldType`)
+    /// - offset: ` 29`(x86)/` 45`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_heightfieldType: HeightFieldType,
     /// # C++ Info
-    /// -          name: `intToFloatScale`(ctype: `hkVector4`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `intToFloatScale`(ctype: `hkVector4`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_intToFloatScale: Vector4,
     /// # C++ Info
-    /// -          name: `floatToIntScale`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 64(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `floatToIntScale`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 64`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_floatToIntScale: Vector4,
     /// # C++ Info
-    /// -          name: `floatToIntOffsetFloorCorrected`(ctype: `hkVector4`)
-    /// -        offset:  64(x86)/ 80(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `floatToIntOffsetFloorCorrected`(ctype: `hkVector4`)
+    /// - offset: ` 64`(x86)/` 80`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_floatToIntOffsetFloorCorrected: Vector4,
     /// # C++ Info
-    /// -          name: `extents`(ctype: `hkVector4`)
-    /// -        offset:  80(x86)/ 96(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `extents`(ctype: `hkVector4`)
+    /// - offset: ` 80`(x86)/` 96`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_extents: Vector4,
 }
 const _: () = {

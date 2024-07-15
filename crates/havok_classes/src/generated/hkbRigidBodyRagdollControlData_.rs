@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbRigidBodyRagdollControlData`
-/// -         version: `1`
-/// -       signature: `0x1e0bc068`
-/// -          size:  64(x86)/ 64(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkbRigidBodyRagdollControlData`
+/// - version: `1`
+/// - signature: `0x1e0bc068`
+/// - size: ` 64`(x86)/` 64`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,17 +19,15 @@ pub struct hkbRigidBodyRagdollControlData {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `keyFrameHierarchyControlData`(ctype: `struct hkaKeyFrameHierarchyUtilityControlData`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:  48(x86)/ 48(x86_64)
-    /// -         flags: `ALIGN_16`
-    ///
+    /// - name: `keyFrameHierarchyControlData`(ctype: `struct hkaKeyFrameHierarchyUtilityControlData`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: ` 48`(x86)/` 48`(x86_64)
+    /// - flags: `ALIGN_16`
     pub m_keyFrameHierarchyControlData: hkaKeyFrameHierarchyUtilityControlData,
     /// # C++ Info
-    /// -          name: `durationToBlend`(ctype: `hkReal`)
-    /// -        offset:  48(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `durationToBlend`(ctype: `hkReal`)
+    /// - offset: ` 48`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_durationToBlend: f32,
 }
 const _: () = {

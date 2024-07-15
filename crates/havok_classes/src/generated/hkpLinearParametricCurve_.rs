@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpLinearParametricCurve`
-/// -         version: `0`
-/// -       signature: `0xd7b3be03`
-/// -          size:  64(x86)/ 80(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpLinearParametricCurve`
+/// - version: `0`
+/// - signature: `0xd7b3be03`
+/// - size: ` 64`(x86)/` 80`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,34 +21,29 @@ pub struct hkpLinearParametricCurve {
     /// Alternative to C++ class inheritance.
     pub parent: hkpParametricCurve,
     /// # C++ Info
-    /// -          name: `smoothingFactor`(ctype: `hkReal`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `smoothingFactor`(ctype: `hkReal`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_smoothingFactor: f32,
     /// # C++ Info
-    /// -          name: `closedLoop`(ctype: `hkBool`)
-    /// -        offset:  12(x86)/ 20(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `closedLoop`(ctype: `hkBool`)
+    /// - offset: ` 12`(x86)/` 20`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_closedLoop: bool,
     /// # C++ Info
-    /// -          name: `dirNotParallelToTangentAlongWholePath`(ctype: `hkVector4`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `dirNotParallelToTangentAlongWholePath`(ctype: `hkVector4`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_dirNotParallelToTangentAlongWholePath: Vector4,
     /// # C++ Info
-    /// -          name: `points`(ctype: `hkArray<hkVector4>`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `points`(ctype: `hkArray<hkVector4>`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_points: Vec<Vector4>,
     /// # C++ Info
-    /// -          name: `distance`(ctype: `hkArray<hkReal>`)
-    /// -        offset:  44(x86)/ 64(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `distance`(ctype: `hkArray<hkReal>`)
+    /// - offset: ` 44`(x86)/` 64`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_distance: Vec<f32>,
 }
 const _: () = {

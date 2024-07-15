@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbCharacterSkinInfo`
-/// -         version: `2`
-/// -       signature: `0x180d900d`
-/// -          size:  40(x86)/ 56(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbCharacterSkinInfo`
+/// - version: `2`
+/// - signature: `0x180d900d`
+/// - size: ` 40`(x86)/` 56`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkbCharacterSkinInfo {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `characterId`(ctype: `hkUint64`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   8(x86)/  8(x86_64)
-    ///
+    /// - name: `characterId`(ctype: `hkUint64`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  8`(x86)/`  8`(x86_64)
     pub m_characterId: u64,
     /// # C++ Info
-    /// -          name: `deformableSkins`(ctype: `hkArray<hkUint64>`)
-    /// -        offset:  16(x86)/ 24(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `deformableSkins`(ctype: `hkArray<hkUint64>`)
+    /// - offset: ` 16`(x86)/` 24`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_deformableSkins: Vec<u64>,
     /// # C++ Info
-    /// -          name: `rigidSkins`(ctype: `hkArray<hkUint64>`)
-    /// -        offset:  28(x86)/ 40(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `rigidSkins`(ctype: `hkArray<hkUint64>`)
+    /// - offset: ` 28`(x86)/` 40`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_rigidSkins: Vec<u64>,
 }
 const _: () = {

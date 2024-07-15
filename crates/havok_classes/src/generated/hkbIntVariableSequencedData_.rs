@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbIntVariableSequencedData`
-/// -         version: `0`
-/// -       signature: `0x7bfc518a`
-/// -          size:  24(x86)/ 40(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbIntVariableSequencedData`
+/// - version: `0`
+/// - signature: `0x7bfc518a`
+/// - size: ` 24`(x86)/` 40`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkbIntVariableSequencedData {
     /// Alternative to C++ class inheritance.
     pub parent: hkbSequencedData,
     /// # C++ Info
-    /// -          name: `samples`(ctype: `hkArray<struct hkbIntVariableSequencedDataSample>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `samples`(ctype: `hkArray<struct hkbIntVariableSequencedDataSample>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_samples: Vec<hkbIntVariableSequencedDataSample>,
     /// # C++ Info
-    /// -          name: `variableIndex`(ctype: `hkInt32`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `variableIndex`(ctype: `hkInt32`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_variableIndex: i32,
 }
 const _: () = {

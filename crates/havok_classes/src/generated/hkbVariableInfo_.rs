@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbVariableInfo`
-/// -         version: `1`
-/// -       signature: `0x9e746ba2`
-/// -          size:   6(x86)/  6(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkbVariableInfo`
+/// - version: `1`
+/// - signature: `0x9e746ba2`
+/// - size: `  6`(x86)/`  6`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,16 +19,14 @@ pub struct hkbVariableInfo {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `role`(ctype: `struct hkbRoleAttribute`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `role`(ctype: `struct hkbRoleAttribute`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_role: hkbRoleAttribute,
     /// # C++ Info
-    /// -          name: `type`(ctype: `enum VariableType`)
-    /// -        offset:   4(x86)/  4(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `type`(ctype: `enum VariableType`)
+    /// - offset: `  4`(x86)/`  4`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_type: VariableType,
 }
 const _: () = {

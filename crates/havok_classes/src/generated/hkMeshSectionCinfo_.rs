@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkMeshSectionCinfo`
-/// -         version: `1`
-/// -       signature: `0x6075f3ff`
-/// -          size:  32(x86)/ 48(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkMeshSectionCinfo`
+/// - version: `1`
+/// - signature: `0x6075f3ff`
+/// - size: ` 32`(x86)/` 48`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,53 +19,45 @@ pub struct hkMeshSectionCinfo {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `vertexBuffer`(ctype: `struct hkMeshVertexBuffer*`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `vertexBuffer`(ctype: `struct hkMeshVertexBuffer*`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_vertexBuffer: Pointer,
     /// # C++ Info
-    /// -          name: `material`(ctype: `struct hkMeshMaterial*`)
-    /// -        offset:   4(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `material`(ctype: `struct hkMeshMaterial*`)
+    /// - offset: `  4`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_material: Pointer,
     /// # C++ Info
-    /// -          name: `primitiveType`(ctype: `enum PrimitiveType`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `primitiveType`(ctype: `enum PrimitiveType`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_primitiveType: PrimitiveType,
     /// # C++ Info
-    /// -          name: `numPrimitives`(ctype: `hkInt32`)
-    /// -        offset:  12(x86)/ 20(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `numPrimitives`(ctype: `hkInt32`)
+    /// - offset: ` 12`(x86)/` 20`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_numPrimitives: i32,
     /// # C++ Info
-    /// -          name: `indexType`(ctype: `enum MeshSectionIndexType`)
-    /// -        offset:  16(x86)/ 24(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `indexType`(ctype: `enum MeshSectionIndexType`)
+    /// - offset: ` 16`(x86)/` 24`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_indexType: MeshSectionIndexType,
     /// # C++ Info
-    /// -          name: `indices`(ctype: `void*`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `indices`(ctype: `void*`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_indices: Pointer,
     /// # C++ Info
-    /// -          name: `vertexStartIndex`(ctype: `hkInt32`)
-    /// -        offset:  24(x86)/ 40(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `vertexStartIndex`(ctype: `hkInt32`)
+    /// - offset: ` 24`(x86)/` 40`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_vertexStartIndex: i32,
     /// # C++ Info
-    /// -          name: `transformIndex`(ctype: `hkInt32`)
-    /// -        offset:  28(x86)/ 44(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `transformIndex`(ctype: `hkInt32`)
+    /// - offset: ` 28`(x86)/` 44`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_transformIndex: i32,
 }
 const _: () = {

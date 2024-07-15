@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkaDeltaCompressedAnimation`
-/// -         version: `0`
-/// -       signature: `0x90a68d40`
-/// -          size: 120(x86)/144(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkaDeltaCompressedAnimation`
+/// - version: `0`
+/// - signature: `0x90a68d40`
+/// - size: `120`(x86)/`144`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,88 +21,74 @@ pub struct hkaDeltaCompressedAnimation<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkaAnimation<'a>,
     /// # C++ Info
-    /// -          name: `numberOfPoses`(ctype: `hkInt32`)
-    /// -        offset:  40(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `numberOfPoses`(ctype: `hkInt32`)
+    /// - offset: ` 40`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_numberOfPoses: i32,
     /// # C++ Info
-    /// -          name: `blockSize`(ctype: `hkInt32`)
-    /// -        offset:  44(x86)/ 60(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `blockSize`(ctype: `hkInt32`)
+    /// - offset: ` 44`(x86)/` 60`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_blockSize: i32,
     /// # C++ Info
-    /// -          name: `qFormat`(ctype: `struct hkaDeltaCompressedAnimationQuantizationFormat`)
-    /// -        offset:  48(x86)/ 64(x86_64)
-    /// -     type_size:  20(x86)/ 20(x86_64)
-    ///
+    /// - name: `qFormat`(ctype: `struct hkaDeltaCompressedAnimationQuantizationFormat`)
+    /// - offset: ` 48`(x86)/` 64`(x86_64)
+    /// - type_size: ` 20`(x86)/` 20`(x86_64)
     pub m_qFormat: hkaDeltaCompressedAnimationQuantizationFormat,
     /// # C++ Info
-    /// -          name: `quantizedDataIdx`(ctype: `hkUint32`)
-    /// -        offset:  68(x86)/ 84(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `quantizedDataIdx`(ctype: `hkUint32`)
+    /// - offset: ` 68`(x86)/` 84`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_quantizedDataIdx: u32,
     /// # C++ Info
-    /// -          name: `quantizedDataSize`(ctype: `hkUint32`)
-    /// -        offset:  72(x86)/ 88(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `quantizedDataSize`(ctype: `hkUint32`)
+    /// - offset: ` 72`(x86)/` 88`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_quantizedDataSize: u32,
     /// # C++ Info
-    /// -          name: `staticMaskIdx`(ctype: `hkUint32`)
-    /// -        offset:  76(x86)/ 92(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `staticMaskIdx`(ctype: `hkUint32`)
+    /// - offset: ` 76`(x86)/` 92`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_staticMaskIdx: u32,
     /// # C++ Info
-    /// -          name: `staticMaskSize`(ctype: `hkUint32`)
-    /// -        offset:  80(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `staticMaskSize`(ctype: `hkUint32`)
+    /// - offset: ` 80`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_staticMaskSize: u32,
     /// # C++ Info
-    /// -          name: `staticDOFsIdx`(ctype: `hkUint32`)
-    /// -        offset:  84(x86)/100(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `staticDOFsIdx`(ctype: `hkUint32`)
+    /// - offset: ` 84`(x86)/`100`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_staticDOFsIdx: u32,
     /// # C++ Info
-    /// -          name: `staticDOFsSize`(ctype: `hkUint32`)
-    /// -        offset:  88(x86)/104(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `staticDOFsSize`(ctype: `hkUint32`)
+    /// - offset: ` 88`(x86)/`104`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_staticDOFsSize: u32,
     /// # C++ Info
-    /// -          name: `numStaticTransformDOFs`(ctype: `hkUint32`)
-    /// -        offset:  92(x86)/108(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `numStaticTransformDOFs`(ctype: `hkUint32`)
+    /// - offset: ` 92`(x86)/`108`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_numStaticTransformDOFs: u32,
     /// # C++ Info
-    /// -          name: `numDynamicTransformDOFs`(ctype: `hkUint32`)
-    /// -        offset:  96(x86)/112(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `numDynamicTransformDOFs`(ctype: `hkUint32`)
+    /// - offset: ` 96`(x86)/`112`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_numDynamicTransformDOFs: u32,
     /// # C++ Info
-    /// -          name: `totalBlockSize`(ctype: `hkUint32`)
-    /// -        offset: 100(x86)/116(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `totalBlockSize`(ctype: `hkUint32`)
+    /// - offset: `100`(x86)/`116`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_totalBlockSize: u32,
     /// # C++ Info
-    /// -          name: `lastBlockSize`(ctype: `hkUint32`)
-    /// -        offset: 104(x86)/120(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `lastBlockSize`(ctype: `hkUint32`)
+    /// - offset: `104`(x86)/`120`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_lastBlockSize: u32,
     /// # C++ Info
-    /// -          name: `dataBuffer`(ctype: `hkArray<hkUint8>`)
-    /// -        offset: 108(x86)/128(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `dataBuffer`(ctype: `hkArray<hkUint8>`)
+    /// - offset: `108`(x86)/`128`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_dataBuffer: Vec<u8>,
 }
 const _: () = {

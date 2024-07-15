@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkxCamera`
-/// -         version: `1`
-/// -       signature: `0xe3597b02`
-/// -          size:  80(x86)/ 80(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkxCamera`
+/// - version: `1`
+/// - signature: `0xe3597b02`
+/// - size: ` 80`(x86)/` 80`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,46 +21,39 @@ pub struct hkxCamera {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `from`(ctype: `hkVector4`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `from`(ctype: `hkVector4`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_from: Vector4,
     /// # C++ Info
-    /// -          name: `focus`(ctype: `hkVector4`)
-    /// -        offset:  32(x86)/ 32(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `focus`(ctype: `hkVector4`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_focus: Vector4,
     /// # C++ Info
-    /// -          name: `up`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 48(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `up`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 48`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_up: Vector4,
     /// # C++ Info
-    /// -          name: `fov`(ctype: `hkReal`)
-    /// -        offset:  64(x86)/ 64(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `fov`(ctype: `hkReal`)
+    /// - offset: ` 64`(x86)/` 64`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_fov: f32,
     /// # C++ Info
-    /// -          name: `far`(ctype: `hkReal`)
-    /// -        offset:  68(x86)/ 68(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `far`(ctype: `hkReal`)
+    /// - offset: ` 68`(x86)/` 68`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_far: f32,
     /// # C++ Info
-    /// -          name: `near`(ctype: `hkReal`)
-    /// -        offset:  72(x86)/ 72(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `near`(ctype: `hkReal`)
+    /// - offset: ` 72`(x86)/` 72`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_near: f32,
     /// # C++ Info
-    /// -          name: `leftHanded`(ctype: `hkBool`)
-    /// -        offset:  76(x86)/ 76(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `leftHanded`(ctype: `hkBool`)
+    /// - offset: ` 76`(x86)/` 76`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_leftHanded: bool,
 }
 const _: () = {

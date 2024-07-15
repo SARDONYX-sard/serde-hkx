@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbEventDrivenModifier`
-/// -         version: `0`
-/// -       signature: `0x7ed3f44e`
-/// -          size:  60(x86)/104(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbEventDrivenModifier`
+/// - version: `0`
+/// - signature: `0x7ed3f44e`
+/// - size: ` 60`(x86)/`104`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,29 +21,25 @@ pub struct hkbEventDrivenModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifierWrapper<'a>,
     /// # C++ Info
-    /// -          name: `activateEventId`(ctype: `hkInt32`)
-    /// -        offset:  48(x86)/ 88(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `activateEventId`(ctype: `hkInt32`)
+    /// - offset: ` 48`(x86)/` 88`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_activateEventId: i32,
     /// # C++ Info
-    /// -          name: `deactivateEventId`(ctype: `hkInt32`)
-    /// -        offset:  52(x86)/ 92(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `deactivateEventId`(ctype: `hkInt32`)
+    /// - offset: ` 52`(x86)/` 92`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_deactivateEventId: i32,
     /// # C++ Info
-    /// -          name: `activeByDefault`(ctype: `hkBool`)
-    /// -        offset:  56(x86)/ 96(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `activeByDefault`(ctype: `hkBool`)
+    /// - offset: ` 56`(x86)/` 96`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_activeByDefault: bool,
     /// # C++ Info
-    /// -          name: `isActive`(ctype: `hkBool`)
-    /// -        offset:  57(x86)/ 97(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `isActive`(ctype: `hkBool`)
+    /// - offset: ` 57`(x86)/` 97`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_isActive: bool,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpProjectileGun`
-/// -         version: `0`
-/// -       signature: `0xb4f30148`
-/// -          size:  64(x86)/104(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpProjectileGun`
+/// - version: `0`
+/// - signature: `0xb4f30148`
+/// - size: ` 64`(x86)/`104`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,44 +21,38 @@ pub struct hkpProjectileGun<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkpFirstPersonGun<'a>,
     /// # C++ Info
-    /// -          name: `maxProjectiles`(ctype: `hkInt32`)
-    /// -        offset:  32(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `maxProjectiles`(ctype: `hkInt32`)
+    /// - offset: ` 32`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_maxProjectiles: i32,
     /// # C++ Info
-    /// -          name: `reloadTime`(ctype: `hkReal`)
-    /// -        offset:  36(x86)/ 60(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `reloadTime`(ctype: `hkReal`)
+    /// - offset: ` 36`(x86)/` 60`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_reloadTime: f32,
     /// # C++ Info
-    /// -          name: `reload`(ctype: `hkReal`)
-    /// -        offset:  40(x86)/ 64(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `reload`(ctype: `hkReal`)
+    /// - offset: ` 40`(x86)/` 64`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_reload: f32,
     /// # C++ Info
-    /// -          name: `projectiles`(ctype: `hkArray<void*>`)
-    /// -        offset:  44(x86)/ 72(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `projectiles`(ctype: `hkArray<void*>`)
+    /// - offset: ` 44`(x86)/` 72`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_projectiles: Vec<Pointer>,
     /// # C++ Info
-    /// -          name: `world`(ctype: `void*`)
-    /// -        offset:  56(x86)/ 88(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `world`(ctype: `void*`)
+    /// - offset: ` 56`(x86)/` 88`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_world: Pointer,
     /// # C++ Info
-    /// -          name: `destructionWorld`(ctype: `void*`)
-    /// -        offset:  60(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `destructionWorld`(ctype: `void*`)
+    /// - offset: ` 60`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_destructionWorld: Pointer,
 }
 const _: () = {

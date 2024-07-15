@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbBehaviorGraphData`
-/// -         version: `2`
-/// -       signature: `0x95aca5d`
-/// -          size:  88(x86)/128(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbBehaviorGraphData`
+/// - version: `2`
+/// - signature: `0x95aca5d`
+/// - size: ` 88`(x86)/`128`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,52 +21,44 @@ pub struct hkbBehaviorGraphData {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `attributeDefaults`(ctype: `hkArray<hkReal>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `attributeDefaults`(ctype: `hkArray<hkReal>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_attributeDefaults: Vec<f32>,
     /// # C++ Info
-    /// -          name: `variableInfos`(ctype: `hkArray<struct hkbVariableInfo>`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `variableInfos`(ctype: `hkArray<struct hkbVariableInfo>`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_variableInfos: Vec<hkbVariableInfo>,
     /// # C++ Info
-    /// -          name: `characterPropertyInfos`(ctype: `hkArray<struct hkbVariableInfo>`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `characterPropertyInfos`(ctype: `hkArray<struct hkbVariableInfo>`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_characterPropertyInfos: Vec<hkbVariableInfo>,
     /// # C++ Info
-    /// -          name: `eventInfos`(ctype: `hkArray<struct hkbEventInfo>`)
-    /// -        offset:  44(x86)/ 64(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `eventInfos`(ctype: `hkArray<struct hkbEventInfo>`)
+    /// - offset: ` 44`(x86)/` 64`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_eventInfos: Vec<hkbEventInfo>,
     /// # C++ Info
-    /// -          name: `wordMinVariableValues`(ctype: `hkArray<struct hkbVariableValue>`)
-    /// -        offset:  56(x86)/ 80(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `wordMinVariableValues`(ctype: `hkArray<struct hkbVariableValue>`)
+    /// - offset: ` 56`(x86)/` 80`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_wordMinVariableValues: Vec<hkbVariableValue>,
     /// # C++ Info
-    /// -          name: `wordMaxVariableValues`(ctype: `hkArray<struct hkbVariableValue>`)
-    /// -        offset:  68(x86)/ 96(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `wordMaxVariableValues`(ctype: `hkArray<struct hkbVariableValue>`)
+    /// - offset: ` 68`(x86)/` 96`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_wordMaxVariableValues: Vec<hkbVariableValue>,
     /// # C++ Info
-    /// -          name: `variableInitialValues`(ctype: `struct hkbVariableValueSet*`)
-    /// -        offset:  80(x86)/112(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `variableInitialValues`(ctype: `struct hkbVariableValueSet*`)
+    /// - offset: ` 80`(x86)/`112`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_variableInitialValues: Pointer,
     /// # C++ Info
-    /// -          name: `stringData`(ctype: `struct hkbBehaviorGraphStringData*`)
-    /// -        offset:  84(x86)/120(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `stringData`(ctype: `struct hkbBehaviorGraphStringData*`)
+    /// - offset: ` 84`(x86)/`120`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_stringData: Pointer,
 }
 const _: () = {

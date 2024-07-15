@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpVehicleFrictionDescriptionAxisDescription`
-/// -         version: `0`
-/// -       signature: `0x59ce153f`
-/// -          size: 100(x86)/100(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpVehicleFrictionDescriptionAxisDescription`
+/// - version: `0`
+/// - signature: `0x59ce153f`
+/// - size: `100`(x86)/`100`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,64 +19,54 @@ pub struct hkpVehicleFrictionDescriptionAxisDescription {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `frictionCircleYtab`(ctype: `hkReal[16]`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:  64(x86)/ 64(x86_64)
-    ///
+    /// - name: `frictionCircleYtab`(ctype: `hkReal[16]`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: ` 64`(x86)/` 64`(x86_64)
     pub m_frictionCircleYtab: [f32; 16usize],
     /// # C++ Info
-    /// -          name: `xStep`(ctype: `hkReal`)
-    /// -        offset:  64(x86)/ 64(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `xStep`(ctype: `hkReal`)
+    /// - offset: ` 64`(x86)/` 64`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_xStep: f32,
     /// # C++ Info
-    /// -          name: `xStart`(ctype: `hkReal`)
-    /// -        offset:  68(x86)/ 68(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `xStart`(ctype: `hkReal`)
+    /// - offset: ` 68`(x86)/` 68`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_xStart: f32,
     /// # C++ Info
-    /// -          name: `wheelSurfaceInertia`(ctype: `hkReal`)
-    /// -        offset:  72(x86)/ 72(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `wheelSurfaceInertia`(ctype: `hkReal`)
+    /// - offset: ` 72`(x86)/` 72`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_wheelSurfaceInertia: f32,
     /// # C++ Info
-    /// -          name: `wheelSurfaceInertiaInv`(ctype: `hkReal`)
-    /// -        offset:  76(x86)/ 76(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `wheelSurfaceInertiaInv`(ctype: `hkReal`)
+    /// - offset: ` 76`(x86)/` 76`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_wheelSurfaceInertiaInv: f32,
     /// # C++ Info
-    /// -          name: `wheelChassisMassRatio`(ctype: `hkReal`)
-    /// -        offset:  80(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `wheelChassisMassRatio`(ctype: `hkReal`)
+    /// - offset: ` 80`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_wheelChassisMassRatio: f32,
     /// # C++ Info
-    /// -          name: `wheelRadius`(ctype: `hkReal`)
-    /// -        offset:  84(x86)/ 84(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `wheelRadius`(ctype: `hkReal`)
+    /// - offset: ` 84`(x86)/` 84`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_wheelRadius: f32,
     /// # C++ Info
-    /// -          name: `wheelRadiusInv`(ctype: `hkReal`)
-    /// -        offset:  88(x86)/ 88(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `wheelRadiusInv`(ctype: `hkReal`)
+    /// - offset: ` 88`(x86)/` 88`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_wheelRadiusInv: f32,
     /// # C++ Info
-    /// -          name: `wheelDownForceFactor`(ctype: `hkReal`)
-    /// -        offset:  92(x86)/ 92(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `wheelDownForceFactor`(ctype: `hkReal`)
+    /// - offset: ` 92`(x86)/` 92`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_wheelDownForceFactor: f32,
     /// # C++ Info
-    /// -          name: `wheelDownForceSumFactor`(ctype: `hkReal`)
-    /// -        offset:  96(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `wheelDownForceSumFactor`(ctype: `hkReal`)
+    /// - offset: ` 96`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_wheelDownForceSumFactor: f32,
 }
 const _: () = {

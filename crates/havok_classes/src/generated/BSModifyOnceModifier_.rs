@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `BSModifyOnceModifier`
-/// -         version: `1`
-/// -       signature: `0x1e20a97a`
-/// -          size:  80(x86)/112(x86_64)
-/// -          vtable: true
-///
+/// - name: `BSModifyOnceModifier`
+/// - version: `1`
+/// - signature: `0x1e20a97a`
+/// - size: ` 80`(x86)/`112`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,18 +21,16 @@ pub struct BSModifyOnceModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `pOnActivateModifier`(ctype: `struct hkbModifier*`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `ALIGN_16`
-    ///
+    /// - name: `pOnActivateModifier`(ctype: `struct hkbModifier*`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `ALIGN_16`
     pub m_pOnActivateModifier: Pointer,
     /// # C++ Info
-    /// -          name: `pOnDeactivateModifier`(ctype: `struct hkbModifier*`)
-    /// -        offset:  64(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `ALIGN_16`
-    ///
+    /// - name: `pOnDeactivateModifier`(ctype: `struct hkbModifier*`)
+    /// - offset: ` 64`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `ALIGN_16`
     pub m_pOnDeactivateModifier: Pointer,
 }
 const _: () = {

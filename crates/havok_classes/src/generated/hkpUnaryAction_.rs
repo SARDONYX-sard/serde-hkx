@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpUnaryAction`
-/// -         version: `0`
-/// -       signature: `0x895532c0`
-/// -          size:  28(x86)/ 56(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpUnaryAction`
+/// - version: `0`
+/// - signature: `0x895532c0`
+/// - size: ` 28`(x86)/` 56`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkpUnaryAction<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkpAction<'a>,
     /// # C++ Info
-    /// -          name: `entity`(ctype: `struct hkpEntity*`)
-    /// -        offset:  24(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `entity`(ctype: `struct hkpEntity*`)
+    /// - offset: ` 24`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_entity: Pointer,
 }
 const _: () = {

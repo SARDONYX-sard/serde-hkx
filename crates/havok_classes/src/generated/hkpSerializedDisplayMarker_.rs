@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpSerializedDisplayMarker`
-/// -         version: `0`
-/// -       signature: `0xd7c8c54f`
-/// -          size:  80(x86)/ 80(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpSerializedDisplayMarker`
+/// - version: `0`
+/// - signature: `0xd7c8c54f`
+/// - size: ` 80`(x86)/` 80`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkpSerializedDisplayMarker {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `transform`(ctype: `hkTransform`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  64(x86)/ 64(x86_64)
-    ///
+    /// - name: `transform`(ctype: `hkTransform`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 64`(x86)/` 64`(x86_64)
     pub m_transform: Transform,
 }
 const _: () = {

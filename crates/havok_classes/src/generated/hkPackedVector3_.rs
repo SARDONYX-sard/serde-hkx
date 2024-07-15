@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkPackedVector3`
-/// -         version: `0`
-/// -       signature: `0x9c16df5b`
-/// -          size:   8(x86)/  8(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkPackedVector3`
+/// - version: `0`
+/// - signature: `0x9c16df5b`
+/// - size: `  8`(x86)/`  8`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,10 +19,9 @@ pub struct hkPackedVector3 {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `values`(ctype: `hkInt16[4]`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   8(x86)/  8(x86_64)
-    ///
+    /// - name: `values`(ctype: `hkInt16[4]`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  8`(x86)/`  8`(x86_64)
     pub m_values: [i16; 4usize],
 }
 const _: () = {

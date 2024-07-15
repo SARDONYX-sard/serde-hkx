@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbStateMachineTransitionInfo`
-/// -         version: `1`
-/// -       signature: `0xcdec8025`
-/// -          size:  60(x86)/ 72(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkbStateMachineTransitionInfo`
+/// - version: `1`
+/// - signature: `0xcdec8025`
+/// - size: ` 60`(x86)/` 72`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,64 +19,54 @@ pub struct hkbStateMachineTransitionInfo {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `triggerInterval`(ctype: `struct hkbStateMachineTimeInterval`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `triggerInterval`(ctype: `struct hkbStateMachineTimeInterval`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_triggerInterval: hkbStateMachineTimeInterval,
     /// # C++ Info
-    /// -          name: `initiateInterval`(ctype: `struct hkbStateMachineTimeInterval`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `initiateInterval`(ctype: `struct hkbStateMachineTimeInterval`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_initiateInterval: hkbStateMachineTimeInterval,
     /// # C++ Info
-    /// -          name: `transition`(ctype: `struct hkbTransitionEffect*`)
-    /// -        offset:  32(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `transition`(ctype: `struct hkbTransitionEffect*`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_transition: Pointer,
     /// # C++ Info
-    /// -          name: `condition`(ctype: `struct hkbCondition*`)
-    /// -        offset:  36(x86)/ 40(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `condition`(ctype: `struct hkbCondition*`)
+    /// - offset: ` 36`(x86)/` 40`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_condition: Pointer,
     /// # C++ Info
-    /// -          name: `eventId`(ctype: `hkInt32`)
-    /// -        offset:  40(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `eventId`(ctype: `hkInt32`)
+    /// - offset: ` 40`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_eventId: i32,
     /// # C++ Info
-    /// -          name: `toStateId`(ctype: `hkInt32`)
-    /// -        offset:  44(x86)/ 52(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `toStateId`(ctype: `hkInt32`)
+    /// - offset: ` 44`(x86)/` 52`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_toStateId: i32,
     /// # C++ Info
-    /// -          name: `fromNestedStateId`(ctype: `hkInt32`)
-    /// -        offset:  48(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `fromNestedStateId`(ctype: `hkInt32`)
+    /// - offset: ` 48`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_fromNestedStateId: i32,
     /// # C++ Info
-    /// -          name: `toNestedStateId`(ctype: `hkInt32`)
-    /// -        offset:  52(x86)/ 60(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `toNestedStateId`(ctype: `hkInt32`)
+    /// - offset: ` 52`(x86)/` 60`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_toNestedStateId: i32,
     /// # C++ Info
-    /// -          name: `priority`(ctype: `hkInt16`)
-    /// -        offset:  56(x86)/ 64(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `priority`(ctype: `hkInt16`)
+    /// - offset: ` 56`(x86)/` 64`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_priority: i16,
     /// # C++ Info
-    /// -          name: `flags`(ctype: `flags TransitionFlags`)
-    /// -        offset:  58(x86)/ 66(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `flags`(ctype: `flags TransitionFlags`)
+    /// - offset: ` 58`(x86)/` 66`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_flags: TransitionFlags,
 }
 const _: () = {

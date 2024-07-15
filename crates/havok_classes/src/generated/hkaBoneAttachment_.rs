@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkaBoneAttachment`
-/// -         version: `1`
-/// -       signature: `0xa8ccd5cf`
-/// -          size:  96(x86)/128(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkaBoneAttachment`
+/// - version: `1`
+/// - signature: `0xa8ccd5cf`
+/// - size: ` 96`(x86)/`128`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,34 +21,29 @@ pub struct hkaBoneAttachment<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `originalSkeletonName`(ctype: `hkStringPtr`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `originalSkeletonName`(ctype: `hkStringPtr`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_originalSkeletonName: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `boneFromAttachment`(ctype: `hkMatrix4`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:  64(x86)/ 64(x86_64)
-    ///
+    /// - name: `boneFromAttachment`(ctype: `hkMatrix4`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: ` 64`(x86)/` 64`(x86_64)
     pub m_boneFromAttachment: Matrix4,
     /// # C++ Info
-    /// -          name: `attachment`(ctype: `struct hkReferencedObject*`)
-    /// -        offset:  80(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `attachment`(ctype: `struct hkReferencedObject*`)
+    /// - offset: ` 80`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_attachment: Pointer,
     /// # C++ Info
-    /// -          name: `name`(ctype: `hkStringPtr`)
-    /// -        offset:  84(x86)/104(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `name`(ctype: `hkStringPtr`)
+    /// - offset: ` 84`(x86)/`104`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_name: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `boneIndex`(ctype: `hkInt16`)
-    /// -        offset:  88(x86)/112(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `boneIndex`(ctype: `hkInt16`)
+    /// - offset: ` 88`(x86)/`112`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_boneIndex: i16,
 }
 const _: () = {

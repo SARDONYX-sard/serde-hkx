@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpTriSampledHeightFieldCollection`
-/// -         version: `0`
-/// -       signature: `0xc291ddde`
-/// -          size:  64(x86)/ 96(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpTriSampledHeightFieldCollection`
+/// - version: `0`
+/// - signature: `0xc291ddde`
+/// - size: ` 64`(x86)/` 96`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,35 +21,30 @@ pub struct hkpTriSampledHeightFieldCollection {
     /// Alternative to C++ class inheritance.
     pub parent: hkpShapeCollection,
     /// # C++ Info
-    /// -          name: `heightfield`(ctype: `struct hkpSampledHeightFieldShape*`)
-    /// -        offset:  24(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `heightfield`(ctype: `struct hkpSampledHeightFieldShape*`)
+    /// - offset: ` 24`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_heightfield: Pointer,
     /// # C++ Info
-    /// -          name: `childSize`(ctype: `hkInt32`)
-    /// -        offset:  28(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `childSize`(ctype: `hkInt32`)
+    /// - offset: ` 28`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_childSize: i32,
     /// # C++ Info
-    /// -          name: `radius`(ctype: `hkReal`)
-    /// -        offset:  32(x86)/ 60(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `radius`(ctype: `hkReal`)
+    /// - offset: ` 32`(x86)/` 60`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_radius: f32,
     /// # C++ Info
-    /// -          name: `weldingInfo`(ctype: `hkArray<hkUint16>`)
-    /// -        offset:  36(x86)/ 64(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `weldingInfo`(ctype: `hkArray<hkUint16>`)
+    /// - offset: ` 36`(x86)/` 64`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_weldingInfo: Vec<u16>,
     /// # C++ Info
-    /// -          name: `triangleExtrusion`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `triangleExtrusion`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_triangleExtrusion: Vector4,
 }
 const _: () = {

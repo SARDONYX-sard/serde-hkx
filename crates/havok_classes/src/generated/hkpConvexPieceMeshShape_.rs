@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpConvexPieceMeshShape`
-/// -         version: `0`
-/// -       signature: `0x38fd3d97`
-/// -          size:  36(x86)/ 72(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpConvexPieceMeshShape`
+/// - version: `0`
+/// - signature: `0x38fd3d97`
+/// - size: ` 36`(x86)/` 72`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkpConvexPieceMeshShape {
     /// Alternative to C++ class inheritance.
     pub parent: hkpShapeCollection,
     /// # C++ Info
-    /// -          name: `convexPieceStream`(ctype: `struct hkpConvexPieceStreamData*`)
-    /// -        offset:  24(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `convexPieceStream`(ctype: `struct hkpConvexPieceStreamData*`)
+    /// - offset: ` 24`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_convexPieceStream: Pointer,
     /// # C++ Info
-    /// -          name: `displayMesh`(ctype: `struct hkpShapeCollection*`)
-    /// -        offset:  28(x86)/ 56(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `displayMesh`(ctype: `struct hkpShapeCollection*`)
+    /// - offset: ` 28`(x86)/` 56`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_displayMesh: Pointer,
     /// # C++ Info
-    /// -          name: `radius`(ctype: `hkReal`)
-    /// -        offset:  32(x86)/ 64(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `radius`(ctype: `hkReal`)
+    /// - offset: ` 32`(x86)/` 64`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_radius: f32,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpVehicleInstanceWheelInfo`
-/// -         version: `1`
-/// -       signature: `0x99f693f0`
-/// -          size: 224(x86)/224(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpVehicleInstanceWheelInfo`
+/// - version: `1`
+/// - signature: `0x99f693f0`
+/// - size: `224`(x86)/`224`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,107 +19,90 @@ pub struct hkpVehicleInstanceWheelInfo {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `contactPoint`(ctype: `struct hkContactPoint`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:  32(x86)/ 32(x86_64)
-    ///
+    /// - name: `contactPoint`(ctype: `struct hkContactPoint`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: ` 32`(x86)/` 32`(x86_64)
     pub m_contactPoint: hkContactPoint,
     /// # C++ Info
-    /// -          name: `contactFriction`(ctype: `hkReal`)
-    /// -        offset:  32(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `contactFriction`(ctype: `hkReal`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_contactFriction: f32,
     /// # C++ Info
-    /// -          name: `contactBody`(ctype: `void*`)
-    /// -        offset:  36(x86)/ 40(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `contactBody`(ctype: `void*`)
+    /// - offset: ` 36`(x86)/` 40`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_contactBody: Pointer,
     /// # C++ Info
-    /// -          name: `contactShapeKey`(ctype: `hkUint32[8]`)
-    /// -        offset:  40(x86)/ 48(x86_64)
-    /// -     type_size:  32(x86)/ 32(x86_64)
-    ///
+    /// - name: `contactShapeKey`(ctype: `hkUint32[8]`)
+    /// - offset: ` 40`(x86)/` 48`(x86_64)
+    /// - type_size: ` 32`(x86)/` 32`(x86_64)
     pub m_contactShapeKey: [u32; 8usize],
     /// # C++ Info
-    /// -          name: `hardPointWs`(ctype: `hkVector4`)
-    /// -        offset:  80(x86)/ 80(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `hardPointWs`(ctype: `hkVector4`)
+    /// - offset: ` 80`(x86)/` 80`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_hardPointWs: Vector4,
     /// # C++ Info
-    /// -          name: `rayEndPointWs`(ctype: `hkVector4`)
-    /// -        offset:  96(x86)/ 96(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `rayEndPointWs`(ctype: `hkVector4`)
+    /// - offset: ` 96`(x86)/` 96`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_rayEndPointWs: Vector4,
     /// # C++ Info
-    /// -          name: `currentSuspensionLength`(ctype: `hkReal`)
-    /// -        offset: 112(x86)/112(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `currentSuspensionLength`(ctype: `hkReal`)
+    /// - offset: `112`(x86)/`112`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_currentSuspensionLength: f32,
     /// # C++ Info
-    /// -          name: `suspensionDirectionWs`(ctype: `hkVector4`)
-    /// -        offset: 128(x86)/128(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `suspensionDirectionWs`(ctype: `hkVector4`)
+    /// - offset: `128`(x86)/`128`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_suspensionDirectionWs: Vector4,
     /// # C++ Info
-    /// -          name: `spinAxisChassisSpace`(ctype: `hkVector4`)
-    /// -        offset: 144(x86)/144(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `spinAxisChassisSpace`(ctype: `hkVector4`)
+    /// - offset: `144`(x86)/`144`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_spinAxisChassisSpace: Vector4,
     /// # C++ Info
-    /// -          name: `spinAxisWs`(ctype: `hkVector4`)
-    /// -        offset: 160(x86)/160(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `spinAxisWs`(ctype: `hkVector4`)
+    /// - offset: `160`(x86)/`160`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_spinAxisWs: Vector4,
     /// # C++ Info
-    /// -          name: `steeringOrientationChassisSpace`(ctype: `hkQuaternion`)
-    /// -        offset: 176(x86)/176(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `steeringOrientationChassisSpace`(ctype: `hkQuaternion`)
+    /// - offset: `176`(x86)/`176`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_steeringOrientationChassisSpace: Quaternion,
     /// # C++ Info
-    /// -          name: `spinVelocity`(ctype: `hkReal`)
-    /// -        offset: 192(x86)/192(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `spinVelocity`(ctype: `hkReal`)
+    /// - offset: `192`(x86)/`192`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_spinVelocity: f32,
     /// # C++ Info
-    /// -          name: `spinAngle`(ctype: `hkReal`)
-    /// -        offset: 196(x86)/196(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `spinAngle`(ctype: `hkReal`)
+    /// - offset: `196`(x86)/`196`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_spinAngle: f32,
     /// # C++ Info
-    /// -          name: `skidEnergyDensity`(ctype: `hkReal`)
-    /// -        offset: 200(x86)/200(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `skidEnergyDensity`(ctype: `hkReal`)
+    /// - offset: `200`(x86)/`200`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_skidEnergyDensity: f32,
     /// # C++ Info
-    /// -          name: `sideForce`(ctype: `hkReal`)
-    /// -        offset: 204(x86)/204(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `sideForce`(ctype: `hkReal`)
+    /// - offset: `204`(x86)/`204`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_sideForce: f32,
     /// # C++ Info
-    /// -          name: `forwardSlipVelocity`(ctype: `hkReal`)
-    /// -        offset: 208(x86)/208(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `forwardSlipVelocity`(ctype: `hkReal`)
+    /// - offset: `208`(x86)/`208`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_forwardSlipVelocity: f32,
     /// # C++ Info
-    /// -          name: `sideSlipVelocity`(ctype: `hkReal`)
-    /// -        offset: 212(x86)/212(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `sideSlipVelocity`(ctype: `hkReal`)
+    /// - offset: `212`(x86)/`212`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_sideSlipVelocity: f32,
 }
 const _: () = {

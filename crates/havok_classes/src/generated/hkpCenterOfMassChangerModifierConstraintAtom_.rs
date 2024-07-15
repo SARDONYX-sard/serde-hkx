@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpCenterOfMassChangerModifierConstraintAtom`
-/// -         version: `0`
-/// -       signature: `0x1d7dbdd2`
-/// -          size:  64(x86)/ 80(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpCenterOfMassChangerModifierConstraintAtom`
+/// - version: `0`
+/// - signature: `0x1d7dbdd2`
+/// - size: ` 64`(x86)/` 80`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkpCenterOfMassChangerModifierConstraintAtom {
     /// Alternative to C++ class inheritance.
     pub parent: hkpModifierConstraintAtom,
     /// # C++ Info
-    /// -          name: `displacementA`(ctype: `hkVector4`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `displacementA`(ctype: `hkVector4`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_displacementA: Vector4,
     /// # C++ Info
-    /// -          name: `displacementB`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 64(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `displacementB`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 64`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_displacementB: Vector4,
 }
 const _: () = {

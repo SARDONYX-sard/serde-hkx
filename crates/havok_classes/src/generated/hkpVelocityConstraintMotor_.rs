@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpVelocityConstraintMotor`
-/// -         version: `0`
-/// -       signature: `0xfca2fcc3`
-/// -          size:  32(x86)/ 48(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpVelocityConstraintMotor`
+/// - version: `0`
+/// - signature: `0xfca2fcc3`
+/// - size: ` 32`(x86)/` 48`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkpVelocityConstraintMotor {
     /// Alternative to C++ class inheritance.
     pub parent: hkpLimitedForceConstraintMotor,
     /// # C++ Info
-    /// -          name: `tau`(ctype: `hkReal`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `tau`(ctype: `hkReal`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_tau: f32,
     /// # C++ Info
-    /// -          name: `velocityTarget`(ctype: `hkReal`)
-    /// -        offset:  24(x86)/ 36(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `velocityTarget`(ctype: `hkReal`)
+    /// - offset: ` 24`(x86)/` 36`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_velocityTarget: f32,
     /// # C++ Info
-    /// -          name: `useVelocityTargetFromConstraintTargets`(ctype: `hkBool`)
-    /// -        offset:  28(x86)/ 40(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `useVelocityTargetFromConstraintTargets`(ctype: `hkBool`)
+    /// - offset: ` 28`(x86)/` 40`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_useVelocityTargetFromConstraintTargets: bool,
 }
 const _: () = {

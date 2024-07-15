@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpLinkedCollidable`
-/// -         version: `0`
-/// -       signature: `0xe1a81497`
-/// -          size:  92(x86)/128(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkpLinkedCollidable`
+/// - version: `0`
+/// - signature: `0xe1a81497`
+/// - size: ` 92`(x86)/`128`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,11 +21,10 @@ pub struct hkpLinkedCollidable {
     /// Alternative to C++ class inheritance.
     pub parent: hkpCollidable,
     /// # C++ Info
-    /// -          name: `collisionEntries`(ctype: `hkArray<void>`)
-    /// -        offset:  80(x86)/112(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `collisionEntries`(ctype: `hkArray<void>`)
+    /// - offset: ` 80`(x86)/`112`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_collisionEntries: Vec<()>,
 }
 const _: () = {

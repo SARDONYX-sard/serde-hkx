@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkMonitorStreamFrameInfo`
-/// -         version: `0`
-/// -       signature: `0x7798b7db`
-/// -          size:  36(x86)/ 40(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkMonitorStreamFrameInfo`
+/// - version: `0`
+/// - signature: `0x7798b7db`
+/// - size: ` 36`(x86)/` 40`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,58 +19,49 @@ pub struct hkMonitorStreamFrameInfo<'a> {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `heading`(ctype: `hkStringPtr`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `heading`(ctype: `hkStringPtr`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_heading: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `indexOfTimer0`(ctype: `hkInt32`)
-    /// -        offset:   4(x86)/  8(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `indexOfTimer0`(ctype: `hkInt32`)
+    /// - offset: `  4`(x86)/`  8`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_indexOfTimer0: i32,
     /// # C++ Info
-    /// -          name: `indexOfTimer1`(ctype: `hkInt32`)
-    /// -        offset:   8(x86)/ 12(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `indexOfTimer1`(ctype: `hkInt32`)
+    /// - offset: `  8`(x86)/` 12`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_indexOfTimer1: i32,
     /// # C++ Info
-    /// -          name: `absoluteTimeCounter`(ctype: `enum AbsoluteTimeCounter`)
-    /// -        offset:  12(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `absoluteTimeCounter`(ctype: `enum AbsoluteTimeCounter`)
+    /// - offset: ` 12`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_absoluteTimeCounter: AbsoluteTimeCounter,
     /// # C++ Info
-    /// -          name: `timerFactor0`(ctype: `hkReal`)
-    /// -        offset:  16(x86)/ 20(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `timerFactor0`(ctype: `hkReal`)
+    /// - offset: ` 16`(x86)/` 20`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_timerFactor0: f32,
     /// # C++ Info
-    /// -          name: `timerFactor1`(ctype: `hkReal`)
-    /// -        offset:  20(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `timerFactor1`(ctype: `hkReal`)
+    /// - offset: ` 20`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_timerFactor1: f32,
     /// # C++ Info
-    /// -          name: `threadId`(ctype: `hkInt32`)
-    /// -        offset:  24(x86)/ 28(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `threadId`(ctype: `hkInt32`)
+    /// - offset: ` 24`(x86)/` 28`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_threadId: i32,
     /// # C++ Info
-    /// -          name: `frameStreamStart`(ctype: `hkInt32`)
-    /// -        offset:  28(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `frameStreamStart`(ctype: `hkInt32`)
+    /// - offset: ` 28`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_frameStreamStart: i32,
     /// # C++ Info
-    /// -          name: `frameStreamEnd`(ctype: `hkInt32`)
-    /// -        offset:  32(x86)/ 36(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `frameStreamEnd`(ctype: `hkInt32`)
+    /// - offset: ` 32`(x86)/` 36`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_frameStreamEnd: i32,
 }
 const _: () = {

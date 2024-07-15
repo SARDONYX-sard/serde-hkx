@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbCharacterAddedInfo`
-/// -         version: `0`
-/// -       signature: `0x3544e182`
-/// -          size:  96(x86)/128(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbCharacterAddedInfo`
+/// - version: `0`
+/// - signature: `0x3544e182`
+/// - size: ` 96`(x86)/`128`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,46 +21,39 @@ pub struct hkbCharacterAddedInfo<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `characterId`(ctype: `hkUint64`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   8(x86)/  8(x86_64)
-    ///
+    /// - name: `characterId`(ctype: `hkUint64`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  8`(x86)/`  8`(x86_64)
     pub m_characterId: u64,
     /// # C++ Info
-    /// -          name: `instanceName`(ctype: `hkStringPtr`)
-    /// -        offset:  16(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `instanceName`(ctype: `hkStringPtr`)
+    /// - offset: ` 16`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_instanceName: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `templateName`(ctype: `hkStringPtr`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `templateName`(ctype: `hkStringPtr`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_templateName: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `fullPathToProject`(ctype: `hkStringPtr`)
-    /// -        offset:  24(x86)/ 40(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `fullPathToProject`(ctype: `hkStringPtr`)
+    /// - offset: ` 24`(x86)/` 40`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_fullPathToProject: StringPtr<'a>,
     /// # C++ Info
-    /// -          name: `skeleton`(ctype: `struct hkaSkeleton*`)
-    /// -        offset:  28(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `skeleton`(ctype: `struct hkaSkeleton*`)
+    /// - offset: ` 28`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_skeleton: Pointer,
     /// # C++ Info
-    /// -          name: `worldFromModel`(ctype: `hkQsTransform`)
-    /// -        offset:  32(x86)/ 64(x86_64)
-    /// -     type_size:  48(x86)/ 48(x86_64)
-    ///
+    /// - name: `worldFromModel`(ctype: `hkQsTransform`)
+    /// - offset: ` 32`(x86)/` 64`(x86_64)
+    /// - type_size: ` 48`(x86)/` 48`(x86_64)
     pub m_worldFromModel: QsTransform,
     /// # C++ Info
-    /// -          name: `poseModelSpace`(ctype: `hkArray<hkQsTransform>`)
-    /// -        offset:  80(x86)/112(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `poseModelSpace`(ctype: `hkArray<hkQsTransform>`)
+    /// - offset: ` 80`(x86)/`112`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_poseModelSpace: Vec<QsTransform>,
 }
 const _: () = {

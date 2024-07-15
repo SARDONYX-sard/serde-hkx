@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpGroupCollisionFilter`
-/// -         version: `0`
-/// -       signature: `0x5cc01561`
-/// -          size: 180(x86)/208(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpGroupCollisionFilter`
+/// - version: `0`
+/// - signature: `0x5cc01561`
+/// - size: `180`(x86)/`208`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,16 +21,14 @@ pub struct hkpGroupCollisionFilter {
     /// Alternative to C++ class inheritance.
     pub parent: hkpCollisionFilter,
     /// # C++ Info
-    /// -          name: `noGroupCollisionEnabled`(ctype: `hkBool`)
-    /// -        offset:  48(x86)/ 72(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `noGroupCollisionEnabled`(ctype: `hkBool`)
+    /// - offset: ` 48`(x86)/` 72`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_noGroupCollisionEnabled: bool,
     /// # C++ Info
-    /// -          name: `collisionGroups`(ctype: `hkUint32[32]`)
-    /// -        offset:  52(x86)/ 76(x86_64)
-    /// -     type_size: 128(x86)/128(x86_64)
-    ///
+    /// - name: `collisionGroups`(ctype: `hkUint32[32]`)
+    /// - offset: ` 52`(x86)/` 76`(x86_64)
+    /// - type_size: `128`(x86)/`128`(x86_64)
     pub m_collisionGroups: [u32; 32usize],
 }
 const _: () = {

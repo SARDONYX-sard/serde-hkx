@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `BSDecomposeVectorModifier`
-/// -         version: `0`
-/// -       signature: `0x31f6b8b6`
-/// -          size:  80(x86)/112(x86_64)
-/// -          vtable: true
-///
+/// - name: `BSDecomposeVectorModifier`
+/// - version: `0`
+/// - signature: `0x31f6b8b6`
+/// - size: ` 80`(x86)/`112`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,34 +21,29 @@ pub struct BSDecomposeVectorModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `vector`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `vector`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_vector: Vector4,
     /// # C++ Info
-    /// -          name: `x`(ctype: `hkReal`)
-    /// -        offset:  64(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `x`(ctype: `hkReal`)
+    /// - offset: ` 64`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_x: f32,
     /// # C++ Info
-    /// -          name: `y`(ctype: `hkReal`)
-    /// -        offset:  68(x86)/100(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `y`(ctype: `hkReal`)
+    /// - offset: ` 68`(x86)/`100`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_y: f32,
     /// # C++ Info
-    /// -          name: `z`(ctype: `hkReal`)
-    /// -        offset:  72(x86)/104(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `z`(ctype: `hkReal`)
+    /// - offset: ` 72`(x86)/`104`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_z: f32,
     /// # C++ Info
-    /// -          name: `w`(ctype: `hkReal`)
-    /// -        offset:  76(x86)/108(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `w`(ctype: `hkReal`)
+    /// - offset: ` 76`(x86)/`108`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_w: f32,
 }
 const _: () = {

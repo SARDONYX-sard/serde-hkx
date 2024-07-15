@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpStorageMeshShape`
-/// -         version: `0`
-/// -       signature: `0xbefd8b39`
-/// -          size: 112(x86)/144(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpStorageMeshShape`
+/// - version: `0`
+/// - signature: `0xbefd8b39`
+/// - size: `112`(x86)/`144`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,10 +21,9 @@ pub struct hkpStorageMeshShape {
     /// Alternative to C++ class inheritance.
     pub parent: hkpMeshShape,
     /// # C++ Info
-    /// -          name: `storage`(ctype: `hkArray<hkpStorageMeshShapeSubpartStorage*>`)
-    /// -        offset:  96(x86)/128(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `storage`(ctype: `hkArray<hkpStorageMeshShapeSubpartStorage*>`)
+    /// - offset: ` 96`(x86)/`128`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_storage: Vec<Pointer>,
 }
 const _: () = {

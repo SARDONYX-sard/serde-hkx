@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbHandle`
-/// -         version: `1`
-/// -       signature: `0xd8b6401c`
-/// -          size:  24(x86)/ 48(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbHandle`
+/// - version: `1`
+/// - signature: `0xd8b6401c`
+/// - size: ` 24`(x86)/` 48`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,28 +21,24 @@ pub struct hkbHandle {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `frame`(ctype: `struct hkLocalFrame*`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `frame`(ctype: `struct hkLocalFrame*`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_frame: Pointer,
     /// # C++ Info
-    /// -          name: `rigidBody`(ctype: `struct hkpRigidBody*`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `rigidBody`(ctype: `struct hkpRigidBody*`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_rigidBody: Pointer,
     /// # C++ Info
-    /// -          name: `character`(ctype: `struct hkbCharacter*`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `character`(ctype: `struct hkbCharacter*`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_character: Pointer,
     /// # C++ Info
-    /// -          name: `animationBoneIndex`(ctype: `hkInt16`)
-    /// -        offset:  20(x86)/ 40(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `animationBoneIndex`(ctype: `hkInt16`)
+    /// - offset: ` 20`(x86)/` 40`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_animationBoneIndex: i16,
 }
 const _: () = {

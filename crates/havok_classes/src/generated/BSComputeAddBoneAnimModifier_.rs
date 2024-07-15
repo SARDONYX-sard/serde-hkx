@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `BSComputeAddBoneAnimModifier`
-/// -         version: `1`
-/// -       signature: `0xa67f8c46`
-/// -          size: 112(x86)/160(x86_64)
-/// -          vtable: true
-///
+/// - name: `BSComputeAddBoneAnimModifier`
+/// - version: `1`
+/// - signature: `0xa67f8c46`
+/// - size: `112`(x86)/`160`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,35 +21,30 @@ pub struct BSComputeAddBoneAnimModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `boneIndex`(ctype: `hkInt16`)
-    /// -        offset:  44(x86)/ 80(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `boneIndex`(ctype: `hkInt16`)
+    /// - offset: ` 44`(x86)/` 80`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_boneIndex: i16,
     /// # C++ Info
-    /// -          name: `translationLSOut`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 96(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `translationLSOut`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 96`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_translationLSOut: Vector4,
     /// # C++ Info
-    /// -          name: `rotationLSOut`(ctype: `hkQuaternion`)
-    /// -        offset:  64(x86)/112(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `rotationLSOut`(ctype: `hkQuaternion`)
+    /// - offset: ` 64`(x86)/`112`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_rotationLSOut: Quaternion,
     /// # C++ Info
-    /// -          name: `scaleLSOut`(ctype: `hkVector4`)
-    /// -        offset:  80(x86)/128(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `scaleLSOut`(ctype: `hkVector4`)
+    /// - offset: ` 80`(x86)/`128`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_scaleLSOut: Vector4,
     /// # C++ Info
-    /// -          name: `pSkeletonMemory`(ctype: `void*`)
-    /// -        offset:  96(x86)/144(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `pSkeletonMemory`(ctype: `void*`)
+    /// - offset: ` 96`(x86)/`144`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_pSkeletonMemory: Pointer,
 }
 const _: () = {

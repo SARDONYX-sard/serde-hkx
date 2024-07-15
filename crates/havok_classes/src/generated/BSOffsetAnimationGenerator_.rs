@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `BSOffsetAnimationGenerator`
-/// -         version: `1`
-/// -       signature: `0xb8571122`
-/// -          size: 128(x86)/176(x86_64)
-/// -          vtable: true
-///
+/// - name: `BSOffsetAnimationGenerator`
+/// - version: `1`
+/// - signature: `0xb8571122`
+/// - size: `128`(x86)/`176`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,78 +21,67 @@ pub struct BSOffsetAnimationGenerator<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbGenerator<'a>,
     /// # C++ Info
-    /// -          name: `pDefaultGenerator`(ctype: `struct hkbGenerator*`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `ALIGN_16`
-    ///
+    /// - name: `pDefaultGenerator`(ctype: `struct hkbGenerator*`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `ALIGN_16`
     pub m_pDefaultGenerator: Pointer,
     /// # C++ Info
-    /// -          name: `pOffsetClipGenerator`(ctype: `struct hkbGenerator*`)
-    /// -        offset:  64(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `ALIGN_16`
-    ///
+    /// - name: `pOffsetClipGenerator`(ctype: `struct hkbGenerator*`)
+    /// - offset: ` 64`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `ALIGN_16`
     pub m_pOffsetClipGenerator: Pointer,
     /// # C++ Info
-    /// -          name: `fOffsetVariable`(ctype: `hkReal`)
-    /// -        offset:  68(x86)/104(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `fOffsetVariable`(ctype: `hkReal`)
+    /// - offset: ` 68`(x86)/`104`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_fOffsetVariable: f32,
     /// # C++ Info
-    /// -          name: `fOffsetRangeStart`(ctype: `hkReal`)
-    /// -        offset:  72(x86)/108(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `fOffsetRangeStart`(ctype: `hkReal`)
+    /// - offset: ` 72`(x86)/`108`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_fOffsetRangeStart: f32,
     /// # C++ Info
-    /// -          name: `fOffsetRangeEnd`(ctype: `hkReal`)
-    /// -        offset:  76(x86)/112(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `fOffsetRangeEnd`(ctype: `hkReal`)
+    /// - offset: ` 76`(x86)/`112`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_fOffsetRangeEnd: f32,
     /// # C++ Info
-    /// -          name: `BoneOffsetA`(ctype: `hkArray<void>`)
-    /// -        offset:  80(x86)/120(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `BoneOffsetA`(ctype: `hkArray<void>`)
+    /// - offset: ` 80`(x86)/`120`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_BoneOffsetA: Vec<()>,
     /// # C++ Info
-    /// -          name: `BoneIndexA`(ctype: `hkArray<void>`)
-    /// -        offset:  92(x86)/136(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `BoneIndexA`(ctype: `hkArray<void>`)
+    /// - offset: ` 92`(x86)/`136`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_BoneIndexA: Vec<()>,
     /// # C++ Info
-    /// -          name: `fCurrentPercentage`(ctype: `hkReal`)
-    /// -        offset: 104(x86)/152(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `fCurrentPercentage`(ctype: `hkReal`)
+    /// - offset: `104`(x86)/`152`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_fCurrentPercentage: f32,
     /// # C++ Info
-    /// -          name: `iCurrentFrame`(ctype: `hkUint32`)
-    /// -        offset: 108(x86)/156(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `iCurrentFrame`(ctype: `hkUint32`)
+    /// - offset: `108`(x86)/`156`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_iCurrentFrame: u32,
     /// # C++ Info
-    /// -          name: `bZeroOffset`(ctype: `hkBool`)
-    /// -        offset: 112(x86)/160(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `bZeroOffset`(ctype: `hkBool`)
+    /// - offset: `112`(x86)/`160`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_bZeroOffset: bool,
     /// # C++ Info
-    /// -          name: `bOffsetValid`(ctype: `hkBool`)
-    /// -        offset: 113(x86)/161(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `bOffsetValid`(ctype: `hkBool`)
+    /// - offset: `113`(x86)/`161`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_bOffsetValid: bool,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbTwistModifier`
-/// -         version: `1`
-/// -       signature: `0xb6b76b32`
-/// -          size: 112(x86)/144(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbTwistModifier`
+/// - version: `1`
+/// - signature: `0xb6b76b32`
+/// - size: `112`(x86)/`144`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,60 +21,51 @@ pub struct hkbTwistModifier<'a> {
     /// Alternative to C++ class inheritance.
     pub parent: hkbModifier<'a>,
     /// # C++ Info
-    /// -          name: `axisOfRotation`(ctype: `hkVector4`)
-    /// -        offset:  48(x86)/ 80(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `axisOfRotation`(ctype: `hkVector4`)
+    /// - offset: ` 48`(x86)/` 80`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_axisOfRotation: Vector4,
     /// # C++ Info
-    /// -          name: `twistAngle`(ctype: `hkReal`)
-    /// -        offset:  64(x86)/ 96(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `twistAngle`(ctype: `hkReal`)
+    /// - offset: ` 64`(x86)/` 96`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_twistAngle: f32,
     /// # C++ Info
-    /// -          name: `startBoneIndex`(ctype: `hkInt16`)
-    /// -        offset:  68(x86)/100(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `startBoneIndex`(ctype: `hkInt16`)
+    /// - offset: ` 68`(x86)/`100`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_startBoneIndex: i16,
     /// # C++ Info
-    /// -          name: `endBoneIndex`(ctype: `hkInt16`)
-    /// -        offset:  70(x86)/102(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `endBoneIndex`(ctype: `hkInt16`)
+    /// - offset: ` 70`(x86)/`102`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_endBoneIndex: i16,
     /// # C++ Info
-    /// -          name: `setAngleMethod`(ctype: `enum SetAngleMethod`)
-    /// -        offset:  72(x86)/104(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `setAngleMethod`(ctype: `enum SetAngleMethod`)
+    /// - offset: ` 72`(x86)/`104`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_setAngleMethod: SetAngleMethod,
     /// # C++ Info
-    /// -          name: `rotationAxisCoordinates`(ctype: `enum RotationAxisCoordinates`)
-    /// -        offset:  73(x86)/105(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `rotationAxisCoordinates`(ctype: `enum RotationAxisCoordinates`)
+    /// - offset: ` 73`(x86)/`105`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_rotationAxisCoordinates: RotationAxisCoordinates,
     /// # C++ Info
-    /// -          name: `isAdditive`(ctype: `hkBool`)
-    /// -        offset:  74(x86)/106(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `isAdditive`(ctype: `hkBool`)
+    /// - offset: ` 74`(x86)/`106`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_isAdditive: bool,
     /// # C++ Info
-    /// -          name: `boneChainIndices`(ctype: `hkArray<void>`)
-    /// -        offset:  76(x86)/112(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `boneChainIndices`(ctype: `hkArray<void>`)
+    /// - offset: ` 76`(x86)/`112`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_boneChainIndices: Vec<()>,
     /// # C++ Info
-    /// -          name: `parentBoneIndices`(ctype: `hkArray<void>`)
-    /// -        offset:  88(x86)/128(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `parentBoneIndices`(ctype: `hkArray<void>`)
+    /// - offset: ` 88`(x86)/`128`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_parentBoneIndices: Vec<()>,
 }
 const _: () = {

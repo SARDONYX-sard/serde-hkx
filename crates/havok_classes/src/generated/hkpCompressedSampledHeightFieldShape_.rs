@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpCompressedSampledHeightFieldShape`
-/// -         version: `0`
-/// -       signature: `0x97b6e143`
-/// -          size: 128(x86)/144(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpCompressedSampledHeightFieldShape`
+/// - version: `0`
+/// - signature: `0x97b6e143`
+/// - size: `128`(x86)/`144`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,28 +21,24 @@ pub struct hkpCompressedSampledHeightFieldShape {
     /// Alternative to C++ class inheritance.
     pub parent: hkpSampledHeightFieldShape,
     /// # C++ Info
-    /// -          name: `storage`(ctype: `hkArray<hkUint16>`)
-    /// -        offset:  96(x86)/112(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `storage`(ctype: `hkArray<hkUint16>`)
+    /// - offset: ` 96`(x86)/`112`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_storage: Vec<u16>,
     /// # C++ Info
-    /// -          name: `triangleFlip`(ctype: `hkBool`)
-    /// -        offset: 108(x86)/128(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `triangleFlip`(ctype: `hkBool`)
+    /// - offset: `108`(x86)/`128`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_triangleFlip: bool,
     /// # C++ Info
-    /// -          name: `offset`(ctype: `hkReal`)
-    /// -        offset: 112(x86)/132(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `offset`(ctype: `hkReal`)
+    /// - offset: `112`(x86)/`132`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_offset: f32,
     /// # C++ Info
-    /// -          name: `scale`(ctype: `hkReal`)
-    /// -        offset: 116(x86)/136(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `scale`(ctype: `hkReal`)
+    /// - offset: `116`(x86)/`136`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_scale: f32,
 }
 const _: () = {

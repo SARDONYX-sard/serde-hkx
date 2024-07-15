@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkpMaxSizeMotion`
-/// -         version: `0`
-/// -       signature: `0x64abf85c`
-/// -          size: 288(x86)/320(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkpMaxSizeMotion`
+/// - version: `0`
+/// - signature: `0x64abf85c`
+/// - size: `288`(x86)/`320`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]

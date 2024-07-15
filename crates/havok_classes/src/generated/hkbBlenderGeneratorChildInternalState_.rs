@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbBlenderGeneratorChildInternalState`
-/// -         version: `0`
-/// -       signature: `0xff7327c0`
-/// -          size:   2(x86)/  2(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkbBlenderGeneratorChildInternalState`
+/// - version: `0`
+/// - signature: `0xff7327c0`
+/// - size: `  2`(x86)/`  2`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,16 +19,14 @@ pub struct hkbBlenderGeneratorChildInternalState {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `isActive`(ctype: `hkBool`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `isActive`(ctype: `hkBool`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_isActive: bool,
     /// # C++ Info
-    /// -          name: `syncNextFrame`(ctype: `hkBool`)
-    /// -        offset:   1(x86)/  1(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `syncNextFrame`(ctype: `hkBool`)
+    /// - offset: `  1`(x86)/`  1`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_syncNextFrame: bool,
 }
 const _: () = {

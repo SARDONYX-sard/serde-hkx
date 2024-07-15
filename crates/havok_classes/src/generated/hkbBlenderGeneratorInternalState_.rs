@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbBlenderGeneratorInternalState`
-/// -         version: `0`
-/// -       signature: `0x84717488`
-/// -          size:  48(x86)/ 64(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbBlenderGeneratorInternalState`
+/// - version: `0`
+/// - signature: `0x84717488`
+/// - size: ` 48`(x86)/` 64`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,52 +21,44 @@ pub struct hkbBlenderGeneratorInternalState {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `childrenInternalStates`(ctype: `hkArray<struct hkbBlenderGeneratorChildInternalState>`)
-    /// -        offset:   8(x86)/ 16(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `childrenInternalStates`(ctype: `hkArray<struct hkbBlenderGeneratorChildInternalState>`)
+    /// - offset: `  8`(x86)/` 16`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_childrenInternalStates: Vec<hkbBlenderGeneratorChildInternalState>,
     /// # C++ Info
-    /// -          name: `sortedChildren`(ctype: `hkArray<hkInt16>`)
-    /// -        offset:  20(x86)/ 32(x86_64)
-    /// -     type_size:  12(x86)/ 16(x86_64)
-    ///
+    /// - name: `sortedChildren`(ctype: `hkArray<hkInt16>`)
+    /// - offset: ` 20`(x86)/` 32`(x86_64)
+    /// - type_size: ` 12`(x86)/` 16`(x86_64)
     pub m_sortedChildren: Vec<i16>,
     /// # C++ Info
-    /// -          name: `endIntervalWeight`(ctype: `hkReal`)
-    /// -        offset:  32(x86)/ 48(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `endIntervalWeight`(ctype: `hkReal`)
+    /// - offset: ` 32`(x86)/` 48`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_endIntervalWeight: f32,
     /// # C++ Info
-    /// -          name: `numActiveChildren`(ctype: `hkInt32`)
-    /// -        offset:  36(x86)/ 52(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `numActiveChildren`(ctype: `hkInt32`)
+    /// - offset: ` 36`(x86)/` 52`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_numActiveChildren: i32,
     /// # C++ Info
-    /// -          name: `beginIntervalIndex`(ctype: `hkInt16`)
-    /// -        offset:  40(x86)/ 56(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `beginIntervalIndex`(ctype: `hkInt16`)
+    /// - offset: ` 40`(x86)/` 56`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_beginIntervalIndex: i16,
     /// # C++ Info
-    /// -          name: `endIntervalIndex`(ctype: `hkInt16`)
-    /// -        offset:  42(x86)/ 58(x86_64)
-    /// -     type_size:   2(x86)/  2(x86_64)
-    ///
+    /// - name: `endIntervalIndex`(ctype: `hkInt16`)
+    /// - offset: ` 42`(x86)/` 58`(x86_64)
+    /// - type_size: `  2`(x86)/`  2`(x86_64)
     pub m_endIntervalIndex: i16,
     /// # C++ Info
-    /// -          name: `initSync`(ctype: `hkBool`)
-    /// -        offset:  44(x86)/ 60(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `initSync`(ctype: `hkBool`)
+    /// - offset: ` 44`(x86)/` 60`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_initSync: bool,
     /// # C++ Info
-    /// -          name: `doSubtractiveBlend`(ctype: `hkBool`)
-    /// -        offset:  45(x86)/ 61(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `doSubtractiveBlend`(ctype: `hkBool`)
+    /// - offset: ` 45`(x86)/` 61`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_doSubtractiveBlend: bool,
 }
 const _: () = {

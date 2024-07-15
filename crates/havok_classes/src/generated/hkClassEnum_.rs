@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkClassEnum`
-/// -         version: `0`
-/// -       signature: `0x8a3609cf`
-/// -          size:  20(x86)/ 40(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkClassEnum`
+/// - version: `0`
+/// - signature: `0x8a3609cf`
+/// - size: ` 20`(x86)/` 40`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,29 +19,25 @@ pub struct hkClassEnum<'a> {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `name`(ctype: `char*`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `name`(ctype: `char*`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_name: CString<'a>,
     /// # C++ Info
-    /// -          name: `items`(ctype: `hkSimpleArray<struct hkClassEnumItem>`)
-    /// -        offset:   4(x86)/  8(x86_64)
-    /// -     type_size:   8(x86)/ 12(x86_64)
-    ///
+    /// - name: `items`(ctype: `hkSimpleArray<struct hkClassEnumItem>`)
+    /// - offset: `  4`(x86)/`  8`(x86_64)
+    /// - type_size: `  8`(x86)/` 12`(x86_64)
     pub m_items: Vec<hkClassEnumItem<'a>>,
     /// # C++ Info
-    /// -          name: `attributes`(ctype: `struct hkCustomAttributes*`)
-    /// -        offset:  12(x86)/ 24(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    /// -         flags: `SERIALIZE_IGNORED`
-    ///
+    /// - name: `attributes`(ctype: `struct hkCustomAttributes*`)
+    /// - offset: ` 12`(x86)/` 24`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
+    /// - flags: `SERIALIZE_IGNORED`
     pub m_attributes: Pointer,
     /// # C++ Info
-    /// -          name: `flags`(ctype: `flags FlagValues`)
-    /// -        offset:  16(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `flags`(ctype: `flags FlagValues`)
+    /// - offset: ` 16`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_flags: FlagValues,
 }
 const _: () = {

@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbStateMachineDelayedTransitionInfo`
-/// -         version: `1`
-/// -       signature: `0x26d5499`
-/// -          size:  24(x86)/ 24(x86_64)
-/// -          vtable: false
-///
+/// - name: `hkbStateMachineDelayedTransitionInfo`
+/// - version: `1`
+/// - signature: `0x26d5499`
+/// - size: ` 24`(x86)/` 24`(x86_64)
+/// -  vtable: `false`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -20,28 +19,24 @@ pub struct hkbStateMachineDelayedTransitionInfo {
     /// Not present in the binary & Not exist actual C++ field.
     pub __ptr: Option<Pointer>,
     /// # C++ Info
-    /// -          name: `delayedTransition`(ctype: `struct hkbStateMachineProspectiveTransitionInfo`)
-    /// -        offset:   0(x86)/  0(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `delayedTransition`(ctype: `struct hkbStateMachineProspectiveTransitionInfo`)
+    /// - offset: `  0`(x86)/`  0`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_delayedTransition: hkbStateMachineProspectiveTransitionInfo,
     /// # C++ Info
-    /// -          name: `timeDelayed`(ctype: `hkReal`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:   4(x86)/  4(x86_64)
-    ///
+    /// - name: `timeDelayed`(ctype: `hkReal`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: `  4`(x86)/`  4`(x86_64)
     pub m_timeDelayed: f32,
     /// # C++ Info
-    /// -          name: `isDelayedTransitionReturnToPreviousState`(ctype: `hkBool`)
-    /// -        offset:  20(x86)/ 20(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `isDelayedTransitionReturnToPreviousState`(ctype: `hkBool`)
+    /// - offset: ` 20`(x86)/` 20`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_isDelayedTransitionReturnToPreviousState: bool,
     /// # C++ Info
-    /// -          name: `wasInAbutRangeLastFrame`(ctype: `hkBool`)
-    /// -        offset:  21(x86)/ 21(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `wasInAbutRangeLastFrame`(ctype: `hkBool`)
+    /// - offset: ` 21`(x86)/` 21`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_wasInAbutRangeLastFrame: bool,
 }
 const _: () = {
