@@ -336,28 +336,6 @@ impl<'a> fmt::Display for Unexpected<'a> {
 /// Within the context of a `Visitor` implementation, the `Visitor` itself
 /// (`&self`) is an implementation of this trait.
 ///
-/// ```edition2021
-/// # use havok_serde::de::{self, Unexpected, Visitor};
-/// # use std::fmt;
-/// #
-/// # struct Example;
-/// #
-/// # impl<'de> Visitor<'de> for Example {
-/// #     type Value = ();
-/// #
-/// #     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
-/// #         write!(formatter, "definitely not a boolean")
-/// #     }
-/// #
-/// fn visit_bool<E><V>(self, visitor: V) -> Result<Self::Value, E>
-/// where
-///     E: de::Error,
-/// {
-///     Err(de::Error::invalid_type(Unexpected::Bool(v), &self))
-/// }
-/// # }
-/// ```
-///
 /// Outside of a `Visitor`, `&"..."` can be used.
 ///
 /// ```edition2021
