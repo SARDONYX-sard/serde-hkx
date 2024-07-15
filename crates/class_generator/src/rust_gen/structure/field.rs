@@ -55,8 +55,6 @@ pub(super) fn gen_field(member: &Member, class_name: &str) -> TokenStream {
     }
 }
 
-#[allow(unused)]
-#[rustfmt::skip]
 fn field_doc_tokens(member: &Member) -> TokenStream {
     let Member {
         name,
@@ -69,13 +67,14 @@ fn field_doc_tokens(member: &Member) -> TokenStream {
         ..
     } = member;
 
-    let name =             format!(" -          name: `{name}`(ctype: `{ctype}`)");
-    let offsets =          format!(" -        offset: {offset_x86:3}(x86)/{offset_x86_64:3}(x86_64)");
-    let type_sizes =       format!(" -     type_size: {type_size_x86:3}(x86)/{type_size_x86_64:3}(x86_64)");
+    let name = format!(" - name: `{name}`(ctype: `{ctype}`)");
+    let offsets = format!(" - offset: `{offset_x86:3}`(x86)/`{offset_x86_64:3}`(x86_64)");
+    let type_sizes =
+        format!(" - type_size: `{type_size_x86:3}`(x86)/`{type_size_x86_64:3}`(x86_64)");
     let flags_doc = match flags.bits() {
         0 => quote! {},
         _ => {
-            let doc =      format!(" -         flags: `{flags}`");
+            let doc = format!(" - flags: `{flags}`");
             quote! { #[doc = #doc]}
         }
     };
@@ -86,6 +85,5 @@ fn field_doc_tokens(member: &Member) -> TokenStream {
         #[doc = #offsets]
         #[doc = #type_sizes]
         #flags_doc
-        #[doc = ""]
     }
 }

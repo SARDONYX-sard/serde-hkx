@@ -60,7 +60,6 @@ pub fn generate(class: &Class) -> syn::ItemStruct {
     }
 }
 
-#[rustfmt::skip]
 fn struct_doc_attrs(class: &Class) -> TokenStream {
     let Class {
         name,
@@ -70,14 +69,13 @@ fn struct_doc_attrs(class: &Class) -> TokenStream {
         size_x86_64,
         vtable,
         ..
-
     } = class;
 
-    let name =             format!(" -            name: `{name}`");
-    let version =          format!(" -         version: `{version}`");
-    let signature =        format!(" -       signature: `{signature}`");
-    let class_sizes =       format!(" -          size: {size_x86:3}(x86)/{size_x86_64:3}(x86_64)");
-    let vtable =           format!(" -          vtable: {vtable}");
+    let name = format!(" - name: `{name}`");
+    let version = format!(" - version: `{version}`");
+    let signature = format!(" - signature: `{signature}`");
+    let class_sizes = format!(" - size: `{size_x86:3}`(x86)/`{size_x86_64:3}`(x86_64)");
+    let vtable = format!(" -  vtable: `{vtable}`");
 
     quote! {
         /// # C++ Info
@@ -86,6 +84,5 @@ fn struct_doc_attrs(class: &Class) -> TokenStream {
         #[doc = #signature]
         #[doc = #class_sizes]
         #[doc = #vtable]
-        #[doc = ""]
     }
 }
