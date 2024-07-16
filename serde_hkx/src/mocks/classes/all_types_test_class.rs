@@ -74,7 +74,7 @@ impl Serialize for AllTypesTestClass {
 
         serializer.serialize_stringptr_field("string_ptr", &"StringPtr".into())?;
 
-        serializer.serialize_field("enum", &EventMode::EventModeDefault)?;
+        serializer.serialize_field("enum", &EventMode::EVENT_MODE_DEFAULT)?;
         serializer.serialize_field("flags_none_is_0", &FlagValues::FLAGS_NONE)?;
         serializer.serialize_field(
             "no_display_0_flag_if_has_the_others",

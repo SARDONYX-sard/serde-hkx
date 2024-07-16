@@ -670,8 +670,8 @@ mod tests {
 
     #[test]
     fn test_deserialize_class() {
-        use havok_classes::hkRootLevelContainer;
-        // use crate::mocks::Classes;
+        use havok_classes::{hkRootLevelContainer, hkRootLevelContainerNamedVariant};
+        // use crate::mocks::{hkRootLevelContainer, hkRootLevelContainerNamedVariant};
 
         let xml = r###"
 		<hkobject name="#0008" class="hkRootLevelContainer" signature="0x2772c11e">
@@ -689,7 +689,19 @@ mod tests {
             Ok(res) => res,
             Err(err) => panic!("{err}"),
         };
-        dbg!(res);
+
+        assert_eq!(
+            res,
+            hkRootLevelContainer {
+                __ptr: Some(8.into()),
+                m_namedVariants: vec![hkRootLevelContainerNamedVariant {
+                    __ptr: None,
+                    m_name: "hkbProjectData".into(),
+                    m_className: "hkbProjectData".into(),
+                    m_variant: Pointer::new(10),
+                }],
+            }
+        );
     }
 
     #[test]
@@ -698,15 +710,18 @@ mod tests {
         quick_tracing::init(test = "deserialize_classes_from_xml")
     )]
     fn should_deserialize_classes_from_xml() {
+        use crate::mocks::constructors::external_defaultmale::new_defaultmale;
         use havok_classes::Classes;
+        //
+        // use crate::mocks::constructors::defaultmale::new_defaultmale;
         // use crate::mocks::Classes;
 
-        fn from_file<'a, T>(xml: &'a str) -> Result<T>
+        fn from_file<'a, T>(xml: &'a str) -> T
         where
             T: Deserialize<'a>,
         {
             match from_str_file::<T>(xml) {
-                Ok(res) => Ok(res),
+                Ok(res) => res,
                 Err(err) => {
                     tracing::error!("{err}");
                     panic!("{err}")
@@ -716,10 +731,10 @@ mod tests {
 
         let xml =
             &include_str!("../../../../docs/handson_hex_dump/defaultmale/defaultmale_x86.xml");
-        tracing::debug!("{:#?}", from_file::<Vec<Classes>>(xml).unwrap());
-        tracing::debug!(
-            "{:#?}",
-            from_file::<indexmap::IndexMap<usize, Classes>>(xml).unwrap()
-        );
+        tracing::debug!("{:#?}", from_file::<Vec<Classes>>(xml));
+
+        let actual = from_file::<indexmap::IndexMap<usize, Classes>>(xml);
+        let expected = new_defaultmale();
+        assert_eq!(actual, expected)
     }
 }

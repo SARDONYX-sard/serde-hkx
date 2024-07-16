@@ -15,10 +15,10 @@ use super::class_requires::*;
 #[allow(clippy::enum_variant_names)]
 pub enum EventMode {
     #[default]
-    EventModeDefault = 0,
-    EventModeProcessAll = 1,
-    EventModeIgnoreFromGenerator = 2,
-    EventModeIgnoreToGenerator = 3,
+    EVENT_MODE_DEFAULT = 0,
+    EVENT_MODE_PROCESS_ALL = 1,
+    EVENT_MODE_IGNORE_FROM_GENERATOR = 2,
+    EVENT_MODE_IGNORE_TO_GENERATOR = 3,
 }
 
 impl Serialize for EventMode {
@@ -27,12 +27,12 @@ impl Serialize for EventMode {
 
         // For XML
         match self {
-            EventMode::EventModeDefault => sv.serialize_field("EVENT_MODE_DEFAULT", &0),
-            EventMode::EventModeProcessAll => sv.serialize_field("EVENT_MODE_PROCESS_ALL", &1),
-            EventMode::EventModeIgnoreFromGenerator => {
+            EventMode::EVENT_MODE_DEFAULT => sv.serialize_field("EVENT_MODE_DEFAULT", &0),
+            EventMode::EVENT_MODE_PROCESS_ALL => sv.serialize_field("EVENT_MODE_PROCESS_ALL", &1),
+            EventMode::EVENT_MODE_IGNORE_FROM_GENERATOR => {
                 sv.serialize_field("EVENT_MODE_IGNORE_FROM_GENERATOR", &2)
             }
-            EventMode::EventModeIgnoreToGenerator => {
+            EventMode::EVENT_MODE_IGNORE_TO_GENERATOR => {
                 sv.serialize_field("EVENT_MODE_IGNORE_TO_GENERATOR", &3)
             }
         }?;
@@ -165,19 +165,19 @@ const _: () = {
                     match _serde::de::EnumAccess::variant(__data)? {
                         (__Field::__field0, __variant) => {
                             _serde::de::VariantAccess::unit_variant(__variant)?;
-                            _serde::__private::Ok(EventMode::EventModeDefault)
+                            _serde::__private::Ok(EventMode::EVENT_MODE_DEFAULT)
                         }
                         (__Field::__field1, __variant) => {
                             _serde::de::VariantAccess::unit_variant(__variant)?;
-                            _serde::__private::Ok(EventMode::EventModeProcessAll)
+                            _serde::__private::Ok(EventMode::EVENT_MODE_PROCESS_ALL)
                         }
                         (__Field::__field2, __variant) => {
                             _serde::de::VariantAccess::unit_variant(__variant)?;
-                            _serde::__private::Ok(EventMode::EventModeIgnoreFromGenerator)
+                            _serde::__private::Ok(EventMode::EVENT_MODE_IGNORE_FROM_GENERATOR)
                         }
                         (__Field::__field3, __variant) => {
                             _serde::de::VariantAccess::unit_variant(__variant)?;
-                            _serde::__private::Ok(EventMode::EventModeIgnoreToGenerator)
+                            _serde::__private::Ok(EventMode::EVENT_MODE_IGNORE_TO_GENERATOR)
                         }
                     }
                 }

@@ -530,7 +530,7 @@ impl<'a> SerializeFlags for &'a mut XmlSerializer {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::mocks::{classes::*, constructors::new_defaultmale};
+    use crate::mocks::classes::*;
 
     #[test]
     #[cfg_attr(feature = "tracing", quick_tracing::try_init)]
@@ -547,6 +547,9 @@ mod tests {
 
     #[test]
     fn test_serialize_defaultmale() -> Result<()> {
+        use crate::mocks::constructors::external_defaultmale::new_defaultmale;
+        // use crate::mocks::constructors::defaultmale::new_defaultmale;
+
         let mut classes = new_defaultmale();
 
         // hkRootContainer" is processed last.

@@ -1,3 +1,2 @@
-mod defaultmale;
-
-pub use defaultmale::new_defaultmale;
+pub mod defaultmale;
+pub mod external_defaultmale;

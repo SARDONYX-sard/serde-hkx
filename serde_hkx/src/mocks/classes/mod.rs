@@ -31,13 +31,13 @@ pub enum Classes<'a> {
     ///
     /// To speed up the process, swap the first and last indexes instead of using shift.
     /// This dummy class exists to reserve space for this purpose.
-    PhantomData,
+    SwapDummy,
 
     AllTypesTestClass(AllTypesTestClass),
     hkBaseObject(hkBaseObject),
     hkReferencedObject(hkReferencedObject),
     hkRootLevelContainer(hkRootLevelContainer<'a>),
-    HkRootLevelContainerNamedVariant(hkRootLevelContainerNamedVariant<'a>),
+    hkRootLevelContainerNamedVariant(hkRootLevelContainerNamedVariant<'a>),
     hkbProjectData(hkbProjectData),
     hkbProjectStringData(hkbProjectStringData<'a>),
 }
@@ -45,7 +45,7 @@ pub enum Classes<'a> {
 impl HavokClass for Classes<'_> {
     fn name(&self) -> &'static str {
         match &self {
-            Classes::PhantomData => panic!("The dummy class is used only for sorting, so being called name is not a good use of the API."),
+            Classes::SwapDummy => panic!("The dummy class is used only for sorting, so being called name is not a good use of the API."),
 
             Classes::AllTypesTestClass(class) => class.name(),
             Classes::hkBaseObject(class) => class.name(),
@@ -53,13 +53,13 @@ impl HavokClass for Classes<'_> {
             Classes::hkbProjectStringData(class) => class.name(),
             Classes::hkReferencedObject(class) => class.name(),
             Classes::hkRootLevelContainer(class) => class.name(),
-            Classes::HkRootLevelContainerNamedVariant(class) => class.name(),
+            Classes::hkRootLevelContainerNamedVariant(class) => class.name(),
         }
     }
 
     fn signature(&self) -> Signature {
         match &self {
-            Classes::PhantomData => panic!("The dummy class is used only for sorting, so being called signature is not a good use of the API."),
+            Classes::SwapDummy => panic!("The dummy class is used only for sorting, so being called signature is not a good use of the API."),
 
             Classes::AllTypesTestClass(class) => class.signature(),
             Classes::hkBaseObject(class) => class.signature(),
@@ -67,7 +67,7 @@ impl HavokClass for Classes<'_> {
             Classes::hkbProjectStringData(class) => class.signature(),
             Classes::hkReferencedObject(class) => class.signature(),
             Classes::hkRootLevelContainer(class) => class.signature(),
-            Classes::HkRootLevelContainerNamedVariant(class) => class.signature(),
+            Classes::hkRootLevelContainerNamedVariant(class) => class.signature(),
         }
     }
 }
@@ -75,7 +75,7 @@ impl HavokClass for Classes<'_> {
 impl<'a> Serialize for Classes<'a> {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
-            Classes::PhantomData => panic!("The dummy class is used only for sorting, so being called serialize is not a good use of the API."),
+            Classes::SwapDummy => panic!("The dummy class is used only for sorting, so being called serialize is not a good use of the API."),
 
             Classes::AllTypesTestClass(class) => class.serialize(serializer),
             Classes::hkBaseObject(class) => class.serialize(serializer),
@@ -83,7 +83,7 @@ impl<'a> Serialize for Classes<'a> {
             Classes::hkbProjectStringData(class) => class.serialize(serializer),
             Classes::hkReferencedObject(class) => class.serialize(serializer),
             Classes::hkRootLevelContainer(class) => class.serialize(serializer),
-            Classes::HkRootLevelContainerNamedVariant(class) => class.serialize(serializer),
+            Classes::hkRootLevelContainerNamedVariant(class) => class.serialize(serializer),
         }
     }
 }
@@ -117,7 +117,7 @@ impl<'a, 'de: 'a> Deserialize<'de> for Classes<'a> {
                     "hkReferencedObject" => Ok(Classes::hkReferencedObject(map.next_value()?)),
                     "hkRootLevelContainer" => Ok(Classes::hkRootLevelContainer(map.next_value()?)),
                     "hkRootLevelContainerNamedVariant" => {
-                        Ok(Classes::HkRootLevelContainerNamedVariant(map.next_value()?))
+                        Ok(Classes::hkRootLevelContainerNamedVariant(map.next_value()?))
                     }
                     _ => Err(de::Error::unknown_field(
                         class_name,

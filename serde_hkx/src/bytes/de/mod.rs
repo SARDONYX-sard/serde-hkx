@@ -843,7 +843,7 @@ mod tests {
     #[test]
     fn test_deserialize_primitive() {
         parse_assert(&[128, 0], FlagValues::ALIGN_8);
-        parse_assert(&[0], EventMode::EventModeDefault);
+        parse_assert(&[0], EventMode::EVENT_MODE_DEFAULT);
     }
 
     #[test]

@@ -1,6 +1,6 @@
 //! Deserializing each element in an `Array`
 use super::parser::{
-    comment_multispace0, comment_multispace1,
+    comment_multispace0,
     tag::{end_tag, start_tag},
 };
 use super::XmlDeserializer;
@@ -10,8 +10,6 @@ use crate::tri;
 
 use havok_serde::de::{DeserializeSeed, SeqAccess};
 use winnow::combinator::alt;
-use winnow::error::{StrContext, StrContextValue};
-use winnow::Parser;
 
 /// A structure for deserializing each element in an `Array`.
 ///
@@ -56,29 +54,16 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
     where
         T: DeserializeSeed<'de>,
     {
-        // Check if there are no more elements.
-        if self.de.parse_peek(end_tag("hkparam")).is_ok() {
-            return Ok(None);
-        };
-
         // Space is required before every element except the first.
-        if !self.first {
-            tri!(self.de.parse(
-                comment_multispace1()
-                    .context(StrContext::Expected(StrContextValue::CharLiteral(' ')))
-            ));
+        tri!(self.de.parse(comment_multispace0()));
+
+        // Check if there are no more elements.
+        if self.de.input.is_empty() || self.de.parse_peek(end_tag("hkparam")).is_ok() {
+            return Ok(None);
         };
         self.first = false;
 
-        // NOTE:
-        // If there is no value after leaving whitespace and it is the end, it is necessary
-        // to check here to avoid an infinite loop.
-        if self.de.input.is_empty() {
-            return Ok(None);
-        };
-
-        let value = seed.deserialize(&mut *self.de).map(Some)?; // Deserialize an array element.
-        Ok(value)
+        seed.deserialize(&mut *self.de).map(Some) // Deserialize an array element.
     }
 
     fn next_class_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
@@ -100,20 +85,19 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
         seed.deserialize(&mut *self.de).map(Some) // Deserialize an array element.
     }
 
+    /// - `hkArray<Vector4>`
+    /// ```xml
+    /// <hkparam name="key" numelements="2">
+    ///     (0.000000 0.000000 0.000000 0.000000)
+    ///     (0.000000 0.000000 0.000000 0.000000)
+    /// </hkparam>
+    /// ```
+    #[inline]
     fn next_math_element_seed<T>(&mut self, seed: T) -> Result<Option<T::Value>, Self::Error>
     where
         T: DeserializeSeed<'de>,
     {
-        // Check if there are no more elements.
-        // NOTE: If there is no empty confirmation in this location, the test or partial parsing will result in an infinite loop.
-        if self.de.input.is_empty() || self.de.parse_peek(end_tag("hkparam")).is_ok() {
-            return Ok(None);
-        };
-        self.first = false;
-
-        let value = tri!(seed.deserialize(&mut *self.de).map(Some));
-        tri!(self.de.parse(comment_multispace0()));
-        Ok(value)
+        self.next_primitive_element_seed(seed)
     }
 
     #[inline]

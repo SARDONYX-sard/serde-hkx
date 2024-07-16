@@ -827,10 +827,13 @@ impl<'a> SerializeFlags for &'a mut ByteSerializer {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::{
-        bytes::serde::hkx_header::HkxHeader,
-        mocks::{classes::*, constructors::new_defaultmale},
-    };
+    use crate::bytes::serde::hkx_header::HkxHeader;
+
+    use crate::mocks::constructors::external_defaultmale::new_defaultmale;
+    use havok_classes::Classes;
+    //
+    // use crate::mocks::constructors::defaultmale::new_defaultmale;
+    // use crate::mocks::Classes;
 
     #[test]
     #[cfg_attr(feature = "tracing", quick_tracing::try_init(test = "serialize_bytes"))]
@@ -839,7 +842,7 @@ mod tests {
 
         // For binary writing, the youngest pointer index must be first after sorting in reverse order.
         // Usually a shift operation is required, but a dummy and a swap can speed up the process.
-        classes.insert(usize::MAX, Classes::PhantomData);
+        classes.insert(usize::MAX, Classes::SwapDummy);
         classes.sort_by(|k_1, _v_1, k_2, _v_2| k_2.cmp(k_1)); // Reverse order
         classes.swap_indices(0, classes.len() - 1);
         let _ = classes.pop();
