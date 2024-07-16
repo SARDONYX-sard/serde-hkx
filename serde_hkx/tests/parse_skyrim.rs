@@ -1,3 +1,5 @@
+use std::path::Path;
+
 use havok_classes::Classes;
 use serde_hkx::{from_bytes, to_string};
 
@@ -29,9 +31,16 @@ fn test() -> std::io::Result<()> {
 
                 let file_name = path.file_stem().unwrap().to_string_lossy();
 
-                std::fs::create_dir_all("./tests/output/xml/").unwrap();
+                let out_root = path
+                    .parent()
+                    .unwrap()
+                    .to_string_lossy()
+                    .replace("./tests/data", "./tests/output/xml");
+                let out_path = format!("{out_root}/{file_name}.xml");
+                let out_path = Path::new(&out_path);
+                std::fs::create_dir_all(out_path.parent().unwrap()).unwrap();
                 std::fs::write(
-                    &format!("./tests/output/xml/{file_name}.xml"),
+                    out_path,
                     &to_string(&classes, top_ptr.unwrap_or_default()).unwrap(),
                 )
                 .unwrap();

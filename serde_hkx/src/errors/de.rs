@@ -11,12 +11,6 @@ pub enum Error {
         msg: String,
     },
 
-    /// Unique index of class for this `global_fix.dst`{virtual_src} is missing.
-    #[snafu(display(
-        "Unique index of class for this `global_fix.dst`(virtual_src): {global_dst} is missing."
-    ))]
-    NotFoundClassIndex { global_dst: u32 },
-
     #[snafu(display("The number of required constructors in C++ is insufficient. actual: {actual}, expected: {expected}"))]
     LackOfConstructors { actual: usize, expected: usize },
 

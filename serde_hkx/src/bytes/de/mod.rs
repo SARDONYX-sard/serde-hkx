@@ -328,9 +328,12 @@ impl<'de> BytesDeserializer<'de> {
                     self.current_position += if self.is_x86 { 4 } else { 8 };
                     Ok(Pointer::new(class_index + 1))
                 } else {
-                    Err(Error::NotFoundClassIndex {
-                        global_dst: *global_dst,
-                    })
+                    #[cfg(feature = "tracing")]
+                    tracing::debug!(
+                    "Missing unique index of class for `global_fixup.dst(virtual_src)`({global_dst}) -> Not found `virtual_fixup.name_offset`. `NullPtr` is entered instead."
+                );
+                    self.current_position += if self.is_x86 { 4 } else { 8 };
+                    Ok(Pointer::new(0))
                 }
             }
             None => {
