@@ -833,6 +833,7 @@ dependencies = [
  "havok_types",
  "havok_types_derive",
  "indexmap 2.2.6",
+ "jwalk",
  "num-derive",
  "num-traits",
  "pretty_assertions",

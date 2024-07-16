@@ -2,7 +2,6 @@
 use crate::bytes::serde::section_header::SectionHeader;
 use crate::tri;
 use indexmap::IndexMap;
-use std::collections::HashMap;
 use winnow::{
     binary::{self, Endianness},
     error::{ContextError, StrContext, StrContextValue::*},
@@ -10,7 +9,7 @@ use winnow::{
     Parser,
 };
 
-pub type LocalFixups = HashMap<u32, u32>;
+pub type LocalFixups = IndexMap<u32, u32>;
 pub type GLobalFixups = IndexMap<u32, (u32, u32)>;
 /// NOTE: The order in which C++ constructors are called is fixed. Therefore, we need a Map that holds the Index.
 pub type VirtualFixups = IndexMap<u32, (u32, u32)>;
@@ -61,7 +60,7 @@ pub const GLOBAL_FIXUP_ONE_SIZE: u32 = 12;
 pub const VIRTUAL_FIXUP_ONE_SIZE: u32 = 12;
 
 /// After writing fixup, since it is 0xff up to align16, read fixup relying on this.
-pub const FIXUP_VALUE_FOR_ALIGN: u32 = 0xFFFFFFFF;
+pub const FIXUP_VALUE_FOR_ALIGN: u32 = u32::MAX;
 
 impl Fixups {
     pub const fn new(
@@ -91,20 +90,23 @@ impl Fixups {
         let local_range = global_fixups_offset - local_fixups_offset;
         let global_range = virtual_fixups_offset - global_fixups_offset;
         let virtual_range = exports_offset - virtual_fixups_offset;
-        let needs_len = local_range + global_range + virtual_range;
+        let needs_bytes_len = local_range + global_range + virtual_range;
+
+        #[cfg(feature = "tracing")]
+        tracing::trace!(local_range, global_range, virtual_range);
 
         move |bytes: &mut &'a [u8]| {
-            if needs_len as usize > bytes.len() {
-                panic!("need {needs_len}. but got {}", bytes.len());
+            if needs_bytes_len as usize > bytes.len() {
+                panic!("need {needs_bytes_len}. but got {}", bytes.len());
             };
 
-            #[cfg(feature = "tracing")]
-            tracing::trace!(local_range, global_range, virtual_range);
-
+            let local_max_len = local_range / LOCAL_FIXUP_ONE_SIZE;
+            let global_max_len = global_range / GLOBAL_FIXUP_ONE_SIZE;
+            let virtual_max_len = local_range / VIRTUAL_FIXUP_ONE_SIZE;
             Ok(Self {
-                local_fixups: tri!(read_local_fixups(bytes, endian, local_range)),
-                global_fixups: tri!(read_fixups(bytes, endian, global_range)),
-                virtual_fixups: tri!(read_fixups(bytes, endian, virtual_range)),
+                local_fixups: tri!(read_local_fixups(bytes, endian, local_max_len)),
+                global_fixups: tri!(read_fixups(bytes, endian, global_max_len)),
+                virtual_fixups: tri!(read_fixups(bytes, endian, virtual_max_len)),
             })
         }
     }
@@ -119,21 +121,19 @@ fn read_local_fixups(
     endian: Endianness,
     len: u32,
 ) -> winnow::PResult<LocalFixups> {
-    let mut local_map = HashMap::new();
+    let mut local_map = LocalFixups::new();
     for _ in 0..len {
         if let Ok(local_src) = binary::u32::<&[u8], ContextError>(endian)
             .verify(|src| *src != FIXUP_VALUE_FOR_ALIGN)
             .context(StrContext::Expected(Description("local_fixup.src(u32)")))
             .parse_next(bytes)
         {
-            #[cfg(feature = "tracing")]
-            tracing::trace!(local_src);
-
             let local_dst = tri!(binary::u32(endian)
                 .context(StrContext::Expected(Description("local_fixup.dst(u32)")))
                 .parse_next(bytes));
+
             #[cfg(feature = "tracing")]
-            tracing::trace!(local_dst);
+            tracing::trace!(local_src, local_dst);
 
             local_map.insert(local_src, local_dst);
         } else {
@@ -150,7 +150,7 @@ fn read_local_fixups(
 /// # Note
 /// And take align mark(0xff) bytes.
 fn read_fixups(bytes: &mut &[u8], endian: Endianness, len: u32) -> winnow::PResult<VirtualFixups> {
-    let mut fixups = IndexMap::new();
+    let mut fixups = VirtualFixups::new();
     for _ in 0..len {
         if let Ok(src) = binary::u32::<&[u8], ContextError>(endian)
             .verify(|src| *src != FIXUP_VALUE_FOR_ALIGN)
@@ -206,10 +206,31 @@ mod tests {
         ];
 
         let mut bytes = FIXUPS;
+
         let local = read_local_fixups(&mut bytes, Endianness::Little, 5 * 16).unwrap();
         let global = read_fixups(&mut bytes, Endianness::Little, 2 * 16).unwrap();
         let virtual_fixups = read_fixups(&mut bytes, Endianness::Little, 3 * 16).unwrap();
 
-        dbg!(local, global, virtual_fixups);
+        assert_eq!(
+            local,
+            [
+                (216, 320),
+                (232, 352),
+                (0, 16),
+                (24, 64),
+                (256, 264),
+                (208, 304),
+                (176, 256),
+                (16, 40),
+                (224, 336)
+            ]
+            .into()
+        );
+
+        assert_eq!(global, [(32, (2, 80)), (112, (2, 128))].into());
+        assert_eq!(
+            virtual_fixups,
+            [(0, (0, 75,)), (80, (0, 101,)), (128, (0, 121))].into()
+        );
     }
 }

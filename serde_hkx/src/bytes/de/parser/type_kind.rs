@@ -190,8 +190,10 @@ pub fn array_meta<'a>(
             .context(StrContext::Expected(
                 StrContextValue::Description("size(i32)")
             )),
-            binary::i32(endian).context(
-                StrContext::Expected(StrContextValue::Description("capacity&flags(i32)"))
+            binary::i32(endian)
+            .verify(|cap| (cap & (1 << 31)) != 0) // bit 32th flag is enabled
+            .context(
+                StrContext::Expected(StrContextValue::Description("capacity&flags(i32 | 1 << 31)"))
             )
         }
         .parse_next(bytes)

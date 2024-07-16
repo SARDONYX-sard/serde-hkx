@@ -2,19 +2,22 @@ mod enum_fields;
 mod visit_struct;
 mod visit_struct_for_bytes;
 
-use crate::cpp_info::{Class, TypeKind};
+use crate::{
+    cpp_info::{Class, TypeKind},
+    ClassMap,
+};
 use enum_fields::gen_enum_fields;
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
 
-pub fn impl_deserialize(class: &Class) -> TokenStream {
+pub fn impl_deserialize(class: &Class, class_map: &ClassMap) -> TokenStream {
     let members = &class.members;
     let enum_fields = gen_enum_fields(members);
 
     let class_name_str = &class.name;
 
     let visitor_ident = to_visitor_ident(class_name_str);
-    let visitor_for_bytes = visit_struct_for_bytes::gen(class);
+    let visitor_for_bytes = visit_struct_for_bytes::gen(class, class_map);
     let visitor_for_xml = visit_struct::gen(class);
 
     let expected_msg = format!("struct {class_name_str}");

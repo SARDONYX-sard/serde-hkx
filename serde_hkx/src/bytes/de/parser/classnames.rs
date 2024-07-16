@@ -14,7 +14,7 @@ use crate::{bytes::de::parser::type_kind::string, tri};
 /// - value: class name
 pub type ClassNames<'a> = HashMap<u32, &'a str>;
 
-const FIXUP_VALUE_FOR_ALIGN: u32 = 0xffffff;
+const FIXUP_VALUE_FOR_ALIGN: u32 = u32::MAX;
 
 /// Create `local_fixups` from bytes.
 ///
@@ -36,6 +36,9 @@ pub fn classnames_section<'a>(
             .context(StrContext::Expected(Description("local_fixup.src(u32)")))
             .parse_next(bytes)
         {
+            #[cfg(feature = "tracing")]
+            tracing::trace!("signature: {_signature:#x}");
+
             let (class_name,) =tri!(seq! {
                 _: binary::u8::<&[u8], ContextError>
                     .verify(|byte| *byte == 0x9)
@@ -47,9 +50,7 @@ pub fn classnames_section<'a>(
 
             offset += 5; // signature(4bytes) + separator(1byte)
             #[cfg(feature = "tracing")]
-            tracing::trace!(
-                "signature: {_signature:#x}, class_name: {class_name}, offset: {offset}"
-            );
+            tracing::trace!("class_name: {class_name}, offset: {offset}");
             class_map.insert(offset as u32, class_name);
 
             // Safety: as long as ASCII

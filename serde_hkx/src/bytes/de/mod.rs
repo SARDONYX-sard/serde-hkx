@@ -68,12 +68,16 @@ pub struct BytesDeserializer<'de> {
     /// Unique Class index & XML name attribute(e.g. `#0050`).
     ///
     /// Incremented each time deserialize_struct is called.
+    /// # Note
+    /// It exists to enable class_index to be retrieved at any time when seq'd as a key in a HashMap, etc.
     class_index: usize,
 
-    /// Whether to advance the pointer, which is the name attribute for XML
+    /// takeable index for root class (e.g. `#0050`)
     ///
-    /// (It is actually map.rs that advances it, this is to prevent unintentional rewriting of variables in the processing of structs within structs)
-    in_struct: bool,
+    /// # Intent that field exists.
+    /// Provide an [`Option::take`] able index to prevent accidentally giving an index to a class in the structure
+    /// or to the parent class of an inheritance source.
+    takable_class_index: Option<Pointer>,
 }
 
 impl<'de> BytesDeserializer<'de> {
@@ -305,6 +309,7 @@ impl<'de> BytesDeserializer<'de> {
         Ok(())
     }
 
+    /// Get current position(as `global_fixup.src`) -> `global_fixup.dst` -> class index
     fn get_class_index_ptr(&mut self) -> Result<Pointer> {
         let global_fixup_src = self.relative_position();
 
@@ -325,9 +330,14 @@ impl<'de> BytesDeserializer<'de> {
                     })
                 }
             }
-            None => Err(Error::NotFoundDataGlobalFixupsValue {
-                key: global_fixup_src,
-            }),
+            None => {
+                #[cfg(feature = "tracing")]
+                tracing::debug!(
+                    "Not found `global_fixup.src({global_fixup_src})` -> `global_fixup.dst`. `NullPtr` is entered instead."
+                );
+                self.current_position += if self.is_x86 { 4 } else { 8 };
+                Ok(Pointer::new(0))
+            }
         }
     }
 
@@ -340,21 +350,27 @@ impl<'de> BytesDeserializer<'de> {
 
         #[cfg(feature = "tracing")]
         {
-            let local_abs = self.current_position;
-            tracing::debug!("local_src: {local_src}, abs + local_src: {local_abs:#x}");
+            let local_src_abs = self.current_position;
+            tracing::debug!("local_src: {local_src}/abs({local_src_abs:#x})");
         }
 
-        let local_dst = *tri!(self
-            .data_fixups
-            .local_fixups
-            .get(&local_src)
-            .ok_or(Error::NotFoundDataLocalFixupsValue { key: local_src }));
-
-        #[cfg(feature = "tracing")]
-        tracing::debug!(local_dst);
+        #[allow(clippy::unnecessary_lazy_evaluations)]
+        let local_dst = *tri!({
+            self.data_fixups
+                .local_fixups
+                .get(&local_src)
+                .ok_or_else(|| {
+                    #[cfg(feature = "tracing")]
+                    tracing::debug!("Not found `local_fixup.src({local_src})` -> `local_dst`.");
+                    Error::NotFoundDataLocalFixupsValue { key: local_src }
+                })
+        });
 
         // Change to abs
-        Ok((local_dst + self.data_header.absolute_data_start) as usize)
+        let local_dst_abs = (local_dst + self.data_header.absolute_data_start) as usize;
+        #[cfg(feature = "tracing")]
+        tracing::debug!("local_dst: {local_dst}/abs({local_dst_abs:#x})");
+        Ok(local_dst_abs)
     }
 
     /// Jump current position(`local_fixup.src`) to dst, then parse, and back to current position.
@@ -687,11 +703,18 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
+        #[cfg(feature = "tracing")]
+        tracing::debug!(
+            "current_position: relative({:#x})/abs({:#x})",
+            self.relative_position(),
+            self.current_position
+        );
+
         // If size is 0, local_fixups does not exist, so check size first.
         // NOTE: This is a look-ahead, assuming the position does not move with this method.
         let (size, _cap_and_flags) = tri!(self.parse_peek(array_meta(self.is_x86, self.endian)));
         #[cfg(feature = "tracing")]
-        tracing::debug!("in_struct array_size: {size}");
+        tracing::debug!("in_struct array_size: {size}",);
 
         if size == 0 {
             self.current_position += if self.is_x86 { 12 } else { 16 };
@@ -755,16 +778,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let ptr_name = if self.in_struct {
-            None
-        } else {
-            self.in_struct = true;
-            Some(Pointer::new(self.class_index))
-        };
-        let value =
-            tri!(visitor.visit_struct_for_bytes(MapDeserializer::new(self, ptr_name, fields)));
-        self.in_struct = false;
-        Ok(value)
+        visitor.visit_struct_for_bytes(MapDeserializer::new(self, fields))
     }
 
     /// TODO: binary representation of Variant is unknown.
@@ -784,7 +798,11 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     {
         let s = match tri!(self.parse_local_fixup(string())) {
             Some(s) => CString::from_str(s),
-            None => CString::from_option(None),
+            None => {
+                #[cfg(feature = "tracing")]
+                tracing::debug!("CString is NullPtr");
+                CString::from_option(None)
+            }
         };
         tri!(self.skip_ptr_size());
         visitor.visit_cstring(s)
@@ -835,7 +853,11 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
     {
         let s = match tri!(self.parse_local_fixup(string())) {
             Some(s) => StringPtr::from_str(s),
-            None => StringPtr::from_option(None),
+            None => {
+                #[cfg(feature = "tracing")]
+                tracing::debug!("StringPtr is NullPtr");
+                StringPtr::from_option(None)
+            }
         };
         tri!(self.skip_ptr_size());
         visitor.visit_stringptr(s)

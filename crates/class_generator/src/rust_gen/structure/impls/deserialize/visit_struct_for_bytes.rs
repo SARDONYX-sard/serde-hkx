@@ -3,12 +3,13 @@ use crate::{
     rust_gen::structure::{
         impls::deserialize::member_to_de_rust_type, to_rust_token::to_rust_field_ident,
     },
+    ClassMap,
 };
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
 
 /// Generate `visit_struct_for_bytes` (For binary)
-pub fn gen(class: &Class) -> TokenStream {
+pub fn gen(class: &Class, class_map: &ClassMap) -> TokenStream {
     let mut first_recv_fields = Vec::new(); // after call `next_value`
     let mut visit_fields_matcher = Vec::new(); // 　The process of removing the Option and inserting the value into the field at the end.
     let mut last_recv_fields = Vec::new();
@@ -16,11 +17,29 @@ pub fn gen(class: &Class) -> TokenStream {
 
     let mut x86_current_offset = match class.members.first() {
         Some(member) => member.offset_x86,
-        None => 0,
+        None => {
+            if let Some(parent_name) = &class.parent {
+                let parent_class = class_map
+                    .get(parent_name)
+                    .unwrap_or_else(|| panic!("Need parent({parent_name}), but it's not found"));
+                parent_class.size_x86
+            } else {
+                0
+            }
+        } // If no member in itself -> size of parent == size of itself.
     };
     let mut x64_current_offset = match class.members.first() {
         Some(member) => member.offset_x86_64,
-        None => 0,
+        None => {
+            if let Some(parent_name) = &class.parent {
+                let parent_class = class_map
+                    .get(parent_name)
+                    .unwrap_or_else(|| panic!("Need parent({parent_name}), but it's not found"));
+                parent_class.size_x86_64
+            } else {
+                0
+            }
+        }
     };
 
     for (index, member) in class.members.iter().enumerate() {

@@ -7,3 +7,5 @@
 **/target
 
 **/logs/
+
+**/serde_hkx/tests/data/

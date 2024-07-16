@@ -24,10 +24,6 @@ pub enum Error {
     #[snafu(display("The data position pointed to by the pointer of the read position ({key}) is not found in local_fixups."))]
     NotFoundDataLocalFixupsValue { key: u32 },
 
-    /// The data position pointed to by the pointer of the read position ({key}) is not found in global_fixups.
-    #[snafu(display("The data position pointed to by the pointer of the read position ({key}) is not found in global_fixups."))]
-    NotFoundDataGlobalFixupsValue { key: u32 },
-
     /// Could not find the {index}th corresponding class: {start_offset}
     #[snafu(display("Could not find the {index}th corresponding class: {start_offset}"))]
     NotFoundClass { index: usize, start_offset: u32 },

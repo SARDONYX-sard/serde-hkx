@@ -9,7 +9,6 @@ use havok_types::Pointer;
 pub struct MapDeserializer<'a, 'de: 'a> {
     /// Deserializer
     de: &'a mut BytesDeserializer<'de>,
-    ptr_name: Option<Pointer>,
 
     #[allow(unused)]
     /// Field index currently being processed
@@ -21,16 +20,11 @@ pub struct MapDeserializer<'a, 'de: 'a> {
 
 impl<'a, 'de> MapDeserializer<'a, 'de> {
     /// Create a new map deserializer
-    pub fn new(
-        de: &'a mut BytesDeserializer<'de>,
-        ptr_name: Option<Pointer>,
-        fields: &'static [&'static str],
-    ) -> Self {
+    pub fn new(de: &'a mut BytesDeserializer<'de>, fields: &'static [&'static str]) -> Self {
         Self {
             de,
             field_index: 0,
             fields,
-            ptr_name,
         }
     }
 }
@@ -40,7 +34,7 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
 
     #[inline]
     fn class_ptr(&mut self) -> Option<Pointer> {
-        self.ptr_name.take()
+        self.de.takable_class_index.take()
     }
 
     #[inline]
@@ -49,6 +43,12 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
 
         if pad <= self.de.input.len() {
             self.de.current_position += pad;
+
+            #[cfg(feature = "tracing")]
+            tracing::trace!(
+                "padding: {pad} -> current position: {:#x}",
+                self.de.current_position
+            );
             Ok(())
         } else {
             Err(Error::Eof)
@@ -72,11 +72,15 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
     {
         #[cfg(feature = "tracing")]
         {
+            if self.field_index == 0 {
+                tracing::trace!("fields: {:?}", self.fields);
+            };
+
             if let Some(field_name) = self.fields.get(self.field_index) {
                 tracing::trace!(
-                    "deserialize {}th field: {field_name} of {:?}",
+                    "deserialize {}th field({:#x}): {field_name}",
                     self.field_index,
-                    self.fields
+                    self.de.current_position
                 )
             } else {
                 tracing::warn!(

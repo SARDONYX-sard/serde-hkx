@@ -2,6 +2,7 @@
 use super::BytesDeserializer;
 use crate::errors::de::Error;
 use havok_serde::de::{ClassIndexAccess, DeserializeSeed};
+use havok_types::Pointer;
 
 /// Order in which they are called.: `SeqAccess::next_class_element` -> `next_key` -> `next_value`
 #[derive(Debug)]
@@ -32,14 +33,19 @@ impl<'a, 'de> ClassIndexAccess<'de> for BytesClassIndexMapDeserializer<'a, 'de> 
         {
             // NOTE: First increment class_index(XML: `#0000`) to 1 based index notation.
             self.de.class_index += 1;
+            self.de.takable_class_index = Some(Pointer::new(self.de.class_index));
             start_offset = *name_start_offset;
 
             if let Some(name) = self.de.classnames.get(name_start_offset) {
-                self.de.current_position =
+                let virtual_src_abs =
                     (*virtual_src + self.de.data_header.absolute_data_start) as usize;
+                self.de.current_position = virtual_src_abs;
 
                 #[cfg(feature = "tracing")]
-                tracing::debug!(name, self.de.class_index);
+                tracing::debug!(
+                    "name: {name}, class_index: {}, virtual_src: {virtual_src_abs:#x}",
+                    self.de.class_index
+                );
                 return Ok(*name);
             };
         };
