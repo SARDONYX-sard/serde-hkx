@@ -77,6 +77,9 @@ pub struct BytesDeserializer<'de> {
     /// # Intent that field exists.
     /// Provide an [`Option::take`] able index to prevent accidentally giving an index to a class in the structure
     /// or to the parent class of an inheritance source.
+    ///
+    /// The only place it is incremented is `next_key` in `class_index_map`.
+    /// Currently, this means that the index is not incremented except for `HashMap<usize, Classes>`.
     takable_class_index: Option<Pointer>,
 }
 
@@ -948,7 +951,7 @@ mod tests {
                 0, 0, 0, 0, // 8bytes align for struct
             ],
             hkReferencedObject {
-                __ptr: Some(Pointer::new(0)), // In single class partial mode, ptr is not allocated.
+                __ptr: None, // In single class partial mode, ptr is not allocated.
                 parent: hkBaseObject { __ptr: None },
                 m_memSizeAndFlags: 2,
                 m_referenceCount: 0,
