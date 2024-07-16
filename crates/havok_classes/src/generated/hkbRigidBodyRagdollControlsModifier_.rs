@@ -203,6 +203,7 @@ for __hkbRigidBodyRagdollControlsModifierVisitor<'de> {
                             ),
                         );
                     }
+                    __A::pad(&mut __map, 4usize, 0usize)?;
                     m_controlData = _serde::__private::Some(
                         match __A::next_value::<
                             hkbRigidBodyRagdollControlData,

@@ -163,6 +163,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMoppCodeVisitor<'de> {
                             <__A::Error as _serde::de::Error>::duplicate_field("info"),
                         );
                     }
+                    __A::pad(&mut __map, 8usize, 0usize)?;
                     m_info = _serde::__private::Some(
                         match __A::next_value::<hkpMoppCodeCodeInfo>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,

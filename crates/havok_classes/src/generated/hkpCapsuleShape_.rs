@@ -166,6 +166,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCapsuleShapeVisitor<'de> {
                             <__A::Error as _serde::de::Error>::duplicate_field("vertexA"),
                         );
                     }
+                    __A::pad(&mut __map, 12usize, 8usize)?;
                     m_vertexA = _serde::__private::Some(
                         match __A::next_value::<Vector4>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,

@@ -492,6 +492,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbProxyModifierVisitor<'de> {
                             ),
                         );
                     }
+                    __A::pad(&mut __map, 4usize, 0usize)?;
                     m_proxyInfo = _serde::__private::Some(
                         match __A::next_value::<hkbProxyModifierProxyInfo>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,

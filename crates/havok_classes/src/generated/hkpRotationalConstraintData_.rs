@@ -150,6 +150,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRotationalConstraintDataVisitor<'de>
                             <__A::Error as _serde::de::Error>::duplicate_field("atoms"),
                         );
                     }
+                    __A::pad(&mut __map, 4usize, 8usize)?;
                     m_atoms = _serde::__private::Some(
                         match __A::next_value::<
                             hkpRotationalConstraintDataAtoms,

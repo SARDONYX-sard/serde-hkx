@@ -219,6 +219,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpAabbPhantomVisitor<'de> {
                             <__A::Error as _serde::de::Error>::duplicate_field("aabb"),
                         );
                     }
+                    __A::pad(&mut __map, 12usize, 0usize)?;
                     m_aabb = _serde::__private::Some(
                         match __A::next_value::<hkAabb>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,

@@ -141,6 +141,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpNamedMeshMaterialVisitor<'de> {
                             <__A::Error as _serde::de::Error>::duplicate_field("name"),
                         );
                     }
+                    __A::pad(&mut __map, 0usize, 4usize)?;
                     m_name = _serde::__private::Some(
                         match __A::next_value::<StringPtr<'de>>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,

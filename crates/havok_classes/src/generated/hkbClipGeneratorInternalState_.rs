@@ -237,6 +237,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbClipGeneratorInternalStateVisitor<'d
                             ),
                         );
                     }
+                    __A::pad(&mut __map, 8usize, 0usize)?;
                     m_extractedMotion = _serde::__private::Some(
                         match __A::next_value::<QsTransform>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,

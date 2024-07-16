@@ -143,6 +143,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRejectChassisListenerVisitor<'de> {
                             <__A::Error as _serde::de::Error>::duplicate_field("chassis"),
                         );
                     }
+                    __A::pad(&mut __map, 4usize, 0usize)?;
                     m_chassis = _serde::__private::Some(
                         match __A::next_value::<Pointer>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,

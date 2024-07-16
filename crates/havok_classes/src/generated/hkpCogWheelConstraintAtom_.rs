@@ -198,6 +198,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCogWheelConstraintAtomVisitor<'de> {
                             ),
                         );
                     }
+                    __A::pad(&mut __map, 2usize, 2usize)?;
                     m_cogWheelRadiusA = _serde::__private::Some(
                         match __A::next_value::<f32>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,

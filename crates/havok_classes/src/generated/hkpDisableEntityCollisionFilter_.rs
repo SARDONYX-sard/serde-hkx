@@ -162,6 +162,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpDisableEntityCollisionFilterVisitor<
                             ),
                         );
                     }
+                    __A::pad(&mut __map, 4usize, 8usize)?;
                     m_disabledEntities = _serde::__private::Some(
                         match __A::next_value::<Vec<Pointer>>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,

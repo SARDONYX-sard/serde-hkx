@@ -193,6 +193,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpShapePhantomVisitor<'de> {
                             ),
                         );
                     }
+                    __A::pad(&mut __map, 12usize, 0usize)?;
                     m_motionState = _serde::__private::Some(
                         match __A::next_value::<hkMotionState>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,

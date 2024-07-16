@@ -412,6 +412,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbPoseMatchingGeneratorVisitor<'de> {
                             ),
                         );
                     }
+                    __A::pad(&mut __map, 12usize, 0usize)?;
                     m_worldFromModelRotation = _serde::__private::Some(
                         match __A::next_value::<Quaternion>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,

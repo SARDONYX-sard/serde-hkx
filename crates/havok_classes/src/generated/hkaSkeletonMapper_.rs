@@ -143,6 +143,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSkeletonMapperVisitor<'de> {
                             <__A::Error as _serde::de::Error>::duplicate_field("mapping"),
                         );
                     }
+                    __A::pad(&mut __map, 8usize, 0usize)?;
                     m_mapping = _serde::__private::Some(
                         match __A::next_value::<hkaSkeletonMapperData>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,

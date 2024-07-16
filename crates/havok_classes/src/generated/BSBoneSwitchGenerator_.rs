@@ -194,6 +194,7 @@ impl<'de> _serde::de::Visitor<'de> for __BSBoneSwitchGeneratorVisitor<'de> {
                             ),
                         );
                     }
+                    __A::pad(&mut __map, 8usize, 8usize)?;
                     m_pDefaultGenerator = _serde::__private::Some(
                         match __A::next_value::<Pointer>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,

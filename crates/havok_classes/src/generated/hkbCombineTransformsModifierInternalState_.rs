@@ -163,6 +163,7 @@ for __hkbCombineTransformsModifierInternalStateVisitor<'de> {
                             ),
                         );
                     }
+                    __A::pad(&mut __map, 8usize, 0usize)?;
                     m_translationOut = _serde::__private::Some(
                         match __A::next_value::<Vector4>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,

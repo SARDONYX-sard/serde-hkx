@@ -156,6 +156,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSetLocalRotationsConstraintAtomVisit
                             ),
                         );
                     }
+                    __A::pad(&mut __map, 14usize, 14usize)?;
                     m_rotationA = _serde::__private::Some(
                         match __A::next_value::<Rotation>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,

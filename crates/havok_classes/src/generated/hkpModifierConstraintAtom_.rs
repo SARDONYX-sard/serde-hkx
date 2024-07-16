@@ -172,6 +172,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpModifierConstraintAtomVisitor<'de> {
                             ),
                         );
                     }
+                    __A::pad(&mut __map, 14usize, 14usize)?;
                     m_modifierAtomSize = _serde::__private::Some(
                         match __A::next_value::<u16>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,

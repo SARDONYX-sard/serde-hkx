@@ -161,6 +161,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCollisionFilterVisitor<'de> {
                             <__A::Error as _serde::de::Error>::duplicate_field("prepad"),
                         );
                     }
+                    __A::pad(&mut __map, 16usize, 32usize)?;
                     m_prepad = _serde::__private::Some(
                         match __A::next_value::<[u32; 2usize]>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,

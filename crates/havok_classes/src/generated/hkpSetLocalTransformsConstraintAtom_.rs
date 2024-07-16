@@ -157,6 +157,7 @@ for __hkpSetLocalTransformsConstraintAtomVisitor<'de> {
                             ),
                         );
                     }
+                    __A::pad(&mut __map, 14usize, 14usize)?;
                     m_transformA = _serde::__private::Some(
                         match __A::next_value::<Transform>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,

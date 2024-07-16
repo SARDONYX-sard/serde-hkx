@@ -159,6 +159,7 @@ for __hkbComputeRotationFromAxisAngleModifierInternalStateVisitor<'de> {
                             ),
                         );
                     }
+                    __A::pad(&mut __map, 8usize, 0usize)?;
                     m_rotationOut = _serde::__private::Some(
                         match __A::next_value::<Quaternion>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,

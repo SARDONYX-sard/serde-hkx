@@ -143,6 +143,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpStiffSpringConstraintAtomVisitor<'de
                             <__A::Error as _serde::de::Error>::duplicate_field("length"),
                         );
                     }
+                    __A::pad(&mut __map, 2usize, 2usize)?;
                     m_length = _serde::__private::Some(
                         match __A::next_value::<f32>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,

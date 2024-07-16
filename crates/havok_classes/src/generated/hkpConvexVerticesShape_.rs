@@ -231,6 +231,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpConvexVerticesShapeVisitor<'de> {
                             ),
                         );
                     }
+                    __A::pad(&mut __map, 12usize, 8usize)?;
                     m_aabbHalfExtents = _serde::__private::Some(
                         match __A::next_value::<Vector4>(&mut __map) {
                             _serde::__private::Ok(__val) => __val,

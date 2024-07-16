@@ -299,6 +299,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpExtendedMeshShapeVisitor<'de> {
                             ),
                         );
                     }
+                    __A::pad(&mut __map, 8usize, 0usize)?;
                     m_embeddedTrianglesSubpart = _serde::__private::Some(
                         match __A::next_value::<
                             hkpExtendedMeshShapeTrianglesSubpart,
