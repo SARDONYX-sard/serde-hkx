@@ -1,6 +1,6 @@
 # SkyrimSE parse all hkx files of `Animation.bsa`
 
-With the logger turned off by tokio's multi thread async, everything can be converted to XML in 1 minute.
+By tokio's multi thread async(With the logger turned off), everything can be converted to XML in 1 minute.
 
 - `data/meshes/` of extracted `Animation.bsa`
 
