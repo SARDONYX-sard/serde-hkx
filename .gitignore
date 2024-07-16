@@ -9,3 +9,4 @@
 **/logs/
 
 **/serde_hkx/tests/data/
+**/serde_hkx/tests/output/

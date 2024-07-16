@@ -29,16 +29,16 @@ fn test() -> std::io::Result<()> {
 
                 let file_name = path.file_stem().unwrap().to_string_lossy();
 
-                tracing::debug!("{classes:#?}");
+                std::fs::create_dir_all("./tests/output/xml/").unwrap();
                 std::fs::write(
-                    &format!("./{file_name}.xml"),
+                    &format!("./tests/output/xml/{file_name}.xml"),
                     &to_string(&classes, top_ptr.unwrap_or_default()).unwrap(),
                 )
                 .unwrap();
             }
             Err(err) => {
-                tracing::error!("{err}");
-                panic!("{err}")
+                tracing::error!("{path:?}\n{err}");
+                panic!("{path:?}\n{err}")
             }
         };
     }

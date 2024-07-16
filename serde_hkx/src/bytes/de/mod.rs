@@ -717,7 +717,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut BytesDeserializer<'de> {
         // NOTE: This is a look-ahead, assuming the position does not move with this method.
         let (size, _cap_and_flags) = tri!(self.parse_peek(array_meta(self.is_x86, self.endian)));
         #[cfg(feature = "tracing")]
-        tracing::debug!("in_struct array_size: {size}",);
+        tracing::debug!("in_struct array_size: {size}");
 
         if size == 0 {
             self.current_position += if self.is_x86 { 12 } else { 16 };

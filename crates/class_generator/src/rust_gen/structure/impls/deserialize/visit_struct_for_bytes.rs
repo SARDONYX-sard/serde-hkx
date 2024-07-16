@@ -15,31 +15,17 @@ pub fn gen(class: &Class, class_map: &ClassMap) -> TokenStream {
     let mut last_recv_fields = Vec::new();
     let mut field_idents = Vec::new();
 
-    let mut x86_current_offset = match class.members.first() {
-        Some(member) => member.offset_x86,
-        None => {
-            if let Some(parent_name) = &class.parent {
-                let parent_class = class_map
-                    .get(parent_name)
-                    .unwrap_or_else(|| panic!("Need parent({parent_name}), but it's not found"));
-                parent_class.size_x86
-            } else {
-                0
-            }
-        } // If no member in itself -> size of parent == size of itself.
-    };
-    let mut x64_current_offset = match class.members.first() {
-        Some(member) => member.offset_x86_64,
-        None => {
-            if let Some(parent_name) = &class.parent {
-                let parent_class = class_map
-                    .get(parent_name)
-                    .unwrap_or_else(|| panic!("Need parent({parent_name}), but it's not found"));
-                parent_class.size_x86_64
-            } else {
-                0
-            }
+    let (mut x86_current_offset, mut x64_current_offset) = match &class.parent {
+        Some(parent_name) => {
+            let parent_class = class_map
+                .get(parent_name)
+                .unwrap_or_else(|| panic!("Need parent({parent_name}), but it's not found"));
+            (parent_class.size_x86, parent_class.size_x86_64)
         }
+        _ => match class.members.first() {
+            Some(member) => (member.offset_x86, member.offset_x86_64),
+            None => (0, 0),
+        },
     };
 
     for (index, member) in class.members.iter().enumerate() {
