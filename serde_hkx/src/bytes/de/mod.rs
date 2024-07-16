@@ -81,7 +81,6 @@ impl<'de> BytesDeserializer<'de> {
     pub fn from_bytes(input: &'de [u8]) -> Self {
         Self {
             input,
-            class_index: 0,
             ..Default::default()
         }
     }
@@ -93,11 +92,24 @@ impl<'de> BytesDeserializer<'de> {
 ///
 /// # Note
 /// If pointer types are included, it is impossible to deserialize correctly because fixups information is required.
-pub fn from_bytes<'a, T>(s: &'a [u8]) -> Result<T>
+pub fn from_partial_bytes<'a, T>(bytes: &'a [u8]) -> Result<T>
 where
     T: Deserialize<'a>,
 {
-    let mut deserializer = BytesDeserializer::from_bytes(s);
+    from_partial_bytes_with_opt(BytesDeserializer::from_bytes(bytes))
+}
+
+/// Parse binary data as the type specified in the partial generics with custom `BytesDeserializer` settings.
+///
+/// e.g. one class, 3 booleans, `[u32; 10]`,
+///
+/// # Note
+/// If pointer types are included, it is impossible to deserialize correctly because fixups information is required.
+pub fn from_partial_bytes_with_opt<'a, T>(de: BytesDeserializer<'a>) -> Result<T>
+where
+    T: Deserialize<'a>,
+{
+    let mut deserializer = de;
     let t = T::deserialize(&mut deserializer)?;
     if deserializer.input[deserializer.current_position..].is_empty() {
         Ok(t)
@@ -107,11 +119,20 @@ where
 }
 
 /// Analyze as binary data of one file in order from hkx header.
-pub fn from_bytes_file<'a, T>(bytes: &'a [u8]) -> Result<T>
+#[inline]
+pub fn from_bytes<'a, T>(bytes: &'a [u8]) -> Result<T>
 where
     T: Deserialize<'a>,
 {
-    let mut deserializer = BytesDeserializer::from_bytes(bytes);
+    from_bytes_with_opt(BytesDeserializer::from_bytes(bytes))
+}
+
+/// Analyze as binary data of one file in order from hkx header(with custom deserializer settings).
+pub fn from_bytes_with_opt<'a, T>(de: BytesDeserializer<'a>) -> Result<T>
+where
+    T: Deserialize<'a>,
+{
+    let mut deserializer = de;
 
     // 1. Deserialize root file header.
     let header = tri!(deserializer.parse_peek(HkxHeader::from_bytes()));
@@ -827,11 +848,11 @@ mod tests {
     use crate::mocks::{classes::*, enums::EventMode, flags::FlagValues};
     use pretty_assertions::assert_eq;
 
-    fn parse_assert<'a, T>(s: BytesStream<'a>, expected: T)
+    fn partial_parse_assert<'a, T>(s: BytesStream<'a>, expected: T)
     where
         T: Deserialize<'a> + PartialEq + fmt::Debug,
     {
-        match from_bytes::<T>(s) {
+        match from_partial_bytes::<T>(s) {
             Ok(res) => assert_eq!(res, expected),
             Err(err) => {
                 tracing::error!(?err);
@@ -842,17 +863,17 @@ mod tests {
 
     #[test]
     fn test_deserialize_primitive() {
-        parse_assert(&[128, 0], FlagValues::ALIGN_8);
-        parse_assert(&[0], EventMode::EVENT_MODE_DEFAULT);
+        partial_parse_assert(&[128, 0], FlagValues::ALIGN_8);
+        partial_parse_assert(&[0], EventMode::EVENT_MODE_DEFAULT);
     }
 
     #[test]
     #[quick_tracing::init]
     fn test_deserialize_primitive_array() {
-        parse_assert::<[char; 0]>(b"", []);
+        partial_parse_assert::<[char; 0]>(b"", []);
 
-        parse_assert(&[1, 0], [true, false]);
-        parse_assert(
+        partial_parse_assert(&[1, 0], [true, false]);
+        partial_parse_assert(
             zerocopy::AsBytes::as_bytes(&[
                 0u32, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
             ]),
@@ -884,7 +905,7 @@ mod tests {
                 w: 1.0,
             },
         ];
-        parse_assert(
+        partial_parse_assert(
             zerocopy::AsBytes::as_bytes(&[
                 -0.0f32, 0.0, -0.0, 1.0, // 1 vec4
                 0.0, 0.0, -0.0, 1.0, // 2 vec4
@@ -897,7 +918,7 @@ mod tests {
     #[test]
     #[quick_tracing::init]
     fn test_deserialize_class() {
-        parse_assert(
+        partial_parse_assert(
             &[
                 0, 0, 0, 0, 0, 0, 0, 0, // hkBaseObject
                 2, 0, // mem_size_and_flags
@@ -926,7 +947,7 @@ mod tests {
         where
             T: Deserialize<'a>,
         {
-            match from_bytes_file::<T>(bytes) {
+            match from_bytes::<T>(bytes) {
                 Ok(res) => Ok(res),
                 Err(err) => {
                     tracing::error!("{err}");

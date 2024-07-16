@@ -1,5 +1,6 @@
 pub mod bytes;
 pub mod errors;
+pub mod prelude;
 pub mod xml;
 
 #[cfg(test)]
@@ -47,7 +48,7 @@ macro_rules! tri {
 }
 pub(crate) use tri;
 
-pub use bytes::de::{from_bytes, from_bytes_file};
+pub use bytes::de::from_bytes;
 pub use bytes::ser::to_bytes;
-pub use xml::de::{from_str, from_str_file};
+pub use xml::de::from_str;
 pub use xml::ser::to_string;

@@ -26,6 +26,7 @@ use havok_serde::de::{self, Deserialize, ReadEnumSize, Visitor};
 use havok_types::*;
 use parser::tag::{class_start_tag, start_tag};
 use winnow::ascii::{dec_int, dec_uint};
+use winnow::combinator::opt;
 use winnow::Parser;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,11 +71,21 @@ impl<'de> XmlDeserializer<'de> {
     }
 }
 
-pub fn from_str<'a, T>(s: &'a str) -> Result<T>
+/// from partial xml string.
+#[inline]
+pub fn from_partial_str<'a, T>(s: &'a str) -> Result<T>
 where
     T: Deserialize<'a>,
 {
-    let mut deserializer = XmlDeserializer::from_str(s);
+    from_partial_str_with_opt(XmlDeserializer::from_str(s))
+}
+
+/// from partial xml string with custom `XmlDeserializer` settings.
+pub fn from_partial_str_with_opt<'a, T>(de: XmlDeserializer<'a>) -> Result<T>
+where
+    T: Deserialize<'a>,
+{
+    let mut deserializer = de;
     let t = tri!(T::deserialize(&mut deserializer));
 
     if deserializer.input.is_empty() {
@@ -86,16 +97,25 @@ where
     }
 }
 
-pub fn from_str_file<'a, T>(s: &'a str) -> Result<T>
+/// From xml string.
+#[inline]
+pub fn from_str<'a, T>(s: &'a str) -> Result<T>
 where
     T: Deserialize<'a>,
 {
-    let mut deserializer = XmlDeserializer::from_str(s);
+    from_str_with_opt(XmlDeserializer::from_str(s))
+}
+
+/// from xml string with custom `XmlDeserializer` settings.
+pub fn from_str_with_opt<'a, T>(de: XmlDeserializer<'a>) -> Result<T>
+where
+    T: Deserialize<'a>,
+{
+    let mut deserializer = de;
     tri!(deserializer.parse(winnow::token::take_until(0.., "<hkobject")));
     let t = tri!(T::deserialize(&mut deserializer));
-
-    tri!(deserializer.parse(end_tag("hksection")));
-    tri!(deserializer.parse(end_tag("hkpackfile")));
+    tri!(deserializer.parse(opt(end_tag("hksection"))));
+    tri!(deserializer.parse(opt(end_tag("hkpackfile"))));
 
     if deserializer.input.is_empty() {
         Ok(t)
@@ -525,11 +545,11 @@ mod tests {
     // use crate::mocks::{classes::*, enums::EventMode, flags::FlagValues};
     use pretty_assertions::assert_eq;
 
-    fn parse_assert<'a, T>(s: &'a str, expected: T)
+    fn partial_parse_assert<'a, T>(s: &'a str, expected: T)
     where
         T: Deserialize<'a> + PartialEq + fmt::Debug,
     {
-        match from_str::<T>(s) {
+        match from_partial_str::<T>(s) {
             Ok(res) => assert_eq!(res, expected),
             Err(err) => {
                 tracing::error!(?err);
@@ -572,7 +592,7 @@ mod tests {
 
     #[test]
     fn test_deserialize_string() {
-        parse_assert::<Vec<StringPtr>>(
+        partial_parse_assert::<Vec<StringPtr>>(
             r#"
     <hkcstring>Hello</hkcstring>
         <hkcstring>World</hkcstring>
@@ -584,7 +604,7 @@ mod tests {
 
     #[test]
     fn test_deserialize_primitive_vec() {
-        parse_assert(
+        partial_parse_assert(
             r#"
                 <!-- Hi? -->
                 <!-- Hi? -->
@@ -597,7 +617,7 @@ mod tests {
             vec![true, false],
         );
 
-        parse_assert(
+        partial_parse_assert(
             r#"
     0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
     16 17 18 19 20
@@ -608,7 +628,7 @@ mod tests {
 
     #[test]
     fn test_deserialize_math_vec() {
-        parse_assert(
+        partial_parse_assert(
             r#"   <!-- comment -->
 
         (-0.000000 0.000000 -0.000000 1.000000  )
@@ -646,13 +666,13 @@ mod tests {
 
     #[test]
     fn test_deserialize_primitive_array() {
-        parse_assert::<[char; 0]>("", []);
+        partial_parse_assert::<[char; 0]>("", []);
     }
 
     #[test]
     fn should_skip_class() {
         use havok_classes::{hkBaseObject, hkReferencedObject};
-        parse_assert(
+        partial_parse_assert(
             r##"
 <hkobject name="#01000" class="hkReferencedObject" signature="0xea7f1d08">
     <!-- memSizeAndFlags SERIALIZE_IGNORED -->
@@ -720,7 +740,7 @@ mod tests {
         where
             T: Deserialize<'a>,
         {
-            match from_str_file::<T>(xml) {
+            match from_str::<T>(xml) {
                 Ok(res) => res,
                 Err(err) => {
                     tracing::error!("{err}");

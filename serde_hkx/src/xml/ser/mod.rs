@@ -10,11 +10,25 @@ use havok_types::{
 };
 
 #[derive(Debug)]
-struct XmlSerializer {
+pub struct XmlSerializer {
+    /// XML string
     output: String,
+    /// Indent type(tab, space)
     indent: &'static str,
+    /// Indent time
     depth: usize,
+    /// If you want to output XML partially, put [`Option::None`].
+    /// # Example XML
+    /// ```xml
+    /// <?xml version="1.0" encoding="ascii"?>
+    /// <hkpackfile classversion="8" contentsversion="hk_2010.2.0-r1" toplevelobject=""
+    /// ```
     start_root: Option<&'static str>,
+    /// If you want to output XML partially, put [`Option::None`].
+    /// # Example XML
+    /// ```xml
+    /// </hkpackfile>
+    /// ```
     end_root: Option<&'static str>,
 }
 
@@ -34,11 +48,23 @@ impl Default for XmlSerializer {
 }
 
 /// To XML String.
+#[inline]
 pub fn to_string<T>(value: &T, top_ptr: usize) -> Result<String>
 where
     T: Serialize,
 {
-    let mut serializer = XmlSerializer::default();
+    to_string_with_opt(value, top_ptr, XmlSerializer::default())
+}
+
+/// To xml string with custom `XmlSerializer` settings.
+///
+/// # Info
+/// This can be done in partial mode by eliminating the root string.
+pub fn to_string_with_opt<T>(value: &T, top_ptr: usize, ser: XmlSerializer) -> Result<String>
+where
+    T: Serialize,
+{
+    let mut serializer = ser;
 
     if let Some(start_root) = serializer.start_root {
         serializer.output += start_root;

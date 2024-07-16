@@ -25,31 +25,45 @@ use std::collections::HashMap;
 use std::io::{Cursor, Write};
 use trait_impls::{ClassNamesWriter as _, LocalFixupsWriter as _};
 
-// TODO: It may be possible to cache classnames obtained at deserialization time.
+/// To hkx binary file data.
+pub fn to_bytes<K, V>(value: &IndexMap<K, V>, header: &HkxHeader) -> Result<Vec<u8>>
+where
+    V: Serialize + HavokClass,
+{
+    to_bytes_with_opt(
+        value,
+        header,
+        ByteSerializer {
+            is_little_endian: match header.endian {
+                0 => false, // big endian
+                1 => true,  // little endian
+                invalid => InvalidEndianSnafu { invalid }.fail()?,
+            },
+            is_x86: match header.pointer_size {
+                4 => true,
+                8 => false,
+                invalid => UnsupportedPtrSizeSnafu { invalid }.fail()?,
+            },
+            ..Default::default()
+        },
+    )
+}
 
-/// Serialize to bytes
+/// Serialize to bytes with custom `BytesSerializer` settings.
 ///
 /// # Note
 /// This serializer assumes the following.
 /// - `contents_class_name_section_index`: It is always assumed to be 0.
 /// - `contents_section_index`: It is always assumed to be 2.
-pub fn to_bytes<K, V>(value: &IndexMap<K, V>, header: &HkxHeader) -> Result<Vec<u8>>
+pub fn to_bytes_with_opt<K, V>(
+    value: &IndexMap<K, V>,
+    header: &HkxHeader,
+    ser: ByteSerializer,
+) -> Result<Vec<u8>>
 where
     V: Serialize + HavokClass,
 {
-    let mut serializer = ByteSerializer {
-        is_little_endian: match header.endian {
-            0 => false, // big endian
-            1 => true,  // little endian
-            invalid => InvalidEndianSnafu { invalid }.fail()?,
-        },
-        is_x86: match header.pointer_size {
-            4 => true,
-            8 => false,
-            invalid => UnsupportedPtrSizeSnafu { invalid }.fail()?,
-        },
-        ..Default::default()
-    };
+    let mut serializer = ser;
 
     // 1/5: root header
     serializer.output.write_all(&header.to_bytes())?;
