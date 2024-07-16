@@ -1,124 +1,126 @@
-2024-06-19T21:58:10.371216Z DEBUG serde_hkx\src\bytes\ser\mod.rs:832: {
-    8: HkRootLevelContainer(
-        HkRootLevelContainer {
-            _name: Some(
+2024-07-16T04:28:03.814185Z DEBUG serde_hkx\src\bytes\ser\mod.rs:849: {
+    8: hkRootLevelContainer(
+        hkRootLevelContainer {
+            __ptr: Some(
                 Pointer(
                     8,
                 ),
             ),
-            named_variants: [
-                HkRootLevelContainerNamedVariant {
-                    _name: None,
-                    name: StringPtr {
+            m_namedVariants: [
+                hkRootLevelContainerNamedVariant {
+                    __ptr: None,
+                    m_name: StringPtr {
                         inner: Some(
                             "hkbProjectData",
                         ),
                     },
-                    class_name: StringPtr {
+                    m_className: StringPtr {
                         inner: Some(
                             "hkbProjectData",
                         ),
                     },
-                    variant: Pointer(
+                    m_variant: Pointer(
                         10,
                     ),
                 },
             ],
         },
     ),
-    10: HkbProjectData(
-        HkbProjectData {
-            parent: HkReferencedObject {
-                parent: HkBaseObject {
-                    _name: None,
-                },
-                _name: None,
-                mem_size_and_flags: 0,
-                reference_count: 0,
-            },
-            _name: Some(
+    10: hkbProjectData(
+        hkbProjectData {
+            __ptr: Some(
                 Pointer(
                     10,
                 ),
             ),
-            world_up_ws: Vector4 {
+            parent: hkReferencedObject {
+                __ptr: None,
+                parent: hkBaseObject {
+                    __ptr: None,
+                },
+                m_memSizeAndFlags: 0,
+                m_referenceCount: 0,
+            },
+            m_worldUpWS: Vector4 {
                 x: 0.0,
                 y: 0.0,
                 z: 1.0,
                 w: 0.0,
             },
-            string_data: Pointer(
+            m_stringData: Pointer(
                 9,
             ),
-            default_event_mode: EventModeIgnoreFromGenerator,
+            m_defaultEventMode: EVENT_MODE_IGNORE_FROM_GENERATOR,
         },
     ),
-    9: HkbProjectStringData(
-        HkbProjectStringData {
-            parent: HkReferencedObject {
-                parent: HkBaseObject {
-                    _name: None,
-                },
-                _name: None,
-                mem_size_and_flags: 0,
-                reference_count: 0,
-            },
-            _name: Some(
+    9: hkbProjectStringData(
+        hkbProjectStringData {
+            __ptr: Some(
                 Pointer(
                     9,
                 ),
             ),
-            animation_filenames: [],
-            behavior_filenames: [],
-            character_filenames: [
+            parent: hkReferencedObject {
+                __ptr: None,
+                parent: hkBaseObject {
+                    __ptr: None,
+                },
+                m_memSizeAndFlags: 0,
+                m_referenceCount: 0,
+            },
+            m_animationFilenames: [],
+            m_behaviorFilenames: [],
+            m_characterFilenames: [
                 StringPtr {
                     inner: Some(
                         "Characters\\DefaultMale.hkx",
                     ),
                 },
             ],
-            event_names: [],
-            animation_path: StringPtr {
+            m_eventNames: [],
+            m_animationPath: StringPtr {
                 inner: Some(
                     "",
                 ),
             },
-            behavior_path: StringPtr {
+            m_behaviorPath: StringPtr {
                 inner: Some(
                     "",
                 ),
             },
-            character_path: StringPtr {
+            m_characterPath: StringPtr {
                 inner: Some(
                     "",
                 ),
             },
-            full_path_to_source: StringPtr {
+            m_fullPathToSource: StringPtr {
                 inner: Some(
                     "",
                 ),
             },
-            root_path: StringPtr {
+            m_rootPath: StringPtr {
                 inner: None,
             },
         },
     ),
 }
-2024-06-19T21:58:10.372452Z TRACE serde_hkx\src\bytes\ser\mod.rs:72: class_starts: {
-    "hkbProjectData": 101,
+2024-07-16T04:28:03.815724Z TRACE serde_hkx\src\bytes\ser\mod.rs:81: class_starts: {
     "hkRootLevelContainer": 75,
     "hkbProjectStringData": 121,
+    "hkbProjectData": 101,
 }
-2024-06-19T21:58:10.373012Z TRACE serde_hkx\src\bytes\ser\mod.rs:242: key="namedVariants" local_src=0 local_dst=16
-2024-06-19T21:58:10.373490Z TRACE serde_hkx\src\bytes\ser\mod.rs:242: key="name" local_src=16 local_dst=40
-2024-06-19T21:58:10.373849Z TRACE serde_hkx\src\bytes\ser\mod.rs:242: key="className" local_src=24 local_dst=64
-2024-06-19T21:58:10.374237Z TRACE serde_hkx\src\bytes\ser\mod.rs:242: key="characterFilenames" local_src=176 local_dst=256
-2024-06-19T21:58:10.374601Z TRACE serde_hkx\src\bytes\ser\mod.rs:263: index=0 local_src=256 local_dst=264
-2024-06-19T21:58:10.375017Z TRACE serde_hkx\src\bytes\ser\mod.rs:242: key="animationPath" local_src=208 local_dst=304
-2024-06-19T21:58:10.375422Z TRACE serde_hkx\src\bytes\ser\mod.rs:242: key="behaviorPath" local_src=216 local_dst=320
-2024-06-19T21:58:10.375790Z TRACE serde_hkx\src\bytes\ser\mod.rs:242: key="characterPath" local_src=224 local_dst=336
-2024-06-19T21:58:10.376184Z TRACE serde_hkx\src\bytes\ser\mod.rs:242: key="fullPathToSource" local_src=232 local_dst=352
-2024-06-19T21:58:10.379107Z DEBUG serde_hkx\src\bytes\ser\mod.rs:354: [global_fixups pointers]
+2024-07-16T04:28:03.817458Z TRACE serde_hkx\src\bytes\ser\mod.rs:239: key="namedVariants" local_src=0 local_dst=16
+2024-07-16T04:28:03.818358Z TRACE serde_hkx\src\bytes\ser\mod.rs:239: key="name" local_src=16 local_dst=40
+2024-07-16T04:28:03.820042Z TRACE serde_hkx\src\bytes\ser\mod.rs:239: key="className" local_src=24 local_dst=64
+2024-07-16T04:28:03.822077Z DEBUG serde_hkx\src\bytes\ser\mod.rs:669: skip serializing StringPtr rootPath.
+2024-07-16T04:28:03.823398Z TRACE serde_hkx\src\bytes\ser\mod.rs:239: key="characterFilenames" local_src=176 local_dst=256
+2024-07-16T04:28:03.824537Z TRACE serde_hkx\src\bytes\ser\mod.rs:264: index=0 local_src=256 local_dst=264
+2024-07-16T04:28:03.825528Z TRACE serde_hkx\src\bytes\ser\mod.rs:239: key="animationPath" local_src=208 local_dst=304
+2024-07-16T04:28:03.827191Z TRACE serde_hkx\src\bytes\ser\mod.rs:239: key="behaviorPath" local_src=216 local_dst=320
+2024-07-16T04:28:03.828184Z TRACE serde_hkx\src\bytes\ser\mod.rs:239: key="characterPath" local_src=224 local_dst=336
+2024-07-16T04:28:03.830042Z TRACE serde_hkx\src\bytes\ser\mod.rs:239: key="fullPathToSource" local_src=232 local_dst=352
+2024-07-16T04:28:03.830803Z DEBUG serde_hkx\src\bytes\ser\mod.rs:250: Skip because there is no corresponding `local_fixup.src`. rootPath -> dst(368)
+2024-07-16T04:28:03.833677Z DEBUG serde_hkx\src\bytes\ser\mod.rs:359: [global_fixups pointers]
 src: {
     Pointer(
         10,
@@ -129,18 +131,18 @@ src: {
 },
 dest(same as virtual.src): {
     Pointer(
-        10,
-    ): 80,
-    Pointer(
         9,
     ): 128,
     Pointer(
         8,
     ): 0,
+    Pointer(
+        10,
+    ): 80,
 }
-2024-06-19T21:58:10.379600Z DEBUG serde_hkx\src\bytes\ser\mod.rs:287: [global_fixups] src: 32, dst: 80
-2024-06-19T21:58:10.380011Z DEBUG serde_hkx\src\bytes\ser\mod.rs:287: [global_fixups] src: 112, dst: 128
-2024-06-19T21:58:10.381583Z TRACE serde_hkx\src\bytes\ser\mod.rs:105: 
+2024-07-16T04:28:03.834896Z DEBUG serde_hkx\src\bytes\ser\mod.rs:292: [global_fixups] src: 32, dst: 80
+2024-07-16T04:28:03.835793Z DEBUG serde_hkx\src\bytes\ser\mod.rs:292: [global_fixups] src: 112, dst: 128
+2024-07-16T04:28:03.837605Z TRACE serde_hkx\src\bytes\ser\mod.rs:98: 
 Offsets:
   absolute data start: 0x160
          local fixups: 0x170
@@ -155,7 +157,7 @@ Offsets:
         abs + imports: 0x370
         abs +     end: 0x370
 
-2024-06-19T21:58:10.389798Z DEBUG serde_hkx\src\bytes\ser\mod.rs:836: 
+2024-07-16T04:28:03.846475Z DEBUG serde_hkx\src\bytes\ser\mod.rs:853: 
 00000000: 57 e0 e0 57 10 c0 c0 10 00 00 00 00 08 00 00 00  W..W............
 00000010: 08 01 00 01 03 00 00 00 02 00 00 00 00 00 00 00  ................
 00000020: 00 00 00 00 4b 00 00 00 68 6b 5f 32 30 31 30 2e  ....K...hk_2010.
