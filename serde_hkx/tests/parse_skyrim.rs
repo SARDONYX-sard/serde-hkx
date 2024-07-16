@@ -2,6 +2,7 @@ use havok_classes::Classes;
 use serde_hkx::{from_bytes, to_string};
 
 #[quick_tracing::init(test = "from_bytes_skyrim_se_all_files")]
+#[ignore = "Because it is impossible to test without a set of files in the game."]
 #[test]
 fn test() -> std::io::Result<()> {
     for path in jwalk::WalkDir::new("./tests/data") {
@@ -34,7 +35,6 @@ fn test() -> std::io::Result<()> {
                     &to_string(&classes, top_ptr.unwrap_or_default()).unwrap(),
                 )
                 .unwrap();
-                break;
             }
             Err(err) => {
                 tracing::error!("{err}");
