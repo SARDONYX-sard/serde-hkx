@@ -187,7 +187,6 @@ impl<'de> _serde::de::Visitor<'de> for __hkpThinBoxMotionVisitor<'de> {
                 _ => {}
             }
         }
-        __A::pad(&mut __map, 288usize, 320usize)?;
         _serde::__private::Ok(hkpThinBoxMotion { __ptr, parent })
     }
     fn visit_struct<__A>(

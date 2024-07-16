@@ -187,7 +187,6 @@ impl<'de> _serde::de::Visitor<'de> for __hkpFixedRigidMotionVisitor<'de> {
                 _ => {}
             }
         }
-        __A::pad(&mut __map, 288usize, 320usize)?;
         _serde::__private::Ok(hkpFixedRigidMotion {
             __ptr,
             parent,

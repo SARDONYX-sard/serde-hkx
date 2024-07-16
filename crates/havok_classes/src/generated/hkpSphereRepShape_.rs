@@ -135,7 +135,6 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSphereRepShapeVisitor<'de> {
                 _ => {}
             }
         }
-        __A::pad(&mut __map, 16usize, 32usize)?;
         _serde::__private::Ok(hkpSphereRepShape { __ptr, parent })
     }
     fn visit_struct<__A>(

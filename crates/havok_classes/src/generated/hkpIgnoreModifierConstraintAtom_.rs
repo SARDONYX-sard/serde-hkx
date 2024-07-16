@@ -140,7 +140,6 @@ impl<'de> _serde::de::Visitor<'de> for __hkpIgnoreModifierConstraintAtomVisitor<
                 _ => {}
             }
         }
-        __A::pad(&mut __map, 32usize, 48usize)?;
         _serde::__private::Ok(hkpIgnoreModifierConstraintAtom {
             __ptr,
             parent,

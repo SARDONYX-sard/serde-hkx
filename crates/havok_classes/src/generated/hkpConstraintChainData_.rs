@@ -133,7 +133,6 @@ impl<'de> _serde::de::Visitor<'de> for __hkpConstraintChainDataVisitor<'de> {
                 _ => {}
             }
         }
-        __A::pad(&mut __map, 12usize, 24usize)?;
         _serde::__private::Ok(hkpConstraintChainData {
             __ptr,
             parent,

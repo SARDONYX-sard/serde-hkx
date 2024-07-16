@@ -130,7 +130,6 @@ impl<'de> _serde::de::Visitor<'de> for __hkbStateListenerVisitor<'de> {
                 _ => {}
             }
         }
-        __A::pad(&mut __map, 8usize, 16usize)?;
         _serde::__private::Ok(hkbStateListener { __ptr, parent })
     }
     fn visit_struct<__A>(

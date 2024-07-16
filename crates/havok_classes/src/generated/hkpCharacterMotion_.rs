@@ -168,7 +168,6 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCharacterMotionVisitor<'de> {
                 _ => {}
             }
         }
-        __A::pad(&mut __map, 288usize, 320usize)?;
         _serde::__private::Ok(hkpCharacterMotion {
             __ptr,
             parent,

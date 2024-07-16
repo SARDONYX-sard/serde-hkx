@@ -145,7 +145,6 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMultithreadedVehicleManagerVisitor<'
                 _ => {}
             }
         }
-        __A::pad(&mut __map, 20usize, 32usize)?;
         _serde::__private::Ok(hkpMultithreadedVehicleManager {
             __ptr,
             parent,

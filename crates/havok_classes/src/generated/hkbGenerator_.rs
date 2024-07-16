@@ -166,7 +166,6 @@ impl<'de> _serde::de::Visitor<'de> for __hkbGeneratorVisitor<'de> {
                 _ => {}
             }
         }
-        __A::pad(&mut __map, 40usize, 72usize)?;
         _serde::__private::Ok(hkbGenerator { __ptr, parent })
     }
     fn visit_struct<__A>(

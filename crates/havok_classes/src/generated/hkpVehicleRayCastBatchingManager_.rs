@@ -155,7 +155,6 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleRayCastBatchingManagerVisitor
                 _ => {}
             }
         }
-        __A::pad(&mut __map, 24usize, 40usize)?;
         _serde::__private::Ok(hkpVehicleRayCastBatchingManager {
             __ptr,
             parent,

@@ -144,7 +144,6 @@ for __hkpViscousSurfaceModifierConstraintAtomVisitor<'de> {
                 _ => {}
             }
         }
-        __A::pad(&mut __map, 32usize, 48usize)?;
         _serde::__private::Ok(hkpViscousSurfaceModifierConstraintAtom {
             __ptr,
             parent,

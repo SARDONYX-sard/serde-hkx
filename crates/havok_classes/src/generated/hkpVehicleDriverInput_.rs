@@ -130,7 +130,6 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDriverInputVisitor<'de> {
                 _ => {}
             }
         }
-        __A::pad(&mut __map, 8usize, 16usize)?;
         _serde::__private::Ok(hkpVehicleDriverInput {
             __ptr,
             parent,

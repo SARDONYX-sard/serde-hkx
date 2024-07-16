@@ -187,7 +187,6 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMaxSizeMotionVisitor<'de> {
                 _ => {}
             }
         }
-        __A::pad(&mut __map, 288usize, 320usize)?;
         _serde::__private::Ok(hkpMaxSizeMotion { __ptr, parent })
     }
     fn visit_struct<__A>(

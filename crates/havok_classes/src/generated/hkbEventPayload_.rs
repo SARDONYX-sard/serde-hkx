@@ -130,7 +130,6 @@ impl<'de> _serde::de::Visitor<'de> for __hkbEventPayloadVisitor<'de> {
                 _ => {}
             }
         }
-        __A::pad(&mut __map, 8usize, 16usize)?;
         _serde::__private::Ok(hkbEventPayload { __ptr, parent })
     }
     fn visit_struct<__A>(

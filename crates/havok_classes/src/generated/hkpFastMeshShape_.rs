@@ -172,7 +172,6 @@ impl<'de> _serde::de::Visitor<'de> for __hkpFastMeshShapeVisitor<'de> {
                 _ => {}
             }
         }
-        __A::pad(&mut __map, 96usize, 128usize)?;
         _serde::__private::Ok(hkpFastMeshShape { __ptr, parent })
     }
     fn visit_struct<__A>(

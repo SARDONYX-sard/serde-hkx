@@ -226,7 +226,6 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRigidBodyVisitor<'de> {
                 _ => {}
             }
         }
-        __A::pad(&mut __map, 544usize, 720usize)?;
         _serde::__private::Ok(hkpRigidBody { __ptr, parent })
     }
     fn visit_struct<__A>(

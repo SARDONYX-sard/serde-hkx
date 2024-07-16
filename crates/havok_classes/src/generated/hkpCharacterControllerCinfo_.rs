@@ -133,7 +133,6 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCharacterControllerCinfoVisitor<'de>
                 _ => {}
             }
         }
-        __A::pad(&mut __map, 8usize, 16usize)?;
         _serde::__private::Ok(hkpCharacterControllerCinfo {
             __ptr,
             parent,

@@ -136,7 +136,6 @@ impl<'de> _serde::de::Visitor<'de> for __hkpNullCollisionFilterVisitor<'de> {
                 _ => {}
             }
         }
-        __A::pad(&mut __map, 48usize, 72usize)?;
         _serde::__private::Ok(hkpNullCollisionFilter {
             __ptr,
             parent,

@@ -130,7 +130,6 @@ impl<'de> _serde::de::Visitor<'de> for __hkLocalFrameVisitor<'de> {
                 _ => {}
             }
         }
-        __A::pad(&mut __map, 8usize, 16usize)?;
         _serde::__private::Ok(hkLocalFrame { __ptr, parent })
     }
     fn visit_struct<__A>(

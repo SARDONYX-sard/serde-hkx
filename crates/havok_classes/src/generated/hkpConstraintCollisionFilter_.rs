@@ -150,7 +150,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpConstraintCollisionFilterVisitor<'de
                 _ => {}
             }
         }
-        __A::pad(&mut __map, 68usize, 104usize)?;
+        __A::pad(&mut __map, 4usize, 8usize)?;
         _serde::__private::Ok(hkpConstraintCollisionFilter {
             __ptr,
             parent,
