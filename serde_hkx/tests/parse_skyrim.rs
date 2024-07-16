@@ -3,10 +3,30 @@ use std::path::Path;
 use havok_classes::Classes;
 use serde_hkx::{from_bytes, to_string};
 
-#[quick_tracing::init(test = "from_bytes_skyrim_se_all_files")]
+#[allow(clippy::enum_variant_names)]
+#[derive(Debug, snafu::Snafu)]
+enum ConvertError {
+    #[snafu(transparent)]
+    DeError {
+        source: serde_hkx::errors::de::Error,
+    },
+    #[snafu(transparent)]
+    SerError {
+        source: serde_hkx::errors::ser::Error,
+    },
+
+    #[snafu(transparent)]
+    IoError { source: std::io::Error },
+}
+
+type Result<T> = core::result::Result<T, ConvertError>;
+
+// #[quick_tracing::init(test = "from_bytes_skyrim_se_all_files", stdio = false)]
 #[ignore = "Because it is impossible to test without a set of files in the game."]
-#[test]
-fn test() -> std::io::Result<()> {
+#[tokio::test]
+async fn test() -> std::io::Result<()> {
+    let mut task_handles: Vec<tokio::task::JoinHandle<Result<()>>> = Vec::new();
+
     for path in jwalk::WalkDir::new("./tests/data") {
         let path = path?.path();
         let path = path.as_path();
@@ -15,42 +35,51 @@ fn test() -> std::io::Result<()> {
         }
 
         tracing::debug!(?path);
-        let bytes = std::fs::read(path)?;
-
-        match from_bytes::<indexmap::IndexMap<usize, Classes>>(&bytes) {
-            Ok(mut classes) => {
-                // hkRootContainer" is processed last.
-                classes.sort_keys();
-                let mut top_ptr = None;
-                if !classes.is_empty() {
-                    if let Some((first_key, first_value)) = classes.shift_remove_index(0) {
-                        classes.insert(first_key, first_value);
-                        top_ptr = Some(first_key);
-                    }
+        let path = path.to_path_buf();
+        task_handles.push(tokio::spawn(async {
+            let cloned_path = path.clone();
+            match parse_to_xml(path).await {
+                Ok(_) => Ok(()),
+                Err(err) => {
+                    tracing::error!("{cloned_path:?}\n{err}");
+                    Err(err)
                 }
-
-                let file_name = path.file_stem().unwrap().to_string_lossy();
-
-                let out_root = path
-                    .parent()
-                    .unwrap()
-                    .to_string_lossy()
-                    .replace("./tests/data", "./tests/output/xml");
-                let out_path = format!("{out_root}/{file_name}.xml");
-                let out_path = Path::new(&out_path);
-                std::fs::create_dir_all(out_path.parent().unwrap()).unwrap();
-                std::fs::write(
-                    out_path,
-                    &to_string(&classes, top_ptr.unwrap_or_default()).unwrap(),
-                )
-                .unwrap();
             }
-            Err(err) => {
-                tracing::error!("{path:?}\n{err}");
-                panic!("{path:?}\n{err}")
-            }
-        };
+        }));
     }
 
+    for task_handle in task_handles {
+        if let Err(err) = task_handle.await {
+            panic!("{err}")
+        };
+    }
+    Ok(())
+}
+
+async fn parse_to_xml(path: impl AsRef<Path>) -> Result<()> {
+    let path = path.as_ref();
+    let bytes = std::fs::read(path)?;
+
+    let mut classes = from_bytes::<indexmap::IndexMap<usize, Classes>>(&bytes)?;
+
+    // hkRootContainer" is processed last.
+    classes.sort_keys();
+    let mut top_ptr = None;
+    if !classes.is_empty() {
+        if let Some((first_key, first_value)) = classes.shift_remove_index(0) {
+            classes.insert(first_key, first_value);
+            top_ptr = Some(first_key);
+        }
+    }
+
+    let mut out_path = path.to_path_buf();
+    let _ = out_path.set_extension("xml");
+    let out_path = out_path
+        .to_string_lossy()
+        .replace("./tests/data", "./tests/output/xml");
+    let out_path = Path::new(&out_path);
+
+    tokio::fs::create_dir_all(out_path.parent().unwrap()).await?;
+    tokio::fs::write(out_path, to_string(&classes, top_ptr.unwrap_or_default())?).await?;
     Ok(())
 }

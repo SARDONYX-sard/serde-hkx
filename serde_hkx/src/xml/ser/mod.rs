@@ -240,6 +240,9 @@ impl<'a> Serializer for &'a mut XmlSerializer {
             self.output +=
                 &format!("<hkobject name=\"{ptr_name}\" class=\"{name}\" signature=\"{sig}\">\n");
         } else {
+            if !self.output.ends_with('\n') {
+                self.output += "\n";
+            };
             self.indent();
             self.output += "<hkobject>\n"; // If ptr & signature are not provided, the class is considered to be an in-field class. (e.g. `Array<hkRootContainerNamedVariant>`)
         }
