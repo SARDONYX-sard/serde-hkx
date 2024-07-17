@@ -1,7 +1,7 @@
 use std::path::Path;
 
 use havok_classes::Classes;
-use serde_hkx::{from_bytes, to_string};
+use serde_hkx::{bytes::serde::hkx_header::HkxHeader, from_bytes, to_bytes, to_string};
 
 #[allow(clippy::enum_variant_names)]
 #[derive(Debug, snafu::Snafu)]
@@ -20,6 +20,13 @@ enum ConvertError {
 }
 
 type Result<T> = core::result::Result<T, ConvertError>;
+
+#[tokio::test]
+#[quick_tracing::init(test = "from_bytes_one_files")]
+async fn one_test() -> Result<()> {
+    let path = "./tests/data/meshes/actors/ambient/chicken/chickenproject.hkx";
+    parse_to_xml(path).await
+}
 
 // #[quick_tracing::init(test = "from_bytes_skyrim_se_all_files", stdio = false)]
 #[ignore = "Because it is impossible to test without a set of files in the game."]
@@ -81,5 +88,21 @@ async fn parse_to_xml(path: impl AsRef<Path>) -> Result<()> {
 
     tokio::fs::create_dir_all(out_path.parent().unwrap()).await?;
     tokio::fs::write(out_path, to_string(&classes, top_ptr.unwrap_or_default())?).await?;
+
+    pretty_assertions::assert_eq!(
+        rhexdump::hexdump::RhexdumpString::new().hexdump_bytes(to_bytes(
+            {
+                // classes.insert(usize::MAX, Classes::SwapDummy);
+                classes.sort_keys();
+                // classes.swap_indices(0, classes.len() - 1);
+                // let _ = classes.pop();
+                &classes
+            },
+            &HkxHeader::new_skyrim_se()
+        )?),
+        rhexdump::hexdump::RhexdumpString::new().hexdump_bytes(&bytes),
+        "path = {path:?}"
+    );
+
     Ok(())
 }
