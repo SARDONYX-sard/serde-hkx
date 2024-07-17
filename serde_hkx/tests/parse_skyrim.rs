@@ -22,15 +22,16 @@ enum ConvertError {
 type Result<T> = core::result::Result<T, ConvertError>;
 
 #[tokio::test]
+#[ignore = "Because it is impossible to test without a set of files in the game."]
 #[quick_tracing::init(test = "from_bytes_one_files")]
 async fn one_test() -> Result<()> {
     let path = "./tests/data/meshes/actors/ambient/chicken/chickenproject.hkx";
     parse_to_xml(path).await
 }
 
-// #[quick_tracing::init(test = "from_bytes_skyrim_se_all_files", stdio = false)]
-#[ignore = "Because it is impossible to test without a set of files in the game."]
 #[tokio::test]
+#[ignore = "Because it is impossible to test without a set of files in the game."]
+// #[quick_tracing::init(test = "from_bytes_skyrim_se_all_files", stdio = false)]
 async fn test() -> std::io::Result<()> {
     let mut task_handles: Vec<tokio::task::JoinHandle<Result<()>>> = Vec::new();
 
