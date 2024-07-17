@@ -648,6 +648,15 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         value.serialize(&mut **self)
     }
 
+    #[inline]
+    fn serialize_fixed_array_field<V, T>(&mut self, _key: &'static str, value: V) -> Result<()>
+    where
+        V: AsRef<[T]> + Serialize,
+        T: Serialize,
+    {
+        value.serialize(&mut **self)
+    }
+
     fn serialize_cstring_meta_field(
         &mut self,
         key: &'static str,

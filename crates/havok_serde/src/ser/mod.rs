@@ -297,6 +297,18 @@ pub trait SerializeStruct {
     where
         T: ?Sized + Serialize;
 
+    /// Serialize a struct field for fixed array.
+    /// -   XML: add `numelements` attribute to `hkparam` and write array contents.(same as `hkArray`)
+    /// - Bytes: write each bytes.
+    fn serialize_fixed_array_field<V, T>(
+        &mut self,
+        key: &'static str,
+        value: V,
+    ) -> Result<(), Self::Error>
+    where
+        V: AsRef<[T]> + Serialize,
+        T: Serialize;
+
     /// Serialize a struct field for `CString`.
     /// -   XML: Same as `serialize_field`.
     /// - Bytes: Alloc ptr size -> Write String after write all struct fields.

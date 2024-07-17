@@ -154,12 +154,19 @@ fn impl_serialize_self_fields(
         let rust_field_name = to_rust_field_ident(name);
         let parent_ident = n_time_parent_ident(parent_depth);
 
-        let maybe_as_slice = match arrsize {
-            0 => quote! {},
-            1.. => quote! { .as_slice() },
+        match arrsize {
+            0 => serialize_calls
+                    .push(quote! { serializer.#meta_method(#cpp_field_key, &self #parent_ident.#rust_field_name)?; }),
+            1.. => {
+                if flags.has_skip_serializing() {
+                    serialize_calls
+                        .push(quote! { serializer.#meta_method(#cpp_field_key, &self #parent_ident.#rust_field_name.as_slice())?; })
+                } else {
+                    serialize_calls
+                        .push(quote! { serializer.serialize_fixed_array_field(#cpp_field_key, self #parent_ident.#rust_field_name.as_slice())?; });
+                };
+            }
         };
-        serialize_calls
-            .push(quote! { serializer.#meta_method(#cpp_field_key, &self #parent_ident.#rust_field_name #maybe_as_slice)?; });
 
         // For `Array`, `CString` or `StringPtr`.(Not use `[StringPtr; 4]`)
         if let Some(pointed_method) = pointed_method {

@@ -25,7 +25,8 @@ type Result<T> = core::result::Result<T, ConvertError>;
 #[ignore = "Because it is impossible to test without a set of files in the game."]
 #[quick_tracing::init(test = "from_bytes_one_files")]
 async fn one_test() -> Result<()> {
-    let path = "./tests/data/meshes/actors/ambient/chicken/chickenproject.hkx";
+    let path = "./tests/data/meshes/actors/character/characters/defaultmale.hkx";
+    // let path = "./tests/data/meshes/actors/ambient/chicken/chickenproject.hkx";
     parse_to_xml(path).await
 }
 

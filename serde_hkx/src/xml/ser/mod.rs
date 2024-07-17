@@ -240,8 +240,13 @@ impl<'a> Serializer for &'a mut XmlSerializer {
             self.output +=
                 &format!("<hkobject name=\"{ptr_name}\" class=\"{name}\" signature=\"{sig}\">\n");
         } else {
+            // If there is a line break in the class of a single field, but it is impossible to
+            // determine whether it is a class or not within the serialize method of a single
+            // field, so if there is no line break here, it is processed as class processing
+            // within the field.
             if !self.output.ends_with('\n') {
                 self.output += "\n";
+                self.increment_depth();
             };
             self.indent();
             self.output += "<hkobject>\n"; // If ptr & signature are not provided, the class is considered to be an in-field class. (e.g. `Array<hkRootContainerNamedVariant>`)
@@ -433,8 +438,28 @@ impl<'a> SerializeStruct for &'a mut XmlSerializer {
 
         tri!(value.serialize(&mut **self));
 
+        // The class in the field is currently having line break processing problems,
+        // so it is processed to format it well. from `serialize_struct`
+        if self.output.ends_with("</hkobject>") {
+            self.output += "\n";
+            self.decrement_depth();
+            self.indent();
+        };
         self.output += "</hkparam>\n";
         Ok(())
+    }
+
+    #[inline]
+    fn serialize_fixed_array_field<V, T>(
+        &mut self,
+        key: &'static str,
+        value: V,
+    ) -> std::result::Result<(), Self::Error>
+    where
+        V: AsRef<[T]> + Serialize,
+        T: Serialize,
+    {
+        SerializeStruct::serialize_array_meta_field(self, key, value)
     }
 
     #[inline]
