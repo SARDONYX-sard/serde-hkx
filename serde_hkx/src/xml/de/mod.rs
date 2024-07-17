@@ -223,8 +223,8 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let s = tri!(self.parse(string())); // Read Until `</hkparam>`
-        visitor.visit_stringptr(StringPtr::from_str(s))
+        let s = tri!(self.parse(string())); // Read Until `</`
+        visitor.visit_stringptr(StringPtr::from_option(Some(s)))
     }
 
     // To parse field in struct (e.g. `<hkparam name="key"></hkparam>`)
@@ -497,12 +497,17 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         visitor.visit_pointer(tri!(self.parse(pointer())))
     }
 
-    #[inline]
     fn deserialize_cstring<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_cstring(CString::from_str(tri!(self.parse(string()))))
+        let s = tri!(self.parse(string())); // take until `</`
+        if s == "\u{2400}" {
+            // Unicode null is null
+            visitor.visit_stringptr(StringPtr::from_option(None))
+        } else {
+            visitor.visit_stringptr(StringPtr::from_option(Some(s)))
+        }
     }
 
     #[inline]
@@ -518,7 +523,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         V: Visitor<'de>,
     {
         let s = tri!(self.parse(string()));
-        let result = visitor.visit_stringptr(StringPtr::from_str(s));
+        let result = visitor.visit_stringptr(StringPtr::from_option(Some(s)));
         self.to_readable_err(result)
     }
 
@@ -535,7 +540,12 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
         V: Visitor<'de>,
     {
         let s = tri!(self.parse(string())); // take until `</`
-        visitor.visit_stringptr(StringPtr::from_str(s))
+        if s == "\u{2400}" {
+            // Unicode null is null
+            visitor.visit_stringptr(StringPtr::from_option(None))
+        } else {
+            visitor.visit_stringptr(StringPtr::from_option(Some(s)))
+        }
     }
 }
 

@@ -266,7 +266,7 @@ impl<'a> Serializer for &'a mut XmlSerializer {
     #[inline]
     fn serialize_cstring(self, v: &CString) -> Result<Self::Ok> {
         if let Some(s) = v.get_ref() {
-            self.output += s;
+            self.output += &html_escape::encode_text(s);
         };
         Ok(())
     }
@@ -291,7 +291,10 @@ impl<'a> Serializer for &'a mut XmlSerializer {
     #[inline]
     fn serialize_stringptr(self, v: &StringPtr) -> Result<Self::Ok> {
         if let Some(s) = v.get_ref() {
-            self.output += s;
+            self.output += &html_escape::encode_text(s);
+        } else {
+            // null is &#9216: https://www.compart.com/en/unicode/U+2400
+            self.output += "&#9216;";
         };
         Ok(())
     }

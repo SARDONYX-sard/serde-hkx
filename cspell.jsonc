@@ -1,9 +1,11 @@
 {
   "words": [
     "alloc",
+    "apos",
     "arrsize",
     "bitflags",
     "byteorder",
+    "Caseless",
     "classnames",
     "classversion",
     "Collidable",

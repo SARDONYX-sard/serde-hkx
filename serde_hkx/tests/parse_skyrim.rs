@@ -1,7 +1,7 @@
-use std::path::Path;
-
 use havok_classes::Classes;
-use serde_hkx::{bytes::serde::hkx_header::HkxHeader, from_bytes, to_bytes, to_string};
+use pretty_assertions::assert_eq;
+use serde_hkx::{bytes::serde::hkx_header::HkxHeader, from_bytes, from_str, to_bytes, to_string};
+use std::path::Path;
 
 #[allow(clippy::enum_variant_names)]
 #[derive(Debug, snafu::Snafu)]
@@ -25,7 +25,8 @@ type Result<T> = core::result::Result<T, ConvertError>;
 #[ignore = "Because it is impossible to test without a set of files in the game."]
 #[quick_tracing::init(test = "from_bytes_one_files")]
 async fn one_test() -> Result<()> {
-    let path = "./tests/data/meshes/actors/character/characters/defaultmale.hkx";
+    let path = "./tests/data/meshes/interface/intperkline01.hkx";
+    // let path = "./tests/data/meshes/actors/character/characters/defaultmale.hkx";
     // let path = "./tests/data/meshes/actors/ambient/chicken/chickenproject.hkx";
     parse_to_xml(path).await
 }
@@ -43,7 +44,6 @@ async fn test() -> std::io::Result<()> {
             continue;
         }
 
-        tracing::debug!(?path);
         let path = path.to_path_buf();
         task_handles.push(tokio::spawn(async {
             let cloned_path = path.clone();
@@ -65,11 +65,13 @@ async fn test() -> std::io::Result<()> {
     Ok(())
 }
 
+type ClassMap<'a> = indexmap::IndexMap<usize, Classes<'a>>;
+
 async fn parse_to_xml(path: impl AsRef<Path>) -> Result<()> {
     let path = path.as_ref();
     let bytes = std::fs::read(path)?;
 
-    let mut classes = from_bytes::<indexmap::IndexMap<usize, Classes>>(&bytes)?;
+    let mut classes = from_bytes::<ClassMap>(&bytes)?;
 
     // hkRootContainer" is processed last.
     classes.sort_keys();
@@ -89,22 +91,20 @@ async fn parse_to_xml(path: impl AsRef<Path>) -> Result<()> {
     let out_path = Path::new(&out_path);
 
     tokio::fs::create_dir_all(out_path.parent().unwrap()).await?;
-    tokio::fs::write(out_path, to_string(&classes, top_ptr.unwrap_or_default())?).await?;
+    let xml = to_string(&classes, top_ptr.unwrap_or_default())?;
+    tokio::fs::write(out_path, &xml).await?;
 
-    pretty_assertions::assert_eq!(
-        rhexdump::hexdump::RhexdumpString::new().hexdump_bytes(to_bytes(
-            {
-                // classes.insert(usize::MAX, Classes::SwapDummy);
-                classes.sort_keys();
-                // classes.swap_indices(0, classes.len() - 1);
-                // let _ = classes.pop();
-                &classes
-            },
-            &HkxHeader::new_skyrim_se()
-        )?),
+    classes.sort_keys();
+    assert_eq!(
+        rhexdump::hexdump::RhexdumpString::new()
+            .hexdump_bytes(to_bytes(&classes, &HkxHeader::new_skyrim_se())?),
         rhexdump::hexdump::RhexdumpString::new().hexdump_bytes(&bytes),
         "path = {path:?}"
     );
+
+    let mut classes_from_xml: ClassMap = from_str(&xml)?;
+    classes_from_xml.sort_keys();
+    assert_eq!(classes_from_xml, classes, "path = {path:?}");
 
     Ok(())
 }

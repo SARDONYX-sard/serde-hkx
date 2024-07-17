@@ -1,9 +1,10 @@
 //! TypeKind XML parsers
+
 use crate::{lib::*, tri};
 
 use super::delimited_with_multispace0;
-
 use havok_types::*;
+use std::borrow::Cow;
 use winnow::ascii::{digit1, multispace0};
 use winnow::combinator::{alt, preceded, seq};
 use winnow::error::{ContextError, StrContext, StrContextValue};
@@ -154,8 +155,9 @@ pub fn pointer<'a>() -> impl Parser<&'a str, Pointer, ContextError> {
 
 /// Parses a string literal until `</`, e.g., `example` in (`example</`).
 /// - The corresponding type kind: `CString`, `StringPtr`
-pub fn string<'a>() -> impl Parser<&'a str, &'a str, ContextError> {
+pub fn string<'a>() -> impl Parser<&'a str, Cow<'a, str>, ContextError> {
     take_until(0.., "</")
+        .map(|s| html_escape::decode_html_entities(s))
         .context(StrContext::Label(
             "end of string tag(`</hkparam>`, `</hkcstring>` in Array)",
         ))
@@ -229,10 +231,20 @@ mod tests {
 
     #[test]
     fn test_string() {
-        assert_eq!(string().parse_next(&mut "example</"), Ok("example"));
+        assert_eq!(string().parse_next(&mut "example</"), Ok("example".into()));
         assert_eq!(
             string().parse_next(&mut "example</not_hkparam>"),
-            Ok("example")
+            Ok("example".into())
+        );
+
+        assert_eq!(string().parse_next(&mut "&#9216;</"), Ok("\u{2400}".into()));
+        let mut escaped =
+            "This is a &lt;test&gt; &amp; &quot;example&quot; &apos; &#9216; &#x2400;</";
+        assert_eq!(
+            string().parse_next(&mut escaped),
+            Ok(Cow::Borrowed(
+                "This is a <test> & \"example\" ' \u{2400} \u{2400}"
+            ))
         );
     }
 }

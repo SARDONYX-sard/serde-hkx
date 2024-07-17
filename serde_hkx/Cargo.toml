@@ -16,6 +16,7 @@ educe = "0.6.0"
 havok_serde = { path = "../crates/havok_serde", features = ["indexmap"] }
 havok_types = { path = "../crates/havok_types" }
 havok_types_derive = { path = "../crates/havok_types_derive" }            # To impl `Default`&`FromStr` for Bitflags
+html-escape = "0.2.13"
 indexmap = "2.2.6"
 rhexdump = "0.2.0"                                                        # hexdump display for binary error repoting
 snafu = "0.8.2"                                                           # Define all error patterns(with backtrace)
