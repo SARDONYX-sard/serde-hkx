@@ -88,7 +88,8 @@ const _: () = {
                     "wantAabbRejectionTest",
                     &self.m_wantAabbRejectionTest,
                 )?;
-            serializer.serialize_field("padding", &self.m_padding.as_slice())?;
+            serializer
+                .serialize_fixed_array_field("padding", self.m_padding.as_slice())?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
             serializer.end()
         }

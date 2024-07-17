@@ -115,7 +115,8 @@ const _: () = {
             serializer.serialize_field("data", &self.m_data)?;
             serializer
                 .serialize_field("constraintModifiers", &self.m_constraintModifiers)?;
-            serializer.serialize_field("entities", &self.m_entities.as_slice())?;
+            serializer
+                .serialize_fixed_array_field("entities", self.m_entities.as_slice())?;
             serializer.serialize_field("priority", &self.m_priority)?;
             serializer.serialize_field("wantRuntime", &self.m_wantRuntime)?;
             serializer

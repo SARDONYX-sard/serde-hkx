@@ -86,7 +86,11 @@ const _: () = {
                 .map(|name| (name, _serde::__private::Signature::new(0xf2a92154)));
             let mut serializer = __serializer
                 .serialize_struct("hkPackfileSectionHeader", class_meta)?;
-            serializer.serialize_field("sectionTag", &self.m_sectionTag.as_slice())?;
+            serializer
+                .serialize_fixed_array_field(
+                    "sectionTag",
+                    self.m_sectionTag.as_slice(),
+                )?;
             serializer.serialize_field("nullByte", &self.m_nullByte)?;
             serializer.serialize_field("absoluteDataStart", &self.m_absoluteDataStart)?;
             serializer.serialize_field("localFixupsOffset", &self.m_localFixupsOffset)?;

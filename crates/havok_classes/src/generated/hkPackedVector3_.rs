@@ -46,7 +46,7 @@ const _: () = {
                 .map(|name| (name, _serde::__private::Signature::new(0x9c16df5b)));
             let mut serializer = __serializer
                 .serialize_struct("hkPackedVector3", class_meta)?;
-            serializer.serialize_field("values", &self.m_values.as_slice())?;
+            serializer.serialize_fixed_array_field("values", self.m_values.as_slice())?;
             serializer.end()
         }
     }

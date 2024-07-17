@@ -81,7 +81,7 @@ const _: () = {
                     &self.m_rollingFrictionMultiplier,
                 )?;
             serializer.serialize_field("internalData1", &self.m_internalData1)?;
-            serializer.serialize_field("data", &self.m_data.as_slice())?;
+            serializer.serialize_fixed_array_field("data", self.m_data.as_slice())?;
             serializer.end()
         }
     }

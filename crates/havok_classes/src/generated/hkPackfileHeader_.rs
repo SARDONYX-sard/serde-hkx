@@ -101,10 +101,14 @@ const _: () = {
                 .map(|name| (name, _serde::__private::Signature::new(0x79f9ffda)));
             let mut serializer = __serializer
                 .serialize_struct("hkPackfileHeader", class_meta)?;
-            serializer.serialize_field("magic", &self.m_magic.as_slice())?;
+            serializer.serialize_fixed_array_field("magic", self.m_magic.as_slice())?;
             serializer.serialize_field("userTag", &self.m_userTag)?;
             serializer.serialize_field("fileVersion", &self.m_fileVersion)?;
-            serializer.serialize_field("layoutRules", &self.m_layoutRules.as_slice())?;
+            serializer
+                .serialize_fixed_array_field(
+                    "layoutRules",
+                    self.m_layoutRules.as_slice(),
+                )?;
             serializer.serialize_field("numSections", &self.m_numSections)?;
             serializer
                 .serialize_field("contentsSectionIndex", &self.m_contentsSectionIndex)?;
@@ -124,9 +128,12 @@ const _: () = {
                     &self.m_contentsClassNameSectionOffset,
                 )?;
             serializer
-                .serialize_field("contentsVersion", &self.m_contentsVersion.as_slice())?;
+                .serialize_fixed_array_field(
+                    "contentsVersion",
+                    self.m_contentsVersion.as_slice(),
+                )?;
             serializer.serialize_field("flags", &self.m_flags)?;
-            serializer.serialize_field("pad", &self.m_pad.as_slice())?;
+            serializer.serialize_fixed_array_field("pad", self.m_pad.as_slice())?;
             serializer.end()
         }
     }

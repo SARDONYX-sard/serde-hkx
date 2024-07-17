@@ -91,7 +91,10 @@ const _: () = {
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("format", &self.m_format)?;
             serializer
-                .serialize_field("elementOffsets", &self.m_elementOffsets.as_slice())?;
+                .serialize_fixed_array_field(
+                    "elementOffsets",
+                    self.m_elementOffsets.as_slice(),
+                )?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_array_meta_field("memory", &self.m_memory)?;
             serializer.serialize_field("vertexStride", &self.m_vertexStride)?;

@@ -46,7 +46,7 @@ const _: () = {
                 .map(|name| (name, _serde::__private::Signature::new(0x6a4ca82c)));
             let mut serializer = __serializer
                 .serialize_struct("hkTraceStreamTitle", class_meta)?;
-            serializer.serialize_field("value", &self.m_value.as_slice())?;
+            serializer.serialize_fixed_array_field("value", self.m_value.as_slice())?;
             serializer.end()
         }
     }

@@ -62,9 +62,9 @@ const _: () = {
                     &self.parent.parent.m_deactivationIntegrateCounter,
                 )?;
             serializer
-                .serialize_field(
+                .serialize_fixed_array_field(
                     "deactivationNumInactiveFrames",
-                    &self.parent.parent.m_deactivationNumInactiveFrames.as_slice(),
+                    self.parent.parent.m_deactivationNumInactiveFrames.as_slice(),
                 )?;
             serializer.pad_field([0u8; 2usize].as_slice(), [0u8; 10usize].as_slice())?;
             serializer
@@ -85,14 +85,14 @@ const _: () = {
                     &self.parent.parent.m_angularVelocity,
                 )?;
             serializer
-                .serialize_field(
+                .serialize_fixed_array_field(
                     "deactivationRefPosition",
-                    &self.parent.parent.m_deactivationRefPosition.as_slice(),
+                    self.parent.parent.m_deactivationRefPosition.as_slice(),
                 )?;
             serializer
-                .serialize_field(
+                .serialize_fixed_array_field(
                     "deactivationRefOrientation",
-                    &self.parent.parent.m_deactivationRefOrientation.as_slice(),
+                    self.parent.parent.m_deactivationRefOrientation.as_slice(),
                 )?;
             serializer
                 .serialize_field("savedMotion", &self.parent.parent.m_savedMotion)?;

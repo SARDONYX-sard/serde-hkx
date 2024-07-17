@@ -57,10 +57,16 @@ const _: () = {
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.pad_field([0u8; 16usize].as_slice(), [0u8; 32usize].as_slice())?;
             serializer
-                .serialize_field("prepad", &self.parent.parent.m_prepad.as_slice())?;
+                .serialize_fixed_array_field(
+                    "prepad",
+                    self.parent.parent.m_prepad.as_slice(),
+                )?;
             serializer.serialize_field("type", &self.parent.parent.m_type)?;
             serializer
-                .serialize_field("postpad", &self.parent.parent.m_postpad.as_slice())?;
+                .serialize_fixed_array_field(
+                    "postpad",
+                    self.parent.parent.m_postpad.as_slice(),
+                )?;
             serializer.skip_field("disabledPairs", &self.parent.m_disabledPairs)?;
             serializer.serialize_field("childFilter", &self.parent.m_childFilter)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;

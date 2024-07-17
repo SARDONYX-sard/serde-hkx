@@ -81,7 +81,11 @@ const _: () = {
                 .map(|name| (name, _serde::__private::Signature::new(0xa3c341f8)));
             let mut serializer = __serializer
                 .serialize_struct("hkbGeneratorSyncInfo", class_meta)?;
-            serializer.serialize_field("syncPoints", &self.m_syncPoints.as_slice())?;
+            serializer
+                .serialize_fixed_array_field(
+                    "syncPoints",
+                    self.m_syncPoints.as_slice(),
+                )?;
             serializer.pad_field([0u8; 56usize].as_slice(), [0u8; 0usize].as_slice())?;
             serializer.serialize_field("baseFrequency", &self.m_baseFrequency)?;
             serializer.serialize_field("localTime", &self.m_localTime)?;

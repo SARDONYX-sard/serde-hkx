@@ -75,7 +75,7 @@ const _: () = {
             serializer.serialize_field("pivotInB", &self.m_pivotInB)?;
             serializer.serialize_field("aTc", &self.m_aTc)?;
             serializer.serialize_field("bTc", &self.m_bTc)?;
-            serializer.serialize_field("motors", &self.m_motors.as_slice())?;
+            serializer.serialize_fixed_array_field("motors", self.m_motors.as_slice())?;
             serializer.serialize_field("switchBodies", &self.m_switchBodies)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 7usize].as_slice())?;
             serializer.end()

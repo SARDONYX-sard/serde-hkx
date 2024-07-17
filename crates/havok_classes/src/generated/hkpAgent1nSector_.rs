@@ -72,7 +72,7 @@ const _: () = {
             serializer.serialize_field("pad0", &self.m_pad0)?;
             serializer.serialize_field("pad1", &self.m_pad1)?;
             serializer.serialize_field("pad2", &self.m_pad2)?;
-            serializer.serialize_field("data", &self.m_data.as_slice())?;
+            serializer.serialize_fixed_array_field("data", self.m_data.as_slice())?;
             serializer.end()
         }
     }

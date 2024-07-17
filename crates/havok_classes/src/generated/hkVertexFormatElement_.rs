@@ -76,7 +76,7 @@ const _: () = {
             serializer.serialize_field("usage", &self.m_usage)?;
             serializer.serialize_field("subUsage", &self.m_subUsage)?;
             serializer.serialize_field("flags", &self.m_flags)?;
-            serializer.serialize_field("pad", &self.m_pad.as_slice())?;
+            serializer.serialize_fixed_array_field("pad", self.m_pad.as_slice())?;
             serializer.end()
         }
     }

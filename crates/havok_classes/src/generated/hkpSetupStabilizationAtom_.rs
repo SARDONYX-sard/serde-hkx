@@ -62,7 +62,8 @@ const _: () = {
             serializer.serialize_field("enabled", &self.m_enabled)?;
             serializer.pad_field([0u8; 1usize].as_slice(), [0u8; 1usize].as_slice())?;
             serializer.serialize_field("maxAngle", &self.m_maxAngle)?;
-            serializer.serialize_field("padding", &self.m_padding.as_slice())?;
+            serializer
+                .serialize_fixed_array_field("padding", self.m_padding.as_slice())?;
             serializer.end()
         }
     }

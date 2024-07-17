@@ -82,7 +82,7 @@ const _: () = {
                 .serialize_stringptr_meta_field("name", &self.parent.parent.m_name)?;
             serializer.serialize_field("entityA", &self.parent.m_entityA)?;
             serializer.serialize_field("entityB", &self.parent.m_entityB)?;
-            serializer.serialize_field("point", &self.m_point.as_slice())?;
+            serializer.serialize_fixed_array_field("point", self.m_point.as_slice())?;
             serializer.serialize_field("strength", &self.m_strength)?;
             serializer.serialize_field("damping", &self.m_damping)?;
             serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 8usize].as_slice())?;

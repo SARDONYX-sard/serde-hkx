@@ -110,7 +110,7 @@ const _: () = {
             serializer.serialize_field("weldingType", &self.m_weldingType)?;
             serializer.pad_field([0u8; 3usize].as_slice(), [0u8; 3usize].as_slice())?;
             serializer.serialize_field("radius", &self.m_radius)?;
-            serializer.serialize_field("pad", &self.m_pad.as_slice())?;
+            serializer.serialize_fixed_array_field("pad", self.m_pad.as_slice())?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_array_field("subparts", &self.m_subparts)?;
             serializer.serialize_array_field("weldingInfo", &self.m_weldingInfo)?;

@@ -135,12 +135,16 @@ const _: () = {
             serializer
                 .serialize_array_meta_field("contactPoints", &self.m_contactPoints)?;
             serializer.serialize_array_meta_field("cpIdMgr", &self.m_cpIdMgr)?;
-            serializer.serialize_field("nnEntryData", &self.m_nnEntryData.as_slice())?;
+            serializer
+                .serialize_fixed_array_field(
+                    "nnEntryData",
+                    self.m_nnEntryData.as_slice(),
+                )?;
             serializer.serialize_field("trackInfo", &self.m_trackInfo)?;
             serializer
-                .serialize_field(
+                .serialize_fixed_array_field(
                     "endianCheckBuffer",
-                    &self.m_endianCheckBuffer.as_slice(),
+                    self.m_endianCheckBuffer.as_slice(),
                 )?;
             serializer.serialize_field("version", &self.m_version)?;
             serializer.pad_field([0u8; 12usize].as_slice(), [0u8; 8usize].as_slice())?;

@@ -808,9 +808,9 @@ const _: () = {
             serializer
                 .pad_field([0u8; 320usize].as_slice(), [0u8; 328usize].as_slice())?;
             serializer
-                .serialize_field(
+                .serialize_fixed_array_field(
                     "broadPhaseExtents",
-                    &self.m_broadPhaseExtents.as_slice(),
+                    self.m_broadPhaseExtents.as_slice(),
                 )?;
             serializer
                 .serialize_field("broadPhaseNumMarkers", &self.m_broadPhaseNumMarkers)?;

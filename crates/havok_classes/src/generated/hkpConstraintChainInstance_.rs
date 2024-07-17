@@ -66,7 +66,11 @@ const _: () = {
                     "constraintModifiers",
                     &self.parent.m_constraintModifiers,
                 )?;
-            serializer.serialize_field("entities", &self.parent.m_entities.as_slice())?;
+            serializer
+                .serialize_fixed_array_field(
+                    "entities",
+                    self.parent.m_entities.as_slice(),
+                )?;
             serializer.serialize_field("priority", &self.parent.m_priority)?;
             serializer.serialize_field("wantRuntime", &self.parent.m_wantRuntime)?;
             serializer

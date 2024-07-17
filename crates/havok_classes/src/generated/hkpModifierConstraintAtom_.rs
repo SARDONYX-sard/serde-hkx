@@ -70,7 +70,7 @@ const _: () = {
             serializer.serialize_field("childSize", &self.m_childSize)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("child", &self.m_child)?;
-            serializer.serialize_field("pad", &self.m_pad.as_slice())?;
+            serializer.serialize_fixed_array_field("pad", self.m_pad.as_slice())?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.end()
         }

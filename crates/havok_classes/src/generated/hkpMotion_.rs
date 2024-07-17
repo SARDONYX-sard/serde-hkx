@@ -113,9 +113,9 @@ const _: () = {
                     &self.m_deactivationIntegrateCounter,
                 )?;
             serializer
-                .serialize_field(
+                .serialize_fixed_array_field(
                     "deactivationNumInactiveFrames",
-                    &self.m_deactivationNumInactiveFrames.as_slice(),
+                    self.m_deactivationNumInactiveFrames.as_slice(),
                 )?;
             serializer.pad_field([0u8; 2usize].as_slice(), [0u8; 10usize].as_slice())?;
             serializer.serialize_field("motionState", &self.m_motionState)?;
@@ -123,14 +123,14 @@ const _: () = {
             serializer.serialize_field("linearVelocity", &self.m_linearVelocity)?;
             serializer.serialize_field("angularVelocity", &self.m_angularVelocity)?;
             serializer
-                .serialize_field(
+                .serialize_fixed_array_field(
                     "deactivationRefPosition",
-                    &self.m_deactivationRefPosition.as_slice(),
+                    self.m_deactivationRefPosition.as_slice(),
                 )?;
             serializer
-                .serialize_field(
+                .serialize_fixed_array_field(
                     "deactivationRefOrientation",
-                    &self.m_deactivationRefOrientation.as_slice(),
+                    self.m_deactivationRefOrientation.as_slice(),
                 )?;
             serializer.serialize_field("savedMotion", &self.m_savedMotion)?;
             serializer

@@ -132,7 +132,10 @@ const _: () = {
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.skip_field("contactBody", &self.m_contactBody)?;
             serializer
-                .serialize_field("contactShapeKey", &self.m_contactShapeKey.as_slice())?;
+                .serialize_fixed_array_field(
+                    "contactShapeKey",
+                    self.m_contactShapeKey.as_slice(),
+                )?;
             serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 0usize].as_slice())?;
             serializer.serialize_field("hardPointWs", &self.m_hardPointWs)?;
             serializer.serialize_field("rayEndPointWs", &self.m_rayEndPointWs)?;

@@ -72,11 +72,19 @@ const _: () = {
                 .map(|name| (name, _serde::__private::Signature::new(0x11e7c11)));
             let mut serializer = __serializer
                 .serialize_struct("hkAabbUint32", class_meta)?;
-            serializer.serialize_field("min", &self.m_min.as_slice())?;
-            serializer.serialize_field("expansionMin", &self.m_expansionMin.as_slice())?;
+            serializer.serialize_fixed_array_field("min", self.m_min.as_slice())?;
+            serializer
+                .serialize_fixed_array_field(
+                    "expansionMin",
+                    self.m_expansionMin.as_slice(),
+                )?;
             serializer.serialize_field("expansionShift", &self.m_expansionShift)?;
-            serializer.serialize_field("max", &self.m_max.as_slice())?;
-            serializer.serialize_field("expansionMax", &self.m_expansionMax.as_slice())?;
+            serializer.serialize_fixed_array_field("max", self.m_max.as_slice())?;
+            serializer
+                .serialize_fixed_array_field(
+                    "expansionMax",
+                    self.m_expansionMax.as_slice(),
+                )?;
             serializer.serialize_field("shapeKeyByte", &self.m_shapeKeyByte)?;
             serializer.end()
         }

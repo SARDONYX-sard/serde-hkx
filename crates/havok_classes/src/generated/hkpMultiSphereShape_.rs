@@ -70,7 +70,8 @@ const _: () = {
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.serialize_field("numSpheres", &self.m_numSpheres)?;
             serializer.pad_field([0u8; 12usize].as_slice(), [0u8; 12usize].as_slice())?;
-            serializer.serialize_field("spheres", &self.m_spheres.as_slice())?;
+            serializer
+                .serialize_fixed_array_field("spheres", self.m_spheres.as_slice())?;
             serializer.end()
         }
     }

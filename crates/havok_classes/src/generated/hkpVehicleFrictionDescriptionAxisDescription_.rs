@@ -95,9 +95,9 @@ const _: () = {
                     class_meta,
                 )?;
             serializer
-                .serialize_field(
+                .serialize_fixed_array_field(
                     "frictionCircleYtab",
-                    &self.m_frictionCircleYtab.as_slice(),
+                    self.m_frictionCircleYtab.as_slice(),
                 )?;
             serializer.serialize_field("xStep", &self.m_xStep)?;
             serializer.serialize_field("xStart", &self.m_xStart)?;

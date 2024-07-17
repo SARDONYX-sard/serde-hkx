@@ -51,7 +51,8 @@ const _: () = {
                 .map(|name| (name, _serde::__private::Signature::new(0xf11e3ff7)));
             let mut serializer = __serializer
                 .serialize_struct("hkVertexFormat", class_meta)?;
-            serializer.serialize_field("elements", &self.m_elements.as_slice())?;
+            serializer
+                .serialize_fixed_array_field("elements", self.m_elements.as_slice())?;
             serializer.pad_field([0u8; 248usize].as_slice(), [0u8; 0usize].as_slice())?;
             serializer.serialize_field("numElements", &self.m_numElements)?;
             serializer.end()

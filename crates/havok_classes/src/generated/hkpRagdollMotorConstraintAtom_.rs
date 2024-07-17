@@ -79,7 +79,7 @@ const _: () = {
                 )?;
             serializer.pad_field([0u8; 8usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.serialize_field("target_bRca", &self.m_target_bRca)?;
-            serializer.serialize_field("motors", &self.m_motors.as_slice())?;
+            serializer.serialize_fixed_array_field("motors", self.m_motors.as_slice())?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.end()
         }

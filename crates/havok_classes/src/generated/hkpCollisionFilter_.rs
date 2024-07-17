@@ -63,9 +63,10 @@ const _: () = {
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
             serializer.pad_field([0u8; 0usize].as_slice(), [0u8; 4usize].as_slice())?;
             serializer.pad_field([0u8; 16usize].as_slice(), [0u8; 32usize].as_slice())?;
-            serializer.serialize_field("prepad", &self.m_prepad.as_slice())?;
+            serializer.serialize_fixed_array_field("prepad", self.m_prepad.as_slice())?;
             serializer.serialize_field("type", &self.m_type)?;
-            serializer.serialize_field("postpad", &self.m_postpad.as_slice())?;
+            serializer
+                .serialize_fixed_array_field("postpad", self.m_postpad.as_slice())?;
             serializer.end()
         }
     }

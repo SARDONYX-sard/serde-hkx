@@ -85,7 +85,10 @@ const _: () = {
                 )?;
             serializer.pad_field([0u8; 15usize].as_slice(), [0u8; 3usize].as_slice())?;
             serializer
-                .serialize_field("transform_OS_KS", &self.m_transform_OS_KS.as_slice())?;
+                .serialize_fixed_array_field(
+                    "transform_OS_KS",
+                    self.m_transform_OS_KS.as_slice(),
+                )?;
             serializer.end()
         }
     }

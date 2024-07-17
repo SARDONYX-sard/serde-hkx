@@ -100,7 +100,10 @@ const _: () = {
             serializer.serialize_field("aabbHalfExtents", &self.m_aabbHalfExtents)?;
             serializer.serialize_field("aabbCenter", &self.m_aabbCenter)?;
             serializer
-                .serialize_field("enabledChildren", &self.m_enabledChildren.as_slice())?;
+                .serialize_fixed_array_field(
+                    "enabledChildren",
+                    self.m_enabledChildren.as_slice(),
+                )?;
             serializer.serialize_array_field("childInfo", &self.m_childInfo)?;
             serializer.end()
         }

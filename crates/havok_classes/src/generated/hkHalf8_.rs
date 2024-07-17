@@ -46,7 +46,7 @@ const _: () = {
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x7684dc80)));
             let mut serializer = __serializer.serialize_struct("hkHalf8", class_meta)?;
-            serializer.serialize_field("quad", &self.m_quad.as_slice())?;
+            serializer.serialize_fixed_array_field("quad", self.m_quad.as_slice())?;
             serializer.end()
         }
     }

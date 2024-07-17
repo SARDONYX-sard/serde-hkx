@@ -58,7 +58,8 @@ const _: () = {
                 .serialize_struct("hkpVehicleFrictionDescription", class_meta)?;
             serializer.serialize_field("wheelDistance", &self.m_wheelDistance)?;
             serializer.serialize_field("chassisMassInv", &self.m_chassisMassInv)?;
-            serializer.serialize_field("axleDescr", &self.m_axleDescr.as_slice())?;
+            serializer
+                .serialize_fixed_array_field("axleDescr", self.m_axleDescr.as_slice())?;
             serializer.pad_field([0u8; 100usize].as_slice(), [0u8; 0usize].as_slice())?;
             serializer.end()
         }
