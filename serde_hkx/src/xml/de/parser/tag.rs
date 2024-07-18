@@ -31,26 +31,7 @@ pub fn end_tag<'a>(tag: &'static str) -> impl Parser<&'a str, (), ContextError> 
         _: delimited_multispace0_comment(">")
     )
     .context(StrContext::Label("end tag"))
-}
-
-/// Parses the array start close tag ` numelements="3">`
-///
-/// Use the `field_start_open_tag` in combination with the `attr_string` parser.
-///
-/// # Returns
-/// `numelements` -> e.g. `3`
-pub fn array_field_start_close_tag<'a>() -> impl Parser<&'a str, u64, ContextError> {
-    seq!(
-        _: delimited_with_multispace0("numelements"),
-        _: delimited_with_multispace0("="),
-        number_in_string(), // e.g. "8"
-        _: delimited_multispace0_comment(">")
-    )
-    .map(|num| num.0)
-    .context(StrContext::Label("class field of array start closing tag"))
-    .context(StrContext::Expected(StrContextValue::Description(
-        "e.g. `numelements=\"3\">`",
-    )))
+    .context(StrContext::Label(tag))
 }
 
 /// Parses the array start tag (e.g. `<hkobject name="#0010" class="hkbProjectData" signature="0x13a39ba7">`)
@@ -83,7 +64,13 @@ pub fn class_start_tag<'a>() -> impl Parser<&'a str, (Pointer, &'a str, Signatur
 }
 
 /// Parses the field of class start opening tag `<hkparam name=`
-pub fn field_start_open_tag<'a>() -> impl Parser<&'a str, (), ContextError> {
+///
+/// # Note
+/// All arguments are used only for clarity of error reporting.
+pub fn field_start_open_tag<'a>(
+    class_name: &'static str,
+    field_name: &'static str,
+) -> impl Parser<&'a str, (), ContextError> {
     seq!(
         _: delimited_comment_multispace0("<"),
         _: delimited_with_multispace0("hkparam"),
@@ -91,23 +78,26 @@ pub fn field_start_open_tag<'a>() -> impl Parser<&'a str, (), ContextError> {
         _: delimited_with_multispace0("="),
     )
     .context(StrContext::Label("field of class: start opening tag"))
+    .context(StrContext::Label(field_name))
+    .context(StrContext::Label(class_name))
     .context(StrContext::Expected(StrContextValue::Description(
         "e.g. `<hkparam name=`",
     )))
 }
 
 /// Parses the field of class start closing tag `>`
-pub fn field_start_close_tag<'a>() -> impl Parser<&'a str, (), ContextError> {
+pub fn field_start_close_tag<'a>() -> impl Parser<&'a str, Option<u64>, ContextError> {
     seq!(
-        _: winnow::combinator::opt(
+        winnow::combinator::opt(
             seq!(
                 _: delimited_with_multispace0("numelements"),
                 _: delimited_with_multispace0("="),
-                _: number_in_string::<u64>(), // e.g. "8"
+                number_in_string::<u64>(), // e.g. "8"
             )
         ),
         _: delimited_multispace0_comment(">")
     )
+    .map(|(n,)| n.map(|n| n.0))
     .context(StrContext::Label("field of class: start closing tag"))
     .context(StrContext::Expected(StrContextValue::Description(
         "e.g. `>`",
@@ -195,9 +185,9 @@ mod tests {
     }
 
     #[test]
-    fn test_parse_array_start_tag() {
-        fn test_parse(input: &str, expected: u64) {
-            match array_field_start_close_tag()
+    fn test_parse_array_start_close_tag() {
+        fn test_parse(input: &str, expected: Option<u64>) {
+            match field_start_close_tag()
                 .parse(input)
                 .map_err(|e| ReadableError::from_parse(e, input).to_string())
             {
@@ -207,7 +197,7 @@ mod tests {
         }
 
         let ideal_input = r#" numelements="3">"#;
-        test_parse(ideal_input, 3);
+        test_parse(ideal_input, Some(3));
 
         let indent_input = r#"
 
@@ -215,7 +205,7 @@ mod tests {
   = "85"
 
 >"#;
-        test_parse(indent_input, 85);
+        test_parse(indent_input, Some(85));
     }
 
     #[test]

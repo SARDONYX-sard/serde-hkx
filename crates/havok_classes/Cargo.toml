@@ -26,3 +26,7 @@ serde_with = { version = "3.8.1", optional = true } # Serde utility
 [features]
 # Derive `serde`
 serde = ["dep:serde", "dep:serde_with"]
+
+# Strictly check for the presence of values.
+# For example, if a field is missing, an error is made. (but not the original behavior).
+strict = []

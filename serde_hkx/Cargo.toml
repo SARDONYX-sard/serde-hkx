@@ -26,7 +26,7 @@ winnow = { version = "0.6.8", features = ["simd"] }                       # Pars
 
 [dev-dependencies]
 bitflags = "2.4" # To generate flags type(mock)
-havok_classes = { path = "../crates/havok_classes" }
+havok_classes = { path = "../crates/havok_classes", features = ["strict"] }
 jwalk = { version = "0.8" } # To enumarate json class files
 num-derive = "0.4" # enum to number(mock)
 num-traits = "0.2" # enum to number(mock)

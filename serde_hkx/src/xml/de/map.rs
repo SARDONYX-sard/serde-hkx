@@ -26,11 +26,12 @@ use havok_types::Pointer;
 pub struct MapDeserializer<'a, 'de: 'a> {
     /// Deserializer
     de: &'a mut XmlDeserializer<'de>,
+    ptr_name: Option<Pointer>,
+    class_name: &'static str,
     fields: &'static [&'static str],
 
     /// To check fields length
     index: usize,
-    ptr_name: Option<Pointer>,
 }
 
 impl<'a, 'de> MapDeserializer<'a, 'de> {
@@ -38,13 +39,15 @@ impl<'a, 'de> MapDeserializer<'a, 'de> {
     pub fn new(
         de: &'a mut XmlDeserializer<'de>,
         ptr_name: Option<Pointer>,
+        class_name: &'static str,
         fields: &'static [&'static str],
     ) -> Self {
         Self {
             de,
+            ptr_name,
+            class_name,
             fields,
             index: 0,
-            ptr_name,
         }
     }
 }
@@ -67,9 +70,12 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
             return Ok(None);
         }
 
-        tri!(self.de.parse(field_start_open_tag())); // Parse `<hkparam name=`
+        let field_name = self.fields[self.index];
+        tri!(self
+            .de
+            .parse_next(field_start_open_tag(self.class_name, field_name))); // Parse `<hkparam name=`
         let key = seed.deserialize(&mut *self.de).map(Some); // Parse `"string"`
-        tri!(self.de.parse(field_start_close_tag())); // Parse `>` or ` numelements="3">`
+        tri!(self.de.parse_next(field_start_close_tag())); // Parse `>` or ` numelements="3">`
         self.index += 1;
 
         key
@@ -81,7 +87,7 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
         V: DeserializeSeed<'de>,
     {
         let value = tri!(seed.deserialize(&mut *self.de));
-        tri!(self.de.parse(end_tag("hkparam")));
+        tri!(self.de.parse_next(end_tag("hkparam")));
         Ok(value)
     }
 

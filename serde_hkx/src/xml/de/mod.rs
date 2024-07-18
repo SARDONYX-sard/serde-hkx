@@ -112,10 +112,10 @@ where
     T: Deserialize<'a>,
 {
     let mut deserializer = de;
-    tri!(deserializer.parse(winnow::token::take_until(0.., "<hkobject")));
+    tri!(deserializer.parse_next(winnow::token::take_until(0.., "<hkobject")));
     let t = tri!(T::deserialize(&mut deserializer));
-    tri!(deserializer.parse(opt(end_tag("hksection"))));
-    tri!(deserializer.parse(opt(end_tag("hkpackfile"))));
+    tri!(deserializer.parse_next(opt(end_tag("hksection"))));
+    tri!(deserializer.parse_next(opt(end_tag("hkpackfile"))));
 
     if deserializer.input.is_empty() {
         Ok(t)
@@ -146,7 +146,7 @@ impl<'de> XmlDeserializer<'de> {
     /// Parse by argument parser.
     ///
     /// If an error occurs, it is converted to [`ReadableError`] and returned.
-    fn parse<O>(
+    fn parse_next<O>(
         &mut self,
         mut parser: impl Parser<&'de str, O, winnow::error::ContextError>,
     ) -> Result<O> {
@@ -223,7 +223,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let s = tri!(self.parse(string())); // Read Until `</`
+        let s = tri!(self.parse_next(string())); // Read Until `</`
         visitor.visit_stringptr(StringPtr::from_option(Some(s)))
     }
 
@@ -233,7 +233,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let key = tri!(self.parse(attr_string()));
+        let key = tri!(self.parse_next(attr_string()));
 
         #[cfg(feature = "tracing")]
         tracing::debug!(key);
@@ -262,7 +262,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_bool(tri!(self.parse(boolean())))
+        visitor.visit_bool(tri!(self.parse_next(boolean())))
     }
 
     fn deserialize_char<V>(self, visitor: V) -> Result<V::Value, Self::Error>
@@ -279,7 +279,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_int8(tri!(self.parse(dec_int)))
+        visitor.visit_int8(tri!(self.parse_next(dec_int)))
     }
 
     #[inline]
@@ -287,7 +287,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_uint8(tri!(self.parse(dec_uint)))
+        visitor.visit_uint8(tri!(self.parse_next(dec_uint)))
     }
 
     #[inline]
@@ -295,7 +295,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_int16(tri!(self.parse(dec_int)))
+        visitor.visit_int16(tri!(self.parse_next(dec_int)))
     }
 
     #[inline]
@@ -303,7 +303,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_uint16(tri!(self.parse(dec_uint)))
+        visitor.visit_uint16(tri!(self.parse_next(dec_uint)))
     }
 
     #[inline]
@@ -311,7 +311,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_int32(tri!(self.parse(dec_int)))
+        visitor.visit_int32(tri!(self.parse_next(dec_int)))
     }
 
     #[inline]
@@ -319,7 +319,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_uint32(tri!(self.parse(dec_uint)))
+        visitor.visit_uint32(tri!(self.parse_next(dec_uint)))
     }
 
     #[inline]
@@ -327,7 +327,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_int64(tri!(self.parse(dec_int)))
+        visitor.visit_int64(tri!(self.parse_next(dec_int)))
     }
 
     #[inline]
@@ -335,7 +335,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_uint64(tri!(self.parse(dec_uint)))
+        visitor.visit_uint64(tri!(self.parse_next(dec_uint)))
     }
 
     #[inline]
@@ -343,70 +343,70 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_real(tri!(self.parse(real())))
+        visitor.visit_real(tri!(self.parse_next(real())))
     }
 
     fn deserialize_vector4<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_vector4(tri!(self.parse(vector4())))
+        visitor.visit_vector4(tri!(self.parse_next(vector4())))
     }
 
     fn deserialize_quaternion<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_quaternion(tri!(self.parse(quaternion())))
+        visitor.visit_quaternion(tri!(self.parse_next(quaternion())))
     }
 
     fn deserialize_matrix3<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_matrix3(tri!(self.parse(matrix3())))
+        visitor.visit_matrix3(tri!(self.parse_next(matrix3())))
     }
 
     fn deserialize_rotation<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_rotation(tri!(self.parse(rotation())))
+        visitor.visit_rotation(tri!(self.parse_next(rotation())))
     }
 
     fn deserialize_qstransform<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_qstransform(tri!(self.parse(qstransform())))
+        visitor.visit_qstransform(tri!(self.parse_next(qstransform())))
     }
 
     fn deserialize_matrix4<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_matrix4(tri!(self.parse(matrix4())))
+        visitor.visit_matrix4(tri!(self.parse_next(matrix4())))
     }
 
     fn deserialize_transform<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_transform(tri!(self.parse(transform())))
+        visitor.visit_transform(tri!(self.parse_next(transform())))
     }
 
     fn deserialize_pointer<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_pointer(tri!(self.parse(pointer())))
+        visitor.visit_pointer(tri!(self.parse_next(pointer())))
     }
 
     fn deserialize_array<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        tri!(self.parse(comment_multispace0()));
+        tri!(self.parse_next(comment_multispace0()));
         let value = visitor.visit_array(SeqDeserializer::new(self));
 
         // NOTE: If to_readable_err is used here, for some reason the stack overflows
@@ -465,10 +465,10 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     {
         let ptr_name = if self.in_struct {
             // When a struct is present in the field of struct, the name and signature attributes are not present.
-            tri!(self.parse(start_tag("hkobject")));
+            tri!(self.parse_next(start_tag("hkobject")));
             None
         } else {
-            let (ptr_name, class_name, _signature) = tri!(self.parse(class_start_tag()));
+            let (ptr_name, class_name, _signature) = tri!(self.parse_next(class_start_tag()));
             #[cfg(feature = "tracing")]
             tracing::debug!("ptr_name={ptr_name}, class_name={class_name}, Signature={_signature}");
 
@@ -483,8 +483,8 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
             Some(ptr_name)
         };
 
-        let value = tri!(visitor.visit_struct(MapDeserializer::new(self, ptr_name, fields)));
-        tri!(self.parse(end_tag("hkobject")));
+        let value = tri!(visitor.visit_struct(MapDeserializer::new(self, ptr_name, name, fields)));
+        tri!(self.parse_next(end_tag("hkobject")));
         self.in_struct = false;
         Ok(value)
     }
@@ -494,14 +494,14 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_pointer(tri!(self.parse(pointer())))
+        visitor.visit_pointer(tri!(self.parse_next(pointer())))
     }
 
     fn deserialize_cstring<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        let s = tri!(self.parse(string())); // take until `</`
+        let s = tri!(self.parse_next(string())); // take until `</`
         if s == "\u{2400}" {
             // Unicode null is null
             visitor.visit_stringptr(StringPtr::from_option(None))
@@ -522,7 +522,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let s = tri!(self.parse(string()));
+        let s = tri!(self.parse_next(string()));
         let result = visitor.visit_stringptr(StringPtr::from_option(Some(s)));
         self.to_readable_err(result)
     }
@@ -531,7 +531,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let float = tri!(self.parse(real()));
+        let float = tri!(self.parse_next(real()));
         visitor.visit_half(f16::from_f32(float))
     }
 
@@ -539,7 +539,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let s = tri!(self.parse(string())); // take until `</`
+        let s = tri!(self.parse_next(string())); // take until `</`
         if s == "\u{2400}" {
             // Unicode null is null
             visitor.visit_stringptr(StringPtr::from_option(None))

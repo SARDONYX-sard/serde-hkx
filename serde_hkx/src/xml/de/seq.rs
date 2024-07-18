@@ -55,7 +55,7 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
         T: DeserializeSeed<'de>,
     {
         // Space is required before every element except the first.
-        tri!(self.de.parse(comment_multispace0()));
+        tri!(self.de.parse_next(comment_multispace0()));
 
         // Check if there are no more elements.
         if self.de.input.is_empty() || self.de.parse_peek(end_tag("hkparam")).is_ok() {
@@ -135,9 +135,9 @@ impl<'de, 'a> SeqAccess<'de> for SeqDeserializer<'a, 'de> {
         };
         self.first = false;
 
-        tri!(self.de.parse(start_tag("hkcstring")));
+        tri!(self.de.parse_next(start_tag("hkcstring")));
         let ret = seed.deserialize(&mut *self.de).map(Some)?;
-        tri!(self.de.parse(end_tag("hkcstring")));
+        tri!(self.de.parse_next(end_tag("hkcstring")));
         Ok(ret)
     }
 }

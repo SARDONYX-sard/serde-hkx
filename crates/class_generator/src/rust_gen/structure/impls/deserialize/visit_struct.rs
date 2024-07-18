@@ -21,7 +21,12 @@ pub fn gen(class: &Class) -> TokenStream {
     let mut has_skip_once = false; // All fields whose serialize is skipped are made to use `Default::default`.
 
     for member in &class.members {
-        let Member { name, flags, .. } = member;
+        let Member {
+            name,
+            flags,
+            arrsize,
+            ..
+        } = member;
 
         if flags.has_skip_serializing() {
             has_skip_once = true;
@@ -37,6 +42,10 @@ pub fn gen(class: &Class) -> TokenStream {
             let mut #field_ident: _serde::__private::Option<#rust_type> = _serde::__private::None;
         });
 
+        let default_value = match arrsize {
+            33.. => quote! { [Default::default(); #arrsize] },
+            _ => quote! { Default::default() },
+        };
         visit_fields_matcher.push(quote! {
             __Field::#field_ident => {
                 if _serde::__private::Option::is_some(&#field_ident) {
@@ -48,7 +57,10 @@ pub fn gen(class: &Class) -> TokenStream {
                     match __A::next_value::<#rust_type>(&mut __map) {
                         _serde::__private::Ok(__val) => __val,
                         _serde::__private::Err(__err) => {
+                            #[cfg(feature = "strict")]
                             return _serde::__private::Err(__err);
+                            #[cfg(not(feature = "strict"))]
+                            #default_value // If not, fall back to the default value.
                         }
                     },
                 );
@@ -59,9 +71,12 @@ pub fn gen(class: &Class) -> TokenStream {
             let #field_ident = match #field_ident {
                 _serde::__private::Some(__field) => __field,
                 _serde::__private::None => {
+                    #[cfg(feature = "strict")]
                     return _serde::__private::Err(
                         <__A::Error as _serde::de::Error>::missing_field(#name),
-                    )
+                    );
+                    #[cfg(not(feature = "strict"))]
+                    #default_value // If not, fall back to the default value.
                 }
             };
         });
@@ -86,6 +101,7 @@ pub fn gen(class: &Class) -> TokenStream {
     let no_skip_len = first_recv_fields.len();
     let class_name = format_ident!("{}", class.name);
     quote! {
+            #[allow(clippy::manual_unwrap_or_default)]
             fn visit_struct<__A>(
                 self,
                 mut __map: __A,
@@ -97,7 +113,11 @@ pub fn gen(class: &Class) -> TokenStream {
                 #deserialize_parent
                 #(#first_recv_fields)*
                 for _ in 0..#no_skip_len {
-                    if let _serde::__private::Some(__key) = __A::next_key::<__Field>(&mut __map)? {
+                    #[cfg(not(feature = "strict"))]
+                    let __res = __A::next_key::<__Field>(&mut __map).unwrap_or(Some(__Field::__ignore));
+                    #[cfg(feature = "strict")]
+                    let __res = __A::next_key::<__Field>(&mut __map)?;
+                    if let _serde::__private::Some(__key) = __res {
                         match __key {
                             #(#visit_fields_matcher)*
                             _ => {}
