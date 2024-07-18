@@ -624,6 +624,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkaFootstepAnalysisInfoVisitor<'de> {
             m_duration,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -648,9 +649,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkaFootstepAnalysisInfoVisitor<'de> {
         let mut m_velTol: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_duration: _serde::__private::Option<f32> = _serde::__private::None;
         for _ in 0..14usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_name => {
                         if _serde::__private::Option::is_some(&m_name) {
@@ -662,7 +666,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaFootstepAnalysisInfoVisitor<'de> {
                             match __A::next_value::<Vec<char>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -679,7 +685,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaFootstepAnalysisInfoVisitor<'de> {
                             match __A::next_value::<Vec<char>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -696,7 +704,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaFootstepAnalysisInfoVisitor<'de> {
                             match __A::next_value::<Vec<char>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -713,7 +723,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaFootstepAnalysisInfoVisitor<'de> {
                             match __A::next_value::<Vec<char>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -730,7 +742,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaFootstepAnalysisInfoVisitor<'de> {
                             match __A::next_value::<Vec<char>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -745,7 +759,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaFootstepAnalysisInfoVisitor<'de> {
                             match __A::next_value::<Vec<f32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -760,7 +776,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaFootstepAnalysisInfoVisitor<'de> {
                             match __A::next_value::<Vec<f32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -775,7 +793,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaFootstepAnalysisInfoVisitor<'de> {
                             match __A::next_value::<Vec<f32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -790,7 +810,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaFootstepAnalysisInfoVisitor<'de> {
                             match __A::next_value::<Vec<f32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -807,7 +829,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaFootstepAnalysisInfoVisitor<'de> {
                             match __A::next_value::<Vec<f32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -824,7 +848,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaFootstepAnalysisInfoVisitor<'de> {
                             match __A::next_value::<Vec<f32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -839,7 +865,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaFootstepAnalysisInfoVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -854,7 +882,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaFootstepAnalysisInfoVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -871,7 +901,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaFootstepAnalysisInfoVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -883,113 +915,141 @@ impl<'de> _serde::de::Visitor<'de> for __hkaFootstepAnalysisInfoVisitor<'de> {
         let m_name = match m_name {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("name"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_nameStrike = match m_nameStrike {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("nameStrike"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_nameLift = match m_nameLift {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("nameLift"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_nameLock = match m_nameLock {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("nameLock"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_nameUnlock = match m_nameUnlock {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("nameUnlock"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_minPos = match m_minPos {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("minPos"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_maxPos = match m_maxPos {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("maxPos"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_minVel = match m_minVel {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("minVel"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_maxVel = match m_maxVel {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("maxVel"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_allBonesDown = match m_allBonesDown {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("allBonesDown"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_anyBonesDown = match m_anyBonesDown {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("anyBonesDown"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_posTol = match m_posTol {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("posTol"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_velTol = match m_velTol {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("velTol"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_duration = match m_duration {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("duration"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkaFootstepAnalysisInfo {

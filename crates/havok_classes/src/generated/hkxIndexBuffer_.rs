@@ -312,6 +312,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkxIndexBufferVisitor<'de> {
             m_length,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -327,9 +328,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkxIndexBufferVisitor<'de> {
         let mut m_vertexBaseOffset: _serde::__private::Option<u32> = _serde::__private::None;
         let mut m_length: _serde::__private::Option<u32> = _serde::__private::None;
         for _ in 0..5usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_indexType => {
                         if _serde::__private::Option::is_some(&m_indexType) {
@@ -343,7 +347,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxIndexBufferVisitor<'de> {
                             match __A::next_value::<IndexType>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -360,7 +366,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxIndexBufferVisitor<'de> {
                             match __A::next_value::<Vec<u16>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -377,7 +385,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxIndexBufferVisitor<'de> {
                             match __A::next_value::<Vec<u32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -394,7 +404,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxIndexBufferVisitor<'de> {
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -409,7 +421,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxIndexBufferVisitor<'de> {
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -421,41 +435,51 @@ impl<'de> _serde::de::Visitor<'de> for __hkxIndexBufferVisitor<'de> {
         let m_indexType = match m_indexType {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("indexType"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_indices16 = match m_indices16 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("indices16"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_indices32 = match m_indices32 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("indices32"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_vertexBaseOffset = match m_vertexBaseOffset {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("vertexBaseOffset"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_length = match m_length {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("length"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkxIndexBuffer {

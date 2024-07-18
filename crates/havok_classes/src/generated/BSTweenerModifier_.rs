@@ -496,6 +496,7 @@ impl<'de> _serde::de::Visitor<'de> for __BSTweenerModifierVisitor<'de> {
             m_time,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -512,9 +513,12 @@ impl<'de> _serde::de::Visitor<'de> for __BSTweenerModifierVisitor<'de> {
         let mut m_targetPosition: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_targetRotation: _serde::__private::Option<Quaternion> = _serde::__private::None;
         for _ in 0..6usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_tweenPosition => {
                         if _serde::__private::Option::is_some(&m_tweenPosition) {
@@ -528,7 +532,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSTweenerModifierVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -545,7 +551,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSTweenerModifierVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -562,7 +570,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSTweenerModifierVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -579,7 +589,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSTweenerModifierVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -596,7 +608,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSTweenerModifierVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -613,7 +627,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSTweenerModifierVisitor<'de> {
                             match __A::next_value::<Quaternion>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -625,49 +641,61 @@ impl<'de> _serde::de::Visitor<'de> for __BSTweenerModifierVisitor<'de> {
         let m_tweenPosition = match m_tweenPosition {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("tweenPosition"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_tweenRotation = match m_tweenRotation {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("tweenRotation"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_useTweenDuration = match m_useTweenDuration {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("useTweenDuration"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_tweenDuration = match m_tweenDuration {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("tweenDuration"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_targetPosition = match m_targetPosition {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("targetPosition"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_targetRotation = match m_targetRotation {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("targetRotation"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(BSTweenerModifier {

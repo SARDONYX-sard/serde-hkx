@@ -626,6 +626,7 @@ impl<'de> _serde::de::Visitor<'de> for __BSEventOnFalseToTrueModifierVisitor<'de
             m_bSlot3ActivatedLastFrame,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -645,9 +646,12 @@ impl<'de> _serde::de::Visitor<'de> for __BSEventOnFalseToTrueModifierVisitor<'de
         let mut m_bVariableToTest3: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_EventToSend3: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
         for _ in 0..9usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_bEnableEvent1 => {
                         if _serde::__private::Option::is_some(&m_bEnableEvent1) {
@@ -661,7 +665,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSEventOnFalseToTrueModifierVisitor<'de
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -678,7 +684,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSEventOnFalseToTrueModifierVisitor<'de
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -695,7 +703,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSEventOnFalseToTrueModifierVisitor<'de
                             match __A::next_value::<hkbEventProperty>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -712,7 +722,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSEventOnFalseToTrueModifierVisitor<'de
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -729,7 +741,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSEventOnFalseToTrueModifierVisitor<'de
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -746,7 +760,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSEventOnFalseToTrueModifierVisitor<'de
                             match __A::next_value::<hkbEventProperty>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -763,7 +779,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSEventOnFalseToTrueModifierVisitor<'de
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -780,7 +798,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSEventOnFalseToTrueModifierVisitor<'de
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -797,7 +817,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSEventOnFalseToTrueModifierVisitor<'de
                             match __A::next_value::<hkbEventProperty>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -809,73 +831,91 @@ impl<'de> _serde::de::Visitor<'de> for __BSEventOnFalseToTrueModifierVisitor<'de
         let m_bEnableEvent1 = match m_bEnableEvent1 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bEnableEvent1"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bVariableToTest1 = match m_bVariableToTest1 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bVariableToTest1"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_EventToSend1 = match m_EventToSend1 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("EventToSend1"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bEnableEvent2 = match m_bEnableEvent2 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bEnableEvent2"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bVariableToTest2 = match m_bVariableToTest2 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bVariableToTest2"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_EventToSend2 = match m_EventToSend2 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("EventToSend2"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bEnableEvent3 = match m_bEnableEvent3 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bEnableEvent3"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bVariableToTest3 = match m_bVariableToTest3 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bVariableToTest3"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_EventToSend3 = match m_EventToSend3 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("EventToSend3"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(BSEventOnFalseToTrueModifier {

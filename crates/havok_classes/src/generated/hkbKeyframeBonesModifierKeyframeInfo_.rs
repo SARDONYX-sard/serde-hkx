@@ -273,6 +273,7 @@ for __hkbKeyframeBonesModifierKeyframeInfoVisitor<'de> {
             m_isValid,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -286,9 +287,12 @@ for __hkbKeyframeBonesModifierKeyframeInfoVisitor<'de> {
         let mut m_boneIndex: _serde::__private::Option<i16> = _serde::__private::None;
         let mut m_isValid: _serde::__private::Option<bool> = _serde::__private::None;
         for _ in 0..4usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_keyframedPosition => {
                         if _serde::__private::Option::is_some(&m_keyframedPosition) {
@@ -302,7 +306,9 @@ for __hkbKeyframeBonesModifierKeyframeInfoVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -319,7 +325,9 @@ for __hkbKeyframeBonesModifierKeyframeInfoVisitor<'de> {
                             match __A::next_value::<Quaternion>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -336,7 +344,9 @@ for __hkbKeyframeBonesModifierKeyframeInfoVisitor<'de> {
                             match __A::next_value::<i16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -353,7 +363,9 @@ for __hkbKeyframeBonesModifierKeyframeInfoVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -365,33 +377,41 @@ for __hkbKeyframeBonesModifierKeyframeInfoVisitor<'de> {
         let m_keyframedPosition = match m_keyframedPosition {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("keyframedPosition"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_keyframedRotation = match m_keyframedRotation {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("keyframedRotation"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_boneIndex = match m_boneIndex {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("boneIndex"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_isValid = match m_isValid {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("isValid"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkbKeyframeBonesModifierKeyframeInfo {

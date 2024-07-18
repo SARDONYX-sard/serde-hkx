@@ -409,6 +409,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkMeshSectionCinfoVisitor<'de> {
             m_transformIndex,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -425,9 +426,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkMeshSectionCinfoVisitor<'de> {
         let mut m_vertexStartIndex: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_transformIndex: _serde::__private::Option<i32> = _serde::__private::None;
         for _ in 0..7usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_vertexBuffer => {
                         if _serde::__private::Option::is_some(&m_vertexBuffer) {
@@ -441,7 +445,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMeshSectionCinfoVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -458,7 +464,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMeshSectionCinfoVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -475,7 +483,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMeshSectionCinfoVisitor<'de> {
                             match __A::next_value::<PrimitiveType>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -492,7 +502,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMeshSectionCinfoVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -509,7 +521,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMeshSectionCinfoVisitor<'de> {
                             match __A::next_value::<MeshSectionIndexType>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -526,7 +540,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMeshSectionCinfoVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -543,7 +559,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMeshSectionCinfoVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -555,57 +573,71 @@ impl<'de> _serde::de::Visitor<'de> for __hkMeshSectionCinfoVisitor<'de> {
         let m_vertexBuffer = match m_vertexBuffer {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("vertexBuffer"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_material = match m_material {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("material"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_primitiveType = match m_primitiveType {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("primitiveType"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_numPrimitives = match m_numPrimitives {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("numPrimitives"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_indexType = match m_indexType {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("indexType"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_vertexStartIndex = match m_vertexStartIndex {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("vertexStartIndex"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_transformIndex = match m_transformIndex {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("transformIndex"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkMeshSectionCinfo {

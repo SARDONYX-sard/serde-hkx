@@ -287,6 +287,7 @@ for __hkbCharacterDataCharacterControllerInfoVisitor<'de> {
             m_characterControllerCinfo,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -300,9 +301,12 @@ for __hkbCharacterDataCharacterControllerInfoVisitor<'de> {
         let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
         let mut m_characterControllerCinfo: _serde::__private::Option<Pointer> = _serde::__private::None;
         for _ in 0..4usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_capsuleHeight => {
                         if _serde::__private::Option::is_some(&m_capsuleHeight) {
@@ -316,7 +320,9 @@ for __hkbCharacterDataCharacterControllerInfoVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -333,7 +339,9 @@ for __hkbCharacterDataCharacterControllerInfoVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -350,7 +358,9 @@ for __hkbCharacterDataCharacterControllerInfoVisitor<'de> {
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -369,7 +379,9 @@ for __hkbCharacterDataCharacterControllerInfoVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -381,37 +393,45 @@ for __hkbCharacterDataCharacterControllerInfoVisitor<'de> {
         let m_capsuleHeight = match m_capsuleHeight {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("capsuleHeight"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_capsuleRadius = match m_capsuleRadius {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("capsuleRadius"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_collisionFilterInfo = match m_collisionFilterInfo {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "collisionFilterInfo",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_characterControllerCinfo = match m_characterControllerCinfo {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "characterControllerCinfo",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkbCharacterDataCharacterControllerInfo {

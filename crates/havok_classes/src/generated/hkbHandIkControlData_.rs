@@ -556,6 +556,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkControlDataVisitor<'de> {
             m_fixUp,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -577,9 +578,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkControlDataVisitor<'de> {
         let mut m_handleChangeMode: _serde::__private::Option<HandleChangeMode> = _serde::__private::None;
         let mut m_fixUp: _serde::__private::Option<bool> = _serde::__private::None;
         for _ in 0..12usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_targetPosition => {
                         if _serde::__private::Option::is_some(&m_targetPosition) {
@@ -593,7 +597,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkControlDataVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -610,7 +616,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkControlDataVisitor<'de> {
                             match __A::next_value::<Quaternion>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -627,7 +635,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkControlDataVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -644,7 +654,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkControlDataVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -661,7 +673,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkControlDataVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -678,7 +692,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkControlDataVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -695,7 +711,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkControlDataVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -712,7 +730,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkControlDataVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -729,7 +749,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkControlDataVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -746,7 +768,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkControlDataVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -763,7 +787,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkControlDataVisitor<'de> {
                             match __A::next_value::<HandleChangeMode>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -778,7 +804,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkControlDataVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -790,101 +818,125 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkControlDataVisitor<'de> {
         let m_targetPosition = match m_targetPosition {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("targetPosition"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_targetRotation = match m_targetRotation {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("targetRotation"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_targetNormal = match m_targetNormal {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("targetNormal"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_targetHandle = match m_targetHandle {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("targetHandle"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_transformOnFraction = match m_transformOnFraction {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "transformOnFraction",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_normalOnFraction = match m_normalOnFraction {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("normalOnFraction"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_fadeInDuration = match m_fadeInDuration {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("fadeInDuration"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_fadeOutDuration = match m_fadeOutDuration {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("fadeOutDuration"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_extrapolationTimeStep = match m_extrapolationTimeStep {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "extrapolationTimeStep",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_handleChangeSpeed = match m_handleChangeSpeed {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("handleChangeSpeed"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_handleChangeMode = match m_handleChangeMode {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("handleChangeMode"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_fixUp = match m_fixUp {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("fixUp"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkbHandIkControlData {

@@ -236,6 +236,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpHingeLimitsDataAtomsVisitor<'de> {
             m_2dAng,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -250,9 +251,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkpHingeLimitsDataAtomsVisitor<'de> {
         let mut m_angLimit: _serde::__private::Option<hkpAngLimitConstraintAtom> = _serde::__private::None;
         let mut m_2dAng: _serde::__private::Option<hkp2dAngConstraintAtom> = _serde::__private::None;
         for _ in 0..3usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_rotations => {
                         if _serde::__private::Option::is_some(&m_rotations) {
@@ -268,7 +272,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpHingeLimitsDataAtomsVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -287,7 +293,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpHingeLimitsDataAtomsVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -302,7 +310,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpHingeLimitsDataAtomsVisitor<'de> {
                             match __A::next_value::<hkp2dAngConstraintAtom>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -314,25 +324,31 @@ impl<'de> _serde::de::Visitor<'de> for __hkpHingeLimitsDataAtomsVisitor<'de> {
         let m_rotations = match m_rotations {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("rotations"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_angLimit = match m_angLimit {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("angLimit"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_2dAng = match m_2dAng {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("2dAng"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpHingeLimitsDataAtoms {

@@ -277,6 +277,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorInfoIdToNamePairVisitor<'de>
             m_id,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -290,9 +291,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorInfoIdToNamePairVisitor<'de>
         let mut m_toolType: _serde::__private::Option<ToolNodeType> = _serde::__private::None;
         let mut m_id: _serde::__private::Option<i16> = _serde::__private::None;
         for _ in 0..4usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_behaviorName => {
                         if _serde::__private::Option::is_some(&m_behaviorName) {
@@ -306,7 +310,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorInfoIdToNamePairVisitor<'de>
                             match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -323,7 +329,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorInfoIdToNamePairVisitor<'de>
                             match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -340,7 +348,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorInfoIdToNamePairVisitor<'de>
                             match __A::next_value::<ToolNodeType>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -355,7 +365,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorInfoIdToNamePairVisitor<'de>
                             match __A::next_value::<i16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -367,33 +379,41 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorInfoIdToNamePairVisitor<'de>
         let m_behaviorName = match m_behaviorName {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("behaviorName"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_nodeName = match m_nodeName {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("nodeName"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_toolType = match m_toolType {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("toolType"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_id = match m_id {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("id"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkbBehaviorInfoIdToNamePair {

@@ -1150,6 +1150,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbClipGeneratorVisitor<'de> {
             m_pingPongBackward,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -1171,9 +1172,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkbClipGeneratorVisitor<'de> {
         let mut m_mode: _serde::__private::Option<PlaybackMode> = _serde::__private::None;
         let mut m_flags: _serde::__private::Option<i8> = _serde::__private::None;
         for _ in 0..11usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_animationName => {
                         if _serde::__private::Option::is_some(&m_animationName) {
@@ -1187,7 +1191,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbClipGeneratorVisitor<'de> {
                             match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1204,7 +1210,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbClipGeneratorVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1223,7 +1231,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbClipGeneratorVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1242,7 +1252,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbClipGeneratorVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1259,7 +1271,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbClipGeneratorVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1276,7 +1290,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbClipGeneratorVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1293,7 +1309,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbClipGeneratorVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1312,7 +1330,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbClipGeneratorVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1329,7 +1349,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbClipGeneratorVisitor<'de> {
                             match __A::next_value::<i16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1344,7 +1366,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbClipGeneratorVisitor<'de> {
                             match __A::next_value::<PlaybackMode>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1359,7 +1383,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbClipGeneratorVisitor<'de> {
                             match __A::next_value::<i8>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1371,97 +1397,119 @@ impl<'de> _serde::de::Visitor<'de> for __hkbClipGeneratorVisitor<'de> {
         let m_animationName = match m_animationName {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("animationName"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_triggers = match m_triggers {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("triggers"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_cropStartAmountLocalTime = match m_cropStartAmountLocalTime {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "cropStartAmountLocalTime",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_cropEndAmountLocalTime = match m_cropEndAmountLocalTime {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "cropEndAmountLocalTime",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_startTime = match m_startTime {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("startTime"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_playbackSpeed = match m_playbackSpeed {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("playbackSpeed"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_enforcedDuration = match m_enforcedDuration {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("enforcedDuration"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_userControlledTimeFraction = match m_userControlledTimeFraction {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "userControlledTimeFraction",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_animationBindingIndex = match m_animationBindingIndex {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "animationBindingIndex",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_mode = match m_mode {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("mode"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_flags = match m_flags {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("flags"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkbClipGenerator {

@@ -673,6 +673,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkaDeltaCompressedAnimationVisitor<'de>
             m_dataBuffer,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -699,9 +700,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkaDeltaCompressedAnimationVisitor<'de>
         let mut m_lastBlockSize: _serde::__private::Option<u32> = _serde::__private::None;
         let mut m_dataBuffer: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
         for _ in 0..14usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_numberOfPoses => {
                         if _serde::__private::Option::is_some(&m_numberOfPoses) {
@@ -715,7 +719,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaDeltaCompressedAnimationVisitor<'de>
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -732,7 +738,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaDeltaCompressedAnimationVisitor<'de>
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -751,7 +759,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaDeltaCompressedAnimationVisitor<'de>
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -768,7 +778,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaDeltaCompressedAnimationVisitor<'de>
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -785,7 +797,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaDeltaCompressedAnimationVisitor<'de>
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -802,7 +816,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaDeltaCompressedAnimationVisitor<'de>
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -819,7 +835,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaDeltaCompressedAnimationVisitor<'de>
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -836,7 +854,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaDeltaCompressedAnimationVisitor<'de>
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -853,7 +873,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaDeltaCompressedAnimationVisitor<'de>
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -872,7 +894,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaDeltaCompressedAnimationVisitor<'de>
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -891,7 +915,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaDeltaCompressedAnimationVisitor<'de>
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -908,7 +934,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaDeltaCompressedAnimationVisitor<'de>
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -925,7 +953,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaDeltaCompressedAnimationVisitor<'de>
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -942,7 +972,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaDeltaCompressedAnimationVisitor<'de>
                             match __A::next_value::<Vec<u8>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -954,117 +986,145 @@ impl<'de> _serde::de::Visitor<'de> for __hkaDeltaCompressedAnimationVisitor<'de>
         let m_numberOfPoses = match m_numberOfPoses {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("numberOfPoses"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_blockSize = match m_blockSize {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("blockSize"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_qFormat = match m_qFormat {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("qFormat"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_quantizedDataIdx = match m_quantizedDataIdx {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("quantizedDataIdx"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_quantizedDataSize = match m_quantizedDataSize {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("quantizedDataSize"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_staticMaskIdx = match m_staticMaskIdx {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("staticMaskIdx"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_staticMaskSize = match m_staticMaskSize {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("staticMaskSize"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_staticDOFsIdx = match m_staticDOFsIdx {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("staticDOFsIdx"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_staticDOFsSize = match m_staticDOFsSize {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("staticDOFsSize"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_numStaticTransformDOFs = match m_numStaticTransformDOFs {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "numStaticTransformDOFs",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_numDynamicTransformDOFs = match m_numDynamicTransformDOFs {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "numDynamicTransformDOFs",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_totalBlockSize = match m_totalBlockSize {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("totalBlockSize"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_lastBlockSize = match m_lastBlockSize {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("lastBlockSize"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_dataBuffer = match m_dataBuffer {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("dataBuffer"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkaDeltaCompressedAnimation {

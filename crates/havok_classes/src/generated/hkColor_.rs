@@ -126,6 +126,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkColorVisitor<'de> {
         __A::pad(&mut __map, 1usize, 1usize)?;
         _serde::__private::Ok(hkColor { __ptr })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -135,9 +136,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkColorVisitor<'de> {
     {
         let __ptr = __A::class_ptr(&mut __map);
         for _ in 0..0usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     _ => {}
                 }

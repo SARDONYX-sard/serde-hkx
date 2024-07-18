@@ -614,6 +614,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbEvaluateHandleModifierVisitor<'de> {
             m_smoothlyChangingHandles,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -631,9 +632,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkbEvaluateHandleModifierVisitor<'de> {
         let mut m_handleChangeSpeed: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_handleChangeMode: _serde::__private::Option<HandleChangeMode> = _serde::__private::None;
         for _ in 0..7usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_handle => {
                         if _serde::__private::Option::is_some(&m_handle) {
@@ -645,7 +649,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbEvaluateHandleModifierVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -662,7 +668,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbEvaluateHandleModifierVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -679,7 +687,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbEvaluateHandleModifierVisitor<'de> {
                             match __A::next_value::<Quaternion>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -696,7 +706,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbEvaluateHandleModifierVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -713,7 +725,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbEvaluateHandleModifierVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -730,7 +744,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbEvaluateHandleModifierVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -747,7 +763,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbEvaluateHandleModifierVisitor<'de> {
                             match __A::next_value::<HandleChangeMode>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -759,59 +777,73 @@ impl<'de> _serde::de::Visitor<'de> for __hkbEvaluateHandleModifierVisitor<'de> {
         let m_handle = match m_handle {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("handle"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_handlePositionOut = match m_handlePositionOut {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("handlePositionOut"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_handleRotationOut = match m_handleRotationOut {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("handleRotationOut"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_isValidOut = match m_isValidOut {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("isValidOut"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_extrapolationTimeStep = match m_extrapolationTimeStep {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "extrapolationTimeStep",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_handleChangeSpeed = match m_handleChangeSpeed {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("handleChangeSpeed"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_handleChangeMode = match m_handleChangeMode {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("handleChangeMode"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkbEvaluateHandleModifier {

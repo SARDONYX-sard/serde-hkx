@@ -445,6 +445,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimpleContactConstraintAtomVisitor<'
             m_info,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -463,9 +464,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimpleContactConstraintAtomVisitor<'
         let mut m_maxNumContactPoints: _serde::__private::Option<u16> = _serde::__private::None;
         let mut m_info: _serde::__private::Option<hkpSimpleContactConstraintDataInfo> = _serde::__private::None;
         for _ in 0..8usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_sizeOfAllAtoms => {
                         if _serde::__private::Option::is_some(&m_sizeOfAllAtoms) {
@@ -479,7 +483,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimpleContactConstraintAtomVisitor<'
                             match __A::next_value::<u16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -496,7 +502,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimpleContactConstraintAtomVisitor<'
                             match __A::next_value::<u16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -515,7 +523,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimpleContactConstraintAtomVisitor<'
                             match __A::next_value::<u16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -532,7 +542,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimpleContactConstraintAtomVisitor<'
                             match __A::next_value::<u8>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -549,7 +561,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimpleContactConstraintAtomVisitor<'
                             match __A::next_value::<u8>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -568,7 +582,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimpleContactConstraintAtomVisitor<'
                             match __A::next_value::<u8>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -585,7 +601,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimpleContactConstraintAtomVisitor<'
                             match __A::next_value::<u16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -602,7 +620,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimpleContactConstraintAtomVisitor<'
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -614,75 +634,91 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimpleContactConstraintAtomVisitor<'
         let m_sizeOfAllAtoms = match m_sizeOfAllAtoms {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("sizeOfAllAtoms"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_numContactPoints = match m_numContactPoints {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("numContactPoints"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_numReservedContactPoints = match m_numReservedContactPoints {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "numReservedContactPoints",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_numUserDatasForBodyA = match m_numUserDatasForBodyA {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "numUserDatasForBodyA",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_numUserDatasForBodyB = match m_numUserDatasForBodyB {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "numUserDatasForBodyB",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_contactPointPropertiesStriding = match m_contactPointPropertiesStriding {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "contactPointPropertiesStriding",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_maxNumContactPoints = match m_maxNumContactPoints {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "maxNumContactPoints",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_info = match m_info {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("info"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpSimpleContactConstraintAtom {

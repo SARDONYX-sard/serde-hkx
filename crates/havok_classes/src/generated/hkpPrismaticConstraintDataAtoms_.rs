@@ -377,6 +377,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPrismaticConstraintDataAtomsVisitor<
             m_linLimit,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -395,9 +396,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPrismaticConstraintDataAtomsVisitor<
         let mut m_lin1: _serde::__private::Option<hkpLinConstraintAtom> = _serde::__private::None;
         let mut m_linLimit: _serde::__private::Option<hkpLinLimitConstraintAtom> = _serde::__private::None;
         for _ in 0..7usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_transforms => {
                         if _serde::__private::Option::is_some(&m_transforms) {
@@ -413,7 +417,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPrismaticConstraintDataAtomsVisitor<
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -430,7 +436,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPrismaticConstraintDataAtomsVisitor<
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -449,7 +457,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPrismaticConstraintDataAtomsVisitor<
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -464,7 +474,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPrismaticConstraintDataAtomsVisitor<
                             match __A::next_value::<hkpAngConstraintAtom>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -479,7 +491,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPrismaticConstraintDataAtomsVisitor<
                             match __A::next_value::<hkpLinConstraintAtom>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -494,7 +508,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPrismaticConstraintDataAtomsVisitor<
                             match __A::next_value::<hkpLinConstraintAtom>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -513,7 +529,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPrismaticConstraintDataAtomsVisitor<
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -525,57 +543,71 @@ impl<'de> _serde::de::Visitor<'de> for __hkpPrismaticConstraintDataAtomsVisitor<
         let m_transforms = match m_transforms {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("transforms"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_motor = match m_motor {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("motor"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_friction = match m_friction {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("friction"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_ang = match m_ang {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("ang"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_lin0 = match m_lin0 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("lin0"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_lin1 = match m_lin1 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("lin1"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_linLimit = match m_linLimit {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("linLimit"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpPrismaticConstraintDataAtoms {

@@ -230,6 +230,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkxMaterialTextureStageVisitor<'de> {
             m_tcoordChannel,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -242,9 +243,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkxMaterialTextureStageVisitor<'de> {
         let mut m_usageHint: _serde::__private::Option<TextureType> = _serde::__private::None;
         let mut m_tcoordChannel: _serde::__private::Option<i32> = _serde::__private::None;
         for _ in 0..3usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_texture => {
                         if _serde::__private::Option::is_some(&m_texture) {
@@ -258,7 +262,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxMaterialTextureStageVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -275,7 +281,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxMaterialTextureStageVisitor<'de> {
                             match __A::next_value::<TextureType>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -292,7 +300,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxMaterialTextureStageVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -304,25 +314,31 @@ impl<'de> _serde::de::Visitor<'de> for __hkxMaterialTextureStageVisitor<'de> {
         let m_texture = match m_texture {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("texture"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_usageHint = match m_usageHint {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("usageHint"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_tcoordChannel = match m_tcoordChannel {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("tcoordChannel"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkxMaterialTextureStage {

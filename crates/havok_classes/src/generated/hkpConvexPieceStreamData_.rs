@@ -270,6 +270,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpConvexPieceStreamDataVisitor<'de> {
             m_convexPieceSingleTriangles,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -283,9 +284,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkpConvexPieceStreamDataVisitor<'de> {
         let mut m_convexPieceOffsets: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
         let mut m_convexPieceSingleTriangles: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
         for _ in 0..3usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_convexPieceStream => {
                         if _serde::__private::Option::is_some(&m_convexPieceStream) {
@@ -299,7 +303,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpConvexPieceStreamDataVisitor<'de> {
                             match __A::next_value::<Vec<u32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -316,7 +322,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpConvexPieceStreamDataVisitor<'de> {
                             match __A::next_value::<Vec<u32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -335,7 +343,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpConvexPieceStreamDataVisitor<'de> {
                             match __A::next_value::<Vec<u32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -347,29 +357,35 @@ impl<'de> _serde::de::Visitor<'de> for __hkpConvexPieceStreamDataVisitor<'de> {
         let m_convexPieceStream = match m_convexPieceStream {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("convexPieceStream"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_convexPieceOffsets = match m_convexPieceOffsets {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "convexPieceOffsets",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_convexPieceSingleTriangles = match m_convexPieceSingleTriangles {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "convexPieceSingleTriangles",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpConvexPieceStreamData {

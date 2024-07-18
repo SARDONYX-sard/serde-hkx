@@ -471,6 +471,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimulationVisitor<'de> {
             m_previousStepResult,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -490,9 +491,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimulationVisitor<'de> {
         let mut m_frameMarkerPsiSnap: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_previousStepResult: _serde::__private::Option<u32> = _serde::__private::None;
         for _ in 0..9usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_determinismCheckFrameCounter => {
                         if _serde::__private::Option::is_some(
@@ -508,7 +512,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimulationVisitor<'de> {
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -523,7 +529,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimulationVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -540,7 +548,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimulationVisitor<'de> {
                             match __A::next_value::<LastProcessingStep>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -557,7 +567,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimulationVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -574,7 +586,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimulationVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -591,7 +605,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimulationVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -608,7 +624,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimulationVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -625,7 +643,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimulationVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -642,7 +662,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimulationVisitor<'de> {
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -654,81 +676,99 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSimulationVisitor<'de> {
         let m_determinismCheckFrameCounter = match m_determinismCheckFrameCounter {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "determinismCheckFrameCounter",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_world = match m_world {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("world"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_lastProcessingStep = match m_lastProcessingStep {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "lastProcessingStep",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_currentTime = match m_currentTime {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("currentTime"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_currentPsiTime = match m_currentPsiTime {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("currentPsiTime"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_physicsDeltaTime = match m_physicsDeltaTime {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("physicsDeltaTime"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_simulateUntilTime = match m_simulateUntilTime {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("simulateUntilTime"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_frameMarkerPsiSnap = match m_frameMarkerPsiSnap {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "frameMarkerPsiSnap",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_previousStepResult = match m_previousStepResult {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "previousStepResult",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpSimulation {

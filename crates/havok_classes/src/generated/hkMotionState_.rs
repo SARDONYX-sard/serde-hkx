@@ -482,6 +482,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkMotionStateVisitor<'de> {
             m_deactivationClass,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -501,9 +502,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkMotionStateVisitor<'de> {
         let mut m_maxAngularVelocity: _serde::__private::Option<u8> = _serde::__private::None;
         let mut m_deactivationClass: _serde::__private::Option<u8> = _serde::__private::None;
         for _ in 0..10usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_transform => {
                         if _serde::__private::Option::is_some(&m_transform) {
@@ -517,7 +521,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMotionStateVisitor<'de> {
                             match __A::next_value::<Transform>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -534,7 +540,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMotionStateVisitor<'de> {
                             match __A::next_value::<hkSweptTransform>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -551,7 +559,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMotionStateVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -568,7 +578,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMotionStateVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -585,7 +597,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMotionStateVisitor<'de> {
                             match __A::next_value::<f16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -602,7 +616,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMotionStateVisitor<'de> {
                             match __A::next_value::<f16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -619,7 +635,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMotionStateVisitor<'de> {
                             match __A::next_value::<f16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -636,7 +654,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMotionStateVisitor<'de> {
                             match __A::next_value::<u8>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -653,7 +673,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMotionStateVisitor<'de> {
                             match __A::next_value::<u8>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -670,7 +692,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMotionStateVisitor<'de> {
                             match __A::next_value::<u8>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -682,83 +706,103 @@ impl<'de> _serde::de::Visitor<'de> for __hkMotionStateVisitor<'de> {
         let m_transform = match m_transform {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("transform"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_sweptTransform = match m_sweptTransform {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("sweptTransform"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_deltaAngle = match m_deltaAngle {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("deltaAngle"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_objectRadius = match m_objectRadius {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("objectRadius"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_linearDamping = match m_linearDamping {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("linearDamping"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_angularDamping = match m_angularDamping {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("angularDamping"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_timeFactor = match m_timeFactor {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("timeFactor"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_maxLinearVelocity = match m_maxLinearVelocity {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("maxLinearVelocity"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_maxAngularVelocity = match m_maxAngularVelocity {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "maxAngularVelocity",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_deactivationClass = match m_deactivationClass {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("deactivationClass"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkMotionState {

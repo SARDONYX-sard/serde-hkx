@@ -444,6 +444,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkMonitorStreamFrameInfoVisitor<'de> {
             m_frameStreamEnd,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -462,9 +463,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkMonitorStreamFrameInfoVisitor<'de> {
         let mut m_frameStreamStart: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_frameStreamEnd: _serde::__private::Option<i32> = _serde::__private::None;
         for _ in 0..9usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_heading => {
                         if _serde::__private::Option::is_some(&m_heading) {
@@ -478,7 +482,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMonitorStreamFrameInfoVisitor<'de> {
                             match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -495,7 +501,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMonitorStreamFrameInfoVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -512,7 +520,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMonitorStreamFrameInfoVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -529,7 +539,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMonitorStreamFrameInfoVisitor<'de> {
                             match __A::next_value::<AbsoluteTimeCounter>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -546,7 +558,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMonitorStreamFrameInfoVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -563,7 +577,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMonitorStreamFrameInfoVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -580,7 +596,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMonitorStreamFrameInfoVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -597,7 +615,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMonitorStreamFrameInfoVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -614,7 +634,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMonitorStreamFrameInfoVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -626,75 +648,93 @@ impl<'de> _serde::de::Visitor<'de> for __hkMonitorStreamFrameInfoVisitor<'de> {
         let m_heading = match m_heading {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("heading"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_indexOfTimer0 = match m_indexOfTimer0 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("indexOfTimer0"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_indexOfTimer1 = match m_indexOfTimer1 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("indexOfTimer1"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_absoluteTimeCounter = match m_absoluteTimeCounter {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "absoluteTimeCounter",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_timerFactor0 = match m_timerFactor0 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("timerFactor0"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_timerFactor1 = match m_timerFactor1 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("timerFactor1"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_threadId = match m_threadId {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("threadId"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_frameStreamStart = match m_frameStreamStart {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("frameStreamStart"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_frameStreamEnd = match m_frameStreamEnd {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("frameStreamEnd"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkMonitorStreamFrameInfo {

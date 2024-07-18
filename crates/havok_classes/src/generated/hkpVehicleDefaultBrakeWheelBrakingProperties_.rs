@@ -255,6 +255,7 @@ for __hkpVehicleDefaultBrakeWheelBrakingPropertiesVisitor<'de> {
             m_isConnectedToHandbrake,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -267,9 +268,12 @@ for __hkpVehicleDefaultBrakeWheelBrakingPropertiesVisitor<'de> {
         let mut m_minPedalInputToBlock: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_isConnectedToHandbrake: _serde::__private::Option<bool> = _serde::__private::None;
         for _ in 0..3usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_maxBreakingTorque => {
                         if _serde::__private::Option::is_some(&m_maxBreakingTorque) {
@@ -283,7 +287,9 @@ for __hkpVehicleDefaultBrakeWheelBrakingPropertiesVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -300,7 +306,9 @@ for __hkpVehicleDefaultBrakeWheelBrakingPropertiesVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -319,7 +327,9 @@ for __hkpVehicleDefaultBrakeWheelBrakingPropertiesVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -331,29 +341,35 @@ for __hkpVehicleDefaultBrakeWheelBrakingPropertiesVisitor<'de> {
         let m_maxBreakingTorque = match m_maxBreakingTorque {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("maxBreakingTorque"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_minPedalInputToBlock = match m_minPedalInputToBlock {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "minPedalInputToBlock",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_isConnectedToHandbrake = match m_isConnectedToHandbrake {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "isConnectedToHandbrake",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpVehicleDefaultBrakeWheelBrakingProperties {

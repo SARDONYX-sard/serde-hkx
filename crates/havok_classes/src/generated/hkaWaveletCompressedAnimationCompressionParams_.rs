@@ -517,6 +517,7 @@ for __hkaWaveletCompressedAnimationCompressionParamsVisitor<'de> {
             m_absoluteFloatTolerance,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -536,9 +537,12 @@ for __hkaWaveletCompressedAnimationCompressionParamsVisitor<'de> {
         let mut m_scaleTolerance: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_absoluteFloatTolerance: _serde::__private::Option<f32> = _serde::__private::None;
         for _ in 0..10usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_quantizationBits => {
                         if _serde::__private::Option::is_some(&m_quantizationBits) {
@@ -552,7 +556,9 @@ for __hkaWaveletCompressedAnimationCompressionParamsVisitor<'de> {
                             match __A::next_value::<u16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -569,7 +575,9 @@ for __hkaWaveletCompressedAnimationCompressionParamsVisitor<'de> {
                             match __A::next_value::<u16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -586,7 +594,9 @@ for __hkaWaveletCompressedAnimationCompressionParamsVisitor<'de> {
                             match __A::next_value::<u16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -603,7 +613,9 @@ for __hkaWaveletCompressedAnimationCompressionParamsVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -620,7 +632,9 @@ for __hkaWaveletCompressedAnimationCompressionParamsVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -639,7 +653,9 @@ for __hkaWaveletCompressedAnimationCompressionParamsVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -658,7 +674,9 @@ for __hkaWaveletCompressedAnimationCompressionParamsVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -675,7 +693,9 @@ for __hkaWaveletCompressedAnimationCompressionParamsVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -692,7 +712,9 @@ for __hkaWaveletCompressedAnimationCompressionParamsVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -711,7 +733,9 @@ for __hkaWaveletCompressedAnimationCompressionParamsVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -723,89 +747,109 @@ for __hkaWaveletCompressedAnimationCompressionParamsVisitor<'de> {
         let m_quantizationBits = match m_quantizationBits {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("quantizationBits"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_blockSize = match m_blockSize {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("blockSize"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_preserve = match m_preserve {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("preserve"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_truncProp = match m_truncProp {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("truncProp"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_useOldStyleTruncation = match m_useOldStyleTruncation {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "useOldStyleTruncation",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_absolutePositionTolerance = match m_absolutePositionTolerance {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "absolutePositionTolerance",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_relativePositionTolerance = match m_relativePositionTolerance {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "relativePositionTolerance",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_rotationTolerance = match m_rotationTolerance {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("rotationTolerance"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_scaleTolerance = match m_scaleTolerance {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("scaleTolerance"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_absoluteFloatTolerance = match m_absoluteFloatTolerance {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "absoluteFloatTolerance",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkaWaveletCompressedAnimationCompressionParams {

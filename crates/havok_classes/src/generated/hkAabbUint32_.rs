@@ -342,6 +342,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkAabbUint32Visitor<'de> {
             m_shapeKeyByte,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -357,9 +358,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkAabbUint32Visitor<'de> {
         let mut m_expansionMax: _serde::__private::Option<[u8; 3usize]> = _serde::__private::None;
         let mut m_shapeKeyByte: _serde::__private::Option<u8> = _serde::__private::None;
         for _ in 0..6usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_min => {
                         if _serde::__private::Option::is_some(&m_min) {
@@ -371,7 +375,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkAabbUint32Visitor<'de> {
                             match __A::next_value::<[u32; 3usize]>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -388,7 +394,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkAabbUint32Visitor<'de> {
                             match __A::next_value::<[u8; 3usize]>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -405,7 +413,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkAabbUint32Visitor<'de> {
                             match __A::next_value::<u8>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -420,7 +430,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkAabbUint32Visitor<'de> {
                             match __A::next_value::<[u32; 3usize]>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -437,7 +449,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkAabbUint32Visitor<'de> {
                             match __A::next_value::<[u8; 3usize]>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -454,7 +468,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkAabbUint32Visitor<'de> {
                             match __A::next_value::<u8>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -466,49 +482,61 @@ impl<'de> _serde::de::Visitor<'de> for __hkAabbUint32Visitor<'de> {
         let m_min = match m_min {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("min"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_expansionMin = match m_expansionMin {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("expansionMin"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_expansionShift = match m_expansionShift {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("expansionShift"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_max = match m_max {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("max"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_expansionMax = match m_expansionMax {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("expansionMax"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_shapeKeyByte = match m_shapeKeyByte {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("shapeKeyByte"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkAabbUint32 {

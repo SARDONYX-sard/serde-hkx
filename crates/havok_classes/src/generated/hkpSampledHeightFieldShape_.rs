@@ -473,6 +473,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSampledHeightFieldShapeVisitor<'de> 
             m_extents,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -492,9 +493,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSampledHeightFieldShapeVisitor<'de> 
         let mut m_floatToIntOffsetFloorCorrected: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_extents: _serde::__private::Option<Vector4> = _serde::__private::None;
         for _ in 0..9usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_xRes => {
                         if _serde::__private::Option::is_some(&m_xRes) {
@@ -506,7 +510,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSampledHeightFieldShapeVisitor<'de> 
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -521,7 +527,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSampledHeightFieldShapeVisitor<'de> 
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -538,7 +546,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSampledHeightFieldShapeVisitor<'de> 
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -557,7 +567,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSampledHeightFieldShapeVisitor<'de> 
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -574,7 +586,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSampledHeightFieldShapeVisitor<'de> 
                             match __A::next_value::<HeightFieldType>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -591,7 +605,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSampledHeightFieldShapeVisitor<'de> 
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -608,7 +624,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSampledHeightFieldShapeVisitor<'de> 
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -627,7 +645,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSampledHeightFieldShapeVisitor<'de> 
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -644,7 +664,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSampledHeightFieldShapeVisitor<'de> 
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -656,77 +678,95 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSampledHeightFieldShapeVisitor<'de> 
         let m_xRes = match m_xRes {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("xRes"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_zRes = match m_zRes {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("zRes"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_heightCenter = match m_heightCenter {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("heightCenter"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_useProjectionBasedHeight = match m_useProjectionBasedHeight {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "useProjectionBasedHeight",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_heightfieldType = match m_heightfieldType {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("heightfieldType"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_intToFloatScale = match m_intToFloatScale {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("intToFloatScale"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_floatToIntScale = match m_floatToIntScale {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("floatToIntScale"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_floatToIntOffsetFloorCorrected = match m_floatToIntOffsetFloorCorrected {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "floatToIntOffsetFloorCorrected",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_extents = match m_extents {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("extents"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpSampledHeightFieldShape {

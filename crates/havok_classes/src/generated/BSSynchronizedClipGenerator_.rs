@@ -885,6 +885,7 @@ impl<'de> _serde::de::Visitor<'de> for __BSSynchronizedClipGeneratorVisitor<'de>
             m_bAllCharactersAtMarks,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -904,9 +905,12 @@ impl<'de> _serde::de::Visitor<'de> for __BSSynchronizedClipGeneratorVisitor<'de>
         let mut m_bApplyMotionFromRoot: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_sAnimationBindingIndex: _serde::__private::Option<i16> = _serde::__private::None;
         for _ in 0..9usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_pClipGenerator => {
                         if _serde::__private::Option::is_some(&m_pClipGenerator) {
@@ -920,7 +924,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSSynchronizedClipGeneratorVisitor<'de>
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -937,7 +943,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSSynchronizedClipGeneratorVisitor<'de>
                             match __A::next_value::<CString<'de>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -956,7 +964,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSSynchronizedClipGeneratorVisitor<'de>
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -973,7 +983,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSSynchronizedClipGeneratorVisitor<'de>
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -990,7 +1002,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSSynchronizedClipGeneratorVisitor<'de>
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1007,7 +1021,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSSynchronizedClipGeneratorVisitor<'de>
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1024,7 +1040,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSSynchronizedClipGeneratorVisitor<'de>
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1041,7 +1059,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSSynchronizedClipGeneratorVisitor<'de>
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1060,7 +1080,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSSynchronizedClipGeneratorVisitor<'de>
                             match __A::next_value::<i16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1072,83 +1094,101 @@ impl<'de> _serde::de::Visitor<'de> for __BSSynchronizedClipGeneratorVisitor<'de>
         let m_pClipGenerator = match m_pClipGenerator {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("pClipGenerator"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_SyncAnimPrefix = match m_SyncAnimPrefix {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("SyncAnimPrefix"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bSyncClipIgnoreMarkPlacement = match m_bSyncClipIgnoreMarkPlacement {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "bSyncClipIgnoreMarkPlacement",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_fGetToMarkTime = match m_fGetToMarkTime {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("fGetToMarkTime"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_fMarkErrorThreshold = match m_fMarkErrorThreshold {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "fMarkErrorThreshold",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bLeadCharacter = match m_bLeadCharacter {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bLeadCharacter"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bReorientSupportChar = match m_bReorientSupportChar {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "bReorientSupportChar",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bApplyMotionFromRoot = match m_bApplyMotionFromRoot {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "bApplyMotionFromRoot",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_sAnimationBindingIndex = match m_sAnimationBindingIndex {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "sAnimationBindingIndex",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(BSSynchronizedClipGenerator {

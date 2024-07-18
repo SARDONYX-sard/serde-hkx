@@ -263,6 +263,7 @@ for __hkbStateMachineProspectiveTransitionInfoVisitor<'de> {
             m_toStateId,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -279,9 +280,12 @@ for __hkbStateMachineProspectiveTransitionInfoVisitor<'de> {
         > = _serde::__private::None;
         let mut m_toStateId: _serde::__private::Option<i32> = _serde::__private::None;
         for _ in 0..3usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_transitionInfoReference => {
                         if _serde::__private::Option::is_some(
@@ -299,7 +303,9 @@ for __hkbStateMachineProspectiveTransitionInfoVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -320,7 +326,9 @@ for __hkbStateMachineProspectiveTransitionInfoVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -337,7 +345,9 @@ for __hkbStateMachineProspectiveTransitionInfoVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -349,29 +359,35 @@ for __hkbStateMachineProspectiveTransitionInfoVisitor<'de> {
         let m_transitionInfoReference = match m_transitionInfoReference {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "transitionInfoReference",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_transitionInfoReferenceForTE = match m_transitionInfoReferenceForTE {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "transitionInfoReferenceForTE",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_toStateId = match m_toStateId {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("toStateId"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkbStateMachineProspectiveTransitionInfo {

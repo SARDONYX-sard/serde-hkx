@@ -313,6 +313,7 @@ impl<'de> _serde::de::Visitor<'de> for __BSSpeedSamplerModifierVisitor<'de> {
             m_speedOut,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -327,9 +328,12 @@ impl<'de> _serde::de::Visitor<'de> for __BSSpeedSamplerModifierVisitor<'de> {
         let mut m_goalSpeed: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_speedOut: _serde::__private::Option<f32> = _serde::__private::None;
         for _ in 0..4usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_state => {
                         if _serde::__private::Option::is_some(&m_state) {
@@ -341,7 +345,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSSpeedSamplerModifierVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -358,7 +364,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSSpeedSamplerModifierVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -375,7 +383,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSSpeedSamplerModifierVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -392,7 +402,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSSpeedSamplerModifierVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -404,33 +416,41 @@ impl<'de> _serde::de::Visitor<'de> for __BSSpeedSamplerModifierVisitor<'de> {
         let m_state = match m_state {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("state"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_direction = match m_direction {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("direction"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_goalSpeed = match m_goalSpeed {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("goalSpeed"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_speedOut = match m_speedOut {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("speedOut"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(BSSpeedSamplerModifier {

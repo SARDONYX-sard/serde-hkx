@@ -648,6 +648,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkDriverInfoHandVisitor<'de> {
             m_localFrameName,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -671,9 +672,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkDriverInfoHandVisitor<'de> {
         let mut m_enforceEndRotation: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_localFrameName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
         for _ in 0..14usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_elbowAxisLS => {
                         if _serde::__private::Option::is_some(&m_elbowAxisLS) {
@@ -687,7 +691,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkDriverInfoHandVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -704,7 +710,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkDriverInfoHandVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -721,7 +729,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkDriverInfoHandVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -740,7 +750,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkDriverInfoHandVisitor<'de> {
                             match __A::next_value::<Quaternion>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -757,7 +769,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkDriverInfoHandVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -774,7 +788,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkDriverInfoHandVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -791,7 +807,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkDriverInfoHandVisitor<'de> {
                             match __A::next_value::<i16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -808,7 +826,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkDriverInfoHandVisitor<'de> {
                             match __A::next_value::<i16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -825,7 +845,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkDriverInfoHandVisitor<'de> {
                             match __A::next_value::<i16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -842,7 +864,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkDriverInfoHandVisitor<'de> {
                             match __A::next_value::<i16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -859,7 +883,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkDriverInfoHandVisitor<'de> {
                             match __A::next_value::<i16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -876,7 +902,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkDriverInfoHandVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -893,7 +921,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkDriverInfoHandVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -910,7 +940,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkDriverInfoHandVisitor<'de> {
                             match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -922,125 +954,153 @@ impl<'de> _serde::de::Visitor<'de> for __hkbHandIkDriverInfoHandVisitor<'de> {
         let m_elbowAxisLS = match m_elbowAxisLS {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("elbowAxisLS"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_backHandNormalLS = match m_backHandNormalLS {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("backHandNormalLS"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_handOffsetLS = match m_handOffsetLS {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("handOffsetLS"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_handOrienationOffsetLS = match m_handOrienationOffsetLS {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "handOrienationOffsetLS",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_maxElbowAngleDegrees = match m_maxElbowAngleDegrees {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "maxElbowAngleDegrees",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_minElbowAngleDegrees = match m_minElbowAngleDegrees {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "minElbowAngleDegrees",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_shoulderIndex = match m_shoulderIndex {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("shoulderIndex"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_shoulderSiblingIndex = match m_shoulderSiblingIndex {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "shoulderSiblingIndex",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_elbowIndex = match m_elbowIndex {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("elbowIndex"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_elbowSiblingIndex = match m_elbowSiblingIndex {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("elbowSiblingIndex"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_wristIndex = match m_wristIndex {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("wristIndex"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_enforceEndPosition = match m_enforceEndPosition {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "enforceEndPosition",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_enforceEndRotation = match m_enforceEndRotation {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "enforceEndRotation",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_localFrameName = match m_localFrameName {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("localFrameName"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkbHandIkDriverInfoHand {

@@ -267,6 +267,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbWorldFromModelModeDataVisitor<'de> {
             m_mode,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -280,9 +281,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkbWorldFromModelModeDataVisitor<'de> {
         let mut m_poseMatchingBone2: _serde::__private::Option<i16> = _serde::__private::None;
         let mut m_mode: _serde::__private::Option<WorldFromModelMode> = _serde::__private::None;
         for _ in 0..4usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_poseMatchingBone0 => {
                         if _serde::__private::Option::is_some(&m_poseMatchingBone0) {
@@ -296,7 +300,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbWorldFromModelModeDataVisitor<'de> {
                             match __A::next_value::<i16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -313,7 +319,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbWorldFromModelModeDataVisitor<'de> {
                             match __A::next_value::<i16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -330,7 +338,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbWorldFromModelModeDataVisitor<'de> {
                             match __A::next_value::<i16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -345,7 +355,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbWorldFromModelModeDataVisitor<'de> {
                             match __A::next_value::<WorldFromModelMode>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -357,33 +369,41 @@ impl<'de> _serde::de::Visitor<'de> for __hkbWorldFromModelModeDataVisitor<'de> {
         let m_poseMatchingBone0 = match m_poseMatchingBone0 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("poseMatchingBone0"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_poseMatchingBone1 = match m_poseMatchingBone1 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("poseMatchingBone1"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_poseMatchingBone2 = match m_poseMatchingBone2 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("poseMatchingBone2"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_mode = match m_mode {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("mode"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkbWorldFromModelModeData {

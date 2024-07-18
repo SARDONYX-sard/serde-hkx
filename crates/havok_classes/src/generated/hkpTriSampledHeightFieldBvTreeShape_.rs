@@ -301,6 +301,7 @@ for __hkpTriSampledHeightFieldBvTreeShapeVisitor<'de> {
             m_padding,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -314,9 +315,12 @@ for __hkpTriSampledHeightFieldBvTreeShapeVisitor<'de> {
         let mut m_wantAabbRejectionTest: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_padding: _serde::__private::Option<[u8; 12usize]> = _serde::__private::None;
         for _ in 0..3usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_childContainer => {
                         if _serde::__private::Option::is_some(&m_childContainer) {
@@ -332,7 +336,9 @@ for __hkpTriSampledHeightFieldBvTreeShapeVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -349,7 +355,9 @@ for __hkpTriSampledHeightFieldBvTreeShapeVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -366,7 +374,9 @@ for __hkpTriSampledHeightFieldBvTreeShapeVisitor<'de> {
                             match __A::next_value::<[u8; 12usize]>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -378,27 +388,33 @@ for __hkpTriSampledHeightFieldBvTreeShapeVisitor<'de> {
         let m_childContainer = match m_childContainer {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("childContainer"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_wantAabbRejectionTest = match m_wantAabbRejectionTest {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "wantAabbRejectionTest",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_padding = match m_padding {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("padding"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpTriSampledHeightFieldBvTreeShape {

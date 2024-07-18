@@ -661,6 +661,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterDataVisitor<'de> {
             m_numFloatSlots,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -687,9 +688,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterDataVisitor<'de> {
         let mut m_mirroredSkeletonInfo: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_scale: _serde::__private::Option<f32> = _serde::__private::None;
         for _ in 0..12usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_characterControllerInfo => {
                         if _serde::__private::Option::is_some(
@@ -707,7 +711,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterDataVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -724,7 +730,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterDataVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -741,7 +749,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterDataVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -758,7 +768,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterDataVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -777,7 +789,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterDataVisitor<'de> {
                             match __A::next_value::<Vec<hkbVariableInfo>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -794,7 +808,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterDataVisitor<'de> {
                             match __A::next_value::<Vec<i32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -813,7 +829,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterDataVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -830,7 +848,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterDataVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -847,7 +867,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterDataVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -864,7 +886,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterDataVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -881,7 +905,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterDataVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -896,7 +922,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterDataVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -908,105 +936,129 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterDataVisitor<'de> {
         let m_characterControllerInfo = match m_characterControllerInfo {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "characterControllerInfo",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_modelUpMS = match m_modelUpMS {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("modelUpMS"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_modelForwardMS = match m_modelForwardMS {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("modelForwardMS"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_modelRightMS = match m_modelRightMS {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("modelRightMS"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_characterPropertyInfos = match m_characterPropertyInfos {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "characterPropertyInfos",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_numBonesPerLod = match m_numBonesPerLod {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("numBonesPerLod"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_characterPropertyValues = match m_characterPropertyValues {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "characterPropertyValues",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_footIkDriverInfo = match m_footIkDriverInfo {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("footIkDriverInfo"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_handIkDriverInfo = match m_handIkDriverInfo {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("handIkDriverInfo"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_stringData = match m_stringData {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("stringData"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_mirroredSkeletonInfo = match m_mirroredSkeletonInfo {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "mirroredSkeletonInfo",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_scale = match m_scale {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("scale"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkbCharacterData {

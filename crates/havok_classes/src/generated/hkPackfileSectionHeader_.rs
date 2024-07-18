@@ -452,6 +452,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkPackfileSectionHeaderVisitor<'de> {
             m_endOffset,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -470,9 +471,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkPackfileSectionHeaderVisitor<'de> {
         let mut m_importsOffset: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_endOffset: _serde::__private::Option<i32> = _serde::__private::None;
         for _ in 0..9usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_sectionTag => {
                         if _serde::__private::Option::is_some(&m_sectionTag) {
@@ -486,7 +490,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkPackfileSectionHeaderVisitor<'de> {
                             match __A::next_value::<[char; 19usize]>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -503,7 +509,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkPackfileSectionHeaderVisitor<'de> {
                             match __A::next_value::<char>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -520,7 +528,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkPackfileSectionHeaderVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -537,7 +547,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkPackfileSectionHeaderVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -554,7 +566,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkPackfileSectionHeaderVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -571,7 +585,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkPackfileSectionHeaderVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -588,7 +604,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkPackfileSectionHeaderVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -605,7 +623,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkPackfileSectionHeaderVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -622,7 +642,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkPackfileSectionHeaderVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -634,77 +656,95 @@ impl<'de> _serde::de::Visitor<'de> for __hkPackfileSectionHeaderVisitor<'de> {
         let m_sectionTag = match m_sectionTag {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("sectionTag"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_nullByte = match m_nullByte {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("nullByte"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_absoluteDataStart = match m_absoluteDataStart {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("absoluteDataStart"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_localFixupsOffset = match m_localFixupsOffset {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("localFixupsOffset"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_globalFixupsOffset = match m_globalFixupsOffset {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "globalFixupsOffset",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_virtualFixupsOffset = match m_virtualFixupsOffset {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "virtualFixupsOffset",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_exportsOffset = match m_exportsOffset {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("exportsOffset"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_importsOffset = match m_importsOffset {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("importsOffset"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_endOffset = match m_endOffset {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("endOffset"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkPackfileSectionHeader {

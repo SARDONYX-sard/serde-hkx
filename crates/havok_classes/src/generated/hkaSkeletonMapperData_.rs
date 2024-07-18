@@ -433,6 +433,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSkeletonMapperDataVisitor<'de> {
             m_mappingType,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -454,9 +455,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSkeletonMapperDataVisitor<'de> {
         let mut m_keepUnmappedLocal: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_mappingType: _serde::__private::Option<MappingType> = _serde::__private::None;
         for _ in 0..8usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_skeletonA => {
                         if _serde::__private::Option::is_some(&m_skeletonA) {
@@ -470,7 +474,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSkeletonMapperDataVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -487,7 +493,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSkeletonMapperDataVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -506,7 +514,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSkeletonMapperDataVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -525,7 +535,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSkeletonMapperDataVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -542,7 +554,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSkeletonMapperDataVisitor<'de> {
                             match __A::next_value::<Vec<i16>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -561,7 +575,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSkeletonMapperDataVisitor<'de> {
                             match __A::next_value::<QsTransform>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -578,7 +594,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSkeletonMapperDataVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -595,7 +613,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSkeletonMapperDataVisitor<'de> {
                             match __A::next_value::<MappingType>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -607,67 +627,83 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSkeletonMapperDataVisitor<'de> {
         let m_skeletonA = match m_skeletonA {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("skeletonA"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_skeletonB = match m_skeletonB {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("skeletonB"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_simpleMappings = match m_simpleMappings {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("simpleMappings"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_chainMappings = match m_chainMappings {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("chainMappings"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_unmappedBones = match m_unmappedBones {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("unmappedBones"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_extractedMotionMapping = match m_extractedMotionMapping {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "extractedMotionMapping",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_keepUnmappedLocal = match m_keepUnmappedLocal {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("keepUnmappedLocal"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_mappingType = match m_mappingType {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("mappingType"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkaSkeletonMapperData {

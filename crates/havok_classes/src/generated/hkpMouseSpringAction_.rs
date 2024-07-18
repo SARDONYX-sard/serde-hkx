@@ -440,6 +440,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMouseSpringActionVisitor<'de> {
             m_applyCallbacks,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -457,9 +458,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMouseSpringActionVisitor<'de> {
         let mut m_objectDamping: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_shapeKey: _serde::__private::Option<u32> = _serde::__private::None;
         for _ in 0..7usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_positionInRbLocal => {
                         if _serde::__private::Option::is_some(&m_positionInRbLocal) {
@@ -473,7 +477,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMouseSpringActionVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -490,7 +496,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMouseSpringActionVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -507,7 +515,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMouseSpringActionVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -524,7 +534,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMouseSpringActionVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -541,7 +553,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMouseSpringActionVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -558,7 +572,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMouseSpringActionVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -575,7 +591,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMouseSpringActionVisitor<'de> {
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -587,59 +605,73 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMouseSpringActionVisitor<'de> {
         let m_positionInRbLocal = match m_positionInRbLocal {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("positionInRbLocal"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_mousePositionInWorld = match m_mousePositionInWorld {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "mousePositionInWorld",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_springDamping = match m_springDamping {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("springDamping"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_springElasticity = match m_springElasticity {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("springElasticity"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_maxRelativeForce = match m_maxRelativeForce {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("maxRelativeForce"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_objectDamping = match m_objectDamping {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("objectDamping"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_shapeKey = match m_shapeKey {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("shapeKey"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpMouseSpringAction {

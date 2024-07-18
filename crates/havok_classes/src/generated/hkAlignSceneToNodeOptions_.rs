@@ -462,6 +462,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkAlignSceneToNodeOptionsVisitor<'de> {
             m_nodeName,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -481,9 +482,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkAlignSceneToNodeOptionsVisitor<'de> {
         let mut m_keyframe: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_nodeName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
         for _ in 0..9usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_invert => {
                         if _serde::__private::Option::is_some(&m_invert) {
@@ -495,7 +499,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkAlignSceneToNodeOptionsVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -512,7 +518,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkAlignSceneToNodeOptionsVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -529,7 +537,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkAlignSceneToNodeOptionsVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -546,7 +556,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkAlignSceneToNodeOptionsVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -563,7 +575,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkAlignSceneToNodeOptionsVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -580,7 +594,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkAlignSceneToNodeOptionsVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -597,7 +613,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkAlignSceneToNodeOptionsVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -614,7 +632,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkAlignSceneToNodeOptionsVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -631,7 +651,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkAlignSceneToNodeOptionsVisitor<'de> {
                             match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -643,79 +665,97 @@ impl<'de> _serde::de::Visitor<'de> for __hkAlignSceneToNodeOptionsVisitor<'de> {
         let m_invert = match m_invert {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("invert"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_transformPositionX = match m_transformPositionX {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "transformPositionX",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_transformPositionY = match m_transformPositionY {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "transformPositionY",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_transformPositionZ = match m_transformPositionZ {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "transformPositionZ",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_transformRotation = match m_transformRotation {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("transformRotation"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_transformScale = match m_transformScale {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("transformScale"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_transformSkew = match m_transformSkew {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("transformSkew"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_keyframe = match m_keyframe {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("keyframe"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_nodeName = match m_nodeName {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("nodeName"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkAlignSceneToNodeOptions {

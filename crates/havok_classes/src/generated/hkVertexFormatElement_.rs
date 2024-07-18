@@ -331,6 +331,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkVertexFormatElementVisitor<'de> {
             m_pad,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -346,9 +347,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkVertexFormatElementVisitor<'de> {
         let mut m_flags: _serde::__private::Option<HintFlags> = _serde::__private::None;
         let mut m_pad: _serde::__private::Option<[u8; 3usize]> = _serde::__private::None;
         for _ in 0..6usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_dataType => {
                         if _serde::__private::Option::is_some(&m_dataType) {
@@ -362,7 +366,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkVertexFormatElementVisitor<'de> {
                             match __A::next_value::<ComponentType>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -379,7 +385,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkVertexFormatElementVisitor<'de> {
                             match __A::next_value::<u8>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -394,7 +402,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkVertexFormatElementVisitor<'de> {
                             match __A::next_value::<ComponentUsage>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -411,7 +421,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkVertexFormatElementVisitor<'de> {
                             match __A::next_value::<u8>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -426,7 +438,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkVertexFormatElementVisitor<'de> {
                             match __A::next_value::<HintFlags>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -441,7 +455,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkVertexFormatElementVisitor<'de> {
                             match __A::next_value::<[u8; 3usize]>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -453,49 +469,61 @@ impl<'de> _serde::de::Visitor<'de> for __hkVertexFormatElementVisitor<'de> {
         let m_dataType = match m_dataType {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("dataType"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_numValues = match m_numValues {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("numValues"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_usage = match m_usage {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("usage"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_subUsage = match m_subUsage {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("subUsage"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_flags = match m_flags {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("flags"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_pad = match m_pad {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("pad"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkVertexFormatElement {

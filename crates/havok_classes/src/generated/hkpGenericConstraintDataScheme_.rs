@@ -307,6 +307,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpGenericConstraintDataSchemeVisitor<'
             m_motors,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -319,9 +320,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkpGenericConstraintDataSchemeVisitor<'
         let mut m_commands: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
         let mut m_motors: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
         for _ in 0..3usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_data => {
                         if _serde::__private::Option::is_some(&m_data) {
@@ -333,7 +337,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpGenericConstraintDataSchemeVisitor<'
                             match __A::next_value::<Vec<Vector4>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -350,7 +356,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpGenericConstraintDataSchemeVisitor<'
                             match __A::next_value::<Vec<i32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -365,7 +373,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpGenericConstraintDataSchemeVisitor<'
                             match __A::next_value::<Vec<Pointer>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -377,25 +387,31 @@ impl<'de> _serde::de::Visitor<'de> for __hkpGenericConstraintDataSchemeVisitor<'
         let m_data = match m_data {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("data"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_commands = match m_commands {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("commands"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_motors = match m_motors {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("motors"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpGenericConstraintDataScheme {

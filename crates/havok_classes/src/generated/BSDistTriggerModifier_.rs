@@ -319,6 +319,7 @@ impl<'de> _serde::de::Visitor<'de> for __BSDistTriggerModifierVisitor<'de> {
             m_triggerEvent,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -333,9 +334,12 @@ impl<'de> _serde::de::Visitor<'de> for __BSDistTriggerModifierVisitor<'de> {
         let mut m_distanceTrigger: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_triggerEvent: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
         for _ in 0..4usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_targetPosition => {
                         if _serde::__private::Option::is_some(&m_targetPosition) {
@@ -349,7 +353,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSDistTriggerModifierVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -366,7 +372,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSDistTriggerModifierVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -383,7 +391,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSDistTriggerModifierVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -400,7 +410,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSDistTriggerModifierVisitor<'de> {
                             match __A::next_value::<hkbEventProperty>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -412,33 +424,41 @@ impl<'de> _serde::de::Visitor<'de> for __BSDistTriggerModifierVisitor<'de> {
         let m_targetPosition = match m_targetPosition {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("targetPosition"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_distance = match m_distance {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("distance"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_distanceTrigger = match m_distanceTrigger {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("distanceTrigger"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_triggerEvent = match m_triggerEvent {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("triggerEvent"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(BSDistTriggerModifier {

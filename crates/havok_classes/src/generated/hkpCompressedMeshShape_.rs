@@ -954,6 +954,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
             m_namedMaterials,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -991,9 +992,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
             Vec<hkpNamedMeshMaterial<'de>>,
         > = _serde::__private::None;
         for _ in 0..21usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_bitsPerIndex => {
                         if _serde::__private::Option::is_some(&m_bitsPerIndex) {
@@ -1007,7 +1011,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1024,7 +1030,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1041,7 +1049,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1058,7 +1068,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1073,7 +1085,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1090,7 +1104,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
                             match __A::next_value::<WeldingType>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1107,7 +1123,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
                             match __A::next_value::<MaterialType>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1124,7 +1142,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
                             match __A::next_value::<Vec<u32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1141,7 +1161,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
                             match __A::next_value::<Vec<u16>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1158,7 +1180,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
                             match __A::next_value::<Vec<u8>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1175,7 +1199,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
                             match __A::next_value::<Vec<QsTransform>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1192,7 +1218,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
                             match __A::next_value::<Vec<Vector4>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1211,7 +1239,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1228,7 +1258,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1247,7 +1279,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1262,7 +1296,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1277,7 +1313,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
                             match __A::next_value::<hkAabb>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1296,7 +1334,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1313,7 +1353,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
                             match __A::next_value::<u16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1330,7 +1372,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
                             match __A::next_value::<u16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1349,7 +1393,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1361,171 +1407,213 @@ impl<'de> _serde::de::Visitor<'de> for __hkpCompressedMeshShapeVisitor<'de> {
         let m_bitsPerIndex = match m_bitsPerIndex {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bitsPerIndex"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bitsPerWIndex = match m_bitsPerWIndex {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bitsPerWIndex"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_wIndexMask = match m_wIndexMask {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("wIndexMask"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_indexMask = match m_indexMask {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("indexMask"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_radius = match m_radius {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("radius"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_weldingType = match m_weldingType {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("weldingType"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_materialType = match m_materialType {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("materialType"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_materials = match m_materials {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("materials"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_materials16 = match m_materials16 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("materials16"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_materials8 = match m_materials8 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("materials8"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_transforms = match m_transforms {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("transforms"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bigVertices = match m_bigVertices {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bigVertices"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bigTriangles = match m_bigTriangles {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bigTriangles"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_chunks = match m_chunks {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("chunks"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_convexPieces = match m_convexPieces {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("convexPieces"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_error = match m_error {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("error"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bounds = match m_bounds {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bounds"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_defaultCollisionFilterInfo = match m_defaultCollisionFilterInfo {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "defaultCollisionFilterInfo",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_materialStriding = match m_materialStriding {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("materialStriding"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_numMaterials = match m_numMaterials {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("numMaterials"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_namedMaterials = match m_namedMaterials {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("namedMaterials"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpCompressedMeshShape {

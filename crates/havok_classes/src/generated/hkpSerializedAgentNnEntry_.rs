@@ -636,6 +636,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSerializedAgentNnEntryVisitor<'de> {
             m_version,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -660,9 +661,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSerializedAgentNnEntryVisitor<'de> {
         let mut m_endianCheckBuffer: _serde::__private::Option<[u8; 4usize]> = _serde::__private::None;
         let mut m_version: _serde::__private::Option<u32> = _serde::__private::None;
         for _ in 0..14usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_bodyA => {
                         if _serde::__private::Option::is_some(&m_bodyA) {
@@ -674,7 +678,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSerializedAgentNnEntryVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -689,7 +695,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSerializedAgentNnEntryVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -706,7 +714,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSerializedAgentNnEntryVisitor<'de> {
                             match __A::next_value::<u64>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -723,7 +733,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSerializedAgentNnEntryVisitor<'de> {
                             match __A::next_value::<u64>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -740,7 +752,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSerializedAgentNnEntryVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -757,7 +771,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSerializedAgentNnEntryVisitor<'de> {
                             match __A::next_value::<SerializedAgentType>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -774,7 +790,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSerializedAgentNnEntryVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -791,7 +809,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSerializedAgentNnEntryVisitor<'de> {
                             match __A::next_value::<Vec<u8>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -808,7 +828,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSerializedAgentNnEntryVisitor<'de> {
                             match __A::next_value::<Vec<hkContactPoint>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -825,7 +847,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSerializedAgentNnEntryVisitor<'de> {
                             match __A::next_value::<Vec<u8>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -842,7 +866,10 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSerializedAgentNnEntryVisitor<'de> {
                             match __A::next_value::<[u8; 160usize]>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))]
+                                    [Default::default(); 160usize]
                                 }
                             },
                         );
@@ -861,7 +888,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSerializedAgentNnEntryVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -878,7 +907,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSerializedAgentNnEntryVisitor<'de> {
                             match __A::next_value::<[u8; 4usize]>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -895,7 +926,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSerializedAgentNnEntryVisitor<'de> {
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -907,113 +940,141 @@ impl<'de> _serde::de::Visitor<'de> for __hkpSerializedAgentNnEntryVisitor<'de> {
         let m_bodyA = match m_bodyA {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bodyA"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bodyB = match m_bodyB {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bodyB"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bodyAId = match m_bodyAId {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bodyAId"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bodyBId = match m_bodyBId {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bodyBId"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_useEntityIds = match m_useEntityIds {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("useEntityIds"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_agentType = match m_agentType {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("agentType"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_atom = match m_atom {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("atom"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_propertiesStream = match m_propertiesStream {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("propertiesStream"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_contactPoints = match m_contactPoints {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("contactPoints"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_cpIdMgr = match m_cpIdMgr {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("cpIdMgr"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_nnEntryData = match m_nnEntryData {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("nnEntryData"),
                 );
+                #[cfg(not(feature = "strict"))] [Default::default(); 160usize]
             }
         };
         let m_trackInfo = match m_trackInfo {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("trackInfo"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_endianCheckBuffer = match m_endianCheckBuffer {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("endianCheckBuffer"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_version = match m_version {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("version"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpSerializedAgentNnEntry {

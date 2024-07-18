@@ -505,6 +505,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCombineTransformsModifierVisitor<'de
             m_invertResult,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -524,9 +525,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCombineTransformsModifierVisitor<'de
         let mut m_invertRightTransform: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_invertResult: _serde::__private::Option<bool> = _serde::__private::None;
         for _ in 0..9usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_translationOut => {
                         if _serde::__private::Option::is_some(&m_translationOut) {
@@ -540,7 +544,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCombineTransformsModifierVisitor<'de
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -557,7 +563,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCombineTransformsModifierVisitor<'de
                             match __A::next_value::<Quaternion>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -574,7 +582,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCombineTransformsModifierVisitor<'de
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -591,7 +601,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCombineTransformsModifierVisitor<'de
                             match __A::next_value::<Quaternion>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -608,7 +620,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCombineTransformsModifierVisitor<'de
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -625,7 +639,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCombineTransformsModifierVisitor<'de
                             match __A::next_value::<Quaternion>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -642,7 +658,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCombineTransformsModifierVisitor<'de
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -659,7 +677,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCombineTransformsModifierVisitor<'de
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -676,7 +696,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCombineTransformsModifierVisitor<'de
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -688,77 +710,95 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCombineTransformsModifierVisitor<'de
         let m_translationOut = match m_translationOut {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("translationOut"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_rotationOut = match m_rotationOut {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("rotationOut"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_leftTranslation = match m_leftTranslation {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("leftTranslation"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_leftRotation = match m_leftRotation {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("leftRotation"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_rightTranslation = match m_rightTranslation {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("rightTranslation"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_rightRotation = match m_rightRotation {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("rightRotation"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_invertLeftTransform = match m_invertLeftTransform {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "invertLeftTransform",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_invertRightTransform = match m_invertRightTransform {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "invertRightTransform",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_invertResult = match m_invertResult {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("invertResult"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkbCombineTransformsModifier {

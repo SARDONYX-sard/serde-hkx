@@ -879,6 +879,7 @@ impl<'de> _serde::de::Visitor<'de> for __BSLookAtModifierVisitor<'de> {
             m_pSkeletonMemory,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -905,9 +906,12 @@ impl<'de> _serde::de::Visitor<'de> for __BSLookAtModifierVisitor<'de> {
         let mut m_lookAtCameraY: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_lookAtCameraZ: _serde::__private::Option<f32> = _serde::__private::None;
         for _ in 0..16usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_lookAtTarget => {
                         if _serde::__private::Option::is_some(&m_lookAtTarget) {
@@ -921,7 +925,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSLookAtModifierVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -938,7 +944,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSLookAtModifierVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -957,7 +965,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSLookAtModifierVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -974,7 +984,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSLookAtModifierVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -993,7 +1005,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSLookAtModifierVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1012,7 +1026,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSLookAtModifierVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1027,7 +1043,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSLookAtModifierVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1044,7 +1062,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSLookAtModifierVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1061,7 +1081,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSLookAtModifierVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1078,7 +1100,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSLookAtModifierVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1095,7 +1119,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSLookAtModifierVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1112,7 +1138,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSLookAtModifierVisitor<'de> {
                             match __A::next_value::<hkbEventProperty>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1129,7 +1157,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSLookAtModifierVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1146,7 +1176,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSLookAtModifierVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1163,7 +1195,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSLookAtModifierVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1180,7 +1214,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSLookAtModifierVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1192,137 +1228,169 @@ impl<'de> _serde::de::Visitor<'de> for __BSLookAtModifierVisitor<'de> {
         let m_lookAtTarget = match m_lookAtTarget {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("lookAtTarget"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bones = match m_bones {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bones"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_eyeBones = match m_eyeBones {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("eyeBones"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_limitAngleDegrees = match m_limitAngleDegrees {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("limitAngleDegrees"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_limitAngleThresholdDegrees = match m_limitAngleThresholdDegrees {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "limitAngleThresholdDegrees",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_continueLookOutsideOfLimit = match m_continueLookOutsideOfLimit {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "continueLookOutsideOfLimit",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_onGain = match m_onGain {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("onGain"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_offGain = match m_offGain {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("offGain"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_useBoneGains = match m_useBoneGains {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("useBoneGains"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_targetLocation = match m_targetLocation {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("targetLocation"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_targetOutsideLimits = match m_targetOutsideLimits {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "targetOutsideLimits",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_targetOutOfLimitEvent = match m_targetOutOfLimitEvent {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "targetOutOfLimitEvent",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_lookAtCamera = match m_lookAtCamera {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("lookAtCamera"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_lookAtCameraX = match m_lookAtCameraX {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("lookAtCameraX"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_lookAtCameraY = match m_lookAtCameraY {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("lookAtCameraY"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_lookAtCameraZ = match m_lookAtCameraZ {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("lookAtCameraZ"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(BSLookAtModifier {

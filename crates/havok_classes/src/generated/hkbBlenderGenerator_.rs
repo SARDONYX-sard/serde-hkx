@@ -777,6 +777,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBlenderGeneratorVisitor<'de> {
             m_doSubtractiveBlend,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -795,9 +796,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBlenderGeneratorVisitor<'de> {
         let mut m_subtractLastChild: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_children: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
         for _ in 0..8usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_referencePoseWeightThreshold => {
                         if _serde::__private::Option::is_some(
@@ -813,7 +817,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBlenderGeneratorVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -830,7 +836,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBlenderGeneratorVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -849,7 +857,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBlenderGeneratorVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -868,7 +878,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBlenderGeneratorVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -887,7 +899,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBlenderGeneratorVisitor<'de> {
                             match __A::next_value::<i16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -902,7 +916,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBlenderGeneratorVisitor<'de> {
                             match __A::next_value::<i16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -919,7 +935,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBlenderGeneratorVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -936,7 +954,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBlenderGeneratorVisitor<'de> {
                             match __A::next_value::<Vec<Pointer>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -948,73 +968,89 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBlenderGeneratorVisitor<'de> {
         let m_referencePoseWeightThreshold = match m_referencePoseWeightThreshold {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "referencePoseWeightThreshold",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_blendParameter = match m_blendParameter {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("blendParameter"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_minCyclicBlendParameter = match m_minCyclicBlendParameter {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "minCyclicBlendParameter",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_maxCyclicBlendParameter = match m_maxCyclicBlendParameter {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "maxCyclicBlendParameter",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_indexOfSyncMasterChild = match m_indexOfSyncMasterChild {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "indexOfSyncMasterChild",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_flags = match m_flags {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("flags"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_subtractLastChild = match m_subtractLastChild {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("subtractLastChild"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_children = match m_children {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("children"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkbBlenderGenerator {

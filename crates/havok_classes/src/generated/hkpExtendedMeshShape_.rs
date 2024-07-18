@@ -655,6 +655,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpExtendedMeshShapeVisitor<'de> {
             m_padding,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -682,9 +683,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkpExtendedMeshShapeVisitor<'de> {
         let mut m_cachedNumChildShapes: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_triangleRadius: _serde::__private::Option<f32> = _serde::__private::None;
         for _ in 0..11usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_embeddedTrianglesSubpart => {
                         if _serde::__private::Option::is_some(
@@ -702,7 +706,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpExtendedMeshShapeVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -719,7 +725,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpExtendedMeshShapeVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -736,7 +744,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpExtendedMeshShapeVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -755,7 +765,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpExtendedMeshShapeVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -774,7 +786,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpExtendedMeshShapeVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -793,7 +807,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpExtendedMeshShapeVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -810,7 +826,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpExtendedMeshShapeVisitor<'de> {
                             match __A::next_value::<Vec<u16>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -827,7 +845,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpExtendedMeshShapeVisitor<'de> {
                             match __A::next_value::<WeldingType>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -846,7 +866,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpExtendedMeshShapeVisitor<'de> {
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -863,7 +885,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpExtendedMeshShapeVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -880,7 +904,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpExtendedMeshShapeVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -892,97 +918,119 @@ impl<'de> _serde::de::Visitor<'de> for __hkpExtendedMeshShapeVisitor<'de> {
         let m_embeddedTrianglesSubpart = match m_embeddedTrianglesSubpart {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "embeddedTrianglesSubpart",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_aabbHalfExtents = match m_aabbHalfExtents {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("aabbHalfExtents"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_aabbCenter = match m_aabbCenter {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("aabbCenter"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_numBitsForSubpartIndex = match m_numBitsForSubpartIndex {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "numBitsForSubpartIndex",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_trianglesSubparts = match m_trianglesSubparts {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("trianglesSubparts"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_shapesSubparts = match m_shapesSubparts {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("shapesSubparts"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_weldingInfo = match m_weldingInfo {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("weldingInfo"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_weldingType = match m_weldingType {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("weldingType"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_defaultCollisionFilterInfo = match m_defaultCollisionFilterInfo {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "defaultCollisionFilterInfo",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_cachedNumChildShapes = match m_cachedNumChildShapes {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "cachedNumChildShapes",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_triangleRadius = match m_triangleRadius {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("triangleRadius"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpExtendedMeshShape {

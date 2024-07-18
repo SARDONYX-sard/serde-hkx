@@ -243,6 +243,7 @@ for __hkpStorageExtendedMeshShapeMaterialVisitor<'de> {
             m_userData,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -256,9 +257,12 @@ for __hkpStorageExtendedMeshShapeMaterialVisitor<'de> {
         let mut m_friction: _serde::__private::Option<f16> = _serde::__private::None;
         let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
         for _ in 0..3usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_restitution => {
                         if _serde::__private::Option::is_some(&m_restitution) {
@@ -272,7 +276,9 @@ for __hkpStorageExtendedMeshShapeMaterialVisitor<'de> {
                             match __A::next_value::<f16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -289,7 +295,9 @@ for __hkpStorageExtendedMeshShapeMaterialVisitor<'de> {
                             match __A::next_value::<f16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -306,7 +314,9 @@ for __hkpStorageExtendedMeshShapeMaterialVisitor<'de> {
                             match __A::next_value::<u64>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -318,25 +328,31 @@ for __hkpStorageExtendedMeshShapeMaterialVisitor<'de> {
         let m_restitution = match m_restitution {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("restitution"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_friction = match m_friction {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("friction"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_userData = match m_userData {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("userData"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpStorageExtendedMeshShapeMaterial {

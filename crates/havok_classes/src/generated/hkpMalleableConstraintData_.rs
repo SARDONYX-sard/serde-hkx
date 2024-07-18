@@ -243,6 +243,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMalleableConstraintDataVisitor<'de> 
             m_strength,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -256,9 +257,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMalleableConstraintDataVisitor<'de> 
         let mut m_atoms: _serde::__private::Option<hkpBridgeAtoms> = _serde::__private::None;
         let mut m_strength: _serde::__private::Option<f32> = _serde::__private::None;
         for _ in 0..3usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_constraintData => {
                         if _serde::__private::Option::is_some(&m_constraintData) {
@@ -272,7 +276,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMalleableConstraintDataVisitor<'de> 
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -287,7 +293,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMalleableConstraintDataVisitor<'de> 
                             match __A::next_value::<hkpBridgeAtoms>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -304,7 +312,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMalleableConstraintDataVisitor<'de> 
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -316,25 +326,31 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMalleableConstraintDataVisitor<'de> 
         let m_constraintData = match m_constraintData {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("constraintData"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_atoms = match m_atoms {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("atoms"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_strength = match m_strength {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("strength"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpMalleableConstraintData {

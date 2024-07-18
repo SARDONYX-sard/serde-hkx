@@ -466,6 +466,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleFrictionStatusAxisStatusVisit
             m_relativeForwardForce,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -484,9 +485,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleFrictionStatusAxisStatusVisit
         let mut m_relativeSideForce: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_relativeForwardForce: _serde::__private::Option<f32> = _serde::__private::None;
         for _ in 0..9usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_forward_slip_velocity => {
                         if _serde::__private::Option::is_some(&m_forward_slip_velocity) {
@@ -500,7 +504,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleFrictionStatusAxisStatusVisit
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -517,7 +523,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleFrictionStatusAxisStatusVisit
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -534,7 +542,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleFrictionStatusAxisStatusVisit
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -551,7 +561,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleFrictionStatusAxisStatusVisit
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -570,7 +582,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleFrictionStatusAxisStatusVisit
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -587,7 +601,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleFrictionStatusAxisStatusVisit
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -604,7 +620,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleFrictionStatusAxisStatusVisit
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -621,7 +639,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleFrictionStatusAxisStatusVisit
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -638,7 +658,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleFrictionStatusAxisStatusVisit
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -650,83 +672,101 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleFrictionStatusAxisStatusVisit
         let m_forward_slip_velocity = match m_forward_slip_velocity {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "forward_slip_velocity",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_side_slip_velocity = match m_side_slip_velocity {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "side_slip_velocity",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_skid_energy_density = match m_skid_energy_density {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "skid_energy_density",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_side_force = match m_side_force {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("side_force"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_delayed_forward_impulse = match m_delayed_forward_impulse {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "delayed_forward_impulse",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_sideRhs = match m_sideRhs {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("sideRhs"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_forwardRhs = match m_forwardRhs {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("forwardRhs"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_relativeSideForce = match m_relativeSideForce {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("relativeSideForce"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_relativeForwardForce = match m_relativeForwardForce {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "relativeForwardForce",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpVehicleFrictionStatusAxisStatus {

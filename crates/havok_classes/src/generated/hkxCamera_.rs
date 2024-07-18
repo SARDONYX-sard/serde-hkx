@@ -371,6 +371,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkxCameraVisitor<'de> {
             m_leftHanded,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -388,9 +389,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkxCameraVisitor<'de> {
         let mut m_near: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_leftHanded: _serde::__private::Option<bool> = _serde::__private::None;
         for _ in 0..7usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_from => {
                         if _serde::__private::Option::is_some(&m_from) {
@@ -402,7 +406,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxCameraVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -417,7 +423,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxCameraVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -432,7 +440,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxCameraVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -447,7 +457,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxCameraVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -462,7 +474,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxCameraVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -477,7 +491,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxCameraVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -494,7 +510,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxCameraVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -506,57 +524,71 @@ impl<'de> _serde::de::Visitor<'de> for __hkxCameraVisitor<'de> {
         let m_from = match m_from {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("from"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_focus = match m_focus {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("focus"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_up = match m_up {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("up"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_fov = match m_fov {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("fov"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_far = match m_far {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("far"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_near = match m_near {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("near"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_leftHanded = match m_leftHanded {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("leftHanded"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkxCamera {

@@ -400,6 +400,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDefaultTransmissionVisitor<'d
             m_wheelsTorqueRatio,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -417,9 +418,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDefaultTransmissionVisitor<'d
         let mut m_gearsRatio: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
         let mut m_wheelsTorqueRatio: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
         for _ in 0..7usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_downshiftRPM => {
                         if _serde::__private::Option::is_some(&m_downshiftRPM) {
@@ -433,7 +437,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDefaultTransmissionVisitor<'d
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -450,7 +456,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDefaultTransmissionVisitor<'d
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -469,7 +477,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDefaultTransmissionVisitor<'d
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -486,7 +496,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDefaultTransmissionVisitor<'d
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -503,7 +515,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDefaultTransmissionVisitor<'d
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -520,7 +534,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDefaultTransmissionVisitor<'d
                             match __A::next_value::<Vec<f32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -537,7 +553,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDefaultTransmissionVisitor<'d
                             match __A::next_value::<Vec<f32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -549,59 +567,73 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleDefaultTransmissionVisitor<'d
         let m_downshiftRPM = match m_downshiftRPM {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("downshiftRPM"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_upshiftRPM = match m_upshiftRPM {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("upshiftRPM"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_primaryTransmissionRatio = match m_primaryTransmissionRatio {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "primaryTransmissionRatio",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_clutchDelayTime = match m_clutchDelayTime {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("clutchDelayTime"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_reverseGearRatio = match m_reverseGearRatio {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("reverseGearRatio"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_gearsRatio = match m_gearsRatio {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("gearsRatio"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_wheelsTorqueRatio = match m_wheelsTorqueRatio {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("wheelsTorqueRatio"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpVehicleDefaultTransmission {

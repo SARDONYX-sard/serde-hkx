@@ -279,6 +279,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkMemoryMeshShapeVisitor<'de> {
             m_name,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -293,9 +294,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkMemoryMeshShapeVisitor<'de> {
         let mut m_indices32: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
         let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
         for _ in 0..4usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_sections => {
                         if _serde::__private::Option::is_some(&m_sections) {
@@ -311,7 +315,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMemoryMeshShapeVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -328,7 +334,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMemoryMeshShapeVisitor<'de> {
                             match __A::next_value::<Vec<u16>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -345,7 +353,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMemoryMeshShapeVisitor<'de> {
                             match __A::next_value::<Vec<u32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -360,7 +370,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkMemoryMeshShapeVisitor<'de> {
                             match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -372,33 +384,41 @@ impl<'de> _serde::de::Visitor<'de> for __hkMemoryMeshShapeVisitor<'de> {
         let m_sections = match m_sections {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("sections"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_indices16 = match m_indices16 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("indices16"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_indices32 = match m_indices32 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("indices32"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_name = match m_name {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("name"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkMemoryMeshShape {

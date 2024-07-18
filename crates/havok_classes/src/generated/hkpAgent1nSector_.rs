@@ -296,6 +296,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpAgent1nSectorVisitor<'de> {
             m_data,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -310,9 +311,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkpAgent1nSectorVisitor<'de> {
         let mut m_pad2: _serde::__private::Option<u32> = _serde::__private::None;
         let mut m_data: _serde::__private::Option<[u8; 496usize]> = _serde::__private::None;
         for _ in 0..5usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_bytesAllocated => {
                         if _serde::__private::Option::is_some(&m_bytesAllocated) {
@@ -326,7 +330,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpAgent1nSectorVisitor<'de> {
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -341,7 +347,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpAgent1nSectorVisitor<'de> {
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -356,7 +364,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpAgent1nSectorVisitor<'de> {
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -371,7 +381,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpAgent1nSectorVisitor<'de> {
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -386,7 +398,10 @@ impl<'de> _serde::de::Visitor<'de> for __hkpAgent1nSectorVisitor<'de> {
                             match __A::next_value::<[u8; 496usize]>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))]
+                                    [Default::default(); 496usize]
                                 }
                             },
                         );
@@ -398,41 +413,51 @@ impl<'de> _serde::de::Visitor<'de> for __hkpAgent1nSectorVisitor<'de> {
         let m_bytesAllocated = match m_bytesAllocated {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bytesAllocated"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_pad0 = match m_pad0 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("pad0"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_pad1 = match m_pad1 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("pad1"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_pad2 = match m_pad2 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("pad2"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_data = match m_data {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("data"),
                 );
+                #[cfg(not(feature = "strict"))] [Default::default(); 496usize]
             }
         };
         _serde::__private::Ok(hkpAgent1nSector {

@@ -364,6 +364,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkIndexedTransformSetVisitor<'de> {
             m_allMatricesAreAffine,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -382,9 +383,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkIndexedTransformSetVisitor<'de> {
         > = _serde::__private::None;
         let mut m_allMatricesAreAffine: _serde::__private::Option<bool> = _serde::__private::None;
         for _ in 0..6usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_matrices => {
                         if _serde::__private::Option::is_some(&m_matrices) {
@@ -398,7 +402,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkIndexedTransformSetVisitor<'de> {
                             match __A::next_value::<Vec<Matrix4>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -415,7 +421,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkIndexedTransformSetVisitor<'de> {
                             match __A::next_value::<Vec<Matrix4>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -432,7 +440,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkIndexedTransformSetVisitor<'de> {
                             match __A::next_value::<Vec<i16>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -449,7 +459,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkIndexedTransformSetVisitor<'de> {
                             match __A::next_value::<Vec<StringPtr<'de>>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -468,7 +480,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkIndexedTransformSetVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -485,7 +499,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkIndexedTransformSetVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -497,51 +513,63 @@ impl<'de> _serde::de::Visitor<'de> for __hkIndexedTransformSetVisitor<'de> {
         let m_matrices = match m_matrices {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("matrices"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_inverseMatrices = match m_inverseMatrices {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("inverseMatrices"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_matricesOrder = match m_matricesOrder {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("matricesOrder"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_matricesNames = match m_matricesNames {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("matricesNames"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_indexMappings = match m_indexMappings {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("indexMappings"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_allMatricesAreAffine = match m_allMatricesAreAffine {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "allMatricesAreAffine",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkIndexedTransformSet {

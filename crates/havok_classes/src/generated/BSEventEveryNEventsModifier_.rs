@@ -461,6 +461,7 @@ impl<'de> _serde::de::Visitor<'de> for __BSEventEveryNEventsModifierVisitor<'de>
             m_calculatedNumberOfEventsBeforeSend,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -476,9 +477,12 @@ impl<'de> _serde::de::Visitor<'de> for __BSEventEveryNEventsModifierVisitor<'de>
         let mut m_minimumNumberOfEventsBeforeSend: _serde::__private::Option<i8> = _serde::__private::None;
         let mut m_randomizeNumberOfEvents: _serde::__private::Option<bool> = _serde::__private::None;
         for _ in 0..5usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_eventToCheckFor => {
                         if _serde::__private::Option::is_some(&m_eventToCheckFor) {
@@ -492,7 +496,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSEventEveryNEventsModifierVisitor<'de>
                             match __A::next_value::<hkbEventProperty>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -509,7 +515,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSEventEveryNEventsModifierVisitor<'de>
                             match __A::next_value::<hkbEventProperty>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -528,7 +536,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSEventEveryNEventsModifierVisitor<'de>
                             match __A::next_value::<i8>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -547,7 +557,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSEventEveryNEventsModifierVisitor<'de>
                             match __A::next_value::<i8>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -566,7 +578,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSEventEveryNEventsModifierVisitor<'de>
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -578,47 +592,57 @@ impl<'de> _serde::de::Visitor<'de> for __BSEventEveryNEventsModifierVisitor<'de>
         let m_eventToCheckFor = match m_eventToCheckFor {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("eventToCheckFor"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_eventToSend = match m_eventToSend {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("eventToSend"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_numberOfEventsBeforeSend = match m_numberOfEventsBeforeSend {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "numberOfEventsBeforeSend",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_minimumNumberOfEventsBeforeSend = match m_minimumNumberOfEventsBeforeSend {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "minimumNumberOfEventsBeforeSend",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_randomizeNumberOfEvents = match m_randomizeNumberOfEvents {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "randomizeNumberOfEvents",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(BSEventEveryNEventsModifier {

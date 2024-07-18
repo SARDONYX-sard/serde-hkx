@@ -517,6 +517,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkxVertexBufferVertexDataVisitor<'de> {
             m_uint8Stride,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -537,9 +538,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkxVertexBufferVertexDataVisitor<'de> {
         let mut m_uint16Stride: _serde::__private::Option<u32> = _serde::__private::None;
         let mut m_uint8Stride: _serde::__private::Option<u32> = _serde::__private::None;
         for _ in 0..11usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_vectorData => {
                         if _serde::__private::Option::is_some(&m_vectorData) {
@@ -553,7 +557,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxVertexBufferVertexDataVisitor<'de> {
                             match __A::next_value::<Vec<Vector4>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -570,7 +576,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxVertexBufferVertexDataVisitor<'de> {
                             match __A::next_value::<Vec<f32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -587,7 +595,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxVertexBufferVertexDataVisitor<'de> {
                             match __A::next_value::<Vec<u32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -604,7 +614,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxVertexBufferVertexDataVisitor<'de> {
                             match __A::next_value::<Vec<u16>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -621,7 +633,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxVertexBufferVertexDataVisitor<'de> {
                             match __A::next_value::<Vec<u8>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -638,7 +652,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxVertexBufferVertexDataVisitor<'de> {
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -655,7 +671,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxVertexBufferVertexDataVisitor<'de> {
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -672,7 +690,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxVertexBufferVertexDataVisitor<'de> {
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -689,7 +709,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxVertexBufferVertexDataVisitor<'de> {
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -706,7 +728,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxVertexBufferVertexDataVisitor<'de> {
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -723,7 +747,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxVertexBufferVertexDataVisitor<'de> {
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -735,89 +761,111 @@ impl<'de> _serde::de::Visitor<'de> for __hkxVertexBufferVertexDataVisitor<'de> {
         let m_vectorData = match m_vectorData {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("vectorData"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_floatData = match m_floatData {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("floatData"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_uint32Data = match m_uint32Data {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("uint32Data"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_uint16Data = match m_uint16Data {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("uint16Data"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_uint8Data = match m_uint8Data {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("uint8Data"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_numVerts = match m_numVerts {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("numVerts"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_vectorStride = match m_vectorStride {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("vectorStride"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_floatStride = match m_floatStride {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("floatStride"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_uint32Stride = match m_uint32Stride {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("uint32Stride"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_uint16Stride = match m_uint16Stride {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("uint16Stride"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_uint8Stride = match m_uint8Stride {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("uint8Stride"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkxVertexBufferVertexData {

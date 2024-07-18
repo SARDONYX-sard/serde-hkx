@@ -179,6 +179,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkxTriangleSelectionChannelVisitor<'de>
             m_selectedTriangles,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -190,9 +191,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkxTriangleSelectionChannelVisitor<'de>
         let parent = __hkReferencedObjectVisitor::visit_as_parent(&mut __map)?;
         let mut m_selectedTriangles: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
         for _ in 0..1usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_selectedTriangles => {
                         if _serde::__private::Option::is_some(&m_selectedTriangles) {
@@ -206,7 +210,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxTriangleSelectionChannelVisitor<'de>
                             match __A::next_value::<Vec<i32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -218,9 +224,11 @@ impl<'de> _serde::de::Visitor<'de> for __hkxTriangleSelectionChannelVisitor<'de>
         let m_selectedTriangles = match m_selectedTriangles {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("selectedTriangles"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkxTriangleSelectionChannel {

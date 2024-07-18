@@ -594,6 +594,7 @@ for __hkaSplineCompressedAnimationTrackCompressionParamsVisitor<'de> {
             m_floatQuantizationType,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -619,9 +620,12 @@ for __hkaSplineCompressedAnimationTrackCompressionParamsVisitor<'de> {
         let mut m_scaleQuantizationType: _serde::__private::Option<ScalarQuantization> = _serde::__private::None;
         let mut m_floatQuantizationType: _serde::__private::Option<ScalarQuantization> = _serde::__private::None;
         for _ in 0..12usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_rotationTolerance => {
                         if _serde::__private::Option::is_some(&m_rotationTolerance) {
@@ -635,7 +639,9 @@ for __hkaSplineCompressedAnimationTrackCompressionParamsVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -652,7 +658,9 @@ for __hkaSplineCompressedAnimationTrackCompressionParamsVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -669,7 +677,9 @@ for __hkaSplineCompressedAnimationTrackCompressionParamsVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -686,7 +696,9 @@ for __hkaSplineCompressedAnimationTrackCompressionParamsVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -703,7 +715,9 @@ for __hkaSplineCompressedAnimationTrackCompressionParamsVisitor<'de> {
                             match __A::next_value::<u16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -720,7 +734,9 @@ for __hkaSplineCompressedAnimationTrackCompressionParamsVisitor<'de> {
                             match __A::next_value::<u16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -737,7 +753,9 @@ for __hkaSplineCompressedAnimationTrackCompressionParamsVisitor<'de> {
                             match __A::next_value::<u16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -754,7 +772,9 @@ for __hkaSplineCompressedAnimationTrackCompressionParamsVisitor<'de> {
                             match __A::next_value::<u16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -773,7 +793,9 @@ for __hkaSplineCompressedAnimationTrackCompressionParamsVisitor<'de> {
                             match __A::next_value::<RotationQuantization>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -792,7 +814,9 @@ for __hkaSplineCompressedAnimationTrackCompressionParamsVisitor<'de> {
                             match __A::next_value::<ScalarQuantization>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -809,7 +833,9 @@ for __hkaSplineCompressedAnimationTrackCompressionParamsVisitor<'de> {
                             match __A::next_value::<ScalarQuantization>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -826,7 +852,9 @@ for __hkaSplineCompressedAnimationTrackCompressionParamsVisitor<'de> {
                             match __A::next_value::<ScalarQuantization>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -838,107 +866,131 @@ for __hkaSplineCompressedAnimationTrackCompressionParamsVisitor<'de> {
         let m_rotationTolerance = match m_rotationTolerance {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("rotationTolerance"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_translationTolerance = match m_translationTolerance {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "translationTolerance",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_scaleTolerance = match m_scaleTolerance {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("scaleTolerance"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_floatingTolerance = match m_floatingTolerance {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("floatingTolerance"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_rotationDegree = match m_rotationDegree {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("rotationDegree"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_translationDegree = match m_translationDegree {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("translationDegree"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_scaleDegree = match m_scaleDegree {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("scaleDegree"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_floatingDegree = match m_floatingDegree {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("floatingDegree"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_rotationQuantizationType = match m_rotationQuantizationType {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "rotationQuantizationType",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_translationQuantizationType = match m_translationQuantizationType {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "translationQuantizationType",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_scaleQuantizationType = match m_scaleQuantizationType {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "scaleQuantizationType",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_floatQuantizationType = match m_floatQuantizationType {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "floatQuantizationType",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkaSplineCompressedAnimationTrackCompressionParams {

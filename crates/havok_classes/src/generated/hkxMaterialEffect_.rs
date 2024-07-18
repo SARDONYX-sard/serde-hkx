@@ -238,6 +238,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkxMaterialEffectVisitor<'de> {
             m_data,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -251,9 +252,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkxMaterialEffectVisitor<'de> {
         let mut m_type: _serde::__private::Option<EffectType> = _serde::__private::None;
         let mut m_data: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
         for _ in 0..3usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_name => {
                         if _serde::__private::Option::is_some(&m_name) {
@@ -265,7 +269,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxMaterialEffectVisitor<'de> {
                             match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -280,7 +286,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxMaterialEffectVisitor<'de> {
                             match __A::next_value::<EffectType>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -295,7 +303,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxMaterialEffectVisitor<'de> {
                             match __A::next_value::<Vec<u8>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -307,25 +317,31 @@ impl<'de> _serde::de::Visitor<'de> for __hkxMaterialEffectVisitor<'de> {
         let m_name = match m_name {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("name"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_type = match m_type {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("type"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_data = match m_data {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("data"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkxMaterialEffect {

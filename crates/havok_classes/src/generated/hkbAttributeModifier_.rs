@@ -215,6 +215,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbAttributeModifierVisitor<'de> {
             m_assignments,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -228,9 +229,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkbAttributeModifierVisitor<'de> {
             Vec<hkbAttributeModifierAssignment>,
         > = _serde::__private::None;
         for _ in 0..1usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_assignments => {
                         if _serde::__private::Option::is_some(&m_assignments) {
@@ -246,7 +250,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbAttributeModifierVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -258,9 +264,11 @@ impl<'de> _serde::de::Visitor<'de> for __hkbAttributeModifierVisitor<'de> {
         let m_assignments = match m_assignments {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("assignments"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkbAttributeModifier {

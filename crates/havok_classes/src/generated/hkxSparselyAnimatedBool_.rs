@@ -203,6 +203,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkxSparselyAnimatedBoolVisitor<'de> {
             m_times,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -215,9 +216,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkxSparselyAnimatedBoolVisitor<'de> {
         let mut m_bools: _serde::__private::Option<Vec<bool>> = _serde::__private::None;
         let mut m_times: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
         for _ in 0..2usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_bools => {
                         if _serde::__private::Option::is_some(&m_bools) {
@@ -229,7 +233,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxSparselyAnimatedBoolVisitor<'de> {
                             match __A::next_value::<Vec<bool>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -244,7 +250,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkxSparselyAnimatedBoolVisitor<'de> {
                             match __A::next_value::<Vec<f32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -256,17 +264,21 @@ impl<'de> _serde::de::Visitor<'de> for __hkxSparselyAnimatedBoolVisitor<'de> {
         let m_bools = match m_bools {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bools"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_times = match m_times {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("times"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkxSparselyAnimatedBool {

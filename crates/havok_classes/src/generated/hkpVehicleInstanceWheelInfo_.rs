@@ -767,6 +767,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleInstanceWheelInfoVisitor<'de>
             m_sideSlipVelocity,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -794,9 +795,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleInstanceWheelInfoVisitor<'de>
         let mut m_forwardSlipVelocity: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_sideSlipVelocity: _serde::__private::Option<f32> = _serde::__private::None;
         for _ in 0..16usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_contactPoint => {
                         if _serde::__private::Option::is_some(&m_contactPoint) {
@@ -810,7 +814,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleInstanceWheelInfoVisitor<'de>
                             match __A::next_value::<hkContactPoint>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -827,7 +833,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleInstanceWheelInfoVisitor<'de>
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -844,7 +852,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleInstanceWheelInfoVisitor<'de>
                             match __A::next_value::<[u32; 8usize]>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -861,7 +871,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleInstanceWheelInfoVisitor<'de>
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -878,7 +890,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleInstanceWheelInfoVisitor<'de>
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -897,7 +911,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleInstanceWheelInfoVisitor<'de>
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -914,7 +930,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleInstanceWheelInfoVisitor<'de>
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -931,7 +949,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleInstanceWheelInfoVisitor<'de>
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -948,7 +968,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleInstanceWheelInfoVisitor<'de>
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -967,7 +989,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleInstanceWheelInfoVisitor<'de>
                             match __A::next_value::<Quaternion>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -984,7 +1008,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleInstanceWheelInfoVisitor<'de>
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1001,7 +1027,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleInstanceWheelInfoVisitor<'de>
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1018,7 +1046,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleInstanceWheelInfoVisitor<'de>
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1035,7 +1065,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleInstanceWheelInfoVisitor<'de>
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1052,7 +1084,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleInstanceWheelInfoVisitor<'de>
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1069,7 +1103,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleInstanceWheelInfoVisitor<'de>
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -1081,139 +1117,171 @@ impl<'de> _serde::de::Visitor<'de> for __hkpVehicleInstanceWheelInfoVisitor<'de>
         let m_contactPoint = match m_contactPoint {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("contactPoint"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_contactFriction = match m_contactFriction {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("contactFriction"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_contactShapeKey = match m_contactShapeKey {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("contactShapeKey"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_hardPointWs = match m_hardPointWs {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("hardPointWs"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_rayEndPointWs = match m_rayEndPointWs {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("rayEndPointWs"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_currentSuspensionLength = match m_currentSuspensionLength {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "currentSuspensionLength",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_suspensionDirectionWs = match m_suspensionDirectionWs {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "suspensionDirectionWs",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_spinAxisChassisSpace = match m_spinAxisChassisSpace {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "spinAxisChassisSpace",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_spinAxisWs = match m_spinAxisWs {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("spinAxisWs"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_steeringOrientationChassisSpace = match m_steeringOrientationChassisSpace {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "steeringOrientationChassisSpace",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_spinVelocity = match m_spinVelocity {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("spinVelocity"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_spinAngle = match m_spinAngle {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("spinAngle"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_skidEnergyDensity = match m_skidEnergyDensity {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("skidEnergyDensity"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_sideForce = match m_sideForce {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("sideForce"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_forwardSlipVelocity = match m_forwardSlipVelocity {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "forwardSlipVelocity",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_sideSlipVelocity = match m_sideSlipVelocity {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("sideSlipVelocity"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpVehicleInstanceWheelInfo {

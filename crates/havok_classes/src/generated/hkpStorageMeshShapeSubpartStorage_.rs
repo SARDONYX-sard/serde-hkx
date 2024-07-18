@@ -363,6 +363,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpStorageMeshShapeSubpartStorageVisito
             m_materialIndices16,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -379,9 +380,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkpStorageMeshShapeSubpartStorageVisito
         let mut m_materials: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
         let mut m_materialIndices16: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
         for _ in 0..6usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_vertices => {
                         if _serde::__private::Option::is_some(&m_vertices) {
@@ -395,7 +399,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpStorageMeshShapeSubpartStorageVisito
                             match __A::next_value::<Vec<f32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -412,7 +418,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpStorageMeshShapeSubpartStorageVisito
                             match __A::next_value::<Vec<u16>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -429,7 +437,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpStorageMeshShapeSubpartStorageVisito
                             match __A::next_value::<Vec<u32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -446,7 +456,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpStorageMeshShapeSubpartStorageVisito
                             match __A::next_value::<Vec<u8>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -463,7 +475,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpStorageMeshShapeSubpartStorageVisito
                             match __A::next_value::<Vec<u32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -480,7 +494,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpStorageMeshShapeSubpartStorageVisito
                             match __A::next_value::<Vec<u16>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -492,49 +508,61 @@ impl<'de> _serde::de::Visitor<'de> for __hkpStorageMeshShapeSubpartStorageVisito
         let m_vertices = match m_vertices {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("vertices"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_indices16 = match m_indices16 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("indices16"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_indices32 = match m_indices32 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("indices32"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_materialIndices = match m_materialIndices {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("materialIndices"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_materials = match m_materials {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("materials"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_materialIndices16 = match m_materialIndices16 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("materialIndices16"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpStorageMeshShapeSubpartStorage {

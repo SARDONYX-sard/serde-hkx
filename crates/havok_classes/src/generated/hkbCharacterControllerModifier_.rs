@@ -595,6 +595,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterControllerModifierVisitor<'
             m_isInitialVelocityAdded,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -617,9 +618,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterControllerModifierVisitor<'
         let mut m_setInitialVelocity: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_isTouchingGround: _serde::__private::Option<bool> = _serde::__private::None;
         for _ in 0..8usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_controlData => {
                         if _serde::__private::Option::is_some(&m_controlData) {
@@ -635,7 +639,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterControllerModifierVisitor<'
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -652,7 +658,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterControllerModifierVisitor<'
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -673,7 +681,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterControllerModifierVisitor<'
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -690,7 +700,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterControllerModifierVisitor<'
                             match __A::next_value::<MotionMode>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -707,7 +719,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterControllerModifierVisitor<'
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -724,7 +738,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterControllerModifierVisitor<'
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -741,7 +757,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterControllerModifierVisitor<'
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -758,7 +776,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterControllerModifierVisitor<'
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -770,71 +790,87 @@ impl<'de> _serde::de::Visitor<'de> for __hkbCharacterControllerModifierVisitor<'
         let m_controlData = match m_controlData {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("controlData"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_initialVelocity = match m_initialVelocity {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("initialVelocity"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_initialVelocityCoordinates = match m_initialVelocityCoordinates {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "initialVelocityCoordinates",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_motionMode = match m_motionMode {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("motionMode"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_forceDownwardMomentum = match m_forceDownwardMomentum {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "forceDownwardMomentum",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_applyGravity = match m_applyGravity {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("applyGravity"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_setInitialVelocity = match m_setInitialVelocity {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "setInitialVelocity",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_isTouchingGround = match m_isTouchingGround {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("isTouchingGround"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkbCharacterControllerModifier {

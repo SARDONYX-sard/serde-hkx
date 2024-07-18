@@ -469,6 +469,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorGraphDataVisitor<'de> {
             m_stringData,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -493,9 +494,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorGraphDataVisitor<'de> {
         let mut m_variableInitialValues: _serde::__private::Option<Pointer> = _serde::__private::None;
         let mut m_stringData: _serde::__private::Option<Pointer> = _serde::__private::None;
         for _ in 0..8usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_attributeDefaults => {
                         if _serde::__private::Option::is_some(&m_attributeDefaults) {
@@ -509,7 +513,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorGraphDataVisitor<'de> {
                             match __A::next_value::<Vec<f32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -526,7 +532,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorGraphDataVisitor<'de> {
                             match __A::next_value::<Vec<hkbVariableInfo>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -545,7 +553,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorGraphDataVisitor<'de> {
                             match __A::next_value::<Vec<hkbVariableInfo>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -562,7 +572,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorGraphDataVisitor<'de> {
                             match __A::next_value::<Vec<hkbEventInfo>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -579,7 +591,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorGraphDataVisitor<'de> {
                             match __A::next_value::<Vec<hkbVariableValue>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -596,7 +610,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorGraphDataVisitor<'de> {
                             match __A::next_value::<Vec<hkbVariableValue>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -613,7 +629,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorGraphDataVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -630,7 +648,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorGraphDataVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -642,73 +662,89 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorGraphDataVisitor<'de> {
         let m_attributeDefaults = match m_attributeDefaults {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("attributeDefaults"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_variableInfos = match m_variableInfos {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("variableInfos"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_characterPropertyInfos = match m_characterPropertyInfos {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "characterPropertyInfos",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_eventInfos = match m_eventInfos {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("eventInfos"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_wordMinVariableValues = match m_wordMinVariableValues {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "wordMinVariableValues",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_wordMaxVariableValues = match m_wordMaxVariableValues {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "wordMaxVariableValues",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_variableInitialValues = match m_variableInitialValues {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "variableInitialValues",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_stringData = match m_stringData {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("stringData"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkbBehaviorGraphData {

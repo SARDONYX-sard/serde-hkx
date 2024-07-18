@@ -288,6 +288,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkaRagdollInstanceVisitor<'de> {
             m_skeleton,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -302,9 +303,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkaRagdollInstanceVisitor<'de> {
         let mut m_boneToRigidBodyMap: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
         let mut m_skeleton: _serde::__private::Option<Pointer> = _serde::__private::None;
         for _ in 0..4usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_rigidBodies => {
                         if _serde::__private::Option::is_some(&m_rigidBodies) {
@@ -318,7 +322,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaRagdollInstanceVisitor<'de> {
                             match __A::next_value::<Vec<Pointer>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -335,7 +341,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaRagdollInstanceVisitor<'de> {
                             match __A::next_value::<Vec<Pointer>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -352,7 +360,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaRagdollInstanceVisitor<'de> {
                             match __A::next_value::<Vec<i32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -369,7 +379,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaRagdollInstanceVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -381,35 +393,43 @@ impl<'de> _serde::de::Visitor<'de> for __hkaRagdollInstanceVisitor<'de> {
         let m_rigidBodies = match m_rigidBodies {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("rigidBodies"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_constraints = match m_constraints {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("constraints"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_boneToRigidBodyMap = match m_boneToRigidBodyMap {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "boneToRigidBodyMap",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_skeleton = match m_skeleton {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("skeleton"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkaRagdollInstance {

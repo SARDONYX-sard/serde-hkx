@@ -359,6 +359,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbSequenceInternalStateVisitor<'de> {
             m_isEnabled,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -375,9 +376,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkbSequenceInternalStateVisitor<'de> {
         let mut m_time: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_isEnabled: _serde::__private::Option<bool> = _serde::__private::None;
         for _ in 0..6usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_nextSampleEvents => {
                         if _serde::__private::Option::is_some(&m_nextSampleEvents) {
@@ -391,7 +395,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbSequenceInternalStateVisitor<'de> {
                             match __A::next_value::<Vec<i32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -408,7 +414,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbSequenceInternalStateVisitor<'de> {
                             match __A::next_value::<Vec<i32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -425,7 +433,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbSequenceInternalStateVisitor<'de> {
                             match __A::next_value::<Vec<i32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -442,7 +452,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbSequenceInternalStateVisitor<'de> {
                             match __A::next_value::<Vec<i32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -457,7 +469,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbSequenceInternalStateVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -474,7 +488,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbSequenceInternalStateVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -486,49 +502,61 @@ impl<'de> _serde::de::Visitor<'de> for __hkbSequenceInternalStateVisitor<'de> {
         let m_nextSampleEvents = match m_nextSampleEvents {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("nextSampleEvents"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_nextSampleReals = match m_nextSampleReals {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("nextSampleReals"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_nextSampleBools = match m_nextSampleBools {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("nextSampleBools"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_nextSampleInts = match m_nextSampleInts {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("nextSampleInts"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_time = match m_time {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("time"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_isEnabled = match m_isEnabled {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("isEnabled"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkbSequenceInternalState {

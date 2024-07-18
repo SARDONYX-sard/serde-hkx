@@ -379,6 +379,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpWheelConstraintDataAtomsVisitor<'de>
             m_2dAng,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -399,9 +400,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkpWheelConstraintDataAtomsVisitor<'de>
         > = _serde::__private::None;
         let mut m_2dAng: _serde::__private::Option<hkp2dAngConstraintAtom> = _serde::__private::None;
         for _ in 0..7usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_suspensionBase => {
                         if _serde::__private::Option::is_some(&m_suspensionBase) {
@@ -417,7 +421,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpWheelConstraintDataAtomsVisitor<'de>
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -436,7 +442,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpWheelConstraintDataAtomsVisitor<'de>
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -455,7 +463,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpWheelConstraintDataAtomsVisitor<'de>
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -470,7 +480,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpWheelConstraintDataAtomsVisitor<'de>
                             match __A::next_value::<hkpLinConstraintAtom>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -485,7 +497,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpWheelConstraintDataAtomsVisitor<'de>
                             match __A::next_value::<hkpLinConstraintAtom>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -504,7 +518,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpWheelConstraintDataAtomsVisitor<'de>
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -519,7 +535,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpWheelConstraintDataAtomsVisitor<'de>
                             match __A::next_value::<hkp2dAngConstraintAtom>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -531,57 +549,71 @@ impl<'de> _serde::de::Visitor<'de> for __hkpWheelConstraintDataAtomsVisitor<'de>
         let m_suspensionBase = match m_suspensionBase {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("suspensionBase"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_lin0Limit = match m_lin0Limit {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("lin0Limit"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_lin0Soft = match m_lin0Soft {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("lin0Soft"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_lin1 = match m_lin1 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("lin1"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_lin2 = match m_lin2 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("lin2"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_steeringBase = match m_steeringBase {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("steeringBase"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_2dAng = match m_2dAng {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("2dAng"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpWheelConstraintDataAtoms {

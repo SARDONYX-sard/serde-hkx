@@ -527,6 +527,7 @@ impl<'de> _serde::de::Visitor<'de> for __BSIsActiveModifierVisitor<'de> {
             m_bInvertActive4,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -547,9 +548,12 @@ impl<'de> _serde::de::Visitor<'de> for __BSIsActiveModifierVisitor<'de> {
         let mut m_bIsActive4: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_bInvertActive4: _serde::__private::Option<bool> = _serde::__private::None;
         for _ in 0..10usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_bIsActive0 => {
                         if _serde::__private::Option::is_some(&m_bIsActive0) {
@@ -563,7 +567,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSIsActiveModifierVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -580,7 +586,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSIsActiveModifierVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -597,7 +605,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSIsActiveModifierVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -614,7 +624,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSIsActiveModifierVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -631,7 +643,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSIsActiveModifierVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -648,7 +662,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSIsActiveModifierVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -665,7 +681,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSIsActiveModifierVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -682,7 +700,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSIsActiveModifierVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -699,7 +719,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSIsActiveModifierVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -716,7 +738,9 @@ impl<'de> _serde::de::Visitor<'de> for __BSIsActiveModifierVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -728,81 +752,101 @@ impl<'de> _serde::de::Visitor<'de> for __BSIsActiveModifierVisitor<'de> {
         let m_bIsActive0 = match m_bIsActive0 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bIsActive0"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bInvertActive0 = match m_bInvertActive0 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bInvertActive0"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bIsActive1 = match m_bIsActive1 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bIsActive1"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bInvertActive1 = match m_bInvertActive1 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bInvertActive1"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bIsActive2 = match m_bIsActive2 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bIsActive2"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bInvertActive2 = match m_bInvertActive2 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bInvertActive2"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bIsActive3 = match m_bIsActive3 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bIsActive3"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bInvertActive3 = match m_bInvertActive3 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bInvertActive3"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bIsActive4 = match m_bIsActive4 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bIsActive4"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_bInvertActive4 = match m_bInvertActive4 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("bInvertActive4"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(BSIsActiveModifier {

@@ -431,6 +431,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRagdollConstraintDataAtomsVisitor<'d
             m_ballSocket,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -454,9 +455,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRagdollConstraintDataAtomsVisitor<'d
         let mut m_planesLimit: _serde::__private::Option<hkpConeLimitConstraintAtom> = _serde::__private::None;
         let mut m_ballSocket: _serde::__private::Option<hkpBallSocketConstraintAtom> = _serde::__private::None;
         for _ in 0..8usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_transforms => {
                         if _serde::__private::Option::is_some(&m_transforms) {
@@ -472,7 +476,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRagdollConstraintDataAtomsVisitor<'d
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -491,7 +497,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRagdollConstraintDataAtomsVisitor<'d
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -510,7 +518,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRagdollConstraintDataAtomsVisitor<'d
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -529,7 +539,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRagdollConstraintDataAtomsVisitor<'d
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -548,7 +560,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRagdollConstraintDataAtomsVisitor<'d
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -567,7 +581,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRagdollConstraintDataAtomsVisitor<'d
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -586,7 +602,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRagdollConstraintDataAtomsVisitor<'d
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -605,7 +623,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRagdollConstraintDataAtomsVisitor<'d
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -617,67 +637,83 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRagdollConstraintDataAtomsVisitor<'d
         let m_transforms = match m_transforms {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("transforms"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_setupStabilization = match m_setupStabilization {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "setupStabilization",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_ragdollMotors = match m_ragdollMotors {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("ragdollMotors"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_angFriction = match m_angFriction {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("angFriction"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_twistLimit = match m_twistLimit {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("twistLimit"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_coneLimit = match m_coneLimit {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("coneLimit"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_planesLimit = match m_planesLimit {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("planesLimit"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_ballSocket = match m_ballSocket {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("ballSocket"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpRagdollConstraintDataAtoms {

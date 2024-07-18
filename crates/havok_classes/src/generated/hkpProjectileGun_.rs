@@ -354,6 +354,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpProjectileGunVisitor<'de> {
             m_destructionWorld,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -366,9 +367,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkpProjectileGunVisitor<'de> {
         let mut m_maxProjectiles: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_reloadTime: _serde::__private::Option<f32> = _serde::__private::None;
         for _ in 0..2usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_maxProjectiles => {
                         if _serde::__private::Option::is_some(&m_maxProjectiles) {
@@ -382,7 +386,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpProjectileGunVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -399,7 +405,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpProjectileGunVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -411,17 +419,21 @@ impl<'de> _serde::de::Visitor<'de> for __hkpProjectileGunVisitor<'de> {
         let m_maxProjectiles = match m_maxProjectiles {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("maxProjectiles"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_reloadTime = match m_reloadTime {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("reloadTime"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpProjectileGun {

@@ -445,6 +445,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBlenderGeneratorInternalStateVisitor
             m_doSubtractiveBlend,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -465,9 +466,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBlenderGeneratorInternalStateVisitor
         let mut m_initSync: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_doSubtractiveBlend: _serde::__private::Option<bool> = _serde::__private::None;
         for _ in 0..8usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_childrenInternalStates => {
                         if _serde::__private::Option::is_some(
@@ -485,7 +489,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBlenderGeneratorInternalStateVisitor
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -502,7 +508,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBlenderGeneratorInternalStateVisitor
                             match __A::next_value::<Vec<i16>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -519,7 +527,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBlenderGeneratorInternalStateVisitor
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -536,7 +546,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBlenderGeneratorInternalStateVisitor
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -553,7 +565,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBlenderGeneratorInternalStateVisitor
                             match __A::next_value::<i16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -570,7 +584,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBlenderGeneratorInternalStateVisitor
                             match __A::next_value::<i16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -587,7 +603,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBlenderGeneratorInternalStateVisitor
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -604,7 +622,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBlenderGeneratorInternalStateVisitor
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -616,71 +636,87 @@ impl<'de> _serde::de::Visitor<'de> for __hkbBlenderGeneratorInternalStateVisitor
         let m_childrenInternalStates = match m_childrenInternalStates {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "childrenInternalStates",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_sortedChildren = match m_sortedChildren {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("sortedChildren"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_endIntervalWeight = match m_endIntervalWeight {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("endIntervalWeight"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_numActiveChildren = match m_numActiveChildren {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("numActiveChildren"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_beginIntervalIndex = match m_beginIntervalIndex {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "beginIntervalIndex",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_endIntervalIndex = match m_endIntervalIndex {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("endIntervalIndex"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_initSync = match m_initSync {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("initSync"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_doSubtractiveBlend = match m_doSubtractiveBlend {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "doSubtractiveBlend",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkbBlenderGeneratorInternalState {

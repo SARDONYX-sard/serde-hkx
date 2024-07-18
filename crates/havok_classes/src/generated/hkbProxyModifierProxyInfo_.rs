@@ -652,6 +652,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbProxyModifierProxyInfoVisitor<'de> {
             m_refreshManifoldInCheckSupport,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -675,9 +676,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkbProxyModifierProxyInfoVisitor<'de> {
         let mut m_maxCastIterations: _serde::__private::Option<i32> = _serde::__private::None;
         let mut m_refreshManifoldInCheckSupport: _serde::__private::Option<bool> = _serde::__private::None;
         for _ in 0..14usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_dynamicFriction => {
                         if _serde::__private::Option::is_some(&m_dynamicFriction) {
@@ -691,7 +695,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbProxyModifierProxyInfoVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -708,7 +714,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbProxyModifierProxyInfoVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -725,7 +733,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbProxyModifierProxyInfoVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -740,7 +750,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbProxyModifierProxyInfoVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -757,7 +769,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbProxyModifierProxyInfoVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -776,7 +790,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbProxyModifierProxyInfoVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -793,7 +809,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbProxyModifierProxyInfoVisitor<'de> {
                             match __A::next_value::<u32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -812,7 +830,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbProxyModifierProxyInfoVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -829,7 +849,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbProxyModifierProxyInfoVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -846,7 +868,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbProxyModifierProxyInfoVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -863,7 +887,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbProxyModifierProxyInfoVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -882,7 +908,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbProxyModifierProxyInfoVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -899,7 +927,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbProxyModifierProxyInfoVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -918,7 +948,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbProxyModifierProxyInfoVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -930,123 +962,151 @@ impl<'de> _serde::de::Visitor<'de> for __hkbProxyModifierProxyInfoVisitor<'de> {
         let m_dynamicFriction = match m_dynamicFriction {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("dynamicFriction"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_staticFriction = match m_staticFriction {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("staticFriction"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_keepContactTolerance = match m_keepContactTolerance {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "keepContactTolerance",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_up = match m_up {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("up"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_keepDistance = match m_keepDistance {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("keepDistance"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_contactAngleSensitivity = match m_contactAngleSensitivity {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "contactAngleSensitivity",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_userPlanes = match m_userPlanes {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("userPlanes"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_maxCharacterSpeedForSolver = match m_maxCharacterSpeedForSolver {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "maxCharacterSpeedForSolver",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_characterStrength = match m_characterStrength {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("characterStrength"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_characterMass = match m_characterMass {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("characterMass"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_maxSlope = match m_maxSlope {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("maxSlope"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_penetrationRecoverySpeed = match m_penetrationRecoverySpeed {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "penetrationRecoverySpeed",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_maxCastIterations = match m_maxCastIterations {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("maxCastIterations"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_refreshManifoldInCheckSupport = match m_refreshManifoldInCheckSupport {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "refreshManifoldInCheckSupport",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkbProxyModifierProxyInfo {

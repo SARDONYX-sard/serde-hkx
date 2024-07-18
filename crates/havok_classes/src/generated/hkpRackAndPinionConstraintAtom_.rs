@@ -337,6 +337,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRackAndPinionConstraintAtomVisitor<'
             m_memOffsetToRevolutionCounter,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -352,9 +353,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRackAndPinionConstraintAtomVisitor<'
         let mut m_memOffsetToPrevAngle: _serde::__private::Option<i8> = _serde::__private::None;
         let mut m_memOffsetToRevolutionCounter: _serde::__private::Option<i8> = _serde::__private::None;
         for _ in 0..5usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_pinionRadiusOrScrewPitch => {
                         if _serde::__private::Option::is_some(
@@ -370,7 +374,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRackAndPinionConstraintAtomVisitor<'
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -387,7 +393,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRackAndPinionConstraintAtomVisitor<'
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -406,7 +414,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRackAndPinionConstraintAtomVisitor<'
                             match __A::next_value::<i8>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -423,7 +433,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRackAndPinionConstraintAtomVisitor<'
                             match __A::next_value::<i8>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -442,7 +454,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRackAndPinionConstraintAtomVisitor<'
                             match __A::next_value::<i8>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -454,49 +468,59 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRackAndPinionConstraintAtomVisitor<'
         let m_pinionRadiusOrScrewPitch = match m_pinionRadiusOrScrewPitch {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "pinionRadiusOrScrewPitch",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_isScrew = match m_isScrew {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("isScrew"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_memOffsetToInitialAngleOffset = match m_memOffsetToInitialAngleOffset {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "memOffsetToInitialAngleOffset",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_memOffsetToPrevAngle = match m_memOffsetToPrevAngle {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "memOffsetToPrevAngle",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_memOffsetToRevolutionCounter = match m_memOffsetToRevolutionCounter {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "memOffsetToRevolutionCounter",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpRackAndPinionConstraintAtom {

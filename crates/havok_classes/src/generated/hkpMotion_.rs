@@ -598,6 +598,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMotionVisitor<'de> {
             m_gravityFactor,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -624,9 +625,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMotionVisitor<'de> {
         let mut m_savedQualityTypeIndex: _serde::__private::Option<u16> = _serde::__private::None;
         let mut m_gravityFactor: _serde::__private::Option<f16> = _serde::__private::None;
         for _ in 0..12usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_type => {
                         if _serde::__private::Option::is_some(&m_type) {
@@ -638,7 +642,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMotionVisitor<'de> {
                             match __A::next_value::<MotionType>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -657,7 +663,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMotionVisitor<'de> {
                             match __A::next_value::<u8>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -676,7 +684,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMotionVisitor<'de> {
                             match __A::next_value::<[u16; 2usize]>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -693,7 +703,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMotionVisitor<'de> {
                             match __A::next_value::<hkMotionState>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -710,7 +722,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMotionVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -727,7 +741,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMotionVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -744,7 +760,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMotionVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -763,7 +781,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMotionVisitor<'de> {
                             match __A::next_value::<[Vector4; 2usize]>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -782,7 +802,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMotionVisitor<'de> {
                             match __A::next_value::<[u32; 2usize]>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -799,7 +821,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMotionVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -816,7 +840,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMotionVisitor<'de> {
                             match __A::next_value::<u16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -833,7 +859,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMotionVisitor<'de> {
                             match __A::next_value::<f16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -845,107 +873,131 @@ impl<'de> _serde::de::Visitor<'de> for __hkpMotionVisitor<'de> {
         let m_type = match m_type {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("type"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_deactivationIntegrateCounter = match m_deactivationIntegrateCounter {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "deactivationIntegrateCounter",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_deactivationNumInactiveFrames = match m_deactivationNumInactiveFrames {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "deactivationNumInactiveFrames",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_motionState = match m_motionState {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("motionState"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_inertiaAndMassInv = match m_inertiaAndMassInv {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("inertiaAndMassInv"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_linearVelocity = match m_linearVelocity {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("linearVelocity"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_angularVelocity = match m_angularVelocity {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("angularVelocity"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_deactivationRefPosition = match m_deactivationRefPosition {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "deactivationRefPosition",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_deactivationRefOrientation = match m_deactivationRefOrientation {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "deactivationRefOrientation",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_savedMotion = match m_savedMotion {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("savedMotion"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_savedQualityTypeIndex = match m_savedQualityTypeIndex {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "savedQualityTypeIndex",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_gravityFactor = match m_gravityFactor {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("gravityFactor"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpMotion {

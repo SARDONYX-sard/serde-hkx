@@ -645,6 +645,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSplineCompressedAnimationVisitor<'de
             m_endian,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -668,9 +669,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSplineCompressedAnimationVisitor<'de
         let mut m_data: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
         let mut m_endian: _serde::__private::Option<i32> = _serde::__private::None;
         for _ in 0..13usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_numFrames => {
                         if _serde::__private::Option::is_some(&m_numFrames) {
@@ -684,7 +688,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSplineCompressedAnimationVisitor<'de
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -701,7 +707,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSplineCompressedAnimationVisitor<'de
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -718,7 +726,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSplineCompressedAnimationVisitor<'de
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -737,7 +747,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSplineCompressedAnimationVisitor<'de
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -754,7 +766,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSplineCompressedAnimationVisitor<'de
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -771,7 +785,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSplineCompressedAnimationVisitor<'de
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -788,7 +804,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSplineCompressedAnimationVisitor<'de
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -805,7 +823,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSplineCompressedAnimationVisitor<'de
                             match __A::next_value::<Vec<u32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -822,7 +842,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSplineCompressedAnimationVisitor<'de
                             match __A::next_value::<Vec<u32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -839,7 +861,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSplineCompressedAnimationVisitor<'de
                             match __A::next_value::<Vec<u32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -856,7 +880,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSplineCompressedAnimationVisitor<'de
                             match __A::next_value::<Vec<u32>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -871,7 +897,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSplineCompressedAnimationVisitor<'de
                             match __A::next_value::<Vec<u8>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -886,7 +914,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSplineCompressedAnimationVisitor<'de
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -898,109 +928,135 @@ impl<'de> _serde::de::Visitor<'de> for __hkaSplineCompressedAnimationVisitor<'de
         let m_numFrames = match m_numFrames {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("numFrames"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_numBlocks = match m_numBlocks {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("numBlocks"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_maxFramesPerBlock = match m_maxFramesPerBlock {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("maxFramesPerBlock"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_maskAndQuantizationSize = match m_maskAndQuantizationSize {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "maskAndQuantizationSize",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_blockDuration = match m_blockDuration {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("blockDuration"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_blockInverseDuration = match m_blockInverseDuration {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "blockInverseDuration",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_frameDuration = match m_frameDuration {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("frameDuration"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_blockOffsets = match m_blockOffsets {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("blockOffsets"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_floatBlockOffsets = match m_floatBlockOffsets {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("floatBlockOffsets"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_transformOffsets = match m_transformOffsets {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("transformOffsets"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_floatOffsets = match m_floatOffsets {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("floatOffsets"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_data = match m_data {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("data"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_endian = match m_endian {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("endian"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkaSplineCompressedAnimation {

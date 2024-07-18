@@ -174,6 +174,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRagdollLimitsDataVisitor<'de> {
             m_atoms,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -185,9 +186,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRagdollLimitsDataVisitor<'de> {
         let parent = __hkpConstraintDataVisitor::visit_as_parent(&mut __map)?;
         let mut m_atoms: _serde::__private::Option<hkpRagdollLimitsDataAtoms> = _serde::__private::None;
         for _ in 0..1usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_atoms => {
                         if _serde::__private::Option::is_some(&m_atoms) {
@@ -201,7 +205,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRagdollLimitsDataVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -213,9 +219,11 @@ impl<'de> _serde::de::Visitor<'de> for __hkpRagdollLimitsDataVisitor<'de> {
         let m_atoms = match m_atoms {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("atoms"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpRagdollLimitsData {

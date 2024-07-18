@@ -302,6 +302,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkSweptTransformVisitor<'de> {
             m_centerOfMassLocal,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -316,9 +317,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkSweptTransformVisitor<'de> {
         let mut m_rotation1: _serde::__private::Option<Quaternion> = _serde::__private::None;
         let mut m_centerOfMassLocal: _serde::__private::Option<Vector4> = _serde::__private::None;
         for _ in 0..5usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_centerOfMass0 => {
                         if _serde::__private::Option::is_some(&m_centerOfMass0) {
@@ -332,7 +336,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkSweptTransformVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -349,7 +355,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkSweptTransformVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -366,7 +374,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkSweptTransformVisitor<'de> {
                             match __A::next_value::<Quaternion>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -383,7 +393,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkSweptTransformVisitor<'de> {
                             match __A::next_value::<Quaternion>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -400,7 +412,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkSweptTransformVisitor<'de> {
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -412,41 +426,51 @@ impl<'de> _serde::de::Visitor<'de> for __hkSweptTransformVisitor<'de> {
         let m_centerOfMass0 = match m_centerOfMass0 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("centerOfMass0"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_centerOfMass1 = match m_centerOfMass1 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("centerOfMass1"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_rotation0 = match m_rotation0 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("rotation0"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_rotation1 = match m_rotation1 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("rotation1"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_centerOfMassLocal = match m_centerOfMassLocal {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("centerOfMassLocal"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkSweptTransform {

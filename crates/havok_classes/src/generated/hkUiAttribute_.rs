@@ -418,6 +418,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkUiAttributeVisitor<'de> {
             m_advanced,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -435,9 +436,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkUiAttributeVisitor<'de> {
         let mut m_endGroup2: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_advanced: _serde::__private::Option<bool> = _serde::__private::None;
         for _ in 0..8usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_visible => {
                         if _serde::__private::Option::is_some(&m_visible) {
@@ -451,7 +455,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkUiAttributeVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -468,7 +474,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkUiAttributeVisitor<'de> {
                             match __A::next_value::<HideInModeler>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -483,7 +491,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkUiAttributeVisitor<'de> {
                             match __A::next_value::<CString<'de>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -498,7 +508,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkUiAttributeVisitor<'de> {
                             match __A::next_value::<CString<'de>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -515,7 +527,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkUiAttributeVisitor<'de> {
                             match __A::next_value::<CString<'de>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -532,7 +546,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkUiAttributeVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -549,7 +565,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkUiAttributeVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -566,7 +584,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkUiAttributeVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -578,67 +598,83 @@ impl<'de> _serde::de::Visitor<'de> for __hkUiAttributeVisitor<'de> {
         let m_visible = match m_visible {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("visible"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_hideInModeler = match m_hideInModeler {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("hideInModeler"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_label = match m_label {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("label"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_group = match m_group {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("group"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_hideBaseClassMembers = match m_hideBaseClassMembers {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "hideBaseClassMembers",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_endGroup = match m_endGroup {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("endGroup"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_endGroup2 = match m_endGroup2 {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("endGroup2"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_advanced = match m_advanced {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("advanced"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkUiAttribute {

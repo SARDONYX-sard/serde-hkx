@@ -252,6 +252,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbGetWorldFromModelModifierVisitor<'de
             m_rotationOut,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -264,9 +265,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkbGetWorldFromModelModifierVisitor<'de
         let mut m_translationOut: _serde::__private::Option<Vector4> = _serde::__private::None;
         let mut m_rotationOut: _serde::__private::Option<Quaternion> = _serde::__private::None;
         for _ in 0..2usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_translationOut => {
                         if _serde::__private::Option::is_some(&m_translationOut) {
@@ -280,7 +284,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbGetWorldFromModelModifierVisitor<'de
                             match __A::next_value::<Vector4>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -297,7 +303,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbGetWorldFromModelModifierVisitor<'de
                             match __A::next_value::<Quaternion>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -309,17 +317,21 @@ impl<'de> _serde::de::Visitor<'de> for __hkbGetWorldFromModelModifierVisitor<'de
         let m_translationOut = match m_translationOut {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("translationOut"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_rotationOut = match m_rotationOut {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("rotationOut"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkbGetWorldFromModelModifier {

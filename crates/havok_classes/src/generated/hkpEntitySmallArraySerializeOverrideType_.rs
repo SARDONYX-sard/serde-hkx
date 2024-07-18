@@ -239,6 +239,7 @@ for __hkpEntitySmallArraySerializeOverrideTypeVisitor<'de> {
             m_capacityAndFlags,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -250,9 +251,12 @@ for __hkpEntitySmallArraySerializeOverrideTypeVisitor<'de> {
         let mut m_size: _serde::__private::Option<u16> = _serde::__private::None;
         let mut m_capacityAndFlags: _serde::__private::Option<u16> = _serde::__private::None;
         for _ in 0..2usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_size => {
                         if _serde::__private::Option::is_some(&m_size) {
@@ -264,7 +268,9 @@ for __hkpEntitySmallArraySerializeOverrideTypeVisitor<'de> {
                             match __A::next_value::<u16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -281,7 +287,9 @@ for __hkpEntitySmallArraySerializeOverrideTypeVisitor<'de> {
                             match __A::next_value::<u16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -293,17 +301,21 @@ for __hkpEntitySmallArraySerializeOverrideTypeVisitor<'de> {
         let m_size = match m_size {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("size"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_capacityAndFlags = match m_capacityAndFlags {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("capacityAndFlags"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpEntitySmallArraySerializeOverrideType {

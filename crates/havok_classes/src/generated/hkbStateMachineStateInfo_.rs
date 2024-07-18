@@ -468,6 +468,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbStateMachineStateInfoVisitor<'de> {
             m_enable,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -487,9 +488,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkbStateMachineStateInfoVisitor<'de> {
         let mut m_probability: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
         for _ in 0..9usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_listeners => {
                         if _serde::__private::Option::is_some(&m_listeners) {
@@ -503,7 +507,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbStateMachineStateInfoVisitor<'de> {
                             match __A::next_value::<Vec<Pointer>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -520,7 +526,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbStateMachineStateInfoVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -537,7 +545,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbStateMachineStateInfoVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -554,7 +564,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbStateMachineStateInfoVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -571,7 +583,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbStateMachineStateInfoVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -586,7 +600,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbStateMachineStateInfoVisitor<'de> {
                             match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -603,7 +619,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbStateMachineStateInfoVisitor<'de> {
                             match __A::next_value::<i32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -620,7 +638,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbStateMachineStateInfoVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -635,7 +655,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbStateMachineStateInfoVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -647,73 +669,91 @@ impl<'de> _serde::de::Visitor<'de> for __hkbStateMachineStateInfoVisitor<'de> {
         let m_listeners = match m_listeners {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("listeners"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_enterNotifyEvents = match m_enterNotifyEvents {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("enterNotifyEvents"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_exitNotifyEvents = match m_exitNotifyEvents {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("exitNotifyEvents"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_transitions = match m_transitions {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("transitions"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_generator = match m_generator {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("generator"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_name = match m_name {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("name"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_stateId = match m_stateId {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("stateId"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_probability = match m_probability {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("probability"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_enable = match m_enable {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("enable"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkbStateMachineStateInfo {

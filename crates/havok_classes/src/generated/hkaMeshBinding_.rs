@@ -335,6 +335,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkaMeshBindingVisitor<'de> {
             m_boneFromSkinMeshTransforms,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -352,9 +353,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkaMeshBindingVisitor<'de> {
             Vec<Transform>,
         > = _serde::__private::None;
         for _ in 0..5usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_mesh => {
                         if _serde::__private::Option::is_some(&m_mesh) {
@@ -366,7 +370,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaMeshBindingVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -383,7 +389,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaMeshBindingVisitor<'de> {
                             match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -400,7 +408,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaMeshBindingVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -419,7 +429,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaMeshBindingVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -438,7 +450,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaMeshBindingVisitor<'de> {
                             match __A::next_value::<Vec<Transform>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -450,45 +464,55 @@ impl<'de> _serde::de::Visitor<'de> for __hkaMeshBindingVisitor<'de> {
         let m_mesh = match m_mesh {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("mesh"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_originalSkeletonName = match m_originalSkeletonName {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "originalSkeletonName",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_skeleton = match m_skeleton {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("skeleton"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_mappings = match m_mappings {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("mappings"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_boneFromSkinMeshTransforms = match m_boneFromSkinMeshTransforms {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "boneFromSkinMeshTransforms",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkaMeshBinding {

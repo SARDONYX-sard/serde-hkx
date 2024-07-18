@@ -417,6 +417,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbGeneratorSyncInfoVisitor<'de> {
             m_isAdditive,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -436,9 +437,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkbGeneratorSyncInfoVisitor<'de> {
         let mut m_isMirrored: _serde::__private::Option<bool> = _serde::__private::None;
         let mut m_isAdditive: _serde::__private::Option<bool> = _serde::__private::None;
         for _ in 0..8usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_syncPoints => {
                         if _serde::__private::Option::is_some(&m_syncPoints) {
@@ -454,7 +458,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbGeneratorSyncInfoVisitor<'de> {
                             >(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -471,7 +477,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbGeneratorSyncInfoVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -488,7 +496,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbGeneratorSyncInfoVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -505,7 +515,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbGeneratorSyncInfoVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -522,7 +534,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbGeneratorSyncInfoVisitor<'de> {
                             match __A::next_value::<i8>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -539,7 +553,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbGeneratorSyncInfoVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -556,7 +572,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbGeneratorSyncInfoVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -573,7 +591,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbGeneratorSyncInfoVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -585,65 +605,81 @@ impl<'de> _serde::de::Visitor<'de> for __hkbGeneratorSyncInfoVisitor<'de> {
         let m_syncPoints = match m_syncPoints {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("syncPoints"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_baseFrequency = match m_baseFrequency {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("baseFrequency"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_localTime = match m_localTime {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("localTime"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_playbackSpeed = match m_playbackSpeed {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("playbackSpeed"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_numSyncPoints = match m_numSyncPoints {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("numSyncPoints"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_isCyclic = match m_isCyclic {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("isCyclic"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_isMirrored = match m_isMirrored {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("isMirrored"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_isAdditive = match m_isAdditive {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("isAdditive"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkbGeneratorSyncInfo {

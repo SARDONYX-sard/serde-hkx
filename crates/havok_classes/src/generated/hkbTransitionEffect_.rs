@@ -282,6 +282,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkbTransitionEffectVisitor<'de> {
             m_defaultEventMode,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -294,9 +295,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkbTransitionEffectVisitor<'de> {
         let mut m_selfTransitionMode: _serde::__private::Option<SelfTransitionMode> = _serde::__private::None;
         let mut m_eventMode: _serde::__private::Option<EventMode> = _serde::__private::None;
         for _ in 0..2usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_selfTransitionMode => {
                         if _serde::__private::Option::is_some(&m_selfTransitionMode) {
@@ -310,7 +314,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbTransitionEffectVisitor<'de> {
                             match __A::next_value::<SelfTransitionMode>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -327,7 +333,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkbTransitionEffectVisitor<'de> {
                             match __A::next_value::<EventMode>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -339,19 +347,23 @@ impl<'de> _serde::de::Visitor<'de> for __hkbTransitionEffectVisitor<'de> {
         let m_selfTransitionMode = match m_selfTransitionMode {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "selfTransitionMode",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_eventMode = match m_eventMode {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("eventMode"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkbTransitionEffect {

@@ -350,6 +350,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkpLinMotorConstraintAtomVisitor<'de> {
             m_motor,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -366,9 +367,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkpLinMotorConstraintAtomVisitor<'de> {
         let mut m_targetPosition: _serde::__private::Option<f32> = _serde::__private::None;
         let mut m_motor: _serde::__private::Option<Pointer> = _serde::__private::None;
         for _ in 0..6usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_isEnabled => {
                         if _serde::__private::Option::is_some(&m_isEnabled) {
@@ -382,7 +386,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpLinMotorConstraintAtomVisitor<'de> {
                             match __A::next_value::<bool>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -399,7 +405,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpLinMotorConstraintAtomVisitor<'de> {
                             match __A::next_value::<u8>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -416,7 +424,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpLinMotorConstraintAtomVisitor<'de> {
                             match __A::next_value::<i16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -435,7 +445,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpLinMotorConstraintAtomVisitor<'de> {
                             match __A::next_value::<i16>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -452,7 +464,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpLinMotorConstraintAtomVisitor<'de> {
                             match __A::next_value::<f32>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -467,7 +481,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkpLinMotorConstraintAtomVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -479,51 +495,63 @@ impl<'de> _serde::de::Visitor<'de> for __hkpLinMotorConstraintAtomVisitor<'de> {
         let m_isEnabled = match m_isEnabled {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("isEnabled"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_motorAxis = match m_motorAxis {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("motorAxis"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_initializedOffset = match m_initializedOffset {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("initializedOffset"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_previousTargetPositionOffset = match m_previousTargetPositionOffset {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "previousTargetPositionOffset",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_targetPosition = match m_targetPosition {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("targetPosition"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_motor = match m_motor {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("motor"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkpLinMotorConstraintAtom {

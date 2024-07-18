@@ -349,6 +349,7 @@ impl<'de> _serde::de::Visitor<'de> for __hkaAnimationBindingVisitor<'de> {
             m_blendHint,
         })
     }
+    #[allow(clippy::manual_unwrap_or_default)]
     fn visit_struct<__A>(
         self,
         mut __map: __A,
@@ -364,9 +365,12 @@ impl<'de> _serde::de::Visitor<'de> for __hkaAnimationBindingVisitor<'de> {
         let mut m_floatTrackToFloatSlotIndices: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
         let mut m_blendHint: _serde::__private::Option<BlendHint> = _serde::__private::None;
         for _ in 0..5usize {
-            if let _serde::__private::Some(__key) = __A::next_key::<
-                __Field,
-            >(&mut __map)? {
+            #[cfg(not(feature = "strict"))]
+            let __res = __A::next_key::<__Field>(&mut __map)
+                .unwrap_or(Some(__Field::__ignore));
+            #[cfg(feature = "strict")]
+            let __res = __A::next_key::<__Field>(&mut __map)?;
+            if let _serde::__private::Some(__key) = __res {
                 match __key {
                     __Field::m_originalSkeletonName => {
                         if _serde::__private::Option::is_some(&m_originalSkeletonName) {
@@ -380,7 +384,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaAnimationBindingVisitor<'de> {
                             match __A::next_value::<StringPtr<'de>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -397,7 +403,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaAnimationBindingVisitor<'de> {
                             match __A::next_value::<Pointer>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -416,7 +424,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaAnimationBindingVisitor<'de> {
                             match __A::next_value::<Vec<i16>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -435,7 +445,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaAnimationBindingVisitor<'de> {
                             match __A::next_value::<Vec<i16>>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -452,7 +464,9 @@ impl<'de> _serde::de::Visitor<'de> for __hkaAnimationBindingVisitor<'de> {
                             match __A::next_value::<BlendHint>(&mut __map) {
                                 _serde::__private::Ok(__val) => __val,
                                 _serde::__private::Err(__err) => {
+                                    #[cfg(feature = "strict")]
                                     return _serde::__private::Err(__err);
+                                    #[cfg(not(feature = "strict"))] Default::default()
                                 }
                             },
                         );
@@ -464,47 +478,57 @@ impl<'de> _serde::de::Visitor<'de> for __hkaAnimationBindingVisitor<'de> {
         let m_originalSkeletonName = match m_originalSkeletonName {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "originalSkeletonName",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_animation = match m_animation {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("animation"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_transformTrackToBoneIndices = match m_transformTrackToBoneIndices {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "transformTrackToBoneIndices",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_floatTrackToFloatSlotIndices = match m_floatTrackToFloatSlotIndices {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field(
                         "floatTrackToFloatSlotIndices",
                     ),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         let m_blendHint = match m_blendHint {
             _serde::__private::Some(__field) => __field,
             _serde::__private::None => {
+                #[cfg(feature = "strict")]
                 return _serde::__private::Err(
                     <__A::Error as _serde::de::Error>::missing_field("blendHint"),
                 );
+                #[cfg(not(feature = "strict"))] Default::default()
             }
         };
         _serde::__private::Ok(hkaAnimationBinding {
