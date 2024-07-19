@@ -48,6 +48,12 @@ impl Pointer {
         Self(ptr)
     }
 
+    /// Pointer(Class index) is null(`#0000`)?
+    #[inline]
+    pub const fn is_null(&self) -> bool {
+        self.0 == 0
+    }
+
     /// Get inner value.
     #[inline]
     pub const fn get(&self) -> usize {

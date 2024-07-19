@@ -23,7 +23,7 @@ use snafu::ensure;
 use std::borrow::Cow;
 use std::collections::HashMap;
 use std::io::{Cursor, Write};
-use trait_impls::{ClassNamesWriter as _, LocalFixupsWriter as _};
+use trait_impls::{ClassNamesWriter as _, ClassStartsMap, LocalFixupsWriter as _};
 
 /// To hkx binary file data.
 pub fn to_bytes<K, V>(value: &IndexMap<K, V>, header: &HkxHeader) -> Result<Vec<u8>>
@@ -94,9 +94,9 @@ where
     #[cfg(feature = "tracing")]
     tracing::trace!("class_starts: {:#?}", serializer.class_starts);
 
-    // We can calculate absolute data offset(__data__ section start position) now.
+    // - `__data__` section
     serializer.abs_data_offset = header.padding_size() + serializer.output.position() as u32;
-    value.serialize(&mut serializer)?; // - `__data__` section
+    value.serialize(&mut serializer)?;
 
     // 4/5: Write fixups_offsets of `__data__` section header.
     let (local_offset, global_offset, virtual_offset) = serializer.write_data_fixups()?; // Write local, global and virtual fixups
@@ -203,7 +203,7 @@ pub struct ByteSerializer {
     /// This is created by writing the `__classnames__` section.
     /// - key: class name
     /// - value: class name start position
-    class_starts: HashMap<&'static str, u32>,
+    class_starts: ClassStartsMap,
 
     /// Used only when writing `Array<StringPtr>` or `Array<CString>`.
     ///
@@ -487,10 +487,15 @@ impl<'a> Serializer for &'a mut ByteSerializer {
 
     /// Pointer(Name attribute on XML) does not exist in bytes data(`.hkx`).
     fn serialize_pointer(self, ptr: Pointer) -> Result<Self::Ok, Self::Error> {
-        // Write global_fixup src(write start) position.
-        let start = self.relative_position()?;
-        self.global_fixups_ptr_src.insert(ptr, start);
-
+        #[allow(clippy::needless_else)]
+        if !ptr.is_null() {
+            // Write global_fixup src(write start) position.
+            let start = self.relative_position()?;
+            self.global_fixups_ptr_src.insert(ptr, start);
+        } else {
+            #[cfg(feature = "tracing")]
+            tracing::debug!("Skip global_fixup.src writing, because it's null ptr.");
+        };
         self.serialize_ulong(0_u64)
     }
 
@@ -510,12 +515,13 @@ impl<'a> Serializer for &'a mut ByteSerializer {
         name: &'static str,
         class_meta: Option<(Pointer, Signature)>,
     ) -> Result<Self::SerializeStruct, Self::Error> {
+        #[cfg(feature = "tracing")]
+        tracing::debug!("serialize struct {name}({:?})", class_meta);
+
         if let Some((ptr, _)) = class_meta {
             let virtual_src = self.relative_position()?;
             self.virtual_fixups_ptr_src.insert(ptr, virtual_src); // For global_fixups
-
-            // At this point, one set of values for `virtual_fixup` is known.
-            self.write_virtual_fixups_pair(name, virtual_src)?;
+            self.write_virtual_fixups_pair(name, virtual_src)?; // Ok, `virtual_fixup` is known.
         }
         Ok(self)
     }
@@ -645,6 +651,8 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
     where
         T: ?Sized + Serialize,
     {
+        #[cfg(feature = "tracing")]
+        tracing::trace!("serialize field({:#x}): {_key}", self.output.position());
         value.serialize(&mut **self)
     }
 
@@ -654,6 +662,11 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         V: AsRef<[T]> + Serialize,
         T: Serialize,
     {
+        #[cfg(feature = "tracing")]
+        tracing::trace!(
+            "serialize FixedArray field({:#x}): {_key}",
+            self.output.position()
+        );
         value.serialize(&mut **self)
     }
 
@@ -662,6 +675,11 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         key: &'static str,
         value: &CString,
     ) -> Result<(), Self::Error> {
+        #[cfg(feature = "tracing")]
+        tracing::trace!(
+            "serialize CString field({:#x}): {key}({value})",
+            self.output.position()
+        );
         if value.should_write_binary() {
             let str_start = self.relative_position()?;
             self.local_fixups_name_src.insert(key, str_start);
@@ -684,6 +702,11 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         key: &'static str,
         value: &StringPtr,
     ) -> Result<(), Self::Error> {
+        #[cfg(feature = "tracing")]
+        tracing::trace!(
+            "serialize StringPtr field({:#x}): {key}({value})",
+            self.output.position()
+        );
         if value.should_write_binary() {
             let str_start = self.relative_position()?;
             self.local_fixups_name_src.insert(key, str_start);
@@ -706,6 +729,11 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
         V: AsRef<[T]> + Serialize,
         T: Serialize,
     {
+        #[cfg(feature = "tracing")]
+        tracing::trace!(
+            "serialize Array field({:#x}): {key}",
+            self.output.position()
+        );
         if !value.as_ref().is_empty() {
             // Ptr type need to pointing data position(local.dst).
             let array_start = self.relative_position()?;
@@ -768,6 +796,8 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
     where
         T: ?Sized + Serialize,
     {
+        #[cfg(feature = "tracing")]
+        tracing::trace!("serialize field({:#x}): {_key}", self.output.position());
         value.serialize(&mut **self)
     }
 
@@ -796,6 +826,13 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
     where
         T: ?Sized + AsRef<[u8]>,
     {
+        #[cfg(feature = "tracing")]
+        tracing::debug!(
+            "serialize pads({:#x}): x86({})/x64({})",
+            self.output.position(),
+            x86_pads.as_ref().len(),
+            x64_pads.as_ref().len(),
+        );
         match self.is_x86 {
             true => {
                 if x86_pads.as_ref().is_empty() {
@@ -815,6 +852,8 @@ impl<'a> SerializeStruct for &'a mut ByteSerializer {
 
     #[inline]
     fn end(self) -> Result<()> {
+        // NOTE: The offset map pointing to the pointer for field is different for each struct and must be reset here.
+        self.local_fixups_name_src.clear();
         Ok(())
     }
 }

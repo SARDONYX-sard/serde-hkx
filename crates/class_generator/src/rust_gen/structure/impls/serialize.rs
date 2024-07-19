@@ -13,7 +13,7 @@ pub fn impl_serialize(class: &Class, class_map: &ClassMap) -> TokenStream {
     let name = class.name.as_ref();
     let hex_signature = str2lit(&class.signature.to_string());
     let class_name = syn::Ident::new(name, proc_macro2::Span::call_site());
-    let fields = impl_serialize_fields(class, class_map);
+    let (fields, pointed_writers) = impl_serialize_fields(class, class_map);
     let lifetime = match class.has_string {
         true => quote! { <'a> },
         false => quote! {},
@@ -42,6 +42,7 @@ pub fn impl_serialize(class: &Class, class_map: &ClassMap) -> TokenStream {
                     let class_meta = self.__ptr.map(|name| (name, _serde::__private::Signature::new(#hex_signature)));
                     let mut serializer = __serializer.serialize_struct(#name, class_meta)?;
                     #(#fields)*
+                    #(#pointed_writers)*
                     serializer.end()
                 }
         }
@@ -49,7 +50,10 @@ pub fn impl_serialize(class: &Class, class_map: &ClassMap) -> TokenStream {
     }
 }
 
-fn impl_serialize_fields(class: &Class, class_map: &ClassMap) -> Vec<TokenStream> {
+fn impl_serialize_fields(
+    class: &Class,
+    class_map: &ClassMap,
+) -> (Vec<TokenStream>, Vec<TokenStream>) {
     let mut serialize_calls = Vec::new();
     // The ptr type must serialize the data pointed to by ptr after serializing all fields. This is an array for that purpose.
     let mut ptr_after_write_fields = Vec::new();
@@ -73,8 +77,7 @@ fn impl_serialize_fields(class: &Class, class_map: &ClassMap) -> Vec<TokenStream
         ptr_after_write_fields.extend(ptr_fields);
     }
 
-    serialize_calls.extend(ptr_after_write_fields);
-    serialize_calls
+    (serialize_calls, ptr_after_write_fields)
 }
 
 /// # Returns
