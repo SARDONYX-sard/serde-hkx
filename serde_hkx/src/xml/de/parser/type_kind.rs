@@ -5,7 +5,7 @@ use crate::{lib::*, tri};
 use super::delimited_with_multispace0;
 use havok_types::*;
 use std::borrow::Cow;
-use winnow::ascii::{digit1, multispace0};
+use winnow::ascii::{digit1, multispace0, Caseless};
 use winnow::combinator::{alt, preceded, seq};
 use winnow::error::{ContextError, StrContext, StrContextValue};
 use winnow::token::take_until;
@@ -139,9 +139,16 @@ pub fn transform<'a>() -> impl Parser<&'a str, Transform, ContextError> {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/// - Class pointer. (e.g. `#0050`)
+/// - Class pointer. (e.g. `#0050`, `null`, etc.)
 pub fn pointer<'a>() -> impl Parser<&'a str, Pointer, ContextError> {
-    move |input: &mut &'a str| {
+    let null_ptr = Caseless("null")
+        .value(Pointer::new(0))
+        .context(StrContext::Label("Pointer"))
+        .context(StrContext::Expected(StrContextValue::Description(
+            "Pointer(e.g. `null`)",
+        )));
+
+    alt((null_ptr, move |input: &mut &'a str| {
         let digit = tri!(preceded("#", digit1)
             .parse_to()
             .context(StrContext::Label("Pointer"))
@@ -150,7 +157,7 @@ pub fn pointer<'a>() -> impl Parser<&'a str, Pointer, ContextError> {
             )))
             .parse_next(input));
         Ok(Pointer::new(digit))
-    }
+    }))
 }
 
 /// Parses a string literal until `</`, e.g., `example` in (`example</`).
