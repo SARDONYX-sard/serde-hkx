@@ -10,6 +10,7 @@ edition = "2021"
 [workspace]
 members = [
   "crates/class_generator",
+  "crates/cli",
   "crates/havok_classes",
   "crates/havok_serde",
   "crates/havok_types",
@@ -18,10 +19,13 @@ members = [
   "crates/inheritance_tree_gen",
   "serde_hkx",
 ]
-default-members = ["crates/class_generator"]
+default-members = ["crates/cli"]
 resolver = "2"
 
 [workspace.dependencies]
 proc-macro2 = { version = "1.0.82", default-features = false }
 quote = { version = "1.0.36", default-features = false }
 syn = { version = "2.0.63", default-features = false }
+
+[profile.release]
+lto = "thin"

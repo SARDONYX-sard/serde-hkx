@@ -7,6 +7,7 @@ on:
     branches: "*"
 env:
   CARGO_TERM_COLOR: always
+  APP_NAME: cvhkx
 
 jobs:
   build:
@@ -33,3 +34,30 @@ jobs:
 
       - name: Run build
         run: cargo build
+
+      - name: Make outputs dir
+        run: mkdir -p ./build
+      - name: Compress outputs(Windows)
+        shell: pwsh
+        if: runner.os == 'Windows'
+        run: |
+          Move-Item -Path ./target/release/${{ env.APP_NAME }}.exe -Destination './build'
+
+      - name: Compress outputs(MacOS)
+        shell: bash
+        if: runner.os == 'macOS'
+        run: |
+          mv ./target/release/${{ env.APP_NAME }} ./build
+      - name: Compress outputs(Linux)
+        shell: bash
+        if: runner.os == 'Linux'
+        run: |
+          mv ./target/release/${{ env.APP_NAME }} ./build
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.3.4
+
+        with:
+          name: serde-hkx-cli-${{runner.os}}
+          path: |
+            ./build/
