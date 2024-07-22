@@ -33,7 +33,7 @@ jobs:
         run: cargo test --workspace
 
       - name: Run build
-        run: cargo build
+        run: cargo build --release
 
       - name: Make outputs dir
         run: mkdir -p ./build
