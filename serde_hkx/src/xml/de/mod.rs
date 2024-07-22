@@ -457,7 +457,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
     fn deserialize_struct<V>(
         self,
         name: &'static str,
-        fields: &'static [&'static str],
+        _fields: &'static [&'static str], // current class's field names only
         visitor: V,
     ) -> Result<V::Value, Self::Error>
     where
@@ -483,7 +483,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut XmlDeserializer<'de> {
             Some(ptr_name)
         };
 
-        let value = tri!(visitor.visit_struct(MapDeserializer::new(self, ptr_name, name, fields)));
+        let value = tri!(visitor.visit_struct(MapDeserializer::new(self, ptr_name, name,)));
         tri!(self.parse_next(end_tag("hkobject")));
         self.in_struct = false;
         Ok(value)

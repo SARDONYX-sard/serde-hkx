@@ -4,21 +4,21 @@ mod visit_struct_for_bytes;
 
 use crate::{
     cpp_info::{Class, TypeKind},
-    ClassMap,
+    get_inherited_members, ClassMap,
 };
-use enum_fields::gen_enum_fields;
+use enum_fields::gen_enum_visitor;
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
 
 pub fn impl_deserialize(class: &Class, class_map: &ClassMap) -> TokenStream {
     let members = &class.members;
-    let enum_fields = gen_enum_fields(members);
+    let enum_visitor = gen_enum_visitor(get_inherited_members(&class.name, class_map).as_slice());
 
     let class_name_str = &class.name;
 
     let visitor_ident = to_visitor_ident(class_name_str);
     let visitor_for_bytes = visit_struct_for_bytes::gen(class, class_map);
-    let visitor_for_xml = visit_struct::gen(class);
+    let visitor_for_xml = visit_struct::gen(class, class_map);
 
     let expected_msg = format!("struct {class_name_str}");
 
@@ -35,58 +35,36 @@ pub fn impl_deserialize(class: &Class, class_map: &ClassMap) -> TokenStream {
     }
 
     quote! {
-        use havok_serde as _serde;
-
-        #enum_fields
-
-        pub(super) struct #visitor_ident<'de> {
-                marker: core::marker::PhantomData<#class_name #lifetime>,
-                lifetime: core::marker::PhantomData<&'de ()>,
-        }
-
-        impl<'de> #visitor_ident<'de> {
-            /// # Purpose of this method
-            /// To reproduce C++ field inheritance, we will have the field internal implementation
-            /// of deserialization partially exposed and reused.
-            #[inline]
-            pub(super) fn visit_as_parent<__A>(
-                __map: &mut __A,
-            ) -> _serde::__private::Result<#class_name #lifetime, __A::Error>
-            where
-                __A: _serde::de::MapAccess<'de>,
-            {
-                _serde::de::Visitor::visit_struct(
-                    Self {
-                        marker: _serde::__private::PhantomData::<#class_name #lifetime>,
-                        lifetime: _serde::__private::PhantomData,
-                    },
-                    __map,
-                )
-            }
-        }
-
-        #[allow(clippy::match_single_binding)]
-        #[allow(clippy::reversed_empty_ranges)]
-        #[allow(clippy::single_match)]
-        impl<'de> _serde::de::Visitor<'de> for #visitor_ident<'de> {
-            type Value = #class_name #lifetime;
-            fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
-                core::fmt::Formatter::write_str(__formatter, #expected_msg)
-            }
-
-            #visitor_for_bytes
-            #visitor_for_xml
-        }
-
         #[doc(hidden)]
         #[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
         const _: () = {
+            use havok_serde as _serde;
             #[automatically_derived]
             impl<'de> _serde::Deserialize<'de> for #class_name #lifetime {
                 fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
                 where
                     __D: _serde::Deserializer<'de>,
                 {
+                    #enum_visitor
+
+                    struct #visitor_ident<'de> {
+                        marker: _serde::__private::PhantomData<#class_name #lifetime>,
+                        lifetime: _serde::__private::PhantomData<&'de ()>,
+                    }
+
+                    #[allow(clippy::match_single_binding)]
+                    #[allow(clippy::reversed_empty_ranges)]
+                    #[allow(clippy::single_match)]
+                    impl<'de> _serde::de::Visitor<'de> for #visitor_ident<'de> {
+                        type Value = #class_name #lifetime;
+                        fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+                            core::fmt::Formatter::write_str(__formatter, #expected_msg)
+                        }
+
+                        #visitor_for_bytes
+                        #visitor_for_xml
+                    }
+
                     const FIELDS: &[&str] = &[#(#member_names,)*];
                     _serde::Deserializer::deserialize_struct(
                         deserializer,

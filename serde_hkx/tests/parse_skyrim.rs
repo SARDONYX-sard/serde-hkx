@@ -23,21 +23,28 @@ type Result<T> = core::result::Result<T, ConvertError>;
 
 #[tokio::test]
 #[ignore = "Because it is impossible to test without a set of files in the game."]
-#[quick_tracing::init(test = "from_bytes_one_files", stdio = false)]
-async fn one_test() -> Result<()> {
+#[quick_tracing::init(test = "should_parse_one_file", stdio = false)]
+async fn should_parse_one_file() -> Result<()> {
     // let path = "./tests/data/meshes/interface/intperkline01.hkx";
     // let path = "./tests/data/meshes/actors/ambient/chicken/chickenproject.hkx";
+    // let path = "./tests/data/meshes/actors/character/characters/defaultmale.hkx";
 
-    let path = "./tests/data/meshes/actors/character/characters/defaultmale.hkx";
-    parse_to_xml(path).await.unwrap();
-
-    // let classes_from_xml: ClassMap = match from_str(include_str!("./defaultmale.xml")) {
-    //     Ok(s) => s,
-    //     Err(err) => panic!("{err}"),
-    // };
-    // dbg!(classes_from_xml);
+    // parse_to_xml(path).await.unwrap();
+    //
+    let xml = include_str!("./defaultmale.xml");
+    tokio::fs::write("./output.hkx", xml_to_bytes(xml)?).await?;
     Ok(())
     // parse_to_xml(path).await
+}
+
+fn xml_to_bytes(xml: &str) -> Result<Vec<u8>> {
+    let mut classes: ClassMap = match from_str(xml) {
+        Ok(s) => s,
+        Err(err) => panic!("{err}"),
+    };
+    classes.sort_keys();
+    tracing::debug!("classes = {classes:#?}");
+    Ok(to_bytes(&classes, &HkxHeader::new_skyrim_se())?)
 }
 
 #[tokio::test]

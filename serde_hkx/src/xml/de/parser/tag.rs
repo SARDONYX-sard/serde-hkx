@@ -69,7 +69,6 @@ pub fn class_start_tag<'a>() -> impl Parser<&'a str, (Pointer, &'a str, Signatur
 /// All arguments are used only for clarity of error reporting.
 pub fn field_start_open_tag<'a>(
     class_name: &'static str,
-    field_name: &'static str,
 ) -> impl Parser<&'a str, (), ContextError> {
     seq!(
         _: delimited_comment_multispace0("<"),
@@ -78,7 +77,6 @@ pub fn field_start_open_tag<'a>(
         _: delimited_with_multispace0("="),
     )
     .context(StrContext::Label("field of class: start opening tag"))
-    .context(StrContext::Label(field_name))
     .context(StrContext::Label(class_name))
     .context(StrContext::Expected(StrContextValue::Description(
         "e.g. `<hkparam name=`",

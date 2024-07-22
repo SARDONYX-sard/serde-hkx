@@ -28,5 +28,8 @@ serde_with = { version = "3.8.1", optional = true } # Serde utility
 serde = ["dep:serde", "dep:serde_with"]
 
 # Strictly check for the presence of values.
-# For example, if a field is missing, an error is made. (but not the original behavior).
+# For example, forbitten missing fields, duplicate fields, an error is made. (but not the original behavior).
 strict = []
+
+# When reading partial XML in Nemesis, you may want to ignore duplicates because the original comes a second time. This is used in that case.
+ignore_duplicates = []

@@ -28,10 +28,6 @@ pub struct MapDeserializer<'a, 'de: 'a> {
     de: &'a mut XmlDeserializer<'de>,
     ptr_name: Option<Pointer>,
     class_name: &'static str,
-    fields: &'static [&'static str],
-
-    /// To check fields length
-    index: usize,
 }
 
 impl<'a, 'de> MapDeserializer<'a, 'de> {
@@ -40,14 +36,11 @@ impl<'a, 'de> MapDeserializer<'a, 'de> {
         de: &'a mut XmlDeserializer<'de>,
         ptr_name: Option<Pointer>,
         class_name: &'static str,
-        fields: &'static [&'static str],
     ) -> Self {
         Self {
             de,
             ptr_name,
             class_name,
-            fields,
-            index: 0,
         }
     }
 }
@@ -60,43 +53,44 @@ impl<'a, 'de> MapAccess<'de> for MapDeserializer<'a, 'de> {
         self.ptr_name.take()
     }
 
-    // Parse e.g. `<hkparam name="worldUpWS">`, `<hkparam name="boneWeights" numelements="90">`
+    // Parse e.g. `<hkparam name="worldUpWS"`, `<hkparam name="boneWeights"`
     fn next_key_seed<K>(&mut self, seed: K) -> Result<Option<K::Value>, Self::Error>
     where
         K: DeserializeSeed<'de>,
     {
         // Check if there are no more elements.
-        if self.fields.len() == self.index {
+        if self.de.parse_peek(end_tag("hkobject")).is_ok() {
             return Ok(None);
         }
+        // Avoid infinite loops by checking the end of XML.
+        if self.de.input.is_empty() {
+            return Err(Error::Eof);
+        }
 
-        let field_name = self.fields[self.index];
-        tri!(self
-            .de
-            .parse_next(field_start_open_tag(self.class_name, field_name))); // Parse `<hkparam name=`
-        let key = seed.deserialize(&mut *self.de).map(Some); // Parse `"string"`
-        tri!(self.de.parse_next(field_start_close_tag())); // Parse `>` or ` numelements="3">`
-        self.index += 1;
-
-        key
+        tri!(self.de.parse_next(field_start_open_tag(self.class_name))); // Parse `<hkparam name=`
+        seed.deserialize(&mut *self.de).map(Some) // Parse `"string"`
     }
 
-    // Parse e.g. `(0.000000 0.000000 1.000000 0.000000)</hkparam>`
+    // Parse e.g. `>(0.000000 0.000000 1.000000 0.000000)</hkparam>`
     fn next_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
     where
         V: DeserializeSeed<'de>,
     {
+        // HACK: If the `strict` feature is disabled, fall back to the default value
+        // if there is an error retrieving the value in the `havok_classes` crate, so check
+        // for `>` here and omit the implementation of the `/>` shorthand notation.
+        tri!(self.de.parse_next(field_start_close_tag())); // Parse `>` or ` numelements="3">`
+
         let value = tri!(seed.deserialize(&mut *self.de));
         tri!(self.de.parse_next(end_tag("hkparam")));
         Ok(value)
     }
 
-    // NOTE: This method is not used in `havok_classes` in XML because it is for bytes
     #[cold]
-    fn parent_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
+    fn parent_value_seed<V>(&mut self, _seed: V) -> Result<V::Value, Self::Error>
     where
         V: DeserializeSeed<'de>,
     {
-        self.next_value_seed(seed)
+        unreachable!("Using the wrong API: This method is not used in `havok_classes` in XML because it is for bytes.")
     }
 }

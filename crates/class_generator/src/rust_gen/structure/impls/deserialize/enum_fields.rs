@@ -3,17 +3,22 @@ use proc_macro2::TokenStream;
 use quote::quote;
 
 /// Implement deserialization to parse key(`<hkparam name="key">`) for XML and convert it to each variant of enum.
-pub fn gen_enum_fields(members: &[Member]) -> TokenStream {
+pub fn gen_enum_visitor(members: &[&Member]) -> TokenStream {
     let mut enum_variants = Vec::new();
     let mut visit_key_matchers = Vec::new();
 
     for member in members {
-        let field_ident = to_rust_field_ident(&member.name);
+        let Member { name, flags, .. } = member;
+
+        if flags.has_skip_serializing() {
+            continue;
+        }
+        let field_ident = to_rust_field_ident(name);
 
         enum_variants.push(quote! { #field_ident });
         if !&member.flags.has_skip_serializing() {
             // e.g. "referenceCount" => Ok(__Field::__field1),
-            let member_name = &member.name;
+            let member_name = name;
             visit_key_matchers.push(quote! { #member_name => Ok(__Field::#field_ident) });
         };
     }
