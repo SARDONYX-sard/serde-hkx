@@ -121,568 +121,599 @@ const _: () = {
         }
     }
 };
-use havok_serde as _serde;
-#[allow(non_camel_case_types)]
-enum __Field {
-    m_memberPath,
-    m_memberClass,
-    m_offsetInObjectPlusOne,
-    m_offsetInArrayPlusOne,
-    m_rootVariableIndex,
-    m_variableIndex,
-    m_bitIndex,
-    m_bindingType,
-    m_memberType,
-    m_variableType,
-    m_flags,
-    __ignore,
-}
-struct __FieldVisitor;
-impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
-    type Value = __Field;
-    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
-        core::fmt::Formatter::write_str(__formatter, "field identifier")
-    }
-    /// Intended for use in XML.
-    #[allow(clippy::match_single_binding)]
-    #[allow(clippy::reversed_empty_ranges)]
-    #[allow(clippy::single_match)]
-    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
-    where
-        __E: _serde::de::Error,
-    {
-        match __value {
-            "memberPath" => Ok(__Field::m_memberPath),
-            "variableIndex" => Ok(__Field::m_variableIndex),
-            "bitIndex" => Ok(__Field::m_bitIndex),
-            "bindingType" => Ok(__Field::m_bindingType),
-            _ => Ok(__Field::__ignore),
-        }
-    }
-}
-impl<'de> _serde::Deserialize<'de> for __Field {
-    #[inline]
-    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
-    where
-        __D: _serde::Deserializer<'de>,
-    {
-        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
-    }
-}
-pub(super) struct __hkbVariableBindingSetBindingVisitor<'de> {
-    marker: core::marker::PhantomData<hkbVariableBindingSetBinding<'de>>,
-    lifetime: core::marker::PhantomData<&'de ()>,
-}
-impl<'de> __hkbVariableBindingSetBindingVisitor<'de> {
-    /// # Purpose of this method
-    /// To reproduce C++ field inheritance, we will have the field internal implementation
-    /// of deserialization partially exposed and reused.
-    #[inline]
-    pub(super) fn visit_as_parent<__A>(
-        __map: &mut __A,
-    ) -> _serde::__private::Result<hkbVariableBindingSetBinding<'de>, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        _serde::de::Visitor::visit_struct(
-            Self {
-                marker: _serde::__private::PhantomData::<
-                    hkbVariableBindingSetBinding<'de>,
-                >,
-                lifetime: _serde::__private::PhantomData,
-            },
-            __map,
-        )
-    }
-}
-#[allow(clippy::match_single_binding)]
-#[allow(clippy::reversed_empty_ranges)]
-#[allow(clippy::single_match)]
-impl<'de> _serde::de::Visitor<'de> for __hkbVariableBindingSetBindingVisitor<'de> {
-    type Value = hkbVariableBindingSetBinding<'de>;
-    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
-        core::fmt::Formatter::write_str(
-            __formatter,
-            "struct hkbVariableBindingSetBinding",
-        )
-    }
-    fn visit_struct_for_bytes<__A>(
-        self,
-        mut __map: __A,
-    ) -> _serde::__private::Result<Self::Value, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        let __ptr = __A::class_ptr(&mut __map);
-        let mut m_memberPath: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-        let mut m_memberClass: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_offsetInObjectPlusOne: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_offsetInArrayPlusOne: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_rootVariableIndex: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_variableIndex: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_bitIndex: _serde::__private::Option<i8> = _serde::__private::None;
-        let mut m_bindingType: _serde::__private::Option<BindingType> = _serde::__private::None;
-        let mut m_memberType: _serde::__private::Option<u8> = _serde::__private::None;
-        let mut m_variableType: _serde::__private::Option<i8> = _serde::__private::None;
-        let mut m_flags: _serde::__private::Option<i8> = _serde::__private::None;
-        for i in 0..11usize {
-            match i {
-                0usize => {
-                    if _serde::__private::Option::is_some(&m_memberPath) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "memberPath",
-                            ),
-                        );
-                    }
-                    m_memberPath = _serde::__private::Some(
-                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                1usize => {
-                    if _serde::__private::Option::is_some(&m_memberClass) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "memberClass",
-                            ),
-                        );
-                    }
-                    m_memberClass = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                2usize => {
-                    if _serde::__private::Option::is_some(&m_offsetInObjectPlusOne) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "offsetInObjectPlusOne",
-                            ),
-                        );
-                    }
-                    m_offsetInObjectPlusOne = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                3usize => {
-                    if _serde::__private::Option::is_some(&m_offsetInArrayPlusOne) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "offsetInArrayPlusOne",
-                            ),
-                        );
-                    }
-                    m_offsetInArrayPlusOne = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                4usize => {
-                    if _serde::__private::Option::is_some(&m_rootVariableIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "rootVariableIndex",
-                            ),
-                        );
-                    }
-                    m_rootVariableIndex = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                5usize => {
-                    if _serde::__private::Option::is_some(&m_variableIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "variableIndex",
-                            ),
-                        );
-                    }
-                    m_variableIndex = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                6usize => {
-                    if _serde::__private::Option::is_some(&m_bitIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "bitIndex",
-                            ),
-                        );
-                    }
-                    m_bitIndex = _serde::__private::Some(
-                        match __A::next_value::<i8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                7usize => {
-                    if _serde::__private::Option::is_some(&m_bindingType) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "bindingType",
-                            ),
-                        );
-                    }
-                    m_bindingType = _serde::__private::Some(
-                        match __A::next_value::<BindingType>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                8usize => {
-                    if _serde::__private::Option::is_some(&m_memberType) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "memberType",
-                            ),
-                        );
-                    }
-                    m_memberType = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                9usize => {
-                    if _serde::__private::Option::is_some(&m_variableType) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "variableType",
-                            ),
-                        );
-                    }
-                    m_variableType = _serde::__private::Some(
-                        match __A::next_value::<i8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                10usize => {
-                    if _serde::__private::Option::is_some(&m_flags) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("flags"),
-                        );
-                    }
-                    m_flags = _serde::__private::Some(
-                        match __A::next_value::<i8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                _ => {}
-            }
-        }
-        __A::pad(&mut __map, 3usize, 3usize)?;
-        let m_memberPath = match m_memberPath {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("memberPath"),
-                );
-            }
-        };
-        let m_memberClass = match m_memberClass {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("memberClass"),
-                );
-            }
-        };
-        let m_offsetInObjectPlusOne = match m_offsetInObjectPlusOne {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "offsetInObjectPlusOne",
-                    ),
-                );
-            }
-        };
-        let m_offsetInArrayPlusOne = match m_offsetInArrayPlusOne {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "offsetInArrayPlusOne",
-                    ),
-                );
-            }
-        };
-        let m_rootVariableIndex = match m_rootVariableIndex {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("rootVariableIndex"),
-                );
-            }
-        };
-        let m_variableIndex = match m_variableIndex {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("variableIndex"),
-                );
-            }
-        };
-        let m_bitIndex = match m_bitIndex {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("bitIndex"),
-                );
-            }
-        };
-        let m_bindingType = match m_bindingType {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("bindingType"),
-                );
-            }
-        };
-        let m_memberType = match m_memberType {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("memberType"),
-                );
-            }
-        };
-        let m_variableType = match m_variableType {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("variableType"),
-                );
-            }
-        };
-        let m_flags = match m_flags {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("flags"),
-                );
-            }
-        };
-        _serde::__private::Ok(hkbVariableBindingSetBinding {
-            __ptr,
-            m_memberPath,
-            m_memberClass,
-            m_offsetInObjectPlusOne,
-            m_offsetInArrayPlusOne,
-            m_rootVariableIndex,
-            m_variableIndex,
-            m_bitIndex,
-            m_bindingType,
-            m_memberType,
-            m_variableType,
-            m_flags,
-        })
-    }
-    #[allow(clippy::manual_unwrap_or_default)]
-    fn visit_struct<__A>(
-        self,
-        mut __map: __A,
-    ) -> _serde::__private::Result<Self::Value, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        let __ptr = __A::class_ptr(&mut __map);
-        let mut m_memberPath: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-        let mut m_variableIndex: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_bitIndex: _serde::__private::Option<i8> = _serde::__private::None;
-        let mut m_bindingType: _serde::__private::Option<BindingType> = _serde::__private::None;
-        for _ in 0..4usize {
-            #[cfg(not(feature = "strict"))]
-            let __res = __A::next_key::<__Field>(&mut __map)
-                .unwrap_or(Some(__Field::__ignore));
-            #[cfg(feature = "strict")]
-            let __res = __A::next_key::<__Field>(&mut __map)?;
-            if let _serde::__private::Some(__key) = __res {
-                match __key {
-                    __Field::m_memberPath => {
-                        if _serde::__private::Option::is_some(&m_memberPath) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "memberPath",
-                                ),
-                            );
-                        }
-                        m_memberPath = _serde::__private::Some(
-                            match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_variableIndex => {
-                        if _serde::__private::Option::is_some(&m_variableIndex) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "variableIndex",
-                                ),
-                            );
-                        }
-                        m_variableIndex = _serde::__private::Some(
-                            match __A::next_value::<i32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_bitIndex => {
-                        if _serde::__private::Option::is_some(&m_bitIndex) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "bitIndex",
-                                ),
-                            );
-                        }
-                        m_bitIndex = _serde::__private::Some(
-                            match __A::next_value::<i8>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_bindingType => {
-                        if _serde::__private::Option::is_some(&m_bindingType) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "bindingType",
-                                ),
-                            );
-                        }
-                        m_bindingType = _serde::__private::Some(
-                            match __A::next_value::<BindingType>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    _ => {}
-                }
-            }
-        }
-        let m_memberPath = match m_memberPath {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("memberPath"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_variableIndex = match m_variableIndex {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("variableIndex"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_bitIndex = match m_bitIndex {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("bitIndex"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_bindingType = match m_bindingType {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("bindingType"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        _serde::__private::Ok(hkbVariableBindingSetBinding {
-            __ptr,
-            m_memberPath,
-            m_variableIndex,
-            m_bitIndex,
-            m_bindingType,
-            ..Default::default()
-        })
-    }
-}
 #[doc(hidden)]
 #[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
 const _: () = {
+    use havok_serde as _serde;
     #[automatically_derived]
     impl<'de> _serde::Deserialize<'de> for hkbVariableBindingSetBinding<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
         {
+            #[allow(non_camel_case_types)]
+            enum __Field {
+                m_bindingType,
+                m_bitIndex,
+                m_variableIndex,
+                m_memberPath,
+                __ignore,
+            }
+            struct __FieldVisitor;
+            impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+                type Value = __Field;
+                fn expecting(
+                    &self,
+                    __formatter: &mut core::fmt::Formatter,
+                ) -> core::fmt::Result {
+                    core::fmt::Formatter::write_str(__formatter, "field identifier")
+                }
+                /// Intended for use in XML.
+                #[allow(clippy::match_single_binding)]
+                #[allow(clippy::reversed_empty_ranges)]
+                #[allow(clippy::single_match)]
+                fn visit_key<__E>(
+                    self,
+                    __value: &str,
+                ) -> core::result::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match __value {
+                        "bindingType" => Ok(__Field::m_bindingType),
+                        "bitIndex" => Ok(__Field::m_bitIndex),
+                        "variableIndex" => Ok(__Field::m_variableIndex),
+                        "memberPath" => Ok(__Field::m_memberPath),
+                        _ => Ok(__Field::__ignore),
+                    }
+                }
+            }
+            impl<'de> _serde::Deserialize<'de> for __Field {
+                #[inline]
+                fn deserialize<__D>(
+                    __deserializer: __D,
+                ) -> core::result::Result<Self, __D::Error>
+                where
+                    __D: _serde::Deserializer<'de>,
+                {
+                    _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+                }
+            }
+            struct __hkbVariableBindingSetBindingVisitor<'de> {
+                marker: _serde::__private::PhantomData<
+                    hkbVariableBindingSetBinding<'de>,
+                >,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            #[allow(clippy::match_single_binding)]
+            #[allow(clippy::reversed_empty_ranges)]
+            #[allow(clippy::single_match)]
+            impl<'de> _serde::de::Visitor<'de>
+            for __hkbVariableBindingSetBindingVisitor<'de> {
+                type Value = hkbVariableBindingSetBinding<'de>;
+                fn expecting(
+                    &self,
+                    __formatter: &mut core::fmt::Formatter,
+                ) -> core::fmt::Result {
+                    core::fmt::Formatter::write_str(
+                        __formatter,
+                        "struct hkbVariableBindingSetBinding",
+                    )
+                }
+                fn visit_struct_for_bytes<__A>(
+                    self,
+                    mut __map: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::MapAccess<'de>,
+                {
+                    let __ptr = __A::class_ptr(&mut __map);
+                    let mut m_memberPath: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_memberClass: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_offsetInObjectPlusOne: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_offsetInArrayPlusOne: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_rootVariableIndex: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_variableIndex: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_bitIndex: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_bindingType: _serde::__private::Option<BindingType> = _serde::__private::None;
+                    let mut m_memberType: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_variableType: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_flags: _serde::__private::Option<i8> = _serde::__private::None;
+                    for i in 0..11usize {
+                        match i {
+                            0usize => {
+                                if _serde::__private::Option::is_some(&m_memberPath) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "memberPath",
+                                        ),
+                                    );
+                                }
+                                m_memberPath = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            1usize => {
+                                if _serde::__private::Option::is_some(&m_memberClass) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "memberClass",
+                                        ),
+                                    );
+                                }
+                                m_memberClass = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            2usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_offsetInObjectPlusOne,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "offsetInObjectPlusOne",
+                                        ),
+                                    );
+                                }
+                                m_offsetInObjectPlusOne = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            3usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_offsetInArrayPlusOne,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "offsetInArrayPlusOne",
+                                        ),
+                                    );
+                                }
+                                m_offsetInArrayPlusOne = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            4usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_rootVariableIndex,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "rootVariableIndex",
+                                        ),
+                                    );
+                                }
+                                m_rootVariableIndex = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            5usize => {
+                                if _serde::__private::Option::is_some(&m_variableIndex) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "variableIndex",
+                                        ),
+                                    );
+                                }
+                                m_variableIndex = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            6usize => {
+                                if _serde::__private::Option::is_some(&m_bitIndex) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "bitIndex",
+                                        ),
+                                    );
+                                }
+                                m_bitIndex = _serde::__private::Some(
+                                    match __A::next_value::<i8>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            7usize => {
+                                if _serde::__private::Option::is_some(&m_bindingType) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "bindingType",
+                                        ),
+                                    );
+                                }
+                                m_bindingType = _serde::__private::Some(
+                                    match __A::next_value::<BindingType>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            8usize => {
+                                if _serde::__private::Option::is_some(&m_memberType) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "memberType",
+                                        ),
+                                    );
+                                }
+                                m_memberType = _serde::__private::Some(
+                                    match __A::next_value::<u8>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            9usize => {
+                                if _serde::__private::Option::is_some(&m_variableType) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "variableType",
+                                        ),
+                                    );
+                                }
+                                m_variableType = _serde::__private::Some(
+                                    match __A::next_value::<i8>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            10usize => {
+                                if _serde::__private::Option::is_some(&m_flags) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("flags"),
+                                    );
+                                }
+                                m_flags = _serde::__private::Some(
+                                    match __A::next_value::<i8>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            _ => {}
+                        }
+                    }
+                    __A::pad(&mut __map, 3usize, 3usize)?;
+                    let m_memberPath = match m_memberPath {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "memberPath",
+                                ),
+                            );
+                        }
+                    };
+                    let m_memberClass = match m_memberClass {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "memberClass",
+                                ),
+                            );
+                        }
+                    };
+                    let m_offsetInObjectPlusOne = match m_offsetInObjectPlusOne {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "offsetInObjectPlusOne",
+                                ),
+                            );
+                        }
+                    };
+                    let m_offsetInArrayPlusOne = match m_offsetInArrayPlusOne {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "offsetInArrayPlusOne",
+                                ),
+                            );
+                        }
+                    };
+                    let m_rootVariableIndex = match m_rootVariableIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "rootVariableIndex",
+                                ),
+                            );
+                        }
+                    };
+                    let m_variableIndex = match m_variableIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "variableIndex",
+                                ),
+                            );
+                        }
+                    };
+                    let m_bitIndex = match m_bitIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("bitIndex"),
+                            );
+                        }
+                    };
+                    let m_bindingType = match m_bindingType {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "bindingType",
+                                ),
+                            );
+                        }
+                    };
+                    let m_memberType = match m_memberType {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "memberType",
+                                ),
+                            );
+                        }
+                    };
+                    let m_variableType = match m_variableType {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "variableType",
+                                ),
+                            );
+                        }
+                    };
+                    let m_flags = match m_flags {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("flags"),
+                            );
+                        }
+                    };
+                    _serde::__private::Ok(hkbVariableBindingSetBinding {
+                        __ptr,
+                        m_memberPath,
+                        m_memberClass,
+                        m_offsetInObjectPlusOne,
+                        m_offsetInArrayPlusOne,
+                        m_rootVariableIndex,
+                        m_variableIndex,
+                        m_bitIndex,
+                        m_bindingType,
+                        m_memberType,
+                        m_variableType,
+                        m_flags,
+                    })
+                }
+                #[allow(clippy::manual_unwrap_or_default)]
+                fn visit_struct<__A>(
+                    self,
+                    mut __map: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::MapAccess<'de>,
+                {
+                    let mut m_bindingType: _serde::__private::Option<BindingType> = _serde::__private::None;
+                    let mut m_bitIndex: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_variableIndex: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_memberPath: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    while let _serde::__private::Some(__key) = {
+                        #[cfg(not(feature = "strict"))]
+                        let __key = __A::next_key::<__Field>(&mut __map)
+                            .unwrap_or(Some(__Field::__ignore));
+                        #[cfg(feature = "strict")]
+                        let __key = __A::next_key::<__Field>(&mut __map)?;
+                        __key
+                    } {
+                        match __key {
+                            __Field::m_bindingType => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_bindingType) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "bindingType",
+                                        ),
+                                    );
+                                }
+                                m_bindingType = _serde::__private::Some(
+                                    match __A::next_value::<BindingType>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_bitIndex => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_bitIndex) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "bitIndex",
+                                        ),
+                                    );
+                                }
+                                m_bitIndex = _serde::__private::Some(
+                                    match __A::next_value::<i8>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_variableIndex => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_variableIndex) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "variableIndex",
+                                        ),
+                                    );
+                                }
+                                m_variableIndex = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_memberPath => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_memberPath) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "memberPath",
+                                        ),
+                                    );
+                                }
+                                m_memberPath = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            _ => {}
+                        }
+                    }
+                    let m_bindingType = match m_bindingType {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "bindingType",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_bitIndex = match m_bitIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("bitIndex"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_variableIndex = match m_variableIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "variableIndex",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_memberPath = match m_memberPath {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "memberPath",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let __ptr = __A::class_ptr(&mut __map);
+                    _serde::__private::Ok(hkbVariableBindingSetBinding {
+                        __ptr,
+                        m_memberPath,
+                        m_variableIndex,
+                        m_bitIndex,
+                        m_bindingType,
+                        ..Default::default()
+                    })
+                }
+            }
             const FIELDS: &[&str] = &[
                 "memberPath",
                 "memberClass",

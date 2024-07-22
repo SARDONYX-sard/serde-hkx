@@ -88,421 +88,459 @@ const _: () = {
         }
     }
 };
-use havok_serde as _serde;
-#[allow(non_camel_case_types)]
-enum __Field {
-    m_transform,
-    m_transformSet,
-    m_shape,
-    m_vertexBuffers,
-    m_name,
-    __ignore,
-}
-struct __FieldVisitor;
-impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
-    type Value = __Field;
-    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
-        core::fmt::Formatter::write_str(__formatter, "field identifier")
-    }
-    /// Intended for use in XML.
-    #[allow(clippy::match_single_binding)]
-    #[allow(clippy::reversed_empty_ranges)]
-    #[allow(clippy::single_match)]
-    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
-    where
-        __E: _serde::de::Error,
-    {
-        match __value {
-            "transform" => Ok(__Field::m_transform),
-            "transformSet" => Ok(__Field::m_transformSet),
-            "shape" => Ok(__Field::m_shape),
-            "vertexBuffers" => Ok(__Field::m_vertexBuffers),
-            "name" => Ok(__Field::m_name),
-            _ => Ok(__Field::__ignore),
-        }
-    }
-}
-impl<'de> _serde::Deserialize<'de> for __Field {
-    #[inline]
-    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
-    where
-        __D: _serde::Deserializer<'de>,
-    {
-        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
-    }
-}
-pub(super) struct __hkMemoryMeshBodyVisitor<'de> {
-    marker: core::marker::PhantomData<hkMemoryMeshBody<'de>>,
-    lifetime: core::marker::PhantomData<&'de ()>,
-}
-impl<'de> __hkMemoryMeshBodyVisitor<'de> {
-    /// # Purpose of this method
-    /// To reproduce C++ field inheritance, we will have the field internal implementation
-    /// of deserialization partially exposed and reused.
-    #[inline]
-    pub(super) fn visit_as_parent<__A>(
-        __map: &mut __A,
-    ) -> _serde::__private::Result<hkMemoryMeshBody<'de>, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        _serde::de::Visitor::visit_struct(
-            Self {
-                marker: _serde::__private::PhantomData::<hkMemoryMeshBody<'de>>,
-                lifetime: _serde::__private::PhantomData,
-            },
-            __map,
-        )
-    }
-}
-#[allow(clippy::match_single_binding)]
-#[allow(clippy::reversed_empty_ranges)]
-#[allow(clippy::single_match)]
-impl<'de> _serde::de::Visitor<'de> for __hkMemoryMeshBodyVisitor<'de> {
-    type Value = hkMemoryMeshBody<'de>;
-    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
-        core::fmt::Formatter::write_str(__formatter, "struct hkMemoryMeshBody")
-    }
-    fn visit_struct_for_bytes<__A>(
-        self,
-        mut __map: __A,
-    ) -> _serde::__private::Result<Self::Value, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::parent_value(&mut __map)?;
-        let mut m_transform: _serde::__private::Option<Matrix4> = _serde::__private::None;
-        let mut m_transformSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_shape: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_vertexBuffers: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-        let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-        for i in 0..5usize {
-            match i {
-                0usize => {
-                    if _serde::__private::Option::is_some(&m_transform) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "transform",
-                            ),
-                        );
-                    }
-                    __A::pad(&mut __map, 8usize, 0usize)?;
-                    m_transform = _serde::__private::Some(
-                        match __A::next_value::<Matrix4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                1usize => {
-                    if _serde::__private::Option::is_some(&m_transformSet) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "transformSet",
-                            ),
-                        );
-                    }
-                    m_transformSet = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                2usize => {
-                    if _serde::__private::Option::is_some(&m_shape) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("shape"),
-                        );
-                    }
-                    m_shape = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                3usize => {
-                    if _serde::__private::Option::is_some(&m_vertexBuffers) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "vertexBuffers",
-                            ),
-                        );
-                    }
-                    m_vertexBuffers = _serde::__private::Some(
-                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                4usize => {
-                    if _serde::__private::Option::is_some(&m_name) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("name"),
-                        );
-                    }
-                    m_name = _serde::__private::Some(
-                        match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                _ => {}
-            }
-        }
-        __A::pad(&mut __map, 8usize, 8usize)?;
-        let m_transform = match m_transform {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("transform"),
-                );
-            }
-        };
-        let m_transformSet = match m_transformSet {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("transformSet"),
-                );
-            }
-        };
-        let m_shape = match m_shape {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("shape"),
-                );
-            }
-        };
-        let m_vertexBuffers = match m_vertexBuffers {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("vertexBuffers"),
-                );
-            }
-        };
-        let m_name = match m_name {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("name"),
-                );
-            }
-        };
-        _serde::__private::Ok(hkMemoryMeshBody {
-            __ptr,
-            parent,
-            m_transform,
-            m_transformSet,
-            m_shape,
-            m_vertexBuffers,
-            m_name,
-        })
-    }
-    #[allow(clippy::manual_unwrap_or_default)]
-    fn visit_struct<__A>(
-        self,
-        mut __map: __A,
-    ) -> _serde::__private::Result<Self::Value, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        let __ptr = __A::class_ptr(&mut __map);
-        let parent = __hkMeshBodyVisitor::visit_as_parent(&mut __map)?;
-        let mut m_transform: _serde::__private::Option<Matrix4> = _serde::__private::None;
-        let mut m_transformSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_shape: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_vertexBuffers: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-        let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-        for _ in 0..5usize {
-            #[cfg(not(feature = "strict"))]
-            let __res = __A::next_key::<__Field>(&mut __map)
-                .unwrap_or(Some(__Field::__ignore));
-            #[cfg(feature = "strict")]
-            let __res = __A::next_key::<__Field>(&mut __map)?;
-            if let _serde::__private::Some(__key) = __res {
-                match __key {
-                    __Field::m_transform => {
-                        if _serde::__private::Option::is_some(&m_transform) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "transform",
-                                ),
-                            );
-                        }
-                        m_transform = _serde::__private::Some(
-                            match __A::next_value::<Matrix4>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_transformSet => {
-                        if _serde::__private::Option::is_some(&m_transformSet) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "transformSet",
-                                ),
-                            );
-                        }
-                        m_transformSet = _serde::__private::Some(
-                            match __A::next_value::<Pointer>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_shape => {
-                        if _serde::__private::Option::is_some(&m_shape) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field("shape"),
-                            );
-                        }
-                        m_shape = _serde::__private::Some(
-                            match __A::next_value::<Pointer>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_vertexBuffers => {
-                        if _serde::__private::Option::is_some(&m_vertexBuffers) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "vertexBuffers",
-                                ),
-                            );
-                        }
-                        m_vertexBuffers = _serde::__private::Some(
-                            match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_name => {
-                        if _serde::__private::Option::is_some(&m_name) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field("name"),
-                            );
-                        }
-                        m_name = _serde::__private::Some(
-                            match __A::next_value::<StringPtr<'de>>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    _ => {}
-                }
-            }
-        }
-        let m_transform = match m_transform {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("transform"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_transformSet = match m_transformSet {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("transformSet"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_shape = match m_shape {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("shape"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_vertexBuffers = match m_vertexBuffers {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("vertexBuffers"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_name = match m_name {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("name"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        _serde::__private::Ok(hkMemoryMeshBody {
-            __ptr,
-            parent,
-            m_transform,
-            m_transformSet,
-            m_shape,
-            m_vertexBuffers,
-            m_name,
-        })
-    }
-}
 #[doc(hidden)]
 #[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
 const _: () = {
+    use havok_serde as _serde;
     #[automatically_derived]
     impl<'de> _serde::Deserialize<'de> for hkMemoryMeshBody<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
         {
+            #[allow(non_camel_case_types)]
+            enum __Field {
+                m_name,
+                m_vertexBuffers,
+                m_shape,
+                m_transformSet,
+                m_transform,
+                __ignore,
+            }
+            struct __FieldVisitor;
+            impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+                type Value = __Field;
+                fn expecting(
+                    &self,
+                    __formatter: &mut core::fmt::Formatter,
+                ) -> core::fmt::Result {
+                    core::fmt::Formatter::write_str(__formatter, "field identifier")
+                }
+                /// Intended for use in XML.
+                #[allow(clippy::match_single_binding)]
+                #[allow(clippy::reversed_empty_ranges)]
+                #[allow(clippy::single_match)]
+                fn visit_key<__E>(
+                    self,
+                    __value: &str,
+                ) -> core::result::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match __value {
+                        "name" => Ok(__Field::m_name),
+                        "vertexBuffers" => Ok(__Field::m_vertexBuffers),
+                        "shape" => Ok(__Field::m_shape),
+                        "transformSet" => Ok(__Field::m_transformSet),
+                        "transform" => Ok(__Field::m_transform),
+                        _ => Ok(__Field::__ignore),
+                    }
+                }
+            }
+            impl<'de> _serde::Deserialize<'de> for __Field {
+                #[inline]
+                fn deserialize<__D>(
+                    __deserializer: __D,
+                ) -> core::result::Result<Self, __D::Error>
+                where
+                    __D: _serde::Deserializer<'de>,
+                {
+                    _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+                }
+            }
+            struct __hkMemoryMeshBodyVisitor<'de> {
+                marker: _serde::__private::PhantomData<hkMemoryMeshBody<'de>>,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            #[allow(clippy::match_single_binding)]
+            #[allow(clippy::reversed_empty_ranges)]
+            #[allow(clippy::single_match)]
+            impl<'de> _serde::de::Visitor<'de> for __hkMemoryMeshBodyVisitor<'de> {
+                type Value = hkMemoryMeshBody<'de>;
+                fn expecting(
+                    &self,
+                    __formatter: &mut core::fmt::Formatter,
+                ) -> core::fmt::Result {
+                    core::fmt::Formatter::write_str(
+                        __formatter,
+                        "struct hkMemoryMeshBody",
+                    )
+                }
+                fn visit_struct_for_bytes<__A>(
+                    self,
+                    mut __map: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::MapAccess<'de>,
+                {
+                    let __ptr = __A::class_ptr(&mut __map);
+                    let parent = __A::parent_value(&mut __map)?;
+                    let mut m_transform: _serde::__private::Option<Matrix4> = _serde::__private::None;
+                    let mut m_transformSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_shape: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_vertexBuffers: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    for i in 0..5usize {
+                        match i {
+                            0usize => {
+                                if _serde::__private::Option::is_some(&m_transform) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "transform",
+                                        ),
+                                    );
+                                }
+                                __A::pad(&mut __map, 8usize, 0usize)?;
+                                m_transform = _serde::__private::Some(
+                                    match __A::next_value::<Matrix4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            1usize => {
+                                if _serde::__private::Option::is_some(&m_transformSet) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "transformSet",
+                                        ),
+                                    );
+                                }
+                                m_transformSet = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            2usize => {
+                                if _serde::__private::Option::is_some(&m_shape) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("shape"),
+                                    );
+                                }
+                                m_shape = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            3usize => {
+                                if _serde::__private::Option::is_some(&m_vertexBuffers) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "vertexBuffers",
+                                        ),
+                                    );
+                                }
+                                m_vertexBuffers = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            4usize => {
+                                if _serde::__private::Option::is_some(&m_name) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                    );
+                                }
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            _ => {}
+                        }
+                    }
+                    __A::pad(&mut __map, 8usize, 8usize)?;
+                    let m_transform = match m_transform {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "transform",
+                                ),
+                            );
+                        }
+                    };
+                    let m_transformSet = match m_transformSet {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "transformSet",
+                                ),
+                            );
+                        }
+                    };
+                    let m_shape = match m_shape {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("shape"),
+                            );
+                        }
+                    };
+                    let m_vertexBuffers = match m_vertexBuffers {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "vertexBuffers",
+                                ),
+                            );
+                        }
+                    };
+                    let m_name = match m_name {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
+                            );
+                        }
+                    };
+                    _serde::__private::Ok(hkMemoryMeshBody {
+                        __ptr,
+                        parent,
+                        m_transform,
+                        m_transformSet,
+                        m_shape,
+                        m_vertexBuffers,
+                        m_name,
+                    })
+                }
+                #[allow(clippy::manual_unwrap_or_default)]
+                fn visit_struct<__A>(
+                    self,
+                    mut __map: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::MapAccess<'de>,
+                {
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_vertexBuffers: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_shape: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_transformSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_transform: _serde::__private::Option<Matrix4> = _serde::__private::None;
+                    while let _serde::__private::Some(__key) = {
+                        #[cfg(not(feature = "strict"))]
+                        let __key = __A::next_key::<__Field>(&mut __map)
+                            .unwrap_or(Some(__Field::__ignore));
+                        #[cfg(feature = "strict")]
+                        let __key = __A::next_key::<__Field>(&mut __map)?;
+                        __key
+                    } {
+                        match __key {
+                            __Field::m_name => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_name) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                    );
+                                }
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_vertexBuffers => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_vertexBuffers) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "vertexBuffers",
+                                        ),
+                                    );
+                                }
+                                m_vertexBuffers = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_shape => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_shape) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("shape"),
+                                    );
+                                }
+                                m_shape = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_transformSet => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_transformSet) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "transformSet",
+                                        ),
+                                    );
+                                }
+                                m_transformSet = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_transform => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_transform) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "transform",
+                                        ),
+                                    );
+                                }
+                                m_transform = _serde::__private::Some(
+                                    match __A::next_value::<Matrix4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            _ => {}
+                        }
+                    }
+                    let m_name = match m_name {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_vertexBuffers = match m_vertexBuffers {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "vertexBuffers",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_shape = match m_shape {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("shape"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_transformSet = match m_transformSet {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "transformSet",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_transform = match m_transform {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "transform",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let __ptr = None;
+                    let parent = hkBaseObject { __ptr };
+                    let parent = hkReferencedObject {
+                        __ptr,
+                        parent,
+                        ..Default::default()
+                    };
+                    let parent = hkMeshBody { __ptr, parent };
+                    let __ptr = __A::class_ptr(&mut __map);
+                    _serde::__private::Ok(hkMemoryMeshBody {
+                        __ptr,
+                        parent,
+                        m_transform,
+                        m_transformSet,
+                        m_shape,
+                        m_vertexBuffers,
+                        m_name,
+                    })
+                }
+            }
             const FIELDS: &[&str] = &[
                 "transform",
                 "transformSet",

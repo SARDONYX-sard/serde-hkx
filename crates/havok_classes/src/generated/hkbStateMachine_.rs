@@ -335,1444 +335,1729 @@ const _: () = {
         }
     }
 };
-use havok_serde as _serde;
-#[allow(non_camel_case_types)]
-enum __Field {
-    m_eventToSendWhenStateOrTransitionChanges,
-    m_startStateChooser,
-    m_startStateId,
-    m_returnToPreviousStateEventId,
-    m_randomTransitionEventId,
-    m_transitionToNextHigherStateEventId,
-    m_transitionToNextLowerStateEventId,
-    m_syncVariableIndex,
-    m_currentStateId,
-    m_wrapAroundStateId,
-    m_maxSimultaneousTransitions,
-    m_startStateMode,
-    m_selfTransitionMode,
-    m_isActive,
-    m_states,
-    m_wildcardTransitions,
-    m_stateIdToIndexMap,
-    m_activeTransitions,
-    m_transitionFlags,
-    m_wildcardTransitionFlags,
-    m_delayedTransitions,
-    m_timeInState,
-    m_lastLocalTime,
-    m_previousStateId,
-    m_nextStartStateIndexOverride,
-    m_stateOrTransitionChanged,
-    m_echoNextUpdate,
-    m_sCurrentStateIndexAndEntered,
-    __ignore,
-}
-struct __FieldVisitor;
-impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
-    type Value = __Field;
-    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
-        core::fmt::Formatter::write_str(__formatter, "field identifier")
-    }
-    /// Intended for use in XML.
-    #[allow(clippy::match_single_binding)]
-    #[allow(clippy::reversed_empty_ranges)]
-    #[allow(clippy::single_match)]
-    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
-    where
-        __E: _serde::de::Error,
-    {
-        match __value {
-            "eventToSendWhenStateOrTransitionChanges" => {
-                Ok(__Field::m_eventToSendWhenStateOrTransitionChanges)
-            }
-            "startStateChooser" => Ok(__Field::m_startStateChooser),
-            "startStateId" => Ok(__Field::m_startStateId),
-            "returnToPreviousStateEventId" => Ok(__Field::m_returnToPreviousStateEventId),
-            "randomTransitionEventId" => Ok(__Field::m_randomTransitionEventId),
-            "transitionToNextHigherStateEventId" => {
-                Ok(__Field::m_transitionToNextHigherStateEventId)
-            }
-            "transitionToNextLowerStateEventId" => {
-                Ok(__Field::m_transitionToNextLowerStateEventId)
-            }
-            "syncVariableIndex" => Ok(__Field::m_syncVariableIndex),
-            "wrapAroundStateId" => Ok(__Field::m_wrapAroundStateId),
-            "maxSimultaneousTransitions" => Ok(__Field::m_maxSimultaneousTransitions),
-            "startStateMode" => Ok(__Field::m_startStateMode),
-            "selfTransitionMode" => Ok(__Field::m_selfTransitionMode),
-            "states" => Ok(__Field::m_states),
-            "wildcardTransitions" => Ok(__Field::m_wildcardTransitions),
-            _ => Ok(__Field::__ignore),
-        }
-    }
-}
-impl<'de> _serde::Deserialize<'de> for __Field {
-    #[inline]
-    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
-    where
-        __D: _serde::Deserializer<'de>,
-    {
-        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
-    }
-}
-pub(super) struct __hkbStateMachineVisitor<'de> {
-    marker: core::marker::PhantomData<hkbStateMachine<'de>>,
-    lifetime: core::marker::PhantomData<&'de ()>,
-}
-impl<'de> __hkbStateMachineVisitor<'de> {
-    /// # Purpose of this method
-    /// To reproduce C++ field inheritance, we will have the field internal implementation
-    /// of deserialization partially exposed and reused.
-    #[inline]
-    pub(super) fn visit_as_parent<__A>(
-        __map: &mut __A,
-    ) -> _serde::__private::Result<hkbStateMachine<'de>, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        _serde::de::Visitor::visit_struct(
-            Self {
-                marker: _serde::__private::PhantomData::<hkbStateMachine<'de>>,
-                lifetime: _serde::__private::PhantomData,
-            },
-            __map,
-        )
-    }
-}
-#[allow(clippy::match_single_binding)]
-#[allow(clippy::reversed_empty_ranges)]
-#[allow(clippy::single_match)]
-impl<'de> _serde::de::Visitor<'de> for __hkbStateMachineVisitor<'de> {
-    type Value = hkbStateMachine<'de>;
-    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
-        core::fmt::Formatter::write_str(__formatter, "struct hkbStateMachine")
-    }
-    fn visit_struct_for_bytes<__A>(
-        self,
-        mut __map: __A,
-    ) -> _serde::__private::Result<Self::Value, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::parent_value(&mut __map)?;
-        let mut m_eventToSendWhenStateOrTransitionChanges: _serde::__private::Option<
-            hkbEvent,
-        > = _serde::__private::None;
-        let mut m_startStateChooser: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_startStateId: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_returnToPreviousStateEventId: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_randomTransitionEventId: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_transitionToNextHigherStateEventId: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_transitionToNextLowerStateEventId: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_syncVariableIndex: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_currentStateId: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_wrapAroundStateId: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_maxSimultaneousTransitions: _serde::__private::Option<i8> = _serde::__private::None;
-        let mut m_startStateMode: _serde::__private::Option<StartStateMode> = _serde::__private::None;
-        let mut m_selfTransitionMode: _serde::__private::Option<
-            StateMachineSelfTransitionMode,
-        > = _serde::__private::None;
-        let mut m_isActive: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_states: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-        let mut m_wildcardTransitions: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_stateIdToIndexMap: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_activeTransitions: _serde::__private::Option<Vec<()>> = _serde::__private::None;
-        let mut m_transitionFlags: _serde::__private::Option<Vec<()>> = _serde::__private::None;
-        let mut m_wildcardTransitionFlags: _serde::__private::Option<Vec<()>> = _serde::__private::None;
-        let mut m_delayedTransitions: _serde::__private::Option<Vec<()>> = _serde::__private::None;
-        let mut m_timeInState: _serde::__private::Option<f32> = _serde::__private::None;
-        let mut m_lastLocalTime: _serde::__private::Option<f32> = _serde::__private::None;
-        let mut m_previousStateId: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_nextStartStateIndexOverride: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_stateOrTransitionChanged: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_echoNextUpdate: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_sCurrentStateIndexAndEntered: _serde::__private::Option<u16> = _serde::__private::None;
-        for i in 0..28usize {
-            match i {
-                0usize => {
-                    if _serde::__private::Option::is_some(
-                        &m_eventToSendWhenStateOrTransitionChanges,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "eventToSendWhenStateOrTransitionChanges",
-                            ),
-                        );
-                    }
-                    m_eventToSendWhenStateOrTransitionChanges = _serde::__private::Some(
-                        match __A::next_value::<hkbEvent>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                1usize => {
-                    if _serde::__private::Option::is_some(&m_startStateChooser) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "startStateChooser",
-                            ),
-                        );
-                    }
-                    m_startStateChooser = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                2usize => {
-                    if _serde::__private::Option::is_some(&m_startStateId) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "startStateId",
-                            ),
-                        );
-                    }
-                    m_startStateId = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                3usize => {
-                    if _serde::__private::Option::is_some(
-                        &m_returnToPreviousStateEventId,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "returnToPreviousStateEventId",
-                            ),
-                        );
-                    }
-                    m_returnToPreviousStateEventId = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                4usize => {
-                    if _serde::__private::Option::is_some(&m_randomTransitionEventId) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "randomTransitionEventId",
-                            ),
-                        );
-                    }
-                    m_randomTransitionEventId = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                5usize => {
-                    if _serde::__private::Option::is_some(
-                        &m_transitionToNextHigherStateEventId,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "transitionToNextHigherStateEventId",
-                            ),
-                        );
-                    }
-                    m_transitionToNextHigherStateEventId = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                6usize => {
-                    if _serde::__private::Option::is_some(
-                        &m_transitionToNextLowerStateEventId,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "transitionToNextLowerStateEventId",
-                            ),
-                        );
-                    }
-                    m_transitionToNextLowerStateEventId = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                7usize => {
-                    if _serde::__private::Option::is_some(&m_syncVariableIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "syncVariableIndex",
-                            ),
-                        );
-                    }
-                    m_syncVariableIndex = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                8usize => {
-                    if _serde::__private::Option::is_some(&m_currentStateId) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "currentStateId",
-                            ),
-                        );
-                    }
-                    m_currentStateId = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                9usize => {
-                    if _serde::__private::Option::is_some(&m_wrapAroundStateId) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "wrapAroundStateId",
-                            ),
-                        );
-                    }
-                    m_wrapAroundStateId = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                10usize => {
-                    if _serde::__private::Option::is_some(
-                        &m_maxSimultaneousTransitions,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "maxSimultaneousTransitions",
-                            ),
-                        );
-                    }
-                    m_maxSimultaneousTransitions = _serde::__private::Some(
-                        match __A::next_value::<i8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                11usize => {
-                    if _serde::__private::Option::is_some(&m_startStateMode) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "startStateMode",
-                            ),
-                        );
-                    }
-                    m_startStateMode = _serde::__private::Some(
-                        match __A::next_value::<StartStateMode>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                12usize => {
-                    if _serde::__private::Option::is_some(&m_selfTransitionMode) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "selfTransitionMode",
-                            ),
-                        );
-                    }
-                    m_selfTransitionMode = _serde::__private::Some(
-                        match __A::next_value::<
-                            StateMachineSelfTransitionMode,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                13usize => {
-                    if _serde::__private::Option::is_some(&m_isActive) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "isActive",
-                            ),
-                        );
-                    }
-                    m_isActive = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                14usize => {
-                    if _serde::__private::Option::is_some(&m_states) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("states"),
-                        );
-                    }
-                    __A::pad(&mut __map, 3usize, 7usize)?;
-                    m_states = _serde::__private::Some(
-                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                15usize => {
-                    if _serde::__private::Option::is_some(&m_wildcardTransitions) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "wildcardTransitions",
-                            ),
-                        );
-                    }
-                    m_wildcardTransitions = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                16usize => {
-                    if _serde::__private::Option::is_some(&m_stateIdToIndexMap) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "stateIdToIndexMap",
-                            ),
-                        );
-                    }
-                    m_stateIdToIndexMap = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                17usize => {
-                    if _serde::__private::Option::is_some(&m_activeTransitions) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "activeTransitions",
-                            ),
-                        );
-                    }
-                    m_activeTransitions = _serde::__private::Some(
-                        match __A::next_value::<Vec<()>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                18usize => {
-                    if _serde::__private::Option::is_some(&m_transitionFlags) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "transitionFlags",
-                            ),
-                        );
-                    }
-                    m_transitionFlags = _serde::__private::Some(
-                        match __A::next_value::<Vec<()>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                19usize => {
-                    if _serde::__private::Option::is_some(&m_wildcardTransitionFlags) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "wildcardTransitionFlags",
-                            ),
-                        );
-                    }
-                    m_wildcardTransitionFlags = _serde::__private::Some(
-                        match __A::next_value::<Vec<()>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                20usize => {
-                    if _serde::__private::Option::is_some(&m_delayedTransitions) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "delayedTransitions",
-                            ),
-                        );
-                    }
-                    m_delayedTransitions = _serde::__private::Some(
-                        match __A::next_value::<Vec<()>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                21usize => {
-                    if _serde::__private::Option::is_some(&m_timeInState) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "timeInState",
-                            ),
-                        );
-                    }
-                    m_timeInState = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                22usize => {
-                    if _serde::__private::Option::is_some(&m_lastLocalTime) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "lastLocalTime",
-                            ),
-                        );
-                    }
-                    m_lastLocalTime = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                23usize => {
-                    if _serde::__private::Option::is_some(&m_previousStateId) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "previousStateId",
-                            ),
-                        );
-                    }
-                    m_previousStateId = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                24usize => {
-                    if _serde::__private::Option::is_some(
-                        &m_nextStartStateIndexOverride,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "nextStartStateIndexOverride",
-                            ),
-                        );
-                    }
-                    m_nextStartStateIndexOverride = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                25usize => {
-                    if _serde::__private::Option::is_some(&m_stateOrTransitionChanged) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "stateOrTransitionChanged",
-                            ),
-                        );
-                    }
-                    m_stateOrTransitionChanged = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                26usize => {
-                    if _serde::__private::Option::is_some(&m_echoNextUpdate) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "echoNextUpdate",
-                            ),
-                        );
-                    }
-                    m_echoNextUpdate = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                27usize => {
-                    if _serde::__private::Option::is_some(
-                        &m_sCurrentStateIndexAndEntered,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "sCurrentStateIndexAndEntered",
-                            ),
-                        );
-                    }
-                    m_sCurrentStateIndexAndEntered = _serde::__private::Some(
-                        match __A::next_value::<u16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                _ => {}
-            }
-        }
-        __A::pad(&mut __map, 0usize, 4usize)?;
-        let m_eventToSendWhenStateOrTransitionChanges = match m_eventToSendWhenStateOrTransitionChanges {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "eventToSendWhenStateOrTransitionChanges",
-                    ),
-                );
-            }
-        };
-        let m_startStateChooser = match m_startStateChooser {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("startStateChooser"),
-                );
-            }
-        };
-        let m_startStateId = match m_startStateId {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("startStateId"),
-                );
-            }
-        };
-        let m_returnToPreviousStateEventId = match m_returnToPreviousStateEventId {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "returnToPreviousStateEventId",
-                    ),
-                );
-            }
-        };
-        let m_randomTransitionEventId = match m_randomTransitionEventId {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "randomTransitionEventId",
-                    ),
-                );
-            }
-        };
-        let m_transitionToNextHigherStateEventId = match m_transitionToNextHigherStateEventId {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "transitionToNextHigherStateEventId",
-                    ),
-                );
-            }
-        };
-        let m_transitionToNextLowerStateEventId = match m_transitionToNextLowerStateEventId {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "transitionToNextLowerStateEventId",
-                    ),
-                );
-            }
-        };
-        let m_syncVariableIndex = match m_syncVariableIndex {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("syncVariableIndex"),
-                );
-            }
-        };
-        let m_currentStateId = match m_currentStateId {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("currentStateId"),
-                );
-            }
-        };
-        let m_wrapAroundStateId = match m_wrapAroundStateId {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("wrapAroundStateId"),
-                );
-            }
-        };
-        let m_maxSimultaneousTransitions = match m_maxSimultaneousTransitions {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "maxSimultaneousTransitions",
-                    ),
-                );
-            }
-        };
-        let m_startStateMode = match m_startStateMode {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("startStateMode"),
-                );
-            }
-        };
-        let m_selfTransitionMode = match m_selfTransitionMode {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "selfTransitionMode",
-                    ),
-                );
-            }
-        };
-        let m_isActive = match m_isActive {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("isActive"),
-                );
-            }
-        };
-        let m_states = match m_states {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("states"),
-                );
-            }
-        };
-        let m_wildcardTransitions = match m_wildcardTransitions {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "wildcardTransitions",
-                    ),
-                );
-            }
-        };
-        let m_stateIdToIndexMap = match m_stateIdToIndexMap {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("stateIdToIndexMap"),
-                );
-            }
-        };
-        let m_activeTransitions = match m_activeTransitions {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("activeTransitions"),
-                );
-            }
-        };
-        let m_transitionFlags = match m_transitionFlags {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("transitionFlags"),
-                );
-            }
-        };
-        let m_wildcardTransitionFlags = match m_wildcardTransitionFlags {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "wildcardTransitionFlags",
-                    ),
-                );
-            }
-        };
-        let m_delayedTransitions = match m_delayedTransitions {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "delayedTransitions",
-                    ),
-                );
-            }
-        };
-        let m_timeInState = match m_timeInState {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("timeInState"),
-                );
-            }
-        };
-        let m_lastLocalTime = match m_lastLocalTime {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("lastLocalTime"),
-                );
-            }
-        };
-        let m_previousStateId = match m_previousStateId {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("previousStateId"),
-                );
-            }
-        };
-        let m_nextStartStateIndexOverride = match m_nextStartStateIndexOverride {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "nextStartStateIndexOverride",
-                    ),
-                );
-            }
-        };
-        let m_stateOrTransitionChanged = match m_stateOrTransitionChanged {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "stateOrTransitionChanged",
-                    ),
-                );
-            }
-        };
-        let m_echoNextUpdate = match m_echoNextUpdate {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("echoNextUpdate"),
-                );
-            }
-        };
-        let m_sCurrentStateIndexAndEntered = match m_sCurrentStateIndexAndEntered {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "sCurrentStateIndexAndEntered",
-                    ),
-                );
-            }
-        };
-        _serde::__private::Ok(hkbStateMachine {
-            __ptr,
-            parent,
-            m_eventToSendWhenStateOrTransitionChanges,
-            m_startStateChooser,
-            m_startStateId,
-            m_returnToPreviousStateEventId,
-            m_randomTransitionEventId,
-            m_transitionToNextHigherStateEventId,
-            m_transitionToNextLowerStateEventId,
-            m_syncVariableIndex,
-            m_currentStateId,
-            m_wrapAroundStateId,
-            m_maxSimultaneousTransitions,
-            m_startStateMode,
-            m_selfTransitionMode,
-            m_isActive,
-            m_states,
-            m_wildcardTransitions,
-            m_stateIdToIndexMap,
-            m_activeTransitions,
-            m_transitionFlags,
-            m_wildcardTransitionFlags,
-            m_delayedTransitions,
-            m_timeInState,
-            m_lastLocalTime,
-            m_previousStateId,
-            m_nextStartStateIndexOverride,
-            m_stateOrTransitionChanged,
-            m_echoNextUpdate,
-            m_sCurrentStateIndexAndEntered,
-        })
-    }
-    #[allow(clippy::manual_unwrap_or_default)]
-    fn visit_struct<__A>(
-        self,
-        mut __map: __A,
-    ) -> _serde::__private::Result<Self::Value, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        let __ptr = __A::class_ptr(&mut __map);
-        let parent = __hkbGeneratorVisitor::visit_as_parent(&mut __map)?;
-        let mut m_eventToSendWhenStateOrTransitionChanges: _serde::__private::Option<
-            hkbEvent,
-        > = _serde::__private::None;
-        let mut m_startStateChooser: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_startStateId: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_returnToPreviousStateEventId: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_randomTransitionEventId: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_transitionToNextHigherStateEventId: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_transitionToNextLowerStateEventId: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_syncVariableIndex: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_wrapAroundStateId: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_maxSimultaneousTransitions: _serde::__private::Option<i8> = _serde::__private::None;
-        let mut m_startStateMode: _serde::__private::Option<StartStateMode> = _serde::__private::None;
-        let mut m_selfTransitionMode: _serde::__private::Option<
-            StateMachineSelfTransitionMode,
-        > = _serde::__private::None;
-        let mut m_states: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-        let mut m_wildcardTransitions: _serde::__private::Option<Pointer> = _serde::__private::None;
-        for _ in 0..14usize {
-            #[cfg(not(feature = "strict"))]
-            let __res = __A::next_key::<__Field>(&mut __map)
-                .unwrap_or(Some(__Field::__ignore));
-            #[cfg(feature = "strict")]
-            let __res = __A::next_key::<__Field>(&mut __map)?;
-            if let _serde::__private::Some(__key) = __res {
-                match __key {
-                    __Field::m_eventToSendWhenStateOrTransitionChanges => {
-                        if _serde::__private::Option::is_some(
-                            &m_eventToSendWhenStateOrTransitionChanges,
-                        ) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "eventToSendWhenStateOrTransitionChanges",
-                                ),
-                            );
-                        }
-                        m_eventToSendWhenStateOrTransitionChanges = _serde::__private::Some(
-                            match __A::next_value::<hkbEvent>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_startStateChooser => {
-                        if _serde::__private::Option::is_some(&m_startStateChooser) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "startStateChooser",
-                                ),
-                            );
-                        }
-                        m_startStateChooser = _serde::__private::Some(
-                            match __A::next_value::<Pointer>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_startStateId => {
-                        if _serde::__private::Option::is_some(&m_startStateId) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "startStateId",
-                                ),
-                            );
-                        }
-                        m_startStateId = _serde::__private::Some(
-                            match __A::next_value::<i32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_returnToPreviousStateEventId => {
-                        if _serde::__private::Option::is_some(
-                            &m_returnToPreviousStateEventId,
-                        ) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "returnToPreviousStateEventId",
-                                ),
-                            );
-                        }
-                        m_returnToPreviousStateEventId = _serde::__private::Some(
-                            match __A::next_value::<i32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_randomTransitionEventId => {
-                        if _serde::__private::Option::is_some(
-                            &m_randomTransitionEventId,
-                        ) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "randomTransitionEventId",
-                                ),
-                            );
-                        }
-                        m_randomTransitionEventId = _serde::__private::Some(
-                            match __A::next_value::<i32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_transitionToNextHigherStateEventId => {
-                        if _serde::__private::Option::is_some(
-                            &m_transitionToNextHigherStateEventId,
-                        ) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "transitionToNextHigherStateEventId",
-                                ),
-                            );
-                        }
-                        m_transitionToNextHigherStateEventId = _serde::__private::Some(
-                            match __A::next_value::<i32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_transitionToNextLowerStateEventId => {
-                        if _serde::__private::Option::is_some(
-                            &m_transitionToNextLowerStateEventId,
-                        ) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "transitionToNextLowerStateEventId",
-                                ),
-                            );
-                        }
-                        m_transitionToNextLowerStateEventId = _serde::__private::Some(
-                            match __A::next_value::<i32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_syncVariableIndex => {
-                        if _serde::__private::Option::is_some(&m_syncVariableIndex) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "syncVariableIndex",
-                                ),
-                            );
-                        }
-                        m_syncVariableIndex = _serde::__private::Some(
-                            match __A::next_value::<i32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_wrapAroundStateId => {
-                        if _serde::__private::Option::is_some(&m_wrapAroundStateId) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "wrapAroundStateId",
-                                ),
-                            );
-                        }
-                        m_wrapAroundStateId = _serde::__private::Some(
-                            match __A::next_value::<bool>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_maxSimultaneousTransitions => {
-                        if _serde::__private::Option::is_some(
-                            &m_maxSimultaneousTransitions,
-                        ) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "maxSimultaneousTransitions",
-                                ),
-                            );
-                        }
-                        m_maxSimultaneousTransitions = _serde::__private::Some(
-                            match __A::next_value::<i8>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_startStateMode => {
-                        if _serde::__private::Option::is_some(&m_startStateMode) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "startStateMode",
-                                ),
-                            );
-                        }
-                        m_startStateMode = _serde::__private::Some(
-                            match __A::next_value::<StartStateMode>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_selfTransitionMode => {
-                        if _serde::__private::Option::is_some(&m_selfTransitionMode) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "selfTransitionMode",
-                                ),
-                            );
-                        }
-                        m_selfTransitionMode = _serde::__private::Some(
-                            match __A::next_value::<
-                                StateMachineSelfTransitionMode,
-                            >(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_states => {
-                        if _serde::__private::Option::is_some(&m_states) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field("states"),
-                            );
-                        }
-                        m_states = _serde::__private::Some(
-                            match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_wildcardTransitions => {
-                        if _serde::__private::Option::is_some(&m_wildcardTransitions) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "wildcardTransitions",
-                                ),
-                            );
-                        }
-                        m_wildcardTransitions = _serde::__private::Some(
-                            match __A::next_value::<Pointer>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    _ => {}
-                }
-            }
-        }
-        let m_eventToSendWhenStateOrTransitionChanges = match m_eventToSendWhenStateOrTransitionChanges {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "eventToSendWhenStateOrTransitionChanges",
-                    ),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_startStateChooser = match m_startStateChooser {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("startStateChooser"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_startStateId = match m_startStateId {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("startStateId"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_returnToPreviousStateEventId = match m_returnToPreviousStateEventId {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "returnToPreviousStateEventId",
-                    ),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_randomTransitionEventId = match m_randomTransitionEventId {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "randomTransitionEventId",
-                    ),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_transitionToNextHigherStateEventId = match m_transitionToNextHigherStateEventId {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "transitionToNextHigherStateEventId",
-                    ),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_transitionToNextLowerStateEventId = match m_transitionToNextLowerStateEventId {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "transitionToNextLowerStateEventId",
-                    ),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_syncVariableIndex = match m_syncVariableIndex {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("syncVariableIndex"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_wrapAroundStateId = match m_wrapAroundStateId {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("wrapAroundStateId"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_maxSimultaneousTransitions = match m_maxSimultaneousTransitions {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "maxSimultaneousTransitions",
-                    ),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_startStateMode = match m_startStateMode {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("startStateMode"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_selfTransitionMode = match m_selfTransitionMode {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "selfTransitionMode",
-                    ),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_states = match m_states {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("states"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_wildcardTransitions = match m_wildcardTransitions {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "wildcardTransitions",
-                    ),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        _serde::__private::Ok(hkbStateMachine {
-            __ptr,
-            parent,
-            m_eventToSendWhenStateOrTransitionChanges,
-            m_startStateChooser,
-            m_startStateId,
-            m_returnToPreviousStateEventId,
-            m_randomTransitionEventId,
-            m_transitionToNextHigherStateEventId,
-            m_transitionToNextLowerStateEventId,
-            m_syncVariableIndex,
-            m_wrapAroundStateId,
-            m_maxSimultaneousTransitions,
-            m_startStateMode,
-            m_selfTransitionMode,
-            m_states,
-            m_wildcardTransitions,
-            ..Default::default()
-        })
-    }
-}
 #[doc(hidden)]
 #[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
 const _: () = {
+    use havok_serde as _serde;
     #[automatically_derived]
     impl<'de> _serde::Deserialize<'de> for hkbStateMachine<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
         {
+            #[allow(non_camel_case_types)]
+            enum __Field {
+                m_variableBindingSet,
+                m_name,
+                m_userData,
+                m_wildcardTransitions,
+                m_states,
+                m_selfTransitionMode,
+                m_startStateMode,
+                m_maxSimultaneousTransitions,
+                m_wrapAroundStateId,
+                m_syncVariableIndex,
+                m_transitionToNextLowerStateEventId,
+                m_transitionToNextHigherStateEventId,
+                m_randomTransitionEventId,
+                m_returnToPreviousStateEventId,
+                m_startStateId,
+                m_startStateChooser,
+                m_eventToSendWhenStateOrTransitionChanges,
+                __ignore,
+            }
+            struct __FieldVisitor;
+            impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+                type Value = __Field;
+                fn expecting(
+                    &self,
+                    __formatter: &mut core::fmt::Formatter,
+                ) -> core::fmt::Result {
+                    core::fmt::Formatter::write_str(__formatter, "field identifier")
+                }
+                /// Intended for use in XML.
+                #[allow(clippy::match_single_binding)]
+                #[allow(clippy::reversed_empty_ranges)]
+                #[allow(clippy::single_match)]
+                fn visit_key<__E>(
+                    self,
+                    __value: &str,
+                ) -> core::result::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match __value {
+                        "variableBindingSet" => Ok(__Field::m_variableBindingSet),
+                        "name" => Ok(__Field::m_name),
+                        "userData" => Ok(__Field::m_userData),
+                        "wildcardTransitions" => Ok(__Field::m_wildcardTransitions),
+                        "states" => Ok(__Field::m_states),
+                        "selfTransitionMode" => Ok(__Field::m_selfTransitionMode),
+                        "startStateMode" => Ok(__Field::m_startStateMode),
+                        "maxSimultaneousTransitions" => {
+                            Ok(__Field::m_maxSimultaneousTransitions)
+                        }
+                        "wrapAroundStateId" => Ok(__Field::m_wrapAroundStateId),
+                        "syncVariableIndex" => Ok(__Field::m_syncVariableIndex),
+                        "transitionToNextLowerStateEventId" => {
+                            Ok(__Field::m_transitionToNextLowerStateEventId)
+                        }
+                        "transitionToNextHigherStateEventId" => {
+                            Ok(__Field::m_transitionToNextHigherStateEventId)
+                        }
+                        "randomTransitionEventId" => {
+                            Ok(__Field::m_randomTransitionEventId)
+                        }
+                        "returnToPreviousStateEventId" => {
+                            Ok(__Field::m_returnToPreviousStateEventId)
+                        }
+                        "startStateId" => Ok(__Field::m_startStateId),
+                        "startStateChooser" => Ok(__Field::m_startStateChooser),
+                        "eventToSendWhenStateOrTransitionChanges" => {
+                            Ok(__Field::m_eventToSendWhenStateOrTransitionChanges)
+                        }
+                        _ => Ok(__Field::__ignore),
+                    }
+                }
+            }
+            impl<'de> _serde::Deserialize<'de> for __Field {
+                #[inline]
+                fn deserialize<__D>(
+                    __deserializer: __D,
+                ) -> core::result::Result<Self, __D::Error>
+                where
+                    __D: _serde::Deserializer<'de>,
+                {
+                    _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+                }
+            }
+            struct __hkbStateMachineVisitor<'de> {
+                marker: _serde::__private::PhantomData<hkbStateMachine<'de>>,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            #[allow(clippy::match_single_binding)]
+            #[allow(clippy::reversed_empty_ranges)]
+            #[allow(clippy::single_match)]
+            impl<'de> _serde::de::Visitor<'de> for __hkbStateMachineVisitor<'de> {
+                type Value = hkbStateMachine<'de>;
+                fn expecting(
+                    &self,
+                    __formatter: &mut core::fmt::Formatter,
+                ) -> core::fmt::Result {
+                    core::fmt::Formatter::write_str(
+                        __formatter,
+                        "struct hkbStateMachine",
+                    )
+                }
+                fn visit_struct_for_bytes<__A>(
+                    self,
+                    mut __map: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::MapAccess<'de>,
+                {
+                    let __ptr = __A::class_ptr(&mut __map);
+                    let parent = __A::parent_value(&mut __map)?;
+                    let mut m_eventToSendWhenStateOrTransitionChanges: _serde::__private::Option<
+                        hkbEvent,
+                    > = _serde::__private::None;
+                    let mut m_startStateChooser: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_startStateId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_returnToPreviousStateEventId: _serde::__private::Option<
+                        i32,
+                    > = _serde::__private::None;
+                    let mut m_randomTransitionEventId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_transitionToNextHigherStateEventId: _serde::__private::Option<
+                        i32,
+                    > = _serde::__private::None;
+                    let mut m_transitionToNextLowerStateEventId: _serde::__private::Option<
+                        i32,
+                    > = _serde::__private::None;
+                    let mut m_syncVariableIndex: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_currentStateId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_wrapAroundStateId: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_maxSimultaneousTransitions: _serde::__private::Option<
+                        i8,
+                    > = _serde::__private::None;
+                    let mut m_startStateMode: _serde::__private::Option<
+                        StartStateMode,
+                    > = _serde::__private::None;
+                    let mut m_selfTransitionMode: _serde::__private::Option<
+                        StateMachineSelfTransitionMode,
+                    > = _serde::__private::None;
+                    let mut m_isActive: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_states: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_wildcardTransitions: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_stateIdToIndexMap: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_activeTransitions: _serde::__private::Option<Vec<()>> = _serde::__private::None;
+                    let mut m_transitionFlags: _serde::__private::Option<Vec<()>> = _serde::__private::None;
+                    let mut m_wildcardTransitionFlags: _serde::__private::Option<
+                        Vec<()>,
+                    > = _serde::__private::None;
+                    let mut m_delayedTransitions: _serde::__private::Option<Vec<()>> = _serde::__private::None;
+                    let mut m_timeInState: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_lastLocalTime: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_previousStateId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_nextStartStateIndexOverride: _serde::__private::Option<
+                        i32,
+                    > = _serde::__private::None;
+                    let mut m_stateOrTransitionChanged: _serde::__private::Option<
+                        bool,
+                    > = _serde::__private::None;
+                    let mut m_echoNextUpdate: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_sCurrentStateIndexAndEntered: _serde::__private::Option<
+                        u16,
+                    > = _serde::__private::None;
+                    for i in 0..28usize {
+                        match i {
+                            0usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_eventToSendWhenStateOrTransitionChanges,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "eventToSendWhenStateOrTransitionChanges",
+                                        ),
+                                    );
+                                }
+                                m_eventToSendWhenStateOrTransitionChanges = _serde::__private::Some(
+                                    match __A::next_value::<hkbEvent>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            1usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_startStateChooser,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "startStateChooser",
+                                        ),
+                                    );
+                                }
+                                m_startStateChooser = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            2usize => {
+                                if _serde::__private::Option::is_some(&m_startStateId) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "startStateId",
+                                        ),
+                                    );
+                                }
+                                m_startStateId = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            3usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_returnToPreviousStateEventId,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "returnToPreviousStateEventId",
+                                        ),
+                                    );
+                                }
+                                m_returnToPreviousStateEventId = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            4usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_randomTransitionEventId,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "randomTransitionEventId",
+                                        ),
+                                    );
+                                }
+                                m_randomTransitionEventId = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            5usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_transitionToNextHigherStateEventId,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "transitionToNextHigherStateEventId",
+                                        ),
+                                    );
+                                }
+                                m_transitionToNextHigherStateEventId = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            6usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_transitionToNextLowerStateEventId,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "transitionToNextLowerStateEventId",
+                                        ),
+                                    );
+                                }
+                                m_transitionToNextLowerStateEventId = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            7usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_syncVariableIndex,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "syncVariableIndex",
+                                        ),
+                                    );
+                                }
+                                m_syncVariableIndex = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            8usize => {
+                                if _serde::__private::Option::is_some(&m_currentStateId) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "currentStateId",
+                                        ),
+                                    );
+                                }
+                                m_currentStateId = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            9usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_wrapAroundStateId,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "wrapAroundStateId",
+                                        ),
+                                    );
+                                }
+                                m_wrapAroundStateId = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            10usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_maxSimultaneousTransitions,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "maxSimultaneousTransitions",
+                                        ),
+                                    );
+                                }
+                                m_maxSimultaneousTransitions = _serde::__private::Some(
+                                    match __A::next_value::<i8>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            11usize => {
+                                if _serde::__private::Option::is_some(&m_startStateMode) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "startStateMode",
+                                        ),
+                                    );
+                                }
+                                m_startStateMode = _serde::__private::Some(
+                                    match __A::next_value::<StartStateMode>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            12usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_selfTransitionMode,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "selfTransitionMode",
+                                        ),
+                                    );
+                                }
+                                m_selfTransitionMode = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        StateMachineSelfTransitionMode,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            13usize => {
+                                if _serde::__private::Option::is_some(&m_isActive) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "isActive",
+                                        ),
+                                    );
+                                }
+                                m_isActive = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            14usize => {
+                                if _serde::__private::Option::is_some(&m_states) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("states"),
+                                    );
+                                }
+                                __A::pad(&mut __map, 3usize, 7usize)?;
+                                m_states = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            15usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_wildcardTransitions,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "wildcardTransitions",
+                                        ),
+                                    );
+                                }
+                                m_wildcardTransitions = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            16usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_stateIdToIndexMap,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "stateIdToIndexMap",
+                                        ),
+                                    );
+                                }
+                                m_stateIdToIndexMap = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            17usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_activeTransitions,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "activeTransitions",
+                                        ),
+                                    );
+                                }
+                                m_activeTransitions = _serde::__private::Some(
+                                    match __A::next_value::<Vec<()>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            18usize => {
+                                if _serde::__private::Option::is_some(&m_transitionFlags) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "transitionFlags",
+                                        ),
+                                    );
+                                }
+                                m_transitionFlags = _serde::__private::Some(
+                                    match __A::next_value::<Vec<()>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            19usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_wildcardTransitionFlags,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "wildcardTransitionFlags",
+                                        ),
+                                    );
+                                }
+                                m_wildcardTransitionFlags = _serde::__private::Some(
+                                    match __A::next_value::<Vec<()>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            20usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_delayedTransitions,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "delayedTransitions",
+                                        ),
+                                    );
+                                }
+                                m_delayedTransitions = _serde::__private::Some(
+                                    match __A::next_value::<Vec<()>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            21usize => {
+                                if _serde::__private::Option::is_some(&m_timeInState) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "timeInState",
+                                        ),
+                                    );
+                                }
+                                m_timeInState = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            22usize => {
+                                if _serde::__private::Option::is_some(&m_lastLocalTime) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "lastLocalTime",
+                                        ),
+                                    );
+                                }
+                                m_lastLocalTime = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            23usize => {
+                                if _serde::__private::Option::is_some(&m_previousStateId) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "previousStateId",
+                                        ),
+                                    );
+                                }
+                                m_previousStateId = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            24usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_nextStartStateIndexOverride,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "nextStartStateIndexOverride",
+                                        ),
+                                    );
+                                }
+                                m_nextStartStateIndexOverride = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            25usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_stateOrTransitionChanged,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "stateOrTransitionChanged",
+                                        ),
+                                    );
+                                }
+                                m_stateOrTransitionChanged = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            26usize => {
+                                if _serde::__private::Option::is_some(&m_echoNextUpdate) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "echoNextUpdate",
+                                        ),
+                                    );
+                                }
+                                m_echoNextUpdate = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            27usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_sCurrentStateIndexAndEntered,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "sCurrentStateIndexAndEntered",
+                                        ),
+                                    );
+                                }
+                                m_sCurrentStateIndexAndEntered = _serde::__private::Some(
+                                    match __A::next_value::<u16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            _ => {}
+                        }
+                    }
+                    __A::pad(&mut __map, 0usize, 4usize)?;
+                    let m_eventToSendWhenStateOrTransitionChanges = match m_eventToSendWhenStateOrTransitionChanges {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "eventToSendWhenStateOrTransitionChanges",
+                                ),
+                            );
+                        }
+                    };
+                    let m_startStateChooser = match m_startStateChooser {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "startStateChooser",
+                                ),
+                            );
+                        }
+                    };
+                    let m_startStateId = match m_startStateId {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "startStateId",
+                                ),
+                            );
+                        }
+                    };
+                    let m_returnToPreviousStateEventId = match m_returnToPreviousStateEventId {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "returnToPreviousStateEventId",
+                                ),
+                            );
+                        }
+                    };
+                    let m_randomTransitionEventId = match m_randomTransitionEventId {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "randomTransitionEventId",
+                                ),
+                            );
+                        }
+                    };
+                    let m_transitionToNextHigherStateEventId = match m_transitionToNextHigherStateEventId {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "transitionToNextHigherStateEventId",
+                                ),
+                            );
+                        }
+                    };
+                    let m_transitionToNextLowerStateEventId = match m_transitionToNextLowerStateEventId {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "transitionToNextLowerStateEventId",
+                                ),
+                            );
+                        }
+                    };
+                    let m_syncVariableIndex = match m_syncVariableIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "syncVariableIndex",
+                                ),
+                            );
+                        }
+                    };
+                    let m_currentStateId = match m_currentStateId {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "currentStateId",
+                                ),
+                            );
+                        }
+                    };
+                    let m_wrapAroundStateId = match m_wrapAroundStateId {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "wrapAroundStateId",
+                                ),
+                            );
+                        }
+                    };
+                    let m_maxSimultaneousTransitions = match m_maxSimultaneousTransitions {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxSimultaneousTransitions",
+                                ),
+                            );
+                        }
+                    };
+                    let m_startStateMode = match m_startStateMode {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "startStateMode",
+                                ),
+                            );
+                        }
+                    };
+                    let m_selfTransitionMode = match m_selfTransitionMode {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "selfTransitionMode",
+                                ),
+                            );
+                        }
+                    };
+                    let m_isActive = match m_isActive {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("isActive"),
+                            );
+                        }
+                    };
+                    let m_states = match m_states {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("states"),
+                            );
+                        }
+                    };
+                    let m_wildcardTransitions = match m_wildcardTransitions {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "wildcardTransitions",
+                                ),
+                            );
+                        }
+                    };
+                    let m_stateIdToIndexMap = match m_stateIdToIndexMap {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "stateIdToIndexMap",
+                                ),
+                            );
+                        }
+                    };
+                    let m_activeTransitions = match m_activeTransitions {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "activeTransitions",
+                                ),
+                            );
+                        }
+                    };
+                    let m_transitionFlags = match m_transitionFlags {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "transitionFlags",
+                                ),
+                            );
+                        }
+                    };
+                    let m_wildcardTransitionFlags = match m_wildcardTransitionFlags {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "wildcardTransitionFlags",
+                                ),
+                            );
+                        }
+                    };
+                    let m_delayedTransitions = match m_delayedTransitions {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "delayedTransitions",
+                                ),
+                            );
+                        }
+                    };
+                    let m_timeInState = match m_timeInState {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "timeInState",
+                                ),
+                            );
+                        }
+                    };
+                    let m_lastLocalTime = match m_lastLocalTime {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "lastLocalTime",
+                                ),
+                            );
+                        }
+                    };
+                    let m_previousStateId = match m_previousStateId {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "previousStateId",
+                                ),
+                            );
+                        }
+                    };
+                    let m_nextStartStateIndexOverride = match m_nextStartStateIndexOverride {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "nextStartStateIndexOverride",
+                                ),
+                            );
+                        }
+                    };
+                    let m_stateOrTransitionChanged = match m_stateOrTransitionChanged {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "stateOrTransitionChanged",
+                                ),
+                            );
+                        }
+                    };
+                    let m_echoNextUpdate = match m_echoNextUpdate {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "echoNextUpdate",
+                                ),
+                            );
+                        }
+                    };
+                    let m_sCurrentStateIndexAndEntered = match m_sCurrentStateIndexAndEntered {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "sCurrentStateIndexAndEntered",
+                                ),
+                            );
+                        }
+                    };
+                    _serde::__private::Ok(hkbStateMachine {
+                        __ptr,
+                        parent,
+                        m_eventToSendWhenStateOrTransitionChanges,
+                        m_startStateChooser,
+                        m_startStateId,
+                        m_returnToPreviousStateEventId,
+                        m_randomTransitionEventId,
+                        m_transitionToNextHigherStateEventId,
+                        m_transitionToNextLowerStateEventId,
+                        m_syncVariableIndex,
+                        m_currentStateId,
+                        m_wrapAroundStateId,
+                        m_maxSimultaneousTransitions,
+                        m_startStateMode,
+                        m_selfTransitionMode,
+                        m_isActive,
+                        m_states,
+                        m_wildcardTransitions,
+                        m_stateIdToIndexMap,
+                        m_activeTransitions,
+                        m_transitionFlags,
+                        m_wildcardTransitionFlags,
+                        m_delayedTransitions,
+                        m_timeInState,
+                        m_lastLocalTime,
+                        m_previousStateId,
+                        m_nextStartStateIndexOverride,
+                        m_stateOrTransitionChanged,
+                        m_echoNextUpdate,
+                        m_sCurrentStateIndexAndEntered,
+                    })
+                }
+                #[allow(clippy::manual_unwrap_or_default)]
+                fn visit_struct<__A>(
+                    self,
+                    mut __map: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::MapAccess<'de>,
+                {
+                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_wildcardTransitions: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_states: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_selfTransitionMode: _serde::__private::Option<
+                        StateMachineSelfTransitionMode,
+                    > = _serde::__private::None;
+                    let mut m_startStateMode: _serde::__private::Option<
+                        StartStateMode,
+                    > = _serde::__private::None;
+                    let mut m_maxSimultaneousTransitions: _serde::__private::Option<
+                        i8,
+                    > = _serde::__private::None;
+                    let mut m_wrapAroundStateId: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_syncVariableIndex: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_transitionToNextLowerStateEventId: _serde::__private::Option<
+                        i32,
+                    > = _serde::__private::None;
+                    let mut m_transitionToNextHigherStateEventId: _serde::__private::Option<
+                        i32,
+                    > = _serde::__private::None;
+                    let mut m_randomTransitionEventId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_returnToPreviousStateEventId: _serde::__private::Option<
+                        i32,
+                    > = _serde::__private::None;
+                    let mut m_startStateId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_startStateChooser: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_eventToSendWhenStateOrTransitionChanges: _serde::__private::Option<
+                        hkbEvent,
+                    > = _serde::__private::None;
+                    while let _serde::__private::Some(__key) = {
+                        #[cfg(not(feature = "strict"))]
+                        let __key = __A::next_key::<__Field>(&mut __map)
+                            .unwrap_or(Some(__Field::__ignore));
+                        #[cfg(feature = "strict")]
+                        let __key = __A::next_key::<__Field>(&mut __map)?;
+                        __key
+                    } {
+                        match __key {
+                            __Field::m_variableBindingSet => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_variableBindingSet,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "variableBindingSet",
+                                        ),
+                                    );
+                                }
+                                m_variableBindingSet = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_name => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_name) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                    );
+                                }
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_userData => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_userData) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "userData",
+                                        ),
+                                    );
+                                }
+                                m_userData = _serde::__private::Some(
+                                    match __A::next_value::<u64>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_wildcardTransitions => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_wildcardTransitions,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "wildcardTransitions",
+                                        ),
+                                    );
+                                }
+                                m_wildcardTransitions = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_states => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_states) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("states"),
+                                    );
+                                }
+                                m_states = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_selfTransitionMode => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_selfTransitionMode,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "selfTransitionMode",
+                                        ),
+                                    );
+                                }
+                                m_selfTransitionMode = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        StateMachineSelfTransitionMode,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_startStateMode => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_startStateMode) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "startStateMode",
+                                        ),
+                                    );
+                                }
+                                m_startStateMode = _serde::__private::Some(
+                                    match __A::next_value::<StartStateMode>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_maxSimultaneousTransitions => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_maxSimultaneousTransitions,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "maxSimultaneousTransitions",
+                                        ),
+                                    );
+                                }
+                                m_maxSimultaneousTransitions = _serde::__private::Some(
+                                    match __A::next_value::<i8>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_wrapAroundStateId => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_wrapAroundStateId,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "wrapAroundStateId",
+                                        ),
+                                    );
+                                }
+                                m_wrapAroundStateId = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_syncVariableIndex => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_syncVariableIndex,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "syncVariableIndex",
+                                        ),
+                                    );
+                                }
+                                m_syncVariableIndex = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_transitionToNextLowerStateEventId => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_transitionToNextLowerStateEventId,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "transitionToNextLowerStateEventId",
+                                        ),
+                                    );
+                                }
+                                m_transitionToNextLowerStateEventId = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_transitionToNextHigherStateEventId => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_transitionToNextHigherStateEventId,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "transitionToNextHigherStateEventId",
+                                        ),
+                                    );
+                                }
+                                m_transitionToNextHigherStateEventId = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_randomTransitionEventId => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_randomTransitionEventId,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "randomTransitionEventId",
+                                        ),
+                                    );
+                                }
+                                m_randomTransitionEventId = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_returnToPreviousStateEventId => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_returnToPreviousStateEventId,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "returnToPreviousStateEventId",
+                                        ),
+                                    );
+                                }
+                                m_returnToPreviousStateEventId = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_startStateId => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_startStateId) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "startStateId",
+                                        ),
+                                    );
+                                }
+                                m_startStateId = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_startStateChooser => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_startStateChooser,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "startStateChooser",
+                                        ),
+                                    );
+                                }
+                                m_startStateChooser = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_eventToSendWhenStateOrTransitionChanges => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_eventToSendWhenStateOrTransitionChanges,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "eventToSendWhenStateOrTransitionChanges",
+                                        ),
+                                    );
+                                }
+                                m_eventToSendWhenStateOrTransitionChanges = _serde::__private::Some(
+                                    match __A::next_value::<hkbEvent>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            _ => {}
+                        }
+                    }
+                    let m_variableBindingSet = match m_variableBindingSet {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "variableBindingSet",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_name = match m_name {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_userData = match m_userData {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("userData"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_wildcardTransitions = match m_wildcardTransitions {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "wildcardTransitions",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_states = match m_states {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("states"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_selfTransitionMode = match m_selfTransitionMode {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "selfTransitionMode",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_startStateMode = match m_startStateMode {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "startStateMode",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxSimultaneousTransitions = match m_maxSimultaneousTransitions {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxSimultaneousTransitions",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_wrapAroundStateId = match m_wrapAroundStateId {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "wrapAroundStateId",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_syncVariableIndex = match m_syncVariableIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "syncVariableIndex",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_transitionToNextLowerStateEventId = match m_transitionToNextLowerStateEventId {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "transitionToNextLowerStateEventId",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_transitionToNextHigherStateEventId = match m_transitionToNextHigherStateEventId {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "transitionToNextHigherStateEventId",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_randomTransitionEventId = match m_randomTransitionEventId {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "randomTransitionEventId",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_returnToPreviousStateEventId = match m_returnToPreviousStateEventId {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "returnToPreviousStateEventId",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_startStateId = match m_startStateId {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "startStateId",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_startStateChooser = match m_startStateChooser {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "startStateChooser",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_eventToSendWhenStateOrTransitionChanges = match m_eventToSendWhenStateOrTransitionChanges {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "eventToSendWhenStateOrTransitionChanges",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let __ptr = None;
+                    let parent = hkBaseObject { __ptr };
+                    let parent = hkReferencedObject {
+                        __ptr,
+                        parent,
+                        ..Default::default()
+                    };
+                    let parent = hkbBindable {
+                        __ptr,
+                        parent,
+                        m_variableBindingSet,
+                        ..Default::default()
+                    };
+                    let parent = hkbNode {
+                        __ptr,
+                        parent,
+                        m_userData,
+                        m_name,
+                        ..Default::default()
+                    };
+                    let parent = hkbGenerator { __ptr, parent };
+                    let __ptr = __A::class_ptr(&mut __map);
+                    _serde::__private::Ok(hkbStateMachine {
+                        __ptr,
+                        parent,
+                        m_eventToSendWhenStateOrTransitionChanges,
+                        m_startStateChooser,
+                        m_startStateId,
+                        m_returnToPreviousStateEventId,
+                        m_randomTransitionEventId,
+                        m_transitionToNextHigherStateEventId,
+                        m_transitionToNextLowerStateEventId,
+                        m_syncVariableIndex,
+                        m_wrapAroundStateId,
+                        m_maxSimultaneousTransitions,
+                        m_startStateMode,
+                        m_selfTransitionMode,
+                        m_states,
+                        m_wildcardTransitions,
+                        ..Default::default()
+                    })
+                }
+            }
             const FIELDS: &[&str] = &[
                 "eventToSendWhenStateOrTransitionChanges",
                 "startStateChooser",

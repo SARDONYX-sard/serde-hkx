@@ -106,599 +106,648 @@ const _: () = {
         }
     }
 };
-use havok_serde as _serde;
-#[allow(non_camel_case_types)]
-enum __Field {
-    m_visible,
-    m_hideInModeler,
-    m_label,
-    m_group,
-    m_hideBaseClassMembers,
-    m_endGroup,
-    m_endGroup2,
-    m_advanced,
-    __ignore,
-}
-struct __FieldVisitor;
-impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
-    type Value = __Field;
-    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
-        core::fmt::Formatter::write_str(__formatter, "field identifier")
-    }
-    /// Intended for use in XML.
-    #[allow(clippy::match_single_binding)]
-    #[allow(clippy::reversed_empty_ranges)]
-    #[allow(clippy::single_match)]
-    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
-    where
-        __E: _serde::de::Error,
-    {
-        match __value {
-            "visible" => Ok(__Field::m_visible),
-            "hideInModeler" => Ok(__Field::m_hideInModeler),
-            "label" => Ok(__Field::m_label),
-            "group" => Ok(__Field::m_group),
-            "hideBaseClassMembers" => Ok(__Field::m_hideBaseClassMembers),
-            "endGroup" => Ok(__Field::m_endGroup),
-            "endGroup2" => Ok(__Field::m_endGroup2),
-            "advanced" => Ok(__Field::m_advanced),
-            _ => Ok(__Field::__ignore),
-        }
-    }
-}
-impl<'de> _serde::Deserialize<'de> for __Field {
-    #[inline]
-    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
-    where
-        __D: _serde::Deserializer<'de>,
-    {
-        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
-    }
-}
-pub(super) struct __hkUiAttributeVisitor<'de> {
-    marker: core::marker::PhantomData<hkUiAttribute<'de>>,
-    lifetime: core::marker::PhantomData<&'de ()>,
-}
-impl<'de> __hkUiAttributeVisitor<'de> {
-    /// # Purpose of this method
-    /// To reproduce C++ field inheritance, we will have the field internal implementation
-    /// of deserialization partially exposed and reused.
-    #[inline]
-    pub(super) fn visit_as_parent<__A>(
-        __map: &mut __A,
-    ) -> _serde::__private::Result<hkUiAttribute<'de>, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        _serde::de::Visitor::visit_struct(
-            Self {
-                marker: _serde::__private::PhantomData::<hkUiAttribute<'de>>,
-                lifetime: _serde::__private::PhantomData,
-            },
-            __map,
-        )
-    }
-}
-#[allow(clippy::match_single_binding)]
-#[allow(clippy::reversed_empty_ranges)]
-#[allow(clippy::single_match)]
-impl<'de> _serde::de::Visitor<'de> for __hkUiAttributeVisitor<'de> {
-    type Value = hkUiAttribute<'de>;
-    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
-        core::fmt::Formatter::write_str(__formatter, "struct hkUiAttribute")
-    }
-    fn visit_struct_for_bytes<__A>(
-        self,
-        mut __map: __A,
-    ) -> _serde::__private::Result<Self::Value, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        let __ptr = __A::class_ptr(&mut __map);
-        let mut m_visible: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_hideInModeler: _serde::__private::Option<HideInModeler> = _serde::__private::None;
-        let mut m_label: _serde::__private::Option<CString<'de>> = _serde::__private::None;
-        let mut m_group: _serde::__private::Option<CString<'de>> = _serde::__private::None;
-        let mut m_hideBaseClassMembers: _serde::__private::Option<CString<'de>> = _serde::__private::None;
-        let mut m_endGroup: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_endGroup2: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_advanced: _serde::__private::Option<bool> = _serde::__private::None;
-        for i in 0..8usize {
-            match i {
-                0usize => {
-                    if _serde::__private::Option::is_some(&m_visible) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("visible"),
-                        );
-                    }
-                    m_visible = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                1usize => {
-                    if _serde::__private::Option::is_some(&m_hideInModeler) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "hideInModeler",
-                            ),
-                        );
-                    }
-                    m_hideInModeler = _serde::__private::Some(
-                        match __A::next_value::<HideInModeler>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                2usize => {
-                    if _serde::__private::Option::is_some(&m_label) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("label"),
-                        );
-                    }
-                    __A::pad(&mut __map, 2usize, 6usize)?;
-                    m_label = _serde::__private::Some(
-                        match __A::next_value::<CString<'de>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                3usize => {
-                    if _serde::__private::Option::is_some(&m_group) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("group"),
-                        );
-                    }
-                    m_group = _serde::__private::Some(
-                        match __A::next_value::<CString<'de>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                4usize => {
-                    if _serde::__private::Option::is_some(&m_hideBaseClassMembers) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "hideBaseClassMembers",
-                            ),
-                        );
-                    }
-                    m_hideBaseClassMembers = _serde::__private::Some(
-                        match __A::next_value::<CString<'de>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                5usize => {
-                    if _serde::__private::Option::is_some(&m_endGroup) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "endGroup",
-                            ),
-                        );
-                    }
-                    m_endGroup = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                6usize => {
-                    if _serde::__private::Option::is_some(&m_endGroup2) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "endGroup2",
-                            ),
-                        );
-                    }
-                    m_endGroup2 = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                7usize => {
-                    if _serde::__private::Option::is_some(&m_advanced) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "advanced",
-                            ),
-                        );
-                    }
-                    m_advanced = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                _ => {}
-            }
-        }
-        __A::pad(&mut __map, 1usize, 5usize)?;
-        let m_visible = match m_visible {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("visible"),
-                );
-            }
-        };
-        let m_hideInModeler = match m_hideInModeler {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("hideInModeler"),
-                );
-            }
-        };
-        let m_label = match m_label {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("label"),
-                );
-            }
-        };
-        let m_group = match m_group {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("group"),
-                );
-            }
-        };
-        let m_hideBaseClassMembers = match m_hideBaseClassMembers {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "hideBaseClassMembers",
-                    ),
-                );
-            }
-        };
-        let m_endGroup = match m_endGroup {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("endGroup"),
-                );
-            }
-        };
-        let m_endGroup2 = match m_endGroup2 {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("endGroup2"),
-                );
-            }
-        };
-        let m_advanced = match m_advanced {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("advanced"),
-                );
-            }
-        };
-        _serde::__private::Ok(hkUiAttribute {
-            __ptr,
-            m_visible,
-            m_hideInModeler,
-            m_label,
-            m_group,
-            m_hideBaseClassMembers,
-            m_endGroup,
-            m_endGroup2,
-            m_advanced,
-        })
-    }
-    #[allow(clippy::manual_unwrap_or_default)]
-    fn visit_struct<__A>(
-        self,
-        mut __map: __A,
-    ) -> _serde::__private::Result<Self::Value, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        let __ptr = __A::class_ptr(&mut __map);
-        let mut m_visible: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_hideInModeler: _serde::__private::Option<HideInModeler> = _serde::__private::None;
-        let mut m_label: _serde::__private::Option<CString<'de>> = _serde::__private::None;
-        let mut m_group: _serde::__private::Option<CString<'de>> = _serde::__private::None;
-        let mut m_hideBaseClassMembers: _serde::__private::Option<CString<'de>> = _serde::__private::None;
-        let mut m_endGroup: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_endGroup2: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_advanced: _serde::__private::Option<bool> = _serde::__private::None;
-        for _ in 0..8usize {
-            #[cfg(not(feature = "strict"))]
-            let __res = __A::next_key::<__Field>(&mut __map)
-                .unwrap_or(Some(__Field::__ignore));
-            #[cfg(feature = "strict")]
-            let __res = __A::next_key::<__Field>(&mut __map)?;
-            if let _serde::__private::Some(__key) = __res {
-                match __key {
-                    __Field::m_visible => {
-                        if _serde::__private::Option::is_some(&m_visible) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "visible",
-                                ),
-                            );
-                        }
-                        m_visible = _serde::__private::Some(
-                            match __A::next_value::<bool>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_hideInModeler => {
-                        if _serde::__private::Option::is_some(&m_hideInModeler) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "hideInModeler",
-                                ),
-                            );
-                        }
-                        m_hideInModeler = _serde::__private::Some(
-                            match __A::next_value::<HideInModeler>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_label => {
-                        if _serde::__private::Option::is_some(&m_label) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field("label"),
-                            );
-                        }
-                        m_label = _serde::__private::Some(
-                            match __A::next_value::<CString<'de>>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_group => {
-                        if _serde::__private::Option::is_some(&m_group) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field("group"),
-                            );
-                        }
-                        m_group = _serde::__private::Some(
-                            match __A::next_value::<CString<'de>>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_hideBaseClassMembers => {
-                        if _serde::__private::Option::is_some(&m_hideBaseClassMembers) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "hideBaseClassMembers",
-                                ),
-                            );
-                        }
-                        m_hideBaseClassMembers = _serde::__private::Some(
-                            match __A::next_value::<CString<'de>>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_endGroup => {
-                        if _serde::__private::Option::is_some(&m_endGroup) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "endGroup",
-                                ),
-                            );
-                        }
-                        m_endGroup = _serde::__private::Some(
-                            match __A::next_value::<bool>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_endGroup2 => {
-                        if _serde::__private::Option::is_some(&m_endGroup2) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "endGroup2",
-                                ),
-                            );
-                        }
-                        m_endGroup2 = _serde::__private::Some(
-                            match __A::next_value::<bool>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_advanced => {
-                        if _serde::__private::Option::is_some(&m_advanced) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "advanced",
-                                ),
-                            );
-                        }
-                        m_advanced = _serde::__private::Some(
-                            match __A::next_value::<bool>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    _ => {}
-                }
-            }
-        }
-        let m_visible = match m_visible {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("visible"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_hideInModeler = match m_hideInModeler {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("hideInModeler"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_label = match m_label {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("label"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_group = match m_group {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("group"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_hideBaseClassMembers = match m_hideBaseClassMembers {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "hideBaseClassMembers",
-                    ),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_endGroup = match m_endGroup {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("endGroup"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_endGroup2 = match m_endGroup2 {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("endGroup2"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_advanced = match m_advanced {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("advanced"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        _serde::__private::Ok(hkUiAttribute {
-            __ptr,
-            m_visible,
-            m_hideInModeler,
-            m_label,
-            m_group,
-            m_hideBaseClassMembers,
-            m_endGroup,
-            m_endGroup2,
-            m_advanced,
-        })
-    }
-}
 #[doc(hidden)]
 #[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
 const _: () = {
+    use havok_serde as _serde;
     #[automatically_derived]
     impl<'de> _serde::Deserialize<'de> for hkUiAttribute<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
         {
+            #[allow(non_camel_case_types)]
+            enum __Field {
+                m_advanced,
+                m_endGroup2,
+                m_endGroup,
+                m_hideBaseClassMembers,
+                m_group,
+                m_label,
+                m_hideInModeler,
+                m_visible,
+                __ignore,
+            }
+            struct __FieldVisitor;
+            impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+                type Value = __Field;
+                fn expecting(
+                    &self,
+                    __formatter: &mut core::fmt::Formatter,
+                ) -> core::fmt::Result {
+                    core::fmt::Formatter::write_str(__formatter, "field identifier")
+                }
+                /// Intended for use in XML.
+                #[allow(clippy::match_single_binding)]
+                #[allow(clippy::reversed_empty_ranges)]
+                #[allow(clippy::single_match)]
+                fn visit_key<__E>(
+                    self,
+                    __value: &str,
+                ) -> core::result::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match __value {
+                        "advanced" => Ok(__Field::m_advanced),
+                        "endGroup2" => Ok(__Field::m_endGroup2),
+                        "endGroup" => Ok(__Field::m_endGroup),
+                        "hideBaseClassMembers" => Ok(__Field::m_hideBaseClassMembers),
+                        "group" => Ok(__Field::m_group),
+                        "label" => Ok(__Field::m_label),
+                        "hideInModeler" => Ok(__Field::m_hideInModeler),
+                        "visible" => Ok(__Field::m_visible),
+                        _ => Ok(__Field::__ignore),
+                    }
+                }
+            }
+            impl<'de> _serde::Deserialize<'de> for __Field {
+                #[inline]
+                fn deserialize<__D>(
+                    __deserializer: __D,
+                ) -> core::result::Result<Self, __D::Error>
+                where
+                    __D: _serde::Deserializer<'de>,
+                {
+                    _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+                }
+            }
+            struct __hkUiAttributeVisitor<'de> {
+                marker: _serde::__private::PhantomData<hkUiAttribute<'de>>,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            #[allow(clippy::match_single_binding)]
+            #[allow(clippy::reversed_empty_ranges)]
+            #[allow(clippy::single_match)]
+            impl<'de> _serde::de::Visitor<'de> for __hkUiAttributeVisitor<'de> {
+                type Value = hkUiAttribute<'de>;
+                fn expecting(
+                    &self,
+                    __formatter: &mut core::fmt::Formatter,
+                ) -> core::fmt::Result {
+                    core::fmt::Formatter::write_str(__formatter, "struct hkUiAttribute")
+                }
+                fn visit_struct_for_bytes<__A>(
+                    self,
+                    mut __map: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::MapAccess<'de>,
+                {
+                    let __ptr = __A::class_ptr(&mut __map);
+                    let mut m_visible: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_hideInModeler: _serde::__private::Option<HideInModeler> = _serde::__private::None;
+                    let mut m_label: _serde::__private::Option<CString<'de>> = _serde::__private::None;
+                    let mut m_group: _serde::__private::Option<CString<'de>> = _serde::__private::None;
+                    let mut m_hideBaseClassMembers: _serde::__private::Option<
+                        CString<'de>,
+                    > = _serde::__private::None;
+                    let mut m_endGroup: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_endGroup2: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_advanced: _serde::__private::Option<bool> = _serde::__private::None;
+                    for i in 0..8usize {
+                        match i {
+                            0usize => {
+                                if _serde::__private::Option::is_some(&m_visible) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "visible",
+                                        ),
+                                    );
+                                }
+                                m_visible = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            1usize => {
+                                if _serde::__private::Option::is_some(&m_hideInModeler) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "hideInModeler",
+                                        ),
+                                    );
+                                }
+                                m_hideInModeler = _serde::__private::Some(
+                                    match __A::next_value::<HideInModeler>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            2usize => {
+                                if _serde::__private::Option::is_some(&m_label) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("label"),
+                                    );
+                                }
+                                __A::pad(&mut __map, 2usize, 6usize)?;
+                                m_label = _serde::__private::Some(
+                                    match __A::next_value::<CString<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            3usize => {
+                                if _serde::__private::Option::is_some(&m_group) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("group"),
+                                    );
+                                }
+                                m_group = _serde::__private::Some(
+                                    match __A::next_value::<CString<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            4usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_hideBaseClassMembers,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "hideBaseClassMembers",
+                                        ),
+                                    );
+                                }
+                                m_hideBaseClassMembers = _serde::__private::Some(
+                                    match __A::next_value::<CString<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            5usize => {
+                                if _serde::__private::Option::is_some(&m_endGroup) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "endGroup",
+                                        ),
+                                    );
+                                }
+                                m_endGroup = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            6usize => {
+                                if _serde::__private::Option::is_some(&m_endGroup2) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "endGroup2",
+                                        ),
+                                    );
+                                }
+                                m_endGroup2 = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            7usize => {
+                                if _serde::__private::Option::is_some(&m_advanced) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "advanced",
+                                        ),
+                                    );
+                                }
+                                m_advanced = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            _ => {}
+                        }
+                    }
+                    __A::pad(&mut __map, 1usize, 5usize)?;
+                    let m_visible = match m_visible {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("visible"),
+                            );
+                        }
+                    };
+                    let m_hideInModeler = match m_hideInModeler {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "hideInModeler",
+                                ),
+                            );
+                        }
+                    };
+                    let m_label = match m_label {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("label"),
+                            );
+                        }
+                    };
+                    let m_group = match m_group {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("group"),
+                            );
+                        }
+                    };
+                    let m_hideBaseClassMembers = match m_hideBaseClassMembers {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "hideBaseClassMembers",
+                                ),
+                            );
+                        }
+                    };
+                    let m_endGroup = match m_endGroup {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("endGroup"),
+                            );
+                        }
+                    };
+                    let m_endGroup2 = match m_endGroup2 {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "endGroup2",
+                                ),
+                            );
+                        }
+                    };
+                    let m_advanced = match m_advanced {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("advanced"),
+                            );
+                        }
+                    };
+                    _serde::__private::Ok(hkUiAttribute {
+                        __ptr,
+                        m_visible,
+                        m_hideInModeler,
+                        m_label,
+                        m_group,
+                        m_hideBaseClassMembers,
+                        m_endGroup,
+                        m_endGroup2,
+                        m_advanced,
+                    })
+                }
+                #[allow(clippy::manual_unwrap_or_default)]
+                fn visit_struct<__A>(
+                    self,
+                    mut __map: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::MapAccess<'de>,
+                {
+                    let mut m_advanced: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_endGroup2: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_endGroup: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_hideBaseClassMembers: _serde::__private::Option<
+                        CString<'de>,
+                    > = _serde::__private::None;
+                    let mut m_group: _serde::__private::Option<CString<'de>> = _serde::__private::None;
+                    let mut m_label: _serde::__private::Option<CString<'de>> = _serde::__private::None;
+                    let mut m_hideInModeler: _serde::__private::Option<HideInModeler> = _serde::__private::None;
+                    let mut m_visible: _serde::__private::Option<bool> = _serde::__private::None;
+                    while let _serde::__private::Some(__key) = {
+                        #[cfg(not(feature = "strict"))]
+                        let __key = __A::next_key::<__Field>(&mut __map)
+                            .unwrap_or(Some(__Field::__ignore));
+                        #[cfg(feature = "strict")]
+                        let __key = __A::next_key::<__Field>(&mut __map)?;
+                        __key
+                    } {
+                        match __key {
+                            __Field::m_advanced => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_advanced) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "advanced",
+                                        ),
+                                    );
+                                }
+                                m_advanced = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_endGroup2 => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_endGroup2) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "endGroup2",
+                                        ),
+                                    );
+                                }
+                                m_endGroup2 = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_endGroup => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_endGroup) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "endGroup",
+                                        ),
+                                    );
+                                }
+                                m_endGroup = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_hideBaseClassMembers => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_hideBaseClassMembers,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "hideBaseClassMembers",
+                                        ),
+                                    );
+                                }
+                                m_hideBaseClassMembers = _serde::__private::Some(
+                                    match __A::next_value::<CString<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_group => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_group) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("group"),
+                                    );
+                                }
+                                m_group = _serde::__private::Some(
+                                    match __A::next_value::<CString<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_label => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_label) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("label"),
+                                    );
+                                }
+                                m_label = _serde::__private::Some(
+                                    match __A::next_value::<CString<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_hideInModeler => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_hideInModeler) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "hideInModeler",
+                                        ),
+                                    );
+                                }
+                                m_hideInModeler = _serde::__private::Some(
+                                    match __A::next_value::<HideInModeler>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_visible => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_visible) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "visible",
+                                        ),
+                                    );
+                                }
+                                m_visible = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            _ => {}
+                        }
+                    }
+                    let m_advanced = match m_advanced {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("advanced"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_endGroup2 = match m_endGroup2 {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "endGroup2",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_endGroup = match m_endGroup {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("endGroup"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_hideBaseClassMembers = match m_hideBaseClassMembers {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "hideBaseClassMembers",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_group = match m_group {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("group"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_label = match m_label {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("label"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_hideInModeler = match m_hideInModeler {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "hideInModeler",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_visible = match m_visible {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("visible"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let __ptr = __A::class_ptr(&mut __map);
+                    _serde::__private::Ok(hkUiAttribute {
+                        __ptr,
+                        m_visible,
+                        m_hideInModeler,
+                        m_label,
+                        m_group,
+                        m_hideBaseClassMembers,
+                        m_endGroup,
+                        m_endGroup2,
+                        m_advanced,
+                    })
+                }
+            }
             const FIELDS: &[&str] = &[
                 "visible",
                 "hideInModeler",

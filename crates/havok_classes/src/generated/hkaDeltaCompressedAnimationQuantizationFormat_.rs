@@ -85,483 +85,10 @@ const _: () = {
         }
     }
 };
-use havok_serde as _serde;
-#[allow(non_camel_case_types)]
-enum __Field {
-    m_maxBitWidth,
-    m_preserved,
-    m_numD,
-    m_offsetIdx,
-    m_scaleIdx,
-    m_bitWidthIdx,
-    __ignore,
-}
-struct __FieldVisitor;
-impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
-    type Value = __Field;
-    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
-        core::fmt::Formatter::write_str(__formatter, "field identifier")
-    }
-    /// Intended for use in XML.
-    #[allow(clippy::match_single_binding)]
-    #[allow(clippy::reversed_empty_ranges)]
-    #[allow(clippy::single_match)]
-    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
-    where
-        __E: _serde::de::Error,
-    {
-        match __value {
-            "maxBitWidth" => Ok(__Field::m_maxBitWidth),
-            "preserved" => Ok(__Field::m_preserved),
-            "numD" => Ok(__Field::m_numD),
-            "offsetIdx" => Ok(__Field::m_offsetIdx),
-            "scaleIdx" => Ok(__Field::m_scaleIdx),
-            "bitWidthIdx" => Ok(__Field::m_bitWidthIdx),
-            _ => Ok(__Field::__ignore),
-        }
-    }
-}
-impl<'de> _serde::Deserialize<'de> for __Field {
-    #[inline]
-    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
-    where
-        __D: _serde::Deserializer<'de>,
-    {
-        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
-    }
-}
-pub(super) struct __hkaDeltaCompressedAnimationQuantizationFormatVisitor<'de> {
-    marker: core::marker::PhantomData<hkaDeltaCompressedAnimationQuantizationFormat>,
-    lifetime: core::marker::PhantomData<&'de ()>,
-}
-impl<'de> __hkaDeltaCompressedAnimationQuantizationFormatVisitor<'de> {
-    /// # Purpose of this method
-    /// To reproduce C++ field inheritance, we will have the field internal implementation
-    /// of deserialization partially exposed and reused.
-    #[inline]
-    pub(super) fn visit_as_parent<__A>(
-        __map: &mut __A,
-    ) -> _serde::__private::Result<
-        hkaDeltaCompressedAnimationQuantizationFormat,
-        __A::Error,
-    >
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        _serde::de::Visitor::visit_struct(
-            Self {
-                marker: _serde::__private::PhantomData::<
-                    hkaDeltaCompressedAnimationQuantizationFormat,
-                >,
-                lifetime: _serde::__private::PhantomData,
-            },
-            __map,
-        )
-    }
-}
-#[allow(clippy::match_single_binding)]
-#[allow(clippy::reversed_empty_ranges)]
-#[allow(clippy::single_match)]
-impl<'de> _serde::de::Visitor<'de>
-for __hkaDeltaCompressedAnimationQuantizationFormatVisitor<'de> {
-    type Value = hkaDeltaCompressedAnimationQuantizationFormat;
-    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
-        core::fmt::Formatter::write_str(
-            __formatter,
-            "struct hkaDeltaCompressedAnimationQuantizationFormat",
-        )
-    }
-    fn visit_struct_for_bytes<__A>(
-        self,
-        mut __map: __A,
-    ) -> _serde::__private::Result<Self::Value, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        let __ptr = __A::class_ptr(&mut __map);
-        let mut m_maxBitWidth: _serde::__private::Option<u8> = _serde::__private::None;
-        let mut m_preserved: _serde::__private::Option<u8> = _serde::__private::None;
-        let mut m_numD: _serde::__private::Option<u32> = _serde::__private::None;
-        let mut m_offsetIdx: _serde::__private::Option<u32> = _serde::__private::None;
-        let mut m_scaleIdx: _serde::__private::Option<u32> = _serde::__private::None;
-        let mut m_bitWidthIdx: _serde::__private::Option<u32> = _serde::__private::None;
-        for i in 0..6usize {
-            match i {
-                0usize => {
-                    if _serde::__private::Option::is_some(&m_maxBitWidth) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "maxBitWidth",
-                            ),
-                        );
-                    }
-                    m_maxBitWidth = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                1usize => {
-                    if _serde::__private::Option::is_some(&m_preserved) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "preserved",
-                            ),
-                        );
-                    }
-                    m_preserved = _serde::__private::Some(
-                        match __A::next_value::<u8>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                2usize => {
-                    if _serde::__private::Option::is_some(&m_numD) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("numD"),
-                        );
-                    }
-                    __A::pad(&mut __map, 2usize, 2usize)?;
-                    m_numD = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                3usize => {
-                    if _serde::__private::Option::is_some(&m_offsetIdx) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "offsetIdx",
-                            ),
-                        );
-                    }
-                    m_offsetIdx = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                4usize => {
-                    if _serde::__private::Option::is_some(&m_scaleIdx) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "scaleIdx",
-                            ),
-                        );
-                    }
-                    m_scaleIdx = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                5usize => {
-                    if _serde::__private::Option::is_some(&m_bitWidthIdx) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "bitWidthIdx",
-                            ),
-                        );
-                    }
-                    m_bitWidthIdx = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                _ => {}
-            }
-        }
-        let m_maxBitWidth = match m_maxBitWidth {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("maxBitWidth"),
-                );
-            }
-        };
-        let m_preserved = match m_preserved {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("preserved"),
-                );
-            }
-        };
-        let m_numD = match m_numD {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("numD"),
-                );
-            }
-        };
-        let m_offsetIdx = match m_offsetIdx {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("offsetIdx"),
-                );
-            }
-        };
-        let m_scaleIdx = match m_scaleIdx {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("scaleIdx"),
-                );
-            }
-        };
-        let m_bitWidthIdx = match m_bitWidthIdx {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("bitWidthIdx"),
-                );
-            }
-        };
-        _serde::__private::Ok(hkaDeltaCompressedAnimationQuantizationFormat {
-            __ptr,
-            m_maxBitWidth,
-            m_preserved,
-            m_numD,
-            m_offsetIdx,
-            m_scaleIdx,
-            m_bitWidthIdx,
-        })
-    }
-    #[allow(clippy::manual_unwrap_or_default)]
-    fn visit_struct<__A>(
-        self,
-        mut __map: __A,
-    ) -> _serde::__private::Result<Self::Value, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        let __ptr = __A::class_ptr(&mut __map);
-        let mut m_maxBitWidth: _serde::__private::Option<u8> = _serde::__private::None;
-        let mut m_preserved: _serde::__private::Option<u8> = _serde::__private::None;
-        let mut m_numD: _serde::__private::Option<u32> = _serde::__private::None;
-        let mut m_offsetIdx: _serde::__private::Option<u32> = _serde::__private::None;
-        let mut m_scaleIdx: _serde::__private::Option<u32> = _serde::__private::None;
-        let mut m_bitWidthIdx: _serde::__private::Option<u32> = _serde::__private::None;
-        for _ in 0..6usize {
-            #[cfg(not(feature = "strict"))]
-            let __res = __A::next_key::<__Field>(&mut __map)
-                .unwrap_or(Some(__Field::__ignore));
-            #[cfg(feature = "strict")]
-            let __res = __A::next_key::<__Field>(&mut __map)?;
-            if let _serde::__private::Some(__key) = __res {
-                match __key {
-                    __Field::m_maxBitWidth => {
-                        if _serde::__private::Option::is_some(&m_maxBitWidth) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "maxBitWidth",
-                                ),
-                            );
-                        }
-                        m_maxBitWidth = _serde::__private::Some(
-                            match __A::next_value::<u8>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_preserved => {
-                        if _serde::__private::Option::is_some(&m_preserved) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "preserved",
-                                ),
-                            );
-                        }
-                        m_preserved = _serde::__private::Some(
-                            match __A::next_value::<u8>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_numD => {
-                        if _serde::__private::Option::is_some(&m_numD) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field("numD"),
-                            );
-                        }
-                        m_numD = _serde::__private::Some(
-                            match __A::next_value::<u32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_offsetIdx => {
-                        if _serde::__private::Option::is_some(&m_offsetIdx) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "offsetIdx",
-                                ),
-                            );
-                        }
-                        m_offsetIdx = _serde::__private::Some(
-                            match __A::next_value::<u32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_scaleIdx => {
-                        if _serde::__private::Option::is_some(&m_scaleIdx) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "scaleIdx",
-                                ),
-                            );
-                        }
-                        m_scaleIdx = _serde::__private::Some(
-                            match __A::next_value::<u32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_bitWidthIdx => {
-                        if _serde::__private::Option::is_some(&m_bitWidthIdx) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "bitWidthIdx",
-                                ),
-                            );
-                        }
-                        m_bitWidthIdx = _serde::__private::Some(
-                            match __A::next_value::<u32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    _ => {}
-                }
-            }
-        }
-        let m_maxBitWidth = match m_maxBitWidth {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("maxBitWidth"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_preserved = match m_preserved {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("preserved"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_numD = match m_numD {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("numD"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_offsetIdx = match m_offsetIdx {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("offsetIdx"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_scaleIdx = match m_scaleIdx {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("scaleIdx"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_bitWidthIdx = match m_bitWidthIdx {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("bitWidthIdx"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        _serde::__private::Ok(hkaDeltaCompressedAnimationQuantizationFormat {
-            __ptr,
-            m_maxBitWidth,
-            m_preserved,
-            m_numD,
-            m_offsetIdx,
-            m_scaleIdx,
-            m_bitWidthIdx,
-        })
-    }
-}
 #[doc(hidden)]
 #[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
 const _: () = {
+    use havok_serde as _serde;
     #[automatically_derived]
     impl<'de> _serde::Deserialize<'de>
     for hkaDeltaCompressedAnimationQuantizationFormat {
@@ -569,6 +96,513 @@ const _: () = {
         where
             __D: _serde::Deserializer<'de>,
         {
+            #[allow(non_camel_case_types)]
+            enum __Field {
+                m_bitWidthIdx,
+                m_scaleIdx,
+                m_offsetIdx,
+                m_numD,
+                m_preserved,
+                m_maxBitWidth,
+                __ignore,
+            }
+            struct __FieldVisitor;
+            impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+                type Value = __Field;
+                fn expecting(
+                    &self,
+                    __formatter: &mut core::fmt::Formatter,
+                ) -> core::fmt::Result {
+                    core::fmt::Formatter::write_str(__formatter, "field identifier")
+                }
+                /// Intended for use in XML.
+                #[allow(clippy::match_single_binding)]
+                #[allow(clippy::reversed_empty_ranges)]
+                #[allow(clippy::single_match)]
+                fn visit_key<__E>(
+                    self,
+                    __value: &str,
+                ) -> core::result::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match __value {
+                        "bitWidthIdx" => Ok(__Field::m_bitWidthIdx),
+                        "scaleIdx" => Ok(__Field::m_scaleIdx),
+                        "offsetIdx" => Ok(__Field::m_offsetIdx),
+                        "numD" => Ok(__Field::m_numD),
+                        "preserved" => Ok(__Field::m_preserved),
+                        "maxBitWidth" => Ok(__Field::m_maxBitWidth),
+                        _ => Ok(__Field::__ignore),
+                    }
+                }
+            }
+            impl<'de> _serde::Deserialize<'de> for __Field {
+                #[inline]
+                fn deserialize<__D>(
+                    __deserializer: __D,
+                ) -> core::result::Result<Self, __D::Error>
+                where
+                    __D: _serde::Deserializer<'de>,
+                {
+                    _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+                }
+            }
+            struct __hkaDeltaCompressedAnimationQuantizationFormatVisitor<'de> {
+                marker: _serde::__private::PhantomData<
+                    hkaDeltaCompressedAnimationQuantizationFormat,
+                >,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            #[allow(clippy::match_single_binding)]
+            #[allow(clippy::reversed_empty_ranges)]
+            #[allow(clippy::single_match)]
+            impl<'de> _serde::de::Visitor<'de>
+            for __hkaDeltaCompressedAnimationQuantizationFormatVisitor<'de> {
+                type Value = hkaDeltaCompressedAnimationQuantizationFormat;
+                fn expecting(
+                    &self,
+                    __formatter: &mut core::fmt::Formatter,
+                ) -> core::fmt::Result {
+                    core::fmt::Formatter::write_str(
+                        __formatter,
+                        "struct hkaDeltaCompressedAnimationQuantizationFormat",
+                    )
+                }
+                fn visit_struct_for_bytes<__A>(
+                    self,
+                    mut __map: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::MapAccess<'de>,
+                {
+                    let __ptr = __A::class_ptr(&mut __map);
+                    let mut m_maxBitWidth: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_preserved: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_numD: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_offsetIdx: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_scaleIdx: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_bitWidthIdx: _serde::__private::Option<u32> = _serde::__private::None;
+                    for i in 0..6usize {
+                        match i {
+                            0usize => {
+                                if _serde::__private::Option::is_some(&m_maxBitWidth) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "maxBitWidth",
+                                        ),
+                                    );
+                                }
+                                m_maxBitWidth = _serde::__private::Some(
+                                    match __A::next_value::<u8>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            1usize => {
+                                if _serde::__private::Option::is_some(&m_preserved) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "preserved",
+                                        ),
+                                    );
+                                }
+                                m_preserved = _serde::__private::Some(
+                                    match __A::next_value::<u8>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            2usize => {
+                                if _serde::__private::Option::is_some(&m_numD) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("numD"),
+                                    );
+                                }
+                                __A::pad(&mut __map, 2usize, 2usize)?;
+                                m_numD = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            3usize => {
+                                if _serde::__private::Option::is_some(&m_offsetIdx) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "offsetIdx",
+                                        ),
+                                    );
+                                }
+                                m_offsetIdx = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            4usize => {
+                                if _serde::__private::Option::is_some(&m_scaleIdx) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "scaleIdx",
+                                        ),
+                                    );
+                                }
+                                m_scaleIdx = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            5usize => {
+                                if _serde::__private::Option::is_some(&m_bitWidthIdx) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "bitWidthIdx",
+                                        ),
+                                    );
+                                }
+                                m_bitWidthIdx = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            _ => {}
+                        }
+                    }
+                    let m_maxBitWidth = match m_maxBitWidth {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxBitWidth",
+                                ),
+                            );
+                        }
+                    };
+                    let m_preserved = match m_preserved {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "preserved",
+                                ),
+                            );
+                        }
+                    };
+                    let m_numD = match m_numD {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("numD"),
+                            );
+                        }
+                    };
+                    let m_offsetIdx = match m_offsetIdx {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "offsetIdx",
+                                ),
+                            );
+                        }
+                    };
+                    let m_scaleIdx = match m_scaleIdx {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("scaleIdx"),
+                            );
+                        }
+                    };
+                    let m_bitWidthIdx = match m_bitWidthIdx {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "bitWidthIdx",
+                                ),
+                            );
+                        }
+                    };
+                    _serde::__private::Ok(hkaDeltaCompressedAnimationQuantizationFormat {
+                        __ptr,
+                        m_maxBitWidth,
+                        m_preserved,
+                        m_numD,
+                        m_offsetIdx,
+                        m_scaleIdx,
+                        m_bitWidthIdx,
+                    })
+                }
+                #[allow(clippy::manual_unwrap_or_default)]
+                fn visit_struct<__A>(
+                    self,
+                    mut __map: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::MapAccess<'de>,
+                {
+                    let mut m_bitWidthIdx: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_scaleIdx: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_offsetIdx: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_numD: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_preserved: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_maxBitWidth: _serde::__private::Option<u8> = _serde::__private::None;
+                    while let _serde::__private::Some(__key) = {
+                        #[cfg(not(feature = "strict"))]
+                        let __key = __A::next_key::<__Field>(&mut __map)
+                            .unwrap_or(Some(__Field::__ignore));
+                        #[cfg(feature = "strict")]
+                        let __key = __A::next_key::<__Field>(&mut __map)?;
+                        __key
+                    } {
+                        match __key {
+                            __Field::m_bitWidthIdx => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_bitWidthIdx) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "bitWidthIdx",
+                                        ),
+                                    );
+                                }
+                                m_bitWidthIdx = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_scaleIdx => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_scaleIdx) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "scaleIdx",
+                                        ),
+                                    );
+                                }
+                                m_scaleIdx = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_offsetIdx => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_offsetIdx) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "offsetIdx",
+                                        ),
+                                    );
+                                }
+                                m_offsetIdx = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_numD => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_numD) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("numD"),
+                                    );
+                                }
+                                m_numD = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_preserved => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_preserved) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "preserved",
+                                        ),
+                                    );
+                                }
+                                m_preserved = _serde::__private::Some(
+                                    match __A::next_value::<u8>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_maxBitWidth => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_maxBitWidth) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "maxBitWidth",
+                                        ),
+                                    );
+                                }
+                                m_maxBitWidth = _serde::__private::Some(
+                                    match __A::next_value::<u8>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            _ => {}
+                        }
+                    }
+                    let m_bitWidthIdx = match m_bitWidthIdx {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "bitWidthIdx",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_scaleIdx = match m_scaleIdx {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("scaleIdx"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_offsetIdx = match m_offsetIdx {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "offsetIdx",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_numD = match m_numD {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("numD"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_preserved = match m_preserved {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "preserved",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_maxBitWidth = match m_maxBitWidth {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "maxBitWidth",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let __ptr = __A::class_ptr(&mut __map);
+                    _serde::__private::Ok(hkaDeltaCompressedAnimationQuantizationFormat {
+                        __ptr,
+                        m_maxBitWidth,
+                        m_preserved,
+                        m_numD,
+                        m_offsetIdx,
+                        m_scaleIdx,
+                        m_bitWidthIdx,
+                    })
+                }
+            }
             const FIELDS: &[&str] = &[
                 "maxBitWidth",
                 "preserved",

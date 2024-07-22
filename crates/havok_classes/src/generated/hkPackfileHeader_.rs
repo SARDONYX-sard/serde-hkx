@@ -138,857 +138,949 @@ const _: () = {
         }
     }
 };
-use havok_serde as _serde;
-#[allow(non_camel_case_types)]
-enum __Field {
-    m_magic,
-    m_userTag,
-    m_fileVersion,
-    m_layoutRules,
-    m_numSections,
-    m_contentsSectionIndex,
-    m_contentsSectionOffset,
-    m_contentsClassNameSectionIndex,
-    m_contentsClassNameSectionOffset,
-    m_contentsVersion,
-    m_flags,
-    m_pad,
-    __ignore,
-}
-struct __FieldVisitor;
-impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
-    type Value = __Field;
-    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
-        core::fmt::Formatter::write_str(__formatter, "field identifier")
-    }
-    /// Intended for use in XML.
-    #[allow(clippy::match_single_binding)]
-    #[allow(clippy::reversed_empty_ranges)]
-    #[allow(clippy::single_match)]
-    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
-    where
-        __E: _serde::de::Error,
-    {
-        match __value {
-            "magic" => Ok(__Field::m_magic),
-            "userTag" => Ok(__Field::m_userTag),
-            "fileVersion" => Ok(__Field::m_fileVersion),
-            "layoutRules" => Ok(__Field::m_layoutRules),
-            "numSections" => Ok(__Field::m_numSections),
-            "contentsSectionIndex" => Ok(__Field::m_contentsSectionIndex),
-            "contentsSectionOffset" => Ok(__Field::m_contentsSectionOffset),
-            "contentsClassNameSectionIndex" => {
-                Ok(__Field::m_contentsClassNameSectionIndex)
-            }
-            "contentsClassNameSectionOffset" => {
-                Ok(__Field::m_contentsClassNameSectionOffset)
-            }
-            "contentsVersion" => Ok(__Field::m_contentsVersion),
-            "flags" => Ok(__Field::m_flags),
-            "pad" => Ok(__Field::m_pad),
-            _ => Ok(__Field::__ignore),
-        }
-    }
-}
-impl<'de> _serde::Deserialize<'de> for __Field {
-    #[inline]
-    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
-    where
-        __D: _serde::Deserializer<'de>,
-    {
-        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
-    }
-}
-pub(super) struct __hkPackfileHeaderVisitor<'de> {
-    marker: core::marker::PhantomData<hkPackfileHeader>,
-    lifetime: core::marker::PhantomData<&'de ()>,
-}
-impl<'de> __hkPackfileHeaderVisitor<'de> {
-    /// # Purpose of this method
-    /// To reproduce C++ field inheritance, we will have the field internal implementation
-    /// of deserialization partially exposed and reused.
-    #[inline]
-    pub(super) fn visit_as_parent<__A>(
-        __map: &mut __A,
-    ) -> _serde::__private::Result<hkPackfileHeader, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        _serde::de::Visitor::visit_struct(
-            Self {
-                marker: _serde::__private::PhantomData::<hkPackfileHeader>,
-                lifetime: _serde::__private::PhantomData,
-            },
-            __map,
-        )
-    }
-}
-#[allow(clippy::match_single_binding)]
-#[allow(clippy::reversed_empty_ranges)]
-#[allow(clippy::single_match)]
-impl<'de> _serde::de::Visitor<'de> for __hkPackfileHeaderVisitor<'de> {
-    type Value = hkPackfileHeader;
-    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
-        core::fmt::Formatter::write_str(__formatter, "struct hkPackfileHeader")
-    }
-    fn visit_struct_for_bytes<__A>(
-        self,
-        mut __map: __A,
-    ) -> _serde::__private::Result<Self::Value, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        let __ptr = __A::class_ptr(&mut __map);
-        let mut m_magic: _serde::__private::Option<[i32; 2usize]> = _serde::__private::None;
-        let mut m_userTag: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_fileVersion: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_layoutRules: _serde::__private::Option<[u8; 4usize]> = _serde::__private::None;
-        let mut m_numSections: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_contentsSectionIndex: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_contentsSectionOffset: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_contentsClassNameSectionIndex: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_contentsClassNameSectionOffset: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_contentsVersion: _serde::__private::Option<[char; 16usize]> = _serde::__private::None;
-        let mut m_flags: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_pad: _serde::__private::Option<[i32; 1usize]> = _serde::__private::None;
-        for i in 0..12usize {
-            match i {
-                0usize => {
-                    if _serde::__private::Option::is_some(&m_magic) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("magic"),
-                        );
-                    }
-                    m_magic = _serde::__private::Some(
-                        match __A::next_value::<[i32; 2usize]>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                1usize => {
-                    if _serde::__private::Option::is_some(&m_userTag) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("userTag"),
-                        );
-                    }
-                    m_userTag = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                2usize => {
-                    if _serde::__private::Option::is_some(&m_fileVersion) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "fileVersion",
-                            ),
-                        );
-                    }
-                    m_fileVersion = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                3usize => {
-                    if _serde::__private::Option::is_some(&m_layoutRules) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "layoutRules",
-                            ),
-                        );
-                    }
-                    m_layoutRules = _serde::__private::Some(
-                        match __A::next_value::<[u8; 4usize]>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                4usize => {
-                    if _serde::__private::Option::is_some(&m_numSections) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numSections",
-                            ),
-                        );
-                    }
-                    m_numSections = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                5usize => {
-                    if _serde::__private::Option::is_some(&m_contentsSectionIndex) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "contentsSectionIndex",
-                            ),
-                        );
-                    }
-                    m_contentsSectionIndex = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                6usize => {
-                    if _serde::__private::Option::is_some(&m_contentsSectionOffset) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "contentsSectionOffset",
-                            ),
-                        );
-                    }
-                    m_contentsSectionOffset = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                7usize => {
-                    if _serde::__private::Option::is_some(
-                        &m_contentsClassNameSectionIndex,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "contentsClassNameSectionIndex",
-                            ),
-                        );
-                    }
-                    m_contentsClassNameSectionIndex = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                8usize => {
-                    if _serde::__private::Option::is_some(
-                        &m_contentsClassNameSectionOffset,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "contentsClassNameSectionOffset",
-                            ),
-                        );
-                    }
-                    m_contentsClassNameSectionOffset = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                9usize => {
-                    if _serde::__private::Option::is_some(&m_contentsVersion) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "contentsVersion",
-                            ),
-                        );
-                    }
-                    m_contentsVersion = _serde::__private::Some(
-                        match __A::next_value::<[char; 16usize]>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                10usize => {
-                    if _serde::__private::Option::is_some(&m_flags) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("flags"),
-                        );
-                    }
-                    m_flags = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                11usize => {
-                    if _serde::__private::Option::is_some(&m_pad) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("pad"),
-                        );
-                    }
-                    m_pad = _serde::__private::Some(
-                        match __A::next_value::<[i32; 1usize]>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                _ => {}
-            }
-        }
-        let m_magic = match m_magic {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("magic"),
-                );
-            }
-        };
-        let m_userTag = match m_userTag {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("userTag"),
-                );
-            }
-        };
-        let m_fileVersion = match m_fileVersion {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("fileVersion"),
-                );
-            }
-        };
-        let m_layoutRules = match m_layoutRules {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("layoutRules"),
-                );
-            }
-        };
-        let m_numSections = match m_numSections {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("numSections"),
-                );
-            }
-        };
-        let m_contentsSectionIndex = match m_contentsSectionIndex {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "contentsSectionIndex",
-                    ),
-                );
-            }
-        };
-        let m_contentsSectionOffset = match m_contentsSectionOffset {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "contentsSectionOffset",
-                    ),
-                );
-            }
-        };
-        let m_contentsClassNameSectionIndex = match m_contentsClassNameSectionIndex {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "contentsClassNameSectionIndex",
-                    ),
-                );
-            }
-        };
-        let m_contentsClassNameSectionOffset = match m_contentsClassNameSectionOffset {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "contentsClassNameSectionOffset",
-                    ),
-                );
-            }
-        };
-        let m_contentsVersion = match m_contentsVersion {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("contentsVersion"),
-                );
-            }
-        };
-        let m_flags = match m_flags {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("flags"),
-                );
-            }
-        };
-        let m_pad = match m_pad {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("pad"),
-                );
-            }
-        };
-        _serde::__private::Ok(hkPackfileHeader {
-            __ptr,
-            m_magic,
-            m_userTag,
-            m_fileVersion,
-            m_layoutRules,
-            m_numSections,
-            m_contentsSectionIndex,
-            m_contentsSectionOffset,
-            m_contentsClassNameSectionIndex,
-            m_contentsClassNameSectionOffset,
-            m_contentsVersion,
-            m_flags,
-            m_pad,
-        })
-    }
-    #[allow(clippy::manual_unwrap_or_default)]
-    fn visit_struct<__A>(
-        self,
-        mut __map: __A,
-    ) -> _serde::__private::Result<Self::Value, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        let __ptr = __A::class_ptr(&mut __map);
-        let mut m_magic: _serde::__private::Option<[i32; 2usize]> = _serde::__private::None;
-        let mut m_userTag: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_fileVersion: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_layoutRules: _serde::__private::Option<[u8; 4usize]> = _serde::__private::None;
-        let mut m_numSections: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_contentsSectionIndex: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_contentsSectionOffset: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_contentsClassNameSectionIndex: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_contentsClassNameSectionOffset: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_contentsVersion: _serde::__private::Option<[char; 16usize]> = _serde::__private::None;
-        let mut m_flags: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_pad: _serde::__private::Option<[i32; 1usize]> = _serde::__private::None;
-        for _ in 0..12usize {
-            #[cfg(not(feature = "strict"))]
-            let __res = __A::next_key::<__Field>(&mut __map)
-                .unwrap_or(Some(__Field::__ignore));
-            #[cfg(feature = "strict")]
-            let __res = __A::next_key::<__Field>(&mut __map)?;
-            if let _serde::__private::Some(__key) = __res {
-                match __key {
-                    __Field::m_magic => {
-                        if _serde::__private::Option::is_some(&m_magic) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field("magic"),
-                            );
-                        }
-                        m_magic = _serde::__private::Some(
-                            match __A::next_value::<[i32; 2usize]>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_userTag => {
-                        if _serde::__private::Option::is_some(&m_userTag) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "userTag",
-                                ),
-                            );
-                        }
-                        m_userTag = _serde::__private::Some(
-                            match __A::next_value::<i32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_fileVersion => {
-                        if _serde::__private::Option::is_some(&m_fileVersion) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "fileVersion",
-                                ),
-                            );
-                        }
-                        m_fileVersion = _serde::__private::Some(
-                            match __A::next_value::<i32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_layoutRules => {
-                        if _serde::__private::Option::is_some(&m_layoutRules) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "layoutRules",
-                                ),
-                            );
-                        }
-                        m_layoutRules = _serde::__private::Some(
-                            match __A::next_value::<[u8; 4usize]>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_numSections => {
-                        if _serde::__private::Option::is_some(&m_numSections) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "numSections",
-                                ),
-                            );
-                        }
-                        m_numSections = _serde::__private::Some(
-                            match __A::next_value::<i32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_contentsSectionIndex => {
-                        if _serde::__private::Option::is_some(&m_contentsSectionIndex) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "contentsSectionIndex",
-                                ),
-                            );
-                        }
-                        m_contentsSectionIndex = _serde::__private::Some(
-                            match __A::next_value::<i32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_contentsSectionOffset => {
-                        if _serde::__private::Option::is_some(&m_contentsSectionOffset) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "contentsSectionOffset",
-                                ),
-                            );
-                        }
-                        m_contentsSectionOffset = _serde::__private::Some(
-                            match __A::next_value::<i32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_contentsClassNameSectionIndex => {
-                        if _serde::__private::Option::is_some(
-                            &m_contentsClassNameSectionIndex,
-                        ) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "contentsClassNameSectionIndex",
-                                ),
-                            );
-                        }
-                        m_contentsClassNameSectionIndex = _serde::__private::Some(
-                            match __A::next_value::<i32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_contentsClassNameSectionOffset => {
-                        if _serde::__private::Option::is_some(
-                            &m_contentsClassNameSectionOffset,
-                        ) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "contentsClassNameSectionOffset",
-                                ),
-                            );
-                        }
-                        m_contentsClassNameSectionOffset = _serde::__private::Some(
-                            match __A::next_value::<i32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_contentsVersion => {
-                        if _serde::__private::Option::is_some(&m_contentsVersion) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "contentsVersion",
-                                ),
-                            );
-                        }
-                        m_contentsVersion = _serde::__private::Some(
-                            match __A::next_value::<[char; 16usize]>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_flags => {
-                        if _serde::__private::Option::is_some(&m_flags) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field("flags"),
-                            );
-                        }
-                        m_flags = _serde::__private::Some(
-                            match __A::next_value::<i32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_pad => {
-                        if _serde::__private::Option::is_some(&m_pad) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field("pad"),
-                            );
-                        }
-                        m_pad = _serde::__private::Some(
-                            match __A::next_value::<[i32; 1usize]>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    _ => {}
-                }
-            }
-        }
-        let m_magic = match m_magic {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("magic"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_userTag = match m_userTag {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("userTag"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_fileVersion = match m_fileVersion {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("fileVersion"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_layoutRules = match m_layoutRules {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("layoutRules"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_numSections = match m_numSections {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("numSections"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_contentsSectionIndex = match m_contentsSectionIndex {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "contentsSectionIndex",
-                    ),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_contentsSectionOffset = match m_contentsSectionOffset {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "contentsSectionOffset",
-                    ),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_contentsClassNameSectionIndex = match m_contentsClassNameSectionIndex {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "contentsClassNameSectionIndex",
-                    ),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_contentsClassNameSectionOffset = match m_contentsClassNameSectionOffset {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "contentsClassNameSectionOffset",
-                    ),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_contentsVersion = match m_contentsVersion {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("contentsVersion"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_flags = match m_flags {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("flags"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_pad = match m_pad {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("pad"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        _serde::__private::Ok(hkPackfileHeader {
-            __ptr,
-            m_magic,
-            m_userTag,
-            m_fileVersion,
-            m_layoutRules,
-            m_numSections,
-            m_contentsSectionIndex,
-            m_contentsSectionOffset,
-            m_contentsClassNameSectionIndex,
-            m_contentsClassNameSectionOffset,
-            m_contentsVersion,
-            m_flags,
-            m_pad,
-        })
-    }
-}
 #[doc(hidden)]
 #[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
 const _: () = {
+    use havok_serde as _serde;
     #[automatically_derived]
     impl<'de> _serde::Deserialize<'de> for hkPackfileHeader {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
         {
+            #[allow(non_camel_case_types)]
+            enum __Field {
+                m_pad,
+                m_flags,
+                m_contentsVersion,
+                m_contentsClassNameSectionOffset,
+                m_contentsClassNameSectionIndex,
+                m_contentsSectionOffset,
+                m_contentsSectionIndex,
+                m_numSections,
+                m_layoutRules,
+                m_fileVersion,
+                m_userTag,
+                m_magic,
+                __ignore,
+            }
+            struct __FieldVisitor;
+            impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+                type Value = __Field;
+                fn expecting(
+                    &self,
+                    __formatter: &mut core::fmt::Formatter,
+                ) -> core::fmt::Result {
+                    core::fmt::Formatter::write_str(__formatter, "field identifier")
+                }
+                /// Intended for use in XML.
+                #[allow(clippy::match_single_binding)]
+                #[allow(clippy::reversed_empty_ranges)]
+                #[allow(clippy::single_match)]
+                fn visit_key<__E>(
+                    self,
+                    __value: &str,
+                ) -> core::result::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match __value {
+                        "pad" => Ok(__Field::m_pad),
+                        "flags" => Ok(__Field::m_flags),
+                        "contentsVersion" => Ok(__Field::m_contentsVersion),
+                        "contentsClassNameSectionOffset" => {
+                            Ok(__Field::m_contentsClassNameSectionOffset)
+                        }
+                        "contentsClassNameSectionIndex" => {
+                            Ok(__Field::m_contentsClassNameSectionIndex)
+                        }
+                        "contentsSectionOffset" => Ok(__Field::m_contentsSectionOffset),
+                        "contentsSectionIndex" => Ok(__Field::m_contentsSectionIndex),
+                        "numSections" => Ok(__Field::m_numSections),
+                        "layoutRules" => Ok(__Field::m_layoutRules),
+                        "fileVersion" => Ok(__Field::m_fileVersion),
+                        "userTag" => Ok(__Field::m_userTag),
+                        "magic" => Ok(__Field::m_magic),
+                        _ => Ok(__Field::__ignore),
+                    }
+                }
+            }
+            impl<'de> _serde::Deserialize<'de> for __Field {
+                #[inline]
+                fn deserialize<__D>(
+                    __deserializer: __D,
+                ) -> core::result::Result<Self, __D::Error>
+                where
+                    __D: _serde::Deserializer<'de>,
+                {
+                    _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+                }
+            }
+            struct __hkPackfileHeaderVisitor<'de> {
+                marker: _serde::__private::PhantomData<hkPackfileHeader>,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            #[allow(clippy::match_single_binding)]
+            #[allow(clippy::reversed_empty_ranges)]
+            #[allow(clippy::single_match)]
+            impl<'de> _serde::de::Visitor<'de> for __hkPackfileHeaderVisitor<'de> {
+                type Value = hkPackfileHeader;
+                fn expecting(
+                    &self,
+                    __formatter: &mut core::fmt::Formatter,
+                ) -> core::fmt::Result {
+                    core::fmt::Formatter::write_str(
+                        __formatter,
+                        "struct hkPackfileHeader",
+                    )
+                }
+                fn visit_struct_for_bytes<__A>(
+                    self,
+                    mut __map: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::MapAccess<'de>,
+                {
+                    let __ptr = __A::class_ptr(&mut __map);
+                    let mut m_magic: _serde::__private::Option<[i32; 2usize]> = _serde::__private::None;
+                    let mut m_userTag: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_fileVersion: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_layoutRules: _serde::__private::Option<[u8; 4usize]> = _serde::__private::None;
+                    let mut m_numSections: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_contentsSectionIndex: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_contentsSectionOffset: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_contentsClassNameSectionIndex: _serde::__private::Option<
+                        i32,
+                    > = _serde::__private::None;
+                    let mut m_contentsClassNameSectionOffset: _serde::__private::Option<
+                        i32,
+                    > = _serde::__private::None;
+                    let mut m_contentsVersion: _serde::__private::Option<
+                        [char; 16usize],
+                    > = _serde::__private::None;
+                    let mut m_flags: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_pad: _serde::__private::Option<[i32; 1usize]> = _serde::__private::None;
+                    for i in 0..12usize {
+                        match i {
+                            0usize => {
+                                if _serde::__private::Option::is_some(&m_magic) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("magic"),
+                                    );
+                                }
+                                m_magic = _serde::__private::Some(
+                                    match __A::next_value::<[i32; 2usize]>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            1usize => {
+                                if _serde::__private::Option::is_some(&m_userTag) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "userTag",
+                                        ),
+                                    );
+                                }
+                                m_userTag = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            2usize => {
+                                if _serde::__private::Option::is_some(&m_fileVersion) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "fileVersion",
+                                        ),
+                                    );
+                                }
+                                m_fileVersion = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            3usize => {
+                                if _serde::__private::Option::is_some(&m_layoutRules) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "layoutRules",
+                                        ),
+                                    );
+                                }
+                                m_layoutRules = _serde::__private::Some(
+                                    match __A::next_value::<[u8; 4usize]>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            4usize => {
+                                if _serde::__private::Option::is_some(&m_numSections) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "numSections",
+                                        ),
+                                    );
+                                }
+                                m_numSections = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            5usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_contentsSectionIndex,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "contentsSectionIndex",
+                                        ),
+                                    );
+                                }
+                                m_contentsSectionIndex = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            6usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_contentsSectionOffset,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "contentsSectionOffset",
+                                        ),
+                                    );
+                                }
+                                m_contentsSectionOffset = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            7usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_contentsClassNameSectionIndex,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "contentsClassNameSectionIndex",
+                                        ),
+                                    );
+                                }
+                                m_contentsClassNameSectionIndex = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            8usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_contentsClassNameSectionOffset,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "contentsClassNameSectionOffset",
+                                        ),
+                                    );
+                                }
+                                m_contentsClassNameSectionOffset = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            9usize => {
+                                if _serde::__private::Option::is_some(&m_contentsVersion) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "contentsVersion",
+                                        ),
+                                    );
+                                }
+                                m_contentsVersion = _serde::__private::Some(
+                                    match __A::next_value::<[char; 16usize]>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            10usize => {
+                                if _serde::__private::Option::is_some(&m_flags) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("flags"),
+                                    );
+                                }
+                                m_flags = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            11usize => {
+                                if _serde::__private::Option::is_some(&m_pad) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("pad"),
+                                    );
+                                }
+                                m_pad = _serde::__private::Some(
+                                    match __A::next_value::<[i32; 1usize]>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            _ => {}
+                        }
+                    }
+                    let m_magic = match m_magic {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("magic"),
+                            );
+                        }
+                    };
+                    let m_userTag = match m_userTag {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("userTag"),
+                            );
+                        }
+                    };
+                    let m_fileVersion = match m_fileVersion {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "fileVersion",
+                                ),
+                            );
+                        }
+                    };
+                    let m_layoutRules = match m_layoutRules {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "layoutRules",
+                                ),
+                            );
+                        }
+                    };
+                    let m_numSections = match m_numSections {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "numSections",
+                                ),
+                            );
+                        }
+                    };
+                    let m_contentsSectionIndex = match m_contentsSectionIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "contentsSectionIndex",
+                                ),
+                            );
+                        }
+                    };
+                    let m_contentsSectionOffset = match m_contentsSectionOffset {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "contentsSectionOffset",
+                                ),
+                            );
+                        }
+                    };
+                    let m_contentsClassNameSectionIndex = match m_contentsClassNameSectionIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "contentsClassNameSectionIndex",
+                                ),
+                            );
+                        }
+                    };
+                    let m_contentsClassNameSectionOffset = match m_contentsClassNameSectionOffset {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "contentsClassNameSectionOffset",
+                                ),
+                            );
+                        }
+                    };
+                    let m_contentsVersion = match m_contentsVersion {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "contentsVersion",
+                                ),
+                            );
+                        }
+                    };
+                    let m_flags = match m_flags {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("flags"),
+                            );
+                        }
+                    };
+                    let m_pad = match m_pad {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("pad"),
+                            );
+                        }
+                    };
+                    _serde::__private::Ok(hkPackfileHeader {
+                        __ptr,
+                        m_magic,
+                        m_userTag,
+                        m_fileVersion,
+                        m_layoutRules,
+                        m_numSections,
+                        m_contentsSectionIndex,
+                        m_contentsSectionOffset,
+                        m_contentsClassNameSectionIndex,
+                        m_contentsClassNameSectionOffset,
+                        m_contentsVersion,
+                        m_flags,
+                        m_pad,
+                    })
+                }
+                #[allow(clippy::manual_unwrap_or_default)]
+                fn visit_struct<__A>(
+                    self,
+                    mut __map: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::MapAccess<'de>,
+                {
+                    let mut m_pad: _serde::__private::Option<[i32; 1usize]> = _serde::__private::None;
+                    let mut m_flags: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_contentsVersion: _serde::__private::Option<
+                        [char; 16usize],
+                    > = _serde::__private::None;
+                    let mut m_contentsClassNameSectionOffset: _serde::__private::Option<
+                        i32,
+                    > = _serde::__private::None;
+                    let mut m_contentsClassNameSectionIndex: _serde::__private::Option<
+                        i32,
+                    > = _serde::__private::None;
+                    let mut m_contentsSectionOffset: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_contentsSectionIndex: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numSections: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_layoutRules: _serde::__private::Option<[u8; 4usize]> = _serde::__private::None;
+                    let mut m_fileVersion: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_userTag: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_magic: _serde::__private::Option<[i32; 2usize]> = _serde::__private::None;
+                    while let _serde::__private::Some(__key) = {
+                        #[cfg(not(feature = "strict"))]
+                        let __key = __A::next_key::<__Field>(&mut __map)
+                            .unwrap_or(Some(__Field::__ignore));
+                        #[cfg(feature = "strict")]
+                        let __key = __A::next_key::<__Field>(&mut __map)?;
+                        __key
+                    } {
+                        match __key {
+                            __Field::m_pad => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_pad) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("pad"),
+                                    );
+                                }
+                                m_pad = _serde::__private::Some(
+                                    match __A::next_value::<[i32; 1usize]>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_flags => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_flags) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("flags"),
+                                    );
+                                }
+                                m_flags = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_contentsVersion => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_contentsVersion) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "contentsVersion",
+                                        ),
+                                    );
+                                }
+                                m_contentsVersion = _serde::__private::Some(
+                                    match __A::next_value::<[char; 16usize]>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_contentsClassNameSectionOffset => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_contentsClassNameSectionOffset,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "contentsClassNameSectionOffset",
+                                        ),
+                                    );
+                                }
+                                m_contentsClassNameSectionOffset = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_contentsClassNameSectionIndex => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_contentsClassNameSectionIndex,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "contentsClassNameSectionIndex",
+                                        ),
+                                    );
+                                }
+                                m_contentsClassNameSectionIndex = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_contentsSectionOffset => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_contentsSectionOffset,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "contentsSectionOffset",
+                                        ),
+                                    );
+                                }
+                                m_contentsSectionOffset = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_contentsSectionIndex => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_contentsSectionIndex,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "contentsSectionIndex",
+                                        ),
+                                    );
+                                }
+                                m_contentsSectionIndex = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_numSections => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_numSections) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "numSections",
+                                        ),
+                                    );
+                                }
+                                m_numSections = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_layoutRules => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_layoutRules) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "layoutRules",
+                                        ),
+                                    );
+                                }
+                                m_layoutRules = _serde::__private::Some(
+                                    match __A::next_value::<[u8; 4usize]>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_fileVersion => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_fileVersion) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "fileVersion",
+                                        ),
+                                    );
+                                }
+                                m_fileVersion = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_userTag => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_userTag) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "userTag",
+                                        ),
+                                    );
+                                }
+                                m_userTag = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_magic => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_magic) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("magic"),
+                                    );
+                                }
+                                m_magic = _serde::__private::Some(
+                                    match __A::next_value::<[i32; 2usize]>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            _ => {}
+                        }
+                    }
+                    let m_pad = match m_pad {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("pad"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_flags = match m_flags {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("flags"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_contentsVersion = match m_contentsVersion {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "contentsVersion",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_contentsClassNameSectionOffset = match m_contentsClassNameSectionOffset {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "contentsClassNameSectionOffset",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_contentsClassNameSectionIndex = match m_contentsClassNameSectionIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "contentsClassNameSectionIndex",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_contentsSectionOffset = match m_contentsSectionOffset {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "contentsSectionOffset",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_contentsSectionIndex = match m_contentsSectionIndex {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "contentsSectionIndex",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_numSections = match m_numSections {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "numSections",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_layoutRules = match m_layoutRules {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "layoutRules",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_fileVersion = match m_fileVersion {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "fileVersion",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_userTag = match m_userTag {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("userTag"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_magic = match m_magic {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("magic"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let __ptr = __A::class_ptr(&mut __map);
+                    _serde::__private::Ok(hkPackfileHeader {
+                        __ptr,
+                        m_magic,
+                        m_userTag,
+                        m_fileVersion,
+                        m_layoutRules,
+                        m_numSections,
+                        m_contentsSectionIndex,
+                        m_contentsSectionOffset,
+                        m_contentsClassNameSectionIndex,
+                        m_contentsClassNameSectionOffset,
+                        m_contentsVersion,
+                        m_flags,
+                        m_pad,
+                    })
+                }
+            }
             const FIELDS: &[&str] = &[
                 "magic",
                 "userTag",

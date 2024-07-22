@@ -139,882 +139,996 @@ const _: () = {
         }
     }
 };
-use havok_serde as _serde;
-#[allow(non_camel_case_types)]
-enum __Field {
-    m_legs,
-    m_raycastDistanceUp,
-    m_raycastDistanceDown,
-    m_originalGroundHeightMS,
-    m_verticalOffset,
-    m_collisionFilterInfo,
-    m_forwardAlignFraction,
-    m_sidewaysAlignFraction,
-    m_sidewaysSampleWidth,
-    m_lockFeetWhenPlanted,
-    m_useCharacterUpVector,
-    m_isQuadrupedNarrow,
-    __ignore,
-}
-struct __FieldVisitor;
-impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
-    type Value = __Field;
-    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
-        core::fmt::Formatter::write_str(__formatter, "field identifier")
-    }
-    /// Intended for use in XML.
-    #[allow(clippy::match_single_binding)]
-    #[allow(clippy::reversed_empty_ranges)]
-    #[allow(clippy::single_match)]
-    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
-    where
-        __E: _serde::de::Error,
-    {
-        match __value {
-            "legs" => Ok(__Field::m_legs),
-            "raycastDistanceUp" => Ok(__Field::m_raycastDistanceUp),
-            "raycastDistanceDown" => Ok(__Field::m_raycastDistanceDown),
-            "originalGroundHeightMS" => Ok(__Field::m_originalGroundHeightMS),
-            "verticalOffset" => Ok(__Field::m_verticalOffset),
-            "collisionFilterInfo" => Ok(__Field::m_collisionFilterInfo),
-            "forwardAlignFraction" => Ok(__Field::m_forwardAlignFraction),
-            "sidewaysAlignFraction" => Ok(__Field::m_sidewaysAlignFraction),
-            "sidewaysSampleWidth" => Ok(__Field::m_sidewaysSampleWidth),
-            "lockFeetWhenPlanted" => Ok(__Field::m_lockFeetWhenPlanted),
-            "useCharacterUpVector" => Ok(__Field::m_useCharacterUpVector),
-            "isQuadrupedNarrow" => Ok(__Field::m_isQuadrupedNarrow),
-            _ => Ok(__Field::__ignore),
-        }
-    }
-}
-impl<'de> _serde::Deserialize<'de> for __Field {
-    #[inline]
-    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
-    where
-        __D: _serde::Deserializer<'de>,
-    {
-        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
-    }
-}
-pub(super) struct __hkbFootIkDriverInfoVisitor<'de> {
-    marker: core::marker::PhantomData<hkbFootIkDriverInfo>,
-    lifetime: core::marker::PhantomData<&'de ()>,
-}
-impl<'de> __hkbFootIkDriverInfoVisitor<'de> {
-    /// # Purpose of this method
-    /// To reproduce C++ field inheritance, we will have the field internal implementation
-    /// of deserialization partially exposed and reused.
-    #[inline]
-    pub(super) fn visit_as_parent<__A>(
-        __map: &mut __A,
-    ) -> _serde::__private::Result<hkbFootIkDriverInfo, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        _serde::de::Visitor::visit_struct(
-            Self {
-                marker: _serde::__private::PhantomData::<hkbFootIkDriverInfo>,
-                lifetime: _serde::__private::PhantomData,
-            },
-            __map,
-        )
-    }
-}
-#[allow(clippy::match_single_binding)]
-#[allow(clippy::reversed_empty_ranges)]
-#[allow(clippy::single_match)]
-impl<'de> _serde::de::Visitor<'de> for __hkbFootIkDriverInfoVisitor<'de> {
-    type Value = hkbFootIkDriverInfo;
-    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
-        core::fmt::Formatter::write_str(__formatter, "struct hkbFootIkDriverInfo")
-    }
-    fn visit_struct_for_bytes<__A>(
-        self,
-        mut __map: __A,
-    ) -> _serde::__private::Result<Self::Value, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::parent_value(&mut __map)?;
-        let mut m_legs: _serde::__private::Option<Vec<hkbFootIkDriverInfoLeg>> = _serde::__private::None;
-        let mut m_raycastDistanceUp: _serde::__private::Option<f32> = _serde::__private::None;
-        let mut m_raycastDistanceDown: _serde::__private::Option<f32> = _serde::__private::None;
-        let mut m_originalGroundHeightMS: _serde::__private::Option<f32> = _serde::__private::None;
-        let mut m_verticalOffset: _serde::__private::Option<f32> = _serde::__private::None;
-        let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
-        let mut m_forwardAlignFraction: _serde::__private::Option<f32> = _serde::__private::None;
-        let mut m_sidewaysAlignFraction: _serde::__private::Option<f32> = _serde::__private::None;
-        let mut m_sidewaysSampleWidth: _serde::__private::Option<f32> = _serde::__private::None;
-        let mut m_lockFeetWhenPlanted: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_useCharacterUpVector: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_isQuadrupedNarrow: _serde::__private::Option<bool> = _serde::__private::None;
-        for i in 0..12usize {
-            match i {
-                0usize => {
-                    if _serde::__private::Option::is_some(&m_legs) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("legs"),
-                        );
-                    }
-                    m_legs = _serde::__private::Some(
-                        match __A::next_value::<
-                            Vec<hkbFootIkDriverInfoLeg>,
-                        >(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                1usize => {
-                    if _serde::__private::Option::is_some(&m_raycastDistanceUp) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "raycastDistanceUp",
-                            ),
-                        );
-                    }
-                    m_raycastDistanceUp = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                2usize => {
-                    if _serde::__private::Option::is_some(&m_raycastDistanceDown) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "raycastDistanceDown",
-                            ),
-                        );
-                    }
-                    m_raycastDistanceDown = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                3usize => {
-                    if _serde::__private::Option::is_some(&m_originalGroundHeightMS) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "originalGroundHeightMS",
-                            ),
-                        );
-                    }
-                    m_originalGroundHeightMS = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                4usize => {
-                    if _serde::__private::Option::is_some(&m_verticalOffset) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "verticalOffset",
-                            ),
-                        );
-                    }
-                    m_verticalOffset = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                5usize => {
-                    if _serde::__private::Option::is_some(&m_collisionFilterInfo) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "collisionFilterInfo",
-                            ),
-                        );
-                    }
-                    m_collisionFilterInfo = _serde::__private::Some(
-                        match __A::next_value::<u32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                6usize => {
-                    if _serde::__private::Option::is_some(&m_forwardAlignFraction) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "forwardAlignFraction",
-                            ),
-                        );
-                    }
-                    m_forwardAlignFraction = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                7usize => {
-                    if _serde::__private::Option::is_some(&m_sidewaysAlignFraction) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "sidewaysAlignFraction",
-                            ),
-                        );
-                    }
-                    m_sidewaysAlignFraction = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                8usize => {
-                    if _serde::__private::Option::is_some(&m_sidewaysSampleWidth) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "sidewaysSampleWidth",
-                            ),
-                        );
-                    }
-                    m_sidewaysSampleWidth = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                9usize => {
-                    if _serde::__private::Option::is_some(&m_lockFeetWhenPlanted) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "lockFeetWhenPlanted",
-                            ),
-                        );
-                    }
-                    m_lockFeetWhenPlanted = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                10usize => {
-                    if _serde::__private::Option::is_some(&m_useCharacterUpVector) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "useCharacterUpVector",
-                            ),
-                        );
-                    }
-                    m_useCharacterUpVector = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                11usize => {
-                    if _serde::__private::Option::is_some(&m_isQuadrupedNarrow) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "isQuadrupedNarrow",
-                            ),
-                        );
-                    }
-                    m_isQuadrupedNarrow = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                _ => {}
-            }
-        }
-        __A::pad(&mut __map, 1usize, 5usize)?;
-        let m_legs = match m_legs {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("legs"),
-                );
-            }
-        };
-        let m_raycastDistanceUp = match m_raycastDistanceUp {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("raycastDistanceUp"),
-                );
-            }
-        };
-        let m_raycastDistanceDown = match m_raycastDistanceDown {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "raycastDistanceDown",
-                    ),
-                );
-            }
-        };
-        let m_originalGroundHeightMS = match m_originalGroundHeightMS {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "originalGroundHeightMS",
-                    ),
-                );
-            }
-        };
-        let m_verticalOffset = match m_verticalOffset {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("verticalOffset"),
-                );
-            }
-        };
-        let m_collisionFilterInfo = match m_collisionFilterInfo {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "collisionFilterInfo",
-                    ),
-                );
-            }
-        };
-        let m_forwardAlignFraction = match m_forwardAlignFraction {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "forwardAlignFraction",
-                    ),
-                );
-            }
-        };
-        let m_sidewaysAlignFraction = match m_sidewaysAlignFraction {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "sidewaysAlignFraction",
-                    ),
-                );
-            }
-        };
-        let m_sidewaysSampleWidth = match m_sidewaysSampleWidth {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "sidewaysSampleWidth",
-                    ),
-                );
-            }
-        };
-        let m_lockFeetWhenPlanted = match m_lockFeetWhenPlanted {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "lockFeetWhenPlanted",
-                    ),
-                );
-            }
-        };
-        let m_useCharacterUpVector = match m_useCharacterUpVector {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "useCharacterUpVector",
-                    ),
-                );
-            }
-        };
-        let m_isQuadrupedNarrow = match m_isQuadrupedNarrow {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("isQuadrupedNarrow"),
-                );
-            }
-        };
-        _serde::__private::Ok(hkbFootIkDriverInfo {
-            __ptr,
-            parent,
-            m_legs,
-            m_raycastDistanceUp,
-            m_raycastDistanceDown,
-            m_originalGroundHeightMS,
-            m_verticalOffset,
-            m_collisionFilterInfo,
-            m_forwardAlignFraction,
-            m_sidewaysAlignFraction,
-            m_sidewaysSampleWidth,
-            m_lockFeetWhenPlanted,
-            m_useCharacterUpVector,
-            m_isQuadrupedNarrow,
-        })
-    }
-    #[allow(clippy::manual_unwrap_or_default)]
-    fn visit_struct<__A>(
-        self,
-        mut __map: __A,
-    ) -> _serde::__private::Result<Self::Value, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        let __ptr = __A::class_ptr(&mut __map);
-        let parent = __hkReferencedObjectVisitor::visit_as_parent(&mut __map)?;
-        let mut m_legs: _serde::__private::Option<Vec<hkbFootIkDriverInfoLeg>> = _serde::__private::None;
-        let mut m_raycastDistanceUp: _serde::__private::Option<f32> = _serde::__private::None;
-        let mut m_raycastDistanceDown: _serde::__private::Option<f32> = _serde::__private::None;
-        let mut m_originalGroundHeightMS: _serde::__private::Option<f32> = _serde::__private::None;
-        let mut m_verticalOffset: _serde::__private::Option<f32> = _serde::__private::None;
-        let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
-        let mut m_forwardAlignFraction: _serde::__private::Option<f32> = _serde::__private::None;
-        let mut m_sidewaysAlignFraction: _serde::__private::Option<f32> = _serde::__private::None;
-        let mut m_sidewaysSampleWidth: _serde::__private::Option<f32> = _serde::__private::None;
-        let mut m_lockFeetWhenPlanted: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_useCharacterUpVector: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_isQuadrupedNarrow: _serde::__private::Option<bool> = _serde::__private::None;
-        for _ in 0..12usize {
-            #[cfg(not(feature = "strict"))]
-            let __res = __A::next_key::<__Field>(&mut __map)
-                .unwrap_or(Some(__Field::__ignore));
-            #[cfg(feature = "strict")]
-            let __res = __A::next_key::<__Field>(&mut __map)?;
-            if let _serde::__private::Some(__key) = __res {
-                match __key {
-                    __Field::m_legs => {
-                        if _serde::__private::Option::is_some(&m_legs) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field("legs"),
-                            );
-                        }
-                        m_legs = _serde::__private::Some(
-                            match __A::next_value::<
-                                Vec<hkbFootIkDriverInfoLeg>,
-                            >(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_raycastDistanceUp => {
-                        if _serde::__private::Option::is_some(&m_raycastDistanceUp) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "raycastDistanceUp",
-                                ),
-                            );
-                        }
-                        m_raycastDistanceUp = _serde::__private::Some(
-                            match __A::next_value::<f32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_raycastDistanceDown => {
-                        if _serde::__private::Option::is_some(&m_raycastDistanceDown) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "raycastDistanceDown",
-                                ),
-                            );
-                        }
-                        m_raycastDistanceDown = _serde::__private::Some(
-                            match __A::next_value::<f32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_originalGroundHeightMS => {
-                        if _serde::__private::Option::is_some(
-                            &m_originalGroundHeightMS,
-                        ) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "originalGroundHeightMS",
-                                ),
-                            );
-                        }
-                        m_originalGroundHeightMS = _serde::__private::Some(
-                            match __A::next_value::<f32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_verticalOffset => {
-                        if _serde::__private::Option::is_some(&m_verticalOffset) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "verticalOffset",
-                                ),
-                            );
-                        }
-                        m_verticalOffset = _serde::__private::Some(
-                            match __A::next_value::<f32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_collisionFilterInfo => {
-                        if _serde::__private::Option::is_some(&m_collisionFilterInfo) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "collisionFilterInfo",
-                                ),
-                            );
-                        }
-                        m_collisionFilterInfo = _serde::__private::Some(
-                            match __A::next_value::<u32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_forwardAlignFraction => {
-                        if _serde::__private::Option::is_some(&m_forwardAlignFraction) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "forwardAlignFraction",
-                                ),
-                            );
-                        }
-                        m_forwardAlignFraction = _serde::__private::Some(
-                            match __A::next_value::<f32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_sidewaysAlignFraction => {
-                        if _serde::__private::Option::is_some(&m_sidewaysAlignFraction) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "sidewaysAlignFraction",
-                                ),
-                            );
-                        }
-                        m_sidewaysAlignFraction = _serde::__private::Some(
-                            match __A::next_value::<f32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_sidewaysSampleWidth => {
-                        if _serde::__private::Option::is_some(&m_sidewaysSampleWidth) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "sidewaysSampleWidth",
-                                ),
-                            );
-                        }
-                        m_sidewaysSampleWidth = _serde::__private::Some(
-                            match __A::next_value::<f32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_lockFeetWhenPlanted => {
-                        if _serde::__private::Option::is_some(&m_lockFeetWhenPlanted) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "lockFeetWhenPlanted",
-                                ),
-                            );
-                        }
-                        m_lockFeetWhenPlanted = _serde::__private::Some(
-                            match __A::next_value::<bool>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_useCharacterUpVector => {
-                        if _serde::__private::Option::is_some(&m_useCharacterUpVector) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "useCharacterUpVector",
-                                ),
-                            );
-                        }
-                        m_useCharacterUpVector = _serde::__private::Some(
-                            match __A::next_value::<bool>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_isQuadrupedNarrow => {
-                        if _serde::__private::Option::is_some(&m_isQuadrupedNarrow) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "isQuadrupedNarrow",
-                                ),
-                            );
-                        }
-                        m_isQuadrupedNarrow = _serde::__private::Some(
-                            match __A::next_value::<bool>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    _ => {}
-                }
-            }
-        }
-        let m_legs = match m_legs {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("legs"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_raycastDistanceUp = match m_raycastDistanceUp {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("raycastDistanceUp"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_raycastDistanceDown = match m_raycastDistanceDown {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "raycastDistanceDown",
-                    ),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_originalGroundHeightMS = match m_originalGroundHeightMS {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "originalGroundHeightMS",
-                    ),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_verticalOffset = match m_verticalOffset {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("verticalOffset"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_collisionFilterInfo = match m_collisionFilterInfo {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "collisionFilterInfo",
-                    ),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_forwardAlignFraction = match m_forwardAlignFraction {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "forwardAlignFraction",
-                    ),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_sidewaysAlignFraction = match m_sidewaysAlignFraction {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "sidewaysAlignFraction",
-                    ),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_sidewaysSampleWidth = match m_sidewaysSampleWidth {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "sidewaysSampleWidth",
-                    ),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_lockFeetWhenPlanted = match m_lockFeetWhenPlanted {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "lockFeetWhenPlanted",
-                    ),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_useCharacterUpVector = match m_useCharacterUpVector {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "useCharacterUpVector",
-                    ),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_isQuadrupedNarrow = match m_isQuadrupedNarrow {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("isQuadrupedNarrow"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        _serde::__private::Ok(hkbFootIkDriverInfo {
-            __ptr,
-            parent,
-            m_legs,
-            m_raycastDistanceUp,
-            m_raycastDistanceDown,
-            m_originalGroundHeightMS,
-            m_verticalOffset,
-            m_collisionFilterInfo,
-            m_forwardAlignFraction,
-            m_sidewaysAlignFraction,
-            m_sidewaysSampleWidth,
-            m_lockFeetWhenPlanted,
-            m_useCharacterUpVector,
-            m_isQuadrupedNarrow,
-        })
-    }
-}
 #[doc(hidden)]
 #[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
 const _: () = {
+    use havok_serde as _serde;
     #[automatically_derived]
     impl<'de> _serde::Deserialize<'de> for hkbFootIkDriverInfo {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
         {
+            #[allow(non_camel_case_types)]
+            enum __Field {
+                m_isQuadrupedNarrow,
+                m_useCharacterUpVector,
+                m_lockFeetWhenPlanted,
+                m_sidewaysSampleWidth,
+                m_sidewaysAlignFraction,
+                m_forwardAlignFraction,
+                m_collisionFilterInfo,
+                m_verticalOffset,
+                m_originalGroundHeightMS,
+                m_raycastDistanceDown,
+                m_raycastDistanceUp,
+                m_legs,
+                __ignore,
+            }
+            struct __FieldVisitor;
+            impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+                type Value = __Field;
+                fn expecting(
+                    &self,
+                    __formatter: &mut core::fmt::Formatter,
+                ) -> core::fmt::Result {
+                    core::fmt::Formatter::write_str(__formatter, "field identifier")
+                }
+                /// Intended for use in XML.
+                #[allow(clippy::match_single_binding)]
+                #[allow(clippy::reversed_empty_ranges)]
+                #[allow(clippy::single_match)]
+                fn visit_key<__E>(
+                    self,
+                    __value: &str,
+                ) -> core::result::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match __value {
+                        "isQuadrupedNarrow" => Ok(__Field::m_isQuadrupedNarrow),
+                        "useCharacterUpVector" => Ok(__Field::m_useCharacterUpVector),
+                        "lockFeetWhenPlanted" => Ok(__Field::m_lockFeetWhenPlanted),
+                        "sidewaysSampleWidth" => Ok(__Field::m_sidewaysSampleWidth),
+                        "sidewaysAlignFraction" => Ok(__Field::m_sidewaysAlignFraction),
+                        "forwardAlignFraction" => Ok(__Field::m_forwardAlignFraction),
+                        "collisionFilterInfo" => Ok(__Field::m_collisionFilterInfo),
+                        "verticalOffset" => Ok(__Field::m_verticalOffset),
+                        "originalGroundHeightMS" => Ok(__Field::m_originalGroundHeightMS),
+                        "raycastDistanceDown" => Ok(__Field::m_raycastDistanceDown),
+                        "raycastDistanceUp" => Ok(__Field::m_raycastDistanceUp),
+                        "legs" => Ok(__Field::m_legs),
+                        _ => Ok(__Field::__ignore),
+                    }
+                }
+            }
+            impl<'de> _serde::Deserialize<'de> for __Field {
+                #[inline]
+                fn deserialize<__D>(
+                    __deserializer: __D,
+                ) -> core::result::Result<Self, __D::Error>
+                where
+                    __D: _serde::Deserializer<'de>,
+                {
+                    _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+                }
+            }
+            struct __hkbFootIkDriverInfoVisitor<'de> {
+                marker: _serde::__private::PhantomData<hkbFootIkDriverInfo>,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            #[allow(clippy::match_single_binding)]
+            #[allow(clippy::reversed_empty_ranges)]
+            #[allow(clippy::single_match)]
+            impl<'de> _serde::de::Visitor<'de> for __hkbFootIkDriverInfoVisitor<'de> {
+                type Value = hkbFootIkDriverInfo;
+                fn expecting(
+                    &self,
+                    __formatter: &mut core::fmt::Formatter,
+                ) -> core::fmt::Result {
+                    core::fmt::Formatter::write_str(
+                        __formatter,
+                        "struct hkbFootIkDriverInfo",
+                    )
+                }
+                fn visit_struct_for_bytes<__A>(
+                    self,
+                    mut __map: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::MapAccess<'de>,
+                {
+                    let __ptr = __A::class_ptr(&mut __map);
+                    let parent = __A::parent_value(&mut __map)?;
+                    let mut m_legs: _serde::__private::Option<
+                        Vec<hkbFootIkDriverInfoLeg>,
+                    > = _serde::__private::None;
+                    let mut m_raycastDistanceUp: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_raycastDistanceDown: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_originalGroundHeightMS: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_verticalOffset: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_forwardAlignFraction: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_sidewaysAlignFraction: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_sidewaysSampleWidth: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_lockFeetWhenPlanted: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_useCharacterUpVector: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_isQuadrupedNarrow: _serde::__private::Option<bool> = _serde::__private::None;
+                    for i in 0..12usize {
+                        match i {
+                            0usize => {
+                                if _serde::__private::Option::is_some(&m_legs) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("legs"),
+                                    );
+                                }
+                                m_legs = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkbFootIkDriverInfoLeg>,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            1usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_raycastDistanceUp,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "raycastDistanceUp",
+                                        ),
+                                    );
+                                }
+                                m_raycastDistanceUp = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            2usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_raycastDistanceDown,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "raycastDistanceDown",
+                                        ),
+                                    );
+                                }
+                                m_raycastDistanceDown = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            3usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_originalGroundHeightMS,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "originalGroundHeightMS",
+                                        ),
+                                    );
+                                }
+                                m_originalGroundHeightMS = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            4usize => {
+                                if _serde::__private::Option::is_some(&m_verticalOffset) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "verticalOffset",
+                                        ),
+                                    );
+                                }
+                                m_verticalOffset = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            5usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_collisionFilterInfo,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "collisionFilterInfo",
+                                        ),
+                                    );
+                                }
+                                m_collisionFilterInfo = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            6usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_forwardAlignFraction,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "forwardAlignFraction",
+                                        ),
+                                    );
+                                }
+                                m_forwardAlignFraction = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            7usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_sidewaysAlignFraction,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "sidewaysAlignFraction",
+                                        ),
+                                    );
+                                }
+                                m_sidewaysAlignFraction = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            8usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_sidewaysSampleWidth,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "sidewaysSampleWidth",
+                                        ),
+                                    );
+                                }
+                                m_sidewaysSampleWidth = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            9usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_lockFeetWhenPlanted,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "lockFeetWhenPlanted",
+                                        ),
+                                    );
+                                }
+                                m_lockFeetWhenPlanted = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            10usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_useCharacterUpVector,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "useCharacterUpVector",
+                                        ),
+                                    );
+                                }
+                                m_useCharacterUpVector = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            11usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_isQuadrupedNarrow,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "isQuadrupedNarrow",
+                                        ),
+                                    );
+                                }
+                                m_isQuadrupedNarrow = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            _ => {}
+                        }
+                    }
+                    __A::pad(&mut __map, 1usize, 5usize)?;
+                    let m_legs = match m_legs {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("legs"),
+                            );
+                        }
+                    };
+                    let m_raycastDistanceUp = match m_raycastDistanceUp {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "raycastDistanceUp",
+                                ),
+                            );
+                        }
+                    };
+                    let m_raycastDistanceDown = match m_raycastDistanceDown {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "raycastDistanceDown",
+                                ),
+                            );
+                        }
+                    };
+                    let m_originalGroundHeightMS = match m_originalGroundHeightMS {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "originalGroundHeightMS",
+                                ),
+                            );
+                        }
+                    };
+                    let m_verticalOffset = match m_verticalOffset {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "verticalOffset",
+                                ),
+                            );
+                        }
+                    };
+                    let m_collisionFilterInfo = match m_collisionFilterInfo {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "collisionFilterInfo",
+                                ),
+                            );
+                        }
+                    };
+                    let m_forwardAlignFraction = match m_forwardAlignFraction {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "forwardAlignFraction",
+                                ),
+                            );
+                        }
+                    };
+                    let m_sidewaysAlignFraction = match m_sidewaysAlignFraction {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "sidewaysAlignFraction",
+                                ),
+                            );
+                        }
+                    };
+                    let m_sidewaysSampleWidth = match m_sidewaysSampleWidth {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "sidewaysSampleWidth",
+                                ),
+                            );
+                        }
+                    };
+                    let m_lockFeetWhenPlanted = match m_lockFeetWhenPlanted {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "lockFeetWhenPlanted",
+                                ),
+                            );
+                        }
+                    };
+                    let m_useCharacterUpVector = match m_useCharacterUpVector {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "useCharacterUpVector",
+                                ),
+                            );
+                        }
+                    };
+                    let m_isQuadrupedNarrow = match m_isQuadrupedNarrow {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "isQuadrupedNarrow",
+                                ),
+                            );
+                        }
+                    };
+                    _serde::__private::Ok(hkbFootIkDriverInfo {
+                        __ptr,
+                        parent,
+                        m_legs,
+                        m_raycastDistanceUp,
+                        m_raycastDistanceDown,
+                        m_originalGroundHeightMS,
+                        m_verticalOffset,
+                        m_collisionFilterInfo,
+                        m_forwardAlignFraction,
+                        m_sidewaysAlignFraction,
+                        m_sidewaysSampleWidth,
+                        m_lockFeetWhenPlanted,
+                        m_useCharacterUpVector,
+                        m_isQuadrupedNarrow,
+                    })
+                }
+                #[allow(clippy::manual_unwrap_or_default)]
+                fn visit_struct<__A>(
+                    self,
+                    mut __map: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::MapAccess<'de>,
+                {
+                    let mut m_isQuadrupedNarrow: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_useCharacterUpVector: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_lockFeetWhenPlanted: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_sidewaysSampleWidth: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_sidewaysAlignFraction: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_forwardAlignFraction: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_verticalOffset: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_originalGroundHeightMS: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_raycastDistanceDown: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_raycastDistanceUp: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_legs: _serde::__private::Option<
+                        Vec<hkbFootIkDriverInfoLeg>,
+                    > = _serde::__private::None;
+                    while let _serde::__private::Some(__key) = {
+                        #[cfg(not(feature = "strict"))]
+                        let __key = __A::next_key::<__Field>(&mut __map)
+                            .unwrap_or(Some(__Field::__ignore));
+                        #[cfg(feature = "strict")]
+                        let __key = __A::next_key::<__Field>(&mut __map)?;
+                        __key
+                    } {
+                        match __key {
+                            __Field::m_isQuadrupedNarrow => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_isQuadrupedNarrow,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "isQuadrupedNarrow",
+                                        ),
+                                    );
+                                }
+                                m_isQuadrupedNarrow = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_useCharacterUpVector => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_useCharacterUpVector,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "useCharacterUpVector",
+                                        ),
+                                    );
+                                }
+                                m_useCharacterUpVector = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_lockFeetWhenPlanted => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_lockFeetWhenPlanted,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "lockFeetWhenPlanted",
+                                        ),
+                                    );
+                                }
+                                m_lockFeetWhenPlanted = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_sidewaysSampleWidth => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_sidewaysSampleWidth,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "sidewaysSampleWidth",
+                                        ),
+                                    );
+                                }
+                                m_sidewaysSampleWidth = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_sidewaysAlignFraction => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_sidewaysAlignFraction,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "sidewaysAlignFraction",
+                                        ),
+                                    );
+                                }
+                                m_sidewaysAlignFraction = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_forwardAlignFraction => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_forwardAlignFraction,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "forwardAlignFraction",
+                                        ),
+                                    );
+                                }
+                                m_forwardAlignFraction = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_collisionFilterInfo => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_collisionFilterInfo,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "collisionFilterInfo",
+                                        ),
+                                    );
+                                }
+                                m_collisionFilterInfo = _serde::__private::Some(
+                                    match __A::next_value::<u32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_verticalOffset => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_verticalOffset) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "verticalOffset",
+                                        ),
+                                    );
+                                }
+                                m_verticalOffset = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_originalGroundHeightMS => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_originalGroundHeightMS,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "originalGroundHeightMS",
+                                        ),
+                                    );
+                                }
+                                m_originalGroundHeightMS = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_raycastDistanceDown => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_raycastDistanceDown,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "raycastDistanceDown",
+                                        ),
+                                    );
+                                }
+                                m_raycastDistanceDown = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_raycastDistanceUp => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_raycastDistanceUp,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "raycastDistanceUp",
+                                        ),
+                                    );
+                                }
+                                m_raycastDistanceUp = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_legs => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_legs) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("legs"),
+                                    );
+                                }
+                                m_legs = _serde::__private::Some(
+                                    match __A::next_value::<
+                                        Vec<hkbFootIkDriverInfoLeg>,
+                                    >(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            _ => {}
+                        }
+                    }
+                    let m_isQuadrupedNarrow = match m_isQuadrupedNarrow {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "isQuadrupedNarrow",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_useCharacterUpVector = match m_useCharacterUpVector {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "useCharacterUpVector",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_lockFeetWhenPlanted = match m_lockFeetWhenPlanted {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "lockFeetWhenPlanted",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_sidewaysSampleWidth = match m_sidewaysSampleWidth {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "sidewaysSampleWidth",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_sidewaysAlignFraction = match m_sidewaysAlignFraction {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "sidewaysAlignFraction",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_forwardAlignFraction = match m_forwardAlignFraction {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "forwardAlignFraction",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_collisionFilterInfo = match m_collisionFilterInfo {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "collisionFilterInfo",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_verticalOffset = match m_verticalOffset {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "verticalOffset",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_originalGroundHeightMS = match m_originalGroundHeightMS {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "originalGroundHeightMS",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_raycastDistanceDown = match m_raycastDistanceDown {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "raycastDistanceDown",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_raycastDistanceUp = match m_raycastDistanceUp {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "raycastDistanceUp",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_legs = match m_legs {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("legs"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let __ptr = None;
+                    let parent = hkBaseObject { __ptr };
+                    let parent = hkReferencedObject {
+                        __ptr,
+                        parent,
+                        ..Default::default()
+                    };
+                    let __ptr = __A::class_ptr(&mut __map);
+                    _serde::__private::Ok(hkbFootIkDriverInfo {
+                        __ptr,
+                        parent,
+                        m_legs,
+                        m_raycastDistanceUp,
+                        m_raycastDistanceDown,
+                        m_originalGroundHeightMS,
+                        m_verticalOffset,
+                        m_collisionFilterInfo,
+                        m_forwardAlignFraction,
+                        m_sidewaysAlignFraction,
+                        m_sidewaysSampleWidth,
+                        m_lockFeetWhenPlanted,
+                        m_useCharacterUpVector,
+                        m_isQuadrupedNarrow,
+                    })
+                }
+            }
             const FIELDS: &[&str] = &[
                 "legs",
                 "raycastDistanceUp",

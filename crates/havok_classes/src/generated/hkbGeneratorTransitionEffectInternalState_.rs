@@ -127,748 +127,839 @@ const _: () = {
         }
     }
 };
-use havok_serde as _serde;
-#[allow(non_camel_case_types)]
-enum __Field {
-    m_timeInTransition,
-    m_duration,
-    m_effectiveBlendInDuration,
-    m_effectiveBlendOutDuration,
-    m_toGeneratorState,
-    m_echoTransitionGenerator,
-    m_echoToGenerator,
-    m_justActivated,
-    m_updateActiveNodes,
-    m_stage,
-    __ignore,
-}
-struct __FieldVisitor;
-impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
-    type Value = __Field;
-    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
-        core::fmt::Formatter::write_str(__formatter, "field identifier")
-    }
-    /// Intended for use in XML.
-    #[allow(clippy::match_single_binding)]
-    #[allow(clippy::reversed_empty_ranges)]
-    #[allow(clippy::single_match)]
-    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
-    where
-        __E: _serde::de::Error,
-    {
-        match __value {
-            "timeInTransition" => Ok(__Field::m_timeInTransition),
-            "duration" => Ok(__Field::m_duration),
-            "effectiveBlendInDuration" => Ok(__Field::m_effectiveBlendInDuration),
-            "effectiveBlendOutDuration" => Ok(__Field::m_effectiveBlendOutDuration),
-            "toGeneratorState" => Ok(__Field::m_toGeneratorState),
-            "echoTransitionGenerator" => Ok(__Field::m_echoTransitionGenerator),
-            "echoToGenerator" => Ok(__Field::m_echoToGenerator),
-            "justActivated" => Ok(__Field::m_justActivated),
-            "updateActiveNodes" => Ok(__Field::m_updateActiveNodes),
-            "stage" => Ok(__Field::m_stage),
-            _ => Ok(__Field::__ignore),
-        }
-    }
-}
-impl<'de> _serde::Deserialize<'de> for __Field {
-    #[inline]
-    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
-    where
-        __D: _serde::Deserializer<'de>,
-    {
-        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
-    }
-}
-pub(super) struct __hkbGeneratorTransitionEffectInternalStateVisitor<'de> {
-    marker: core::marker::PhantomData<hkbGeneratorTransitionEffectInternalState>,
-    lifetime: core::marker::PhantomData<&'de ()>,
-}
-impl<'de> __hkbGeneratorTransitionEffectInternalStateVisitor<'de> {
-    /// # Purpose of this method
-    /// To reproduce C++ field inheritance, we will have the field internal implementation
-    /// of deserialization partially exposed and reused.
-    #[inline]
-    pub(super) fn visit_as_parent<__A>(
-        __map: &mut __A,
-    ) -> _serde::__private::Result<hkbGeneratorTransitionEffectInternalState, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        _serde::de::Visitor::visit_struct(
-            Self {
-                marker: _serde::__private::PhantomData::<
-                    hkbGeneratorTransitionEffectInternalState,
-                >,
-                lifetime: _serde::__private::PhantomData,
-            },
-            __map,
-        )
-    }
-}
-#[allow(clippy::match_single_binding)]
-#[allow(clippy::reversed_empty_ranges)]
-#[allow(clippy::single_match)]
-impl<'de> _serde::de::Visitor<'de>
-for __hkbGeneratorTransitionEffectInternalStateVisitor<'de> {
-    type Value = hkbGeneratorTransitionEffectInternalState;
-    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
-        core::fmt::Formatter::write_str(
-            __formatter,
-            "struct hkbGeneratorTransitionEffectInternalState",
-        )
-    }
-    fn visit_struct_for_bytes<__A>(
-        self,
-        mut __map: __A,
-    ) -> _serde::__private::Result<Self::Value, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::parent_value(&mut __map)?;
-        let mut m_timeInTransition: _serde::__private::Option<f32> = _serde::__private::None;
-        let mut m_duration: _serde::__private::Option<f32> = _serde::__private::None;
-        let mut m_effectiveBlendInDuration: _serde::__private::Option<f32> = _serde::__private::None;
-        let mut m_effectiveBlendOutDuration: _serde::__private::Option<f32> = _serde::__private::None;
-        let mut m_toGeneratorState: _serde::__private::Option<ToGeneratorState> = _serde::__private::None;
-        let mut m_echoTransitionGenerator: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_echoToGenerator: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_justActivated: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_updateActiveNodes: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_stage: _serde::__private::Option<Stage> = _serde::__private::None;
-        for i in 0..10usize {
-            match i {
-                0usize => {
-                    if _serde::__private::Option::is_some(&m_timeInTransition) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "timeInTransition",
-                            ),
-                        );
-                    }
-                    m_timeInTransition = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                1usize => {
-                    if _serde::__private::Option::is_some(&m_duration) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "duration",
-                            ),
-                        );
-                    }
-                    m_duration = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                2usize => {
-                    if _serde::__private::Option::is_some(&m_effectiveBlendInDuration) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "effectiveBlendInDuration",
-                            ),
-                        );
-                    }
-                    m_effectiveBlendInDuration = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                3usize => {
-                    if _serde::__private::Option::is_some(&m_effectiveBlendOutDuration) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "effectiveBlendOutDuration",
-                            ),
-                        );
-                    }
-                    m_effectiveBlendOutDuration = _serde::__private::Some(
-                        match __A::next_value::<f32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                4usize => {
-                    if _serde::__private::Option::is_some(&m_toGeneratorState) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "toGeneratorState",
-                            ),
-                        );
-                    }
-                    m_toGeneratorState = _serde::__private::Some(
-                        match __A::next_value::<ToGeneratorState>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                5usize => {
-                    if _serde::__private::Option::is_some(&m_echoTransitionGenerator) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "echoTransitionGenerator",
-                            ),
-                        );
-                    }
-                    m_echoTransitionGenerator = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                6usize => {
-                    if _serde::__private::Option::is_some(&m_echoToGenerator) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "echoToGenerator",
-                            ),
-                        );
-                    }
-                    m_echoToGenerator = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                7usize => {
-                    if _serde::__private::Option::is_some(&m_justActivated) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "justActivated",
-                            ),
-                        );
-                    }
-                    m_justActivated = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                8usize => {
-                    if _serde::__private::Option::is_some(&m_updateActiveNodes) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "updateActiveNodes",
-                            ),
-                        );
-                    }
-                    m_updateActiveNodes = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                9usize => {
-                    if _serde::__private::Option::is_some(&m_stage) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("stage"),
-                        );
-                    }
-                    m_stage = _serde::__private::Some(
-                        match __A::next_value::<Stage>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                _ => {}
-            }
-        }
-        __A::pad(&mut __map, 2usize, 2usize)?;
-        let m_timeInTransition = match m_timeInTransition {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("timeInTransition"),
-                );
-            }
-        };
-        let m_duration = match m_duration {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("duration"),
-                );
-            }
-        };
-        let m_effectiveBlendInDuration = match m_effectiveBlendInDuration {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "effectiveBlendInDuration",
-                    ),
-                );
-            }
-        };
-        let m_effectiveBlendOutDuration = match m_effectiveBlendOutDuration {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "effectiveBlendOutDuration",
-                    ),
-                );
-            }
-        };
-        let m_toGeneratorState = match m_toGeneratorState {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("toGeneratorState"),
-                );
-            }
-        };
-        let m_echoTransitionGenerator = match m_echoTransitionGenerator {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "echoTransitionGenerator",
-                    ),
-                );
-            }
-        };
-        let m_echoToGenerator = match m_echoToGenerator {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("echoToGenerator"),
-                );
-            }
-        };
-        let m_justActivated = match m_justActivated {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("justActivated"),
-                );
-            }
-        };
-        let m_updateActiveNodes = match m_updateActiveNodes {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("updateActiveNodes"),
-                );
-            }
-        };
-        let m_stage = match m_stage {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("stage"),
-                );
-            }
-        };
-        _serde::__private::Ok(hkbGeneratorTransitionEffectInternalState {
-            __ptr,
-            parent,
-            m_timeInTransition,
-            m_duration,
-            m_effectiveBlendInDuration,
-            m_effectiveBlendOutDuration,
-            m_toGeneratorState,
-            m_echoTransitionGenerator,
-            m_echoToGenerator,
-            m_justActivated,
-            m_updateActiveNodes,
-            m_stage,
-        })
-    }
-    #[allow(clippy::manual_unwrap_or_default)]
-    fn visit_struct<__A>(
-        self,
-        mut __map: __A,
-    ) -> _serde::__private::Result<Self::Value, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        let __ptr = __A::class_ptr(&mut __map);
-        let parent = __hkReferencedObjectVisitor::visit_as_parent(&mut __map)?;
-        let mut m_timeInTransition: _serde::__private::Option<f32> = _serde::__private::None;
-        let mut m_duration: _serde::__private::Option<f32> = _serde::__private::None;
-        let mut m_effectiveBlendInDuration: _serde::__private::Option<f32> = _serde::__private::None;
-        let mut m_effectiveBlendOutDuration: _serde::__private::Option<f32> = _serde::__private::None;
-        let mut m_toGeneratorState: _serde::__private::Option<ToGeneratorState> = _serde::__private::None;
-        let mut m_echoTransitionGenerator: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_echoToGenerator: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_justActivated: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_updateActiveNodes: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_stage: _serde::__private::Option<Stage> = _serde::__private::None;
-        for _ in 0..10usize {
-            #[cfg(not(feature = "strict"))]
-            let __res = __A::next_key::<__Field>(&mut __map)
-                .unwrap_or(Some(__Field::__ignore));
-            #[cfg(feature = "strict")]
-            let __res = __A::next_key::<__Field>(&mut __map)?;
-            if let _serde::__private::Some(__key) = __res {
-                match __key {
-                    __Field::m_timeInTransition => {
-                        if _serde::__private::Option::is_some(&m_timeInTransition) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "timeInTransition",
-                                ),
-                            );
-                        }
-                        m_timeInTransition = _serde::__private::Some(
-                            match __A::next_value::<f32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_duration => {
-                        if _serde::__private::Option::is_some(&m_duration) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "duration",
-                                ),
-                            );
-                        }
-                        m_duration = _serde::__private::Some(
-                            match __A::next_value::<f32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_effectiveBlendInDuration => {
-                        if _serde::__private::Option::is_some(
-                            &m_effectiveBlendInDuration,
-                        ) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "effectiveBlendInDuration",
-                                ),
-                            );
-                        }
-                        m_effectiveBlendInDuration = _serde::__private::Some(
-                            match __A::next_value::<f32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_effectiveBlendOutDuration => {
-                        if _serde::__private::Option::is_some(
-                            &m_effectiveBlendOutDuration,
-                        ) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "effectiveBlendOutDuration",
-                                ),
-                            );
-                        }
-                        m_effectiveBlendOutDuration = _serde::__private::Some(
-                            match __A::next_value::<f32>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_toGeneratorState => {
-                        if _serde::__private::Option::is_some(&m_toGeneratorState) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "toGeneratorState",
-                                ),
-                            );
-                        }
-                        m_toGeneratorState = _serde::__private::Some(
-                            match __A::next_value::<ToGeneratorState>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_echoTransitionGenerator => {
-                        if _serde::__private::Option::is_some(
-                            &m_echoTransitionGenerator,
-                        ) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "echoTransitionGenerator",
-                                ),
-                            );
-                        }
-                        m_echoTransitionGenerator = _serde::__private::Some(
-                            match __A::next_value::<bool>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_echoToGenerator => {
-                        if _serde::__private::Option::is_some(&m_echoToGenerator) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "echoToGenerator",
-                                ),
-                            );
-                        }
-                        m_echoToGenerator = _serde::__private::Some(
-                            match __A::next_value::<bool>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_justActivated => {
-                        if _serde::__private::Option::is_some(&m_justActivated) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "justActivated",
-                                ),
-                            );
-                        }
-                        m_justActivated = _serde::__private::Some(
-                            match __A::next_value::<bool>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_updateActiveNodes => {
-                        if _serde::__private::Option::is_some(&m_updateActiveNodes) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "updateActiveNodes",
-                                ),
-                            );
-                        }
-                        m_updateActiveNodes = _serde::__private::Some(
-                            match __A::next_value::<bool>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_stage => {
-                        if _serde::__private::Option::is_some(&m_stage) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field("stage"),
-                            );
-                        }
-                        m_stage = _serde::__private::Some(
-                            match __A::next_value::<Stage>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    _ => {}
-                }
-            }
-        }
-        let m_timeInTransition = match m_timeInTransition {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("timeInTransition"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_duration = match m_duration {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("duration"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_effectiveBlendInDuration = match m_effectiveBlendInDuration {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "effectiveBlendInDuration",
-                    ),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_effectiveBlendOutDuration = match m_effectiveBlendOutDuration {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "effectiveBlendOutDuration",
-                    ),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_toGeneratorState = match m_toGeneratorState {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("toGeneratorState"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_echoTransitionGenerator = match m_echoTransitionGenerator {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "echoTransitionGenerator",
-                    ),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_echoToGenerator = match m_echoToGenerator {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("echoToGenerator"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_justActivated = match m_justActivated {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("justActivated"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_updateActiveNodes = match m_updateActiveNodes {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("updateActiveNodes"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_stage = match m_stage {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("stage"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        _serde::__private::Ok(hkbGeneratorTransitionEffectInternalState {
-            __ptr,
-            parent,
-            m_timeInTransition,
-            m_duration,
-            m_effectiveBlendInDuration,
-            m_effectiveBlendOutDuration,
-            m_toGeneratorState,
-            m_echoTransitionGenerator,
-            m_echoToGenerator,
-            m_justActivated,
-            m_updateActiveNodes,
-            m_stage,
-        })
-    }
-}
 #[doc(hidden)]
 #[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
 const _: () = {
+    use havok_serde as _serde;
     #[automatically_derived]
     impl<'de> _serde::Deserialize<'de> for hkbGeneratorTransitionEffectInternalState {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
         {
+            #[allow(non_camel_case_types)]
+            enum __Field {
+                m_stage,
+                m_updateActiveNodes,
+                m_justActivated,
+                m_echoToGenerator,
+                m_echoTransitionGenerator,
+                m_toGeneratorState,
+                m_effectiveBlendOutDuration,
+                m_effectiveBlendInDuration,
+                m_duration,
+                m_timeInTransition,
+                __ignore,
+            }
+            struct __FieldVisitor;
+            impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+                type Value = __Field;
+                fn expecting(
+                    &self,
+                    __formatter: &mut core::fmt::Formatter,
+                ) -> core::fmt::Result {
+                    core::fmt::Formatter::write_str(__formatter, "field identifier")
+                }
+                /// Intended for use in XML.
+                #[allow(clippy::match_single_binding)]
+                #[allow(clippy::reversed_empty_ranges)]
+                #[allow(clippy::single_match)]
+                fn visit_key<__E>(
+                    self,
+                    __value: &str,
+                ) -> core::result::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match __value {
+                        "stage" => Ok(__Field::m_stage),
+                        "updateActiveNodes" => Ok(__Field::m_updateActiveNodes),
+                        "justActivated" => Ok(__Field::m_justActivated),
+                        "echoToGenerator" => Ok(__Field::m_echoToGenerator),
+                        "echoTransitionGenerator" => {
+                            Ok(__Field::m_echoTransitionGenerator)
+                        }
+                        "toGeneratorState" => Ok(__Field::m_toGeneratorState),
+                        "effectiveBlendOutDuration" => {
+                            Ok(__Field::m_effectiveBlendOutDuration)
+                        }
+                        "effectiveBlendInDuration" => {
+                            Ok(__Field::m_effectiveBlendInDuration)
+                        }
+                        "duration" => Ok(__Field::m_duration),
+                        "timeInTransition" => Ok(__Field::m_timeInTransition),
+                        _ => Ok(__Field::__ignore),
+                    }
+                }
+            }
+            impl<'de> _serde::Deserialize<'de> for __Field {
+                #[inline]
+                fn deserialize<__D>(
+                    __deserializer: __D,
+                ) -> core::result::Result<Self, __D::Error>
+                where
+                    __D: _serde::Deserializer<'de>,
+                {
+                    _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+                }
+            }
+            struct __hkbGeneratorTransitionEffectInternalStateVisitor<'de> {
+                marker: _serde::__private::PhantomData<
+                    hkbGeneratorTransitionEffectInternalState,
+                >,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            #[allow(clippy::match_single_binding)]
+            #[allow(clippy::reversed_empty_ranges)]
+            #[allow(clippy::single_match)]
+            impl<'de> _serde::de::Visitor<'de>
+            for __hkbGeneratorTransitionEffectInternalStateVisitor<'de> {
+                type Value = hkbGeneratorTransitionEffectInternalState;
+                fn expecting(
+                    &self,
+                    __formatter: &mut core::fmt::Formatter,
+                ) -> core::fmt::Result {
+                    core::fmt::Formatter::write_str(
+                        __formatter,
+                        "struct hkbGeneratorTransitionEffectInternalState",
+                    )
+                }
+                fn visit_struct_for_bytes<__A>(
+                    self,
+                    mut __map: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::MapAccess<'de>,
+                {
+                    let __ptr = __A::class_ptr(&mut __map);
+                    let parent = __A::parent_value(&mut __map)?;
+                    let mut m_timeInTransition: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_duration: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_effectiveBlendInDuration: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_effectiveBlendOutDuration: _serde::__private::Option<
+                        f32,
+                    > = _serde::__private::None;
+                    let mut m_toGeneratorState: _serde::__private::Option<
+                        ToGeneratorState,
+                    > = _serde::__private::None;
+                    let mut m_echoTransitionGenerator: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_echoToGenerator: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_justActivated: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_updateActiveNodes: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_stage: _serde::__private::Option<Stage> = _serde::__private::None;
+                    for i in 0..10usize {
+                        match i {
+                            0usize => {
+                                if _serde::__private::Option::is_some(&m_timeInTransition) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "timeInTransition",
+                                        ),
+                                    );
+                                }
+                                m_timeInTransition = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            1usize => {
+                                if _serde::__private::Option::is_some(&m_duration) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "duration",
+                                        ),
+                                    );
+                                }
+                                m_duration = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            2usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_effectiveBlendInDuration,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "effectiveBlendInDuration",
+                                        ),
+                                    );
+                                }
+                                m_effectiveBlendInDuration = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            3usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_effectiveBlendOutDuration,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "effectiveBlendOutDuration",
+                                        ),
+                                    );
+                                }
+                                m_effectiveBlendOutDuration = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            4usize => {
+                                if _serde::__private::Option::is_some(&m_toGeneratorState) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "toGeneratorState",
+                                        ),
+                                    );
+                                }
+                                m_toGeneratorState = _serde::__private::Some(
+                                    match __A::next_value::<ToGeneratorState>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            5usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_echoTransitionGenerator,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "echoTransitionGenerator",
+                                        ),
+                                    );
+                                }
+                                m_echoTransitionGenerator = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            6usize => {
+                                if _serde::__private::Option::is_some(&m_echoToGenerator) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "echoToGenerator",
+                                        ),
+                                    );
+                                }
+                                m_echoToGenerator = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            7usize => {
+                                if _serde::__private::Option::is_some(&m_justActivated) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "justActivated",
+                                        ),
+                                    );
+                                }
+                                m_justActivated = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            8usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_updateActiveNodes,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "updateActiveNodes",
+                                        ),
+                                    );
+                                }
+                                m_updateActiveNodes = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            9usize => {
+                                if _serde::__private::Option::is_some(&m_stage) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("stage"),
+                                    );
+                                }
+                                m_stage = _serde::__private::Some(
+                                    match __A::next_value::<Stage>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            _ => {}
+                        }
+                    }
+                    __A::pad(&mut __map, 2usize, 2usize)?;
+                    let m_timeInTransition = match m_timeInTransition {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "timeInTransition",
+                                ),
+                            );
+                        }
+                    };
+                    let m_duration = match m_duration {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("duration"),
+                            );
+                        }
+                    };
+                    let m_effectiveBlendInDuration = match m_effectiveBlendInDuration {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "effectiveBlendInDuration",
+                                ),
+                            );
+                        }
+                    };
+                    let m_effectiveBlendOutDuration = match m_effectiveBlendOutDuration {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "effectiveBlendOutDuration",
+                                ),
+                            );
+                        }
+                    };
+                    let m_toGeneratorState = match m_toGeneratorState {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "toGeneratorState",
+                                ),
+                            );
+                        }
+                    };
+                    let m_echoTransitionGenerator = match m_echoTransitionGenerator {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "echoTransitionGenerator",
+                                ),
+                            );
+                        }
+                    };
+                    let m_echoToGenerator = match m_echoToGenerator {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "echoToGenerator",
+                                ),
+                            );
+                        }
+                    };
+                    let m_justActivated = match m_justActivated {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "justActivated",
+                                ),
+                            );
+                        }
+                    };
+                    let m_updateActiveNodes = match m_updateActiveNodes {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "updateActiveNodes",
+                                ),
+                            );
+                        }
+                    };
+                    let m_stage = match m_stage {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("stage"),
+                            );
+                        }
+                    };
+                    _serde::__private::Ok(hkbGeneratorTransitionEffectInternalState {
+                        __ptr,
+                        parent,
+                        m_timeInTransition,
+                        m_duration,
+                        m_effectiveBlendInDuration,
+                        m_effectiveBlendOutDuration,
+                        m_toGeneratorState,
+                        m_echoTransitionGenerator,
+                        m_echoToGenerator,
+                        m_justActivated,
+                        m_updateActiveNodes,
+                        m_stage,
+                    })
+                }
+                #[allow(clippy::manual_unwrap_or_default)]
+                fn visit_struct<__A>(
+                    self,
+                    mut __map: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::MapAccess<'de>,
+                {
+                    let mut m_stage: _serde::__private::Option<Stage> = _serde::__private::None;
+                    let mut m_updateActiveNodes: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_justActivated: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_echoToGenerator: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_echoTransitionGenerator: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_toGeneratorState: _serde::__private::Option<
+                        ToGeneratorState,
+                    > = _serde::__private::None;
+                    let mut m_effectiveBlendOutDuration: _serde::__private::Option<
+                        f32,
+                    > = _serde::__private::None;
+                    let mut m_effectiveBlendInDuration: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_duration: _serde::__private::Option<f32> = _serde::__private::None;
+                    let mut m_timeInTransition: _serde::__private::Option<f32> = _serde::__private::None;
+                    while let _serde::__private::Some(__key) = {
+                        #[cfg(not(feature = "strict"))]
+                        let __key = __A::next_key::<__Field>(&mut __map)
+                            .unwrap_or(Some(__Field::__ignore));
+                        #[cfg(feature = "strict")]
+                        let __key = __A::next_key::<__Field>(&mut __map)?;
+                        __key
+                    } {
+                        match __key {
+                            __Field::m_stage => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_stage) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("stage"),
+                                    );
+                                }
+                                m_stage = _serde::__private::Some(
+                                    match __A::next_value::<Stage>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_updateActiveNodes => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_updateActiveNodes,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "updateActiveNodes",
+                                        ),
+                                    );
+                                }
+                                m_updateActiveNodes = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_justActivated => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_justActivated) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "justActivated",
+                                        ),
+                                    );
+                                }
+                                m_justActivated = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_echoToGenerator => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_echoToGenerator) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "echoToGenerator",
+                                        ),
+                                    );
+                                }
+                                m_echoToGenerator = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_echoTransitionGenerator => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_echoTransitionGenerator,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "echoTransitionGenerator",
+                                        ),
+                                    );
+                                }
+                                m_echoTransitionGenerator = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_toGeneratorState => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_toGeneratorState) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "toGeneratorState",
+                                        ),
+                                    );
+                                }
+                                m_toGeneratorState = _serde::__private::Some(
+                                    match __A::next_value::<ToGeneratorState>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_effectiveBlendOutDuration => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_effectiveBlendOutDuration,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "effectiveBlendOutDuration",
+                                        ),
+                                    );
+                                }
+                                m_effectiveBlendOutDuration = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_effectiveBlendInDuration => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_effectiveBlendInDuration,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "effectiveBlendInDuration",
+                                        ),
+                                    );
+                                }
+                                m_effectiveBlendInDuration = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_duration => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_duration) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "duration",
+                                        ),
+                                    );
+                                }
+                                m_duration = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_timeInTransition => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_timeInTransition) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "timeInTransition",
+                                        ),
+                                    );
+                                }
+                                m_timeInTransition = _serde::__private::Some(
+                                    match __A::next_value::<f32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            _ => {}
+                        }
+                    }
+                    let m_stage = match m_stage {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("stage"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_updateActiveNodes = match m_updateActiveNodes {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "updateActiveNodes",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_justActivated = match m_justActivated {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "justActivated",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_echoToGenerator = match m_echoToGenerator {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "echoToGenerator",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_echoTransitionGenerator = match m_echoTransitionGenerator {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "echoTransitionGenerator",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_toGeneratorState = match m_toGeneratorState {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "toGeneratorState",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_effectiveBlendOutDuration = match m_effectiveBlendOutDuration {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "effectiveBlendOutDuration",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_effectiveBlendInDuration = match m_effectiveBlendInDuration {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "effectiveBlendInDuration",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_duration = match m_duration {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("duration"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_timeInTransition = match m_timeInTransition {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "timeInTransition",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let __ptr = None;
+                    let parent = hkBaseObject { __ptr };
+                    let parent = hkReferencedObject {
+                        __ptr,
+                        parent,
+                        ..Default::default()
+                    };
+                    let __ptr = __A::class_ptr(&mut __map);
+                    _serde::__private::Ok(hkbGeneratorTransitionEffectInternalState {
+                        __ptr,
+                        parent,
+                        m_timeInTransition,
+                        m_duration,
+                        m_effectiveBlendInDuration,
+                        m_effectiveBlendOutDuration,
+                        m_toGeneratorState,
+                        m_echoTransitionGenerator,
+                        m_echoToGenerator,
+                        m_justActivated,
+                        m_updateActiveNodes,
+                        m_stage,
+                    })
+                }
+            }
             const FIELDS: &[&str] = &[
                 "timeInTransition",
                 "duration",

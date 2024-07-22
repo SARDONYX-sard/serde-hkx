@@ -342,1096 +342,1285 @@ const _: () = {
         }
     }
 };
-use havok_serde as _serde;
-#[allow(non_camel_case_types)]
-enum __Field {
-    m_variableMode,
-    m_uniqueIdPool,
-    m_idToStateMachineTemplateMap,
-    m_mirroredExternalIdMap,
-    m_pseudoRandomGenerator,
-    m_rootGenerator,
-    m_data,
-    m_rootGeneratorClone,
-    m_activeNodes,
-    m_activeNodeTemplateToIndexMap,
-    m_activeNodesChildrenIndices,
-    m_globalTransitionData,
-    m_eventIdMap,
-    m_attributeIdMap,
-    m_variableIdMap,
-    m_characterPropertyIdMap,
-    m_variableValueSet,
-    m_nodeTemplateToCloneMap,
-    m_nodeCloneToTemplateMap,
-    m_stateListenerTemplateToCloneMap,
-    m_nodePartitionInfo,
-    m_numIntermediateOutputs,
-    m_jobs,
-    m_allPartitionMemory,
-    m_numStaticNodes,
-    m_nextUniqueId,
-    m_isActive,
-    m_isLinked,
-    m_updateActiveNodes,
-    m_stateOrTransitionChanged,
-    __ignore,
-}
-struct __FieldVisitor;
-impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
-    type Value = __Field;
-    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
-        core::fmt::Formatter::write_str(__formatter, "field identifier")
-    }
-    /// Intended for use in XML.
-    #[allow(clippy::match_single_binding)]
-    #[allow(clippy::reversed_empty_ranges)]
-    #[allow(clippy::single_match)]
-    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
-    where
-        __E: _serde::de::Error,
-    {
-        match __value {
-            "variableMode" => Ok(__Field::m_variableMode),
-            "rootGenerator" => Ok(__Field::m_rootGenerator),
-            "data" => Ok(__Field::m_data),
-            _ => Ok(__Field::__ignore),
-        }
-    }
-}
-impl<'de> _serde::Deserialize<'de> for __Field {
-    #[inline]
-    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
-    where
-        __D: _serde::Deserializer<'de>,
-    {
-        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
-    }
-}
-pub(super) struct __hkbBehaviorGraphVisitor<'de> {
-    marker: core::marker::PhantomData<hkbBehaviorGraph<'de>>,
-    lifetime: core::marker::PhantomData<&'de ()>,
-}
-impl<'de> __hkbBehaviorGraphVisitor<'de> {
-    /// # Purpose of this method
-    /// To reproduce C++ field inheritance, we will have the field internal implementation
-    /// of deserialization partially exposed and reused.
-    #[inline]
-    pub(super) fn visit_as_parent<__A>(
-        __map: &mut __A,
-    ) -> _serde::__private::Result<hkbBehaviorGraph<'de>, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        _serde::de::Visitor::visit_struct(
-            Self {
-                marker: _serde::__private::PhantomData::<hkbBehaviorGraph<'de>>,
-                lifetime: _serde::__private::PhantomData,
-            },
-            __map,
-        )
-    }
-}
-#[allow(clippy::match_single_binding)]
-#[allow(clippy::reversed_empty_ranges)]
-#[allow(clippy::single_match)]
-impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorGraphVisitor<'de> {
-    type Value = hkbBehaviorGraph<'de>;
-    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
-        core::fmt::Formatter::write_str(__formatter, "struct hkbBehaviorGraph")
-    }
-    fn visit_struct_for_bytes<__A>(
-        self,
-        mut __map: __A,
-    ) -> _serde::__private::Result<Self::Value, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        let __ptr = __A::class_ptr(&mut __map);
-        let parent = __A::parent_value(&mut __map)?;
-        let mut m_variableMode: _serde::__private::Option<VariableMode> = _serde::__private::None;
-        let mut m_uniqueIdPool: _serde::__private::Option<Vec<()>> = _serde::__private::None;
-        let mut m_idToStateMachineTemplateMap: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_mirroredExternalIdMap: _serde::__private::Option<Vec<()>> = _serde::__private::None;
-        let mut m_pseudoRandomGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_rootGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_data: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_rootGeneratorClone: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_activeNodes: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_activeNodeTemplateToIndexMap: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_activeNodesChildrenIndices: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_globalTransitionData: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_eventIdMap: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_attributeIdMap: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_variableIdMap: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_characterPropertyIdMap: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_variableValueSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_nodeTemplateToCloneMap: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_nodeCloneToTemplateMap: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_stateListenerTemplateToCloneMap: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_nodePartitionInfo: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_numIntermediateOutputs: _serde::__private::Option<i32> = _serde::__private::None;
-        let mut m_jobs: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-        let mut m_allPartitionMemory: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-        let mut m_numStaticNodes: _serde::__private::Option<i16> = _serde::__private::None;
-        let mut m_nextUniqueId: _serde::__private::Option<i16> = _serde::__private::None;
-        let mut m_isActive: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_isLinked: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_updateActiveNodes: _serde::__private::Option<bool> = _serde::__private::None;
-        let mut m_stateOrTransitionChanged: _serde::__private::Option<bool> = _serde::__private::None;
-        for i in 0..30usize {
-            match i {
-                0usize => {
-                    if _serde::__private::Option::is_some(&m_variableMode) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "variableMode",
-                            ),
-                        );
-                    }
-                    m_variableMode = _serde::__private::Some(
-                        match __A::next_value::<VariableMode>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                1usize => {
-                    if _serde::__private::Option::is_some(&m_uniqueIdPool) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "uniqueIdPool",
-                            ),
-                        );
-                    }
-                    __A::pad(&mut __map, 3usize, 7usize)?;
-                    m_uniqueIdPool = _serde::__private::Some(
-                        match __A::next_value::<Vec<()>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                2usize => {
-                    if _serde::__private::Option::is_some(
-                        &m_idToStateMachineTemplateMap,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "idToStateMachineTemplateMap",
-                            ),
-                        );
-                    }
-                    m_idToStateMachineTemplateMap = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                3usize => {
-                    if _serde::__private::Option::is_some(&m_mirroredExternalIdMap) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "mirroredExternalIdMap",
-                            ),
-                        );
-                    }
-                    m_mirroredExternalIdMap = _serde::__private::Some(
-                        match __A::next_value::<Vec<()>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                4usize => {
-                    if _serde::__private::Option::is_some(&m_pseudoRandomGenerator) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "pseudoRandomGenerator",
-                            ),
-                        );
-                    }
-                    m_pseudoRandomGenerator = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                5usize => {
-                    if _serde::__private::Option::is_some(&m_rootGenerator) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "rootGenerator",
-                            ),
-                        );
-                    }
-                    m_rootGenerator = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                6usize => {
-                    if _serde::__private::Option::is_some(&m_data) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("data"),
-                        );
-                    }
-                    m_data = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                7usize => {
-                    if _serde::__private::Option::is_some(&m_rootGeneratorClone) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "rootGeneratorClone",
-                            ),
-                        );
-                    }
-                    m_rootGeneratorClone = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                8usize => {
-                    if _serde::__private::Option::is_some(&m_activeNodes) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "activeNodes",
-                            ),
-                        );
-                    }
-                    m_activeNodes = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                9usize => {
-                    if _serde::__private::Option::is_some(
-                        &m_activeNodeTemplateToIndexMap,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "activeNodeTemplateToIndexMap",
-                            ),
-                        );
-                    }
-                    m_activeNodeTemplateToIndexMap = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                10usize => {
-                    if _serde::__private::Option::is_some(
-                        &m_activeNodesChildrenIndices,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "activeNodesChildrenIndices",
-                            ),
-                        );
-                    }
-                    m_activeNodesChildrenIndices = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                11usize => {
-                    if _serde::__private::Option::is_some(&m_globalTransitionData) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "globalTransitionData",
-                            ),
-                        );
-                    }
-                    m_globalTransitionData = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                12usize => {
-                    if _serde::__private::Option::is_some(&m_eventIdMap) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "eventIdMap",
-                            ),
-                        );
-                    }
-                    m_eventIdMap = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                13usize => {
-                    if _serde::__private::Option::is_some(&m_attributeIdMap) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "attributeIdMap",
-                            ),
-                        );
-                    }
-                    m_attributeIdMap = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                14usize => {
-                    if _serde::__private::Option::is_some(&m_variableIdMap) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "variableIdMap",
-                            ),
-                        );
-                    }
-                    m_variableIdMap = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                15usize => {
-                    if _serde::__private::Option::is_some(&m_characterPropertyIdMap) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "characterPropertyIdMap",
-                            ),
-                        );
-                    }
-                    m_characterPropertyIdMap = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                16usize => {
-                    if _serde::__private::Option::is_some(&m_variableValueSet) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "variableValueSet",
-                            ),
-                        );
-                    }
-                    m_variableValueSet = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                17usize => {
-                    if _serde::__private::Option::is_some(&m_nodeTemplateToCloneMap) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "nodeTemplateToCloneMap",
-                            ),
-                        );
-                    }
-                    m_nodeTemplateToCloneMap = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                18usize => {
-                    if _serde::__private::Option::is_some(&m_nodeCloneToTemplateMap) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "nodeCloneToTemplateMap",
-                            ),
-                        );
-                    }
-                    m_nodeCloneToTemplateMap = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                19usize => {
-                    if _serde::__private::Option::is_some(
-                        &m_stateListenerTemplateToCloneMap,
-                    ) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "stateListenerTemplateToCloneMap",
-                            ),
-                        );
-                    }
-                    m_stateListenerTemplateToCloneMap = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                20usize => {
-                    if _serde::__private::Option::is_some(&m_nodePartitionInfo) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "nodePartitionInfo",
-                            ),
-                        );
-                    }
-                    m_nodePartitionInfo = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                21usize => {
-                    if _serde::__private::Option::is_some(&m_numIntermediateOutputs) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numIntermediateOutputs",
-                            ),
-                        );
-                    }
-                    m_numIntermediateOutputs = _serde::__private::Some(
-                        match __A::next_value::<i32>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                22usize => {
-                    if _serde::__private::Option::is_some(&m_jobs) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field("jobs"),
-                        );
-                    }
-                    __A::pad(&mut __map, 0usize, 4usize)?;
-                    m_jobs = _serde::__private::Some(
-                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                23usize => {
-                    if _serde::__private::Option::is_some(&m_allPartitionMemory) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "allPartitionMemory",
-                            ),
-                        );
-                    }
-                    m_allPartitionMemory = _serde::__private::Some(
-                        match __A::next_value::<Vec<Pointer>>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                24usize => {
-                    if _serde::__private::Option::is_some(&m_numStaticNodes) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "numStaticNodes",
-                            ),
-                        );
-                    }
-                    m_numStaticNodes = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                25usize => {
-                    if _serde::__private::Option::is_some(&m_nextUniqueId) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "nextUniqueId",
-                            ),
-                        );
-                    }
-                    m_nextUniqueId = _serde::__private::Some(
-                        match __A::next_value::<i16>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                26usize => {
-                    if _serde::__private::Option::is_some(&m_isActive) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "isActive",
-                            ),
-                        );
-                    }
-                    m_isActive = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                27usize => {
-                    if _serde::__private::Option::is_some(&m_isLinked) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "isLinked",
-                            ),
-                        );
-                    }
-                    m_isLinked = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                28usize => {
-                    if _serde::__private::Option::is_some(&m_updateActiveNodes) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "updateActiveNodes",
-                            ),
-                        );
-                    }
-                    m_updateActiveNodes = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                29usize => {
-                    if _serde::__private::Option::is_some(&m_stateOrTransitionChanged) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "stateOrTransitionChanged",
-                            ),
-                        );
-                    }
-                    m_stateOrTransitionChanged = _serde::__private::Some(
-                        match __A::next_value::<bool>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                _ => {}
-            }
-        }
-        let m_variableMode = match m_variableMode {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("variableMode"),
-                );
-            }
-        };
-        let m_uniqueIdPool = match m_uniqueIdPool {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("uniqueIdPool"),
-                );
-            }
-        };
-        let m_idToStateMachineTemplateMap = match m_idToStateMachineTemplateMap {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "idToStateMachineTemplateMap",
-                    ),
-                );
-            }
-        };
-        let m_mirroredExternalIdMap = match m_mirroredExternalIdMap {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "mirroredExternalIdMap",
-                    ),
-                );
-            }
-        };
-        let m_pseudoRandomGenerator = match m_pseudoRandomGenerator {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "pseudoRandomGenerator",
-                    ),
-                );
-            }
-        };
-        let m_rootGenerator = match m_rootGenerator {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("rootGenerator"),
-                );
-            }
-        };
-        let m_data = match m_data {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("data"),
-                );
-            }
-        };
-        let m_rootGeneratorClone = match m_rootGeneratorClone {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "rootGeneratorClone",
-                    ),
-                );
-            }
-        };
-        let m_activeNodes = match m_activeNodes {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("activeNodes"),
-                );
-            }
-        };
-        let m_activeNodeTemplateToIndexMap = match m_activeNodeTemplateToIndexMap {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "activeNodeTemplateToIndexMap",
-                    ),
-                );
-            }
-        };
-        let m_activeNodesChildrenIndices = match m_activeNodesChildrenIndices {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "activeNodesChildrenIndices",
-                    ),
-                );
-            }
-        };
-        let m_globalTransitionData = match m_globalTransitionData {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "globalTransitionData",
-                    ),
-                );
-            }
-        };
-        let m_eventIdMap = match m_eventIdMap {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("eventIdMap"),
-                );
-            }
-        };
-        let m_attributeIdMap = match m_attributeIdMap {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("attributeIdMap"),
-                );
-            }
-        };
-        let m_variableIdMap = match m_variableIdMap {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("variableIdMap"),
-                );
-            }
-        };
-        let m_characterPropertyIdMap = match m_characterPropertyIdMap {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "characterPropertyIdMap",
-                    ),
-                );
-            }
-        };
-        let m_variableValueSet = match m_variableValueSet {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("variableValueSet"),
-                );
-            }
-        };
-        let m_nodeTemplateToCloneMap = match m_nodeTemplateToCloneMap {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "nodeTemplateToCloneMap",
-                    ),
-                );
-            }
-        };
-        let m_nodeCloneToTemplateMap = match m_nodeCloneToTemplateMap {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "nodeCloneToTemplateMap",
-                    ),
-                );
-            }
-        };
-        let m_stateListenerTemplateToCloneMap = match m_stateListenerTemplateToCloneMap {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "stateListenerTemplateToCloneMap",
-                    ),
-                );
-            }
-        };
-        let m_nodePartitionInfo = match m_nodePartitionInfo {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("nodePartitionInfo"),
-                );
-            }
-        };
-        let m_numIntermediateOutputs = match m_numIntermediateOutputs {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "numIntermediateOutputs",
-                    ),
-                );
-            }
-        };
-        let m_jobs = match m_jobs {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("jobs"),
-                );
-            }
-        };
-        let m_allPartitionMemory = match m_allPartitionMemory {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "allPartitionMemory",
-                    ),
-                );
-            }
-        };
-        let m_numStaticNodes = match m_numStaticNodes {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("numStaticNodes"),
-                );
-            }
-        };
-        let m_nextUniqueId = match m_nextUniqueId {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("nextUniqueId"),
-                );
-            }
-        };
-        let m_isActive = match m_isActive {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("isActive"),
-                );
-            }
-        };
-        let m_isLinked = match m_isLinked {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("isLinked"),
-                );
-            }
-        };
-        let m_updateActiveNodes = match m_updateActiveNodes {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("updateActiveNodes"),
-                );
-            }
-        };
-        let m_stateOrTransitionChanged = match m_stateOrTransitionChanged {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field(
-                        "stateOrTransitionChanged",
-                    ),
-                );
-            }
-        };
-        _serde::__private::Ok(hkbBehaviorGraph {
-            __ptr,
-            parent,
-            m_variableMode,
-            m_uniqueIdPool,
-            m_idToStateMachineTemplateMap,
-            m_mirroredExternalIdMap,
-            m_pseudoRandomGenerator,
-            m_rootGenerator,
-            m_data,
-            m_rootGeneratorClone,
-            m_activeNodes,
-            m_activeNodeTemplateToIndexMap,
-            m_activeNodesChildrenIndices,
-            m_globalTransitionData,
-            m_eventIdMap,
-            m_attributeIdMap,
-            m_variableIdMap,
-            m_characterPropertyIdMap,
-            m_variableValueSet,
-            m_nodeTemplateToCloneMap,
-            m_nodeCloneToTemplateMap,
-            m_stateListenerTemplateToCloneMap,
-            m_nodePartitionInfo,
-            m_numIntermediateOutputs,
-            m_jobs,
-            m_allPartitionMemory,
-            m_numStaticNodes,
-            m_nextUniqueId,
-            m_isActive,
-            m_isLinked,
-            m_updateActiveNodes,
-            m_stateOrTransitionChanged,
-        })
-    }
-    #[allow(clippy::manual_unwrap_or_default)]
-    fn visit_struct<__A>(
-        self,
-        mut __map: __A,
-    ) -> _serde::__private::Result<Self::Value, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        let __ptr = __A::class_ptr(&mut __map);
-        let parent = __hkbGeneratorVisitor::visit_as_parent(&mut __map)?;
-        let mut m_variableMode: _serde::__private::Option<VariableMode> = _serde::__private::None;
-        let mut m_rootGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_data: _serde::__private::Option<Pointer> = _serde::__private::None;
-        for _ in 0..3usize {
-            #[cfg(not(feature = "strict"))]
-            let __res = __A::next_key::<__Field>(&mut __map)
-                .unwrap_or(Some(__Field::__ignore));
-            #[cfg(feature = "strict")]
-            let __res = __A::next_key::<__Field>(&mut __map)?;
-            if let _serde::__private::Some(__key) = __res {
-                match __key {
-                    __Field::m_variableMode => {
-                        if _serde::__private::Option::is_some(&m_variableMode) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "variableMode",
-                                ),
-                            );
-                        }
-                        m_variableMode = _serde::__private::Some(
-                            match __A::next_value::<VariableMode>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_rootGenerator => {
-                        if _serde::__private::Option::is_some(&m_rootGenerator) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field(
-                                    "rootGenerator",
-                                ),
-                            );
-                        }
-                        m_rootGenerator = _serde::__private::Some(
-                            match __A::next_value::<Pointer>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    __Field::m_data => {
-                        if _serde::__private::Option::is_some(&m_data) {
-                            return _serde::__private::Err(
-                                <__A::Error as _serde::de::Error>::duplicate_field("data"),
-                            );
-                        }
-                        m_data = _serde::__private::Some(
-                            match __A::next_value::<Pointer>(&mut __map) {
-                                _serde::__private::Ok(__val) => __val,
-                                _serde::__private::Err(__err) => {
-                                    #[cfg(feature = "strict")]
-                                    return _serde::__private::Err(__err);
-                                    #[cfg(not(feature = "strict"))] Default::default()
-                                }
-                            },
-                        );
-                    }
-                    _ => {}
-                }
-            }
-        }
-        let m_variableMode = match m_variableMode {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("variableMode"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_rootGenerator = match m_rootGenerator {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("rootGenerator"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        let m_data = match m_data {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                #[cfg(feature = "strict")]
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("data"),
-                );
-                #[cfg(not(feature = "strict"))] Default::default()
-            }
-        };
-        _serde::__private::Ok(hkbBehaviorGraph {
-            __ptr,
-            parent,
-            m_variableMode,
-            m_rootGenerator,
-            m_data,
-            ..Default::default()
-        })
-    }
-}
 #[doc(hidden)]
 #[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
 const _: () = {
+    use havok_serde as _serde;
     #[automatically_derived]
     impl<'de> _serde::Deserialize<'de> for hkbBehaviorGraph<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
         {
+            #[allow(non_camel_case_types)]
+            enum __Field {
+                m_variableBindingSet,
+                m_name,
+                m_userData,
+                m_data,
+                m_rootGenerator,
+                m_variableMode,
+                __ignore,
+            }
+            struct __FieldVisitor;
+            impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+                type Value = __Field;
+                fn expecting(
+                    &self,
+                    __formatter: &mut core::fmt::Formatter,
+                ) -> core::fmt::Result {
+                    core::fmt::Formatter::write_str(__formatter, "field identifier")
+                }
+                /// Intended for use in XML.
+                #[allow(clippy::match_single_binding)]
+                #[allow(clippy::reversed_empty_ranges)]
+                #[allow(clippy::single_match)]
+                fn visit_key<__E>(
+                    self,
+                    __value: &str,
+                ) -> core::result::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match __value {
+                        "variableBindingSet" => Ok(__Field::m_variableBindingSet),
+                        "name" => Ok(__Field::m_name),
+                        "userData" => Ok(__Field::m_userData),
+                        "data" => Ok(__Field::m_data),
+                        "rootGenerator" => Ok(__Field::m_rootGenerator),
+                        "variableMode" => Ok(__Field::m_variableMode),
+                        _ => Ok(__Field::__ignore),
+                    }
+                }
+            }
+            impl<'de> _serde::Deserialize<'de> for __Field {
+                #[inline]
+                fn deserialize<__D>(
+                    __deserializer: __D,
+                ) -> core::result::Result<Self, __D::Error>
+                where
+                    __D: _serde::Deserializer<'de>,
+                {
+                    _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+                }
+            }
+            struct __hkbBehaviorGraphVisitor<'de> {
+                marker: _serde::__private::PhantomData<hkbBehaviorGraph<'de>>,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            #[allow(clippy::match_single_binding)]
+            #[allow(clippy::reversed_empty_ranges)]
+            #[allow(clippy::single_match)]
+            impl<'de> _serde::de::Visitor<'de> for __hkbBehaviorGraphVisitor<'de> {
+                type Value = hkbBehaviorGraph<'de>;
+                fn expecting(
+                    &self,
+                    __formatter: &mut core::fmt::Formatter,
+                ) -> core::fmt::Result {
+                    core::fmt::Formatter::write_str(
+                        __formatter,
+                        "struct hkbBehaviorGraph",
+                    )
+                }
+                fn visit_struct_for_bytes<__A>(
+                    self,
+                    mut __map: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::MapAccess<'de>,
+                {
+                    let __ptr = __A::class_ptr(&mut __map);
+                    let parent = __A::parent_value(&mut __map)?;
+                    let mut m_variableMode: _serde::__private::Option<VariableMode> = _serde::__private::None;
+                    let mut m_uniqueIdPool: _serde::__private::Option<Vec<()>> = _serde::__private::None;
+                    let mut m_idToStateMachineTemplateMap: _serde::__private::Option<
+                        Pointer,
+                    > = _serde::__private::None;
+                    let mut m_mirroredExternalIdMap: _serde::__private::Option<
+                        Vec<()>,
+                    > = _serde::__private::None;
+                    let mut m_pseudoRandomGenerator: _serde::__private::Option<
+                        Pointer,
+                    > = _serde::__private::None;
+                    let mut m_rootGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_rootGeneratorClone: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_activeNodes: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_activeNodeTemplateToIndexMap: _serde::__private::Option<
+                        Pointer,
+                    > = _serde::__private::None;
+                    let mut m_activeNodesChildrenIndices: _serde::__private::Option<
+                        Pointer,
+                    > = _serde::__private::None;
+                    let mut m_globalTransitionData: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_eventIdMap: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_attributeIdMap: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableIdMap: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_characterPropertyIdMap: _serde::__private::Option<
+                        Pointer,
+                    > = _serde::__private::None;
+                    let mut m_variableValueSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_nodeTemplateToCloneMap: _serde::__private::Option<
+                        Pointer,
+                    > = _serde::__private::None;
+                    let mut m_nodeCloneToTemplateMap: _serde::__private::Option<
+                        Pointer,
+                    > = _serde::__private::None;
+                    let mut m_stateListenerTemplateToCloneMap: _serde::__private::Option<
+                        Pointer,
+                    > = _serde::__private::None;
+                    let mut m_nodePartitionInfo: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_numIntermediateOutputs: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_jobs: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_allPartitionMemory: _serde::__private::Option<
+                        Vec<Pointer>,
+                    > = _serde::__private::None;
+                    let mut m_numStaticNodes: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_nextUniqueId: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_isActive: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_isLinked: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_updateActiveNodes: _serde::__private::Option<bool> = _serde::__private::None;
+                    let mut m_stateOrTransitionChanged: _serde::__private::Option<
+                        bool,
+                    > = _serde::__private::None;
+                    for i in 0..30usize {
+                        match i {
+                            0usize => {
+                                if _serde::__private::Option::is_some(&m_variableMode) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "variableMode",
+                                        ),
+                                    );
+                                }
+                                m_variableMode = _serde::__private::Some(
+                                    match __A::next_value::<VariableMode>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            1usize => {
+                                if _serde::__private::Option::is_some(&m_uniqueIdPool) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "uniqueIdPool",
+                                        ),
+                                    );
+                                }
+                                __A::pad(&mut __map, 3usize, 7usize)?;
+                                m_uniqueIdPool = _serde::__private::Some(
+                                    match __A::next_value::<Vec<()>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            2usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_idToStateMachineTemplateMap,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "idToStateMachineTemplateMap",
+                                        ),
+                                    );
+                                }
+                                m_idToStateMachineTemplateMap = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            3usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_mirroredExternalIdMap,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "mirroredExternalIdMap",
+                                        ),
+                                    );
+                                }
+                                m_mirroredExternalIdMap = _serde::__private::Some(
+                                    match __A::next_value::<Vec<()>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            4usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_pseudoRandomGenerator,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "pseudoRandomGenerator",
+                                        ),
+                                    );
+                                }
+                                m_pseudoRandomGenerator = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            5usize => {
+                                if _serde::__private::Option::is_some(&m_rootGenerator) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "rootGenerator",
+                                        ),
+                                    );
+                                }
+                                m_rootGenerator = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            6usize => {
+                                if _serde::__private::Option::is_some(&m_data) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("data"),
+                                    );
+                                }
+                                m_data = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            7usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_rootGeneratorClone,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "rootGeneratorClone",
+                                        ),
+                                    );
+                                }
+                                m_rootGeneratorClone = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            8usize => {
+                                if _serde::__private::Option::is_some(&m_activeNodes) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "activeNodes",
+                                        ),
+                                    );
+                                }
+                                m_activeNodes = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            9usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_activeNodeTemplateToIndexMap,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "activeNodeTemplateToIndexMap",
+                                        ),
+                                    );
+                                }
+                                m_activeNodeTemplateToIndexMap = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            10usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_activeNodesChildrenIndices,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "activeNodesChildrenIndices",
+                                        ),
+                                    );
+                                }
+                                m_activeNodesChildrenIndices = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            11usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_globalTransitionData,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "globalTransitionData",
+                                        ),
+                                    );
+                                }
+                                m_globalTransitionData = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            12usize => {
+                                if _serde::__private::Option::is_some(&m_eventIdMap) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "eventIdMap",
+                                        ),
+                                    );
+                                }
+                                m_eventIdMap = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            13usize => {
+                                if _serde::__private::Option::is_some(&m_attributeIdMap) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "attributeIdMap",
+                                        ),
+                                    );
+                                }
+                                m_attributeIdMap = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            14usize => {
+                                if _serde::__private::Option::is_some(&m_variableIdMap) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "variableIdMap",
+                                        ),
+                                    );
+                                }
+                                m_variableIdMap = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            15usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_characterPropertyIdMap,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "characterPropertyIdMap",
+                                        ),
+                                    );
+                                }
+                                m_characterPropertyIdMap = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            16usize => {
+                                if _serde::__private::Option::is_some(&m_variableValueSet) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "variableValueSet",
+                                        ),
+                                    );
+                                }
+                                m_variableValueSet = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            17usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_nodeTemplateToCloneMap,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "nodeTemplateToCloneMap",
+                                        ),
+                                    );
+                                }
+                                m_nodeTemplateToCloneMap = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            18usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_nodeCloneToTemplateMap,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "nodeCloneToTemplateMap",
+                                        ),
+                                    );
+                                }
+                                m_nodeCloneToTemplateMap = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            19usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_stateListenerTemplateToCloneMap,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "stateListenerTemplateToCloneMap",
+                                        ),
+                                    );
+                                }
+                                m_stateListenerTemplateToCloneMap = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            20usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_nodePartitionInfo,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "nodePartitionInfo",
+                                        ),
+                                    );
+                                }
+                                m_nodePartitionInfo = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            21usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_numIntermediateOutputs,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "numIntermediateOutputs",
+                                        ),
+                                    );
+                                }
+                                m_numIntermediateOutputs = _serde::__private::Some(
+                                    match __A::next_value::<i32>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            22usize => {
+                                if _serde::__private::Option::is_some(&m_jobs) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("jobs"),
+                                    );
+                                }
+                                __A::pad(&mut __map, 0usize, 4usize)?;
+                                m_jobs = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            23usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_allPartitionMemory,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "allPartitionMemory",
+                                        ),
+                                    );
+                                }
+                                m_allPartitionMemory = _serde::__private::Some(
+                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            24usize => {
+                                if _serde::__private::Option::is_some(&m_numStaticNodes) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "numStaticNodes",
+                                        ),
+                                    );
+                                }
+                                m_numStaticNodes = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            25usize => {
+                                if _serde::__private::Option::is_some(&m_nextUniqueId) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "nextUniqueId",
+                                        ),
+                                    );
+                                }
+                                m_nextUniqueId = _serde::__private::Some(
+                                    match __A::next_value::<i16>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            26usize => {
+                                if _serde::__private::Option::is_some(&m_isActive) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "isActive",
+                                        ),
+                                    );
+                                }
+                                m_isActive = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            27usize => {
+                                if _serde::__private::Option::is_some(&m_isLinked) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "isLinked",
+                                        ),
+                                    );
+                                }
+                                m_isLinked = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            28usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_updateActiveNodes,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "updateActiveNodes",
+                                        ),
+                                    );
+                                }
+                                m_updateActiveNodes = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            29usize => {
+                                if _serde::__private::Option::is_some(
+                                    &m_stateOrTransitionChanged,
+                                ) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "stateOrTransitionChanged",
+                                        ),
+                                    );
+                                }
+                                m_stateOrTransitionChanged = _serde::__private::Some(
+                                    match __A::next_value::<bool>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            _ => {}
+                        }
+                    }
+                    let m_variableMode = match m_variableMode {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "variableMode",
+                                ),
+                            );
+                        }
+                    };
+                    let m_uniqueIdPool = match m_uniqueIdPool {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "uniqueIdPool",
+                                ),
+                            );
+                        }
+                    };
+                    let m_idToStateMachineTemplateMap = match m_idToStateMachineTemplateMap {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "idToStateMachineTemplateMap",
+                                ),
+                            );
+                        }
+                    };
+                    let m_mirroredExternalIdMap = match m_mirroredExternalIdMap {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "mirroredExternalIdMap",
+                                ),
+                            );
+                        }
+                    };
+                    let m_pseudoRandomGenerator = match m_pseudoRandomGenerator {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "pseudoRandomGenerator",
+                                ),
+                            );
+                        }
+                    };
+                    let m_rootGenerator = match m_rootGenerator {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "rootGenerator",
+                                ),
+                            );
+                        }
+                    };
+                    let m_data = match m_data {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("data"),
+                            );
+                        }
+                    };
+                    let m_rootGeneratorClone = match m_rootGeneratorClone {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "rootGeneratorClone",
+                                ),
+                            );
+                        }
+                    };
+                    let m_activeNodes = match m_activeNodes {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "activeNodes",
+                                ),
+                            );
+                        }
+                    };
+                    let m_activeNodeTemplateToIndexMap = match m_activeNodeTemplateToIndexMap {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "activeNodeTemplateToIndexMap",
+                                ),
+                            );
+                        }
+                    };
+                    let m_activeNodesChildrenIndices = match m_activeNodesChildrenIndices {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "activeNodesChildrenIndices",
+                                ),
+                            );
+                        }
+                    };
+                    let m_globalTransitionData = match m_globalTransitionData {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "globalTransitionData",
+                                ),
+                            );
+                        }
+                    };
+                    let m_eventIdMap = match m_eventIdMap {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "eventIdMap",
+                                ),
+                            );
+                        }
+                    };
+                    let m_attributeIdMap = match m_attributeIdMap {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "attributeIdMap",
+                                ),
+                            );
+                        }
+                    };
+                    let m_variableIdMap = match m_variableIdMap {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "variableIdMap",
+                                ),
+                            );
+                        }
+                    };
+                    let m_characterPropertyIdMap = match m_characterPropertyIdMap {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "characterPropertyIdMap",
+                                ),
+                            );
+                        }
+                    };
+                    let m_variableValueSet = match m_variableValueSet {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "variableValueSet",
+                                ),
+                            );
+                        }
+                    };
+                    let m_nodeTemplateToCloneMap = match m_nodeTemplateToCloneMap {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "nodeTemplateToCloneMap",
+                                ),
+                            );
+                        }
+                    };
+                    let m_nodeCloneToTemplateMap = match m_nodeCloneToTemplateMap {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "nodeCloneToTemplateMap",
+                                ),
+                            );
+                        }
+                    };
+                    let m_stateListenerTemplateToCloneMap = match m_stateListenerTemplateToCloneMap {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "stateListenerTemplateToCloneMap",
+                                ),
+                            );
+                        }
+                    };
+                    let m_nodePartitionInfo = match m_nodePartitionInfo {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "nodePartitionInfo",
+                                ),
+                            );
+                        }
+                    };
+                    let m_numIntermediateOutputs = match m_numIntermediateOutputs {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "numIntermediateOutputs",
+                                ),
+                            );
+                        }
+                    };
+                    let m_jobs = match m_jobs {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("jobs"),
+                            );
+                        }
+                    };
+                    let m_allPartitionMemory = match m_allPartitionMemory {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "allPartitionMemory",
+                                ),
+                            );
+                        }
+                    };
+                    let m_numStaticNodes = match m_numStaticNodes {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "numStaticNodes",
+                                ),
+                            );
+                        }
+                    };
+                    let m_nextUniqueId = match m_nextUniqueId {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "nextUniqueId",
+                                ),
+                            );
+                        }
+                    };
+                    let m_isActive = match m_isActive {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("isActive"),
+                            );
+                        }
+                    };
+                    let m_isLinked = match m_isLinked {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("isLinked"),
+                            );
+                        }
+                    };
+                    let m_updateActiveNodes = match m_updateActiveNodes {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "updateActiveNodes",
+                                ),
+                            );
+                        }
+                    };
+                    let m_stateOrTransitionChanged = match m_stateOrTransitionChanged {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "stateOrTransitionChanged",
+                                ),
+                            );
+                        }
+                    };
+                    _serde::__private::Ok(hkbBehaviorGraph {
+                        __ptr,
+                        parent,
+                        m_variableMode,
+                        m_uniqueIdPool,
+                        m_idToStateMachineTemplateMap,
+                        m_mirroredExternalIdMap,
+                        m_pseudoRandomGenerator,
+                        m_rootGenerator,
+                        m_data,
+                        m_rootGeneratorClone,
+                        m_activeNodes,
+                        m_activeNodeTemplateToIndexMap,
+                        m_activeNodesChildrenIndices,
+                        m_globalTransitionData,
+                        m_eventIdMap,
+                        m_attributeIdMap,
+                        m_variableIdMap,
+                        m_characterPropertyIdMap,
+                        m_variableValueSet,
+                        m_nodeTemplateToCloneMap,
+                        m_nodeCloneToTemplateMap,
+                        m_stateListenerTemplateToCloneMap,
+                        m_nodePartitionInfo,
+                        m_numIntermediateOutputs,
+                        m_jobs,
+                        m_allPartitionMemory,
+                        m_numStaticNodes,
+                        m_nextUniqueId,
+                        m_isActive,
+                        m_isLinked,
+                        m_updateActiveNodes,
+                        m_stateOrTransitionChanged,
+                    })
+                }
+                #[allow(clippy::manual_unwrap_or_default)]
+                fn visit_struct<__A>(
+                    self,
+                    mut __map: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::MapAccess<'de>,
+                {
+                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
+                    let mut m_userData: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_rootGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableMode: _serde::__private::Option<VariableMode> = _serde::__private::None;
+                    while let _serde::__private::Some(__key) = {
+                        #[cfg(not(feature = "strict"))]
+                        let __key = __A::next_key::<__Field>(&mut __map)
+                            .unwrap_or(Some(__Field::__ignore));
+                        #[cfg(feature = "strict")]
+                        let __key = __A::next_key::<__Field>(&mut __map)?;
+                        __key
+                    } {
+                        match __key {
+                            __Field::m_variableBindingSet => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(
+                                    &m_variableBindingSet,
+                                ) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "variableBindingSet",
+                                        ),
+                                    );
+                                }
+                                m_variableBindingSet = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_name => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_name) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("name"),
+                                    );
+                                }
+                                m_name = _serde::__private::Some(
+                                    match __A::next_value::<StringPtr<'de>>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_userData => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_userData) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "userData",
+                                        ),
+                                    );
+                                }
+                                m_userData = _serde::__private::Some(
+                                    match __A::next_value::<u64>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_data => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_data) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field("data"),
+                                    );
+                                }
+                                m_data = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_rootGenerator => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_rootGenerator) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "rootGenerator",
+                                        ),
+                                    );
+                                }
+                                m_rootGenerator = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_variableMode => {
+                                #[cfg(
+                                    any(feature = "strict", feature = "ignore_duplicates")
+                                )]
+                                if _serde::__private::Option::is_some(&m_variableMode) {
+                                    #[cfg(feature = "ignore_duplicates")] continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "variableMode",
+                                        ),
+                                    );
+                                }
+                                m_variableMode = _serde::__private::Some(
+                                    match __A::next_value::<VariableMode>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))] Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            _ => {}
+                        }
+                    }
+                    let m_variableBindingSet = match m_variableBindingSet {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "variableBindingSet",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_name = match m_name {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("name"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_userData = match m_userData {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("userData"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_data = match m_data {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("data"),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_rootGenerator = match m_rootGenerator {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "rootGenerator",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let m_variableMode = match m_variableMode {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "variableMode",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))] Default::default()
+                        }
+                    };
+                    let __ptr = None;
+                    let parent = hkBaseObject { __ptr };
+                    let parent = hkReferencedObject {
+                        __ptr,
+                        parent,
+                        ..Default::default()
+                    };
+                    let parent = hkbBindable {
+                        __ptr,
+                        parent,
+                        m_variableBindingSet,
+                        ..Default::default()
+                    };
+                    let parent = hkbNode {
+                        __ptr,
+                        parent,
+                        m_userData,
+                        m_name,
+                        ..Default::default()
+                    };
+                    let parent = hkbGenerator { __ptr, parent };
+                    let __ptr = __A::class_ptr(&mut __map);
+                    _serde::__private::Ok(hkbBehaviorGraph {
+                        __ptr,
+                        parent,
+                        m_variableMode,
+                        m_rootGenerator,
+                        m_data,
+                        ..Default::default()
+                    })
+                }
+            }
             const FIELDS: &[&str] = &[
                 "variableMode",
                 "uniqueIdPool",
