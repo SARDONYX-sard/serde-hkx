@@ -10,22 +10,20 @@ edition.workspace = true
 
 
 [dependencies]
-annotate-snippets = "0.11.4" # Error reporting display
+annotate-snippets = "0.11.4"                                                   # Error reporting display
 byteorder = "1.5.0"
 educe = "0.6.0"
-havok_classes = { path = "../crates/havok_classes", features = [
-  "ignore_duplicates",
-] }
+havok_classes = { path = "../crates/havok_classes", default-features = false }
 havok_serde = { path = "../crates/havok_serde", features = ["indexmap"] }
 havok_types = { path = "../crates/havok_types" }
-havok_types_derive = { path = "../crates/havok_types_derive" } # To impl `Default`&`FromStr` for Bitflags
+havok_types_derive = { path = "../crates/havok_types_derive" }                 # To impl `Default`&`FromStr` for Bitflags
 html-escape = "0.2.13"
 indexmap = "2.2.6"
-rhexdump = "0.2.0" # hexdump display for binary error repoting
-snafu = "0.8.2" # Define all error patterns(with backtrace)
+rhexdump = "0.2.0"                                                             # hexdump display for binary error repoting
+snafu = "0.8.2"                                                                # Define all error patterns(with backtrace)
 static_assertions = "1.1.0"
 tracing = { version = "0.1.40", optional = true }
-winnow = { version = "0.6.8", features = ["simd"] } # Parser conbinator
+winnow = { version = "0.6.8", features = ["simd"] }                            # Parser conbinator
 
 [dev-dependencies]
 bitflags = "2.4" # To generate flags type(mock)
@@ -45,11 +43,16 @@ tracing = { version = "0.1.40" }
 zerocopy = { version = "0.7.34" } # To(As)Bytes
 
 [features]
-# default = []
-default = ["tracing"]
+default = ["ignore_duplicates", "tracing"]
 
 # Use tracing logging.(We may need `tracing-subscriber` crate too.)
 tracing = ["dep:tracing"]
 
 # Derive `serde`
 serde = ["havok_types/serde"]
+
+# Strictly check for the presence of values.
+# For example, forbitten missing fields, duplicate fields, an error is made. (but not the original behavior).
+strict = ["havok_classes/strict"]
+# When reading partial XML in Nemesis, you may want to ignore duplicates because the original comes a second time. This is used in that case.
+ignore_duplicates = ["havok_classes/ignore_duplicates"]

@@ -64,7 +64,7 @@ impl Member<'_> {
     ///
     /// # Errors
     /// - If entered
-    /// `TypeKind::Void | TypeKind::Zero | TypeKind::FnPtr |
+    ///   `TypeKind::Void | TypeKind::Zero | TypeKind::FnPtr |
     ///  TypeKind::InplaceArray | TypeKind::HomogeneousArray |
     ///  TypeKind::RelArray | TypeKind::Max` => These are not used inside the 2010 Havok Class.
     ///
@@ -199,9 +199,9 @@ impl Member<'_> {
 ///
 /// # Errors
 /// - If entered
-/// `TypeKind::Void(vtype) | TypeKind::Zero | TypeKind::FnPtr |
-///  TypeKind::InplaceArray | TypeKind::HomogeneousArray |
-///  TypeKind::RelArray | TypeKind::Max` => These are not used inside the 2010 Havok Class.
+///     `TypeKind::Void(vtype) | TypeKind::Zero | TypeKind::FnPtr |
+///    TypeKind::InplaceArray | TypeKind::HomogeneousArray |
+///    TypeKind::RelArray | TypeKind::Max` => These are not used inside the 2010 Havok Class.
 ///
 /// - `TypeKind::Struct` => This cannot be calculated here. It is calculated externally using `HashMap` or similar.
 fn size_of_type_common(type_kind: &TypeKind, ptr_size: u32) -> Result<u32, MemberError> {

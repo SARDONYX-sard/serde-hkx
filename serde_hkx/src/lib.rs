@@ -11,10 +11,7 @@ pub mod mocks;
 /// module.
 mod lib {
     mod core {
-        #[cfg(not(feature = "std"))]
         pub use core::*;
-        #[cfg(feature = "std")]
-        pub use std::*;
     }
 
     pub use self::core::f32;
@@ -27,9 +24,6 @@ mod lib {
     pub use self::core::fmt::Display;
     pub use self::core::str::FromStr;
 
-    #[cfg(all(feature = "alloc", not(feature = "std")))]
-    pub use alloc::string::{String, ToString};
-    #[cfg(feature = "std")]
     pub use std::string::{String, ToString};
 }
 

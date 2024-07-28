@@ -1,12 +1,11 @@
 use super::class_requires::*;
 use super::*;
 /// # C++ Info
-/// -            name: `hkbProjectData`
-/// -         version: `2`
-/// -       signature: `0x13a39ba7`
-/// -          size:  48(x86)/ 48(x86_64)
-/// -          vtable: true
-///
+/// - name: `hkbProjectData`
+/// - version: `2`
+/// - signature: `0x13a39ba7`
+/// - size: ` 48`(x86)/` 48`(x86_64)
+/// -  vtable: `true`
 #[allow(non_upper_case_globals, non_snake_case)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
@@ -22,22 +21,19 @@ pub struct hkbProjectData {
     /// Alternative to C++ class inheritance.
     pub parent: hkReferencedObject,
     /// # C++ Info
-    /// -          name: `worldUpWS`(ctype: `hkVector4`)
-    /// -        offset:  16(x86)/ 16(x86_64)
-    /// -     type_size:  16(x86)/ 16(x86_64)
-    ///
+    /// - name: `worldUpWS`(ctype: `hkVector4`)
+    /// - offset: ` 16`(x86)/` 16`(x86_64)
+    /// - type_size: ` 16`(x86)/` 16`(x86_64)
     pub m_worldUpWS: Vector4,
     /// # C++ Info
-    /// -          name: `stringData`(ctype: `struct hkbProjectStringData*`)
-    /// -        offset:  32(x86)/ 32(x86_64)
-    /// -     type_size:   4(x86)/  8(x86_64)
-    ///
+    /// - name: `stringData`(ctype: `struct hkbProjectStringData*`)
+    /// - offset: ` 32`(x86)/` 32`(x86_64)
+    /// - type_size: `  4`(x86)/`  8`(x86_64)
     pub m_stringData: Pointer,
     /// # C++ Info
-    /// -          name: `defaultEventMode`(ctype: `enum EventMode`)
-    /// -        offset:  36(x86)/ 40(x86_64)
-    /// -     type_size:   1(x86)/  1(x86_64)
-    ///
+    /// - name: `defaultEventMode`(ctype: `enum EventMode`)
+    /// - offset: ` 36`(x86)/` 40`(x86_64)
+    /// - type_size: `  1`(x86)/`  1`(x86_64)
     pub m_defaultEventMode: EventMode,
 }
 const _: () = {
@@ -60,8 +56,7 @@ const _: () = {
             let class_meta = self
                 .__ptr
                 .map(|name| (name, _serde::__private::Signature::new(0x13a39ba7)));
-            let mut serializer = __serializer
-                .serialize_struct("hkbProjectData", class_meta)?;
+            let mut serializer = __serializer.serialize_struct("hkbProjectData", class_meta)?;
             serializer.pad_field([0u8; 4usize].as_slice(), [0u8; 8usize].as_slice())?;
             serializer.skip_field("memSizeAndFlags", &self.parent.m_memSizeAndFlags)?;
             serializer.skip_field("referenceCount", &self.parent.m_referenceCount)?;
@@ -75,293 +70,323 @@ const _: () = {
         }
     }
 };
-use havok_serde as _serde;
-#[allow(non_camel_case_types)]
-enum __Field {
-    m_worldUpWS,
-    m_stringData,
-    m_defaultEventMode,
-    __ignore,
-}
-struct __FieldVisitor;
-impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
-    type Value = __Field;
-    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
-        core::fmt::Formatter::write_str(__formatter, "field identifier")
-    }
-    /// Intended for use in XML.
-    #[allow(clippy::match_single_binding)]
-    #[allow(clippy::reversed_empty_ranges)]
-    #[allow(clippy::single_match)]
-    fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
-    where
-        __E: _serde::de::Error,
-    {
-        match __value {
-            "worldUpWS" => Ok(__Field::m_worldUpWS),
-            "stringData" => Ok(__Field::m_stringData),
-            "defaultEventMode" => Ok(__Field::m_defaultEventMode),
-            _ => Ok(__Field::__ignore),
-        }
-    }
-}
-impl<'de> _serde::Deserialize<'de> for __Field {
-    #[inline]
-    fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
-    where
-        __D: _serde::Deserializer<'de>,
-    {
-        _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
-    }
-}
-pub(super) struct __hkbProjectDataVisitor<'de> {
-    marker: core::marker::PhantomData<hkbProjectData>,
-    lifetime: core::marker::PhantomData<&'de ()>,
-}
-impl<'de> __hkbProjectDataVisitor<'de> {
-    /// # Purpose of this method
-    /// To reproduce C++ field inheritance, we will have the field internal implementation
-    /// of deserialization partially exposed and reused.
-    #[inline]
-    pub(super) fn visit_as_parent<__A>(
-        __map: &mut __A,
-    ) -> _serde::__private::Result<hkbProjectData, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        _serde::de::Visitor::visit_struct(
-            Self {
-                marker: _serde::__private::PhantomData::<hkbProjectData>,
-                lifetime: _serde::__private::PhantomData,
-            },
-            __map,
-        )
-    }
-}
-#[allow(clippy::match_single_binding)]
-#[allow(clippy::reversed_empty_ranges)]
-#[allow(clippy::single_match)]
-impl<'de> _serde::de::Visitor<'de> for __hkbProjectDataVisitor<'de> {
-    type Value = hkbProjectData;
-    fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
-        core::fmt::Formatter::write_str(__formatter, "struct hkbProjectData")
-    }
-    fn visit_struct_for_bytes<__A>(
-        self,
-        mut __map: __A,
-    ) -> _serde::__private::Result<Self::Value, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        let parent = __A::next_value(&mut __map)?;
-        let mut m_worldUpWS: _serde::__private::Option<Vector4> = _serde::__private::None;
-        let mut m_stringData: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_defaultEventMode: _serde::__private::Option<EventMode> = _serde::__private::None;
-        for i in 0..3usize {
-            match i {
-                0usize => {
-                    if _serde::__private::Option::is_some(&m_worldUpWS) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "worldUpWS",
-                            ),
-                        );
-                    }
-                    m_worldUpWS = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                1usize => {
-                    if _serde::__private::Option::is_some(&m_stringData) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "stringData",
-                            ),
-                        );
-                    }
-                    m_stringData = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                2usize => {
-                    if _serde::__private::Option::is_some(&m_defaultEventMode) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "defaultEventMode",
-                            ),
-                        );
-                    }
-                    m_defaultEventMode = _serde::__private::Some(
-                        match __A::next_value::<EventMode>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                _ => {}
-            }
-        }
-        __A::pad(&mut __map, 11usize, 7usize)?;
-        let m_worldUpWS = match m_worldUpWS {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("worldUpWS"),
-                );
-            }
-        };
-        let m_stringData = match m_stringData {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("stringData"),
-                );
-            }
-        };
-        let m_defaultEventMode = match m_defaultEventMode {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("defaultEventMode"),
-                );
-            }
-        };
-        _serde::__private::Ok(hkbProjectData {
-            __ptr: __A::class_ptr(&mut __map),
-            parent,
-            m_worldUpWS,
-            m_stringData,
-            m_defaultEventMode,
-        })
-    }
-    fn visit_struct<__A>(
-        self,
-        mut __map: __A,
-    ) -> _serde::__private::Result<Self::Value, __A::Error>
-    where
-        __A: _serde::de::MapAccess<'de>,
-    {
-        let parent = __hkReferencedObjectVisitor::visit_as_parent(&mut __map)?;
-        let mut m_worldUpWS: _serde::__private::Option<Vector4> = _serde::__private::None;
-        let mut m_stringData: _serde::__private::Option<Pointer> = _serde::__private::None;
-        let mut m_defaultEventMode: _serde::__private::Option<EventMode> = _serde::__private::None;
-        while let _serde::__private::Some(__key) = match __A::next_key::<
-            __Field,
-        >(&mut __map) {
-            _serde::__private::Ok(__val) => __val,
-            _serde::__private::Err(__err) => {
-                return _serde::__private::Err(__err);
-            }
-        } {
-            match __key {
-                __Field::m_worldUpWS => {
-                    if _serde::__private::Option::is_some(&m_worldUpWS) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "worldUpWS",
-                            ),
-                        );
-                    }
-                    m_worldUpWS = _serde::__private::Some(
-                        match __A::next_value::<Vector4>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_stringData => {
-                    if _serde::__private::Option::is_some(&m_stringData) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "stringData",
-                            ),
-                        );
-                    }
-                    m_stringData = _serde::__private::Some(
-                        match __A::next_value::<Pointer>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                __Field::m_defaultEventMode => {
-                    if _serde::__private::Option::is_some(&m_defaultEventMode) {
-                        return _serde::__private::Err(
-                            <__A::Error as _serde::de::Error>::duplicate_field(
-                                "defaultEventMode",
-                            ),
-                        );
-                    }
-                    m_defaultEventMode = _serde::__private::Some(
-                        match __A::next_value::<EventMode>(&mut __map) {
-                            _serde::__private::Ok(__val) => __val,
-                            _serde::__private::Err(__err) => {
-                                return _serde::__private::Err(__err);
-                            }
-                        },
-                    );
-                }
-                _ => {}
-            }
-        }
-        let m_worldUpWS = match m_worldUpWS {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("worldUpWS"),
-                );
-            }
-        };
-        let m_stringData = match m_stringData {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("stringData"),
-                );
-            }
-        };
-        let m_defaultEventMode = match m_defaultEventMode {
-            _serde::__private::Some(__field) => __field,
-            _serde::__private::None => {
-                return _serde::__private::Err(
-                    <__A::Error as _serde::de::Error>::missing_field("defaultEventMode"),
-                );
-            }
-        };
-        _serde::__private::Ok(hkbProjectData {
-            __ptr: __A::class_ptr(&mut __map),
-            parent,
-            m_worldUpWS,
-            m_stringData,
-            m_defaultEventMode,
-        })
-    }
-}
 #[doc(hidden)]
 #[allow(non_upper_case_globals, unused_attributes, unused_qualifications)]
 const _: () = {
+    use havok_serde as _serde;
     #[automatically_derived]
     impl<'de> _serde::Deserialize<'de> for hkbProjectData {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
         {
+            #[allow(non_camel_case_types)]
+            enum __Field {
+                m_defaultEventMode,
+                m_stringData,
+                m_worldUpWS,
+                __ignore,
+            }
+            struct __FieldVisitor;
+            impl<'de> _serde::de::Visitor<'de> for __FieldVisitor {
+                type Value = __Field;
+                fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+                    core::fmt::Formatter::write_str(__formatter, "field identifier")
+                }
+                /// Intended for use in XML.
+                #[allow(clippy::match_single_binding)]
+                #[allow(clippy::reversed_empty_ranges)]
+                #[allow(clippy::single_match)]
+                fn visit_key<__E>(self, __value: &str) -> core::result::Result<Self::Value, __E>
+                where
+                    __E: _serde::de::Error,
+                {
+                    match __value {
+                        "defaultEventMode" => Ok(__Field::m_defaultEventMode),
+                        "stringData" => Ok(__Field::m_stringData),
+                        "worldUpWS" => Ok(__Field::m_worldUpWS),
+                        _ => Ok(__Field::__ignore),
+                    }
+                }
+            }
+            impl<'de> _serde::Deserialize<'de> for __Field {
+                #[inline]
+                fn deserialize<__D>(__deserializer: __D) -> core::result::Result<Self, __D::Error>
+                where
+                    __D: _serde::Deserializer<'de>,
+                {
+                    _serde::Deserializer::deserialize_key(__deserializer, __FieldVisitor)
+                }
+            }
+            struct __hkbProjectDataVisitor<'de> {
+                marker: _serde::__private::PhantomData<hkbProjectData>,
+                lifetime: _serde::__private::PhantomData<&'de ()>,
+            }
+            #[allow(clippy::match_single_binding)]
+            #[allow(clippy::reversed_empty_ranges)]
+            #[allow(clippy::single_match)]
+            impl<'de> _serde::de::Visitor<'de> for __hkbProjectDataVisitor<'de> {
+                type Value = hkbProjectData;
+                fn expecting(&self, __formatter: &mut core::fmt::Formatter) -> core::fmt::Result {
+                    core::fmt::Formatter::write_str(__formatter, "struct hkbProjectData")
+                }
+                fn visit_struct_for_bytes<__A>(
+                    self,
+                    mut __map: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::MapAccess<'de>,
+                {
+                    let __ptr = __A::class_ptr(&mut __map);
+                    let parent = __A::parent_value(&mut __map)?;
+                    let mut m_worldUpWS: _serde::__private::Option<Vector4> =
+                        _serde::__private::None;
+                    let mut m_stringData: _serde::__private::Option<Pointer> =
+                        _serde::__private::None;
+                    let mut m_defaultEventMode: _serde::__private::Option<EventMode> =
+                        _serde::__private::None;
+                    for i in 0..3usize {
+                        match i {
+                            0usize => {
+                                if _serde::__private::Option::is_some(&m_worldUpWS) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "worldUpWS",
+                                        ),
+                                    );
+                                }
+                                __A::pad(&mut __map, 8usize, 0usize)?;
+                                m_worldUpWS = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            1usize => {
+                                if _serde::__private::Option::is_some(&m_stringData) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "stringData",
+                                        ),
+                                    );
+                                }
+                                m_stringData = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            2usize => {
+                                if _serde::__private::Option::is_some(&m_defaultEventMode) {
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "defaultEventMode",
+                                        ),
+                                    );
+                                }
+                                m_defaultEventMode = _serde::__private::Some(
+                                    match __A::next_value::<EventMode>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            return _serde::__private::Err(__err);
+                                        }
+                                    },
+                                );
+                            }
+                            _ => {}
+                        }
+                    }
+                    __A::pad(&mut __map, 11usize, 7usize)?;
+                    let m_worldUpWS = match m_worldUpWS {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("worldUpWS"),
+                            );
+                        }
+                    };
+                    let m_stringData = match m_stringData {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("stringData"),
+                            );
+                        }
+                    };
+                    let m_defaultEventMode = match m_defaultEventMode {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "defaultEventMode",
+                                ),
+                            );
+                        }
+                    };
+                    _serde::__private::Ok(hkbProjectData {
+                        __ptr,
+                        parent,
+                        m_worldUpWS,
+                        m_stringData,
+                        m_defaultEventMode,
+                    })
+                }
+                #[allow(clippy::manual_unwrap_or_default)]
+                fn visit_struct<__A>(
+                    self,
+                    mut __map: __A,
+                ) -> _serde::__private::Result<Self::Value, __A::Error>
+                where
+                    __A: _serde::de::MapAccess<'de>,
+                {
+                    let mut m_defaultEventMode: _serde::__private::Option<EventMode> =
+                        _serde::__private::None;
+                    let mut m_stringData: _serde::__private::Option<Pointer> =
+                        _serde::__private::None;
+                    let mut m_worldUpWS: _serde::__private::Option<Vector4> =
+                        _serde::__private::None;
+                    while let _serde::__private::Some(__key) = {
+                        #[cfg(not(feature = "strict"))]
+                        let __key =
+                            __A::next_key::<__Field>(&mut __map).unwrap_or(Some(__Field::__ignore));
+                        #[cfg(feature = "strict")]
+                        let __key = __A::next_key::<__Field>(&mut __map)?;
+                        __key
+                    } {
+                        match __key {
+                            __Field::m_defaultEventMode => {
+                                #[cfg(any(feature = "strict", feature = "ignore_duplicates"))]
+                                if _serde::__private::Option::is_some(&m_defaultEventMode) {
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "defaultEventMode",
+                                        ),
+                                    );
+                                }
+                                m_defaultEventMode = _serde::__private::Some(
+                                    match __A::next_value::<EventMode>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))]
+                                            Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_stringData => {
+                                #[cfg(any(feature = "strict", feature = "ignore_duplicates"))]
+                                if _serde::__private::Option::is_some(&m_stringData) {
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "stringData",
+                                        ),
+                                    );
+                                }
+                                m_stringData = _serde::__private::Some(
+                                    match __A::next_value::<Pointer>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))]
+                                            Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            __Field::m_worldUpWS => {
+                                #[cfg(any(feature = "strict", feature = "ignore_duplicates"))]
+                                if _serde::__private::Option::is_some(&m_worldUpWS) {
+                                    #[cfg(feature = "ignore_duplicates")]
+                                    continue;
+                                    #[cfg(feature = "strict")]
+                                    return _serde::__private::Err(
+                                        <__A::Error as _serde::de::Error>::duplicate_field(
+                                            "worldUpWS",
+                                        ),
+                                    );
+                                }
+                                m_worldUpWS = _serde::__private::Some(
+                                    match __A::next_value::<Vector4>(&mut __map) {
+                                        _serde::__private::Ok(__val) => __val,
+                                        _serde::__private::Err(__err) => {
+                                            #[cfg(feature = "strict")]
+                                            return _serde::__private::Err(__err);
+                                            #[cfg(not(feature = "strict"))]
+                                            Default::default()
+                                        }
+                                    },
+                                );
+                            }
+                            _ => {}
+                        }
+                    }
+                    let m_defaultEventMode = match m_defaultEventMode {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field(
+                                    "defaultEventMode",
+                                ),
+                            );
+                            #[cfg(not(feature = "strict"))]
+                            Default::default()
+                        }
+                    };
+                    let m_stringData = match m_stringData {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("stringData"),
+                            );
+                            #[cfg(not(feature = "strict"))]
+                            Default::default()
+                        }
+                    };
+                    let m_worldUpWS = match m_worldUpWS {
+                        _serde::__private::Some(__field) => __field,
+                        _serde::__private::None => {
+                            #[cfg(feature = "strict")]
+                            return _serde::__private::Err(
+                                <__A::Error as _serde::de::Error>::missing_field("worldUpWS"),
+                            );
+                            #[cfg(not(feature = "strict"))]
+                            Default::default()
+                        }
+                    };
+                    let __ptr = None;
+                    let parent = hkBaseObject { __ptr };
+                    let parent = hkReferencedObject {
+                        __ptr,
+                        parent,
+                        ..Default::default()
+                    };
+                    let __ptr = __A::class_ptr(&mut __map);
+                    _serde::__private::Ok(hkbProjectData {
+                        __ptr,
+                        parent,
+                        m_worldUpWS,
+                        m_stringData,
+                        m_defaultEventMode,
+                    })
+                }
+            }
             const FIELDS: &[&str] = &["worldUpWS", "stringData", "defaultEventMode"];
             _serde::Deserializer::deserialize_struct(
                 deserializer,

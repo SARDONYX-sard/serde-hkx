@@ -22,7 +22,7 @@ havok_classes = { path = "../havok_classes", features = ["ignore_duplicates"] }
 indexmap = "2.2.6"
 jwalk = { version = "0.8" } # To enumarate json class files
 parse-display = "0.9.0" # Display derive
-serde_hkx = { path = "../../serde_hkx" }
+serde_hkx = { path = "../../serde_hkx", features = ["tracing"] }
 snafu = "0.8.2" # Define all error patterns(with backtrace)
 tokio = { version = "1.37.0", features = [
   "fs",
