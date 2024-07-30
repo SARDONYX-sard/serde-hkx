@@ -286,7 +286,7 @@ impl<'a> Serializer for &'a mut XmlSerializer {
 
     #[inline]
     fn serialize_half(self, v: f16) -> Result<Self::Ok> {
-        self.output += &v.to_string();
+        self.output += &format!("{v:.06}");
         Ok(())
     }
 
